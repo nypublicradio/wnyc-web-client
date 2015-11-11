@@ -1,6 +1,9 @@
 var proxyPath = '/wnyc';
+var makeConfig = require('../../config/environment');
 
-module.exports = function(app) {
+module.exports = function(app, options) {
+  var config = makeConfig(options.environment);
+
   // For options, see:
   // https://github.com/nodejitsu/node-http-proxy
   var proxy = require('http-proxy').createProxyServer({});
@@ -10,10 +13,8 @@ module.exports = function(app) {
   });
 
   app.use(proxyPath, function(req, res, next){
-    // include root path in proxied request
-    // req.url = proxyPath + '/' + req.url;
     proxy.web(req, res, {
-      target: 'http://www.wnyc.org/',
+      target: config.wnycURL,
       autoRewrite: true, // rewrites host in redirects
       changeOrigin: true // rewrites host header in requests
     });
