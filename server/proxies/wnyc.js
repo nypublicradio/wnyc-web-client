@@ -12,9 +12,15 @@ module.exports = function(app, options) {
     console.error(err, req.url);
   });
 
+  proxy.on('proxyReq', function(proxyReq, req, res, options) {
+    if (config.realWNYCURL) {
+      proxyReq.setHeader('Host', config.wnycURL);
+    }
+  });
+
   app.use(proxyPath, function(req, res, next){
     proxy.web(req, res, {
-      target: config.wnycURL,
+      target: config.realWNYCURL || config.wnycURL,
       autoRewrite: true, // rewrites host in redirects
       changeOrigin: true // rewrites host header in requests
     });

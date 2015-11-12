@@ -43,7 +43,10 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    // At present, my "production" environment is dev.wnyc.net. But
+    // that host has overrideen DNS for www.wnyc.org, which I need to
+    // counteract here.
+    ENV.realWNYCURL = 'http://52.22.94.214';
   }
 
   return ENV;
