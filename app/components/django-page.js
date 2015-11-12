@@ -7,10 +7,10 @@ export default Ember.Component.extend({
     this.get('page').appendTo(this.$());
   },
   click(event) {
-    let target = $(event.target);
-    if (target.is('a')) {
+    let target = $(event.target).closest('a');
+    if (target.length > 0) {
       let href = target.attr('href');
-      let m = /\/\/www.wnyc.org\/(.*)$/.exec(href);
+      let m = /\/\/www\.wnyc\.org\/(.*)$/.exec(href);
       if (m) {
         this.get('router').transitionTo('django-rendered', m[1]);
         event.preventDefault();
