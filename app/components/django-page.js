@@ -16,7 +16,7 @@ export default Ember.Component.extend({
         event.preventDefault();
         return false;
       }
-      if (href === '/') {
+      if (href === '/' || href === '#') {
         this.get('router').transitionTo('index');
         event.preventDefault();
         return false;
