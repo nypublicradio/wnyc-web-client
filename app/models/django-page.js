@@ -13,7 +13,10 @@ export default DS.Model.extend({
   }),
 
   title: Ember.computed('document', function() {
-    return this.get('document').querySelector('title').innerHTML;
+    let titleTag = this.get('document').querySelector('title');
+    if (titleTag) {
+      return titleTag.innerHTML;
+    }
   }),
 
   appendStyles($element) {
