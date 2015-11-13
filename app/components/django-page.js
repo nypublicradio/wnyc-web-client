@@ -16,6 +16,14 @@ export default Ember.Component.extend({
         event.preventDefault();
         return false;
       }
+
+      m = /^\/?([^/].*)$/.exec(href);
+      if (m) {
+        this.get('router').transitionTo('django-rendered', m[1]);
+        event.preventDefault();
+        return false;
+      }
+
       if (href === '/' || href === '#') {
         this.get('router').transitionTo('index');
         event.preventDefault();
