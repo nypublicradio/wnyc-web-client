@@ -3,7 +3,8 @@ const $ = Ember.$;
 
 export default Ember.Component.extend({
   router: Ember.inject.service('wnyc-routing'),
-  didInsertElement() {
+  didRender() {
+    this.$().empty();
     this.get('page').appendTo(this.$());
   },
   click(event) {

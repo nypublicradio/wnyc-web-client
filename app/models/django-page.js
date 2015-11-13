@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 import config from '../config/environment';
+import loadScripts from '../lib/external-script-loader';
 const $ = Ember.$;
+const { allSettled } = Ember.RSVP;
 const Promise = Ember.RSVP.Promise;
 
 export default DS.Model.extend({
@@ -19,43 +21,90 @@ export default DS.Model.extend({
     }
   }),
 
-  appendStyles($element) {
+  appendHeaderStyles($element) {
     let doc = this.get('document');
     let internalStyles = doc.querySelectorAll('head style');
     let externalStyles = Array.from(doc.querySelectorAll('head link[rel=stylesheet]')).map(s => {
-      let style = $(s);
-      let href = style.attr('href');
-      if (href) {
-        href = href.replace(/^\/\//, location.protocol + '//');
-        if (href.indexOf(config.wnycMediaURL) === 0) {
-          style = style.clone();
-          style.attr('href', href.replace(config.wnycMediaURL, '/wnyc-media'));
-        }
-        else if (href.indexOf('http://cloud.typography.com') === 0) {
-          style = style.clone();
-          style.attr('href', href.replace('http://cloud.typography.com', '/cloud-typography'));
-        }
-      }
+      let style = $(importNode(s));
+      style.attr('href', this.rewriteURL(style.attr('href')));
       return style;
     });
 
-    let stylesLoaded = externalStyles.map(s => loaded(s));
+    let stylesLoaded = externalStyles.map(s => styleLoaded(s));
     $element.append(internalStyles).append(externalStyles);
-    return Promise.all(stylesLoaded);
+    return allSettled(stylesLoaded);
+  },
+
+  rewriteURL(url) {
+    if (url) {
+      url = url.replace(/^\/\//, location.protocol + '//');
+      if (url.indexOf(config.wnycMediaURL) === 0) {
+        return url.replace(config.wnycMediaURL, '/wnyc-media');
+      }
+      if (url.indexOf('http://cloud.typography.com') === 0) {
+        return url.replace('http://cloud.typography.com', '/cloud-typography');
+      }
+    }
+    return url;
+  },
+
+  separateScripts() {
+    let doc = this.get('document');
+    let body = importNode(doc.querySelector('body'));
+    let scripts = [];
+
+    // First handle <script> in the <head>
+    Array.from(doc.querySelectorAll('head script')).forEach(script => {
+      if (isJavascript(script)) {
+        // Save for later evaluation
+        scripts.push(script);
+      } else {
+        // Non-javascript script tags (templates, for example) get
+        // moved from head to body so they will get added to our
+        // rendered output (we only output the contents of body, since
+        // it doesn't make sense to add a new head to the existing
+        // page).
+        body.appendChild(script);
+      }
+    });
+
+    // Then handle <script> in <body>
+    Array.from(body.querySelectorAll('script')).forEach(script => {
+      if (isJavascript(script)) {
+        // Pull out of body and save for evaluation
+        script.remove();
+        scripts.push(script);
+      }
+    });
+
+    return { body, scripts };
   },
 
   appendTo($element) {
-    let doc = this.get('document');
-    return this.appendStyles($element).finally(() => {
-      $element.append($(doc).find('body').children().clone());
+    return this.appendHeaderStyles($element).finally(() => {
+      let { body, scripts } = this.separateScripts();
+      Array.from(body.childNodes).forEach(child => {
+        $element[0].appendChild(importNode(child));
+      });
+      loadScripts(scripts, $element[0]);
     });
   }
 });
 
-function loaded(element) {
+function styleLoaded(element) {
   return new Promise((resolve, reject) => {
     $(element)
       .on('load', resolve)
       .on('error', reject);
   });
+}
+
+function importNode(node) {
+  const DEEP_COPY = true;
+  return window.document.importNode(node, DEEP_COPY);
+}
+
+function isJavascript(scriptTag) {
+  let type = scriptTag.attributes.type ? scriptTag.attributes.type.value : 'text/javascript';
+  return /(?:application)|(?:text)\/javascript/i.test(type);
 }

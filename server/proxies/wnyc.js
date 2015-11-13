@@ -25,4 +25,16 @@ module.exports = function(app, options) {
       changeOrigin: true // rewrites host header in requests
     });
   });
+
+  ['/datanewswidget', '/api'].forEach(function(path) {
+    app.use(path, function(req, res, next){
+      req.url = path + req.url;
+      proxy.web(req, res, {
+        target: config.realWNYCURL || config.wnycURL,
+        autoRewrite: true, // rewrites host in redirects
+        changeOrigin: true // rewrites host header in requests
+      });
+    });
+  });
+
 };
