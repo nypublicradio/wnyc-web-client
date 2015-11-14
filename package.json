@@ -23,7 +23,7 @@
     "broccoli-asset-rev": "^2.2.0",
     "broccoli-merge-trees": "^1.0.0",
     "broccoli-sourcemap-concat": "^1.1.6",
-    "ember-cli": "1.13.12",
+    "ember-cli": "ef4/ember-cli#4f39a7c362d010a87e849bf013449d8eadf4d9d6",
     "ember-cli-app-version": "^1.0.0",
     "ember-cli-babel": "^5.1.5",
     "ember-cli-dependency-checker": "^1.1.0",
