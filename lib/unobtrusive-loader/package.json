@@ -1,0 +1,9 @@
+{
+  "name": "unobtrusive-loader",
+  "keywords": [
+    "ember-addon"
+  ],
+  "ember-addon": {
+    "before": "ember-cli-uglify"
+  }
+}

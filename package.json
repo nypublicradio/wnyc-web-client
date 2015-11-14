@@ -21,6 +21,8 @@
   "devDependencies": {
     "ember-cli-autoprefixer": "0.5.0",
     "broccoli-asset-rev": "^2.2.0",
+    "broccoli-merge-trees": "^1.0.0",
+    "broccoli-sourcemap-concat": "^1.1.6",
     "ember-cli": "1.13.12",
     "ember-cli-app-version": "^1.0.0",
     "ember-cli-babel": "^5.1.5",
@@ -41,5 +43,10 @@
     "morgan": "^1.6.1",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4"
+  },
+  "ember-addon": {
+    "paths": [
+      "lib/unobtrusive-loader"
+    ]
   }
 }
