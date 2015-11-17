@@ -19,6 +19,9 @@ module.exports = function(environment) {
     },
 
     wnycURL: 'http://www.wnyc.org',
+    // On dev.wnyc.net, the DNS for www.wnyc.org is overridden, so to
+    // talk to the real one we need to know this IP:
+    realWNYCURL: 'http://52.22.94.214',
     wnycMediaURL: 'http://media.wnyc.org'
   };
 
@@ -43,10 +46,6 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    // At present, my "production" environment is dev.wnyc.net. But
-    // that host has overrideen DNS for www.wnyc.org, which I need to
-    // counteract here.
-    ENV.realWNYCURL = 'http://52.22.94.214';
   }
 
   return ENV;
