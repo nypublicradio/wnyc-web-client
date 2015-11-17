@@ -1,33 +1,34 @@
 import Ember from 'ember';
-const $ = Ember.$;
+import { beforeTeardown } from '../lib/compat-hooks';
+const { $ } = Ember;
 
 export default Ember.Component.extend({
   router: Ember.inject.service('wnyc-routing'),
+
   didRender() {
     this.$().empty();
     this.get('page').appendTo(this.$());
   },
+
   click(event) {
     let target = $(event.target).closest('a');
     if (target.length > 0) {
       let href = target.attr('href');
+      let route;
+
       let m = /\/\/www\.wnyc\.org\/(.*)$/.exec(href);
       if (m) {
-        this.get('router').transitionTo('django-rendered', m[1]);
-        event.preventDefault();
-        return false;
+        route = ['django-rendered', m[1]];
+      } else if ((m = /^\/?([^/].*)$/.exec(href))) {
+        route = ['django-rendered', m[1]];
+      } else if (href === '/' || href === '#') {
+        route = ['index'];
       }
 
-      m = /^\/?([^/].*)$/.exec(href);
-      if (m) {
-        this.get('router').transitionTo('django-rendered', m[1]);
+      if (route) {
+        this.get('router').transitionTo(...route);
         event.preventDefault();
-        return false;
-      }
-
-      if (href === '/' || href === '#') {
-        this.get('router').transitionTo('index');
-        event.preventDefault();
+        beforeTeardown(this.get('element'), this.get('page'));
         return false;
       }
     }

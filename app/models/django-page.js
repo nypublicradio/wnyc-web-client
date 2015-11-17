@@ -2,6 +2,7 @@ import Ember from 'ember';
 import DS from 'ember-data';
 import config from '../config/environment';
 import loadScripts from '../lib/external-script-loader';
+import { beforeAppend } from '../lib/compat-hooks';
 const $ = Ember.$;
 const { allSettled } = Ember.RSVP;
 const Promise = Ember.RSVP.Promise;
@@ -76,6 +77,8 @@ export default DS.Model.extend({
         scripts.push(script);
       }
     });
+
+    body = beforeAppend(body);
 
     return { body, scripts };
   },
