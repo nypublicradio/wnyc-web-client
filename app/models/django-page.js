@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import DS from 'ember-data';
-import config from '../config/environment';
 import loadScripts from '../lib/external-script-loader';
 import { beforeAppend } from '../lib/compat-hooks';
 const $ = Ember.$;
@@ -24,29 +23,11 @@ export default DS.Model.extend({
 
   appendHeaderStyles($element) {
     let doc = this.get('document');
-    let internalStyles = doc.querySelectorAll('head style');
-    let externalStyles = Array.from(doc.querySelectorAll('head link[rel=stylesheet]')).map(s => {
-      let style = $(importNode(s));
-      style.attr('href', this.rewriteURL(style.attr('href')));
-      return style;
-    });
-
+    let internalStyles = Array.from(doc.querySelectorAll('head style')).map(importNode);
+    let externalStyles = Array.from(doc.querySelectorAll('head link[rel=stylesheet]')).map(importNode);
     let stylesLoaded = externalStyles.map(s => styleLoaded(s));
     $element.append(internalStyles).append(externalStyles);
     return allSettled(stylesLoaded);
-  },
-
-  rewriteURL(url) {
-    if (url) {
-      url = url.replace(/^\/\//, location.protocol + '//');
-      if (url.indexOf(config.wnycMediaURL) === 0) {
-        return url.replace(config.wnycMediaURL, '/wnyc-media');
-      }
-      if (url.indexOf('http://cloud.typography.com') === 0) {
-        return url.replace('http://cloud.typography.com', '/cloud-typography');
-      }
-    }
-    return url;
   },
 
   separateScripts() {
