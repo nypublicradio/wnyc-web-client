@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { beforeTeardown } from '../lib/compat-hooks';
+import rewriter from 'ember-cli-proxy/rewriter';
 const { $ } = Ember;
 
 export default Ember.Component.extend({
@@ -13,16 +14,19 @@ export default Ember.Component.extend({
   click(event) {
     let target = $(event.target).closest('a');
     if (target.length > 0) {
-      let href = target.attr('href');
       let route;
-
-      let m = /\/\/www\.wnyc\.org\/(.*)$/.exec(href);
-      if (m) {
-        route = ['django-rendered', m[1]];
-      } else if ((m = /^\/?([^/].*)$/.exec(href))) {
-        route = ['django-rendered', m[1]];
-      } else if (href === '/' || href === '#') {
-        route = ['index'];
+      let origin = location.protocol + '//' + location.host;
+      let href = rewriter.rewriteURL(target.attr('href'), {
+        relativeTo: location.href,
+        myHost: origin
+      }).toString();
+      if (href.indexOf(origin + '/wnyc') === 0) {
+        href = href.replace(origin + '/wnyc', '');
+        if (href === '/') {
+          route = ['index'];
+        } else {
+          route = ['django-rendered', href];
+        }
       }
 
       if (route) {
