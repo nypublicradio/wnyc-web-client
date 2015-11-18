@@ -16,13 +16,7 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    },
-
-    wnycURL: 'http://www.wnyc.org',
-    // On dev.wnyc.net, the DNS for www.wnyc.org is overridden, so to
-    // talk to the real one we need to know this IP:
-    realWNYCURL: 'http://52.22.94.214',
-    wnycMediaURL: 'http://media.wnyc.org'
+    }
   };
 
   if (environment === 'development') {
