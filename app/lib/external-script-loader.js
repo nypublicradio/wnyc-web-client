@@ -9,6 +9,7 @@
 import fetch from 'fetch';
 import Ember from 'ember';
 import rewriter from 'ember-cli-proxy/rewriter';
+import URL from 'ember-cli-proxy/url';
 const { Promise } = Ember.RSVP;
 
 export default function loadScripts(scriptTags, containerElement) {
@@ -43,6 +44,6 @@ function scriptURL(tag) {
   if (url.indexOf(origin) === '0') {
     return url;
   } else {
-    return '/dynamic-script-loader/' + encodeURIComponent(url);
+    return '/dynamic-script-loader/' + encodeURIComponent(new URL(url, location.href).toString());
   }
 }
