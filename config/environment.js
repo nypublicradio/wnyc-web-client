@@ -19,7 +19,8 @@ module.exports = function(environment) {
     },
 
     wnycURL: 'http://dev.wnyc.net:4302',
-    wnycMediaURL: 'http://dev.wnyc.net:4302/media'
+    wnycMediaURL: 'http://dev.wnyc.net:4302/media',
+    googleAPIv3Key: 'AIzaSyCDbxxvbl0Zj6af28IfWjJ-S0SKxwDXnkc'
   };
 
   if (environment === 'development') {
