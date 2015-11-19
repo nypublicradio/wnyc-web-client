@@ -21,8 +21,8 @@ export default Ember.Component.extend({
         myHost: origin
       }).toString();
       if (href.indexOf(origin + '/wnyc') === 0) {
-        href = href.replace(origin + '/wnyc', '');
-        if (href === '/') {
+        href = href.replace(origin + '/wnyc', '').replace(/^\//, '');
+        if (href === '') {
           route = ['index'];
         } else {
           route = ['django-rendered', href];
