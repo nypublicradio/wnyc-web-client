@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 import { beforeAppend } from '../lib/compat-hooks';
+import isJavascript from '../lib/is-js';
 const { $ } = Ember;
 const { allSettled, Promise } = Ember.RSVP;
 
@@ -102,9 +103,4 @@ function styleLoaded(element) {
 function importNode(node) {
   const DEEP_COPY = true;
   return window.document.importNode(node, DEEP_COPY);
-}
-
-function isJavascript(scriptTag) {
-  let type = scriptTag.attributes.type ? scriptTag.attributes.type.value : 'text/javascript';
-  return /(?:application)|(?:text)\/javascript/i.test(type);
 }

@@ -16,9 +16,12 @@ const { Promise } = Ember.RSVP;
 export default Ember.Service.extend({
   asyncWriter: Ember.inject.service(),
 
-  load(scriptTags, containerElement) {
-    let asyncWriter = this.get('asyncWriter');
+  init() {
+    this.stack = [];
+  },
 
+  load(scriptTags, containerElement) {
+    debugger;
     let sources = Array.from(scriptTags).map(
       tag => loadSource(tag).then(src => ({
         src,
@@ -26,24 +29,45 @@ export default Ember.Service.extend({
       }))
     );
 
-    function evalNext() {
-      if (sources.length === 0) {
-        return Promise.resolve();
-      }
-      return sources.shift().then(({src, tag}) => {
-        let postMangled = mangleJavascript(tag, src);
-        if (postMangled) {
-          let script = document.createElement('script');
-          script.textContent = postMangled;
-          script.type = 'text/javascript';
-          asyncWriter.cursorTo(placeholderFor(tag));
-          containerElement.appendChild(script);
-        }
-      }).finally(evalNext);
+    this.stack.unshift({ sources,containerElement });
+    if (this.stack.length === 1) {
+      this._evalNext();
+    }
+  },
+
+  _evalNext() {
+    if (this.stack.length === 0) {
+      return Promise.resolve();
     }
 
-    return evalNext();
+    let { sources, containerElement } = this.stack[0];
+
+    if (sources.length === 0) {
+      this.stack.shift();
+      return this._evalNext();
+    }
+
+    let asyncWriter = this.get('asyncWriter');
+
+    return sources.shift().then(({src, tag}) => {
+      let postMangled = mangleJavascript(tag, src);
+      if (postMangled) {
+        let script = document.createElement('script');
+        script.textContent = postMangled;
+        script.type = 'text/javascript';
+        asyncWriter.cursorTo(placeholderFor(tag));
+
+        // Since we have already preloaded and inlined the source,
+        // this will run it synchronously.
+        containerElement.appendChild(script);
+
+        // Make sure any document.writes get their place at the head
+        // of the stack before we move on
+        asyncWriter.flush();
+      }
+    }).finally(() => this._evalNext());
   }
+
 });
 
 // In order to fetch all the scripts via XHR without tripping CORs
