@@ -34,3 +34,12 @@ export function beforeAppend(element /*, page */) {
   });
   return element;
 }
+
+// All the dynamically discovered Javascript that comes along with the
+// pages is run through this before executing. You can return non-true
+// to cancel the entire script.
+export function mangleJavascript(scriptTag, sourceCode) {
+  // TODO: I see in the mako templates that this is already disabled
+  // in overhaul mode. Need to discuss with Brian.
+  return sourceCode.replace('.pubads().enableSyncRendering()', '');
+}

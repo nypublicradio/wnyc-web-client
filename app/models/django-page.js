@@ -1,12 +1,14 @@
 import Ember from 'ember';
 import DS from 'ember-data';
-import loadScripts from '../lib/external-script-loader';
 import { beforeAppend } from '../lib/compat-hooks';
 const { $ } = Ember;
 const { allSettled, Promise } = Ember.RSVP;
 
+let scriptCounter = 0;
+
 export default DS.Model.extend({
   htmlParser: Ember.inject.service(),
+  scriptLoader: Ember.inject.service(),
   text: DS.attr(),
 
   document: Ember.computed('text', function() {
@@ -49,8 +51,16 @@ export default DS.Model.extend({
     // Then handle <script> in <body>
     Array.from(body.querySelectorAll('script')).forEach(script => {
       if (isJavascript(script)) {
-        // Pull out of body and save for evaluation
+        // Pull out of body and save for evaluation, leaving a marker
+        // in the original spot in case we need to direct any
+        // document.writes back there.
+        let marker = document.createElement('script');
+        marker.type = 'text/x-original-location';
+        let id = scriptCounter++;
+        marker.setAttribute('data-script-id', id);
+        script.parentElement.insertBefore(marker, script);
         script.remove();
+        script.setAttribute('data-script-id', id);
         scripts.push(script);
       }
     });
@@ -68,11 +78,12 @@ export default DS.Model.extend({
 
   appendTo($element) {
     let { body, scripts, styles } = this.separateScripts();
+    let loader = this.get('scriptLoader');
     return this.appendStyles($element, styles).finally(() => {
       Array.from(body.childNodes).forEach(child => {
         $element[0].appendChild(importNode(child));
       });
-      loadScripts(scripts, $element[0]);
+      loader.load(scripts, $element[0]);
     });
   }
 });
