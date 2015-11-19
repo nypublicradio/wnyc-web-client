@@ -16,10 +16,7 @@ export default Ember.Component.extend({
     if (target.length > 0) {
       let route;
       let origin = location.protocol + '//' + location.host;
-      let href = rewriter.rewriteURL(target.attr('href'), {
-        relativeTo: location.href,
-        myHost: origin
-      }).toString();
+      let href = rewriter.rewriteURL(target.attr('href'));
       if (href.indexOf(origin + '/wnyc') === 0) {
         href = href.replace(origin + '/wnyc', '').replace(/^\//, '');
         if (href === '') {

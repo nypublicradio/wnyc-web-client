@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import rewriter from 'ember-cli-proxy/rewriter';
 const { $ } = Ember;
-const origin = location.protocol + '//' + location.host;
 
 export default Ember.Service.extend({
   htmlParser: Ember.inject.service(),
@@ -26,7 +25,7 @@ export default Ember.Service.extend({
       }
       scripts.forEach(script => {
         if (script.attributes.src) {
-          script.src = rewriter.rewriteURL(script.attributes.src.value, { relativeTo: location.href, myHost: origin });
+          script.src = rewriter.rewriteURL(script.attributes.src.value);
         }
       });
       document.body.appendChild(newNode);

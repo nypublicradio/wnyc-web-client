@@ -40,7 +40,7 @@ export default function loadScripts(scriptTags, containerElement) {
 // violations, we are proxying them through our own server.
 function scriptURL(tag) {
   let origin = location.protocol + '//' + location.host;
-  let url = rewriter.rewriteURL(tag.attributes.src.value, { relativeTo: location.href, myHost: origin });
+  let url = rewriter.rewriteURL(tag.attributes.src.value);
   if (url.indexOf(origin) === '0') {
     return url;
   } else {
