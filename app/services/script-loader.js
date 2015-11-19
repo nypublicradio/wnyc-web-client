@@ -21,7 +21,6 @@ export default Ember.Service.extend({
   },
 
   load(scriptTags, containerElement) {
-    debugger;
     let sources = Array.from(scriptTags).map(
       tag => loadSource(tag).then(src => ({
         src,
