@@ -7,8 +7,12 @@ export default Ember.Component.extend({
   router: Ember.inject.service('wnyc-routing'),
 
   didRender() {
-    this.$().empty();
-    this.get('page').appendTo(this.$());
+    let page = this.get('page');
+    if (page !== this._lastPage) {
+      this._lastPage = page;
+      this.$().empty();
+      this.get('page').appendTo(this.$());
+    }
   },
 
   click(event) {
