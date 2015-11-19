@@ -8,6 +8,7 @@
 
 import fetch from 'fetch';
 import Ember from 'ember';
+import rewriter from 'ember-cli-proxy/rewriter';
 const { Promise } = Ember.RSVP;
 
 export default function loadScripts(scriptTags, containerElement) {
@@ -37,7 +38,11 @@ export default function loadScripts(scriptTags, containerElement) {
 // In order to fetch all the scripts via XHR without tripping CORs
 // violations, we are proxying them through our own server.
 function scriptURL(tag) {
-  // We need to resolve protocol-relative URLs before passing them on to the server.
-  let url = tag.attributes.src.value.replace(/^\/\//, location.protocol +"//");
-  return '/dynamic-script-loader/' + encodeURIComponent(url);
+  let origin = location.protocol + '//' + location.host;
+  let url = rewriter.rewriteURL(tag.attributes.src.value, { relativeTo: location.href, myHost: origin });
+  if (url.indexOf(origin) === '0') {
+    return url;
+  } else {
+    return '/dynamic-script-loader/' + encodeURIComponent(url);
+  }
 }

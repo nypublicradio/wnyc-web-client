@@ -2,9 +2,8 @@ import Ember from 'ember';
 import DS from 'ember-data';
 import loadScripts from '../lib/external-script-loader';
 import { beforeAppend } from '../lib/compat-hooks';
-const $ = Ember.$;
-const { allSettled } = Ember.RSVP;
-const Promise = Ember.RSVP.Promise;
+const { $ } = Ember;
+const { allSettled, Promise } = Ember.RSVP;
 
 export default DS.Model.extend({
   htmlParser: Ember.inject.service(),
@@ -21,12 +20,9 @@ export default DS.Model.extend({
     }
   }),
 
-  appendHeaderStyles($element) {
-    let doc = this.get('document');
-    let internalStyles = Array.from(doc.querySelectorAll('head style')).map(importNode);
-    let externalStyles = Array.from(doc.querySelectorAll('head link[rel=stylesheet]')).map(importNode);
-    let stylesLoaded = externalStyles.map(s => styleLoaded(s));
-    $element.append(internalStyles).append(externalStyles);
+  appendStyles($element, styles) {
+    let stylesLoaded = styles.map(s => styleLoaded(s));
+    $element.append(styles);
     return allSettled(stylesLoaded);
   },
 
@@ -59,14 +55,20 @@ export default DS.Model.extend({
       }
     });
 
+    // Styles, both inline and external, with their relative order maintained.
+    let styles = Array.from(doc.querySelectorAll('style, link[rel=stylesheet]')).map(element => importNode(element));
+
+    // Remove the style tags from our imported body, because they will be handled separately.
+    Array.from(body.querySelectorAll('style, link[rel=stylesheet]')).forEach(element => element.remove());
+
     body = beforeAppend(body);
 
-    return { body, scripts };
+    return { body, scripts, styles };
   },
 
   appendTo($element) {
-    return this.appendHeaderStyles($element).finally(() => {
-      let { body, scripts } = this.separateScripts();
+    let { body, scripts, styles } = this.separateScripts();
+    return this.appendStyles($element, styles).finally(() => {
       Array.from(body.childNodes).forEach(child => {
         $element[0].appendChild(importNode(child));
       });
@@ -76,6 +78,9 @@ export default DS.Model.extend({
 });
 
 function styleLoaded(element) {
+  if (element.tagName !== 'LINK') {
+    return Promise.resolve();
+  }
   return new Promise((resolve, reject) => {
     $(element)
       .on('load', resolve)
