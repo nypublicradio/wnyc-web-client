@@ -2,7 +2,7 @@
 module.exports = function(env) {
   "use strict";
 
-  let wnyc = env.wnycURL;
+  var wnyc = env.wnycURL;
 
   // Establishes a two-way relationship by:
   //   1. installing proxy middleware so that /wnyc/foo gets
@@ -12,8 +12,8 @@ module.exports = function(env) {
   //
   // URL rewriters get applied to the proxied content, including
   // Location headers in redirects, URLs in CSS, and URLs in HTML.
-  this.masquerade(wnyc,                { as: '/wnyc' });
-  this.masquerade('http://media.wnyc.org',              { as: '/wnyc-media' });
+  this.masquerade(wnyc,             { as: '/wnyc' });
+  this.masquerade(env.wnycMediaURL,  { as: '/media' });
   this.masquerade('http://cloud.typography.com', { as: '/cloud-typography', headers: { Referer: wnyc } });
 
   // This establishes a one-way relationship -- it proxies requests
@@ -24,6 +24,7 @@ module.exports = function(env) {
   this.proxy(wnyc + '/api',            { as: '/api' });
   this.proxy(wnyc + '/datanewswidget', { as: '/datanewswidget' });
 
+
   // This is the other kind of one-way relationship, in isolation.
   // this.rewrite('http://www.wnyc.org', { to: '/wnyc' });
 
@@ -31,8 +32,8 @@ module.exports = function(env) {
   // need more direct control. We will still install URL rewriters for
   // you if you use createProxyServer.
   this.proxy(function(app) {
-    let url = require('url');
-    let proxyServer = this.createProxyServer();
+    var url = require('url');
+    var proxyServer = this.createProxyServer();
     app.get('/dynamic-script-loader/*', function(req, res) {
       var parsed = url.parse(req.params[0]);
       var origin = parsed.protocol + '//' + parsed.host;

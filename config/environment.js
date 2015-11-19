@@ -18,7 +18,8 @@ module.exports = function(environment) {
       // when it is created
     },
 
-    wnycURL: 'http://www.wnyc.org'
+    wnycURL: 'http://dev.wnyc.net:4302',
+    wnycMediaURL: 'http://dev.wnyc.net:4302/media'
   };
 
   if (environment === 'development') {
