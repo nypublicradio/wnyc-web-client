@@ -59,7 +59,7 @@ export default Ember.Service.extend({
       let { scripts, nonscripts } = this._extractScripts(this._nodesFrom(string));
 
       nonscripts.forEach(node => {
-        let newNode = window.document.import(node, true);
+        let newNode = window.document.importNode(node, true);
         if (cursor) {
           cursor.parentElement.insertBefore(newNode, cursor);
         } else {
