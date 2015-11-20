@@ -16,6 +16,17 @@ export function beforeTeardown(/* element, page */) {
   $('html')
     .removeClass('navigation-open')
     .removeClass('subnavigation-open');
+
+  // The mailchimp popup signup form is badly behaved -- it insists on
+  // being the only AMD loader on the page. So here we clear it away
+  // to make room for the next copy. (Ember's AMD loader is hiding
+  // under WNYC_EMBER_LOADER, see lib/unobstrusive-loader.js.)
+  window.define = undefined;
+
+  // Most pages don't actually overwrite this if it exists, so it can
+  // end up accumulating unexpected cruft.
+  window.wnyc = undefined;
+
 }
 
 // This gets run by the django-page model when it's figuring out how
