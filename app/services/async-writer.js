@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import isJavascript from '../lib/is-js';
-const { $, RSVP } = Ember;
-const { Promise } = RSVP;
+const { $ } = Ember;
 
 export default Ember.Service.extend({
   htmlParser: Ember.inject.service(),
