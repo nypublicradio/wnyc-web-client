@@ -7,7 +7,6 @@
 // evaluated before domready.
 export const dependencies = Object.freeze({
   'js/lib/wnyc/user.js': ['js/lib/jquery/jquery.xdr.js'],
-  'js/lib/jquery/jquery.ba-postmessage.js': ['js/bootstraps/story.js'],
   'js/lib/jquery/jquery.xdr.js': ['js/lib/jquery/jquery.ba-postmessage.js']
 });
 

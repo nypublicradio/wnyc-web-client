@@ -1,1 +1,8 @@
 {{title page.title}}
+
+{{!-- Our component manually inserts server-generated DOM into this element --}}
+<div class="django-content"></div>
+
+{{#if showingOverlay}}
+  {{yield}}
+{{/if}}

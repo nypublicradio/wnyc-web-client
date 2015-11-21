@@ -6,12 +6,27 @@ const { $ } = Ember;
 export default Ember.Component.extend({
   router: Ember.inject.service('wnyc-routing'),
 
+  didReceiveAttrs() {
+    // If we have a new page model, we want to clear any overlaid
+    // content when we rerender.
+    let page = this.get('page');
+    if (page !== this._lastPage) {
+      this.set('showingOverlay', false);
+    }
+  },
+
   didRender() {
     let page = this.get('page');
     if (page !== this._lastPage) {
       this._lastPage = page;
-      this.$().empty();
-      this.get('page').appendTo(this.$());
+      let elt = this.$('.django-content');
+      elt.empty();
+      this.get('page').appendTo(elt).then(() => {
+        // After the server-rendered page has been inserted, we
+        // re-enable any overlaid content so that it can wormhole
+        // itself into the server-rendered DOM.
+        this.set('showingOverlay', true);
+      });
     }
   },
 
