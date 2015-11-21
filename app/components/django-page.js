@@ -18,20 +18,13 @@ export default Ember.Component.extend({
   click(event) {
     let target = $(event.target).closest('a');
     if (target.length > 0) {
-      let route;
+      let router = this.get('router');
       let origin = location.protocol + '//' + location.host;
       let href = rewriter.rewriteURL(target.attr('href'));
       if (href.indexOf(origin + '/wnyc') === 0) {
         href = href.replace(origin + '/wnyc', '').replace(/^\//, '');
-        if (href === '') {
-          route = ['index'];
-        } else {
-          route = ['django-rendered', href];
-        }
-      }
-
-      if (route) {
-        this.get('router').transitionTo(...route);
+        let { routeName, params } = router.recognize(href);
+        router.transitionTo(routeName, ...params);
         event.preventDefault();
         beforeTeardown(this.get('element'), this.get('page'));
         return false;
