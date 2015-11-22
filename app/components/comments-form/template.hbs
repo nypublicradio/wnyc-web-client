@@ -1,0 +1,42 @@
+<h2 class="h3 flush" id="commentsForm">Leave a comment</h2>
+<div class="text">Email addresses are required but never displayed</div>
+
+{{#unless user.isStaff}}
+<fieldset class="fieldset">
+    <label class="h4" for="name">Name</label>
+    {{#if errors.name}}
+        <div class="text text--red flush">{{errors.name}}</div>
+    {{/if}}
+    {{input value=name class="input flush" type="text" name="name"}}
+</fieldset>
+
+<fieldset class="fieldset">
+    <label class="h4" for="email">Email address</label>
+    {{#if errors.email}}
+        <div class="text text--red flush">{{errors.email}}</div>
+    {{/if}}
+    {{input value=email class="input flush" type="email" name="email"}}
+</fieldset>
+{{/unless}}
+
+<fieldset class="fieldset">
+    <label class="h4" for="commentBox">Comment</label>
+    {{#if errors.comment}}
+        <div class="text text--red flush">{{errors.comment}}</div>
+    {{/if}}
+    {{textarea value=comment class="textarea textarea--resize" id="commentBox" name="comment" cols="40" rows="10"}}
+</fieldset>
+
+<fieldset class="fieldset">
+    <label class="h4" for="location">Location</label>
+    {{input value=location class="input flush" type="text" name="location"}}
+</fieldset>
+
+{{#if user.isStaff}}
+<fieldset class="fieldset">
+    <label class="h4" for="userNameOverride">User name override</label>
+    {{input value=nameOverride class="input flush" name="user_name_override"}}
+</fieldset>
+{{/if}}
+
+<button class="btn btn--graytext btn--squared" disabled={{isDisabled}} {{action 'sendComment'}}>Submit Comment</button>

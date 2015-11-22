@@ -1,15 +1,19 @@
 // This module works with module_wrapper.py to give us runtime control
 // over each legacy Javascript file.
 
+// -------
 // This lets you declare that certain modules should run after
 // others. It's needed because some of the old code is actually
 // delivered in the wrong order, and only works when it's all
 // evaluated before domready.
+// -------
 export const dependencies = Object.freeze({
   'js/lib/wnyc/user.js': ['js/lib/jquery/jquery.xdr.js'],
-  'js/lib/jquery/jquery.xdr.js': ['js/lib/jquery/jquery.ba-postmessage.js']
+  'js/lib/jquery/jquery.xdr.js': ['js/lib/jquery/jquery.ba-postmessage.js'],
+  'js/lib/jquery/jquery.ba-postmessage.js': []
 });
 
+// -------
 // This lets us declare which modules are safe to only run once. By
 // default we assume it is not safe and stateful work needs to be
 // done, so modules not listed here will be rerun whenever django
@@ -17,12 +21,15 @@ export const dependencies = Object.freeze({
 //
 // There are probably plenty of other modules that are safe to include
 // here, with a little bit a review. Anything that only declares
-// functions underneath window or jQuery is safe.
+// functions underneath window or jQuery is safe. Modules that add
+// functions under `wnyc` are not currently safe, because that whole
+// object gets recreated every request.
 //
 // A good refactoring strategy is to move code around so that more and
 // more files can be listed here. In a well-built Javascript app,
 // there's really only one entrypoint that kicks off all the stateful
 // behavior.
+// --------
 export const runOnce = Object.freeze({
   'js/json2.js': true,
   'js/consoleFix.js': true,
@@ -31,7 +38,6 @@ export const runOnce = Object.freeze({
   'js/vendor/backbone/backbone-0.9.9.js': true,
   'js/vendor/handlebars/handlebars-2.0.0.min.js': true,
   'js/vendor/jwplayer/jwplayer.js': true,
-  'js/util.js': true,
   'js/lib/wnyc/jquery.js': true
 });
 

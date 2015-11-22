@@ -23,13 +23,30 @@ export default DS.Model.extend({
     }
   }),
 
+  wnycContent: Ember.computed('document', function() {
+    let tag = this.get('document').querySelector('#wnyc-content-jsonapi');
+    let json;
+    if (tag) {
+      try {
+        json = JSON.parse(tag.innerText);
+      } catch(err) {}
+    }
+    if (json) {
+      return this.store.push(json);
+    }
+  }),
+
   appendStyles($element, styles) {
     let stylesLoaded = styles.map(s => styleLoaded(s));
     $element.append(styles);
     return allSettled(stylesLoaded);
   },
 
-  separateScripts() {
+  pieces: Ember.computed('document', function() {
+    return this._separateScripts();
+  }),
+
+  _separateScripts() {
     let doc = this.get('document');
     let body = importNode(doc.querySelector('body'));
     let scripts = [];
@@ -78,13 +95,12 @@ export default DS.Model.extend({
   },
 
   appendTo($element) {
-    let { body, scripts, styles } = this.separateScripts();
     let loader = this.get('scriptLoader');
-    return this.appendStyles($element, styles).finally(() => {
-      Array.from(body.childNodes).forEach(child => {
+    return this.appendStyles($element, this.get('pieces.styles')).finally(() => {
+      Array.from(this.get('pieces.body').childNodes).forEach(child => {
         $element[0].appendChild(importNode(child));
       });
-      loader.load(scripts, $element[0]);
+      loader.load(this.get('pieces.scripts'), $element[0]);
     });
   }
 });

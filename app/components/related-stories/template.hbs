@@ -1,0 +1,63 @@
+{{#if stories}}
+<div class="list-heading">
+    <h1 class="h4">Related</h1>
+</div>
+{{/if}}
+
+{{#each stories as |item|}}
+<article class="list-item list-item--tall">
+    <div class="media media--rev flush">
+        {{#if item.imageMain}}
+        <img class="media-image middle-narrow-up" alt="{{item.title}}"
+            src="{{image-template item.imageMain.template 100 100 item.imageMain.crop}}"
+            srcset="{{image-template item.imageMain.template 200 200 item.imageMain.crop}} 2x,
+                {{image-template item.imageMain.template 300 300 item.imageMain.crop}} 3x"
+            width="100" height="100">
+        {{/if}}
+
+        <div class="media-body">
+            {{#if item.headers.links}}
+            <div class="text text--small nudge-mini">
+            {{#each item.headers.links as |link|}}
+                <a href="{{link.url}}" class="link--dark">{{{link.title}}}</a>
+                {{#if link.addSlash}}<span class="text--lightgray"> / </span>{{/if}}
+            {{/each}}
+            </div>
+            {{/if}}
+
+            <h1 class="h2 h2--mq-small nudge-mini">
+                <a class="link--dark" href="{{item.url}}?utm_source={{pathname}}&utm_medium=treatment&utm_campaign=morelikethis">{{{item.title}}}</a>
+            </h1>
+
+            <div class="nudge-big">
+                <div class="text-body text--medium text-body--forceinline text-body--nopad">
+                    {{{item.tease}}} <span class="dimmed text--small">({{moment-format item.dateLine 'MMM D, YYYY'}})</span>
+                </div>
+            </div>
+        </div>
+        <!-- .media-body -->
+    </div>
+    <!-- .media -->
+
+    {{#if item.audioEventually}}
+    {{#if item.audioAvailable}}
+    <div class="btn-group">
+        <button aria-label="Listen to {{item.title}}" class="btn btn--blue js-listen" data-id="{{item.id}}" data-category="Listen">
+            <i class="fa fa-play icon--prefix"></i>
+            Listen
+            <span class="dimmed text--small">{{item.audioDurationReadable}}</span>
+        </button>
+        <button aria-label="Add {{item.title}} to Your Queue" class="btn btn--graytext hide-on-mobile js-queue" data-id="{{item.id}}" data-category="Queue">
+            <i class="fa fa-plus icon--prefix"></i>Queue
+        </button>
+    </div>
+    <!-- .btn-group -->
+    {{else}}
+    <div class="text text--medium text--lightergray flush--medium">
+        <em>Audio not yet available</em>
+    </div>
+    {{/if}}
+    {{/if}}
+
+</article>
+{{/each}}

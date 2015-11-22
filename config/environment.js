@@ -20,7 +20,10 @@ module.exports = function(environment) {
 
     wnycURL: 'http://dev.wnyc.net:4302',
     wnycMediaURL: 'http://dev.wnyc.net:4302/media',
-    googleAPIv3Key: 'AIzaSyCDbxxvbl0Zj6af28IfWjJ-S0SKxwDXnkc'
+    googleAPIv3Key: 'AIzaSyCDbxxvbl0Zj6af28IfWjJ-S0SKxwDXnkc',
+    wnycAPI: '',
+    wnycAccountAPI: '',
+    wnycEtagAPI: ''
   };
 
   if (environment === 'development') {
@@ -45,6 +48,9 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
+    ENV.wnycAPI = '//api.wnyc.org';
+    ENV.wnycAccountAPI = 'https://account.wnyc.org';
+    ENV.wnycEtagAPI = 'https://www.wnyc.org';
   }
 
   return ENV;

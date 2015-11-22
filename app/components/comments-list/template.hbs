@@ -1,0 +1,28 @@
+<div class="list">
+{{#each comments as |comment|}}
+    <article class="list-item{{if comment.isStaffComment ' list-item--highlight'}}" data-id="{{comment.id}}">
+        <h1 class="h3">
+        {{#if comment.staffNameOverride}}
+            {{comment.staffNameOverride}}
+        {{else if comment.location}}
+            {{comment.author}} from {{comment.location}}
+        {{else}}
+            {{comment.author}}
+        {{/if}}
+        </h1>
+
+        <div class="text text--prewrap">{{{comment.comment}}}</div>
+
+        <div class="l-split flush">
+            <div class="dimmed">{{comment.publishDate}}</div>
+
+            {{#if user.isStaff}}
+                {{comments-admin id=comment.id browserId=browserId}}
+            {{/if}}
+
+        </div>
+        <!-- .l-split -->
+    </article>
+{{/each}}
+</div>
+<!-- .list -->

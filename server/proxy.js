@@ -23,6 +23,7 @@ module.exports = function(env) {
   // other rules.
   this.proxy(wnyc + '/api',            { as: '/api' });
   this.proxy(wnyc + '/datanewswidget', { as: '/datanewswidget' });
+  this.proxy(wnyc + '/comments', { as: '/comments' });
 
 
   // This is the other kind of one-way relationship, in isolation.
