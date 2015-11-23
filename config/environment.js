@@ -23,7 +23,8 @@ module.exports = function(environment) {
     googleAPIv3Key: 'AIzaSyCDbxxvbl0Zj6af28IfWjJ-S0SKxwDXnkc',
     wnycAPI: '',
     wnycAccountAPI: '',
-    wnycEtagAPI: ''
+    wnycEtagAPI: '',
+    wnycStaticURL: '/wnyc/static'
   };
 
   if (environment === 'development') {
@@ -51,6 +52,7 @@ module.exports = function(environment) {
     ENV.wnycAPI = '//api.wnyc.org';
     ENV.wnycAccountAPI = 'https://account.wnyc.org';
     ENV.wnycEtagAPI = 'https://www.wnyc.org';
+    ENV.wnycStaticURL = 'http://www.wnyc.org/static';
   }
 
   return ENV;

@@ -1,0 +1,25 @@
+<style type="text/css">
+  #wnyc-loading-spinner {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    animation:spin 6s linear infinite;
+    -webkit-animation: spin 6s linear infinite;
+  }
+  @-webkit-keyframes spin {
+  from { -webkit-transform: rotateX(-15deg); }
+  25% { -webkit-transform: rotateX(-15deg)rotateY(90deg); }
+  75% { -webkit-transform: rotateX(-15deg)rotateY(270deg); }
+  to { -webkit-transform: rotateX(-15deg)rotateY(360deg); }
+  }
+  @keyframes spin {
+  from { transform: rotateX(-15deg); }
+  25% { transform: rotateX(-15deg)rotateY(90deg); }
+  75% { transform: rotateX(-15deg)rotateY(270deg); }
+  to { transform: rotateX(-15deg)rotateY(360deg); }
+  }
+
+</style>
+<img id="wnyc-loading-spinner" src="{{staticURL}}/img/wnyc/wnyc-logo-fb.png">
