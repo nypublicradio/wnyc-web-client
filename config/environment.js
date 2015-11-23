@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'wnyc-wrapper',
+    modulePrefix: 'overhaul',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',

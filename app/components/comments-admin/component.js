@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import ENV from 'wnyc-wrapper/config/environment';
+import ENV from 'overhaul/config/environment';
 
 export default Ember.Component.extend({
   actions: {
@@ -15,13 +15,13 @@ export default Ember.Component.extend({
           comment_id: id
         },
         xhrFields: { withCredentials: true }
-      }
+      };
 
       Ember.$.ajax(options).always( d => {
         if ( d.featured ) {
-          this.set('isFeatured', true)
+          this.set('isFeatured', true);
         }
-      })
+      });
     }
   }
-})
+});

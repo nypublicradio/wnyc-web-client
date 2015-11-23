@@ -17,7 +17,7 @@ export default DS.JSONAPISerializer.extend({
           avatars: payload.avatars
         }
       }
-    }
+    };
   }
 
 });

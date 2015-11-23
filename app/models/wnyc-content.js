@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import DS from 'ember-data';
-import ENV from 'wnyc-wrapper/config/environment';
+import ENV from 'overhaul/config/environment';
 const { attr } = DS;
 
 export default DS.Model.extend({

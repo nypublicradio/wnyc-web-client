@@ -1,7 +1,7 @@
 {
-  "name": "wnyc-wrapper",
+  "name": "overhaul",
   "version": "0.0.0",
-  "description": "Small description for wnyc-wrapper goes here",
+  "description": "Small description for overhaul goes here",
   "private": true,
   "directories": {
     "doc": "doc",

@@ -8,7 +8,7 @@ export default Ember.Component.extend({
     get() {
       this.get('getStories')().then(stories => {
         this.set('stories', stories);
-        Ember.run.scheduleOnce('afterRender', this, this.imagesLoaded)
+        Ember.run.scheduleOnce('afterRender', this, this.imagesLoaded);
       });
     },
     set(k,v) { return v; }
@@ -19,7 +19,7 @@ export default Ember.Component.extend({
     // call back to run once all the <img/> els are finished downloading
     this.$().imagesLoaded()
       .progress(function(instance, image) {
-        Ember.$(image.img).addClass('is-loaded')
-      })
+        Ember.$(image.img).addClass('is-loaded');
+      });
   }
-})
+});

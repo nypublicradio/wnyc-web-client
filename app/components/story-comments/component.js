@@ -3,9 +3,9 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   comments: Ember.computed('getComments', {
     get() {
-      this.set('isLoading', true)
+      this.set('isLoading', true);
       this.get('getComments')().then(comments => {
-        this.set('comments', comments)
+        this.set('comments', comments);
       }).finally(() => this.set('isLoading', false));
     },
     set(k,v) { return v; }
@@ -13,7 +13,7 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     if (this.get('isShowingComments')) {
-      this.get('element').scrollIntoView()
+      this.get('element').scrollIntoView();
     }
   },
 
@@ -34,7 +34,7 @@ export default Ember.Component.extend({
 
   isShowingComments: Ember.computed({
     get() {
-      var hash = window.location.hash.slice(1).split('&')
+      var hash = window.location.hash.slice(1).split('&');
       return hash.indexOf('comments') !== -1 || hash.indexOf('commentlist') !== -1;
     },
     set(k,v){ return v; }
@@ -42,12 +42,12 @@ export default Ember.Component.extend({
 
   actions: {
     getComments() {
-      this.set('isShowingComments', true)
-      this.set('isShowingForm', true)
+      this.set('isShowingComments', true);
+      this.set('isShowingForm', true);
     },
     saveSuccess() {
-      this.set('isShowingForm', false)
-      this.set('isSuccess', true)
+      this.set('isShowingForm', false);
+      this.set('isSuccess', true);
     }
   }
 });
