@@ -4,8 +4,8 @@ export default DS.JSONAPISerializer.extend({
   normalizeResponse(store, primaryModelClass, payload) {
     return {
       data: payload.results.map(result => {
-        let id = result.id;
-        delete result.id;
+        let id = result.pk;
+        delete result.pk;
         return {
           id,
           type: 'comment',

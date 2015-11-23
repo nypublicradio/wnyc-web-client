@@ -17,7 +17,7 @@ export default DS.Model.extend({
   tags: attr(),
   title: attr('string'),
 
-  securityURL(browserId) {
+  commentSecurityURL(browserId) {
     let data = {
       content_type: 'cms.' + this.get('item_type'),
       object_pk: this.get('id'),

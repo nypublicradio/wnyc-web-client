@@ -12,7 +12,7 @@ export default Ember.Component.extend({
   securityURL: Ember.computed('story', 'browserId', function() {
     let story = this.get('story');
     let browserId = this.get('browserId');
-    return story.securityURL(browserId);
+    return story.commentSecurityURL(browserId);
   }),
 
   didInsertElement() {
@@ -24,30 +24,30 @@ export default Ember.Component.extend({
     var requiredFields = [
       'name',
       'comment'
-    ]
+    ];
 
     if ( !this.get('user.isStaff') ) {
-      requiredFields.push('email')
+      requiredFields.push('email');
     }
 
-    this.set('errors', {})
+    this.set('errors', {});
 
     requiredFields.forEach(function(field) {
-      var val = this.get(field)
+      var val = this.get(field);
       if ( !val ) {
-        this.set(`errors.${field}`, 'This field is required')
+        this.set(`errors.${field}`, 'This field is required');
       }
-    }, this)
+    }, this);
 
-    return Ember.keys(this.get('errors')).length !== 0
+    return Ember.keys(this.get('errors')).length !== 0;
   },
 
   actions: {
     sendComment() {
-      this.set('isDisabled', true)
+      this.set('isDisabled', true);
       if (this.hasErrors()) {
-        this.set('isDisabled', false)
-        return false
+        this.set('isDisabled', false);
+        return false;
       }
       let data = this.$().serialize();
       this.auth.then(({ security_hash, timestamp }) => {
@@ -66,16 +66,16 @@ export default Ember.Component.extend({
           url,
           xhrFields: { withCredentials: true },
           data: data + '&' + Ember.$.param(metaData)
-        }
+        };
         Ember.$.ajax(options).always(function(response) {
           if ( response.errors ) {
-            this.set('errors', response.errors)
-            this.set('isDisabled', false)
+            this.set('errors', response.errors);
+            this.set('isDisabled', false);
           } else {
-            this.set('isSaved', true)
-            this.sendAction()
+            this.set('isSaved', true);
+            this.sendAction();
           }
-        }.bind(this))
+        }.bind(this));
       });
     }
   }
