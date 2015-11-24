@@ -3,7 +3,18 @@
   <head>
     <title>WNYC Hybrid Architecture</title>
     <link type="text/css" rel="stylesheet" href="assets/tufte.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/prism.css"/>
+    <script src="assets/prism.js" type="text/javascript"></script>    
     <script src="/ember-cli-live-reload.js" type="text/javascript"></script>
+    <style type="text/css">
+pre[class*="language-"] {
+    margin: 0 0 1.75em 0;
+}
+.token.variable {
+    color: #251904;
+}
+
+    </style>
   </head>
   <body>
     <article>
@@ -86,11 +97,11 @@
         <h2>Ember Application Tour</h2>
 
         <p>
-          This section is a guided tour through several important
-          pieces of your Ember application that make the hybrid
-          architecture possible. The application is in
-          the <code>overhaul</code> subdirectory on the
-          branch <code>efaulkner/prototype</code> in the
+          This section highlights several important pieces of your
+          Ember application that make the hybrid architecture
+          possible. The application is in the <code>overhaul</code>
+          subdirectory on the branch <code>efaulkner/prototype</code>
+          in the
           repo <code>git.wnyc.net:puppysite</code>. <label for="separate-repo"
           class="margin-toggle sidenote-number"></label>
           <input type="checkbox" id="separate-repo"
@@ -103,7 +114,7 @@
         <h3>Routing</h3>
 
         <p>
-          Routes are defined using the standard Ember conventions,
+          Routes are defined using standard Ember conventions,
           in <code>app/router.js</code>. We have a catch-all route
           named <code>django-rendered</code> that can handle any URL
           and render it by fetching the corresponding page from the
@@ -124,11 +135,156 @@
           There is an <code>ember-data</code> model
           named <code>django-page</code>, with corresponding adapter
           and serializer implementations. The adapter & serializer
-          abstract the details of page fetching so the rest of the
-          Ember application can use standard conventions for fetching
-          and caching data.
+          abstract the details of page fetching<label for="fetch-api"
+          class="margin-toggle sidenote-number"></label>
+          <input type="checkbox" id="fetch-api"
+          class="margin-toggle"/><span class="sidenote">I use
+          the <a href="https://fetch.spec.whatwg.org/">Fetch API</a>
+          throughout, which is a modern replacement
+          for <code>XMLHttpRequest</code>. The <a href="https://github.com/stefanpenner/ember-fetch">ember-fetch</a>
+          addon provides a polyfill that works on all browsers
+          that Ember supports.</span> so the rest of the Ember
+          application can use standard conventions for fetching and
+          caching data.
         </p>
+
+        <p>
+          The <code>django-page</code> model has
+          an <code>appendTo</code> method that puts the page's content
+          into the DOM, while dealing gracefully with styles and
+          scripts. It depends on the <code>script-loader</code>
+          service (described further below) to simulate the way any
+          scripts would have executed during a normal page load.
+        </p>
+
+        <h3>Rendering Django Content</h3>
         
+        <p>
+          Once you have a <code>django-page</code> model, you can
+          render it with the <code>django-page</code> component. The
+          component has three important features.
+        </p>
+
+        <p>
+          First, it knows how to render the page model into the
+          DOM. Second, it intercepts clicks on links in the content
+          and converts them into Ember transitions. This is a critical
+          step to enable persistence &mdash; we don't want a link to
+          take the user back to the server.
+        </p>
+
+        <p>
+          And third, it can gracefully embed dynamic Ember
+          content <em>inside</em> the Django-rendered content. Here's
+          an excerpt from the <code>story</code> template:
+          </p>
+
+          <pre class="code"><code class="language-handlebars">{{#django-page page=model.page}}
+  {{#if model.story.commentsEnabled }}
+    {{#ember-wormhole to="comments" }}
+      {{story-comments story=model.story
+                       user=model.user
+                       getComments=model.getComments
+                       browserId=model.browserId.identity }}
+    {{/ember-wormhole}}
+  {{/if}}
+{{/django-page}}</code></pre>
+
+        <p>
+          The above means "render the given Django page, then if
+          comments are enabled, render the <code>story-comments</code>
+          component inside the element
+          with <code class="language-javascript">id="comments"</code>". This
+          is the key technique for gradually enhancing your existing
+          pages with new dynamic capability.
+        </p>
+           
+
+        <h3>Script Loader Service</h3>
+
+        <p>
+          The <code>script-loader</code> service solves one particular
+          problem: <code>&lt;script&gt;</code> tags execute
+          synchronously and in order of appearance during the initial
+          rendering of a web page, but that order is lost if you
+          append them dynamically later on. Much of your legacy
+          Javascript relies on that synchrony assumption. So the
+          script loader manually retrieves and executes scripts in
+          exactly the same order they would have run during initial
+          page load.
+        </p>
+
+        <p>
+          Another browser feature that only works at initial load
+          is <code>document.write</code><label for="document-write"
+          class="margin-toggle
+          sidenote-number"></label><input type="checkbox"
+          id="document-write"
+          class="margin-toggle"/><span class="sidenote"><code>document.write</code>
+          is considered legacy technology with quirky behavior, and
+          new code should not use it.</span>. To keep your existing
+          scripts working, I added an <code>async-writer</code>
+          service that replaces <code>document.write</code> for
+          scripts that are running after page load.
+        </p>
+
+        <p>
+          <code>script-loader</code> and <code>async-writer</code>
+          work together to ensure that even scripts added
+          via <code>document.write</code> execute in the correct
+          order. But sometimes the legacy code is quirky enough that
+          we don't actually want to run it at all, or we need to
+          deliberately change ordering, which brings us to
+          the <code>legacy-loader</code>.
+        </p>
+
+        <h3>Legacy Loader Service</h3>
+
+        <p>
+          Your Django app uses Django Compressor to manage most
+          Javascript assets. I added a new Javascript
+          precompiler<label for="document-write" class="margin-toggle
+          sidenote-number"></label><input type="checkbox"
+          id="document-write"
+          class="margin-toggle"/><span class="sidenote">Django
+          Compressor only applies Javascript precompilers
+          to <code>&lt;script&gt;</code> tags with the correct
+          mime-type. You should make a pass through your templates to
+          fix up any that are still missing. It's not fatal, but any
+          scripts that don't go through the precompiler won't be
+          subject to the legacy loader's rules.</span> to your
+          Compressor configuration
+          called <code>ModuleWrapper</code>. It provides a very slim
+          module loader interface around each Javascript file.
+        </p>
+
+        <p>
+          The <code>legacy-loader</code> service is able to use that
+          interface to control the execution of individual Javascript
+          files, even when they have been concatenated and minified.
+          See the comments
+          in <code>app/services/legacy-loader.js</code> for more
+          detail on how it can be used to suppress or reorder
+          evaluation of individual scripts.
+        </p>
+
+        <p>
+          <code>legacy-loader</code> exists to help make the
+          refactoring of legacy Javascript more manageable. When a
+          problem is uncovered, it can often be fixed quickly with a
+          new rule in <code>legacy-loader</code>, and later when the
+          offending code gets refactored the rule can be removed.
+        </p>
+
+        <p>
+          There is an optional <code>LOG_LEGACY_LOADER</code> flag
+          in <code>config/environment.js</code> that can
+          suppress/enable verbose browser console logging of which
+          scripts are running. The log is very helpful in identifying
+          where an exception is coming from, but it's also very noisy
+          when you're working on something else.
+        </p>
+
       </section>
       
     </article>
