@@ -238,7 +238,16 @@ pre[class*="language-"] {
           the <code>legacy-loader</code>.
         </p>
 
-        <h3>Legacy Loader Service</h3>
+        <h3>Legacy Loader and Compatibility Hooks</h3>
+        
+        <p>
+          The <code>legacy-loader</code> service
+          and <code>app/lib/compat-hooks</code> exist to make the
+          refactoring of legacy Javascript more manageable. When a
+          problem is uncovered, it can often be fixed quickly by
+          adding a new rule to one of these, and later when the
+          offending code gets refactored the rule can be removed.
+        </p>
 
         <p>
           Your Django app uses Django Compressor to manage most
@@ -256,9 +265,6 @@ pre[class*="language-"] {
           Compressor configuration
           called <code>ModuleWrapper</code>. It provides a very slim
           module loader interface around each Javascript file.
-        </p>
-
-        <p>
           The <code>legacy-loader</code> service is able to use that
           interface to control the execution of individual Javascript
           files, even when they have been concatenated and minified.
@@ -269,14 +275,6 @@ pre[class*="language-"] {
         </p>
 
         <p>
-          <code>legacy-loader</code> exists to help make the
-          refactoring of legacy Javascript more manageable. When a
-          problem is uncovered, it can often be fixed quickly with a
-          new rule in <code>legacy-loader</code>, and later when the
-          offending code gets refactored the rule can be removed.
-        </p>
-
-        <p>
           There is an optional <code>LOG_LEGACY_LOADER</code> flag
           in <code>config/environment.js</code> that can
           suppress/enable verbose browser console logging of which
@@ -284,6 +282,11 @@ pre[class*="language-"] {
           where an exception is coming from, but it's also very noisy
           when you're working on something else.
         </p>
+
+      </section>
+
+      <section>
+        <h2>Next Steps</h2>
 
       </section>
       
