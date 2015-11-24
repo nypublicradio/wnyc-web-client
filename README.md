@@ -21,3 +21,6 @@ When we fetch pages from the Django app, we include the `X-WNYC-Ember` HTTP head
 
 The `story` route is a good example of how to take a server-generated page and embed Ember components inside of it. The components I'm using there were taken out of the earlier `overhaul-story` app and integrated into this app.
 
+# Additional Documentation
+
+See `docs/prototype-report.html` for the original writeup when this application was created.

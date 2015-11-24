@@ -1,9 +1,18 @@
 /* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+var mergeTrees = require('broccoli-merge-trees');
+var mv = require('broccoli-stew').mv;
 
 module.exports = function(defaults) {
+  var pubTrees = ['public'];
+  if (EmberApp.env() === 'development') {
+    pubTrees.push(mv('docs', 'docs'));
+  }
   var app = new EmberApp(defaults, {
-    babel: { includePolyfill: true }
+    babel: { includePolyfill: true },
+    trees: {
+      public: mergeTrees(pubTrees)
+    }
   });
 
   // This is here so that legacy JS within our content pages can share

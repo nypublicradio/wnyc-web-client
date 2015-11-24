@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WNYC Hybrid Architecture</title>
+    <link type="text/css" rel="stylesheet" href="assets/tufte.css"/>
+    <script src="/ember-cli-live-reload.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <article>
+      <h1>WNYC Hybrid Architecture</h1>
+      <p class="subtitle">Results and Recommendations</p>
+      <section>
+        <h2>Executive Summary</h2>
+        <p>
+          The goal of this project is to deliver a <em>next generation
+          listener experience</em>
+          for <a href="www.wnyc.org">www.wnyc.org</a> without the
+          up-front cost, delay, and risk of a complete rewrite.  We
+          can achieve that goal by deploying a new hybrid architecture
+          that combines a modern, in-browser Ember application
+          with your existing Django application.
+        </p>
+
+        <p>
+          In this two week project I built a fully-working prototype
+          Ember app that can play persistent audio, render existing
+          content from Django, and seamlessly combine new dynamic
+          components with existing server-rendered content. The app
+          demonstrates general techniques for introducing new features
+          while gradually refactoring older features in a
+          pay-as-you-go process.
+        </p>
+
+        <p>
+          Taking this prototype into production will require
+          substantial QA testing, since it touches almost every aspect
+          of the user-facing website. It will also require deployment
+          planning and design. However, no major pieces of software
+          remain to be written &mdash; the architecture is essentially
+          complete, and it should be possible to steadily iterate with
+          the new and old architectures running side-by-side until you
+          gain sufficient confidence to begin switching users over.
+        </p>
+      </section>
+
+      <section>
+        <h2>The Hybrid Architecture</h2>
+        
+        <p>
+          The key to understanding this new architecture is to think
+          of your site as two applications, not one. This is a
+          significant shift from how a traditional website
+          works.
+          <label for="like-mobile" class="margin-toggle
+          sidenote-number"></label> <input type="checkbox"
+          id="like-mobile"
+          class="margin-toggle"/><span class="sidenote">It's actually
+          much closer to how native mobile apps work, and keeping that
+          analogy in mind can help when you're designing your build,
+          test, and deployment process.</span>
+        </p>
+
+        <p>
+          The frontend application, written in Ember, manages all
+          navigation and rendering. It communicates with the backend
+          application (your existing Django app, nearly unchanged)
+          when it needs to fetch or store information. By minimizing
+          the coupling between the two applications, we make it easier
+          to develop and test each one, sticking to the strengths of
+          each respective framework's conventions.
+        </p>
+
+        <p>
+          The architecture is "hybrid" because the data passed from
+          backend to frontend is not strictly semantic. It is often
+          pre-rendered into HTML, CSS, and even Javascript. This is
+          what allows us to achieve a graceful upgrade &mdash; we can
+          let the server continue to do render the things it's already
+          rendering well, while mixing in dynamic client-rendered
+          content as desired.
+        </p>
+
+      </section>
+
+      <section>
+        <h2>Ember Application Tour</h2>
+
+        <p>
+          This section is a guided tour through several important
+          pieces of your Ember application that make the hybrid
+          architecture possible. The application is in
+          the <code>overhaul</code> subdirectory on the
+          branch <code>efaulkner/prototype</code> in the
+          repo <code>git.wnyc.net:puppysite</code>. <label for="separate-repo"
+          class="margin-toggle sidenote-number"></label>
+          <input type="checkbox" id="separate-repo"
+          class="margin-toggle"/><span class="sidenote">I would
+          recommend switching to separate repos for frontend and
+          backend applications. It clarifies their division of
+          responsibilites.</span>
+        </p>
+
+        <h3>Routing</h3>
+
+        <p>
+          Routes are defined using the standard Ember conventions,
+          in <code>app/router.js</code>. We have a catch-all route
+          named <code>django-rendered</code> that can handle any URL
+          and render it by fetching the corresponding page from the
+          server. But more specific routes can also be defined, and
+          the <code>story</code> route serves as good example.
+        </p>
+
+        <p>
+          The important feature here is that you can choose to
+          gradually specialize individual URLs when you want to
+          deliver new dynamic features, while leaving all other URLs
+          up to the catch-all route.
+        </p>
+
+        <h3>Fetching Content from Django</h3>
+
+        <p>
+          There is an <code>ember-data</code> model
+          named <code>django-page</code>, with corresponding adapter
+          and serializer implementations. The adapter & serializer
+          abstract the details of page fetching so the rest of the
+          Ember application can use standard conventions for fetching
+          and caching data.
+        </p>
+        
+      </section>
+      
+    </article>
+  </body>
+</html>
