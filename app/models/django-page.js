@@ -105,6 +105,8 @@ export default DS.Model.extend({
   }
 });
 
+// <link> tags do not reliably produce load events, particularly if
+// the CSS is already cached.
 function styleLoaded(element) {
   if (element.tagName !== 'LINK') {
     return Promise.resolve();
@@ -113,6 +115,17 @@ function styleLoaded(element) {
     $(element)
       .on('load', resolve)
       .on('error', reject);
+    let started = Date.now();
+    let interval = setInterval(() => {
+      if (Date.now() - started > 1000) {
+        clearInterval(interval);
+        reject();
+      } else if (Array.from(document.styleSheets).find(s => s.ownerNode === element)) {
+        clearInterval(interval);
+        resolve();
+      }
+    }, 20);
+
   });
 }
 
