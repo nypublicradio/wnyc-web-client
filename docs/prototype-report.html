@@ -52,6 +52,7 @@ pre[class*="language-"] {
           the new and old architectures running side-by-side until you
           gain sufficient confidence to begin switching users over.
         </p>
+
       </section>
 
       <section>
@@ -108,7 +109,7 @@ pre[class*="language-"] {
           class="margin-toggle"/><span class="sidenote">I would
           recommend switching to separate repos for frontend and
           backend applications. It clarifies their division of
-          responsibilites.</span>
+          responsibilities.</span>
         </p>
 
         <h3>Routing</h3>
@@ -146,6 +147,15 @@ pre[class*="language-"] {
           that Ember supports.</span> so the rest of the Ember
           application can use standard conventions for fetching and
           caching data.
+        </p>
+
+        <p>
+          Requests from the Ember app include a
+          custom <code>X-WNYC-Ember</code> HTTP header that can be
+          used within Django to tailor responses that are more
+          appropriate for consumption by the Ember app. Search
+          for <code>HTTP_X_WNYC_EMBER</code> in the Django templates
+          to see where I am using this technique.
         </p>
 
         <p>
@@ -204,14 +214,14 @@ pre[class*="language-"] {
 
         <p>
           The <code>script-loader</code> service solves one particular
-          problem: <code>&lt;script&gt;</code> tags execute
-          synchronously and in order of appearance during the initial
-          rendering of a web page, but that order is lost if you
-          append them dynamically later on. Much of your legacy
-          Javascript relies on that synchrony assumption. So the
-          script loader manually retrieves and executes scripts in
-          exactly the same order they would have run during initial
-          page load.
+          problem: during the initial rendering of a web
+          page, <code>&lt;script&gt;</code> tags execute synchronously
+          in order of appearance. But at any later point, newly
+          created <code>&lt;script&gt;</code> tags run in
+          unpredictable order. Much of your legacy Javascript assumes
+          strict ordering. So the script loader manually retrieves and
+          executes scripts in exactly the same order they would have
+          run during initial page load.
         </p>
 
         <p>
@@ -263,11 +273,11 @@ pre[class*="language-"] {
           scripts that don't go through the precompiler won't be
           subject to the legacy loader's rules.</span> to your
           Compressor configuration
-          called <code>ModuleWrapper</code>. It provides a very slim
-          module loader interface around each Javascript file.
+          called <code>ModuleWrapper</code>. It adds a tiny module
+          loader interface to each Javascript file.
           The <code>legacy-loader</code> service is able to use that
           interface to control the execution of individual Javascript
-          files, even when they have been concatenated and minified.
+          files, even after they have been concatenated and minified.
           See the comments
           in <code>app/services/legacy-loader.js</code> for more
           detail on how it can be used to suppress or reorder
@@ -276,20 +286,151 @@ pre[class*="language-"] {
 
         <p>
           There is an optional <code>LOG_LEGACY_LOADER</code> flag
-          in <code>config/environment.js</code> that can
-          suppress/enable verbose browser console logging of which
-          scripts are running. The log is very helpful in identifying
-          where an exception is coming from, but it's also very noisy
-          when you're working on something else.
+          in <code>config/environment.js</code> that can enable
+          verbose browser console logging of which scripts are
+          running. The log is very helpful in identifying where an
+          exception is coming from, but it's also very noisy when
+          you're working on something else.
         </p>
 
       </section>
 
       <section>
         <h2>Next Steps</h2>
+        
+        <h3>Integrate the Listings App</h3>
+        
+        <p>
+          Prior to this work, you had two Ember apps embedded in the
+          site: overhaul-story and overhaul-listings. I absorbed
+          overhaul-story into the new Ember app in order to
+          demonstrate how it should work. You will need to do the same
+          with the listings app.<label for="emapp-refactor"
+          class="margin-toggle
+          sidenote-number"></label><input type="checkbox"
+          id="emapp-refactor"
+          class="margin-toggle"/><span class="sidenote">In the process
+          of porting overhaul-story, I refactored its data flow to
+          bring it closer to Ember standard conventions and reduce the
+          API surface area between it and your legacy Javascript. It
+          would be helpful to review these changes and try to emulate
+          them as you go forward.</span>
+        </p>
 
+        <h3>Review my addition to CMS content model</h3>
+
+        <p>
+          I added<label for="cms-model" class="margin-toggle
+          sidenote-number"></label><input type="checkbox"
+          id="cms-model"
+          class="margin-toggle"/><span class="sidenote">See commit
+          0992ac8ceb0.</span> the ability to
+          embed <a href="http://jsonapi.org/">JSONAPI</a>-compliant
+          structured data in your Django templates. You will want to
+          review this change and make sure it fits into your model
+          hierarchy. In particular, I'm not confident that my example
+          code deals correctly with the distinction between "cms" and
+          "npr" namespaced models, and the difference may interfere
+          with generating valid security info when submitting comments
+          on NPR stories.
+        </p>
+
+        <h3>Update build and deployment code</h3>
+
+        <p>
+          I recommend dropping the build code
+          in <code>grunt/overhaul.js</code>. Use stock ember-cli to
+          build the Ember app. 
+
+          Use <a href="http://ember-cli.github.io/ember-cli-deploy/">ember-cli-deploy</a>
+          to deliver the Ember app to Django and your CDN / media
+          servers.
+        </p>
+
+        <h3>Progressive Boot</h3>
+        
+        <p>
+          I don't think Ember Fastboot is a requirement for deploying
+          this new architecture. It could be a nice simplification
+          down the road, but since we already have server-generated
+          content available, we can just continue using that.
+        </p>
+
+        <p>
+          Instead, we can extend the Ember app so that during the
+          first render it detects the content already in the page and
+          skips the fetch and django-page render, taking over from
+          there for subsequent navigation.
+        </p>
+        
+        <h3>Test Interactive Elements</h3>
+
+        <p>
+          This is probably the biggest remaining task. All pages with
+          existing Javascript-powered interactions need to be reviewed
+          to ensure that those interactions are still working. Most of
+          them are working, but you will definitely find some that
+          need small tweaks (like a new rule in the legacy-loader
+          service or in the compat-hooks).
+        </p>
+
+        <p>
+          One example of an Javascript element that is not fully
+          working is ad_leaderboard.js. It needs to be updated to work
+          when loaded asynchronously.
+        </p>
+        
+        <h3>Review Analytics and Advertising Functionality</h3>
+
+        <p>
+          There are several disparate pieces of analytics Javascript
+          that should probably just be moved directly into the Ember
+          app, where they will have a stable home and complete
+          visibility into user actions. But at a minimum, those
+          analytics should be reviewd to ensure they're still working.
+        </p>
+
+        <p>
+          GPT-driven advertising is working, although I had to disable
+          synchronous rendering mode (it's not clear why that was
+          enabled originally). Like analytics, you will probably want
+          to move global initialization and configuration of
+          advertising code into the Ember app, so that it runs once
+          per session (instead of once per navigation) and maintains
+          persistent visibility. Confirm that page-context-based
+          targeting rules are being updated correctly as users
+          navigate within the Ember app.
+        </p>
+
+        <h3>Replace my placeholder loading screen</h3>
+        <p>
+          I added a spinning WNYC logo to demonstrate how loading
+          templates work. You will want to design something nicer.
+        </p>
+        
       </section>
-      
+
+      <section>
+        <h2>Strategic Recommendation</h2>
+        <p>
+          A successful outcome for this project requires both a
+          working website and a team that is happily and creatively
+          pushing forward, confident in their shared understanding of
+          the platform and the vision.
+        </p>
+
+        <p>
+          For that reason I would recommend against outsourcing the
+          bulk of the remaining work because it's important to
+          cultivate expertise and ownership within your team. I would
+          be happy to stay involved in an advisor / mentor role to
+          ensure that the project keeps moving forward. In particular,
+          I think periodic code reviews can be extremely valuable, and
+          some on-demand pair-programming is a great way to cut
+          through tricky bugs quickly while also serving as great
+          learning opportunities.
+        </p>
+      </section>
     </article>
   </body>
 </html>
