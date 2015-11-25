@@ -35,14 +35,7 @@ export function beforeTeardown(/* element, page */) {
 // Element is not yet inserted into any document, and you can modify
 // it here as needed.
 export function beforeAppend(element /*, page */) {
-  // wnyc.basic_analytics.js doesn't respect preventDefault on link
-  // clicks, which causes users to accidentally escape the ember
-  // app. It tracks anything with this class name, so I'm just
-  // disabling it here by removing the class. We will want to fix and
-  // re-enable.
-  Array.from(element.querySelectorAll('.js-track-links')).forEach(elt => {
-    elt.className = elt.className.replace('js-track-links', '');
-  });
+
   return element;
 }
 
