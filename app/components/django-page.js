@@ -1,6 +1,9 @@
 import Ember from 'ember';
 import { beforeTeardown } from '../lib/compat-hooks';
+import ENV from '../config/environment';
 const { $ } = Ember;
+const { wnycURL } = ENV;
+
 
 export default Ember.Component.extend({
   router: Ember.inject.service('wnyc-routing'),
@@ -33,10 +36,9 @@ export default Ember.Component.extend({
     let target = $(event.target).closest('a');
     if (target.length > 0) {
       let router = this.get('router');
-      let origin = location.protocol + '//' + location.host;
-      let href = target.attr('href');
-      if (href.indexOf(origin + '/wnyc') === 0) {
-        href = href.replace(origin + '/wnyc', '').replace(/^\//, '');
+      let href = new URL(target.attr('href'), new URL(this.get('page.id'), wnycURL).toString()).toString();
+      if (href.indexOf(wnycURL) === 0) {
+        href = href.replace(wnycURL, '').replace(/^\//, '');
         let { routeName, params } = router.recognize(href);
         router.transitionTo(routeName, ...params);
         event.preventDefault();
