@@ -24,7 +24,7 @@ module.exports = function(environment) {
     wnycAPI: '',
     wnycAccountAPI: '',
     wnycEtagAPI: '',
-    wnycStaticURL: '/wnyc/static'
+    wnycStaticURL: '/static'
   };
 
   if (environment === 'development') {

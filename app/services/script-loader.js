@@ -8,8 +8,6 @@
 
 import fetch from 'fetch';
 import Ember from 'ember';
-import rewriter from 'ember-cli-proxy/rewriter';
-import URL from 'ember-cli-proxy/url';
 import { mangleJavascript } from '../lib/compat-hooks';
 const { Promise } = Ember.RSVP;
 
@@ -69,15 +67,20 @@ export default Ember.Service.extend({
 
 });
 
+// TODO: polyfill URL on all browsers
+function canonicalize(url) {
+  return new URL(url, location.href).toString();
+}
+
 // In order to fetch all the scripts via XHR without tripping CORs
 // violations, we are proxying them through our own server.
 function scriptURL(tag) {
   let origin = location.protocol + '//' + location.host;
-  let url = rewriter.rewriteURL(tag.attributes.src.value);
-  if (url.indexOf(origin) === '0') {
+  let url = canonicalize(tag.attributes.src.value);
+  if (url.indexOf(origin) === 0) {
     return url;
   } else {
-    return '/dynamic-script-loader/' + encodeURIComponent(new URL(url, location.href).toString());
+    return '/dynamic-script-loader/' + encodeURIComponent(canonicalize(url));
   }
 }
 
