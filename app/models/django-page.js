@@ -77,6 +77,7 @@ export default DS.Model.extend({
         let id = scriptCounter++;
         marker.setAttribute('data-script-id', id);
         script.parentElement.insertBefore(marker, script);
+        // TODO: compatability: http://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove.html
         script.remove();
         script.setAttribute('data-script-id', id);
         scripts.push(script);
@@ -87,6 +88,7 @@ export default DS.Model.extend({
     let styles = Array.from(doc.querySelectorAll('style, link[rel=stylesheet]')).map(element => importNode(element));
 
     // Remove the style tags from our imported body, because they will be handled separately.
+    // TODO: compatability: http://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove.html
     Array.from(body.querySelectorAll('style, link[rel=stylesheet]')).forEach(element => element.remove());
 
     body = beforeAppend(body);
