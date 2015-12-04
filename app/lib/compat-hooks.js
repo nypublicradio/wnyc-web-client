@@ -45,5 +45,7 @@ export function beforeAppend(element /*, page */) {
 export function mangleJavascript(scriptTag, sourceCode) {
   // TODO: I see in the mako templates that this is already disabled
   // in overhaul mode. Need to discuss with Brian.
-  return sourceCode.replace('.pubads().enableSyncRendering()', '');
+  let source = sourceCode.replace('.pubads().enableSyncRendering()', '');
+  source = source.replace(/Okra\.execute\('displayPlayer'\);/, '');
+  return source;
 }

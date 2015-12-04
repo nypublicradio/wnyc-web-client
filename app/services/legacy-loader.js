@@ -10,7 +10,8 @@
 export const dependencies = Object.freeze({
   'js/lib/wnyc/user.js': ['js/lib/jquery/jquery.xdr.js'],
   'js/lib/jquery/jquery.xdr.js': ['js/lib/jquery/jquery.ba-postmessage.js'],
-  'js/lib/jquery/jquery.ba-postmessage.js': []
+  'js/lib/jquery/jquery.ba-postmessage.js': [],
+  'js/lib/backbone/models/sound_manager_player.js': ['js/vendor/backbone/backbone-0.9.9.js']
 });
 
 // -------
@@ -38,7 +39,8 @@ export const runOnce = Object.freeze({
   'js/vendor/backbone/backbone-0.9.9.js': true,
   'js/vendor/handlebars/handlebars-2.0.0.min.js': true,
   'js/vendor/jwplayer/jwplayer.js': true,
-  'js/lib/wnyc/jquery.js': true
+  'js/lib/wnyc/jquery.js': true,
+  'js/lib/backbone/models/sound_manager_player.js': true
 });
 
 import Ember from 'ember';
