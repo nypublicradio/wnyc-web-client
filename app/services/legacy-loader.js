@@ -90,8 +90,8 @@ export default Ember.Service.extend({
         let tracker = this.waiting[name];
         this.waiting[name] = null;
         tracker.pending -= 1;
-        if (tracker.pending.length < 1) {
-          this._evaluate(name);
+        if (tracker.pending < 1) {
+          this._evaluate(tracker.name, tracker.fn);
         }
       });
     }
