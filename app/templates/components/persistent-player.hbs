@@ -1,2 +1,9 @@
-<audio src="http://www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/bl/bl111115apod.mp3" controls>
-</audio>
+<div style="color: blue;">
+{{#if audio.isPlaying}}
+  <strong>is playing</strong>
+{{else}}
+  <strong>not playing</strong>
+{{/if}}
+
+{{audio.position}}
+</div>
