@@ -36,6 +36,18 @@ export default DS.Model.extend({
     }
   }),
 
+  embeddedEmberComponents: Ember.computed('document', function() {
+    let doc = this.get('pieces.body');
+    return Array.from(doc.querySelectorAll('[data-ember-component]')).map(el => {
+      let id = el.id;
+      return {
+        id,
+        componentName: el.getAttribute('data-ember-component'),
+        args: JSON.parse(el.getAttribute('data-ember-args'))
+      };
+    });
+  }),
+
   appendStyles($element, styles) {
     let stylesLoaded = styles.map(s => styleLoaded(s));
     $element.append(styles);
@@ -82,6 +94,12 @@ export default DS.Model.extend({
         script.setAttribute('data-script-id', id);
         scripts.push(script);
       }
+    });
+
+    Array.from(body.querySelectorAll('[data-ember-component]')).forEach(el => {
+      // embedded ember components require an ID that is in sync with the
+      // django-page document
+      el.id = el.id || (Math.random().toFixed(5).slice(2));
     });
 
     // Styles, both inline and external, with their relative order maintained.

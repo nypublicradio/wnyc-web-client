@@ -43,7 +43,7 @@
     "ember-fetch": "^1.2.2",
     "ember-moment": "^4.1.0",
     "ember-page-title": "2.0.7",
-    "ember-wormhole": "^0.3.4",
+    "ember-wormhole": "noslouch/ember-wormhole#d83b1cc4b691ed2e0551a905c14a422022fb8496",
     "glob": "^4.5.3",
     "http-proxy": "^1.12.0",
     "morgan": "^1.6.1"
