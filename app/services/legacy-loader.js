@@ -8,10 +8,20 @@
 // evaluated before domready.
 // -------
 export const dependencies = Object.freeze({
-  'js/lib/wnyc/user.js': ['js/lib/jquery/jquery.xdr.js'],
+  'js/lib/wnyc/user.js': [
+    'js/lib/jquery/jquery.xdr.js',
+    'js/lib/wnyc/jquery.js',
+    'js/lib/wnyc/listening.js',
+    'js/util.js',
+  ],
   'js/lib/jquery/jquery.xdr.js': ['js/lib/jquery/jquery.ba-postmessage.js'],
-  'js/lib/jquery/jquery.ba-postmessage.js': [],
-  'js/lib/backbone/models/sound_manager_player.js': ['js/vendor/backbone/backbone-0.9.9.js']
+  'installBridge': [
+    'js/lib/marionette/xd_player/okra/core.js',
+    'js/lib/marionette/xd_player/core.js',
+    'js/lib/marionette/xd_player/okra/requests.js',
+    'js/lib/marionette/xd_player/okra/ondemand/controller.js',
+    'js/lib/marionette/xd_player/web_player_controller.js'
+  ],
 });
 
 // -------
@@ -39,8 +49,9 @@ export const runOnce = Object.freeze({
   'js/vendor/backbone/backbone-0.9.9.js': true,
   'js/vendor/handlebars/handlebars-2.0.0.min.js': true,
   'js/vendor/jwplayer/jwplayer.js': true,
-  'js/lib/wnyc/jquery.js': true,
-  'js/lib/backbone/models/sound_manager_player.js': true
+  'js/vendor/soundmanager2/v297a-20140901/soundmanager2.js': true,
+  'js/lib/marionette/xd_player/core.js': true,
+  'js/lib/marionette/xd_player/okra/core.js': true,
 });
 
 import Ember from 'ember';
