@@ -1,15 +1,15 @@
 {{#django-page page=model.page}}
 
-  {{#if model.story.commentsEnabled }}
-    {{#ember-wormhole to="comments" }}
+  {{#if model.story.commentsEnabled}}
+    {{#ember-wormhole to="comments"}}
       {{story-comments story=model.story
                        user=model.user
                        getComments=model.getComments
-                       browserId=model.browserId.identity }}
+                       browserId=model.browserId.identity}}
     {{/ember-wormhole}}
   {{/if}}
 
-  {{#ember-wormhole to="related" }}
+  {{#ember-wormhole to="related"}}
     {{related-stories getStories=model.getRelatedStories}}
   {{/ember-wormhole}}
 
