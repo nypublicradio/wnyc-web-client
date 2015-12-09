@@ -1,9 +1,9 @@
 <div style="color: blue;">
-{{#if audio.isPlaying}}
+{{#if audio.currentAudio.isPlaying}}
   <strong>is playing</strong>
 {{else}}
   <strong>not playing</strong>
 {{/if}}
 
-{{audio.position}}
+{{audio.currentAudio.position}}
 </div>
