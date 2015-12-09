@@ -1,12 +1,37 @@
 import Ember from 'ember';
-import {playOnDemand} from '../lib/okra-bridge';
-import Bridge from '../lib/okra-bridge';
+import service from 'ember-service/inject';
+import { ServiceBridge } from '../lib/okra-bridge';
+const {
+  A:emberArray,
+  Service,
+  get,
+  set
+} = Ember;
 
-export default Ember.Service.extend({
-  bridge: Bridge.create(),
-  position: Ember.computed.alias('bridge.position'),
-  isPlaying: Ember.computed.bool('bridge.isPlaying'),
+// the ServiceBridge provides:
+// playerController <- will be refactored out
+// playerModel <- well be refactored out
+// isReady <- will need to be replaced by an ember observer
+export default Service.extend(ServiceBridge, {
+  store: service('store'),
+  queue: emberArray([]),
   playOnDemand(pk) {
-    playOnDemand(pk);
+    let currentAudio = get(this, 'currentAudio.id');
+    if (currentAudio === pk) {
+      this.play();
+      return;
+    }
+
+    get(this, 'store').find('ondemand', pk).then(o => { 
+      set(this, 'currentAudio', o);
+      // TODO: the ModelBridge starts playing
+      // o.play();
+    });
+  },
+  pause() {
+    get(this, 'currentAudio').pause();
+  },
+  play() {
+    get(this, 'currentAudio').play();
   }
 });
