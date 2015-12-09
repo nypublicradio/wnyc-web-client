@@ -47,5 +47,19 @@ export default Service.extend(ServiceBridge, {
   },
   play() {
     get(this, 'currentAudio').play();
+  },
+  increaseVolume() {
+    let currentAudio = get(this, 'currentAudio');
+    if (currentAudio) {
+      let volume = get(this, 'currentAudio.volume');
+      set(this, 'currentAudio.volume', volume + 10 > 100 ? 100 : volume + 10);
+    }
+  },
+  decreaseVolume() {
+    let currentAudio = get(this, 'currentAudio');
+    if (currentAudio) {
+      let volume = get(this, 'currentAudio.volume');
+      set(this, 'currentAudio.volume', volume - 10 < 0 ? 0 : volume - 10);
+    }
   }
 });

@@ -4,7 +4,8 @@ const {
   Mixin,
   computed,
   set,
-  get
+  get,
+  observer
 } = Ember;
 const { Promise } = Ember.RSVP;
 const { bind, throttle } = Ember.run;
@@ -109,7 +110,13 @@ export const ModelBridge = Mixin.create({
   },
   pause() {
     PLAYER_MODEL.then(p => p.pause());
-  }
+  },
+  updateVolume: observer('volume', function() {
+    PLAYER_MODEL.then(p => {
+      let volume = get(this, 'volume');
+      p.set('volume', volume);
+    });
+  }),
 });
 
 // the ApiBridge is imported into the ondemand and streaming adaptesr to provide
