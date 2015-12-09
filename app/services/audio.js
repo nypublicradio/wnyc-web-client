@@ -28,6 +28,20 @@ export default Service.extend(ServiceBridge, {
       // o.play();
     });
   },
+
+  playStream(slug) {
+    let currentStream = get(this, 'currentAudio.id');
+    if (currentStream === slug) {
+      this.play();
+      return;
+    }
+
+    get(this, 'store').find('stream', slug).then(s => {
+      set(this, 'currentAudio', s);
+      // TODO: the ModelBridge handles playig for now
+      // s.play();
+    });
+  },
   pause() {
     get(this, 'currentAudio').pause();
   },
