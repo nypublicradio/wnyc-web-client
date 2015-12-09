@@ -14,8 +14,8 @@ export default DS.JSONAPIAdapter.extend({
 
     let story = new Promise(resolve => {
       return playerController.then(a => {
-        a.on('player:loading', ({piece}) => {
-          resolve(piece.attributes);
+        a.once('player:launchingRemoteFile', ({attributes}) => {
+          resolve(attributes);
         });
       });
     });
