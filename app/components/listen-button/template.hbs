@@ -1,3 +1,12 @@
-<button aria-label="Listen to {{itemTitle}}" class="btn btn--blue btn--large" {{action 'listenOnDemand'}}>
-    <i class="fa fa-play icon--prefix--large"></i>Listen <span class="text--small dimmed">{{duration}}</span>
+{{#unless isPlaying}}
+<button
+  aria-label="Listen to {{itemTitle}}"
+  disabled={{waitingForAudio}}
+  class="btn btn--blue btn--large" {{action 'listenOnDemand'}}>
+  <i class="fa fa-play icon--prefix--large"></i>Listen <span class="text--small dimmed">{{duration}}</span>
 </button>
+{{else}}
+<button class="btn btn--blue btn--circle" {{action 'pause'}}>
+  <i class="fa fa-pause"></i>
+</button>
+{{/unless}}

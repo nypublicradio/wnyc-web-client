@@ -1,9 +1,15 @@
 import Ember from 'ember';
+import service from 'ember-service/inject';
+const {
+  Component,
+  computed,
+  get,
+} = Ember;
 
 function wnycEmbeddedAttr() {
-  return Ember.computed('embeddedAttrs', {
+  return computed('embeddedAttrs', {
     get(k) {
-      return this.get(`embeddedAttrs.${k}`);
+      return get(this, `embeddedAttrs.${k}`);
     },
     set(k, v) {
       return v;
@@ -11,17 +17,27 @@ function wnycEmbeddedAttr() {
   });
 }
 
-export default Ember.Component.extend({
-  audio: Ember.inject.service(),
+export default Component.extend({
+  audio: service(),
+  waitingForAudio: computed.not('audio.isReady'),
+  myAudio: computed('audio.currentAudio', {
+    get() {
+      let currentAudio = get(this, 'audio.currentAudio.id');
+      return currentAudio === get(this, 'itemPK') ? get(this, 'audio.currentAudio') : undefined;
+    }
+  }),
+  isPlaying: computed.equal('myAudio.isPlaying', true),
 
-  classNames: ['btn', 'btn--blue', 'btn--large'],
   tagName: '',
   itemPK: wnycEmbeddedAttr(),
   itemTitle: wnycEmbeddedAttr(),
   duration: wnycEmbeddedAttr(),
   actions: {
     listenOnDemand() {
-      this.get('audio').playOnDemand(this.get('itemPK'));
+      get(this, 'audio').playOnDemand(get(this, 'itemPK'));
+    },
+    pause() {
+      get(this, 'audio').pause();
     }
   }
 });
