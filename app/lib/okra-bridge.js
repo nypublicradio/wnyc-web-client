@@ -7,7 +7,7 @@ const {
   get
 } = Ember;
 const { Promise } = Ember.RSVP;
-const { bind } = Ember.run;
+const { bind, throttle } = Ember.run;
 
 // XDPlayer and Okra are globals provided by the underlying backbone source,
 // but we need to wait until all the deps are loaded before booting it up.
@@ -87,16 +87,15 @@ export const ServiceBridge = Mixin.create({
 export const ModelBridge = Mixin.create({
   playerController: WEB_PLAYER_CONTROLLER.then(a => a),
   playerModel: PLAYER_MODEL.then(p => p),
-  init() {
-    this._super(...arguments);
+  ready() {
     get(this, 'playerController').then(bind(this, this.setupPlayerController));
     get(this, 'playerModel').then(bind(this, this.setupPlayerModel));
   },
   setupPlayerController(playerController) {
-    playerController.on('player:progress', m => set(this, 'position', m.normalised));
+    playerController.on('player:progress', m => throttle(this, () => set(this, 'position', m.normalised), 1000));
   },
   setupPlayerModel(playerModel) {
-     playerModel.on('change:isPlaying', (x, val) => set(this, 'isPlaying', val));
+    playerModel.on('change:isPlaying', (x, val) => set(this, 'isPlaying', val));
   },
   addToPlaylist(pkOrUrl, title) {
     if (/^\d+/.test(pkOrUrl)) {
@@ -104,9 +103,6 @@ export const ModelBridge = Mixin.create({
     } else {
       Okra.execute('addToPlaylistFromFile', pkOrUrl, title);
     }
-  },
-  playStream(slug) {
-    Okra.execute('playStream', slug);
   },
   play() {
     PLAYER_MODEL.then(p => p.play());
@@ -129,5 +125,10 @@ export const ApiBridge = {
       Okra.execute('playOnDemandFile', pkOrUrl, title);
     }
   },
+
+  playStream(slug) {
+    Okra.Streams.controller.playStream(slug);
+  },
+
 
 };
