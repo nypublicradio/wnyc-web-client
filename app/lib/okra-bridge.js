@@ -86,8 +86,8 @@ export const ServiceBridge = Mixin.create({
 // are found on the playerModel directly and some are found on the playerController.
 // the `setup` methods can init any listenrs required to update the ember-data model.
 export const ModelBridge = Mixin.create({
-  playerController: WEB_PLAYER_CONTROLLER.then(a => a),
-  playerModel: PLAYER_MODEL.then(p => p),
+  playerController: WEB_PLAYER_CONTROLLER,
+  playerModel: PLAYER_MODEL,
   ready() {
     get(this, 'playerController').then(bind(this, this.setupPlayerController));
     get(this, 'playerModel').then(bind(this, this.setupPlayerModel));
