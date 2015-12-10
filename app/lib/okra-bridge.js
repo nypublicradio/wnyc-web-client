@@ -2,12 +2,11 @@
 import Ember from 'ember';
 const {
   Mixin,
-  computed,
   set,
   get,
   observer
 } = Ember;
-const { Promise } = Ember.RSVP;
+const { Promise, all } = Ember.RSVP;
 const { bind, throttle } = Ember.run;
 
 // XDPlayer and Okra are globals provided by the underlying backbone source,
@@ -73,7 +72,11 @@ const PLAYER_MODEL = WEB_PLAYER_CONTROLLER.then(c => c.playerModel);
 export const ServiceBridge = Mixin.create({
   playerController: WEB_PLAYER_CONTROLLER.then(c => c),
   playerModel: PLAYER_MODEL.then(m => m),
-  isReady: computed.and('playerController', 'playerModel')
+  isReady: false,
+  init() {
+    this._super(...arguments);
+    all([get(this, 'playerController'), get(this, 'playerModel')]).then(() => set(this, 'isReady', true));
+  },
 });
 
 // the ModelBridge is mixed into the ondemand and stream models to provide a
