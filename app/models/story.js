@@ -10,5 +10,6 @@ export default DS.Model.extend({
     audio: DS.attr('string'),
     audioDurationReadable: DS.attr('string'),
     audioAvailable: DS.attr('boolean'),
-    audioEventually: DS.attr('boolean')
+    audioEventually: DS.attr('boolean'),
+    slug: DS.attr('string'),
 });
