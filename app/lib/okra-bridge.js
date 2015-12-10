@@ -96,10 +96,11 @@ export const ModelBridge = Mixin.create({
     get(this, 'playerModel').then(bind(this, this.setupPlayerModel));
   },
   setupPlayerController(playerController) {
-    playerController.on('player:progress', m => throttle(this, () => set(this, 'position', m.normalised), 1000));
+    playerController.on('player:progress', m => throttle(this, () => set(this, 'position', m.progress), 1000));
   },
   setupPlayerModel(playerModel) {
     playerModel.on('change:isPlaying', (x, val) => set(this, 'isPlaying', val));
+    playerModel.on('change:duration', (x, d) => set(this, 'duration', d));
   },
   addToPlaylist(pkOrUrl, title) {
     if (/^\d+/.test(pkOrUrl)) {
