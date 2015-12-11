@@ -1,9 +1,15 @@
 import Ember from 'ember';
 import { beforeTeardown } from '../lib/compat-hooks';
 import ENV from '../config/environment';
+import {
+  isInDom,
+  clearAlienDom,
+  embeddedComponentSetup,
+  installAlienListener
+} from '../lib/alien-dom';
+
 const { $ } = Ember;
 const { wnycURL } = ENV;
-
 
 export default Ember.Component.extend({
   router: Ember.inject.service('wnyc-routing'),
@@ -13,7 +19,11 @@ export default Ember.Component.extend({
     // content when we rerender.
     let page = this.get('page');
     if (page !== this._lastPage) {
-      this.set('showingOverlay', false);
+      if (isInDom(page.get('id'))) {
+        embeddedComponentSetup();
+      }
+
+      this.set('showingOverlay', isInDom(page.get('id')));
     }
   },
 
@@ -23,12 +33,21 @@ export default Ember.Component.extend({
       this._lastPage = page;
       let elt = this.$('.django-content');
       elt.empty();
-      this.get('page').appendTo(elt).then(() => {
-        // After the server-rendered page has been inserted, we
-        // re-enable any overlaid content so that it can wormhole
-        // itself into the server-rendered DOM.
-        this.set('showingOverlay', true);
-      });
+
+      if (isInDom(page.get('id'))) {
+        // if an alien dom is present, capture any escaped clicks but otherwise
+        // leave the alien alone
+        installAlienListener(this);
+      } else {
+        // otherwise clear out the dom and render our server-fetched content
+        clearAlienDom();
+        this.get('page').appendTo(elt).then(() => {
+          // After the server-rendered page has been inserted, we
+          // re-enable any overlaid content so that it can wormhole
+          // itself into the server-rendered DOM.
+          this.set('showingOverlay', true);
+        });
+      }
     }
   },
 
