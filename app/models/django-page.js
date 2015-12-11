@@ -4,16 +4,24 @@ import { beforeAppend } from '../lib/compat-hooks';
 import isJavascript from '../lib/is-js';
 const { $ } = Ember;
 const { allSettled, Promise } = Ember.RSVP;
+import { embeddedComponentSetup } from '../lib/alien-dom';
 
 let scriptCounter = 0;
 
 export default DS.Model.extend({
   htmlParser: Ember.inject.service(),
   scriptLoader: Ember.inject.service(),
+  inlineDocument: DS.attr(),
   text: DS.attr(),
 
-  document: Ember.computed('text', function() {
-    return this.get('htmlParser').parse(this.get('text'));
+  document: Ember.computed('inlineDocument', 'text', function(){
+    let inlineDoc = this.get('inlineDocument');
+    let text = this.get('text');
+    if (inlineDoc) {
+      return inlineDoc;
+    } else {
+      return this.get('htmlParser').parse(text);
+    }
   }),
 
   title: Ember.computed('document', function() {
@@ -96,11 +104,7 @@ export default DS.Model.extend({
       }
     });
 
-    Array.from(body.querySelectorAll('[data-ember-component]')).forEach(el => {
-      // embedded ember components require an ID that is in sync with the
-      // django-page document
-      el.id = el.id || (Math.random().toFixed(5).slice(2));
-    });
+    embeddedComponentSetup(body);
 
     // Styles, both inline and external, with their relative order maintained.
     let styles = Array.from(doc.querySelectorAll('style, link[rel=stylesheet]')).map(element => importNode(element));
