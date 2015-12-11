@@ -18,8 +18,6 @@ module.exports = function(environment) {
       // when it is created
     },
 
-    wnycURL: 'http://dev.wnyc.net:4302',
-    wnycMediaURL: 'http://dev.wnyc.net:4302/media',
     googleAPIv3Key: 'AIzaSyCDbxxvbl0Zj6af28IfWjJ-S0SKxwDXnkc',
     wnycAPI: '',
     wnycAccountAPI: '',
@@ -34,6 +32,24 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
     ENV.LOG_LEGACY_LOADER = true;
+
+    // This is a convenience for developers to inform the ember app where it can
+    // find a django server. Django will write a simple node module to a file at
+    // `puppy/overhaul/config/dev_url` which exports its url and port, which we 
+    // consume here for the rest of the app.
+    //
+    // In production, the ember app will point to www.wnyc.org, so this isn't required
+    try {
+      var devUrl = require('./dev_url');
+      ENV.wnycURL = devUrl;
+    } catch(e) {
+      var chalk = require('chalk');
+      console.log(chalk.yellow(e.stack) + "\n");
+      console.log(chalk.bold.red("Could not find a dev_url file."));
+      console.log(chalk.bold.red("Using http://www.wnyc.org instead"));
+      console.log(chalk.bold.red("Run `./manage.py runserver 0.0.0.0:<port number>` to generate a url for the ember app."));
+      process.exit(1);
+    }
   }
 
   if (environment === 'test') {
@@ -52,7 +68,8 @@ module.exports = function(environment) {
     ENV.wnycAPI = '//api.wnyc.org';
     ENV.wnycAccountAPI = 'https://account.wnyc.org';
     ENV.wnycEtagAPI = 'https://www.wnyc.org';
-    ENV.wnycStaticURL = 'http://www.wnyc.org/static';
+    ENV.wnycStaticURL = 'http://media.wnyc.org/static';
+    ENV.wnycURL = 'http://www.wnyc.org';
   }
 
   return ENV;

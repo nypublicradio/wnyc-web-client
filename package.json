@@ -54,5 +54,8 @@
       "lib/unobtrusive-loader",
       "lib/google-apis"
     ]
+  },
+  "dependencies": {
+    "chalk": "^1.1.1"
   }
 }
