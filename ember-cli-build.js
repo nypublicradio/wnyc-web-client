@@ -12,6 +12,9 @@ module.exports = function(defaults) {
     babel: { includePolyfill: true },
     trees: {
       public: mergeTrees(pubTrees)
+    },
+    fingerprint: {
+      enabled: false
     }
   });
 
