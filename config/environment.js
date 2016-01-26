@@ -25,7 +25,7 @@ module.exports = function(environment) {
     wnycEtagAPI: '',
     wnycStaticURL: '/static',
     featureFlags: {
-      'routing': false
+      'django-page-routing': false
     }
   };
 

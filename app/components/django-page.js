@@ -52,6 +52,10 @@ export default Ember.Component.extend({
   },
 
   click(event) {
+    if (!this.features.get('django-page-routing')) {
+      return;
+    }
+
     let target = $(event.target).closest('a');
     if (target.length > 0) {
       let router = this.get('router');
