@@ -15,7 +15,15 @@ module.exports = function(defaults) {
     },
     fingerprint: {
       enabled: false
-    }
+    },
+    dotEnv: {
+      clientAllowedKeys: ['GOOGLE_ANALYTICS'],
+      path: {
+        development: './.env',
+        production: './.env.production',
+        test: './.env.test'
+      }
+    },
   });
 
   // This is here so that legacy JS within our content pages can share
@@ -27,6 +35,7 @@ module.exports = function(defaults) {
   // these are symlinked to their original locations in the puppy
   // source.
   app.import('vendor/imagesloaded/imagesloaded.pkgd.js');
+  app.import('bower_components/moment/moment.js');
 
   return app.toTree();
 };
