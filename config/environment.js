@@ -23,7 +23,10 @@ module.exports = function(environment) {
     wnycAPI: '',
     wnycAccountAPI: '',
     wnycEtagAPI: '',
-    wnycStaticURL: '/static'
+    wnycStaticURL: '/static',
+    featureFlags: {
+      'routing': false
+    }
   };
 
   if (environment === 'development') {
