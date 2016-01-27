@@ -6,7 +6,6 @@ import {
 const {
   get,
   set,
-  $,
   Component
 } = Ember;
 const {htmlSafe} = Ember.String;
