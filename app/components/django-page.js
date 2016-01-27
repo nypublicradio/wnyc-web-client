@@ -52,7 +52,7 @@ export default Ember.Component.extend({
   },
 
   click(event) {
-    if (!this.features.get('django-page-routing')) {
+    if (!this.features.isEnabled('django-page-routing')) {
       return;
     }
 
