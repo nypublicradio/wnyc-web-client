@@ -16,7 +16,6 @@ let NYPRResolver = Resolver.extend({
   }
 });
 
-
 Ember.MODEL_FACTORY_INJECTIONS = true;
 
 App = Ember.Application.extend({
