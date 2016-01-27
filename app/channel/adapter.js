@@ -22,7 +22,7 @@ export default ApplicationAdapter.extend({
   },
 
   findRecord(store, type, id/*, snapshot*/) {
-    const { listing } = window.wnyc;
+    const { wnyc: listing } = window;
 
     if (listing && listing[id]) {
       return new RSVP.Promise(resolve => run(null, resolve, listing[id]))
