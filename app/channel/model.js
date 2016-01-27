@@ -15,23 +15,23 @@ export default DS.Model.extend({
   chunks: DS.attr(), // Array of custom html markup 
   chunkSidebarTop: computed('chunks', {
     get() {
-      const chunks = get(this, 'chunks')
-      const chunk = chunks.findBy('position', 'top')
+      const chunks = get(this, 'chunks').compact();
+      const chunk = chunks.findBy('position', 'top');
       if (chunk) {
-        return chunk.content
+        return chunk.content;
       } else {
-        return ''
+        return '';
       }
     }
   }),
   chunkSidebarBottom: computed('chunks', {
     get() {
-      const chunks = get(this, 'chunks')
-      const chunk = chunks.findBy('position', 'bottom')
+      const chunks = get(this, 'chunks').compact();
+      const chunk = chunks.findBy('position', 'bottom');
       if (chunk) {
-        return chunk.content
+        return chunk.content;
       } else {
-        return ''
+        return '';
       }
     }
   }),
@@ -58,13 +58,13 @@ export default DS.Model.extend({
   hasFeatured: computed.bool('featured'),
   featuredId: computed('hasFeatured', {
     get() {
-      const hasFeatured = get(this, 'hasFeatured')
-      const featured = get(this, 'featured')
+      const hasFeatured = get(this, 'hasFeatured');
+      const featured = get(this, 'featured');
 
       if (hasFeatured) {
         // ember coerces model IDs to strings, so we want to make sure this value
         // matches type for other operations
-        return String(get(featured, 'id'))
+        return String(get(featured, 'id'));
       }
     }
   }),
@@ -76,6 +76,4 @@ export default DS.Model.extend({
   hasSubscriptionLinks: computed.bool('podcastLinks.firstObject'),
   hasTwitterLink: computed.bool('twitter'),
   hasHeaderButtons: computed.or('hasDonationLink', 'hasSubscriptionLinks')
-})
-
-
+});
