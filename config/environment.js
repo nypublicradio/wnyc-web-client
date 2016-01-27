@@ -7,6 +7,7 @@ module.exports = function(environment) {
     baseURL: '/',
     locationType: 'auto',
     googleAnalyticsKey: process.env.GOOGLE_ANALYTICS,
+    metricsAdapters: [],
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
