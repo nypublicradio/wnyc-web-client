@@ -1,0 +1,43 @@
+<div class="text text--medium about-show">
+  {{{ model.aboutPage.body }}}
+</div>
+
+<section>
+  <h1 class="for-screenreaders">People</h1>
+  {{#each model.aboutPage.people as |person|}}
+  <article class="text text--medium about-person">
+    <div class="flag flag--rev flush">
+       <div class="flag-body">
+        <a class="link--dark" href={{person.url}}>
+            <h1 class="h2 h2--mq-small nudge-mini">
+                {{person.name}}
+            </h1>
+        </a>
+        
+        <p class="nudge-down">{{person.jobTitle}}</p>
+        <div class="btn-group">
+          {{#each person.social as |social|}}
+            {{#if social.contactString}}
+              {{social-button item=social}}
+            {{/if}}
+          {{/each}}
+        </div>
+      </div>
+      <!-- .flag-body -->  
+        
+        
+      {{#if person.image}}
+      <div class="flag-image no-decor">
+        <img class="middle-narrow-up" alt="{{person.name}}" 
+            src="{{image-template person.image.template 100 100 person.image.crop}}" 
+            srcset="{{image-template person.image.template 200 200 person.image.crop}} 2x,
+                {{image-template person.image.template 300 300 person.image.crop}} 3x"
+            width="100" height="100">
+      </div>
+      {{/if}}
+      
+    </div>
+    <!-- .flag -->
+  </article>
+  {{/each}}
+</section>

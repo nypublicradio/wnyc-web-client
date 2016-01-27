@@ -1,0 +1,55 @@
+<div class="l-constrained">
+  <div class="l-flexrow--mqmd">
+    <div class="l-col2of3">
+      <div class="flag">
+        {{#if model.logoImage}}
+        <div class="flag-image channel-logo {{if model.hasMarquee 'flag-image--squeeze'}}">
+          <img class="badge squarebadge badge--mq-tomed badge--shadow" alt={{model.logoImage.caption}}
+              src={{image-template model.logoImage.template 129 129 model.logoImage.crop}}
+              srcset="{{image-template model.logoImage.template 258 258 model.logoImage.crop}} 2x,
+                  {{image-template model.logoImage.template 387 387 model.logoImage.crop}} 3x"
+              width="129">
+        </div>
+        <!-- .flag-image -->
+        {{/if}}
+
+        <div class="flag-body">
+         <div class="text text--heading {{unless model.logoImage 'text--extrapadding'}}"> 
+            <h1 id="channelTitle" class="channel-title">{{model.title}}</h1>
+            <p class="text-body text--medium text-body--forceline text-body--nopad">
+                {{#if model.producingOrganizations}}    
+                    {{producing-orgs model.producingOrganizations}} 
+                {{/if}}    
+                {{airings}}
+            </p>
+          </div>
+        </div>
+        <!-- .flag-body -->
+      </div>
+    </div>
+    <!-- .l-col2of3 -->
+
+    <div class="l-col1of3 l-col--flex l-col--cv l-col--right">
+      {{#if model.hasHeaderButtons}}
+      <div class="btn-group">
+        {{#if model.hasDonationLink}}
+        <a class="btn" href="{{donationOption.href}}" target="_blank">Donate</a>
+        {{/if}}
+
+        {{#if model.hasSubscriptionLinks}}
+        {{podcast-links subscribeOptions=model.podcastLinks}}
+        {{/if}}
+
+        <a data-url="{{model.editLink}}" class="btn btn--green stf" style="display:none">Edit this</a>
+      </div>
+      <!-- .btn-group -->
+      {{else}}
+        <a data-url="{{model.editLink}}" class="btn btn--green stf" style="display:none">Edit this</a>
+      {{/if}}
+    </div> 
+    <!-- .l-col1of3 -->
+  </div>
+  <!-- .l-flexrow -->
+         
+</div>
+<!-- .l-constrained -->

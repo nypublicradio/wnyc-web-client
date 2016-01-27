@@ -1,0 +1,19 @@
+<div class="btn-group btn-group--closer social-group">
+  {{#if model.hasFacebookLink}}
+      <a href={{facebook.href}} target="_blank" class="btn btn--circle btn--blacktext">
+          <i class={{facebookClassName}}></i>
+          <span class="for-screenreaders">Share on {{facebook.title}}</span>
+      </a> 
+  {{/if}}
+
+  {{#if model.hasTwitterLink}}
+      <a href={{twitter.href}} target="_blank" class="btn btn--circle btn--blacktext">
+          <i class={{twitterClassName}}></i>
+          <span class="for-screenreaders">Share on {{twitter.title}}</span>
+      </a> 
+  {{/if}}   
+
+  {{#if model.hasNewsletterLink}}
+      <a class="btn" href={{newsletter.href}} target="_blank">Sign up for our newsletter</a>
+  {{/if}}
+</div>

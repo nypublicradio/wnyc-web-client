@@ -1,0 +1,13 @@
+<h1 class="for-screenreaders">Sub Nav</h1>
+<ul class="list list--inline flush">
+{{#each links as |link|}}
+  <li class="list-item list-item--mini">
+    {{#unless link.href}}
+      {{#link-to channelTypeWell link.navSlug classNames='link link--dark tab-link'}}{{link.title}}{{/link-to}}
+    {{else}}
+      <a href={{link.href}} class="link link--dark link--nodecor tab-link">{{link.title}}</a>
+    {{/unless}}
+  </li>
+{{/each}}
+<div class="tab-line tab-line--red" style={{linePosition}}></div>
+</ul>

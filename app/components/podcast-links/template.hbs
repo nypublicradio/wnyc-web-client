@@ -1,0 +1,15 @@
+<div class="dropdown dropdown--br dropdown--nearwhite">
+            <button class="btn js-dropdownClickable">Subscribe to the podcast ▾</button>
+            <div class="dropdown-body">
+              <div class="panel">
+                {{#each subscribeOptions as |item|}}
+                  <a class="panel-link text--medium link--dark" href={{item.href}} target="_blank">
+                      {{podcast-icons item}}
+                  </a>
+                {{/each}}
+              </div>
+              <!-- .panel -->
+            </div>
+            <!-- .dropdown-body -->
+</div>
+          <!-- .dropdown -->         

@@ -1,0 +1,7 @@
+{{#if isTwitter}}
+  <a href="https://twitter.com/{{item.contactString}}" data-size="large" class="twitter-follow-button" data-show-count="false">Follow @{{item.contactString}}</a>
+{{else}}
+  <a class="btn btn--circle btn--blacktext" href={{url}} target="_blank">
+    <i class="fa fa-{{iconname}}"></i>
+  </a>
+{{/if}}
