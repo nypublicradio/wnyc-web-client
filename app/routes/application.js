@@ -15,5 +15,14 @@ export default Ember.Route.extend({
       bgColor: '#384043', 
       url: '/media/swf/soundmanager2_v297a-20140901'
     };
+  },
+  actions: {
+    loading() {
+      if (this.features.isEnabled('django-page-routing')) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 });
