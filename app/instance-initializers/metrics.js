@@ -1,12 +1,11 @@
-/*global wnyc*/
-import config from 'overhaul-listings/config/environment';
+import config from '../config/environment';
 
 const {
   googleAnalyticsKey:id
 } = config;
 
 export function initialize(applicationInstance) {
-  const metrics = applicationInstance.container.lookup('service:metrics');
+  const metrics = applicationInstance.lookup('service:metrics');
   const { login_root:apiHost } = wnyc;
   const endpoint = 'api/v1/analytics/ga';
   const mailchimp = String(window.location).match(/utm_term=(\d+_\w+-\w+-\w+)/);
@@ -26,7 +25,7 @@ export function initialize(applicationInstance) {
   }])
 
   // TODO: send these on every pageView or just once per session?
-  metrics.trackBrowser()
+  metrics.trackBrowser();
 
   if (mailchimp !== null) {
     metrics.trackEvent('DataWarehouse', {

@@ -1,9 +1,8 @@
 /*jshint laxcomma:true*/
-/*global wnyc*/
 import Metrics from 'ember-metrics/services/metrics';
 import Ember from 'ember';
 import service from 'ember-service/inject';
-import { firstLessThan } from 'overhaul-listings/utils/math-util';
+import { firstLessThan } from '../utils/math-util';
 
 const {
   $,

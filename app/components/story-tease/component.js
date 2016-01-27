@@ -1,6 +1,5 @@
-/*global moment*/
 import Ember from 'ember';
-import LegacySupport from 'overhaul-listings/mixins/legacy-support';
+import LegacySupport from '../../mixins/legacy-support';
 import service from 'ember-service/inject';
 
 const {

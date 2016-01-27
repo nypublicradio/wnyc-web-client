@@ -1,5 +1,4 @@
-/*global wnyc*/
-import BaseAdapter from 'overhaul-listings/metrics-adapters/base';
+import BaseAdapter from '../metrics-adapters/base';
 import Ember from 'ember';
 //import service from 'ember-service/inject';
 

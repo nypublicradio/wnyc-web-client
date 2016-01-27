@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import config from './config/environment';
+import AnalyticsMixin from './mixins/analytics';
 
-const Router = Ember.Router.extend({
+const Router = Ember.Router.extend(AnalyticsMixin, {
   location: config.locationType
 });
 
@@ -12,7 +13,6 @@ function subpageRoutes() {
     this.route('page', {path: ':page'});
   });
 }
-
 
 Router.map(function() {
   // This is an example of a route that we've customized beyond the

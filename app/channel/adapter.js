@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import ApplicationAdapter from 'overhaul-listings/application/adapter';
+import ApplicationAdapter from '../adapters/application';
 
 const {
   RSVP,

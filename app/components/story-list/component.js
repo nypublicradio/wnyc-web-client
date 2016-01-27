@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
-import LegacySupport from 'overhaul-listings/mixins/legacy-support';
+import LegacySupport from '../../mixins/legacy-support';
 
 const {
   Component,
