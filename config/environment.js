@@ -20,6 +20,7 @@ module.exports = function(environment) {
       // when it is created
     },
 
+    renderGoogleAds: true,
     googleAPIv3Key: 'AIzaSyCDbxxvbl0Zj6af28IfWjJ-S0SKxwDXnkc',
     wnycURL: 'http://dev.wnyc.net:4568',
     wnycStaticURL: '/static',
@@ -61,6 +62,8 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+
+    ENV.renderGoogleAds = false;
   }
 
   if (environment === 'production') {
