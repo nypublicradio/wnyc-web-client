@@ -2,6 +2,8 @@ import DS from 'ember-data';
 
 export default DS.JSONAPISerializer.extend({
   normalizeResponse(store, typeClass, payload, id) {
+    payload.included = payload.included || [];
+
     // id will have a trailing slash because it is derived from the URL and we
     // reliably append a trailing slash via Django
     payload.included.push({
