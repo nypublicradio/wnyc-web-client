@@ -17,7 +17,7 @@ export default Route.extend({
 
     if (isInDom(listingSlug)) {
       // if an alien dom is present, we can render our template just fine
-      return this.store.findRecord('channel', listingSlug).then(channel => { channel })
+      return this.store.findRecord('channel', listingSlug).then(channel => ({ channel }) )
     } else {
       return this.store.find('django-page', listingSlug).then(page => {
         return waitFor({
