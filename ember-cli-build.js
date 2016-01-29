@@ -26,6 +26,8 @@ module.exports = function(defaults) {
     },
   });
 
+  app.import('bower_components/moment/moment.js');
+
   // This is here so that legacy JS within our content pages can share
   // our version of jQuery without dying.
   app.import('vendor/jquery-migrate/jquery-migrate.js');
@@ -35,7 +37,13 @@ module.exports = function(defaults) {
   // these are symlinked to their original locations in the puppy
   // source.
   app.import('vendor/imagesloaded/imagesloaded.pkgd.js');
-  app.import('bower_components/moment/moment.js');
+  app.import('vendor/wnyc-legacy/util.js')
+  app.import('vendor/wnyc-legacy/lib/wnyc/listening.js')
+  app.import('vendor/wnyc-legacy/lib/wnyc/namespace.js')
+  app.import('vendor/wnyc-legacy/overhaul/story/namespace_ext.js')
+  app.import('vendor/wnyc-legacy/lib/wnyc/jquery.js')
+  app.import('vendor/wnyc-legacy/lib/jquery/jquery.ba-postmessage.js')
+  app.import('vendor/wnyc-legacy/lib/jquery/jquery.xdr.js')
 
   return app.toTree();
 };
