@@ -63,7 +63,7 @@ export default Service.extend({
     // something like:
     //  session-service for auth
     //  updates bound prop which reveals editlinks
-    wnyc.user.staffLinks();
+    wnyc.listening.listen("wnyc.user.success", () => wnyc.user.staffLinks());
   },
 
   trackShowFromMenu(e) {
