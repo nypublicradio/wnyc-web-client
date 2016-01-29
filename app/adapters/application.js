@@ -1,9 +1,9 @@
-/*global wnyc*/
 import DS from 'ember-data';
+import ENV from '../config/environment';
 
 export default DS.JSONAPIAdapter.extend({
-    host: wnyc.api_url || '',
     namespace: 'api/v3',
+    host: ENV.wnycAPI,
     ajaxOptions(url) {
       return {
         url: url,

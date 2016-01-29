@@ -1,11 +1,9 @@
 import BaseAdapter from '../metrics-adapters/base';
 import Ember from 'ember';
-//import service from 'ember-service/inject';
 
 const {
   get,
   set,
-  //setProperties,
   $,
   K,
   copy

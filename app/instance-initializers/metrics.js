@@ -1,19 +1,19 @@
-import config from '../config/environment';
+import ENV from '../config/environment';
 
 const {
-  googleAnalyticsKey:id
-} = config;
+  googleAnalyticsKey:id,
+  wnycAccountAPI
+} = ENV;
 
 export function initialize(applicationInstance) {
   const metrics = applicationInstance.lookup('service:metrics');
-  const { login_root:apiHost } = wnyc;
   const endpoint = 'api/v1/analytics/ga';
   const mailchimp = String(window.location).match(/utm_term=(\d+_\w+-\w+-\w+)/);
 
   metrics.activateAdapters([{
     name: 'DataWarehouse',
     config: {
-      host: apiHost,
+      host: wnycAccountAPI,
       endpoint: endpoint,
       debug: /alertTracking/.test(window.location.search)
     }
