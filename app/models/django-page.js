@@ -44,6 +44,44 @@ export default DS.Model.extend({
     }
   }),
 
+
+  wnycChannel: Ember.computed('document', function() {
+    let channel = this.get('document').querySelector('#wnyc-channel-jsonapi');
+    let channelSerializer = this.store.serializerFor('channel');
+    let channelModel = this.store.modelFor('channel')
+    let id = this.get('id')
+    let json;
+
+    if (channel) {
+      try {
+        json = JSON.parse(channel.innerText)
+      } catch(err) {}
+      if (json) {
+        return this.store.push(channelSerializer.normalizeResponse(this.store, channelModel, json[id], id));
+      }
+    }
+  }),
+
+  wnycChannelPageone: Ember.computed('document', function() {
+    let pageOneAndId = this.get('document').querySelector('#wnyc-pageone-jsonapi');
+    let apiResponseSerializer = this.store.serializerFor('api-response');
+    let apiResponseModel = this.store.modelFor('api-response')
+    let json;
+
+    if (pageOneAndId) {
+      try {
+        json = JSON.parse(pageOneAndId.innerText)
+      } catch(err) {}
+      if (json) {
+        // until we merge 4990
+        let [path, query] = json[0].split('?')
+        let offset = query.split('&')[0].split('=')[1] // yuck
+        let pageNumber = Number(offset[0]) + 1
+        return this.store.push(apiResponseSerializer.normalizeResponse(this.store, apiResponseModel, json[1], `${path}${pageNumber}`));
+      }
+    }
+  }),
+
   embeddedEmberComponents: Ember.computed('document', function() {
     let doc = this.get('pieces.body');
     return Array.from(doc.querySelectorAll('[data-ember-component]')).map(el => {

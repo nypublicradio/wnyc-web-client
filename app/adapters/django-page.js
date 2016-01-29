@@ -9,7 +9,7 @@ export default DS.Adapter.extend({
     if (isInDom(id)) {
       return document;
     }
-    return fetch(ENV.wnycURL + '/' + id.replace(/^\//, ''), { headers: {'X-WNYC-EMBER':1}})
+    return fetch(`${ENV.wnycURL}/${id === '/' ? '' : id.replace(/\/*$/, '/')}`, { headers: {'X-WNYC-EMBER':1}})
       .then(response => response.text());
   }
 });
