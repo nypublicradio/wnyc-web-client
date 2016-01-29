@@ -1,15 +1,21 @@
 import DS from 'ember-data';
+const { attr }  = DS;
 
 export default DS.Model.extend({
-    title: DS.attr('string'),
-    url: DS.attr('string'),
-    tease: DS.attr('string'),
-    imageMain: DS.attr(),
-    dateLine: DS.attr('string'),
-    headers: DS.attr(),
-    audio: DS.attr('string'),
-    audioDurationReadable: DS.attr('string'),
-    audioAvailable: DS.attr('boolean'),
-    audioEventually: DS.attr('boolean'),
-    slug: DS.attr('string'),
+  audio: attr('string'),
+  audioAvailable: attr('boolean'),
+  audioEventually: attr('boolean'),
+  audioDurationReadable: attr('string'),
+  dateLine: attr('string'),
+  dateLineDatetime: attr('string'),
+  editLink: attr('string'),
+  headers: attr(),
+  imageMain: attr(),
+  isLatest: attr('boolean'),
+  largeTeaseLayout: attr('boolean'),
+  slug: DS.attr('string'),
+  tease: attr('string'),
+  title: attr('string'),
+  url: attr('string'),
+  extendedStory: attr()
 });
