@@ -60,8 +60,7 @@
   "ember-addon": {
     "paths": [
       "lib/unobtrusive-loader",
-      "lib/google-apis",
-      "lib/wnyc-legacy"
+      "lib/google-apis"
     ]
   }
 }

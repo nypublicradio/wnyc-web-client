@@ -37,6 +37,7 @@ module.exports = function(defaults) {
   // these are symlinked to their original locations in the puppy
   // source.
   app.import('vendor/imagesloaded/imagesloaded.pkgd.js');
+  app.import('vendor/wnyc-bootstrap/index.js')
   app.import('vendor/wnyc-legacy/util.js')
   app.import('vendor/wnyc-legacy/lib/wnyc/listening.js')
   app.import('vendor/wnyc-legacy/lib/wnyc/namespace.js')
