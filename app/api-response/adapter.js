@@ -10,7 +10,6 @@ const {
   get
 } = Ember;
 
-
 export default ApplicationAdapter.extend({
   pageNumbers: service(),
   pathForType() {

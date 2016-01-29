@@ -19,7 +19,6 @@ export default Route.extend({
       return waitFor({
         page,
         channel: page.get('wnycChannel'),
-        pageOne: page.get('wnycChannelPageone') // just to push it into the store
       })
     })
   },
