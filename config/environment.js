@@ -29,6 +29,16 @@ module.exports = function(environment) {
     featureFlags: {
       'django-page-routing': false,
       'persistent-player': false
+    },
+    contentSecurityPolicy: {
+      'connect-src': "'self' *.wnyc.net:*",
+      'style-src': "'self' 'unsafe-inline' *.wnyc.net:* *.wnyc.org cloud.typography.com fonts.googleapis.com",
+      'img-src': "'self' data: *.wnyc.net *.wnyc.org csi.gstatic.com pixel.quantserve.com *.doubleclick.net maps.googleapis.com",
+      'script-src': "'self' 'unsafe-inline' 'unsafe-eval' data: *.wnyc.org *.wnyc.net:* www.google.com www.google-analytics.com\
+        *.googletagservices.com *.googleadservices.com *.quantserve.com *.doubleclick.net www.youtube.com s.ytimg.com maps.googleapis.com",
+      'object-src': "'self' *.wnyc.net:* *.wnyc.org",
+      'font-src': "'self' data: fonts.gstatic.com",
+      'frame-src': "'self' *.wnyc.net:* *.wnyc.org *.doubleclick.net *.googlesyndication.com"
     }
   };
 
