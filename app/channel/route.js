@@ -15,18 +15,13 @@ export default Route.extend({
     const channelType = this.routeName
     const listingSlug = `${channelType}/${params.slug}`
 
-    if (isInDom(listingSlug)) {
-      // if an alien dom is present, we can render our template just fine
-      return this.store.findRecord('channel', listingSlug).then(channel => ({ channel }) )
-    } else {
-      return this.store.find('django-page', listingSlug).then(page => {
-        return waitFor({
-          page,
-          channel: page.get('wnycChannel'),
-          pageOne: page.get('wnycChannelPageone') // just to push it into the store
-        })
+    return this.store.find('django-page', listingSlug).then(page => {
+      return waitFor({
+        page,
+        channel: page.get('wnycChannel'),
+        pageOne: page.get('wnycChannelPageone') // just to push it into the store
       })
-    }
+    })
   },
   afterModel({ channel }) {
     const listRouter = get(this, 'listRouter')
