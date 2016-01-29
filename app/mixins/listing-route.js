@@ -16,8 +16,8 @@ export default Mixin.create({
 
   channelTitle: computed({
     get() {
-      const channelModel = this.modelFor(get(this, 'channelType'))
-      const channelTitle = get(channelModel, 'title')
+      const { channel } = this.modelFor(get(this, 'channelType'))
+      const channelTitle = get(channel, 'title')
       return channelTitle
     }
   }).readOnly(),
@@ -54,10 +54,10 @@ export default Mixin.create({
       return
     }
     const channelType = get(this, 'channelType')
-    const channelModel = this.modelFor(channelType)
-    const channelTitle = get(channelModel, 'title')
+    const { channel } = this.modelFor(channelType)
+    const channelTitle = get(channel, 'title')
 
-    this._filterForFeatured(teaseList, channelModel)
+    this._filterForFeatured(teaseList, channel)
 
     teaseList.forEach(s => {
       const brandTitle = get(s, 'headers.brand.title')
@@ -94,10 +94,10 @@ export default Mixin.create({
   },
 
   _getNavSlug(channelType) {
-    const channelModel = this.modelFor(channelType)
+    const { channel } = this.modelFor(channelType)
     const {navSlug} = this.paramsFor(`${channelType}.well`)
-    const linkRollSlug = get(channelModel, 'linkroll.firstObject.navSlug')
-    const hasLinkRoll = get(channelModel, 'hasLinkroll')
+    const linkRollSlug = get(channel, 'linkroll.firstObject.navSlug')
+    const hasLinkRoll = get(channel, 'hasLinkroll')
 
     if (hasLinkRoll && navSlug) {
       return navSlug
@@ -108,9 +108,9 @@ export default Mixin.create({
     }
   },
 
-  _filterForFeatured(teaseList, channelModel) {
-    const channelHasFeatured = get(channelModel, 'hasFeatured')
-    const featuredId = get(channelModel, 'featuredId')
+  _filterForFeatured(teaseList, channel) {
+    const channelHasFeatured = get(channel, 'hasFeatured')
+    const featuredId = get(channel, 'featuredId')
     // ember coerces IDs to strings, but these are just straight objects, for now
     // coerce to a Number until the day they are proper ember models
     const featuredStory = teaseList.findBy('id', Number(featuredId))
@@ -121,7 +121,7 @@ export default Mixin.create({
   },
 
   _scrollToOffset(channelType) {
-    const channel = this.modelFor(channelType)
+    const { channel } = this.modelFor(channelType)
     const hasLinkroll = get(channel, 'hasLinkroll')
     const scrollTarget = hasLinkroll ? $('nav.tabs-header').get(0) : $('#channelTitle').get(0)
     if (scrollTarget.scrollIntoView) {

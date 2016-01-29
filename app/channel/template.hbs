@@ -1,71 +1,73 @@
-{{#ember-wormhole to="js-listings"}}
-  {{#google-ad ad="leaderboard" hasMarquee=model.hasMarquee class="l-constrained"}}
-    <div id="leaderboard" class="aligncenter"></div>
-  {{/google-ad}}
+{{#django-page page=model.page}}
+  {{#ember-wormhole to="js-listings"}}
+    {{#google-ad ad="leaderboard" hasMarquee=model.hasMarquee class="l-constrained"}}
+      <div id="leaderboard" class="aligncenter"></div>
+    {{/google-ad}}
 
-  {{#if model.hasMarquee}}
-    {{x-marquee model=model}}
-  {{else}}
-    {{#if model.hasFeatured}}
-      {{channel-header model=model}}
+    {{#if model.channel.hasMarquee}}
+      {{x-marquee model=model.channel}}
     {{else}}
-      {{channel-header model=model classNames='flush'}}
+      {{#if model.channel.hasFeatured}}
+        {{channel-header model=model.channel}}
+      {{else}}
+        {{channel-header model=model.channel classNames='flush'}}
+      {{/if}}
     {{/if}}
-  {{/if}}
 
-  <div class="l-constrained">        
-    <main class="l-col2of3">
+    <div class="l-constrained">        
+      <main class="l-col2of3">
 
-      {{#if model.hasFeatured}}
-      <section>
-        <h1 class="for-screenreaders">Featured Item</h1>
-        {{story-tease
-          item=model.featured
-          hideLinks=true
-          isFeatured=true
-          class='box box--bgoverflow'}}
-      </section>
-      {{/if}}
-
-      {{#if model.linkroll}}
-        {{nav-links channelType=channelType links=model.linkroll action="updateRouteTitle"}}
-      {{/if}}
-
-      {{outlet}}
-
-    </main>
-
-    <aside class="l-col1of3">
-      <div class="l-skinny">
-
-        {{#if model.tease}}
-        <div class="box box--nopad">
-          <div class="box-heading">
-            <h1 class="h5 text--gray">About the {{capitalize-word model.listingObjectType}}</h1>
-          </div>
-          <div class="text text--medium">
-            <div class="text-body text-body--nopad text-body--forceinline">
-              {{{model.tease}}}
-              {{#if model.producingOrganizations}}
-                {{producing-orgs model.producingOrganizations}}
-              {{/if}}
-            </div>
-          </div>
-        </div>
-        <!-- .box -->
+        {{#if model.channel.hasFeatured}}
+        <section>
+          <h1 class="for-screenreaders">Featured Item</h1>
+          {{story-tease
+            item=model.channel.featured
+            hideLinks=true
+            isFeatured=true
+            class='box box--bgoverflow'}}
+        </section>
         {{/if}}
 
+        {{#if model.channel.linkroll}}
+          {{nav-links channelType=channelType links=model.channel.linkroll action="updateRouteTitle"}}
+        {{/if}}
 
-        {{social-links model=model}}
+        {{outlet}}
 
-        {{{model.chunkSidebarTop}}}
+      </main>
 
-        {{google-ad ad="rightRail" class="align--mq-centertoright channel-ad"}}
+      <aside class="l-col1of3">
+        <div class="l-skinny">
 
-        {{{model.chunkSidebarBottom}}}
+          {{#if model.channel.tease}}
+          <div class="box box--nopad">
+            <div class="box-heading">
+              <h1 class="h5 text--gray">About the {{capitalize-word model.channel.listingObjectType}}</h1>
+            </div>
+            <div class="text text--medium">
+              <div class="text-body text-body--nopad text-body--forceinline">
+                {{{model.channel.tease}}}
+                {{#if model.channel.producingOrganizations}}
+                  {{producing-orgs model.channel.producingOrganizations}}
+                {{/if}}
+              </div>
+            </div>
+          </div>
+          <!-- .box -->
+          {{/if}}
 
-      </div>
-      <!-- .l-skinny -->
-    </aside>
-  </div>
-{{/ember-wormhole}}
+
+          {{social-links model=model.channel}}
+
+          {{{model.channel.chunkSidebarTop}}}
+
+          {{google-ad ad="rightRail" class="align--mq-centertoright channel-ad"}}
+
+          {{{model.channel.chunkSidebarBottom}}}
+
+        </div>
+        <!-- .l-skinny -->
+      </aside>
+    </div>
+  {{/ember-wormhole}}
+{{/django-page}}

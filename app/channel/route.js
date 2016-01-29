@@ -28,9 +28,9 @@ export default Route.extend({
       })
     }
   },
-  afterModel(model) {
+  afterModel({ channel }) {
     const listRouter = get(this, 'listRouter')
-    const channelTitle = get(model, 'title')
+    const channelTitle = get(channel, 'title')
     set(listRouter, 'channelTitle', channelTitle)
   },
   setupController(controller) {
