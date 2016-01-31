@@ -4,6 +4,7 @@ import Ember from 'ember';
 export default Service.extend({
   install() {
     window.addEventListener('message', this._resizeLeaderboard);
+    this._resizeLeaderboard();
   },
   _resizeLeaderboard(e) {
     let data;
