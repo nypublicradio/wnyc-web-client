@@ -8,7 +8,6 @@ const {
   computed,
   Component
 } = Ember
-const { googletag } = window
 
 export default Component.extend({
   router: service('-routing'),
@@ -37,6 +36,7 @@ export default Component.extend({
     // the URL observer. so we cache the url changes and compare
     const currentUrl = get(this, 'router.router.url')
     const cachedUrl = get(this, 'cachedUrl')
+    const { googletag } = window;
 
     if (currentUrl !== cachedUrl) {
       if (googletag && googletag.apiReady) {
