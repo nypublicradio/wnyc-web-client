@@ -3,7 +3,7 @@
   <h1 class="for-screenreaders">Pagination</h1>
     {{#if canStepBackward}}
         <span class="pagefooter-previous">
-            <a href="#" {{action "incrementPage" -1}} class="page-indicators">&laquo; Prev</a>
+            <a href="#" {{action "incrementPage" -1 bubbles=false}} class="page-indicators">&laquo; Prev</a>
             <button {{action "incrementPage" -1}} class="btn btn-page-mobile btn--large btn--blacktext">&lsaquo; Prev</button>
         </span>
     {{/if}}
@@ -16,14 +16,14 @@
             <span class="pagefooter-current">{{item.page}}</span>
         {{else}}
             <span class="pagefooter-link">
-                <a href="#" {{action "pageClicked" item.page}}>{{item.page}}</a>
+                <a href="#" {{action "pageClicked" item.page bubbles=false}}>{{item.page}}</a>
             </span>
         {{/if}}
     {{/each}}
 
     {{#if canStepForward}}
         <span class="pagefooter-next">
-            <a href="#" {{action "incrementPage" 1}} class="page-indicators">Next &raquo;</a> 
+            <a href="#" {{action "incrementPage" 1 bubbles=false}} class="page-indicators">Next &raquo;</a> 
             <button {{action "incrementPage" 1}} class="btn btn-page-mobile btn--large {{currentPageClass}} btn--blacktext">Next &rsaquo;</button>
         </span>
     {{/if}}

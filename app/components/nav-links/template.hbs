@@ -3,7 +3,7 @@
 {{#each links as |link|}}
   <li class="list-item list-item--mini">
     {{#unless link.href}}
-      {{#link-to channelTypeWell link.navSlug classNames='link link--dark tab-link'}}{{link.title}}{{/link-to}}
+      {{#link-to channelTypeWell link.navSlug classNames='link link--dark tab-link' bubbles=false}}{{link.title}}{{/link-to}}
     {{else}}
       <a href={{link.href}} class="link link--dark link--nodecor tab-link">{{link.title}}</a>
     {{/unless}}
