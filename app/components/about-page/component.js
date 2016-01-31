@@ -1,4 +1,4 @@
-import Component from 'ember-compnent';
+import Component from 'ember-component';
 
 export default Component.extend({
   tagName: 'section'
