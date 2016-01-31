@@ -1,3 +1,4 @@
+/* jshint asi: true*/
 import Ember from 'ember';
 import service from 'ember-service/inject';
 
@@ -111,9 +112,7 @@ export default Mixin.create({
   _filterForFeatured(teaseList, channel) {
     const channelHasFeatured = get(channel, 'hasFeatured')
     const featuredId = get(channel, 'featuredId')
-    // ember coerces IDs to strings, but these are just straight objects, for now
-    // coerce to a Number until the day they are proper ember models
-    const featuredStory = teaseList.findBy('id', Number(featuredId))
+    const featuredStory = teaseList.findBy('id', featuredId)
 
     if (channelHasFeatured) {
       teaseList.removeObject(featuredStory)
