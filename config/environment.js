@@ -1,4 +1,4 @@
-/* jshint node: true */
+/* jshint node: true, multistr: true */
 
 module.exports = function(environment) {
   var ENV = {
@@ -31,9 +31,9 @@ module.exports = function(environment) {
       'persistent-player': false
     },
     contentSecurityPolicy: {
-      'connect-src': "'self' *.wnyc.net:*",
+      'connect-src': "'self' *.wnyc.net:* ws://*.wnyc.net:*",
       'style-src': "'self' 'unsafe-inline' *.wnyc.net:* *.wnyc.org cloud.typography.com fonts.googleapis.com",
-      'img-src': "'self' data: *.wnyc.net *.wnyc.org csi.gstatic.com pixel.quantserve.com *.doubleclick.net maps.googleapis.com",
+      'img-src': "'self' data: *.wnyc.net *.wnyc.org csi.gstatic.com pixel.quantserve.com *.doubleclick.net maps.googleapis.com www.google-analytics.com *.pubmatic.com www.google.com",
       'script-src': "'self' 'unsafe-inline' 'unsafe-eval' data: *.wnyc.org *.wnyc.net:* www.google.com www.google-analytics.com\
         *.googletagservices.com *.googleadservices.com *.quantserve.com *.doubleclick.net www.youtube.com s.ytimg.com maps.googleapis.com",
       'object-src': "'self' *.wnyc.net:* *.wnyc.org",
