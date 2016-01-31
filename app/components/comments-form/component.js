@@ -54,7 +54,7 @@ export default Ember.Component.extend({
         let url = `${ENV.wnycAccountAPI}/comments/post/?bust_cache=${Math.random()}&id=${this.get('browserId')}`;
         let story = this.get('story');
         let metaData = {
-          content_type: 'cms.' + story.get('item_type'),
+          content_type: 'cms.' + story.get('itemType'),
           object_pk: story.get('id'),
           timestamp,
           security_hash,
