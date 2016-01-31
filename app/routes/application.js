@@ -4,9 +4,12 @@ import {installBridge} from '../lib/okra-bridge';
 export default Ember.Route.extend({
   asyncWriter: Ember.inject.service(),
   legacyLoader: Ember.inject.service(),
+  leaderboard: Ember.inject.service(),
 
   beforeModel() {
     this.get('asyncWriter').install();
+    this.get('leaderboard').install();
+
     window.WNYC_LEGACY_LOADER = this.get('legacyLoader');
     window.WNYC_LEGACY_LOADER.define('installBridge', installBridge);
 
