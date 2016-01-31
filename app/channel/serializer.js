@@ -1,7 +1,4 @@
 import DS from 'ember-data';
-// import {
-//     filterForByTitle
-// } from 'overhaul-listings/utils/filters'
 
 export default DS.JSONAPISerializer.extend({
   normalizeResponse(store, typeClass, payload, id) {

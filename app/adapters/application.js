@@ -13,6 +13,6 @@ export default DS.JSONAPIAdapter.extend({
     },
     // ember 2.0 deprecation
     shouldBackgroundReloadRecord() {
-      return false
+      return false;
     }
 });

@@ -1,12 +1,12 @@
 import Ember from 'ember';
-import { beforeTeardown } from '../lib/compat-hooks';
-import ENV from '../config/environment';
+import { beforeTeardown } from '../../lib/compat-hooks';
+import ENV from '../../config/environment';
 import {
   isInDom,
   clearAlienDom,
   embeddedComponentSetup,
   installAlienListener
-} from '../lib/alien-dom';
+} from '../../lib/alien-dom';
 
 const { $ } = Ember;
 const { wnycURL } = ENV;
