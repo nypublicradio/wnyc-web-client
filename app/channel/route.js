@@ -15,7 +15,7 @@ export default Route.extend({
     const channelType = this.routeName
     const listingSlug = `${channelType}/${params.slug}`
 
-    return this.store.find('django-page', listingSlug).then(page => {
+    return this.store.find('django-page', listingSlug.replace(/\/*$/, '/')).then(page => {
       return waitFor({
         page,
         channel: page.get('wnycChannel'),
