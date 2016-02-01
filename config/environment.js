@@ -32,7 +32,7 @@ module.exports = function(environment) {
     },
     contentSecurityPolicy: {
       'connect-src': "'self' *.wnyc.net:* ws://*.wnyc.net:*",
-      'style-src': "'self' 'unsafe-inline' *.wnyc.net:* *.wnyc.org cloud.typography.com fonts.googleapis.com",
+      'style-src': "'self' 'unsafe-inline' *.wnyc.net:* *.wnyc.org cloud.typography.com fonts.googleapis.com www.google.com",
       'img-src': "'self' data: *",
       'script-src': "'self' 'unsafe-inline' 'unsafe-eval' data: *",
       'object-src': "'self' *.wnyc.net:* *.wnyc.org *.moatads.com",
