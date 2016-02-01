@@ -30,7 +30,6 @@ function getBrowserId(knownId) {
   }
 
   return fetch(url, {
-    credentials: 'include',
     headers
   }).then(checkStatus)
     .then(response => response.json());
