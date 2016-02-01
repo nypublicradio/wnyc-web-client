@@ -4,7 +4,7 @@ import loadInitializers from 'ember/load-initializers';
 import config from './config/environment';
 
 let App;
-let RE = /^(?:route|template):(shows|series|articles|tags)/;
+let RE = /^(?:route|template):(shows|series|articles|tags|blogs)/;
 
 let NYPRResolver = Resolver.extend({
   parseName(fullName) {

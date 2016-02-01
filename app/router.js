@@ -23,6 +23,7 @@ Router.map(function() {
   this.route('articles', {path: 'articles/:slug'}, subpageRoutes);
   this.route('series', {path: 'series/:slug'}, subpageRoutes);
   this.route('tags', {path: 'tags/:slug'}, subpageRoutes);
+  this.route('blogs', {path: 'blogs/:slug'}, subpageRoutes);
 
   // This is our catch all route that can render any existing page
   // from the django site. It will be used when there's nothing more
