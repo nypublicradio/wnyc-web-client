@@ -59,7 +59,9 @@ export default Ember.Component.extend({
       if (href.indexOf(wnycURL) === 0) {
         href = href.replace(wnycURL, '');
 
-        if (!this.features.isEnabled('django-page-routing')) {
+        if (target.attr('target') === '_blank') {
+          return true;
+        } else if (!this.features.isEnabled('django-page-routing')) {
           window.location.assign(href.replace(/^([^\/])/, '/$1'));
           return false;
         }
