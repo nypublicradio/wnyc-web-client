@@ -57,14 +57,14 @@ export default Ember.Component.extend({
       let router = this.get('router');
       let href = new URL(target.attr('href'), new URL(this.get('page.id'), wnycURL).toString()).toString();
       if (href.indexOf(wnycURL) === 0) {
-        href = href.replace(wnycURL, '').replace(/^\//, '');
+        href = href.replace(wnycURL, '');
 
         if (!this.features.isEnabled('django-page-routing')) {
-          window.location = href;
+          window.location.assign(href.replace(/^([^\/])/, '/$1'));
           return false;
         }
 
-        let { routeName, params } = router.recognize(href);
+        let { routeName, params } = router.recognize(href.replace(/^\//, ''));
         router.transitionTo(routeName, ...params);
         event.preventDefault();
         beforeTeardown(this.get('element'), this.get('page'));
