@@ -136,7 +136,7 @@ export default Metrics.extend({
     }
     // see puppy/cms/models/content.py#analytics_code_string for fields
     const fields = ['slug', 'audio', 'audioduration', 'video', 'modelchar', 'domainint', 'hasshow', 'haschannel', 'seriesslugs', 'channelslugs', 'tags', 'audiopath']
-    const REGEX = /(?:.*:)?(.*)\W+\$A(\d)\$AD(\d+)\$V(\d)\$M(\w)\$D(\d)\$CS(\d)\$CC(\d)\$SS([^$]+)\$S([^$]+)\$T([^$]+)\$AP([^$]+)\$$/
+    const REGEX = /(?:.*:)?(.*)\W+\$A(\d)\$AD(\d+)\$V(\d)\$M(\w)\$D(\d+)\$CS(\d)\$CC(\d)\$SS([^$]+)\$S([^$]+)\$T([^$]+)\$AP([^$]+)\$$/
     const match = code.match(REGEX).slice(1)
     const analyticsObject = {}
 
