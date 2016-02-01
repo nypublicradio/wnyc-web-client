@@ -22,7 +22,7 @@ export default DS.JSONAPIAdapter.extend({
 });
 
 function getBrowserId(knownId) {
-  let url = ENV.wnycEtagAPI + '/api/v1/browser_id/';
+  let url = ENV.wnycEtagAPI;
   let headers = {};
 
   if (knownId) {
