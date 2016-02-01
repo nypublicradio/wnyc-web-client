@@ -4,7 +4,7 @@ import ENV from '../config/environment';
 
 export default DS.JSONAPIAdapter.extend({
   findRecord() {
-    return fetch(ENV.wnycAccountAPI, {
+    return fetch(ENV.wnycAccountAPI + '/api/v1/is_logged_in/', {
       credentials: 'include'
     }).then(checkStatus)
       .then(response => response.json());
