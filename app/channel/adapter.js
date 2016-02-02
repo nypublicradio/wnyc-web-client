@@ -7,8 +7,6 @@ const {
   run
 } = Ember;
 
-const { wnyc } = window;
-
 export default ApplicationAdapter.extend({
   pathForType() {
     return 'channel'
@@ -24,7 +22,7 @@ export default ApplicationAdapter.extend({
   },
 
   findRecord(store, type, id/*, snapshot*/) {
-    let listing = wnyc.listing;
+    let listing = window.wnyc.listing;
 
     if (listing && listing[id]) {
       return new RSVP.Promise(resolve => run(null, resolve, listing[id]))
