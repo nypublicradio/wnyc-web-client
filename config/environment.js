@@ -22,9 +22,6 @@ module.exports = function(environment) {
 
     googleAPIv3Key: 'AIzaSyCDbxxvbl0Zj6af28IfWjJ-S0SKxwDXnkc',
     wnycURL: 'http://dev.wnyc.net:4568',
-    wnycAPI: '',
-    wnycAccountAPI: '',
-    wnycEtagAPI: '',
     wnycStaticURL: '/static',
     featureFlags: {
       'django-page-routing': false,
@@ -40,6 +37,10 @@ module.exports = function(environment) {
       'frame-src': "'self' *"
     }
   };
+
+  ENV.wnycAPI = ENV.wnycURL
+  ENV.wnycAccountAPI = ENV.wnycURL
+  ENV.wnycEtagAPI = ENV.wnycURL
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
