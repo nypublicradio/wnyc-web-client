@@ -1,3 +1,4 @@
+/* globals wnyc */
 import GoogleAnalytics from 'ember-metrics/metrics-adapters/google-analytics';
 
 // TODO: still relying on wnyc's listening extension. should move to a session
@@ -16,7 +17,7 @@ export default GoogleAnalytics.extend({
     //   //see media/js/lib/wnyc/overlay/
     //   window.overlay_iframe_obj.opt.googletrackcode = trackCode;
     // }
-    listen("wnyc.user.success", this.identify)
+    listen("wnyc.user.success", this.identify);
   },
   identify() {
     var userData = wnyc.user && wnyc.user.data,

@@ -18,13 +18,13 @@ export default Mixin.create({
   _trackPage() {
     run.scheduleOnce('afterRender', this, () => {
       const metrics = get(this, 'metrics');
-      const page = document.location.pathname // e.g. '/shows/bl/'
-      const title = document.title // this should be something dynamic
+      const page = document.location.pathname; // e.g. '/shows/bl/'
+      const title = document.title; // this should be something dynamic
 
       // TODO: assess what should be sent for listing views for trackPage events
       // TODO: story items send 'Web Page' to GA/DW as the category, but pledge
       // sends _trackPageview as the cateogry to DW. how to resolve
-      metrics.trackPage({ page, title })
-    })
+      metrics.trackPage({ page, title });
+    });
   },
 });

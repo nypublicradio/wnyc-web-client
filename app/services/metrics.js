@@ -1,4 +1,4 @@
-/*jshint laxcomma:true*/
+/* globals wnyc */
 import Metrics from 'ember-metrics/services/metrics';
 import Ember from 'ember';
 import service from 'ember-service/inject';
@@ -45,17 +45,17 @@ export default Metrics.extend({
   },
 
   trackStory(story) {
-    const showTitle = get(story, 'headers.brand.title')
-    const storyTitle = get(story, 'title')
-    const analyticsObject = this.parseAnalyticsCode(get(story, 'analyticsCode'))
-    const router = get(this, 'router')
-    const currentChannel = router.get('currentState.routerJsState.params.channel.channel')
+    const showTitle = get(story, 'headers.brand.title');
+    const storyTitle = get(story, 'title');
+    const analyticsObject = this.parseAnalyticsCode(get(story, 'analyticsCode'));
+    const router = get(this, 'router');
+    const currentChannel = router.get('currentState.routerJsState.params.channel.channel');
 
     this.trackEvent({
       category: 'Web Page',
       action: `Viewed Story of Show "${showTitle}"`,
       label: storyTitle
-    })
+    });
 
     if (analyticsObject.seriesslugs) {
       analyticsObject.seriesslugs.forEach(s => {
@@ -64,9 +64,9 @@ export default Metrics.extend({
             category: 'Web Page',
             action: `Viewed Story in Series "${s}"`,
             label: storyTitle
-          })
+          });
         }
-      })
+      });
     }
 
     if (analyticsObject.haschannel) {
@@ -76,19 +76,19 @@ export default Metrics.extend({
             category: 'Web Page',
             action: `Viewed Story in Channel "${s}"`,
             label: storyTitle
-          })
+          });
         }
-      })
+      });
     }
 
-    run.later(this, () => window.location = get(story, 'url'), 100)
+    run.later(this, () => window.location = get(story, 'url'), 100);
   },
 
   trackProvenance(e) {
     var TARGET_PROVENANCES = [
-        'related'
-        , 'series'
-        , 'segments'
+        'related',
+        'series',
+        'segments'
       ],
       delegate = e.currentTarget,
       provenance = delegate.id,
@@ -132,31 +132,31 @@ export default Metrics.extend({
 
   parseAnalyticsCode(code) {
     if (!code) {
-      return {}
+      return {};
     }
     // see puppy/cms/models/content.py#analytics_code_string for fields
-    const fields = ['slug', 'audio', 'audioduration', 'video', 'modelchar', 'domainint', 'hasshow', 'haschannel', 'seriesslugs', 'channelslugs', 'tags', 'audiopath']
-    const REGEX = /(?:.*:)?(.*)\W+\$A(\d)\$AD(\d+)\$V(\d)\$M(\w)\$D(\d+)\$CS(\d)\$CC(\d)\$SS([^$]+)\$S([^$]+)\$T([^$]+)\$AP([^$]+)\$$/
-    const match = code.match(REGEX).slice(1)
-    const analyticsObject = {}
+    const fields = ['slug', 'audio', 'audioduration', 'video', 'modelchar', 'domainint', 'hasshow', 'haschannel', 'seriesslugs', 'channelslugs', 'tags', 'audiopath'];
+    const REGEX = /(?:.*:)?(.*)\W+\$A(\d)\$AD(\d+)\$V(\d)\$M(\w)\$D(\d+)\$CS(\d)\$CC(\d)\$SS([^$]+)\$S([^$]+)\$T([^$]+)\$AP([^$]+)\$$/;
+    const match = code.match(REGEX).slice(1);
+    const analyticsObject = {};
 
-    const boolFields = ['audio', 'video', 'haschannel', 'hasshow']
-    const numFields = ['audioduration', 'domainint']
-    const arrayFields = {tags: '!', channelslugs: '|', seriesslugs: '+'}
+    const boolFields = ['audio', 'video', 'haschannel', 'hasshow'];
+    const numFields = ['audioduration', 'domainint'];
+    const arrayFields = {tags: '!', channelslugs: '|', seriesslugs: '+'};
 
     for (let i = 0; i < fields.length; i++) {
-      let field = fields[i]
+      let field = fields[i];
       if (boolFields.contains(field)) {
-        analyticsObject[field] = match[i] === "1"
+        analyticsObject[field] = match[i] === "1";
       } else if (numFields.contains(field)) {
-        analyticsObject[field] = Number(match[i])
+        analyticsObject[field] = Number(match[i]);
       } else if (Object.keys(arrayFields).contains(field)) {
-        analyticsObject[field] = match[i].split(arrayFields[field]).reject(i => !i)
+        analyticsObject[field] = match[i].split(arrayFields[field]).reject(i => !i);
       } else {
-        analyticsObject[field] = match[i]
+        analyticsObject[field] = match[i];
       }
     }
 
-    return analyticsObject
+    return analyticsObject;
   }
 });

@@ -8,8 +8,8 @@ export default DS.Model.extend({
   totalCount: DS.attr('number'),
   totalPages: computed('totalCount', {
     get() {
-      const total = get(this, 'totalCount')
-      return totalPages(total)
+      const total = get(this, 'totalCount');
+      return totalPages(total);
     }
   }),
   html: DS.attr('string'),

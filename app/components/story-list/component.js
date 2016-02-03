@@ -11,7 +11,7 @@ export default Component.extend(LegacySupport, {
   listRouter: service(),
   tagName: 'section',
   didRender() {
-    this.editLinks()
+    this.editLinks();
   },
   sectionTitle: computed.alias('listRouter.navTitle')
 });

@@ -5,9 +5,8 @@ const {
   get,
   set,
   run,
-  computed,
   Component
-} = Ember
+} = Ember;
 
 export default Component.extend({
   router: service('-routing'),
@@ -16,9 +15,9 @@ export default Component.extend({
     this._super(...arguments);
 
     if (config.renderGoogleAds) {
-      let router = get(this, 'router.router')
+      let router = get(this, 'router.router');
       router.on('didTransition', () => this.doRefresh());
-      run.later(this, 'adSpaceCleanup', { hasMarquee: get(this, 'hasMarquee') }, 2000)
+      run.later(this, 'adSpaceCleanup', { hasMarquee: get(this, 'hasMarquee') }, 2000);
     }
   },
 
@@ -33,22 +32,22 @@ export default Component.extend({
     // this causes the leaderboard to refresh twice if going from a non-leaderbaord
     // page to a leaderboard page: once for didInsertElement and another from
     // the URL observer. so we cache the url changes and compare
-    const currentUrl = get(this, 'router.router.url')
-    const cachedUrl = get(this, 'cachedUrl')
+    const currentUrl = get(this, 'router.router.url');
+    const cachedUrl = get(this, 'cachedUrl');
     const { googletag } = window;
 
     if (currentUrl !== cachedUrl) {
       if (googletag && googletag.apiReady) {
         run.schedule('afterRender', this, () => {
           googletag.cmd.push(() => {
-            const ad = get(this, 'ad')
-            const adSlot = window.wnyc.ads[ad]
-            googletag.pubads().refresh([adSlot])
-          })
-          set(this, 'cachedUrl', currentUrl)
-        })
+            const ad = get(this, 'ad');
+            const adSlot = window.wnyc.ads[ad];
+            googletag.pubads().refresh([adSlot]);
+          });
+          set(this, 'cachedUrl', currentUrl);
+        });
       } else {
-        run.later(this, 'doRefresh', 500)
+        run.later(this, 'doRefresh', 500);
       }
     }
   }

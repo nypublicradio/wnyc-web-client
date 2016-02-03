@@ -13,10 +13,10 @@ export default Service.extend({
   navSlug: null,
   navTitle: null,
   updateDocumentTitle: observer('navTitle', 'channelTitle', function() {
-    const navTitle = get(this, 'navTitle')
-    const channelTitle = get(this, 'channelTitle')
-    const pageTitle = navTitle ? `${navTitle} - ${channelTitle}` : channelTitle
+    const navTitle = get(this, 'navTitle');
+    const channelTitle = get(this, 'channelTitle');
+    const pageTitle = navTitle ? `${navTitle} - ${channelTitle}` : channelTitle;
 
-    set(document, 'title', pageTitle)
+    set(document, 'title', pageTitle);
   })
 });

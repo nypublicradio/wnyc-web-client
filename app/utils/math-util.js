@@ -2,7 +2,7 @@ export function totalPages(totalItems, offset = 10) {
     const value = totalItems / offset;
     const pages = Math.ceil(value);
 
-    return isNaN(pages) ? 0 : pages
+    return isNaN(pages) ? 0 : pages;
 }
 
 export function calculateOffset(page, limitPerPage) {

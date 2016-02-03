@@ -13,8 +13,8 @@ export default Service.extend({
   metrics: service(),
 
   init() {
-    this._setupStreamListener()
-    this._setupMenuTracking()
+    this._setupStreamListener();
+    this._setupMenuTracking();
   },
   stream(e) {
     const streamSlug = $(this).attr('data-stream-slug');
@@ -38,7 +38,7 @@ export default Service.extend({
     }
   },
   listen(id, title, show) {
-    const metrics = get(this, 'metrics')
+    const metrics = get(this, 'metrics');
     try {
       wnyc.xdPlayer.playOnDemand(id);
     } catch(e) {
@@ -49,7 +49,7 @@ export default Service.extend({
       category: 'Cross-Domain Player',
       action: `Played OnDemand Show "${show}"`,
       label: title
-    })
+    });
   },
   queue(id) {
     try {
@@ -67,23 +67,23 @@ export default Service.extend({
   },
 
   trackShowFromMenu(e) {
-    const openMenu = $('#navigation-menu .active-nav-item')
-    const $target = $(e.currentTarget)
-    const showTitle = $target.text().trim()
-    const destinationUrl = $target.attr('href')
-    const metrics = get(this, 'metrics')
+    const openMenu = $('#navigation-menu .active-nav-item');
+    const $target = $(e.currentTarget);
+    const showTitle = $target.text().trim();
+    const destinationUrl = $target.attr('href');
+    const metrics = get(this, 'metrics');
 
     if (openMenu.text().trim() !== 'Shows') {
-      return
+      return;
     } else {
-      e.preventDefault()
+      e.preventDefault();
     }
 
     metrics.trackEvent({
       category: 'WNYC Menu',
       action: `Clicked "${showTitle}"`,
       label: `"${showTitle}" with URL "${destinationUrl || 'no URL'}"`
-    })
+    });
 
     if (destinationUrl) {
       run.later(this, () => window.location = destinationUrl, 100);
@@ -91,10 +91,10 @@ export default Service.extend({
   },
 
   _setupStreamListener() {
-    $(document).on('click', '.js-launch-stream', this.stream)
+    $(document).on('click', '.js-launch-stream', this.stream);
   },
 
   _setupMenuTracking() {
-    $(document).on('click', '#navigation-menu a', this.trackShowFromMenu.bind(this))
+    $(document).on('click', '#navigation-menu a', this.trackShowFromMenu.bind(this));
   }
 });

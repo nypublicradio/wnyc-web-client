@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const { helper } = Ember.Helper
+const { helper } = Ember.Helper;
 
 export default helper(function([ value ]){
     if ( value ) {

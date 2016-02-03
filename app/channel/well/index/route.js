@@ -4,16 +4,16 @@ import Route from 'ember-route';
 
 export default Route.extend({
   beforeModel() {
-    let channelType = this.routeName.split('.')[0]
+    let channelType = this.routeName.split('.')[0];
 
-    const {navSlug} = this.paramsFor(`${channelType}.well`)
+    const {navSlug} = this.paramsFor(`${channelType}.well`);
     if (/^\d+$/.test(navSlug)) {
       // navSlug is a page number
-      return this.replaceWith(`${channelType}.page`, navSlug)
+      return this.replaceWith(`${channelType}.page`, navSlug);
     } else {
       // navSlug is actually a navSlug
       // go to the channel.well.page route with a blanked out param for page #
-      return this.replaceWith(`${channelType}.well.page`, navSlug, '')
+      return this.replaceWith(`${channelType}.well.page`, navSlug, '');
     }
   }
-})
+});

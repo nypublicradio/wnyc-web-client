@@ -48,13 +48,13 @@ export default DS.Model.extend({
   wnycChannel: Ember.computed('document', function() {
     let channel = this.get('document').querySelector('#wnyc-channel-jsonapi');
     let channelSerializer = this.store.serializerFor('channel');
-    let channelModel = this.store.modelFor('channel')
-    let id = this.get('id')
+    let channelModel = this.store.modelFor('channel');
+    let id = this.get('id');
     let json;
 
     if (channel) {
       try {
-        json = JSON.parse(channel.innerText)
+        json = JSON.parse(channel.innerText);
       } catch(err) {}
       if (json) {
         return this.store.push(channelSerializer.normalizeResponse(this.store, channelModel, json[id], id));

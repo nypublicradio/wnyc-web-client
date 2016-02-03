@@ -5,7 +5,7 @@ const {
 } = Ember;
 
 export function filterForNewsLetter(value/*, index*/) {
-    const title = value.title.toLowerCase()
+    const title = value.title.toLowerCase();
     if (title === 'newsletter') {
         return true;
     } else {
@@ -14,7 +14,7 @@ export function filterForNewsLetter(value/*, index*/) {
 }
 
 export function getNewsLetter(value) {
-    return value.title.toLowerCase() === 'newsletter'
+    return value.title.toLowerCase() === 'newsletter';
 }
 
 export function filterOutTitleByDonate(value/*, index*/) {
@@ -22,7 +22,7 @@ export function filterOutTitleByDonate(value/*, index*/) {
 }
 
 export function filterForSocialIcons(value/*, index*/) {
-    const title = value.title.toLowerCase()
+    const title = value.title.toLowerCase();
     if(title !== 'donate' && title !== 'newsletter') {
         return true;
     } else {
@@ -39,10 +39,10 @@ export function checkPropertyExists(prop) {
 }
 
 export function filterForByTitle(collection, value) {
-  let item = collection.find(i => i.title.toLowerCase() === value)
+  let item = collection.find(i => i.title.toLowerCase() === value);
   if (!item) {
-    return ''
+    return '';
   }
-  item.iconClassName = item.title.toLowerCase()
-  return item
+  item.iconClassName = item.title.toLowerCase();
+  return item;
 }

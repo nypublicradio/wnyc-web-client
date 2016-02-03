@@ -27,7 +27,7 @@ export function initialize(applicationInstance) {
     config: {
       id
     }
-  }])
+  }]);
 
   // TODO: send these on every pageView or just once per session?
   metrics.trackBrowser();
@@ -36,11 +36,11 @@ export function initialize(applicationInstance) {
     metrics.trackEvent('DataWarehouse', {
       eventName: 'trackMailChimpID',
       mailchimp: encodeURIComponent(mailchimp[1])
-    })
+    });
   }
 }
 
 export default {
   name: 'metrics',
   initialize
-}
+};

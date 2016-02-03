@@ -5,14 +5,14 @@ const {
 
 
 export function podcastIcons(item) {
-    let podcast = item[0]
-    let podcastString = ''
+    let podcast = item[0];
+    let podcastString = '';
     if(podcast.title.toLowerCase() === 'rss') {
-     podcastString = `<i class="fa fa-rss"></i>${podcast.title}`
+     podcastString = `<i class="fa fa-rss"></i>${podcast.title}`;
     } else {
-     podcastString = `<i class="fa fa-mobile"></i>${podcast.title}`
+     podcastString = `<i class="fa fa-mobile"></i>${podcast.title}`;
     }
-   return Ember.String.htmlSafe(podcastString); 
+   return Ember.String.htmlSafe(podcastString);
 }
 
 export default Helper.helper(podcastIcons);

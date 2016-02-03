@@ -4,22 +4,22 @@ const {
 } = Ember;
 
 export function producingOrgs([ orgsList ]/*, hash*/) {
-  let producingString = ''
+  let producingString = '';
 
   orgsList.forEach((org, idx) => {
-    let line = `<a href="${org.url}" target="_blank" class="link link--dark">${org.name}</a>`
+    let line = `<a href="${org.url}" target="_blank" class="link link--dark">${org.name}</a>`;
     if (idx === orgsList.length - 1) {
-      line += '.'
+      line += '.';
     } else if (idx === orgsList.length - 2){
-      line += ' and '
+      line += ' and ';
     } else {
-      line += ', '
+      line += ', ';
     }
 
-    producingString += line
-  })
+    producingString += line;
+  });
 
-  return Ember.String.htmlSafe(`Produced by ${producingString}`)
+  return Ember.String.htmlSafe(`Produced by ${producingString}`);
 }
 
 export default Helper.helper(producingOrgs);

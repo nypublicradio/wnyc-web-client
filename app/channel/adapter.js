@@ -9,24 +9,24 @@ const {
 
 export default ApplicationAdapter.extend({
   pathForType() {
-    return 'channel'
+    return 'channel';
   },
   ajaxOptions(urlToDecode, type, options = {}) {
-    const url = decodeURIComponent(urlToDecode)
+    const url = decodeURIComponent(urlToDecode);
 
     return merge(options, {
       url: url.slice(-1) === '/' ? `${url}/` : url,
       dataType: 'jsonp',
       jsonpCallback: 'WNYC'
-    })
+    });
   },
 
   findRecord(store, type, id/*, snapshot*/) {
     let listing = window.wnyc.listing;
 
     if (listing && listing[id]) {
-      return new RSVP.Promise(resolve => run(null, resolve, listing[id]))
+      return new RSVP.Promise(resolve => run(null, resolve, listing[id]));
     }
-    return this._super(...arguments)
+    return this._super(...arguments);
   }
-})
+});

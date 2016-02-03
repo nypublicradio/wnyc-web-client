@@ -1,3 +1,4 @@
+/* globals wnyc */
 import BaseAdapter from '../metrics-adapters/base';
 import Ember from 'ember';
 
@@ -69,7 +70,7 @@ export default BaseAdapter.extend({
       action: page, // document.location.href
       label: title, // document.title
       value: 0 // must be an integer, 0 is fine
-    }
+    };
 
     this.send(data);
 
@@ -115,7 +116,7 @@ export default BaseAdapter.extend({
 
     if (isDebug) {
       console.log(`sending to ${host}/${endpoint}`, options.data);
-      options.headers = { 'X-Ember': 'TRUE' }
+      options.headers = { 'X-Ember': 'TRUE' };
     }
     return ajax(url, options);
   },
@@ -141,7 +142,7 @@ export default BaseAdapter.extend({
 
   _getUser() {
     if (wnyc.user && wnyc.user.data) {
-      return wnyc.user.data
+      return wnyc.user.data;
     } else {
       return '';
     }
@@ -184,7 +185,7 @@ export default BaseAdapter.extend({
         source: 'mailchimp',
         mailchimp: options.mailchimp
       }
-    })
+    });
   },
 
   _serialize(url, data) {
@@ -211,5 +212,4 @@ export default BaseAdapter.extend({
     // Given the PK of a Managed Item, track a view event against it.
     this.send({endpoint: `/api/most/view/managed_item/${pk}/`, data: {context: 'NYPR_Web'}});
   }
-
 });

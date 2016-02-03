@@ -12,25 +12,22 @@ export default Component.extend({
   isTwitter: computed.equal('item.service', 'twitter'),
   iconname: computed('item', {
     get() {
-      const svc = get(this, 'item.service')
-      return svc === 'email' ? 'envelope' : svc
+      const svc = get(this, 'item.service');
+      return svc === 'email' ? 'envelope' : svc;
     }
   }),
   url: computed('item', {
     get() {
-      const svc = get(this, 'item.service')
-      const user = get(this, 'item.contactString')
+      const svc = get(this, 'item.service');
+      const user = get(this, 'item.contactString');
 
       switch(svc) {
         case 'facebook':
-          return `http:\/\/facebook.com/${user}`
-          break;
+          return `http:\/\/facebook.com/${user}`;
         case 'instagram':
-          return `http:\/\/instagram.com/${user}`
-          break;
+          return `http:\/\/instagram.com/${user}`;
         case 'email':
-          return `mailto:${user}`
-          break;
+          return `mailto:${user}`;
         default:
           return null;
       }
@@ -39,11 +36,11 @@ export default Component.extend({
 
   didInsertElement() {
     if (this.get('isTwitter')) {
-      this._insertTwitter()
+      this._insertTwitter();
     }
   },
   _insertTwitter() {
-    const $s = $('<script/>', { id: 'twitter-wjs', src: '//platform.twitter.com/widgets.js' })
-    $(document).find('head').prepend($s)
+    const $s = $('<script/>', { id: 'twitter-wjs', src: '//platform.twitter.com/widgets.js' });
+    $(document).find('head').prepend($s);
   }
 });
