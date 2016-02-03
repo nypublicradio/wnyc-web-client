@@ -39,9 +39,9 @@ module.exports = function(environment) {
     }
   };
 
-  ENV.wnycAPI = ENV.wnycURL
-  ENV.wnycAccountAPI = ENV.wnycURL
-  ENV.wnycEtagAPI = ENV.wnycURL
+  ENV.wnycAPI = ENV.wnycURL;
+  ENV.wnycAccountAPI = ENV.wnycURL;
+  ENV.wnycEtagAPI = ENV.wnycURL;
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;

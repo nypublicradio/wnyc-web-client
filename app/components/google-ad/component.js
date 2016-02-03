@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
-import config from 'overhaul-listings/config/environment';
+import config from 'overhaul/config/environment';
 const {
   get,
   set,
