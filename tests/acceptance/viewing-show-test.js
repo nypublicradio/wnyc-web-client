@@ -5,16 +5,9 @@ import showPage from 'overhaul/tests/pages/show';
 
 moduleForAcceptance('Acceptance | viewing show', {
   beforeEach() {
-    window.wnyc = {
-      listing: {},
-      user: {
-        staffLinks() {}
-      }
-    };
-  },
-
-  afterEach() {
-    window.wnyc = undefined;
+    $('#ember-testing').empty();
+    $('<script type="text/x-wnyc-marker" data-url="shows/show-slug/"></script>').appendTo('#ember-testing');
+    $('<div/>', {id: 'js-listings'}).appendTo('#ember-testing');
   }
 });
 
@@ -60,16 +53,24 @@ test('using a nav-link', function(assert) {
 
 function bootstrapListingGlobal(showAttrs) {
   // Create server models
-  let showModel = server.schema.show.create(showAttrs);
-  showModel.createStory();
-  let apiResponseModel = server.schema.apiResponse.create({
-    id: `${showAttrs.id}/episodes/1`
+  let apiResponse = server.create('api-response', {
+    id: `${showAttrs.id}episodes/1`,
   });
+  let story = server.create('story', { apiResponseId: apiResponse.id });
+  let show = server.create('show', showAttrs);
 
   // Serialize models
-  let serializedShow = serialize(showModel);
-  let serializedApiResponse = serialize(apiResponseModel);
-  serializedShow.included.push(serializedApiResponse.data);
+  let serializedShow = serialize(server.schema.find('show', show.id));
+  let serializedApiResponse = serialize(server.schema.find('apiResponse', apiResponse.id));
+  let serializedStory = serialize(server.schema.find('story', story.id));
 
-  window.wnyc.listing = { [showAttrs.id]: serializedShow };
+  let jsonApiResponse = {included: []};
+  jsonApiResponse.data = serializedShow.data;
+  jsonApiResponse.included.push(serializedApiResponse.data);
+  jsonApiResponse.included.push(serializedStory.data);
+
+  let string = JSON.stringify({[showAttrs.id]: jsonApiResponse });
+  let element = $('<script/>', {id: 'wnyc-channel-jsonapi', type: 'application/vnd.api+json'});
+  element.html(string);
+  element.appendTo('#ember-testing');
 }

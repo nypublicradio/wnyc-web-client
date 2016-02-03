@@ -1,12 +1,10 @@
-export default function() {
-  this.get('/api/v3/channel/:apiRequestId', function(schema, request) {
-    let apiRequestId = decodeURIComponent(request.params.apiRequestId);
-    let apiRequest = schema.apiResponse.find(apiRequestId);
-    return jsonpResponse(this, apiRequest);
-  });
-}
+import config from 'overhaul/config/environment';
 
-function jsonpResponse(server, model) {
-  let payload = server.serializerOrRegistry.serialize(model);
-  return `WNYC(${JSON.stringify(payload)})`;
+export default function() {
+  this.namespace = config.wnycURL;
+
+  this.get('/api/v3/channel/shows/:showId/:navSlug/1', function(schema, request) {
+    let { showId, navSlug } = request.params;
+    return schema.apiResponse.find(`shows/${showId}/${navSlug}/1`);
+  });
 }

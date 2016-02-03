@@ -6,7 +6,7 @@ export default Factory.extend({
   },
 
   id() {
-    return `shows/${this.slug}`;
+    return `shows/${this.slug}/`;
   },
 
   linkroll() {
