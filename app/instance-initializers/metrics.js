@@ -1,13 +1,13 @@
 import ENV from '../config/environment';
 
 const {
-  googleAnalyticsKey:id,
+  googleAnalyticsKey: id,
   wnycAccountAPI
 } = ENV;
 
 export function initialize(applicationInstance) {
   // Don't run setup if there are no configured metrics adapters.
-  if (!ENV.metricsAdapters.length) {
+  if (!id) {
     return false;
   }
 

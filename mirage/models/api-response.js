@@ -1,6 +1,5 @@
 import { Model, hasMany } from 'ember-cli-mirage';
 
 export default Model.extend({
-  teaseList: hasMany('story'),
-  included: ['teaseList']
+  teaseList: hasMany('story')
 });
