@@ -7,7 +7,7 @@ let {
 } = PageObject;
 
 export default PageObject.create({
-  visit: visitable('/shows/:slug'),
+  visit: visitable(':id'),
   clickNavLink: clickOnText('.tabs-header'),
   storyTitles: textList('[data-test-selector=story-tease-title]')
 });
