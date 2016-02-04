@@ -67,11 +67,12 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.wnycAPI = '//api.wnyc.org';
-    ENV.wnycAccountAPI = 'https://account.wnyc.org';
-    ENV.wnycEtagAPI = 'https://www.wnyc.org';
-    ENV.wnycStaticURL = 'http://media.wnyc.org/static';
-    ENV.wnycURL = 'http://www.wnyc.org';
+    // The following config properties will be injected by the Django app
+    //ENV.wnycAPI = '//api.wnyc.org';
+    //ENV.wnycAccountAPI = 'https://account.wnyc.org';
+    //ENV.wnycEtagAPI = 'https://www.wnyc.org';
+    //ENV.wnycStaticURL = 'http://media.wnyc.org/static';
+    //ENV.wnycURL = 'http://www.wnyc.org';
   }
 
   return ENV;

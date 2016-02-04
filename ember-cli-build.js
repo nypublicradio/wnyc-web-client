@@ -3,9 +3,11 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var mergeTrees = require('broccoli-merge-trees');
 var mv = require('broccoli-stew').mv;
 
+var env = EmberApp.env();
+
 module.exports = function(defaults) {
   var pubTrees = ['public'];
-  if (EmberApp.env() === 'development') {
+  if (env === 'development') {
     pubTrees.push(mv('docs', 'docs'));
   }
   var app = new EmberApp(defaults, {
@@ -14,7 +16,8 @@ module.exports = function(defaults) {
       public: mergeTrees(pubTrees)
     },
     fingerprint: {
-      enabled: false
+      enabled: env === 'production',
+      prepend: process.env.FINGERPRINT_PREPEND_URL
     },
     dotEnv: {
       clientAllowedKeys: ['GOOGLE_ANALYTICS'],

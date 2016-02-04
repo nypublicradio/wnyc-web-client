@@ -18,3 +18,4 @@ testem.log
 
 # keep production keys out of repo
 .env.production
+.env.deploy.*
