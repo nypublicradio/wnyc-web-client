@@ -89,7 +89,7 @@ export default Mixin.create({
   buildId(channelType, page) {
     const { slug } = this.paramsFor(channelType)
     const navSlug = this._getNavSlug(channelType)
-    const path = `${channelType}/${slug}/${navSlug ? `${navSlug}` : 'all_stories'}`
+    const path = `${channelType}/${slug}/${navSlug ? `${navSlug}` : 'recent_stories'}`
 
     return `${path}/${page}`
   },
