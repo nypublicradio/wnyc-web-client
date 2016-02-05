@@ -1,8 +1,6 @@
 import ApplicationSerializer from './application';
 
 export default ApplicationSerializer.extend({
-  include: ['stories'],
-
   typeKeyForModel(model) {
     // This is a Mirage serialization bug, the wrong serializer
     // is being used for 'story'.
