@@ -30,9 +30,9 @@ module.exports = function(deployTarget) {
     }
   };
 
-  //if (deployTarget === 'development') {
-    //ENV.build.environment = 'development';
-  //}
+  if (deployTarget === 'beta') {
+    ENV.redis.keyPrefix = 'beta:index';
+  }
 
   //if (deployTarget === 'staging') {
     //ENV.build.environment = 'production';
