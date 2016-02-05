@@ -1,3 +1,4 @@
+/* jshint node:true */
 /* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var mergeTrees = require('broccoli-merge-trees');
@@ -18,6 +19,9 @@ module.exports = function(defaults) {
     fingerprint: {
       enabled: env === 'production',
       prepend: process.env.FINGERPRINT_PREPEND_URL
+    },
+    sourcemaps: {
+      enabled: env === 'production',
     },
     dotEnv: {
       clientAllowedKeys: ['GOOGLE_ANALYTICS'],

@@ -38,9 +38,11 @@ module.exports = function(deployTarget) {
     //ENV.build.environment = 'production';
   //}
 
-  //if (deployTarget === 'production') {
-    //ENV.build.environment = 'production';
-  //}
+  if (deployTarget === 'production') {
+    // remove JS sourcemaps from production
+    ENV.s3.filePattern = '**/*.{js,css,png,gif,ico,jpg,xml,txt,svg,swf,eot,ttf,woff,woff2}';
+    // TODO: install and configure ember-cli-deploy-sentry
+  }
 
   return ENV;
 };
