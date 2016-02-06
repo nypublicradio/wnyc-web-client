@@ -53,6 +53,10 @@ export const runOnce = Object.freeze({
   'js/vendor/soundmanager2/v297a-20140901/soundmanager2.js': true,
   'js/lib/marionette/xd_player/core.js': true,
   'js/lib/marionette/xd_player/okra/core.js': true,
+  // from previous legacy loader commit
+  // TODO: test if we should only run these once
+  //'js/util.js': true,
+  //'js/lib/wnyc/jquery.js': true
 });
 
 import Ember from 'ember';
