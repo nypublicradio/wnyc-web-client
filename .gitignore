@@ -17,5 +17,5 @@ npm-debug.log
 testem.log
 
 # keep production keys out of repo
-.env.production
+.env
 .env.deploy.*

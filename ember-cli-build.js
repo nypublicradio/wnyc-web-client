@@ -24,13 +24,17 @@ module.exports = function(defaults) {
       enabled: env === 'production',
     },
     dotEnv: {
-      clientAllowedKeys: ['GOOGLE_ANALYTICS'],
-      path: {
-        development: './.env',
-        production: './.env.production',
-        test: './.env.test'
-      }
+      clientAllowedKeys: [
+        'GOOGLE_ANALYTICS',
+        'GOOGLE_API_V3_KEY',
+        'WNYC_API',
+        'WNYC_ACCOUNT_API',
+        'WNYC_ETAG_API',
+        'WNYC_STATIC_URL',
+        'WNYC_URL',
+      ],
     },
+    storeConfigInMeta: EmberApp.env() !== 'development',
 
     // This project's in-repo addon configuration confuses Mirage and makes it
     // think we are distributing this project as an addon. Because of this it assumes

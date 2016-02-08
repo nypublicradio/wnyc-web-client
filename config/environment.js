@@ -6,7 +6,6 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
-    googleAnalyticsKey: process.env.GOOGLE_ANALYTICS,
     metricsAdapters: [],
     EmberENV: {
       FEATURES: {
@@ -21,9 +20,13 @@ module.exports = function(environment) {
     },
 
     renderGoogleAds: true,
-    googleAPIv3Key: 'AIzaSyCDbxxvbl0Zj6af28IfWjJ-S0SKxwDXnkc',
-    wnycURL: 'http://dev.wnyc.net:4568',
-    wnycStaticURL: '/static',
+    googleAPIv3Key: process.env.GOOGLE_API_V3_KEY,
+    googleAnalyticsKey: process.env.GOOGLE_ANALYTICS,
+    wnycAPI: process.env.WNYC_API,
+    wnycAccountAPI: process.env.WNYC_ACCOUNT_API,
+    wnycEtagAPI: process.env.WNYC_ETAG_API,
+    wnycStaticURL: process.env.WNYC_STATIC_URL,
+    wnycURL: process.env.WNYC_URL,
     featureFlags: {
       'django-page-routing': false,
       'persistent-player': false
@@ -38,10 +41,6 @@ module.exports = function(environment) {
       'frame-src': "'self' *"
     }
   };
-
-  ENV.wnycAPI = ENV.wnycURL;
-  ENV.wnycAccountAPI = ENV.wnycURL;
-  ENV.wnycEtagAPI = ENV.wnycURL;
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
@@ -67,12 +66,6 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    // The following config properties will be injected by the Django app
-    //ENV.wnycAPI = '//api.wnyc.org';
-    //ENV.wnycAccountAPI = 'https://account.wnyc.org';
-    //ENV.wnycEtagAPI = 'https://www.wnyc.org';
-    //ENV.wnycStaticURL = 'http://media.wnyc.org/static';
-    //ENV.wnycURL = 'http://www.wnyc.org';
   }
 
   return ENV;
