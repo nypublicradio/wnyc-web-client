@@ -21,7 +21,7 @@ module.exports = function(defaults) {
       prepend: process.env.FINGERPRINT_PREPEND_URL
     },
     sourcemaps: {
-      enabled: env === 'production',
+      enabled: true,
     },
     dotEnv: {
       clientAllowedKeys: [

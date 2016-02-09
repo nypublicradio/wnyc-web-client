@@ -10,6 +10,7 @@ import fetch from 'fetch';
 import Ember from 'ember';
 import { mangleJavascript } from '../lib/compat-hooks';
 const { Promise } = Ember.RSVP;
+import ENV from '../config/environment';
 
 export default Ember.Service.extend({
   asyncWriter: Ember.inject.service(),
@@ -75,7 +76,7 @@ function canonicalize(url) {
 // In order to fetch all the scripts via XHR without tripping CORs
 // violations, we are proxying them through our own server.
 function scriptURL(tag) {
-  let origin = location.protocol + '//' + location.host;
+  let origin = ENV.wnycURL;
   let url = canonicalize(tag.attributes.src.value);
   if (url.indexOf(origin) === 0) {
     return url;
