@@ -53,7 +53,8 @@ export default Ember.Component.extend({
 
   click(event) {
     let target = $(event.target).closest('a');
-    if (target.length > 0) {
+    let href = target.attr('href');
+    if (target.length > 0 && href && href[0] !== '#') {
       let router = this.get('router');
       let href = new URL(target.attr('href'), new URL(this.get('page.id'), wnycURL).toString()).toString();
       if (href.indexOf(wnycURL) === 0) {
