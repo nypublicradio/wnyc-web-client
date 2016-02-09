@@ -18,7 +18,8 @@ module.exports = function(deployTarget) {
     },
 
     redis: {
-      filePattern: 'index.json'
+      filePattern: 'index.json',
+      allowOverwrite: true
     },
 
     'ssh-tunnel': {
@@ -30,8 +31,8 @@ module.exports = function(deployTarget) {
     }
   };
 
-  if (deployTarget === 'beta') {
-    ENV.redis.keyPrefix = 'beta:index';
+  if (deployTarget === 'demo') {
+    ENV.pipeline = { activateOnDeploy: true  };
   }
 
   //if (deployTarget === 'staging') {
