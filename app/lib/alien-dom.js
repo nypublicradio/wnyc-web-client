@@ -18,7 +18,7 @@ export function isInDom(id) {
 // no-op after one run.
 export function clearAlienDom() {
   let notEmber = document.querySelectorAll('body > :not(.ember-view)');
-  Array.from(notEmber).forEach(n => n.remove());
+  Array.from(notEmber).forEach(n => n.parentNode.removeChild(n));
   document.removeEventListener('click', alienEventListener);
 }
 
