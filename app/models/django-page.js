@@ -100,7 +100,7 @@ export default DS.Model.extend({
         // rendered output (we only output the contents of body, since
         // it doesn't make sense to add a new head to the existing
         // page).
-        body.appendChild(script);
+        body.appendChild(importNode(script));
       }
     });
 
