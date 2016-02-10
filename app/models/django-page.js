@@ -36,7 +36,7 @@ export default DS.Model.extend({
     let json;
     if (tag) {
       try {
-        json = JSON.parse(tag.innerText);
+        json = JSON.parse(tag.textContent);
       } catch(err) {}
     }
     if (json) {
@@ -54,7 +54,7 @@ export default DS.Model.extend({
 
     if (channel) {
       try {
-        json = JSON.parse(channel.innerText);
+        json = JSON.parse(channel.textContent);
       } catch(err) {}
       if (json) {
         return this.store.push(channelSerializer.normalizeResponse(this.store, channelModel, json[id], id));
