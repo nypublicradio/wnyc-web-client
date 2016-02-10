@@ -32,7 +32,7 @@ export default Ember.Service.extend({
         Array.from(node.querySelectorAll('script')).forEach(script => {
           if (isJavascript(script)) {
             scripts.push(script);
-            script.remove();
+            script.parentNode.removeChild(script);
           }
         });
         nonscripts.push(node);
