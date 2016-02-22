@@ -42,7 +42,9 @@
     {{#if item.audioEventually}}
     {{#if item.audioAvailable}}
     <div class="btn-group">
-      {{listen-button itemPK=item.id itemTitle=item.title duration=item.audioDurationReadable}}
+      <button aria-label="Listen to {{item.title}}" class="btn btn--blue js-listen" data-id="{{item.id}}" data-category="Listen">
+          <i class="fa fa-play icon--prefix--large"></i>Listen <span class="text--small dimmed">{{item.audioDurationReadable}}</span>
+      </button>
       <button aria-label="Add {{item.title}} to Your Queue" class="btn btn--graytext hide-on-mobile js-queue" data-id="{{item.id}}" data-category="Queue">
           <i class="fa fa-plus icon--prefix"></i>Queue
       </button>
