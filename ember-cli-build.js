@@ -44,6 +44,7 @@ module.exports = function(defaults) {
     'ember-cli-mirage': { directory: defaults.project.root + '/mirage' }
   });
 
+  app.import('vendor/polyfills/url.js');
   app.import('bower_components/moment/moment.js');
 
   // This is here so that legacy JS within our content pages can share
