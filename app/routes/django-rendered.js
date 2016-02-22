@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  model({ upstream_url }, transition) {
+  model({ upstream_url }/*, transition*/) {
     // This adds trailing slashes, because the server's redirect
     // doesn't otherwise work correctly due to the proxying I'm using
     // in development (which is neeeded due to CORs).
