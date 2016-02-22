@@ -29,7 +29,8 @@ module.exports = function(environment) {
     wnycURL: process.env.WNYC_URL,
     featureFlags: {
       'django-page-routing': false,
-      'persistent-player': false
+      'persistent-player': false,
+      'embedded-components': false
     },
     contentSecurityPolicy: {
       'connect-src': "'self' *.wnyc.net:* ws://*.wnyc.net:*",
