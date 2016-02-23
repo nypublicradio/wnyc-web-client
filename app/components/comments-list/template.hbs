@@ -14,7 +14,7 @@
         <div class="text text--prewrap">{{{comment.comment}}}</div>
 
         <div class="l-split flush">
-            <div class="dimmed">{{comment.publishDate}}</div>
+            <div class="dimmed">{{moment-format comment.publishDate 'MMM D, YYYY, h:mm A'}}</div>
 
             {{#if user.isStaff}}
                 {{comments-admin id=comment.id browserId=browserId}}
