@@ -43,13 +43,8 @@ export function beforeAppend(element /*, page */) {
 // pages is run through this before executing. You can return non-true
 // to cancel the entire script.
 export function mangleJavascript(scriptTag, sourceCode) {
-  if (/localstorage/.test(scriptTag.getAttribute('src')) || 
-      /web_player_controller/.test(scriptTag.getAttribute('src'))) {
-    return sourceCode.replace(/typeof define/, 'typeof foo');
-  }
   // TODO: I see in the mako templates that this is already disabled
   // in overhaul mode. Need to discuss with Brian.
   let source = sourceCode.replace('.pubads().enableSyncRendering()', '');
-  source = source.replace(/Okra\.execute\('displayPlayer'\);/, '');
   return source;
 }
