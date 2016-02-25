@@ -28,7 +28,7 @@ module.exports = function(defaults) {
         'GOOGLE_ANALYTICS',
         'GOOGLE_API_V3_KEY',
         'WNYC_API',
-        'WNYC_ACCOUNT_API',
+        'WNYC_ACCOUNT_ROOT',
         'WNYC_ETAG_API',
         'WNYC_STATIC_URL',
         'WNYC_URL',

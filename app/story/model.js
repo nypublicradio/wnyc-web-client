@@ -45,6 +45,6 @@ export default Model.extend({
     if (browserId) {
       data.id = browserId;
     }
-    return `${ENV.wnycAccountAPI}/comments/security_info/?${Ember.$.param(data)}`;
+    return `${ENV.wnycAccountRoot}/comments/security_info/?${Ember.$.param(data)}`;
   }
 });

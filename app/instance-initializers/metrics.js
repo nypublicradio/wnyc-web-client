@@ -2,7 +2,7 @@ import ENV from '../config/environment';
 
 const {
   googleAnalyticsKey: id,
-  wnycAccountAPI
+  wnycAccountRoot
 } = ENV;
 
 export function initialize(applicationInstance) {
@@ -18,7 +18,7 @@ export function initialize(applicationInstance) {
   metrics.activateAdapters([{
     name: 'DataWarehouse',
     config: {
-      host: wnycAccountAPI,
+      host: wnycAccountRoot,
       endpoint: endpoint,
       debug: /alertTracking/.test(window.location.search)
     }
