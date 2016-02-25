@@ -4,7 +4,7 @@ import Ember from 'ember';
 export default Service.extend({
   install() {
     window.addEventListener('message', this._resizeLeaderboard);
-    googletag.cmd.push(() => googletag.pubads().addEventListener('slotRenderEnded', this.adSpaceCleanup));
+    window.googletag.cmd.push(() => googletag.pubads().addEventListener('slotRenderEnded', this.adSpaceCleanup));
   },
   adSpaceCleanup(e) {
     if (/leaderboard/.test(e.slot.getAdUnitPath())) {

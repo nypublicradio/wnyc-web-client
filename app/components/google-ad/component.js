@@ -5,6 +5,7 @@ import ENV from 'overhaul/config/environment';
 const {
   get,
   set,
+  run,
   Component
 } = Ember;
 
@@ -12,7 +13,6 @@ export default Component.extend({
   router: service('-routing'),
 
   init() {
-    const { googletag } = window;
     this._super(...arguments);
 
     if (ENV.renderGoogleAds) {
