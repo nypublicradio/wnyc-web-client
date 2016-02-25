@@ -2,6 +2,7 @@ import Ember from 'ember';
 import ENV from 'overhaul/config/environment';
 
 export default Ember.Component.extend({
+  cmsUrl: ENV.wnycAccountRoot,
   actions: {
     featureMe() {
       let id = this.get('id');
