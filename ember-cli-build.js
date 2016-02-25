@@ -64,6 +64,7 @@ module.exports = function(defaults) {
   app.import('vendor/wnyc-legacy/lib/wnyc/jquery.js');
   app.import('vendor/wnyc-legacy/lib/jquery/jquery.ba-postmessage.js');
   app.import('vendor/wnyc-legacy/lib/jquery/jquery.xdr.js');
+  app.import('vendor/wnyc-legacy/lib/jquery/browserWarn.js');
 
   return app.toTree();
 };
