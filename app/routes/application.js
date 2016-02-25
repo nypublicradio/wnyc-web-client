@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import ENV from 'overhaul/config/environment';
 import {installBridge} from '../lib/okra-bridge';
 
 export default Ember.Route.extend({
@@ -8,7 +9,9 @@ export default Ember.Route.extend({
 
   beforeModel() {
     this.get('asyncWriter').install();
-    this.get('leaderboard').install();
+    if (ENV.renderGoogleAds) {
+      this.get('leaderboard').install();
+    }
 
     window.WNYC_LEGACY_LOADER = this.get('legacyLoader');
     window.WNYC_LEGACY_LOADER.define('installBridge', installBridge);
