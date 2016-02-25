@@ -4,6 +4,17 @@ import Ember from 'ember';
 export default Service.extend({
   install() {
     window.addEventListener('message', this._resizeLeaderboard);
+    googletag.cmd.push(() => googletag.pubads().addEventListener('slotRenderEnded', this.adSpaceCleanup));
+  },
+  adSpaceCleanup(e) {
+    if (/leaderboard/.test(e.slot.getAdUnitPath())) {
+      // TODO: use classes to manage this after all ads are migrated to ember
+      if (e.isEmpty) {
+        Ember.$('#leaderboard').css({'margin-top': -20, 'max-height': 0});
+      } else {
+        Ember.$('#leaderboard').css({'margin-top': 0, 'max-height': 90});
+      }
+    }
   },
   _resizeLeaderboard(e) {
     let data;
