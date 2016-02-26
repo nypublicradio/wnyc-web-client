@@ -9,6 +9,7 @@ const { hash: waitFor } = Ember.RSVP;
 
 export default Route.extend({
   listRouter: service(),
+  metrics: service(),
 
   model(params) {
     const channelType = this.routeName;
@@ -24,7 +25,13 @@ export default Route.extend({
   afterModel({ channel }) {
     const listRouter = get(this, 'listRouter');
     const channelTitle = get(channel, 'title');
+    const metrics = get(this, 'metrics');
+
     set(listRouter, 'channelTitle', channelTitle);
+    metrics.trackEvent({
+      category: `Viewed ${get(channel, 'listingObjectType').capitalize()}`,
+      action: channelTitle
+    });
   },
   setupController(controller) {
     this._super(...arguments);

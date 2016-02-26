@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 import ENV from '../config/environment';
+import parseAnalyticsCode from '../utils/analytics-code-parser';
 const { attr, Model } = DS;
 const { computed, get } = Ember;
 
@@ -30,6 +31,7 @@ export default Model.extend({
   title: attr('string'),
   url: attr('string'),
   extendedStory: attr(),
+
   escapedBody: computed('extendedStory.body', {
     get() {
       let body = get(this, 'extendedStory.body');
@@ -46,5 +48,24 @@ export default Model.extend({
       data.id = browserId;
     }
     return `${ENV.wnycAccountRoot}/comments/security_info/?${Ember.$.param(data)}`;
-  }
+  },
+  analytics: computed('analyticsCode', {
+    get() {
+      let analyticsCode = get(this, 'analyticsCode');
+      let {channelslug, showslug, seriesslugs} = parseAnalyticsCode(analyticsCode);
+      let gaAction = [channelslug, showslug, seriesslugs].map((c, i) => {
+        if (i === 0 && c) {
+          return `Article Channel: ${c} `;
+        } else if (i === 1 && c) {
+          return `Show: ${c}`;
+        } else if (i === 2 && c.length) {
+          return `Series: ${c.join('+')}`;
+        }
+      }).compact().join(' | ');
+      return {
+        gaAction,
+        gaLabel: get(this, 'title')
+      };
+    }
+  })
 });
