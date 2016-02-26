@@ -44,46 +44,6 @@ export default Metrics.extend({
     });
   },
 
-  trackStory(story) {
-    const showTitle = get(story, 'headers.brand.title');
-    const storyTitle = get(story, 'title');
-    const analyticsObject = this.parseAnalyticsCode(get(story, 'analyticsCode'));
-    const router = get(this, 'router');
-    const currentChannel = router.get('currentState.routerJsState.params.channel.channel');
-
-    this.trackEvent({
-      category: 'Web Page',
-      action: `Viewed Story of Show "${showTitle}"`,
-      label: storyTitle
-    });
-
-    if (analyticsObject.seriesslugs) {
-      analyticsObject.seriesslugs.forEach(s => {
-        if (currentChannel === s) {
-          this.trackEvent({
-            category: 'Web Page',
-            action: `Viewed Story in Series "${s}"`,
-            label: storyTitle
-          });
-        }
-      });
-    }
-
-    if (analyticsObject.haschannel) {
-      analyticsObject.channelslugs.forEach(s => {
-        if (currentChannel === s) {
-          this.trackEvent({
-            category: 'Web Page',
-            action: `Viewed Story in Channel "${s}"`,
-            label: storyTitle
-          });
-        }
-      });
-    }
-
-    run.later(this, () => window.location = get(story, 'url'), 100);
-  },
-
   trackProvenance(e) {
     var TARGET_PROVENANCES = [
         'related',

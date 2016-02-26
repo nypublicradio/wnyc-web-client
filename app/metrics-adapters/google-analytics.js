@@ -10,13 +10,6 @@ const {
 export default GoogleAnalytics.extend({
   init() {
     this._super(...arguments);
-
-    // TODO: will there be analytics for overlays? overlays on listing pages?
-    // if (window.overlay_iframe_obj && window.overlay_iframe_obj.opt
-    // && !window.overlay_iframe_obj.opt.googletrackcode) {
-    //   //see media/js/lib/wnyc/overlay/
-    //   window.overlay_iframe_obj.opt.googletrackcode = trackCode;
-    // }
     listen("wnyc.user.success", this.identify);
   },
   identify() {
@@ -24,7 +17,7 @@ export default GoogleAnalytics.extend({
       isLoggedIn = userData && !!userData.isAuthenticated;
     // TODO: need to figure out new GA equivalent of this:
     // _gaq.push(['_setCustomVar', 1, 'User.LoggedIn', isLoggedIn]);
-    window.ga('set', 'dimension1', isLoggedIn); // maybe??
+    window.ga('set', 'dimension1', String(isLoggedIn)); // maybe??
   },
 
   trackEvent(data) {
@@ -40,17 +33,6 @@ export default GoogleAnalytics.extend({
 
   // TODO: start sending through anatlyics bytestrings to listing objects
   _experimentalSend(data) {
-    var analyticsCode = data.label,
-      m = String(analyticsCode).match(/(\$A\d)\$AD\d+(\$V\d).*(\$M\w).*(\$S[^$]+)/);
-    if (m) {
-      // TODO: figure out new analytics equivalent of this:
-      //custom variables can only be up to 5.  #1 is for is_logged_in
-      // var pageAction = 3;
-      // _gaq.push(['_setCustomVar', 2, 'audiovideo', m[1] + m[2], pageAction]);
-      // _gaq.push(['_setCustomVar', 3, 'model', m[3], pageAction]);
-      // _gaq.push(['_setCustomVar', 4, 'channels', m[4], pageAction]);
-    }
-
     // EXPERIMENTAL
     data.category = 'Experimental: ' + data.category;
     // EXPERIMENTAL

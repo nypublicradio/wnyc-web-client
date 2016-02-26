@@ -21,9 +21,6 @@ export default Mixin.create({
       const page = document.location.pathname; // e.g. '/shows/bl/'
       const title = document.title; // this should be something dynamic
 
-      // TODO: assess what should be sent for listing views for trackPage events
-      // TODO: story items send 'Web Page' to GA/DW as the category, but pledge
-      // sends _trackPageview as the cateogry to DW. how to resolve
       metrics.trackPage({ page, title });
     });
   },
