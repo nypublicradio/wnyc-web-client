@@ -2,11 +2,12 @@ import Ember from 'ember';
 import ENV from 'overhaul/config/environment';
 
 export default Ember.Component.extend({
+  cmsUrl: ENV.wnycAccountRoot,
   actions: {
     featureMe() {
       let id = this.get('id');
       let browserId = this.get('browserId');
-      let url = `${ENV.wnycAccountAPI}/comments/adminflag/?bust_cache=${Math.random()}&id=${browserId}`;
+      let url = `${ENV.wnycAccountRoot}/comments/adminflag/?bust_cache=${Math.random()}&id=${browserId}`;
 
       let options = {
         type: 'POST',

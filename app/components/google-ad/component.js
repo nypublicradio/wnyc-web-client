@@ -1,6 +1,7 @@
+/*global wnyc*/
 import Ember from 'ember';
 import service from 'ember-service/inject';
-import config from 'overhaul/config/environment';
+import ENV from 'overhaul/config/environment';
 const {
   get,
   set,
@@ -14,16 +15,9 @@ export default Component.extend({
   init() {
     this._super(...arguments);
 
-    if (config.renderGoogleAds) {
+    if (ENV.renderGoogleAds) {
       let router = get(this, 'router.router');
       router.on('didTransition', () => this.doRefresh());
-      run.later(this, 'adSpaceCleanup', { hasMarquee: get(this, 'hasMarquee') }, 2000);
-    }
-  },
-
-  adSpaceCleanup(arg) {
-    if(arg.hasMarquee && Ember.$('#leaderboard').css('display') === 'none') {
-        Ember.$(this.element).css({'margin-top': '-20px'});
     }
   },
 
@@ -41,7 +35,7 @@ export default Component.extend({
         run.schedule('afterRender', this, () => {
           googletag.cmd.push(() => {
             const ad = get(this, 'ad');
-            const adSlot = window.wnyc.ads[ad];
+            const adSlot = wnyc.ads[ad];
             googletag.pubads().refresh([adSlot]);
           });
           set(this, 'cachedUrl', currentUrl);

@@ -28,7 +28,7 @@ module.exports = function(defaults) {
         'GOOGLE_ANALYTICS',
         'GOOGLE_API_V3_KEY',
         'WNYC_API',
-        'WNYC_ACCOUNT_API',
+        'WNYC_ACCOUNT_ROOT',
         'WNYC_ETAG_API',
         'WNYC_STATIC_URL',
         'WNYC_URL',
@@ -44,6 +44,7 @@ module.exports = function(defaults) {
     'ember-cli-mirage': { directory: defaults.project.root + '/mirage' }
   });
 
+  app.import('vendor/polyfills/url.js');
   app.import('bower_components/moment/moment.js');
 
   // This is here so that legacy JS within our content pages can share
@@ -63,6 +64,7 @@ module.exports = function(defaults) {
   app.import('vendor/wnyc-legacy/lib/wnyc/jquery.js');
   app.import('vendor/wnyc-legacy/lib/jquery/jquery.ba-postmessage.js');
   app.import('vendor/wnyc-legacy/lib/jquery/jquery.xdr.js');
+  app.import('vendor/wnyc-legacy/lib/jquery/browserWarn.js');
 
   return app.toTree();
 };

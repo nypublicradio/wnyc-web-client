@@ -20,16 +20,18 @@ module.exports = function(environment) {
     },
 
     renderGoogleAds: true,
+    // these are provided via a .env file or else by Django's EmberAdapter
     googleAPIv3Key: process.env.GOOGLE_API_V3_KEY,
     googleAnalyticsKey: process.env.GOOGLE_ANALYTICS,
     wnycAPI: process.env.WNYC_API,
-    wnycAccountAPI: process.env.WNYC_ACCOUNT_API,
+    wnycAccountRoot: process.env.WNYC_ACCOUNT_ROOT,
     wnycEtagAPI: process.env.WNYC_ETAG_API,
     wnycStaticURL: process.env.WNYC_STATIC_URL,
     wnycURL: process.env.WNYC_URL,
     featureFlags: {
       'django-page-routing': false,
-      'persistent-player': false
+      'persistent-player': false,
+      'embedded-components': false
     },
     contentSecurityPolicy: {
       'connect-src': "'self' *.wnyc.net:* ws://*.wnyc.net:*",

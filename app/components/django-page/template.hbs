@@ -5,9 +5,11 @@
 
 {{#if showingOverlay}}
   {{yield}}
-  {{#each page.embeddedEmberComponents as |ec|}}
-    {{#ember-wormhole to=ec.id replaceDestination=true}}
-      {{component ec.componentName embeddedAttrs=ec.args}}
-    {{/ember-wormhole}}
-  {{/each}}
+  {{#if features.embeddedComponents}}
+    {{#each page.embeddedEmberComponents as |ec|}}
+      {{#ember-wormhole to=ec.id replaceDestination=true}}
+        {{component ec.componentName embeddedAttrs=ec.args}}
+      {{/ember-wormhole}}
+    {{/each}}
+  {{/if}}
 {{/if}}

@@ -51,7 +51,7 @@ export default Ember.Component.extend({
       }
       let data = this.$().serialize();
       this.auth.then(({ security_hash, timestamp }) => {
-        let url = `${ENV.wnycAccountAPI}/comments/post/?bust_cache=${Math.random()}&id=${this.get('browserId')}`;
+        let url = `${ENV.wnycAccountRoot}/comments/post/?bust_cache=${Math.random()}&id=${this.get('browserId')}`;
         let story = this.get('story');
         let metaData = {
           content_type: 'cms.' + story.get('itemType'),

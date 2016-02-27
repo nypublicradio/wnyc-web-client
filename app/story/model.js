@@ -2,6 +2,7 @@ import Ember from 'ember';
 import DS from 'ember-data';
 import ENV from '../config/environment';
 const { attr, Model } = DS;
+const { computed, get } = Ember;
 
 
 export default Model.extend({
@@ -29,6 +30,12 @@ export default Model.extend({
   title: attr('string'),
   url: attr('string'),
   extendedStory: attr(),
+  escapedBody: computed('extendedStory.body', {
+    get() {
+      let body = get(this, 'extendedStory.body');
+      return body.replace(/\\x3C\/script>/g, '</script>');
+    }
+  }),
   commentSecurityURL(browserId) {
     let data = {
       content_type: 'cms.' + this.get('itemType'),
@@ -38,6 +45,6 @@ export default Model.extend({
     if (browserId) {
       data.id = browserId;
     }
-    return `${ENV.wnycAccountAPI}/comments/security_info/?${Ember.$.param(data)}`;
+    return `${ENV.wnycAccountRoot}/comments/security_info/?${Ember.$.param(data)}`;
   }
 });
