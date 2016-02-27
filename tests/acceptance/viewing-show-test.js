@@ -15,12 +15,7 @@ moduleForAcceptance('Acceptance | viewing show', {
 });
 
 test('visiting a show - smoke test', function(assert) {
-  let showAttrs = server.build('show', {
-    id: 'shows/show-slug/',
-    linkroll: [
-      { "href": null, "navSlug": "episodes", "title": "Episodes" }
-    ]
-  });
+  let showAttrs = server.create('show', { id: 'shows/show-slug/' });
 
   bootstrapChannelHTML(showAttrs);
 
@@ -32,7 +27,7 @@ test('visiting a show - smoke test', function(assert) {
 });
 
 test('using a nav-link', function(assert) {
-  let showAttrs = server.build('show', {
+  let showAttrs = server.create('show', {
     id: 'shows/show-slug/',
     linkroll: [
       {"href": null, "navSlug": "episodes", "title": "Episodes"},
@@ -56,22 +51,16 @@ test('using a nav-link', function(assert) {
 });
 
 
-function bootstrapChannelHTML(showAttrs) {
+function bootstrapChannelHTML(show) {
   appendHTML(`
-    <script type="text/x-wnyc-marker" data-url="${showAttrs.id}"></script>
+    <script type="text/x-wnyc-marker" data-url="${show.id}"></script>
   `);
 
   // Create server models
   let apiResponse = server.create('api-response', {
-    id: `${showAttrs.id}${showAttrs.linkroll[0].navSlug}/1`
+    id: `${show.id}${show.linkroll[0].navSlug}/1`
   });
   let story = server.create('story', { apiResponseId: apiResponse.id });
-  let show = server.create('show', showAttrs);
-
-  // TODO: We're missing a relationship between channel and api-response. How
-  // does the server know what to send? Even if this is an unusual query we
-  // should docuement our understanding in the `included` hook of the Mirage
-  // Channel Serializer and then remove this code.
 
   let serializedShow = serialize(server.schema.find('show', show.id));
   let serializedApiResponse = serialize(server.schema.find('apiResponse', apiResponse.id));
@@ -84,7 +73,7 @@ function bootstrapChannelHTML(showAttrs) {
 
   appendHTML(`
     <script id="wnyc-channel-jsonapi" type="application/vnd.api+json">
-      ${JSON.stringify({[showAttrs.id]: serializedShow })}
+      ${JSON.stringify({[show.id]: serializedShow })}
     </script>
   `);
 }
