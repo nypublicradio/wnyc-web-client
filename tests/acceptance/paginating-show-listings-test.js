@@ -1,7 +1,7 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
-import serialize from 'overhaul/mirage/utils/serialize';
 import showPage from 'overhaul/tests/pages/show';
+import serialize from 'overhaul/mirage/utils/serialize';
 import { appendHTML, resetHTML } from 'overhaul/tests/helpers/html';
 
 moduleForAcceptance('Acceptance | paginating show listings', {
@@ -15,21 +15,9 @@ moduleForAcceptance('Acceptance | paginating show listings', {
 });
 
 test('showing pagination for a list of episodes', function(assert) {
-  let show = server.create('show', {
-    id: 'shows/show-slug/',
-    linkroll: [
-      {"href": null, "navSlug": "episodes", "title": "Episodes"}
-    ]
-  });
+  let show = server.create('show');
 
-  let apiResponse = server.create('api-response', {
-    id: 'shows/show-slug/episodes/1',
-    totalCount: 11
-  });
-
-  server.createList('story', 5, { apiResponseId: apiResponse.id });
-
-  bootstrapChannelHTML(show, apiResponse);
+  bootstrapChannelHTML(show);
 
   showPage.visit(show);
 
@@ -38,19 +26,13 @@ test('showing pagination for a list of episodes', function(assert) {
   });
 });
 
-function bootstrapChannelHTML(show, apiResponse) {
+function bootstrapChannelHTML(show) {
+  let showModel = server.schema.show.find(show.id);
+  let serializedShow = serialize(showModel);
+
   appendHTML(`
     <script type="text/x-wnyc-marker" data-url="${show.id}"></script>
   `);
-
-  let showModel = server.schema.show.find(show.id);
-  let serializedShow = serialize(showModel);
-  let apiResponseModel = server.schema.apiResponse.find(apiResponse.id);
-
-  serializedShow.included = [
-    serialize(apiResponseModel).data,
-    ...apiResponseModel.teaseList.map((s) => serialize(s).data)
-  ];
 
   appendHTML(`
     <script id="wnyc-channel-jsonapi" type="application/vnd.api+json">

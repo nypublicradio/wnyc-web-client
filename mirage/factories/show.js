@@ -1,10 +1,10 @@
 import { Factory } from 'ember-cli-mirage';
 
 export default Factory.extend({
-  id(i) {
-    return `shows/show-slug-${i}/`;
+  id(id) {
+    return `shows/${this.firstPage}-${id}/`;
   },
-
+  firstPage: 'list',
   linkroll() {
     return [
       {"href":null,"navSlug":"episodes","title":"Episodes"}
