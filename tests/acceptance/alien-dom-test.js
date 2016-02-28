@@ -2,17 +2,18 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import {
   appendHTML,
-  resetHTML,
-  alienDOMMarker } from 'overhaul/tests/helpers/html';
+  resetHTML 
+} from 'overhaul/tests/helpers/html';
 
 moduleForAcceptance('django-page leaves alien dom alone', {
   afterEach() {
     resetHTML();
   }
 });
+
 test('on homepage', function(assert) {
   let homePage = server.create('django-page', {id: '/'});
-  appendHtml(homePage.text);
+  appendHTML(homePage.text);
 
   visit('/');
   andThen(function() {
@@ -23,8 +24,9 @@ test('on homepage', function(assert) {
 });
 
 test('on a search page with a query', function(assert) {
-  let search = server.create('django-page', {id: 'search/?q=foo'});
-  appendHtml(search.text);
+  // django will only append the path, not the query string
+  let search = server.create('django-page', {id: 'search/'});
+  appendHTML(search.text);
 
   visit('search/?q=foo');
   andThen(function() {
