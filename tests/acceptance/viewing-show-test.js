@@ -15,35 +15,37 @@ moduleForAcceptance('Acceptance | viewing show', {
 });
 
 test('visiting a show - smoke test', function(assert) {
-  let showAttrs = server.create('show', { id: 'shows/show-slug/' });
+  let show = server.create('show');
 
-  bootstrapChannelHTML(showAttrs);
+  bootstrapChannelHTML(show);
 
-  showPage.visit(showAttrs);
+  showPage.visit(show);
 
   andThen(function() {
-    assert.equal(currentURL(), '/shows/show-slug/');
+    assert.equal(currentURL(), `/${show.id}`);
   });
 });
 
 test('using a nav-link', function(assert) {
-  let showAttrs = server.create('show', {
-    id: 'shows/show-slug/',
+  let show = server.create('show', {
     linkroll: [
       {"href": null, "navSlug": "episodes", "title": "Episodes"},
       {"href": null, "navSlug": "next-link", "title": "Next Link"}
     ]
   });
 
-  let apiResponse = server.create('api-response', { id: 'shows/show-slug/next-link/1' });
-  server.create('story', {
-    apiResponseId: apiResponse.id,
+  let story = server.create('story', {
     title: "Story Title"
   });
 
-  bootstrapChannelHTML(showAttrs);
+  server.create('api-response', {
+    id: `${show.id}${show.linkroll[1].navSlug}/1`,
+    teaseList: [server.schema.story.find(story.id)]
+  });
 
-  showPage.visit(showAttrs).clickNavLink('Next Link');
+  bootstrapChannelHTML(show);
+
+  showPage.visit(show).clickNavLink('Next Link');
 
   andThen(() => {
     assert.deepEqual(showPage.storyTitles(), ["Story Title"]);
@@ -52,24 +54,12 @@ test('using a nav-link', function(assert) {
 
 
 function bootstrapChannelHTML(show) {
+  let showModel = server.schema.show.find(show.id);
+  let serializedShow = serialize(showModel);
+
   appendHTML(`
     <script type="text/x-wnyc-marker" data-url="${show.id}"></script>
   `);
-
-  // Create server models
-  let apiResponse = server.create('api-response', {
-    id: `${show.id}${show.linkroll[0].navSlug}/1`
-  });
-  let story = server.create('story', { apiResponseId: apiResponse.id });
-
-  let serializedShow = serialize(server.schema.find('show', show.id));
-  let serializedApiResponse = serialize(server.schema.find('apiResponse', apiResponse.id));
-  let serializedStory = serialize(server.schema.find('story', story.id));
-
-  serializedShow.included = [
-    serializedApiResponse.data,
-    serializedStory.data
-  ];
 
   appendHTML(`
     <script id="wnyc-channel-jsonapi" type="application/vnd.api+json">
