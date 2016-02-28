@@ -7,8 +7,6 @@ const {
 } = Ember;
 
 export default DS.Model.extend({
-  wellContent: DS.belongsTo('api-response', {async: false}),
-
   title: DS.attr('string'),
   about: DS.belongsTo('api-response', {async: false}),
 
