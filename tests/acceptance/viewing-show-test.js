@@ -25,6 +25,30 @@ test('visiting a show - listing smoke test', function(assert) {
   });
 });
 
+test('visting a show - about smoke test', function(assert) {
+  let show = server.create('show', {firstPage: 'about'});
+
+  showPage
+    .bootstrap(show)
+    .visit(show);
+
+  andThen(function() {
+    assert.equal(showPage.aboutText(), 'About');
+  });
+});
+
+test('visiting a show - story page smoke test', function(assert) {
+  let show = server.create('show', {firstPage: 'story'});
+
+  showPage
+    .bootstrap(show)
+    .visit(show);
+
+  andThen(() => {
+    assert.equal(showPage.storyText(), 'Story body.');
+  });
+});
+
 test('using a nav-link', function(assert) {
   let show = server.create('show', {
     linkroll: [
