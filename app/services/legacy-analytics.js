@@ -7,22 +7,26 @@ const {
   run
 } = Ember;
 
-const BASIC_SELECTORS = '.js-track-links';
+const MENU_SELECTORS = '#navigation-menu';
 const HOMEPAGE_SELECTORS = '#wnyc_home a[href^=http], #wnyc_home a.external-link';
 const SHARE_SELECTORS = '.js-share';
+
+function contains(selector, target) {
+  let results = $(target).closest(selector);
+  return !!results.length;
+}
 
 export default Service.extend({
   metrics: service(),
 
   dispatch(e) {
-    let { target } = e;
-    let link = $(target).closest('a')[0];
+    let {target} = e;
 
-    if (Array.from(document.querySelectorAll(BASIC_SELECTORS)).contains(link)) {
+    if (contains(MENU_SELECTORS, target)) {
       this._trackMenu(e);
-    } else if (Array.from(document.querySelectorAll(HOMEPAGE_SELECTORS)).contains(link)) {
+    } else if (contains(HOMEPAGE_SELECTORS, target)) {
       this._trackHomepage(e);
-    } else if (Array.from(document.querySelectorAll(SHARE_SELECTORS)).contains(link)) {
+    } else if (contains(SHARE_SELECTORS, target)) {
       this._trackShare(e);
     }
   },
