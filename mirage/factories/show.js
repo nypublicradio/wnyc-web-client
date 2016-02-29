@@ -18,5 +18,6 @@ export default Factory.extend({
         "position": "top"
       }
     ];
-  }
+  },
+  listingObjectType: 'show'
 });
