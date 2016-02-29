@@ -20,24 +20,4 @@ export default GoogleAnalytics.extend({
     window.ga('set', 'dimension1', String(isLoggedIn)); // maybe??
   },
 
-  trackEvent(data) {
-    const { eventName } = data;
-
-    if (eventName === 'experimentalSend') {
-      return this._experimentalSend(data);
-    } else {
-      return this._super(...arguments);
-    }
-
-  },
-
-  // TODO: start sending through anatlyics bytestrings to listing objects
-  _experimentalSend(data) {
-    // EXPERIMENTAL
-    data.category = 'Experimental: ' + data.category;
-    // EXPERIMENTAL
-
-    this.trackEvent(data);
-  }
-
 });

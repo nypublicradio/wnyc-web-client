@@ -29,9 +29,6 @@ export function initialize(applicationInstance) {
     }
   }]);
 
-  // TODO: send these on every pageView or just once per session?
-  metrics.trackBrowser();
-
   if (mailchimp !== null) {
     metrics.trackEvent('DataWarehouse', {
       eventName: 'trackMailChimpID',
