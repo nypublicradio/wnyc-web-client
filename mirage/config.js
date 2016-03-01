@@ -14,4 +14,8 @@ export default function() {
     }
     return apiResponse;
   });
-}
+
+  this.get('*upstream_url', function(schema, request) {
+    return schema.djangoPage.find({id: request.params.upstream_url});
+  });
+};
