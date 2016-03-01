@@ -1,4 +1,5 @@
 import config from 'overhaul/config/environment';
+import { pregnantApiResponse } from 'overhaul/tests/helpers/api-response';
 
 export default function() {
   this.namespace = config.wnycURL;
@@ -9,16 +10,7 @@ export default function() {
     let apiResponse = schema.apiResponse.find(id);
 
     if (!apiResponse) {
-      let attrs;
-      let storyList = server.createList('story', 50);
-      if (/list/.test(showId)) {
-        attrs = {
-          id,
-          totalCount: 1000,
-          teaseList: server.schema.story.find(storyList.mapBy('id'))
-        }
-      }
-      return schema.apiResponse.create(attrs);
+      return pregnantApiResponse(id);
     }
     return apiResponse;
   });
