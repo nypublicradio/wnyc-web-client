@@ -1,10 +1,17 @@
 import config from 'overhaul/config/environment';
+import { pregnantApiResponse } from 'overhaul/tests/helpers/api-response';
 
 export default function() {
   this.namespace = config.wnycURL;
 
-  this.get('/api/v3/channel/shows/:showId/:navSlug/1', function(schema, request) {
-    let { showId, navSlug } = request.params;
-    return schema.apiResponse.find(`shows/${showId}/${navSlug}/1`);
+  this.get('/api/v3/channel/shows/:showId/:navSlug/:pageNumber', function(schema, request) {
+    let { showId, navSlug, pageNumber } = request.params;
+    let id = `shows/${showId}/${navSlug}/${pageNumber}`;
+    let apiResponse = schema.apiResponse.find(id);
+
+    if (!apiResponse) {
+      return pregnantApiResponse(id);
+    }
+    return apiResponse;
   });
 }

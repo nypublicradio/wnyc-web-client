@@ -1,6 +1,5 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
-import serialize from 'overhaul/mirage/utils/serialize';
 import showPage from 'overhaul/tests/pages/show';
 import { appendHTML, resetHTML } from 'overhaul/tests/helpers/html';
 
@@ -14,15 +13,39 @@ moduleForAcceptance('Acceptance | viewing show', {
   }
 });
 
-test('visiting a show - smoke test', function(assert) {
+test('visiting a show - listing smoke test', function(assert) {
   let show = server.create('show');
 
-  bootstrapChannelHTML(show);
-
-  showPage.visit(show);
+  showPage
+    .bootstrap(show)
+    .visit(show);
 
   andThen(function() {
     assert.equal(currentURL(), `/${show.id}`);
+  });
+});
+
+test('visting a show - about smoke test', function(assert) {
+  let show = server.create('show', {firstPage: 'about'});
+
+  showPage
+    .bootstrap(show)
+    .visit(show);
+
+  andThen(function() {
+    assert.equal(showPage.aboutText(), 'About');
+  });
+});
+
+test('visiting a show - story page smoke test', function(assert) {
+  let show = server.create('show', {firstPage: 'story'});
+
+  showPage
+    .bootstrap(show)
+    .visit(show);
+
+  andThen(() => {
+    assert.equal(showPage.storyText(), 'Story body.');
   });
 });
 
@@ -43,27 +66,12 @@ test('using a nav-link', function(assert) {
     teaseList: [server.schema.story.find(story.id)]
   });
 
-  bootstrapChannelHTML(show);
-
-  showPage.visit(show).clickNavLink('Next Link');
+  showPage
+    .bootstrap(show)
+    .visit(show)
+    .clickNavLink('Next Link');
 
   andThen(() => {
     assert.deepEqual(showPage.storyTitles(), ["Story Title"]);
   });
 });
-
-
-function bootstrapChannelHTML(show) {
-  let showModel = server.schema.show.find(show.id);
-  let serializedShow = serialize(showModel);
-
-  appendHTML(`
-    <script type="text/x-wnyc-marker" data-url="${show.id}"></script>
-  `);
-
-  appendHTML(`
-    <script id="wnyc-channel-jsonapi" type="application/vnd.api+json">
-      ${JSON.stringify({[show.id]: serializedShow })}
-    </script>
-  `);
-}

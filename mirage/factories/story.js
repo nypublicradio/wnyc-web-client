@@ -4,7 +4,10 @@ export default Factory.extend({
   headers() {
     return {};
   },
+  title(id) {
+    return `Story ${id}`;
+  },
   extendedStory: {
-    body: ''
+    body: 'Story body.'
   }
 });

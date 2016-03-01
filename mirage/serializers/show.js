@@ -1,5 +1,6 @@
 import ApplicationSerializer from './application';
 import serialize from 'overhaul/mirage/utils/serialize';
+import { pregnantApiResponse } from 'overhaul/tests/helpers/api-response';
 
 export default ApplicationSerializer.extend({
   typeKeyForModel(model) {
@@ -12,35 +13,21 @@ export default ApplicationSerializer.extend({
     }
   },
   serialize({id, attrs}, response) {
-    const REGEX = /shows\/([^\/]+)-\d+/;
-    let type = id.match(REGEX)[1];
-    let apiResponseId = `${id}${attrs.linkroll[0].navSlug}/1`;
 
-    switch(type) {
-      case 'list':
-        let storyList = server.createList('story', 11);
-        let apiResponse = server.create('api-response', {
-          id: apiResponseId,
-          totalCount: 11,
-          teaseList: server.schema.story.find(storyList.mapBy('id'))
-        });
-        break;
-      case 'story':
-        let story = server.create('story');
-        break;
-      case 'about':
-        break;
+    let data = {
+      type: 'channel',
+      id,
+      attributes: attrs
+    };
+    if (/about/.test(id)) {
+      return { data };
     }
 
-    let apiResponseModel = server.schema.apiResponse.find(apiResponse.id);
-    let {data, included} = serialize(apiResponseModel);
+    let apiResponseModel = pregnantApiResponse(`${id}${attrs.linkroll[0].navSlug}/1`);
+    let {data:apiResponseJSON, included} = serialize(apiResponseModel);
     return {
-      data: {
-        type: 'channel',
-        id,
-        attributes: attrs
-      },
-      included: included.concat(data)
+      data,
+      included: included.concat(apiResponseJSON)
     }
   }
 });
