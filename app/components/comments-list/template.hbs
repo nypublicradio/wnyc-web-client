@@ -1,4 +1,4 @@
-<div class="list">
+<div class="list" data-test-selector="comment-list">
 {{#each comments as |comment|}}
     <article class="list-item{{if comment.isStaffComment ' list-item--highlight'}}" data-id="{{comment.id}}">
         <h1 class="h3">
