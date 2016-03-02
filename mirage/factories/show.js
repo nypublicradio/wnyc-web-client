@@ -28,5 +28,6 @@ export default Factory.extend({
         "position": "top"
       }
     ];
-  }
+  },
+  socialLinks: []
 });

@@ -11,7 +11,9 @@ moduleForAcceptance('Acceptance | Django Page | Show Page', {
 });
 
 test('smoke test', function(assert) {
-  let show = server.create('show');
+  let show = server.create('show', {
+    socialLinks: [{title: 'facebook', href: 'http://facebook.com'}]
+  });
   server.create('django-page', {id: show.id});
 
   djangoPage
@@ -20,6 +22,7 @@ test('smoke test', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), `/${show.id}`);
+    assert.ok(showPage.facebookIsVisible());
   });
 });
 

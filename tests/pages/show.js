@@ -5,7 +5,8 @@ let {
   clickOnText,
   clickable,
   textList,
-  text
+  text,
+  isVisible
 } = PageObject;
 
 export default PageObject.create({
@@ -17,4 +18,5 @@ export default PageObject.create({
   clickNext: clickable('.pagefooter-next > a'),
   clickBack: clickable('.pagefooter-previous > a'),
   clickPage: clickOnText('.pagefooter-link'),
+  facebookIsVisible: isVisible('a[href="http://facebook.com"]')
 });
