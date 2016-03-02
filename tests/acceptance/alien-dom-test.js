@@ -1,5 +1,6 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
+import djangoPage from 'overhaul/tests/pages/django-page';
 import {
   appendHTML,
   resetHTML 
@@ -12,10 +13,11 @@ moduleForAcceptance('django-page leaves alien dom alone', {
 });
 
 test('on homepage', function(assert) {
-  let homePage = server.create('django-page', {id: '/'});
-  appendHTML(homePage.text);
+  let home = server.create('django-page', {id: '/'});
+  djangoPage
+    .bootstrap(home)
+    .visit(home);
 
-  visit('/');
   andThen(function() {
     assert.equal(currentURL(), '/');
     let djangoContent = find('.django-content');
@@ -26,9 +28,10 @@ test('on homepage', function(assert) {
 test('on a search page with a query', function(assert) {
   // django will only append the path, not the query string
   let search = server.create('django-page', {id: 'search/'});
-  appendHTML(search.text);
+  djangoPage
+    .bootstrap(search)
+    .visit({id: 'search/?q=foo'});
 
-  visit('search/?q=foo');
   andThen(function() {
     assert.equal(currentURL(), 'search/?q=foo');
     let djangoContent = find('.django-content');
@@ -41,6 +44,7 @@ moduleForAcceptance('django-page and alien clicks', {
     resetHTML();
   }
 });
+
 test('lets # links pass though', function(assert) {
   appendHTML('<a href="#" id="link">click</a>');
   appendHTML('<div id="output"></div>');
