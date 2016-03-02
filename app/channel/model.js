@@ -39,17 +39,29 @@ export default DS.Model.extend({
   description: DS.attr('string'),
   donate: DS.attr(),
   tease: DS.attr('string'),
-  facebook: DS.attr(),
   marqueeImage: DS.attr(),
-  newsletter: DS.attr(),
   podcastLinks: DS.attr(),
   rssFeed: DS.attr('string'),
   logoImage: DS.attr(),
   listingObjectType: DS.attr('string'),
   editLink: DS.attr('string'),
   socialLinks: DS.attr(),
+  facebook: computed('socialLinks', {
+    get() {
+      return get(this, 'socialLinks').findBy('title', 'facebook');
+    }
+  }),
+  twitter: computed('socialLinks', {
+    get() {
+      return get(this, 'socialLinks').findBy('title', 'twitter');
+    }
+  }),
+  newsletter: computed('socialLinks', {
+    get() {
+      return get(this, 'socialLinks').findBy('title', 'newsletter');
+    }
+  }),
   featured: DS.attr(),
-  twitter: DS.attr(),
   scheduleSummary: DS.attr('string'),
   producingOrganizations: DS.attr(),
   // computeds
@@ -69,9 +81,6 @@ export default DS.Model.extend({
   hasLinkroll: computed.bool('linkroll.firstObject'),
   hasMarquee: computed.bool('marqueeImage'),
   hasDonationLink: computed.bool('donate'),
-  hasFacebookLink: computed.bool('facebook'),
-  hasNewsletterLink: computed.bool('newsletter'),
   hasSubscriptionLinks: computed.bool('podcastLinks.firstObject'),
-  hasTwitterLink: computed.bool('twitter'),
   hasHeaderButtons: computed.or('hasDonationLink', 'hasSubscriptionLinks')
 });
