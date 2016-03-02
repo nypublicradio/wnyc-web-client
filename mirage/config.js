@@ -1,5 +1,4 @@
 import config from 'overhaul/config/environment';
-import { pregnantApiResponse } from 'overhaul/tests/helpers/api-response';
 
 export default function() {
   this.namespace = config.wnycURL;
@@ -10,7 +9,7 @@ export default function() {
     let apiResponse = schema.apiResponse.find(id);
 
     if (!apiResponse) {
-      return pregnantApiResponse(id);
+      return schema.apiResponse.find(server.create('api-response', {id}).id);
     }
     return apiResponse;
   });
