@@ -27,7 +27,6 @@ module.exports = function(deployTarget) {
       host: process.env.SSH_TUNNEL_HOST,
       dstHost: process.env.SSH_TUNNEL_DESTINATION_HOST,
       dstPort: process.env.SSH_TUNNEL_DESTINATION_PORT,
-      privateKeyPath: process.env.SSH_TUNNEL_PRIVATE_KEY_PATH
     }
   };
 
@@ -35,9 +34,9 @@ module.exports = function(deployTarget) {
     ENV.pipeline = { activateOnDeploy: true };
   }
 
-  //if (deployTarget === 'staging') {
-    //ENV.build.environment = 'production';
-  //}
+  if (deployTarget === 'staging') {
+    ENV.build.environment = 'production';
+  }
 
   if (deployTarget === 'production') {
     // remove JS sourcemaps from production
