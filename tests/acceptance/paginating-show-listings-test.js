@@ -1,13 +1,10 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
+import djangoPage from 'overhaul/tests/pages/django-page';
 import showPage from 'overhaul/tests/pages/show';
-import { appendHTML, resetHTML } from 'overhaul/tests/helpers/html';
+import { resetHTML } from 'overhaul/tests/helpers/html';
 
-moduleForAcceptance('Acceptance | paginating show listings', {
-  beforeEach() {
-    appendHTML('<div id="js-listings"></div>');
-  },
-
+moduleForAcceptance('Acceptance | Django Page | paginating show listings', {
   afterEach() {
     resetHTML();
   }
@@ -15,8 +12,9 @@ moduleForAcceptance('Acceptance | paginating show listings', {
 
 test('showing pagination for a list of episodes', function(assert) {
   let show = server.create('show');
+  server.create('django-page', {id: show.id});
 
-  showPage
+  djangoPage
     .bootstrap(show)
     .visit(show);
 
@@ -27,7 +25,9 @@ test('showing pagination for a list of episodes', function(assert) {
 
 test('showing no pagination on about pages', function(assert) {
   let show = server.create('show', {firstPage: 'about'});
-  showPage
+  server.create('django-page', {id: show.id});
+
+  djangoPage
     .bootstrap(show)
     .visit(show);
 
@@ -38,7 +38,9 @@ test('showing no pagination on about pages', function(assert) {
 
 test('showing no pagination on story detail listing pages', function(assert) {
   let show = server.create('show', {firstPage: 'story'});
-  showPage
+  server.create('django-page', {id: show.id});
+
+  djangoPage
     .bootstrap(show)
     .visit(show);
 
@@ -49,9 +51,10 @@ test('showing no pagination on story detail listing pages', function(assert) {
 
 test('can go back and forward', function(assert) {
   let show = server.create('show');
+  server.create('django-page', {id: show.id});
   let firstStoryTitle;
 
-  showPage
+  djangoPage
     .bootstrap(show)
     .visit(show);
 
@@ -72,9 +75,10 @@ test('can go back and forward', function(assert) {
 
 test('can navigate to a specified page of results', function(assert) {
   let show = server.create('show');
+  server.create('django-page', {id: show.id});
   let firstStoryTitle;
 
-  showPage
+  djangoPage
     .bootstrap(show)
     .visit(show);
 
