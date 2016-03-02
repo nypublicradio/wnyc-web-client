@@ -32,7 +32,7 @@ export default DS.Model.extend({
   }),
 
   wnycContent: Ember.computed('document', function() {
-    let tag = this.get('document').querySelector('#wnyc-content-jsonapi');
+    let tag = this.get('document').querySelector('#wnyc-story-jsonapi');
     let json;
     if (tag) {
       try {
@@ -57,7 +57,7 @@ export default DS.Model.extend({
         json = JSON.parse(channel.textContent);
       } catch(err) {}
       if (json) {
-        return this.store.push(channelSerializer.normalizeResponse(this.store, channelModel, json[id], id));
+        return this.store.push(channelSerializer.normalizeResponse(this.store, channelModel, json, id));
       }
     }
   }),
