@@ -26,8 +26,7 @@ module.exports = function(deployTarget) {
       username: process.env.SSH_TUNNEL_USERNAME,
       host: process.env.SSH_TUNNEL_HOST,
       dstHost: process.env.SSH_TUNNEL_DESTINATION_HOST,
-      dstPort: process.env.SSH_TUNNEL_DESTINATION_PORT,
-      privateKeyPath: process.env.SSH_TUNNEL_PRIVATE_KEY_PATH
+      dstPort: process.env.SSH_TUNNEL_DESTINATION_PORT
     }
   };
 
