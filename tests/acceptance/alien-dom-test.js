@@ -46,8 +46,12 @@ moduleForAcceptance('django-page and alien clicks', {
 });
 
 test('lets # links pass though', function(assert) {
-  appendHTML('<a href="#" id="link">click</a>');
-  appendHTML('<div id="output"></div>');
+  let page = server.create('django-page');
+
+  appendHTML('<a href="#" id="link">click</a><div id="output"></div>');
+  djangoPage
+    .bootstrap(page)
+    .visit(page);
 
   document.addEventListener('click', function bar(e) {
     if (e.target.id === 'link') {
@@ -58,8 +62,10 @@ test('lets # links pass though', function(assert) {
     document.removeEventListener('click', bar);
   }, false);
 
-  let link = document.getElementById('link');
-  link.click();
+  andThen(() => {
+    djangoPage.alienClick('#link')
+  });
+
   andThen(() => {
     assert.equal(find('#output').text(), 'foo');
     assert.notOk(location.hash);

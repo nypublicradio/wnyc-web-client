@@ -11,6 +11,9 @@ let {
 
 export default PageObject.create({
   visit: visitable(':id'),
+  alienClick(selector) {
+    document.querySelector(selector).click();
+  },
 
   bootstrap({id}) {
     let djangoPage = server.schema.djangoPage.find(id);
