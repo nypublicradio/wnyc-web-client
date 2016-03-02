@@ -20,7 +20,7 @@ test('on homepage', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/');
-    let djangoContent = find('.django-content');
+    let djangoContent = findWithAssert('.django-content');
     assert.notOk(djangoContent.contents().length);
   });
 });
@@ -34,7 +34,7 @@ test('on a search page with a query', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), 'search/?q=foo');
-    let djangoContent = find('.django-content');
+    let djangoContent = findWithAssert('.django-content');
     assert.notOk(djangoContent.contents().length);
   });
 });
@@ -63,7 +63,7 @@ test('lets # links pass though', function(assert) {
   }, false);
 
   andThen(() => {
-    djangoPage.alienClick('#link')
+    djangoPage.alienClick('#link');
   });
 
   andThen(() => {
