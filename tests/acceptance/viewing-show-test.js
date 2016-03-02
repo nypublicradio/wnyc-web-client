@@ -1,22 +1,20 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
+import djangoPage from 'overhaul/tests/pages/django-page';
 import showPage from 'overhaul/tests/pages/show';
-import { appendHTML, resetHTML } from 'overhaul/tests/helpers/html';
+import { resetHTML } from 'overhaul/tests/helpers/html';
 
-moduleForAcceptance('Acceptance | viewing show', {
-  beforeEach() {
-    appendHTML('<div id="js-listings"></div>');
-  },
-
+moduleForAcceptance('Acceptance | Django Page | Show Page', {
   afterEach() {
     resetHTML();
   }
 });
 
-test('visiting a show - listing smoke test', function(assert) {
+test('smoke test', function(assert) {
   let show = server.create('show');
+  server.create('django-page', {id: show.id});
 
-  showPage
+  djangoPage
     .bootstrap(show)
     .visit(show);
 
@@ -27,8 +25,9 @@ test('visiting a show - listing smoke test', function(assert) {
 
 test('visting a show - about smoke test', function(assert) {
   let show = server.create('show', {firstPage: 'about'});
+  server.create('django-page', {id: show.id});
 
-  showPage
+  djangoPage
     .bootstrap(show)
     .visit(show);
 
@@ -39,8 +38,9 @@ test('visting a show - about smoke test', function(assert) {
 
 test('visiting a show - story page smoke test', function(assert) {
   let show = server.create('show', {firstPage: 'story'});
+  server.create('django-page', {id: show.id});
 
-  showPage
+  djangoPage
     .bootstrap(show)
     .visit(show);
 
@@ -66,10 +66,13 @@ test('using a nav-link', function(assert) {
     teaseList: [server.schema.story.find(story.id)]
   });
 
-  showPage
+  server.create('django-page', {id: show.id});
+
+  djangoPage
     .bootstrap(show)
-    .visit(show)
-    .clickNavLink('Next Link');
+    .visit(show);
+
+  showPage.clickNavLink('Next Link');
 
   andThen(() => {
     assert.deepEqual(showPage.storyTitles(), ["Story Title"]);

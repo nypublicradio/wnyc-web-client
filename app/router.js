@@ -17,7 +17,7 @@ function subpageRoutes() {
 Router.map(function() {
   // This is an example of a route that we've customized beyond the
   // default behavior in the `django-rendered` route.
-  this.route('story', { path: '/story/:slug' });
+  this.route('story', { path: 'story/:slug' });
 
   this.route('shows', {path: 'shows/:slug'}, subpageRoutes);
   this.route('articles', {path: 'articles/:slug'}, subpageRoutes);

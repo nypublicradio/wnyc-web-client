@@ -8,11 +8,10 @@ export default Service.extend({
   },
   adSpaceCleanup(e) {
     if (/leaderboard/.test(e.slot.getAdUnitPath())) {
-      // TODO: use classes to manage this after all ads are migrated to ember
       if (e.isEmpty) {
-        Ember.$('#leaderboard').css({'margin-top': -20, 'max-height': 0});
+        Ember.$('#leaderboard').addClass('is-collapsed');
       } else {
-        Ember.$('#leaderboard').css({'margin-top': 0, 'max-height': 90});
+        Ember.$('#leaderboard').removeClass('is-collapsed');
       }
     }
   },

@@ -1,8 +1,19 @@
 import config from 'overhaul/config/environment';
-import { pregnantApiResponse } from 'overhaul/tests/helpers/api-response';
 
 export default function() {
   this.namespace = config.wnycURL;
+
+  this.get('/api/v1/list/comments/:typeId/:storyId/', function(schema, request) {
+    return {
+      results: server.createList('comment', 5)
+    }
+  });
+
+  this.get('/api/v2/related/:storyId/', function(schema, request) {
+    return {
+      results: server.createList('story', 5)
+    }
+  });
 
   this.get('/api/v3/channel/shows/:showId/:navSlug/:pageNumber', function(schema, request) {
     let { showId, navSlug, pageNumber } = request.params;
@@ -10,7 +21,7 @@ export default function() {
     let apiResponse = schema.apiResponse.find(id);
 
     if (!apiResponse) {
-      return pregnantApiResponse(id);
+      return schema.apiResponse.find(server.create('api-response', {id}).id);
     }
     return apiResponse;
   });
