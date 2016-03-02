@@ -2,6 +2,7 @@ import { Factory } from 'ember-cli-mirage';
 import serialize from 'overhaul/mirage/utils/serialize';
 
 export default Factory.extend({
+  id: '/',
   text() {
     let {id, slug} = this;
     let wormholes;
@@ -40,16 +41,11 @@ export default Factory.extend({
     }
 
     return `
-      <html>
-        <head></head>
-        <body>
-          ${wormholes}
-          <script type="text/x-wnyc-marker" data-url="${id}"></script>
-          <script id="wnyc-${type}-jsonapi" type="application/vnd.api+json">
-            ${JSON.stringify(json)}
-          </script>
-        </body>
-      </html>
+      ${wormholes || ''}
+      <script type="text/x-wnyc-marker" data-url="${id}"></script>
+      <script id="wnyc-${type}-jsonapi" type="application/vnd.api+json">
+        ${JSON.stringify(json)}
+      </script>
     `
   }
 });
