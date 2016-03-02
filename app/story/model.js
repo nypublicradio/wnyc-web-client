@@ -53,7 +53,7 @@ export default Model.extend({
     get() {
       let analyticsCode = get(this, 'analyticsCode');
       let {channelslug, showslug, seriesslugs} = parseAnalyticsCode(analyticsCode);
-      let gaAction = [channelslug, showslug, seriesslugs].map((c, i) => {
+      let gaAction = [channelslug, showslug, seriesslugs].compact().map((c, i) => {
         if (i === 0 && c) {
           return `Article Channel: ${c} `;
         } else if (i === 1 && c) {
