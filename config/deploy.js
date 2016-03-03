@@ -34,10 +34,6 @@ module.exports = function(deployTarget) {
     ENV.pipeline = { activateOnDeploy: true };
   }
 
-  if (deployTarget === 'staging') {
-    ENV.build.environment = 'production';
-  }
-
   if (deployTarget === 'production') {
     // remove JS sourcemaps from production
     ENV.s3.filePattern = '**/*.{js,css,png,gif,ico,jpg,xml,txt,svg,swf,eot,ttf,woff,woff2}';
