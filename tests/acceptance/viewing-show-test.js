@@ -26,7 +26,7 @@ test('smoke test', function(assert) {
   });
 });
 
-test('visting a show - about smoke test', function(assert) {
+test('about smoke test', function(assert) {
   let show = server.create('show', {firstPage: 'about'});
   server.create('django-page', {id: show.id});
 
@@ -79,5 +79,31 @@ test('using a nav-link', function(assert) {
 
   andThen(() => {
     assert.deepEqual(showPage.storyTitles(), ["Story Title"]);
+  });
+});
+
+test('null social links should not break page', function(assert) {
+  let show = server.create('show', {socialLinks: null});
+  server.create('django-page', {id: show.id});
+
+  djangoPage
+    .bootstrap(show)
+    .visit(show);
+
+  andThen(function() {
+    assert.equal(currentURL(), `/${show.id}`);
+  });
+});
+
+test('undefined social links should not break page', function(assert) {
+  let show = server.create('show', {socialLinks: undefined});
+  server.create('django-page', {id: show.id});
+
+  djangoPage
+    .bootstrap(show)
+    .visit(show);
+
+  andThen(function() {
+    assert.equal(currentURL(), `/${show.id}`);
   });
 });

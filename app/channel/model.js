@@ -46,21 +46,9 @@ export default DS.Model.extend({
   listingObjectType: DS.attr('string'),
   editLink: DS.attr('string'),
   socialLinks: DS.attr(),
-  facebook: computed('socialLinks', {
-    get() {
-      return get(this, 'socialLinks').findBy('title', 'facebook');
-    }
-  }),
-  twitter: computed('socialLinks', {
-    get() {
-      return get(this, 'socialLinks').findBy('title', 'twitter');
-    }
-  }),
-  newsletter: computed('socialLinks', {
-    get() {
-      return get(this, 'socialLinks').findBy('title', 'newsletter');
-    }
-  }),
+  facebook: computed.filterBy('socialLinks', 'title', 'facebook'),
+  twitter: computed.filterBy('socialLinks', 'title', 'twitter'),
+  newsletter: computed.filterBy('socialLinks', 'title', 'newsletter'),
   featured: DS.attr(),
   scheduleSummary: DS.attr('string'),
   producingOrganizations: DS.attr(),
