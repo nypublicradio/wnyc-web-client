@@ -1,0 +1,14 @@
+#leaderboard {
+    max-height: 90px;
+    overflow-y: hidden;
+    @include mq($small-only) {
+        margin: 0 -5px;
+    }
+}
+
+#rightRail {
+    @include mq($small-only) {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+}
