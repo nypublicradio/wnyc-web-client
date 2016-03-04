@@ -10,6 +10,7 @@ const {
 const MENU_SELECTORS = '#navigation-menu';
 const HOMEPAGE_SELECTORS = '#wnyc_home a[href^=http], #wnyc_home a.external-link';
 const SHARE_SELECTORS = '.js-share';
+const HEADER_SELECTORS = '#brand-logo, .header-wide-button, #header .user-logout, #header .user-login';
 
 function contains(selector, target) {
   let results = $(target).closest(selector);
@@ -23,7 +24,9 @@ export default Service.extend({
     let {target} = e;
 
     if (contains(MENU_SELECTORS, target)) {
-      this._trackMenu(e);
+      this._trackLinkWithText(e, 'WNYC Menu');
+    } else if (contains(HEADER_SELECTORS, target)) {
+      this._trackLinkWithText(e, 'WNYC Header');
     } else if (contains(HOMEPAGE_SELECTORS, target)) {
       this._trackHomepage(e);
     } else if (contains(SHARE_SELECTORS, target)) {
@@ -31,16 +34,16 @@ export default Service.extend({
     }
   },
 
-  _trackMenu({target}) {
+  _trackLinkWithText({target}, category) {
     const $target = $(target);
     const title = $target.text().trim();
     const destinationUrl = $target.attr('href') !== '#' ? $target.attr('href') : false;
     const metrics = get(this, 'metrics');
 
     metrics.trackEvent({
-      category: 'WNYC Menu',
+      category: category,
       action: `Clicked "${title}"`,
-      label: `"${title}" with URL "${destinationUrl || 'no URL'}"`
+      label: `${destinationUrl || 'no URL'}`
     });
 
     if (destinationUrl) {
