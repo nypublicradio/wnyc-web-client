@@ -4,7 +4,7 @@ export default function(code) {
     return {};
   }
   // see puppy/cms/models/content.py#analytics_code_string for fields
-  const fields = ['slug', 'audio', 'audioduration', 'video', 'modelchar', 'domainint', 'hasshow', 'haschannel', 'seriesslugs', 'channelslug', 'showslug', 'tags', 'audiopath'];
+  const fields = ['slug', 'audio', 'audioduration', 'video', 'modelchar', 'domainint', 'hasshow', 'haschannel', 'seriestitles', 'channeltitle', 'showtitle', 'tags', 'audiopath'];
   const REGEX = /(?:.*:)?(.*)\W+\$A(\d)\$AD(\d+)\$V(\d)\$M(\w)\$D(\d+)\$HS(\d)\$HC(\d)\$SS([^$]+)\$C([^$]*)\$S([^$]*)\$T([^$]+)\$AP([^$]+)\$$/;
   let match = code.match(REGEX);
   if (!match) {
@@ -17,7 +17,7 @@ export default function(code) {
 
   const boolFields = ['audio', 'video', 'haschannel', 'hasshow'];
   const numFields = ['audioduration', 'domainint'];
-  const arrayFields = {tags: '!', seriesslugs: '+'};
+  const arrayFields = {tags: '!', seriestitles: '+'};
 
   for (let i = 0; i < fields.length; i++) {
     let field = fields[i];
