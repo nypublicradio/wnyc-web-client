@@ -1,0 +1,14 @@
+#leaderboard {
+    max-height: 90px;
+    overflow-y: hidden;
+    @media only screen and (max-width: 800px) {
+        margin: 0 -5px;
+    }
+}
+
+#rightRail {
+    @media only screen and (max-width: 800px) {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+}

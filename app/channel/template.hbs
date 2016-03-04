@@ -57,7 +57,10 @@
           {{/if}}
 
 
-          {{social-links model=model.channel}}
+          {{social-links
+            facebook=model.channel.facebook.firstObject
+            twitter=model.channel.twitter.firstObject
+            newsletter=model.channel.newsletter.firstObject}}
 
           {{{model.channel.chunkSidebarTop}}}
 

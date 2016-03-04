@@ -26,16 +26,12 @@ module.exports = function(deployTarget) {
       username: process.env.SSH_TUNNEL_USERNAME,
       host: process.env.SSH_TUNNEL_HOST,
       dstHost: process.env.SSH_TUNNEL_DESTINATION_HOST,
-      dstPort: process.env.SSH_TUNNEL_DESTINATION_PORT,
+      dstPort: process.env.SSH_TUNNEL_DESTINATION_PORT
     }
   };
 
   if (deployTarget === 'demo') {
     ENV.pipeline = { activateOnDeploy: true };
-  }
-
-  if (deployTarget === 'staging') {
-    ENV.build.environment = 'production';
   }
 
   if (deployTarget === 'production') {
