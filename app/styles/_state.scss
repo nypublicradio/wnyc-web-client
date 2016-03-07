@@ -1,6 +1,12 @@
 // gotta refactor out all IDs
-#leaderboard.is-collapsed {
-  margin-bottom: 0;
-  margin-top: -20px;
-  max-height: 0;
+.is-collapsed {
+
+  #leaderboard {
+    margin-bottom: 0;
+    max-height: 0;
+  }
+
+  + .marquee {
+    margin-top: -20px;
+  }
 }

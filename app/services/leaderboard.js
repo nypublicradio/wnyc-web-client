@@ -9,9 +9,9 @@ export default Service.extend({
   adSpaceCleanup(e) {
     if (/leaderboard/.test(e.slot.getAdUnitPath())) {
       if (e.isEmpty) {
-        Ember.$('#leaderboard').addClass('is-collapsed');
+        Ember.$('#leaderboard').parent().addClass('is-collapsed');
       } else {
-        Ember.$('#leaderboard').removeClass('is-collapsed');
+        Ember.$('#leaderboard').parent().removeClass('is-collapsed');
       }
     }
   },
