@@ -4,7 +4,7 @@ export default DS.Serializer.extend({
   normalizeResponse(store, primaryModelClass, payload, id /*, requestType */) {
     let attributes = {};
     if (payload instanceof Document) {
-      attributes.inlineDocument = payload.cloneNode(true);
+      attributes.inlineDocument = payload.documentElement.cloneNode(true);
     } else {
       attributes.text = payload;
     }
