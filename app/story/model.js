@@ -35,6 +35,9 @@ export default Model.extend({
   escapedBody: computed('extendedStory.body', {
     get() {
       let body = get(this, 'extendedStory.body');
+      if (!body) {
+        reutrn '';
+      }
       return body.replace(/\\x3C\/script>/g, '</script>');
     }
   }),
