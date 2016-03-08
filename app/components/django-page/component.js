@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import service from 'ember-service/inject';
 import { beforeTeardown } from '../../lib/compat-hooks';
 import ENV from '../../config/environment';
 import {
@@ -8,10 +9,11 @@ import {
   installAlienListener
 } from '../../lib/alien-dom';
 
-const { $ } = Ember;
+const { $, get } = Ember;
 const { wnycURL } = ENV;
 
 export default Ember.Component.extend({
+  legacyAnalytics: service(),
   router: Ember.inject.service('wnyc-routing'),
 
   didReceiveAttrs() {
@@ -52,6 +54,9 @@ export default Ember.Component.extend({
   },
 
   click(event) {
+    let legacyAnalytics = get(this, 'legacyAnalytics');
+    legacyAnalytics.dispatch(event);
+
     let target = $(event.target).closest('a');
     let href = target.attr('href');
     if (target.length > 0 && href && href[0] !== '#') {

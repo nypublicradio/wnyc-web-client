@@ -1,7 +1,10 @@
 import Ember from 'ember';
+import service from 'ember-service/inject';
+const { get } = Ember;
 const { hash: waitFor } = Ember.RSVP;
 
 export default Ember.Route.extend({
+  metrics: service(),
   model({ slug }) {
     return this.store.find('django-page', `story/${slug}`.replace(/\/*$/, '/')).then(page => {
       let story = page.get('wnycContent');
@@ -15,6 +18,16 @@ export default Ember.Route.extend({
         getComments: () => comments,
         getRelatedStories: () => relatedStories
       });
+    });
+  },
+  afterModel(model) {
+    let metrics = get(this, 'metrics');
+    let {gaAction:action, gaLabel:label} = get(model, 'story.analytics');
+
+    metrics.trackEvent({
+      category: 'Viewed Story',
+      action,
+      label
     });
   }
 });

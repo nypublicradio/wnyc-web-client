@@ -12,7 +12,6 @@ const {
 
 export default Component.extend(LegacySupport, {
   whatsOn: service(),
-  metrics: service(),
 
   tagName: 'article',
   status: null,
@@ -81,14 +80,6 @@ export default Component.extend(LegacySupport, {
     }
 
     this._checkWhatsOn();
-  },
-
-  actions: {
-    track() {
-      const metrics = get(this, 'metrics');
-      const story = get(this, 'item');
-      metrics.trackStory(story);
-    }
   },
 
   _checkWhatsOn() {

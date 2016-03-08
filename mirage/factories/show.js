@@ -29,5 +29,6 @@ export default Factory.extend({
       }
     ];
   },
+  listingObjectType: 'show',
   socialLinks: []
 });

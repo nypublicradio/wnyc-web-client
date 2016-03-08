@@ -6,7 +6,6 @@ const {
   Service,
   $,
   get,
-  run
 } = Ember;
 
 export default Service.extend({
@@ -14,7 +13,6 @@ export default Service.extend({
 
   init() {
     this._setupStreamListener();
-    this._setupMenuTracking();
   },
   stream(e) {
     const streamSlug = $(this).attr('data-stream-slug');
@@ -66,35 +64,8 @@ export default Service.extend({
     wnyc.listening.listen("wnyc.user.success", () => wnyc.user.staffLinks());
   },
 
-  trackShowFromMenu(e) {
-    const openMenu = $('#navigation-menu .active-nav-item');
-    const $target = $(e.currentTarget);
-    const showTitle = $target.text().trim();
-    const destinationUrl = $target.attr('href');
-    const metrics = get(this, 'metrics');
-
-    if (openMenu.text().trim() !== 'Shows') {
-      return;
-    } else {
-      e.preventDefault();
-    }
-
-    metrics.trackEvent({
-      category: 'WNYC Menu',
-      action: `Clicked "${showTitle}"`,
-      label: `"${showTitle}" with URL "${destinationUrl || 'no URL'}"`
-    });
-
-    if (destinationUrl) {
-      run.later(this, () => window.location = destinationUrl, 100);
-    }
-  },
-
   _setupStreamListener() {
     $(document).on('click', '.js-launch-stream', this.stream);
   },
 
-  _setupMenuTracking() {
-    $(document).on('click', '#navigation-menu a', this.trackShowFromMenu.bind(this));
-  }
 });

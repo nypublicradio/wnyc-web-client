@@ -1,6 +1,8 @@
 import Ember from 'ember';
+import service from 'ember-service/inject';
 
 export default Ember.Component.extend({
+  metrics: service(),
   comments: Ember.computed('getComments', {
     get() {
       this.set('isLoading', true);
@@ -42,6 +44,16 @@ export default Ember.Component.extend({
 
   actions: {
     getComments() {
+      if (!this.get('isShowingComments')) {
+        let metrics = this.get('metrics');
+        let {gaAction:action, gaLabel:label} = this.get('story.analytics');
+
+        metrics.trackEvent({
+          category: 'Displayed Comments',
+          action,
+          label
+        });
+      }
       this.set('isShowingComments', true);
       this.set('isShowingForm', true);
     },
