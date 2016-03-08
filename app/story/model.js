@@ -36,7 +36,7 @@ export default Model.extend({
     get() {
       let body = get(this, 'extendedStory.body');
       if (!body) {
-        reutrn '';
+        return '';
       }
       return body.replace(/\\x3C\/script>/g, '</script>');
     }
