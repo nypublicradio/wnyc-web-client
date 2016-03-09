@@ -1,5 +1,6 @@
 /*global Okra, XDPlayer*/
 import Ember from 'ember';
+import config from 'overhaul/config/environment';
 const {
   Mixin,
   set,
@@ -46,14 +47,16 @@ export function installBridge() {
 // confusing naming overlaps we'll refer to it as the WEB_PLAYER_CONTROLLER or
 // the playerController in our Ember context.
 const WEB_PLAYER_CONTROLLER = new Promise(resolve => {
-  let interval = setInterval(() => {
-    if (typeof Okra !== 'undefined') {
-      clearInterval(interval);
-      Okra.on('initialize:after', function() {
-        resolve(Okra.request('audioService'));
-      });
-    }
-  }, 20);
+  if (config.featureFlags['persistent-player']) {
+    let interval = setInterval(() => {
+      if (typeof Okra !== 'undefined') {
+        clearInterval(interval);
+        Okra.on('initialize:after', function() {
+          resolve(Okra.request('audioService'));
+        });
+      }
+    }, 20);
+  }
 });
 
 // a lower-level interface to the soundManger soundObject instance.
