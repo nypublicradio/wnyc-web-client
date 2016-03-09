@@ -4,7 +4,6 @@ const {
   $,
   get,
   Service,
-  run
 } = Ember;
 
 const MENU_SELECTORS = '#navigation-menu';
@@ -45,10 +44,6 @@ export default Service.extend({
       action: `Clicked "${title}"`,
       label: `${destinationUrl || 'no URL'}`
     });
-
-    if (destinationUrl) {
-      run.later(this, () => window.location = destinationUrl, 100);
-    }
   },
 
   _trackHomepage({target}) {

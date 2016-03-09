@@ -69,7 +69,6 @@ export default Ember.Component.extend({
         if (ENV.environment !== 'development' && target.attr('target') === '_blank') {
           return true;
         } else if (!this.features.isEnabled('django-page-routing')) {
-          window.location.assign(href.replace(/^([^\/])/, '/$1'));
           return false;
         }
 
