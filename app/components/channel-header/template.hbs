@@ -30,19 +30,17 @@
     <!-- .l-col2of3 -->
 
     <div class="l-col1of3 l-col--flex l-col--cv l-col--right">
+      <a data-url="{{model.editLink}}" class="btn btn--green stf" style="display:none; margin:auto;">Edit this</a>
+
       {{#if model.hasHeaderButtons}}
-      <div class="btn-group">
+      <div class="btn-group btn-group--stacked">
         {{{model.donateChunk}}}
 
         {{#if model.hasSubscriptionLinks}}
         {{podcast-links subscribeOptions=model.podcastLinks}}
         {{/if}}
-
-        <a data-url="{{model.editLink}}" class="btn btn--green stf" style="display:none">Edit this</a>
       </div>
       <!-- .btn-group -->
-      {{else}}
-        <a data-url="{{model.editLink}}" class="btn btn--green stf" style="display:none">Edit this</a>
       {{/if}}
     </div> 
     <!-- .l-col1of3 -->

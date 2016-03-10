@@ -1,0 +1,35 @@
+/**
+ * stacked button group
+ * the idea is to create a module that wraps buttons and botton like objects
+ * so that they can be stacked vertically, aligned center, and the container
+ * object is as wide as the widest child.
+ * It's this last bit which is tough to do strictly in CSS, but it does seem
+ * to work when the .btn-group--stacked is a flex-child itself.
+ */
+.btn-group--stacked {
+  display: flex;
+  flex-direction: column;
+
+  > .btn {
+    margin-right: 0;
+    margin-bottom: 10px; // should update with global _var
+    text-align: center;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.btn--studio360-override {
+  font-weight: 600 !important;
+  letter-spacing: 2px;
+  max-width: 150px;
+
+  > a {
+    margin-top: 10px !important;
+    font-family: "Open Sans", sans-serif !important;
+    color: white !important;
+    line-height: initial !important;
+  }
+}
