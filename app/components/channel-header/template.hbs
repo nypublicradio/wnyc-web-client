@@ -32,9 +32,7 @@
     <div class="l-col1of3 l-col--flex l-col--cv l-col--right">
       {{#if model.hasHeaderButtons}}
       <div class="btn-group">
-        {{#if model.hasDonationLink}}
-        <a class="btn" href="{{donationOption.href}}" target="_blank">Donate</a>
-        {{/if}}
+        {{{model.donateChunk}}}
 
         {{#if model.hasSubscriptionLinks}}
         {{podcast-links subscribeOptions=model.podcastLinks}}

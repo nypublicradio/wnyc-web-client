@@ -1,5 +1,4 @@
 import DS from 'ember-data';
-
 export default DS.JSONAPISerializer.extend({
   normalizeResponse(store, typeClass, payload, id) {
     payload.included = payload.included || [];

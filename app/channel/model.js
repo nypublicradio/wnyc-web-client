@@ -10,10 +10,10 @@ export default DS.Model.extend({
   title: DS.attr('string'),
   about: DS.belongsTo('api-response', {async: false}),
 
-  chunks: DS.attr(), // Array of custom html markup 
-  chunkSidebarTop: computed('chunks', {
+  sidebarChunks: DS.attr(), // Array of custom html markup 
+  chunkSidebarTop: computed('sidebarChunks', {
     get() {
-      const chunks = get(this, 'chunks').compact();
+      const chunks = get(this, 'sidebarChunks').compact();
       const chunk = chunks.findBy('position', 'top');
       if (chunk) {
         return chunk.content;
@@ -22,9 +22,9 @@ export default DS.Model.extend({
       }
     }
   }),
-  chunkSidebarBottom: computed('chunks', {
+  chunkSidebarBottom: computed('sidebarChunks', {
     get() {
-      const chunks = get(this, 'chunks').compact();
+      const chunks = get(this, 'sidebarChunks').compact();
       const chunk = chunks.findBy('position', 'bottom');
       if (chunk) {
         return chunk.content;
@@ -33,11 +33,11 @@ export default DS.Model.extend({
       }
     }
   }),
+  donateChunk: DS.attr(),
 
   linkroll: DS.attr(),
   bgColor: DS.attr('string'),
   description: DS.attr('string'),
-  donate: DS.attr(),
   tease: DS.attr('string'),
   marqueeImage: DS.attr(),
   podcastLinks: DS.attr(),
@@ -68,7 +68,6 @@ export default DS.Model.extend({
   }),
   hasLinkroll: computed.bool('linkroll.firstObject'),
   hasMarquee: computed.bool('marqueeImage'),
-  hasDonationLink: computed.bool('donate'),
   hasSubscriptionLinks: computed.bool('podcastLinks.firstObject'),
-  hasHeaderButtons: computed.or('hasDonationLink', 'hasSubscriptionLinks')
+  hasHeaderButtons: computed.or('donateChunk', 'hasSubscriptionLinks')
 });
