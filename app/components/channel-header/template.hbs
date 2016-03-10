@@ -37,7 +37,7 @@
         {{{model.donateChunk}}}
 
         {{#if model.hasSubscriptionLinks}}
-        {{podcast-links subscribeOptions=model.podcastLinks}}
+          {{dropdown-menu items=model.podcastLinks}}
         {{/if}}
       </div>
       <!-- .btn-group -->
