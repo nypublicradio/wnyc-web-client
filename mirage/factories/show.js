@@ -21,7 +21,7 @@ export default Factory.extend({
     ];
   },
 
-  chunks() {
+  sidebarChunks() {
     return [
       {
         "content": "I'm a top chunk",
