@@ -13,8 +13,11 @@ export default DS.Model.extend({
   sidebarChunks: DS.attr(), // Array of custom html markup 
   chunkSidebarTop: computed('sidebarChunks', {
     get() {
-      const chunks = get(this, 'sidebarChunks').compact();
-      const chunk = chunks.findBy('position', 'top');
+      const chunks = get(this, 'sidebarChunks');
+      if (!chunks) {
+        return '';
+      }
+      const chunk = chunks.compact().findBy('position', 'top');
       if (chunk) {
         return chunk.content;
       } else {
@@ -24,8 +27,11 @@ export default DS.Model.extend({
   }),
   chunkSidebarBottom: computed('sidebarChunks', {
     get() {
-      const chunks = get(this, 'sidebarChunks').compact();
-      const chunk = chunks.findBy('position', 'bottom');
+      const chunks = get(this, 'sidebarChunks');
+      if (!chunks) {
+        return '';
+      }
+      const chunk = chunks.compact().findBy('position', 'bottom');
       if (chunk) {
         return chunk.content;
       } else {
