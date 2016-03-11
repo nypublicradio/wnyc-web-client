@@ -42,7 +42,7 @@
     <div class="btn-group">
       {{#if isListenableNow}}
         {{#if isLive}}
-          <button {{action 'listen' item 'wnyc-fm939'}}
+          <button {{action 'listen' item livestream}}
             aria-label="Listen to {{item.title}}"
             class="btn btn--blue {{if isFeatured 'btn--large'}}">
             <i class="fa fa-play {{if isFeatured 'icon--prefix--large' 'icon--prefix'}}"></i>

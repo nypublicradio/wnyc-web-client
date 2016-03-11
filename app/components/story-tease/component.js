@@ -96,10 +96,11 @@ export default Component.extend(LegacySupport, {
   },
 
   _updateStatus(results) {
-    const [isLive, endtime] = results;
+    const [isLive, endtime, livestream] = results;
     if (isLive) {
       set(this, 'status', 'live');
       set(this, 'endtime', endtime);
+      set(this, 'livestream', livestream)
     } else if (this._isUpcoming()){
       set(this, 'status', 'upcoming');
     } else {
