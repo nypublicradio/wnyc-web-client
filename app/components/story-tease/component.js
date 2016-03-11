@@ -100,7 +100,7 @@ export default Component.extend(LegacySupport, {
     if (isLive) {
       set(this, 'status', 'live');
       set(this, 'endtime', endtime);
-      set(this, 'livestream', livestream)
+      set(this, 'livestream', livestream);
     } else if (this._isUpcoming()){
       set(this, 'status', 'upcoming');
     } else {
