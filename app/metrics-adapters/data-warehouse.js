@@ -10,14 +10,14 @@ const {
   copy
 } = Ember;
 
-const {
-  listen
-} = wnyc.listening;
+// TODO: still using wnyc listen module for legacy compat. upgrade to session manager eventually
+// const {
+//   listen
+// } = wnyc.listening;
 
 const { ajax } = $;
 
 export default BaseAdapter.extend({
-  // TODO: still using wnyc listen module for legacy compat. upgrade to session manager eventually
   //sessionManager: service(),
 
   toStringExtension() {
@@ -38,6 +38,8 @@ export default BaseAdapter.extend({
   },
 
   trackEvent(o) {
+    // TODO: turn off metrics for now until migrate to sessionManager
+    return;
     const isDebug = get(this, 'isDebug');
     const options = copy(o);
     const { eventName } = options;
@@ -60,6 +62,8 @@ export default BaseAdapter.extend({
   },
 
   trackPage(details) {
+    // TODO: turn off metrics for now until migrate to sessionManager
+    return;
     const {
       page,
       title
