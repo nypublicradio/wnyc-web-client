@@ -29,7 +29,7 @@ module.exports = function(environment) {
     wnycStaticURL: process.env.WNYC_STATIC_URL,
     wnycURL: process.env.WNYC_URL,
     featureFlags: {
-      'django-page-routing': false,
+      'django-page-routing': true,
       'persistent-player': false,
       'embedded-components': false
     },
