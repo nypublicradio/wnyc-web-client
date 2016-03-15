@@ -62,7 +62,8 @@ export default Service.extend({
     // something like:
     //  session-service for auth
     //  updates bound prop which reveals editlinks
-    wnyc.listening.listen("wnyc.user.success", () => wnyc.user.staffLinks());
+    // TODO: not until we migrate to sessionManager
+    //wnyc.listening.listen("wnyc.user.success", () => wnyc.user.staffLinks());
   },
 
   _setupStreamListener() {
