@@ -17,7 +17,7 @@ export default Component.extend({
 
     if (ENV.renderGoogleAds) {
       let router = get(this, 'router.router');
-      router.on('didTransition', () => this.doRefresh());
+      router.on('didTransition', this.doRefresh);
     }
   },
 
@@ -38,7 +38,11 @@ export default Component.extend({
             const adSlot = wnyc.ads[ad];
             googletag.pubads().refresh([adSlot]);
           });
-          set(this, 'cachedUrl', currentUrl);
+          if (!get(this, 'isDestroying')) {
+            set(this, 'cachedUrl', currentUrl);
+          } else {
+            get(this, 'router.router').off('didTransition', this.doRefresh);
+          }
         });
       } else {
         run.later(this, 'doRefresh', 500);
