@@ -15,6 +15,7 @@ module.exports = function(app) {
     var parsed = url.parse(req.params[0]);
     var origin = parsed.protocol + '//' + parsed.host;
     req.url = parsed.path;
+    res.setHeader('Access-Control-Allow-Origin', '*');
     proxy.web(req, res, { target: origin, changeOrigin: true });
   });
 };
