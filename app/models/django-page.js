@@ -86,10 +86,14 @@ export default DS.Model.extend({
 
   _separateScripts() {
     let doc = this.get('document');
+
+    // First remove any cached ember tags
+    Array.from(doc.querySelectorAll('[data-ember]')).forEach(n => n.parentNode.removeChild(n));
+
     let body = importNode(doc.querySelector('body'));
     let scripts = [];
 
-    // First handle <script> in the <head>
+    // Then handle <script> in the <head>
     Array.from(doc.querySelectorAll('head script')).forEach(script => {
       if (isJavascript(script)) {
         // Save for later evaluation
