@@ -57,7 +57,6 @@ module.exports = function(defaults) {
   // source.
   app.import('vendor/imagesloaded/imagesloaded.pkgd.js');
   app.import('vendor/wnyc-bootstrap/index.js');
-  app.import('vendor/wnyc-legacy/util.js');
   app.import('vendor/wnyc-legacy/lib/wnyc/listening.js');
   app.import('vendor/wnyc-legacy/lib/wnyc/namespace.js');
   app.import('vendor/wnyc-legacy/overhaul/story/namespace_ext.js');
