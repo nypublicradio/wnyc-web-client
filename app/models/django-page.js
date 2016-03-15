@@ -31,6 +31,10 @@ export default DS.Model.extend({
     }
   }),
 
+  legacyContent: Ember.computed('document', function() {
+    return this.get('document').querySelector('#site');
+  }),
+
   wnycContent: Ember.computed('document', function() {
     let tag = this.get('document').querySelector('#wnyc-story-jsonapi');
     let json;
