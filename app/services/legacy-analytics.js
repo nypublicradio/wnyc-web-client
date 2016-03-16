@@ -92,7 +92,8 @@ export default Service.extend({
     metrics.trackEvent({
       category: 'Share',
       action: `${showName ? `Show: ${showName} | ` : ''}Title: ${storyTitle}`,
-      label: sharedVia
+      label: sharedVia,
+      pk: {cmsPK: wnyc.current_item.id}
     });
   }
 });
