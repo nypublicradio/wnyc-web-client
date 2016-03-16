@@ -6,8 +6,7 @@ const {
   get,
   set,
   $,
-  K,
-  copy
+  K
 } = Ember;
 
 const {
@@ -38,6 +37,7 @@ export default BaseAdapter.extend({
   },
 
   trackEvent(options) {
+    const isDebug = get(this, 'isDebug');
     const { eventName } = options;
     const eventMethod = `_${eventName}`;
 
@@ -67,7 +67,6 @@ export default BaseAdapter.extend({
     const {
       page,
       title,
-      pk
     } = details;
 
     const data = {
