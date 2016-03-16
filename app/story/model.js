@@ -59,7 +59,7 @@ export default Model.extend({
       // compact first to guard against returned undefineds
       let gaAction = [channeltitle, showtitle, seriestitles].compact().map((c, i) => {
         if (i === 0 && c) {
-          return `${channeltype === 'c' ? 'Article Channel' : 'Blog'}: ${c} `;
+          return `${channeltype === 'c' ? 'Article Channel' : 'Blog'}: ${c}`;
         } else if (i === 1 && c) {
           return `Show: ${c}`;
         } else if (i === 2 && c.length) {
