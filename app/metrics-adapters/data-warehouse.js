@@ -37,32 +37,37 @@ export default BaseAdapter.extend({
     }
   },
 
-  trackEvent(o) {
-    const isDebug = get(this, 'isDebug');
-    const options = copy(o);
+  trackEvent(options) {
     const { eventName } = options;
     const eventMethod = `_${eventName}`;
 
-    delete options.eventName;
-
     if (!eventName) {
-      this.send(options);
+      this.defaultSend(options);
     } else if (this[eventMethod]) {
       this[eventMethod](options);
     } else if (isDebug) {
       console.warn(`No ${eventMethod} method defined on ${this.toString()}.`);
     }
 
-    if (isDebug) {
-      console.log('trackEvent', options);
-    }
+  },
 
+  defaultSend(options) {
+    const {
+      model,
+      category,
+      action,
+      label,
+    } = options;
+
+    const pk = model ? model.get('cmsPK') || 'No CMS PK' : 'No available model';
+    this.send({ category, action, label, pk });
   },
 
   trackPage(details) {
     const {
       page,
-      title
+      title,
+      pk
     } = details;
 
     const data = {
