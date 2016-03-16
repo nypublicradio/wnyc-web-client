@@ -58,7 +58,7 @@ export default Model.extend({
       let analyticsCode = get(this, 'analyticsCode');
       let {channeltitle, showtitle, seriestitles} = parseAnalyticsCode(analyticsCode);
       // compact first to guard against returned undefineds
-      let gaAction = [channeltitle, showtitle, seriestitles].compact().map((c, i) => {
+      let containers = [channeltitle, showtitle, seriestitles].compact().map((c, i) => {
         if (i === 0 && c) {
           return `Article Channel: ${c} `;
         } else if (i === 1 && c) {
@@ -68,8 +68,8 @@ export default Model.extend({
         }
       }).compact().join(' | ');
       return {
-        gaAction,
-        gaLabel: get(this, 'title')
+        containers,
+        title: get(this, 'title')
       };
     }
   })
