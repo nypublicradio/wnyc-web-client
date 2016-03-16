@@ -20,7 +20,7 @@ export function initialize(applicationInstance) {
     config: {
       host: wnycAccountRoot,
       endpoint: endpoint,
-      debug: /alertTracking/.test(window.location.search)
+      debug: /debug/.test(window.location.search)
     }
   }, {
     name: 'GoogleAnalytics',
