@@ -74,6 +74,7 @@ module.exports = function(environment) {
     },
 
     siteSlug: 'wnyc',
+    siteName: 'WNYC',
     renderGoogleAds: true,
     // these are provided via a .env file or else by Django's EmberAdapter
     googleAnalyticsKey: process.env.GOOGLE_ANALYTICS,
