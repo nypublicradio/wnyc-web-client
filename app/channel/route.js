@@ -30,7 +30,8 @@ export default Route.extend({
     set(listRouter, 'channelTitle', channelTitle);
     metrics.trackEvent({
       category: `Viewed ${get(channel, 'listingObjectType').capitalize()}`,
-      action: channelTitle
+      action: channelTitle,
+      model: channel
     });
   },
   setupController(controller) {
