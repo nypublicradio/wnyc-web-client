@@ -46,7 +46,7 @@ export default Ember.Component.extend({
     getComments() {
       if (!this.get('isShowingComments')) {
         let metrics = this.get('metrics');
-        let {gaAction:action, gaLabel:label} = this.get('story.analytics');
+        let {containers:action, title:label} = this.get('story.analytics');
 
         metrics.trackEvent({
           category: 'Displayed Comments',
