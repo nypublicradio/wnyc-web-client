@@ -24,11 +24,15 @@ export default Ember.Route.extend({
   afterModel(model) {
     let metrics = get(this, 'metrics');
     let {containers:action, title:label} = get(model, 'story.analytics');
+    let nprVals = get(model, 'story.nprAnalyticsDimensions');
     
     if (get(model, 'story.extendedStory.headerDonateChunk')) {
       this.send('updateDonateChunk', get(model, 'story.extendedStory.headerDonateChunk'));
     }
-
+    
+    // must run before trackPageview
+    metrics.invoke('nprDimensions', 'GoogleAnalytics', { nprVals });
+    //
     metrics.trackEvent({
       eventName: 'viewedStory',
       category: 'Viewed Story',

@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import ENV from 'overhaul/config/environment';
+import get from 'ember-metal/get';
 import { retryFromServer } from 'overhaul/lib/compat-hooks';
+import service from 'ember-service/inject';
 
 export default Ember.Route.extend({
   queryParams: {
@@ -22,5 +24,11 @@ export default Ember.Route.extend({
     }
     return this.store.find('django-page', upstream_url)
       .catch(e => retryFromServer(e, upstream_url));
+  },
+  afterModel() {
+    const metrics = get(this, 'metrics');
+    // must run before trackPageview
+    metrics.invoke('nprDimensions', 'GoogleAnalytics', {});
+    //
   }
 });

@@ -31,11 +31,15 @@ export default Route.extend({
   afterModel({ channel }) {
     const channelTitle = get(channel, 'title');
     const metrics = get(this, 'metrics');
+    const nprVals = get(channel, 'nprAnalyticsDimensions');
     
     if (channel.get('headerDonateChunk')) {
       this.send('updateDonateChunk', channel.get('headerDonateChunk'));
     }
 
+    // must run before trackPageview
+    metrics.invoke('nprDimensions', 'GoogleAnalytics', { nprVals });
+    //
     metrics.trackEvent({
       category: `Viewed ${get(channel, 'listingObjectType').capitalize()}`,
       action: channelTitle,
