@@ -19,5 +19,7 @@ export default GoogleAnalytics.extend({
     // _gaq.push(['_setCustomVar', 1, 'User.LoggedIn', isLoggedIn]);
     window.ga('set', 'dimension1', String(isLoggedIn)); // maybe??
   },
-
+  trackEvent({ category, action, value }) {
+    this._super({ category, action, value });
+  }
 });
