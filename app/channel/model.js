@@ -70,5 +70,6 @@ export default DS.Model.extend({
   hasLinkroll: computed.bool('linkroll.firstObject'),
   hasMarquee: computed.bool('marqueeImage'),
   hasSubscriptionLinks: computed.bool('podcastLinks.firstObject'),
-  hasHeaderButtons: computed.or('donateChunk', 'hasSubscriptionLinks')
+  hasHeaderButtons: computed.or('donateChunk', 'hasSubscriptionLinks'),
+  nprAnalyticsDimensions: DS.attr(),
 });

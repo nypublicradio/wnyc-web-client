@@ -53,6 +53,7 @@ export default Model.extend({
     }
     return `${ENV.wnycAccountRoot}/comments/security_info/?${Ember.$.param(data)}`;
   },
+  nprAnalyticsDimensions: attr(),
   analytics: computed('analyticsCode', {
     get() {
       let analyticsCode = get(this, 'analyticsCode');
