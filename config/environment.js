@@ -77,7 +77,7 @@ module.exports = function(environment) {
     siteName: 'WNYC',
     renderGoogleAds: true,
     // these are provided via a .env file or else by Django's EmberAdapter
-    googleAnalyticsKey: process.env.GOOGLE_ANALYTICS,
+    googleAnalyticsKey: process.env.GOOGLE_ANALYTICS || 'UA-46158613-1', // demo GA key
     googleAPIv3Key: process.env.GOOGLE_API_V3_KEY,
     typekit: { kitId: 'ifl2zxi' },
     wnycAPI: process.env.WNYC_API,
