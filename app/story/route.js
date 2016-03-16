@@ -27,7 +27,8 @@ export default Ember.Route.extend({
     metrics.trackEvent({
       category: 'Viewed Story',
       action,
-      label
+      label,
+      model: get(model, 'story')
     });
   }
 });
