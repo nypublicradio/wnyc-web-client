@@ -18,6 +18,7 @@ function contains(selector, target) {
 
 export default Service.extend({
   metrics: service(),
+  store: service(),
 
   dispatch(e) {
     let {target} = e;
@@ -66,13 +67,14 @@ export default Service.extend({
 
   _trackShare({target}) {
     let metrics = get(this, 'metrics');
+    let store = get(this, 'store');
+    let story = store.peekRecord('story', wnyc.current_item.id);
+    let {containers, title} = get(story, 'analytics');
 
     /*global wnyc*/
     let $clickedEl = $(target);
     let dataCategory = $clickedEl.closest('[data-category]');
     let sharedVia = dataCategory.data('category');
-    let showName = wnyc.current_item.show;
-    let storyTitle = wnyc.current_item.title;
 
     switch(sharedVia){
       case 'SharedE':
@@ -91,7 +93,7 @@ export default Service.extend({
 
     metrics.trackEvent({
       category: 'Share',
-      action: `${showName ? `Show: ${showName} | ` : ''}Title: ${storyTitle}`,
+      action: `${containers} | Title: ${title}`,
       label: sharedVia
     });
   }
