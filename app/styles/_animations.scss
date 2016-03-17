@@ -1,0 +1,62 @@
+#js-listings {
+  min-height: calc(100vh - 75px);
+
+  .ember-application & {
+    &:before,
+    &:after {
+      content: none;
+    }
+  }
+}
+
+.loading-page {
+  min-height: calc(100vh - 150px);
+}
+
+#js-listings,
+.loading-page {
+  position: relative;
+
+  &:after {
+    content: '';
+    width: 30px;
+    height: 30px;
+    border: 6px solid rgba(239,239,239,1);
+    border-radius: 50%;
+    border-left-color: rgba(176,176,175,1);
+    border-top-color: rgba(176,176,176,1);
+
+    text-align: center;
+    animation: bigSpin 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+    transform-origin: 50% 50%; 
+  }
+
+  &:before {
+    content: '';
+    width: 15px;
+    height: 15px;
+    border: 6px solid rgba(239,239,239,1);
+    border-radius: 50%;
+    border-left-color: rgba(176,176,175,1);
+    border-top-color: rgba(176,176,176,1);
+
+    animation: bigSpin .8s linear infinite;
+    animation-origin: 50% 50%;
+  }
+
+  &:after,
+  &:before {
+    display: block;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    margin: auto;
+  }
+}
+
+@keyframes bigSpin {
+  0% {
+  }
+  100% { 
+    transform: rotate(360deg);
+  }
+}
