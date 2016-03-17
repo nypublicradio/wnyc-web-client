@@ -42,6 +42,10 @@ export function sanitizeAlienDom(djangoPage) {
   Array.from(djangoPage.get('document').querySelectorAll('script'))
     .filter(n => toSanitize.find(r => r.test(n.src)))
     .forEach(n => n.parentNode.removeChild(n));
+
+  
+  Array.from(djangoPage.get('document').querySelectorAll('body > .ember-view'))
+    .forEach(n => n.parentNode.removeChild(n));
 }
 
 // Embedded Ember components require an ID for ember-wormwhole to use them as a
