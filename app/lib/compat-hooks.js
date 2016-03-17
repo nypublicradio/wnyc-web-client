@@ -21,6 +21,10 @@ export function beforeTeardown(/* element, page */) {
     .removeClass('navigation-open')
     .removeClass('subnavigation-open');
 
+  // player.js listens for a story event with a handler defined on the wnyc object,
+  // which is triggered randomly; unbind here to avoid throwing undefined errors
+  $(window).off('unload storage');
+
   // The mailchimp popup signup form is badly behaved -- it insists on
   // being the only AMD loader on the page. So here we clear it away
   // to make room for the next copy. (Ember's AMD loader is hiding
