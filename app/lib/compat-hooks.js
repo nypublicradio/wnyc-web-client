@@ -12,6 +12,10 @@ const { $ } = Ember;
 // This gets run by the django-page component right before tearing
 // down the content.
 export function beforeTeardown(/* element, page */) {
+  // we must destroy any presently loaded google ad slots so the next page can
+  // reliably render theirs
+  window.googletag.destroySlots();
+
   // toggle_menu_v2.js sets classes way up on <html>, so we may need to clear them.
   $('html')
     .removeClass('navigation-open')
