@@ -12,6 +12,22 @@ import {
 
 const { $, get } = Ember;
 const { wnycURL } = ENV;
+const { run } = Ember;
+
+function doRefresh() {
+  const { googletag } = window;
+
+  if (googletag && googletag.apiReady) {
+    run.schedule('afterRender', this, () => {
+      googletag.cmd.push(() => {
+        googletag.pubads().refresh();
+      });
+    });
+  } else {
+    run.later(this, doRefresh, 500);
+  }
+}
+
 
 export default Ember.Component.extend({
   legacyAnalytics: service(),
@@ -42,6 +58,7 @@ export default Ember.Component.extend({
         // if an alien dom is present, capture any escaped clicks but otherwise
         // leave the alien alone
         installAlienListener(this);
+        doRefresh();
       } else {
         // otherwise clear out the dom and render our server-fetched content
         clearAlienDom();
@@ -50,6 +67,7 @@ export default Ember.Component.extend({
           // re-enable any overlaid content so that it can wormhole
           // itself into the server-rendered DOM.
           this.set('showingOverlay', true);
+          doRefresh();
         });
       }
     }
