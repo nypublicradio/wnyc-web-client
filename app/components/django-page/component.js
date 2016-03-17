@@ -6,7 +6,8 @@ import {
   isInDom,
   clearAlienDom,
   embeddedComponentSetup,
-  installAlienListener
+  installAlienListener,
+  sanitizeAlienDom
 } from '../../lib/alien-dom';
 
 const { $, get } = Ember;
@@ -23,6 +24,7 @@ export default Ember.Component.extend({
     if (page !== this._lastPage) {
       if (isInDom(page.get('id'))) {
         embeddedComponentSetup();
+        sanitizeAlienDom(this.get('page'));
       }
 
       this.set('showingOverlay', isInDom(page.get('id')));

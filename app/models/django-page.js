@@ -90,10 +90,6 @@ export default DS.Model.extend({
 
   _separateScripts() {
     let doc = this.get('document');
-
-    // First remove any cached ember tags
-    Array.from(doc.querySelectorAll('[data-ember]')).forEach(n => n.parentNode.removeChild(n));
-
     let body = importNode(doc.querySelector('body'));
     let scripts = [];
 

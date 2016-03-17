@@ -1,6 +1,20 @@
 // The Alien DOM is a DOM that exists beyond the reaches of an Ember app's
 // understanding, i.e. an HTML document that is already present when the app boots.
 
+// Alien DOMs load up various scripts at boot time which must only run once. These
+// will be sanitized from the Alien DOM before render so any future renders will
+// not try to load these for a second time.
+const toSanitize = [
+  /.*google\.com\/jsapi/,
+  /.*google-analytics.*/,
+  /.*googletagservices.*/,
+  /.*quantserve.*/,
+  /.*googleapis.*/,
+  /assets\/vendor.*.js/,
+  /assets\/overhaul.*.js/,
+];
+
+
 // This is assigned to in installAlienListener so it can later be referenced for
 // removal from the click event.
 let alienEventListener;
@@ -20,6 +34,14 @@ export function clearAlienDom() {
   let notEmber = document.querySelectorAll('body > :not(.ember-view)');
   Array.from(notEmber).forEach(n => n.parentNode.removeChild(n));
   document.removeEventListener('click', alienEventListener);
+}
+
+// When we have a django-page ready to render for the first time, we need to clean out
+// any scripts which should not be reinitizalized as part of the `appendTo` process.
+export function sanitizeAlienDom(djangoPage) {
+  Array.from(djangoPage.get('document').querySelectorAll('script'))
+    .filter(n => toSanitize.find(r => r.test(n.src)))
+    .forEach(n => n.parentNode.removeChild(n));
 }
 
 // Embedded Ember components require an ID for ember-wormwhole to use them as a
