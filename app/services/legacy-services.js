@@ -4,30 +4,12 @@ import service from 'ember-service/inject';
 
 const {
   Service,
-  $,
   get,
 } = Ember;
 
 export default Service.extend({
   metrics: service(),
 
-  init() {
-    this._setupStreamListener();
-  },
-  stream(e) {
-    const streamSlug = $(this).attr('data-stream-slug');
-    if (!wnyc || !wnyc.xdPlayer) {
-      console.log('error: wnyc or wnyc.xdPlayer is missing');
-      return;
-    }
-    if (streamSlug) {
-      wnyc.xdPlayer.playStream(streamSlug);
-    } else {
-      // If no streamSlug, just open player to streams menu.
-      wnyc.xdPlayer.openToAllStreams();
-    }
-    e.preventDefault();
-  },
   streamStation(streamSlug) {
     if (!streamSlug) {
       wnyc.xdPlayer.openToAllStreams();
@@ -64,9 +46,4 @@ export default Service.extend({
     //  updates bound prop which reveals editlinks
     wnyc.listening.listen("wnyc.user.success", () => wnyc.user.staffLinks());
   },
-
-  _setupStreamListener() {
-    $(document).on('click', '.js-launch-stream', this.stream);
-  },
-
 });
