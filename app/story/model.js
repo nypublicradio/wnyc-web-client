@@ -66,8 +66,8 @@ export default Model.extend({
           return `Series: ${c.join('+')}`;
         }
       }).compact().join(' | ');
-      if (isnpr) {
-        gaAction = gaAction ? `NPR | ${gaAction}` : 'NPR';
+      if (isnpr && !gaAction) {
+        gaAction = 'NPR';
       }
       return {
         gaAction,
