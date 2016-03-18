@@ -7,6 +7,7 @@
   out of the old JS.
 */
 import Ember from 'ember';
+import { runOnce } from 'overhaul/services/legacy-loader';
 const { $ } = Ember;
 
 // This gets run by the django-page component right before tearing
@@ -51,8 +52,8 @@ export function beforeAppend(element /*, page */) {
 // pages is run through this before executing. You can return non-true
 // to cancel the entire script.
 export function mangleJavascript(scriptTag, sourceCode) {
-  // TODO: I see in the mako templates that this is already disabled
-  // in overhaul mode. Need to discuss with Brian.
-  let source = sourceCode.replace('.pubads().enableSyncRendering()', '');
-  return source;
+  if (Object.keys(runOnce).any(k => scriptTag.src.match(k))) {
+    return false;
+  }
+  return sourceCode;
 }
