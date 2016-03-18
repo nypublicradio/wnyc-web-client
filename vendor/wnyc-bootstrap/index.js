@@ -1,0 +1,1 @@
+window.wnyc = window.wnyc || {}
