@@ -48,15 +48,21 @@ export const runOnce = Object.freeze({
   'js/swfobject.js': true,
   'js/vendor/underscore/underscore-1.4.4.js': true,
   'js/vendor/backbone/backbone-0.9.9.js': true,
+  'js/vendor/backbone/backbone-1.0.0.js': true,
   'js/vendor/handlebars/handlebars-2.0.0.min.js': true,
   'js/vendor/jwplayer/jwplayer.js': true,
   'js/vendor/soundmanager2/v297a-20140901/soundmanager2.js': true,
   'js/lib/marionette/xd_player/core.js': true,
   'js/lib/marionette/xd_player/okra/core.js': true,
-  // from previous legacy loader commit
-  // TODO: test if we should only run these once
-  //'js/util.js': true,
-  //'js/lib/wnyc/jquery.js': true
+  'www-widgetapi.js': true,
+  '.*google.com/jsapi': true,
+  '.*google-analytics.*': true,
+  '.*googletagservices.*': true,
+  '.*googleadservices.*': true,
+  '.*quantserve.*': true,
+  '.*googleapis.*': true,
+  'assets/vendor.*.js': true,
+  'assets/overhaul.*.js': true,
 });
 
 import Ember from 'ember';
