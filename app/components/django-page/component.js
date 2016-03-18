@@ -7,7 +7,6 @@ import {
   clearAlienDom,
   embeddedComponentSetup,
   installAlienListener,
-  sanitizeAlienDom
 } from '../../lib/alien-dom';
 
 const { $, get } = Ember;
@@ -57,7 +56,6 @@ export default Ember.Component.extend({
         // if an alien dom is present, capture any escaped clicks but otherwise
         // leave the alien alone
         installAlienListener(this);
-        doRefresh();
       } else {
         // otherwise clear out the dom and render our server-fetched content
         clearAlienDom();
