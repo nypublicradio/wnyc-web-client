@@ -34,7 +34,7 @@ module.exports = function(defaults) {
         'WNYC_URL',
       ],
     },
-    storeConfigInMeta: EmberApp.env() !== 'development',
+    storeConfigInMeta: env !== 'development',
 
     // This project's in-repo addon configuration confuses Mirage and makes it
     // think we are distributing this project as an addon. Because of this it assumes
@@ -56,6 +56,18 @@ module.exports = function(defaults) {
   // these are symlinked to their original locations in the puppy
   // source.
   app.import('vendor/imagesloaded/imagesloaded.pkgd.js');
+
+  if (env === 'test') {
+    app.import('vendor/wnyc-bootstrap/index.js');
+    app.import('vendor/wnyc-legacy/util.js');
+    app.import('vendor/wnyc-legacy/lib/wnyc/listening.js');
+    app.import('vendor/wnyc-legacy/lib/wnyc/namespace.js');
+    app.import('vendor/wnyc-legacy/overhaul/story/namespace_ext.js');
+    app.import('vendor/wnyc-legacy/lib/wnyc/jquery.js');
+    app.import('vendor/wnyc-legacy/lib/jquery/jquery.ba-postmessage.js');
+    app.import('vendor/wnyc-legacy/lib/jquery/jquery.xdr.js');
+    app.import('vendor/wnyc-legacy/lib/jquery/browserWarn.js');
+  }
 
   return app.toTree();
 };
