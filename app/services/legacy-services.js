@@ -39,12 +39,4 @@ export default Service.extend({
       console.warn('Cross Domain Player does not exist');
     }
   },
-  processEditLinks() {
-    // should be abstracted for emberification
-    // something like:
-    //  session-service for auth
-    //  updates bound prop which reveals editlinks
-    // TODO: not until we migrate to sessionManager
-    //wnyc.listening.listen("wnyc.user.success", () => wnyc.user.staffLinks());
-  },
 });

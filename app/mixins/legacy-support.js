@@ -9,11 +9,6 @@ const {
 export default Mixin.create({
   legacyServices: inject.service(),
 
-  editLinks() {
-      const legacy = get(this, 'legacyServices');
-      legacy.processEditLinks();
-  },
-
   actions: {
     listen(model, streamSlug) {
       const id = get(model, 'id');
