@@ -71,7 +71,9 @@
         </div>
       {{/if}}
 
-      <a data-url="{{item.editLink}}" class="btn btn--green stf" style="display:none">Edit this</a>
+      {{#if sessionManager.user.isStaff}}
+        <a href="{{item.editLink}}" class="btn btn--green">Edit this</a>
+      {{/if}}
     </div>
     <!-- .btn-group -->
 

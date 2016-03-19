@@ -30,7 +30,9 @@
     <!-- .l-col2of3 -->
 
     <div class="l-col1of3 l-col--flex l-col--cv l-col--right">
-      <a data-url="{{model.editLink}}" class="btn btn--green stf" style="display:none; margin:auto;">Edit this</a>
+      {{#if sessionManager.user.isStaff}}
+        <a href="{{model.editLink}}" class="btn btn--green" style="margin:auto;">Edit this</a>
+      {{/if}}
 
       {{#if model.hasHeaderButtons}}
       <div class="btn-group btn-group--stacked">
