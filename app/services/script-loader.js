@@ -77,12 +77,11 @@ function canonicalize(url) {
 // violations, we are proxying them through our own server.
 function scriptURL(tag) {
   let origin = ENV.wnycURL;
-  let environment = ENV.environment;
   let url = canonicalize(tag.attributes.src.value);
   if (url.indexOf(origin) === 0) {
     return url;
   } else {
-    return `${environment === 'development' ? 'http://localhost:4200' : '' }/dynamic-script-loader/` + encodeURIComponent(canonicalize(url));
+    return `/api/v1/dynamic-script-loader/${encodeURIComponent(canonicalize(url))}`;
   }
 }
 
