@@ -1,24 +1,15 @@
-/* globals wnyc */
+import service from 'ember-service/inject';
 import GoogleAnalytics from 'ember-metrics/metrics-adapters/google-analytics';
-
-// TODO: still relying on wnyc's listening extension. should move to a session
-// manager service
-// const {
-//   listen
-// } = wnyc.listening;
+import Ember from 'ember';
+const { get } = Ember;
 
 export default GoogleAnalytics.extend({
+  sessionManager: service(),
   init() {
     this._super(...arguments);
-    //listen("wnyc.user.success", this.identify);
+    get(this, 'sessionManager.user').then(this.identify);
   },
-  identify() {
-    // TODO: use sessionmanager
-    // var userData = wnyc.user && wnyc.user.data,
-    //   isLoggedIn = userData && !!userData.isAuthenticated;
-    // // TODO: need to figure out new GA equivalent of this:
-    // // _gaq.push(['_setCustomVar', 1, 'User.LoggedIn', isLoggedIn]);
-    // window.ga('set', 'dimension1', String(isLoggedIn)); // maybe??
+  identify(user) {
+    window.ga('set', 'dimension1', String(get(user, 'isAuthenticated')));
   },
-
 });
