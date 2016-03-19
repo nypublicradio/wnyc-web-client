@@ -54,15 +54,17 @@ export const runOnce = Object.freeze({
   'js/vendor/soundmanager2/v297a-20140901/soundmanager2.js': true,
   'js/lib/marionette/xd_player/core.js': true,
   'js/lib/marionette/xd_player/okra/core.js': true,
-  'www-widgetapi.js': true,
-  '.*google.com/jsapi': true,
-  '.*google-analytics.*': true,
-  '.*googletagservices.*': true,
-  '.*googleadservices.*': true,
-  '.*quantserve.*': true,
-  '.*googleapis.*': true,
-  'assets/vendor.*.js': true,
-  'assets/overhaul.*.js': true,
+  'www.google.com/jsapi': true,
+  'maps.googleapis.com/maps/api/js': true,
+  //'www.google-analytics.com/analytics.js': true,
+  //'www.googleadservices.com/pagead/conversion.js': true,
+  'pixel.quantserve.com/aquant.js': true,
+  //'www.googletagservices.com/tag/js/gpt.js': true,
+  //'survey.g.doubleclick.net/async_survey': true,
+  //'www.youtube.com/player_api': true,
+  // async added by other scripts
+  //'www-widgetapi.js': true,
+  //'partner.googleadservices.com/gpt/pubads_impl_82.js': true,
 });
 
 import Ember from 'ember';
