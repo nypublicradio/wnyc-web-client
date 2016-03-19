@@ -72,7 +72,7 @@ export default Component.extend({
       }
     }
   }),
-  didInitAttrs() {
+  didRecieveAttrs() {
     const hideLinks = get(this, 'hideLinks');
     const story = get(this, 'item');
     if (hideLinks) {
