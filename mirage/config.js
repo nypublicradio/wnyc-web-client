@@ -3,6 +3,10 @@ import config from 'overhaul/config/environment';
 export default function() {
   this.namespace = config.wnycURL;
 
+  this.post('/api/v1/analytics/ga/', function() {
+    return {};
+  });
+
   this.get('/api/v1/list/comments/:typeId/:storyId/', function(schema, request) {
     return {
       results: server.createList('comment', 5)
