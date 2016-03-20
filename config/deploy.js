@@ -30,6 +30,10 @@ module.exports = function(deployTarget) {
     }
   };
 
+  if (deployTarget === 'navigation') {
+    ENV.redis.keyPrefix = 'client-navigation';
+  }
+
   if (deployTarget === 'demo') {
     ENV.pipeline = { activateOnDeploy: true };
   }
