@@ -17,6 +17,7 @@ export default Model.extend({
   audioShowOptions: attr('boolean'),
   commentsCount: attr('number'),
   commentsEnabled: attr('boolean'),
+  cmsPK: attr('number'),
   dateLine: attr('string'),
   dateLineDatetime: attr('string'),
   editLink: attr('string'),
