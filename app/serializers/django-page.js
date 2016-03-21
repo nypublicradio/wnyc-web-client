@@ -11,10 +11,10 @@ export default DS.Serializer.extend({
       // we need to clean it from the version we save as our data model, otherwise
       // we get problems from recursive ember views and ember trying to boot again
       Array.from(doc.querySelectorAll('.ember-view')).forEach(n => emberAssets.push(n));
-      emberAssets.push(doc.querySelector('script[src*="assets/vendor"'));
-      emberAssets.push(doc.querySelector('script[src*="assets/overhaul"'));
-      emberAssets.push(doc.querySelector('link[href*="assets/vendor"'));
-      emberAssets.push(doc.querySelector('link[href*="assets/overhaul"'));
+      emberAssets.push(doc.querySelector('script[src*="assets/vendor"]'));
+      emberAssets.push(doc.querySelector('script[src*="assets/overhaul"]'));
+      emberAssets.push(doc.querySelector('link[href*="assets/vendor"]'));
+      emberAssets.push(doc.querySelector('link[href*="assets/overhaul"]'));
 
       emberAssets.forEach(n => n.parentNode.removeChild(n));
       attributes.inlineDocument = doc;
