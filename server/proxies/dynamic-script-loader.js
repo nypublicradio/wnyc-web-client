@@ -11,8 +11,9 @@ module.exports = function(app) {
     console.error(err, req.url);
   });
 
-  app.get('/dynamic-script-loader/*', function(req, res) {
-    var parsed = url.parse(req.params[0]);
+  app.get('/api/v1/dynamic-script-loader/', function(req, res) {
+    var query = url.parse(req.url, true).query;
+    var parsed = url.parse(query.url);
     var origin = parsed.protocol + '//' + parsed.host;
     req.url = parsed.path;
     res.setHeader('Access-Control-Allow-Origin', '*');
