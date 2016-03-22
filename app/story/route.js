@@ -1,10 +1,11 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
-const { get } = Ember;
+const { get, setProperties } = Ember;
 const { hash: waitFor } = Ember.RSVP;
 
 export default Ember.Route.extend({
   metrics: service(),
+  sessionManager: service(),
   model({ slug }) {
     return this.store.find('django-page', `story/${slug}`.replace(/\/*$/, '/')).then(page => {
       let story = page.get('wnycContent');
@@ -13,8 +14,6 @@ export default Ember.Route.extend({
       return waitFor({
         page,
         story,
-        user: this.store.find('current_user', 'current'),
-        browserId: this.store.find('browser_id', 'current'),
         getComments: () => comments,
         getRelatedStories: () => relatedStories
       });
@@ -22,7 +21,13 @@ export default Ember.Route.extend({
   },
   afterModel(model) {
     let metrics = get(this, 'metrics');
+    let sessionManager = get(this,'sessionManager');
     let {gaAction:action, gaLabel:label} = get(model, 'story.analytics');
+
+    setProperties(model, {
+      user: get(sessionManager, 'user'),
+      browserId: get(sessionManager, 'browserId')
+    });
 
     metrics.trackEvent({
       eventName: 'viewedStory',
