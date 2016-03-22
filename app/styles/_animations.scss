@@ -1,15 +1,3 @@
-#js-listings {
-  min-height: calc(100vh - 75px);
-  position: relative;
-
-  .ember-application & {
-    &:before,
-    &:after {
-      content: none;
-    }
-  }
-}
-
 .loading-page {
   position: fixed;
   top: 0;
@@ -18,10 +6,6 @@
   height: 100%;
   z-index: 2000;
   background: white;
-}
-
-#js-listings,
-.loading-page {
 
   &:after {
     content: '';
