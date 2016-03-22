@@ -56,10 +56,10 @@ export const runOnce = Object.freeze({
   'js/lib/marionette/xd_player/okra/core.js': true,
   'www.google.com/jsapi': true,
   'maps.googleapis.com/maps/api/js': true,
-  //'www.google-analytics.com/analytics.js': true,
+  'www.google-analytics.com/analytics.js': true,
   //'www.googleadservices.com/pagead/conversion.js': true,
   'pixel.quantserve.com/aquant.js': true,
-  //'www.googletagservices.com/tag/js/gpt.js': true,
+  'www.googletagservices.com/tag/js/gpt.js': true,
   //'survey.g.doubleclick.net/async_survey': true,
   //'www.youtube.com/player_api': true,
   // async added by other scripts
