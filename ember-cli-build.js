@@ -69,5 +69,17 @@ module.exports = function(defaults) {
     app.import('vendor/wnyc-legacy/lib/jquery/browserWarn.js');
   }
 
+  if (env === 'test') {
+    app.import('vendor/wnyc-bootstrap/index.js');
+    app.import('vendor/wnyc-legacy/util.js');
+    app.import('vendor/wnyc-legacy/lib/wnyc/listening.js');
+    app.import('vendor/wnyc-legacy/lib/wnyc/namespace.js');
+    app.import('vendor/wnyc-legacy/overhaul/story/namespace_ext.js');
+    app.import('vendor/wnyc-legacy/lib/wnyc/jquery.js');
+    app.import('vendor/wnyc-legacy/lib/jquery/jquery.ba-postmessage.js');
+    app.import('vendor/wnyc-legacy/lib/jquery/jquery.xdr.js');
+    app.import('vendor/wnyc-legacy/lib/jquery/browserWarn.js');
+  }
+
   return app.toTree();
 };
