@@ -7,6 +7,7 @@ const {
 } = Ember;
 
 export default DS.Model.extend({
+  cmsPK: DS.attr('number'),
   title: DS.attr('string'),
   about: DS.belongsTo('api-response', {async: false}),
 

@@ -25,9 +25,11 @@ export default Ember.Route.extend({
     let {gaAction:action, gaLabel:label} = get(model, 'story.analytics');
 
     metrics.trackEvent({
+      eventName: 'viewedStory',
       category: 'Viewed Story',
       action,
-      label
+      label,
+      model: get(model, 'story')
     });
   }
 });

@@ -17,6 +17,7 @@ export default Model.extend({
   audioShowOptions: attr('boolean'),
   commentsCount: attr('number'),
   commentsEnabled: attr('boolean'),
+  cmsPK: attr('number'),
   dateLine: attr('string'),
   dateLineDatetime: attr('string'),
   editLink: attr('string'),
@@ -55,17 +56,20 @@ export default Model.extend({
   analytics: computed('analyticsCode', {
     get() {
       let analyticsCode = get(this, 'analyticsCode');
-      let {channeltitle, showtitle, seriestitles} = parseAnalyticsCode(analyticsCode);
+      let {channeltitle, showtitle, seriestitles, isblog, modelchar} = parseAnalyticsCode(analyticsCode);
       // compact first to guard against returned undefineds
       let gaAction = [channeltitle, showtitle, seriestitles].compact().map((c, i) => {
         if (i === 0 && c) {
-          return `Article Channel: ${c} `;
+          return `${isblog ? 'Blog' : 'Article Channel'}: ${c}`;
         } else if (i === 1 && c) {
           return `Show: ${c}`;
         } else if (i === 2 && c.length) {
           return `Series: ${c.join('+')}`;
         }
       }).compact().join(' | ');
+      if (modelchar === 'n' && !gaAction) {
+        gaAction = 'NPR';
+      }
       return {
         gaAction,
         gaLabel: get(this, 'title')

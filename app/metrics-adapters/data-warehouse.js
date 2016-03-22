@@ -6,8 +6,7 @@ const {
   get,
   set,
   $,
-  K,
-  copy
+  K
 } = Ember;
 
 const { ajax } = $;
@@ -33,32 +32,37 @@ export default BaseAdapter.extend({
     }
   },
 
-  trackEvent(o) {
+  trackEvent(options) {
     const isDebug = get(this, 'isDebug');
-    const options = copy(o);
     const { eventName } = options;
     const eventMethod = `_${eventName}`;
 
-    delete options.eventName;
-
     if (!eventName) {
-      this.send(options);
+      this.defaultSend(options);
     } else if (this[eventMethod]) {
       this[eventMethod](options);
     } else if (isDebug) {
       console.warn(`No ${eventMethod} method defined on ${this.toString()}.`);
     }
 
-    if (isDebug) {
-      console.log('trackEvent', options);
-    }
+  },
 
+  defaultSend(options) {
+    const {
+      model,
+      category,
+      action,
+      label,
+    } = options;
+
+    const pk = model ? get(model, 'cmsPK') || 'No CMS PK' : 'No available model';
+    this.send({ category, action, label, pk });
   },
 
   trackPage(details) {
     const {
       page,
-      title
+      title,
     } = details;
 
     const data = {
@@ -69,11 +73,6 @@ export default BaseAdapter.extend({
     };
 
     this.send(data);
-
-    // TODO: are we calling trackManagedItemView for listing objects?
-    // if (pk) {
-    //   this.trackEvent({eventName: 'trackManagedItemView', pk });
-    // }
   },
 
   // TODO: refactor to follow $.ajax signature (String url, Object options)
@@ -138,21 +137,31 @@ export default BaseAdapter.extend({
     return `${url}?${query.join('&')}`;
   },
 
+  _viewedStory(options) {
+    let { model } = options;
+    let pk = get(model, 'cmsPK');
+
+    this.defaultSend(options);
+    //TODO: are we calling trackManagedItemView for listing objects?
+    if (pk) {
+      this._trackManagedItemView(pk);
+    }
+  },
+
   _trackManagedItemListen(options) {
     const { pk } = options;
     // Given the PK of a Managed Item, track a listen event against it.
-    this.send({endpoint: `/api/most/listen/managed_item/${pk}/`});
-    this.send({endpoint: `/api/v1/listenaction/create/${pk}/play/`, data: {context: 'NYPR_Web'}});
+    this.send({endpoint: `api/most/listen/managed_item/${pk}`});
+    this.send({endpoint: `api/v1/listenaction/create/${pk}/play`, data: {context: 'NYPR_Web'}});
   },
 
   _trackManagedItemCompletion(data) {
     const { pk } = data;
-    this.send({endpoint: `/api/v1/listenaction/create/${pk}/complete/`, data: {context: 'NYPR_Web'}});
+    this.send({endpoint: `api/v1/listenaction/create/${pk}/complete`, data: {context: 'NYPR_Web'}});
   },
 
-  _trackManagedItemView(data) {
-    const { pk } = data;
+  _trackManagedItemView(pk) {
     // Given the PK of a Managed Item, track a view event against it.
-    this.send({endpoint: `/api/most/view/managed_item/${pk}/`, data: {context: 'NYPR_Web'}});
+    this.send({endpoint: `api/most/view/managed_item/${pk}`, data: {context: 'NYPR_Web'}});
   }
 });
