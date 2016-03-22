@@ -15,7 +15,9 @@ const { $ } = Ember;
 export function beforeTeardown(/* element, page */) {
   // we must destroy any presently loaded google ad slots so the next page can
   // reliably render theirs
-  window.googletag.destroySlots();
+  if (window.googletag && window.googletag.destroySlots) {
+    window.googletag.destroySlots();
+  }
 
   // toggle_menu_v2.js sets classes way up on <html>, so we may need to clear them.
   $('html')
