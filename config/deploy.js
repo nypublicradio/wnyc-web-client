@@ -30,8 +30,8 @@ module.exports = function(deployTarget) {
     }
   };
 
-  if (deployTarget === 'navigation') {
-    ENV.redis.keyPrefix = 'client-navigation';
+  if (deployTarget !== 'demo' || deployTarget !== 'production') {
+    ENV.redis.keyPrefix = deployTarget;
   }
 
   if (deployTarget === 'demo') {
