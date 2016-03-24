@@ -67,8 +67,8 @@ export default Model.extend({
           return `Series: ${c.join('+')}`;
         }
       }).compact().join(' | ');
-      if (modelchar === 'n' && !gaAction) {
-        gaAction = 'NPR';
+      if (modelchar === 'n' && !containers) {
+        containers = 'NPR';
       }
       return {
         containers,
