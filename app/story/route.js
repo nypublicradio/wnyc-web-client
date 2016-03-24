@@ -25,6 +25,7 @@ export default Ember.Route.extend({
     let {containers:action, title:label} = get(model, 'story.analytics');
 
     metrics.trackEvent({
+      eventName: 'viewedStory',
       category: 'Viewed Story',
       action,
       label,
