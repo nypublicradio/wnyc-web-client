@@ -1,0 +1,542 @@
+/***
+ * Useful Text Classes:
+ */
+
+/**
+ * Semantic Headings:
+ * We can maintain a proper document outline using secitioning elements
+ * and properly ordered headers, but usually the visual heirarchy needs
+ * its own treament, so we use these semantic heading classes.
+ *
+ *      @example
+ *      h1.h6 h1.h6
+ *      h2.h5 h2.h5
+ *      h3.h4 h3.h4
+ *      h4.h3 h4.h3
+ *      h5.h2 h5.h2
+ *      h6.h1 h6.h1
+ */
+.h1 {
+    @include fontsize($base-font*2);
+    font-weight: 600;
+    line-height: 2.6rem;
+}
+.h2 {
+    @include fontsize($base-font*1.25);
+    font-weight: 600;
+    line-height: 1.6rem;
+}
+.h2--mq-small {
+    @include transition(font-size $transition-timing ease, line-height $transition-timing ease);
+
+    @include mq($small-only) {
+        @include fontsize($base-font);
+        line-height: 1.5;
+    }
+}
+
+.h3 {
+    @include fontsize($base-font);
+    font-weight: 600;
+}
+.h4 {
+    @include fontsize($base-font*0.875);
+    font-weight: 600;
+}
+.h5 {
+    @include fontsize($base-font*0.75);
+    font-weight: 600;
+}
+.h6 {
+    @include fontsize($base-font*0.6875);
+    font-weight: 600;
+}
+.h-featured {
+  @include fontsize(26);
+  font-weight: 700;
+  line-height: 1.2em;
+
+  @include transition(font-size $transition-timing ease, line-height $transition-timing ease);
+
+  @include mq($small-only) {
+      @include fontsize(18);
+      line-height: 1.5625rem;
+  }
+}
+
+/**
+ * Text Block:
+ * `.text`
+ * A useful wrapper for any text, anywhere. Sets the color, font size, 
+ * adds a bottom margin for vertical rhythm, and makes sure that last
+ * child elements do not have a bottom margin
+ *
+ *      @example
+ *      .text
+ *          p Some text about a story
+ */
+.text {
+    color: #333; // should really inherit from html
+                 // but other WNYC styles override this
+    @include fontsize(16);
+    @extend %vertical-rhythm;
+    line-height: 1.6rem;
+
+    > h1:last-child,
+    > h2:last-child,
+    > h3:last-child,
+    > h4:last-child,
+    > h5:last-child,
+    > h6:last-child,
+    > p:last-child {
+        margin-bottom: 0;
+    }
+
+    > .text-body > h1:last-child,
+    > .text-body > h2:last-child,
+    > .text-body > h3:last-child,
+    > .text-body > h4:last-child,
+    > .text-body > h5:last-child,
+    > .text-body > h6:last-child,
+    > .text-body > p:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.text--430 {
+  max-width: 430px;
+}
+
+.text--darkshadow {
+  @include text-shadow(0 2px 4px 0px rgba(black, 0.5));
+}
+
+.text--heading {
+  > h1,
+  > h2,
+  > h3,
+  > h4,
+  > h5,
+  > h6 {
+    color: black;
+    line-height: 28px;
+    @include fontsize(20);
+    font-weight: 600;
+    margin-bottom: 0;
+
+    @include mq($medium-and-up) {
+      @include fontsize(32);
+    }
+  }
+
+  > p {
+    color: $darkgray;
+    font-weight: 400;
+    line-height: 20px;
+    @include fontsize(14);
+
+    > a {
+      @extend .link--dark;
+    }
+  }
+}
+
+.text--extrapadding {
+  @include mq($medium-and-up) {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+}
+
+/**
+ * Text Body:
+ * `.text-body`
+ * Adds some padding to all sides inside a text block.
+ *
+ *      @example
+ *      .text
+ *          .text-body
+ *              p Some text offset from the edges of the text block
+ */
+.text-body {
+    padding: 15px;
+}
+
+.text-body--nopad {
+    padding: 0;
+}
+
+.text-body--stackpad {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.text-body--sidepad {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/**
+ * Text Body with Right Padding:
+ * `.text-body--rightpad`
+ * Useful if your text block edges up to another element and you need
+ * some spacing between the two
+ *
+ *      @example
+ *      .l-split
+ *          .l-split-flexchild
+ *              .text
+ *                  .text-body.text-body--rightpad
+ *                      p Some text that will go long but we want to make some space between it and antoher element that is inline with it. Lorem ipsum lorem ipsum lorem ipsum foo bar baz foo bar baz quxx baz bar foo.
+ *          div
+ *              a.btn Something to click on
+ */
+.text-body--rightpad {
+    padding: 0;
+
+    @include mq($medium-and-up) {
+        padding-right: 15px;
+    }
+}
+
+.text-body--rightpad2x {
+    padding: 0;
+
+    @include mq($medium-and-up) {
+        padding-right: 30px;
+    }
+}
+
+/**
+ * Forced Inline Text:
+ * `.text-body--forceinline`
+ * All children are set to `display: inline`. Used to concatenate 
+ * block elements into a single line when delivered from a WYSIWYG editor.
+ *
+ *      @example
+ *      <div class="text">
+ *          <div class="text-body text-body--forceinline">
+ *              This is some text. <p>Followed by a p tag.</p>
+ *          </div>
+ *      </div>
+ */
+.text-body--forceinline {
+    > *,
+    > * > * {
+        display: inline;
+    }
+
+    script {
+      display: none;
+    }
+}
+
+/**
+ * Heavy Text:
+ * `.text--semi`
+ * A modifier to make semi-bold text
+ *
+ *      @example
+ *      .text.text--semi
+ *          p Again, with emphasis.
+ */
+.text--semi {
+    font-weight: 600;
+}
+
+/**
+ * Heavy Text:
+ * `.text--heavy`
+ * A modifier to make bold text
+ *
+ *      @example
+ *      .text.text--heavy
+ *          p Again, with a heavy emphasis.
+ */
+.text--heavy {
+    font-weight: 700;
+}
+
+/**
+ * Large Text:
+ * `.text--large`
+ * A modifier to make text 18px
+ *
+ *      @example
+ *      .text.text--large
+ *          p This is more important.
+ */
+.text--large {
+    @include fontsize(18);
+}
+
+/**
+ * Medium Text:
+ * `.text--medium`
+ * A modifier to make text 14px
+ *
+ *      @example
+ *      .text.text--medium
+ *          p This is not so important.
+ */
+.text--medium {
+    @include fontsize(14);
+}
+
+/**
+ * Small Text:
+ * `.text--small`
+ * A modifier to make text 12px
+ *
+ *      @example
+ *      .text.text--small
+ *          p This is less important.
+ */
+.text--small {
+    @include fontsize(12);
+    line-height: 1.2rem;
+}
+
+/**
+ * Smaller Text:
+ * `.text--smaller`
+ * A modifier to make text 10px
+ *
+ *      @example
+ *      .text.text--smaller
+ *          p This is even less important.
+ */
+.text--smaller {
+    @include fontsize(10);
+    line-height: 0.8rem;
+}
+
+/***
+ * Colors:
+ * Colors are great. Here's how you change text color.
+ */
+
+/**
+ * Black:
+ * `.text--black`
+ *
+ *    @example
+ *    .text.text--black
+ *    p Some black text
+ */
+.text--black {
+  color: black;
+}
+
+/**
+ * Gray:
+ * `.text--gray`
+ *
+ *      @example
+ *      .text.text--gray
+ *          P Probably not important text
+ */
+.text--gray {
+    color: $gray;
+}
+
+/**
+ * Lightgray:
+ * `.text--lightgray`
+ *
+ *      @example
+ *      .text.text--lightgray
+ *          P Probably not important text
+ */
+.text--lightgray {
+    color: $lightgray;
+}
+
+/**
+ * Lightestgray:
+ * `.text--lightergray`
+ *
+ *      @example
+ *      .text.text--lightergray
+ *          P Probably not important text
+ */
+.text--lightergray {
+    color: $lightergray;
+}
+
+/**
+ * Lightestgray:
+ * `.text--lightestgray`
+ *
+ *      @example
+ *      .text.text--lightestgray
+ *          P Probably not important text
+ */
+.text--lightestgray {
+    color: $lightestgray;
+}
+
+.text--white {
+    color: white;
+
+    &:hover {
+        border-bottom-color: white;
+    }
+}
+
+/***
+ * Text Teatments:
+ */
+
+/**
+ * Dotted outline:
+ * `.text--dotted`
+ * adds a dotted top and bottom border to a block of text.
+ *
+ *      @example
+ *      text.text--dotted Apr 1, 2015
+ */
+.text--dotted {
+    padding: 10px 0;
+    border-top: 1px dotted $lightestgray;
+    border-bottom: 1px dotted $lightestgray;
+}
+
+/***
+ * Links:
+ */
+
+/**
+ * Dark link:
+ * `.link--dark`
+ * blue on hover, no underline
+ *
+ *      @example
+ *      a.link--dark(href="http://www.wnyc.org/shows/bl") The Brian Lehrer Show
+ */
+.link--dark {
+    color: $darkergray;
+    border: none;
+
+    &:hover {
+        color: $blue;
+    }
+}
+
+.link--white {
+    color: white;
+    &:hover {
+        border-bottom-color: white;
+    }
+}
+
+.link--underline {
+    border-bottom-color: currentColor;
+
+    &:hover {
+        border-bottom-color: transparent;
+    }
+}
+
+/**
+ * Link with Bottom Padding
+ * `.link--padbtm`
+ * Add a 5px padding to the bottom of the link. Useful for links with icons to 
+ * create some spacing between the underline decoration and the link contents.
+ *
+ *      @example
+ *      a.link--padbtm
+ *          <i class="fa fa-facebook icon--prefix"></i> Facebook
+ */
+.link--padbtm {
+    padding-bottom: 5px;
+}
+
+/**
+ * No decoration link:
+ * `.link--nodecor`
+ * no underline on hover
+ *
+ *      @example
+ *      a.link--nodecor(href="http://www.wnyc.org/shows/bl") The Brian Lehrer Show
+ */
+.link--nodecor {
+    border: none;
+
+    &:hover {
+        border: none;
+    }
+}
+
+.link--mq--nodecortodecor {
+    @include mq($small-only) {
+        border: none;
+
+        &:hover {
+            border: none;
+        }
+    }
+}
+
+
+/**
+ * Media Query Text Links:
+ * Sometimes we need to change a link's colors based on the current MQ.
+ * These should be created according to special MQ cases.
+ */
+
+/**
+ * `.text--mq-bluewhite`
+ * Blue/White MQ Text Link
+ *
+ *      @example
+ *      div.text--mq-bluewhite 
+ *          a. I am a link. And you won't see me.
+ */
+.text--mq-bluewhite {
+
+    @include mq($medium-and-up) {
+        color: white;
+
+	&:hover {
+	    border-bottom-color: white;
+	}
+    }
+}
+
+.text--red {
+    color: red;
+}
+
+.text--ellipsis {
+    display: inline-block;
+    vertical-align: top;
+    max-width: 83%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    
+    > * {
+        display: inline;
+    }
+}
+
+// preserves lines breaks and white space in comments
+.text--prewrap {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.text--upper {
+  text-transform: uppercase;
+}
+
+.text-divide {
+  > .text-divide-slash {
+    color: $lightgray;
+  }
+
+  > .text-divide-slash:last-child {
+    display: none;
+  }
+}

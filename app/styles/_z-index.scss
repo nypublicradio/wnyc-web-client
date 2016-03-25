@@ -1,0 +1,32 @@
+// Z-INDEX REF
+// 
+// Story Page
+// .accordion - 100
+// header.l-bgimg - 200
+
+$zIndex-vanish: -1;
+$zIndex-1:      100;
+$zIndex-2:      200;
+$zIndex-3:      300;
+$zIndex-4:      400;
+$zIndex-5:      500;
+$zIndex-6:      600;
+$zIndex-7:      700;
+$zIndex-8:      800;
+$zIndex-9:      900;
+$zIndex-10:     1000;
+
+$zIndex--isRight:           $zIndex-vanish;
+$zIndex--isUp:              $zIndex-vanish;
+$zIndex--isShrunk:          $zIndex-vanish;
+
+$zIndex--accordion:         $zIndex-1;
+$zIndex--lBgImgAfter:       $zIndex-1;
+$zIndex--isVisible:         $zIndex-1;
+
+$zIndex--abs:               $zIndex-2;
+$zIndex--lBgImg:            $zIndex-2;
+$zIndex--lBgImgChildren:    $zIndex-2;
+$zIndex--lBgImgBefore:      $zIndex-2;
+
+$zIndex--dropdownBody:      $zIndex-3;

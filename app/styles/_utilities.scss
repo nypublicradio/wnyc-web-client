@@ -1,0 +1,189 @@
+/***
+ * Utilities:
+ */
+
+/**
+ * Dimmer:
+ * `.dimmed`
+ * Add-on class to give text 70% transparency.
+ *
+ *      @example
+ *      p Listen <span class="text--small dimmed">21 min</span>
+ *      p <span class="text--small dimmed">Published in</span>
+ */
+.dimmed {
+    opacity: 0.7;
+}
+
+/**
+ * Inherit Styles:
+ * `.inherit`
+ * Utility class to set font & border colors
+ * (and hover states) to colors set by its parent.
+ */
+.inherit {
+    color: inherit;
+    border: inherit;
+
+    &:hover {
+        color: inherit;
+        border: inherit;
+    }
+}
+
+/**
+ * Flush Margin:
+ * `.flush`
+ * If something needs to reset the default vertical rhythm,
+ * we can make it flush with whatever's below it
+ *
+ *      @example
+ *      h3.h3.flush A title
+ *      h4.h4.dimmed A subtitle
+ */
+.flush {
+    margin-bottom: 0;
+}
+
+.flush--medium {
+    @include mq($medium-and-up) {
+        margin-bottom: 0;
+    }
+}
+
+/**
+ * Mini Nudge:
+ * `.nudge-mini`
+ * Adds 5px bottom margin to an element.
+ */
+.nudge-mini {
+    margin-bottom: 5px;
+}
+
+/**
+ * Nudge:
+ * `.nudge`
+ * Adds 10px bottom margin to an element.
+ */
+.nudge {
+    margin-bottom: 10px;
+}
+
+/**
+ * Big Nudge:
+ * `.nudge-big`
+ * Adds 17px bottom margin to an element.
+ */
+.nudge-big {
+    margin-bottom: 17px;
+}
+
+.nudge-down {
+    margin-bottom: 1.25rem
+}
+
+/**
+ * Align Center:
+ * `.aligncenter`
+ * Set text to the center.
+ */
+.aligncenter {
+    text-align: center;
+}
+
+/**
+ * Align Right:
+ * `.alignright`
+ * Set text to the right.
+ */
+.alignright {
+    text-align: right;
+}
+
+/**
+ * Align Left:
+ * `.alignleft`
+ * Set text to the left.
+ */
+.alignleft {
+    text-align: left;
+}
+
+.align--mq-centertoleft {
+    text-align: center;
+
+    @include mq($medium-and-up) {
+        text-align: left;
+    }
+}
+
+.align--mq-centertoright {
+    text-align: center;
+
+    @include mq($medium-and-up) {
+        text-align: right;
+    }
+}
+
+/**
+ * Outline Only:
+ * `.outlineonly`
+ * Hide a node from layout but keep it as part
+ * of the document layout and available for screenreaders.
+ *
+ */
+.outlineonly {
+    @extend %visuallyhidden;
+}
+
+/**
+ * Double Down:
+ * `.doubledown`
+ * Sometimes the default bottom margin is just
+ * not enough. This doubles it.
+ */
+.doubledown {
+    margin-bottom: $spacing * 2;
+}
+
+.for-screenreaders {
+    @extend %visuallyhidden;
+}
+
+.floatright {
+    float: right;
+}
+
+.floatright--mqmd {
+    @include mq($medium-and-up) {
+        float: right;
+    }
+}
+
+.floatleft {
+    float: left;
+}
+
+/**
+ * Inline Images:
+ * `.img--inline`
+ * Some margin adjustments are necessary when adding a small inline image.
+ *
+ *      @example
+ *      img.img--inline(src='http://www.fillmurray.com/45/15')
+ */
+img.img--inline {
+    margin: 0 0 1px 2px;
+}
+
+/**
+ * `.hide-on-mobile`
+ * Sometimes you just need to hide something when it's on an iPhone, iPad or Android device
+ */
+.hide-on-mobile {
+    .is-ipad &,
+    .is-iphone &,
+    .is-android & {
+        display: none;
+    }
+}
