@@ -1,0 +1,34 @@
+.sitechrome-corner {
+  background: $red;
+  height: 83px;
+  padding: 20px;
+  @extend %vertical-rhythm;
+
+  > h1 {
+    margin: 0;
+  }
+}
+
+.sitechrome-top {
+  background: $red;
+  height: 83px;
+  @extend %vertical-rhythm;
+}
+
+.sitechrome-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sitechrome-listitem {
+  text-align: center;
+  @extend %vertical-rhythm;
+
+  > a {
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    @include fontsize(14);
+  }
+}

@@ -1,5 +1,5 @@
 .l-page {
-  padding-left: 75px;
+  padding-left: 150px;
 }
 
 .l-page-nav {
@@ -7,6 +7,537 @@
   left: 0;
   top: 0;
   height: 100%;
-  width: 75px;
+  width: 150px;
   background-color: $navy;
+}
+/***
+ * Layout Spaces:
+ * These atoms are invisible, meaning no backgrounds or borders
+ * (for the most part). We'll add some inline background colors to the examples
+ * so that we can see the spaces in effect.
+ */
+
+/**
+ * Full Space:
+ * `.l-full`
+ * It's full width
+ *
+ *      @example
+ *      .l-full(style="background: rgba(150,255,100,0.25);")
+ *          p Just some text in a full width wrapper
+ */
+.l-full {
+    //background: white;
+    clear: both;
+    @extend %clearfix;
+}
+
+.l-highlight--dark {
+    background-color: $navy;
+}
+
+.l-highlight--mq--darktogray {
+    background-color: black;
+
+    @include mq($medium-and-up) {
+        background-color: #303030;
+    }
+}
+
+/**
+ * Medium Space:
+ * `.l-medium`
+ * 800px wide
+ *
+ *      @example
+ *      .l-medium(style="background: rgba(150,255,100,0.25);")
+ *          p Just some text in a medium width wrapper
+ */
+.l-medium {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/**
+ * Constrained Space:
+ * `.l-constrained`
+ * Constrained to 1100px and horizontally centered. Can be used to center content
+ * against a background of a different color.
+ *
+ *      @example
+ *      .l-full(style="background: rgba(150,255,100,0.25);")
+ *          .l-constrained(style="background: rgba(50,15,100,0.25);")
+ *              p some content in the constrained area
+ *
+ */
+.l-constrained {
+    max-width: 1100px;
+    margin: 0 auto;
+    @extend %clearfix;
+
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-left: rems(15);
+    padding-right: rems(15);
+
+    @include mq($medium-and-up) {
+        padding: 0 25px;
+        padding: 0 rems(25);
+    }
+}
+
+.l-constrained--sm-md-lg {
+
+    @include mq($medium-and-up) {
+        max-width: #{$medium - 1}px;
+    }
+
+    @include mq($large-and-up) {
+        max-width: 1100px;
+    }
+}
+
+.l-constrain--400 {
+    max-width: 400px;
+    width: 100%;
+}
+
+// right rail inner wrapper
+.l-skinny {
+    width: 100%;
+
+    @include mq($medium-and-up) {
+        max-width: 300px;
+        float: right;
+    }
+}
+
+.l-flexrow {
+    @include flexbox;
+}
+
+.l-flexrow--mqmd {
+  @include mq($small-only) {
+    > [class*='l-col']:first-child {
+      margin-bottom: 1.25rem;
+    }
+
+    > [class*='l-col']:only-child {
+      margin-bottom: 0;
+    }
+
+    > .l-col--flex  {
+      display: block;
+    }
+
+  }
+
+  @include mq($medium-and-up) {
+      @include flexbox;
+  }
+}
+
+.l-flexcol--center {
+    @include align-self(center);
+}
+
+/***
+ * Columns:
+ */
+[class*='l-col'] {
+    @extend %clearfix;
+
+    @include mq($medium-and-up) {
+        float: left;
+        padding-left: 0;
+        padding-right: 15px;
+        padding-right: rems(15);
+
+        &:last-child:not(:only-child) {
+            padding-right: 0;
+        }
+    }
+}
+
+.l-col--flex {
+  @include flexbox;
+
+  &.l-col--cv {
+    @include align-items(center);
+  }
+
+  &.l-col--right {
+    @include justify-content(flex-end);
+  }
+}
+
+/**
+ * Available Column Sizes:
+ * `.l-col1of3`
+ * One-third width
+ *
+ * `.l-col2of3`
+ * Two-thirds width
+ *
+ * `.l-col1of2`
+ * One-half width
+ *
+ */
+
+/**
+ * Two-third Column:
+ *      @example
+ *      .l-full
+ *          .l-constrained
+ *              .l-col2of3(style="background: rgba(150,255,100,0.25);")
+ *                  p(style="color: black; background: rgba(0,0,0,0.15);").
+ *                      main content
+ *              .l-col1of3(style="background: rgba(25,25,225,0.25);")
+ *                  p(style="color: black; background: rgba(0,0,0,0.15);").
+ *                      some sidebar content
+ */
+
+/**
+ * Half Columns:
+ *      @example
+ *      .l-full
+ *          .l-constrained
+ *              .l-col1of2(style="background: rgba(150,255,100,0.25);")
+ *                  p(style="color: black; background: rgba(0,0,0,0.15);").
+ *                      Content on the left
+ *              .l-col1of2(style="background: rgba(150,255,100,0.25);")
+ *                  p(style="color: black; background: rgba(0,0,0,0.15);").
+ *                      Content on the right
+ */
+
+.l-col2of3 {
+    @include mq($medium-and-up)  {
+        width: percentage(2/3);
+    }
+}
+
+.l-col2of3--large {
+    @include mq($large-and-up) {
+        width: percentage(2/3);
+    }
+}
+
+.l-col1of3 {
+    @include mq($medium-and-up)  {
+        width: percentage(1/3);
+    }
+}
+
+.l-col1of3--large {
+    @include mq($large-and-up)  {
+        width: percentage(1/3);
+    }
+}
+
+.l-col1of2 {
+    @include mq($medium-and-up) {
+        width: 50%;
+    }
+}
+
+.l-col1of5 {
+    @include mq($medium-and-up) {
+        width: 20%;
+    }
+}
+
+.l-col4of5 {
+    @include mq($medium-and-up) {
+        width: 80%;
+    }
+}
+
+
+/**
+ * Split Space:
+ * `.l-split`
+ * A way to layout two children so they flush with the left and right
+ * of the parent element. `.l-split` should only have two direct descendents.
+ *
+ *      @example
+ *      .l-split
+ *          a Click Me
+ *          button.btn.btn--gray Queue
+ */
+.l-split {
+    @extend %vertical-rhythm;
+
+    > * {
+        display: block;
+    }
+
+    @include mq($medium-and-up) {
+        @include flexbox;
+        @include justify-content(space-between);
+        @include align-items(center);
+
+      > :first-child {
+          padding-right: 15px;
+      }
+    }
+
+    > :last-child {
+        @include flex(0 , 0, auto);
+    }
+
+    > :first-child {
+        @include flex(1, 1, auto);
+    }
+
+    > .l-split-child128 {
+        @include flex-basis(128px);
+    }
+
+    .no-flexbox & {
+        @extend %clearfix;
+
+        > :last-child {
+            float: right;
+        }
+
+        > :first-child {
+            float: left;
+        }
+
+        > :only-child {
+            float: left;
+        }
+    }
+}
+
+.l-split--padsides {
+    padding: 0 15px;
+}
+
+
+/**
+ * Background Image Space:
+ * `.l-bgimg`
+ * A block with a dark background and padding, setup to have a background
+ * image added via inline declaration on the server or dynamically.
+ * Includes a media query to change the background and font color at a medium
+ * breakpoint.
+ *
+ *      @example
+ *      .l-bgimg
+ */
+.l-bgimg {
+    z-index: $zIndex--lBgImg;
+
+    position: relative;
+    background: none;
+
+    padding: 20px 0;
+    padding: rems(20) 0;
+
+    > * {
+        color: black;
+    }
+
+    @include mq($small-only) {
+        margin-bottom: 0;
+    }
+
+    @include mq($medium-and-up) {
+        padding: 20px 30px;
+        padding: rems(20) rems(30) rems(21.5) rems(30);
+
+        > * {
+            z-index: $zIndex--lBgImgChildren;
+
+            color: white;
+            position: relative;
+        }
+
+        &:before,
+        &:after {
+            content:'';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        &:before {
+            z-index: $zIndex--lBgImgBefore;
+
+            background-color: rgba(18,18,18,0.8);
+        }
+
+        &:after {
+            z-index: $zIndex--lBgImgAfter;
+
+            opacity: 0.5;
+            overflow: hidden;
+            background-size: cover;
+            background-repeat: no-repeat;
+            @include filter(blur(4px));
+            @include rotateX(180deg);
+        }
+    }
+
+    .no-filters &:after {
+        display: none;
+    }
+}
+
+.l-padtop {
+    padding-top: 25px;
+    padding-top: rems(25);
+}
+
+.l-padtop--double {
+    padding-top: 50px;
+    padding-top: rems(50);
+}
+
+
+/**
+ * Positions:
+ * `.l-lowleft, .l-lowright, .l-topleft, .l-topright`
+ * position something in a corner of a reltaively positioned parent.
+ * each item is given a sensible offset
+ */
+.l-abs {
+  position: absolute;
+  z-index: $zIndex--abs;
+}
+
+.l-lowright {
+  bottom: 25px;
+  right: 25px;
+
+  &.l-flush {
+    bottom: 0;
+    right: 5px;
+  }
+}
+
+/**
+ * Media Object:
+ * `.media, .media-image, .media-body`
+ * A pattern of elements that allow a piece of media, usually an image,
+ * to exist side-by-side with some text content. the point is that the image
+ * can be of any width, so this molecule is flexible
+ *
+ * The media object can be used for logo lockups in story headers, for 
+ * comments on story pages, etc.
+ *
+ *      @example
+ *      .media
+ *          img.media-image(src="http://www.fillmurray.com/35/35")
+ *          p.media-body Caleb Wilde jokes that he's damned to be a funeral director for the rest of his life. But there's some truth there. He's a sixth-generation funeral director.
+ *      .media
+ *          img.media-image(src="http://www.fillmurray.com/150/75")
+ *          p.media-body The political operative who helped mastermind the notorious lane closures at the George Washington Bridge – and is now cooperating with a federal investigation of the Bridgegate scandal – had more extensive contact with New Jersey Gov. Chris Christie’s inner circle than the governor has acknowledged.
+ */
+.media {
+    display: block;
+    text-decoration: none;
+    overflow: hidden;
+    @extend %vertical-rhythm;
+}
+
+.media-image {
+    float: left;
+    overflow: hidden;
+    margin-right: 25px;
+    padding-top: 5px;
+
+    > * {
+        display: block;
+    }
+
+    .media--rev & {
+        margin-right: 0;
+        margin-left: 25px;
+        float: right;
+    }
+}
+
+.media-imagetext {
+    margin-top: -6px;
+    display: block;
+}
+
+.media-body {
+    overflow: hidden;
+}
+
+/**
+ * Flag Object:
+ * `.flag, .flag-image, .flag-body`
+ * Like the Media Object, but an experimental variation that allows for vertical alignment
+ * Credit to Harry Roberts of CSS Wizardry. Read more about the flag object <a href="http://csswizardry.com/2013/05/the-flag-object/">here</a>.
+ *
+ *      @example
+ *      .flag
+ *          .flag-image
+ *              <img src="http://www.fillmurray.com/200/200/">
+ *          .flag-body
+ *              p When P.S. 62 opens in Staten Island a year from now, it will be the first school in the five boroughs - and maybe even the first building of any kind - that produces as much energy as it consumes.
+ */
+.flag {
+    display: table;
+    width: 100%;
+}
+
+.flag-image,
+.flag-body {
+    display: table-cell;
+    vertical-align: middle;
+
+    .flag--top & {
+        vertical-align: top;
+    }
+
+    .flag--bottom & {
+        vertical-align: bottom;
+    }
+
+}
+
+.flag-image {
+    padding-right: 15px;
+
+    .flag--top & {
+        padding-top: 5px; // for better font and image alignment
+    }
+
+    > img {
+        display: block;
+        max-width: none;
+    }
+
+    .flag--rev & {
+        padding-right: 0;
+        padding-left: 10px;
+    }
+
+    &.flag-image--squeeze > img {
+      @include mq($medium-and-up) {
+        margin-top: -10px;
+        margin-bottom: -10px;
+      }
+    }
+}
+
+.flag-body {
+    width: 100%;
+
+    > :last-child {
+        margin-bottom: 0;
+    }
+
+    &.flag-body--rightpad {
+      padding-right: 90px;
+    }
 }
