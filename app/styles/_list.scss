@@ -1,0 +1,127 @@
+.list {
+    @extend %vertical-rhythm;
+    list-style: none;
+    padding: 0;
+}
+
+.list-heading {
+    color: $lightgray;
+    border-bottom: 1px solid $lightestgray;
+    text-transform: uppercase;
+
+    > h1,
+    > h2,
+    > h3,
+    > h4,
+    > h5,
+    > h6 {
+        font-weight: 400;
+        line-height: 32px;
+        margin-bottom: 0;
+    }
+
+    + ol > .list-item:first-child {
+        border-top: none;
+    }
+}
+
+.list--noborder {
+    > .list-heading {
+        @extend %vertical-rhythm;
+    }
+
+    > .list-item {
+        border: none;
+
+        &:last-child {
+            border: none;
+            margin-bottom: 0;
+        }
+    }
+}
+
+.list--mq-flextoblock {
+    @include mq($small-only) {
+        @include flexbox;
+        @include justify-content(space-between);
+
+        > .list-item {
+            @include flex-grow(1);
+        }
+
+        .no-flexbox & {
+            text-align: center;
+
+            > .list-item {
+                display: inline-block;
+            }
+        }
+    }
+}
+
+.list--mq-blocktoflex {
+    @include mq($medium-and-up) {
+        @include flexbox;
+        @include justify-content(space-between);
+
+        > .list-item {
+            @include flex-grow(1);
+        }
+
+        .no-flexbox & {
+            text-align: center;
+
+            > .list-item {
+                display: inline-block;
+            }
+        }
+    }
+}
+
+.list--flex {
+    @include flexbox;
+    @include justify-content(space-between);
+    
+    > .list-item {
+        @include flex-grow(1);
+    }
+}
+
+.list--inline {
+    display: inline-block;
+
+    > .list-item {
+        border: none;
+        display: inline-block;
+    }
+}
+
+.list-item {
+    padding: 1.5rem 0;
+    border-top: 1px solid $lightestgray;
+    margin-bottom: 0;
+
+    &:last-child {
+        /* border-bottom: 1px solid $lightergray;*/
+    }
+}
+
+.list-item--tall {
+    @extend .doubledown;
+}
+
+.list-item--short {
+    padding: 1rem 0;
+}
+
+.list-item--mini {
+    padding: 0.5rem 0;
+}
+
+.list-item--dimmed {
+    border-color: $darkgray;
+
+    &:last-child {
+        border-color: $darkgray;
+    }
+}
