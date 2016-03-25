@@ -15,3 +15,8 @@
         margin-right: -15px;
     }
 }
+
+img[src*=googleads],
+iframe[name=google_conversion_frame] {
+  display: none !important;
+}

@@ -1,1 +1,324 @@
+// VARS
+$base-font: 16;
+$line-height: 24;
+$transition-timing: 250ms;
+$spacing: 1.5rem;
+
+
+/***
+ * Colors:
+ */
+
+/**
+ * WNYC Red:
+ * `$red`
+ * `#de1e3d`
+ * `rgb(222, 30, 61)`
+ *
+ *      @example
+ *      div.btn--square-small(style='background:#DE1E3D')  
+ */
+$red: #DE1E3D;
+
+/**
+ * WNYC Dark Red:
+ * `$darkred`
+ * `#52000a`
+ * `rgb(82, 0, 10)`
+ *
+ *      @example
+ *      div.btn--square-small(style='background:#52000A')  
+ */
+$darkred: #52000A;
+
+/**
+ * WNYC Fushia:
+ * `$pink`
+ * `#d3008c`
+ * `rgb(211, 0, 140)`
+ *
+ *      @example
+ *      div.btn--square-small(style='background:#D3008C')  
+ */
+$pink: #d3008c;
+
+/**
+ * WNYC Blue:
+ * `$blue`
+ * `#128cf4`
+ * `rgb(18, 140, 244)`
+ *
+ *      @example
+ *      div.btn--square-small(style='background:#128CF4')  
+ */
+$blue: #128cf4;
+
+/**
+ * WNYC Dark Blue:
+ * `$darkblue`
+ * `#1068b2`
+ * `rgb(16, 104, 178)`
+ *
+ *      @example
+ *      div.btn--square-small(style='background:#1068b2')  
+ */
+$darkblue: #1068b2;
+
+/**
+ * WNYC Navy:
+ * `$navy`
+ * `#201f27`
+ * `rgb(32, 31, 39)`
+ *
+ *      @example
+ *      div.btn--square-small(style='background:#201f27')
+ */
 $navy: #201f27;
+
+/**
+ * WNYC Teal:
+ * `$teal`
+ * `#0eb8ba`
+ * `rgb(14, 184, 186)`
+ *
+ *      @example
+ *      div.btn--square-small(style='background:#0EB8BA')  
+ */
+$teal: #0EB8BA;
+
+/**
+ * Light Green:
+ * `$lightgreen`
+ * `#a3f47f`
+ * `rgb(163, 244, 127)`
+ *
+ *      @example
+ *      div.btn--square-small(style='background:#A3F47F')  
+ */
+$lightgreen: #A3F47F;
+
+/**
+ * Dark Green:
+ * `$darkgreen`
+ * `#1e7e00`
+ * `rgb(30, 126, 0)`
+ *
+ *      @example
+ *      div.btn--square-small(style='background:#1E7E00')  
+ */
+$darkgreen: #1E7E00;
+
+/**
+ * Darkest Gray:
+ * `$darkestgray`
+ * `#222`
+ * `rgb(34, 34, 34)`
+ *
+ *      @example
+ *      div.btn--square-small(style='background:#222')  
+ */
+$darkestgray: #222;
+
+/**
+ * Darker Gray:
+ * `$darkergray`
+ * `#333`
+ * `rgb(51, 51, 51)`
+ *
+ *      @example
+ *      div.btn--square-small(style='background:#333')  
+ */
+$darkergray: #333;
+
+/**
+ * Dark Gray:
+ * `$darkgray`
+ * `#444`
+ * `rgb(68, 68, 68)`
+ *
+ *      @example
+ *      div.btn--square-small(style='background:#444')  
+ */
+$darkgray: #444;
+
+/**
+ * Dark Gray:
+ * `$gray`
+ * `#666`
+ * `rgb(102, 102, 102)`
+ *
+ *      @example
+ *      div.btn--square-small(style='background:#666')  
+ */
+$gray: #666;
+
+/**
+ * Light Gray:
+ * `$lightgray`
+ * `#888`
+ * `rgb(136, 136, 136)`
+ *
+ *      @example
+ *      div.btn--square-small(style='background:#888')  
+ */
+$lightgray: #888;
+
+/**
+ * Lighter Gray:
+ * `$lightergray`
+ * `#bbb`
+ * `rgb(187, 187, 187)`
+ *
+ *      @example
+ *      div.btn--square-small(style='background:#bbb')  
+ */
+$lightergray: #bbb;
+
+/**
+ * Lightest Gray:
+ * `$lightestgray`
+ * `#ddd`
+ * `rgb(221, 221, 221)`
+ *
+ *      @example
+ *      div.btn--square-small(style='background:#ddd')  
+ */
+$lightestgray: #ddd;
+
+/**
+ * Near White:
+ * `$nearwhite`
+ * `#f1f1f1`
+ * `rgb(241, 241, 241)`
+ *
+ *      @example
+ *      div.btn--square-small(style='background:#f1f1f1;border: 1px solid #ddd')  
+ */
+$nearwhite: #f1f1f1;
+
+
+// MIXINS and EXTENDS
+%clearfix {
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+%vertical-rhythm {
+    display: block;
+    margin-top: 0;
+    margin-bottom: #{$line-height/$base-font}rem;
+}
+
+@mixin abscenter {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+@mixin mq($mq...) {
+    @if length(keywords($mq)) == 1 {
+        @media only screen and #{$mq} {
+            @content;
+        }
+    } @else {
+        $query: 'only screen';
+
+        @each $media in $mq {
+            $query: #{$query} and #{$media};
+        }
+
+        @media #{$query} {
+            @content;
+        }
+    }
+}
+
+@mixin fontsize($pixels) {
+    font-size: #{$pixels}px;
+    font-size: rems($pixels);
+}
+
+@function rems($size) {
+    @return #{$size/$base-font}rem;
+}
+
+// MEDIA QUERIES
+
+$narrow: 321;
+$middle-narrow: 476;
+$middle-middle: 701;
+$medium: 801;
+$large: 1025;
+
+$large-and-up: "(min-width: #{$large}px)";
+$medium-and-up: "(min-width: #{$medium}px)";
+$small-and-up: "(min-width: #{$narrow}px)";
+$middle-narrow-and-up: "(min-width: #{$middle-narrow}px)";
+$middle-middle-and-up: "(min-width: #{$middle-middle}px)";
+
+$narrow-only: "(max-width: #{$narrow - 1}px)";
+$middle-narrow-only: "(max-width: #{$middle-narrow - 1}px)";
+$small-only: "(max-width: #{$medium - 1}px)";
+$medium-only: "(max-width: #{$large - 1}px)";
+
+.narrow-only {
+    @include mq($small-and-up) {
+        // >= 321px
+        display: none !important;
+    }
+}
+
+.middle-narrow-only {
+    @include mq($middle-narrow-and-up) {
+        // >= 476px
+        display: none !important;
+    }
+}
+
+.small-only {
+    @include mq($medium-and-up) {
+        // >= 801px
+        display: none !important;
+    }
+}
+
+.medium-only {
+    @include mq($large-and-up) {
+        // >= 1025px
+        display: none !important;
+    }
+}
+
+.narrow-up {
+    @include mq($narrow-only) {
+        // < 321 px
+        display: none !important;
+    }
+}
+
+.middle-narrow-up {
+    @include mq($middle-narrow-only) {
+        // < 476px
+        display: none !important;
+    }
+}
+
+.medium-up {
+    @include mq($small-only) {
+        // < 801px
+        display: none !important;
+    }
+}
+
+.large-only {
+    @include mq($medium-only) {
+        // < 1025px
+        display: none !important;
+    }
+}

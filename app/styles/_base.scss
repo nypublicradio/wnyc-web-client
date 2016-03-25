@@ -1,7 +1,165 @@
+/***
+ * Base Styles:
+ * All your base are belong to us. Styles applied directly to elements
+ */
+
+/**
+ * Box-Sizing:
+ * `*, *:after, *:before { box-sizing: border-box; }`
+ */
 *,
 *:after,
 *:before {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+    @include box-sizing(border-box);
+}
+
+/**
+ * Fonts, Colors, and Links:
+ * We use Open Sans, and fall back to sans-serif if Google fonts don't load 
+ * or the client chokes on the web font for some reason.
+ *
+ * The base font size is 1rem (or 16px), and the base line-height is 
+ * 24px, for a ratio of 1.5. That ratio is used to set the vertical rhythm
+ * for text and spacing around the site. See below for more on vertical rhythm.
+ *
+ * Base font-weight is 400 (or normal), the color is #333, and all text is
+ * antialiased by default.
+ *
+ * Links are blue (#128cf4) without an underline. 
+ * On hover a blue underline appears.
+ *
+ *      @example
+ *      p
+ *          |The <a href="http://fema.gov">Federal Emergency Management Agency</a>
+ *          | says it is prepared to reopen all
+ *          |144,000 insurance claims that resulted from Superstorm Sandy in 2012.
+ *      p
+ *          |The move comes after months of questions over whether insurance 
+ *          |companies contracted by the National Flood Insurance Program 
+ *          |fraudulently altered engineering reports.
+ *      p
+ *          |After thousands of homeowners said their insurance claims were 
+ *          |systematically lowballed, FEMA began negotiations in an attempt 
+ *          |to regain the trust of policy holders.
+ */
+html {
+    font: 1rem/#{$line-height/$base-font} 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #333;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    //display: inline-block; // this causes line breaking issues
+    color: $blue;
+    text-decoration: none;
+    border-bottom: 1px solid rgba($blue, 0);
+    @include transition(border-color $transition-timing, color $transition-timing);
+
+    &:hover {
+        border-bottom-color: rgba($blue, 1);
+    }
+}
+
+body {
+    *:focus {
+        outline: none;
+        outline: 1px dotted rgba(0,0,0,.5);
+    }
+}
+
+strong {
+    font-weight: 600;
+}
+
+/**
+ * `<img>`
+ * Images are `max-width: 100%`&nbsp;by default for maximum responsiveness.
+ *
+ *      @example
+ *      img(src="http://www.fillmurray.com/800/400")
+ */
+img {
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+// graceful fallback in case handlbars image helper returns an empty string
+img[src=""] {
+    display: none;
+
+    + .figure-caption {
+        display: none;
+    }
+}
+
+/**
+ * `<figure>` - Figure elements get their left/right margins reset.
+ */
+figure {
+    margin-left: 0;
+    margin-right: 0;
+
+    > img {
+        display: block;
+    }
+}
+
+/**
+ * `<button>`:
+ * Strips default appearance by default and changes focus from
+ * ugly neon blue border to a subtle dotted border
+ *
+ *      @example
+ *      button Submit
+ */
+button {
+    @include appearance(none);
+    &:focus {
+        outline: 1px dotted rgba(0,0,0,.5);
+    }
+}
+
+/**
+ * `<i>`:
+ * i elements are semantically meaningless, so they are
+ * used for icons. We've reset the default font style to normal here.
+ */
+i {
+    font-style: normal;
+    vertical-align: middle;
+    min-width: 15px;
+    @include fontsize($base-font);
+}
+
+/**
+ * `<hr>`:
+ * Make horizontal rules look a little nicer.
+ */
+hr {
+    border: none;
+    height: 1px;
+    background-color: $lightestgray;
+}
+
+/**
+ * Vertical Rhythm:
+ * For consistent spacing across all atoms, molecules, and organisms,
+ * we try to set all top margins to 0 and rely on `margin-bottom`
+ * to push things down the page. Most block level elements will get a bottom
+ * margin equal to `1.5rem`, which is the margin number determined by 
+ * dividng the line-height by the base font-size.
+ */
+h1,h2,h3,h4,h5,h6,
+footer, header,
+p,figure,
+ul,ol,dd,
+blockquote,
+article, section, aside,
+#stream_launch_widget,
+#leaderboard,
+#rightRail,
+pre,table,fieldset,hr {
+    @extend %vertical-rhythm;
 }
