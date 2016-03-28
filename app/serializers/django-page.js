@@ -16,7 +16,7 @@ export default DS.Serializer.extend({
       emberAssets.push(doc.querySelector('link[href*="assets/vendor"]'));
       emberAssets.push(doc.querySelector('link[href*="assets/overhaul"]'));
 
-      emberAssets.forEach(n => n.parentNode.removeChild(n));
+      emberAssets.forEach(n => n && n.parentNode.removeChild(n));
       attributes.inlineDocument = doc;
     } else {
       attributes.text = payload;
