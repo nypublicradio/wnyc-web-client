@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
+import config from 'overhaul/config/environment';
 
 const {
   get,
@@ -20,6 +21,31 @@ export default Component.extend({
     get() {
       return `${get(this, 'channelType')}.well`;
     }
+  }),
+  parsedLinks: computed('links', function() {
+    let origin;
+    if (config.environment === 'development') {
+      // in development, we're usually running a copy of the prod DB which will
+      // point to prod
+      // in prod builds on demo or production, these values will point to our 
+      // configured wnycURL
+      origin = 'http://www.wnyc.org';
+    } else {
+      origin = config.wnycURL;
+    }
+    let links = get(this, 'links');
+    return links.map(i => {
+      let { href } = i;
+      if (!href) {
+        return i;
+      }
+      if (href.indexOf(origin) === 0) {
+        i.path = href.replace(origin, '').replace(/^\//, '');
+        delete i.href;
+        return i;
+      }
+      return i;
+    });
   }),
 
   tagName: 'nav',
