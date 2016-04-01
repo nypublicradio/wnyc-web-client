@@ -127,9 +127,9 @@ hr {
   padding-left: 4px;
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 9pt;
-  line-height: 9pt;
-  height: 9pt;
+  font-size: 9px;
+  line-height: 9px;
+  height: 9px;
   overflow: hidden;
 }
 
@@ -280,7 +280,7 @@ h2.title {
 
 h2.headline {
   color: #999;
-  font-size: 10pt;
+  font-size: 10px;
   padding: 5px 0;
 }
 
@@ -379,7 +379,7 @@ h3.channel-name {
 
 h3.channel-name a {
   color: #666;
-  font-size: 9pt;
+  font-size: 9px;
   font-weight: normal;
   text-transform: uppercase;
 }
@@ -395,7 +395,7 @@ h3.subtitle {
 .message {
   color: #E21E26;
   font-weight: normal;
-  font-size: 10pt;
+  font-size: 10px;
 }
 
 .mceGuest { /* in admin */
@@ -420,8 +420,8 @@ h3.subtitle {
 
 #universal-nav ul {
   float: right;
-  font-size: 8.5pt;
-  line-height: 8pt;
+  font-size: 8.5px;
+  line-height: 8px;
   margin: 9px 0;
 }
 
@@ -478,7 +478,8 @@ h3.subtitle {
 /* pagination */
 
 #page-counter {
-  font: normal 9pt arial,sans-serif;
+  font-size: 9px;
+  font-weight: normal;
   margin: 15px 0;
 }
 
@@ -486,7 +487,7 @@ h3.subtitle {
   clear: both;
   padding: 30px 0 15px 0;
   text-align: right;
-  font-size: 14pt;
+  font-size: 14px;
   color: #b5b5b5;
 }
 
@@ -591,7 +592,7 @@ p.image-caption {
 /*image-caption, image-credit are inline-to-the-article image metadata,
   whereas .credit, .caption are for the story's main image */
 .credit, .caption, .image-caption, .image-credit {
-  font-size: 8pt;
+  font-size: 8px;
   color: #777;
   line-height: 1.2em;
   margin: 0;
@@ -631,7 +632,7 @@ p.image-caption {
 
 
 #enlarge .credit, #enlarge .caption {
-  font-size: 11pt;
+  font-size: 11px;
 }
 
 /* newsletter signup widgets */
@@ -847,7 +848,7 @@ p.image-caption {
   color: #bbb;
   text-transform:uppercase;
   margin-bottom: 5px;
-  font-size: 8pt;
+  font-size: 8px;
 }
 
 .ad_container {
@@ -914,7 +915,7 @@ h4.label {
 }
 
 .block h3 {
-  font-size: 10pt;
+  font-size: 10px;
 }
 
 .show-nav ul.host li {
@@ -975,7 +976,7 @@ h4.label {
 .flatpage-nav ul li {
   border-top: 1px solid #eee;
   padding: 5px 0 4px;
-  font-size: 9pt;
+  font-size: 9px;
   font-weight: bold;
 }
 
@@ -1006,7 +1007,7 @@ ul.sidetouts li {
   background: url(/media/img/wnyc/widgets/quote.png) no-repeat 0 -10px;
   padding: 0 5px 10px 38px;
   margin: 0 0 10px;
-  font-size: 9pt;
+  font-size: 9px;
   line-height: 1.9em;
   color: #333;
 }
@@ -1022,14 +1023,14 @@ li.featuredcomment {
   background: transparent url(/media/img/wnyc/widgets/quote.png) no-repeat top left;
   padding-left: 38px;
   padding-top: 10px;
-  font-size: 8pt;
+  font-size: 8px;
   line-height: 1.4em;
 }
 
 li.featuredcomment p {
   width: 180px; /* ie7 show pullquote bg */
   background: 0;
-  font-size: 8pt;
+  font-size: 8px;
   margin-top: 0;
 }
 
@@ -1046,7 +1047,7 @@ li.featuredcomment p {
   width: 140px;
   margin-left: 10px;
   margin-top: -10px;
-  font-size: 9pt;
+  font-size: 9px;
   color: #333;
   border: 0;
 }
@@ -1059,12 +1060,12 @@ li.featuredcomment .comment-avatar {
 }
 
 li.featuredcomment .comment-author {
-  font-size: 9pt;
+  font-size: 9px;
   font-weight: bold;
 }
 
 li.featuredcomment .comment-object {
-  font-size: 8pt;
+  font-size: 8px;
   font-weight: normal;
   margin-top: 2px;
   padding-bottom: 10px;
@@ -1136,7 +1137,7 @@ ul.sidetouts li p.date {
 
 #comments-carousel li.featuredcomment p {
   width: auto;
-  font-size: 13pt;
+  font-size: 13px;
   line-height: 1.3em;
   margin: 0 0 5px;
   color: #333;
@@ -1160,7 +1161,7 @@ ul.sidetouts li p.date {
 #comments-carousel li.featuredcomment .comment-object,
 #comments-carousel li.featuredcomment .comment-object a {
   display: inline;
-  font-size: 10.5pt;
+  font-size: 10.5px;
   font-weight: normal;
   border: 0;
 }
@@ -1178,8 +1179,8 @@ ul.sidetouts li p.date {
   -moz-border-radius: 3px;
   border-radius: 3px;
   text-align: center;
-  font-size: 9pt;
-  line-height: 13pt;
+  font-size: 9px;
+  line-height: 13px;
   height: 16px;
   width: 580px;
   padding: 4px 8px;
@@ -1517,7 +1518,7 @@ ul.story-sidebar li.last {
 
 .story-sidebar .side-commentlink {
   text-transform: uppercase;
-  font-size: 8.5pt;
+  font-size: 8.5px;
   padding: 12px 0;
 }
 
@@ -1530,7 +1531,7 @@ ul.series-navlinks li {
   margin: 10px 0;
   padding-left: 0;
   color: #666;
-  font-size: 9pt;    /* for annotations */
+  font-size: 9px;    /* for annotations */
   line-height: 1.5em;
 }
 
@@ -1539,13 +1540,13 @@ ul.series-navlinks li {
   margin-right: 5px; /* for annotations */
   margin-top: 1px;   /* for annotations */
   padding-left: 20px;
-  font-size: 10pt;
+  font-size: 10px;
 }
 
 .side-storylinks h4 {
   color: #666;
   text-transform: uppercase;
-  font-size: 8.5pt;
+  font-size: 8.5px;
   padding: 5px 0;
 }
 
@@ -1565,7 +1566,7 @@ ul.series-navlinks li {
 }
 
 .section .story-sidebar .storylinks li a {
-  font-size: 9pt;
+  font-size: 9px;
 }
 
 .article-tags {
@@ -1595,7 +1596,7 @@ ul.series-navlinks li {
 }
 
 .article-bottom-tags, .article-bottom-appearances, .article-bottom-channel {
-  font-size: 10pt;
+  font-size: 10px;
 }
 
 .article-bottom-tags h4,
@@ -1603,7 +1604,7 @@ ul.series-navlinks li {
 .article-bottom-channel h4 {
   display: inline;
   text-transform: uppercase;
-  font-size: 9pt;
+  font-size: 9px;
   color: #666;
 }
 
@@ -1651,7 +1652,7 @@ ul.series-navlinks li {
 }
 
 p.byline {
-  font-size: 9pt;
+  font-size: 9px;
   margin-bottom: 10px;
   color: #666;
 }
@@ -1669,8 +1670,8 @@ p.byline {
   background-color: #f6f6f6;
   padding: 10px;
   margin: 15px 0;
-  font-size: 9.5pt;
-  line-height: 11.5pt;
+  font-size: 9.5px;
+  line-height: 11.5px;
 }
 
 .byline-expanded .image {
@@ -1679,8 +1680,7 @@ p.byline {
 }
 
 .byline-expanded .text h4 {
-  font-family: arial,sans-serif;
-  font-size: 9pt;
+  font-size: 9px;
   color: #444;
 }
 
@@ -1700,7 +1700,7 @@ p.byline {
 
 .episode .page-titlegroup a,
 .article-detail .page-titlegroup a {
-  font-size: 10pt;
+  font-size: 10px;
   color: #666;
   font-weight: 300;
 }
@@ -1720,7 +1720,7 @@ p.byline {
 }
 
 .article-wide blockquote {
-  font-size: 9pt;
+  font-size: 9px;
   margin: 25px 50px 25px 0;
   position: relative;
   left: 25px;
@@ -1751,7 +1751,7 @@ p.byline {
 }
 
 .article-prevnext {
-  font-size: 8.5pt;
+  font-size: 8.5px;
   float: right;
   color: #999;
   margin-top: 10px;
@@ -1906,18 +1906,18 @@ ul.article-playlist {
 }
 
 .comment-guidelines p {
-  font-size: 9pt;
+  font-size: 9px;
   margin-top: 0;
 }
 
 .comment-author {
-  font-size: 10pt;
+  font-size: 10px;
   font-weight: bold;
 }
 
 .comment-text {
   margin-bottom: 10px;
-  font-size: 9pt;
+  font-size: 9px;
 }
 
 .comment-foot {
@@ -1942,7 +1942,7 @@ ul.article-playlist {
 }
 
 .comment-thread form {
-  font-size: 10pt;
+  font-size: 10px;
 }
 
 .comment-thread label {
@@ -2012,7 +2012,7 @@ ul.article-playlist {
 .tiny-tease p,
 .blurb-tease p {
   margin: 0;
-  font-size: 10pt;
+  font-size: 10px;
 }
 
 .segment-tease .media_buttons,
@@ -2090,7 +2090,7 @@ ul.article-playlist {
   color: #999;
   text-transform: uppercase;
   padding: 5px 0;
-  font-size: 9pt;
+  font-size: 9px;
 }
 
 .event-tease h3.subtitle {
@@ -2433,7 +2433,7 @@ h4.schedule-link {
 #current-episode h4.date {
   text-transform: uppercase;
   text-align: center;
-  font-size: 8pt;
+  font-size: 8px;
   padding: 6px 0;
   width: 100%;
 }
@@ -2762,12 +2762,13 @@ h4.schedule-link {
 }
 
 .showslider ul li h4 {
-  font: bold 10pt/1.3em arial;
+  font-size: 10px;
+  font-weight: bold;
   margin-bottom: 5px;
 }
 
 .showslider ul li p {
-  font: 9pt arial;
+  font: 9px arial;
   color: #666;
 }
 
@@ -2813,7 +2814,7 @@ h4.schedule-link {
   height: auto;
   padding: 0 0 3em;
   margin: 0;
-  font-size: 9pt;
+  font-size: 9px;
 }
 
 #login-register form#login {
@@ -2888,7 +2889,7 @@ h4.schedule-link {
 #login-register form li.checkbox {
   width: 100%;
   margin: 5px 0 9px;
-  font-size: 8pt;
+  font-size: 8px;
   text-align: left;
 }
 
@@ -2946,7 +2947,7 @@ h4.schedule-link {
 }
 
 #login-register form ul.errorlist li {
-  font-size: 9pt;
+  font-size: 9px;
   margin: -6px 0 2px;
 }
 
@@ -2955,7 +2956,7 @@ h4.schedule-link {
 }
 
 #login-register p.disclaimer {
-  font-size: 8pt;
+  font-size: 8px;
   margin: 0 5px;
   color: #999;
   display: none;
@@ -3120,7 +3121,7 @@ form#setup-account input.newsletter_opt_in {
 .profile-nav .link-accounts p,
 .profile-nav .link-accounts .modal-popup li {
   font-weight: normal;
-  font-size: 9pt;
+  font-size: 9px;
 }
 
 .profile-nav .link-accounts .modal-popup li a {
@@ -3362,7 +3363,7 @@ form#setup-account input.newsletter_opt_in {
 
 .poll p.results {
   text-align: center;
-  font-size: 8pt;
+  font-size: 8px;
   padding: 8px 0px 0px 0px;
       clear: both;
       margin: 0px;
@@ -3443,7 +3444,7 @@ form.survey {
 }
 
 .survey h3 { /* survey title */
-  font-size: 11pt;
+  font-size: 11px;
 }
 
 .required {
@@ -3467,13 +3468,13 @@ input.required {
 }
 
 form.survey h2 {
-  font-size: 9pt;
+  font-size: 9px;
   margin: 10px 0 4px;
 }
 
 form.survey label.help_text {
   display: block;
-  font-size: 8pt;
+  font-size: 8px;
   line-height: 1.3em;
   margin: 5px 0;
 }
@@ -3500,7 +3501,7 @@ form.survey .results a:after {
 
 .crowd-results form.filters h2 {
   font-weight: bold;
-  font-size: 11pt;
+  font-size: 11px;
 }
 
 .crowd-results h2.chart_title {
@@ -3530,7 +3531,7 @@ form.survey .results a:after {
 
 .crowd-results .field {
   padding: 3px 0;
-  font-size: 10pt;
+  font-size: 10px;
 }
 
 .crowd-results .field label {
@@ -3557,14 +3558,14 @@ form.survey ul li,
 #crowd-detail form ul li {
   list-style-type: none;
   margin: 0;
-  font-size: 9pt;
+  font-size: 9px;
   padding-bottom: 15px;
 }
 
 form.survey label,
 #crowd-detail label {
   font-weight: bold;
-  font-size: 10pt;
+  font-size: 10px;
   color: #000;
 }
 
@@ -4107,13 +4108,14 @@ a.stf, .stfh {
 }
 
 #carousel-inner .item-wrapper h1 a {
-  font: 300 16pt "atrament-web-1","atrament-web-2","Trebuchet MS",sans-serif;
+  font-size: 16px;
+  font-weight: 300;
   text-transform: uppercase;
 }
 
 .wf-active #carousel-inner .item-wrapper h1 a {
-  font-size: 20pt;
-  line-height: 24pt;
+  font-size: 20px;
+  line-height: 24px;
 }
 
 #carousel-inner .item-wrapper .image {
@@ -4135,13 +4137,14 @@ a.stf, .stfh {
 
 #carousel-read-more {
   padding: 10px 65px 0 0;
-  font: 300 14pt/20pt "atrament-web-1","atrament-web-2","Trebuchet MS",sans-serif;
+  font-size: 14px;
+  font-weight: 300;
   text-transform: uppercase;
 }
 
 .wf-active #carousel-read-more {
-  font-size: 18pt;
-  line-height: 12pt;
+  font-size: 18px;
+  line-height: 12px;
   float: right;
 }
 
@@ -4183,7 +4186,7 @@ a.stf, .stfh {
 #flatpage.graphic-feature .modal-popup a.close {
   padding: 0 14px 0 0;
   background: url(/media/img/wnyc/close.gif) no-repeat right center;
-  font-size: 9pt;
+  font-size: 9px;
   cursor: pointer;
   float: right;
   text-align: right;
@@ -4216,7 +4219,7 @@ a.stf, .stfh {
 
 .image-slider .image-caption .credit,
 .image-slider .image-caption .caption {
-  font-size: 8.5pt;
+  font-size: 8.5px;
   color: #aaa;
 }
 
