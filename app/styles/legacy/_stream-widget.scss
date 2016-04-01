@@ -44,6 +44,10 @@
         display: none;
     }
 }
+#stream_launch_widget .show .head a[href]:hover {
+  text-decoration: none;
+  border-bottom-color: white;
+}
 
 #popup-btn {
     width: 121px;
