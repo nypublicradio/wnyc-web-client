@@ -43,9 +43,11 @@
   display: none;
 }
 
+/*
 img {
   vertical-align: bottom;
 }
+*/
 
 a {
   color: #0073d5; 
@@ -261,15 +263,15 @@ input.submit {
   cursor: pointer;
 }
 
-h1 {
-  font: normal 22px arial;
-  padding-bottom: 4px;
-}
-
-h2 {
-  font-size: 22px;
-  line-height: 1.2em;
-}
+//h1 {
+//  font: normal 22px arial;
+//  padding-bottom: 4px;
+//}
+//
+//h2 {
+//  font-size: 22px;
+//  line-height: 1.2em;
+//}
 
 h2.title {
   font-size: 24px;
@@ -552,8 +554,8 @@ table#show-number-archive {
 }
 
 
-.imageleft,
-.alignleft {
+.imageleft {
+//.alignleft {
   margin-top: 0px;
   margin-right: 12px;
   margin-bottom: 10px;
@@ -561,8 +563,8 @@ table#show-number-archive {
   clear: both;
 }
 
-.imageright,
-.alignright {
+.imageright {
+//.alignright {
   margin-top: 3px;
   margin-left: 12px;
   margin-bottom: 10px;
@@ -613,6 +615,7 @@ p.image-caption {
 }
 
 .embedded-image.alignleft {
+    clear: both;
     float: left;
     /* lower top margin, so it's flush with text -- depends on lineheight of text */
     margin: 0.5em 20px 20px 0;
