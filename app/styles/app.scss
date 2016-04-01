@@ -30,3 +30,19 @@
 @import 'legacy/home-compat';
 @import 'legacy/stream-widget';
 @import 'legacy/screen';
+
+#browser-warn.container_12 {
+  @extend .l-constrained;
+  background-color: rgba(217, 83, 79, 0.55);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 5px;
+}
+
+#browser-warn .close {
+  padding: 0 5px;
+}
+
+#browser-warn a {
+  color: black;
+}
