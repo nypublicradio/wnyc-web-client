@@ -1,0 +1,91 @@
+/***
+ * Sliding Accordion:
+ * Accordions are a convenient way to hide information behind a sliding panel.
+ * Built using the following atoms: `.accordion`, `.accordion-header`,
+ * `.accordion-collapsable`, and `.js-accordionButton`. It requires 
+ * `js/overhaul/accordion.js`.
+ *
+ * Make an `.accordion` parent with two children: `.accordion-header` and 
+ * `.accordion-collapsable`. The visible bit goes into `.accordion-header`. The 
+ * JS expects a `.js-accordionButton` as a descendent of `.accordion`; it probably
+ * makes sense to put it in `.accordion-header`.
+ *
+ * Clicking `.js-accordionButton` will toggle the `data-state` attribute of the
+ * `.accordion` element: `is-expanded` or `is-collapsed`. You can set one in the 
+ * markup to choose a page-load state. Put whatever you want in the 
+ * `.accordion-collapsable`.
+ *
+ *      @example
+ *      .accordion(data-state="is-expanded")
+ *          .accordion-header
+ *              .text.text--white.flush
+ *                  <h3 class="h3">Lots of cool things to see here. <button class="btn js-accordionButton">Click to Toggle</button></h3>
+ *          .accordion-collapsable
+ *              .text.text--white.flush
+ *                  .text-body
+ *                      ol.flush
+ *                          li Speed boats
+ *                          li Puppies
+ *                          li CSS Widgets
+ */
+.accordion {
+    z-index: $zIndex--accordion;
+
+    position: relative;
+    background-color: $darkestgray;
+
+    @extend %vertical-rhythm;
+}
+
+.accordion-header {
+    padding: 5px 30px;
+    background-color: $darkgray; 
+    position: relative;
+
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 0;
+        height: 0;
+        left: 25px;
+        top: 100%;
+        border-style: solid;
+        border-color: transparent;
+        border-top-color: $darkgray;
+        border-width: 10px 8px 0;
+        // fixes jagged edges on FF
+        -moz-transform: scale(1.01,1.01);
+
+        opacity: 1;
+        @include transition(opacity $transition-timing);
+    }
+
+    [data-state="is-collapsed"] &:after {
+        opacity: 0;
+    }
+}
+
+.accordion-collapsable {
+    // do not set overflow hidden because
+    // we might need things like dropdowns to overflow!
+    @include transition(max-height $transition-timing, opacity $transition-timing);
+    @include translate3d(0,0,0);
+
+    [data-state="is-expanded"] & {
+        max-height: 1500px;
+
+        // why were we making shorter for wider screens?
+        // @include mq($medium-and-up) {
+        //     max-height: 500px;
+        // }
+
+        opacity: 1;
+    }
+
+    [data-state="is-collapsed"] & {
+        max-height: 0px;
+        opacity: 0;
+        overflow: hidden;
+    }
+}
