@@ -1,7 +1,10 @@
-.icon--wnyc-logo-nav {
-  display: block;
-  fill: white;
-  width: 104px;
-  height: 43px;
-  margin: auto;
+.icon--prefix--large {
+    margin-right: 8px;
+    vertical-align: baseline;
+    @include fontsize(18);
+}
+
+.icon--postfix {
+    margin-left: 8px;
+    vertical-align: middle;
 }
