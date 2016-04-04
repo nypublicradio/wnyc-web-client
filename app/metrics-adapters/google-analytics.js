@@ -12,7 +12,7 @@ export default GoogleAnalytics.extend({
   identify(user) {
     window.ga('set', 'dimension1', String(get(user, 'isAuthenticated')));
   },
-  trackEvent({ category, action, value }) {
-    this._super({ category, action, value });
+  trackEvent({ category, action, label, value }) {
+    this._super({ category, action, label, value });
   }
 });

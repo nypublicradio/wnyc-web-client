@@ -22,7 +22,7 @@ export default Ember.Route.extend({
   afterModel(model) {
     let metrics = get(this, 'metrics');
     let sessionManager = get(this,'sessionManager');
-    let {gaAction:action, gaLabel:label} = get(model, 'story.analytics');
+    let {containers:action, title:label} = get(model, 'story.analytics');
 
     setProperties(model, {
       user: get(sessionManager, 'user'),
