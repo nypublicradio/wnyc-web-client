@@ -37,3 +37,470 @@
     line-height: initial !important;
   }
 }
+/***
+ * Buttons:
+ */
+
+/**
+ * Button:
+ * `.btn`
+ * A base for all buttons. Not much to look at.
+ *
+ *      @example
+ *      button.btn Click Me
+ */
+.btn {
+    display: inline-block;
+    border-radius: 25px;
+    border: 1px solid;
+    border-color: rgba($lightgray, .5);
+
+    padding: 0px 13px;
+    color: $lightgray;
+    background: transparent;
+    @include fontsize(14);
+    line-height: 34px;
+
+    cursor: pointer;
+
+    @include transition(background-color $transition-timing, border-color $transition-timing, color $transition-timing);
+
+    &:hover {
+        border-color: rgba($darkgray, .5);
+	color: $gray;
+    }
+}
+
+/**
+ * Heavy Button:
+ * `.btn--heavy`
+ * Make the button bold.
+ *
+ *      @example
+ *      button.btn.btn--heavy Something to Emphasize
+ */
+.btn--heavy {
+    font-weight: 600;
+}
+
+/**
+ * Blank Button:
+ * `.btn--blank`
+ * An empty button. Useful for icons or interactive buttons
+ * to be style other ways
+ *
+ *      @example
+ *      button.btn.btn--blank I'm a button but I look like nothing special
+ */
+.btn--blank {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    color: #333;
+    // IE doesn't support initial
+    color: initial;
+    text-align: left;
+    background-color: transparent;
+
+    &:hover {
+        background: none;
+        border: none;
+        color: inherit;
+    }
+}
+
+/**
+ * Large Button:
+ * `.btn--large`
+ * It's a little bigger than your standard button.
+ *
+ *      @example
+ *      button.btn.btn--large Click Me, I'm Bigger!
+ */
+.btn--large {
+    padding: 2px 18px 3px 18px;
+    line-height: 36px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    @include fontsize(20);
+}
+
+
+/**
+ * Medium Button:
+ * `.btn--medium`
+ * It's a little mediumer than your standard button.
+ *
+ *      @example
+ *      button.btn.btn--medium Just Right.
+ */
+.btn--medium {
+    padding: 0px 16px;
+    line-height: 50px;
+}
+
+/**
+ * Small Button:
+ * `.btn--small`
+ * It's a little smaller than your standard button.
+ *
+ *      @example
+ *      button.btn.btn--small Can you see me? I'm small.
+ */
+.btn--small {
+    padding: 0 5px;
+    line-height: 20px;
+}
+
+/**
+ * Circle Button:
+ * `.btn--circle` 
+ * Good for icons.
+ *
+ *      @example
+ *      button.btn.btn--circle 
+ *          i.fa.fa-twitter
+ */
+.btn--circle {
+    border-radius: 50%;
+    width: 36px;
+    padding: 0;
+    text-align: center;
+}
+
+/**
+ * Squared Off Button:
+ * `.btn--squared`
+ * Squared off button with rounded corners.
+ *
+ *      @example
+ *      button.btn.btn--squared Submit
+ */
+.btn--squared {
+    border-radius: 6px;
+    padding: 0 8px;
+}
+
+/**
+ * Strict Square Button:
+ * `.btn--strictsquare`
+ * No rounded corners whatsoever.
+ *
+ *      @example
+ *      button.btn.btn--strictsquare Enter
+ */
+.btn--strictsquare {
+    border-radius: 0;
+}
+
+/**
+ * Square Button:
+ * `.btn--square-small`
+ * A 45px width and height button.
+ *
+ *      @example
+ *      button.btn.btn--strictsquare.btn--square-small Hi
+ */
+.btn--square-small {
+    width: 45px;
+    height: 45px;
+}
+
+/**
+ * White Button:
+ * `.btn--white`
+ *
+ *      @example
+ *      .l-full(style="background-color: rgba(0,0,0,0.15)")
+ *          button.btn.btn--white Useful on a dark background
+ */
+.btn--white {
+    color: white;
+    border-color: rgba(white, .2);
+
+    &:hover {
+        color: white;
+	border-color: rgba(white,.7);
+    }
+}
+
+/**
+ * Pink Button:
+ * `.btn--pink`
+ * Make your button stand out with a pink background
+ *
+ *      @example
+ *      button.btn.btn--pink You Know You Want to Click
+ */
+.btn--pink {
+    background-color: $pink;
+    border-color: $pink;
+    color: white;
+    
+    &:hover {
+        color: white;
+    }
+}
+
+/**
+ * Button with Pink Text:
+ * `.btn--pinktext`
+ * A regular button but the text is pink.
+ *
+ *      @example
+ *      button.btn.btn--pinktext Click Here
+ */
+.btn--pinktext {
+    color: $pink;
+}
+
+/**
+ * Blue Button:
+ * `.btn--blue`
+ *
+ *      @example
+ *      button.btn.btn--blue Click
+ */
+.btn--blue {
+    background-color: $blue;
+    border-color: $blue;
+    color: white;
+
+    &:hover {
+        background-color: $darkblue;
+	border-color: $darkblue;
+	color: white;
+    }
+}
+
+/**
+ * Button with Blue Text:
+ * `.btn--bluetext`
+ * A regular button but the text is blue.
+ *
+ *      @example
+ *      button.btn.btn--bluetext Click Here
+ */
+.btn--bluetext {
+    color: $blue;
+}
+
+/**
+ * Green Button:
+ * `.btn--green`
+ *
+ *      @example
+ *      button.btn.btn--green Click
+ */
+.btn--green {
+    background-color: $lightgreen;
+    border-color: $lightgreen;
+    color: $darkgray;
+
+    &:hover {
+	background-color: $darkgreen;
+        border-color: $darkgreen;
+	color: $lightgreen;
+    }
+}
+
+/**
+ * Black Button:
+ * `.btn--black`
+ *
+ *      @example
+ *      button.btn.btn--black Click Here
+ */
+.btn--black {
+    color: white;
+    background-color: black;
+    border-color: black;
+
+    &:hover {
+        background-color: $pink;
+	border-color: $pink;
+	color: white;
+    }
+}
+
+/**
+ * Button with Black Text:
+ * `.btn--blacktext`
+ *
+ *      @example
+ *      button.btn.btn--blacktext Submit Comment
+ */
+.btn--blacktext {
+    color: $darkergray;
+
+    &:hover {
+        color: $pink;
+    }
+
+    &.active {
+        color: black;
+    }
+}
+
+/**
+ * Media Query Buttons:
+ * Sometimes we need to change a button's colors based on the current MQ.
+ * These should be created according to special MQ cases.
+ */
+
+/**
+ * `.btn--mq-graywhite`
+ * Gray/White MQ Button
+ *
+ *      @example
+ *      button.btn.btn--mq-graywhite Gray at Narrow. White at wide.
+ */
+.btn--mq-graywhite {
+
+    @include mq($medium-and-up) {
+        color: white;
+	border-color: rgba(255,255,255,.2);
+        
+	&:hover {
+      	    color: white;
+            border-color: rgba(255,255,255,.7);
+	}
+
+    }
+}
+
+/**
+ * Button Link:
+ * `.btn--link` 
+ * If you have you a button that should look
+ * like a regular link, use this modifier
+ *
+ *      @example
+ *      button.btn.btn--link Show Comments
+ */
+.btn--link {
+    color: #333;
+    background-color: transparent;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid rgba(204,204,204,0.8);
+    padding: 0;
+    font-weight: normal;
+    letter-spacing: normal;
+    // IE doesn't support intial
+    letter-spacing: initial;
+    @include fontsize($base-font);
+    line-height: #{$line-height}px;
+
+    &:hover {
+        color: $blue;
+        background-color: transparent;
+        border-color: rgba(204,204,204,0.8);
+    }
+}
+
+/**
+ * Button Link with Icon:
+ * If you've got a button that should look like a link,
+ * and you want to include an icon, you can add `.btn--linkicon` 
+ * to the `<button>`, and wrap the link text in a span. 
+ * 
+ * Also include `.btn--icon` for proper spacing after the icon.
+ *
+ *      @example
+ *      button.btn.btn--icon.btn--link.btn--linkicon
+ *          i.fa.fa-comment
+ *          span 2 Comments
+ */
+.btn--linkicon {
+    border: none;
+    
+    > span {
+        border-bottom: 1px solid rgba(204,204,204,0.8);
+    }
+}
+
+/**
+ * Button Group:
+ * Group some buttons together and they will line up nicely
+ *
+ *      @example
+ *      .btn-group
+ *          button.btn.btn--large Listen
+ *          button.btn Queue
+ *          button.btn.btn--circle
+ *              i.fa.fa-ellipsis-h
+ */
+.btn-group {
+    font-size: 0;
+
+    > * {
+        margin-right: 10px;
+        vertical-align: middle;
+        display: inline-block;
+    }
+
+    > :last-child {
+        margin-right: 0;
+    }
+}
+
+.btn-group--withvr{
+
+    > * {
+        @extend %vertical-rhythm;
+
+        @include mq($medium-and-up) {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.btn-group--closer {
+  > * {
+    margin-right: 7px;
+  }
+}
+
+/**
+ * Toggle Button:
+ * `.btn--toggle > .btn-togglecontent`
+ * When a button has content you want to want to toggle on clicks, use these
+ * classes. They can applied directly to buttons used for other purposes
+ * such as accordions or tabs and will not interrupt functionality.
+ *
+ * The important thing is to add a data-state attribute set to either `first` or
+ * `second`. This corresponds to which child will be displayed by default.
+ *
+ * Requires `js/overhaul/main.js` but should probably split into its own mod.
+ *
+ *      @example
+ *      button.btn.btn--toggle.js-toggleButton(data-state="first")
+ *          .btn-togglecontent Toggle State 1
+ *          .btn-togglecontent Toggle State 2
+ */
+.btn--toggle {
+    position: relative;
+    // override base `.btn` transition so there is no
+    // conflict with the btn-togglecontent transitions
+    //@include transition(none);
+}
+
+.btn-togglecontent {
+    @include transition(all 150ms ease);
+
+    &:first-child {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+}
+
+.btn--block {
+    display: block;
+    padding: 8px;
+    width: 100%;
+}

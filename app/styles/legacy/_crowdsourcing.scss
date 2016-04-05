@@ -1,0 +1,326 @@
+//
+// WARNING: LEGACY CODE
+// This will need a good dose of overhaul, someday
+//
+
+/* Polls - horizontal layout */
+
+.poll {
+    background-color: #eeeeee;
+    padding: 0px 10px 15px;
+    border: 1px solid #d9d9d9;
+    margin: 10px 0;
+    clear: both;
+}
+
+.poll h3 {
+    font-size: 20px;
+    line-height: 22px;
+    color: #333;
+    padding-bottom: 8px;
+    padding-right: 7px;
+    padding-left: 7px;
+    margin: 0px;
+    text-align: center;
+}
+
+.poll p {
+    color: #333;
+    font-size: 12px;
+    line-height: 15px;
+    padding: 0px 7px;
+    margin: 0px;
+    text-align: left;
+}
+
+.poll p.subtitle {
+    color: #333;
+    padding-bottom: 7px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.poll p.description {
+   padding-bottom: 7px;
+}
+
+.poll p.results {
+    text-align: center;
+    font-size: 8pt;
+    padding: 8px 0px 0px 0px;
+    clear: both;
+    margin: 0px;
+}
+
+.poll p.results a {
+                color: #e21e26;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.poll p.results a:hover {
+    color: #333;
+    text-decoration: underline;
+}
+
+.poll .survey_wrapper {
+    position: relative;
+}
+
+.poll .vote { }
+
+.poll .vote div {
+    border: 1px solid #d9d9d9;
+    background-color: #fff;
+    padding: 10px 8px 0px;
+    text-align: center;
+}
+
+.poll .vote h2 {
+    text-align: center;
+    color: #333;
+    padding: 0px 0px 4px 0px;
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: bold;
+}
+
+ul.voteList,
+.article-wide ul.voteList {
+    margin-bottom: 0px;
+    font-size: auto;
+    line-height: inherit;
+}
+
+ul.voteList li,
+.article-wide ul.voteList li {
+    list-style: none;
+    margin: 10px 8px 15px;
+    padding: 0px;
+}
+
+.poll .vote ul li a {
+    display: block;
+    min-height: 25px;
+    color: #fff;
+    font: normal bold 12px/14px arial;
+    padding: 5px;
+    background-color: #e21e26;
+    border: 1px solid #c6c6c6;
+}
+
+.poll .vote ul li a:hover {
+    text-decoration: none;
+    background-color: #666;
+}
+
+/* More Crowdsourcing */
+
+.article-description .survey,
+.article-wide .survey {
+    clear: both;
+    padding: 5px 15px;
+    border: 1px solid #e9e9e9;
+}
+
+form.survey {
+    padding: 0 !important;
+    border: 0 !important;
+}
+
+.survey h3 { /* survey title */
+    font-size: 11pt;
+}
+
+.required {
+    color: #dd0000;
+    margin: 0 5px;
+}
+
+input.required {
+    color: #000;
+}
+
+.survey h3.message,
+#crowd-detail h3.message {
+    margin: 15px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f6f6f6;
+    text-align: center;
+    font-weight: normal;
+    color: #333;
+}
+
+form.survey h2 {
+    font-size: 9pt;
+    margin: 10px 0 4px;
+}
+
+form.survey label.help_text {
+    display: block;
+    font-size: 8pt;
+    line-height: 1.3em;
+    margin: 5px 0;
+}
+
+form.survey .results { /* link to results */
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+form.survey .results a:after {
+    content: " \0BB";
+}
+
+.crowd-results {
+    clear: both;
+}
+
+.crowd-results .stf {
+    display: none;
+    @extend .btn;
+    @extend .btn--green;
+}
+
+.crowd-results .stf[href] {
+    display: inline-block;
+}
+
+.crowd-results h2 {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 5px;
+    line-height: 1.2em;
+}
+
+.crowd-results form.filters h2 {
+    font-weight: bold;
+    font-size: 11pt;
+}
+
+.crowd-results h2.chart_title {
+    display: block;
+    background-color: #f6f6f6;
+    border-top: 1px solid #ddd;
+    margin: 20px 0 0;
+    padding: 5px 10px;
+}
+
+.crowd-results h2.archive {
+    margin-top: 20px;
+    border-bottom: 2px dotted #ccc;
+    padding: 15px 0;
+    font-weight: bold;
+}
+
+.crowd-results .submission {
+    border-bottom: 2px dotted #ccc;
+    padding: 15px 0;
+}
+
+.crowd-results .date {
+    color: #999;
+    padding-bottom: 5px;
+}
+
+.crowd-results .field {
+    padding: 3px 0;
+    font-size: 10pt;
+}
+
+.crowd-results .field label {
+    font-weight: bold;
+    padding-right: 2px;
+}
+
+.crowd-results .field img,
+.crowd-results .field .videoplayer {
+    display: block;
+    margin: 4px 0;
+}
+
+.crowd-results ul.map_key {
+    margin: 5px 0;
+}
+
+.crowd-results ul.map_key li {
+    display: inline;
+    margin: 0 5px;
+}
+
+form.survey ul li,
+#crowd-detail form ul li {
+    list-style-type: none;
+    margin: 0;
+    font-size: 9pt;
+    padding-bottom: 15px;
+}
+
+form.survey label,
+#crowd-detail label {
+    font-weight: bold;
+    font-size: 10pt;
+    color: #000;
+}
+
+form.survey .help-text,
+#crowd-detail .help-text {
+    margin: 2px 0;
+    color: #777;
+}
+
+form.survey input,
+form.survey select,
+form.survey textarea,
+#crowd-detail input,
+#crowd-detail select,
+#crowd-detail textarea {
+    display: block;
+    margin: 4px 0 1px;
+}
+
+form.survey ul li ul li input,
+#crowd-detail ul li ul li input {
+    display: inline;
+}
+
+form.survey ul li ul li,
+#crowd-detail ul li ul li {
+    list-style-type: none;
+    margin: 5px 0 0;
+    padding: 0;
+}
+
+form.survey input.submit,
+#crowd-detail input.submit {
+    margin: 20px 0;
+}
+
+form.filters {
+    margin: 20px 0 30px;
+    padding: 10px 12px;
+    background-color: #f6f6f6;
+    border: 1px solid #ddd;
+}
+
+form.filters ul {
+    padding:0;
+    margin: 10px 1px 15px;
+}
+
+form.filters ul li {
+    list-style-type: none;
+    margin: 5px 0;
+}
+
+form.filters label {
+    margin-right: 10px;
+}
+
+form.filters #location label,
+form.filters #number label,
+form.filters #decimal label {
+    color: #666;
+    margin: 0 0 0 5px;
+}
