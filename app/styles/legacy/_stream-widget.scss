@@ -43,10 +43,16 @@
     @include mq($small-only) {
         display: none;
     }
-}
-#stream_launch_widget .show .head a[href]:hover {
-  text-decoration: none;
-  border-bottom-color: white;
+
+  .show .head a[href]:hover {
+    text-decoration: none !important;
+    border-bottom-color: white;
+  }
+
+  .util a {
+    border: none;
+  }
+
 }
 
 #popup-btn {
