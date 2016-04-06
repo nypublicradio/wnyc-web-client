@@ -45,17 +45,21 @@
     }
 
   .show .head a[href]:hover {
-    text-decoration: none !important;
-    border-bottom-color: white;
+    text-decoration: underline;
   }
 
-  .util a {
-    border: none;
-  }
+  .util {
+    font-size: 0.75rem;
 
+    > .schedule,
+    > .options {
+      > a {
+        border: none;
+      }
+    }
+  }
 }
 
 #popup-btn {
     width: 121px;
 }
-
