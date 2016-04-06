@@ -10,6 +10,13 @@ import Ember from 'ember';
 import { runOnce } from 'overhaul/services/legacy-loader';
 const { $ } = Ember;
 
+export function homepageCleanup(element = document.body) {
+  Array.from(element.querySelectorAll('#twitterbox, #technical-message'))
+    .forEach(n => !n.childElementCount && n.parentElement.removeChild(n));
+  element.querySelector('#header').classList.add('home');
+  return element;
+}
+
 // This gets run by the django-page component right before tearing
 // down the content.
 export function beforeTeardown(/* element, page */) {
@@ -25,7 +32,7 @@ export function beforeTeardown(/* element, page */) {
     .removeClass('subnavigation-open');
 
   // player.js listens for a story event with a handler defined on the wnyc object,
-  // which is triggered randomly; unbind here to avoid throwing undefined errors
+  // which is triggered by logic outside of Ember; unbind to avoid throwing errors
   $(window).off('unload storage');
 
   // The mailchimp popup signup form is badly behaved -- it insists on
@@ -38,6 +45,8 @@ export function beforeTeardown(/* element, page */) {
   // end up accumulating unexpected cruft.
   window.wnyc = undefined;
 
+  // some legacy CSS needs help to work properly. see legacy/_screen.scss
+  document.body.classList.remove('home');
 }
 
 // This gets run by the django-page model when it's figuring out how
@@ -45,7 +54,11 @@ export function beforeTeardown(/* element, page */) {
 // the content that's about to be appended) and the page model. The
 // Element is not yet inserted into any document, and you can modify
 // it here as needed.
-export function beforeAppend(element /*, page */) {
+export function beforeAppend(element, page) {
+
+  if (page.get('id') === '/') {
+    element = homepageCleanup(element);
+  }
 
   return element;
 }

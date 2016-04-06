@@ -133,7 +133,7 @@ export default DS.Model.extend({
     // Remove the style tags from our imported body, because they will be handled separately.
     Array.from(body.querySelectorAll('style, link[rel=stylesheet]')).forEach(e => e.parentNode.removeChild(e));
 
-    body = beforeAppend(body);
+    body = beforeAppend(body, this);
 
     return { body, scripts, styles };
   },

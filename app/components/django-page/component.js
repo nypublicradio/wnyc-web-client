@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
-import { beforeTeardown } from '../../lib/compat-hooks';
+import { beforeTeardown, homepageCleanup } from '../../lib/compat-hooks';
 import ENV from '../../config/environment';
 import {
   isInDom,
@@ -54,6 +54,9 @@ export default Ember.Component.extend({
       if (isInDom(page.get('id'))) {
         // if an alien dom is present, capture any escaped clicks but otherwise
         // leave the alien alone
+        if (page.get('id') === '/') {
+          homepageCleanup();
+        }
         installAlienListener(this);
       } else {
         // otherwise clear out the dom and render our server-fetched content
