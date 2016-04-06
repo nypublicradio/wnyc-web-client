@@ -39,35 +39,3 @@ test('on a search page with a query', function(assert) {
   });
 });
 
-moduleForAcceptance('django-page and alien clicks', {
-  afterEach() {
-    resetHTML();
-  }
-});
-
-test('lets # links pass though', function(assert) {
-  let page = server.create('django-page');
-
-  appendHTML('<a href="#" id="link">click</a><div id="output"></div>');
-  djangoPage
-    .bootstrap(page)
-    .visit(page);
-
-  document.addEventListener('click', function bar(e) {
-    if (e.target.id === 'link') {
-      e.preventDefault();
-      let output = document.getElementById('output');
-      output.textContent = 'foo';
-    }
-    document.removeEventListener('click', bar);
-  }, false);
-
-  andThen(() => {
-    djangoPage.alienClick('#link');
-  });
-
-  andThen(() => {
-    assert.equal(find('#output').text(), 'foo');
-    assert.notOk(location.hash);
-  });
-});
