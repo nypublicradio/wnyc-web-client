@@ -1,0 +1,15 @@
+#navigation-menu li a {
+  border-bottom: none;
+}
+
+#header a {
+  border-bottom: none;
+}
+
+.header-wide-button.btn--pink {
+  @extend .btn--pink;
+}
+
+.home .header-wide-button.btn--pink {
+  background-color: #4f151e;
+}
