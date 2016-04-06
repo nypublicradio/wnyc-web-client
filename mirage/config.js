@@ -34,6 +34,6 @@ export default function() {
   });
 
   this.get('*upstream_url', function(schema, request) {
-    return schema.djangoPage.find({id: request.params.upstream_url});
+    return schema.djangoPage.find(request.params.upstream_url);
   });
 };
