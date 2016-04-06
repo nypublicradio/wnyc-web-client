@@ -1,7 +1,11 @@
-#footer_container a:hover {
+#footer_container h2 {
+  margin-bottom: 0;
+}
+
+#footer_container a {
   border-bottom: none !important;
 }
 
 #footer_container .footer_copyright .nypr_lockup ul li {
-  width: 90px;
+  width: 90px !important;
 }
