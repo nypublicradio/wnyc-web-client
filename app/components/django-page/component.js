@@ -27,12 +27,6 @@ function doRefresh() {
   }
 }
 
-function initializeImagesLoaded() {
-  imagesLoaded(document.body).on('progress', (i, image) => {
-    image.img.classList.add('is-loaded');
-  });
-}
-
 export default Ember.Component.extend({
   legacyAnalytics: service(),
   router: Ember.inject.service('wnyc-routing'),
@@ -61,7 +55,6 @@ export default Ember.Component.extend({
         // if an alien dom is present, capture any escaped clicks but otherwise
         // leave the alien alone
         installAlienListener(this);
-        initializeImagesLoaded();
       } else {
         // otherwise clear out the dom and render our server-fetched content
         clearAlienDom();
@@ -71,7 +64,11 @@ export default Ember.Component.extend({
           // itself into the server-rendered DOM.
           this.set('showingOverlay', true);
           doRefresh();
-          initializeImagesLoaded();
+
+          this.$().imagesLoaded().progress((i, image) => {
+            image.img.classList.add('is-loaded');
+          });
+
         });
       }
     }
