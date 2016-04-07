@@ -66,7 +66,9 @@ export default Ember.Component.extend({
           // re-enable any overlaid content so that it can wormhole
           // itself into the server-rendered DOM.
           this.set('showingOverlay', true);
-          doRefresh();
+          if (ENV.renderGoogleAds) {
+            doRefresh();
+          }
 
           this.$().imagesLoaded().progress((i, image) => {
             image.img.classList.add('is-loaded');
