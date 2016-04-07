@@ -1,6 +1,7 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import djangoPage from 'overhaul/tests/pages/django-page';
+import DjangoRenderedController from 'overhaul/controllers/django-rendered';
 import 'ember-feature-flags/tests/helpers/with-feature';
 import ENV from 'overhaul/config/environment';
 const { wnycURL } = ENV;
@@ -11,6 +12,8 @@ import {
 function escapeNavigation() {
   return 'leaving';
 }
+
+DjangoRenderedController.reopen({ queryParams: ['bar'] });
 
 moduleForAcceptance('django-page leaves alien dom alone', {
   beforeEach() {
