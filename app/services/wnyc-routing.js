@@ -10,12 +10,17 @@ import Ember from 'ember';
 
 export default Ember.Service.extend({
   _routing: Ember.inject.service('-routing'),
-  transitionTo(routeName, ...models) {
-    this.get('_routing').transitionTo(routeName, models);
+  transitionTo(routeName, models, queryParams) {
+    this.get('_routing').transitionTo(routeName, models, queryParams);
   },
 
   recognize(url) {
-    let handlers = Array.from(this.get('_routing').router.router.recognizer.recognize(url));
+    let handlers = this.get('_routing').router.router.recognizer.recognize(url);
+    // recognize returns queryParams as a property on the handlers array
+    // seems strange, maybe it's a bug? problems with a private API
+    let { queryParams } = handlers;
+    // now make it an array
+    handlers = Array.from(handlers);
     handlers.shift(); // application handler is always present and not interesting here
     //let routeName = handlers.map(h => h.handler).join('.');
     let routeName = handlers[handlers.length -1].handler;
@@ -29,7 +34,7 @@ export default Ember.Service.extend({
         params.push(h.params[p]);
       }
     });
-    return { routeName, params };
+    return { routeName, params, queryParams };
   }
 
 });
