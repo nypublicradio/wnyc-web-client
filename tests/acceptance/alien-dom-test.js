@@ -1,4 +1,4 @@
-import { test, skip } from 'qunit';
+import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import djangoPage from 'overhaul/tests/pages/django-page';
 import 'ember-feature-flags/tests/helpers/with-feature';
@@ -58,7 +58,8 @@ test('alien anchor tag clicks route like link-tos', function(assert) {
   });
 });
 
-skip('alien anchor tag clicks with query strings route OK', function(assert) {
+test('alien anchor tag clicks with query strings route OK', function(assert) {
+
   withFeature('django-page-routing');
   let djangoHTML = `<a href="${wnycURL}/foo?bar=baz" id="link">click me</a>`;
   let page = server.create('django-page', {testMarkup: djangoHTML});
