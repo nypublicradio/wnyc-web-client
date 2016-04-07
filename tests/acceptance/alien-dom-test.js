@@ -39,8 +39,7 @@ test('on homepage', function(assert) {
 });
 
 test('on a search page with a query', function(assert) {
-  // django will only append the path, not the query string
-  let search = server.create('django-page', {id: 'search/'});
+  let search = server.create('django-page', {id: 'search/?q=foo'});
   djangoPage
     .bootstrap(search)
     .visit({id: 'search/?q=foo'});
