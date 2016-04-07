@@ -23,7 +23,9 @@
     "andThen",
     "currentURL",
     "currentPath",
-    "currentRouteName"
+    "currentRouteName",
+    "withFeature",
+    "alienDomClick"
   ],
   "node": false,
   "browser": false,
