@@ -86,3 +86,19 @@ test('alien anchor tag clicks with query strings route OK', function(assert) {
   });
 
 });
+
+test('alien links with bare query strings should create django-page IDs with full path', function(assert) {
+  withFeature('django-page-routing');
+  let djangoHTML = `<a href="?bar=baz" id="link">click me</a>`;
+  let page = server.create('django-page', {id: 'fake/path/', testMarkup: djangoHTML});
+  server.create('django-page', {id: '?bar=baz'});
+
+  djangoPage
+    .bootstrap(page)
+    .visit(page)
+    .alienClick('#link');
+
+  andThen(() => {
+    assert.equal(currentURL(), '/fake/path/?bar=baz');
+  });
+});
