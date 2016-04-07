@@ -12,7 +12,7 @@ let {
 export default PageObject.create({
   visit: visitable(':id'),
   alienClick(selector) {
-    document.querySelector(selector).click();
+    return alienDomClick(selector);
   },
 
   bootstrap({id}) {
