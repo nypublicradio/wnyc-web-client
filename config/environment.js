@@ -65,6 +65,13 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
 
     ENV.renderGoogleAds = false;
+    ENV.googleAPIv3Key = '';
+    ENV.googleAnalyticsKey = '';
+    ENV.wnycAPI = 'http://test.com';
+    ENV.wnycAccountRoot = 'http://test.com/account';
+    ENV.wnycEtagAPI = 'http://test.com/etag';
+    ENV.wnycStaticURL = 'http://test.com/static';
+    ENV.wnycURL = 'http://test.com';
   }
 
   if (environment === 'production') {
