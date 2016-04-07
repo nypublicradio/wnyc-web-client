@@ -9,6 +9,7 @@ export default Factory.extend({
     let json;
     let content;
     let type;
+    let testMarkup = this.testMarkup;
 
     if (/^(shows|articles|tags)/.test(id)) {
       type = 'channel';
@@ -41,6 +42,8 @@ export default Factory.extend({
     }
 
     return `
+      <div id="header"></div>
+      ${testMarkup || ''}
       ${wormholes || ''}
       <script type="text/x-wnyc-marker" data-url="${id}"></script>
       <script id="wnyc-${type}-jsonapi" type="application/vnd.api+json">
