@@ -33,6 +33,10 @@ export default function() {
     return apiResponse;
   });
 
+  this.get('/', function(schema) {
+    return schema.djangoPage.find('/');
+  });
+
   this.get('*upstream_url', function(schema, request) {
     return schema.djangoPage.find(request.params.upstream_url);
   });
