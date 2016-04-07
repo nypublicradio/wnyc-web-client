@@ -37,7 +37,9 @@ export default function() {
     return schema.djangoPage.find('/');
   });
 
-  this.get('*upstream_url', function(schema, request) {
-    return schema.djangoPage.find(request.params.upstream_url);
+  this.get('*upstream_url', function(schema, {params, queryParams}) {
+    let qp = Object.keys(queryParams).map(p => `${p}=${queryParams[p]}`);
+    let { upstream_url } = params;
+    return schema.djangoPage.find(`${qp ? `${upstream_url}?${qp.join('&')}` : upstream_url}`);
   });
 };
