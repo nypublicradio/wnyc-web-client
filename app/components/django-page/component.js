@@ -99,7 +99,10 @@ export default Ember.Component.extend({
         }
 
         let { routeName, params } = router.recognize(href.replace(/^\//, ''));
-        router.transitionTo(routeName, ...params);
+
+        if (!this.get('isDestroyed') && !this.get('isDestroying')) {
+          router.transitionTo(routeName, ...params);
+        }
         event.preventDefault();
         beforeTeardown(this.get('element'), this.get('page'));
         return false;
