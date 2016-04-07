@@ -42,7 +42,7 @@ moduleForComponent('django-page', 'Integration | Component | django page', {
   },
   afterEach() {
     let featureFlags = this.container.lookup('service:features');
-    featuresFlags.disableAll();
+    featureFlags.disableAll();
   }
 });
 
