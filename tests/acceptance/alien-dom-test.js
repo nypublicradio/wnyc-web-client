@@ -8,8 +8,16 @@ import {
   resetHTML
 } from 'overhaul/tests/helpers/html';
 
+function escapeNavigation() {
+  return 'leaving';
+}
+
 moduleForAcceptance('django-page leaves alien dom alone', {
+  beforeEach() {
+    window.beforeunload = escapeNavigation;
+  },
   afterEach() {
+    window.beforeunload = undefined;
     resetHTML();
   }
 });
