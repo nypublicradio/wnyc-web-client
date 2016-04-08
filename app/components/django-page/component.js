@@ -6,7 +6,7 @@ import {
   isInDom,
   clearAlienDom,
   embeddedComponentSetup,
-  installAlienListener,
+  installAlienListeners,
 } from '../../lib/alien-dom';
 
 const { $, get } = Ember;
@@ -57,7 +57,7 @@ export default Ember.Component.extend({
         if (page.get('id') === '/') {
           homepageCleanup();
         }
-        installAlienListener(this);
+        installAlienListeners(this);
       } else {
         // otherwise clear out the dom and render our server-fetched content
         clearAlienDom();
