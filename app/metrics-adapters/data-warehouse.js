@@ -32,7 +32,7 @@ export default BaseAdapter.extend({
     }
   },
 
-  trackEvent(o) {
+  trackEvent(options) {
     const isDebug = get(this, 'isDebug');
     const { eventName } = options;
     const eventMethod = `_${eventName}`;
