@@ -86,7 +86,7 @@ test('let # links pass through', function(assert) {
   assert.notOk(location.hash);
 });
 
-test('imagesLoaded callback is fired on image elements within django-rendered HTML', function(assert) {
+test('imagesLoaded callback is fired on image elements inside django-page component', function(assert) {
   assert.expect(1);
   let done = assert.async();
 
@@ -96,11 +96,10 @@ test('imagesLoaded callback is fired on image elements within django-rendered HT
 
   this.render(hbs`{{django-page page=page}}`);
 
-  Ember.run.later(this, function() {
-    this.$().imagesLoaded(() => {
+  this.$().imagesLoaded(() => {
+    Ember.run.next(this, function() {
       assert.ok(this.$('#test').hasClass('is-loaded'));
       done();
     });
-  }, 1000);
+  });
 });
-
