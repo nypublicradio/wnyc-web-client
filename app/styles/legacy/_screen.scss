@@ -5,6 +5,9 @@
 
   a {
     border-bottom: none;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
@@ -36,20 +39,10 @@
   display: none;
 }
 
-/*
-img {
-  vertical-align: bottom;
-}
-*/
-
 a {
   color: #0073d5; 
   text-decoration: none;
   word-wrap: break-word;
-}
-
-a:hover {
-  text-decoration: underline;
 }
 
 a:focus {
@@ -317,10 +310,6 @@ h1 a, h2.title a { /* ie doppelganger bug in touts */
 
 .article-wide h2.title a { /* no block title display in detail pages */
   display: inline;
-}
-
-h2 a:hover, h3 a:hover, h4 a:hover {
-  text-decoration: underline;
 }
 
 .page-titlegroup {
@@ -964,6 +953,19 @@ h4.label {
 
 .sideblock .feeds {
   margin-top: 10px;
+}
+
+.flatpage-nav {
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  ul li a {
+    color: #dd0000;
+    font-size: 13px;
+  }
 }
 
 .flatpage-nav ul li {
@@ -4659,4 +4661,12 @@ ul.schedule-table {
 
 .clearfix {
   @extend %clearfix;
+}
+
+#pass_through_frame {
+  position: absolute;
+  left: 50%;
+  width: 320px;
+  margin: 4em 0 0 -160px;
+  padding: 0;
 }

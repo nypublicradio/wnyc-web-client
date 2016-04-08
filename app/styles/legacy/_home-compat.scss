@@ -1,39 +1,45 @@
-.story-wrapper {
-  h2 > a:hover {
-    border-bottom-color: white;
+#wnyc_home .story-wrapper {
+  h2 > a {
+    display: block;
+    border: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .puppy-btn:hover {
+    text-decoration: none;
   }
 }
 
 #wnyc_home h2 {
   letter-spacing: 0.2px;
   margin-bottom: 5px;
+  font-weight: 600;
+}
+
+#wnyc_home h4.show-name {
+  font-weight: 600;
 }
 
 #home-primary .story-wrapper h2 {
-  font-weight: 600;
   margin-bottom: 7px;
-}
-
-#home-secondary .story-wrapper h2 {
-  font-weight: 600;
 }
 
 #top-stories-wrapper .story-wrapper h4.show-name {
   font-size: 14px;
-  font-weight: 600;
-  line-height: 36px;
+  line-height: 24px;
   margin-bottom: 5px;
 }
 
-.story-wrapper .description p {
-  font-size: 14px;
-  color: #444;
+.story-wrapper .description {
+  &, p {
+    font-size: 14px;
+    color: #444;
+  }
 }
 
 .button-wrapper .puppy-btn {
   font-size: 1rem !important;
-}
-
-#damost-nav li a:hover {
-  text-decoration: none;
 }

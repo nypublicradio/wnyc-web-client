@@ -36,13 +36,23 @@
 }
 
 #navigation-menu {
-  #navigation-items li a {
+  li a {
     font-size: 16px;
     font-weight: 800;
   }
 
+  li.secondary a,
   #subnavigation-items li a {
-    font-weight: 12px;
+    font-size: 12px;
     font-weight: 800;
+  }
+}
+
+ul.sharelinks {
+  list-style: none;
+
+  a {
+    border-bottom-style: solid !important;
+    border-bottom-width: 1px !important;
   }
 }
