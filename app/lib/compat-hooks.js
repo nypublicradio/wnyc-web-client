@@ -47,6 +47,21 @@ export function beforeTeardown(/* element, page */) {
 
   // some legacy CSS needs help to work properly. see legacy/_screen.scss
   document.body.classList.remove('home');
+
+  // bootstraps story adds a bunch of click handlers at run time that need to be
+  // removed otherwise they will pile up
+  $(document)
+    .off('click',  '.js-accordionButton')
+    .off('click',  '.js-dropdownClickable')
+    .off('click',  '.js-captionBtn')
+    .off('click',  '.js-listen')
+    .off('click',  '.js-queue')
+    .off('click',  '.js-share')
+    .off('submit', '#morningBriefSignup')
+    .off('keyup',  '#morningBriefEmailInput')
+    .off('click', '.js-toggleButton');
+
+  $('.js-embedText').off('click');
 }
 
 // This gets run by the django-page model when it's figuring out how

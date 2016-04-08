@@ -46,7 +46,6 @@ export const runOnce = Object.freeze({
   'js/json2.js': true,
   'js/consoleFix.js': true,
   'js/swfobject.js': true,
-  'js/bootstraps/story.js': true,
   'js/vendor/underscore/underscore-1.4.4.js': true,
   'js/vendor/backbone/backbone-0.9.9.js': true,
   'js/vendor/backbone/backbone-1.0.0.js': true,
