@@ -4656,3 +4656,7 @@ ul.schedule-table {
 .schedule-header > h2 {
   font-weight: 600;
 }
+
+.clearfix {
+  @extend %clearfix;
+}
