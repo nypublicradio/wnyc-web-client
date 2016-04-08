@@ -4,6 +4,7 @@ import service from 'ember-service/inject';
 
 const {
   get,
+  getWithDefault,
   set,
   $,
   K
@@ -100,7 +101,7 @@ export default BaseAdapter.extend({
     delete options.host;
 
     options.data.browser_id = get(browserId, 'identity');
-    options.data.email = get(user, 'email');
+    options.data.email = getWithDefault(user, 'email', '');
     options.data.referrer_from_js = document.referrer;
 
     const url = this._serialize(`${host}/${endpoint}/`, options.data);
