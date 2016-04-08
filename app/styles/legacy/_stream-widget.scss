@@ -1,14 +1,11 @@
 #stream_launch_widget {
-    * {
-        box-sizing: content-box;
-    }
-
     .show {
         width: 55%;
     }
 
-    .head {
+    #stations_wrapper .head {
         width: auto;
+        height: 50px;
     }
 
     .head h4 {
@@ -19,7 +16,8 @@
     }
 
     .head .show-title a {
-        font-size: 12px;
+        font-size: 13px;
+        font-weight: 600;
     }
 
     .head .item-title {
@@ -28,6 +26,8 @@
 
     .head .current {
         line-height: 20px;
+        font-size: 13px;
+        font-weight: 700;
     }
 
     .util {
@@ -53,13 +53,30 @@
 
     > .schedule,
     > .options {
-      > a {
-        border: none;
-      }
+      font-size: 12px;
+      border: none;
+    }
+
+    .schedule-menu li a {
+      width: 100%;
+    }
+
+    li a {
+      font-size: 12px;
     }
   }
-}
 
-#popup-btn {
+  #popup-btn {
     width: 121px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .station-entry {
+    .show-title,
+    .item-title {
+      font-size: 12px;
+      font-weight: 600;
+    }
+  }
 }

@@ -13,3 +13,36 @@
 .home .header-wide-button.btn--pink {
   background-color: #4f151e;
 }
+
+#header #menu-button-label {
+  font-weight: 800;
+  font-size: 14px; 
+}
+
+#header {
+  .menu-button-bar.bar-1 {
+    margin-top: -6px;
+  }
+  .menu-button-bar.bar-2 {
+    margin-top: 0px;
+  }
+  .menu-button-bar.bar-3 {
+    margin-top: 6px;
+  }
+  
+  #search-button {
+    margin-top: -1px;
+  }
+}
+
+#navigation-menu {
+  #navigation-items li a {
+    font-size: 16px;
+    font-weight: 800;
+  }
+
+  #subnavigation-items li a {
+    font-weight: 12px;
+    font-weight: 800;
+  }
+}
