@@ -21,15 +21,15 @@
 }
 
 .status_draft {
-  background: #fff url(/media/img/icons/status_draft.png) no-repeat 250px 15px;
+  background: #fff url(/assets/img/icons/status_draft.png) no-repeat 250px 15px;
 }
 
 #main.status_scheduled {
-  background: #fff url(/media/img/icons/status_scheduled.png) no-repeat 250px 15px;
+  background: #fff url(/assets/img/icons/status_scheduled.png) no-repeat 250px 15px;
 }
 
 #main.status_submitted {
-  background: #fff url(/media/img/icons/status_submitted.png) no-repeat 250px 15px;
+  background: #fff url(/assets/img/icons/status_submitted.png) no-repeat 250px 15px;
 }
 
 #masthead .print-logo {
@@ -997,7 +997,7 @@ ul.sidetouts li {
 }
 
 .pullquote {
-  background: url(/media/img/wnyc/widgets/quote.png) no-repeat 0 -10px;
+  background: url(/assets/img/widgets/quote.png) no-repeat 0 -10px;
   padding: 0 5px 10px 38px;
   margin: 0 0 10px;
   font-size: 9px;
@@ -1427,7 +1427,7 @@ ul.sharelinks {
 
 .sharelinks li.edit-item,
 .upcoming-tease li.edit-item {
-  background: transparent url('/media/img/icons/edit.gif') no-repeat 13px 0px;
+  background: transparent url(/assets/img/icons/edit.gif) no-repeat 13px 0px;
   padding-left: 26px;
   padding-right: 0px;
   float: right;
@@ -2072,7 +2072,7 @@ ul.article-playlist {
 }
 
 .media_buttons a.button.edit {
-  background: transparent url("/media/img/icons/edit.gif") no-repeat 6px 2px;
+  background: transparent url(/assets/img/icons/edit.gif) no-repeat 6px 2px;
   padding-left: 21px;
   text-indent: 0;
   width: auto;
@@ -3925,13 +3925,13 @@ a.stf, .stfh {
 }
 
 .edit-bucket {
-  background-image: url('/media/img/icons/edit-bucket.png');
+  background-image: url(/assets/img/icons/edit-bucket.png);
   z-index: 1001;
   background-position: -58px 0px;
 }
 
 .edit-tout {
-  background-image: url('/media/img/icons/edit-tout.png');
+  background-image: url(/assets/img/icons/edit-tout.png);
   z-index: 1000;
   background-position: -48px 0px;
 }
