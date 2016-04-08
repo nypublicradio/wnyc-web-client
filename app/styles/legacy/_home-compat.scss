@@ -4,6 +4,32 @@
   }
 }
 
+#wnyc_home h2 {
+  letter-spacing: 0.2px;
+  margin-bottom: 5px;
+}
+
+#home-primary .story-wrapper h2 {
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+#home-secondary .story-wrapper h2 {
+  font-weight: 600;
+}
+
+#top-stories-wrapper .story-wrapper h4.show-name {
+  font-size 14px;
+  font-weight 600;
+  line-height: 36px;
+  margin-bottom: 5px;
+}
+
+.story-wrapper .description p {
+  font-size: 14px;
+  color: #444;
+}
+
 .button-wrapper .puppy-btn {
   font-size: 1rem !important;
 }
