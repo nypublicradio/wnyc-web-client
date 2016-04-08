@@ -105,6 +105,7 @@ test('alien links with bare query strings should create django-page IDs with ful
 });
 
 test('imagesLoaded callback is fired for images in alien dom', function(assert) {
+  let done = assert.async();
   let djangoHTML = `<img id="test" src="${faker.internet.avatar()}">`;
   let page = server.create('django-page', {testMarkup: djangoHTML});
 
@@ -115,6 +116,7 @@ test('imagesLoaded callback is fired for images in alien dom', function(assert) 
   Ember.$('#ember-testing').imagesLoaded(() => {
     Ember.run.next(this, function() {
       assert.ok(Ember.$('#test').hasClass('is-loaded'));
+      done();
     });
   });
 });
