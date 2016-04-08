@@ -56,7 +56,7 @@ export default Model.extend({
   analytics: computed('analyticsCode', {
     get() {
       let analyticsCode = get(this, 'analyticsCode');
-      let {channeltitle, showtitle, seriestitles, modelchar, isblog} = parseAnalyticsCode(analyticsCode);
+      let {channeltitle, showtitle, seriestitles, isblog, modelchar} = parseAnalyticsCode(analyticsCode);
       // compact first to guard against returned undefineds
       let containers = [channeltitle, showtitle, seriestitles].compact().map((c, i) => {
         if (i === 0 && c) {
