@@ -85,6 +85,10 @@ export default Ember.Component.extend({
 
     let target = $(event.target).closest('a');
     let href = target.attr('href');
+    if (target.hasClass('stf')) {
+      // admin link
+      return true;
+    }
     if (target.length > 0 && href && href[0] !== '#') {
       let router = this.get('router');
       let href = new URL(target.attr('href'), new URL(this.get('page.id'), wnycURL).toString()).toString();
