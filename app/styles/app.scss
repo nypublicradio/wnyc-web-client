@@ -1,5 +1,5 @@
 // must come first as per CSS spec
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,300,700);
+@import url(//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,300,700);
 //
 
 @import 'compass';
@@ -30,6 +30,7 @@
 @import 'legacy/home-compat';
 @import 'legacy/stream-widget';
 @import 'legacy/crowdsourcing';
+@import 'legacy/search';
 @import 'legacy/screen';
 @import 'legacy/nav-menu';
 @import 'legacy/footer';
