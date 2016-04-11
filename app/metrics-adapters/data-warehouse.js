@@ -85,14 +85,13 @@ export default BaseAdapter.extend({
     };
 
     waitFor({
-      user: get(this, 'sessionManager.user'),
       browserId: get(this, 'sessionManager.browserId')
-    }).then(({ user, browserId }) => this._sendNow(options, browserId, user));
+    }).then(({ user, browserId }) => this._sendNow(options, browserId));
   },
 
   willDestroy: K,
 
-  _sendNow(options, browserId, user) {
+  _sendNow(options, browserId) {
     const isDebug = get(this, 'isDebug');
     const host = options.host || get(this, 'config.host');
     const endpoint = options.endpoint || get(this, 'config.endpoint');
@@ -100,8 +99,8 @@ export default BaseAdapter.extend({
     delete options.endpoint;
     delete options.host;
 
+    options.xhrFields = { withCredentials: true };
     options.data.browser_id = get(browserId, 'identity');
-    options.data.email = getWithDefault(user, 'email', '');
     options.data.referrer_from_js = document.referrer;
 
     const url = this._serialize(`${host}/${endpoint}/`, options.data);
