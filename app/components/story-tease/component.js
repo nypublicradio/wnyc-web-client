@@ -1,6 +1,7 @@
 /* globals moment */
 import Ember from 'ember';
 import service from 'ember-service/inject';
+import LegacySupport from 'overhaul/mixins/legacy-support';
 
 const {
   Component,
@@ -9,7 +10,7 @@ const {
   computed,
 } = Ember;
 
-export default Component.extend({
+export default Component.extend(LegacySupport, {
   whatsOn: service(),
   sessionManager: service(),
 
