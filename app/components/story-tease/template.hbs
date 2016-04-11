@@ -43,6 +43,7 @@
       {{#if isListenableNow}}
         {{#if isLive}}
           <button {{action 'listen' item livestream}}
+            data-test-selector="listen-button"
             aria-label="Listen to {{item.title}}"
             class="btn btn--blue {{if isFeatured 'btn--large'}}">
             <i class="fa fa-play {{if isFeatured 'icon--prefix--large' 'icon--prefix'}}"></i>
@@ -51,6 +52,7 @@
           </button>
         {{else}}
           <button {{action 'listen' item}}
+            data-test-selector="listen-button"
             aria-label="Listen to {{item.title}}"
             class="btn btn--blue {{if isFeatured 'btn--large'}}">
             <i class="fa fa-play {{if isFeatured 'icon--prefix--large' 'icon--prefix'}}"></i>
@@ -60,6 +62,7 @@
         {{/if}}
 
       <button {{action 'queue' item}}
+        data-test-selector="queue-button"
         aria-label="Add {{item.title}} to Your Queue"
         class="btn hide-on-mobile {{if lgTeaseAndImage 'btn--white' 'btn--graytext'}}">
         <i class="fa fa-plus icon--prefix"></i>Queue
