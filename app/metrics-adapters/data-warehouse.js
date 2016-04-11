@@ -82,15 +82,14 @@ export default BaseAdapter.extend({
   // TODO: refactor to follow $.ajax signature (String url, Object options)
   send(d) {
     const browserId = get(this, 'browserId');
-    const user = get(this, 'user');
     const options = {
       type: 'POST', // type for jQuery < 1.9
       data: d.data || d,
       endpoint: d.endpoint
     };
 
-    if (browserId && user) {
-      return this._sendNow(options, browserId, user);
+    if (browserId) {
+      return this._sendNow(options, browserId);
     } else {
       // wait until browserId is set
       return this._sendLater(options);
@@ -99,7 +98,7 @@ export default BaseAdapter.extend({
 
   willDestroy: K,
 
-  _sendNow(options, browserId, user) {
+  _sendNow(options, browserId) {
     const isDebug = get(this, 'isDebug');
     const host = options.host || get(this, 'config.host');
     const endpoint = options.endpoint || get(this, 'config.endpoint');
@@ -125,8 +124,7 @@ export default BaseAdapter.extend({
   _sendLater(options) {
     listen(['wnyc.user.browserId', 'wnyc.user.success'], function(){
       const browserId = this._getBrowserId();
-      const user = this._getUser();
-      return this._sendNow(options, browserId, user);
+      return this._sendNow(options, browserId);
     }.bind(this));
   },
 
