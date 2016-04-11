@@ -31,7 +31,7 @@ export function beforeTeardown(/* element, page */) {
     .removeClass('navigation-open')
     .removeClass('subnavigation-open');
 
-  // player.js listens for a story event with a handler defined on the wnyc object,
+  // player.js listens for a storage event with a handler defined on the wnyc object,
   // which is triggered by logic outside of Ember; unbind to avoid throwing errors
   $(window).off('unload storage');
 
