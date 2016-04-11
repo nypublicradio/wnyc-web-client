@@ -4,7 +4,6 @@ import service from 'ember-service/inject';
 
 const {
   get,
-  getWithDefault,
   set,
   $,
   K
