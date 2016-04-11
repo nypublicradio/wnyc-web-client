@@ -12,7 +12,7 @@ const { $ } = Ember;
 
 export function homepageCleanup(element = document.body) {
   Array.from(element.querySelectorAll('#twitterbox, #technical-message'))
-    .forEach(n => !n.childElementCount && n.parentElement.removeChild(n));
+    .forEach(n => n.hasChildNodes() && n.parentElement.removeChild(n));
   element.querySelector('#header').classList.add('home');
   return element;
 }
