@@ -1,6 +1,13 @@
 import config from 'overhaul/config/environment';
 
 export default function() {
+  this.namespace = config.wnycAccountRoot;
+  this.get('/api/v1/is_logged_in/', function() {
+    return {
+      id: 'current'
+    };
+  });
+
   this.namespace = config.wnycURL;
 
   this.post('/api/v1/analytics/ga/', function() {
