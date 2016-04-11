@@ -2,9 +2,9 @@ import config from 'overhaul/config/environment';
 // The Alien DOM is a DOM that exists beyond the reaches of an Ember app's
 // understanding, i.e. an HTML document that is already present when the app boots.
 
-// This is assigned to in installAlienListener so it can later be referenced for
+// This is assigned to in installAlienListeners so it can later be referenced for
 // removal from the click event.
-let alienEventListener;
+let alienClickListener;
 
 // When we are operating in progressive boot mode, Ember can detect if a requested
 // django-page model is already present by testing the requested id (the url path)
@@ -21,7 +21,7 @@ export function clearAlienDom() {
   let root = config.environment === 'test' ? '#ember-testing' : 'body';
   let notEmber = document.querySelectorAll(`${root} > :not(.ember-view), ${root} > head > link[rel=stylesheet]:not([href*=assets])`);
   Array.from(notEmber).forEach(n => n.parentNode.removeChild(n));
-  document.removeEventListener('click', alienEventListener);
+  document.removeEventListener('click', alienClickListener);
 }
 
 // Embedded Ember components require an ID for ember-wormwhole to use them as a
@@ -35,14 +35,18 @@ export function embeddedComponentSetup(root = document) {
   });
 }
 
-// An Alien DOM means clicks will escape Ember, so the django-page component also 
-// installs this click handler to capture clicks and send them back to Ember. We have
-// to use a closure in order to both capture the passed in component instance as
+// An Alien DOM means legacy events will escape Ember, so the django-page component also 
+// installs these handlers to capture clicks and other events and send them back to Ember.
+// We have to use a closure in order to both capture the passed in component instance as
 // well as save the function for later removal from the global click event.
-export function installAlienListener(component) {
-  alienEventListener = function(e) {
+export function installAlienListeners(component) {
+  alienClickListener = function(e) {
     component.click(e);
   };
 
-  document.addEventListener('click', alienEventListener, false);
+  document.addEventListener('click', alienClickListener, false);
+
+  imagesLoaded(document.body).on('progress', (i, image) => {
+    image.img.classList.add('is-loaded');
+  });
 }

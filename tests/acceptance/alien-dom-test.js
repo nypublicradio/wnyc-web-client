@@ -1,8 +1,10 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import djangoPage from 'overhaul/tests/pages/django-page';
+import { faker  } from 'ember-cli-mirage';
 import DjangoRenderedController from 'overhaul/controllers/django-rendered';
 import 'ember-feature-flags/tests/helpers/with-feature';
+import Ember from 'ember';
 import ENV from 'overhaul/config/environment';
 const { wnycURL } = ENV;
 import {
@@ -99,5 +101,22 @@ test('alien links with bare query strings should create django-page IDs with ful
 
   andThen(() => {
     assert.equal(currentURL(), '/fake/path/?bar=baz');
+  });
+});
+
+test('imagesLoaded callback is fired for images in alien dom', function(assert) {
+  let done = assert.async();
+  let djangoHTML = `<img id="test" src="${faker.internet.avatar()}">`;
+  let page = server.create('django-page', {testMarkup: djangoHTML});
+
+  djangoPage
+    .bootstrap(page)
+    .visit(page);
+
+  Ember.$('#ember-testing').imagesLoaded(() => {
+    Ember.run.next(this, function() {
+      assert.ok(Ember.$('#test').hasClass('is-loaded'));
+      done();
+    });
   });
 });

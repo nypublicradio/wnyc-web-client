@@ -13,3 +13,46 @@
 .home .header-wide-button.btn--pink {
   background-color: #4f151e;
 }
+
+#header #menu-button-label {
+  font-weight: 800;
+  font-size: 14px; 
+}
+
+#header {
+  .menu-button-bar.bar-1 {
+    margin-top: -6px;
+  }
+  .menu-button-bar.bar-2 {
+    margin-top: 0px;
+  }
+  .menu-button-bar.bar-3 {
+    margin-top: 6px;
+  }
+  
+  #search-button {
+    margin-top: -1px;
+  }
+}
+
+#navigation-menu {
+  li a {
+    font-size: 16px;
+    font-weight: 800;
+  }
+
+  li.secondary a,
+  #subnavigation-items li a {
+    font-size: 12px;
+    font-weight: 800;
+  }
+}
+
+ul.sharelinks {
+  list-style: none;
+
+  a {
+    border-bottom-style: solid !important;
+    border-bottom-width: 1px !important;
+  }
+}

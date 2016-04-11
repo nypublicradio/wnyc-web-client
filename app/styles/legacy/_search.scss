@@ -1,0 +1,34 @@
+#main {
+  #filters ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    padding-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  #search a.search-audio {
+    font-size: 11px;
+  }
+
+  #search .searchbox {
+    height: 42px;
+    width: 91%;
+  }
+
+  #sort ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  #sort a {
+    font-size: 15px;
+    width: 82px;
+  }
+
+  .gsc-above-wrapper-area-container {
+    display: table;
+  }
+
+}

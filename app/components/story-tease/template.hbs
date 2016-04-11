@@ -75,7 +75,7 @@
       {{/if}}
 
       {{#if sessionManager.user.isStaff}}
-        <a href="{{item.editLink}}" class="btn btn--green">Edit this</a>
+        <a href="{{sessionManager.user.adminUrl}}/{{item.editLink}}" class="btn btn--green" target="_blank">Edit this</a>
       {{/if}}
     </div>
     <!-- .btn-group -->
