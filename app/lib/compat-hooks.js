@@ -34,6 +34,7 @@ export function beforeTeardown(/* element, page */) {
   // player.js listens for a storage event with a handler defined on the wnyc object,
   // which is triggered by logic outside of Ember; unbind to avoid throwing errors
   $(window).off('unload storage');
+  window.wnyc.xdPlayer.teardown();
 
   // The mailchimp popup signup form is badly behaved -- it insists on
   // being the only AMD loader on the page. So here we clear it away
@@ -73,6 +74,10 @@ export function beforeAppend(element, page) {
 
   if (page.get('id') === '/') {
     element = homepageCleanup(element);
+    Array.from(element.querySelectorAll('.media_buttons'))
+    .forEach(n => {
+      while(n.hasChildNodes()) { n.removeChild(n.firstChild); }
+    });
   }
 
   return element;
