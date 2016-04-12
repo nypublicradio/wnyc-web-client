@@ -3876,6 +3876,10 @@ a.stf, .stfh {
   display:none;
 }
 
+a.stf[href] {
+  display: block;
+}
+
 .edit-wrap {
   position: relative;
 }
