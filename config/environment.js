@@ -20,7 +20,7 @@ module.exports = function(environment) {
     },
 
     sentry: {
-      dsn: 'https://i69r012vyl.execute-api.us-east-1.amazonaws.com/errors/www-' + process.env.DEPLOY_TARGET === 'production' ? 'prod' : 'demo',
+      dsn: 'https://i69r012vyl.execute-api.us-east-1.amazonaws.com/errors/www-' + (process.env.DEPLOY_TARGET === 'production' ? 'prod' : 'demo'),
       debug: process.env.DEPLOY_TARGET !== 'production',
       development: environment === 'development'
     },
