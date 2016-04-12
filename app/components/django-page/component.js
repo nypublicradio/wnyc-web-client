@@ -85,10 +85,6 @@ export default Ember.Component.extend({
 
     let target = $(event.target).closest('a');
     let href = target.attr('href');
-    if (target.hasClass('stf')) {
-      // admin link
-      return true;
-    }
     if (target.length > 0 && href && href[0] !== '#') {
       let router = this.get('router');
       let href = new URL(target.attr('href'), new URL(this.get('page.id'), wnycURL).toString()).toString();
@@ -97,6 +93,9 @@ export default Ember.Component.extend({
 
         // all URLS are maked as external by legacy JS in development mode
         if (ENV.environment !== 'development' && target.attr('target') === '_blank') {
+          return true;
+        } else if (target.hasClass('stf')) {
+        // admin link
           return true;
         } else if (href.split('.').length > 1) {
         // URL has an extension; allow to bubble up
