@@ -14,9 +14,21 @@
   background-color: #4f151e;
 }
 
-#header #menu-button-label {
-  font-weight: 800;
-  font-size: 14px; 
+
+  
+#header {
+  #menu-button-label,
+  #login-wrapper .user-welcome,
+  #login-wrapper .user-welcome a,
+  #login-wrapper .user-login,
+  #login-wrapper .user-login a,
+  #login-wrapper .user-logout,
+  #login-wrapper .user-logout a,
+  .header-wide-button a,
+  #search-form label {
+    font-weight: 800;
+    font-size: 14px; 
+  }
 }
 
 #header {
@@ -41,10 +53,14 @@
     font-weight: 800;
   }
 
-  li.secondary a,
-  #subnavigation-items li a {
+  li.secondary a {
     font-size: 12px;
     font-weight: 800;
+  }
+
+  #subnavigation-items li a {
+    font-size: 14px;
+    font-weight: 600;
   }
 }
 

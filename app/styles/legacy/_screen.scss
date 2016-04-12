@@ -2,17 +2,15 @@
   position: relative;
   margin: 0 auto;
   width: 970px;
-
-  a {
-    border-bottom: none;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
 }
 
 .site-container, .masthead-container, .footer-container, .siteslider-container {
   overflow: hidden;
+}
+
+#footer_container #footer-inner a:hover {
+  text-decoration: none;
+  border-bottom-color: white;
 }
 
 .site-container {
@@ -61,7 +59,7 @@ a:focus {
 }
 
 .text-link:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 a.more.blog_lede {
@@ -722,7 +720,7 @@ table#show-number-archive {
 }
 
 .article-audioplayer a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .article-audioplayer .media_buttons {
@@ -775,7 +773,7 @@ table#show-number-archive {
 }
 
 .sideblock .article-audioplayer a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .sideblock .media_buttons fieldset {
@@ -946,6 +944,10 @@ h4.label {
   ul li a {
     color: #dd0000;
     font-size: 13px;
+
+    &:hover {
+      border-bottom-color: #dd0000;
+    }
   }
 }
 
@@ -1349,7 +1351,7 @@ ul.sidetouts li p.date {
 }
 
 .article-breadcrumbs a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .story-tools {
@@ -3348,12 +3350,12 @@ form#setup-account input.newsletter_opt_in {
 .poll p.results a {
         color: #e21e26;
   font-weight: bold;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .poll p.results a:hover {
   color: #333;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .poll .survey_wrapper {
