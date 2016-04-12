@@ -565,25 +565,6 @@ table#show-number-archive {
   margin-bottom: 3px;
 }
 
-p.image-caption {
-  margin: 2px 0 0;
-  line-height: 1.2em !important;
-  width: 95%;
-}
-
-/*image-caption, image-credit are inline-to-the-article image metadata,
-  whereas .credit, .caption are for the story's main image */
-.credit, .caption, .image-caption, .image-credit {
-  font-size: 8px;
-  color: #777;
-  line-height: 1.2em;
-  margin: 0;
-}
-
-.image-caption, .image-credit {
-  display: inline-block;
-}
-
 /*related to CMS article content:
   these two rules get floated image captions to maintain the borders of the image itself
 */
