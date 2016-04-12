@@ -1,6 +1,5 @@
 /* jshint node: true, multistr: true */
 
-
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'overhaul',
@@ -21,8 +20,8 @@ module.exports = function(environment) {
     },
 
     sentry: {
-      dsn: `https:\/\/i69r012vyl.execute-api.us-east-1.amazonaws.com/errors/www-${environment === 'production' ? 'prod' : 'demo'}`,
-      debug: environment !== 'production',
+      dsn: 'https://i69r012vyl.execute-api.us-east-1.amazonaws.com/errors/www-' + process.env.DEPLOY_TARGET === 'production' ? 'prod' : 'demo',
+      debug: process.env.DEPLOY_TARGET !== 'production',
       development: environment === 'development'
     },
 
