@@ -9,11 +9,11 @@ export default Route.extend({
     const {navSlug} = this.paramsFor(`${channelType}.well`);
     if (/^\d+$/.test(navSlug)) {
       // navSlug is a page number
-      return this.replaceWith(`${channelType}.page`, navSlug);
+      return this.transitionTo(`${channelType}.page`, navSlug);
     } else {
       // navSlug is actually a navSlug
       // go to the channel.well.page route with a blanked out param for page #
-      return this.replaceWith(`${channelType}.well.page`, navSlug, '');
+      return this.transitionTo(`${channelType}.well.page`, navSlug, '');
     }
   }
 });
