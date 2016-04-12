@@ -1,5 +1,6 @@
 /* jshint node: true, multistr: true */
 
+
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'overhaul',
@@ -17,6 +18,12 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+
+    sentry: {
+      dsn: `https:\/\/i69r012vyl.execute-api.us-east-1.amazonaws.com/errors/www-${environment === 'production' ? 'prod' : 'demo'}`,
+      debug: environment !== 'production',
+      development: environment === 'development'
     },
 
     renderGoogleAds: true,
