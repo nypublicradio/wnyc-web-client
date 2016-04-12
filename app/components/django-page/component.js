@@ -98,6 +98,9 @@ export default Ember.Component.extend({
         // all URLS are maked as external by legacy JS in development mode
         if (ENV.environment !== 'development' && target.attr('target') === '_blank') {
           return true;
+        } else if (href.split('.').length > 1) {
+        // URL has an extension; allow to bubble up
+          return true;
         } else if (!this.features.isEnabled('django-page-routing')) {
           return false;
         }
