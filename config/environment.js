@@ -1,5 +1,7 @@
 /* jshint node: true, multistr: true */
 
+var sentryProxyPrefix = 'https://i69r012vyl.execute-api.us-east-1.amazonaws.com/errors/www-';
+
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'overhaul',
@@ -20,7 +22,7 @@ module.exports = function(environment) {
     },
 
     sentry: {
-      dsn: 'https://i69r012vyl.execute-api.us-east-1.amazonaws.com/errors/www-' + (process.env.DEPLOY_TARGET === 'production' ? 'prod' : 'demo'),
+      dsn: sentryProxyPrefix + (process.env.DEPLOY_TARGET === 'production' ? 'prod-ember' : 'demo-ember'),
       debug: process.env.DEPLOY_TARGET !== 'production',
       development: environment !== 'production'
     },
