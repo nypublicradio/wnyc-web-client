@@ -1,3 +1,10 @@
+.site-container,
+#wnyc_home {
+  // legacy styles stay loaded and override a class this is set on
+  width: 100% !important;
+  margin: 0 !important;
+}
+
 #wnyc_home .story-wrapper {
   h2 > a {
     display: block;
