@@ -52,7 +52,7 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{django-page}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.ok(this.$('.django-content').length);
 
   // Template block usage:
   this.render(hbs`
