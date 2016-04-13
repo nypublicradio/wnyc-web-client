@@ -22,7 +22,7 @@ module.exports = function(environment) {
     },
 
     sentry: {
-      dsn: sentryProxyPrefix + (process.env.DEPLOY_TARGET === 'production' ? 'prod-ember' : 'demo-ember'),
+      dsn: process.env.SENTRY_DSN || sentryProxyPrefix + (process.env.DEPLOY_TARGET === 'production' ? 'prod-ember' : 'demo-ember'),
       debug: process.env.DEPLOY_TARGET !== 'production',
       development: environment !== 'production'
     },
