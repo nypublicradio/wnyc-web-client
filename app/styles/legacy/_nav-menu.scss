@@ -71,13 +71,20 @@ ul.sharelinks {
   }
 }
 
+.channel-loading #header {
+  margin-bottom: 0px;
+}
+
+.story-loading #header {
+  margin-bottom: 20px;
+}
+
 .channel-loading,
 .story-loading {
   #header {
     position: relative;
     height: 56px;
     background: white;
-    margin-bottom: 20px;
     border-bottom: 1px solid #e8e8e8;
   }
 
