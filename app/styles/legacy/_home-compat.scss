@@ -43,3 +43,186 @@
 .button-wrapper .puppy-btn {
   font-size: 1rem !important;
 }
+
+.index-loading {
+  #header {
+    background: #de1e3d;
+    border: none;
+  }
+
+  #menu-button-label {
+    line-height: 60px;
+  }
+
+  #menu-button-weather {
+    font-size: 13px;
+    position: absolute;
+    left: 287px;
+    text-transform: uppercase;
+    display: none;
+    cursor: pointer;
+    opacity: 1;
+    font-weight: 400;
+  }
+
+  #brand-strap-line {
+    display: none;
+  }
+
+  .weather-icon-header {
+    position: relative;
+    top: 8px;
+    margin-right: 7px;
+  }
+
+  #header a,
+  #menu-button,
+  #search-wrapper {
+    color: white;
+  }
+
+  #header a:hover,
+  #menu-button:hover,
+  #search-wrapper:hover,
+  #search-wrapper:hover a {
+    color: #911023;
+  }
+
+  #menu-button .menu-button-bar {
+    background: white;
+  }
+
+  #menu-button:hover .menu-button-bar {
+    background: #911023;
+  }
+
+  #support-links button
+  , #support-links a
+  , #support-links p
+  , #login-wrapper li
+  {
+    color: white;
+  }
+
+  .header-wide-button {
+    background: #4f151e;
+  }
+
+  #full-page-transforms-wrapper {
+    background: #e8e8e8;
+  }
+
+  #brand-logo {
+    margin-top: 0;
+    background-position: 0 0;
+    background-size: 62px;
+    -webkit-box-sizing: initial;
+    -moz-box-sizing: initial;
+    box-sizing: initial;
+  }
+
+  #search-input {
+    border-bottom: 1px solid white;
+    color: white;
+  }
+}
+
+@media screen and (min-width:800px) {
+
+  .index-loading {
+    #header-align-bottom-wrapper {
+      position: absolute;
+      width: 100%;
+      height: 55px;
+      left: 0;
+      bottom: 0;
+    }
+
+    #header {
+      height: 125px;
+    }
+
+      #header button
+    , #header button a
+    , #header p
+    {
+      line-height: 58px;
+      height: 55px;
+    }
+
+    #brand-logo {
+      margin-top: 20px;
+      width: 137px;
+      height: 55px;
+      margin-left: -81px;
+      background-size: 136px;
+    }
+
+    #search-form {
+      height: 60px;
+      line-height: 60px;
+    }
+
+    #search-form label {
+      line-height: 60px;
+    }
+
+    #header-social-media-links {
+      display: block;
+      position: absolute;
+      top: 20px;
+      right: 17px;
+      font-size: 18px;
+    }
+
+    #header-social-media-links li {
+      display: inline-block;
+      padding-right: 25px;
+    }
+
+    #header-social-media-links li.last {
+      padding-right: 0;
+    }
+
+    #header-social-media-links a {
+      height: auto;
+      line-height: 1;
+      font-size: 24px;
+    }
+
+  }
+} /* end @media rule */
+
+@media screen and (max-width:900px) {
+  .index-loading {
+    #menu-button-label,
+    #search-wrapper,
+    #header-social-media-links {
+      display: none;
+    }
+  }
+} /* end @media rule */
+
+@media screen and (min-width:1150px) {
+
+  .index-loading {
+    #menu-button-weather {
+      display: block;
+    }
+  }
+} /* end @media rule */
+
+@media screen and (min-width:1500px) {
+  .index-loading {
+    #brand-strap-line {
+      position: absolute;
+      color: white;
+      width: 100%;
+      top: 83px;
+      text-align: center;
+      opacity: 1;
+      font-weight: 200;
+    }
+  }
+}
+

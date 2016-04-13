@@ -14,8 +14,6 @@
   background-color: #4f151e;
 }
 
-
-  
 #header {
   #menu-button-label,
   #login-wrapper .user-welcome,
@@ -71,4 +69,272 @@ ul.sharelinks {
     border-bottom-style: solid !important;
     border-bottom-width: 1px !important;
   }
+}
+
+.story-loading {
+  #header {
+    position: relative;
+    height: 56px;
+    background: white;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e8e8e8;
+  }
+
+  #header, #header * {
+    font-size: 13px;
+  }
+
+  #support-links {
+    display: block;
+    float: right;
+    height: 56px;
+    text-transform: uppercase;
+  }
+
+    #support-links button
+  , #support-links a
+  , #support-links p
+  {
+    display: inline-block;
+    height: 56px;
+    line-height: 56px;
+    color: black;
+    text-align: center;
+    font-weight: 400;
+    margin: 0;
+    padding: 0 10px;
+  }
+
+  #login-wrapper {
+    width: auto;
+    max-width: 250px;
+    float: right;
+    margin: 0 15px;
+  }
+
+  #login-wrapper li {
+    display: inline-block;
+  }
+
+  #login-wrapper li.user-logout {
+    margin-left: 5px;
+  }
+
+  #login-wrapper a {
+    padding: 0;
+  }
+
+  i.user-icon {
+    /* Hidden from other sites with an inline style in
+       util.html. Override that and show it for WNYC. */
+    display: inline-block !important;
+    font-size: 18px;
+    margin-right: 6px;
+  }
+
+  #logout {
+    opacity: .5;
+  }
+
+  #support-links p.header-wide-button a {
+    width: 100%;
+  }
+
+  #brand-logo {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    text-indent: -9999px;
+    z-index: 1;
+    width: 62px;
+    height: 25px;
+    margin-left: -31px;
+    background: url('/assets/img/icons/wnyc-sprite-vector.svg') no-repeat 0 -26px;
+    background-size: 62px;
+  }
+
+  #brand-strap-line {
+    font-weight: 400;
+    display: none;
+  }
+
+  #header button {
+    font-size: 1.3em;
+    overflow: visible; /* IE8 adds extra padding on buttons without this */
+  }
+
+  #header button a {
+    display: block;
+    height: 100%;
+    text-decoration: none;
+  }
+
+  #header button,
+  #header button a {
+    line-height: 56px;
+    height: 56px;
+    cursor: pointer;
+    font-weight: 400;
+  }
+
+  #search-wrapper {
+    float: left;
+  }
+
+  #search-button {
+    display: block;
+    float: left;
+    width: 55px;
+  }
+
+  #search-button .fa-search {
+    font-size: 17px;
+  }
+
+  #search-form {
+    display: block;
+    position: relative;
+    height: 56px;
+    line-height: 56px;
+    float: left;
+    left: -6px;
+  }
+
+  #search-input {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-size: 13px;
+    font-weight: 400;
+    border-bottom: 1px solid #000;
+    padding-bottom: 5px;
+    color: #000;
+    width: 200px;
+    -webkit-transform-origin: 0 0;
+       -moz-transform-origin: 0 0;
+        -ms-transform-origin: 0 0;
+            transform-origin: 0 0;
+    -webkit-transform: scale(0, 1);
+       -moz-transform: scale(0, 1);
+        -ms-transform: scale(0, 1);
+            transform: scale(0, 1);
+  }
+
+  .input-is-open #search-input {
+    cursor: text;
+    -webkit-transform: scale(1, 1);
+       -moz-transform: scale(1, 1);
+        -ms-transform: scale(1, 1);
+            transform: scale(1, 1);
+  }
+
+  #search-form label {
+    font-weight: 400;
+    position: absolute;
+    text-transform: uppercase;
+    font-size: 13px;
+    line-height: 55px;
+    opacity: 1;
+    left: 0;
+    bottom: 0;
+    cursor: pointer;
+  }
+
+  .input-is-open #search-form label {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #menu-button {
+    width: 90px;
+  }
+
+  #menu-button-label {
+    /* override webkit's 'buttonface' and other browsers' equivalents */
+    font-weight: 400;
+    font-size: 13px;
+    text-transform: uppercase;
+    position: absolute;
+    display: block;
+    left: 47px;
+    top: 0;
+    line-height: 58px;
+    cursor: pointer;
+  }
+
+  .menu-button-bar {
+    position: absolute;
+    width: 18px;
+    height: 3px;
+    left: 15px;
+    top: 50%;
+    margin-top: -2px;
+    background: black;
+  }
+
+  .menu-button-bar.bar-1 {
+    margin-top: -8px;
+  }
+
+  .menu-button-bar.bar-3 {
+    margin-top: 4px;
+  }
+
+  #header-social-media-links,
+  #menu-button-weather {
+    display: none;
+  }
+
+  #header a,
+  #menu-button,
+  #search-wrapper {
+    text-decoration: none;
+    color: black;
+  }
+
+  #header a:hover,
+  #menu-button:hover,
+  #search-wrapper:hover,
+  #search-wrapper:hover a {
+    text-decoration: none;
+    color: #999;
+  }
+
+  #menu-button .menu-button-bar {
+    background: black;
+  }
+
+  #menu-button:hover .menu-button-bar {
+    background: #999;
+  }
+
+  /*
+    Smaller screens
+  */
+  @media screen and (max-width:850px)
+  {
+    #menu-button-label,
+    #login-wrapper,
+    #search-button,
+    #search-form {
+      display: none;
+    }
+
+
+  } /* end @media rule */
+
+  /*
+    Smallest screens
+  */
+  @media screen and (max-width:399px)
+  {
+    #header #menu-button {
+      width: 56px;
+    }
+
+    #menu-button-label {
+      display: none;
+    }
+  }
+
 }
