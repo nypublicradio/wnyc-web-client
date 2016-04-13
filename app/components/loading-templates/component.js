@@ -1,11 +1,13 @@
 import computed from 'ember-computed';
 import Component from 'ember-component';
+import Ember from 'ember';
+const { htmlSafe } = Ember.String;
 
 export default Component.extend({
   classNames: ['l-full'],
   classNameBindings: ['cssOverrides'],
   attributeBindings: ['style'],
-  style: 'background-color: white; position: relative;',
+  style: htmlSafe('background-color: white; position: relative;'),
   pageTemplate: computed('type', function() {
     let type = this.get('type');
     return `components/loading-templates/${type}`;

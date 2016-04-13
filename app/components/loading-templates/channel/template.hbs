@@ -72,7 +72,7 @@
 
     {{#each-in (hash one='foo' two='foo' three='foo' four='foo') as |block|}}
     <div class="flag flag--rev flush">
-      <div class="flag-body" style="{{if media.isSmallAndUp 'padding-right: 95px;'}}">
+      <div class="flag-body {{if media.isSmallAndUp 'flag-body--rightpad'}}">
 
         <div class="bg-gray1 nudge" style="height: 20px;"></div>
         <div class="thin-line"></div>
