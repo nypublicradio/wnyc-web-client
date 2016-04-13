@@ -1,6 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('controller:django-rendered', 'Unit | Controller | django rendered', {
+moduleFor('controller:djangorendered', 'Unit | Controller | django rendered', {
   // Specify the other units that are required for this test.
   needs: ['service:metrics']
 });
