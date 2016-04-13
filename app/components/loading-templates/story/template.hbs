@@ -1,69 +1,70 @@
 <div class="l-full" style="background-color: white;">
 
+  <div class="l-constrained" style="margin-bottom: 23px;">
+    <div class="bg-gray1" style="height: 50px;"></div>
+  </div>
+
   <div class="l-constrained">
-    <main class="l-col2of3" id="main" role="main">
-      <article class="">
+    <div class="l-col2of3" id="main" role="main">
+      <div class="l-bgimg bg-gray1" style="height: 238px;">
+        <div class="flag nudge">
+          <a class="flag-image inherit">
+            <div class="bg-gray2 square-small rounded"></div>
+          </a>
 
-        <header class="l-bgimg flush" style="height: 205px;">
-          <div class="flag nudge" style="height: 50px; background-color: rgba(0,0,0,0.25);">
-            <a class="flag-image inherit" href="{{story.headers.brand.url}}"></a>
-
-            <div class="flag-body">
-              <div class="media media--rev">
-                <div class="media-image"></div>
-
-                <div class="media-body"></div>
-              </div>
-              <!-- .media -->
-            </div>
-            <!-- .flag-body -->
-          </div>                                
-          <!-- .flag -->
-
-          <div style="height: 40px; background-color: rgba(0,0,0,0.25); width: 80%;"></div>
-
-          <div class="l-split flush">
-
-            <div class="btn-group btn-group--withvr">
-              <button aria-label="Listen to {{story.title}}" class="btn btn--blue btn--large js-listen" 
-                data-id="{{story.id}}" data-category="Listen">
-                <i class="fa fa-play icon--prefix--large"></i>Listen <span class="text--small dimmed">{{story.audioDurationReadable}}</span>
-              </button>
-
-              <button aria-label="Add {{story.title}} to Your Queue" class="btn btn--mq-graywhite hide-on-mobile js-queue" data-id="{{story.id}}" data-category="Queue">
-                <i class="fa fa-plus icon--prefix"></i>Queue
-              </button>
-
-              <button class="btn btn--circle btn--white medium-up js-dropdownClickable">
-                <i class="fa fa-ellipsis-h"></i>
-              </button>
-            </div>
-            <!-- .btn-group -->
-
-            <div class="btn-group">
-              
-              <button data-action="https://www.facebook.com/sharer/sharer.php?u={{story.url}}" class="btn btn--circle btn--mq-graywhite js-share" data-category="SharedF" target="_blank" title="Share on Facebook">
-                <i class="fa fa-facebook"></i>
-                <span class="for-screenreaders">Share on Facebook</span>
-              </button>
-              <button data-action="" class="btn btn--circle btn--mq-graywhite js-share" data-category="SharedT" id="shareTwitter" target="_blank" title="Share on Twitter">
-                <i class="fa fa-twitter"></i>
-                <span class="for-screenreaders">Share on Twitter</span>
-              </button>
-              <a href="" class="btn btn--circle btn--mq-graywhite js-share" data-category="SharedE" id="shareEmail" title="Email a Friend">
-                <i class="fa fa-envelope"></i>
-                <span class="for-screenreaders">Email a Friend</span>
-              </a>
-            </div>
-            <!-- .btn-group -->
+          <div class="flag-body">
+            <div class="bg-gray2 nudge rounded" style="width: 73px; height: 12px;"></div>
+            <div class="bg-gray2 rounded" style="width: 167px; height: 16px;"></div>
           </div>
-          <!-- .l-split -->
-        </header>
-        <figure class="figure" id="imageMain" style="height: 400px;"></figure>
+          <!-- .flag-body -->
+        </div>                                
+        <!-- .flag -->
 
-      </article>
-    </main>
+        <div class="bg-gray2 nudge rounded" style="height:32px;"></div>
+        <div class="bg-gray2 nudge-extra rounded" style="height:32px; width: 80%;"></div>
+
+        <div class="l-split flush">
+
+          <div class="btn-group btn-group--withvr">
+            <button class="btn btn--blue btn--large bg-gray2">
+              <i class="fa fa-play icon--prefix--large"></i>Listen <span class="text--small dimmed">{{story.audioDurationReadable}}</span>
+            </button>
+
+            <button class="btn btn--mq-graywhite hide-on-mobile bg-gray2">
+              <i class="fa fa-plus icon--prefix"></i>Queue
+            </button>
+
+            <button class="btn btn--circle btn--white medium-up js-dropdownClickable bg-gray2">
+              <i class="fa fa-ellipsis-h"></i>
+            </button>
+          </div>
+          <!-- .btn-group -->
+
+        </div>
+        <!-- .l-split -->
+      </div>
+
+      <div class="bg-gray3" style="height: 391px; margin-bottom: 47px;"></div>
+
+      <div class="bg-gray1" style="width: 80px; height: 14px; margin-bottom: 47px;"></div>
+
+      {{#each-in (hash foo='bar' baz='foo' bar='foo') as |block|}}
+      <div class="thin-line"></div>
+      <div class="thin-line"></div>
+      <div class="thin-line" style="width: 75%; margin-bottom: 58px;"></div>
+      {{/each-in}}
+
+    </div>
     <!-- .l-col2of3 -->
+
+    <div class="l-col1of3">
+      <div class="thin-line" style="margin-bottom: 29px;"></div>
+
+      {{#each-in (hash foo='bar' baz='foo' bar='foo') as |block|}}
+      <div class="thin-line"></div>
+      {{/each-in}}
+      <div class="thin-line" style="width: 75%;"></div>
+    </div>
 
   </div>
   <!-- .l-constrained -->
