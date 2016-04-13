@@ -16,4 +16,9 @@ export default Component.extend({
     let type = this.get('type');
     return `${type}-loading`;
   }),
+  didRender() {
+    if (!Ember.testing) {
+      window.scrollTo(0, 0);
+    }
+  }
 });
