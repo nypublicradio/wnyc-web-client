@@ -58,12 +58,14 @@
     <!-- .l-col2of3 -->
 
     <div class="l-col1of3">
-      <div class="thin-line" style="margin-bottom: 29px;"></div>
+      <div class="l-skinny">
+        <div class="thin-line" style="margin-bottom: 29px;"></div>
 
-      {{#each-in (hash foo='bar' baz='foo' bar='foo') as |block|}}
-      <div class="thin-line"></div>
-      {{/each-in}}
-      <div class="thin-line" style="width: 75%;"></div>
+        {{#each-in (hash foo='bar' baz='foo' bar='foo') as |block|}}
+        <div class="thin-line"></div>
+        {{/each-in}}
+        <div class="thin-line" style="width: 75%;"></div>
+      </div>
     </div>
 
   </div>
