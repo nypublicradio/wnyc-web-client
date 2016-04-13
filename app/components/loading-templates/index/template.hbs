@@ -1,0 +1,81 @@
+<div class="l-full bg-gray3">
+
+  <div class="l-constrained" style="margin-bottom: 34px;">
+    <div class="bg-gray4" style="height: 50px;"></div>
+  </div>
+
+  <div class="l-constrained">
+    <div class="l-col2of3">
+      <div class="bg-gray1" style="height:352px; margin-bottom: 44px;">
+        <div class="white-box" style="width: 50%; height: 100%; float: right;">
+          <div class="thin-line" style="height: 24px;"></div>
+          <div class="thin-line" style="height: 24px; margin-bottom: 22px;"></div>
+
+          <div class="thin-line"></div>
+          <div class="thin-line"></div>
+          <div class="thin-line" style="width: 75%;"></div>
+
+          <div class="bottom">
+            <button class="btn btn--circle bg-gray1" style="width: 36px; height: 36px; margin-right: 10px;"></button>
+            <button class="btn btn--circle bg-gray1" style="width: 36px; height: 36px;"></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="l-full" style="margin-bottom: 63px;">
+
+        {{#each-in (hash one='foo' two='foo') as |block|}}
+        <div class="l-col1of2">
+          <div class="vertical-card" style="height: 513px;">
+            <div class="bottom">
+              <div class="white-box" style="height: 244px;">
+                <div class="thin-line" style="height: 18px;"></div>
+                <div class="thin-line" style="height: 18px; margin-bottom: 19px;"></div>
+
+                <div class="thin-line"></div>
+                <div class="thin-line" style="width: 75%;"></div>
+
+                <div class="bottom">
+                  <button class="btn btn--circle bg-gray1" style="width: 36px; height: 36px; margin-right: 10px;"></button>
+                  <button class="btn btn--circle bg-gray1" style="width: 36px; height: 36px;"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{/each-in}}
+
+      </div>
+    </div>
+
+    <div class="l-col1of3">
+      <div class="bg-gray1" style="height:600px"></div>
+    </div>
+
+
+  </div>
+
+  <div class="l-constrained">
+
+    <div class="thin-line" style="margin-bottom: 20px; width: 150px;"></div>
+
+    {{#each-in (hash one='foo' two='foo' three='foo' four='foo' five='foo') as |block|}}
+    <div class="l-col1of5">
+      <div class="vertical-card" style="height: 287px;">
+        <div class="bottom">
+          <div class="white-box" style="height: 137px;">
+            <div class="thin-line" style="10px;"></div>
+            <div class="thin-line" style="height: 10px;"></div>
+
+            <div class="bottom">
+              <button class="btn btn--circle bg-gray1" style="width: 20px; height: 20px; margin-right: 10px;"></button>
+              <button class="btn btn--circle bg-gray1" style="width: 20px; height: 20px;"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/each-in}}
+
+  </div>
+</div>
