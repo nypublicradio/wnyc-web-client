@@ -16,7 +16,7 @@ function subpageRoutes() {
 
 Router.map(function() {
   // This is an example of a route that we've customized beyond the
-  // default behavior in the `django-rendered` route.
+  // default behavior in the `djangorendered` route.
   this.route('story', { path: 'story/:slug' });
 
   this.route('shows', {path: 'shows/:slug'}, subpageRoutes);
@@ -28,7 +28,7 @@ Router.map(function() {
   // This is our catch all route that can render any existing page
   // from the django site. It will be used when there's nothing more
   // specific.
-  this.route('django-rendered', { path: '*upstream_url' });
+  this.route('djangorendered', { path: '*upstream_url' });
 });
 
 export default Router;

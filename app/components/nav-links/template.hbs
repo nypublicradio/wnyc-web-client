@@ -5,7 +5,7 @@
     {{#if link.navSlug}}
       {{link-to link.title channelTypeWell link.navSlug classNames='link link--dark tab-link' bubbles=false}}
     {{else if link.path}}
-      {{link-to link.title 'django-rendered' link.path classNames="link link--dark link--nodecor tab-link"}}
+      {{link-to link.title 'djangorendered' link.path classNames="link link--dark link--nodecor tab-link"}}
     {{else}}
       <a href={{link.href}} class="link link--dark link--nodecor tab-link">{{link.title}}</a>
     {{/if}}
