@@ -21,6 +21,9 @@ export function clearAlienDom() {
   let root = config.environment === 'test' ? '#ember-testing' : 'body';
   let notEmber = document.querySelectorAll(`${root} > :not(.ember-view), ${root} > head > link[rel=stylesheet]:not([href*=assets])`);
   Array.from(notEmber).forEach(n => n.parentNode.removeChild(n));
+}
+
+export function unbindAlienListener() {
   document.removeEventListener('click', alienClickListener);
 }
 

@@ -21,8 +21,6 @@ export function homepageCleanup(element = document.body) {
 // This gets run by the django-page component right before tearing
 // down the content.
 export function beforeTeardown(/* element, page */) {
-  clearAlienDom();
-
   // we must destroy any presently loaded google ad slots so the next page can
   // reliably render theirs
   if (window.googletag && window.googletag.destroySlots) {
@@ -68,6 +66,8 @@ export function beforeTeardown(/* element, page */) {
     .off('click', '.js-toggleButton');
 
   $('.js-embedText').off('click');
+
+  clearAlienDom();
 }
 
 // This gets run by the django-page model when it's figuring out how

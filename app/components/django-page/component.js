@@ -6,6 +6,7 @@ import {
   isInDom,
   embeddedComponentSetup,
   installAlienListeners,
+  unbindAlienListener,
 } from '../../lib/alien-dom';
 
 const { $, get } = Ember;
@@ -58,6 +59,7 @@ export default Ember.Component.extend({
         }
         installAlienListeners(this);
       } else {
+        unbindAlienListener();
         this.get('page').appendTo(elt).then(() => {
           // After the server-rendered page has been inserted, we
           // re-enable any overlaid content so that it can wormhole
