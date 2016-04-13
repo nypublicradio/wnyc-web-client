@@ -7,6 +7,7 @@
   out of the old JS.
 */
 import Ember from 'ember';
+import { clearAlienDom } from 'overhaul/lib/alien-dom';
 import { runOnce } from 'overhaul/services/legacy-loader';
 const { $ } = Ember;
 
@@ -20,6 +21,8 @@ export function homepageCleanup(element = document.body) {
 // This gets run by the django-page component right before tearing
 // down the content.
 export function beforeTeardown(/* element, page */) {
+  clearAlienDom();
+
   // we must destroy any presently loaded google ad slots so the next page can
   // reliably render theirs
   if (window.googletag && window.googletag.destroySlots) {

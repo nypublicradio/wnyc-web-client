@@ -4,7 +4,6 @@ import { beforeTeardown, homepageCleanup } from '../../lib/compat-hooks';
 import ENV from '../../config/environment';
 import {
   isInDom,
-  clearAlienDom,
   embeddedComponentSetup,
   installAlienListeners,
 } from '../../lib/alien-dom';
@@ -59,8 +58,6 @@ export default Ember.Component.extend({
         }
         installAlienListeners(this);
       } else {
-        // otherwise clear out the dom and render our server-fetched content
-        clearAlienDom();
         this.get('page').appendTo(elt).then(() => {
           // After the server-rendered page has been inserted, we
           // re-enable any overlaid content so that it can wormhole
@@ -110,6 +107,8 @@ export default Ember.Component.extend({
           router.transitionTo(routeName, params, queryParams);
         }
         event.preventDefault();
+
+        // clear out the alienDom and other teardown steps
         beforeTeardown(this.get('element'), this.get('page'));
         return false;
       }
