@@ -9,9 +9,8 @@ import {
   unbindAlienListener,
 } from '../../lib/alien-dom';
 
-const { $, get } = Ember;
+const { $, get, computed, run } = Ember;
 const { wnycURL } = ENV;
-const { run } = Ember;
 
 function doRefresh() {
   const { googletag } = window;
@@ -30,6 +29,25 @@ function doRefresh() {
 export default Ember.Component.extend({
   legacyAnalytics: service(),
   router: Ember.inject.service('wnyc-routing'),
+  type: computed('page', function() {
+    let id = get(this, 'page.id') || '';
+    let firstPart = id.split('/')[0];
+
+    switch(firstPart) {
+      case '':
+        return 'index';
+      case 'shows':
+      case 'articles':
+      case 'series':
+      case 'tags':
+      case 'blogs':
+        return 'channel';
+      case 'story':
+        return 'story';
+      default:
+        return 'legacy';
+    }
+  }),
 
   didReceiveAttrs() {
     // If we have a new page model, we want to clear any overlaid
