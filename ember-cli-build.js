@@ -45,7 +45,6 @@ module.exports = function(defaults) {
   });
 
   app.import('vendor/polyfills/url.js');
-  app.import('bower_components/moment/moment.js');
   app.import('bower_components/normalize.css/normalize.css');
 
   // This is here so that legacy JS within our content pages can share
