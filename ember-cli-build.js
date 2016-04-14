@@ -55,8 +55,11 @@ module.exports = function(defaults) {
   // app should be imported into the app's own build here. Notice that
   // these are symlinked to their original locations in the puppy
   // source.
-  app.import('vendor/imagesloaded/imagesloaded.pkgd.js');
 
+  app.import('vendor/wnyc-legacy/vendor/underscore/underscore-1.4.4.js');
+  app.import('vendor/wnyc-legacy/vendor/backbone/backbone-1.0.0.js');
+  app.import('vendor/wnyc-legacy/jquery.cookie.js');
+  app.import('vendor/imagesloaded/imagesloaded.pkgd.js');
 
   if (env === 'test') {
     app.import('vendor/wnyc-bootstrap/index.js');
