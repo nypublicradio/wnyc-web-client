@@ -1,4 +1,4 @@
-import BaseAdapter from '../metrics-adapters/base';
+import BaseAdapter from 'ember-metrics/metrics-adapters/base';
 import Ember from 'ember';
 import service from 'ember-service/inject';
 
