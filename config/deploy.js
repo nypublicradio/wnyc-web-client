@@ -34,7 +34,8 @@ module.exports = function(deployTarget) {
       sentryUrl: 'https://sentry.wnyc.org',
       sentryOrganizationSlug: 'sentry',
       sentryProjectSlug: process.env.SENTRY_PROJECT,
-      sentryApiKey: process.env.SENTRY_EMBER_SOURCEMAPS_KEY
+      sentryApiKey: process.env.SENTRY_EMBER_SOURCEMAPS_KEY,
+      enableRevisionTagging: false
     }
   };
 
