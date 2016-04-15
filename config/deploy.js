@@ -27,6 +27,14 @@ module.exports = function(deployTarget) {
       host: process.env.SSH_TUNNEL_HOST,
       dstHost: process.env.SSH_TUNNEL_DESTINATION_HOST,
       dstPort: process.env.SSH_TUNNEL_DESTINATION_PORT
+    },
+
+    sentry: {
+      publicUrl: process.env.FINGERPRINT_PREPEND_URL,
+      sentryUrl: 'https://sentry.wnyc.org',
+      sentryOrganizationSlug: 'sentry',
+      sentryProjectSlug: process.env.SENTRY_PROJECT,
+      sentryApiKey: process.env.SENTRY_EMBER_SOURCEMAPS_KEY
     }
   };
 
@@ -41,14 +49,6 @@ module.exports = function(deployTarget) {
   if (deployTarget === 'production') {
     // remove JS sourcemaps from production
     ENV.s3.filePattern = '**/*.{js,css,png,gif,ico,jpg,xml,txt,svg,swf,eot,ttf,woff,woff2}';
-    ENV.sentry = {
-      publicUrl: 'http://www.wnyc.org',
-      sentryUrl: 'https://sentry.wnyc.org',
-      sentryOrganizationSlug: 'sentry',
-      sentryProjectSlug: 'www-prod-ember',
-      sentryApiKey: process.env.PROD_SENTRY_EMBER_SOURCEMAPS_KEY,
-      enableRevisionTagging: false
-    }
   }
 
   return ENV;
