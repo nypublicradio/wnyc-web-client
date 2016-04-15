@@ -39,6 +39,10 @@ module.exports = function(deployTarget) {
     }
   };
 
+  if (deployTarget !== 'production' && deployTarget !== 'demo') {
+    ENV.redis.keyPrefix = deployTarget;
+  }
+
   if (deployTarget === 'demo') {
     ENV.pipeline = { activateOnDeploy: true };
   }
