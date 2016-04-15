@@ -41,7 +41,14 @@ module.exports = function(deployTarget) {
   if (deployTarget === 'production') {
     // remove JS sourcemaps from production
     ENV.s3.filePattern = '**/*.{js,css,png,gif,ico,jpg,xml,txt,svg,swf,eot,ttf,woff,woff2}';
-    // TODO: install and configure ember-cli-deploy-sentry
+    ENV.sentry = {
+      publicUrl: 'http://www.wnyc.org',
+      sentryUrl: 'https://sentry.wnyc.org',
+      sentryOrganizationSlug: 'sentry',
+      sentryProjectSlug: 'www-prod-ember',
+      sentryApiKey: process.env.PROD_SENTRY_EMBER_SOURCEMAPS_KEY,
+      enableRevisionTagging: false
+    }
   }
 
   return ENV;
