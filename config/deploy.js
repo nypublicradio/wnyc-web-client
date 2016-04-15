@@ -39,7 +39,7 @@ module.exports = function(deployTarget) {
     }
   };
 
-  if (deployTarget === 'navigation') {
+  if (deployTarget !== 'production' && deployTarget !== 'demo') {
     ENV.redis.keyPrefix = deployTarget;
   }
 
