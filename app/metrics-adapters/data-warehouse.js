@@ -1,5 +1,5 @@
 /* globals wnyc */
-import BaseAdapter from '../metrics-adapters/base';
+import BaseAdapter from 'ember-metrics/metrics-adapters/base';
 import Ember from 'ember';
 
 const {

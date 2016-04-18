@@ -6,7 +6,20 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
-    metricsAdapters: [],
+    metricsAdapters: [{
+      name: 'GoogleAnalytics',
+      environments: ['development', 'production'],
+      config: {
+        id: process.env.GOOGLE_ANALYTICS
+      }
+    }, {
+      name: 'DataWarehouse',
+      environments: ['development', 'production'],
+      config: {
+        host: process.env.WNYC_ACCOUNT_ROOT,
+        endpoint: 'api/v1/analytics/ga',
+      }
+    }],
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -22,7 +35,6 @@ module.exports = function(environment) {
     renderGoogleAds: true,
     // these are provided via a .env file or else by Django's EmberAdapter
     googleAPIv3Key: process.env.GOOGLE_API_V3_KEY,
-    googleAnalyticsKey: process.env.GOOGLE_ANALYTICS,
     wnycAPI: process.env.WNYC_API,
     wnycAccountRoot: process.env.WNYC_ACCOUNT_ROOT,
     wnycEtagAPI: process.env.WNYC_ETAG_API,
