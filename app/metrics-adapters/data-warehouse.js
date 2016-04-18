@@ -204,18 +204,6 @@ export default BaseAdapter.extend({
     }
   },
 
-  _trackManagedItemListen(options) {
-    const { pk } = options;
-    // Given the PK of a Managed Item, track a listen event against it.
-    this.send({endpoint: `api/most/listen/managed_item/${pk}`});
-    this.send({endpoint: `api/v1/listenaction/create/${pk}/play`, data: {context: 'NYPR_Web'}});
-  },
-
-  _trackManagedItemCompletion(data) {
-    const { pk } = data;
-    this.send({endpoint: `api/v1/listenaction/create/${pk}/complete`, data: {context: 'NYPR_Web'}});
-  },
-
   _trackManagedItemView(pk) {
     // Given the PK of a Managed Item, track a view event against it.
     this.send({endpoint: `api/most/view/managed_item/${pk}`, data: {context: 'NYPR_Web'}});
