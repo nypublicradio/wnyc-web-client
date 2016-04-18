@@ -1,5 +1,6 @@
 /* jshint node: true, multistr: true */
 
+
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'overhaul',
@@ -30,6 +31,12 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+
+    sentry: {
+      dsn: process.env.SENTRY_DSN,
+      debug: process.env.DEPLOY_TARGET !== 'production',
+      development: environment !== 'production'
     },
 
     renderGoogleAds: true,

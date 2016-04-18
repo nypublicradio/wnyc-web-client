@@ -11,6 +11,7 @@
     "fastclick": "~1.0.6",
     "pretender": "~0.10.1",
     "Faker": "~3.0.0",
-    "lodash": "4.3.0"
+    "lodash": "4.3.0",
+    "raven-js": "~2.1"
   }
 }
