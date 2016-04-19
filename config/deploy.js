@@ -36,6 +36,10 @@ module.exports = function(deployTarget) {
       sentryProjectSlug: process.env.SENTRY_PROJECT,
       sentryApiKey: process.env.SENTRY_EMBER_SOURCEMAPS_KEY,
       enableRevisionTagging: false
+    },
+
+    'revision-data': {
+      type: 'version-commit'
     }
   };
 
