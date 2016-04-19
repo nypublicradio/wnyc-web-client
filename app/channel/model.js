@@ -51,6 +51,7 @@ export default DS.Model.extend({
   rssFeed: DS.attr('string'),
   logoImage: DS.attr(),
   listingObjectType: DS.attr('string'),
+  itemType: computed.alias('listingObjectType'),
   editLink: DS.attr('string'),
   socialLinks: DS.attr(),
   facebook: computed.filterBy('socialLinks', 'title', 'facebook'),
