@@ -7,7 +7,9 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
-    'ember-metrics': ['google-analytics', 'data-warehouse'],
+    'ember-metrics': {
+      includeAdapters: ['google-analytics', 'data-warehouse']
+    },
     metricsAdapters: [],
     EmberENV: {
       FEATURES: {
