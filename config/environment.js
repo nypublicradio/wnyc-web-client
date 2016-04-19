@@ -31,6 +31,7 @@ module.exports = function(environment) {
 
     renderGoogleAds: true,
     // these are provided via a .env file or else by Django's EmberAdapter
+    googleAnalyticsKey: process.env.GOOGLE_ANALYTICS,
     googleAPIv3Key: process.env.GOOGLE_API_V3_KEY,
     wnycAPI: process.env.WNYC_API,
     wnycAccountRoot: process.env.WNYC_ACCOUNT_ROOT,
