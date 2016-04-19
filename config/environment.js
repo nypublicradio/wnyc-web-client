@@ -7,20 +7,8 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
-    metricsAdapters: [{
-      name: 'GoogleAnalytics',
-      environments: ['development', 'production'],
-      config: {
-        id: process.env.GOOGLE_ANALYTICS
-      }
-    }, {
-      name: 'DataWarehouse',
-      environments: ['development', 'production'],
-      config: {
-        host: process.env.WNYC_ACCOUNT_ROOT,
-        endpoint: 'api/v1/analytics/ga',
-      }
-    }],
+    'ember-metrics': ['GoogleAnalytics', 'DataWarehouse'],
+    metricsAdapters: [],
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
