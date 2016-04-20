@@ -1,6 +1,5 @@
 /* jshint node: true, multistr: true */
 
-
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'overhaul',
