@@ -4,19 +4,29 @@ import Ember from 'ember';
 export default RavenLogger.extend({
   init() {
     Ember.$(document).ajaxError((event, jqXHR, ajaxSettings, thrownError) => {
+      let {
+        type,
+        url,
+        data
+      } = ajaxSettings;
+      let {
+        status,
+        response
+      } = jqXHR;
+      response = response ? response.substr(0, 100) : '';
       // The details of CORS errors are protected by browsers, so we don't get
       // additional metadata. The jQuery default for these errors are 'error',
       // which isn't helpful.
       let fallbackMessage = jqXHR.statusText === 'error' ? "Possibly a CORS error. Extra details are protected." : jqXHR.statusText;
-      // if a thrownError is actually though, use that. otherwise use whatever we got from above.
+      // if a thrownError is passed in, use that. otherwise use whatever we got from above.
       this.captureMessage(thrownError || fallbackMessage, {
         extra: {
-            type: ajaxSettings.type,
-            url: ajaxSettings.url,
-            data: ajaxSettings.data,
-            status: jqXHR.status,
-            error: thrownError || jqXHR.statusText,
-            response: jqXHR.responseText.substring(0, 100)
+          type,
+          url,
+          data,
+          status,
+          response,
+          error: thrownError || jqXHR.statusText
         }
       });
     });
