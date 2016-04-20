@@ -2,6 +2,7 @@ import Ember from 'ember';
 import service from 'ember-service/inject';
 import { beforeTeardown, homepageCleanup } from '../../lib/compat-hooks';
 import ENV from '../../config/environment';
+import LegacySupportMixin from 'overhaul/mixins/legacy-support';
 import {
   isInDom,
   embeddedComponentSetup,
@@ -26,7 +27,7 @@ function doRefresh() {
   }
 }
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(LegacySupportMixin, {
   legacyAnalytics: service(),
   router: Ember.inject.service('wnyc-routing'),
   type: computed('page', function() {
@@ -132,6 +133,10 @@ export default Ember.Component.extend({
         beforeTeardown(this.get('element'), this.get('page'));
         return false;
       }
+    }
+
+    if (this.isLegacyEvent(event)) {
+      return this.fireLegacyEvent(event.target);
     }
   }
 });
