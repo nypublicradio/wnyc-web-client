@@ -8,11 +8,11 @@ export default DS.JSONAPIAdapter.extend({
   namespace: `api/v1/list/comments`,
   query(store, type, query) {
     let url = [this.host, this.namespace, query.itemTypeId, query.itemId, ''].join('/');
-    if (ENV.environment === 'test') {
+    if (!Ember.testing) {
+      return fetch(url).then(response => response.json());
+    } else {
       // Pretender.js only intercepts XML requests, not JSONP or native Fetch
       return Ember.$.ajax(url).then(d => d);
-    } else {
-      return fetch(url).then(response => response.json());
     }
   }
 });
