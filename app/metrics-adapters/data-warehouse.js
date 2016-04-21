@@ -55,8 +55,9 @@ export default BaseAdapter.extend({
       label,
     } = options;
 
-    const pk = model ? get(model, 'cmsPK') || 'No CMS PK' : 'No available model';
-    this.send({ category, action, label, pk });
+    const cms_id = model ? get(model, 'cmsPK') || 'No CMS PK' : 'No available model';
+    const cms_type = model ? get(model, 'itemType') : 'No available model';
+    this.send({ category, action, label, cms_id, cms_type });
   },
 
   trackPage(details) {
@@ -145,18 +146,6 @@ export default BaseAdapter.extend({
     if (pk) {
       this._trackManagedItemView(pk);
     }
-  },
-
-  _trackManagedItemListen(options) {
-    const { pk } = options;
-    // Given the PK of a Managed Item, track a listen event against it.
-    this.send({endpoint: `api/most/listen/managed_item/${pk}`});
-    this.send({endpoint: `api/v1/listenaction/create/${pk}/play`, data: {context: 'NYPR_Web'}});
-  },
-
-  _trackManagedItemCompletion(data) {
-    const { pk } = data;
-    this.send({endpoint: `api/v1/listenaction/create/${pk}/complete`, data: {context: 'NYPR_Web'}});
   },
 
   _trackManagedItemView(pk) {

@@ -1,25 +1,16 @@
 /* jshint node: true, multistr: true */
 
+
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'overhaul',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
-    metricsAdapters: [{
-      name: 'GoogleAnalytics',
-      environments: ['development', 'production'],
-      config: {
-        id: process.env.GOOGLE_ANALYTICS
-      }
-    }, {
-      name: 'DataWarehouse',
-      environments: ['development', 'production'],
-      config: {
-        host: process.env.WNYC_ACCOUNT_ROOT,
-        endpoint: 'api/v1/analytics/ga',
-      }
-    }],
+    'ember-metrics': {
+      includeAdapters: ['google-analytics', 'data-warehouse']
+    },
+    metricsAdapters: [],
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -40,6 +31,7 @@ module.exports = function(environment) {
 
     renderGoogleAds: true,
     // these are provided via a .env file or else by Django's EmberAdapter
+    googleAnalyticsKey: process.env.GOOGLE_ANALYTICS,
     googleAPIv3Key: process.env.GOOGLE_API_V3_KEY,
     wnycAPI: process.env.WNYC_API,
     wnycAccountRoot: process.env.WNYC_ACCOUNT_ROOT,

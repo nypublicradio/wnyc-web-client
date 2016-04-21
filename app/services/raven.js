@@ -1,7 +1,13 @@
-import RavenLogger from 'ember-cli-sentry/services/raven';
+import RavenLogger from 'ember-cli-deploy-sentry/services/raven';
 import Ember from 'ember';
 
 export default RavenLogger.extend({
+  // ember-cli-deploy-sentry will use this key as part of a dynamic lookup on the
+  // DOM for the revision key. it's currently hardcoded in v0.3.1, but a dynamic
+  // method will be released soon. setting this key should guard against when
+  // the dep is updated. the updated version uses a different key, so we want to
+  // set it here.
+  releaseMetaName: 'revision',
   init() {
     Ember.$(document).ajaxError((event, jqXHR, ajaxSettings, thrownError) => {
       let {
