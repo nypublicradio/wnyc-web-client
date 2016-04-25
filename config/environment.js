@@ -25,7 +25,11 @@ module.exports = function(environment) {
     sentry: {
       dsn: process.env.SENTRY_DSN,
       debug: process.env.DEPLOY_TARGET !== 'production',
-      development: environment !== 'production'
+      development: environment !== 'production',
+      whitelistUrls: [
+        /https?:\/\/((static|demo-static|media)\.)?wnyc\.org/,
+        /https?:\/\/((demo2-wnyc)\.)?wqxr\.org/
+      ]
     },
 
     renderGoogleAds: true,
