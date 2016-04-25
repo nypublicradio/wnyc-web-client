@@ -29,7 +29,21 @@ module.exports = function(environment) {
       whitelistUrls: [
         /https?:\/\/((static|demo-static|media)\.)?wnyc\.org/,
         /https?:\/\/((demo2-wnyc)\.)?wqxr\.org/
-      ]
+      ],
+      ravenOptions: {
+        shouldSendCallback: function(data) {
+          // only send 10% of errors
+          var sampleRate = 10;
+          return (Math.random() * 100 <= sampleRate);
+        },
+        ignoreUrls: [
+          // Facebook blocked
+          /connect\.facebook\.net\/en_US\/all\.js/i,
+          // Chrome extensions
+          /extensions\//i,
+          /^chrome:\/\//i,
+        ]
+      }
     },
 
     renderGoogleAds: true,
