@@ -32,8 +32,8 @@ module.exports = function(environment) {
       ],
       ravenOptions: {
         shouldSendCallback: function(data) {
-          // only send 10% of errors
-          var sampleRate = 10;
+          // only send 1% of errors
+          var sampleRate = 1;
           return (Math.random() * 100 <= sampleRate);
         },
         ignoreUrls: [
