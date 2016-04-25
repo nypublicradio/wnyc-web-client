@@ -38,9 +38,6 @@ module.exports = function(deployTarget) {
       enableRevisionTagging: false
     },
 
-    'revision-data': {
-      type: 'version-commit'
-    }
   };
 
   if (deployTarget !== 'production' && deployTarget !== 'demo') {
