@@ -26,9 +26,16 @@ module.exports = function(environment) {
       dsn: process.env.SENTRY_DSN,
       debug: process.env.DEPLOY_TARGET !== 'production',
       development: environment !== 'production',
+      includePaths: [
+        process.env.WNYC_URL,
+        /https?:\/\/(static|demo-static)\.wnyc\.org/,
+        /https?:\/\/media\.wnyc\.org/,
+        /https?:\/\/(demo2-wnyc)\.wqxr\.org/
+      ],
       whitelistUrls: [
-        /https?:\/\/((static|demo-static|media)\.)?wnyc\.org/,
-        /https?:\/\/((demo2-wnyc)\.)?wqxr\.org/
+        /https?:\/\/(static|demo-static)\.wnyc\.org\/assets\/(vendor|overhaul)-.*/,
+        /https?:\/\/media\.wnyc\.org\/static\/.*\.js/,
+        /https?:\/\/((demo2-wnyc)\.)?wqxr\.org\/static\/.*\.js/
       ],
       ravenOptions: {
         shouldSendCallback: function(data) {
