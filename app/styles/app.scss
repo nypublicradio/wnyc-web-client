@@ -26,6 +26,8 @@
 @import 'badges';
 @import 'dropdown';
 @import 'panel';
+@import 'forms';
+@import 'slideshow';
 
 @import 'persistent-player';
 @import 'site-chrome';
@@ -53,3 +55,11 @@
 #browser-warn a {
   color: black;
 }
+
+// not going to implement imagesLoaded for legacy slideshows
+#main .crowd-results img,
+#main .storyslide > img {
+    opacity: 1;
+}
+
+@import 'lib/slick-1.4.1.scss';

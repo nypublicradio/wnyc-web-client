@@ -1,0 +1,57 @@
+.storyslides, // legacy slideshows
+.slideshow-container,
+.slideshow {
+    position: relative;
+
+    @include mq($medium-and-up) {
+        min-height: 350px;
+    }
+}
+
+.storyslide-navigation, // legacy slideshows
+.slideshow-controls {
+    position: absolute;
+    text-align: right;
+    width: 100%;
+    right: 0;
+    bottom: 0;
+
+    @include mq($medium-and-up) {
+        // slideshow images are set to 350px tall
+        top: 360px;
+        bottom: auto;
+    }
+}
+
+.storyslide, // legacy slideshows
+.slideshow-image {
+    background-color: #333;
+    > img {
+        margin: 0 auto;
+    }
+}
+
+.slideshow-caption {
+    background-color: white;
+    padding-top: 15px;
+
+    @include mq($medium-and-up) {
+        padding-right: 150px;
+    }
+}
+
+// more legacy stuff
+.caption-holder {
+    padding: 15px 5px;
+    background-color: white;
+}
+
+.slideshow-container {
+    @extend %vertical-rhythm;
+}
+
+.storyslide-navigation {
+    background-color: white;
+    width: auto;
+    padding: 3px 3px 0;
+}
