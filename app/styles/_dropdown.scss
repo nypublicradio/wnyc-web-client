@@ -1,0 +1,99 @@
+/***
+ * Dropdowns:
+ * Dropdowns fade in and out by clicking a specific action element. Currently 
+ * requires `js/overhaul/main.js`, but should be split out into its own module.
+ *
+ * Build a dropdown with the following atoms: `.dropdown`, `.js-dropdownClickable`, 
+ * and `.dropdown-body`. `.js-dropdownClickable` and `.dropdown-body` should be
+ * siblings beneath a `.dropdown` parent.
+ *
+ * Use a directional modifier `.dropdown--<direction>` to position the
+ * `.dropdown-body` to the `top`, `bottom`, `left`, or `right` of the 
+ * `.js-dropdownClickable` element.
+ *
+ *      @example
+ *      .dropdown.dropdown--bottom
+ *          button.btn.js-dropdownClickable Toggle Dropdown
+ *          .dropdown-body
+ *              p Peek-a-boo
+ */
+.dropdown {
+    position: relative;
+}
+
+.dropdown--inline {
+  display: inline-block;
+}
+
+.dropdown-body {
+    position: absolute;
+    width: 240px;
+    pointer-events: none;
+    opacity: 0;
+    // for accessibility
+    visibility: hidden;
+    @include box-shadow(0px 0px 20px -5px rgba(0,0,0,0));
+    // add visibility to transition so we can delay it until after the opacity timing
+    @include transition(opacity $transition-timing ease, box-shadow $transition-timing ease ($transition-timing * 1.05), visibility 0ms linear $transition-timing);
+
+    &:after {
+        content: '';
+        position: absolute;
+        border: 11px solid;
+    }
+
+    .dropdown--white > & {
+        &:after {
+            border-color: white;
+        }
+    }
+
+    .dropdown--nearwhite > & {
+        &:after {
+            border-color: $lightestgray;
+        }
+    }
+
+
+    .dropdown--bl > & {
+        top: calc(100% + 12px);
+        left: -13px;
+
+        &:after {
+            top: -21px;
+            left: 20px;
+            border-top-color: transparent;
+            border-right-color: transparent;
+            border-left-color: transparent;
+        }
+    }
+
+    .dropdown--br > & {
+        top: calc(100% + 12px);
+        right: -13px;
+
+        &:after {
+            top: -21px;
+            right: 20px;
+            border-top-color: transparent;
+            border-right-color: transparent;
+            border-left-color: transparent;
+        }
+    }
+
+    .dropdown--tl > & {
+      bottom: calc(100% + 12px);
+      left: -13px;
+
+      &:after {
+        bottom: -21px;
+        left: 20px;
+        border-bottom-color: transparent;
+        border-right-color: transparent;
+        border-left-color: transparent;
+      }
+    }
+
+}
+
+
