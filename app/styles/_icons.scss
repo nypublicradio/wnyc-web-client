@@ -1,3 +1,194 @@
+/***
+ * Icons:
+ * Our icons are made by applying Font Awesome classes to `<i>`
+ * tags.
+ */
+
+/**
+ * Facebook:
+ * `.fa-facebook`
+ *
+ *      @example
+ *      i.fa.fa-facebook
+ */
+/**
+ * Twitter:
+ * `.fa-twitter`
+ *
+ *      @example
+ *      i.fa.fa-twitter
+ */
+/**
+ * Envelope:
+ * `.fa-envelope`
+ *
+ *      @example
+ *      i.fa.fa-envelope
+ */
+i.fa-envelope {
+    .btn--circle > & {
+        height: 16px;
+    }
+}
+/**
+ * Play:
+ * `.fa-play`
+ *
+ *      @example
+ *      i.fa.fa-play
+ */
+.btn--circle > .fa-play {
+    margin-left: 3px;
+}
+
+/**
+ * Plus Sign:
+ * `.fa-plus`
+ *
+ *      @example
+ *      i.fa.fa-plus
+ */
+/**
+ * Ellipsis:
+ * `.fa-ellipsis-h`
+ *
+ *      @example
+ *      i.fa.fa-ellipsis-h
+ */
+i.fa-ellipsis-h {
+    .btn--circle > & {
+        vertical-align: text-bottom;
+    }
+}
+/**
+ * Comment Bubble:
+ * `.fa-comment`
+ *
+ *      @example
+ *      i.fa.fa-comment
+ */
+i.fa.fa-comment {
+    margin-left: 1px; // Fixes icon cropping issue in Chrome.
+}
+
+
+/**
+ * Download Cloud
+ * `.fa-cloud-download`
+ *
+ *      @example
+ *      i.fa.fa-cloud-download
+ */
+i.fa-cloud-download {
+}
+
+/**
+ * Spinner
+ * `.fa-circle-o-notch.fa-spin`
+ *
+ *      @example
+ *      i.fa.fa.circle-o-notch.fa-spin
+ */
+i.fa-circle-o-notch.fa-spin {
+    font-size: 1.5rem;
+    padding: 1px; // fixes an edge from getting cut off
+
+    @include transition(opacity $transition-timing ease);
+}
+
+.icon {
+    display: block;
+}
+
+.icon--captionclose {
+    @include fontsize(20);
+}
+
+.icon--inline {
+    display: inline-block;
+}
+
+.icon-arrow {
+    border-style: solid;
+    border-color: transparent;
+    margin: 1px 3px;
+
+    min-width: 0;
+    width: 0;
+    height: 0;
+
+    // fixes jagged edges on FF
+    -moz-transform: scale(1.01,1.01);
+}
+
+.icon-arrow--right {
+    border-left-color: white;
+    border-width: 6px 0 6px 8px;
+}
+
+.icon-arrow--left {
+    border-right-color: white;
+    border-width: 6px 8px 6px 0;
+}
+
+.icon-arrow--up {
+    border-bottom-color: currentColor;
+    border-width: 0 6px 8px 6px;
+}
+
+.icon-arrow--down {
+    border-top-color: currentColor;
+    border-width: 8px 6px 0 6px;
+}
+
+.icon--info {
+    font-family: serif;
+    font-weight: bold;
+    font-style: oblique;
+    @include fontsize(20);
+    padding: 5px 0;
+}
+
+.icon--error {
+    font-weight: bold;
+    @include fontsize(25);
+    color: $red;
+}
+
+.icon--valid {
+    color: $teal;
+    @include fontsize(21);
+}
+
+/**
+ * Icon Prefix:
+ * `.icon--prefix`
+ * Adds a little spacing between icons and text 
+ *
+ *      @example
+ *      button.btn
+ *          i.fa.fa-play.icon--prefix
+ *          | This is a smaller button
+ *
+ *      button.btn
+ *          i.fa.fa-play.icon--prefix--large
+ *          | This is a larger button
+ *
+ */
+
+.icon--prefix {
+    margin-right: 4px;
+    @include fontsize(12);
+}
+
+.icon--mq--lgtosm {
+    @include fontsize(32);
+
+    @include mq($medium-and-up) {
+        @include fontsize(16);
+    }
+}
+
 .icon--prefix--large {
     margin-right: 8px;
     vertical-align: baseline;
