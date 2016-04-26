@@ -20,7 +20,7 @@ export default Ember.Route.extend({
     }
 
     this.get('asyncWriter').install();
-    if (ENV.renderGoogleAds) {
+    if (ENV.renderGoogleAds && window.googletag) {
       this.get('leaderboard').install();
     }
 

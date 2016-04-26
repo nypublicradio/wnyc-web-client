@@ -1,6 +1,5 @@
 /* jshint node: true, multistr: true */
 
-
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'overhaul',
@@ -26,7 +25,32 @@ module.exports = function(environment) {
     sentry: {
       dsn: process.env.SENTRY_DSN,
       debug: process.env.DEPLOY_TARGET !== 'production',
-      development: environment !== 'production'
+      development: environment !== 'production',
+      includePaths: [
+        process.env.WNYC_URL,
+        /https?:\/\/(static|demo-static)\.wnyc\.org/,
+        /https?:\/\/media\.wnyc\.org/,
+        /https?:\/\/(demo2-wnyc)\.wqxr\.org/
+      ],
+      whitelistUrls: [
+        /https?:\/\/(static|demo-static)\.wnyc\.org\/assets\/(vendor|overhaul)-.*/,
+        /https?:\/\/media\.wnyc\.org\/static\/.*\.js/,
+        /https?:\/\/((demo2-wnyc)\.)?wqxr\.org\/static\/.*\.js/
+      ],
+      ravenOptions: {
+        shouldSendCallback: function(data) {
+          // only send 1% of errors
+          var sampleRate = 1;
+          return (Math.random() * 100 <= sampleRate);
+        },
+        ignoreUrls: [
+          // Facebook blocked
+          /connect\.facebook\.net\/en_US\/all\.js/i,
+          // Chrome extensions
+          /extensions\//i,
+          /^chrome:\/\//i,
+        ]
+      }
     },
 
     renderGoogleAds: true,
