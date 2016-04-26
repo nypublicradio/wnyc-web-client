@@ -1,3 +1,4 @@
+#js-listings,
 .loading-page {
   position: fixed;
   top: 0;
@@ -42,6 +43,19 @@
     margin: auto;
   }
 }
+
+#js-listings {
+  min-height: calc(100vh - 75px);
+  position: relative;
+
+  .ember-application & {
+    &:before,
+    &:after {
+      content: none;
+    }
+  }
+}
+
 
 @keyframes bigSpin {
   0% {
