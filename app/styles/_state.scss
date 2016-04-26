@@ -10,3 +10,133 @@
     margin-top: -20px;
   }
 }
+
+.is-open {
+    + .dropdown-body {
+        opacity: 1;
+        pointer-events: all;
+        @include box-shadow(0px 0px 20px -5px rgba(0,0,0,0.15));
+        z-index: $zIndex--dropdownBody;
+        // for accessibility
+        visibility: visible;
+        @include transition(opacity $transition-timing ease, box-shadow $transition-timing ease ($transition-timing * 1.05));
+    }
+}
+
+[data-state="is-valid"] {
+    .input-state-valid {
+        opacity: 1;
+    }
+} 
+
+[data-state="is-invalid"] {
+    .input-state-invalid {
+        opacity: 1;
+    }
+
+    .input {
+        background-color: $darkred;
+    }
+} 
+
+[data-state="is-right"] {
+    @include translateX(100%);
+    z-index: $zIndex--isRight;
+}
+
+[data-state="is-up"] {
+    @include translateY(-100%);
+    z-index: $zIndex--isUp;
+}
+
+[data-state="is-shrunk"] {
+    @include scale(0);
+    z-index: $zIndex--isShrunk;
+}
+
+[data-state="is-fadeout"] {
+    opacity: 0;
+}
+
+[data-state="is-visible"] {
+    @include translateX(0);
+    @include scale(1);
+    opacity: 1;
+    z-index: $zIndex--isVisible;
+}
+
+// Safari doesn't like using attribute selectors for transitioning clip-path, for
+// some reason. so we're using a class instead
+.figure-caption-body.is-open {
+    -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    opacity: 1;
+}
+
+.figure-caption-body {
+    -webkit-clip-path: polygon(100% 100%, 100% 80%, 100% 100%, 100% 100%);
+    clip-path: polygon(100% 100%, 100% 80%, 100% 100%, 100% 100%);
+    opacity: 0;
+}
+
+.btn--toggle[data-state="first"] {
+    > :nth-child(1) {
+        @extend [data-state="is-visible"];
+    }
+    > :nth-child(2) {
+        @extend [data-state="is-shrunk"];
+    }
+}
+
+.btn--toggle[data-state="second"] {
+    > :nth-child(1) {
+        @extend [data-state="is-shrunk"];
+    }
+    > :nth-child(2) {
+        @extend [data-state="is-visible"];
+    }
+}
+
+// imagesLoaded state
+#main,
+#series,
+#related {
+    img {
+        opacity: 0;
+        @include transition(opacity $transition-timing ease);
+
+        &.is-loaded {
+            opacity: 1;
+        }
+    }
+}
+
+// ManagedItem Publish Statuses
+[data-status="draft"]:before,
+[data-status="submitted"]:before {
+    content: "Current Status: DRAFT";
+}
+
+[data-status="withdrawn"]:before {
+    content: "Current Status: WITHDRAWN";
+}
+
+[data-status="scheduled"]:before {
+    content: "Current Status: SCHEDULED for publishing on " attr(data-date);
+}
+
+[data-status="published"]:before {
+    content: "Current Status: WILL PUBLISH at " attr(data-date);
+}
+
+[data-status]:before {
+    display: block;
+    background-color: $lightgreen;
+    padding: 8px 15px;
+    color: black;
+    @include fontsize(14);
+}
+
+[data-status=""]:before {
+    display: none;
+}
