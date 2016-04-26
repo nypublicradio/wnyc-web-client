@@ -67,3 +67,81 @@
 }
 
 @import 'lib/slick-1.4.1.scss';
+
+/***
+ * Molecules:
+ * Let's build some molecules using atoms
+ */
+
+/**
+ * Facebook Button:
+ *      @example
+ *      button.btn.btn--gray.btn--circle
+ *          i.fa.fa-facebook
+ */
+
+/**
+ * Listen Button:
+ *      @example
+ *      button.btn.btn--pink.btn--large.btn--icon
+ *          <i class="fa fa-play"></i> Listen
+ */
+
+/**
+ * Share Button Group:
+ *      @example
+ *      .btn-group
+ *          button.btn.btn--circle
+ *              i.fa.fa-facebook
+ *          button.btn.btn--circle
+ *              i.fa.fa-twitter
+ *          button.btn.btn--circle
+ *              i.fa.fa-envelope
+ */
+
+/**
+ * Featured Audio Button Group:
+ *      @example
+ *      .btn-group
+ *          button.btn.btn--pink.btn--large.btn--icon
+ *              <i class="fa fa-play"></i> Listen
+ *          button.btn.btn--gray.btn--icon
+ *              <i class="fa fa-play"></i> Queue
+ *          button.btn.btn--gray.btn--icon.btn--circle
+ *              <i class="fa fa-ellipsis-h"></i>
+ */
+
+/***
+ * Organisms:
+ * Put the molecules together and make them something real.
+ */
+
+/**
+ * Story Header:
+ * Uses a flag object, a header element, and a split layout space to create
+ * a header organism.  All of these are wrapped in a background image space.
+ *
+ *      @example
+ *      .l-bgimg
+ *          .flag
+ *              a.flag-image.inherit(href="")
+ *                  img.badge.badge-small(src="http://www.fillmurray.com/40/40")
+ *              .flag-body
+ *                  a.inherit(href="") Bill Murray Show <i class="fa fa-icon fa-angle-right"></i>
+ *          h1.h2 BM's Greatest Hits
+ *          .l-split
+ *              .btn-group
+ *                  button.btn.btn--pink.btn--large.btn--icon
+ *                      <i class="fa fa-play"></i> Listen
+ *                  button.btn.btn--gray.btn--icon
+ *                      <i class="fa fa-play"></i> Queue
+ *                  button.btn.btn--gray.btn--icon.btn--circle
+ *                      <i class="fa fa-ellipsis-h"></i>
+ *              .btn-group
+ *                  button.btn.btn--gray.btn--circle
+ *                      i.fa.fa-facebook
+ *                  button.btn.btn--gray.btn--circle
+ *                      i.fa.fa-twitter
+ *                  button.btn.btn--gray.btn--circle
+ *                      i.fa.fa-envelope
+ */
