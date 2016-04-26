@@ -1,0 +1,137 @@
+/***
+ * Tabs:
+ * Tabs are a lovely little UI molecule made up of the following atoms:
+ * `.tabs-header`, `.tab-line`, `.tab-wrapper`, `.tab-toggleitem`,
+ * and `.js-tabclickable`. It also requires `js/overhaul/tabs.js`.
+ *
+ * `.js-tabClickable` elements are required to be an `a` tag. We use the href
+ * attribute in the JS controlling the behavior.
+ * `.js-tabClickable` els are wrapped in `.tabs-header` with one `.tab-line`
+ * element a a sibling.
+ *
+ * One tab can be associated with one chunk of content. Each content chunk
+ * must be wrapped in a `.tab-toggleitem` with a `data-state` attribute set to
+ * one of the available states in the states partial. `is-fadeout` is a good 
+ * default.
+ *
+ * All Your `.tab-toggleitem` elements must be siblings beneath a single 
+ * a `.tab-wrapper` parent, which can be anywhere on the page.
+ *
+ * Associate `.js-tabClickable` elements with a `.tab-toggleitem` via href/id
+ * attributes like `<a href="#transcripts">` and `<div class="tab-toggleitem" id="transcripts">`.
+ *
+ *      @example
+ *      .tabs-header
+ *          a.js-tabClickable(href="#tabStory") Story
+ *          a.js-tabClickable(href="#tabTranscript") Transcript
+ *          a.js-tabClickable(href="#tabLinks") Links
+ *          .tab-line
+ *      .tab-wrapper
+ *          .tab-toggleitem#tabStory(data-state="is-hidden")
+ *              p It’s almost impossible to imagine a world without words. But this hour, we try to do just that.
+ *          .tab-toggleitem#tabTranscript(data-state="is-hidden")
+ *              p ROBERT KRULWICH: Okay let us begin-
+ *          .tab-toggleitem#tabLinks(data-state="is-hidden")
+ *              ul
+ *                  li <a href="http://google.com">A great search engine</a>
+ *                  li <a href="http://www.radiolab.org">Radiolab Home</a>
+ *                  li <a href="http://www.wnyc.org">WNYC</a>
+ */
+
+.tabs-header {
+    @extend %vertical-rhythm;
+    position: relative;
+    white-space: nowrap;
+    padding: 1px; // allow :focus border to show
+
+    > * {
+        margin-right: 15px;
+    }
+
+    > :last-of-type {
+        margin-right: 0;
+    }
+
+    &.x-scrollable {
+      overflow-x: scroll;
+    }
+}
+
+.tabs-header--border {
+  border-bottom: 1px solid $lightestgray;
+  padding-bottom: 3px;
+}
+
+.tab-link {
+  margin-right: 15px;
+
+  @include mq($small-and-up) {
+    margin-right: 25px;
+  }
+  @include mq($medium-and-up) {
+    margin-right: 35px;
+  }
+}
+
+.tab-link {
+  @include transition(font-size 125ms ease);
+
+  @include fontsize(14);
+
+  @include mq($middle-middle-and-up) {
+    @include fontsize(20);
+  }
+
+  @include mq($medium-and-up) {
+    @include fontsize(14);
+  }
+
+  @include mq($large-and-up) {
+    @include fontsize(20);
+  }
+
+}
+
+.tab-line {
+    width: 0;
+    background-color: $pink;
+    display: block;
+    height: 4px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    @include translateX(0);
+    @include transition(transform $transition-timing 0s, width $transition-timing 150ms, background-color $transition-timing 0s);
+}
+
+.tab-line--red {
+  background-color: $red;
+}
+
+.tab-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.tab-toggleitem {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    @include transition(all $transition-timing);
+}
+
+.tab-link {
+  font-weight: 600;
+
+  &.active,
+  &.ember-transitioning-in {
+    color: $red;
+  }
+
+  &.active.ember-transitioning-out {
+    color: initial;
+  }
+}
