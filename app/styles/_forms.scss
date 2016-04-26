@@ -1,0 +1,113 @@
+/**
+ * `<textarea>`:
+ * Textareas are given a bit of padding, a smaller font-size,
+ * and a gray border by default.
+ */
+.textarea {
+    display: block;
+    width: 100%;
+    border: 1px solid $lightestgray;
+    padding: 12px;
+    @include fontsize(12);
+    line-height: 1.2rem;
+
+    &:focus {
+        outline: 1px dotted $darkergray;
+    }
+}
+
+.input {
+    width: 100%;
+    display: block;
+    @extend %vertical-rhythm;
+    @include transition(background-color $transition-timing ease);
+
+    &:focus {
+        outline: 1px dotted $darkergray;
+    }
+}
+
+.input-state {
+    position: relative;
+
+    > .input {
+        padding-right: 25px;
+    }
+}
+
+.input-state-valid,
+.input-state-invalid {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 25px;
+    opacity: 0;
+
+    @include transition(opacity $transition-timing ease);
+
+    .input-state--right & {
+        right: 15px;
+    }
+}
+
+.input--large {
+    padding: 15px;
+}
+
+.input--gray {
+    background-color: $darkgray;
+    color: white;
+    border: none;
+}
+
+/**
+ * Textarea:
+ * `.textarea--noresize`
+ * Turn off resizing
+ */
+.textarea--noresize {
+    resize: none;
+}
+
+.textarea--verticalonly {
+    resize: vertical;
+}
+
+.fieldset {
+    border: none;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    width: 100%;
+
+    @extend %vertical-rhythm;
+}
+
+.form {
+    width: 100%;
+    display: block;
+
+    @extend %vertical-rhythm;
+}
+
+/**
+ * `.textinput--gray`:
+ * Sometimes a text input needs to be gray. 
+ */
+.textinput--gray {
+    background: #eee;
+    border: 1px solid $lightergray;
+    padding: 12px;
+
+    &:focus {
+        outline: 1px dotted $darkergray;
+    }
+}
+
+
+.label {
+    @extend %vertical-rhythm;
+}
+
+
