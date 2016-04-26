@@ -455,39 +455,6 @@ h3.subtitle {
  color: #9b071e;
 }
 
-/* pagination */
-
-#page-counter {
-  font-size: 9px;
-  font-weight: normal;
-  margin: 15px 0;
-}
-
-#pagefooter {
-  clear: both;
-  padding: 30px 0 15px 0;
-  text-align: right;
-  font-size: 14px;
-  color: #b5b5b5;
-}
-
-.pagefooter-link a,
-.pagefooter-current {
-  padding: 0 6px 0 3px;
-}
-
-.pagefooter-current {
-  color: #b5b5b5;
-}
-
-.pagefooter-previous a:before {
-  content: "\0AB\00a0 ";
-}
-
-.pagefooter-next a:after {
-  content: " \0BB";
-}
-
 /* data tables */
 
 .article-wide table,
