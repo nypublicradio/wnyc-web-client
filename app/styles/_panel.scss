@@ -1,0 +1,64 @@
+/***
+ * Panels:
+ */
+
+/**
+ * Simple Panel:
+ * `.panel`
+ * Can be used for a dropdown.
+ *
+ *      @example
+ *      div.panel This is a panel
+ */
+.panel {
+    position: relative;
+    overflow: hidden; // hides .panel-link border edges when there isn't a panel-body
+    color: black;
+    border-radius: 5px;
+    background-color: white;
+    text-align: left;
+    font-size: medium;
+    // IE doesn't support initial
+    font-size: initial;
+    border: 1px solid $lightestgray;
+}
+
+/**
+ * Panel link:
+ * `.panel-link`
+ * Used inside a panel to add a header.
+ *
+ *      @example
+ *      div.panel This is a panel
+ *          div.panel-link This is a panel header
+ */
+.panel-link {
+    padding: 15px;
+    border-bottom: 1px $lightestgray solid;
+    display: block;
+    // so it doesn't cllapse if there's no body
+    white-space: nowrap;
+
+    &:hover {
+        border-bottom-color: $lightestgray;
+    }
+}
+
+.panel-linkicon {
+    margin-right: 8px;
+    @include fontsize(18);
+}
+
+/**
+ * Panel Body:
+ * `.panel-body`
+ * To wrap text inside a panel and have a nice 15px padding. 
+ *
+ *      @example
+ *      div.panel This is a panel
+ *          div.panel-header This is a panel header
+ *          div.panel-body This is the body inside a panel
+ */
+.panel-body {
+    padding: 15px;
+}
