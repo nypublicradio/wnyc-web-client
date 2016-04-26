@@ -1,0 +1,29 @@
+/**
+ * Video Player:
+ * `.videoplayer`
+ * Responsive embeddable video player
+ *
+ *      @example
+ *      .videoplayer
+ *          iframe("src=http://www.youtube.com/embed/tXmwBN52rkY?wmode=transparent&autohide=1&rel=0&showinfo=0&feature=oembed&enablejsapi=1")
+ */
+.videoplayer,
+.user-embedded-video > div {
+    position: relative;
+    padding-bottom: 56.25%;
+    overflow: hidden;
+    width: 100% !important; // override legacy inline attributes
+
+    @extend %vertical-rhythm;
+
+    > object,
+    > .jwplayer,
+    > iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100% !important; // override legacy inline attrs
+        height: 100% !important; // override legacy inline attrs
+        border: none;
+    }
+}
