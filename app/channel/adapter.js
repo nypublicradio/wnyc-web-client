@@ -3,7 +3,7 @@ import ApplicationAdapter from '../adapters/application';
 
 const {
   RSVP,
-  merge,
+  assign,
   run
 } = Ember;
 
@@ -14,7 +14,7 @@ export default ApplicationAdapter.extend({
   ajaxOptions(urlToDecode, type, options = {}) {
     const url = decodeURIComponent(urlToDecode);
 
-    return merge(options, {
+    return assign(options, {
       url: url.slice(-1) === '/' ? `${url}/` : url,
       dataType: 'jsonp',
       jsonpCallback: 'WNYC'
