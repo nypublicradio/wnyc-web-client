@@ -38,7 +38,7 @@ module.exports = function(environment) {
         /https?:\/\/((demo2-wnyc)\.)?wqxr\.org\/static\/.*\.js/
       ],
       ravenOptions: {
-        shouldSendCallback: function(data) {
+        shouldSendCallback: function() {
           // only send 1% of errors
           var sampleRate = 1;
           return (Math.random() * 100 <= sampleRate);
@@ -85,6 +85,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
     ENV.LOG_LEGACY_LOADER = true;
+    ENV['ember-cli-mirage'] = { enabled: process.env.USE_MIRAGE === 'true' };
   }
 
   if (environment === 'test') {

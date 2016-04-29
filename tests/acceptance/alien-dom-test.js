@@ -19,10 +19,10 @@ DjangoRenderedController.reopen({ queryParams: ['bar'] });
 
 moduleForAcceptance('django-page leaves alien dom alone', {
   beforeEach() {
-    window.beforeunload = escapeNavigation;
+    window.onbeforeunload = escapeNavigation;
   },
   afterEach() {
-    window.beforeunload = undefined;
+    window.onbeforeunload = undefined;
     resetHTML();
   }
 });
