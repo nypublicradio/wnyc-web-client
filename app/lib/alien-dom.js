@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import config from 'overhaul/config/environment';
 import Ember from 'ember';
 // The Alien DOM is a DOM that exists beyond the reaches of an Ember app's

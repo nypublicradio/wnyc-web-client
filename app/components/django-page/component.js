@@ -89,7 +89,9 @@ export default Ember.Component.extend(LegacySupportMixin, {
           }
 
           this.$().imagesLoaded().progress((i, image) => {
-            image.img.classList.add('is-loaded');
+            Ember.run(() => {
+              image.img.classList.add('is-loaded');
+            });
           });
 
         });
