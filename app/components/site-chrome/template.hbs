@@ -78,6 +78,14 @@
           {{/link-to}}
         </li>
         <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
+          {{#link-to 'discover' class='inherit'}}
+          <svg class="icon--menu icon--topics">
+            <use xlink:href="{{svgURL}}nav_icons.svg#Topics"></use>
+          </svg>
+          [Product]
+          {{/link-to}}
+        </li>
+        <li class="list-item list-item--short">
           {{#link-to 'djangorendered' 'support' class='inherit'}}
           {{wnyc-svg icon='gift' className='icon--menu icon--gift'}}
           Ways to Give
