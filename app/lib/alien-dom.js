@@ -18,7 +18,8 @@ export function isInDom(id) {
 // of an Alien DOM. This will run on every django-page render, but should be a simple
 // no-op after one run.
 export function clearAlienDom() {
-  let notEmber = document.querySelectorAll(`${config.rootElement} > :not(.ember-view), ${config.rootElement} > head > link[rel=stylesheet]:not([href*=assets])`);
+  let root = config.environment === 'test' ? '#ember-testing' : 'body';
+  let notEmber = document.querySelectorAll(`${root} > :not(.ember-view), ${root} > head > link[rel=stylesheet]:not([href*=assets])`);
   Array.from(notEmber).forEach(n => n.parentNode.removeChild(n));
   document.removeEventListener('click', alienEventListener);
 }
