@@ -12,7 +12,7 @@ export default Ember.Route.extend({
     // in development (which is neeeded due to CORs).
     upstream_url = upstream_url.replace(/\/*$/, '/');
 
-    let qp = Object.keys(queryParams).map(p => `${p}=${encodeURIComponent(queryParams[p])}`);
+    let qp = Object.keys(queryParams).map(p => `${p}=${queryParams[p].replace(/\s/g, '%20')}`);
     if (qp.length) {
       upstream_url += `?${qp.join('&')}`;
     }
