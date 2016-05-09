@@ -3,7 +3,7 @@ import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import djangoPage from 'overhaul/tests/pages/django-page';
 import { faker  } from 'ember-cli-mirage';
 import DjangoRenderedController from 'overhaul/controllers/djangorendered';
-import 'ember-feature-flags/tests/helpers/with-feature';
+import 'overhaul/tests/helpers/with-feature';
 import Ember from 'ember';
 import ENV from 'overhaul/config/environment';
 const { wnycURL } = ENV;
