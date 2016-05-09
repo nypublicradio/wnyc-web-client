@@ -30,7 +30,7 @@ function doRefresh() {
 export default Ember.Component.extend(LegacySupportMixin, {
   legacyAnalytics: service(),
   router: service('wnyc-routing'),
-  type: computed('page', function() {
+  loadingType: computed('page', function() {
     let id = get(this, 'page.id') || '';
     let firstPart = id.split('/')[0];
 
