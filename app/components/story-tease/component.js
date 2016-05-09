@@ -73,7 +73,8 @@ export default Component.extend(LegacySupport, {
       }
     }
   }),
-  didReceiveAttrs() {
+  init() {
+    this._super(...arguments);
     const hideLinks = get(this, 'hideLinks');
     const story = get(this, 'item');
     if (hideLinks) {
