@@ -39,21 +39,8 @@
     &:after {
         content: '';
         position: absolute;
-        border: 11px solid;
+        border: 11px solid transparent;
     }
-
-    .dropdown--white > & {
-        &:after {
-            border-color: white;
-        }
-    }
-
-    .dropdown--nearwhite > & {
-        &:after {
-            border-color: $lightestgray;
-        }
-    }
-
 
     .dropdown--bl > & {
         top: calc(100% + 12px);
@@ -62,9 +49,6 @@
         &:after {
             top: -21px;
             left: 20px;
-            border-top-color: transparent;
-            border-right-color: transparent;
-            border-left-color: transparent;
         }
     }
 
@@ -75,10 +59,17 @@
         &:after {
             top: -21px;
             right: 20px;
-            border-top-color: transparent;
-            border-right-color: transparent;
-            border-left-color: transparent;
         }
+    }
+
+    .dropdown--nearwhite.dropdown--br > &:after,
+    .dropdown--nearwhite.dropdown--bl > &:after {
+      border-bottom-color: $lightestgray;
+    }
+
+    .dropdown--white.dropdown--br > &:after,
+    .dropdown--white.dropdown--bl > &:after {
+      border-bottom-color: white;
     }
 
     .dropdown--tl > & {
@@ -88,12 +79,14 @@
       &:after {
         bottom: -21px;
         left: 20px;
-        border-bottom-color: transparent;
-        border-right-color: transparent;
-        border-left-color: transparent;
       }
     }
 
+    .dropdown--nearwhite.dropdown--tl > &:after {
+      border-top-color: $lightestgray;
+    }
+
+    .dropdown--white.dropdown--tl > &:after {
+      border-top-color: white;
+    }
 }
-
-
