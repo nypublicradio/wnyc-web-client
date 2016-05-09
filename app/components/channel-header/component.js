@@ -8,9 +8,9 @@ const {
 
 export default Component.extend({
   sessionManager: service(),
-    classNames: ['channel-header'],
-    elementId: 'channel-header',
-    subscribeOptions: computed.readOnly('model.podcastLinks'),
-    donationOption: computed.readOnly('model.donate'),
-    airings: computed.readOnly('model.scheduleSummary')
+  classNames: ['channel-header'],
+  elementId: 'channel-header',
+  subscribeOptions: computed.readOnly('model.podcastLinks'),
+  donationOption: computed.readOnly('model.donate'),
+  airings: computed.readOnly('model.scheduleSummary')
 });
