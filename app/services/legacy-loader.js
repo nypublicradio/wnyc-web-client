@@ -26,6 +26,10 @@ export const dependencies = Object.freeze({
   'js/lib/jquery/autoload.js': ['js/lib/wnyc/search.js']
 });
 
+// Some dependencies are only required for certain pages. We know that dependencies
+// are a djangorendered thing, so the keys in these object are files depended upon
+// by other files, and the values are the djangorendered model ids with which
+// the files will actually be served by django. See _unsatisfiedDeps
 export const depFilter = Object.freeze({
   'js/lib/wnyc/search.js': 'search/'
 });
