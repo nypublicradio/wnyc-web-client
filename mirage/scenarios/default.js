@@ -10,4 +10,5 @@ export default function(server) {
      id: '/'
    });
    server.createList('show', 100);
+   server.createList('discover-topic', 20);
 }

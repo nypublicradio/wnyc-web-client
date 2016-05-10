@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model() {
-    // ajax call to TBD endpoint to get a list of topic key/topic name pairs
+    return this.store.query("discover.topics", {discover_station: "wnyc"});
   },
   actions: {
     next() {

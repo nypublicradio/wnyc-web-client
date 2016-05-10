@@ -110,6 +110,4 @@ export default function() {
   });
 
   this.get(`${baseUrl}/\*id`, 'django-page');
-  this.get('/api/v1/story/:id', 'story');
-
 }
