@@ -18,6 +18,11 @@ export function homepageCleanup(element = document.body) {
   return element;
 }
 
+export function searchpageCleanup(element = document.body) {
+  element.querySelector('#site').classList.add('search');
+  return element;
+}
+
 // This gets run by the django-page component right before tearing
 // down the content.
 export function beforeTeardown(/* element, page */) {
@@ -83,6 +88,10 @@ export function beforeAppend(element, page) {
     .forEach(n => {
       while(n.hasChildNodes()) { n.removeChild(n.firstChild); }
     });
+  }
+
+  if (page.get('id') === 'search/') {
+    element = searchpageCleanup(element);
   }
 
   return element;

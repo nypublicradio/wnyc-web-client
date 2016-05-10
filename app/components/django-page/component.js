@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
-import { beforeTeardown, homepageCleanup } from '../../lib/compat-hooks';
+import { beforeTeardown, homepageCleanup, searchpageCleanup } from '../../lib/compat-hooks';
 import ENV from '../../config/environment';
 import LegacySupportMixin from 'overhaul/mixins/legacy-support';
 import {
@@ -75,6 +75,9 @@ export default Ember.Component.extend(LegacySupportMixin, {
         // leave the alien alone
         if (page.get('id') === '/') {
           homepageCleanup();
+        }
+        if (page.get('id') === 'search/') {
+          searchpageCleanup();
         }
         installAlienListeners(this);
       } else {
