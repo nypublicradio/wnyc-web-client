@@ -143,9 +143,9 @@
   border: 2px solid white;
   padding: 2px 18px 2px 18px;
   background: transparent;
-
-  @include fontsize(12);
-  font-weight: 700;
+  white-space:nowrap;
+  
+  @include fontsize(16);
   line-height: 30px;
   letter-spacing: 2px;
 
