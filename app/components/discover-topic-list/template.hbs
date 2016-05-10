@@ -7,9 +7,9 @@
 {{/each}}
 
 {{#if allSelected}}
-  <a href="#" {{action 'selectNone'}}>Select None</a>
+  <a class="btn" href="#" {{action 'selectNone'}}>Select None</a>
 {{else}}
-  <a href="#" {{action 'selectAll'}}>Select All</a>
+  <a class="btn" href="#" {{action 'selectAll'}}>Select All</a>
 {{/if}}
 
 {{yield}}

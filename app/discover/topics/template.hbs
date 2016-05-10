@@ -1,10 +1,12 @@
 {{! this is "step 1 of 2" of the onboarding process }}
 {{! show list of topics; save selection to session data }}
 
+<button class="btn" {{action 'back'}}>Back</button>
 
-{{#with model as |topics|}}
-  {{discover-topic-list topics=topics}}
+<button class="btn" disabled={{hasNotSelectedATopic}} {{action 'next'}}>Next</button>
+
+{{#with model as |topics| }}
+  {{discover-topic-list topics=topics selectedTopics=selectedTopics}}
 {{/with}}
 
-<button {{action 'next'}}>Next</button>
 {{outlet}}

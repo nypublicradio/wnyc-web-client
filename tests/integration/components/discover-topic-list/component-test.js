@@ -54,3 +54,11 @@ test('select none only shows up when all are selected', function(assert) {
     }
   });
 });
+
+test('passing in selected topics renders selected items', function(assert) {
+  let topics = server.createList('discover-topic', 5);
+  this.set('topics', topics);
+  this.set('selectedTopics', [topics[1], topics[2]]);
+  this.render(hbs`{{discover-topic-list topics=topics selectedTopics=selectedTopics}}`);
+  assert.equal(this.$('input[type=checkbox]:checked').length, 2);
+});
