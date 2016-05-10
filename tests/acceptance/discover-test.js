@@ -29,11 +29,13 @@ test('button exists to create new discover station', function(assert) {
 });
 
 test('shows list of topics', function(assert) {
+  visit('/discover/start');
   server.createList('discover-topic', 20);
-  visit('/discover/topics');
 
   andThen(function() {
-    assert.equal($(".discover-topic").length, 20);
-    pauseTest()
+    click('button:contains("Create My Own")');
+    andThen(function() {
+      assert.equal($(".discover-topic").length, 20);
+    });
   });
 });

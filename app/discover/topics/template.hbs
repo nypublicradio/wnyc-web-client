@@ -1,10 +1,10 @@
 {{! this is "step 1 of 2" of the onboarding process }}
 {{! show list of topics; save selection to session data }}
 
-{{#each model as |topic|}}
-  {{discover-topic title=topic.title url=topic.url}}
-{{/each}}
 
+{{#with model as |topics|}}
+  {{discover-topic-list topics=topics}}
+{{/with}}
 
 <button {{action 'next'}}>Next</button>
 {{outlet}}
