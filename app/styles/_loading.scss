@@ -1,0 +1,22 @@
+.index-loading,
+.channel-loading,
+.legacy-loading,
+.story-loading {
+  .thin-line { background-color: #f2f2f2; overflow: hidden; height: 14px; margin-bottom: 14px; border-radius: 2px;}
+  .bg-gray1 { background-color: #f2f2f2; overflow: hidden; }
+  .bg-gray2 { background-color: #e0e0e0; overflow: hidden; }
+  .bg-gray3 { background-color: #fafafa; overflow: hidden; }
+  .bg-gray4 { background-color: #eeeeee; overflow: hidden; }
+  .square-small { height: 50px; width: 50px; }
+  .btn { color: transparent !important; border: none; pointer-events: none; }
+  .l-bgimg:before { background-color: transparent; }
+  .rounded { border-radius: 2px; }
+  .nudge-extra { margin-bottom: 22px; }
+  .white-box { background-color: white; padding: 20px; position: relative; width: 100%;}
+  .bottom { position: absolute; bottom: 0; left: 0; right: 0; }
+  .white-box .bottom { padding: 20px; }
+  .vertical-card { position: relative; background-color: #f2f2f2; }
+  .flag-image--squeeze > div { margin-top: -10px; margin-bottom: -10px; }
+  .loading-page { top: 56px; }
+
+}
