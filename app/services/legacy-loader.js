@@ -23,6 +23,11 @@ export const dependencies = Object.freeze({
     'js/lib/marionette/xd_player/web_player_controller.js'
   ],
   'js/lib/wnyc/search.js': ['js/jquery-ui-1.8.23.min.js'],
+  'js/lib/jquery/autoload.js': ['js/lib/wnyc/search.js']
+});
+
+export const depFilter = Object.freeze({
+  'js/lib/wnyc/search.js': 'search/'
 });
 
 // -------
@@ -65,6 +70,7 @@ import Ember from 'ember';
 import ENV from '../config/environment';
 
 export default Ember.Service.extend({
+  router: Ember.inject.service('wnyc-routing'),
   init() {
     this._super();
     this.modules = Object.create(null);
@@ -86,7 +92,9 @@ export default Ember.Service.extend({
   _unsatisfiedDeps(name) {
     let deps = dependencies[name];
     if (deps) {
-      return deps.filter(d => !this.modules[d]);
+      let routeParam = this.get('router').recognize(location.pathname).params[0];
+      return deps.reject(d => this.modules[d])
+        .reject(d => depFilter[d] && depFilter[d] !== routeParam);
     }
     return [];
   },
