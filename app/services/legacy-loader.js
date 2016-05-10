@@ -22,7 +22,7 @@ export const dependencies = Object.freeze({
     'js/lib/marionette/xd_player/okra/ondemand/controller.js',
     'js/lib/marionette/xd_player/web_player_controller.js'
   ],
-  'js/lib/wnyc/search.js': ['js/jquery-ui-1.8.15.min.js']
+  'js/lib/wnyc/search.js': ['js/jquery-ui-1.8.23.min.js'],
 });
 
 // -------
