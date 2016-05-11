@@ -1,10 +1,6 @@
-{{#multiselect-checkboxes options=topics selection=selectedTopics as |topic isSelected|}}
+{{#multiselect-checkboxes options=topics selection=selectedTopics onchange=(action 'onMultiselectChangeEvent') as |topic isSelected|}}
   {{discover-topic title=topic.title url=topic.url isSelected=isSelected}}
 {{/multiselect-checkboxes}}
-
-{{#each selectedTopics as |topic|}}
-  {{topic.title}}
-{{/each}}
 
 {{#if allSelected}}
   <a class="btn" href="#" {{action 'selectNone'}}>Select None</a>

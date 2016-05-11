@@ -3,10 +3,10 @@
 
 <button class="btn" {{action 'back'}}>Back</button>
 
-<button class="btn" disabled={{hasNotSelectedATopic}} {{action 'next'}}>Next</button>
+<button class="btn" disabled={{hasNotSelectedATopic}} {{action 'next' selectedTopics}}>Next</button>
 
 {{#with model as |topics| }}
-  {{discover-topic-list topics=topics selectedTopics=selectedTopics}}
+  {{discover-topic-list topics=topics onNoneSelected=(action (mut hasNotSelectedATopic)) onTopicsUpdated=(action (mut selectedTopics))}}
 {{/with}}
 
 {{outlet}}

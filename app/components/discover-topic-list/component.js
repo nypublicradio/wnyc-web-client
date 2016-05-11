@@ -1,17 +1,46 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  selectedTopics:[],
-  allSelected: Ember.computed('selectedTopics.length', 'topics.length', function() {
+  session: Ember.inject.service(),
+  selectedTopics: [],
+
+  init: function() {
+    this._super(...arguments);
+    var selectedTopics = [];
+    let savedTopics = this.get('session.data.discover-topics');
+    if (savedTopics) {
+
+      // Now we'll find the matching objects in the discover topics,
+      // and add them to the selectedTopics list
+      this.get('topics').forEach(function(topic) {
+        if (savedTopics.contains(topic.get('url'))) {
+          selectedTopics.addObject(topic);
+        }
+      });
+    }
+    this.updateTopics(selectedTopics);
+  },
+
+  allSelected: Ember.computed('selectedTopics', 'topics.length', function() {
     return this.get('topics').slice().length === this.get('selectedTopics').length;
   }),
+
+  updateTopics(selectedTopics) {
+    Ember.run.once(() => {
+      this.set('selectedTopics', selectedTopics);
+      this.sendAction('onNoneSelected', selectedTopics.length === 0);
+      this.sendAction('onTopicsUpdated', selectedTopics);
+    });
+  },
   actions: {
     selectAll() {
-      this.set('selectedTopics', this.get('topics').slice());
-      // .slice() to make sure we don't make these the *same*, because then things get weird
+      this.updateTopics(this.get('topics').slice());
     },
     selectNone() {
-      this.set('selectedTopics', []);
+      this.updateTopics([]);
+    },
+    onMultiselectChangeEvent(selectedTopics /*, changedTopics, action */) {
+      this.updateTopics(selectedTopics);
     }
   }
 });
