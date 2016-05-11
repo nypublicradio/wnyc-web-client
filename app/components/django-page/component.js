@@ -112,7 +112,7 @@ export default Ember.Component.extend(LegacySupportMixin, {
       let router = this.get('router');
       let href = new URL(target.attr('href'), new URL(this.get('page.id'), wnycURL).toString()).toString();
       if (href.indexOf(wnycURL) === 0) {
-        href = href.replace(wnycURL, '');
+        href = href.replace(wnycURL, '').replace(/^\//, '') || '/';
 
         // all URLS are maked as external by legacy JS in development mode
         if (ENV.environment !== 'development' && target.attr('target') === '_blank') {
@@ -127,7 +127,7 @@ export default Ember.Component.extend(LegacySupportMixin, {
           return false;
         }
 
-        let { routeName, params, queryParams } = router.recognize(href.replace(/^\//, ''));
+        let { routeName, params, queryParams } = router.recognize(href);
 
         if (!this.get('isDestroyed') && !this.get('isDestroying')) {
           router.transitionTo(routeName, params, queryParams);
