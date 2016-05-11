@@ -125,6 +125,10 @@ export default Ember.Component.extend(LegacySupportMixin, {
           return true;
         } else if (!this.features.isEnabled('django-page-routing')) {
           return false;
+        } else if (isInDom(href)) {
+          // clicked link is current alien DOM, do nothing
+          event.preventDefault();
+          return false;
         }
 
         let { routeName, params, queryParams } = router.recognize(href);
