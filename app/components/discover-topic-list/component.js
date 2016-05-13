@@ -12,9 +12,11 @@ export default Ember.Component.extend({
   }),
 
   updateTopics(selectedTopics) {
-    this.set('selectedTopics', selectedTopics);
-    this.sendAction('onNoneSelected', selectedTopics.length === 0);
-    this.sendAction('onTopicsUpdated', selectedTopics);
+    Ember.run.once(() => {
+      this.set('selectedTopics', selectedTopics);
+      this.sendAction('onNoneSelected', selectedTopics.length === 0);
+      this.sendAction('onTopicsUpdated', selectedTopics);
+    });
   },
   actions: {
     selectAll() {

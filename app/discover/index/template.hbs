@@ -1,3 +1,11 @@
 {{! show playlist with chosen stories, save story IDs in session data for return visits }}
 <button {{action 'edit'}}>Edit My Shows &amp; Topics</button>
+
+
+{{#each stories as |story|}}
+  {{story.url}}
+{{/each}}
+
+
+
 {{outlet}}

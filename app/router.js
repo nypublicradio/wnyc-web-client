@@ -45,7 +45,10 @@ Router.map(function() {
     this.route('start');
     this.route('topics');
     this.route('shows');
-    this.route('edit');
+    this.route('edit', function() {
+      this.route('topics');
+      this.route('stories');
+    });
   });
 });
 

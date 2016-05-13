@@ -152,6 +152,7 @@ module.exports = function(environment) {
     ENV.wnycStaticURL = 'http://example.com/static';
     ENV.wnycURL = '//example.com';
     ENV.wnycBetaURL = 'http://example.com';
+
   }
 
   if (environment === 'production') {

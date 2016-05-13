@@ -1,6 +1,5 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
-import { invalidateSession } from 'overhaul/tests/helpers/ember-simple-auth';
 
 moduleForAcceptance('Acceptance | discover');
 
@@ -58,9 +57,8 @@ test('next button is disabled until a topic is selected', function(assert) {
   });
 });
 
-test('topics are saved in a session and maintained upon next visit', function(assert) {
+test('topics are saved in a session and maintained upon next visit in initial flow', function(assert) {
   visit('/discover/start');
-  invalidateSession(this.application);
   server.create('discover-topic', {title: "Music", url: "music"});
   server.create('discover-topic', {title: "Art", url: "art"});
   server.create('discover-topic', {title: "Technology", url: "technology"});
@@ -81,5 +79,4 @@ test('topics are saved in a session and maintained upon next visit', function(as
       });
     });
   });
-
 });

@@ -1,2 +1,8 @@
 {{! display list of available topics/shows and selection state based on session data }}
+Customize Your Playlist
+
+<button class="btn" {{action 'back'}}>Back</button>
+
+<button class="btn" disabled={{hasNotSelectedATopic}} {{action 'refresh' currentTopicSelection}}>Next</button>
+
 {{outlet}}
