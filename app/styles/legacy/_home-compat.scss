@@ -5,6 +5,19 @@
   margin: 0 !important;
 }
 
+#wnyc_home .btn {
+  line-height: 38px;
+}
+
+#wnyc_home .btn--circle {
+  width: 40px;
+
+  .fa {
+      font-size: 18px;
+  }
+
+}
+
 #wnyc_home .story-wrapper {
   h2 > a {
     display: block;
