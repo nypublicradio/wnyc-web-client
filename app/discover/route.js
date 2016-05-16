@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   session: Ember.inject.service(),
   model() {
+    // Everything in this feature needs the list of the topics, so we'll get them now
     return this.store.query("discover.topics", {discover_station: "wnyc"}).then(topics => {
       var savedTopics = [];
       let savedTopicsKeys = this.get('session.data.discover-topics');
@@ -28,6 +29,9 @@ export default Ember.Route.extend({
     if (!this.get('session.data.discover-topics') && !this.get('session.data.discover-topics')) {
       this.replaceWith('discover.start');
     }
+    // else {
+    //   this.transitionTo('discover.index');
+    // }
   },
   actions: {
     saveTopics(selectedTopics) {

@@ -41,15 +41,20 @@ Router.map(function() {
   // specific.
   this.route('djangorendered', { path: '*upstream_url' });
   this.route('login');
+
   this.route('discover', function() {
     this.route('start');
-    this.route('topics');
-    this.route('shows');
+    this.route('topics', {path: 'start/topics'});
+    this.route('shows', {path: 'start/shows'});
+
     this.route('edit', function() {
       this.route('topics');
       this.route('stories');
     });
+    this.route('index', { path: 'playlist'});
   });
+
+
 });
 
 export default Router;

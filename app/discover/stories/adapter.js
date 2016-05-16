@@ -1,7 +1,6 @@
 import ENV from '../../config/environment';
 import Ember from 'ember';
 import DS from 'ember-data';
-//
 // https://wnyc.demo2.wnyc.net/api/v1/make_radio/?browser_id=5cabe81784235eb8;api_key=trident;discover_station=wnyc_v2;duration=10800;tags=a-mm,a-nn,a-oo;
 
 export default DS.JSONAPIAdapter.extend({

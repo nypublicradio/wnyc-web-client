@@ -23,7 +23,7 @@ test('button exists to create new discover station', function(assert) {
     click('button#discover_station_create_button');
 
     andThen(function() {
-      assert.equal(currentURL(), '/discover/topics');
+      assert.equal(currentURL(), '/discover/start/topics');
     });
   });
 });
@@ -47,7 +47,7 @@ test('next button is disabled until a topic is selected', function(assert) {
   andThen(function() {
     click('button#discover_station_create_button');
     andThen(function() {
-      assert.equal(currentURL(), '/discover/topics');
+      assert.equal(currentURL(), '/discover/start/topics');
       assert.equal($('button:contains("Next")').prop("disabled"), true, "Button should be disabled");
       click(".discover-topic input");
       andThen(function() {
@@ -65,12 +65,12 @@ test('topics are saved in a session and maintained upon next visit in initial fl
   click('button#discover_station_create_button');
 
   andThen(function() {
-    assert.equal(currentURL(), '/discover/topics');
+    assert.equal(currentURL(), '/discover/start/topics');
     click(".discover-topic input[name='music']");
     andThen(function() {
       click("button:contains('Next')");
       andThen(function() {
-        visit('/discover/topics');
+        visit('/discover/start/topics');
         andThen(function() {
           assert.equal($(".discover-topic input[name='music']").prop('checked'), true, "Checkbox was not checked");
           assert.equal($(".discover-topic input[name='art']").prop('checked'), false, "Checkbox was checked when it shouldn't be");

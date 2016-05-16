@@ -3,7 +3,10 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   session: Ember.inject.service(),
   beforeModel() {
-    this.replaceWith('discover.edit.topics');
+    this.transitionTo('discover.edit.topics');
+  },
+  model() {
+    return this.modelFor('discover');
   },
   actions: {
     refresh() {
