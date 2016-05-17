@@ -154,11 +154,11 @@
 
 /**
  * Circle Button:
- * `.btn--circle` 
+ * `.btn--circle`
  * Good for icons.
  *
  *      @example
- *      button.btn.btn--circle 
+ *      button.btn.btn--circle
  *          i.fa.fa-twitter
  */
 .btn--circle {
@@ -166,6 +166,25 @@
     width: 36px;
     padding: 0;
     text-align: center;
+}
+
+/**
+ * Fat Button:
+ * `.btn--fat`
+ * When that small circle button is an important call to action.
+ *
+ *      @example
+ *      button.btn.btn--circle.btn--fat
+ *          i.fa.fa-twitter
+ */
+.btn--fat {
+    width: 40px;
+    line-height: 38px;
+
+    .fa {
+        font-size: 18px;
+    }
+    
 }
 
 /**
@@ -236,7 +255,7 @@
     background-color: $pink;
     border-color: $pink;
     color: white;
-    
+
     &:hover {
         color: white;
     }
@@ -360,7 +379,7 @@
     @include mq($medium-and-up) {
         color: white;
 	border-color: rgba(255,255,255,.2);
-        
+
 	&:hover {
       	    color: white;
             border-color: rgba(255,255,255,.7);
@@ -371,7 +390,7 @@
 
 /**
  * Button Link:
- * `.btn--link` 
+ * `.btn--link`
  * If you have you a button that should look
  * like a regular link, use this modifier
  *
@@ -402,9 +421,9 @@
 /**
  * Button Link with Icon:
  * If you've got a button that should look like a link,
- * and you want to include an icon, you can add `.btn--linkicon` 
- * to the `<button>`, and wrap the link text in a span. 
- * 
+ * and you want to include an icon, you can add `.btn--linkicon`
+ * to the `<button>`, and wrap the link text in a span.
+ *
  * Also include `.btn--icon` for proper spacing after the icon.
  *
  *      @example
@@ -414,7 +433,7 @@
  */
 .btn--linkicon {
     border: none;
-    
+
     > span {
         border-bottom: 1px solid rgba(204,204,204,0.8);
     }

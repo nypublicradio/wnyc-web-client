@@ -5,19 +5,6 @@
   margin: 0 !important;
 }
 
-#wnyc_home .btn {
-  line-height: 38px;
-}
-
-#wnyc_home .btn--circle {
-  width: 40px;
-
-  .fa {
-      font-size: 18px;
-  }
-
-}
-
 #wnyc_home .story-wrapper {
   h2 > a {
     display: block;
@@ -31,6 +18,13 @@
   .puppy-btn:hover {
     text-decoration: none;
   }
+}
+
+.bucket-title,
+#damost-nav {
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 12px;
 }
 
 #wnyc_home h2 {
@@ -245,4 +239,3 @@
     }
   }
 }
-
