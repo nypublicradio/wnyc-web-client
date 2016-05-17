@@ -238,8 +238,8 @@
     border-color: rgba(white, .2);
 
     &:hover {
-        color: white;
-	border-color: rgba(white,.7);
+      color: white;
+      border-color: rgba(white,.7);
     }
 }
 
@@ -286,9 +286,9 @@
     color: white;
 
     &:hover {
-        background-color: $darkblue;
-	border-color: $darkblue;
-	color: white;
+      background-color: $darkblue;
+	    border-color: $darkblue;
+	    color: white;
     }
 }
 
@@ -317,9 +317,9 @@
     color: $darkgray;
 
     &:hover {
-	background-color: $darkgreen;
-        border-color: $darkgreen;
-	color: $lightgreen;
+	    background-color: $darkgreen;
+      border-color: $darkgreen;
+	    color: $lightgreen;
     }
 }
 
@@ -336,9 +336,9 @@
     border-color: black;
 
     &:hover {
-        background-color: $pink;
-	border-color: $pink;
-	color: white;
+      background-color: $pink;
+      border-color: $pink;
+	    color: white;
     }
 }
 
@@ -377,12 +377,12 @@
 .btn--mq-graywhite {
 
     @include mq($medium-and-up) {
-      color: white;
-	    border-color: rgba(255,255,255,.2);
-
-      &:hover {
         color: white;
-        border-color: rgba(255,255,255,.7);
+	border-color: rgba(255,255,255,.2);
+
+	&:hover {
+      	    color: white;
+            border-color: rgba(255,255,255,.7);
 	}
 
     }
