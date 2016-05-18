@@ -41,10 +41,10 @@ test('building a station shows list of shows', function(assert) {
 // TODO: Figure out how to test a loading route. Can't seem to get this to work
 // test('when building a station we show a loading screen', function(assert) {
 //   let done = assert.async();
-//   server.timing = 500;
+//   server.get('/api/v1/make_radio', function() {
+//     assert.equal($("#discover_loading_message").length, 1);
+//     done();
+//   });
 //
 //   visit('/discover/playlist');
-//
-//   assert.equal($("#discover_loading_message").length, 1);
-//   server.timing = 50;
 // });

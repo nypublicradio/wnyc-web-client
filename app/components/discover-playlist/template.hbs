@@ -1,0 +1,8 @@
+{{#sortable-group tagName="ul" onChange="reorderItems" as |group|}}
+  {{#each sortedStories as |story|}}
+    {{#sortable-item tagName="li" group=group model=story handle=".discover-playlist-story"}}
+      <!-- <span class="handle" style="display:block; width:10px; height:10px;">&varr;</span> -->
+      {{discover-playlist-story story=story}}
+    {{/sortable-item}}
+  {{/each}}
+{{/sortable-group}}

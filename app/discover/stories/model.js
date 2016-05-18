@@ -1,8 +1,13 @@
-// import Model from 'ember-data/model';
-// import attr from 'ember-data/attr';
+import Model from 'ember-data/model';
+import attr from  'ember-data/attr';
 
-import Story from '../../story/model';
-
-export default Story.extend({
-
+export default Model.extend({
+  title:              attr('string'),
+  showTitle:          attr('string'),
+  showUrl:            attr('string'),
+  summary:            attr('string'),
+  date:               attr('date'),
+  estimatedDuration:  attr('number'),
+  url:                attr('string'),
+  audio:              attr('string')
 });

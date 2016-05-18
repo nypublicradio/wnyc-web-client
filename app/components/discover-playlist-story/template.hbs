@@ -1,0 +1,11 @@
+<h2 class="discover-playlist-story--story-title">{{story.title}}</h2>
+<h3 class="discover-playlist-story--show-title">{{story.showTitle}}</h3>
+<div class="discover-playlist-story--summary">
+  {{story.tease}}
+</div>
+
+<span class="discover-playlist-story--duration">
+  {{abbreviate-time (humanize-duration story.estimatedDuration 'seconds')}}
+</span>
+
+{{yield}}
