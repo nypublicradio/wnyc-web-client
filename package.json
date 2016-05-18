@@ -33,7 +33,7 @@
     "ember-cli-deploy": "0.6.1",
     "ember-cli-deploy-json-config": "0.2.0",
     "ember-cli-deploy-lightning-pack": "0.6.1",
-    "ember-cli-deploy-sentry": "0.3.1",
+    "ember-cli-deploy-sentry": "nypublicradio/ember-cli-deploy-sentry",
     "ember-cli-deploy-ssh-tunnel": "0.2.2",
     "ember-cli-deprecation-workflow": "^0.2.2",
     "ember-cli-dotenv": "1.2.0",
