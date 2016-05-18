@@ -169,6 +169,25 @@
 }
 
 /**
+ * Fat Button:
+ * `.btn--fat` 
+ * When that small circle button is an important call to action.
+ *
+ *      @example
+ *      button.btn.btn--circle.btn--fat 
+ *          i.fa.fa-twitter
+ */
+.btn--fat {
+    width: 40px;
+    line-height: 38px;
+    
+    .fa {
+      font-size: 18px;
+    }
+    
+}
+
+/**
  * Squared Off Button:
  * `.btn--squared`
  * Squared off button with rounded corners.
