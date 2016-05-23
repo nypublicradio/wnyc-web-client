@@ -39,13 +39,13 @@ test('select none only shows up when all are selected', function(assert) {
   this.set('topics', server.createList('discover-topic', 3));
   this.render(hbs`{{discover-topic-list topics=topics}}`);
 
-  this.$('.discover-topic:nth-child(1) input').click();
+  this.$('.discover-topic input')[0].click();
   assert.equal(this.$('a:contains("Select None")').length, 0, "Should be 'Select All' when not all are selected");
 
-  this.$('.discover-topic:nth-child(2) input').click();
+  this.$('.discover-topic input')[1].click();
   assert.equal(this.$('a:contains("Select None")').length, 0, "Should be 'Select All' when not all are selected");
 
-  this.$('.discover-topic:nth-child(3) input').click();
+  this.$('.discover-topic input')[2].click();
   assert.equal(this.$('a:contains("Select None")').length, 1, "Should be 'Select None' when all are selected");
 });
 

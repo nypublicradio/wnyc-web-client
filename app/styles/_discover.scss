@@ -1,0 +1,124 @@
+body.discover .sitechrome-page-content-area {
+  margin-top:-1.5rem;
+  // TODO: Maybe, make sitechrome have no margin on the bottom and leave it
+  // up to the feature to set a padding.
+
+  background: url(/assets/img/backgrounds/pattern_grey.png);
+  padding:1.5rem;
+}
+
+.discover-loading {
+  width: 100%;
+  min-height: 100vh;
+  z-index: 2000;
+  margin-top:-1.5rem;
+}
+
+.discover-setup-header {
+  padding:1rem 0;
+  @include flexbox;
+  @include flex-direction(row);
+  @include flex-wrap(nowrap);
+  @include flex-grow(1);
+  @include align-items(center);
+  @include justify-content(space-between);
+}
+
+.discover-setup-title-step {
+  margin:0;
+}
+
+/* So the middle flex item is perfectly centered */
+.discover-setup-header-action {
+  min-width:200px;
+}
+.discover-setup-header-action:last-child {
+  text-align: right;
+}
+
+/* Discover Playlist ------------------------------------------------*/
+.discover-playlist {
+  background-color:#FFFFFF;
+}
+
+/*- Discover Topics ------------------------------------------------*/
+.discover-topic-list {
+  background-color:#FFF;
+  border-radius:6px;
+  text-align:center;
+  padding:1rem;
+}
+
+.discover-topic, .discover-topic-bubble-select-all {
+  margin:10px 10px;
+  display:inline-block;
+}
+
+.discover-topic-list hr {
+  display:none;
+  height:0px;
+  width:100%;
+  margin:0;
+  padding:0;
+}
+
+/* For medium layouts:
+    [ ] [ ]
+  [ ] [ ] [ ]
+    [ ] [ ]
+  [ ] [ ] [ ]
+    [ ] [ ]
+*/
+@include mq($medium-only) {
+  .discover-topic-list hr { display:none; }
+  .discover-topic-list hr:nth-of-type(5n),
+  .discover-topic-list hr:nth-of-type(5n-3) {
+      display:block;
+      visibility:hidden;
+  }
+}
+
+/* For large layouts:
+    [ ] [ ] [ ]
+  [ ] [ ] [ ] [ ]
+    [ ] [ ] [ ]
+  [ ] [ ] [ ] [ ]
+    [ ] [ ] [ ]
+*/
+@include mq($large-and-up) {
+  .discover-topic-list hr { display:none; }
+  .discover-topic-list hr:nth-of-type(7n-4),
+  .discover-topic-list hr:nth-of-type(7n) {
+      display:block;
+      visibility:hidden;
+  }
+}
+
+.discover-topic-bubble {
+  @include fontsize(14);
+  cursor:pointer;
+  background-color:#FFF;
+  border-radius:25px;
+  color:$charcoal;
+  display:inline-block;
+  font-weight: bold;
+  letter-spacing: 1px;
+  min-width: 175px;
+  padding:0.5rem 0.75rem;
+  text-align:center;
+  text-transform: uppercase;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  input { display:none; }
+
+  &:hover {
+    // TODO: TBD after feedback from marine
+    color:$charcoal;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+  }
+}
+
+.discover-topic--selected .discover-topic-bubble {
+  background-color:$red;
+  border: 1px solid $red;
+  color:#FFF;
+}

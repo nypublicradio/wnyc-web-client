@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  classNames:['discover-topic-list'],
+
   selectedTopics: [],
 
   allSelected: Ember.computed('selectedTopics', 'topics.length', function() {
@@ -18,6 +20,7 @@ export default Ember.Component.extend({
       this.sendAction('onTopicsUpdated', selectedTopics);
     });
   },
+
   actions: {
     selectAll() {
       this.updateTopics(this.get('topics').slice());

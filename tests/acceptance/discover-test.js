@@ -52,6 +52,24 @@ test('next button is disabled until a topic is selected', function(assert) {
       click(".discover-topic input");
       andThen(function() {
         assert.equal($('button:contains("Next")').prop("disabled"), false, "Button should be enabled");
+        assert.equal($('button.btn--red').length, 1, "Button should be red");
+      });
+    });
+  });
+});
+
+test('back goes back to the welcome screen', function(assert) {
+  visit('/discover/start');
+  server.createList('discover-topic', 20);
+
+  andThen(function() {
+    click('button#discover_station_create_button');
+    andThen(function() {
+      assert.equal(currentURL(), '/discover/start/topics');
+      assert.equal($('button:contains("Next")').prop("disabled"), true, "Button should be disabled");
+      click(".btn:contains('Back')");
+      andThen(function() {
+        assert.equal(currentURL(), '/discover/start');
       });
     });
   });

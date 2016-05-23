@@ -1,8 +1,13 @@
-{{! display list of available topics/shows and selection state based on session data }}
-Customize Your Playlist
-
-<button class="btn" {{action 'back'}}>Back</button>
-
-<button class="btn" disabled={{hasNotSelectedATopic}} {{action 'refresh' currentTopicSelection}}>Next</button>
+<header class="discover-setup-header">
+  <div class="discover-setup-header-action">
+    {{link-to "Cancel" 'discover.index' class="btn btn--white btn--heavyborder btn--heavy text--upper h2"}}
+  </div>
+  <div>
+    <h2 class="discover-setup-title-step h2 text--white">Customize Your Playlist</h2>
+  </div>
+  <div class="discover-setup-header-action">
+    <button class="btn btn--heavy btn--red text--upper h2" disabled={{hasNotSelectedATopic}} {{action 'refresh' currentTopicSelection}}>Refresh Station</button>
+  </div>
+</header>
 
 {{outlet}}

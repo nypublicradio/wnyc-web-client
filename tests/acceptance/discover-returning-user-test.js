@@ -20,6 +20,17 @@ test('visiting discover/edit starts you on topics', function(assert) {
   });
 });
 
+test('clicking cancel on edit page takes you back to playlist', function(assert) {
+  visit('/discover/edit/topics');
+  andThen(function() {
+    click(".discover-setup-header-action .btn:contains('Cancel')");
+    andThen(function() {
+      assert.equal(currentURL(), '/discover/playlist');
+    });
+  });
+});
+
+
 test('topics are saved in a session and maintained upon next visit in edit flow', function(assert) {
   visit('/discover/edit/topics');
   andThen(function() {

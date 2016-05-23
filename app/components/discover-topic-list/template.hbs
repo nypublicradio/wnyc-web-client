@@ -1,11 +1,18 @@
-{{#multiselect-checkboxes options=topics selection=selectedTopics onchange=(action 'onMultiselectChangeEvent') as |topic isSelected|}}
+{{#multiselect-checkboxes options=topics selection=selectedTopics tagName='div' onchange=(action 'onMultiselectChangeEvent') as |topic isSelected|}}
   {{discover-topic title=topic.title url=topic.url isSelected=isSelected}}
+
+  {{! Adding this <hr> element and then doing a couple of nth-of-type selectors to
+  display/hide them allows us to group the items in alternating groups of 3 and 4
+  without having to write a component to do it, and allows us to change based on media query }}
+  <hr class="discover-topic-line-separator"/>
 {{/multiselect-checkboxes}}
 
+<div class="discover-topic-bubble-select-all">
 {{#if allSelected}}
-  <a class="btn" href="#" {{action 'selectNone'}}>Select None</a>
+  <a class="discover-topic-bubble" href="#" {{action 'selectNone'}}>Select None</a>
 {{else}}
-  <a class="btn" href="#" {{action 'selectAll'}}>Select All</a>
+  <a class="discover-topic-bubble" href="#" {{action 'selectAll'}}>Select All</a>
 {{/if}}
+</div>
 
 {{yield}}
