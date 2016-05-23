@@ -1,6 +1,11 @@
 {{#if features.siteChrome}}
   {{#site-chrome beta=beta isHomepage=isHomepage}}
-    {{outlet}}
+    {{#unless error}}
+      {{outlet}}
+    {{else}}
+      <p>Status: {{error.response.status}}</p>
+      <p>Message: {{error}}</p> 
+    {{/unless}}
   {{/site-chrome}}
 {{else}}
   {{outlet}}

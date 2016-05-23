@@ -47,12 +47,22 @@ export default Route.extend(ApplicationRouteMixin, {
     let pollFunction = () => store.findAll('stream');
     get(this, 'poll').addPoll({interval: 60 * 1000, callback: pollFunction});
   },
+
   actions: {
+    error(error, transition) {
+      if (error) {
+        this.controller.set('error', error);
+      }
+    },
+    didTransition() {
+      this.controller.set('error', null);
+    },
     willTransition() {
       //close queue/history modal when we open a new page
       this.controller.send('closeModal');
     }
   },
+
   sessionAuthenticated() {
     this._super(...arguments);
     get(this, 'metrics').identify('GoogleAnalytics', {isAuthenticated: true});
