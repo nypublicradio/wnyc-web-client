@@ -24,7 +24,9 @@ export default DS.Adapter.extend({
     } else if (ENV.environment === 'test') {
       url = ENV.wnycURL;
     }
+
     return fetch(`${canonicalize(url)}${id === '/' ? '' : id}`, { headers: {'X-WNYC-EMBER':1}})
+      .then(checkStatus)
       .then(response => response.text());
   },
   // starting in ember-data 2.0, this defaults to true
@@ -36,3 +38,13 @@ export default DS.Adapter.extend({
   // model element's new IDs
   shouldBackgroundReloadRecord: () => false
 });
+
+function checkStatus(response) {
+  if (response.status >= 200 && response.status < 300) {
+    return response;
+  } else {
+    var error = new Error(response.statusText);
+    error.response = response;
+    throw error;
+  }
+}
