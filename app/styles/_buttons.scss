@@ -86,6 +86,11 @@
   @include btn;
 }
 
+.btn[disabled] {
+  opacity:0.5;
+  cursor:not-allowed;
+}
+
 /**
  * Heavy Button:
  * `.btn--heavy`
@@ -97,6 +102,10 @@
 .btn--heavy {
   font-weight: 600;
   letter-spacing: 1px;
+}
+
+.btn--heavyborder {
+  border-width: 2px;
 }
 
 /**
@@ -118,11 +127,13 @@
     text-align: left;
     background-color: transparent;
 
-    &:hover,
-    &:focus {
-      background: none;
-      border: none;
-      color: inherit;
+    &:not([disabled]) {
+      &:hover,
+      &:focus {
+          background: none;
+          border: none;
+          color: inherit;
+      }
     }
 }
 
@@ -265,11 +276,14 @@
     color: white;
     border-color: rgba(white, 0.2);
 
-    &:hover,
-    &:focus {
-      color: white;
-      border-color: rgba(white, 0.7);
+    &:not([disabled]) {
+      &:focus,
+      &:hover {
+        color: white;
+        border-color: rgba(white,.7);
+      }
     }
+
 }
 
 .btn--whitetext {
@@ -289,9 +303,11 @@
     border-color: $pink;
     color: white;
 
-    &:hover,
-    &:focus {
-        color: white;
+    &:not([disabled]) {
+      &:hover,
+      &:focus {
+          color: white;
+      }
     }
 }
 
@@ -319,13 +335,15 @@
   border-color: $blue;
   color: white;
 
-  &:hover,
-  &:focus {
-    outline: none;
-    background-color: $darkblue;
-    border-color: $darkblue;
-    color: white;
-    opacity: 1;
+  &:not([disabled]) {
+    &:hover,
+    &:focus {
+      outline: none;
+      background-color: $darkblue;
+      border-color: $darkblue;
+      color: white;
+      opacity: 1;
+    }
   }
 }
 
@@ -357,11 +375,13 @@
     border-color: $lightgreen;
     color: $darkgray;
 
-    &:hover,
-    &:focus {
-      background-color: $darkgreen;
-      border-color: $darkgreen;
-      color: $lightgreen;
+    &:not([disabled]) {
+      &:focus,
+      &:hover {
+        background-color: $darkgreen;
+        border-color: $darkgreen;
+        color: $lightgreen;
+      }
     }
 }
 
@@ -377,11 +397,13 @@
     background-color: black;
     border-color: black;
 
-    &:hover,
-    &:focus {
-      background-color: $pink;
-      border-color: $pink;
-      color: white;
+    &:not([disabled]) {
+      &:focus,
+      &:hover {
+        background-color: $pink;
+        border-color: $pink;
+        color: white;
+      }
     }
 }
 
@@ -395,13 +417,35 @@
 .btn--blacktext {
     color: $darkergray;
 
-    &:hover,
-    &:focus {
-        color: $pink;
-    }
+    &:not([disabled]) {
+      &:focus,
+      &:hover {
+          color: $pink;
+      }
 
-    &.active {
-        color: black;
+      &.active {
+          color: black;
+      }
+    }
+}
+
+/**
+ * Red Button:
+ * `.btn--red`
+ * Make your button stand out with a red background
+ *
+ *      @example
+ *      button.btn.btn--red You Know You Want to Click
+ */
+.btn--red {
+    background-color: $red;
+    border-color: $red;
+    color: white;
+
+    &:not([disabled]) {
+      &:hover {
+          color: white;
+      }
     }
 }
 
