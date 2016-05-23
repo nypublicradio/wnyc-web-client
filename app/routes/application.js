@@ -49,7 +49,7 @@ export default Route.extend(ApplicationRouteMixin, {
   },
 
   actions: {
-    error(error, transition) {
+    error(error/*, transition*/) {
       if (error) {
         this.controller.set('error', error);
       }
