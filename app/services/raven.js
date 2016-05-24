@@ -57,6 +57,10 @@ export default RavenLogger.extend({
       // let global ajaxError handler take this
       return true;
     }
+    if (error.message === 'TransitionAborted') {
+      // a known ember error thrown when transitioning on channel pages
+      return true;
+    }
     return this._super();
   },
 
