@@ -40,8 +40,7 @@ export default Component.extend({
         return i;
       }
       if (href.indexOf(origin) === 0) {
-        i.path = href.replace(origin, '').replace(/^\//, '');
-        delete i.href;
+        i.href = href.replace(origin, '');
         return i;
       }
       return i;
