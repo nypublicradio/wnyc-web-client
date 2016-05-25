@@ -129,6 +129,10 @@
             border-bottom: none;
         }
     }
+
+    > a {
+      display: block;
+    }
 }
 
 .list-item--tall {
