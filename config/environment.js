@@ -50,6 +50,9 @@ module.exports = function(environment) {
           // Chrome extensions
           /extensions\//i,
           /^chrome:\/\//i,
+        ],
+        ignoreErrors: [
+          'adsafeprotected'
         ]
       }
     },
