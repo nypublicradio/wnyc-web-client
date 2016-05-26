@@ -8,12 +8,12 @@ const {
 const { hash: waitFor } = Ember.RSVP;
 
 export default Route.extend({
-  listRouter: service(),
   metrics: service(),
 
   model(params) {
     const channelType = this.routeName;
     const listingSlug = `${channelType}/${params.slug}`;
+    set(this, 'listingSlug', listingSlug);
 
     return this.store.find('django-page', listingSlug.replace(/\/*$/, '/')).then(page => {
       return waitFor({
@@ -23,11 +23,9 @@ export default Route.extend({
     });
   },
   afterModel({ channel }) {
-    const listRouter = get(this, 'listRouter');
     const channelTitle = get(channel, 'title');
     const metrics = get(this, 'metrics');
 
-    set(listRouter, 'channelTitle', channelTitle);
     metrics.trackEvent({
       category: `Viewed ${get(channel, 'listingObjectType').capitalize()}`,
       action: channelTitle,
@@ -36,15 +34,9 @@ export default Route.extend({
   },
   setupController(controller) {
     this._super(...arguments);
+    let { navSlug } = this.paramsFor(`${this.routeName}.well`);
     controller.set('channelType', this.routeName);
-  },
-
-  actions: {
-    updateRouteTitle(activeLink) {
-      const listRouter = get(this, 'listRouter');
-      const navTitle = activeLink.text();
-
-      set(listRouter, 'navTitle', navTitle);
-    }
+    controller.set('listingSlug',  get(this, 'listingSlug'));
+    controller.set('defaultSlug', navSlug);
   }
 });
