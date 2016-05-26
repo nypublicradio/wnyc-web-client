@@ -31,7 +31,7 @@
         {{#if model.channel.linkroll}}
           {{nav-links
             defaultSlug=defaultSlug
-            listingSlug=listingSlug
+            navRoot=navRoot
             links=model.channel.linkroll
             transition=(action 'navSlugTransition')}}
         {{/if}}

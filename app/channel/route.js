@@ -32,11 +32,13 @@ export default Route.extend({
       model: channel
     });
   },
-  setupController(controller) {
-    this._super(...arguments);
+  setupController(controller, model) {
     let { navSlug } = this.paramsFor(`${this.routeName}.well`);
-    controller.set('channelType', this.routeName);
-    controller.set('listingSlug',  get(this, 'listingSlug'));
-    controller.set('defaultSlug', navSlug);
+    controller.setProperties({
+      channelType: this.routeName,
+      navRoot: get(this, 'listingSlug'),
+      defaultSlug: navSlug,
+      model
+    });
   }
 });

@@ -28,11 +28,11 @@ export default Component.extend({
       origin = config.wnycURL;
     }
     let links = get(this, 'links');
-    let listingSlug = get(this, 'listingSlug');
+    let navRoot = get(this, 'navRoot');
     return links.map(i => {
       let { href, navSlug } = i;
       if (!href) {
-        i.href = `/${listingSlug}/${navSlug}`;
+        i.href = `/${navRoot}/${navSlug}`;
         return i;
       }
       if (href.indexOf(origin) === 0) {
