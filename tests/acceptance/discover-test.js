@@ -20,7 +20,7 @@ test('button exists to create new discover station', function(assert) {
   server.createList('discover-topic', 20);
 
   andThen(function() {
-    click('button#discover_station_create_button');
+    click('button:contains("Create My Own")');
 
     andThen(function() {
       assert.equal(currentURL(), '/discover/start/topics');
@@ -33,7 +33,7 @@ test('shows list of topics', function(assert) {
   server.createList('discover-topic', 20);
 
   andThen(function() {
-    click('button#discover_station_create_button');
+    click('button:contains("Create My Own")');
     andThen(function() {
       assert.equal($(".discover-topic").length, 20);
     });
@@ -45,14 +45,14 @@ test('next button is disabled until a topic is selected', function(assert) {
   server.createList('discover-topic', 20);
 
   andThen(function() {
-    click('button#discover_station_create_button');
+    click('button:contains("Create My Own")');
     andThen(function() {
       assert.equal(currentURL(), '/discover/start/topics');
       assert.equal($('button:contains("Next")').prop("disabled"), true, "Button should be disabled");
       click(".discover-topic input");
       andThen(function() {
         assert.equal($('button:contains("Next")').prop("disabled"), false, "Button should be enabled");
-        assert.equal($('button.btn--red').length, 1, "Button should be red");
+        assert.equal($('button.mod-filled-red').length, 1, "Button should be red");
       });
     });
   });
@@ -63,11 +63,11 @@ test('back goes back to the welcome screen', function(assert) {
   server.createList('discover-topic', 20);
 
   andThen(function() {
-    click('button#discover_station_create_button');
+    click('button:contains("Create My Own")');
     andThen(function() {
       assert.equal(currentURL(), '/discover/start/topics');
       assert.equal($('button:contains("Next")').prop("disabled"), true, "Button should be disabled");
-      click(".btn:contains('Back')");
+      click("a:contains('Back')");
       andThen(function() {
         assert.equal(currentURL(), '/discover/start');
       });
@@ -80,7 +80,7 @@ test('topics are saved in a session and maintained upon next visit in initial fl
   server.create('discover-topic', {title: "Music", url: "music"});
   server.create('discover-topic', {title: "Art", url: "art"});
   server.create('discover-topic', {title: "Technology", url: "technology"});
-  click('button#discover_station_create_button');
+  click('button:contains("Create My Own")');
 
   andThen(function() {
     assert.equal(currentURL(), '/discover/start/topics');

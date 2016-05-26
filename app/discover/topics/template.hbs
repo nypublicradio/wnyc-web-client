@@ -1,7 +1,7 @@
 <header class="discover-setup-header">
   <div class="discover-setup-header-action">
 
-    {{link-to "Back" 'discover.start' class="btn btn--white btn--heavyborder btn--heavy text--upper h2"}}
+    {{link-to "Back" 'discover.start' class="rounded-caps-button"}}
 
   </div>
   <div>
@@ -9,9 +9,9 @@
   </div>
   <div class="discover-setup-header-action">
     {{#if hasNotSelectedATopic}}
-      <button class="btn btn--heavy btn--white text--upper h2" disabled='disabled'>Next</button>
+      <button class="rounded-caps-button" disabled='disabled'>Next</button>
     {{else}}
-      <button class="btn btn--heavy btn--red text--upper h2" disabled={{hasNotSelectedATopic}} {{action 'next' currentTopicSelection}}>Next</button>
+      <button class="rounded-caps-button mod-filled-red" disabled={{hasNotSelectedATopic}} {{action 'next' currentTopicSelection}}>Next</button>
     {{/if}}
   </div>
 </header>

@@ -23,7 +23,7 @@ test('visiting discover/edit starts you on topics', function(assert) {
 test('clicking cancel on edit page takes you back to playlist', function(assert) {
   visit('/discover/edit/topics');
   andThen(function() {
-    click(".discover-setup-header-action .btn:contains('Cancel')");
+    click("a:contains('Cancel')");
     andThen(function() {
       assert.equal(currentURL(), '/discover/playlist');
     });

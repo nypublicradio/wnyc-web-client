@@ -1,3 +1,11 @@
+@mixin absolute-fill($top:0, $right:0, $bottom:0, $left:0) {
+  position:absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
 body.discover .sitechrome-page-content-area {
   margin-top:-1.5rem;
   // TODO: Maybe, make sitechrome have no margin on the bottom and leave it
@@ -5,18 +13,51 @@ body.discover .sitechrome-page-content-area {
 
   background: url(/assets/img/backgrounds/pattern_grey.png);
   padding:1.5rem;
+  min-height:80vh;
+}
+
+body.discover.index_loading .sitechrome-page-content-area {
+  padding:0;
+}
+
+.discover-welcome-screen {
+  @include absolute-fill();
+  @include display-flex;
+  @include flex-direction(row);
+  @include align-items(center);
+  @include justify-content(center);
+  background: url(/assets/img/backgrounds/pattern_red.jpg);
+  @include transition(background $transition-timing);
+  background-size:cover;
+
+}
+
+.discover-welcome-screen.is-transitioning {
+  @include transition(background $transition-timing);
+  background: url(/assets/img/backgrounds/pattern_grey.png);
+  background-size:cover;
 }
 
 .discover-loading {
+  @include display-flex;
+  @include flex-direction(row);
+  @include align-items(center);
+  @include justify-content(center);
+
   width: 100%;
   min-height: 100vh;
   z-index: 2000;
   margin-top:-1.5rem;
 }
 
+.discover-loading-message-text {
+  color: #FFF;
+}
+
+
 .discover-setup-header {
   padding:1rem 0;
-  @include flexbox;
+  @include display-flex;
   @include flex-direction(row);
   @include flex-wrap(nowrap);
   @include flex-grow(1);
@@ -121,4 +162,37 @@ body.discover .sitechrome-page-content-area {
   background-color:$red;
   border: 1px solid $red;
   color:#FFF;
+}
+
+
+/* Buttons -- eventually once these are tightened up, we can move these out for all to use */
+
+
+.rounded-caps-button {
+  display: inline-block;
+  border-radius: 25px;
+  border: 2px solid #FFF;
+  border-color: #FFF;
+  padding: 2px 15px;
+  color: #FFF;
+  background: transparent;
+  @include fontsize(14);
+  font-weight:bold;
+  text-transform: uppercase;
+  line-height: 34px;
+  cursor: pointer;
+
+  @include transition(background-color $transition-timing, border-color $transition-timing, color $transition-timing);
+
+  &:not([disabled]) {
+    &:hover {
+      border-color: rgba(#FFF, .7);
+      color: #FFF;
+    }
+  }
+}
+
+.rounded-caps-button.mod-filled-red {
+  background-color:$red;
+  border-color:$red;
 }
