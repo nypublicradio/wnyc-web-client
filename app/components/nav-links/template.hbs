@@ -1,13 +1,17 @@
 <h1 class="for-screenreaders">Sub Nav</h1>
 <ul class="list list--inline flush">
-{{#each parsedLinks as |link|}}
-  <li class="list-item list-item--mini">
-    {{#if link.navSlug}}
-      {{link-to link.title channelTypeWell link.navSlug classNames='link link--dark tab-link' bubbles=false}}
-    {{else}}
-      <a href={{link.href}} class="link link--dark link--nodecor tab-link">{{link.title}}</a>
-    {{/if}}
-  </li>
-{{/each}}
-<div class="tab-line tab-line--red" style={{linePosition}}></div>
+{{#liquid-bind activeTabIndex as |currentIndex|}}
+  {{#each parsedLinks as |link index|}}
+    <li class="{{if (eq index currentIndex) 'is-active '}}list-item list-item--mini">
+      {{#if link.navSlug}}
+        <a href={{link.href}} {{action 'transition' link.navSlug index}} class="link link--dark link--nodecor tab-link">{{link.title}}</a>
+      {{else}}
+        <a href={{link.href}} class="link link--dark link--nodecor tab-link">{{link.title}}</a>
+      {{/if}}
+      {{#if (eq index currentIndex)}}
+      <div class="tab-line--liquid tab-line--red"></div>
+      {{/if}}
+    </li>
+  {{/each}}
+{{/liquid-bind}}
 </ul>
