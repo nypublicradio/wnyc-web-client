@@ -55,8 +55,8 @@ export default BaseAdapter.extend({
       label,
     } = options;
 
-    const cms_id = model ? get(model, 'cmsPK') || 'No CMS PK' : 'No available model';
-    const cms_type = model ? get(model, 'itemType') : 'No available model';
+    const cms_id = model ? get(model, 'cmsPK') || '' : '';
+    const cms_type = model ? get(model, 'itemType') || '' : '';
     this.send({ category, action, label, cms_id, cms_type });
   },
 
