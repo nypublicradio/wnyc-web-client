@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import service from 'ember-service/inject';
 import config from 'overhaul/config/environment';
 
 const {
@@ -7,15 +6,14 @@ const {
   set,
   $,
   computed,
-  observer,
-  isEmpty,
   Component,
   run
 } = Ember;
 
-const {htmlSafe} = Ember.String;
-
 export default Component.extend({
+  tagName: 'nav',
+  classNames: ['tabs-header', 'tabs-header--border'],
+  classNameBindings: ['xScrollable'],
   parsedLinks: computed('links', function() {
     let origin;
     if (config.environment === 'development') {
@@ -42,11 +40,8 @@ export default Component.extend({
       return i;
     });
   }),
-
-  tagName: 'nav',
-  classNames: ['tabs-header', 'tabs-header--border'],
   init() {
-    this._super();
+    this._super(...arguments);
     let defaultSlug = get(this, 'defaultSlug');
     let links = get(this, 'links');
     let defaultIndex = links.indexOf(links.findBy('navSlug', defaultSlug));
@@ -61,13 +56,11 @@ export default Component.extend({
   },
 
   didInsertElement() {
-    const list = this.$('.list').get(0);
+    const list = Array.from(this.$('.list-item'));
     const el = this.element;
 
     run.scheduleOnce('afterRender', this, function() {
-      run.next(this, function() {
-        this.handleResize(list, el);
-      });
+      this.handleResize(list, el);
     });
 
     // so we can explicitly remove this at destroy-time
@@ -80,14 +73,11 @@ export default Component.extend({
   },
 
   handleResize(list, el) {
-    if (this._isWiderThan(list, el)) {
-      $(el).addClass('x-scrollable');
+    let listWidth = list.map(n => $(n).outerWidth(true)).reduce((a, b) => a + b);
+    if (listWidth > el.getBoundingClientRect().width) {
+      set(this, 'xScrollable', true);
     } else {
-      $(el).removeClass('x-scrollable');
+      set(this, 'xScrollable', false);
     }
   },
-
-  _isWiderThan(dom1, dom2) {
-    return dom1.getBoundingClientRect().width > dom2.getBoundingClientRect().width;
-  }
 });

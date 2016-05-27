@@ -88,11 +88,19 @@
 }
 
 .list--inline {
-    display: inline-block;
+    //display: inline-block;
 
-    > .list-item {
+    .list-item {
         border: none;
         display: inline-block;
+        margin-right: 15px;
+
+        @include mq($small-and-up) {
+          margin-right: 25px;
+        }
+        @include mq($medium-and-up) {
+          margin-right: 35px;
+        }
     }
 }
 

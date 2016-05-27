@@ -1,6 +1,6 @@
 <h1 class="for-screenreaders">Sub Nav</h1>
-<ul class="list list--inline flush">
 {{#liquid-bind activeTabIndex as |currentIndex|}}
+<ul class="list list--inline flush">
   {{#each parsedLinks as |link index|}}
     <li class="{{if (eq index currentIndex) 'is-active '}}list-item list-item--mini">
       {{#if link.navSlug}}
@@ -13,5 +13,5 @@
       {{/if}}
     </li>
   {{/each}}
-{{/liquid-bind}}
 </ul>
+{{/liquid-bind}}
