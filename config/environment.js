@@ -106,11 +106,11 @@ module.exports = function(environment) {
     ENV.renderGoogleAds = false;
     ENV.googleAPIv3Key = '';
     ENV.googleAnalyticsKey = '';
-    ENV.wnycAPI = 'http://test.com';
-    ENV.wnycAccountRoot = 'http://test.com/account';
-    ENV.wnycEtagAPI = 'http://test.com/etag';
-    ENV.wnycStaticURL = 'http://test.com/static';
-    ENV.wnycURL = 'http://test.com';
+    ENV.wnycAPI = '//test.com';
+    ENV.wnycAccountRoot = '//test.com/account';
+    ENV.wnycEtagAPI = '//test.com/etag';
+    ENV.wnycStaticURL = '//test.com/static';
+    ENV.wnycURL = '//test.com';
   }
 
   if (environment === 'production') {
