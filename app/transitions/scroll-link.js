@@ -6,6 +6,9 @@ export default function() {
     pick: '.tab-line--liquid',
     use: ['fly-to', { duration: 250 }]
   }).then(() => {
+    if (this.oldElement) {
+      this.oldElement.hide();
+    }
     return animate(this.newElement.find('.is-active'), 'scroll', {
       axis: 'x',
       container: this.newView.$('.list'),
