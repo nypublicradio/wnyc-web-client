@@ -13,7 +13,6 @@ const {
 
 export default Mixin.create({
   pageNumbers: service(),
-  listRouter: service(),
 
   channelTitle: computed({
     get() {
@@ -27,8 +26,6 @@ export default Mixin.create({
     let channelType = this.routeName.split('.')[0]
     set(this, 'channelType', channelType)
     const navSlug = this._getNavSlug(channelType)
-    const listRouter = get(this, 'listRouter')
-    set(listRouter, 'navSlug', navSlug)
   },
 
   model(params) {
