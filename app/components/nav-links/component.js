@@ -56,24 +56,22 @@ export default Component.extend({
   },
 
   didInsertElement() {
-    const list = Array.from(this.$('.list-item'));
-    const el = this.element;
-
-    run.scheduleOnce('afterRender', this, function() {
-      this.handleResize(list, el);
-    });
+    run.scheduleOnce('afterRender', this, 'handleResize');
 
     // so we can explicitly remove this at destroy-time
-    const boundHandler = set(this, 'boundResizeHandler', () => this.handleResize(list, el));
-    $(window).on('resize', boundHandler);
+    set(this, 'boundResizeHandler', run.bind(this, 'handleResize'));
+    $(window).on('resize', get(this, 'boundResizeHandler'));
   },
 
   willDestroyElement() {
     $(window).off('resize', get(this, 'boundResizeHandler'));
   },
 
-  handleResize(list, el) {
+  handleResize() {
+    let list = Array.from(this.$('.list-item'));
+    let el = this.element;
     let listWidth = list.map(n => $(n).outerWidth(true)).reduce((a, b) => a + b);
+
     if (listWidth > el.getBoundingClientRect().width) {
       set(this, 'xScrollable', true);
     } else {
