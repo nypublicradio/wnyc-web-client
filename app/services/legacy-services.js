@@ -9,6 +9,7 @@ const {
 
 export default Service.extend({
   metrics: service(),
+  store: service(),
 
   streamStation(streamSlug) {
     if (!streamSlug) {
@@ -17,20 +18,24 @@ export default Service.extend({
       wnyc.xdPlayer.playStream(streamSlug);
     }
   },
-  listen(id, title, show) {
+  listen(id, title) {
     const metrics = get(this, 'metrics');
+    const store = get(this, 'store');
+    const story = store.peekRecord('story', id);
     try {
       wnyc.xdPlayer.playOnDemand(id);
     } catch(e) {
       console.warn('Cross Domain Player does not exist');
     }
 
-    metrics.trackEvent({
-      category: 'Cross-Domain Player',
-      action: `Played OnDemand Show "${show}"`,
-      label: title,
-      model: {cmsPK: id}  // conform to how the data-warehouse metrics adapter expects
-    });
+    if (story) {
+      metrics.trackEvent({
+        category: 'Cross-Domain Player',
+        action: `Played OnDemand Show "${story.get('headers.brand.title')}"`,
+        label: title,
+        model: {cmsPK: id}  // conform to how the data-warehouse metrics adapter expects
+      });
+    }
   },
   queue(id) {
     try {
