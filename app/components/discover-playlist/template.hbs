@@ -1,8 +1,11 @@
-{{#sortable-group tagName="ul" onChange="reorderItems" as |group|}}
+{{#sortable-group class="discover-playlist" tagName="ul" onChange="reorderItems" as |group|}}
   {{#each sortedStories as |story|}}
-    {{#sortable-item tagName="li" group=group model=story handle=".discover-playlist-story"}}
+    {{#sortable-item class="discover-playlist-item" tagName="li" group=group model=story handle=".discover-playlist-story"}}
       <!-- <span class="handle" style="display:block; width:10px; height:10px;">&varr;</span> -->
+      {{playlist-play-indicator title=story.title itemPK=story.id class="discover-playlist-item-play-button"}}
+
       {{discover-playlist-story story=story}}
+
     {{/sortable-item}}
   {{/each}}
 {{/sortable-group}}

@@ -89,7 +89,77 @@ body.discover.index_loading .sitechrome-page-content-area {
 /* Discover Playlist ------------------------------------------------*/
 .discover-playlist {
   background-color:#FFFFFF;
+  list-style:decimal;
+  counter-reset: discover-playlist-counter;
+  padding:0;
+  margin:0;
 }
+
+.discover-playlist-item {
+  min-height: 5rem;
+  @include display-flex;
+  @include flex-direction(row);
+  @include flex-wrap(nowrap);
+  @include align-items(center);
+  // @include justify-content(left);
+}
+
+.discover-playlist-item-play-button {
+  height:5rem;
+  width:rems(70);
+  position:relative;
+
+  &:before {
+    /*  Make this nice and centered */
+    @include display-flex;
+    @include flex-direction(row);
+    @include flex-wrap(nowrap);
+    @include align-items(center);
+    @include justify-content(center);
+    @include absolute-fill();
+
+    color:$lightgray;
+    font-size:rem(24);
+
+    /* CSS counter so we can hide and show it and style it easier than the li counter */
+    counter-increment: discover-playlist-counter;
+    content: counter(discover-playlist-counter);
+  }
+}
+
+.discover-playlist-item + .discover-playlist-item {
+  border-top:1px solid #e9e9e9;
+}
+
+
+/* Discover Playlist Story ------------------------------------------------*/
+
+.discover-playlist-story {
+  margin: 0;
+  padding: 10px;
+}
+
+.discover-playlist-story-title {
+  margin:0;
+  margin-right:5px;
+  font-weight:normal;
+  font-size: rems(15);
+  display:inline-block;
+}
+
+.discover-playlist-story-duration {
+  text-transform: uppercase;
+  font-size: rems(11);
+  font-weight: bold;
+  color: $lightergray;
+}
+
+.discover-playlist-story-show-title {
+  text-transform: uppercase;
+  font-size: rems(12);
+  font-weight: bold;
+}
+
 
 /*- Discover Topics ------------------------------------------------*/
 .discover-topic-list {
