@@ -1,7 +1,13 @@
-import { isAnimating, finish, timeSpent, animate, stop, Promise } from "liquid-fire";
+import { animate, Promise } from "liquid-fire";
 
 export default function() {
   let explode = this.lookup('explode');
+  let oldNavLeft;
+  if (this.oldElement) {
+    oldNavLeft = this.oldElement.find('ul')[0].scrollLeft;
+  }
+  this.newElement.find('ul')[0].scrollLeft = oldNavLeft || 0;
+
   return explode.call(this, {
     pick: '.tab-line--liquid',
     use: ['fly-to', { duration: 250 }]
