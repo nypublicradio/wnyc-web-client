@@ -25,3 +25,12 @@ test('it properly sets the activeTab if defaultTab is undefined', function(asser
 
   assert.equal(this.$('.is-active').text().trim(), 'Foo', 'first link should be active');
 });
+
+test('it properly parses incoming linkroll links', function(assert) {
+
+  this.set('links', [
+    {href: 'http://test.com/foo/bar/', title: 'Example'}
+  ]);
+  this.render(hbs`{{nav-links links=links}}`);
+  assert.equal(this.$('.is-active a').attr('href'), '/foo/bar/', 'links with matching origins have a leading slash');
+});

@@ -36,7 +36,8 @@ export default Component.extend({
         return i;
       }
       if (href.indexOf(origin) === 0) {
-        i.href = href.replace(origin, '');
+        // make sure the parsed path has a leading slash
+        i.href = href.replace(origin, '').replace(/^([^\/]+)/, '/$1');
         return i;
       }
       return i;
