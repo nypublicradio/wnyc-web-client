@@ -31,8 +31,8 @@ export default Service.extend({
     if (story) {
       metrics.trackEvent({
         category: 'Cross-Domain Player',
-        action: `Played OnDemand Show "${story.get('headers.brand.title')}"`,
-        label: title,
+        action: 'Click Through to Player',
+        label: `${story.get('headers.brand.title')} - ${title}`,
         model: {cmsPK: id}  // conform to how the data-warehouse metrics adapter expects
       });
     }
