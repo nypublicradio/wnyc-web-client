@@ -1,11 +1,23 @@
 {{#sortable-group class="discover-playlist" tagName="ul" onChange="reorderItems" as |group|}}
-  {{#each sortedStories as |story|}}
+  {{#each orderedStories as |story|}}
     {{#sortable-item class="discover-playlist-item" tagName="li" group=group model=story handle=".discover-playlist-story"}}
       <!-- <span class="handle" style="display:block; width:10px; height:10px;">&varr;</span> -->
-      {{playlist-play-indicator title=story.title itemPK=story.id class="discover-playlist-item-play-button"}}
 
-      {{discover-playlist-story story=story}}
+      {{#discover-playlist-story isPlaying=(eq story.id currentPlaylistStoryId)}}
 
+        {{playlist-play-indicator
+            title=story.title
+            itemPK=story.id
+            class="discover-playlist-story-play-button"
+            isReady=audioReady
+            isPlaying=(eq story.id currentPlaylistStoryId)
+            onPause=(action 'pauseTrack' story.id)
+            onPlay=(action 'playTrack' story.id)
+          }}
+
+        {{discover-playlist-story-info story=story}}
+
+      {{/discover-playlist-story}}
     {{/sortable-item}}
   {{/each}}
 {{/sortable-group}}

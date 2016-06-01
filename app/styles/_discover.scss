@@ -95,8 +95,8 @@ body.discover.index_loading .sitechrome-page-content-area {
   margin:0;
 }
 
+// This the sortable item
 .discover-playlist-item {
-  min-height: 5rem;
   @include display-flex;
   @include flex-direction(row);
   @include flex-wrap(nowrap);
@@ -104,7 +104,23 @@ body.discover.index_loading .sitechrome-page-content-area {
   // @include justify-content(left);
 }
 
-.discover-playlist-item-play-button {
+.discover-playlist-item + .discover-playlist-item {
+  border-top:1px solid #e9e9e9;
+}
+
+
+/* Discover Playlist Story ------------------------------------------------*/
+
+.discover-playlist-story {
+  min-height: 5rem;
+  @include display-flex;
+  @include flex-direction(row);
+  @include flex-wrap(nowrap);
+  @include align-items(center);
+  // @include justify-content(left);}
+}
+
+.discover-playlist-story-play-button {
   height:5rem;
   width:rems(70);
   position:relative;
@@ -127,14 +143,8 @@ body.discover.index_loading .sitechrome-page-content-area {
   }
 }
 
-.discover-playlist-item + .discover-playlist-item {
-  border-top:1px solid #e9e9e9;
-}
 
-
-/* Discover Playlist Story ------------------------------------------------*/
-
-.discover-playlist-story {
+.discover-playlist-story-info {
   margin: 0;
   padding: 10px;
 }

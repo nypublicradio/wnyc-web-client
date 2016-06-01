@@ -1,33 +1,27 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  attributeBindings: ['aria-label', 'title', 'isCurrent:data-is-current', 'isPlaying:data-is-playing'],
-
-  audio:        Ember.inject.service(),
-  region:       'UnknownRegion',
+  attributeBindings: ['disabled', 'aria-label', 'title', 'isPlaying:data-is-playing'],
 
   title:        Ember.computed('itemTitle', function() {
     return `Listen to ${this.get('itemTitle')}`;
   }),
   'aria-label': Ember.computed.alias('title'),
 
-  disabled:     Ember.computed.not('audio.isReady'),
-  isCurrent:    Ember.computed('audio.currentAudio.id', 'itemPK', function() {
-    return this.get('itemPK') === this.get('audio.currentAudio.id');
-  }),
-  isPlaying:    Ember.computed.and('isCurrent', 'audio.isPlaying'),
+  disabled:     Ember.computed.not('isReady'),
+  isReady:      false,
+  isPlaying:    false,
 
   click() {
-    if (this.get('isErrored')) {
+    if (!this.get('isReady')) {
       return;
     }
-    let region = this.get('region');
-
+    
     if (this.get('isPlaying')) {
-      this.get('audio').pause(region);
+      this.sendAction('onPause');
     }
     else {
-      this.get('audio').playOnDemand(this.get('itemPK'), this.elementId, region);
+      this.sendAction('onPlay');
     }
   }
 });

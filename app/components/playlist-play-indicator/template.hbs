@@ -1,5 +1,9 @@
 {{yield}}
 
 <button disabled={{disabled}} class="playlist-play-indicator-button">
-  Play
+  {{#if isPlaying}}
+    Pause
+  {{else}}
+    Play
+  {{/if}}
 </button>
