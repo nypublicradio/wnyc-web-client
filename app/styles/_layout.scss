@@ -579,6 +579,15 @@
     padding-top: rems(50);
 }
 
+.l-skinnier--mq-med {
+   @include mq($medium-and-up) {
+      padding-left: 80px;
+      padding-left: rems(80);
+      padding-right: 80px;
+      padding-right: rems(80);
+    }
+}
+
 
 /**
  * Positions:

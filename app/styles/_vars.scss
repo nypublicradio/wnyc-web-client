@@ -231,6 +231,18 @@ $lightestgray: #ddd;
 $nearwhite: #f1f1f1;
 
 
+/**
+ * Gray White:
+ * `$graywhite`
+ * `#f8f8f8`
+ * `rgb(248, 248, 248)`
+ *
+ *      @example
+ *      .searchbox input(style='background:#f8f8f8;')  
+ */
+$graywhite: #f8f8f8;
+
+
 // MIXINS and EXTENDS
 %clearfix {
     &:after {

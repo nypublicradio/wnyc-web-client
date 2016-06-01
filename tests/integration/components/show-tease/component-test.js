@@ -39,7 +39,7 @@ test('it renders', function(assert) {
   assert.equal(this.$('.flag-body .text h4').text().trim(), 'WNYC and NPR', 'Producing orgs should render');
   assert.equal(this.$('.flag-body .text h4 a').length, 0, 'Producing orgs should not have links');
   assert.equal(this.$('.flag-body .text h2').text().trim(), 'All Things Considered', 'Title should render correctly');
-  assert.equal(this.$('.flag-body .text .text-body').text().trim(), "A wrap-up of the day's news, with features and interviews.", 'Description should render correctly');
+  assert.equal(this.$('.flag-body .text .text-body--nopad').text().trim(), "A wrap-up of the day's news, with features and interviews.", 'Description should render correctly');
   assert.equal(this.$('.flag-image img').attr("src"), "http://www.wnyc.org/i/135/135/l/99/1/2DQ_1400X1400_NoWNYCSTUDIOS_2.png", "Image is populated");
 
 
@@ -49,8 +49,8 @@ test('it renders', function(assert) {
   assert.equal(this.$(".flag").hasClass("flag--luxe"), true, "Featured Spot has class flag-luxe");
   assert.equal(this.$('.flag-body .text h4.text--lightgray').text().trim(), 'WNYC and NPR', 'Producing orgs should render');
   assert.equal(this.$('.flag-body .text h4 a').length, 0, 'Producing orgs should not have links');
-  assert.equal(this.$('.flag-body .text h2.text--white').text().trim(), 'All Things Considered', 'Title should render correctly');
-  assert.equal(this.$('.flag-body .text h3.text--white').text().trim(), "A wrap-up of the day's news, with features and interviews.", 'Description should render correctly');
+  assert.equal(this.$('.flag-body .text h2').text().trim(), 'All Things Considered', 'Title should render correctly');
+  assert.equal(this.$('.flag-body .text .h3').text().trim(), "A wrap-up of the day's news, with features and interviews.", 'Description should render correctly');
   assert.equal(this.$('.flag-image img').attr("src"), "http://www.wnyc.org/i/250/250/l/99/1/2DQ_1400X1400_NoWNYCSTUDIOS_2.png", "Image is populated");
 
 

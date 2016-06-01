@@ -120,24 +120,33 @@
     box-sizing: border-box;
     padding: 20px 20px 20px 60px; /* room at left for magnifying glass icon */
     border-radius: 100px;
-    background-color: $nearwhite;
+    
+    input[type="search"] {
+        border: none;
+        margin-bottom: 0;
+
+        &:focus {
+            outline: none;
+        }
+
+    }
+
+    .gray-search & {
+        background-color: $graywhite;
+
+        input[type="search"] {
+            background-color: $graywhite;
+            color: $lightgray;
+            &::-webkit-input-placeholder {color: $lightgray; opacity: 1 !important;}
+            &::-moz-placeholder {color: $lightgray;}
+            &:-ms-input-placeholder {color: $lightgray;}
+        }
+    }
 
 }
-input[type="search"].search {
-    background-color: $nearwhite;
-    color: $darkergray;
-    border: none;
-    margin-bottom: 0;
-    &::-webkit-input-placeholder {color: $lightgray; opacity: 1 !important;}
-    &::-moz-placeholder {color: $lightgray;}
-    &:-ms-input-placeholder {color: $lightgray;}
 
-    &:focus {
-        outline: none;
-    }
- }
 
- .input-icon {
+.input-icon {
     position: absolute;
     top: 20px;
     left: 20px;

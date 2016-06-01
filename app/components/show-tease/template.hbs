@@ -3,7 +3,7 @@
   {{#if show.logoImage.crop}}
     {{#link-to 'show' show.slug class="flag-image link--nodecor" }}
       {{#if featuredSpot}}
-        <img src={{image-template show.logoImage.template 250 250 show.logoImage.crop}} class="squarebadge" >
+        <img src={{image-template show.logoImage.template 250 250 show.logoImage.crop}} class="squarebadge--lg" >
       {{else}}
         <img src={{image-template show.logoImage.template 135 135 show.logoImage.crop}} class="squarebadge">
       {{/if}}
@@ -11,24 +11,24 @@
   {{/if}}
 
   <div class="flag-body">
-    <div class="text">
+    <div class="text text--black">
       {{#if featuredSpot}}
 
-        <h4 class="text--small text--lightgray text--spacing nudge medium-up">{{producing-orgs show.producingOrganizations unlinked=true}}</h4>
+        <h4 class="text--small text--lightgray text--spacing text--upper nudge medium-up">{{producing-orgs show.producingOrganizations unlinked=true}}</h4>
 
         <h2 class="h1 h2--mq-small nudge text--white">{{#link-to 'show' show.slug class="link--white"}}{{show.title}}{{/link-to}}</h2>
         
-        <h3 class="h3 text--white medium-up">
+        <div class="h3 h3--larger text--white medium-up">
           {{{show.tease}}}
-        </h3>
+        </div>
 
       {{else}}
 
-        <h4 class="text--small text--lightgray text--spacing nudge medium-up">{{producing-orgs show.producingOrganizations unlinked=true}}</h4>
+        <h4 class="text--small text--lightgray text--spacing text--upper nudge medium-up">{{producing-orgs show.producingOrganizations unlinked=true}}</h4>
 
         <h2 class="h2 h2--mq-small text--normal nudge">{{#link-to 'show' show.slug class="link--dark"}}{{show.title}}{{/link-to}}</h2>
         
-        <div class="text-body text-body--nopad medium-up">{{{show.tease}}}</div>
+        <div class="text-body--nopad text--airy medium-up">{{{show.tease}}}</div>
 
       {{/if}}
     </div>
