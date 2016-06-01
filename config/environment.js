@@ -90,7 +90,7 @@ module.exports = function(environment) {
       'django-page-routing': true,
       'persistent-player': true,
       'embedded-components': true,
-      'site-chrome': false
+      'site-chrome': true
     },
     betaTrials: {
       betaInviteLanding: '#full-page-transforms-wrapper',
