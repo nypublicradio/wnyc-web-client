@@ -13,6 +13,7 @@ const {
 
 export default Component.extend({
   tagName: 'nav',
+  links: [],
   classNames: ['tabs-header', 'tabs-header--border'],
   classNameBindings: ['xScrollable'],
   parsedLinks: computed('links', function() {
@@ -43,7 +44,9 @@ export default Component.extend({
   }),
   init() {
     this._super(...arguments);
-    let defaultSlug = get(this, 'defaultSlug');
+    // fallback to null if defaultSlug is undefined because a linkrolLlink without
+    // a navSlug key will match on `undefined` in `findBy` below
+    let defaultSlug = get(this, 'defaultSlug') || null;
     let links = get(this, 'links');
     let defaultIndex = links.indexOf(links.findBy('navSlug', defaultSlug));
     set(this, 'activeTabIndex', defaultIndex === -1 ? 0 : defaultIndex);
@@ -71,7 +74,7 @@ export default Component.extend({
   handleResize() {
     let list = Array.from(this.$('.list-item'));
     let el = this.element;
-    let listWidth = list.map(n => $(n).outerWidth(true)).reduce((a, b) => a + b);
+    let listWidth = list.map(n => $(n).outerWidth(true)).reduce((a, b) => a + b, 0);
 
     if (listWidth > el.getBoundingClientRect().width) {
       set(this, 'xScrollable', true);
