@@ -36,6 +36,9 @@ export default Ember.Component.extend({
       this.set('customSortedStories', itemModels);
       this.set('justDragged', draggedModel);
     },
+    toggle() {
+      // todo: setup and play playlist
+    },
     pauseTrack(/* storyId */) {
       this.get('audio').pause(this.get('region'));
     },

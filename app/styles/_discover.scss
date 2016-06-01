@@ -87,12 +87,39 @@ body.discover.index_loading .sitechrome-page-content-area {
 }
 
 /* Discover Playlist ------------------------------------------------*/
+
+.discover-playlist-container {
+  @include display-flex;
+  @include flex-direction(column);
+  @include flex-wrap(nowrap);
+  @include align-items(center);
+  @include justify-content(space-between);
+}
+
 .discover-playlist {
   background-color:#FFFFFF;
   list-style:decimal;
   counter-reset: discover-playlist-counter;
   padding:0;
   margin:0;
+  border-radius:5px;
+  max-width:800px;
+}
+
+.discover-playlist-header {
+  @include display-flex;
+  @include flex-direction(column);
+  @include flex-wrap(nowrap);
+  @include align-items(center);
+  @include justify-content(space-between);
+  text-align:center;
+  color:#FFF;
+  padding:20px 0;
+  min-height:10rem;
+}
+
+.discover-playlist-header-title, .discover-playlist-header-subtitle, .discover-playlist-header-button {
+  margin:0.75rem;
 }
 
 // This the sortable item
@@ -114,14 +141,19 @@ body.discover.index_loading .sitechrome-page-content-area {
 .discover-playlist-story {
   min-height: 5rem;
   width:100%;
-  padding:10px 0;
+  padding:10px 10px;
+  border-left:3px solid transparent;
 
   @include display-flex;
   @include flex-direction(row);
   @include flex-wrap(nowrap);
   @include align-items(flex-start);
-}
 
+  &.is-playing {
+    background-color:rgba($red, 0.03);
+    border-left:3px solid $red;
+  }
+}
 
 .discover-playlist-story-info {
   padding:0 10px;
@@ -155,7 +187,7 @@ body.discover.index_loading .sitechrome-page-content-area {
   @include justify-content(center);
 
   height:100%;
-  width:rems(70);
+  width:rems(60);
   position:relative;
   min-height:4rem;
 
@@ -169,11 +201,29 @@ body.discover.index_loading .sitechrome-page-content-area {
     @include absolute-fill();
 
     color:$lightgray;
-    font-size:rem(24);
+    font-size:24px;
 
     /* CSS counter so we can hide and show it and style it easier than the li counter */
     counter-increment: discover-playlist-counter;
     content: counter(discover-playlist-counter);
+    pointer-events: none; // Don't want this sucker interfering with clicks
+  }
+}
+
+
+.playlist-play-indicator-button {
+  /* Hide the button by default */
+  opacity:0;
+}
+
+.discover-playlist-story:hover, .discover-playlist-story.is-playing {
+  .playlist-play-indicator-button {
+    /* Show the button */
+    opacity:1;
+  }
+  .discover-playlist-story-play-button:before {
+    /* Hide the number */
+    opacity:0;
   }
 }
 

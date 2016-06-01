@@ -1,3 +1,11 @@
+<div class="discover-playlist-header">
+
+  {{yield (hash
+    button=(component 'discover-playlist-play-button' click=(action 'toggle') isPlaying=isPlaying)
+  )}}
+
+</div>
+
 {{#sortable-group class="discover-playlist" tagName="ul" onChange="reorderItems" as |group|}}
   {{#each orderedStories as |story|}}
     {{#sortable-item class="discover-playlist-item" tagName="li" group=group model=story handle=".discover-playlist-story"}}
