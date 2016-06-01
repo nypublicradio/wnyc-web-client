@@ -1,4 +1,4 @@
-import { animate, Promise } from "liquid-fire";
+import { animate } from "liquid-fire";
 
 export default function() {
   let explode = this.lookup('explode');
