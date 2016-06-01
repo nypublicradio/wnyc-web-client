@@ -52,7 +52,8 @@ module.exports = function(environment) {
           /^chrome:\/\//i,
         ],
         ignoreErrors: [
-          'adsafeprotected'
+          'adsafeprotected',
+          'sascdn'
         ]
       }
     },
