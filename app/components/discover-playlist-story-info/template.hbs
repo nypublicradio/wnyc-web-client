@@ -1,12 +1,19 @@
-<h2 class="discover-playlist-story-title">{{story.title}}</h2>
-<span class="discover-playlist-story-duration">
-  {{abbreviate-time (humanize-duration story.estimatedDuration 'seconds')}}
-</span>
-<h3 class="discover-playlist-story-show-title">{{story.showTitle}}</h3>
-<div class="discover-playlist-story-summary">
-  {{story.tease}}
+<div class="discover-playlist-story-info-basic">
+  <div class="discover-playlist-story-info-primary">
+    <h2 class="discover-playlist-story-title">{{story.title}}</h2>
+    <span class="discover-playlist-story-duration">
+      {{abbreviate-time (humanize-duration story.estimatedDuration 'seconds')}}
+    </span>
+    <h3 class="discover-playlist-story-show-title">{{story.showTitle}}</h3>
+  </div>
+  <div class="discover-playlist-story-summary-action">
+    <a class="discover-playlist-story-summary-action-link" {{action "toggleSummary"}}>Summary</a>
+  </div>
 </div>
-
-
+{{#if showSummary}}
+  <div class="discover-playlist-story-info-extended">
+    {{story.summary}}
+  </div>
+{{/if}}
 
 {{yield}}

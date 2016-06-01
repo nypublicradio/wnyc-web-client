@@ -113,17 +113,51 @@ body.discover.index_loading .sitechrome-page-content-area {
 
 .discover-playlist-story {
   min-height: 5rem;
+  width:100%;
+  padding:10px 0;
+
   @include display-flex;
   @include flex-direction(row);
   @include flex-wrap(nowrap);
+  @include align-items(flex-start);
+}
+
+
+.discover-playlist-story-info {
+  padding:0 10px;
+  margin: 0;
+  @include display-flex;
+  @include flex-direction(column);
+  width:100%;
+  @include justify-content(center);
+  // @include align-content(center);
+  // @include align-items(flex-start);
+
+}
+
+.discover-playlist-story-info-basic {
+  @include display-flex;
+  @include flex-direction(row);
+  // @include flex-wrap(nowrap);
+  @include justify-content(space-between);
   @include align-items(center);
-  // @include justify-content(left);}
+  min-height:4rem;
+}
+
+.discover-playlist-story-info-extended {
+  font-size:rems(14);
 }
 
 .discover-playlist-story-play-button {
-  height:5rem;
+  @include display-flex;
+  @include flex-wrap(nowrap);
+  @include align-items(center);
+  @include justify-content(center);
+
+  height:100%;
   width:rems(70);
   position:relative;
+  min-height:4rem;
 
   &:before {
     /*  Make this nice and centered */
@@ -143,10 +177,17 @@ body.discover.index_loading .sitechrome-page-content-area {
   }
 }
 
+.discover-playlist-story-summary-action {
+  @include display-flex;
+}
 
-.discover-playlist-story-info {
-  margin: 0;
-  padding: 10px;
+.discover-playlist-story-summary-action-link {
+  white-space:nowrap;
+  text-align:right;
+  text-transform: uppercase;
+  font-size:rems(12);
+  color:$lightgray;
+  font-weight:bold;
 }
 
 .discover-playlist-story-title {

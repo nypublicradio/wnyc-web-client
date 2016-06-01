@@ -1,6 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import startMirage from 'overhaul/tests/helpers/setup-mirage-for-integration';
+import wait from 'ember-test-helpers/wait';
 
 moduleForComponent('discover-playlist-story-info', 'Integration | Component | discover playlist story info', {
   integration: true,
@@ -38,4 +39,30 @@ test('it still renders alright if show is not provided', function(assert) {
 
   this.render(hbs`{{discover-playlist-story-info story=story}}`);
   assert.equal(this.$('.discover-playlist-story-show-title').text().trim(), '');
+});
+
+test('it does not show summary by default', function(assert) {
+  this.set('story', server.create('discover-story', {showTitle: 'yep'}));
+
+  this.render(hbs`{{discover-playlist-story-info story=story}}`);
+  assert.equal(this.$('.discover-playlist-story-info-extended').length, 0);
+});
+
+test('it shows summary when showSummary is true', function(assert) {
+  this.set('story', server.create('discover-story', {showTitle: 'yep'}));
+
+  this.render(hbs`{{discover-playlist-story-info story=story showSummary=true}}`);
+  assert.equal(this.$('.discover-playlist-story-info-extended').length, 1);
+});
+
+test('it shows summary when summary link is clicked', function(assert) {
+  this.set('story', server.create('discover-story', {showTitle: 'yep'}));
+
+  this.render(hbs`{{discover-playlist-story-info story=story}}`);
+
+  $("a.discover-playlist-story-summary-action-link").click();
+
+  return wait().then(() => {
+    assert.equal(this.$('.discover-playlist-story-info-extended').length, 1);
+  });
 });
