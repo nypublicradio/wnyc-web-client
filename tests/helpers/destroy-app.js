@@ -2,5 +2,7 @@ import Ember from 'ember';
 
 export default function destroyApp(application) {
   Ember.run(application, 'destroy');
-  server.shutdown();
+  if (typeof server !== 'undefined') {
+    server.shutdown();
+  }
 }
