@@ -29,7 +29,11 @@
         {{/if}}
 
         {{#if model.channel.linkroll}}
-          {{nav-links channelType=channelType links=model.channel.linkroll action="updateRouteTitle"}}
+          {{nav-links
+            defaultSlug=defaultSlug
+            navRoot=navRoot
+            links=model.channel.linkroll
+            transition=(action 'navSlugTransition')}}
         {{/if}}
 
         {{outlet}}

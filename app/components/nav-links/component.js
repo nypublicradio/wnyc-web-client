@@ -1,27 +1,20 @@
 import Ember from 'ember';
-import service from 'ember-service/inject';
 import config from 'overhaul/config/environment';
+import { canonicalize } from 'overhaul/services/script-loader';
 
 const {
   get,
   set,
   $,
   computed,
-  observer,
-  isEmpty,
   Component,
   run
 } = Ember;
 
-const {htmlSafe} = Ember.String;
-
 export default Component.extend({
-  listRouter: service(),
-  channelTypeWell: computed('channelType', {
-    get() {
-      return `${get(this, 'channelType')}.well`;
-    }
-  }),
+  tagName: 'nav',
+  classNames: ['tabs-header', 'tabs-header--border'],
+  classNameBindings: ['xScrollable'],
   parsedLinks: computed('links', function() {
     let origin;
     if (config.environment === 'development') {
@@ -31,12 +24,14 @@ export default Component.extend({
       // configured wnycURL
       origin = 'http://www.wnyc.org';
     } else {
-      origin = config.wnycURL;
+      origin = canonicalize(config.wnycURL);
     }
     let links = get(this, 'links');
+    let navRoot = get(this, 'navRoot');
     return links.map(i => {
-      let { href } = i;
+      let { href, navSlug } = i;
       if (!href) {
+        i.href = `/${navRoot}/${navSlug}`;
         return i;
       }
       if (href.indexOf(origin) === 0) {
@@ -46,128 +41,42 @@ export default Component.extend({
       return i;
     });
   }),
+  init() {
+    this._super(...arguments);
+    let defaultSlug = get(this, 'defaultSlug');
+    let links = get(this, 'links');
+    let defaultIndex = links.indexOf(links.findBy('navSlug', defaultSlug));
+    set(this, 'activeTabIndex', defaultIndex === -1 ? 0 : defaultIndex);
+  },
 
-  tagName: 'nav',
-  classNames: ['tabs-header', 'tabs-header--border'],
+  actions: {
+    transition(navSlug, index) {
+      set(this, 'activeTabIndex', index);
+      get(this, 'transition')(navSlug);
+    }
+  },
 
   didInsertElement() {
-    const activeLink = this.$('.active');
-    const list = this.$('.list').get(0);
-    const el = this.element;
-
-    run.scheduleOnce('afterRender', this, function() {
-      if (!isEmpty(activeLink)) {
-        set(this, 'activeLink', activeLink);
-      } else {
-        set(this, 'activeLink', this.$('a').first());
-      }
-
-      run.next(this, function() {
-        this.handleResize(list, el);
-        this.showActiveLink();
-      });
-    });
-
-    this.$().on('transitionend', e => {
-      if (e.originalEvent.propertyName === 'font-size') {
-        this._updateLinePosition();
-      }
-    });
+    run.scheduleOnce('afterRender', this, 'handleResize');
 
     // so we can explicitly remove this at destroy-time
-    const boundHandler = set(this, 'boundResizeHandler', () => this.handleResize(list, el));
-    $(window).on('resize', boundHandler);
+    set(this, 'boundResizeHandler', run.bind(this, 'handleResize'));
+    $(window).on('resize', get(this, 'boundResizeHandler'));
   },
 
   willDestroyElement() {
-    this.$().off('transitionend');
     $(window).off('resize', get(this, 'boundResizeHandler'));
   },
 
-  activeLink: computed('listRouter.navSlug', {
-    get() {
-      const navSlug = get(this, 'listRouter.navSlug');
-      const link = this.$(`[href*=${navSlug}]`);
-      return link;
-    },
-    set(keyName, value) {
-      return value;
-    }
-  }),
+  handleResize() {
+    let list = Array.from(this.$('.list-item'));
+    let el = this.element;
+    let listWidth = list.map(n => $(n).outerWidth(true)).reduce((a, b) => a + b);
 
-  updateRouteTitle: observer('activeLink', function() {
-    const activeLink = get(this, 'activeLink');
-    this.sendAction('action', activeLink);
-  }),
-
-  linePosition: computed('activeLink', {
-    get() {
-      const activeLink = get(this, 'activeLink');
-      if (isEmpty(activeLink)) {
-        return htmlSafe('');
-      }
-      const [left, w] = this._getDims(activeLink);
-      const styleString = this._generateStyleString(left, w);
-      return styleString;
-    },
-    set(keyName, value) {
-      return value;
-    }
-  }),
-
-  showActiveLink: observer('activeLink', function() {
-    const activeLink = get(this, 'activeLink').get(0);
-    if (isEmpty(activeLink)) {
-      return;
-    }
-    if (!this._isFullyVisible(activeLink)) {
-      this._scrollNav(activeLink);
-    }
-  }),
-
-  handleResize(list, el) {
-    if (this._isWiderThan(list, el)) {
-      $(el).addClass('x-scrollable');
+    if (listWidth > el.getBoundingClientRect().width) {
+      set(this, 'xScrollable', true);
     } else {
-      $(el).removeClass('x-scrollable');
+      set(this, 'xScrollable', false);
     }
-
-    this._updateLinePosition();
   },
-
-  _isFullyVisible(link) {
-    const linkBounds = link.getBoundingClientRect();
-    const navBounds = link.offsetParent.getBoundingClientRect();
-    return ((linkBounds.left > navBounds.left) && (linkBounds.right < navBounds.right));
-  },
-
-  _scrollNav(link) {
-    const nav = link.offsetParent;
-    nav.scrollLeft = link.offsetLeft;
-  },
-
-  _getDims(dom) {
-    const $dom = $(dom);
-    const navLeft = get(this, 'element.scrollLeft');
-    return [$dom.position().left + navLeft, $dom.width()];
-  },
-
-  _generateStyleString(left, w) {
-    const width         =             `width: ${w}px;`;
-    const transform     =         `transform: translateX(${left}px);`;
-    const mozTransform  =    `-moz-transform: translateX(${left}px);`;
-    const wkTransform   = `-webkit-transform: translateX(${left}px);`;
-    return htmlSafe(`${width} ${transform} ${mozTransform} ${wkTransform}`);
-  },
-
-  _updateLinePosition() {
-    const activeLink = get(this, 'activeLink');
-    const [left, w] = this._getDims(activeLink);
-    const styleString = this._generateStyleString(left, w);
-    set(this, 'linePosition', styleString);
-  },
-
-  _isWiderThan(dom1, dom2) {
-    return dom1.getBoundingClientRect().width > dom2.getBoundingClientRect().width;
-  }
 });

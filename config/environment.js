@@ -110,7 +110,7 @@ module.exports = function(environment) {
     ENV.wnycAccountRoot = 'http://test.com/account';
     ENV.wnycEtagAPI = 'http://test.com/etag';
     ENV.wnycStaticURL = 'http://test.com/static';
-    ENV.wnycURL = 'http://test.com';
+    ENV.wnycURL = '//test.com';
   }
 
   if (environment === 'production') {

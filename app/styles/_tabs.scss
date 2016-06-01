@@ -52,7 +52,7 @@
         margin-right: 0;
     }
 
-    &.x-scrollable {
+    &.x-scrollable .list {
       overflow-x: scroll;
     }
 }
@@ -60,17 +60,6 @@
 .tabs-header--border {
   border-bottom: 1px solid $lightestgray;
   padding-bottom: 3px;
-}
-
-.tab-link {
-  margin-right: 15px;
-
-  @include mq($small-and-up) {
-    margin-right: 25px;
-  }
-  @include mq($medium-and-up) {
-    margin-right: 35px;
-  }
 }
 
 .tab-link {
@@ -103,6 +92,12 @@
 
     @include translateX(0);
     @include transition(transform $transition-timing 0s, width $transition-timing 150ms, background-color $transition-timing 0s);
+}
+
+.tab-line--liquid {
+  width: 100%;
+  height: 4px;
+  margin-top: 7px;
 }
 
 .tab-line--red {

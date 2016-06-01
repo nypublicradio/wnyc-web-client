@@ -68,15 +68,14 @@ export default Ember.Service.extend({
 
 });
 
-// TODO: polyfill URL on all browsers
-function canonicalize(url) {
+export function canonicalize(url) {
   return new URL(url, location.href).toString();
 }
 
 // In order to fetch all the scripts via XHR without tripping CORs
 // violations, we are proxying them through our own server.
 function scriptURL(tag) {
-  let origin = ENV.wnycURL;
+  let origin = canonicalize(ENV.wnycURL);
   let url = canonicalize(tag.attributes.src.value);
   if (url.indexOf(origin) === 0) {
     return url;
