@@ -25,7 +25,6 @@ export default Mixin.create({
   beforeModel() {
     let channelType = this.routeName.split('.')[0]
     set(this, 'channelType', channelType)
-    const navSlug = this._getNavSlug(channelType)
   },
 
   model(params) {
