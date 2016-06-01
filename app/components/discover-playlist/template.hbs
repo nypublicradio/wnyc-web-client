@@ -6,11 +6,10 @@
 
 </div>
 
-{{#sortable-group class="discover-playlist" tagName="ul" onChange="reorderItems" as |group|}}
+{{#sortable-group class="discover-playlist" tagName="ul" onChange="reorderItems" handle=".discover-playlist-item-handle" as |group|}}
   {{#each orderedStories as |story|}}
-    {{#sortable-item class="discover-playlist-item" tagName="li" group=group model=story handle=".discover-playlist-story"}}
-      <!-- <span class="handle" style="display:block; width:10px; height:10px;">&varr;</span> -->
-
+    {{#sortable-item class="discover-playlist-item" tagName="li" group=group model=story handle=".discover-playlist-item-handle"}}
+      <span class="discover-playlist-item-handle"></span>
       {{#discover-playlist-story isPlaying=(eq story.id currentPlaylistStoryId)}}
 
         {{playlist-play-indicator

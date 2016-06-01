@@ -45,17 +45,17 @@ test('it does not show summary by default', function(assert) {
   this.set('story', server.create('discover-story', {showTitle: 'yep'}));
 
   this.render(hbs`{{discover-playlist-story-info story=story}}`);
-  assert.equal(this.$('.discover-playlist-story-info-extended').length, 0);
+  assert.equal(this.$('.discover-playlist-story-info-extended.is-shown').length, 0);
 });
 
 test('it shows summary when showSummary is true', function(assert) {
   this.set('story', server.create('discover-story', {showTitle: 'yep'}));
 
   this.render(hbs`{{discover-playlist-story-info story=story showSummary=true}}`);
-  assert.equal(this.$('.discover-playlist-story-info-extended').length, 1);
+  assert.equal(this.$('.discover-playlist-story-info-extended.is-shown').length, 1);
 });
 
-test('it shows summary when summary link is clicked', function(assert) {
+test('it adds is-shown class when summary link is clicked', function(assert) {
   this.set('story', server.create('discover-story', {showTitle: 'yep'}));
 
   this.render(hbs`{{discover-playlist-story-info story=story}}`);
@@ -63,6 +63,6 @@ test('it shows summary when summary link is clicked', function(assert) {
   $("a.discover-playlist-story-summary-action-link").click();
 
   return wait().then(() => {
-    assert.equal(this.$('.discover-playlist-story-info-extended').length, 1);
+    assert.equal(this.$('.discover-playlist-story-info-extended.is-shown').length, 1);
   });
 });

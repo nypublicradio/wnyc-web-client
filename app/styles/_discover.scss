@@ -88,6 +88,22 @@ body.discover.index_loading .sitechrome-page-content-area {
 
 /* Discover Playlist ------------------------------------------------*/
 
+.discover-edit-playlist-link {
+  color:$red;
+  font-size:rems(12);
+  font-weight:bold;
+  text-transform: uppercase;
+  position:absolute;
+  right:2rem;
+  top:2rem;
+  border:0;
+
+  &:hover {
+    border:0;
+  }
+
+}
+
 .discover-playlist-container {
   @include display-flex;
   @include flex-direction(column);
@@ -128,7 +144,22 @@ body.discover.index_loading .sitechrome-page-content-area {
   @include flex-direction(row);
   @include flex-wrap(nowrap);
   @include align-items(center);
+  position:relative;
+  overflow:visible;
   // @include justify-content(left);
+}
+
+.discover-playlist-item-handle {
+  position:absolute;
+  left:-30px;
+  top:0;
+  bottom:0;
+  width:30px;
+  cursor:grab;
+
+  &:active {
+    cursor:grabbing;
+  }
 }
 
 .discover-playlist-item + .discover-playlist-item {
@@ -178,6 +209,17 @@ body.discover.index_loading .sitechrome-page-content-area {
 
 .discover-playlist-story-info-extended {
   font-size:rems(14);
+  display:block;
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+
+  &.is-shown {
+    @include transition(max-height $transition-timing, max-height 0.2s);
+
+    opacity:1;
+    max-height:200px;
+  }
 }
 
 .discover-playlist-story-play-button {
@@ -238,12 +280,13 @@ body.discover.index_loading .sitechrome-page-content-area {
   font-size:rems(12);
   color:$lightgray;
   font-weight:bold;
+  cursor:pointer;
 }
 
 .discover-playlist-story-title {
   margin:0;
   margin-right:5px;
-  font-weight:normal;
+  font-weight:600;
   font-size: rems(15);
   display:inline-block;
 }
@@ -330,10 +373,13 @@ body.discover.index_loading .sitechrome-page-content-area {
   text-transform: uppercase;
   border: 1px solid rgba(0, 0, 0, 0.15);
   input { display:none; }
+  @include transition(background-color $transition-timing, border-color $transition-timing, color $transition-timing);
+
 
   &:hover {
     // TODO: TBD after feedback from marine
     color:$charcoal;
+    background-color: rgba(0, 0, 0, 0.02);
     border: 1px solid rgba(0, 0, 0, 0.15);
   }
 }
@@ -366,8 +412,14 @@ body.discover.index_loading .sitechrome-page-content-area {
 
   &:not([disabled]) {
     &:hover {
-      border-color: rgba(#FFF, .7);
       color: #FFF;
+      border-color:#FFF;
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    &:active {
+      color: $red;
+      border-color:#FFF;
+      background-color: #FFF;
     }
   }
 }
@@ -375,4 +427,17 @@ body.discover.index_loading .sitechrome-page-content-area {
 .rounded-caps-button.mod-filled-red {
   background-color:$red;
   border-color:$red;
+
+  &:not([disabled]) {
+    &:hover {
+      background-color:$darkred;
+      border-color:$darkred;
+      color: #FFF;
+    }
+    &:active {
+      background-color:$darkred;
+      border-color:$darkred;
+      color: #FFF;
+    }
+  }
 }
