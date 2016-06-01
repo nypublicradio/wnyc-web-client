@@ -61,9 +61,11 @@
     "ember-page-title": "^3.0.1",
     "ember-resolver": "^2.0.3",
     "ember-responsive": "1.2.6",
+    "ember-truth-helpers": "1.2.0",
     "ember-wormhole": "noslouch/ember-wormhole#d83b1cc4b691ed2e0551a905c14a422022fb8496",
     "glob": "^4.5.3",
     "http-proxy": "^1.12.0",
+    "liquid-fire": "0.23.1",
     "loader.js": "^4.0.1",
     "morgan": "^1.6.1"
   },
