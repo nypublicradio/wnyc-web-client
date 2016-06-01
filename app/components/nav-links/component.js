@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import config from 'overhaul/config/environment';
+import { canonicalize } from 'overhaul/services/script-loader';
 
 const {
   get,
@@ -23,7 +24,7 @@ export default Component.extend({
       // configured wnycURL
       origin = 'http://www.wnyc.org';
     } else {
-      origin = config.wnycURL;
+      origin = canonicalize(config.wnycURL);
     }
     let links = get(this, 'links');
     let navRoot = get(this, 'navRoot');

@@ -3,6 +3,7 @@ import service from 'ember-service/inject';
 import { beforeTeardown, homepageCleanup, searchpageCleanup } from '../../lib/compat-hooks';
 import ENV from '../../config/environment';
 import LegacySupportMixin from 'overhaul/mixins/legacy-support';
+import { canonicalize } from 'overhaul/services/script-loader';
 import {
   isInDom,
   embeddedComponentSetup,
@@ -11,7 +12,8 @@ import {
 } from '../../lib/alien-dom';
 
 const { $, get, computed, run } = Ember;
-const { wnycURL } = ENV;
+let { wnycURL } = ENV;
+wnycURL = canonicalize(wnycURL);
 
 function doRefresh() {
   const { googletag } = window;
