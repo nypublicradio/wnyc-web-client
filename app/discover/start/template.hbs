@@ -1,5 +1,7 @@
 <div class="discover-welcome-screen">
 
+  {{wnyc-svg icon='antenna' className='discover-welcome-screen-icon'}}
+
   <h1 class="discover-welcome-screen-title h1">
     It's a [product] customized for you.
   </h1>
@@ -7,7 +9,7 @@
     Pick your topics and shows.<br/>
     We'll do the rest.
   </h3>
-  <button class="rounded-caps-button" {{action 'next'}}>
+  <button class="discover-welcome-screen-button rounded-caps-button" {{action 'next'}}>
     Create My Own
   </button>
   {{outlet}}
