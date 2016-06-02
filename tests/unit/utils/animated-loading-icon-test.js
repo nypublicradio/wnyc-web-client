@@ -1,4 +1,4 @@
-import LoadingIcon from 'overhaul/utils/animated-loading-icon';
+import loadingIcon from 'overhaul/utils/animated-loading-icon';
 import { module, test } from 'qunit';
 
 module('Unit | Utility | animated loading icon');
@@ -7,9 +7,6 @@ module('Unit | Utility | animated loading icon');
 test('it works', function(assert) {
 
   let canvas = document.createElement('canvas');
-
-  let result = LoadingIcon(canvas, {
-    
-  });
+  let result = loadingIcon(canvas, {});
   assert.ok(result);
 });
