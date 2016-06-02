@@ -1,4 +1,14 @@
-{{! step 2 of 2 }}
-{{! show shows, save their selection to session data }}
-<button class="rounded-caps-button" {{action 'next'}}>Next</button>
-{{outlet}}
+<header class="discover-setup-header">
+  <div class="discover-setup-header-action">
+    {{link-to "Back" 'discover.topics' class="rounded-caps-button"}}
+  </div>
+  <div class="discover-setup-header-content">
+    <span class="discover-setup-title-step-count">Step 2 of 2</span>
+    <h2 class="discover-setup-title-step-title h2 text--white">Pick Your Shows</h2>
+    <span class="discover-setup-title-error">&nbsp;
+    </span>
+  </div>
+  <div class="discover-setup-header-action">
+    <button class="rounded-caps-button mod-filled-red" {{action 'next' currentTopicSelection}}>Create Station</button>
+  </div>
+</header>

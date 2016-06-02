@@ -7,7 +7,10 @@
     <h3 class="discover-playlist-story-show-title">{{story.showTitle}}</h3>
   </div>
   <div class="discover-playlist-story-summary-action">
-    <a class="discover-playlist-story-summary-action-link {{if showSummary 'is-shown'}}" {{action "toggleSummary"}}>Summary</a>
+    <a class="discover-playlist-story-summary-action-link {{if showSummary 'is-shown'}}" {{action "toggleSummary"}}>
+      Summary
+      {{wnyc-svg icon="arrow-dropdown"}}
+    </a>
   </div>
 </div>
 <div class="discover-playlist-story-info-extended {{if showSummary 'is-shown'}}">

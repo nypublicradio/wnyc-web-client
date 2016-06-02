@@ -183,18 +183,55 @@ body.discover.index_loading .sitechrome-page-content-area {
 }
 
 .discover-playlist-item-handle {
+  @include display-flex;
+  @include flex-direction(row);
+  @include flex-wrap(nowrap);
+  @include align-items(center);
+  @include justify-content(flex-start);
+
   position:absolute;
-  left:-30px;
+  left:-20px;
   top:0;
   bottom:0;
-  width:30px;
+  width:20px;
   cursor:grab;
 
   &:active {
     cursor:grabbing;
   }
+  svg {
+    width:9px;
+    height:20px;
+  }
+  path {
+    fill:$lightgray;
+  }
 }
 
+.discover-playlist-item-delete {
+  @include display-flex;
+  @include flex-direction(row);
+  @include flex-wrap(nowrap);
+  @include align-items(center);
+  @include justify-content(flex-end);
+  position:absolute;
+  right:-20px;
+  top:0;
+  bottom:0;
+  width:20px;
+  cursor:pointer;
+
+  &:active {
+    cursor:grabbing;
+  }
+  svg {
+    width:9px;
+    height:20px;
+  }
+  path {
+    fill:$lightgray;
+  }
+}
 .discover-playlist-item + .discover-playlist-item {
   border-top:1px solid #e9e9e9;
 }
@@ -290,6 +327,15 @@ body.discover.index_loading .sitechrome-page-content-area {
   /* Hide the button by default */
   opacity:0;
 }
+.discover-playlist-item-handle, .discover-playlist-item-delete {
+  opacity:0;
+}
+
+.discover-playlist-item:hover {
+  .discover-playlist-item-handle, .discover-playlist-item-delete {
+    opacity:1;
+  }
+}
 
 .discover-playlist-story:hover, .discover-playlist-story.is-playing {
   .playlist-play-indicator-button {
@@ -314,6 +360,28 @@ body.discover.index_loading .sitechrome-page-content-area {
   color:$lightgray;
   font-weight:bold;
   cursor:pointer;
+  border-bottom:0!important; // this is defined on the main link style.
+  &:hover {
+    border:0;
+  }
+
+  svg {
+    width:7px;
+    height:7px;
+    margin-bottom:1px;
+    @include transition(all $transition-timing);
+  }
+  svg polygon {
+    fill:$lightgray;
+    stroke:$lightgray;
+  }
+
+  &.is-shown {
+    svg {
+      margin-bottom:2px;
+      transform:rotate(180deg);
+    }
+  }
 }
 
 .discover-playlist-story-title {
@@ -329,6 +397,7 @@ body.discover.index_loading .sitechrome-page-content-area {
   font-size: rems(11);
   font-weight: bold;
   color: $lightergray;
+  white-space: nowrap;
 }
 
 .discover-playlist-story-show-title {

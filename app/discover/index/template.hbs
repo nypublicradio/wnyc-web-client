@@ -1,6 +1,8 @@
 {{! show playlist with chosen stories, save story IDs in session data for return visits }}
 
-{{link-to "Edit My Shows & Topics" 'discover.edit' class="discover-edit-playlist-link"}}
+{{#link-to 'discover.edit' class="discover-edit-playlist-link"}}
+  Edit My Shows & Topics
+{{/link-to}}
 
 {{#discover-playlist stories=model.stories as |playlist|}}
   <h1 class="discover-playlist-header-title h1">Your [product name]</h1>

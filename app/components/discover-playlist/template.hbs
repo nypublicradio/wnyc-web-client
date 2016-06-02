@@ -9,7 +9,9 @@
 {{#sortable-group class="discover-playlist" tagName="ul" onChange="reorderItems" handle=".discover-playlist-item-handle" as |group|}}
   {{#each orderedStories as |story|}}
     {{#sortable-item class="discover-playlist-item" tagName="li" group=group model=story handle=".discover-playlist-item-handle"}}
-      <span class="discover-playlist-item-handle"></span>
+      <span class="discover-playlist-item-handle">
+        {{wnyc-svg icon="reorder"}}
+      </span>
       {{#discover-playlist-story isPlaying=(eq story.id currentPlaylistStoryId)}}
 
         {{playlist-play-indicator
@@ -23,8 +25,10 @@
           }}
 
         {{discover-playlist-story-info story=story}}
-
       {{/discover-playlist-story}}
+      <span class="discover-playlist-item-delete">
+        {{wnyc-svg icon="close"}}
+      </span>
     {{/sortable-item}}
   {{/each}}
 {{/sortable-group}}
