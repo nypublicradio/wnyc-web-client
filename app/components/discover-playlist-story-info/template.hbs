@@ -1,6 +1,8 @@
 <div class="discover-playlist-story-info-basic">
   <div class="discover-playlist-story-info-primary">
-    <h2 class="discover-playlist-story-title">{{story.title}}</h2>
+    <h2 class="discover-playlist-story-title">
+      <a href="{{story.url}}">{{story.title}}</a>
+    </h2>
     <span class="discover-playlist-story-duration">
       {{abbreviate-time (humanize-duration story.estimatedDuration 'seconds')}}
     </span>

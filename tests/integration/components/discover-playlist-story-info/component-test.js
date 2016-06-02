@@ -66,3 +66,11 @@ test('it adds is-shown class when summary link is clicked', function(assert) {
     assert.equal(this.$('.discover-playlist-story-info-extended.is-shown').length, 1);
   });
 });
+
+test('it links to the story url', function(assert) {
+  let url = "http://wnyc.org";
+  this.set('story', server.create('discover-story', {url: url}));
+
+  this.render(hbs`{{discover-playlist-story-info story=story}}`);
+  assert.equal(this.$('a[href]').attr('href'), url);
+});
