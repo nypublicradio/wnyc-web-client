@@ -100,13 +100,16 @@ export function beforeAppend(element, page) {
     } else if (get(page, 'wnycChannel')) {
       container.appendChild(element.querySelector('#js-listings'));
     } else {
+      let flatPage = element.querySelector('#flatpage');
       let legacyContent = element.querySelector('#site') || element.querySelector('#flatpage');
       if (!legacyContent) {
         // maybe it's a flat page
         legacyContent = element;
       }
       let newContent = document.createElement('div');
-      newContent.className = 'l-constrained';
+      if (!flatPage){
+        newContent.className = 'l-constrained';  
+      }
       while (legacyContent.firstChild) {
         newContent.appendChild(legacyContent.firstChild);
       }
