@@ -40,7 +40,7 @@ test('shows list of topics', function(assert) {
   });
 });
 
-test('next button is disabled until a topic is selected', function(assert) {
+test('next button shows an error if you click it without a topic selected', function(assert) {
   visit('/discover/start');
   server.createList('discover-topic', 20);
 
@@ -48,11 +48,10 @@ test('next button is disabled until a topic is selected', function(assert) {
     click('button:contains("Create My Own")');
     andThen(function() {
       assert.equal(currentURL(), '/discover/start/topics');
-      assert.equal($('button:contains("Next")').prop("disabled"), true, "Button should be disabled");
-      click(".discover-topic input");
+      assert.equal($('.discover-setup-title-error').text().trim(), "");
+      click('button:contains("Next")');
       andThen(function() {
-        assert.equal($('button:contains("Next")').prop("disabled"), false, "Button should be enabled");
-        assert.equal($('button.mod-filled-red').length, 1, "Button should be red");
+        assert.equal($('.discover-setup-title-error').text().length > 0, true);
       });
     });
   });
@@ -66,7 +65,6 @@ test('back goes back to the welcome screen', function(assert) {
     click('button:contains("Create My Own")');
     andThen(function() {
       assert.equal(currentURL(), '/discover/start/topics');
-      assert.equal($('button:contains("Next")').prop("disabled"), true, "Button should be disabled");
       click("a:contains('Back')");
       andThen(function() {
         assert.equal(currentURL(), '/discover/start');

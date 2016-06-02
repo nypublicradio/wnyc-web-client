@@ -80,7 +80,8 @@ body.discover.index_loading .sitechrome-page-content-area {
 
 
 .discover-setup-header {
-  padding:1rem 0;
+  padding:1rem 0 0.5rem;
+  margin-bottom:0;
   @include display-flex;
   @include flex-direction(row);
   @include flex-wrap(nowrap);
@@ -89,8 +90,25 @@ body.discover.index_loading .sitechrome-page-content-area {
   @include justify-content(space-between);
 }
 
-.discover-setup-title-step {
-  margin:0;
+.discover-setup-title-step-title {
+  margin:0.5rem;
+}
+
+.discover-setup-title-error {
+  color:$red;
+  font-size:rems(13);
+}
+
+.discover-setup-title-step-count {
+  color:#FFF;
+  font-size:rems(13);
+}
+
+.discover-setup-header-content {
+  @include display-flex;
+  @include flex-direction(column);
+  @include flex-wrap(nowrap);
+  @include align-items(center);
 }
 
 /* So the middle flex item is perfectly centered */

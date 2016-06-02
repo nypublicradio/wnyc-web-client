@@ -1,20 +1,22 @@
 <header class="discover-setup-header">
   <div class="discover-setup-header-action">
-
     {{link-to "Back" 'discover.start' class="rounded-caps-button"}}
-
   </div>
-  <div>
-    <h2 class="discover-setup-title-step h2 text--white">Pick Your Topics</h2>
+  <div class="discover-setup-header-content">
+    <span class="discover-setup-title-step-count">Step 1 of 2</span>
+    <h2 class="discover-setup-title-step-title h2 text--white">Pick Your Topics</h2>
+
+    <span class="discover-setup-title-error">&nbsp;
+      {{#if (and showError hasNotSelectedATopic)}}
+        Please select at least one topic
+      {{/if}}
+    </span>
   </div>
   <div class="discover-setup-header-action">
-    {{#if hasNotSelectedATopic}}
-      <button class="rounded-caps-button" disabled='disabled'>Next</button>
-    {{else}}
-      <button class="rounded-caps-button mod-filled-red" disabled={{hasNotSelectedATopic}} {{action 'next' currentTopicSelection}}>Next</button>
-    {{/if}}
+    <button class="rounded-caps-button mod-filled-red" {{action 'next' currentTopicSelection}}>Next</button>
   </div>
 </header>
+
 
 {{discover-topic-list
   topics=model.topics
