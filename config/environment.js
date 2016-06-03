@@ -21,6 +21,7 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
+    QP_WHITELIST: ['q', 'scheduleStation', 'next'], // see puppy/settings/base_settings.py
     exportApplicationGlobal: process.env.DEPLOY_TARGET !== 'production',
 
     sentry: {
