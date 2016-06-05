@@ -321,6 +321,33 @@ body.discover.index_loading .sitechrome-page-content-area {
     pointer-events: none; // Don't want this sucker interfering with clicks
   }
 }
+.playlist-play-indicator-button {
+  background: transparent;
+  @include fontsize(14);
+  line-height: 34px;
+  cursor: pointer;
+  border:0;
+  outline:0;
+  @include transition(opacity $transition-timing/2);
+
+  svg {
+    width: 40px;
+    height: 40px;
+
+    #pause-icon, #play-icon {
+      fill:$red;
+    }
+    #circle-icon {
+      fill: #eaeaea;
+    }
+  }
+
+  &:hover {
+    #pause-icon, #play-icon, #circle-icon {
+      fill: $darkred;
+    }
+  }
+}
 
 
 .playlist-play-indicator-button {
