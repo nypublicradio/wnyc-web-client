@@ -79,10 +79,8 @@
         </li>
         <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
           {{#link-to 'discover' class='inherit'}}
-          <svg class="icon--menu icon--topics">
-            <use xlink:href="{{svgURL}}nav_icons.svg#Topics"></use>
-          </svg>
-          [Product]
+          {{wnyc-svg icon='antenna' className='icon--menu icon--antenna'}}
+          Discover
           {{/link-to}}
         </li>
         <li class="list-item list-item--short">
