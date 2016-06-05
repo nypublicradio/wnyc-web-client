@@ -72,5 +72,13 @@ test('it links to the story url', function(assert) {
   this.set('story', server.create('discover-story', {url: url}));
 
   this.render(hbs`{{discover-playlist-story-info story=story}}`);
-  assert.equal(this.$('a[href]').attr('href'), url);
+  assert.equal(this.$('.discover-playlist-story-title a[href]').attr('href'), url);
+});
+
+test('it links to the show url', function(assert) {
+  let url = "http://wnyc.org";
+  this.set('story', server.create('discover-story', {showUrl: url}));
+
+  this.render(hbs`{{discover-playlist-story-info story=story}}`);
+  assert.equal(this.$('.discover-playlist-story-show-title a[href]').attr('href'), url);
 });

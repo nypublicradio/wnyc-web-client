@@ -19,7 +19,7 @@
             itemPK=story.id
             class="discover-playlist-story-play-button"
             isReady=audioReady
-            isPlaying=(eq story.id currentPlaylistStoryId)
+            isPlaying=(and (eq story.id currentPlaylistStoryId) isPlaying)
             onPause=(action 'pauseTrack' story.id)
             onPlay=(action 'playTrack' story.id)
           }}
