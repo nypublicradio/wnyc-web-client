@@ -17,7 +17,7 @@
  *      h6.h1 h6.h1
  */
 .h1 {
-    @include fontsize($base-font*2.1875);
+    @include fontsize($base-font*2); /* 32px */
     font-weight: 600;
     line-height: 2.6rem;
 }
@@ -32,13 +32,8 @@
 .h1--extrabold {
   font-weight: 800;
 }
-
-.h2--larger {
-    @include fontsize($base-font*1.5);
-    line-height: 1;
-}
 .h2 {
-    @include fontsize($base-font*1.5);
+    @include fontsize($base-font*1.5); /* 24px */
     font-weight: 600;
     line-height: 2.125rem;
 }
@@ -51,23 +46,19 @@
     }
 }
 .h3 {
-    @include fontsize($base-font);
+    @include fontsize($base-font); /* 16px */
     font-weight: 600;
 }
-.h3--larger {
-    @include fontsize($base-font*1.125);
-    line-height: 1.8;
-}
 .h4 {
-    @include fontsize($base-font*0.875);
+    @include fontsize($base-font*0.875); /* 14px */
     font-weight: 600;
 }
 .h5 {
-    @include fontsize($base-font*0.75);
+    @include fontsize($base-font*0.75); /* 12px */
     font-weight: 600;
 }
 .h6 {
-    @include fontsize($base-font*0.6875);
+    @include fontsize($base-font*0.6875); /* 11px  TODO: phase out this size */
     font-weight: 600;
 }
 .h-featured {
@@ -465,15 +456,6 @@
 
     &:hover,
     &:focus {
-        color: $blue;
-    }
-}
-
-.link--black {
-    color: black;
-    border: none;
-
-    &:hover {
         color: $blue;
     }
 }

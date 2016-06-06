@@ -135,3 +135,8 @@
     
   }
 }
+.featured-show .flag-image>img {
+   @include mq($small-only) {
+    max-width: 110px; 
+  }
+}
