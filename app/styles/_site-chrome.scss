@@ -132,6 +132,16 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     @include fontsize(14);
+
+  }
+}
+
+.sitechrome-nav {
+  a:hover {
+    opacity: 0.8;
+  }
+  button:hover {
+    opacity: 0.8;
   }
 }
 
