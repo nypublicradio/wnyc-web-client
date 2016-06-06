@@ -5,15 +5,12 @@ moduleForComponent('discover-playlist-play-button', 'Integration | Component | d
   integration: true
 });
 
-
-test('it renders with playing text when playing', function(assert) {
-  this.render(hbs`{{discover-playlist-play-button isPlaying=true playingText="Pause" pausedText="Play"}}`);
-
-  assert.equal(this.$().text().trim(), 'Pause');
+test('it renders as inline', function(assert) {
+  this.render(hbs`{{discover-playlist-play-button text="Button Text"}}`);
+  assert.equal(this.$().text().trim(), 'Button Text');
 });
 
-test('it renders with paused text when paused', function(assert) {
-  this.render(hbs`{{discover-playlist-play-button isPlaying=true playingText="Pause" pausedText="Play"}}`);
-
-  assert.equal(this.$().text().trim(), 'Play');
+test('it renders with a block', function(assert) {
+  this.render(hbs`{{#discover-playlist-play-button}}Button Text{{/discover-playlist-play-button}}`);
+  assert.equal(this.$().text().trim(), 'Button Text');
 });

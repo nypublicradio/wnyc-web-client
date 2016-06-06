@@ -10,7 +10,17 @@
   Sit back and just listen, or tell it what you like and don’t like - it will adapt to you.
   </h3>
 
-  {{playlist.button class="discover-playlist-header-button"}}
+  {{#playlist.button class="discover-playlist-header-button"}}
+    {{#if playlist.isNotStarted}}
+      Start Listening
+    {{else}}
+      {{#if playlist.isPaused}}
+        Continue Listening
+      {{else}}
+        Pause
+      {{/if}}
+    {{/if}}
+  {{/playlist.button}}
 {{/discover-playlist}}
 
 {{outlet}}

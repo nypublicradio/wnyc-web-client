@@ -4,15 +4,16 @@ export default Ember.Component.extend({
   classNames:   ['discover-playlist-container'],
   orderedStories: Ember.computed.or('customSortedStories', 'stories'),
 
-  audio:         Ember.inject.service(),
+  audio:          Ember.inject.service(),
   region:        'UnknownRegion',
 
   // Computed properties from a service. These are a little hinky
-  audioReady:    Ember.computed('audio', 'audio.isReady', function() {
+  audioReady:     Ember.computed('audio', 'audio.isReady', function() {
     if (this.get('audio')) {
       return this.get('audio.isReady');
     }
   }),
+
   currentAudioId: Ember.computed('audio', 'audio.currentAudio', 'audio.currentAudio.id', function() {
     if (this.get('audio') && this.get('audio.currentAudio')) {
       return this.get('audio.currentAudio.id');
@@ -21,11 +22,19 @@ export default Ember.Component.extend({
 
   isPlaying:     Ember.computed.and('audioReady', 'currentTrackIsInPlaylist', 'audio.isPlaying'),
 
-  currentTrackIsInPlaylist: Ember.computed('orderedStories', 'currentAudioId', function() {
-    return this.get('orderedStories').findBy('id', this.get('currentAudioId'));
+  isPaused:      Ember.computed('currentTrackIsInPlaylist', 'isPlaying', function() {
+    return this.get('currentTrackIsInPlaylist') && !this.get('isPlaying');
   }),
 
-  currentPlaylistStoryId: Ember.computed('currentTrackIsInPlaylist', 'currentAudioId', function() {
+  isNotStarted:  Ember.computed('isPlaying', 'isPaused', function() {
+    return !this.get('isPlaying') && !this.get('isPaused');
+  }),
+
+  currentTrackIsInPlaylist: Ember.computed('orderedStories', 'currentAudioId', function() {
+    return !!this.get('orderedStories').findBy('id', this.get('currentAudioId'));
+  }),
+
+  currentPlaylistStoryId:   Ember.computed('currentTrackIsInPlaylist', 'currentAudioId', function() {
     if (this.get('currentTrackIsInPlaylist')) {
       return this.get('currentAudioId');
     }
@@ -37,7 +46,18 @@ export default Ember.Component.extend({
       this.set('justDragged', draggedModel);
     },
     toggle() {
-      // todo: setup and play playlist
+      let storyId = this.get('currentPlaylistStoryId');
+
+      if (this.get('isPlaying')) {
+        this.send('pauseTrack');
+      }
+      else if (storyId) {
+        this.send('playTrack', storyId);
+      }
+      else {
+        let story = this.get('orderedStories').get('firstObject');
+        this.send('playTrack', story.id);
+      }
     },
     pauseTrack(/* storyId */) {
       this.get('audio').pause(this.get('region'));
