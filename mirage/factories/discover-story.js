@@ -16,7 +16,7 @@ export default Factory.extend({
     let show_pk = faker.random.uuid();
     return {
       show_pk: show_pk,
-      show_url: function() { return `show/${show_pk}`; },
+      show_url: `show/${show_pk}`,
       show_slug: faker.lorem.words(1),
       show_title: faker.lorem.sentence()
     };
