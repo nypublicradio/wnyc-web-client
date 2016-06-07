@@ -15,7 +15,7 @@
       <span class="discover-playlist-item-handle">
         {{wnyc-svg icon="reorder"}}
       </span>
-      {{#discover-playlist-story isPlaying=(eq story.id currentPlaylistStoryId)}}
+      {{#discover-playlist-story isCurrentTrack=(eq story.id currentPlaylistStoryId) isPlaying=(and isPlaying (eq story.id currentPlaylistStoryId))}}
 
         {{playlist-play-indicator
             title=story.title

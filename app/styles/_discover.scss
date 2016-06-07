@@ -257,7 +257,7 @@ body.discover.index_loading .sitechrome-page-content-area {
   @include flex-wrap(nowrap);
   @include align-items(flex-start);
 
-  &.is-playing {
+  &.is-current-track {
     background-color:rgba($red, 0.03);
     border-left:3px solid $red;
   }
