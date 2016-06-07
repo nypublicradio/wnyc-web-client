@@ -49,7 +49,6 @@
     "ember-cli-pagination": "noslouch/ember-cli-pagination#a946468f2d2cb837cb7a370b5c6e6d7cea3af7c9",
     "ember-cli-qunit": "^1.4.0",
     "ember-cli-release": "0.2.8",
-    "ember-cli-rename": "0.0.4",
     "ember-cli-sentry": "^2.3.2",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-uglify": "^1.2.0",
