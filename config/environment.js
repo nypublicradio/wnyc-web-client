@@ -1,5 +1,6 @@
 /* jshint node: true, multistr: true */
 
+
 module.exports = function(environment) {
 
   function usingProxy() {

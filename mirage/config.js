@@ -1,4 +1,9 @@
 import config from 'overhaul/config/environment';
+import html from './helpers/django-html';
+
+// Mirage is diabled by default when using --proxy
+// In development (without --proxy) and test environments, these handlers will be used
+
 
 // Mirage is diabled by default when using --proxy
 // In development (without --proxy) and test environments, these handlers will be used
@@ -107,6 +112,7 @@ export default function() {
   this.get(`${baseUrl}`, function(schema) {
     let home = schema.djangoPages.find('/');
     return home.attrs.text;
+    // return html;
   });
 
   this.get(`${baseUrl}/\*id`, 'django-page');
