@@ -170,6 +170,13 @@ body.discover.index_loading .sitechrome-page-content-area {
 .discover-playlist-header-title, .discover-playlist-header-subtitle, .discover-playlist-header-button {
   margin:0.75rem;
 }
+.discover-playlist-header-button {
+  @include display-flex;
+  @include flex-direction(row);
+  @include flex-wrap(nowrap);
+  @include align-items(center);
+  @include justify-content(center);
+}
 
 // This the sortable item
 .discover-playlist-item {
@@ -320,6 +327,7 @@ body.discover.index_loading .sitechrome-page-content-area {
     content: counter(discover-playlist-counter);
     pointer-events: none; // Don't want this sucker interfering with clicks
   }
+
 }
 .playlist-play-indicator-button {
   background: transparent;
@@ -328,12 +336,20 @@ body.discover.index_loading .sitechrome-page-content-area {
   cursor: pointer;
   border:0;
   outline:0;
-  @include transition(opacity $transition-timing/2);
+  @include transition(opacity $transition-timing/4);
 
-  svg {
+  .playlist-play-indicator-speaker {
+    width: 22px;
+    path {
+      fill: $red;
+    }
+  }
+
+  .playlist-play-indicator-pause, .playlist-play-indicator-play {
     width: 40px;
     height: 40px;
-
+  }
+  svg {
     #pause-icon, #play-icon {
       fill:$red;
     }
@@ -348,7 +364,6 @@ body.discover.index_loading .sitechrome-page-content-area {
     }
   }
 }
-
 
 .playlist-play-indicator-button {
   /* Hide the button by default */
@@ -365,6 +380,13 @@ body.discover.index_loading .sitechrome-page-content-area {
 }
 
 .discover-playlist-story:hover, .discover-playlist-story.is-playing {
+  .playlist-play-indicator-speaker {
+    display:block;
+  }
+  .playlist-play-indicator-pause {
+    display:none;
+  }
+
   .playlist-play-indicator-button {
     /* Show the button */
     opacity:1;
@@ -372,6 +394,14 @@ body.discover.index_loading .sitechrome-page-content-area {
   .discover-playlist-story-play-button:before {
     /* Hide the number */
     opacity:0;
+  }
+}
+.discover-playlist-story:hover {
+  .playlist-play-indicator-speaker {
+    display:none;
+  }
+  .playlist-play-indicator-pause {
+    display:block;
   }
 }
 
@@ -524,7 +554,7 @@ body.discover.index_loading .sitechrome-page-content-area {
 
 
 .rounded-caps-button {
-  display: inline-block;
+  display:inline-block;
   border-radius: 25px;
   border: 2px solid #FFF;
   border-color: #FFF;
@@ -553,6 +583,21 @@ body.discover.index_loading .sitechrome-page-content-area {
   }
 }
 
+.rounded-caps-button.mod-with-icon {
+  @include display-flex;// so it center aligns nicely
+  svg {
+    width:15px;
+  }
+
+  > svg + span {
+    display:inline-block;
+    margin-left:5px;
+  }
+  > span + svg {
+    margin-left:5px;
+  }
+}
+
 .rounded-caps-button.mod-filled-red {
   background-color:$red;
   border-color:$red;
@@ -568,5 +613,11 @@ body.discover.index_loading .sitechrome-page-content-area {
       border-color:$darkred;
       color: #FFF;
     }
+  }
+}
+
+.rounded-caps-button.mod-with-icon.mod-filled-red {
+  svg path, svg polygon {
+    fill: #FFF;
   }
 }

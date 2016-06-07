@@ -1,6 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  session:        Ember.inject.service(),
+
+  init() {
+    this._super(...arguments);
+  },
+
   classNames:   ['discover-playlist-container'],
   orderedStories: Ember.computed.or('customSortedStories', 'stories'),
 

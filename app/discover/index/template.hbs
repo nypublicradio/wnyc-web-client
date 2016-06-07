@@ -10,14 +10,15 @@
   Sit back and just listen, or tell it what you like and don’t like - it will adapt to you.
   </h3>
 
-  {{#playlist.button class="discover-playlist-header-button"}}
+  {{! Todo: Abstract this into an icon-button component that allows left/right options, etc }}
+  {{#playlist.button class="discover-playlist-header-button mod-with-icon"}}
     {{#if playlist.isNotStarted}}
-      Start Listening
+      <span>Start Listening</span>{{wnyc-svg icon="arrow-down"}}
     {{else}}
       {{#if playlist.isPaused}}
-        Continue Listening
+        {{wnyc-svg icon="play"}}<span>Continue Listening</span>
       {{else}}
-        Pause
+        {{wnyc-svg icon="pause"}}<span>Pause</span>
       {{/if}}
     {{/if}}
   {{/playlist.button}}
