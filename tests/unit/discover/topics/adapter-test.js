@@ -9,8 +9,3 @@ test('it exists', function(assert) {
   let adapter = this.subject();
   assert.ok(adapter);
 });
-
-test('it uses the topics API', function(assert) {
-  let adapter = this.subject();
-  assert.equal(adapter.namespace, "api/v1/discover/topics");
-});
