@@ -103,9 +103,6 @@
 /* Bring up this element to sit flush with the header */
  .flush--header {
     margin-top: -1.5rem;
-    @include mq($middle-narrow-only){
-        margin-top: 0;
-    }
  }
 
 /**

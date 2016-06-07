@@ -143,6 +143,10 @@
   button:hover {
     opacity: 0.8;
   }
+
+  @include mq($middle-narrow-only) {
+    margin-bottom: 24px;
+  }
 }
 
 // .btn.btn--large.btn--white

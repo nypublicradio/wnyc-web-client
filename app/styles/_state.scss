@@ -94,6 +94,10 @@
 
   + .marquee {
     margin-top: -1.5rem;
+
+     @include mq($small-only) {
+        margin-top: 0;
+      }
   }
 }
 
