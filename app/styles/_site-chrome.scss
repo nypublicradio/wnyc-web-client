@@ -17,10 +17,40 @@
 
   @include mq($middle-narrow-only) {
     margin-bottom: 0;
+
+    .fixedNav & {
+      margin-bottom: 57px;
+    }
   }
   @include mq($middle-narrow-and-up) {
     padding-top: 0;
     height: 83px;
+  }
+
+}
+
+.sitechrome-nav {
+  //for mobile header snap
+  -webkit-transform: translate3d(0px,0px,0px);
+  transform: translate3d(0px,0px,0px);
+  
+  a:hover {
+    opacity: 0.8;
+  }
+  button:hover {
+    opacity: 0.8;
+  }
+
+  @include mq($middle-narrow-only) {
+    margin-bottom: 24px;
+  }
+
+  .fixedNav & {
+    position: fixed;
+    position: sticky;
+    top: 0;
+    z-index: $zIndex-fixedNav;
+    width: 100%;
   }
 }
 
@@ -133,19 +163,6 @@
     letter-spacing: 1px;
     @include fontsize(14);
 
-  }
-}
-
-.sitechrome-nav {
-  a:hover {
-    opacity: 0.8;
-  }
-  button:hover {
-    opacity: 0.8;
-  }
-
-  @include mq($middle-narrow-only) {
-    margin-bottom: 24px;
   }
 }
 
