@@ -103,7 +103,6 @@ export function beforeAppend(element, page) {
       // TODO: is there a better way to detect this?
       return container;
     } else {
-      let flatPage = element.querySelector('#flatpage.graphic-responsive');
       let legacyContent = element.querySelector('#site') || element.querySelector('#flatpage');
       if (!legacyContent) {
         // maybe it's a flat page
