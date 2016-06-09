@@ -1,0 +1,27 @@
+<div class="l-constrained flush--left">
+
+  <div class="l-flexrow l-flexcol--center">
+
+    <div class="l-col">
+      <div class="nudge">
+        <img alt="oops"
+          src="/assets/img/error/500_tote.png"
+          srcset="/assets/img/error/500_tote_small.png 1x,
+                /assets/img/error/500_tote.png 2x"
+        />
+      </div>
+    </div>
+
+    <div class="l-col l-flexcol--center">
+        <h1 class="h2">Sorry, this page can’t be found.</h1>
+
+        <p>You may have typed the address incorrectly or you may have used an outdated link.
+        Try <a href="/search">searching</a> for it, or browse our site for more stories.</p>
+
+        <p>Status: {{error.response.status}}</p>
+        <p>Message: {{error}}</p> 
+    </div>
+
+  </div>
+
+</div>

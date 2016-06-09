@@ -31,7 +31,13 @@ export default Ember.Route.extend({
       upstream_url += `?${qp.join('&')}`;
     }
     return this.store.find('django-page', upstream_url)
-      .catch((/*error*/) => {
+      .catch((err) => {
+        
+        if (err == "TypeError: Network request failed") {
+          console.log("lets go to the 404 page");
+          return this.store.find('error-page');
+
+        }
         // retrieving this upstream_url failed, possibly because the server
         // redirected the request to a new destination which does not respect
         // our CORS request. reassign the url to the location and let's see
