@@ -349,17 +349,16 @@ body.discover.index_loading .sitechrome-page-content-area {
     width: 40px;
     height: 40px;
   }
-  svg {
-    #pause-icon, #play-icon {
-      fill:$red;
-    }
-    #circle-icon {
-      fill: #eaeaea;
-    }
+
+  .svg-path-pause-icon, .svg-path-play-icon {
+    fill:$red;
+  }
+  .svg-path-circle-icon {
+    fill: #eaeaea;
   }
 
   &:hover {
-    #pause-icon, #play-icon, #circle-icon {
+    .svg-path-pause-icon, .svg-path-play-icon, .svg-path-circle-icon {
       fill: $darkred;
     }
   }
