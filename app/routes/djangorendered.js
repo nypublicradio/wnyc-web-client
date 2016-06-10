@@ -35,7 +35,8 @@ export default Ember.Route.extend({
         
         if (err == "TypeError: Network request failed") {
           console.log("lets go to the 404 page");
-          return this.store.find('error-page');
+          error = {'type': 404};
+          return this.set('error', '404');
 
         }
         // retrieving this upstream_url failed, possibly because the server

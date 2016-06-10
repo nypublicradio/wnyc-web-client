@@ -1,0 +1,13 @@
+img.error-img {
+    margin-right: 25px;
+    max-width: 340px;
+    @include mq($small-only) {
+        margin-right: 17px;
+        max-width: 135px;
+    }
+}
+
+.error-text-block {
+    margin-right: 25px;
+}
+
