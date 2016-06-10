@@ -49,6 +49,22 @@ test('building a station shows list of shows', function(assert) {
   });
 });
 
+test('the playlist button says "Start Listening" to begin with', function(assert) {
+  server.createList('show', 100);
+  server.createList('discover-topic', 20);
+  server.createList('discover-story', 20);
+
+  visit('/discover/playlist');
+
+  andThen(function() {
+    assert.equal($('.discover-playlist-header-button').text().trim(), "Start Listening");
+    click('button.discover-playlist-header-button');
+
+  });
+});
+
+
+
 // TODO: Figure out how to test a loading route. Can't seem to get this to work
 // test('when building a station we show a loading screen', function(assert) {
 //   let done = assert.async();
