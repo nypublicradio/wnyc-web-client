@@ -116,14 +116,14 @@
       <div class="l-highlight--dark">
         <div class="box box--slim">
           <div class="box--topborder">
-            <div class="text text--upper text--white text--spacing aligncenter">
+            <div class="h5 text--airy text--upper text--white text--spacing aligncenter">
             {{#if session.isAuthenticated}}
-              {{#link-to 'djangorendered' 'users/me' class='inherit h5'}}
-              My Account
-              {{/link-to}}
-              <button class="btn--blank btn--white text--spacing text--upper h5" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
+                {{#link-to 'djangorendered' 'users/me' class='inherit'}}
+                My Account
+                {{/link-to}}
+              <button class="btn--blank btn--white text--spacing text--upper" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
             {{else}}
-              {{#link-to 'login' class='inherit h5'}}
+              {{#link-to 'login' class='inherit'}}
               Sign In
               {{/link-to}}
             {{/if}}
