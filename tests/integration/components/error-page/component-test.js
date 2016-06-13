@@ -5,20 +5,32 @@ moduleForComponent('error-page', 'Integration | Component | error page', {
   integration: true
 });
 
-test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+test('it renders 500 page', function(assert) {
+  let testError = {
+    'response': {
+      'status': 500
+    }
+  };
+  this.set("testError", testError);
 
-  this.render(hbs`{{error-page}}`);
+  this.render(hbs`{{error-page error=testError}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$('.error-text-block h1').text().trim(), "Oops, something went wrong...");
+  assert.equal(this.$('.error-text-block p').text().trim(), "We're experiencing an internal server error. Please try again later.");
 
-  // Template block usage:
-  this.render(hbs`
-    {{#error-page}}
-      template block text
-    {{/error-page}}
-  `);
+});
 
-  assert.equal(this.$().text().trim(), 'template block text');
+test('it renders 404 page', function(assert) {
+  let testError = {
+    'response': {
+      'status': 404
+    }
+  };
+  this.set("testError", testError);
+
+  this.render(hbs`{{error-page error=testError}}`);
+
+  assert.equal(this.$('.error-text-block h1').text().trim(), "Sorry, this page can’t be found.");
+  assert.equal(this.$('.error-text-block p').text().trim(), "You may have typed the address incorrectly or you may have used an outdated link. Try searching for it, or browse our site for more stories.");
+
 });

@@ -5,19 +5,15 @@
       
       {{#if pageNotFound}}
       <img alt="Page Not Found"
-        src="/assets/img/error/404_tote.png"
-        srcset="/assets/img/error/404_tote_small.png 340w,
-              /assets/img/error/404_tote.png 1164w"
-                 class="error-img"
+        src="/assets/img/error/404_tote{{if media.isSmallOnly "_small"}}.png"
+        class="error-img"
       />
       {{/if}}
 
       {{#if serverError}}
       <img alt="Server Error"
-        src="/assets/img/error/500_tote.png"
-        srcset="/assets/img/error/500_tote_small.png 340w,
-              /assets/img/error/500_tote.png 1164w"
-                 class="error-img"
+        src="/assets/img/error/500_tote{{if media.isSmallOnly "_small"}}.png"
+        class="error-img"
       />
       {{/if}}
      
@@ -34,8 +30,7 @@
 
       <div class="text text--430">
         {{#if pageNotFound}}
-        <p>You may have typed the address incorrectly or you may have used an outdated link.
-        Try <a href="/search">searching</a> for it, or browse our site for more stories.</p>
+        <p>You may have typed the address incorrectly or you may have used an outdated link. Try <a href="/search">searching</a> for it, or browse our site for more stories.</p>
         {{/if}}
 
         {{#if serverError}}
