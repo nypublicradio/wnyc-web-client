@@ -43,7 +43,6 @@ function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   } else {
-    console.log("status is not ok", response);
     var error = new Error(response);
     error.response = response;
     throw error;
