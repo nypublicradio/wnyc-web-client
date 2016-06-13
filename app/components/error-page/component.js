@@ -9,16 +9,20 @@ export default Ember.Component.extend({
   //make sure error type is one of expected variables
   errorType: computed('error', {
     get() {
-      const errorType = get(this, 'error.response.status');
+      const statusCode = get(this, 'error.response.status');
 
-      if (errorType === 404) {
-        console.log("404");
-        return 'not-found';
-      } else if (errorType === 500) {
-        return 'server-error';
+      if (statusCode === 404) {
+        return 404;
       } else {
-        return 'other';
+        return 500;
       }
     }
-  })
+  }),
+  pageNotFound: Ember.computed('errorType', function(){
+    console.log(this.get('errorType'));
+    return (this.get('errorType') === 404);
+  }),
+  serverError:  Ember.computed('errorType', function(){
+    return (this.get('errorType') === 500);
+  }),
 });

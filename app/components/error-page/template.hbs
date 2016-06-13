@@ -1,27 +1,46 @@
-<div class="l-flexrow l-flexcol--center">
+<div class="l-flexrow l-flexcol--center doubledown">
 
   <div class="l-col">
     <div class="nudge">
-      <img alt="oops"
-        src="/assets/img/error/500_tote.png"
-        srcset="/assets/img/error/500_tote_small.png 1x,
-              /assets/img/error/500_tote.png 2x"
-        class="error-img"
+      
+      {{#if pageNotFound}}
+      <img alt="Error"
+        src="/assets/img/error/404_tote.png"
+        srcset="/assets/img/error/404_tote_small.png 340w,
+              /assets/img/error/404_tote.png 1164w"
+                 class="error-img"
       />
+      {{/if}}
+
+      {{#if serverError}}
+      <img alt="Error"
+        src="/assets/img/error/500_tote.png"
+        srcset="/assets/img/error/500_tote_small.png 340w,
+              /assets/img/error/500_tote.png 1164w"
+                 class="error-img"
+      />
+      {{/if}}
+     
     </div>
   </div>
 
   <div class="l-col l-flexcol--center">
     <div class="error-text-block">
    
-      <h1 class="h2">Sorry, this page can’t be found.</h1>
+      <h1 class="h2">
+        {{#if pageNotFound}}Sorry, this page can’t be found.{{/if}}
+        {{#if serverError}}Oops, something went wrong...{{/if}}
+      </h1>
 
       <div class="text text--430">
+        {{#if pageNotFound}}
         <p>You may have typed the address incorrectly or you may have used an outdated link.
         Try <a href="/search">searching</a> for it, or browse our site for more stories.</p>
-        <p>Error Type: {{errorType}}</p>
-        <p>Status: {{error.response.status}}</p>
-        <p>Message: {{error.response.statusText}}</p>
+        {{/if}}
+
+        {{#if serverError}}
+        <p>We're experiencing an internal server error. Please try again later. </p>
+        {{/if}}
       </div>
 
     </div>
