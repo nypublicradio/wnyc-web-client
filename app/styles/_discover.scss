@@ -45,6 +45,7 @@ body.discover.index_loading .sitechrome-page-content-area {
 .discover-welcome-screen-title, .discover-welcome-screen-subtitle {
   max-width:350px;
   text-align:center;
+  color:#FFF;
 }
 
 .discover-welcome-screen-title, .discover-welcome-screen-subtitle,
@@ -169,6 +170,7 @@ body.discover.index_loading .sitechrome-page-content-area {
 
 .discover-playlist-header-title, .discover-playlist-header-subtitle, .discover-playlist-header-button {
   margin:0.75rem;
+  color:#FFF;
 }
 .discover-playlist-header-button {
   @include display-flex;
@@ -378,7 +380,7 @@ body.discover.index_loading .sitechrome-page-content-area {
   }
 }
 
-.discover-playlist-story:hover, .discover-playlist-story.is-playing {
+.discover-playlist-story.is-playing {
   .playlist-play-indicator-speaker {
     display:block;
   }

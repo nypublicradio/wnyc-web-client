@@ -50,9 +50,10 @@ test('building a station shows list of shows', function(assert) {
 });
 
 test('the playlist button says "Start Listening" to begin with', function(assert) {
-  server.createList('show', 100);
+  server.createList('show', 10);
   server.createList('discover-topic', 20);
   server.createList('discover-story', 20);
+  server.createList('ondemand', 3)
 
   visit('/discover/playlist');
 
