@@ -3,7 +3,11 @@ import { Factory, faker } from 'ember-cli-mirage';
 /* This is representing the response we're getting from the API. This is different than the discover/story model format we're using in the discover feature. Data gets transformed a bit by the serializer */
 
 export default Factory.extend({
-  pk()    { return faker.random.number(1000000); },
+  id() {
+    return faker.random.number(1000000);
+  },
+
+  pk()    { return this.id; },
   // this needs to be only numbers, or the audio service will think this it's a 'stream' instead of 'onDemand'.
 
   title() { return faker.lorem.sentence(); },
