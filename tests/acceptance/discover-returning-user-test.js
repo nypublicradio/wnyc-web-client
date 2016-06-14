@@ -53,7 +53,7 @@ test('the playlist button says "Start Listening" to begin with', function(assert
   server.createList('show', 10);
   server.createList('discover-topic', 20);
   server.createList('discover-story', 20);
-  server.createList('ondemand', 3)
+  server.createList('ondemand', 3);
 
   visit('/discover/playlist');
 
