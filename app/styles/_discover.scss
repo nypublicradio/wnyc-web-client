@@ -359,7 +359,12 @@ body.discover.index_loading .sitechrome-page-content-area {
     fill: #eaeaea;
   }
 
+  &:focus {
+    opacity:0;
+  }
+
   &:hover {
+    opacity:1;
     .svg-path-pause-icon, .svg-path-play-icon, .svg-path-circle-icon {
       fill: $darkred;
     }
@@ -403,6 +408,13 @@ body.discover.index_loading .sitechrome-page-content-area {
   }
   .playlist-play-indicator-pause {
     display:block;
+  }
+  .playlist-play-indicator-button {
+    opacity:1;
+  }
+  .discover-playlist-story-play-button:before {
+    /* Hide the number */
+      opacity:0;
   }
 }
 
