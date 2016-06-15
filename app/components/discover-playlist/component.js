@@ -1,11 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  session:        Ember.inject.service(),
-
-  init() {
-    this._super(...arguments);
-  },
+  session: Ember.inject.service(),
+  queue:   Ember.inject.service('discover-queue'),
 
   classNames:   ['discover-playlist-container'],
   orderedStories: Ember.computed.or('customSortedStories', 'stories'),
@@ -50,6 +47,14 @@ export default Ember.Component.extend({
     reorderItems(itemModels, draggedModel) {
       this.set('customSortedStories', itemModels);
       this.set('justDragged', draggedModel);
+
+      this.get('queue').updateQueue(itemModels);
+      this.sendAction('onUpdateItems', itemModels);
+    },
+    removeItem(item) {
+      this.get('queue').removeItem(item);
+      this.get('orderedStories').removeObject(item);
+      this.sendAction('onRemoveItem', item);
     },
     toggle() {
       let storyId = this.get('currentPlaylistStoryId');

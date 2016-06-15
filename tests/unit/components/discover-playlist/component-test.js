@@ -69,7 +69,6 @@ test("isNotStarted is set when the playlist isn't playing and isn't paused", fun
 
   component.set('audio.isPlaying', false);
   assert.equal(component.get('isNotStarted'), false, "has not started is false after audio is paused");
-
 });
 
 test('currentPlaylistStoryId is set when the current audio matches a story in the playlist', function(assert) {
@@ -81,4 +80,38 @@ test('currentPlaylistStoryId is set when the current audio matches a story in th
   component.set('audio.currentAudio.id', 1);
 
   assert.equal(component.get('currentPlaylistStoryId'), 1, "matching story should return story id");
+});
+
+test('delete action sends delete to discover queue and deletes item from array', function(assert) {
+  var component = this.subject();
+  component.set('stories', stories);
+
+  var itemDeleted;
+  let queueStub = {
+    removeItem(item) {
+      itemDeleted = item;
+    }
+  };
+  component.set('queue', queueStub);
+
+  let story = stories[0];
+  component.send('removeItem', story);
+  assert.equal(itemDeleted, story, "should send first deleted item to service");
+  assert.equal(component.get('orderedStories').length, 1, "item should be deleted from internal list");
+});
+
+test('reordering items sends updates to discover queue', function(assert) {
+  var component = this.subject();
+  component.set('stories', stories);
+
+  var newQueue;
+  let queueStub = {
+    updateQueue(items) {
+      newQueue = items;
+    }
+  };
+
+  component.set('queue', queueStub);
+  component.send('reorderItems', [{id:10}, {id:11}]);
+  assert.deepEqual(newQueue.map(n => n.id), [10, 11]);
 });

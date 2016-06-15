@@ -29,7 +29,7 @@
 
         {{discover-playlist-story-info story=story}}
       {{/discover-playlist-story}}
-      <span class="discover-playlist-item-delete">
+      <span class="discover-playlist-item-delete" {{action 'removeItem' story}}>
         {{wnyc-svg icon="close"}}
       </span>
     {{/sortable-item}}

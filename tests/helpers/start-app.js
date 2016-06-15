@@ -2,6 +2,7 @@ import Ember from 'ember';
 import Application from '../../app';
 import config from '../../config/environment';
 import './alien-dom-click';
+import './ember-sortable/test-helpers';
 
 export default function startApp(attrs) {
   let application;
