@@ -13,7 +13,7 @@
     </span>
   </div>
   <div class="discover-setup-header-action">
-    <button class="rounded-caps-button mod-filled-red" {{action 'next' currentTopicSelection}}>Next</button>
+    <button class="rounded-caps-button {{if (not hasNotSelectedATopic) 'mod-filled-red'}}" {{action 'next' currentTopicSelection}}>Next</button>
   </div>
 </header>
 

@@ -40,6 +40,24 @@ test('shows list of topics', function(assert) {
   });
 });
 
+
+test('next button is disabled until a topic is selected', function(assert) {
+  visit('/discover/start');
+  server.createList('discover-topic', 20);
+
+  andThen(function() {
+    click('button:contains("Create My Own")');
+    andThen(function() {
+      assert.equal(currentURL(), '/discover/start/topics');
+      assert.equal($('button.mod-filled-red').length, 0, "Button should not be red");
+      click(".discover-topic input");
+      andThen(function() {
+        assert.equal($('button.mod-filled-red').length, 1, "Button should be red");
+      });
+    });
+  });
+});
+
 test('next button shows an error if you click it without a topic selected', function(assert) {
   visit('/discover/start');
   server.createList('discover-topic', 20);
