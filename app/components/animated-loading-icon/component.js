@@ -4,7 +4,7 @@ import LoadingIcon from '../../utils/animated-loading-icon';
 export default Ember.Component.extend({
   width: 68,
   height: 68,
-  color: "#777",
+  color: "#FFF",
 
   /* Not the most intuitive for tweaking, but that's how the thing was built */
   radius: 6,     // Radius of the ring before it's exploded.
