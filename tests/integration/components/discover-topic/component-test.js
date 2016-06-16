@@ -47,8 +47,8 @@ test('when checked element has correct class', function(assert) {
   this.set('url', 'm-u');
   this.set('isSelected', false);
   this.render(hbs`{{discover-topic title=title url=url isSelected=isSelected}}`);
-  assert.equal(this.$('.discover-topic').hasClass('discover-topic--selected'), false);
+  assert.equal(this.$('.discover-topic').hasClass('is-selected'), false);
 
   this.set('isSelected', true);
-  assert.equal(this.$('.discover-topic').hasClass('discover-topic--selected'), true);
+  assert.equal(this.$('.discover-topic').hasClass('is-selected'), true);
 });

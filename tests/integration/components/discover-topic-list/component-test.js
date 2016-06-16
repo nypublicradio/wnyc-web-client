@@ -39,13 +39,13 @@ test('select none only shows up when all are selected', function(assert) {
   this.set('topics', server.createList('discover-topic', 3));
   this.render(hbs`{{discover-topic-list topics=topics}}`);
 
-  this.$('.discover-topic input')[0].click();
+  this.$('.discover-topic')[0].click();
   assert.equal(this.$('a:contains("Select None")').length, 0, "Should be 'Select All' when not all are selected");
 
-  this.$('.discover-topic input')[1].click();
+  this.$('.discover-topic')[1].click();
   assert.equal(this.$('a:contains("Select None")').length, 0, "Should be 'Select All' when not all are selected");
 
-  this.$('.discover-topic input')[2].click();
+  this.$('.discover-topic')[2].click();
   assert.equal(this.$('a:contains("Select None")').length, 1, "Should be 'Select None' when all are selected");
 });
 
@@ -55,4 +55,17 @@ test('passing in selected topics renders selected items', function(assert) {
   this.set('selectedTopics', [topics[1], topics[2]]);
   this.render(hbs`{{discover-topic-list topics=topics selectedTopics=selectedTopics}}`);
   assert.equal(this.$('input[type=checkbox]:checked').length, 2);
+});
+
+test('clicking on a topic sends an updated topics list', function(assert) {
+  let topics = server.createList('discover-topic', 5);
+  this.set('topics', topics);
+  this.set('selectedTopics', [topics[1], topics[2]]);
+  this.set('currentlySelectedTopics', []);
+  this.render(hbs`{{discover-topic-list topics=topics selectedTopics=selectedTopics onTopicsUpdated=(action (mut currentlySelectedTopics))}}`);
+
+  assert.equal(this.get('currentlySelectedTopics').length, 2, "should get updated on render");
+
+  this.$('.discover-topic')[1].click();
+  assert.equal(this.get('currentlySelectedTopics').length, 1, "should be updated when topics change");
 });

@@ -5,7 +5,7 @@ export default Ember.Component.extend({
 
   selectedTopics: [],
 
-  allSelected: Ember.computed('selectedTopics', 'topics.length', function() {
+  allSelected: Ember.computed('selectedTopics.length', 'topics.length', function() {
     return this.get('topics').slice().length === this.get('selectedTopics').length;
   }),
 
@@ -28,8 +28,17 @@ export default Ember.Component.extend({
     selectNone() {
       this.updateTopics([]);
     },
-    onMultiselectChangeEvent(selectedTopics /*, changedTopics, action */) {
-      this.updateTopics(selectedTopics);
+    onMultiselectChangeEvent(selectedTopics, changedTopics, action) {
+      let topics = this.get('selectedTopics');
+
+      if (action === 'added') {
+        topics.addObject(changedTopics);
+      }
+      else if (action === 'removed') {
+        topics.removeObject(changedTopics);
+      }
+
+      this.updateTopics(topics);
     }
   }
 });
