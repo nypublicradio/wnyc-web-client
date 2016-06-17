@@ -8,22 +8,12 @@ export default Ember.Component.extend({
   orderedStories: Ember.computed.or('customSortedStories', 'stories'),
 
   audio:          Ember.inject.service(),
-  region:        'UnknownRegion',
 
   // Computed properties from a service. These are a little hinky
-  audioReady:     Ember.computed('audio', 'audio.isReady', function() {
-    if (this.get('audio')) {
-      return this.get('audio.isReady');
-    }
-  }),
+  audioReady:     Ember.computed.alias('audio.isReady'),
+  currentAudioId: Ember.computed.alias('audio.currentAudio.id'),
 
-  currentAudioId: Ember.computed('audio', 'audio.currentAudio', 'audio.currentAudio.id', function() {
-    if (this.get('audio') && this.get('audio.currentAudio')) {
-      return this.get('audio.currentAudio.id');
-    }
-  }),
-
-  isPlaying:     Ember.computed.and('audioReady', 'currentTrackIsInPlaylist', 'audio.isPlaying'),
+  isPlaying:      Ember.computed.and('audioReady', 'currentTrackIsInPlaylist', 'audio.isPlaying'),
 
   isPaused:      Ember.computed('currentTrackIsInPlaylist', 'isPlaying', function() {
     return this.get('currentTrackIsInPlaylist') && !this.get('isPlaying');
@@ -51,11 +41,13 @@ export default Ember.Component.extend({
       this.get('queue').updateQueue(itemModels);
       this.sendAction('onUpdateItems', itemModels);
     },
+
     removeItem(item) {
       this.get('queue').removeItem(item);
       this.get('orderedStories').removeObject(item);
       this.sendAction('onRemoveItem', item);
     },
+
     toggle() {
       let storyId = this.get('currentPlaylistStoryId');
 
@@ -70,12 +62,13 @@ export default Ember.Component.extend({
         this.send('playTrack', story.id);
       }
     },
+
     pauseTrack(/* storyId */) {
-      this.get('audio').pause(this.get('region'));
+      this.get('audio').pause();
     },
-    playTrack(storyId) {
-      // Why does this require a button id? Seems like it knows too much
-      this.get('audio').playOnDemand(storyId, null, this.get('region'));
+
+    playTrack(pk) {
+      this.get('audio').play(pk, 'discover');
     }
   }
 });

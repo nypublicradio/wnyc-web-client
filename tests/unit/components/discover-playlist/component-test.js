@@ -27,6 +27,15 @@ test('currentAudioId changes when service audio id changes', function(assert) {
   assert.equal(component.get('currentAudioId'), 'blah');
 });
 
+test('currentPlaylistStoryId equals audioId when audio is within playlist', function(assert) {
+  var component = this.subject();
+  component.set('stories', stories);
+  component.set('audio.currentAudio.id', 'not-in-dere');
+  assert.equal(component.get('currentPlaylistStoryId'), undefined);
+  component.set('audio.currentAudio.id', stories[0].id);
+  assert.equal(component.get('currentPlaylistStoryId'), stories[0].id, 'ooooh fer sure it should be in dere');
+});
+
 test('isPlaying is set when the current audio matches a story in the playlist', function(assert) {
   var component = this.subject();
   component.set('stories', stories);

@@ -313,7 +313,7 @@ export default Service.extend({
 
   /* EVENTS AND HELPERS -------------------------------------------------------*/
 
-  finishedTrack() {
+  onFinishedTrack() {
     this._trackPlayerEvent({
       action: 'Finished Story',
       withAnalytics: true,

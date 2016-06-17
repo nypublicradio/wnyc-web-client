@@ -2,6 +2,7 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 import startMirage from 'overhaul/tests/helpers/setup-mirage-for-integration';
+import wait from 'ember-test-helpers/wait';
 
 moduleForComponent('discover-playlist', 'Integration | Component | discover playlist', {
   integration: true,
@@ -23,7 +24,7 @@ const audioStub = Ember.Service.extend({
   currentAudio: {id: 'audioPK'},
   isPlaying: false,
   pause: () => {},
-  playOnDemand: () => {}
+  play: () => {}
 });
 
 const queueStub = Ember.Service.extend({
@@ -44,7 +45,7 @@ test('clicking play on a track sends a play action to the audio service', functi
 
   this.set('stories', server.createList('discover-story', 5));
   this.set('audio.isPlaying', false);
-  this.set('audio.playOnDemand', (storyId) => {
+  this.set('audio.play', (storyId) => {
     let firstStory = server.db.discoverStories[0];
     assert.equal(firstStory.id, storyId);
   });
@@ -76,16 +77,17 @@ test('clicking pause on a track sends a pause action to the audio service', func
   this.set('audio.isPlaying', true);
 
   var pauseActionTriggered = false;
-  this.set('audio.pause', (args) => {
+  this.set('audio.pause', () => {
     pauseActionTriggered = true;
-    assert.ok(args);
   });
 
   this.render(hbs`{{discover-playlist stories=stories}}`);
-
+  assert.equal(this.$('.playlist-play-indicator-button:first label').text().trim(), "Pause", 'should be in playing state');
   this.$('.playlist-play-indicator-button:first').click();
 
-  assert.equal(pauseActionTriggered, true, "Pause should have been called");
+  return wait().then(() => {
+    assert.ok(pauseActionTriggered, "Pause should have been called");
+  });
 });
 
 test('clicking delete on a track sends a delete action', function(assert) {
