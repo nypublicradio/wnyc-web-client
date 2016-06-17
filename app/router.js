@@ -49,7 +49,7 @@ Router.map(function() {
 
     this.route('edit', function() {
       this.route('topics');
-      this.route('stories');
+      this.route('shows');
     });
     this.route('index', { path: 'playlist'});
   });

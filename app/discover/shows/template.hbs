@@ -9,6 +9,12 @@
     </span>
   </div>
   <div class="discover-setup-header-action">
-    <button class="rounded-caps-button mod-filled-red" {{action 'next' currentTopicSelection}}>Create Station</button>
+    <button class="rounded-caps-button mod-filled-red" {{action 'next' currentShowSelection}}>Create Station</button>
   </div>
 </header>
+
+{{discover-show-list
+  shows=model.shows
+  selectedShows=model.savedShows
+  onShowsUpdated=(action (mut currentShowSelection))
+}}

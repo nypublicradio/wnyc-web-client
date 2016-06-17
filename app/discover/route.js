@@ -34,6 +34,10 @@ export default Ember.Route.extend({
     // }
   },
   actions: {
+    saveShows(selectedShows) {
+      // called by child routes
+      this.get('session').set('data.discover-shows', selectedShows.map(s => s.get('id')));
+    },
     saveTopics(selectedTopics) {
       // called by child routes
       this.get('session').set('data.discover-topics', selectedTopics.map(s => s.get('url')));

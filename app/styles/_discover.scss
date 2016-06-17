@@ -114,10 +114,19 @@ body.discover.index_loading .sitechrome-page-content-area {
 
 /* So the middle flex item is perfectly centered */
 .discover-setup-header-action {
-  min-width:200px;
+  min-width:150px;
+  @include display-flex;
+  @include flex-wrap(nowrap);
+  @include justify-content(flex-start);
 }
 .discover-setup-header-action:last-child {
+  @include justify-content(flex-end);
   text-align: right;
+}
+.discover-setup-header-cancel-button svg {
+  width:11px;
+  height:11px;
+  margin-right:2px;
 }
 
 /* Discover Playlist ------------------------------------------------*/
@@ -556,12 +565,121 @@ body.discover.index_loading .sitechrome-page-content-area {
   }
 }
 
-.discover-topic--selected .discover-topic-bubble {
+.discover-topic-bubble.is-selected  {
   background-color:$red;
   border: 1px solid $red;
   color:#FFF;
 }
 
+
+/*- Discover Shows ------------------------------------------------*/
+
+.discover-show-list {
+  background-color:#FFF;
+  border-radius:6px;
+  text-align:center;
+  padding:3rem 2rem 2rem;
+}
+
+.discover-show-list > div { // this is the multi-select checkbox component
+  @include display-flex;
+  @include flex-wrap(wrap);
+
+  @include flex-direction(row);
+  @include align-items(flex-start);
+  @include justify-content(space-between);
+}
+
+.discover-show {
+  display:inline-block;
+  width:150px;
+  margin:1rem 1rem;
+  position:relative;
+  input { display:none; }
+}
+
+.discover-show-selection-icon {
+  position:absolute;
+  top:130px;
+  right:-8px;
+}
+
+.discover-show-selection-icon {
+  svg {
+    width:30px;
+    height:30px;
+    box-shadow: 0 0 3px #333;
+    border-radius: 50%;
+    background-color:transparent;
+  }
+  .show-not-selected-icon {
+    circle {
+      stroke: $red;
+      box-shadow:0 0 3px #000;
+    }
+    path, polygon { fill: $red; }
+  }
+  .show-selected-icon {
+    .svg-path-circle-icon {
+      fill: $red;
+      stroke: $red;
+      stroke-width:2px;
+    }
+    .svg-path-check-icon { fill: #FFF; }
+  }
+}
+
+.discover-show-image {
+  overflow:hidden;
+  border-radius:5px;
+  border:1px solid $lightestgray;
+}
+
+.discover-show-title {
+  margin:1rem 0 0;
+  font-weight:normal;
+}
+
+.discover-setup-tab-container {
+  @include display-flex;
+  @include justify-content(space-around);
+  padding:1rem 0;
+  margin-top:1.5rem;
+}
+
+.discover-setup-tab {
+  font-size:rems(20);
+  font-weight:bold;
+}
+
+.discover-setup-tab-link {
+  color:$gray;
+  &:focus {
+    opacity:1;
+  }
+}
+
+
+.discover.edit.shows .discover-setup-tab-link-shows,
+.discover.edit.topics .discover-setup-tab-link-topics  {
+  position:relative;
+  color:#FFF;
+
+  &:after {
+    bottom: -35px;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(255, 255, 255, 0);
+    border-bottom-color: #FFF;
+    border-width: 30px;
+    margin-left: -30px;
+  }
+}
 
 /* Buttons -- eventually once these are tightened up, we can move these out for all to use */
 
@@ -597,8 +715,16 @@ body.discover.index_loading .sitechrome-page-content-area {
 }
 
 .rounded-caps-button.mod-with-icon {
-  @include display-flex;// so it center aligns nicely
+  @include display-flex;
+  @include flex-wrap(nowrap);
+  @include align-items(center);
+  @include justify-content(space-between);
+  text-align: center;
+
   svg {
+    path {
+      fill: #FFF;
+    }
     width:15px;
   }
 

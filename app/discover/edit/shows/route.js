@@ -1,4 +1,2 @@
-import Ember from 'ember';
-
-export default Ember.Route.extend({
-});
+import ShowsRoute from '../../shows/route';
+export default ShowsRoute.extend({});

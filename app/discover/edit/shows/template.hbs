@@ -1,1 +1,7 @@
+{{discover-show-list
+  shows=model.shows
+  selectedShows=model.savedShows
+  onShowsUpdated=(action (mut currentShowSelection))
+}}
+
 {{outlet}}
