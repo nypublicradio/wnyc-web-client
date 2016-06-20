@@ -5,6 +5,7 @@ export default Ember.Component.extend({
   classNames:['discover-show'],
 
   classNameBindings:['isSelected'],
+  attributeBindings:['slug:data-slug'],
 
   imageUrl: computed('imageTemplate', function() {
     let template = this.get('imageTemplate');

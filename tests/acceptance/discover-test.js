@@ -114,3 +114,34 @@ test('topics are saved in a session and maintained upon next visit in initial fl
     });
   });
 });
+
+test('shows are saved in a session and maintained upon next visit in initial flow', function(assert) {
+  server.createList('discover-topic', 5);
+  let shows = server.createList('show', 5);
+  let testShow = shows[0];
+  visit('/discover/start');
+  click('button:contains("Create My Own")');
+
+  andThen(function() {
+    click(".discover-topic input");
+    click("button:contains('Next')");
+
+    andThen(function() {
+      assert.equal(currentURL(), '/discover/start/shows');
+      assert.equal($(`.discover-show[data-slug="${testShow.slug}"] input`).prop('checked'), true);
+      click(`.discover-show[data-slug="${testShow.slug}"]`);
+      // click(".discover-setup-header-action a:contains('Back')");
+
+      click("button:contains('Create Station')");
+
+      andThen(function() {
+        visit('/discover/start/shows');
+
+        andThen(function() {
+          assert.equal($(`.discover-show[data-slug="${testShow.slug}"]`).length, 1);
+          assert.equal($(`.discover-show[data-slug="${testShow.slug}"] input`).prop('checked'), false, "should not be checked");
+        });
+      });
+    });
+  });
+});
