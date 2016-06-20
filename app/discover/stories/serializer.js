@@ -7,7 +7,7 @@ export default JSONAPISerializer.extend({
       data: payload.results.map(result => {
 
         return {
-          id: result.pk,
+          id: result.cmsPK,
           type: 'discover.stories',
           attributes: {
             title:              result.title,
@@ -18,7 +18,7 @@ export default JSONAPISerializer.extend({
             date:               result.newsdate,
             audio:              result.audio,
             url:                result.url,
-            cmsPK:              result.pk
+            cmsPK:              result.cmsPK
           }
         };
       })

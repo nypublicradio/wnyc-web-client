@@ -57,7 +57,7 @@ test('shows are saved in a session and maintained upon next visit in edit flow',
         assert.equal(currentURL(), '/discover/edit/shows');
         assert.equal($(".discover-show input").length, server.db.shows.length, "all should be present");
         assert.equal($(".discover-show input:checked").length, 1, "1 should be checked");
-        assert.equal($(`.discover-show input[name=${stories[0].slug}]:checked`).length, 1, "correct one should be checked");
+        assert.equal($(`.discover-show input[name="${stories[0].slug}"]:checked`).length, 1, "correct one should be checked");
       });
   });
 });
