@@ -324,6 +324,16 @@ export default Service.extend({
     if (get(this, 'currentContext') === 'queue') {
       this.playNextInQueue();
     }
+    else if (context === 'discover') {
+      let nextTrack = this.get('discoverQueue').nextItem(this.get('currentAudio.id'));
+      if (nextTrack) {
+        this.play(get(nextTrack, 'cmsPK'), 'discover');
+      }
+      else {
+        set(this, 'isPlaying', false);
+        set(this, 'currentContext', null);
+      }
+    }
   },
 
   errorEvent(model, errorCode, errorName, errorMessage, ...rest) {

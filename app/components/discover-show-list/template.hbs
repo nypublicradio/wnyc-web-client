@@ -1,4 +1,4 @@
 {{#multiselect-checkboxes options=shows selection=selectedShows tagName='div' onchange=(action 'onMultiselectChangeEvent') as |show isSelected|}}
-  {{discover-show title=show.title isSelected=isSelected imageTemplate=show.logoImage.template}}
+  {{discover-show title=show.title slug=show.slug isSelected=isSelected imageTemplate=show.logoImage.template}}
 {{/multiselect-checkboxes}}
 {{yield}}

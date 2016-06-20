@@ -7,10 +7,10 @@ export default Ember.Route.extend({
       var savedShows = [];
       let savedShowsKeys = this.get('session.data.discover-shows');
       if (savedShowsKeys) {
-        // Now we'll find the matching objects in the discover topics,
-        // and add them to the selectedTopics list
+        // Now we'll find the matching objects in the discover shows,
+        // and add them to the savedShows list
         shows.forEach(function(show) {
-          if (savedShowsKeys.contains(show.get('id'))) {
+          if (savedShowsKeys.contains(show.get('slug'))) {
             savedShows.addObject(show);
           }
         });

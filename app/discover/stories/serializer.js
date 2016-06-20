@@ -17,7 +17,8 @@ export default JSONAPISerializer.extend({
             estimatedDuration:  result.estimated_duration,
             date:               result.newsdate,
             audio:              result.audio,
-            url:                result.url
+            url:                result.url,
+            cmsPK:              result.pk
           }
         };
       })

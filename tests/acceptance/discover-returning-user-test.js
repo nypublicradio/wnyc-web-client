@@ -5,11 +5,14 @@ import { currentSession } from 'overhaul/tests/helpers/ember-simple-auth';
 moduleForAcceptance('Acceptance | discover returning user', {
   beforeEach() {
     let session = currentSession(this.application);
-    server.createList('discover-story', 5);
     server.create('discover-topic', {title: "Music", url: "music"});
     server.create('discover-topic', {title: "Art", url: "art"});
     server.create('discover-topic', {title: "Technology", url: "technology"});
+    server.createList('discover-story', 10);
+    let shows = server.createList('show', 10);
+    session.set('data.discover-shows',  [shows[0].slug]); // set some saved shows
     session.set('data.discover-topics', ['music']); // set some saved topics
+    session.set('data.discover-queue',  server.db.discoverStories); // set some saved stories
   }
 });
 
@@ -39,9 +42,31 @@ test('topics are saved in a session and maintained upon next visit in edit flow'
   });
 });
 
-// TODO update this after getting discover story component in
-test('building a station shows list of shows', function(assert) {
-  server.create('discover-story', {title: 'specific-story-title-to-look-for'});
+
+test('shows are saved in a session and maintained upon next visit in edit flow', function(assert) {
+  visit('/discover/playlist');
+
+  let session = currentSession(this.application);
+  let stories = server.createList('show', 10);
+  session.set('data.discover-shows',  [stories[0].slug]); // set some saved stories
+  click(".discover-edit-playlist-link");
+
+  andThen(function() {
+      click(".discover-setup-tab-link-shows");
+      andThen(function() {
+        assert.equal(currentURL(), '/discover/edit/shows');
+        assert.equal($(".discover-show input").length, server.db.shows.length, "all should be present");
+        assert.equal($(".discover-show input:checked").length, 1, "1 should be checked");
+        assert.equal($(`.discover-show input[name=${stories[0].slug}]:checked`).length, 1, "correct one should be checked");
+      });
+  });
+});
+
+test('stories are displayed from saved session data', function(assert) {
+  let session = currentSession(this.application);
+  let story = server.create('discover-story', {title: 'specific-story-title-to-look-for'});
+  session.set('data.discover-queue',  [story]); // set some saved stories
+
   visit('/discover/playlist');
   andThen(() =>{
     assert.equal($('.discover-playlist:contains("specific-story-title-to-look-for")').length, 1);

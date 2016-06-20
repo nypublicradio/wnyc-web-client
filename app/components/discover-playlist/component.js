@@ -24,10 +24,10 @@ export default Ember.Component.extend({
   }),
 
   currentTrackIsInPlaylist: Ember.computed('orderedStories', 'currentAudioId', function() {
-    return !!this.get('orderedStories').findBy('id', this.get('currentAudioId'));
+    return !!this.get('orderedStories').findBy('cmsPK', this.get('currentAudioId'));
   }),
 
-  currentPlaylistStoryId:   Ember.computed('currentTrackIsInPlaylist', 'currentAudioId', function() {
+  currentPlaylistStoryPk:   Ember.computed('currentTrackIsInPlaylist', function() {
     if (this.get('currentTrackIsInPlaylist')) {
       return this.get('currentAudioId');
     }
@@ -49,17 +49,17 @@ export default Ember.Component.extend({
     },
 
     toggle() {
-      let storyId = this.get('currentPlaylistStoryId');
+      let storyPk = this.get('currentPlaylistStoryPk');
 
       if (this.get('isPlaying')) {
         this.send('pauseTrack');
       }
-      else if (storyId) {
-        this.send('playTrack', storyId);
+      else if (storyPk) {
+        this.send('playTrack', storyPk);
       }
       else {
         let story = this.get('orderedStories').get('firstObject');
-        this.send('playTrack', story.id);
+        this.send('playTrack', story.cmsPK);
       }
     },
 

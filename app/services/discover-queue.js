@@ -9,6 +9,12 @@ export default Ember.Service.extend({
   session: service(),
   items:   computed.alias('session.data.discover-queue'),
   history: service('listen-history'),
+  count:   computed.alias('session.data.discover-queue.length'),
+
+  init() {
+    this.set('items', this.get('session').getWithDefault('data.discover-queue', emberArray()));
+    this._super(...arguments);
+  },
 
   addItem(item) {
     let session       = this.get('session');
@@ -37,6 +43,16 @@ export default Ember.Service.extend({
   updateQueue(items) {
     let session = this.get('session');
     session.set('data.discover-queue', items);
+  },
+
+  nextItem(currentPk) {
+    let items = this.get('items');
+    let current = this.get('items').findBy('cmsPK', currentPk);
+    let currentIndex = items.indexOf(current);
+
+    if (currentIndex < items.length) {
+      return items[currentIndex + 1];
+    }
   },
 
   nextUnplayedItem() {

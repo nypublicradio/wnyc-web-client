@@ -9,5 +9,6 @@ export default Model.extend({
   date:               attr('date'),
   estimatedDuration:  attr('number'),
   url:                attr('string'),
-  audio:              attr('string')
+  audio:              attr('string'),
+  cmsPK:              attr('string')
 });

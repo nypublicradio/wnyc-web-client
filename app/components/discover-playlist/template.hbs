@@ -15,16 +15,16 @@
       <span class="discover-playlist-item-handle">
         {{wnyc-svg icon="reorder"}}
       </span>
-      {{#discover-playlist-story isCurrentTrack=(eq story.id currentPlaylistStoryId) isPlaying=(and isPlaying (eq story.id currentPlaylistStoryId))}}
+      {{#discover-playlist-story isCurrentTrack=(eq story.cmsPK currentPlaylistStoryPk) isPlaying=(and isPlaying (eq story.cmsPK currentPlaylistStoryPk))}}
 
         {{playlist-play-indicator
             title=story.title
-            itemPK=story.id
+            itemPK=story.cmsPK
             class="discover-playlist-story-play-button"
             isReady=audioReady
-            isPlaying=(and (eq story.id currentPlaylistStoryId) isPlaying)
-            onPause=(action 'pauseTrack' story.id)
-            onPlay=(action 'playTrack' story.id)
+            isPlaying=(and (eq story.cmsPK currentPlaylistStoryPk) isPlaying)
+            onPause=(action 'pauseTrack' story.cmsPK)
+            onPlay=(action 'playTrack' story.cmsPK)
           }}
 
         {{discover-playlist-story-info story=story}}

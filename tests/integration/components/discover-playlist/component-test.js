@@ -47,7 +47,7 @@ test('clicking play on a track sends a play action to the audio service', functi
   this.set('audio.isPlaying', false);
   this.set('audio.play', (storyId) => {
     let firstStory = server.db.discoverStories[0];
-    assert.equal(firstStory.id, storyId);
+    assert.equal(firstStory.cmsPK, storyId);
   });
 
   this.render(hbs`{{discover-playlist audioReady=true stories=stories}}`);
@@ -59,7 +59,7 @@ test('play button should be playing when track is playing', function(assert) {
   let playingStory = stories[0];
 
   this.set('stories', stories);
-  this.set('audio.currentAudio.id', playingStory.id);
+  this.set('audio.currentAudio.id', playingStory.cmsPK);
   this.set('audio.isReady', true);
   this.set('audio.isPlaying', true);
 
@@ -72,7 +72,7 @@ test('clicking pause on a track sends a pause action to the audio service', func
   let playingStory = stories[0];
 
   this.set('stories', stories);
-  this.set('audio.currentAudio.id', playingStory.id);
+  this.set('audio.currentAudio.id', playingStory.cmsPK);
   this.set('audio.isReady', true);
   this.set('audio.isPlaying', true);
 
@@ -101,7 +101,7 @@ test('clicking delete on a track sends a delete action', function(assert) {
   this.render(hbs`{{discover-playlist audioReady=true stories=stories onRemoveItem=onRemove}}`);
   this.$('.discover-playlist-item-delete:first').click();
 
-  assert.equal(this.get('itemRemoved').id, server.db.discoverStories[0].id);
+  assert.equal(this.get('itemRemoved').id, server.db.discoverStories[0].cmsPK);
 });
 
 test('clicking delete on a track sends delete to discover queue', function(assert) {
@@ -112,5 +112,5 @@ test('clicking delete on a track sends delete to discover queue', function(asser
   this.render(hbs`{{discover-playlist audioReady=true stories=stories}}`);
   this.$('.discover-playlist-item-delete:first').click();
 
-  assert.equal(this.get('queue.itemDeleted').id, server.db.discoverStories[0].id);
+  assert.equal(this.get('queue.itemDeleted').id, server.db.discoverStories[0].cmsPK);
 });
