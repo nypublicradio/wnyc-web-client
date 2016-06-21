@@ -48,7 +48,7 @@ function checkAuthentication({success, errors}, resolve, reject) {
   if (success) {
     return getUserData().then(json => {
       if (!json.isAuthenticated) {
-        reject("Invalid credentials");
+        reject(["Invalid credentials"]);
       } else {
         resolve(json);
       }
