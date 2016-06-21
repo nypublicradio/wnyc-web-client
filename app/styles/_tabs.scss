@@ -42,7 +42,6 @@
     @extend %vertical-rhythm;
     position: relative;
     white-space: nowrap;
-    padding: 1px; // allow :focus border to show
 
     > * {
         margin-right: 15px;
@@ -59,7 +58,6 @@
 
 .tabs-header--border {
   border-bottom: 1px solid $lightestgray;
-  padding-bottom: 3px;
 }
 
 .tab-link {
@@ -68,7 +66,7 @@
   @include fontsize(14);
 
   @include mq($middle-middle-and-up) {
-    @include fontsize(20);
+    @include fontsize(16);
   }
 
   @include mq($medium-and-up) {
@@ -76,7 +74,7 @@
   }
 
   @include mq($large-and-up) {
-    @include fontsize(20);
+    @include fontsize(16);
   }
 
 }
