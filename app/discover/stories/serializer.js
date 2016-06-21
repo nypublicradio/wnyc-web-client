@@ -4,7 +4,7 @@ import JSONAPISerializer from 'ember-data/serializers/json-api';
 export default JSONAPISerializer.extend({
   normalizeQueryResponse(store, primaryModelClass, payload) {
     return {
-      data: payload.results.map(result => {
+      data: payload.data.map(result => {
         return {
           id: result.pk,
           type: 'discover.stories',

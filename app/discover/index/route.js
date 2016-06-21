@@ -6,16 +6,17 @@ const {
 export default Ember.Route.extend({
   session:       Ember.inject.service(),
   discoverQueue: Ember.inject.service(),
-  discoverPrefs: Ember.inject.service(),
   listenActions: Ember.inject.service(),
+  preflight:     Ember.inject.service('discover-playlist-preflight'),
+  discoverPrefs: Ember.inject.service(),
 
   model() {
-    let prefs = this.get('discoverPrefs');
-    let excludedIds = prefs.get('excludedStoryIds');
+    let prefs         = this.get('discoverPrefs');
+    let excludedIds   = prefs.get('excludedStoryIds');
+    let queuedStories = this.get('discoverQueue.items');
     var stories;
 
-    if (this.get('discoverQueue.items').length > 0) {
-      let queuedStories = this.get('discoverQueue.items');
+    if (queuedStories.length > 0) {
 
       if (queuedStories.mapBy('id').compact().length > 0) {
         // these are already instantiated ember objects from the store
@@ -37,17 +38,25 @@ export default Ember.Route.extend({
       });
     }
     else {
-      let tags = prefs.get('selectedTopicTags').join(",");
-      stories = this.store.query('discover.stories', {
-        browser_id: this.get('session.data.browserId'),
-        discover_station: 'wnyc_2',
-        api_key: 'trident',
-        duration: 10800,
-        tags: tags
-      }).then(s => {
-        return s.filter(story => { return !excludedIds.contains(story.id); });
+
+      let preflight = this.get('preflight');
+      let topicTags = prefs.get('selectedTopicTags');
+      let showSlugs = prefs.get('selectedShowSlugs');
+      stories = Ember.RSVP.hash({
+        showStories: preflight.storiesFromShows(showSlugs),
+        tagStories: preflight.storiesFromTopics(topicTags)
+      }).then((results) => {
+        return this.store.query('discover.stories', {
+          show_stories: results.showStories,
+          tag_stories: results.tagStories,
+        }).then(stories => {
+          return stories.filter(s => !excludedIds.contains(s.id));
+        });
+      }, function(/*error*/) {
+
       });
     }
+
 
     return Ember.RSVP.hash({
       stories: stories
