@@ -1,7 +1,13 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 
-moduleForAcceptance('Acceptance | discover');
+moduleForAcceptance('Acceptance | discover',
+  {
+    beforeEach() {
+      window.Modernizr.touch = false;
+    }
+  }
+);
 
 test('can visit discover from the home page', function(assert) {
   visit('/');
@@ -143,5 +149,17 @@ test('shows are saved in a session and maintained upon next visit in initial flo
         });
       });
     });
+  });
+});
+
+test('mobile users get the app download page', function(assert) {
+  let oldTouchSetting = window.Modernizr.touch;
+  window.Modernizr.touch = true; //spoof this thing
+  server.createList('discover-topic', 5);
+  visit('/discover/start/topics');
+  andThen(function() {
+    assert.equal(currentURL(), '/discover/start');
+    assert.equal($("a:contains('Download It Now')").length, 1);
+    window.Modernizr.touch = oldTouchSetting; // restore this thing
   });
 });

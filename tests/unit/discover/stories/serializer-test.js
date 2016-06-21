@@ -17,8 +17,7 @@ test('it serializes the data', function(assert) {
   server.create('discover-story');
   this.store().query('discover/stories', {}).then(records => {
     let keysToCheck = ['title', 'showTitle', 'showUrl', 'summary', 'estimatedDuration', 'date', 'audio', 'url', 'cmsPK'];
-
-    assert.equal(records.get('length'), 1);
+    assert.equal(records.get('length'), 1, "no records were returned");
 
     records.forEach((record) => {
       keysToCheck.forEach(function(key) {
@@ -34,7 +33,7 @@ test('it serializes the data if show is blank', function(assert) {
     show: {}
   });
   this.store().query('discover/stories', {}).then(records => {
-    assert.equal(records.get('length'), 1);
+    assert.equal(records.get('length'), 1, "no records were returned");
     assert.ok(records);
     records.forEach(record => {
       assert.ok(!record.get('showTitle'), "show title should be blank");

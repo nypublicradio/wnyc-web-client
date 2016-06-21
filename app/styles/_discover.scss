@@ -30,11 +30,38 @@ body.discover.index_loading .sitechrome-page-content-area {
   @include transition(background $transition-timing);
   background-size:cover;
   color: #FFFFFF;
+  padding-bottom:4rem;
+
+  .player-wrapper {
+    display:none;
+  }
+
+  @include mq($small-only) {
+    @include justify-content(space-around);
+    padding-bottom:0;
+  }
+}
+
+.discover-welcome-screen-title-area {
+  text-align:center;
+}
+
+.discover-welcome-screen-action {
+  padding:2rem 0;
+  text-align:center;
+}
+.discover-welcome-screen-action-text {
+  color:#FFF;  
 }
 
 .discover-welcome-screen-icon {
   width:68px;
   height:68px;
+
+  @include mq($small-only) {
+    width:64px;
+    height:64px;
+  }
 
   path {
     color:#FFF;
@@ -51,7 +78,7 @@ body.discover.index_loading .sitechrome-page-content-area {
 .discover-welcome-screen-title, .discover-welcome-screen-subtitle,
 .discover-welcome-screen-icon,
 .discover-welcome-screen-button {
-  margin: 0.75rem;
+  margin: 0.5rem;
 }
 
 .discover-welcome-screen.is-transitioning {

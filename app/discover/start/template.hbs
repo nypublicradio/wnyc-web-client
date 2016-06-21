@@ -1,16 +1,34 @@
 <div class="discover-welcome-screen">
+  <div class="discover-welcome-screen-title-area">
+    {{wnyc-svg icon='antenna' className='discover-welcome-screen-icon'}}
 
-  {{wnyc-svg icon='antenna' className='discover-welcome-screen-icon'}}
+    <h1 class="discover-welcome-screen-title h1">
+      It's a [product] customized for you.
+    </h1>
+    <h3 class="discover-welcome-screen-subtitle h3">
+      Pick your topics and shows.<br/>
+      We'll do the rest.
+    </h3>
+  </div>
 
-  <h1 class="discover-welcome-screen-title h1">
-    It's a [product] customized for you.
-  </h1>
-  <h3 class="discover-welcome-screen-subtitle h3">
-    Pick your topics and shows.<br/>
-    We'll do the rest.
-  </h3>
-  <button class="discover-welcome-screen-button rounded-caps-button" {{action 'next'}}>
-    Create My Own
-  </button>
+  <div class="discover-welcome-screen-action">
+    {{#if isMobile}}
+      <h3 class="h3 discover-welcome-screen-action-text">Available in the WNYC app</h3>
+
+      {{#if isAndroid}}
+        <a href="https://play.google.com/store/apps/details?id=org.wnyc.android&hl=en" class="discover-welcome-screen-button rounded-caps-button">
+          Download It Now
+        </a>
+      {{else}}
+        <a href="https://itunes.apple.com/us/app/wnyc-discover/id470219771?mt=8" class="discover-welcome-screen-button rounded-caps-button">
+          Download It Now
+        </a>
+      {{/if}}
+    {{else}}
+      <button class="discover-welcome-screen-button rounded-caps-button" {{action 'next'}}>
+        Create My Own
+      </button>
+    {{/if}}
+  </div>
   {{outlet}}
 </div>
