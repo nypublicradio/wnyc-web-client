@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import ENV from '../config/environment';
+import RSVP from 'rsvp';
 
 export default Ember.Service.extend({
   session: Ember.inject.service(),
@@ -32,7 +33,7 @@ export default Ember.Service.extend({
   sendHeardStream(pk, context) {
     return this._queueListenAction(pk, 'heardstream', context);
   },
-
+  
 
   /* ------------------------------------------------------------ */
 
@@ -57,7 +58,7 @@ export default Ember.Service.extend({
 
   _queueListenAction(pk, action, context, value) {
     let queue = this.get('queue');
-    let ts = Math.floor(new Date().getTime() / 1000);
+    let ts = new Date().getTime();
 
     queue.addObject({
       pk: pk,
@@ -73,56 +74,70 @@ export default Ember.Service.extend({
   },
 
   _sendSingleListenAction(pk, action, context, value, ts) {
-    //POST /api/v1/listenaction/create/(pk)/(action)/?browser_id=abc123abc123&context=OPB_App_Discover
-
     // pk:       the story pk
     // action:  'pause' | 'skip' | 'play' | 'complete' | 'delete' | 'heardstream'
     // value:   <seconds if action=='pause, absent otherwise>
     // ts:       Unixstyle epoch integer timestamp for when this event occured
 
-    let baseUrl = [ENV.wnycAccountRoot, 'api/v1/listenaction/create', pk, action].join("/");
-    let url = `${baseUrl}/?browser_id=${this.get('browserId')}&context=${context}`;
+    //POST /api/v1/listenaction/create/(pk)/(action)/?browser_id=abc123abc123&context=OPB_App_Discover
 
-    return Ember.$.ajax({
-      data: JSON.stringify({
-        pk: pk,
-        action: action,
-        value:  value,
-        ts: ts
-      }),
-      method: "POST",
-      url: url,
-      dataType: "json",
-      xhrFields: {
-        withCredentials: true
-      }
+    let baseUrl = [ENV.wnycAPI, 'api/v1/listenaction/create', pk, action].join("/");
+    let url = `${baseUrl}?browser_id=${this.get('browserId')}&context=${context}`;
+
+    return new RSVP.Promise((resolve) => {
+      return Ember.$.ajax({
+        data: JSON.stringify({
+          pk: pk,
+          action: action,
+          value:  value,
+          ts: ts
+        }),
+        method: "POST",
+        url: url,
+        dataType: "json",
+        contentType: "application/json",
+        xhrFields: {
+          withCredentials: true
+        }
+      }).then((results) => {
+        resolve(results);
+      });
     });
   },
 
   _sendBulkListenActions(data) {
-    //POST /api/v1/listenaction/create/
+    // pk:       the story pk
+    // action:  'pause' | 'skip' | 'play' | 'complete' | 'delete' | 'heardstream'
+    // value:   <seconds if action=='pause, absent otherwise>
+    // ts:       Unixstyle epoch integer timestamp for when this event occured
 
+    //POST /api/v1/listenaction/create/
     // { browser_id: 123512125,
     //    actions: [
     //      {pk: 1, action: 'play', context: 'discover'}
     //    ]
     // }
 
-    let url = [ENV.wnycAccountRoot, 'api/v1/listenaction/create/'].join("/");
+    let url = [ENV.wnycAPI, 'api/v1/listenaction/create'].join("/");
 
     let payload = {
       browser_id: this.get('browserId'),
       actions: data
     };
 
-    return Ember.$.ajax({
-      data: JSON.stringify(payload),
-      method: "POST",
-      url: url,
-      dataType: "json",
-      xhrFields: {
-        withCredentials: true
-      }
+    return new RSVP.Promise((resolve) => {
+      return Ember.$.ajax({
+        data: JSON.stringify(payload),
+        method: "POST",
+        url: url,
+        dataType: "json",
+        contentType: "application/json",
+        xhrFields: {
+          withCredentials: true
+        }
+      }).then((results) => {
+        resolve(results);
+      });
     });
   }
 });

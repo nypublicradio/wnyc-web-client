@@ -59,14 +59,14 @@ function testSingleRequest(assert, url, functionToRun, postCallback) {
   assert.equal(ajaxCalled, true, "should've sent ajax request to play");
   assert.equal(browserId, 'secrets', "browser id should have been passed in");
   assert.equal(withCredentials, true, "ajax should be sent with credentials");
-  assert.equal(timeStamp, Math.floor(testTimestamp / 1000), "timestamp should have been sent with data");
+  assert.equal(timeStamp, testTimestamp, "timestamp should have been sent with data");
   assert.equal(context, 'context-key', "context should have been sent with data");
 }
 
 test('sending play action sends request in correct format', function(assert) {
   let service = this.subject();
 
-  let url = [ENV.wnycAccountRoot, 'api/v1/listenaction/create/', 400, 'play'].join("/");
+  let url = [ENV.wnycAPI, 'api/v1/listenaction/create', 400, 'play'].join("/");
   testSingleRequest(assert, url, function() {
     service.sendPlay(400, 'context-key');
   });
@@ -77,7 +77,7 @@ test('sending pause action sends request in correct format', function(assert) {
 
   let service = this.subject();
 
-  let url = [ENV.wnycAccountRoot, 'api/v1/listenaction/create', 400, 'pause'].join("/");
+  let url = [ENV.wnycAPI, 'api/v1/listenaction/create', 400, 'pause'].join("/");
   testSingleRequest(assert, url, function() {
     service.sendPause(400, 'context-key', 20);
   }, function(request) {
@@ -89,7 +89,7 @@ test('sending pause action sends request in correct format', function(assert) {
 test('sending skip action sends request in correct format', function(assert) {
   let service = this.subject();
 
-  let url = [ENV.wnycAccountRoot, 'api/v1/listenaction/create', 400, 'skip'].join("/");
+  let url = [ENV.wnycAPI, 'api/v1/listenaction/create', 400, 'skip'].join("/");
   testSingleRequest(assert, url, function() {
     service.sendSkip(400, 'context-key');
   });
@@ -98,7 +98,7 @@ test('sending skip action sends request in correct format', function(assert) {
 test('sending complete action sends request in correct format', function(assert) {
   let service = this.subject();
 
-  let url = [ENV.wnycAccountRoot, 'api/v1/listenaction/create', 400, 'complete'].join("/");
+  let url = [ENV.wnycAPI, 'api/v1/listenaction/create', 400, 'complete'].join("/");
   testSingleRequest(assert, url, function() {
     service.sendComplete(400, 'context-key');
   });
@@ -107,7 +107,7 @@ test('sending complete action sends request in correct format', function(assert)
 test('sending delete action sends request in correct format', function(assert) {
   let service = this.subject();
 
-  let url = [ENV.wnycAccountRoot, 'api/v1/listenaction/create', 400, 'delete'].join("/");
+  let url = [ENV.wnycAPI, 'api/v1/listenaction/create', 400, 'delete'].join("/");
   testSingleRequest(assert, url, function() {
     service.sendDelete(400, 'context-key');
   });
@@ -116,7 +116,7 @@ test('sending delete action sends request in correct format', function(assert) {
 test('sending heardstream action sends request in correct format', function(assert) {
   let service = this.subject();
 
-  let url = [ENV.wnycAccountRoot, 'api/v1/listenaction/create', 400, 'heardstream'].join("/");
+  let url = [ENV.wnycAPI, 'api/v1/listenaction/create', 400, 'heardstream'].join("/");
   testSingleRequest(assert, url, function() {
     service.sendHeardStream(400, 'context-key');
   });
@@ -129,7 +129,7 @@ test('sending multiple actions queues them up and sends them as one request', fu
   var withCredentials = false;
   var browserId;
   var invalidCallCount = 0;
-  let baseUrl = [ENV.wnycAccountRoot, 'api/v1/listenaction/create'].join("/");
+  let baseUrl = [ENV.wnycAPI, 'api/v1/listenaction/create'].join("/");
   var actions = [];
 
   server.post(baseUrl, function(schema, request) {
@@ -163,7 +163,6 @@ test('sending multiple actions queues them up and sends them as one request', fu
     assert.deepEqual(actions.mapBy('pk'), [400, 401, 405, 402, 404], "should have supplied pks");
     assert.deepEqual(actions.mapBy('context'), ['context-key', 'context-key','context-key','context-key','context-key',], "should have supplied contexts");
 
-    let t = Math.floor(testTimestamp / 1000);
-    assert.deepEqual(actions.mapBy('ts'), [t,t,t,t,t], "should all have timestamps");
+    assert.deepEqual(actions.mapBy('ts'), [testTimestamp, testTimestamp, testTimestamp, testTimestamp, testTimestamp], "should all have timestamps");
   });
 });
