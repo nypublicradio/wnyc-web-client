@@ -188,6 +188,7 @@ body.discover.index_loading .sitechrome-page-content-area {
   counter-reset: discover-playlist-counter;
   padding:0;
   margin:0;
+  margin-bottom:2rem;
   border-radius:5px;
   max-width:800px;
 }
@@ -762,6 +763,24 @@ body.discover.index_loading .sitechrome-page-content-area {
   }
   > span + svg {
     margin-left:5px;
+  }
+}
+
+.rounded-caps-button.mod-hollow-blue {
+  border-color:#8fa2e5;
+  color:#8fa2e5;
+  &:not([disabled]) {
+    &:hover, &:focus {
+      color: #FFF;
+      border-color:#FFF;
+      background-color: rgba(255, 255, 255, 0.2);
+      opacity:1;
+    }
+    &:active {
+      color: #8fa2e5;
+      border-color:#FFF;
+      background-color: #FFF;
+    }
   }
 }
 

@@ -48,6 +48,10 @@ export default Ember.Component.extend({
       this.sendAction('onRemoveItem', item);
     },
 
+    findMore() {
+      this.sendAction('onFindMore');
+    },
+
     toggle() {
       let storyPk = this.get('currentPlaylistStoryPk');
 

@@ -29,6 +29,10 @@ export default Ember.Route.extend({
     this.get('discoverQueue').updateQueue(model.stories.toArray());
   },
   actions: {
+    findMore() {
+      this.get('discoverQueue').updateQueue([]);
+      this.refresh();
+    },
     edit() {
       this.transitionTo('discover.edit');
     }
