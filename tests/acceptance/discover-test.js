@@ -102,19 +102,22 @@ test('topics are saved in a session and maintained upon next visit in initial fl
   server.create('discover-topic', {title: "Music", url: "music"});
   server.create('discover-topic', {title: "Art", url: "art"});
   server.create('discover-topic', {title: "Technology", url: "technology"});
-  click('button:contains("Create My Own")');
 
-  andThen(function() {
-    assert.equal(currentURL(), '/discover/start/topics');
-    click(".discover-topic input[name='music']");
-    andThen(function() {
-      click("button:contains('Next')");
-      andThen(function() {
-        visit('/discover/start/topics');
+  andThen(() => {
+    click('button:contains("Create My Own")');
+    andThen(() => {
+      assert.equal(currentURL(), '/discover/start/topics', "is on topics");
+      click(".discover-topic input[name='music']");
+      andThen(() => {
+        click("button:contains('Next')");
         andThen(function() {
-          assert.equal($(".discover-topic input[name='music']").prop('checked'), true, "Checkbox was not checked");
-          assert.equal($(".discover-topic input[name='art']").prop('checked'), false, "Checkbox was checked when it shouldn't be");
-          assert.equal($(".discover-topic input[name='technology']").prop('checked'), false, "Checkbox was checked when it shouldn't be");
+          assert.equal(currentURL(), "/discover/start/shows");
+          visit('/discover/start/topics');
+          andThen(() => {
+            assert.equal($(".discover-topic input[name='music']").prop('checked'), true, "Checkbox was not checked");
+            assert.equal($(".discover-topic input[name='art']").prop('checked'), false, "Checkbox was checked when it shouldn't be");
+            assert.equal($(".discover-topic input[name='technology']").prop('checked'), false, "Checkbox was checked when it shouldn't be");
+          });
         });
       });
     });
@@ -136,8 +139,6 @@ test('shows are saved in a session and maintained upon next visit in initial flo
       assert.equal(currentURL(), '/discover/start/shows');
       assert.equal($(`.discover-show[data-slug="${testShow.slug}"] input`).prop('checked'), true);
       click(`.discover-show[data-slug="${testShow.slug}"]`);
-      // click(".discover-setup-header-action a:contains('Back')");
-
       click("button:contains('Create Station')");
 
       andThen(function() {
