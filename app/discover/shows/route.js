@@ -17,8 +17,8 @@ export default Ember.Route.extend({
   actions: {
     next(selectedShowSlugs) {
       let prefs = this.get('discoverPrefs');
-
       prefs.set('selectedShowSlugs', selectedShowSlugs);
+      prefs.set('setupComplete', true);
       prefs.save();
 
       this.transitionTo('discover.index');

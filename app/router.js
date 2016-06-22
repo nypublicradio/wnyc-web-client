@@ -51,10 +51,9 @@ Router.map(function() {
       this.route('topics');
       this.route('shows');
     });
+
     this.route('index', { path: 'playlist'});
   });
-
-
 });
 
 export default Router;

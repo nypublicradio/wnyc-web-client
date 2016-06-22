@@ -6,12 +6,8 @@ export default Ember.Route.extend({
   discoverPrefs: Ember.inject.service(),
 
   beforeModel() {
-    let prefs = this.get('discoverPrefs');
     if (window.Modernizr.touch) {
-      this.replaceWith('discover.start');
-    }
-    // look at session data and redirect to start if there are no selected topics
-    else if (prefs.get('selectedTopicTags').length === 0) {
+      // Show download links
       this.replaceWith('discover.start');
     }
   },

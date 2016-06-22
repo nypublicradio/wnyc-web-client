@@ -170,6 +170,52 @@ test('all shows are selected by default', function(assert) {
   });
 });
 
+test('setup picks up where you left off if you bail half way through', function(assert) {
+  server.createList('discover-topic', 5);
+  server.createList('show', 5);
+
+  visit('/discover/start');
+  click('button:contains("Create My Own")');
+
+  andThen(function() {
+    click(".discover-topic input");
+    click("button:contains('Next')");
+
+    andThen(function() {
+      assert.equal(currentURL(), '/discover/start/shows');
+      click('a[href="/login"]');
+      andThen(function() {
+        click('.list-item a[href*="/discover"]');
+        andThen(function() {
+          assert.equal(currentURL(), '/discover/start/shows', "should be on shows step");
+        });
+      });
+    });
+  });
+});
+
+test('nav link sends you to start page', function(assert) {
+  server.createList('discover-topic', 5);
+  server.createList('show', 5);
+  visit('/login');
+  click('.list-item a[href*="/discover"]');
+
+  andThen(function() {
+    assert.equal(currentURL(), '/discover/start', "should be on start page");
+  });
+});
+
+test('nav link sends you to start page', function(assert) {
+  server.createList('discover-topic', 5);
+  server.createList('show', 5);
+  visit('/login');
+  click('.list-item a[href*="/discover"]');
+
+  andThen(function() {
+    assert.equal(currentURL(), '/discover/start', "should be on start page");
+  });
+});
+
 test('mobile users get the app download page', function(assert) {
   let oldTouchSetting = window.Modernizr.touch;
   window.Modernizr.touch = true; //spoof this thing
