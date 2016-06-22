@@ -153,6 +153,23 @@ test('shows are saved in a session and maintained upon next visit in initial flo
   });
 });
 
+test('all shows are selected by default', function(assert) {
+  server.createList('discover-topic', 5);
+  let shows = server.createList('show', 5);
+  visit('/discover/start');
+  click('button:contains("Create My Own")');
+
+  andThen(function() {
+    click(".discover-topic input");
+    click("button:contains('Next')");
+
+    andThen(function() {
+      assert.equal(currentURL(), '/discover/start/shows');
+      assert.equal($(`.discover-show input:checked`).length, shows.length, "all shows should be selected");
+    });
+  });
+});
+
 test('mobile users get the app download page', function(assert) {
   let oldTouchSetting = window.Modernizr.touch;
   window.Modernizr.touch = true; //spoof this thing

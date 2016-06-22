@@ -2,17 +2,26 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   session: Ember.inject.service(),
+  discoverPrefs: Ember.inject.service(),
+
   model() {
-    return this.modelFor('discover');
+    return Ember.RSVP.hash({
+      topics: this.store.query("discover.topics", {discover_station: "wnyc"}),
+      selectedTopicTags: this.get('discoverPrefs.selectedTopicTags')
+    });
   },
   actions: {
-    next(selectedTopics) {
-      if (selectedTopics.length === 0) {
+    next(selectedTopicTags) {
+      let prefs = this.get('discoverPrefs');
+
+      if (selectedTopicTags.length === 0) {
         this.controllerFor('discover.topics').set('showError', true);
       }
       else {
         this.controllerFor('discover.topics').set('showError', false);
-        this.send('saveTopics', selectedTopics);
+        prefs.set('selectedTopicTags', selectedTopicTags);
+        prefs.save();
+
         this.transitionTo('discover.shows');
       }
     }

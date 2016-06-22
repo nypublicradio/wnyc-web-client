@@ -2,31 +2,25 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   session: Ember.inject.service(),
+  discoverPrefs: Ember.inject.service(),
   model() {
-    return this.store.findAll('shows').then(shows => {
-      var savedShows = [];
-      let savedShowsKeys = this.get('session.data.discover-shows');
-      if (savedShowsKeys) {
-        // Now we'll find the matching objects in the discover shows,
-        // and add them to the savedShows list
-        shows.forEach(function(show) {
-          if (savedShowsKeys.contains(show.get('slug'))) {
-            savedShows.addObject(show);
-          }
-        });
-      }
-      if (!savedShows || savedShows.length === 0) {
-        savedShows = [].concat(shows.toArray());
-      }
+    let prefs = this.get('discoverPrefs');
+
+    return this.store.findAll('shows').then((shows) => {
+      prefs.setDefaultShows(shows.mapBy('slug'));
       return Ember.RSVP.hash({
         shows: shows,
-        savedShows: savedShows
+        selectedShowSlugs: prefs.get('selectedShowSlugs')
       });
     });
   },
   actions: {
-    next(selectedShows) {
-      this.send('saveShows', selectedShows);
+    next(selectedShowSlugs) {
+      let prefs = this.get('discoverPrefs');
+
+      prefs.set('selectedShowSlugs', selectedShowSlugs);
+      prefs.save();
+
       this.transitionTo('discover.index');
     }
   }

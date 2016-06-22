@@ -41,7 +41,7 @@ test('you can browse directly to topics tab', function(assert) {
 test('clicking cancel on edit page takes you back to playlist', function(assert) {
   visit('/discover/edit/topics');
   andThen(function() {
-    click("*:contains('Cancel')");
+    click("button:contains('Cancel')");
     andThen(function() {
       assert.equal(currentURL(), '/discover/playlist');
     });

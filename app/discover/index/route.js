@@ -1,17 +1,19 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  session: Ember.inject.service(),
+  session:       Ember.inject.service(),
   discoverQueue: Ember.inject.service(),
+  discoverPrefs: Ember.inject.service(),
 
   model() {
+    let prefs = this.get('discoverPrefs');
     var stories;
 
     if (this.get('discoverQueue.items').length > 0) {
       stories = this.get('discoverQueue.items');
     }
     else {
-      let tags = this.get('session.data.discover-topics').join(",");
+      let tags = prefs.get('selectedTopicTags').join(",");
       stories = this.store.query('discover.stories', {
         browser_id: this.get('session.data.browserId'),
         discover_station: 'wnyc_2',

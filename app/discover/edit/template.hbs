@@ -1,14 +1,14 @@
 <header class="discover-setup-header">
   <div class="discover-setup-header-action">
-    {{#link-to 'discover.index' class="rounded-caps-button mod-with-icon discover-setup-header-cancel-button"}}
+    <button {{action 'cancel'}}  class="rounded-caps-button mod-with-icon discover-setup-header-cancel-button">
       {{wnyc-svg icon="close"}}<span>Cancel</span>
-    {{/link-to}}
+    </button>
   </div>
   <div>
     <h2 class="discover-setup-title-step-title h2 text--white">Customize Your Playlist</h2>
   </div>
   <div class="discover-setup-header-action">
-    <button class="rounded-caps-button mod-filled-red" {{action 'refresh' currentTopicSelection}}>Refresh Station</button>
+    <button class="rounded-caps-button mod-filled-red" {{action 'refresh'}}>Refresh Station</button>
   </div>
 </header>
 
@@ -24,4 +24,5 @@
     {{/link-to}}
   </div>
 </div>
+
 {{outlet}}
