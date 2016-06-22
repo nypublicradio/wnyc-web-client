@@ -7,7 +7,7 @@ export default Ember.Route.extend({
     controller.set('isMobile', window.Modernizr.touch);
     controller.set('isAndroid', /Android/i.test(window.navigator.userAgent));
   },
-  redirect(/* model, transition */) {
+  redirect(model, transition) {
     let prefs = this.get('discoverPrefs');
     if (!prefs.get('setupComplete')) {
       prefs.loadFromSession(); // we want the saved data, not the temp data
@@ -22,8 +22,12 @@ export default Ember.Route.extend({
         this.replaceWith('discover.shows');
       }
     }
-    else {
+    else if (transition.targetName === 'discover.start'){
+      // we clicked on the side bar
       this.replaceWith('discover.index');
+    }
+    else {
+      // browsing direct, allow it
     }
   },
   actions: {

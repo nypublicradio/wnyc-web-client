@@ -6,7 +6,7 @@ export default Ember.Service.extend({
   selectedTopicTags:[],
   selectedShowSlugs:[],
 
-  completedSetup: false,
+  setupComplete: false,
 
   init() {
     this.loadFromSession();
