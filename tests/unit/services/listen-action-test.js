@@ -2,7 +2,6 @@ import Ember from 'ember';
 import { moduleFor, test } from 'ember-qunit';
 import startMirage from 'overhaul/tests/helpers/setup-mirage-for-integration';
 import ENV from 'overhaul/config/environment';
-
 // import wait from 'ember-test-helpers/wait';
 
 let originalGetTime = Date.prototype.getTime;
@@ -33,17 +32,6 @@ moduleFor('service:listen-action', 'Unit | Service | listen action', {
   }
 });
 
-let queryToHash = function(queryString) {
-  var j, q;
-  q = queryString.replace(/\?/, "").split("&");
-  j = {};
-  $.each(q, function(i, arr) {
-    arr = arr.split('=');
-    return j[arr[0]] = arr[1];
-  });
-  return j;
-};
-
 function testSingleRequest(assert, url, functionToRun, postCallback) {
   var ajaxCalled = false;
   var withCredentials = false;
@@ -55,7 +43,7 @@ function testSingleRequest(assert, url, functionToRun, postCallback) {
     withCredentials = request.withCredentials;
     browserId = request.queryParams.browser_id;
 
-    let data = queryToHash(request.requestBody);
+    let data = JSON.parse(request.requestBody);
     timeStamp = data.ts;
 
     if (postCallback) {
@@ -63,7 +51,9 @@ function testSingleRequest(assert, url, functionToRun, postCallback) {
     }
   });
 
-  functionToRun();
+  Ember.run(() => {
+    functionToRun();
+  });
 
   assert.equal(ajaxCalled, true, "should've sent ajax request to play");
   assert.equal(browserId, 'secrets', "browser id should have been passed in");
@@ -81,13 +71,15 @@ test('sending play action sends request in correct format', function(assert) {
 });
 
 test('sending pause action sends request in correct format', function(assert) {
+  assert.expect(5);
+
   let service = this.subject();
 
   let url = [ENV.wnycAPI, 'api/v1/listenaction/create', 400, 'pause'].join("/");
   testSingleRequest(assert, url, function() {
     service.sendPause(400, 20);
   }, function(request) {
-    let data = queryToHash(request.requestBody);
+    let data = JSON.parse(request.requestBody);
     assert.equal(data.value, 20, "should have a value of 20");
   });
 });
@@ -125,5 +117,49 @@ test('sending heardstream action sends request in correct format', function(asse
   let url = [ENV.wnycAPI, 'api/v1/listenaction/create', 400, 'heardstream'].join("/");
   testSingleRequest(assert, url, function() {
     service.sendHeardStream(400);
+  });
+});
+
+test('sending multiple actions queues them up and sends them as one request', function(assert) {
+  let service = this.subject();
+
+  var ajaxCalled = false;
+  var withCredentials = false;
+  var browserId;
+  var timeStamp;
+  var invalidCallCount = 0;
+  let baseUrl = [ENV.wnycAPI, 'api/v1/listenaction/create'].join("/");
+  var actions = [];
+
+  server.post(baseUrl, function(schema, request) {
+    let data = JSON.parse(request.requestBody);
+    ajaxCalled = true;
+    withCredentials = request.withCredentials;
+    browserId = data.browser_id;
+    actions = data.actions;
+  });
+
+  server.post([baseUrl, '*'].join("/"), function(/*schema, request*/) {
+    invalidCallCount = invalidCallCount + 1;
+  });
+
+  Ember.run(() => {
+    service.sendDelete(400);
+    service.sendDelete(401);
+    service.sendPlay(405);
+    service.sendDelete(402);
+    service.sendDelete(404);
+  });
+
+  Ember.run(() => {
+    assert.equal(ajaxCalled, true, "should've sent ajax request to play");
+    assert.equal(browserId, 'secrets', "browser id should have been passed in");
+    assert.equal(withCredentials, true, "ajax should be sent with credentials");
+    assert.equal(invalidCallCount, 0, "individual request should not have been called");
+    assert.equal(actions.length, 5);
+    assert.equal(actions.filterBy('action', 'delete').length, 4, "should be four delete actions");
+    assert.equal(actions.filterBy('action', 'play').length, 1, "should be one play action");
+    assert.deepEqual(actions.mapBy('pk'), [400, 401, 405, 402, 404], "should have supplied pks");
+    assert.deepEqual(actions.mapBy('ts'), [testTimestamp, testTimestamp, testTimestamp, testTimestamp, testTimestamp], "should all have timestamps");
   });
 });
