@@ -4,14 +4,41 @@ import RSVP from 'rsvp';
 
 export default Ember.Service.extend({
   session: Ember.inject.service(),
-
   browserId: Ember.computed.alias('session.data.browserId'),
 
   init() {
     this.set('queue', []);
   },
 
-  flushQueue() {
+  sendPlay(pk, context) {
+    return this._queueListenAction(pk, 'play', context);
+  },
+
+  sendSkip(pk, context) {
+    return this._queueListenAction(pk, 'skip', context);
+  },
+
+  sendPause(pk, context, seconds) {
+    return this._queueListenAction(pk, 'pause', context, seconds);
+  },
+
+  sendComplete(pk, context) {
+    return this._queueListenAction(pk, 'complete', context);
+  },
+
+  sendDelete(pk, context) {
+    return this._queueListenAction(pk, 'delete', context);
+  },
+
+  sendHeardStream(pk, context) {
+    return this._queueListenAction(pk, 'heardstream', context);
+  },
+
+
+  /* ------------------------------------------------------------ */
+
+
+  _flushQueue() {
     let queue = this.get('queue');
 
     if (queue.length === 0) {
@@ -20,16 +47,16 @@ export default Ember.Service.extend({
 
     if (queue.length === 1) {
       let item = queue[0];
-      this.sendSingleListenAction(item.pk, item.action, item.value, item.ts);
+      this._sendSingleListenAction(item.pk, item.action, item.context, item.value, item.ts);
     }
     else {
-      this.sendBulkListenActions(queue);
+      this._sendBulkListenActions(queue);
     }
 
     this.set('queue', []);
   },
 
-  queueListenAction(pk, action, value) {
+  _queueListenAction(pk, action, context, value) {
     let queue = this.get('queue');
     let ts = new Date().getTime();
 
@@ -37,39 +64,16 @@ export default Ember.Service.extend({
       pk: pk,
       action: action,
       value: value,
+      context: context,
       ts: ts
     });
 
     Ember.run.scheduleOnce('actions', () => {
-      this.flushQueue();
+      this._flushQueue();
     });
   },
 
-  sendPlay(pk) {
-    return this.queueListenAction(pk, 'play');
-  },
-
-  sendSkip(pk) {
-    return this.queueListenAction(pk, 'skip');
-  },
-
-  sendPause(pk, seconds) {
-    return this.queueListenAction(pk, 'pause', seconds);
-  },
-
-  sendComplete(pk) {
-    return this.queueListenAction(pk, 'complete');
-  },
-
-  sendDelete(pk) {
-    return this.queueListenAction(pk, 'delete');
-  },
-
-  sendHeardStream(pk) {
-    return this.queueListenAction(pk, 'heardstream');
-  },
-
-  sendSingleListenAction(pk, action, value, ts) {
+  _sendSingleListenAction(pk, action, context, value, ts) {
     // pk:       the story pk
     // action:  'pause' | 'skip' | 'play' | 'complete' | 'delete' | 'heardstream'
     // value:   <seconds if action=='pause, absent otherwise>
@@ -78,7 +82,7 @@ export default Ember.Service.extend({
     //POST /api/v1/listenaction/create/(pk)/(action)/?browser_id=abc123abc123&context=OPB_App_Discover
 
     let baseUrl = [ENV.wnycAPI, 'api/v1/listenaction/create', pk, action].join("/");
-    let url = `${baseUrl}?browser_id=${this.get('browserId')}`;
+    let url = `${baseUrl}?browser_id=${this.get('browserId')}&context=${context}`;
 
     return new RSVP.Promise((resolve) => {
       return Ember.$.ajax({
@@ -101,7 +105,7 @@ export default Ember.Service.extend({
     });
   },
 
-  sendBulkListenActions(data) {
+  _sendBulkListenActions(data) {
     let url = [ENV.wnycAPI, 'api/v1/listenaction/create'].join("/");
 
     let payload = {
