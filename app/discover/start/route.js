@@ -11,27 +11,10 @@ export default Ember.Route.extend({
     let prefs = this.get('discoverPrefs');
 
     if (!prefs.get('setupComplete')) {
-      // prefs.loadFromSession(); // we want the saved data, not the temp data
-
-      // yo, get back to the setup flow
-      // but where we at?
-      // look at session data and redirect to start if there are no selected topics
-
       this.transitionTo(`discover.${prefs.get('currentSetupStep')}`);
-
-      // if (transition.targetName === 'discover.start') {
-      //   // we clicked on the side bar
-      //   this.transitionTo('discover.start');
-      // }
-      // else if (prefs.get('selectedTopicTags').length === 0) {
-      //   this.replaceWith('discover.start');
-      // }
-      // else if (prefs.get('selectedShowSlugs').length === 0) {
-      //   this.replaceWith('discover.shows');
-      // }
     }
     else if (transition.targetName === 'discover.start'){
-      // we clicked on the side bar
+      // we clicked on the side bar, and setup is done. Go to the playlist
       this.replaceWith('discover.index');
     }
     else {
