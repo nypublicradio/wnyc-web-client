@@ -7,6 +7,7 @@ export default Ember.Service.extend({
   selectedShowSlugs:[],
 
   setupComplete: false,
+  currentSetupStep: 'start',
 
   init() {
     this.loadFromSession();
@@ -17,10 +18,12 @@ export default Ember.Service.extend({
     let topics  = session.getWithDefault('data.discover-topics', []);
     let shows   = session.getWithDefault('data.discover-shows', []);
     let setupComplete = session.getWithDefault('data.discover-setup-complete', false);
+    let currentSetupStep = session.getWithDefault('data.discover-current-setup-step', 'start');
 
     this.set('selectedTopicTags', topics);
     this.set('selectedShowSlugs', shows);
     this.set('setupComplete', setupComplete);
+    this.set('currentSetupStep', currentSetupStep);
   },
 
   setDefaultShows(slugs) {
@@ -44,5 +47,7 @@ export default Ember.Service.extend({
     session.set('data.discover-shows', this.get('selectedShowSlugs'));
     session.set('data.discover-topics', this.get('selectedTopicTags'));
     session.set('data.discover-setup-complete', this.get('setupComplete'));
+    session.set('data.discover-current-setup-step', this.get('currentSetupStep'));
+
   }
 });

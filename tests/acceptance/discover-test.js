@@ -89,7 +89,7 @@ test('back goes back to the welcome screen', function(assert) {
     click('button:contains("Create My Own")');
     andThen(function() {
       assert.equal(currentURL(), '/discover/start/topics');
-      click("a:contains('Back')");
+      click("button:contains('Back')");
       andThen(function() {
         assert.equal(currentURL(), '/discover/start');
       });
@@ -194,16 +194,32 @@ test('setup picks up where you left off if you bail half way through', function(
   });
 });
 
-test('nav link sends you to start page', function(assert) {
+
+test('should be able to go back to welcome screen if you really want to', function(assert) {
   server.createList('discover-topic', 5);
   server.createList('show', 5);
-  visit('/login');
-  click('.list-item a[href*="/discover"]');
+
+  visit('/discover/start');
+  click('button:contains("Create My Own")');
 
   andThen(function() {
-    assert.equal(currentURL(), '/discover/start', "should be on start page");
+    click(".discover-topic input");
+    click("button:contains('Next')");
+
+    andThen(function() {
+      assert.equal(currentURL(), '/discover/start/shows');
+      click(".rounded-caps-button:contains('Back')");
+      andThen(function() {
+        assert.equal(currentURL(), '/discover/start/topics', "should be on topics screen");
+        click(".rounded-caps-button:contains('Back')");
+        andThen(function() {
+          assert.equal(currentURL(), '/discover/start', "should be on welcome screen");
+        });
+      });
+    });
   });
 });
+
 
 test('nav link sends you to start page', function(assert) {
   server.createList('discover-topic', 5);

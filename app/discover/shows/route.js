@@ -15,6 +15,11 @@ export default Ember.Route.extend({
     });
   },
   actions: {
+    back() {
+      let prefs = this.get('discoverPrefs');
+      prefs.set('currentSetupStep', 'topics');
+      this.transitionTo('discover.topics');
+    },
     next(selectedShowSlugs) {
       let prefs = this.get('discoverPrefs');
       prefs.set('selectedShowSlugs', selectedShowSlugs);
