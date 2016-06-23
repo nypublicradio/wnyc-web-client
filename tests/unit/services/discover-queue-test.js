@@ -91,3 +91,28 @@ test('queue can return next item that is unplayed', function(assert) {
   service.get('history').addListen(story1);
   assert.equal(service.nextUnplayedItem().id, 3);
 });
+
+test('queue can return next item in list given the current item', function(assert) {
+  let story1 = {id: 1, cmsPK: 1};
+  let story2 = {id: 2, cmsPK: 2};
+  let service = this.subject();
+
+  service.addItem(story1);
+  service.addItem(story2);
+  assert.equal(service.get('items').length, 2);
+
+  assert.equal(service.nextItem(1), story2);
+});
+
+test('queue can be empied', function(assert) {
+  let story1 = {id: 1};
+  let story2 = {id: 2};
+  let service = this.subject();
+
+  service.addItem(story1);
+  service.addItem(story2);
+  assert.equal(service.get('items').length, 2);
+
+  service.emptyQueue();
+  assert.equal(service.get('items').length, 0);
+});

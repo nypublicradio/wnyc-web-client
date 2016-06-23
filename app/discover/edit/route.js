@@ -26,6 +26,7 @@ export default Ember.Route.extend({
     },
     refresh() {
       this.get('discoverPrefs').save();
+      this.get('discoverQueue').emptyQueue();
       this.transitionTo('discover.index');
     }
   }

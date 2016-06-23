@@ -45,6 +45,11 @@ export default Ember.Service.extend({
     session.set('data.discover-queue', items);
   },
 
+  emptyQueue() {
+    let session = this.get('session');
+    session.set('data.discover-queue', []);
+  },
+
   nextItem(currentPk) {
     let items = this.get('items');
     let current = this.get('items').findBy('cmsPK', currentPk);

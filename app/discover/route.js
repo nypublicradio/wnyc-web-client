@@ -13,7 +13,7 @@ export default Ember.Route.extend({
   },
   actions: {
     resetPlaylist() {
-      this.get('discoverQueue').updateQueue([]);
+      this.get('discoverQueue').emptyQueue();
     }
   }
 });

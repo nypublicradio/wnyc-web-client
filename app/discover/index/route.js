@@ -42,7 +42,7 @@ export default Ember.Route.extend({
         listenActions.sendSkip(get(item, 'cmsPK'), 'discover');
         // send a skip action for each item in the playlist
       });
-      discoverQueue.updateQueue([]);
+      discoverQueue.emptyQueue();
 
       this.refresh();
     },
