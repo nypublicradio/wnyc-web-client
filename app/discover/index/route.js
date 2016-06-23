@@ -1,4 +1,7 @@
 import Ember from 'ember';
+const {
+  get
+} = Ember;
 
 export default Ember.Route.extend({
   session:       Ember.inject.service(),
@@ -36,12 +39,16 @@ export default Ember.Route.extend({
       let listenActions = this.get('listenActions');
       let discoverQueue = this.get('discoverQueue');
       discoverQueue.get('items').forEach(item => {
-        listenActions.sendSkip(item.pk, 'discover');
+        listenActions.sendSkip(get(item, 'cmsPK'), 'discover');
         // send a skip action for each item in the playlist
       });
       discoverQueue.updateQueue([]);
 
       this.refresh();
+    },
+    removeItem(item) {
+      let listenActions = this.get('listenActions');
+      listenActions.sendDelete(get(item, 'cmsPK'), 'discover');
     },
     edit() {
       this.transitionTo('discover.edit');

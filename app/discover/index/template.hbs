@@ -4,7 +4,7 @@
   Edit My Shows & Topics
 {{/link-to}}
 
-{{#discover-playlist stories=model.stories onFindMore='findMore' as |playlist|}}
+{{#discover-playlist stories=model.stories onFindMore='findMore' onRemoveItem='removeItem' as |playlist|}}
   <h1 class="discover-playlist-header-title h1">Your Discover Playlist</h1>
   <h3 class="discover-playlist-header-subtitle h3">We put together some audio specifically for you, based on your favorite shows and topics. <br/>
   Sit back and just listen, or tell it what you like and don’t like - it will adapt to you.

@@ -58,7 +58,7 @@ export default Ember.Service.extend({
 
   _queueListenAction(pk, action, context, value) {
     let queue = this.get('queue');
-    let ts = new Date().getTime();
+    let ts = Math.floor(new Date().getTime() / 1000);
 
     queue.addObject({
       pk: pk,
@@ -81,8 +81,8 @@ export default Ember.Service.extend({
     // value:   <seconds if action=='pause, absent otherwise>
     // ts:       Unixstyle epoch integer timestamp for when this event occured
 
-    let baseUrl = [ENV.wnycAPI, 'api/v1/listenaction/create', pk, action].join("/");
-    let url = `${baseUrl}?browser_id=${this.get('browserId')}&context=${context}`;
+    let baseUrl = [ENV.wnycAccountRoot, 'api/v1/listenaction/create', pk, action].join("/");
+    let url = `${baseUrl}/?browser_id=${this.get('browserId')}&context=${context}`;
 
     return new RSVP.Promise((resolve) => {
       return Ember.$.ajax({
@@ -95,7 +95,6 @@ export default Ember.Service.extend({
         method: "POST",
         url: url,
         dataType: "json",
-        contentType: "application/json",
         xhrFields: {
           withCredentials: true
         }
@@ -114,7 +113,7 @@ export default Ember.Service.extend({
     //    ]
     // }
 
-    let url = [ENV.wnycAPI, 'api/v1/listenaction/create'].join("/");
+    let url = [ENV.wnycAccountRoot, 'api/v1/listenaction/create/'].join("/");
 
     let payload = {
       browser_id: this.get('browserId'),
@@ -127,7 +126,6 @@ export default Ember.Service.extend({
         method: "POST",
         url: url,
         dataType: "json",
-        contentType: "application/json",
         xhrFields: {
           withCredentials: true
         }

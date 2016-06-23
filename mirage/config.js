@@ -100,11 +100,11 @@ export default function() {
     return true;
   });
 
-  this.post(`${baseUrl}/api/v1/listenaction/create/`, function() {
+  this.post(`${config.wnycAccountRoot}/api/v1/listenaction/create/`, function() {
     return true;
   });
 
-  this.post(`${baseUrl}/api/v1/listenaction/create/:pk/:action`, function() {
+  this.post(`${config.wnycAccountRoot}/api/v1/listenaction/create/:pk/:action`, function() {
     return true;
   });
 
