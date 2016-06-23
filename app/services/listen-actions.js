@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import ENV from '../config/environment';
-import RSVP from 'rsvp';
 
 export default Ember.Service.extend({
   session: Ember.inject.service(),
@@ -84,23 +83,19 @@ export default Ember.Service.extend({
     let baseUrl = [ENV.wnycAccountRoot, 'api/v1/listenaction/create', pk, action].join("/");
     let url = `${baseUrl}/?browser_id=${this.get('browserId')}&context=${context}`;
 
-    return new RSVP.Promise((resolve) => {
-      return Ember.$.ajax({
-        data: JSON.stringify({
-          pk: pk,
-          action: action,
-          value:  value,
-          ts: ts
-        }),
-        method: "POST",
-        url: url,
-        dataType: "json",
-        xhrFields: {
-          withCredentials: true
-        }
-      }).then((results) => {
-        resolve(results);
-      });
+    return Ember.$.ajax({
+      data: JSON.stringify({
+        pk: pk,
+        action: action,
+        value:  value,
+        ts: ts
+      }),
+      method: "POST",
+      url: url,
+      dataType: "json",
+      xhrFields: {
+        withCredentials: true
+      }
     });
   },
 
@@ -120,18 +115,14 @@ export default Ember.Service.extend({
       actions: data
     };
 
-    return new RSVP.Promise((resolve) => {
-      return Ember.$.ajax({
-        data: JSON.stringify(payload),
-        method: "POST",
-        url: url,
-        dataType: "json",
-        xhrFields: {
-          withCredentials: true
-        }
-      }).then((results) => {
-        resolve(results);
-      });
+    return Ember.$.ajax({
+      data: JSON.stringify(payload),
+      method: "POST",
+      url: url,
+      dataType: "json",
+      xhrFields: {
+        withCredentials: true
+      }
     });
   }
 });
