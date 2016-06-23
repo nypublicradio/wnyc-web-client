@@ -33,7 +33,7 @@ export default Ember.Service.extend({
   sendHeardStream(pk, context) {
     return this._queueListenAction(pk, 'heardstream', context);
   },
-  
+
 
   /* ------------------------------------------------------------ */
 
@@ -74,12 +74,12 @@ export default Ember.Service.extend({
   },
 
   _sendSingleListenAction(pk, action, context, value, ts) {
+    //POST /api/v1/listenaction/create/(pk)/(action)/?browser_id=abc123abc123&context=OPB_App_Discover
+
     // pk:       the story pk
     // action:  'pause' | 'skip' | 'play' | 'complete' | 'delete' | 'heardstream'
     // value:   <seconds if action=='pause, absent otherwise>
     // ts:       Unixstyle epoch integer timestamp for when this event occured
-
-    //POST /api/v1/listenaction/create/(pk)/(action)/?browser_id=abc123abc123&context=OPB_App_Discover
 
     let baseUrl = [ENV.wnycAPI, 'api/v1/listenaction/create', pk, action].join("/");
     let url = `${baseUrl}?browser_id=${this.get('browserId')}&context=${context}`;
@@ -106,12 +106,8 @@ export default Ember.Service.extend({
   },
 
   _sendBulkListenActions(data) {
-    // pk:       the story pk
-    // action:  'pause' | 'skip' | 'play' | 'complete' | 'delete' | 'heardstream'
-    // value:   <seconds if action=='pause, absent otherwise>
-    // ts:       Unixstyle epoch integer timestamp for when this event occured
-
     //POST /api/v1/listenaction/create/
+
     // { browser_id: 123512125,
     //    actions: [
     //      {pk: 1, action: 'play', context: 'discover'}

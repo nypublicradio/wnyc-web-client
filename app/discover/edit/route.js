@@ -3,6 +3,8 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   session: Ember.inject.service(),
   discoverPrefs: Ember.inject.service(),
+  discoverQueue: Ember.inject.service(),
+  listenActions: Ember.inject.service(),
 
   redirect(model, transition) {
     if (transition.targetName === "discover.edit.index") {

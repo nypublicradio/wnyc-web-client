@@ -4,6 +4,7 @@ export default Ember.Route.extend({
   session:       Ember.inject.service(),
   discoverQueue: Ember.inject.service(),
   discoverPrefs: Ember.inject.service(),
+  listenActions: Ember.inject.service(),
 
   model() {
     let prefs = this.get('discoverPrefs');
@@ -32,7 +33,14 @@ export default Ember.Route.extend({
   },
   actions: {
     findMore() {
-      this.get('discoverQueue').updateQueue([]);
+      let listenActions = this.get('listenActions');
+      let discoverQueue = this.get('discoverQueue');
+      discoverQueue.get('items').forEach(item => {
+        listenActions.sendSkip(item.pk, 'discover');
+        // send a skip action for each item in the playlist
+      });
+      discoverQueue.updateQueue([]);
+
       this.refresh();
     },
     edit() {
