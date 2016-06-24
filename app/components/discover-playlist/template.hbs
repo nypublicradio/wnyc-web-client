@@ -10,33 +10,34 @@
 </div>
 
 {{#way-point action=(action "scrollPointReached") offset="125"}}
-{{#sortable-group class="discover-playlist" tagName="ul" onChange="reorderItems" handle=".discover-playlist-item-handle" as |group|}}
-  {{#each orderedStories as |story|}}
-    {{#sortable-item class="discover-playlist-item" tagName="li" group=group model=story handle=".discover-playlist-item-handle"}}
-      <span id='story-{{story.cmsPK}}' class="discover-playlist-item-handle">
-        {{wnyc-svg icon="reorder"}}
-      </span>
+  {{#sortable-group class="discover-playlist" tagName="ul" onChange="reorderItems" handle=".discover-playlist-item-handle" as |group|}}
+    {{#each orderedStories as |story|}}
+      {{#sortable-item class=(if (get removedItemsHash story.cmsPK) 'discover-playlist-item is-deleted' 'discover-playlist-item')
+        tagName="li" group=group model=story handle=".discover-playlist-item-handle"}}
+        <span id='story-{{story.cmsPK}}' class="discover-playlist-item-handle">
+          {{wnyc-svg icon="reorder"}}
+        </span>
 
-      {{#discover-playlist-story isCurrentTrack=(eq story.cmsPK currentPlaylistStoryPk) isPlaying=(and isPlaying (eq story.cmsPK currentPlaylistStoryPk))}}
+        {{#discover-playlist-story isCurrentTrack=(eq story.cmsPK currentPlaylistStoryPk) isPlaying=(and isPlaying (eq story.cmsPK currentPlaylistStoryPk))}}
+          {{playlist-play-indicator
+              title=story.title
+              itemPK=story.cmsPK
+              class="discover-playlist-story-play-button"
+              isReady=audioReady
+              isPlaying=(and (eq story.cmsPK currentPlaylistStoryPk) isPlaying)
+              onPause=(action 'pauseTrack' story.cmsPK)
+              onPlay=(action 'playTrack' story.cmsPK)
+            }}
 
-        {{playlist-play-indicator
-            title=story.title
-            itemPK=story.cmsPK
-            class="discover-playlist-story-play-button"
-            isReady=audioReady
-            isPlaying=(and (eq story.cmsPK currentPlaylistStoryPk) isPlaying)
-            onPause=(action 'pauseTrack' story.cmsPK)
-            onPlay=(action 'playTrack' story.cmsPK)
-          }}
+          {{discover-playlist-story-info story=story}}
+        {{/discover-playlist-story}}
 
-        {{discover-playlist-story-info story=story}}
-      {{/discover-playlist-story}}
-      <span class="discover-playlist-item-delete" {{action 'removeItem' story}}>
-        {{wnyc-svg icon="close"}}
-      </span>
-    {{/sortable-item}}
-  {{/each}}
-{{/sortable-group}}
+        <span class="discover-playlist-item-delete" {{action 'removeItem' story}}>
+          {{wnyc-svg icon="close"}}
+        </span>
+      {{/sortable-item}}
+    {{/each}}
+  {{/sortable-group}}
 {{/way-point}}
 
 <button {{action 'findMore'}} class="discover-playlist-find-more rounded-caps-button mod-hollow-blue">

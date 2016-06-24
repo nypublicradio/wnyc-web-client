@@ -304,8 +304,24 @@ body.discover.index_loading .sitechrome-page-content-area {
   @include align-items(center);
   position:relative;
   overflow:visible;
+  max-height:200px;
+
   // @include justify-content(left);
 }
+
+.discover-playlist-item + .discover-playlist-item {
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: #e9e9e9;
+}
+
+.discover-playlist-item.is-deleted {
+  @include transition(opacity $transition-timing ease-in-out, max-height $transition-timing/2 ease-in-out $transition-timing);
+  opacity:0;
+  border-bottom-style: none;
+  max-height:0;
+}
+
 
 .discover-playlist-item-handle {
   @include display-flex;
@@ -356,9 +372,6 @@ body.discover.index_loading .sitechrome-page-content-area {
   path {
     fill:$lightgray;
   }
-}
-.discover-playlist-item + .discover-playlist-item {
-  border-top:1px solid #e9e9e9;
 }
 
 
@@ -417,7 +430,7 @@ body.discover.index_loading .sitechrome-page-content-area {
   }
 }
 
-.discover-playlist-story-play-button {
+.discover-playlist-item .discover-playlist-story-play-button {
   @include display-flex;
   @include flex-wrap(nowrap);
   @include align-items(center);
@@ -441,12 +454,23 @@ body.discover.index_loading .sitechrome-page-content-area {
     font-size:24px;
 
     /* CSS counter so we can hide and show it and style it easier than the li counter */
-    counter-increment: discover-playlist-counter;
-    content: counter(discover-playlist-counter);
     pointer-events: none; // Don't want this sucker interfering with clicks
   }
-
 }
+
+.discover-playlist-item:not(.is-deleted) .discover-playlist-story-play-button {
+  &:before {
+    counter-increment: discover-playlist-counter;
+    content: counter(discover-playlist-counter);
+  }
+}
+
+.discover-playlist-item.is-deleted .discover-playlist-story-play-button {
+  &:before {
+    content: "\00b7";
+  }}
+
+
 .playlist-play-indicator-button {
   background: transparent;
   @include fontsize(14);
