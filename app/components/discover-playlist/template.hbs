@@ -10,9 +10,10 @@
 </div>
 
 {{#way-point action=(action "scrollPointReached") offset="105"}}
+
   {{#sortable-group class="discover-playlist" tagName="ul" onChange="reorderItems" handle=".discover-playlist-item-handle" as |group|}}
     {{#each orderedStories as |story|}}
-      {{#sortable-item id=(concat 'story-' story.cmsPK) class=(if (get removedItemsHash story.cmsPK) 'discover-playlist-item is-deleted' 'discover-playlist-item')
+      {{#sortable-item id=(concat 'story-' story.cmsPK) class=(if (array-contains removedItemIds story.cmsPK) 'discover-playlist-item is-deleted' 'discover-playlist-item')
         tagName="li"
         group=group
         model=story
@@ -20,6 +21,7 @@
         onDragStart="dragStarted"
         onDragStop="dragStopped"
       }}
+
         <span class="discover-playlist-item-handle">
           {{wnyc-svg icon="reorder"}}
         </span>

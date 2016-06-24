@@ -8,7 +8,7 @@ export default Factory.extend({
   },
 
   pk()    { return this.id; },
-  cmsPK() { return parseInt(this.id, 10); },
+  cmsPK() { return this.id; },
   // make sure this is a number too, or else weird stuff happens.
   // Should be able to fix this once the id toJSON changes happen
 

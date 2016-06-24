@@ -190,7 +190,7 @@ test('deleting an item removes the item from the list', function(assert) {
       return new RSVP.Promise(function(resolve) {
         // pause while making the test wait
         window.setTimeout(function() {
-          resolve();
+            resolve();
         }, 1000);
       }).then(function() {
         assert.equal($(`#story-${story.cmsPK}.is-deleted`).length, 1, "item should be marked as deleted");

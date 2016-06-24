@@ -1,7 +1,4 @@
 import Ember from 'ember';
-const {
-  get,
-} = Ember;
 
 export default Ember.Component.extend({
   session:        Ember.inject.service(),
@@ -48,21 +45,13 @@ export default Ember.Component.extend({
     }
   }),
 
+  removedItemIds: Ember.computed.map('removedItems', (i) => i.cmsPK),
+
   // This is for the delete effects, and this might be a weird way to do it
   // but by not actually deleting the item from the list we can avoid having to
   // set magic number timeouts
 
   removedItems: [],
-  removedItemsHash: Ember.computed('removedItems.length', function() {
-    // converting the array of ids to a hash so we can use the get
-    // helper in the template to set an .is-deleted class on the item
-    var hash = {};
-    this.get('removedItems').forEach(i => {
-      hash[get(i, 'cmsPK')] = true;
-    });
-    return hash;
-  }),
-
   actions: {
     removeItem(item) {
       // This will trigger the CSS effect to remove it/hide it from the list
@@ -98,9 +87,9 @@ export default Ember.Component.extend({
       this.set('justDragged', draggedModel);
 
       // This is a good time to actually delete the hidden items
-      let removedItems = this.get('removedItems');
+      var removedItemIds = this.get('removedItemIds');
       let presentAndOrderedItems = itemModels.reject((item) => {
-        return removedItems.findBy('id', item.id);
+        return removedItemIds.contains(item.cmsPK);
       });
 
       // Update queue with only the items that haven't been deleted
