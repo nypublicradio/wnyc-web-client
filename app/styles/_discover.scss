@@ -11,9 +11,12 @@ body.discover .sitechrome-page-content-area {
   // TODO: Maybe, make sitechrome have no margin on the bottom and leave it
   // up to the feature to set a padding.
 
-  background: url(/assets/img/backgrounds/pattern_grey.png);
   padding:1.5rem;
   min-height:80vh;
+}
+
+body.discover #site-chrome {
+  background: url(/assets/img/backgrounds/pattern_grey.png) fixed;
 }
 
 body.discover.index_loading .sitechrome-page-content-area {
@@ -106,7 +109,6 @@ body.discover.index_loading .sitechrome-page-content-area {
   color: #FFF;
 }
 
-
 .discover-setup-header {
   padding:1rem 0 0.5rem;
   margin-bottom:0;
@@ -158,22 +160,6 @@ body.discover.index_loading .sitechrome-page-content-area {
 
 /* Discover Playlist ------------------------------------------------*/
 
-.discover-edit-playlist-link {
-  color:$red;
-  font-size:rems(12);
-  font-weight:bold;
-  text-transform: uppercase;
-  position:absolute;
-  right:2rem;
-  top:2rem;
-  border:0;
-
-  &:hover {
-    border:0;
-  }
-
-}
-
 .discover-playlist-container {
   @include display-flex;
   @include flex-direction(column);
@@ -205,16 +191,109 @@ body.discover.index_loading .sitechrome-page-content-area {
   min-height:10rem;
 }
 
+.discover-playlist-header-content {
+  @include display-flex;
+  @include flex-direction(column);
+  @include flex-wrap(nowrap);
+  @include align-items(center);
+  @include justify-content(space-between);
+}
+
 .discover-playlist-header-title, .discover-playlist-header-subtitle, .discover-playlist-header-button {
   margin:0.75rem;
   color:#FFF;
 }
+
+.discover-playlist-header-container {
+  /* this is relative to the content area */
+
+  position:absolute;
+  top:0;
+  left: 0;
+  right:0;
+
+  @include display-flex;
+  @include justify-content(center);
+  @include align-items(center);
+  @include flex-direction(row);
+}
+
+.discover-edit-playlist-link {
+  color:$red;
+  font-size:rems(12);
+  font-weight:bold;
+  text-transform: uppercase;
+  position:absolute;
+  right:2rem;
+  top:2rem;
+  border:0;
+
+  &:hover {
+    border:0;
+  }
+}
+
+.mod-collapsed-header {
+  .discover-playlist-header-container {
+    position:fixed;
+    top:0;
+    height:100px;
+    left:1.5rem;
+    right:1.5rem;
+    background: url(/assets/img/backgrounds/pattern_grey.png) fixed;
+    text-align:left;
+    height:100px;
+    z-index:2;
+
+    @include mq($middle-narrow-and-up) {
+      left: 144px;
+      right:0;
+    }
+  }
+
+  .discover-playlist-header {
+    @include display-flex;
+    @include justify-content(space-between);
+    @include align-items(center);
+    @include flex-direction(row);
+    height:100px;
+    max-width:800px;
+    width:100%;
+  }
+
+  .discover-playlist-header-content {
+    @include display-flex;
+    @include justify-content(space-between);
+    @include align-items(center);
+    @include flex-direction(row);
+  }
+
+  .discover-playlist-header-title {
+    font-size:rems(24);
+    margin-left:0;
+  }
+  .discover-playlist-header-subtitle {
+    display:none;
+  }
+
+  .discover-edit-playlist-link {
+    position:relative;
+    top:0;
+    right:0;
+  }
+}
+
+.discover-playlist-container {
+  padding-top:15rem;
+}
+
 .discover-playlist-header-button {
   @include display-flex;
   @include flex-direction(row);
   @include flex-wrap(nowrap);
   @include align-items(center);
   @include justify-content(center);
+  white-space: nowrap;
 }
 
 // This the sortable item

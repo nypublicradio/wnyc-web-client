@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   session: Ember.inject.service(),
   discoverPrefs: Ember.inject.service(),
+
   model() {
     let prefs = this.get('discoverPrefs');
 
@@ -14,6 +15,7 @@ export default Ember.Route.extend({
       });
     });
   },
+
   actions: {
     back() {
       let prefs = this.get('discoverPrefs');

@@ -1,26 +1,27 @@
 {{! show playlist with chosen stories, save story IDs in session data for return visits }}
 
-{{#link-to 'discover.edit' class="discover-edit-playlist-link"}}
-  Edit My Shows & Topics
-{{/link-to}}
-
 {{#discover-playlist stories=model.stories onFindMore='findMore' onRemoveItem='removeItem' as |playlist|}}
-  <h1 class="discover-playlist-header-title h1">Your Discover Playlist</h1>
-  <h3 class="discover-playlist-header-subtitle h3">We put together some audio specifically for you, based on your favorite shows and topics. <br/>
-  Sit back and just listen, or tell it what you like and don’t like - it will adapt to you.
-  </h3>
+  <div class="discover-playlist-header-content"> {{! for the flex layout shifts }}
+    <h1 class="discover-playlist-header-title h1">Your Discover Playlist</h1>
+    <h3 class="discover-playlist-header-subtitle h3">We put together some audio specifically for you, based on your favorite shows and topics. <br/>
+    Sit back and just listen, or tell it what you like and don’t like - it will adapt to you.
+    </h3>
 
-  {{! Todo: Abstract this into an icon-button component that allows left/right options, etc }}
-  {{#playlist.button class="discover-playlist-header-button mod-with-icon"}}
-    {{#if playlist.isNotStarted}}
-      <span>Start Listening</span>{{wnyc-svg icon="arrow-down"}}
-    {{else}}
-      {{#if playlist.isPaused}}
-        {{wnyc-svg icon="play"}}<span>Continue Listening</span>
+    {{! Todo: Abstract this into an icon-button component that allows left/right options, etc }}
+    {{#playlist.button class="discover-playlist-header-button mod-with-icon"}}
+      {{#if playlist.isNotStarted}}
+        <span>Start Listening</span>{{wnyc-svg icon="arrow-down"}}
       {{else}}
-        {{wnyc-svg icon="pause"}}<span>Pause</span>
+        {{#if playlist.isPaused}}
+          {{wnyc-svg icon="play"}}<span>Continue Listening</span>
+        {{else}}
+          {{wnyc-svg icon="pause"}}<span>Pause</span>
+        {{/if}}
       {{/if}}
-    {{/if}}
-  {{/playlist.button}}
+    {{/playlist.button}}
+  </div>
+  {{#link-to 'discover.edit' class="discover-edit-playlist-link"}}
+    Edit My Shows & Topics
+  {{/link-to}}
 {{/discover-playlist}}
 {{outlet}}

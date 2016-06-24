@@ -1,10 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  session: Ember.inject.service(),
-  queue:   Ember.inject.service('discover-queue'),
+  session:  Ember.inject.service(),
+  queue:    Ember.inject.service('discover-queue'),
+  scroller: Ember.inject.service(),
 
   classNames:   ['discover-playlist-container'],
+  classNameBindings: ['collapsedHeader:mod-collapsed-header'],
   orderedStories: Ember.computed.or('customSortedStories', 'stories'),
 
   audio:          Ember.inject.service(),
@@ -34,6 +36,9 @@ export default Ember.Component.extend({
   }),
 
   actions: {
+    scrollPointReached(direction) {
+      this.set('collapsedHeader', direction === 'down');
+    },
     reorderItems(itemModels, draggedModel) {
       this.set('customSortedStories', itemModels);
       this.set('justDragged', draggedModel);
@@ -64,6 +69,7 @@ export default Ember.Component.extend({
       else {
         let story = this.get('orderedStories').get('firstObject');
         this.send('playTrack', story.cmsPK);
+        this.get('scroller').scrollVertical(Ember.$(`#story-${story.cmsPK}`), {offset: -100, duration: 500});
       }
     },
 

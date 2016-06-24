@@ -1,20 +1,22 @@
-<div class="discover-playlist-header">
-
-  {{yield (hash
-    button=(component 'discover-playlist-play-button' click=(action 'toggle'))
-    isPlaying=isPlaying
-    isPaused=isPaused
-    isNotStarted=isNotStarted
-  )}}
-
+<div class="discover-playlist-header-container">
+  <div class="discover-playlist-header">
+    {{yield (hash
+      button=(component 'discover-playlist-play-button' click=(action 'toggle'))
+      isPlaying=isPlaying
+      isPaused=isPaused
+      isNotStarted=isNotStarted
+    )}}
+  </div>
 </div>
 
+{{#way-point action=(action "scrollPointReached") offset="125"}}
 {{#sortable-group class="discover-playlist" tagName="ul" onChange="reorderItems" handle=".discover-playlist-item-handle" as |group|}}
   {{#each orderedStories as |story|}}
     {{#sortable-item class="discover-playlist-item" tagName="li" group=group model=story handle=".discover-playlist-item-handle"}}
-      <span class="discover-playlist-item-handle">
+      <span id='story-{{story.cmsPK}}' class="discover-playlist-item-handle">
         {{wnyc-svg icon="reorder"}}
       </span>
+
       {{#discover-playlist-story isCurrentTrack=(eq story.cmsPK currentPlaylistStoryPk) isPlaying=(and isPlaying (eq story.cmsPK currentPlaylistStoryPk))}}
 
         {{playlist-play-indicator
@@ -35,7 +37,7 @@
     {{/sortable-item}}
   {{/each}}
 {{/sortable-group}}
-
+{{/way-point}}
 
 <button {{action 'findMore'}} class="discover-playlist-find-more rounded-caps-button mod-hollow-blue">
   Find Me Some More
