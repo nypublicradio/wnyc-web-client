@@ -12,9 +12,15 @@
 {{#way-point action=(action "scrollPointReached") offset="125"}}
   {{#sortable-group class="discover-playlist" tagName="ul" onChange="reorderItems" handle=".discover-playlist-item-handle" as |group|}}
     {{#each orderedStories as |story|}}
-      {{#sortable-item class=(if (get removedItemsHash story.cmsPK) 'discover-playlist-item is-deleted' 'discover-playlist-item')
-        tagName="li" group=group model=story handle=".discover-playlist-item-handle"}}
-        <span id='story-{{story.cmsPK}}' class="discover-playlist-item-handle">
+      {{#sortable-item id=(concat 'story-' story.cmsPK) class=(if (get removedItemsHash story.id) 'discover-playlist-item is-deleted' 'discover-playlist-item')
+        tagName="li"
+        group=group
+        model=story
+        handle=".discover-playlist-item-handle"
+        onDragStart="dragStarted"
+        onDragStop="dragStopped"
+      }}
+        <span class="discover-playlist-item-handle">
           {{wnyc-svg icon="reorder"}}
         </span>
 

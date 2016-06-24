@@ -11,6 +11,7 @@ moduleForComponent('discover-playlist', 'Unit | Component | discover playlist', 
       isPlaying: false
     });
 
+
     this.register('service:audio', audioStub);
     this.inject.service('audio', { as: 'audio' });
   }
@@ -91,7 +92,7 @@ test('currentPlaylistStoryPk is set when the current audio matches a story in th
   assert.equal(component.get('currentPlaylistStoryPk'), 1, "matching story should return story pk");
 });
 
-test('delete action sends delete to discover queue and deletes item from array', function(assert) {
+test('delete action sends delete to discover queue and marks item as deleted', function(assert) {
   var component = this.subject();
   component.set('stories', stories);
 
@@ -102,11 +103,15 @@ test('delete action sends delete to discover queue and deletes item from array',
     }
   };
   component.set('queue', queueStub);
+  component.set('removedItems', []);
 
   let story = stories[0];
   component.send('removeItem', story);
+
   assert.equal(itemDeleted, story, "should send first deleted item to service");
-  assert.equal(component.get('orderedStories').length, 1, "item should be deleted from internal list");
+  console.log(component.get('removedItems'));
+
+  assert.equal(component.get('removedItems').length, 1, "item should be added to removed items list");
 });
 
 test('reordering items sends updates to discover queue', function(assert) {

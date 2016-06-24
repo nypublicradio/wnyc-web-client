@@ -1,25 +1,26 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import startMirage from 'overhaul/tests/helpers/setup-mirage-for-integration';
 
 moduleForComponent('discover-topic-list', 'Integration | Component | discover topic list', {
-  integration: true,
-  beforeEach() {
-    startMirage(this.container);
-  },
-  afterEach() {
-    window.server.shutdown();
-  }
+  integration: true
 });
 
+const topics = [
+  {id: 1, url: 'a-m', title: "Music"},
+  {id: 2, url: 'a-a', title: "Arts"},
+  {id: 3, url: 'a-f', title: "Food"},
+  {id: 4, url: 'a-d', title: "Dreams"},
+  {id: 5, url: 'a-s', title: "Sleep"}
+];
+
 test('it renders', function(assert) {
-  this.set('topics', server.createList('discover-topic', 20));
+  this.set('topics', topics);
   this.render(hbs`{{discover-topic-list topics=topics}}`);
-  assert.equal(this.$('.discover-topic').length, 20);
+  assert.equal(this.$('.discover-topic').length, 5);
 });
 
 test('select all selects all topics', function(assert) {
-  this.set('topics', server.createList('discover-topic', 20));
+  this.set('topics', topics);
   this.render(hbs`{{discover-topic-list topics=topics onTopicsUpdated=(action (mut currentlySelectedTopics))}}`);
 
   this.$('a:contains("Select All")').click();
@@ -27,7 +28,7 @@ test('select all selects all topics', function(assert) {
 });
 
 test('select none selects none', function(assert) {
-  this.set('topics', server.createList('discover-topic', 20));
+  this.set('topics', topics);
   this.render(hbs`{{discover-topic-list topics=topics onTopicsUpdated=(action (mut currentlySelectedTopics))}}`);
 
   this.$('a:contains("Select All")').click();
@@ -36,7 +37,7 @@ test('select none selects none', function(assert) {
 });
 
 test('select none only shows up when all are selected', function(assert) {
-  this.set('topics', server.createList('discover-topic', 3));
+  this.set('topics', topics.slice(0, 3));
   this.render(hbs`{{discover-topic-list topics=topics}}`);
 
   this.$('.discover-topic')[0].click();
@@ -50,7 +51,6 @@ test('select none only shows up when all are selected', function(assert) {
 });
 
 test('passing in selected topics renders selected items', function(assert) {
-  let topics = server.createList('discover-topic', 5);
   this.set('topics', topics);
   this.set('selectedTopicTags', [topics[1].url, topics[2].url]);
   this.render(hbs`{{discover-topic-list topics=topics selectedTopicTags=selectedTopicTags}}`);
@@ -58,7 +58,6 @@ test('passing in selected topics renders selected items', function(assert) {
 });
 
 test('clicking on a topic sends an updated topics list', function(assert) {
-  let topics = server.createList('discover-topic', 5);
   this.set('topics', topics);
   this.set('selectedTopicTags', [topics[1].url, topics[2].url]);
   this.set('currentlySelectedTopics', []);

@@ -1,6 +1,7 @@
 {
   "predef": [
     "server",
+    "drag",
     "document",
     "window",
     "location",

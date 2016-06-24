@@ -8,7 +8,9 @@ export default Factory.extend({
   },
 
   pk()    { return this.id; },
-  cmsPK() { return this.id; },
+  cmsPK() { return parseInt(this.id, 10); },
+  // make sure this is a number too, or else weird stuff happens.
+  // Should be able to fix this once the id toJSON changes happen
 
   // this needs to be only numbers, or the audio service will think this it's a 'stream' instead of 'onDemand'.
 

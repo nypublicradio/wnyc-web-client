@@ -1,6 +1,10 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import { currentSession } from 'overhaul/tests/helpers/ember-simple-auth';
+import ENV from 'overhaul/config/environment';
+import RSVP from 'rsvp';
+
+import 'overhaul/tests/helpers/ember-sortable/test-helpers';
 
 moduleForAcceptance('Acceptance | discover returning user', {
   beforeEach() {
@@ -30,7 +34,6 @@ test('you can browse directly to shows tab', function(assert) {
   });
 });
 
-
 test('you can browse directly to topics tab', function(assert) {
   visit('/discover/edit/topics');
   andThen(() => {
@@ -42,6 +45,7 @@ test('clicking cancel on edit page takes you back to playlist', function(assert)
   visit('/discover/edit/topics');
   andThen(function() {
     click("button:contains('Cancel')");
+
     andThen(function() {
       assert.equal(currentURL(), '/discover/playlist');
     });
@@ -156,6 +160,122 @@ test('selected shows are not retained if you hit cancel', function(assert) {
   });
 });
 
+test('deleting an item sends a delete listen action', function(assert) {
+  let stories = server.db.discoverStories;
+  var story = stories[0];
+
+  let url = [ENV.wnycAccountRoot, 'api/v1/listenaction/create', story.cmsPK, 'delete'].join("/");
+  var listenActionSent = false;
+  server.post(url, function() {
+    listenActionSent = true;
+  });
+
+  visit('/discover/playlist');
+
+  andThen(() => {
+    click(`#story-${story.cmsPK} .discover-playlist-item-delete`);
+    andThen(() => {
+      assert.equal(listenActionSent, true, "action should have been called");
+    });
+  });
+});
+
+test('deleting an item removes the item from the list', function(assert) {
+  let stories = server.db.discoverStories;
+  var story = stories[0];
+  visit('/discover/playlist');
+  andThen(() => {
+    click(`#story-${story.cmsPK} .discover-playlist-item-delete`);
+    andThen(() => {
+      return new RSVP.Promise(function(resolve) {
+        // pause while making the test wait
+        window.setTimeout(function() {
+          resolve();
+        }, 1000);
+      }).then(function() {
+        assert.equal($(`#story-${story.cmsPK}.is-deleted`).length, 1, "item should be marked as deleted");
+      });
+    });
+  });
+});
+
+test('the list can be reordered by dragging', function(assert) {
+  visit('/discover/playlist');
+
+  var currentPlaylistOrder = function() {
+    return $('.discover-playlist-item').map(function() { return $(this).attr('id'); }).toArray();
+  };
+
+  andThen(() => {
+    let originalOrder = currentPlaylistOrder();
+    let second = originalOrder[1];
+
+    let offsetFunction = function() {
+      return {
+        dy: -200,
+        dx:0
+      };
+    };
+
+    return drag('mouse', `#${second} .discover-playlist-item-handle`, offsetFunction).then(() => { // jshint ignore:line
+      return new RSVP.Promise(function(resolve) {
+        // pause while making the test wait
+        window.setTimeout(function() {
+          resolve();
+        }, 1000);
+      }).then(function() {
+        let newOrder = currentPlaylistOrder();
+        let expectedOrder = [].concat(originalOrder);
+        expectedOrder.unshift(expectedOrder.splice(1,1)[0]);
+        assert.deepEqual(newOrder, expectedOrder, "second item should be in first position");
+      });
+    });
+  });
+});
+
+test('reording the list after deleting does not bring back the deleted item', function(assert) {
+  visit('/discover/playlist');
+
+  var currentVisiblePlaylistOrder = function() {
+    return $('.discover-playlist-item:not(.is-deleted)').map(function() { return $(this).attr('id'); }).toArray();
+  };
+
+  let stories = server.db.discoverStories;
+
+  let test1 = stories[4];
+  let test2 = stories[2];
+
+  click(`#story-${test1.id} .discover-playlist-item-delete`);
+  click(`#story-${test2.id} .discover-playlist-item-delete`);
+
+  andThen(() => {
+    let originalOrder = currentVisiblePlaylistOrder();
+    let second = originalOrder[1];
+
+    let offsetFunction = function() {
+      return {
+        dy: -200,
+        dx:0
+      };
+    };
+
+      return drag('mouse', `#${second} .discover-playlist-item-handle`, offsetFunction).then(() => { // jshint ignore:line
+        return new RSVP.Promise(function(resolve) {
+          // pause while making the test wait
+          window.setTimeout(function() {
+            resolve();
+          }, 1000);
+        }).then(function() {
+          let newOrder = currentVisiblePlaylistOrder();
+          let expectedOrder = [].concat(originalOrder);
+          expectedOrder.unshift(expectedOrder.splice(1,1)[0]);
+          assert.deepEqual(newOrder.length, expectedOrder.length, "items should not have been added");
+          assert.deepEqual(newOrder, expectedOrder, "second item should be in first position");
+        });
+      });
+    });
+
+});
 
 
 // TODO: climb the mountain that is making the audio service testable/workable in dev

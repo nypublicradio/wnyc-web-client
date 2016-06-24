@@ -3,16 +3,14 @@ const {
   get,
 } = Ember;
 
-
 export default Ember.Component.extend({
   session:        Ember.inject.service(),
   queue:          Ember.inject.service('discover-queue'),
   scroller:       Ember.inject.service(),
   audio:          Ember.inject.service(),
 
-  classNames:   ['discover-playlist-container'],
-  classNameBindings: ['collapsedHeader:mod-collapsed-header'],
-  orderedStories: Ember.computed.or('customSortedStories', 'stories'),
+  classNames:        ['discover-playlist-container'],
+  classNameBindings: ['collapsedHeader:mod-collapsed-header', 'isDraggingItem:is-dragging-item'],
 
   // Computed properties from a service. These are a little hinky
   audioReady:     Ember.computed.alias('audio.isReady'),
@@ -38,6 +36,17 @@ export default Ember.Component.extend({
     }
   }),
 
+  // this is what we interact with
+  orderedStories: Ember.computed.or('customSortedStories', 'stories'),
+  // customSortedStories is what the sortable sets after reordering
+
+  stillVisibleStories: Ember.computed.setDiff('orderedStories', 'removedItems'),
+  visibleCount: Ember.computed.alias('stillVisibleStories.length'),
+  refreshAutomaticallyIfZero: Ember.observer('visibleCount', function() {
+    if (this.get('itemCount') === 0) {
+      this.findMore();
+    }
+  }),
 
   // This is for the delete effects, and this might be a weird way to do it
   // but by not actually deleting the item from the list we can avoid having to
@@ -49,22 +58,23 @@ export default Ember.Component.extend({
     // helper in the template to set an .is-deleted class on the item
     var hash = {};
     this.get('removedItems').forEach(i => {
-      hash[i] = true;
+      hash[get(i, 'cmsPK')] = true;
     });
-
     return hash;
   }),
 
   actions: {
     removeItem(item) {
+      // This will trigger the CSS effect to remove it/hide it from the list
+      this.get('removedItems').addObject(item);
+
       // delete it from the queue
       this.get('queue').removeItem(item);
 
       // this will fire the listen action
       this.sendAction('onRemoveItem', item);
 
-      // This will trigger the CSS effect to remove it/hide it from the list
-      this.get('removedItems').addObject(get(item, 'cmsPK'));
+
 
       // we don't want to actually delete it from this ordered stories
       // that will work itself next time the list loads
@@ -76,12 +86,28 @@ export default Ember.Component.extend({
       this.set('collapsedHeader', direction === 'down');
     },
 
+    dragStarted(/* item */) {
+      this.set('isDraggingItem', true);
+    },
+
+    dragStopped(/* item */) {
+      this.set('isDraggingItem', false);
+    },
+
     reorderItems(itemModels, draggedModel) {
-      this.set('customSortedStories', itemModels);
       this.set('justDragged', draggedModel);
 
-      this.get('queue').updateQueue(itemModels);
-      this.sendAction('onUpdateItems', itemModels);
+      // This is a good time to actually delete the hidden items
+      let removedItems = this.get('removedItems');
+      let presentAndOrderedItems = itemModels.reject((item) => {
+        return removedItems.findBy('id', item.id);
+      });
+
+      // Update queue with only the items that haven't been deleted
+      this.set('customSortedStories', presentAndOrderedItems);
+      this.set('removedItems', []); // clear out removed/hidden items
+      this.get('queue').updateQueue(presentAndOrderedItems.copy());
+      this.sendAction('onUpdateItems', presentAndOrderedItems);
     },
 
     findMore() {
