@@ -52,9 +52,12 @@ export default Ember.Route.extend({
     findMore() {
       let listenActions = this.get('listenActions');
       let discoverQueue = this.get('discoverQueue');
+      let prefs         = this.get('discoverPrefs');
+
       discoverQueue.get('items').forEach(item => {
-        listenActions.sendSkip(get(item, 'id'), 'discover');
-        // send a skip action for each item in the playlist
+        let itemId        = get(item, 'id');
+        listenActions.sendSkip(itemId, 'discover');
+        prefs.excludeStoryId(itemId);
       });
       discoverQueue.emptyQueue();
 
