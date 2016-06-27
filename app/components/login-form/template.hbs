@@ -1,37 +1,39 @@
-<div class="main login-register">
-  <div class="page-titlegroup profile-head-row">
-    <h2>Sign In</h2>
-  </div>
-  <div id="login-register">
+<div class="l-constrained l-constrain--400">
+  <div class="main login-register">
+    <div class="page-titlegroup profile-head-row">
+      <h2>Sign In</h2>
+    </div>
+    <div id="login-register">
 
-    <form {{action 'login' on='submit'}} id="login" class="js-login_form" autocapitalize='none' autocorrect='none'>
-      {{#if errors}}
-      <ul class="errorlist">
-      {{#each errors as |message|}}
-        <li>
-          {{message}}
-        </li>
-      {{/each}}
-      </ul>
-      {{/if}}
+      <form {{action 'login' on='submit'}} id="login" class="js-login_form" autocapitalize='none' autocorrect='none'>
+        {{#if errors}}
+        <ul class="errorlist">
+        {{#each errors as |message|}}
+          <li>
+            {{message}}
+          </li>
+        {{/each}}
+        </ul>
+        {{/if}}
 
-      <label for="id_username" style="display: none;">email</label>
-      {{input value=username maxlength=254 placeholder='email' name='username' class="input--block"}}
+        <label for="id_username" style="display: none;">email</label>
+        {{input value=username maxlength=254 placeholder='email' name='username' class="input--block nudge"}}
 
-      <label for="id_password" style="display: none;">Password</label>
-      {{input value=password type='password' placeholder='Password' name='password' class="input--block"}}
+        <label for="id_password" style="display: none;">Password</label>
+        {{input value=password type='password' placeholder='Password' name='password' class="input--block nudge"}}
 
-      <button class='submit' type="submit">Submit</button>
-      <div><a href="/in_iframe/accounts/password/reset/">Forgot your password?</a></div>
-      <div>New user? <a href="/in_iframe/accounts/register/?next=http://www.wnyc.org/">Sign up</a>.</div>
-      <div>Trying to <a href="http://www.wnyc.org/support/faq/#10" target="_blank" class="external-link">access your membership account</a>?</div>
-      </form>
+        <button class='submit' type="submit">Sign In</button>
+        <div><a href="/in_iframe/accounts/password/reset/">Forgot your password?</a></div>
+        <div>New user? <a href="/in_iframe/accounts/register/?next=http://www.wnyc.org/">Sign up</a>.</div>
+        <div>Trying to <a href="http://www.wnyc.org/support/faq/#10" target="_blank" class="external-link">access your membership account</a>?</div>
+        </form>
 
-            
-      <p class="disclaimer">Online accounts are not directly linked with membership accounts and
-      pledges at this time. If you need to update your membership
-      information you <a href="/contact/">contact us</a> or call 646.829.4000.
-      </p>
+              
+        <p class="disclaimer">Online accounts are not directly linked with membership accounts and
+        pledges at this time. If you need to update your membership
+        information you <a href="/contact/">contact us</a> or call 646.829.4000.
+        </p>
 
+    </div>
   </div>
 </div>
