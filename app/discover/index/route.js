@@ -19,10 +19,8 @@ export default Ember.Route.extend({
       // push the stories into the store
       queuedStories.forEach((story) => { this.store.push(story); });
 
-      // push the stories into the store
-      let ids = queuedStories.map(i => i.data.id);
-
       // make sure we're only getting the ones that were in the queue
+      let ids = queuedStories.map(i => i.data.id);
       stories = this.store.peekAll('discover.stories').filter(story => {
         return ids.contains(story.id);
       });
