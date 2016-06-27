@@ -17,14 +17,22 @@ export default Ember.Route.extend({
     if (this.get('discoverQueue.items').length > 0) {
       let queuedStories = this.get('discoverQueue.items');
 
-      // push the stories into the store
-      queuedStories.forEach((story) => { this.store.push(story); });
+      if (queuedStories.mapBy('id').compact().length > 0) {
+        // these are already instantiated ember objects from the store
+        stories = queuedStories;
+      }
+      else {
+        // push the stories into the store
+        queuedStories.forEach((story) => { this.store.push(story); });
 
-      // make sure we're only getting the ones that were in the queue
-      let ids = queuedStories.map(i => i.data.id);
-      stories = this.store.peekAll('discover.stories').filter(story => {
-        return ids.contains(story.id);
-      }).filter(story => {
+        // make sure we're only getting the ones that were in the queue
+        let ids = queuedStories.map(i => i.data.id);
+        stories = this.store.peekAll('discover.stories').filter(story => {
+          return ids.contains(story.id);
+        });
+      }
+
+      stories.filter(story => {
         return !excludedIds.contains(story.id);
       });
     }
