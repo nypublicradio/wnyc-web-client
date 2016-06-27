@@ -49,3 +49,20 @@ test('it loads data from the session on loadFromSession', function(assert) {
   assert.deepEqual(service.get('selectedShowSlugs'), ['show-slug']);
   assert.deepEqual(service.get('selectedTopicTags'), ['topic-tag']);
 });
+
+test('it can keep track of excluded story ids', function(assert) {
+  let service = this.subject();
+
+  service.set('excludedStoryIds', [1]);
+  service.save();
+
+  assert.deepEqual(service.get('session.data.discover-excluded-story-ids'), [1]);
+
+  service.excludeStoryId(3);
+  service.excludeStoryId(4);
+
+  assert.deepEqual(service.get('excludedStoryIds'), [1,3,4], "should have new excluded ids in memory");
+  assert.deepEqual(service.get('session.data.discover-excluded-story-ids'), [1,3,4], "should be saved in session immediately");
+  service.save();
+  assert.deepEqual(service.get('session.data.discover-excluded-story-ids'), [1,3,4], "should have saved in session");
+});

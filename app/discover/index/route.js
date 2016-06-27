@@ -11,6 +11,7 @@ export default Ember.Route.extend({
 
   model() {
     let prefs = this.get('discoverPrefs');
+    let excludedIds = prefs.get('excludedStoryIds');
     var stories;
 
     if (this.get('discoverQueue.items').length > 0) {
@@ -23,6 +24,8 @@ export default Ember.Route.extend({
       let ids = queuedStories.map(i => i.data.id);
       stories = this.store.peekAll('discover.stories').filter(story => {
         return ids.contains(story.id);
+      }).filter(story => {
+        return !excludedIds.contains(story.id);
       });
     }
     else {
@@ -33,6 +36,8 @@ export default Ember.Route.extend({
         api_key: 'trident',
         duration: 10800,
         tags: tags
+      }).then(s => {
+        return s.filter(story => { return !excludedIds.contains(story.id); });
       });
     }
 
@@ -57,7 +62,13 @@ export default Ember.Route.extend({
     },
     removeItem(item) {
       let listenActions = this.get('listenActions');
-      listenActions.sendDelete(get(item, 'id'), 'discover');
+      let prefs         = this.get('discoverPrefs');
+      let itemId        = get(item, 'id');
+
+      listenActions.sendDelete(itemId, 'discover');
+
+      // Make sure this doesn't show up again
+      prefs.excludeStoryId(itemId);
     },
     edit() {
       this.transitionTo('discover.edit');

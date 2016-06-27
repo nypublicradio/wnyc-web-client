@@ -5,6 +5,7 @@ export default Ember.Service.extend({
 
   selectedTopicTags:[],
   selectedShowSlugs:[],
+  excludedStoryIds: Ember.computed.alias('session.data.discover-excluded-story-ids'),
 
   setupComplete: false,
   currentSetupStep: 'start',
@@ -19,6 +20,7 @@ export default Ember.Service.extend({
     let shows   = session.getWithDefault('data.discover-shows', []);
     let setupComplete = session.getWithDefault('data.discover-setup-complete', false);
     let currentSetupStep = session.getWithDefault('data.discover-current-setup-step', 'start');
+    session.set('data.discover-excluded-story-ids', session.getWithDefault('data.discover-excluded-story-ids', []));
 
     this.set('selectedTopicTags', topics);
     this.set('selectedShowSlugs', shows);
@@ -48,6 +50,12 @@ export default Ember.Service.extend({
     session.set('data.discover-topics', this.get('selectedTopicTags'));
     session.set('data.discover-setup-complete', this.get('setupComplete'));
     session.set('data.discover-current-setup-step', this.get('currentSetupStep'));
+  },
 
+
+  // This works a little differently in that it gets persisted immediately.
+  // Not a huge fan of how this is a special case, but oh well.
+  excludeStoryId(id) {
+    this.get('excludedStoryIds').pushObject(id);
   }
 });

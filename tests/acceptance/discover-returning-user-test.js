@@ -16,6 +16,7 @@ moduleForAcceptance('Acceptance | discover returning user', {
     let shows = server.createList('show', 10);
     session.set('data.discover-shows',  [shows[0].slug]); // set some saved shows
     session.set('data.discover-topics', ['music']); // set some saved topics
+    session.set('data.discover-excluded-story-ids', []);
 
     let serializedStories = server.db.discoverStories.map(story => {
       return {data: {
@@ -141,7 +142,6 @@ test('selected topics are retained temporarily when switching between tabs', fun
   });
 });
 
-
 test('selected shows are not retained if you hit cancel', function(assert) {
   let session = currentSession(this.application);
   let stories = server.createList('show', 10);
@@ -203,6 +203,49 @@ test('deleting an item removes the item from the list', function(assert) {
         assert.equal($(`#story-${story.id}.is-deleted`).length, 1, "item should be marked as deleted");
       });
     });
+  });
+});
+
+test('playlist shows all items', function(assert) {
+  server.createList('discover-story', 12);
+  let stories = server.db.discoverStories;
+  let session = currentSession(this.application);
+
+  session.set('data.discover-queue',  []);
+  session.set('data.discover-excluded-story-ids',  []);
+
+  visit('/discover/playlist');
+  andThen(() => {
+    stories.forEach(story => {
+      assert.equal($(`.discover-playlist-story-title a:contains(${story.title})`).length, 1, "playlist should contain story title");
+    });
+  });
+});
+
+test('playlist does not show excluded item when loaded from the queue', function(assert) {
+  server.createList('discover-story', 12);
+  let stories = server.db.discoverStories;
+  let session = currentSession(this.application);
+
+  let exclude = stories[0];
+  session.set('data.discover-excluded-story-ids',  [exclude.id]);
+
+  visit('/discover/playlist');
+  andThen(() => {
+    assert.equal($(`.discover-playlist-story-title a:contains(${exclude.title})`).length, 0, "excluded story should not be there when loaded from the queue");
+  });
+});
+
+test('playlist does not show excluded item when loaded from the store', function(assert) {
+  server.createList('discover-story', 12);
+  let stories = server.db.discoverStories;
+  let session = currentSession(this.application);
+  let exclude = stories[0];
+  session.set('data.discover-queue',  []);
+  session.set('data.discover-excluded-story-ids', [exclude.id]);
+  visit('/discover/playlist');
+  andThen(() => {
+    assert.equal($(`.discover-playlist-story-title a:contains(${exclude.title})`).length, 0, "excluded story should not be there when loaded from the queue");
   });
 });
 
