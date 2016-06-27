@@ -69,7 +69,7 @@
     "ember-sortable": "1.8.1",
     "ember-truth-helpers": "1.2.0",
     "ember-waypoints": "0.1.0",
-    "ember-wormhole": "noslouch/ember-wormhole#d83b1cc4b691ed2e0551a905c14a422022fb8496",
+    "ember-wormhole": "noslouch/ember-wormhole#9894221257d5a7d7247c3fb20ecd093eea2d6c0a",
     "glob": "^4.5.3",
     "http-proxy": "^1.14.0",
     "liquid-fire": "ember-animation/liquid-fire#aa30ff92d4b26bac22799d1c79a07a60a3dce9c9",
