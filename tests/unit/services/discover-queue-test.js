@@ -74,10 +74,10 @@ test('queue can be updated in bulk', function(assert) {
 });
 
 test('queue can return next item that is unplayed', function(assert) {
-  let story1 = {id: 1, cmsPK: 1};
-  let story2 = {id: 2, cmsPK: 2};
-  let story3 = {id: 3, cmsPK: 3};
-  let story4 = {id: 4, cmsPK: 4};
+  let story1 = {id: 1};
+  let story2 = {id: 2};
+  let story3 = {id: 3};
+  let story4 = {id: 4};
 
   let service = this.subject();
 
@@ -93,8 +93,8 @@ test('queue can return next item that is unplayed', function(assert) {
 });
 
 test('queue can return next item in list given the current item', function(assert) {
-  let story1 = {id: 1, cmsPK: 1};
-  let story2 = {id: 2, cmsPK: 2};
+  let story1 = {id: 1};
+  let story2 = {id: 2};
   let service = this.subject();
 
   service.addItem(story1);

@@ -16,7 +16,16 @@ moduleForAcceptance('Acceptance | discover returning user', {
     let shows = server.createList('show', 10);
     session.set('data.discover-shows',  [shows[0].slug]); // set some saved shows
     session.set('data.discover-topics', ['music']); // set some saved topics
-    session.set('data.discover-queue',  server.db.discoverStories); // set some saved stories
+
+    let serializedStories = server.db.discoverStories.map(story => {
+      return {data: {
+        id: story.id,
+        type: "discover.stories",
+        attributes: story
+      }};
+    });
+
+    session.set('data.discover-queue',  serializedStories); // set some saved stories
   }
 });
 
@@ -83,13 +92,11 @@ test('shows are saved in a session and maintained upon next visit in edit flow',
 });
 
 test('stories are displayed from saved session data', function(assert) {
-  let session = currentSession(this.application);
-  let story = server.create('discover-story', {title: 'specific-story-title-to-look-for'});
-  session.set('data.discover-queue',  [story]); // set some saved stories
-
   visit('/discover/playlist');
   andThen(() =>{
-    assert.equal($('.discover-playlist:contains("specific-story-title-to-look-for")').length, 1);
+    server.db.discoverStories.forEach(story => {
+      assert.equal($(`.discover-playlist:contains(${story.title})`).length, 1);
+    });
   });
 });
 
@@ -164,7 +171,7 @@ test('deleting an item sends a delete listen action', function(assert) {
   let stories = server.db.discoverStories;
   var story = stories[0];
 
-  let url = [ENV.wnycAccountRoot, 'api/v1/listenaction/create', story.cmsPK, 'delete'].join("/");
+  let url = [ENV.wnycAccountRoot, 'api/v1/listenaction/create', story.id, 'delete'].join("/");
   var listenActionSent = false;
   server.post(url, function() {
     listenActionSent = true;
@@ -173,7 +180,7 @@ test('deleting an item sends a delete listen action', function(assert) {
   visit('/discover/playlist');
 
   andThen(() => {
-    click(`#story-${story.cmsPK} .discover-playlist-item-delete`);
+    click(`#story-${story.id} .discover-playlist-item-delete`);
     andThen(() => {
       assert.equal(listenActionSent, true, "action should have been called");
     });
@@ -185,7 +192,7 @@ test('deleting an item removes the item from the list', function(assert) {
   var story = stories[0];
   visit('/discover/playlist');
   andThen(() => {
-    click(`#story-${story.cmsPK} .discover-playlist-item-delete`);
+    click(`#story-${story.id} .discover-playlist-item-delete`);
     andThen(() => {
       return new RSVP.Promise(function(resolve) {
         // pause while making the test wait
@@ -193,7 +200,7 @@ test('deleting an item removes the item from the list', function(assert) {
             resolve();
         }, 1000);
       }).then(function() {
-        assert.equal($(`#story-${story.cmsPK}.is-deleted`).length, 1, "item should be marked as deleted");
+        assert.equal($(`#story-${story.id}.is-deleted`).length, 1, "item should be marked as deleted");
       });
     });
   });

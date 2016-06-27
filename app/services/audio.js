@@ -327,7 +327,7 @@ export default Service.extend({
     else if (context === 'discover') {
       let nextTrack = this.get('discoverQueue').nextItem(this.get('currentAudio.id'));
       if (nextTrack) {
-        this.play(get(nextTrack, 'cmsPK'), 'discover');
+        this.play(get(nextTrack, 'id'), 'discover');
       }
       else {
         set(this, 'isPlaying', false);

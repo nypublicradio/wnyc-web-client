@@ -18,7 +18,7 @@ moduleForComponent('discover-playlist', 'Unit | Component | discover playlist', 
 });
 
 const stories = [
-  {id: 'should-not-matter', cmsPK: 1},{id: 'does-not-matter', cmsPK: 2}
+  {id: 1},{id: 2}
 ];
 
 test('currentAudioId changes when service audio id changes', function(assert) {
@@ -33,8 +33,8 @@ test('currentPlaylistStoryPk equals audioId when audio is within playlist', func
   component.set('stories', stories);
   component.set('audio.currentAudio.id', 'not-in-dere');
   assert.equal(component.get('currentPlaylistStoryPk'), undefined);
-  component.set('audio.currentAudio.id', stories[0].cmsPK);
-  assert.equal(component.get('currentPlaylistStoryPk'), stories[0].cmsPK, 'ooooh fer sure it should be in dere');
+  component.set('audio.currentAudio.id', stories[0].id);
+  assert.equal(component.get('currentPlaylistStoryPk'), stories[0].id, 'ooooh fer sure it should be in dere');
 });
 
 test('isPlaying is set when the current audio matches a story in the playlist', function(assert) {

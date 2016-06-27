@@ -24,7 +24,7 @@ export default Ember.Component.extend({
   }),
 
   currentTrackIsInPlaylist: Ember.computed('orderedStories', 'currentAudioId', function() {
-    return !!this.get('orderedStories').findBy('cmsPK', this.get('currentAudioId'));
+    return !!this.get('orderedStories').findBy('id', this.get('currentAudioId'));
   }),
 
   currentPlaylistStoryPk:   Ember.computed('currentTrackIsInPlaylist', function() {
@@ -45,7 +45,7 @@ export default Ember.Component.extend({
     }
   }),
 
-  removedItemIds: Ember.computed.map('removedItems', (i) => i.cmsPK),
+  removedItemIds: Ember.computed.map('removedItems', (i) => i.id),
 
   // This is for the delete effects, and this might be a weird way to do it
   // but by not actually deleting the item from the list we can avoid having to
@@ -89,7 +89,7 @@ export default Ember.Component.extend({
       // This is a good time to actually delete the hidden items
       var removedItemIds = this.get('removedItemIds');
       let presentAndOrderedItems = itemModels.reject((item) => {
-        return removedItemIds.contains(item.cmsPK);
+        return removedItemIds.contains(item.id);
       });
 
       // Update queue with only the items that haven't been deleted
@@ -114,8 +114,8 @@ export default Ember.Component.extend({
       }
       else {
         let story = this.get('orderedStories').get('firstObject');
-        this.send('playTrack', story.cmsPK);
-        this.get('scroller').scrollVertical(Ember.$(`#story-${story.cmsPK}`), {offset: -100, duration: 500});
+        this.send('playTrack', story.id);
+        this.get('scroller').scrollVertical(Ember.$(`#story-${story.id}`), {offset: -100, duration: 500});
       }
     },
 

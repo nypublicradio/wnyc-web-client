@@ -52,7 +52,7 @@ export default Ember.Service.extend({
 
   nextItem(currentPk) {
     let items = this.get('items');
-    let current = this.get('items').findBy('cmsPK', currentPk);
+    let current = this.get('items').findBy('id', currentPk);
     let currentIndex = items.indexOf(current);
 
     if (currentIndex < items.length) {

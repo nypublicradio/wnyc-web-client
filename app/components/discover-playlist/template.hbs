@@ -13,7 +13,7 @@
 
   {{#sortable-group class="discover-playlist" tagName="ul" onChange="reorderItems" handle=".discover-playlist-item-handle" as |group|}}
     {{#each orderedStories as |story|}}
-      {{#sortable-item id=(concat 'story-' story.cmsPK) class=(if (array-contains removedItemIds story.cmsPK) 'discover-playlist-item is-deleted' 'discover-playlist-item')
+      {{#sortable-item id=(concat 'story-' story.id) class=(if (array-contains removedItemIds story.id) 'discover-playlist-item is-deleted' 'discover-playlist-item')
         tagName="li"
         group=group
         model=story
@@ -26,15 +26,15 @@
           {{wnyc-svg icon="reorder"}}
         </span>
 
-        {{#discover-playlist-story isCurrentTrack=(eq story.cmsPK currentPlaylistStoryPk) isPlaying=(and isPlaying (eq story.cmsPK currentPlaylistStoryPk))}}
+        {{#discover-playlist-story isCurrentTrack=(eq story.id currentPlaylistStoryPk) isPlaying=(and isPlaying (eq story.id currentPlaylistStoryPk))}}
           {{playlist-play-indicator
               title=story.title
-              itemPK=story.cmsPK
+              itemPK=story.id
               class="discover-playlist-story-play-button"
               isReady=audioReady
-              isPlaying=(and (eq story.cmsPK currentPlaylistStoryPk) isPlaying)
-              onPause=(action 'pauseTrack' story.cmsPK)
-              onPlay=(action 'playTrack' story.cmsPK)
+              isPlaying=(and (eq story.id currentPlaylistStoryPk) isPlaying)
+              onPause=(action 'pauseTrack' story.id)
+              onPlay=(action 'playTrack' story.id)
             }}
 
           {{discover-playlist-story-info story=story}}

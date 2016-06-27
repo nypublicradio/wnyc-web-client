@@ -10,5 +10,14 @@ export default Model.extend({
   estimatedDuration:  attr('number'),
   url:                attr('string'),
   audio:              attr('string'),
-  cmsPK:              attr('string')
+  cmsPK:              attr('string'),
+
+  // so Ember Simple Auth inludes a records ID when it saves
+  toJSON() {
+    var serializer = this.store.serializerFor(this._internalModel.modelName);
+    var snapshot   = this._internalModel.createSnapshot();
+    let serialized = serializer.serialize(snapshot, {includeId: true});
+
+    return serialized;
+  }
 });
