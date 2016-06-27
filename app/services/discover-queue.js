@@ -13,13 +13,14 @@ export default Ember.Service.extend({
 
   init() {
     let items = this.get('session').getWithDefault('data.discover-queue', emberArray());
-    if (items[0].cmsPK) {
+    
+    if (items.length > 0 && items[0].cmsPK) {
       // reset after serialization changes
       // we can remove this after release, this just helps anyone who tried this in dev
       this.set('items', []);
     }
     else {
-      this.set('items', this.get('session').getWithDefault('data.discover-queue', emberArray()));
+      this.set('items', items);
     }
 
     this._super(...arguments);
