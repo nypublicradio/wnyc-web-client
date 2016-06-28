@@ -18,34 +18,30 @@ export default Ember.Service.extend({
   storiesFromShows(slugs) {
     let url = [ENV.wnycAPI, 'api/v3/show_story_query'].join("/");
 
-    return new RSVP.Promise((resolve) => {
-      return Ember.$.ajax({
-        data: {
-          shows: slugs.join(";")
-        },
-        method: "GET",
-        url: url
-      }).then((results) => {
-        let data = get(results, 'data') || [];
-        resolve(data.map(r => r.id));
-      });
+    return Ember.$.ajax({
+      data: {
+        shows: slugs.join(",")
+      },
+      method: "GET",
+      url: url
+    }).then((results) => {
+      let data = get(results, 'data') || [];
+      return data.map(r => r.id);
     });
   },
 
   storiesFromTopics(tags) {
     let url = [ENV.wnycAPI, 'api/v3/tag_story_query'].join("/");
 
-    return new RSVP.Promise((resolve) => {
-      return Ember.$.ajax({
-        data: {
-          tags: tags.join(";")
-        },
-        method: "GET",
-        url: url
-      }).then((results) => {
-        let data = get(results, 'data') || [];
-        resolve(data.map(r => r.id));
-      });
+    return Ember.$.ajax({
+      data: {
+        tags: tags.join(",")
+      },
+      method: "GET",
+      url: url
+    }).then((results) => {
+      let data = get(results, 'data') || [];
+      return data.map(r => r.id);
     });
   }
 });

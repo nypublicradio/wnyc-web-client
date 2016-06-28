@@ -15,7 +15,7 @@ export default DS.JSONAPIAdapter.extend({
     let storyIds = query.show_stories.join(",");
     let tagIds = query.tag_stories.join(",");
 
-    query = {};
+    // query = {};
     // Put it in the URL so the ajax internals don't go escaping it
     url = url + `?show_stories=${storyIds};tag_stories=${tagIds}`;
 
