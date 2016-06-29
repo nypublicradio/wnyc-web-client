@@ -33,14 +33,16 @@
       {{#listen-button
         type='gray-minion'
         state=(if (eq stream.slug currentAudio) playState)
-        itemPK=stream.slug}}
+        itemPK=stream.slug
+        itemTitle=stream.name}}
         Listen Live
       {{/listen-button}}
     {{else}}
       {{listen-button
         type='blue-hollow'
         state=(if (eq stream.slug currentAudio) playState)
-        itemPK=stream.slug}}
+        itemPK=stream.slug
+        itemTitle=stream.name}}
     {{/if}}
   </div>
 </li>
