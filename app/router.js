@@ -25,7 +25,9 @@ Router.map(function() {
   // This is an example of a route that we've customized beyond the
   // default behavior in the `djangorendered` route.
   this.route('story', { path: 'story/:slug' });
-  //this.route('shows', {path: 'shows'});
+  if (config.environment === 'test' || config.featureFlags['site-chrome']) {
+    this.route('shows', {path: 'shows'});
+  }
   this.route('show', {path: 'shows/:slug'}, subpageRoutes);
   this.route('article', {path: 'articles/:slug'}, subpageRoutes);
   this.route('serie', {path: 'series/:slug'}, subpageRoutes);
