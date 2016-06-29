@@ -55,7 +55,16 @@
     > .scrollable-body {
       max-height: calc(100% - 106px);
       overflow-y: auto;
-      height: 100%;
+      height: 100%; 
+    }
+  }
+
+  /* ipad-only mods to hide the scroll bump as the chrome is minimized */
+  @include mq($ipad-only){
+    height: 110%;
+    > .scrollable-body {
+      max-height: calc(90% -106px);
+      height: auto;
     }
   }
 
@@ -620,6 +629,11 @@
   bottom: 0;
   left: 0;
   width: 100%;
+
+  @include mq($ipad-only){
+    position: relative;
+    margin-top: 20px;
+  }
 }
 
 .l-topright {
