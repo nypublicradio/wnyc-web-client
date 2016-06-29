@@ -1,10 +1,17 @@
 import DS from 'ember-data';
+import Ember from 'ember';
 
 export default DS.Serializer.extend({
   normalizeResponse(store, primaryModelClass, payload, id /*, requestType */) {
     let attributes = {};
     if (payload instanceof Document) {
-      let doc = payload.documentElement.cloneNode(true);
+      let doc;
+      if (Ember.testing) {
+        doc = document.implementation.createHTMLDocument();
+        doc.body.appendChild(payload.querySelector('#ember-testing').cloneNode(true));
+      } else {
+        doc = payload.documentElement.cloneNode(true);
+      }
       let emberAssets = [];
 
       // By this point, ember has already booted a view into the Document, so

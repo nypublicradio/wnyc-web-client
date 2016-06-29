@@ -1,10 +1,10 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 import ENV from '../config/environment';
+import get from 'ember-metal/get';
+import computed from 'ember-computed';
 import parseAnalyticsCode from '../utils/analytics-code-parser';
 const { attr, Model } = DS;
-const { computed, get } = Ember;
-
 
 export default Model.extend({
   analyticsCode: attr('string'),
@@ -17,7 +17,7 @@ export default Model.extend({
   audioShowOptions: attr('boolean'),
   commentsCount: attr('number'),
   commentsEnabled: attr('boolean'),
-  cmsPK: attr('number'),
+  cmsPK: attr('string'),
   dateLine: attr('string'),
   dateLineDatetime: attr('string'),
   editLink: attr('string'),
@@ -32,7 +32,6 @@ export default Model.extend({
   title: attr('string'),
   url: attr('string'),
   extendedStory: attr(),
-
   escapedBody: computed('extendedStory.body', {
     get() {
       let body = get(this, 'extendedStory.body');
@@ -75,5 +74,12 @@ export default Model.extend({
         title: get(this, 'title')
       };
     }
-  })
+  }),
+
+  // so Ember Simple Auth inludes a records ID when it saves
+  toJSON() {
+    var serializer = this.store.serializerFor('story');
+    var snapshot = this._internalModel.createSnapshot();
+    return serializer.serialize(snapshot, {includeId: true});
+  }
 });

@@ -1,15 +1,87 @@
+.l-flexcontext {
+  @include display-flex;
+  height: 100%;
+  @include flex-direction(column);
+}
+
+.l-holygrail {
+  @include display-flex;
+  @include flex-direction(row);
+  @include flex(1 0 auto);
+
+  > .l-holygrail-middle {
+    @include flex-direction(row);
+    @include flex(1);
+  }
+
+  .l-holygrail-centered {
+    @include display-flex;
+    @include flex-direction(column);
+    @include justify-content(center);
+  }
+
+  > .l-holygrail-right,
+  > .l-holygrail-left {
+    @include flex(0 0 auto);
+    @include display-flex;
+  }
+}
+
+.l-modal--shadow {
+  @include box-shadow(0px 2px 4px 0px rgba(black, 0.5));
+}
+
 .l-page {
-  padding-left: 150px;
+  @include mq($middle-narrow-and-up) {
+    padding-left: 144px;
+  }
 }
 
 .l-page-nav {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 150px;
-  background-color: $navy;
+  background-color: $rouge;
+  position: relative;
+
+  @include mq($middle-narrow-and-up) {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 144px;
+    padding-bottom: 117px;
+    background-color: $navy;
+  }
+
+  @include mq($short-only) {
+    > .scrollable-body {
+      max-height: calc(100% - 106px);
+      overflow-y: auto;
+      height: 100%;
+    }
+  }
+
+  &.x-scrollable {
+    > .scrollable-body {
+      overflow-x: scroll;
+      white-space: nowrap;
+      padding: 0 25px;
+      padding: 0 rems(25);
+      padding-right: 35%; //width of the gradient; see below
+    }
+
+    &:after {
+      content: '';
+      pointer-events: none;
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100%;
+      width: 35%;
+      @include background-image(linear-gradient(to right, rgba(141, 33, 48, 0.0), #8d2131));
+    }
+  }
 }
+
 /***
  * Layout Spaces:
  * These atoms are invisible, meaning no backgrounds or borders
@@ -27,21 +99,35 @@
  *          p Just some text in a full width wrapper
  */
 .l-full {
-    //background: white;
+    background: transparent;
     clear: both;
     @extend %clearfix;
+    position: relative;
 }
 
 .l-highlight--dark {
-    background-color: $navy;
+  background-color: $navy;
+  @extend %clearfix;
 }
 
-.l-highlight--mq--darktogray {
-    background-color: black;
+.l-highlight--darknavy {
+  background-color: $darknavy;
+  @extend %clearfix;
+}
 
-    @include mq($medium-and-up) {
-        background-color: #303030;
+.l-highlight--mq--charcoalnavy {
+    background-color: $charcoal;
+    @extend %clearfix;
+
+    @include mq($middle-narrow-and-up) {
+        background-color: $navy;
     }
+}
+
+.l-highlight--geometric {
+    background-image: url("/assets/img/bg/PurplePattern.png");
+    background-position: 80px -90px;
+    @extend %clearfix;
 }
 
 /**
@@ -72,7 +158,7 @@
  *
  */
 .l-constrained {
-    max-width: 1100px;
+    max-width: 1170px;
     margin: 0 auto;
     @extend %clearfix;
 
@@ -85,6 +171,20 @@
         padding: 0 25px;
         padding: 0 rems(25);
     }
+
+  &.l-constrained--shrink {
+    @include mq($middle-narrow-only) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  &.l-constrained--mq-med {
+    @include mq($medium-only) {
+        padding: 0 25px;
+        padding: 0 rems(25);
+    }
+  }
 }
 
 .l-constrained--sm-md-lg {
@@ -103,6 +203,38 @@
     width: 100%;
 }
 
+.l-constrained--mq-padded {
+  padding-top: 15px;
+  padding-bottom: 90px;
+
+  @include mq($wide) {
+    padding-left: 120px;
+    padding-right: 120px;
+    padding-top: 100px;
+    max-width: 1390px;
+    margin: auto;
+  }
+
+  @include mq($short-only, $wide) {
+    padding-top: 50px;
+  }
+
+}
+
+.l-unconstrained {
+  margin-right: -15px;
+  margin-left: -15px;
+  margin-right: rems(-15);
+  margin-left: rems(-15);
+  @extend %vertical-rhythm;
+
+  @include mq($medium-and-up) {
+    margin-left: -25px;
+    margin-right: -25px;
+    margin-left: rems(-25);
+    margin-right: rems(-25);
+  }
+}
 // right rail inner wrapper
 .l-skinny {
     width: 100%;
@@ -113,8 +245,17 @@
     }
 }
 
+// Flex Styles
 .l-flexrow {
-    @include flexbox;
+    @include display-flex;
+}
+
+.l-flexrow--sb {
+  @include justify-content(space-between);
+}
+
+.l-flex-noshrink {
+  @include flex-shrink(0);
 }
 
 .l-flexrow--mqmd {
@@ -134,12 +275,35 @@
   }
 
   @include mq($medium-and-up) {
-      @include flexbox;
+      @include display-flex;
+  }
+
+  > [class*='l-col'].nudge:first-child {
+    @extend .nudge;
   }
 }
 
 .l-flexcol--center {
     @include align-self(center);
+}
+
+.l-flexgrid {
+  @include display-flex;
+  @include flex-wrap(wrap);
+}
+
+.l-flex1of2 {
+  @include flex-basis(100%);
+  @include flex-grow(1);
+  @include flex-shrink(1);
+
+  &[class$="--fixed"] {
+    @include flex(1);
+  }
+
+  @include mq($middle-narrow-and-up) {
+    @include flex(1);
+  }
 }
 
 /***
@@ -158,10 +322,22 @@
             padding-right: 0;
         }
     }
+
+    &[class$='--fixed'] {
+      float: left;
+      padding-left: 7.5px;
+      padding-left: rems(7.5);
+      padding-right: 7.5px;
+      padding-right: rems(7.5);
+
+      &:last-child:not(:only-child) {
+          padding-right: 0;
+      }
+    }
 }
 
 .l-col--flex {
-  @include flexbox;
+  @include display-flex;
 
   &.l-col--cv {
     @include align-items(center);
@@ -239,6 +415,10 @@
     @include mq($medium-and-up) {
         width: 50%;
     }
+
+    &.l-col1of2--fixed {
+      width: 50%;
+    }
 }
 
 .l-col1of5 {
@@ -273,7 +453,7 @@
     }
 
     @include mq($medium-and-up) {
-        @include flexbox;
+        @include display-flex;
         @include justify-content(space-between);
         @include align-items(center);
 
@@ -283,11 +463,11 @@
     }
 
     > :last-child {
-        @include flex(0 , 0, auto);
+        @include flex(0 0 auto);
     }
 
     > :first-child {
-        @include flex(1, 1, auto);
+        @include flex(1 1 auto);
     }
 
     > .l-split-child128 {
@@ -411,6 +591,11 @@
   z-index: $zIndex--abs;
 }
 
+.l-fixed {
+  position: fixed;
+  z-index: $zIndex--fix;
+}
+
 .l-lowright {
   bottom: 25px;
   right: 25px;
@@ -421,6 +606,18 @@
   }
 }
 
+.l-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.l-topright {
+  top: 25px;
+  right: 25px;
+}
+
 /**
  * Media Object:
  * `.media, .media-image, .media-body`
@@ -428,7 +625,7 @@
  * to exist side-by-side with some text content. the point is that the image
  * can be of any width, so this molecule is flexible
  *
- * The media object can be used for logo lockups in story headers, for 
+ * The media object can be used for logo lockups in story headers, for
  * comments on story pages, etc.
  *
  *      @example
@@ -503,6 +700,7 @@
         vertical-align: bottom;
     }
 
+
 }
 
 .flag-image {
@@ -519,7 +717,18 @@
 
     .flag--rev & {
         padding-right: 0;
-        padding-left: 10px;
+        padding-left: 40px;
+    }
+
+    // .flag--luxe & {
+    //     padding-right: 40px;
+    //     @include mq($small-only) {
+    //       padding-right: 0;
+    //     }
+    // }
+
+    .flag--med & {
+      padding-right: 30px;
     }
 
     &.flag-image--squeeze > img {
@@ -540,4 +749,35 @@
     &.flag-body--rightpad {
       padding-right: 90px;
     }
+
+
 }
+
+/* flag luxe spans the whole width of the page */
+/* on smaller screens, divs stack */
+
+.flag--luxe {
+      .flag-image, .flag-body {
+        @include mq($small-only) {
+          display: block;
+        }
+      }
+    .flag-image {
+      padding-right: 40px;
+      @include mq($small-only) {
+          padding-right: 0px;
+          margin: 0 auto 10px;
+        }
+      img {
+        @include mq($small-only) {
+          margin: 0 auto;
+        }
+      }
+    }
+    .flag-body {
+        @include mq($small-only) {
+          text-align: center;
+        }
+    }
+}
+

@@ -12,6 +12,7 @@
     "Faker": "~3.0.0",
     "lodash": "4.3.0",
     "normalize.css": "3.0.3",
-    "raven-js": "~2.1"
+    "raven-js": "~2.1",
+    "SoundManager2": "soundmanager2#*"
   }
 }

@@ -8,6 +8,7 @@
     color: $lightgray;
     border-bottom: 1px solid $lightestgray;
     text-transform: uppercase;
+    letter-spacing: 2px;
 
     > h1,
     > h2,
@@ -15,7 +16,7 @@
     > h4,
     > h5,
     > h6 {
-        font-weight: 400;
+        font-weight: 700;
         line-height: 32px;
         margin-bottom: 0;
     }
@@ -42,7 +43,7 @@
 
 .list--mq-flextoblock {
     @include mq($small-only) {
-        @include flexbox;
+        @include display-flex;
         @include justify-content(space-between);
 
         > .list-item {
@@ -61,7 +62,7 @@
 
 .list--mq-blocktoflex {
     @include mq($medium-and-up) {
-        @include flexbox;
+        @include display-flex;
         @include justify-content(space-between);
 
         > .list-item {
@@ -79,9 +80,10 @@
 }
 
 .list--flex {
-    @include flexbox;
+    @include display-flex;
     @include justify-content(space-between);
-    
+    @include flex-wrap(wrap);
+
     > .list-item {
         @include flex-grow(1);
     }
@@ -102,6 +104,12 @@
           margin-right: 30px;
         }
     }
+
+    &.list--spaced {
+      > .list-item {
+        margin-right: 25px;
+      }
+    }
 }
 
 .list-item {
@@ -111,6 +119,15 @@
 
     &:last-child {
         /* border-bottom: 1px solid $lightergray;*/
+    }
+
+    .list--borderbottom & {
+        border-top: none;
+        border-bottom: 1px solid $lightestgray;
+
+        &:last-child {
+            border-bottom: none;
+        }
     }
 }
 
@@ -124,6 +141,11 @@
 
 .list-item--mini {
     padding: 0.5rem 0 0 0;
+}
+
+.list-item--tiny {
+    padding: 0.5rem 0;
+    line-height: 12px;
 }
 
 .list-item--dimmed {

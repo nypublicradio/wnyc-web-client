@@ -1,0 +1,20 @@
+<span class="streaminfoline">
+  <span class="streaminfoline-stationinfo">
+    LIVE NOW on <a href='{{stream.scheduleUrl}}'
+     target={{is-external stream.scheduleUrl}}
+     data-tracking-category='Persistent Player'
+     data-tracking-action='Click Through to Schedule'>{{stream.name}}</a>
+  </span>
+  <span class="streaminfoline-stationlinks">
+    <a href='{{stream.scheduleUrl}}'
+       target={{is-external stream.scheduleUrl}}
+       data-tracking-category='Persistent Player'
+       data-tracking-action='Click Through to Schedule'>SCHEDULE</a>
+    {{#if stream.playlistUrl}}
+    <a href='/streams/{{stream.id}}'
+       data-tracking-category='Persistent Player'
+       data-tracking-action='Click Through to Music Playlist'
+       data-tracking-label='{{stream.name}}'>MUSIC PLAYLIST</a>
+    {{/if}}
+  </span>
+</span>

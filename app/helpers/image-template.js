@@ -1,12 +1,11 @@
-import Ember from 'ember';
+import { helper } from 'ember-helper';
 
-export default Ember.Helper.helper(function([template, x, y, crop]) {
-  function replaceFn(originalString, base, X, Y, CROP, Q, path) {
-    // quality is not passed in from the templates, just use 80
-    X = x; Y = y; CROP = crop; Q = 99;
-
-    return `${base}/${X}/${Y}/${CROP}/${Q}/${path}`;
+export function imageTemplate([template, x, y, crop]) {
+  function replaceFn(originalString, base, path) {
+    return `${base}/${x}/${y}/${crop}/99/${path}`;
   }
 
-  return template.replace(/(.*\/i)\/(%s)\/(%s)\/(%s)\/(%s)\/(.*)/, replaceFn);
-});
+  return template.replace(/(.*\/i)\/%s\/%s\/%s\/%s\/(.*)/, replaceFn);
+}
+
+export default helper(imageTemplate);

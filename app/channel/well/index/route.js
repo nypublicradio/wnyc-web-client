@@ -1,19 +1,23 @@
-// ember will send a route like /shows/bl/2 to the channel.well.index route with '2'
-// as the navSlug parameter, when we really want to load the channel.page route
 import Route from 'ember-route';
+import get from 'ember-metal/get';
+import set from 'ember-metal/set';
+import ListingRouteMixin from 'overhaul/mixins/listing-route';
 
-export default Route.extend({
-  beforeModel() {
-    let channelType = this.routeName.split('.')[0];
+export default Route.extend(ListingRouteMixin, {
+  model() {
+    let routes = this.routeName.split('.');
+    let { navSlug } = this.paramsFor(`${routes[0]}.${routes[1]}`);
+    let page = /^\d+$/.test(navSlug) ? navSlug : 1;
+    let id = this.buildId(get(this, 'channelType'), page);
+    set(this, 'pageNumbers.totalPages', 0);
 
-    const {navSlug} = this.paramsFor(`${channelType}.well`);
-    if (/^\d+$/.test(navSlug)) {
-      // navSlug is a page number
-      return this.transitionTo(`${channelType}.page`, navSlug);
-    } else {
-      // navSlug is actually a navSlug
-      // go to the channel.well.page route with a blanked out param for page #
-      return this.transitionTo(`${channelType}.well.page`, navSlug, '');
-    }
+    return this.store.findRecord('api-response', id)
+      .then(m => {
+        // wait until models are loaded to keep UI consistent
+        set(this, 'pageNumbers.page', page);
+        set(this, 'pageNumbers.totalPages', get(m, 'totalPages'));
+
+        return m;
+      });
   }
 });

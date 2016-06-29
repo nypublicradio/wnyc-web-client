@@ -15,7 +15,10 @@ $zIndex-7:      700;
 $zIndex-8:      800;
 $zIndex-9:      900;
 $zIndex-10:     1000;
+$zIndex-11:     1100;
+$zIndex-12:     1200;
 
+$zIndex--playerBackdrop:    $zIndex-vanish;
 $zIndex--isRight:           $zIndex-vanish;
 $zIndex--isUp:              $zIndex-vanish;
 $zIndex--isShrunk:          $zIndex-vanish;
@@ -23,10 +26,20 @@ $zIndex--isShrunk:          $zIndex-vanish;
 $zIndex--accordion:         $zIndex-1;
 $zIndex--lBgImgAfter:       $zIndex-1;
 $zIndex--isVisible:         $zIndex-1;
+$zIndex--djangocontent:     $zIndex-1;
 
 $zIndex--abs:               $zIndex-2;
 $zIndex--lBgImg:            $zIndex-2;
 $zIndex--lBgImgChildren:    $zIndex-2;
 $zIndex--lBgImgBefore:      $zIndex-2;
+$zIndex--modalwrapper:      $zIndex-2;
 
 $zIndex--dropdownBody:      $zIndex-3;
+
+$zIndex--fix:               $zIndex-4;
+
+$zIndex--modal:             $zIndex-10;
+
+$zIndex--persistent-player: $zIndex-11;
+
+$zIndex--sliding-modal:     $zIndex-12;

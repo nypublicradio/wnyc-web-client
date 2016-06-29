@@ -18,7 +18,7 @@
             <h1 id="channelTitle" class="channel-title">{{model.title}}</h1>
             <p class="text-body text--medium text-body--forceline text-body--nopad">
                 {{#if model.producingOrganizations}}    
-                    {{producing-orgs model.producingOrganizations}} 
+                    Produced by {{producing-orgs model.producingOrganizations}}.
                 {{/if}}    
                 {{airings}}
             </p>
@@ -30,8 +30,8 @@
     <!-- .l-col2of3 -->
 
     <div class="l-col1of3 l-col--flex l-col--cv l-col--right">
-      {{#if sessionManager.user.isStaff}}
-        <a href="{{sessionManager.user.adminUrl}}/{{model.editLink}}" class="btn btn--green" style="margin:auto;" target="_blank">Edit this</a>
+      {{#if user.is_staff}}
+        <a href="{{user.adminURL}}/{{model.editLink}}" class="btn btn--green" style="margin:auto;" target="_blank">Edit this</a>
       {{/if}}
 
       {{#if model.hasHeaderButtons}}

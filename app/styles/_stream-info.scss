@@ -1,0 +1,75 @@
+.streaminfo {
+  background: #ffffff;
+  color: #000000;
+  padding: 10px 0 0 0;
+
+  @include mq($wide) {
+    padding: 53px 0 40px 0;
+  }
+
+  a {
+    color: #128cf4;
+    text-decoration: none;
+    &:hover,
+    &:focus {
+      color: #1068b3;
+    }
+    &:active {
+      color: #013f73;
+    }
+  }
+
+  .streaminfo-logo {
+    float: left;
+    height: 75px;
+    width: 75px;
+    margin-right: 25px;
+    margin-bottom: 34px;
+  }
+  .streaminfo-heading {
+    margin: 9px 0 2px 0;
+    color: $lightgray;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 400;
+  }
+  .streaminfo-name {
+    margin: 0;
+    font-size: 24px;
+    line-height: 34px;
+    font-weight: 600;
+  }
+  .streaminfo-currentshow {
+    clear: left;
+    font-size: 16px;
+    line-height: 27px;
+    margin-bottom: 27px;
+  }
+  .streaminfo-playlistlink {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .playlistitem {
+    color: $lightgray;
+    margin-bottom: 36px;
+    font-size: 14px;
+    line-height: 24px;
+
+    &.playlistitem--nowplaying {
+      color: $darkergray;
+    }
+    .playlistitem-time,
+    .playlistitem-duration,
+    .playlistitem-buylink {
+      font-size: 12px;
+      line-height: 22px;
+    }
+    .playlistitem-title,
+    .playlistitem-composer {
+      font-size: 16px;
+      line-height: 27px;
+      font-weight: 600;
+    }
+  }
+}

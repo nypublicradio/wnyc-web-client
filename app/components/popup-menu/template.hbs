@@ -1,0 +1,30 @@
+<button class="popupmenu-button" {{action 'togglePopup'}}>{{yield}}</button>
+<div class="popupmenu-popup">
+  <ul class="popupmenu-list">
+  {{#each links as |link|}}
+    {{#if link.action}}
+      <li class="popupmenu-listitem">
+        <a onclick='{{link.action}}'
+           href='{{link.href}}'
+           title='{{link.title}}'
+           target='{{link.target}}'
+           data-tracking-category='{{link.trackingCategory}}'
+           data-tracking-action='{{link.trackingAction}}'
+           data-tracking-label='{{link.trackingLabel}}'>
+          {{link.text}}
+        </a></li>
+    {{else}}
+      <li class="popupmenu-listitem">
+        <a href='{{link.href}}'
+           title='{{link.title}}'
+           target='{{link.target}}'
+           data-tracking-category='{{link.trackingCategory}}'
+           data-tracking-action='{{link.trackingAction}}'
+           data-tracking-label='{{link.trackingLabel}}'>
+          {{link.text}}
+        </a></li>
+    {{/if}}
+  {{/each}}
+  </ul>
+  <div class="popupmenu-popup-pointer"></div>
+</div>

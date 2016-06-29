@@ -16,7 +16,7 @@ export default PageObject.create({
   },
 
   bootstrap({id}) {
-    let djangoPage = server.schema.djangoPage.find(id);
+    let djangoPage = server.schema.djangoPages.find(id);
     appendHTML(djangoPage.attrs.text);
     return this;
   }

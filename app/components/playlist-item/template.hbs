@@ -1,0 +1,38 @@
+<div class="playlistitem-time">
+  {{#if nowPlaying}}
+  Playing Now
+  {{else}}
+    {{moment-format item.startTime 'h:mm a'}}
+  {{/if}}
+</div>
+
+{{#with item.catalogEntry as |entry|}}
+  <div class="playlistitem-title">
+    {{entry.title}}
+  </div>
+  <div class="playlistitem-composer">
+    {{entry.composer.name}}
+  </div>
+
+  <div class="playlistitem-info">
+  {{#if entry.ensemble}}
+    {{entry.ensemble.name}}
+  {{/if}}
+  </div>
+  <div class="playlistitem-info">
+  {{#if entry.conductor}}
+    {{entry.conductor.name}}, conductor
+  {{/if}}
+  </div>
+  {{#each entry.soloists as |soloist|}}
+    <div class="playlistitem-info">
+      {{soloist.musician.name}}{{#each soloist.instruments as |instrument|}}, {{instrument}}{{/each}}
+    </div>
+  {{/each}}
+  <div class="playlistitem-duration">
+    {{humanize-duration entry.length}}
+  </div>
+  <div class="playlistitem-buylink">
+    <a href="{{entry.arkiv_link}}">Buy</a>
+  </div>
+{{/with}}

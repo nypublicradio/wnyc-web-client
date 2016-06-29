@@ -38,13 +38,9 @@
 }
 
 a {
-  color: #0073d5; 
+  color: #0073d5;
   text-decoration: none;
   word-wrap: break-word;
-}
-
-a:focus {
-  outline: 1px dotted invert;
 }
 
 .more:after  {
@@ -52,7 +48,7 @@ a:focus {
 }
 
 .text-link {
-  color: #0073d5; 
+  color: #0073d5;
   text-decoration: none;
   word-wrap: break-word;
   cursor: pointer;
@@ -189,6 +185,7 @@ a.video-overlay:hover {
 }
 
 ul.errorlist {
+  list-style: none;
   color: #dd0000;
   font-weight: bold;
   padding: 0;
@@ -246,16 +243,6 @@ ul.errorlist {
 input.submit {
   cursor: pointer;
 }
-
-//h1 {
-//  font: normal 22px arial;
-//  padding-bottom: 4px;
-//}
-//
-//h2 {
-//  font-size: 22px;
-//  line-height: 1.2em;
-//}
 
 h2.title {
   font-size: 24px;
@@ -839,7 +826,7 @@ h4.label {
 }
 
 .sideblock li {
-  margin: 3px 0 4px 0px;  
+  margin: 3px 0 4px 0px;
 }
 
 .block h3 {
@@ -1271,11 +1258,11 @@ ul.sidetouts li p.date {
 .social-network ul li.facebook a {
         background-image: url('/media/img/icons/icon-facebook.gif');
 }
-                                                                                                
+
 .social-network ul li.myspace a {
         background-image: url('/media/img/icons/icon-myspace.gif');
 }
-                                                                                                
+
 .social-network ul li.flickr a {
         background-image: url('/media/img/icons/icon-flickr.gif');
 }
@@ -1657,7 +1644,7 @@ p.byline {
 
 .article-wide p {
   margin-top: 15px;
-  margin-bottom: 30px;  
+  margin-bottom: 30px;
 }
 
 .article-wide img {
@@ -1997,12 +1984,12 @@ ul.article-playlist {
   clear: none;
 }
 
-.segment-tease h2.title, 
-.episode-tease h2.title, 
-.show-tease h2.title, 
-.event-tease h2.title, 
-.tiny-tease h2.title, 
-.blurb-tease h2.title, 
+.segment-tease h2.title,
+.episode-tease h2.title,
+.show-tease h2.title,
+.event-tease h2.title,
+.tiny-tease h2.title,
+.blurb-tease h2.title,
 #current-episode h2.title {
   font-size: 24px;
   font-weight: 400;
@@ -2013,11 +2000,11 @@ ul.article-playlist {
   font-size: 18px;
 }
 
-.segment-tease .media_buttons a.first, 
-.episode-tease .media_buttons a.first, 
-.show-tease .media_buttons a.first, 
-.event-tease .media_buttons a.first, 
-.playlist-tease.media_buttons a.first, 
+.segment-tease .media_buttons a.first,
+.episode-tease .media_buttons a.first,
+.show-tease .media_buttons a.first,
+.event-tease .media_buttons a.first,
+.playlist-tease.media_buttons a.first,
 .tiny-tease .media_buttons a.first {
         padding-left: 18px;
         background-position: 0px center;
@@ -2047,7 +2034,7 @@ ul.article-playlist {
 
 /*email this*/
 
-#emailthiswrapper { 
+#emailthiswrapper {
   display: none;
   position: absolute;
   width: 425px;
@@ -2058,7 +2045,7 @@ ul.article-playlist {
 }
 
 #emailthiswrapper input, #emailthiswrapper textarea{
-margin-bottom: 10px;  
+margin-bottom: 10px;
 }
 
 #emailthiswrapper .emailthis-submitbutton {
@@ -2089,7 +2076,7 @@ margin-bottom: 10px;
 }
 
 .error-highlight {
-  color: #E21E26 !important; 
+  color: #E21E26 !important;
 }
 
 #emailthiswrapper .form-note {
@@ -2335,12 +2322,12 @@ h4.schedule-link {
   margin: 15px 0;
 }
 
-#show-top-tout a { 
+#show-top-tout a {
   padding: 15px 5px;
   display: block;
 }
 
-#show-top-tout a:hover { 
+#show-top-tout a:hover {
   text-decoration: none;
 }
 
@@ -2612,7 +2599,7 @@ h4.schedule-link {
   margin: 15px 0 20px;
 }
 
-.showslider .jcarousel-prev, .showslider .jcarousel-next { 
+.showslider .jcarousel-prev, .showslider .jcarousel-next {
   height: 64px;
   width: 22px;
   position: absolute;
@@ -2629,7 +2616,7 @@ h4.schedule-link {
         background-image: url('/media/img/wnyc/widgets/show-slider-btn-prev.png');
 }
 
-.showslider .jcarousel-prev:hover { 
+.showslider .jcarousel-prev:hover {
   background-position: left -64px;
 }
 
@@ -2640,7 +2627,7 @@ h4.schedule-link {
         background-image: url('/media/img/wnyc/widgets/show-slider-btn-next.png');
 }
 
-.showslider .jcarousel-next:hover { 
+.showslider .jcarousel-next:hover {
   background-position: 4px -64px;
 }
 
@@ -2764,7 +2751,6 @@ h4.schedule-link {
 
 #login-register form#login {
   margin: 10px 0 0;
-  height: 290px;
 }
 
 #login-register form li {
@@ -2803,7 +2789,7 @@ h4.schedule-link {
   border: 0;
   background: #eeeced;
   padding: 10px;
-  margin: 0;
+  //margin: 0;
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
@@ -2867,7 +2853,6 @@ h4.schedule-link {
 }
 
 #login-register form .submit {
-  float: right;
   height: 52px;
   border: 0;
   background: #338fdd;
@@ -2892,7 +2877,7 @@ h4.schedule-link {
 }
 
 #login-register form ul.errorlist li {
-  font-size: 9px;
+  font-size: 12px;
   margin: -6px 0 2px;
 }
 
@@ -3116,7 +3101,7 @@ form#setup-account input.newsletter_opt_in {
 
 .profile label {
   text-align: right;
-  width: 100px; 
+  width: 100px;
 }
 
 .profile label, .profile-email label {
@@ -3315,7 +3300,7 @@ form#setup-account input.newsletter_opt_in {
 }
 
 .poll p.results a {
-        color: #e21e26;
+  color: #e21e26;
   font-weight: bold;
   text-decoration: none;
 }
@@ -3599,7 +3584,7 @@ form.filters #decimal label {
 }
 .flickr_badge_image img:hover {
   background: #e6e6e6;
-  border: 1px solid #d6d6d6; 
+  border: 1px solid #d6d6d6;
 }
 
 /* shows with external RSS archive */
@@ -3726,7 +3711,7 @@ form.filters #decimal label {
 .events-calendar caption a, .events-calendar caption .monthlink a {
   padding: 0px;
   color: #333;
-  font: normal bold 12px/23px arial;  
+  font: normal bold 12px/23px arial;
 }
 
 .events-calendar td a:link, .events-calendar td a:visited {
@@ -3747,7 +3732,7 @@ form.filters #decimal label {
   margin: 0px auto;
 }
 
-.siteslider .jcarousel-prev, .jcarousel-next { 
+.siteslider .jcarousel-prev, .jcarousel-next {
   height: 64px;
   width: 20px;
   position: absolute;
@@ -4363,7 +4348,7 @@ a.stf[href] {
   -khtml-transition: all 0.07s linear;
   -webkit-transition: all 0.07s linear;
   -ms-transition: all 0.07s linear;
-  transition: all 0.07s linear;    
+  transition: all 0.07s linear;
 }
 
 .sharelinks .fa-hover {
@@ -4489,7 +4474,7 @@ button {
   cursor: pointer;
 }
 
-/* Override padding bottom on audio controls 
+/* Override padding bottom on audio controls
  * to address the lede issue
  * WE-3854
  */
@@ -4584,7 +4569,7 @@ button {
     font-weight: 700;
   }
 }
-                 
+
 ul.schedule-table {
   li.head {
     font-size: 14px;
@@ -4595,7 +4580,7 @@ ul.schedule-table {
   li.details .text {
     font-size: 14px;
     margin-bottom: (1.25 / 2) * 1rem;
-    
+
     p {
       margin-bottom: (1.25 / 2) * 1rem;
     }
@@ -4604,7 +4589,7 @@ ul.schedule-table {
   ul.hosts {
     padding: 0;
   }
-} 
+}
 .schedule-header > h2 {
   font-weight: 600;
 }
@@ -4674,7 +4659,7 @@ ul.schedule-table {
       width: 100%;
       margin: 0;
       padding: 0 10px;
-      @include flexbox;
+      @include display-flex;
       @include flex-flow(row wrap);
     }
 

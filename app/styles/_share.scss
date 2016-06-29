@@ -1,0 +1,26 @@
+.share {
+    height: 100%;
+    margin-left: -14px;
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+.share-buttons {
+    float: left;
+    width: 30%;
+    height: 100%;
+
+    > * {
+        float: left;
+        width: 33%;
+    }
+}
+
+.share-embed {
+    float: left;
+    width: 70%;
+    height: 100%;
+}

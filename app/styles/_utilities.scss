@@ -100,6 +100,14 @@
     }
 }
 
+/* Bring up this element to sit flush with the header */
+ .flush--header {
+    margin-top: -1.5rem;
+    @include mq($middle-narrow-only){
+        margin-top: 0;
+    }
+ }
+
 /**
  * Mini Nudge:
  * `.nudge-mini`
@@ -118,17 +126,21 @@
     margin-bottom: 10px;
 }
 
+.nudge-down {
+    margin-bottom: 1.25rem
+}
+
 /**
  * Big Nudge:
  * `.nudge-big`
- * Adds 17px bottom margin to an element.
+ * Adds 1.5 rem bottom margin to an element.
  */
 .nudge-big {
-    margin-bottom: 17px;
+    margin-bottom: 1.5rem;
 }
 
-.nudge-down {
-    margin-bottom: 1.25rem
+.nudge-large {
+    margin-bottom: 2rem;
 }
 
 /**
@@ -213,6 +225,10 @@
     float: left;
 }
 
+.inline {
+  display: inline;
+}
+
 /**
  * Inline Images:
  * `.img--inline`
@@ -236,3 +252,5 @@ img.img--inline {
         display: none;
     }
 }
+
+

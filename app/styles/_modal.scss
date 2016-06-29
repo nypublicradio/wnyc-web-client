@@ -1,0 +1,70 @@
+.modal-closebutton.btn {
+  display: inline;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+  text-align: right;
+  color: $darkergray;
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-right: 12px;
+  .icon {
+    display: inline-block;
+    vertical-align: text-top;
+    height: 14px;
+    width: 14px;
+    margin-left: 4px;
+    fill: $darkergray;
+  }
+}
+
+.l-sliding-modal {
+  background-color: white;
+  min-height: 100%;
+  //use momentum-based scrolling on ios
+  -webkit-overflow-scrolling: touch;
+  z-index: $zIndex--sliding-modal;
+
+  .l-alignright {
+    text-align: right;
+  }
+}
+
+.l-modal {
+  position: fixed;
+  z-index: $zIndex--modal;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  @include display-flex;
+}
+
+.l-modal--dark {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.l-modal-body {
+  @include flex(0);
+  margin: auto;
+  position: relative;
+  min-width: 80%;
+
+  @include mq($medium-and-up) {
+    min-width: 750px;
+  }
+}
+
+// required to override some unused liquid-fire styles
+// e.g. allows sliging-modal to slide into place
+.modal-wrapper.liquid-container {
+  @include transform(none);
+}
+
+.modal-wrapper > .liquid-child {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  z-index: $zIndex--modalwrapper; // for homepage compat
+}

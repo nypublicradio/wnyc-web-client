@@ -56,13 +56,12 @@ export const runOnce = Object.freeze({
   'js/consoleFix.js': true,
   'js/swfobject.js': true,
   'js/vendor/underscore/underscore-1.4.4.js': true,
+  'js/vendor/backbone/plugins/localstorage/localstorage-1.1.0.js': true,
   'js/vendor/backbone/backbone-0.9.9.js': true,
   'js/vendor/backbone/backbone-1.0.0.js': true,
   'js/vendor/handlebars/handlebars-2.0.0.min.js': true,
   'js/vendor/jwplayer/jwplayer.js': true,
-  'js/vendor/soundmanager2/v297a-20140901/soundmanager2.js': true,
-  'js/lib/marionette/xd_player/core.js': true,
-  'js/lib/marionette/xd_player/okra/core.js': true,
+  'js/vendor/modernizr/modernizr-2.6.2-xd_player_custom.js': true,
   'www.google.com/jsapi': true,
   'maps.googleapis.com/maps/api/js': true,
   'www.google-analytics.com/analytics.js': true,
@@ -77,7 +76,7 @@ export default Ember.Service.extend({
   router: Ember.inject.service('wnyc-routing'),
   init() {
     this._super();
-    this.modules = Object.create(null);
+    this.modules = window.WNYC_MODULES || Object.create(null);
     this.waiting = Object.create(null);
   },
 

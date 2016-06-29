@@ -1,0 +1,11 @@
+{{#if preBeta}}
+  {{#if isOpen}}
+    {{partial 'components/beta-trial/invite'}}
+  {{/if}}
+
+  {{partial 'components/beta-trial/legacy-beta-link'}}
+{{else if beta.isBetaSite}}
+  {{partial 'components/beta-trial/beta-nav'}}
+{{/if}}
+
+{{partial 'components/beta-trial/modal-wrapper'}}

@@ -50,6 +50,12 @@ html {
     -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+    *:focus {
+        outline: none;
+    }
+}
+
 a {
     //display: inline-block; // this causes line breaking issues
     color: $blue;
@@ -57,16 +63,11 @@ a {
     border-bottom: 1px solid rgba($blue, 0);
     @include transition(border-color $transition-timing, color $transition-timing);
 
-    &:hover {
+    &:hover,
+    &:focus {
         border-bottom-color: rgba($blue, 1);
     }
-}
-
-body {
-    *:focus {
-        outline: none;
-        outline: 1px dotted rgba(0,0,0,.5);
-    }
+        
 }
 
 strong {
@@ -116,9 +117,6 @@ figure {
  */
 button {
     @include appearance(none);
-    &:focus {
-        outline: 1px dotted rgba(0,0,0,.5);
-    }
 }
 
 /**

@@ -1,14 +1,116 @@
 import DS from 'ember-data';
+import Ember from 'ember';
+
+// bbModel needs getMimeTypes
+const { isArray } = Ember;
+const agent   = navigator.userAgent;
+const browser = {
+    mobile  : agent.indexOf('Mobile') > -1,
+    android : agent.indexOf('Android') > -1,
+    ios     : agent.indexOf('iPhone') > -1 || agent.indexOf('iPad') > -1
+  };
+const getMimeTypes = function() {
+  var urls = this.get('urls');
+  if (urls == null) {return;}
+  var mimeTypes = [];
+  var mobileAACStreamWasUsed = false;
+  // Mobile browsers should receive the AAC stream specific to mobile
+  // for our analytics.  But if there's no mobile stream, then they
+  // should receive the regular AAC stream.
+  if ((browser.mobile || browser.android || browser.ios) && urls.mobile_aac) {
+    var aacMobile = urls.mobile_aac;
+    if (!isArray(aacMobile)) {
+      aacMobile = [aacMobile];
+    }
+    mimeTypes.push({ type: 'audio/aac', url: aacMobile });
+    mobileAACStreamWasUsed = true;
+  }
+  if (!mobileAACStreamWasUsed && isArray(urls.aac) && urls.aac.length) {
+      mimeTypes.push({ type: 'audio/aac', url: urls.aac });
+  }
+  if (isArray(urls.mp3) && urls.mp3.length) {
+    mimeTypes.push({ type: 'audio/mpeg', url: urls.mp3 });
+  }
+  console.log(mimeTypes);
+  return mimeTypes;
+};
 
 export default DS.JSONAPISerializer.extend({
-  normalizeResponse(store, primaryModelClass, attributes, id) {
-    return {
-      data: {
-        id,
-        type: 'stream',
-        attributes
-      }
+  normalizeFindRecordResponse(store, primaryModelClass, payload/*, id, requestType*/) {
+    let jsonData = this._apiFormatStream(payload.stream);
+    return {data: this._attachWhatsOn(jsonData, payload.whatsOn)};
+  },
+  normalizeFindAllResponse(store, primaryModelClass, payload/*, id, requestType*/) {
+    payload.streams = payload.streams.results.sort((a, b) => a.id - b.id);
+    payload.data = payload.streams.map((stream) => {
+      let jsonData = this._apiFormatStream(stream);
+      return this._attachWhatsOn(jsonData, payload.whatsOn[stream.slug]);
+    });
+    delete payload.streams;
+    delete payload.whatsOn;
+    return payload;
+  },
+  _copyCamelizedKeys(source, target) {
+    Object.keys(source).forEach(function(key) {
+      target[key.camelize()] = source[key];
+    });
+  },
+  _apiFormatStream(data) {
+    let attributes = data;
+    let jsonData = {
+      id: data.slug,
+      type: 'stream',
+      attributes: {}
     };
+    jsonData.attributes.bbModel = data;
+    jsonData.attributes.bbModel.getMimeTypes = getMimeTypes;
+    this._copyCamelizedKeys(attributes, jsonData.attributes);
+    delete jsonData.attributes.id;
+    return jsonData;
+  },
+  _attachWhatsOn(jsonData, whatsOn) {
+    if (whatsOn) {
+      if (whatsOn.current_show) {
+        jsonData.attributes.currentShow = {};
+        this._copyCamelizedKeys(whatsOn.current_show, jsonData.attributes.currentShow);
+        if (whatsOn.current_show.show_title) {
+          jsonData.attributes.currentShow.episodeTitle = whatsOn.current_show.title;
+          jsonData.attributes.currentShow.episodeUrl = whatsOn.current_show.url;
+        } else {
+          jsonData.attributes.currentShow.showTitle = whatsOn.current_show.title;
+          jsonData.attributes.currentShow.showUrl = whatsOn.current_show.url;
+          jsonData.attributes.currentShow.episodeTitle = null;
+          jsonData.attributes.currentShow.episodeUrl = null;
+        }
+        if (whatsOn.current_show.episode_pk) {
+          jsonData.relationships = jsonData.relationships || {};
+          jsonData.relationships.currentStory = {
+            data: {
+              type: 'story',
+              id: whatsOn.current_show.episode_pk
+            }
+          };
+        }
+        if (whatsOn.has_playlists) {
+          jsonData.relationships = jsonData.relationships || {};
+          jsonData.relationships.playlist = {
+            data: {
+              type: 'playlist',
+              id: jsonData.id
+            }
+          };
+        }
+      }
+      if (whatsOn.current_playlist_item) {
+        jsonData.attributes.currentPlaylistItem = {};
+        this._copyCamelizedKeys(whatsOn.current_playlist_item, jsonData.attributes.currentPlaylistItem);
+      }
+      jsonData.attributes.future = [];
+      whatsOn.future.forEach((playlistItem, index) => {
+        jsonData.attributes.future[index] = {};
+        this._copyCamelizedKeys(playlistItem, jsonData.attributes.future[index]);
+      });
+    }
+    return jsonData;
   }
-
 });

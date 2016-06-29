@@ -1,0 +1,12 @@
+<ul class="list list--borderbottom">
+  {{#each activeShows as |show|}}
+    <li class="list-item">
+      {{show-tease show=show}} 
+    </li>
+  {{/each}}
+  {{#if isFetching}}
+    <div class="doubledown box box--luxe">
+      <div class="loading-spinner text"></div>
+    </div>
+  {{/if}}
+</ul>

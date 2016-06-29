@@ -11,6 +11,18 @@
   background-color: black;
 }
 
+.box--white {
+  background-color: white;
+}
+
+.box--rounded {
+  border-radius: 6px;
+}
+
+.box--outlined {
+  border: solid 1px #979797;
+}
+
 .box--nopad {
   padding: 0;
 }
@@ -60,10 +72,34 @@
   }
 }
 
+.box--flexpadtop {
+  padding: 30px 0;
+  padding: rems(30) 0;
+
+  @include mq($middle-narrow-and-up) {
+    padding: 15px 0;
+    padding: rems(15) 0;
+  }
+}
+
 .box--red {
   background: $red;
 }
 
 .box--slim {
   padding: 20px;
+}
+
+.box--luxe {
+  padding: 35px 70px 70px;
+
+  @include mq($small-only){
+    padding: 25px 35px 20px;
+  }
+}
+
+.box--topborder {
+  border-top-width: 0.5px;
+  border-color: rgba(white, 0.14);
+  border-top-style: solid;
 }

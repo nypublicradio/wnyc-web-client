@@ -19,9 +19,12 @@ const item = {
   url: 'story/foo',
   tease: 'foo tease',
   audioDurationReadable: '1 min',
-  dateLine: new Date(),
+  dateLineDatetime: new Date(),
   imageMain: {template: faker.internet.avatar()},
-  headers: {links: [{url: 'foo-link', title: 'foo link'}, {url: 'bar-link', title: 'bar link'}]}
+  headers: {
+    links: [{url: 'foo-link', title: 'foo link'}, {url: 'bar-link', title: 'bar link'}],
+    brand: {title: 'Foo Show'}
+  }
 };
 
 test('it renders', function(assert) {
@@ -34,26 +37,6 @@ test('it renders', function(assert) {
   assert.equal(this.$('[data-test-selector=story-tease-title]').text().trim(), 'foo');
   assert.ok(this.$('a[href="foo-link"]').length, 'header links are rendered');
 
-  this.render(hbs`{{story-tease item=item hideLinks=true}}`);
+  this.render(hbs`{{story-tease item=item parentTitle='Foo Show'}}`);
   assert.notOk(this.$('a[href="foo-link"]').length, 'header links are not rendered');
-});
-
-test('listen and queue buttons open the pop up player', function(assert) {
-  assert.expect(2);
-
-  this.set('item', {id: 'foo'});
-
-  window.wnyc = {};
-  window.wnyc.xdPlayer = {
-    playOnDemand(id) {
-      assert.equal(id, 'foo', 'play button calls XD Player');
-    },
-    addToPlaylist(id) {
-      assert.equal(id, 'foo', 'queue button calls XD Player');
-    }
-  };
-
-  this.render(hbs`{{story-tease isListenableNow=true item=item}}`);
-  this.$('[data-test-selector=listen-button]').click();
-  this.$('[data-test-selector=queue-button]').click();
 });

@@ -22,12 +22,36 @@ export function isInDom(id) {
 export function clearAlienDom() {
   let root = config.environment === 'test' ? '#ember-testing' : 'body';
   let notEmber = document.querySelectorAll(`${root} > :not(.ember-view), ${root} > head > link[rel=stylesheet]:not([href*=assets])`);
-  Array.from(notEmber).forEach(n => n.parentNode.removeChild(n));
+  Array.from(notEmber).forEach((n) => {
+    // Don't remove SoundManager2 flash embed
+    if (n.id && n.id === "sm2-container") {
+      return;
+    }
+    n.parentNode.removeChild(n);
+  });
+
+  removeAlienListeners();
 }
 
 export function unbindAlienListener() {
   document.removeEventListener('click', alienClickListener);
 }
+
+export function removeAlienListeners() {
+  Ember.$(document)
+    .off('click',  '.js-accordionButton')
+    .off('click',  '.js-dropdownClickable')
+    .off('click',  '.js-captionBtn')
+    .off('click',  '.js-listen')
+    .off('click',  '.js-queue')
+    .off('click',  '.js-share')
+    .off('submit', '#morningBriefSignup')
+    .off('keyup',  '#morningBriefEmailInput')
+    .off('click', '.js-toggleButton');
+
+  Ember.$('.js-embedText').off('click');
+}
+
 
 // Embedded Ember components require an ID for ember-wormwhole to use them as a
 // destination. This runs in the django-page model's separateScripts method as well
@@ -40,7 +64,7 @@ export function embeddedComponentSetup(root = document) {
   });
 }
 
-// An Alien DOM means legacy events will escape Ember, so the django-page component also 
+// An Alien DOM means legacy events will escape Ember, so the django-page component also
 // installs these handlers to capture clicks and other events and send them back to Ember.
 // We have to use a closure in order to both capture the passed in component instance as
 // well as save the function for later removal from the global click event.
@@ -56,4 +80,19 @@ export function installAlienListeners(component) {
       image.img.classList.add('is-loaded');
     });
   });
+}
+
+export function addAlienLanding(id, coordinates) {
+  let landingSite = document.querySelector(coordinates);
+  let lander = document.createElement('div');
+  lander.id = id;
+  try {
+    if (Ember.testing) {
+      landingSite.appendChild(lander);
+    } else {
+      landingSite.parentNode.insertBefore(lander, landingSite);
+    }
+  } catch(e) {
+    return false;
+  }
 }

@@ -2,8 +2,9 @@ import DS from 'ember-data';
 
 export default DS.JSONAPISerializer.extend({
   keyForAttribute(key) { return key; },
-  normalizeQueryResponse(store, primaryModelClass, payload) {
-    return {
+  payloadKeyFromModelName() { return 'story'; },
+  normalizeQueryResponse(store, primaryModelClass, payload, id, requestType) {
+    let transformed = {
       data: payload.results.map(result => {
         let id = result.id;
         delete result.id;
@@ -14,5 +15,6 @@ export default DS.JSONAPISerializer.extend({
         };
       })
     };
+    return this._super(store, primaryModelClass, transformed, id, requestType);
   }
 });

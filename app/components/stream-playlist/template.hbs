@@ -1,0 +1,23 @@
+<div class="streaminfo">
+  <a href={{homepage}}><img class="streaminfo-logo" src="{{stream.imageLogo}}"></a>
+  <h2 class="streaminfo-heading">Music Playlist</h2>
+  <h3 class="streaminfo-name">{{stream.name}}</h3>
+
+  <div class="streaminfo-currentshow">
+  <a href="{{stream.currentShow.url}}">{{stream.currentShow.title}}</a> until {{abbreviated-time stream.currentShow.end}}.
+  </div>
+
+  {{#if stream.currentPlaylistItem}}
+    <div class="playlistitem playlistitem--nowplaying">
+    {{playlist-item nowPlaying=true item=stream.currentPlaylistItem}}
+    </div>
+  {{/if}}
+
+  {{#each historyItems as |playlistItem|}}
+    <div class="playlistitem">
+    {{playlist-item item=playlistItem}}
+    </div>
+  {{/each}}
+
+  <a class="streaminfo-playlistlink" href="{{stream.playlistUrl}}">View Full Playlist »</a>
+</div>

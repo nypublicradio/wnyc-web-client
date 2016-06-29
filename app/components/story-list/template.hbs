@@ -2,7 +2,10 @@
   {{#each model.teaseList as |item|}}
   <li class="list-item">
     {{story-tease
-      item=item}}
+      parentTitle=parentTitle
+      user=session.data.user
+      item=item
+      region='StoryList'}}
   </li>
   {{/each}}
 </ul>

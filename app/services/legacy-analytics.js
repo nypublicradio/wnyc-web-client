@@ -95,7 +95,7 @@ export default Service.extend({
       category: 'Share',
       action: `${containers} | Title: ${title}`,
       label: sharedVia,
-      pk: {cmsPK: wnyc.current_item.id}
+      model: story
     });
   }
 });

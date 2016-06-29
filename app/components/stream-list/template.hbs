@@ -1,0 +1,49 @@
+<ul class="stream-list">
+{{#each streams as |stream|}}
+{{#if stream.whatsOn}}
+<li class="l-holygrail streamitem">
+  <div class="l-holygrail-left">
+    <a class="streamitem-imagelink" href="{{stream.scheduleUrl}}"><img class="streamitem-image" src={{stream.imageLogo}}></a>
+  </div>
+
+  <div class="l-holygrail-middle streamitem-info">
+    <div class="streamitem-title">
+      <a href="{{stream.scheduleUrl}}">{{stream.name}}</a>
+    </div>
+    <div class="streamitem-description">
+      <a href="{{stream.currentShow.showUrl}}">{{stream.currentShow.showTitle}}</a>
+      {{!-- Has a current story/episode --}}
+      {{#if stream.currentShow.episodeTitle}}
+        -
+        <a href="{{stream.currentShow.episodeUrl}}">{{stream.currentShow.episodeTitle}}</a>
+      {{/if}}
+      {{!-- Music stream with a playing song--}}
+      {{#if stream.hasPlaylists}}
+      {{#if stream.currentPlaylistItem}}
+        -
+        <span class="streamitem-metadata">
+          {{song-metadata stream.currentPlaylistItem.catalogEntry}}
+        </span>
+      {{/if}}
+      {{/if}}
+  </div>
+  </div>
+  <div class="l-holygrail-right">
+    {{#if media.isMediumAndUp}}
+      {{#listen-button
+        type='gray-minion'
+        state=(if (eq stream.slug currentAudio) playState)
+        itemPK=stream.slug}}
+        Listen Live
+      {{/listen-button}}
+    {{else}}
+      {{listen-button
+        type='blue-hollow'
+        state=(if (eq stream.slug currentAudio) playState)
+        itemPK=stream.slug}}
+    {{/if}}
+  </div>
+</li>
+{{/if}}
+{{/each}}
+</ul>

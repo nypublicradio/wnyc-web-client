@@ -1,0 +1,20 @@
+{{#if listens}}{{clear-history}}{{/if}}
+
+{{! liquid-bind requires these set as a hash or else it won't recognize the empty list}}
+{{#liquid-bind (hash listens=listens) as |props|}}
+<div class='list list--borderflip'>
+{{#each props.listens as |listen index|}}
+  <div class='list-item'>
+   {{queue-listitem
+     isCurrent=(and (eq index 0) (eq listen.story.id audio.currentAudio.id))
+     dataId=listen.id
+     story=listen.story
+     playState=audio.playState
+     playContext='history'
+     removeAction=(action 'removeFromHistory')}}
+  </div>
+{{else}}
+  <div class="queuelist-empty">Your listening history is empty… Start listening!</div>
+{{/each}}
+</div>
+{{/liquid-bind}}

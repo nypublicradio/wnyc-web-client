@@ -1,29 +1,23 @@
-import Ember from 'ember';
+import ENV from 'overhaul/config/environment';
+import $ from 'jquery';
+import Service from 'ember-service';
+import get from 'ember-metal/get';
+import { canonicalize } from 'overhaul/services/script-loader';
 
-const {
-  Service,
-  $,
-  get,
-  RSVP
-} = Ember;
-
-const { Promise } = RSVP;
+let { wnycURL } = ENV;
+wnycURL = canonicalize(wnycURL);
 
 export default Service.extend({
-  endPoint: '/api/v1/whats_on',
+  endPoint: 'api/v1/whats_on/',
   isLive(pk) {
-    const endPoint = get(this, 'endPoint');
+    let endPoint = get(this, 'endPoint');
+    let url = `${wnycURL}${endPoint}`;
 
-    return new Promise(resolve => {
-      $.ajax(endPoint).then(d => {
-          const status = this._extractStatus(d, pk);
-          resolve(status);
-        });
-      });
+    return $.ajax(url).then(d => this._extractStatus(d, pk));
   },
 
   _extractStatus(data, pk) {
-    const stations = Object.keys(data);
+    let stations = Object.keys(data);
     for (let i = 0; i < stations.length; i++) {
       let stationSlug = stations[i];
       let station = data[stationSlug];
@@ -32,7 +26,7 @@ export default Service.extend({
       let onAirPk = get(station, 'current_show.episode_pk') || get(station, 'current_show.pk');
       let endtime = get(station, 'current_show.end');
 
-      if (onAirPk === pk) {
+      if (String(onAirPk) === pk) {
         return [true, endtime, stationSlug];
       }
     }

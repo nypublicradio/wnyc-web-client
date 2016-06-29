@@ -1,0 +1,38 @@
+<div class="persistent-playerinfoline">
+  {{#text-crawl watch=currentAudio}}
+    {{persistent-player.audio-metadata currentAudio=currentAudio}}
+  {{/text-crawl}}
+  {{#share-button
+    story=currentAudio
+    region="Player"}}
+    SHARE
+  {{/share-button}}
+</div>
+
+{{#if isAudiostream}}
+  {{persistent-player.stream-metadata
+    stream=currentAudio}}
+{{else}}
+  {{#if media.isSmallOnly}}
+    {{persistent-player.timelabel
+      position=position
+      duration=duration}}
+  {{/if}}
+
+  <div class="persistent-progress">
+
+    {{persistent-player.progress-meter
+      downloaded=downloaded
+      position=position
+      duration=duration
+      setPosition=setPosition}}
+
+    {{#if media.isMediumAndUp}}
+      {{persistent-player.timelabel
+        position=position
+        duration=duration}}
+    {{/if}}
+
+  </div>
+  <!-- .persistent-progress -->
+{{/if}}

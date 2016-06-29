@@ -7,11 +7,12 @@ const {
 } = Ember;
 
 export default DS.Model.extend({
+  slug: DS.attr('string'),
   cmsPK: DS.attr('number'),
   title: DS.attr('string'),
   about: DS.belongsTo('api-response', {async: false}),
 
-  sidebarChunks: DS.attr(), // Array of custom html markup 
+  sidebarChunks: DS.attr(), // Array of custom html markup
   chunkSidebarTop: computed('sidebarChunks', {
     get() {
       const chunks = get(this, 'sidebarChunks');
@@ -51,29 +52,16 @@ export default DS.Model.extend({
   rssFeed: DS.attr('string'),
   logoImage: DS.attr(),
   listingObjectType: DS.attr('string'),
-  itemType: computed.alias('listingObjectType'),
+  itemType: computed.readOnly('listingObjectType'),
   editLink: DS.attr('string'),
   socialLinks: DS.attr(),
   facebook: computed.filterBy('socialLinks', 'title', 'facebook'),
   twitter: computed.filterBy('socialLinks', 'title', 'twitter'),
   newsletter: computed.filterBy('socialLinks', 'title', 'newsletter'),
-  featured: DS.attr(),
+  featured: DS.belongsTo('story', { inverse: null }),
   scheduleSummary: DS.attr('string'),
   producingOrganizations: DS.attr(),
   // computeds
-  hasFeatured: computed.bool('featured'),
-  featuredId: computed('hasFeatured', {
-    get() {
-      const hasFeatured = get(this, 'hasFeatured');
-      const featured = get(this, 'featured');
-
-      if (hasFeatured) {
-        // ember coerces model IDs to strings, so we want to make sure this value
-        // matches type for other operations
-        return String(get(featured, 'id'));
-      }
-    }
-  }),
   hasLinkroll: computed.bool('linkroll.firstObject'),
   hasMarquee: computed.bool('marqueeImage'),
   hasSubscriptionLinks: computed.bool('podcastLinks.firstObject'),

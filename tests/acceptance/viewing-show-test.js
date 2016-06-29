@@ -21,7 +21,7 @@ test('smoke test', function(assert) {
     .visit(show);
 
   andThen(function() {
-    assert.equal(currentURL(), `/${show.id}`);
+    assert.equal(currentURL(), `${show.id}`);
     assert.ok(showPage.facebookIsVisible());
   });
 });
@@ -66,7 +66,7 @@ test('using a nav-link', function(assert) {
 
   server.create('api-response', {
     id: `${show.id}${show.linkroll[1].navSlug}/1`,
-    teaseList: [server.schema.story.find(story.id)]
+    teaseList: [server.schema.stories.find(story.id)]
   });
 
   server.create('django-page', {id: show.id});
@@ -91,7 +91,7 @@ test('null social links should not break page', function(assert) {
     .visit(show);
 
   andThen(function() {
-    assert.equal(currentURL(), `/${show.id}`);
+    assert.equal(currentURL(), `${show.id}`);
   });
 });
 
@@ -104,6 +104,6 @@ test('undefined social links should not break page', function(assert) {
     .visit(show);
 
   andThen(function() {
-    assert.equal(currentURL(), `/${show.id}`);
+    assert.equal(currentURL(), `${show.id}`);
   });
 });

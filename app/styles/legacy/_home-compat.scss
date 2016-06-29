@@ -54,8 +54,17 @@
   }
 }
 
+// override legacy span behavior
+.button-wrapper .btn-group > button span {
+  display: inline;
+}
+
 .button-wrapper .puppy-btn {
   font-size: 1rem !important;
+}
+
+#damost-nav li a:hover {
+  text-decoration: none;
 }
 
 .index-loading {
@@ -240,3 +249,11 @@
   }
 }
 
+body.home {
+  background: #e8e8e8;
+}
+
+// override screen_wnyc_responsive_header_home_overrides.css
+body:not(.home) {
+  background: white;
+}

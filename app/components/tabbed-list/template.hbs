@@ -1,0 +1,18 @@
+<nav class="tabbedlist">
+  <ul class="tabbedlist-list">
+  {{#liquid-bind activeTabIndex as |currentIndex|}}
+    {{#each tabTitles as |title index|}}
+      <li class="tabbedlist-tab {{if (eq index currentIndex) 'is-active'}}">
+        <button class="tabbedlist-button" {{action 'chooseTab' index}}>{{title}}</button>
+        {{#if (eq index currentIndex)}}
+          <div class="tabbedlist-marker"></div>
+        {{/if}}
+      </li>
+    {{/each}}
+  {{/liquid-bind}}
+  </ul>
+</nav>
+
+<div class="tabbedlist-page">
+  {{component activeComponent}}
+</div>

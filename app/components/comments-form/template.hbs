@@ -1,7 +1,7 @@
 <h2 class="h3 flush" id="commentsForm">Leave a comment</h2>
 <div class="text">Email addresses are required but never displayed</div>
 
-{{#unless user.isStaff}}
+{{#unless user.is_staff}}
 <fieldset class="fieldset">
     <label class="h4" for="name">Name</label>
     {{#if errors.name}}
@@ -32,7 +32,7 @@
     {{input value=location class="input flush" type="text" name="location"}}
 </fieldset>
 
-{{#if user.isStaff}}
+{{#if user.is_staff}}
 <fieldset class="fieldset">
     <label class="h4" for="userNameOverride">User name override</label>
     {{input value=nameOverride class="input flush" name="user_name_override"}}

@@ -1,15 +1,40 @@
-<div style="color: blue;">
-{{#if audio.currentAudio.isPlaying}}
-  <strong>Playing:</strong>
-  {{link-to parentTitle 'djangorendered' parentUrl}} - {{link-to storyTitle 'story' storySlug}}
-{{else}}
-  <strong>not playing</strong>
-{{/if}}
+{{persistent-player.backdrop
+  image=currentAudio.imageMain.url
+  fallbackImage=currentAudio.headers.brand.logoImage.url}}
 
-<div>{{audio.currentAudio.normalizedPosition}}/{{audio.currentAudio.normalizedDuration}}</div>
-</div>
-<div>
-  volume: {{audio.currentAudio.volume}}
-  <button {{action 'increaseVolume'}}>+</button>
-  <button {{action 'decreaseVolume'}}>-</button>
-</div>
+<a class="persistent-player-feedback" href="/digital-feedback/" target="_blank">Feedback on our new player</a>
+
+{{#holygrail-layout as |g|}}
+
+  {{#g.left}}
+    {{persistent-player.left
+      playState=audio.playState
+      currentTitle=(or currentAudio.currentStory.title currentAudio.title)
+      playOrPause=(action 'playOrPause')
+      rewind=(action 'rewind')
+      fastForward=(action 'fastForward')}}
+  {{/g.left}}
+
+  {{#g.center}}
+    {{persistent-player.center
+      currentAudio=currentAudio
+      isAudiostream=isAudiostream
+      position=audio.position
+      duration=audio.duration
+      downloaded=audio.percentLoaded
+      setPosition=(action 'setPosition')}}
+  {{/g.center}}
+
+  {{#g.right}}
+    {{persistent-player.right
+      volume=audio.volume
+      setVolume=(action 'setVolume')
+      toggleMute=(action 'toggleMute')
+      isMuted=audio.isMuted
+      queueLength=audio.queue.items.length
+      showModal=showModal
+      closeModal=closeModal
+      isOpenModal=isOpenModal}}
+  {{/g.right}}
+
+{{/holygrail-layout}}

@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import moment from 'moment';
 import ENV from 'overhaul/config/environment';
 import { canonicalize } from 'overhaul/services/script-loader';
 
@@ -6,6 +7,12 @@ export default Ember.Route.extend({
   queryParams: {
     scheduleStation: {
       refreshModel: true
+    }
+  },
+  beforeModel() {
+    let { upstream_url } = this.paramsFor('djangorendered');
+    if (upstream_url === 'schedule') {
+      this.replaceWith('djangorendered', `schedule/${moment().format('YYYY/MMM/DD').toLowerCase()}`);
     }
   },
   model({ upstream_url }, { queryParams }) {

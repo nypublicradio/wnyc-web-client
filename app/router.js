@@ -1,14 +1,21 @@
 import Ember from 'ember';
 import config from './config/environment';
 import AnalyticsMixin from './mixins/analytics';
+import service from 'ember-service/inject';
 
 const Router = Ember.Router.extend(AnalyticsMixin, {
-  location: config.locationType
+  location: config.locationType,
+  session: service(),
+  willTransition(oldInfos, newInfos, transition) {
+    this._super(...arguments);
+
+    if (transition.targetName !== 'login') {
+      this.get('session').set('attemptedTransition', transition);
+    }
+  }
 });
 
 function subpageRoutes() {
-  this.route('page', {path: ':page'});
-
   this.route('well', {path: ':navSlug'}, function() {
     this.route('page', {path: ':page'});
   });
@@ -18,17 +25,20 @@ Router.map(function() {
   // This is an example of a route that we've customized beyond the
   // default behavior in the `djangorendered` route.
   this.route('story', { path: 'story/:slug' });
-
-  this.route('shows', {path: 'shows/:slug'}, subpageRoutes);
-  this.route('articles', {path: 'articles/:slug'}, subpageRoutes);
-  this.route('series', {path: 'series/:slug'}, subpageRoutes);
-  this.route('tags', {path: 'tags/:slug'}, subpageRoutes);
-  this.route('blogs', {path: 'blogs/:slug'}, subpageRoutes);
+  this.route('shows', {path: 'shows'});
+  this.route('show', {path: 'shows/:slug'}, subpageRoutes);
+  this.route('article', {path: 'articles/:slug'}, subpageRoutes);
+  this.route('serie', {path: 'series/:slug'}, subpageRoutes);
+  this.route('tag', {path: 'tags/:slug'}, subpageRoutes);
+  this.route('blog', {path: 'blogs/:slug'}, subpageRoutes);
+  this.route('stream', {path: 'streams'});
+  this.route('playlist', {path: 'streams/:id'});
 
   // This is our catch all route that can render any existing page
   // from the django site. It will be used when there's nothing more
   // specific.
   this.route('djangorendered', { path: '*upstream_url' });
+  this.route('login');
 });
 
 export default Router;

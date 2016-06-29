@@ -35,7 +35,8 @@ module.exports = function(deployTarget) {
       sentryOrganizationSlug: 'sentry',
       sentryProjectSlug: process.env.SENTRY_PROJECT,
       sentryApiKey: process.env.SENTRY_EMBER_SOURCEMAPS_KEY,
-      enableRevisionTagging: false
+      enableRevisionTagging: false,
+      replaceFiles: true
     }
   };
 

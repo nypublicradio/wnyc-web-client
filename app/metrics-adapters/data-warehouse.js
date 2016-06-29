@@ -10,10 +10,9 @@ const {
 } = Ember;
 
 const { ajax } = $;
-const { hash: waitFor } = Ember.RSVP;
 
 export default BaseAdapter.extend({
-  sessionManager: service(),
+  session: service(),
 
   toStringExtension() {
     return 'data-warehouse';
@@ -55,7 +54,7 @@ export default BaseAdapter.extend({
       label,
     } = options;
 
-    const cms_id = model ? get(model, 'cmsPK') || '' : '';
+    const cms_id = model ? get(model, 'id') || '' : '';
     const cms_type = model ? get(model, 'itemType') || '' : '';
     this.send({ category, action, label, cms_id, cms_type });
   },
@@ -79,14 +78,12 @@ export default BaseAdapter.extend({
   // TODO: refactor to follow $.ajax signature (String url, Object options)
   send(d) {
     const options = {
-      type: 'POST', // type for jQuery < 1.9
+      method: 'POST',
       data: d.data || d,
       endpoint: d.endpoint
     };
 
-    waitFor({
-      browserId: get(this, 'sessionManager.browserId')
-    }).then(({ user, browserId }) => this._sendNow(options, browserId));
+    get(this, 'session').syncBrowserId(false).then(id => this._sendNow(options, id));
   },
 
   willDestroy: K,
@@ -107,7 +104,6 @@ export default BaseAdapter.extend({
 
     if (isDebug) {
       console.log(`sending to ${host}/${endpoint}`, options.data);
-      options.headers = { 'X-Ember': 'TRUE' };
     }
     return ajax(url, options);
   },
@@ -139,7 +135,7 @@ export default BaseAdapter.extend({
 
   _viewedStory(options) {
     let { model } = options;
-    let pk = get(model, 'cmsPK');
+    let pk = model ? get(model, 'id') : '';
 
     this.defaultSend(options);
     //TODO: are we calling trackManagedItemView for listing objects?

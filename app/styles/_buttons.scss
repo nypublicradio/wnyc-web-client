@@ -7,8 +7,8 @@
  * to work when the .btn-group--stacked is a flex-child itself.
  */
 .btn-group--stacked {
-  display: flex;
-  flex-direction: column;
+  @include display-flex;
+  @include flex-direction(column);
 
   > .btn {
     margin-right: 0;
@@ -49,11 +49,12 @@
  *      @example
  *      button.btn Click Me
  */
-.btn {
+@mixin btn {
+    position: relative; // for transition icons
     display: inline-block;
     border-radius: 25px;
-    border: 1px solid;
-    border-color: rgba($lightgray, .5);
+    border: 2px solid;
+    border-color: rgba($lightgray, .2);
 
     padding: 0px 13px;
     color: $lightgray;
@@ -63,12 +64,26 @@
 
     cursor: pointer;
 
-    @include transition(background-color $transition-timing, border-color $transition-timing, color $transition-timing);
+    @include transition(
+      opacity $transition-timing,
+      background-color $transition-timing,
+      border-color $transition-timing,
+      color $transition-timing);
 
-    &:hover {
-        border-color: rgba($darkgray, .5);
-	color: $gray;
+    &:hover,
+    &:focus {
+      border-color: rgba($darkgray, .2);
+      color: $gray;
+      opacity: 1;
     }
+
+    &[disabled] {
+      opacity: 0.15;
+    }
+}
+
+.btn {
+  @include btn;
 }
 
 /**
@@ -80,7 +95,8 @@
  *      button.btn.btn--heavy Something to Emphasize
  */
 .btn--heavy {
-    font-weight: 600;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
 /**
@@ -102,10 +118,11 @@
     text-align: left;
     background-color: transparent;
 
-    &:hover {
-        background: none;
-        border: none;
-        color: inherit;
+    &:hover,
+    &:focus {
+      background: none;
+      border: none;
+      color: inherit;
     }
 }
 
@@ -117,12 +134,14 @@
  *      @example
  *      button.btn.btn--large Click Me, I'm Bigger!
  */
+@mixin btn--large {
+  padding: 3px 18px;
+  line-height: 36px;
+  @include fontsize(20);
+}
+
 .btn--large {
-    padding: 2px 18px 3px 18px;
-    line-height: 36px;
-    font-weight: 600;
-    letter-spacing: -0.5px;
-    @include fontsize(20);
+  @include btn--large;
 }
 
 
@@ -154,37 +173,46 @@
 
 /**
  * Circle Button:
- * `.btn--circle` 
+ * `.btn--circle`
  * Good for icons.
  *
  *      @example
- *      button.btn.btn--circle 
+ *      button.btn.btn--circle
  *          i.fa.fa-twitter
  */
-.btn--circle {
+@mixin btn--circle {
     border-radius: 50%;
     width: 36px;
+    height: 36px;
     padding: 0;
     text-align: center;
 }
 
+.btn--circle {
+  @include btn--circle;
+}
+
 /**
  * Fat Button:
- * `.btn--fat` 
+ * `.btn--fat`
  * When that small circle button is an important call to action.
  *
  *      @example
- *      button.btn.btn--circle.btn--fat 
+ *      button.btn.btn--circle.btn--fat
  *          i.fa.fa-twitter
  */
-.btn--fat {
+@mixin btn--fat {
     width: 40px;
-    line-height: 38px;
-    
+    height: 40px;
+
     .fa {
       font-size: 18px;
     }
-    
+
+}
+
+.btn--fat {
+  @include btn--fat;
 }
 
 /**
@@ -237,10 +265,15 @@
     color: white;
     border-color: rgba(white, .2);
 
-    &:hover {
-        color: white;
-	border-color: rgba(white,.7);
+    &:hover,
+    &:focus {
+      color: white;
+      border-color: rgba(white,.7);
     }
+}
+
+.btn--whitetext {
+  color: white;
 }
 
 /**
@@ -255,8 +288,9 @@
     background-color: $pink;
     border-color: $pink;
     color: white;
-    
-    &:hover {
+
+    &:hover,
+    &:focus {
         color: white;
     }
 }
@@ -280,16 +314,23 @@
  *      @example
  *      button.btn.btn--blue Click
  */
-.btn--blue {
-    background-color: $blue;
-    border-color: $blue;
-    color: white;
+@mixin btn--blue {
+  background-color: $blue;
+  border-color: $blue;
+  color: white;
 
-    &:hover {
-        background-color: $darkblue;
-	border-color: $darkblue;
-	color: white;
-    }
+  &:hover,
+  &:focus {
+    outline: none;
+    background-color: $darkblue;
+    border-color: $darkblue;
+    color: white;
+    opacity: 1;
+  }
+}
+
+.btn--blue {
+  @include btn--blue;
 }
 
 /**
@@ -316,10 +357,11 @@
     border-color: $lightgreen;
     color: $darkgray;
 
-    &:hover {
-	background-color: $darkgreen;
-        border-color: $darkgreen;
-	color: $lightgreen;
+    &:hover,
+    &:focus {
+      background-color: $darkgreen;
+      border-color: $darkgreen;
+      color: $lightgreen;
     }
 }
 
@@ -335,10 +377,11 @@
     background-color: black;
     border-color: black;
 
-    &:hover {
-        background-color: $pink;
-	border-color: $pink;
-	color: white;
+    &:hover,
+    &:focus {
+      background-color: $pink;
+      border-color: $pink;
+      color: white;
     }
 }
 
@@ -352,7 +395,8 @@
 .btn--blacktext {
     color: $darkergray;
 
-    &:hover {
+    &:hover,
+    &:focus {
         color: $pink;
     }
 
@@ -375,22 +419,21 @@
  *      button.btn.btn--mq-graywhite Gray at Narrow. White at wide.
  */
 .btn--mq-graywhite {
+  @include mq($medium-and-up) {
+    color: white;
+    border-color: rgba(255,255,255,.2);
 
-    @include mq($medium-and-up) {
-        color: white;
-	border-color: rgba(255,255,255,.2);
-        
-	&:hover {
-      	    color: white;
-            border-color: rgba(255,255,255,.7);
-	}
-
+    &:hover,
+    &:focus {
+      color: white;
+      border-color: rgba(255,255,255,.7);
     }
+  }
 }
 
 /**
  * Button Link:
- * `.btn--link` 
+ * `.btn--link`
  * If you have you a button that should look
  * like a regular link, use this modifier
  *
@@ -411,19 +454,20 @@
     @include fontsize($base-font);
     line-height: #{$line-height}px;
 
-    &:hover {
-        color: $blue;
-        background-color: transparent;
-        border-color: rgba(204,204,204,0.8);
+    &:hover,
+    &:focus {
+      color: $blue;
+      background-color: transparent;
+      border-color: rgba(204,204,204,0.8);
     }
 }
 
 /**
  * Button Link with Icon:
  * If you've got a button that should look like a link,
- * and you want to include an icon, you can add `.btn--linkicon` 
- * to the `<button>`, and wrap the link text in a span. 
- * 
+ * and you want to include an icon, you can add `.btn--linkicon`
+ * to the `<button>`, and wrap the link text in a span.
+ *
  * Also include `.btn--icon` for proper spacing after the icon.
  *
  *      @example
@@ -433,9 +477,31 @@
  */
 .btn--linkicon {
     border: none;
-    
+
     > span {
         border-bottom: 1px solid rgba(204,204,204,0.8);
+    }
+
+    // beta maybe later button
+    &.btn--white {
+      > span {
+        border-color: rgba(white, 0);
+        color: white;
+      }
+
+      &:hover,
+      &:focus {
+        > span {
+          color: white;
+          border-color: rgba(white, 1);
+        }
+      }
+
+      &:active {
+        opacity: 0.60;
+      }
+
+      @include transition(opacity 125ms ease, border-color 125ms ease);
     }
 }
 
@@ -522,4 +588,690 @@
     display: block;
     padding: 8px;
     width: 100%;
+}
+
+@mixin btn--smalltext {
+  @include fontsize(12);
+}
+
+.btn--smalltext {
+  @include btn--smalltext;
+}
+
+.btn--bigtext {
+  @include fontsize(20);
+}
+
+.btn--upper {
+  text-transform: uppercase;
+}
+
+@mixin btn--strongtext {
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.btn--strongtext {
+  @include btn--strongtext;
+}
+
+@mixin thickbtn {
+  border-width: 2px;
+
+  &.btn--white {
+    border-color: white;
+    background-color: rgba(white, 0);
+
+    &:hover,
+    &:focus {
+      border-color: white;
+      background-color: rgba(white, 0.15);
+    }
+
+    &:active {
+      opacity: 0.60;
+    }
+  }
+}
+
+.thickbtn {
+  @include thickbtn;
+}
+
+// Ember Button Components
+.queue-button {
+  @include btn;
+  @include btn--strongtext;
+  @include btn--smalltext;
+  @include thickbtn;
+
+  &.gray-to-white {
+    border-color: rgba(136, 136, 136, 0.2);
+    color: rgba(51, 51, 51, 1);
+
+    &:hover {
+      border-color: rgba(136, 136, 136, 0.5);
+    }
+
+    &.is-hovering {
+      border-color: rgba(136, 136, 136, 0.5);
+    }
+
+    @include mq($small-and-up) {
+      border-color: rgba(136, 136, 136, 0.6);
+      color: rgba(255, 255, 255, 1);
+
+      &:hover {
+        border-color: rgba(136, 136, 136, 0.6);
+        color: rgba(255, 255, 255, 1);
+      }
+
+      &.is-hovering {
+        border-color: rgba(255, 255, 255, 1);
+      }
+    }
+    
+  }
+
+  &.just-gray {
+    border-color: rgba(136, 136, 136, 0.3);
+    color: rgba(51, 51, 51, 1);
+
+    &:hover {
+      border-color: rgba(136, 136, 136, 0.3);
+      color: rgba(136, 136, 136, 1);
+    }
+
+    &.is-hovering {
+      border-color: rgba(136, 136, 136, 0.5);
+      color: rgba(51, 51, 51, 1);
+    }
+  }
+
+  &.small-blue {
+    @include btn;
+    @include btn--circle;
+    @include btn--fat;
+
+    &:focus,
+    &:hover {
+      border-color: rgba($darkgray, .2);
+      color: $gray;
+      opacity: 1;
+    }
+
+    &.is-hovering {
+      border-color: rgba($darkgray, .2);
+      color: $gray;
+      opacity: 1;
+    }
+  }
+}
+
+@mixin gray-svg {
+  polygon, rect, circle, path {
+    fill: rgba(136, 136, 136, 1);
+  }
+}
+
+@mixin white-svg {
+  polygon, rect, circle, path {
+    fill: white;
+  }
+}
+
+@mixin blue-svg {
+  polygon, rect, circle, path {
+    fill: #128cf4;
+  }
+}
+
+.listen-button {
+  position: relative;
+
+  .l-holygrail-right > & {
+    @include align-self(center);
+  }
+
+  &.blue-boss,
+  &.blue-minion,
+  &.blue-circle {
+    @include btn;
+    @include btn--blue;
+    @include btn--strongtext;
+
+    @include transition(
+      width 200ms cubic-bezier(.17,.89,.39,1.25),
+      opacity $transition-timing,
+      background-color $transition-timing,
+      border-color $transition-timing,
+      color $transition-timing);
+  }
+
+  &.blue-boss,
+  &.blue-minion {
+    white-space: nowrap; // helps transitions
+    overflow: hidden;
+
+    &:focus,
+    &:hover {
+      background-color: $blue;
+      border-color: $blue;
+    }
+
+    &.is-hovering {
+      background-color: $darkblue;
+      border-color: $darkblue;
+    }
+
+    &.is-loading,
+    &.is-playing {
+      @include transition(
+        width 200ms cubic-bezier(1, 0, 0, 1),
+        opacity $transition-timing,
+        background-color $transition-timing,
+        border-color $transition-timing,
+        color $transition-timing);
+
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  &.blue-boss {
+    @include btn--large;
+    padding-left: 13px;
+  }
+
+  &.blue-circle {
+    @include btn--circle;
+    @include btn--fat;
+  }
+
+  &.blue-hollow {
+    width: 44px;
+    height: 44px;
+  }
+
+  &.white-hollow {
+    width: 48px;
+
+    @include mq($wide) {
+      width: 55px;
+    }
+  }
+
+  &.gray-minion {
+    @include btn;
+    @include btn--large;
+    @include btn--strongtext;
+    @include btn--smalltext;
+    @include thickbtn;
+
+    @include transition(
+      width 200ms cubic-bezier(.17,.89,.39,1.25),
+      opacity $transition-timing,
+      background-color $transition-timing,
+      border-color $transition-timing,
+      color $transition-timing);
+
+    white-space: nowrap; // helps transitions
+    overflow: hidden;
+
+    border-color: rgba(136, 136, 136, 0.3);
+    color: rgba(136, 136, 136, 1);
+
+    &:hover {
+      border-color: rgba(136, 136, 136, 0.3);
+      color: rgba(136, 136, 136, 1);
+    }
+
+    &.is-hovering {
+      border-color: rgba(68, 68, 68, 0.5);
+      color: #666;
+    }
+
+    &.is-loading,
+    &.is-playing {
+      @include transition(
+        width 200ms cubic-bezier(1, 0, 0, 1),
+        opacity $transition-timing,
+        background-color $transition-timing,
+        border-color $transition-timing,
+        color $transition-timing);
+
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}
+
+.listen-ui {
+  display: inline-block;
+  position: relative;
+
+  .blue-boss &,
+  .blue-minion & {
+    width: 18px;
+    margin-right: 2px;
+  }
+
+  .blue-minion & {
+    @include scale(0.6, 0.6);
+  }
+
+  .blue-circle & {
+    width: 18px;
+    @include scale(0.8, 0.8);
+  }
+
+  .blue-hollow & {
+    width: 44px;
+  }
+
+  .white-hollow & {
+    width: 48px;
+
+    @include mq($wide) {
+      width: 55px;
+    }
+  }
+
+  > svg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    @include transition(opacity 0.3s ease-in-out, fill 0.2s ease-in-out);
+  }
+
+  .blue-boss & > svg,
+  .blue-minion & > svg,
+  .blue-circle & > svg {
+    @include white-svg;
+    width: 16px;
+  }
+
+  .blue-hollow & > svg {
+    @include blue-svg;
+    width: 44px;
+    height: 44px;
+  }
+
+  .blue-hollow:hover &,
+  .blue-hollow:focus & {
+    polygon, rect, circle, path {
+      fill: #1068b2;
+    }
+  }
+
+  .blue-hollow:active & {
+    polygon, rect, circle, path {
+      fill: #013f73;
+    }
+  }
+
+  .white-hollow & > svg {
+    @include white-svg;
+    width: 48px;
+
+    @include mq($wide) {
+      width: 55px;
+      height: 55px;
+    }
+  }
+
+  .white-hollow:hover &,
+  .white-hollow:focus & {
+    polygon, rect, circle, path {
+      fill: #ccc;
+    }
+  }
+
+  .white-hollow:active & {
+    @include blue-svg;
+  }
+
+  .gray-minion & > svg {
+    @include gray-svg;
+    width: 12px;
+  }
+
+  .icon--pause {
+    opacity: 0;
+  }
+  .listen-spinner {
+    &:before,
+    &:after {
+      opacity: 0;
+    }
+  }
+
+  .is-loading & {
+    width: 100%;
+
+    .listen-spinner {
+      &:before,
+      &:after {
+        opacity: 1;
+      }
+    }
+
+    .icon--pause,
+    .icon--play {
+      opacity: 0;
+    }
+  }
+
+  .is-playing & {
+    width: 100%;
+
+    .icon--pause {
+      opacity: 1;
+    }
+
+    .icon--play {
+      opacity: 0;
+    }
+    .listen-spinner {
+      &:before,
+      &:after {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+.listen-spinner {
+  display: inline-block;
+  @include transition(opacity 150ms ease);
+
+  .blue-boss &,
+  .blue-minion &,
+  .blue-circle & {
+    &:before {
+      @include outer-spinner(
+        $primary: rgba(255, 255, 255, 0),
+        $accent: white
+      );
+    }
+
+    &:after {
+      @include inner-spinner(
+        $primary: rgba(255, 255, 255, 0),
+        $accent: white
+      );
+    }
+  }
+
+  .blue-hollow & {
+    &:before {
+      @include outer-spinner(
+        $primary: rgba(255, 255, 255, 0),
+        $accent: #128cf4
+      );
+    }
+
+    &:after {
+      @include inner-spinner(
+        $primary: rgba(255, 255, 255, 0),
+        $accent: #128cf4
+      );
+    }
+  }
+
+  .white-hollow & {
+    &:before {
+      @include outer-spinner(
+        $primary: rgba(255, 255, 255, 0),
+        $accent: rgba(255, 255, 255, 0.2)
+      );
+    }
+
+    &:after {
+      @include inner-spinner(
+        $primary: rgba(255, 255, 255, 0),
+        $accent: rgba(255, 255, 255, 0.2)
+      );
+    }
+  }
+
+  &.blue-hollow {
+    width: 44px;
+    height: 44px;
+  }
+
+  &.white-hollow {
+    width: 48px;
+
+    @include mq($wide) {
+      width: 55px;
+    }
+  }
+
+  &.gray-minion {
+    @include btn;
+    @include btn--large;
+    @include btn--strongtext;
+    @include btn--smalltext;
+    @include thickbtn;
+
+    @include transition(
+      width 200ms cubic-bezier(.17,.89,.39,1.25),
+      opacity $transition-timing,
+      background-color $transition-timing,
+      border-color $transition-timing,
+      color $transition-timing);
+
+    white-space: nowrap; // helps transitions
+    overflow: hidden;
+
+    border-color: rgba(136, 136, 136, 0.3);
+    color: rgba(136, 136, 136, 1);
+
+    &:hover {
+      border-color: rgba(136, 136, 136, 0.3);
+      color: rgba(136, 136, 136, 1);
+    }
+
+    &.is-hovering {
+      border-color: rgba(68, 68, 68, 0.5);
+      color: #666;
+    }
+
+    &.is-loading,
+    &.is-playing {
+      @include transition(
+        width 200ms cubic-bezier(1, 0, 0, 1),
+        opacity $transition-timing,
+        background-color $transition-timing,
+        border-color $transition-timing,
+        color $transition-timing);
+
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}
+
+.listen-ui {
+  display: inline-block;
+  position: relative;
+
+  .blue-boss &,
+  .blue-minion & {
+    width: 18px;
+    margin-right: 4px;
+  }
+
+  .blue-minion & {
+    @include scale(0.6, 0.6);
+  }
+
+  .blue-circle & {
+    width: 18px;
+    @include scale(0.8, 0.8);
+  }
+
+  .blue-hollow & {
+    width: 44px;
+  }
+
+  .white-hollow & {
+    width: 48px;
+
+    @include mq($wide) {
+      width: 55px;
+    }
+  }
+
+  > svg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    @include transition(opacity 0.3s ease-in-out, fill 0.2s ease-in-out);
+  }
+
+  .blue-boss & > svg,
+  .blue-minion & > svg,
+  .blue-circle & > svg {
+    @include white-svg;
+    width: 18px;
+  }
+
+  .blue-hollow & > svg {
+    @include blue-svg;
+    width: 44px;
+    height: 44px;
+  }
+
+  .blue-hollow:hover &,
+  .blue-hollow:focus & {
+    polygon, rect, circle, path {
+      fill: #1068b2;
+    }
+  }
+
+  .blue-hollow:active & {
+    polygon, rect, circle, path {
+      fill: #013f73;
+    }
+  }
+
+  .white-hollow & > svg {
+    @include white-svg;
+    width: 48px;
+
+    @include mq($wide) {
+      width: 55px;
+      height: 55px;
+    }
+  }
+
+  .white-hollow:hover &,
+  .white-hollow:focus & {
+    polygon, rect, circle, path {
+      fill: #ccc;
+    }
+  }
+
+  .white-hollow:active & {
+    @include blue-svg;
+  }
+
+  .gray-minion & > svg {
+    @include gray-svg;
+    width: 12px;
+  }
+
+  .icon--pause,
+  .listen-spinner {
+    opacity: 0;
+  }
+
+  .is-loading & {
+    width: 100%;
+
+    .listen-spinner {
+      opacity: 1;
+    }
+
+    .icon--pause,
+    .icon--play {
+      opacity: 0;
+    }
+  }
+
+  .is-playing & {
+    width: 100%;
+
+    .icon--pause {
+      opacity: 1;
+    }
+
+    .icon--play,
+    .listen-spinner {
+      opacity: 0;
+    }
+  }
+}
+
+.listen-spinner {
+  display: inline-block;
+  @include transition(opacity 150ms ease);
+
+  .blue-boss &,
+  .blue-minion &,
+  .blue-circle & {
+    &:before {
+      @include outer-spinner(
+        $primary: rgba(255, 255, 255, 0),
+        $accent: white
+      );
+    }
+
+    &:after {
+      @include inner-spinner(
+        $primary: rgba(255, 255, 255, 0),
+        $accent: white
+      );
+    }
+  }
+
+  .blue-hollow & {
+    &:before {
+      @include outer-spinner(
+        $primary: rgba(255, 255, 255, 0),
+        $accent: #128cf4
+      );
+    }
+
+    &:after {
+      @include inner-spinner(
+        $primary: rgba(255, 255, 255, 0),
+        $accent: #128cf4
+      );
+    }
+  }
+
+  .white-hollow & {
+    &:before {
+      @include outer-spinner(
+        $primary: rgba(255, 255, 255, 0),
+        $accent: rgba(255, 255, 255, 0.2)
+      );
+    }
+
+    &:after {
+      @include inner-spinner(
+        $primary: rgba(255, 255, 255, 0),
+        $accent: rgba(255, 255, 255, 0.2)
+      );
+    }
+  }
 }

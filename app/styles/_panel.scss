@@ -39,7 +39,8 @@
     // so it doesn't cllapse if there's no body
     white-space: nowrap;
 
-    &:hover {
+    &:hover,
+    &:focus {
         border-bottom-color: $lightestgray;
     }
 }

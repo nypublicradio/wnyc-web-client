@@ -199,3 +199,91 @@ i.fa-circle-o-notch.fa-spin {
     margin-left: 8px;
     vertical-align: middle;
 }
+
+.icon--wnyc-logo-nav {
+  display: block;
+  width: 75px;
+  height: 30px;
+
+  path {
+    fill: white;
+  }
+
+  @include mq($middle-narrow-and-up) {
+    width: 104px;
+    height: 43px;
+    margin: auto;
+  }
+}
+
+.icon--wnyc-logo-footer {
+  display: inline-block;
+  vertical-align: top;
+  fill: white;
+  width: 80px;
+  height: 30px;
+  margin-right: 16px;
+  margin-top: -2px;
+}
+
+.icon--jlgreene--footer {
+  margin: 6px;
+}
+
+
+.icon--menu {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+
+  path {
+    fill: white;
+  }
+
+  @include mq($middle-narrow-and-up) {
+    display: block;
+    margin: auto;
+    margin-bottom: 7px;
+  }
+}
+
+.icon--search {
+  width: 21px;
+  height: 21px;
+}
+
+.icon--listenlive {
+  width: 25.5px;
+  height: 18.2px;
+}
+
+.icon--schedule {
+  width: 24px;
+  height: 24px;
+}
+
+.icon--shows {
+  width: 25.7px;
+  height: 25.4px;
+}
+
+.icon--topics {
+  width: 22px;
+  height: 22px;
+}
+
+.icon--gift {
+  width: 23px;
+  height: 25px;
+}
+
+.icon--beta-icon {
+  width: 36px;
+  height: 27px;
+  margin-bottom: -7px;
+}
+
+.icon--close {
+  width: 14px;
+  height: 14px;
+}

@@ -5,18 +5,21 @@ import Ember from 'ember';
 
 export default DS.JSONAPIAdapter.extend({
   host: ENV.wnycAPI,
-  namespace: 'api/v2/related',
+  namespace: 'api/v2',
   query(store, type, query) {
-    let url = [this.host, this.namespace, query.itemId, `?limit=${query.limit}`].join('/');
+    let url = [this.host, this.namespace, 'related', query.itemId, `?limit=${query.limit}`].join('/');
     // Django isn't setup to honor XHR requests at the related stories endpoint,
     // so just use the jQuery JSONp for now
     // return fetch(url).then(response => response.json());
-    if (ENV.environment === 'test') {
+    if (ENV.environment === 'test' || ENV.environment === 'development') {
       // Pretender.js only intercepts XML requests, not JSONP or native Fetch
-      return Ember.$.ajax(url).then(d => d);
+      return Ember.$.ajax(url);
     } else {
-      return Ember.$.ajax(url, {dataType: 'jsonp', jsonpCallback: 'RELATED', cache: true})
-        .then(d => d);
+      return Ember.$.ajax(url, {dataType: 'jsonp', jsonpCallback: 'RELATED', cache: true});
     }
+  },
+  findRecord(store, type, id/*, snapshot*/) {
+    var url = [this.host, 'api/v3', 'story', 'detail', id].join('/') + '/';
+    return Ember.$.ajax(url);
   }
 });

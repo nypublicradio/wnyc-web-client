@@ -1,27 +1,19 @@
-import Ember from 'ember';
-import {
-    imageTemplate
-} from '../../utils/image-processing';
-
-const {
-  get,
-  set,
-  Component
-} = Ember;
-const {htmlSafe} = Ember.String;
+import Component from 'ember-component';
+import { imageTemplate } from 'overhaul/helpers/image-template';
+import { htmlSafe } from 'ember-string';
+import get from 'ember-metal/get';
+import set from 'ember-metal/set';
 
 export default Component.extend({
   classNames: ['marquee'],
-  didInitAttrs() {
-      const bgColor = get(this, 'model.bgColor') || 'white';
-      const marquee = get(this, 'model.marqueeImage');
-      const urlString = imageTemplate([marquee.template, 1200,  200, marquee.crop, 99]);
+  init() {
+    this._super(...arguments);
 
-      set(this, 'marqueeImageCSS', htmlSafe(`background: url(${urlString}) no-repeat center center ${bgColor};`));
-      set(this, 'marqueeGradientCSS', htmlSafe(`background-image: -webkit-radial-gradient(rgba(255, 255, 255,0) 200px, ${bgColor} 620px)`));
+    let bgColor = get(this, 'model.bgColor') || 'white';
+    let marquee = get(this, 'model.marqueeImage');
+    let urlString = imageTemplate([marquee.template, 1200,  200, marquee.crop, 99]);
 
-      // TODO: until header is rendered via Ember
-      // TODO: comment out until leaderboard can be taken off certain pages
-      //$('#header').addClass('has-marquee')
+    set(this, 'marqueeImageCSS', htmlSafe(`background: url(${urlString}) no-repeat center center ${bgColor};`));
+    set(this, 'marqueeGradientCSS', htmlSafe(`background-image: -webkit-radial-gradient(rgba(255, 255, 255,0) 200px, ${bgColor} 620px)`));
   }
 });

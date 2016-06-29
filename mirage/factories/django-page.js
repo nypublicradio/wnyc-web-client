@@ -3,6 +3,7 @@ import serialize from 'overhaul/mirage/utils/serialize';
 
 export default Factory.extend({
   id: '/',
+  slug: '/',
   text() {
     let {id, slug} = this;
     let wormholes;
@@ -20,23 +21,36 @@ export default Factory.extend({
     }
 
     if (type === 'channel') {
-      let {data} = serialize(server.schema.show.find(id));
+
+      let {data} = serialize(server.schema.shows.find(id));
       let arId = `${id}${data.attributes.linkroll[0].navSlug}/1`;
+      let apiResponse = server.schema.apiResponses.find(arId);
+      if (!apiResponse) {
+        let type = data.attributes.firstPage;
+        let attrs = { id: arId, type };
 
-      server.create('api-response', {
-        id: arId,
-        type: data.attributes.firstPage
-      });
+        if (type === 'list') {
+          attrs.teaseList = server.createList('story', 50);
+        } else if (type === 'story') {
+          attrs.story = server.create('story');
+        }
+        server.create('api-response', attrs);
+        apiResponse = server.schema.apiResponses.find(arId);
+      }
+      apiResponse = serialize(apiResponse);
 
-      let ar = serialize(server.schema.apiResponse.find(arId));
       json = {
         data,
-        included: ar.included ? ar.included.concat(ar.data) : []
+        included: apiResponse.included ? apiResponse.included.concat(apiResponse.data) : []
       };
       wormholes = '<div id="js-listings"></div>';
     } else if (type === 'story') {
-      json = serialize(server.schema.story.where({slug})[0]);
-      wormholes = '<div id="related"></div><div id="comments"></comments>';
+      json = serialize(server.schema.stories.where({slug}).models[0]);
+      wormholes = `
+        <div class="l-full"></div>
+        <div class="l-constrained">
+          <div id="related"></div><div id="comments"></comments>
+        </div>`;
     } else if (type === 'legacy') {
 
     }
@@ -49,6 +63,6 @@ export default Factory.extend({
       <script id="wnyc-${type}-jsonapi" type="application/vnd.api+json">
         ${JSON.stringify(json)}
       </script>
-    `
+    `;
   }
 });

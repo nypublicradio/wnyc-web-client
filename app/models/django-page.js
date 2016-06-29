@@ -34,23 +34,21 @@ export default DS.Model.extend({
     }
   }),
 
-  legacyContent: Ember.computed('document', function() {
-    return this.get('document').querySelector('#site');
-  }),
-
   wnycContent: Ember.computed('document', function() {
-    let tag = this.get('document').querySelector('#wnyc-story-jsonapi');
+    let story = this.get('document').querySelector('#wnyc-story-jsonapi');
     let json;
-    if (tag) {
+    if (story) {
       try {
-        json = JSON.parse(tag.textContent);
+        json = JSON.parse(story.textContent);
       } catch(err) {}
     }
     if (json) {
-      return this.store.push(json);
+      let storySerializer = this.store.serializerFor('story');
+      let storyModel = this.store.modelFor('story');
+      let { id } = json.data;
+      return this.store.push(storySerializer.normalizeSingleResponse(this.store, storyModel, json, id));
     }
   }),
-
 
   wnycChannel: Ember.computed('document', function() {
     let channel = this.get('document').querySelector('#wnyc-channel-jsonapi');
@@ -69,14 +67,26 @@ export default DS.Model.extend({
     }
   }),
 
-  embeddedEmberComponents: Ember.computed('document', function() {
+  embeddedEmberComponents: Ember.computed('pieces', function() {
     let doc = this.get('pieces.body');
     return Array.from(doc.querySelectorAll('[data-ember-component]')).map(el => {
       let id = el.id;
+      let args;
+      try {
+        args = JSON.parse(el.getAttribute('data-ember-args'));
+        // TODO: ideally we'd decode the value of all the keys, but we'd need
+        // to traverse an arbitrarily nested Object to do it right.
+        // Since we know that only itemTitle is encoded server-side, we can just
+        // target it here.
+        args.itemTitle = args.itemTitle ? decodeURIComponent(args.itemTitle) : '';
+      } catch(e) {
+        console.warn('could not parse', el.getAttribute('data-ember-args'));
+        args = { error: e };
+      }
       return {
         id,
         componentName: el.getAttribute('data-ember-component'),
-        args: JSON.parse(el.getAttribute('data-ember-args'))
+        args
       };
     });
   }),

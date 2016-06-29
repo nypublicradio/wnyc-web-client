@@ -3,7 +3,7 @@ import ENV from 'overhaul/config/environment';
 import fetch from 'fetch';
 
 export default Ember.Component.extend({
-  name: Ember.computed.alias('user.username'),
+  name: Ember.computed.reads('user.username'),
   tagName: 'form',
   classNames: ['form'],
   classNameBindings: ['isSaved:is-fadeout'],
@@ -26,7 +26,7 @@ export default Ember.Component.extend({
       'comment'
     ];
 
-    if ( !this.get('user.isStaff') ) {
+    if ( !this.get('user.is_staff') ) {
       requiredFields.push('email');
     }
 
@@ -39,7 +39,7 @@ export default Ember.Component.extend({
       }
     }, this);
 
-    return Ember.keys(this.get('errors')).length !== 0;
+    return Object.keys(this.get('errors')).length !== 0;
   },
 
   actions: {

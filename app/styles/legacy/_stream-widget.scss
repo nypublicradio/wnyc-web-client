@@ -1,4 +1,8 @@
 #stream_launch_widget {
+    * {
+        box-sizing: content-box;
+    }
+
     .show {
         width: 55%;
 
@@ -11,9 +15,8 @@
 
     }
 
-    #stations_wrapper .head {
+    .head {
         width: auto;
-        height: 50px;
     }
 
     .head h4 {
@@ -24,8 +27,7 @@
     }
 
     .head .show-title a {
-        font-size: 13px;
-        font-weight: 600;
+        font-size: 12px;
     }
 
     .head .item-title {
@@ -34,8 +36,6 @@
 
     .head .current {
         line-height: 20px;
-        font-size: 13px;
-        font-weight: 700;
     }
 
     .util {
@@ -51,50 +51,14 @@
     @include mq($small-only) {
         display: none;
     }
-
-  .show .head a[href]:hover {
-    text-decoration: none !important;
-    border-bottom-color: white;
-  }
-
-  .util {
-    font-size: 0.75rem;
-
-    > .schedule,
-    > .options {
-      font-size: 12px;
-      border: none;
-    }
-
-    .schedule-menu li a {
-      width: 100%;
-    }
-
-    li a {
-      font-size: 12px;
-
-      &:hover {
-        text-decoration: none;
-      }
-    }
-  }
-
-  #popup-btn {
-    width: 121px;
-    font-weight: 600;
-    font-size: 16px;
-  }
-
-  .station-entry {
-    .show-title,
-    .item-title {
-      font-size: 12px;
-      font-weight: 600;
-    }
-  }
-
-  .stream-name {
-    font-size: 12px;
-    font-weight: 600;
-  }
 }
+
+#stream_launch_widget .show .head a[href]:hover {
+  text-decoration: none !important;
+  border-bottom-color: white;
+}
+
+#popup-btn {
+    width: 121px;
+}
+

@@ -2,11 +2,26 @@
 @import url(//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,300,700);
 //
 
+// hide everything not ember so we can control the UI over the alien DOM
+body > :not(
+  .ember-view,
+  #qunit, // except for testing
+  #qunit-fixture,
+  #ember-testing-container,
+  #sm2-container // display: none breaks JS <> Flash communication in Safari
+  ) {
+  display: none;
+}
+
+// contain fixed layouts
+#ember-testing {
+  transform: translateZ(0);
+}
+
 @import 'compass';
-@import 'lib/flexbox';
-
+@import 'normalize';
+@import 'mixins';
 @import 'vars';
-
 @import 'base';
 @import 'z-index';
 @import 'layout';
@@ -15,12 +30,16 @@
 @import 'box';
 @import 'text';
 @import 'icons';
+@import 'badges';
+@import 'tabs';
+@import 'forms';
 @import 'buttons';
 @import 'list';
 @import 'ads';
 @import 'figure';
 @import 'accordion';
 @import 'state';
+@import 'animation';
 @import 'animations';
 @import 'tabs';
 @import 'badges';
@@ -34,8 +53,24 @@
 @import 'loading';
 @import 'print';
 
+@import 'progress';
+@import 'volume';
+@import 'share';
+@import 'text-crawl';
+@import 'modal';
+@import 'utils';
 @import 'persistent-player';
+@import 'queue-history';
+@import 'tabbed-list';
+@import 'stream-list';
+@import 'stream-info';
+@import 'player-buttons';
+@import 'setting-queuefinish';
+@import 'clearhistory';
+@import 'popupmenu';
+
 @import 'site-chrome';
+@import 'liquid-fire-icons';
 
 // LEGACY CODE
 @import 'legacy/home-compat';
@@ -44,6 +79,13 @@
 @import 'legacy/screen';
 @import 'legacy/nav-menu';
 @import 'legacy/footer';
+
+// MISC
+
+.django-content {
+  // for compat between sliding modal and admin edit buttons on homepage
+  z-index: $zIndex--djangocontent;
+}
 
 #browser-warn.container_12 {
   @extend .l-constrained;

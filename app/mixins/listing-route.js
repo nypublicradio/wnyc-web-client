@@ -8,8 +8,10 @@ const {
   set,
   computed,
   isEmpty,
-  $
+  $,
+  Inflector
 } = Ember;
+const inflector = new Inflector(Inflector.defaultRules);
 
 export default Mixin.create({
   pageNumbers: service(),
@@ -27,24 +29,8 @@ export default Mixin.create({
     set(this, 'channelType', channelType)
   },
 
-  model(params) {
-    const channelType = get(this, 'channelType')
-    const page = get(params, 'page') || 1
-    const id = this.buildId(channelType, page)
-
-    set(this, 'pageNumbers.totalPages', 0)
-
-    return this.store.findRecord('api-response', id)
-      .then(m => {
-        // wait until models are loaded to keep UI consistent
-        set(this, 'pageNumbers.page', page)
-        set(this, 'pageNumbers.totalPages', get(m, 'totalPages'))
-
-        return m
-      })
-  },
-
   afterModel(model) {
+
     $('main > section:last-of-type').css('opacity', 1)
     const teaseList = get(model, 'teaseList')
     if (isEmpty(teaseList)) {
@@ -52,18 +38,14 @@ export default Mixin.create({
     }
     const channelType = get(this, 'channelType')
     const { channel } = this.modelFor(channelType)
-    const channelTitle = get(channel, 'title')
 
     this._filterForFeatured(teaseList, channel)
-
-    teaseList.forEach(s => {
-      const brandTitle = get(s, 'headers.brand.title')
-      if (brandTitle === channelTitle) {
-        // don't show header links if this story belongs to this show
-        set(s, 'headers.links', null)
-      }
-    })
-
+  },
+  setupController(controller) {
+    this._super(...arguments);
+    let channelType = get(this, 'channelType')
+    let { channel } = this.modelFor(channelType)
+    controller.set('channelTitle', get(channel, 'title'));
   },
 
   actions: {
@@ -77,7 +59,7 @@ export default Mixin.create({
       if (navSlug) {
         this.transitionTo(`${channelType}.well.page`, navSlug, number)
       } else {
-        this.transitionTo(`${channelType}.page`, number)
+        this.transitionTo(`${channelType}.well`, number)
       }
     }
   },
@@ -85,7 +67,7 @@ export default Mixin.create({
   buildId(channelType, page) {
     const { slug } = this.paramsFor(channelType)
     const navSlug = this._getNavSlug(channelType)
-    const path = `${channelType}/${slug}/${navSlug ? `${navSlug}` : 'recent_stories'}`
+    const path = `${inflector.pluralize(channelType)}/${slug}/${navSlug ? `${navSlug}` : 'recent_stories'}`
 
     return `${path}/${page}`
   },
@@ -96,7 +78,7 @@ export default Mixin.create({
     const linkRollSlug = get(channel, 'linkroll.firstObject.navSlug')
     const hasLinkRoll = get(channel, 'hasLinkroll')
 
-    if (hasLinkRoll && navSlug) {
+    if (hasLinkRoll && navSlug && !/^\d+$/.test(navSlug)) {
       return navSlug
     } else if (hasLinkRoll && linkRollSlug) {
       return linkRollSlug
@@ -106,8 +88,8 @@ export default Mixin.create({
   },
 
   _filterForFeatured(teaseList, channel) {
-    const channelHasFeatured = get(channel, 'hasFeatured')
-    const featuredId = get(channel, 'featuredId')
+    const channelHasFeatured = get(channel, 'featured')
+    const featuredId = get(channel, 'featured.id')
     const featuredStory = teaseList.findBy('id', featuredId)
 
     if (channelHasFeatured) {

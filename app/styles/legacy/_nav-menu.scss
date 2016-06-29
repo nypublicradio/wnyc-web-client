@@ -2,6 +2,26 @@
   border-bottom: none;
 }
 
+#beta-legacy-link {
+  display: table-row;
+
+  > a {
+    color: white;
+    border-bottom: none;
+    text-decoration: none;
+    display: table-cell;
+    vertical-align: middle;
+    border-left: 4px solid transparent;
+    background-color: transparent;
+    position: relative;
+    @include fontsize(11);
+    font-weight: 800;
+    padding-left: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
 #header a {
   border-bottom: none;
 }

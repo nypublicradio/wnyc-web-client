@@ -1,0 +1,10 @@
+<div class="volume-control">
+  <button class="volume-button" {{action 'toggleMute'}}>
+    {{wnyc-svg className="icon volume-button--unmuted" icon="volume"}}
+    {{wnyc-svg className="icon volume-button--muted" icon="mute"}}
+  </button>
+  <div class="volume-slider">
+    <div class="volume-slider-track" style={{trackWidth}}></div>
+    <div class="volume-slider-handle" style={{handlePosition}}></div>
+  </div>
+</div>

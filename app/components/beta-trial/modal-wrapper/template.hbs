@@ -1,0 +1,7 @@
+{{#if showModal}}
+  {{#ember-wormhole to=modalTarget}}
+    <div {{action 'closeModal'}} class="l-modal l-modal--dark" data-test-selector="beta-modal">
+      {{partial modalBody}}
+    </div>
+  {{/ember-wormhole}}
+{{/if}}

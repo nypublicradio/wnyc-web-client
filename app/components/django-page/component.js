@@ -1,17 +1,16 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
-import { beforeTeardown, homepageCleanup, searchpageCleanup } from '../../lib/compat-hooks';
 import ENV from '../../config/environment';
 import LegacySupportMixin from 'overhaul/mixins/legacy-support';
+import BetaActionsMixin from 'overhaul/mixins/beta-actions';
 import { canonicalize } from 'overhaul/services/script-loader';
 import {
   isInDom,
   embeddedComponentSetup,
-  installAlienListeners,
-  unbindAlienListener,
+  clearAlienDom,
 } from '../../lib/alien-dom';
 
-const { $, get, computed, run } = Ember;
+const { get, computed, run } = Ember;
 let { wnycURL } = ENV;
 wnycURL = canonicalize(wnycURL);
 
@@ -29,7 +28,8 @@ function doRefresh() {
   }
 }
 
-export default Ember.Component.extend(LegacySupportMixin, {
+export default Ember.Component.extend(LegacySupportMixin, BetaActionsMixin, {
+  audio: service(),
   legacyAnalytics: service(),
   router: service('wnyc-routing'),
   loadingType: computed('page', function() {
@@ -61,7 +61,7 @@ export default Ember.Component.extend(LegacySupportMixin, {
         embeddedComponentSetup();
       }
 
-      this.set('showingOverlay', isInDom(page.get('id')));
+      this.set('showingOverlay', false);
     }
   },
 
@@ -73,78 +73,31 @@ export default Ember.Component.extend(LegacySupportMixin, {
       elt.empty();
 
       if (isInDom(page.get('id'))) {
-        // if an alien dom is present, capture any escaped clicks but otherwise
-        // leave the alien alone
-        if (page.get('id') === '/') {
-          homepageCleanup();
-        }
-        if (page.get('id') === 'search/') {
-          searchpageCleanup();
-        }
-        installAlienListeners(this);
-      } else {
-        unbindAlienListener();
-        this.get('page').appendTo(elt).then(() => {
-          // After the server-rendered page has been inserted, we
-          // re-enable any overlaid content so that it can wormhole
-          // itself into the server-rendered DOM.
-          this.set('showingOverlay', true);
-          if (ENV.renderGoogleAds) {
-            doRefresh();
-          }
-
-          this.$().imagesLoaded().progress((i, image) => {
-            Ember.run(() => {
-              image.img.classList.add('is-loaded');
-            });
-          });
-
-        });
+        clearAlienDom();
       }
+
+      this.get('page').appendTo(elt).then(() => {
+        // After the server-rendered page has been inserted, we
+        // re-enable any overlaid content so that it can wormhole
+        // itself into the server-rendered DOM.
+        this.set('showingOverlay', true);
+        if (ENV.renderGoogleAds) {
+          doRefresh();
+        }
+
+        this.$().imagesLoaded().progress((i, image) => {
+          Ember.run(() => {
+            image.img.classList.add('is-loaded');
+          });
+        });
+
+      });
     }
   },
 
   click(event) {
     let legacyAnalytics = get(this, 'legacyAnalytics');
     legacyAnalytics.dispatch(event);
-
-    let target = $(event.target).closest('a');
-    let href = target.attr('href');
-    if (target.length > 0 && href && href[0] !== '#') {
-      let router = this.get('router');
-      let href = new URL(target.attr('href'), new URL(this.get('page.id'), wnycURL).toString()).toString();
-      if (href.indexOf(wnycURL) === 0) {
-        href = href.replace(wnycURL, '').replace(/^\//, '') || '/';
-
-        // all URLS are maked as external by legacy JS in development mode
-        if (ENV.environment !== 'development' && target.attr('target') === '_blank') {
-          return true;
-        } else if (target.hasClass('stf')) {
-        // admin link
-          return true;
-        } else if (href.split('.').length > 1) {
-        // URL has an extension; allow to bubble up
-          return true;
-        } else if (!this.features.isEnabled('django-page-routing')) {
-          return false;
-        } else if (isInDom(href)) {
-          // clicked link is current alien DOM, do nothing
-          event.preventDefault();
-          return false;
-        }
-
-        let { routeName, params, queryParams } = router.recognize(href);
-
-        if (!this.get('isDestroyed') && !this.get('isDestroying')) {
-          router.transitionTo(routeName, params, queryParams);
-        }
-        event.preventDefault();
-
-        // clear out the alienDom and other teardown steps
-        beforeTeardown(this.get('element'), this.get('page'));
-        return false;
-      }
-    }
 
     if (this.isLegacyEvent(event)) {
       return this.fireLegacyEvent(event.target);

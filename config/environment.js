@@ -1,6 +1,14 @@
 /* jshint node: true, multistr: true */
 
+
 module.exports = function(environment) {
+
+  function usingProxy() {
+    return !!process.argv.filter(function (arg) {
+      return arg.indexOf('--proxy') === 0;
+    }).length;
+  }
+
   var ENV = {
     modulePrefix: 'overhaul',
     environment: environment,
@@ -21,8 +29,9 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
+    // required for what's on widget compat
+    exportApplicationGlobal: true,
     QP_WHITELIST: ['q', 'scheduleStation', 'next'], // see puppy/settings/base_settings.py
-    exportApplicationGlobal: process.env.DEPLOY_TARGET !== 'production',
 
     sentry: {
       dsn: process.env.SENTRY_DSN,
@@ -59,6 +68,7 @@ module.exports = function(environment) {
       }
     },
 
+    siteSlug: 'wnyc',
     renderGoogleAds: true,
     // these are provided via a .env file or else by Django's EmberAdapter
     googleAnalyticsKey: process.env.GOOGLE_ANALYTICS,
@@ -68,10 +78,20 @@ module.exports = function(environment) {
     wnycEtagAPI: process.env.WNYC_ETAG_API,
     wnycStaticURL: process.env.WNYC_STATIC_URL,
     wnycURL: process.env.WNYC_URL,
+    wnycSvgURL: '/media/svg/',
+    // put beta host at the root so it can be overridden by Django
+    wnycBetaURL: process.env.WNYC_BETA_URL,
     featureFlags: {
       'django-page-routing': true,
-      'persistent-player': false,
-      'embedded-components': false
+      'persistent-player': true,
+      'embedded-components': true,
+      'site-chrome': false
+    },
+    betaTrials: {
+      betaInviteLanding: '#full-page-transforms-wrapper',
+      legacyNavLinkLanding: '#navigation-items > li:nth-child(2)',
+      isBetaSite: false,
+      preBeta: false,
     },
     contentSecurityPolicy: {
       'connect-src': "'self' *.wnyc.net:* ws://*.wnyc.net:*",
@@ -90,8 +110,17 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.LOG_LEGACY_LOADER = true;
-    ENV['ember-cli-mirage'] = { enabled: process.env.USE_MIRAGE === 'true' };
+    // ENV.LOG_LEGACY_LOADER = true;
+
+
+    var mirageEnabled = !usingProxy();
+    ENV['ember-cli-mirage'] = {
+      // Mirage should be doing this automatically, but
+      // it consideres the http-proxies we have in server/proxies
+      // as a "proxy". We only want mirage to be disabled if we've
+      // passed in --proxy to the command line
+      enabled: mirageEnabled
+    };
   }
 
   if (environment === 'test') {
@@ -106,6 +135,10 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
 
     ENV.renderGoogleAds = false;
+
+    ENV.betaTrials.legacyNavLinkLanding = '#ember-testing';
+    ENV.betaTrials.betaInviteLanding = '#ember-testing';
+
     ENV.googleAPIv3Key = '';
     ENV.googleAnalyticsKey = '';
     ENV.wnycAPI = 'http://test.com';
@@ -113,6 +146,7 @@ module.exports = function(environment) {
     ENV.wnycEtagAPI = 'http://test.com/etag';
     ENV.wnycStaticURL = 'http://test.com/static';
     ENV.wnycURL = '//test.com';
+    ENV.wnycBetaURL = 'http://test.com';
   }
 
   if (environment === 'production') {

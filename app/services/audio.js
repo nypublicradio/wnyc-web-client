@@ -1,65 +1,252 @@
-import Ember from 'ember';
+import Service from 'ember-service';
 import service from 'ember-service/inject';
-import { ServiceBridge } from '../lib/okra-bridge';
-const {
-  A:emberArray,
-  Service,
-  get,
-  set
-} = Ember;
+import get from 'ember-metal/get';
+import set from 'ember-metal/set';
+import { OkraBridge } from '../lib/okra-bridge';
+import computed, { readOnly, alias, or } from 'ember-computed';
+import { bind } from 'ember-runloop';
+import RSVP from 'rsvp';
+import { classify as upperCamelize } from 'ember-string';
 
-// the ServiceBridge provides:
-// playerController <- will be refactored out
-// playerModel <- well be refactored out
-// isReady <- will need to be replaced by an ember observer
-export default Service.extend(ServiceBridge, {
-  store: service('store'),
-  queue: emberArray([]),
-  playOnDemand(pk) {
-    let currentAudio = get(this, 'currentAudio.id');
-    if (currentAudio === pk) {
-      this.play();
-      return;
+const FIFTEEN_SECONDS = 1000 * 15;
+
+export default Service.extend({
+  metrics:          service(),
+  store:            service(),
+  session:          service(),
+  //discoverQueue:    service('discover-queue'),
+  listens:          service('listen-history'),
+  queue:            service('listen-queue'),
+  isReady:          readOnly('okraBridge.isReady'),
+  position:         readOnly('okraBridge.position'),
+  duration:         readOnly('okraBridge.duration'),
+  percentLoaded:    readOnly('okraBridge.percentLoaded'),
+  isMuted:          readOnly('okraBridge.isMuted'),
+  volume:           alias('okraBridge.volume'),
+  currentStory:     or('currentAudio.story', 'currentAudio'),
+
+  currentAudio:     null,
+  currentContext:   null,
+
+  isPlaying: readOnly('okraBridge.isPlaying'),
+  isLoading: computed('okraBridge.isLoading', {
+    get() {
+      return get(this, 'okraBridge.isLoading');
+    },
+    set(k, v) { return v; }
+  }),
+  currentId: computed('currentAudio.id', {
+    get() {
+      return get(this, 'currentAudio.id');
+    },
+    set(k, v) { return v; }
+  }),
+  playState: computed('isPlaying', 'isLoading', function() {
+    if (get(this, 'isLoading')) {
+      return 'is-loading';
+    } else if (get(this, 'isPlaying')) {
+      return 'is-playing';
+    } else {
+      return 'is-paused';
     }
+  }),
 
-    get(this, 'store').find('ondemand', pk).then(o => { 
-      set(this, 'currentAudio', o);
-      // TODO: the ModelBridge starts playing
-      // o.play();
-    });
+  init() {
+    set(this, 'okraBridge', OkraBridge.create({ onFinished: bind(this, 'finishedTrack') }));
   },
 
-  playStream(slug) {
-    let currentStream = get(this, 'currentAudio.id');
-    if (currentStream === slug) {
-      this.play();
+  /* TRACK LOGIC --------------------------------------------------------------*/
+
+  play(pk, playContext) {
+    // TODO: might be better to switch the arg order for better api design
+    // i.e. there will always be a context, but there might not always be a pk
+    let id = pk || get(this, 'currentAudio.id');
+    let context = playContext || get(this, 'currentContext') || '';
+
+    if (!id) {
       return;
     }
-
-    get(this, 'store').find('stream', slug).then(s => {
-      set(this, 'currentAudio', s);
-      // TODO: the ModelBridge handles playig for now
-      // s.play();
-    });
+    if (/^\d*$/.test(id)) {
+      return this.playFromPk(id, context);
+    } else {
+      return this.playStream(id);
+    }
   },
   pause() {
-    get(this, 'currentAudio').pause();
+    this.okraBridge.pauseSound();
+    let context = get(this, 'currentContext') || '';
+
+    this._trackPlayerEvent({
+      action: 'Pause',
+      withRegion: true,
+      region: upperCamelize(context),
+      withAnalytics: true
+    });
   },
-  play() {
-    get(this, 'currentAudio').play();
+  playFromPk(id, context) {
+    set(this, 'currentId', id);
+    this.okraBridge.playSoundFor('ondemand', id);
+
+    set(this, 'playedOnce', true); // opens player
+    set(this, 'isLoading', true);
+
+    get(this, 'store').findRecord('story', id).then(story => {
+
+      // independent of context, if this item is already the first item in your
+      // listening history, don't bother adding it again
+      if (get(this, 'listens').indexByStoryPk(id) !== 0) {
+        this.addToHistory(story);
+      }
+
+      if (context === 'queue') {
+        this.removeFromQueue(id);
+      } else if (context ==='history') {
+        if (get(this, 'isPlaying') && get(this, 'currentAudio.id') === id) {
+          this.okraBridge.setPosition(0);
+        }
+      }
+
+      set(this, 'currentAudio', story);
+      set(this, 'currentContext', context);
+
+      this._trackPlayerEvent({
+        action: `Played Story "${story.get('title')}"`,
+        withRegion: true,
+        region: upperCamelize(context),
+        withAnalytics: true,
+        story
+      });
+    });
   },
-  increaseVolume() {
-    let currentAudio = get(this, 'currentAudio');
-    if (currentAudio) {
-      let volume = get(this, 'currentAudio.volume');
-      set(this, 'currentAudio.volume', volume + 10 > 100 ? 100 : volume + 10);
+  playStream(slug, context = '') {
+    set(this, 'currentId', slug);
+    set(this, 'playedOnce', true); // opens player
+    set(this, 'isLoading', true);
+
+    get(this, 'store').findRecord('stream', slug).then(stream => {
+      set(this, 'currentAudio', stream);
+      set(this, 'currentContext', context);
+
+      let streamName = get(stream, 'name');
+      this._trackPlayerEvent({
+        action: 'Launched Stream',
+        label: streamName,
+      });
+
+      this.okraBridge.playSoundFor('stream', get(stream, 'bbModel'));
+
+      RSVP.Promise.resolve(get(stream, 'story')).then(story => {
+        if (story) {
+          this._trackPlayerEvent({
+            action: `Streamed Story "${get(story, 'title')}" on "${get(stream, 'name')}"`,
+            withAnalytics: true,
+            story
+          });
+        }
+      });
+    });
+  },
+
+  setPosition(percentage) {
+    let position = percentage * get(this, 'duration');
+    this.okraBridge.setPosition(position);
+  },
+
+  rewind() {
+    let currentPosition = get(this, 'position');
+    this.okraBridge.setPosition(currentPosition - FIFTEEN_SECONDS);
+
+    this._trackPlayerEvent({
+      action: 'Skip Fifteen Seconds Back',
+      withAnalytics: true
+    });
+  },
+
+  fastForward() {
+    let currentPosition = get(this, 'position');
+    this.okraBridge.setPosition(currentPosition + FIFTEEN_SECONDS);
+
+    this._trackPlayerEvent({
+      action: 'Skip Fifteen Seconds Ahead',
+      withAnalytics: true
+    });
+  },
+
+  toggleMute() {
+    this.okraBridge.toggleMute();
+  },
+
+
+  /* QUEUEING LOGIC -----------------------------------------------------------*/
+
+  addToQueue(id, region) {
+    get(this, 'queue').addToQueueById(id)
+    .then(story => {
+      this._trackPlayerEvent({
+        action: 'Add Story to Queue',
+        withRegion: true,
+        region,
+        withAnalytics: true,
+        story
+      });
+    });
+  },
+
+  removeFromQueue(id) {
+    get(this, 'queue').removeFromQueueById(id);
+  },
+
+  resetQueue(newQueue) {
+    get(this, 'queue').reset(newQueue);
+  },
+
+  playNextInQueue() {
+    let queue = get(this, 'queue');
+    let nextUp = queue.nextItem();
+
+    if (nextUp) {
+      this.play(nextUp.get('id'), 'queue');
+    } else {
+      set(this, 'isPlaying', false);
+      set(this, 'currentContext', null);
+      //We can switch to streaming here
     }
   },
-  decreaseVolume() {
-    let currentAudio = get(this, 'currentAudio');
-    if (currentAudio) {
-      let volume = get(this, 'currentAudio.volume');
-      set(this, 'currentAudio.volume', volume - 10 < 0 ? 0 : volume - 10);
+
+  /* EVENTS AND HELPERS -------------------------------------------------------*/
+
+  finishedTrack() {
+    this._trackPlayerEvent({
+      action: 'Finished Story',
+      withAnalytics: true,
+    });
+
+    if (get(this, 'currentContext') === 'queue') {
+      this.playNextInQueue();
     }
+  },
+
+  addToHistory(story) {
+    this.get('listens').addListen(story);
+  },
+
+  _trackPlayerEvent(options) {
+    let metrics        = get(this, 'metrics');
+    let {action, label, withRegion, region, withAnalytics} = options;
+    let analyticsCode  = '';
+    let story          = options.story || get(this, 'currentAudio');
+    let category       = options.category || 'Persistent Player';
+
+    // Ignore event if it's missing a region but should have one.
+    // Assume it was fired from player internals and shouldn't be logged.
+    if (withRegion && !region) { return; }
+    region = withRegion ? region + ':' : '';
+    if (withAnalytics) {
+      analyticsCode = get(story, 'analyticsCode');
+    }
+    if (withRegion || withAnalytics) {
+      label = `${region}${analyticsCode}`;
+    }
+    metrics.trackEvent({category, action, label, model: story});
   }
 });

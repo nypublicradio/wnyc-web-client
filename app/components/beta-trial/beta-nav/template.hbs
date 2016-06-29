@@ -1,0 +1,5 @@
+{{#ember-wormhole to=betaNav}}
+  <button {{action 'openModal'}} data-test-selector="beta-open-about" class="btn btn--white btn--blank btn--heavy btn--upper btn--smalltext">About Beta</button>
+  <a href={{beta.feedback_form}} class="link--nodecor btn btn--white btn--blank btn--heavy btn--upper btn--smalltext" target="_blank">Give Feedback</a>
+  <button {{action 'exitBeta'}} data-test-selector="beta-exit" class="btn btn--white btn--blank btn--heavy btn--upper btn--smalltext">Exit Beta</button>
+{{/ember-wormhole}}

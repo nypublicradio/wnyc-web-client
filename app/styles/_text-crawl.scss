@@ -1,0 +1,28 @@
+.text-crawl {
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: bottom;
+    max-width: calc(100% - 5px);
+    overflow: hidden;
+
+    @include mq($wide) {
+      max-width: calc(100% - 69px);
+    }
+
+    a {
+      color: white;
+      font-size: 16px;
+    }
+
+    .text-crawl-scroll {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+    }
+
+    &.is-scrolling .text-crawl-scroll {
+      position: relative;
+      text-overflow: clip;
+      overflow: visible;
+    }
+}

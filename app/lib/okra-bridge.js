@@ -1,148 +1,200 @@
-/*global Okra, XDPlayer*/
+// XDPlayer is the toplevel global Backbone app that boots Okra.
+// Okra is the main Marionette module which provides access to everything
+//
+// Generally, the idea is to use Okra as our single source of truth for things
+// like playlists, sound position, volume, duration, etc.
 import Ember from 'ember';
 import config from 'overhaul/config/environment';
-const {
-  Mixin,
-  set,
-  get,
-  observer
-} = Ember;
-const { Promise, all } = Ember.RSVP;
-const { bind, throttle } = Ember.run;
+import set from 'ember-metal/set';
+import get from 'ember-metal/get';
+import computed from 'ember-computed';
+import { bind, throttle } from 'ember-runloop';
+import rsvp from 'rsvp';
+const { Promise, all } = rsvp;
+
+let XDPlayer;
+
+function resolveOkra(resolve, reject) {
+  if (config.featureFlags['persistent-player']) {
+    let interval = setInterval(() => {
+      if (typeof window.Okra !== 'undefined') {
+        clearInterval(interval);
+        resolve(window.Okra);
+      }
+    }, 20);
+  } else {
+    reject('Okra failed to load: Feature flag not set.');
+  }
+}
+
+export const Okra = new Promise(resolveOkra);
 
 // XDPlayer and Okra are globals provided by the underlying backbone source,
 // but we need to wait until all the deps are loaded before booting it up.
 // see services/legacy-loader for dependency list.
 export function installBridge() {
+  XDPlayer = window.XDPlayer;
   XDPlayer.on('initialize:after', function() {
-    Okra.start();
+    Okra.then(o => o.start());
   });
   XDPlayer.start();
 }
 
-// the audio service provides useful events for a soundObject's life cycle.
-// instead of trying to smooth out all the rough edges now, we can use the existing
-// architecture.
-// from puppy/media/js/lib/marionette/xd_player/web_player_controller.js:
-// A Web Player Controller emits the following events:
-//     player:launchingRemoteFile     // Playback of a remote file is about to be attempted.
-//     player:launchingStream         // Playback of a stream is about to be attempted.
-//     player:loading                 // The Player Model has started to load a resource.
-//     player:played                  // The Player Model has begun playback of a sound.
-//     player:paused                  // The Player Model has paused playback of a sound.
-//     player:progress                // A sound has progressed its playback position.
-//     player:buffered                // Some portion of a sound has been buffered.
-//     player:finished                // A sound has completed playback.
-//     player:soundDestroyed          // A sound has been released from memory by the Player Model.
-//     player:switched                // Playback has moved from one piece of audio to another.
-//     player:error                   // The Player Model has published an error message.
-//     player:error:<ERROR_CONSTANT>  // The Player Model has published an error with a specific constant name.
+// Okra.request('audioService') aka WebPlayerController provides useful events
+// for a soundObject's life cycle. instead of trying to smooth out all the rough
+// edges now, we can use the existing architecture.
 //
-// The following events are emitted to match APIs with the mobile app's
-// native bridge:
-//     audioStatusChanged             // The playback state of The Player Model has changed in some way.
-//     audioProgress                  // The audio being played by The Player Model has progressed its playback position.
+// From puppy/media/js/lib/marionette/xd_player/web_player_controller.js:
+//    A Web Player Controller emits the following events:
+//        player:launchingRemoteFile     // Playback of a remote file is about to be attempted.
+//        player:launchingStream         // Playback of a stream is about to be attempted.
+//        player:loading                 // The Player Model has started to load a resource.
+//        player:played                  // The Player Model has begun playback of a sound.
+//        player:paused                  // The Player Model has paused playback of a sound.
+//        player:progress                // A sound has progressed its playback position.
+//        player:buffered                // Some portion of a sound has been buffered.
+//        player:finished                // A sound has completed playback.
+//        player:soundDestroyed          // A sound has been released from memory by the Player Model.
+//        player:switched                // Playback has moved from one piece of audio to another.
+//        player:error                   // The Player Model has published an error message.
+//        player:error:<ERROR_CONSTANT>  // The Player Model has published an error with a specific constant name.
+//
+//    The following events are emitted to match APIs with the mobile app's
+//    native bridge:
+//        audioStatusChanged             // The playback state of The Player Model has changed in some way.
+//        audioProgress                  // The audio being played by The Player Model has progressed its playback position.
 //
 // Note that Okra defines this internally as the `audioService`, but to avoid
-// confusing naming overlaps we'll refer to it as the WEB_PLAYER_CONTROLLER or
+// confusing name overlaps we'll refer to it as the WEB_PLAYER_CONTROLLER or
 // the playerController in our Ember context.
 const WEB_PLAYER_CONTROLLER = new Promise(resolve => {
-  if (config.featureFlags['persistent-player']) {
-    let interval = setInterval(() => {
-      if (typeof Okra !== 'undefined') {
-        clearInterval(interval);
-        Okra.on('initialize:after', function() {
-          resolve(Okra.request('audioService'));
-        });
-      }
-    }, 20);
-  }
+  Okra.then(o => {
+     o.on('initialize:after', function() {
+      resolve(o.request('audioService'));
+    });
+  }).catch((err) => {console.warn(err);});
 });
 
-// a lower-level interface to the soundManger soundObject instance.
-// from puppy/media/js/lib/backbone/models/sound_manager_player.js
+// a lower-level interface to soundManger and the single soundObject instance.
 //
-// A Player Model that fronts a SoundManager backend to be used in//{//}
-// a Marionette app. While this looks very similar to models/player.js,
-// it is used in a totally different way, so certain affordances such as
-// the loadingUpdate handler is not implemented in the same way.
+// from puppy/media/js/lib/backbone/models/sound_manager_player.js:
 //
-// Plays one audio source at a time.
+//    A Player Model that fronts a SoundManager backend to be used in
+//    a Marionette app. While this looks very similar to models/player.js,
+//    it is used in a totally different way, so certain affordances such as
+//    the loadingUpdate handler is not implemented in the same way.
+//
+//    Plays one audio source at a time.
 const PLAYER_MODEL = WEB_PLAYER_CONTROLLER.then(c => c.playerModel);
 
-// the ServiceBridge is mixed into the audio-service to notify when the backbone
-// dependencies are loaded.
-export const ServiceBridge = Mixin.create({
-  playerController: WEB_PLAYER_CONTROLLER.then(c => c),
-  playerModel: PLAYER_MODEL.then(m => m),
+// the ServiceBridge is mixed into the Ember audio-service to act as a proxy to
+// the underlaying Okra functions. Remember the idea is that Okra is our SSOT,
+// so we're listening to and setting values on Okra as much as possible
+export const OkraBridge = Ember.Object.extend({
   isReady: false,
+  isPlaying: false,
+  isLoading: false,
   init() {
-    this._super(...arguments);
-    all([get(this, 'playerController'), get(this, 'playerModel')]).then(() => set(this, 'isReady', true));
-  },
-});
+    all([WEB_PLAYER_CONTROLLER, PLAYER_MODEL]).then(([playerController, playerModel]) => {
+      set(this, 'isReady', true);
 
-// the ModelBridge is mixed into the ondemand and stream models to provide a
-// simplifed interface to the required listeners, methods, and properties.
-// any interaction or data around the audio object itself should proxy to here
-// from other parts of the app usually through the audio services `currentAudio`
-// property, but also potentially via the queue property.
-//
-// certain properties need to be explicitly listened to via backbone KVOs. some
-// are found on the playerModel directly and some are found on the playerController.
-// the `setup` methods can init any listenrs required to update the ember-data model.
-export const ModelBridge = Mixin.create({
-  playerController: WEB_PLAYER_CONTROLLER,
-  playerModel: PLAYER_MODEL,
-  ready() {
-    get(this, 'playerController').then(bind(this, this.setupPlayerController));
-    get(this, 'playerModel').then(bind(this, this.setupPlayerModel));
+      // web_player_controller wraps the playerModel's backbone `change` events
+      // and does some data massaging before publishing to the rest of the app
+      playerController.on({
+        // progress includes the duration and a normalized time
+        'player:progress': m => throttle(this, () => set(this, 'position', m.progress), 1000),
+        'audioStatusChanged': bind(this, '_updateIsPlaying'),
+        'player:finished': get(this, 'onFinished'),
+        'player:buffered': bind(this, '_updateBuffered')
+      });
+
+      playerModel.on({
+        'change:duration': bind(this, '_updateDuration'),
+        'change:sound': bind(this, '_changeSound')
+      });
+
+    });
   },
-  setupPlayerController(playerController) {
-    playerController.on('player:progress', m => throttle(this, () => set(this, 'position', m.progress), 1000));
-  },
-  setupPlayerModel(playerModel) {
-    playerModel.on('change:isPlaying', (x, val) => set(this, 'isPlaying', val));
-    playerModel.on('change:duration', (x, d) => set(this, 'duration', d));
-  },
-  addToPlaylist(pkOrUrl, title) {
-    if (/^\d+/.test(pkOrUrl)) {
-      Okra.execute('addToPlaylistFromPK', pkOrUrl);
-    } else {
-      Okra.execute('addToPlaylistFromFile', pkOrUrl, title);
+  playSoundFor(type, pkOrModel) {
+    if (type === 'ondemand') {
+      Okra.then(o => o.execute('playOnDemand', pkOrModel));
+    } else if (type === 'stream') {
+      let model = Ember.Object.create(pkOrModel);
+      WEB_PLAYER_CONTROLLER.then(player => player.playStream(model));
     }
   },
-  play() {
-    PLAYER_MODEL.then(p => p.play());
-  },
-  pause() {
+  pauseSound() {
     PLAYER_MODEL.then(p => p.pause());
   },
-  updateVolume: observer('volume', function() {
-    PLAYER_MODEL.then(p => {
-      let volume = get(this, 'volume');
-      p.set('volume', volume);
-    });
-  }),
-});
+  // when the user sets the position, set it directly on the soundObject to trigger
+  // the proper listeners
+  setPosition(positionMs) {
+    let soundObject = get(this, 'soundObject');
+    if (soundObject) {
+      if (soundObject.isHTML5) {
+        // handle this manually on the HTML5 audio element due to issues with soundManager on iOS
+        let audio = soundObject._a;
+        // See note about max seek position at:
+        // https://developer.mozilla.org/en-US/Apps/Fundamentals/Audio_and_video_delivery/buffering_seeking_time_ranges#Creating_our_own_Buffering_Feedback
+        let minSeekable = audio.seekable.start(0);
+        let maxSeekable = audio.seekable.end(audio.seekable.length - 1);
 
-// the ApiBridge is imported into the ondemand and streaming adaptesr to provide
-// direct access to some underlying Okra methods which just make fetching audio
-// a smoother experience for now.
-export const ApiBridge = {
-  playerController: WEB_PLAYER_CONTROLLER.then(c => c),
-  playerModel: PLAYER_MODEL.then(m => m),
-  playOnDemand(pkOrUrl, title) {
-    if (/^\d+/.test(pkOrUrl)) {
-      Okra.execute('playOnDemand', pkOrUrl);
-    } else {
-      Okra.execute('playOnDemandFile', pkOrUrl, title);
+        // HTMLAudioElement time is in seconds
+        let seekPositionSec = positionMs / 1000;
+        // clamp position to allowed range
+        seekPositionSec = Math.max(seekPositionSec, minSeekable);
+        seekPositionSec = Math.min(seekPositionSec, maxSeekable);
+        audio.currentTime = seekPositionSec;
+
+        set(this, 'position', audio.currentTime * 1000);
+      } else {
+        // soundManager handles range overruns (i.e. < 0 or > duration);
+        soundObject.setPosition(positionMs);
+        // but also update ember immediately so the throttled callback doesn't cause a lag
+        set(this, 'position', soundObject.position);
+      }
     }
   },
-
-  playStream(slug) {
-    Okra.Streams.controller.playStream(slug);
+  volume: computed({
+    get() {
+      return PLAYER_MODEL.then(playerModel => playerModel.get('volume'));
+    },
+    set(k, v) {
+      PLAYER_MODEL.then(playerModel => playerModel.set('volume', v));
+      return v;
+    }
+  }),
+  toggleMute() {
+    let soundObject = get(this, 'soundObject');
+    if (soundObject && soundObject.muted) {
+      soundObject.unmute();
+      set(this, 'isMuted', false);
+    } else {
+      soundObject.mute();
+      set(this, 'isMuted', true);
+    }
   },
+  _changeSound(backbone, soundObject) {
+    if (soundObject) {
+      if (get(this, 'isMuted')) {
+        soundObject.mute();
+      }
+      set(this, 'soundObject', soundObject);
+    }
+  },
+  _updateIsPlaying(code, STATUS_CODES) {
+    set(this, 'isLoading', STATUS_CODES[code] === 'MEDIA_LOADING');
+    set(this, 'isPlaying', STATUS_CODES[code] === 'MEDIA_RUNNING');
 
-
-};
+    this.notifyPropertyChange('isPlaying');
+    this.notifyPropertyChange('isLoading');
+  },
+  _updateBuffered(percentBuffered) {
+    this._percentLoaded = percentBuffered;
+    throttle(this, () => set(this, 'percentLoaded', this._percentLoaded), 100, false);
+  },
+  _updateDuration(x, duration) {
+    this._duration = duration;
+    throttle(this, () => set(this, 'duration', this._duration), 500, false);
+  },
+});

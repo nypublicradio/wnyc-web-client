@@ -21,10 +21,21 @@
     font-weight: 600;
     line-height: 2.6rem;
 }
+.h1--mq-small {
+    @include transition(font-size $transition-timing ease, line-height $transition-timing ease);
+
+    @include mq($small-only) {
+        @include fontsize($base-font*1.5);
+        line-height: 1;
+    }
+}
+.h1--extrabold {
+  font-weight: 800;
+}
 .h2 {
-    @include fontsize($base-font*1.25);
+    @include fontsize($base-font*1.5);
     font-weight: 600;
-    line-height: 1.6rem;
+    line-height: 2.125rem;
 }
 .h2--mq-small {
     @include transition(font-size $transition-timing ease, line-height $transition-timing ease);
@@ -52,9 +63,9 @@
     font-weight: 600;
 }
 .h-featured {
-  @include fontsize(26);
+  @include fontsize(32);
   font-weight: 700;
-  line-height: 1.2em;
+  line-height: 2.688rem;
 
   @include transition(font-size $transition-timing ease, line-height $transition-timing ease);
 
@@ -232,7 +243,20 @@
 }
 
 /**
- * Heavy Text:
+ * Normal Weight Text:
+ * `.text--normal`
+ * A modifer to make normal weight text
+ *
+ *      @example
+ *      .text.text--normal.h2
+ *        p Sized h2 but weighted normal
+ */
+.text--normal {
+  font-weight: 400;
+}
+
+/**
+ * Semi-Heavy Text:
  * `.text--semi`
  * A modifier to make semi-bold text
  *
@@ -255,6 +279,10 @@
  */
 .text--heavy {
     font-weight: 700;
+}
+
+.text--light {
+  font-weight: 200;
 }
 
 /**
@@ -379,7 +407,8 @@
 .text--white {
     color: white;
 
-    &:hover {
+    &:hover,
+    &:focus {
         border-bottom-color: white;
     }
 }
@@ -418,14 +447,16 @@
     color: $darkergray;
     border: none;
 
-    &:hover {
+    &:hover,
+    &:focus {
         color: $blue;
     }
 }
 
 .link--white {
     color: white;
-    &:hover {
+    &:hover,
+    &:focus {
         border-bottom-color: white;
     }
 }
@@ -433,7 +464,8 @@
 .link--underline {
     border-bottom-color: currentColor;
 
-    &:hover {
+    &:hover,
+    &:focus {
         border-bottom-color: transparent;
     }
 }
@@ -463,7 +495,8 @@
 .link--nodecor {
     border: none;
 
-    &:hover {
+    &:hover,
+    &:focus {
         border: none;
     }
 }
@@ -472,12 +505,44 @@
     @include mq($small-only) {
         border: none;
 
-        &:hover {
+        &:hover,
+        &:focus {
             border: none;
         }
     }
 }
 
+/**
+ * Cap Bold Link
+ * `.link--capbold`
+ * A link style that caps, bolds, and sizes the text to the 12. Also it's white.
+ *
+ *      @example
+ *      a.link--capbold(href="http://www.wnyc.org/shows/bl") The Brian Lehrer Show
+ */
+.link--capbold {
+  color: white;
+  font-weight: 600;
+  @include fontsize(12);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    border-bottom-color: white;
+  }
+}
+
+
+
+.text--spacing {
+  letter-spacing: 2px;
+}
+
+.text--spacing-sm {
+  letter-spacing: 1px;
+}
 
 /**
  * Media Query Text Links:
@@ -498,14 +563,15 @@
     @include mq($medium-and-up) {
         color: white;
 
-	&:hover {
+	&:hover,
+  &:focus {
 	    border-bottom-color: white;
 	}
     }
 }
 
 .text--red {
-    color: red;
+    color: $red;
 }
 
 .text--ellipsis {
@@ -539,4 +605,10 @@
   > .text-divide-slash:last-child {
     display: none;
   }
+}
+
+.right-bar {
+  border-right: 2px solid rgba(white, 0.15);
+  padding: 10px 15px 10px 0;
+  margin-right: 15px;
 }

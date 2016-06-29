@@ -63,13 +63,13 @@ test('can go back and forward', function(assert) {
     showPage.clickNext();
   });
   andThen(function() {
-    assert.notEqual(firstStoryTitle, showPage.storyTitles()[0]);
+    assert.notEqual(firstStoryTitle, showPage.storyTitles()[0], 'first story title should be different');
     assert.equal(currentURL(), `/${show.id}${show.linkroll[0].navSlug}/2`, 'uses nav slug when paginating');
     showPage.clickBack();
   });
   andThen(function() {
     assert.equal(currentURL(), `/${show.id}${show.linkroll[0].navSlug}/1`, 'uses nav slug when paginating');
-    assert.equal(firstStoryTitle, showPage.storyTitles()[0]);
+    assert.equal(firstStoryTitle, showPage.storyTitles()[0], 'first story title should be the same');
   });
 });
 

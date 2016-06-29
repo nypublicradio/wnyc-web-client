@@ -4,7 +4,7 @@
     <title>WNYC Hybrid Architecture</title>
     <link type="text/css" rel="stylesheet" href="assets/tufte.css"/>
     <link type="text/css" rel="stylesheet" href="assets/prism.css"/>
-    <script src="assets/prism.js" type="text/javascript"></script>    
+    <script src="assets/prism.js" type="text/javascript"></script>
     <script src="/ember-cli-live-reload.js" type="text/javascript"></script>
     <style type="text/css">
 pre[class*="language-"] {
@@ -57,7 +57,7 @@ pre[class*="language-"] {
 
       <section>
         <h2>The Hybrid Architecture</h2>
-        
+
         <p>
           The key to understanding this new architecture is to think
           of your site as two applications, not one. This is a
@@ -117,7 +117,7 @@ pre[class*="language-"] {
         <p>
           Routes are defined using standard Ember conventions,
           in <code>app/router.js</code>. We have a catch-all route
-          named <code>django-rendered</code> that can handle any URL
+          named <code>djangorendered</code> that can handle any URL
           and render it by fetching the corresponding page from the
           server. But more specific routes can also be defined, and
           the <code>story</code> route serves as good example.
@@ -168,7 +168,7 @@ pre[class*="language-"] {
         </p>
 
         <h3>Rendering Django Content</h3>
-        
+
         <p>
           Once you have a <code>django-page</code> model, you can
           render it with the <code>django-page</code> component. The
@@ -185,7 +185,7 @@ pre[class*="language-"] {
 
         <p>
           And third, it can gracefully embed dynamic Ember
-          content <em>inside</em> the Django-rendered content. Here's
+          content <em>inside</em> the Djangorendered content. Here's
           an excerpt from the <code>story</code> template:
           </p>
 
@@ -208,7 +208,7 @@ pre[class*="language-"] {
           is the key technique for gradually enhancing your existing
           pages with new dynamic capability.
         </p>
-           
+
 
         <h3>Script Loader Service</h3>
 
@@ -249,7 +249,7 @@ pre[class*="language-"] {
         </p>
 
         <h3>Legacy Loader and Compatibility Hooks</h3>
-        
+
         <p>
           The <code>legacy-loader</code> service
           and <code>app/lib/compat-hooks</code> exist to make the
@@ -297,9 +297,9 @@ pre[class*="language-"] {
 
       <section>
         <h2>Next Steps</h2>
-        
+
         <h3>Integrate the Listings App</h3>
-        
+
         <p>
           Prior to this work, you had two Ember apps embedded in the
           site: overhaul-story and overhaul-listings. I absorbed
@@ -340,7 +340,7 @@ pre[class*="language-"] {
         <p>
           I recommend dropping the build code
           in <code>grunt/overhaul.js</code>. Use stock ember-cli to
-          build the Ember app. 
+          build the Ember app.
 
           Use <a href="http://ember-cli.github.io/ember-cli-deploy/">ember-cli-deploy</a>
           to deliver the Ember app to Django and your CDN / media
@@ -348,7 +348,7 @@ pre[class*="language-"] {
         </p>
 
         <h3>Progressive Boot</h3>
-        
+
         <p>
           I don't think Ember Fastboot is a requirement for deploying
           this new architecture. It could be a nice simplification
@@ -362,7 +362,7 @@ pre[class*="language-"] {
           skips the fetch and django-page render, taking over from
           there for subsequent navigation.
         </p>
-        
+
         <h3>Test Interactive Elements</h3>
 
         <p>
@@ -379,7 +379,7 @@ pre[class*="language-"] {
           working is ad_leaderboard.js. It needs to be updated to work
           when loaded asynchronously.
         </p>
-        
+
         <h3>Review Analytics and Advertising Functionality</h3>
 
         <p>
@@ -407,7 +407,7 @@ pre[class*="language-"] {
           I added a spinning WNYC logo to demonstrate how loading
           templates work. You will want to design something nicer.
         </p>
-        
+
       </section>
 
       <section>

@@ -1,3 +1,89 @@
+// .active,
+// [data-state="is-visible"] {
+//     @include mq($medium) {
+//         @include translateX(0);
+//         @include scale(1);
+//         opacity: 1;
+//         z-index: $zIndex--isVisible;;
+//     }
+// }
+
+.is-scrubbing {
+    .progress-playhead {
+        opacity: 1;
+    }
+
+    .times-label,
+    .box-label {
+        opacity: 1;
+    }
+
+    .times-label--fadein:after,
+    .box-label--fadein:after {
+        opacity: 1 !important;
+    }
+}
+
+.btn--toggle[data-state="is-player"] {
+    > :nth-child(1) {
+        @extend [data-state="is-visible"];
+    }
+    > :nth-child(2) {
+        @extend [data-state="is-shrunk"];
+    }
+}
+
+.btn--toggle[data-state="is-share"] {
+    > :nth-child(1) {
+        @extend [data-state="is-shrunk"];
+    }
+    > :nth-child(2) {
+        @extend [data-state="is-visible"];
+    }
+}
+
+.btn--toggle[data-state="is-paused"] {
+    > :nth-child(1) {
+        @extend [data-state="is-visible"];
+    }
+    > :nth-child(2) {
+        @extend [data-state="is-shrunk"];
+        opacity: 0;
+    }
+    > :nth-child(3) {
+        @extend [data-state="is-shrunk"];
+        opacity: 0;
+    }
+}
+
+.btn--toggle[data-state="is-playing"] {
+    > :nth-child(1) {
+        @extend [data-state="is-shrunk"];
+        opacity: 0;
+    }
+    > :nth-child(2) {
+        @extend [data-state="is-visible"];
+    }
+    > :nth-child(3) {
+        @extend [data-state="is-shrunk"];
+        opacity: 0;
+    }
+}
+
+.btn--toggle[data-state="is-loading"] {
+    > :nth-child(1) {
+        @extend [data-state="is-shrunk"];
+        opacity: 0;
+    }
+    > :nth-child(2) {
+        @extend [data-state="is-shrunk"];
+        opacity: 0;
+    }
+    > :nth-child(3) {
+        @extend [data-state="is-visible"];
+    }
+}
+
 // gotta refactor out all IDs
 .is-collapsed {
 
@@ -7,7 +93,7 @@
   }
 
   + .marquee {
-    margin-top: -20px;
+    margin-top: -1.5rem;
   }
 }
 
@@ -27,7 +113,7 @@
     .input-state-valid {
         opacity: 1;
     }
-} 
+}
 
 [data-state="is-invalid"] {
     .input-state-invalid {
@@ -37,7 +123,7 @@
     .input {
         background-color: $darkred;
     }
-} 
+}
 
 [data-state="is-right"] {
     @include translateX(100%);
@@ -85,19 +171,28 @@
     }
     > :nth-child(2) {
         @extend [data-state="is-shrunk"];
+        opacity: 0;
+    }
+    > :nth-child(3) {
+        @extend [data-state="is-shrunk"];
+        opacity: 0;
     }
 }
 
 .btn--toggle[data-state="second"] {
     > :nth-child(1) {
         @extend [data-state="is-shrunk"];
+        opacity: 0;
     }
     > :nth-child(2) {
         @extend [data-state="is-visible"];
     }
+    > :nth-child(3) {
+        @extend [data-state="is-shrunk"];
+        opacity: 0;
+    }
 }
 
-// imagesLoaded state
 #main,
 #series,
 #related {
@@ -109,6 +204,78 @@
             opacity: 1;
         }
     }
+}
+
+/* Persistent Player & related components */
+
+//.persistent-player { // default state: paused
+//    .persistent-playbutton {
+//      > .icon {
+//          position: absolute;
+//          @include mq($wide) {
+//            top: 13px;
+//          }
+//          left: 0;
+//          right: 0;
+//          margin: auto;
+//          transition: fill 0.2s ease-in-out, opacity 0.3s ease-in-out;
+//      }
+//      > .persistent-playbutton--play {
+//          opacity: 1;
+//      }
+//      > .persistent-playbutton--pause {
+//          opacity: 0;
+//      }
+//      > .persistent-playbutton--spinner {
+//          opacity: 0;
+//      }
+//    }
+//}
+//
+//.persistent-playbutton[data-state="is-playing"] {
+//    > .persistent-playbutton--spinner {
+//        opacity: 0;
+//    }
+//    > .persistent-playbutton--play {
+//        opacity: 0;
+//    }
+//    > .persistent-playbutton--pause {
+//        opacity: 1;
+//    }
+//}
+//
+//.persistent-playbutton[data-state="is-loading"] {
+//    > .persistent-playbutton--play {
+//        opacity: 0;
+//    }
+//    > .persistent-playbutton--pause {
+//        opacity: 0;
+//    }
+//    > .persistent-playbutton--spinner {
+//        opacity: 1;
+//    }
+//}
+//
+.persistent-queuebutton {
+    > .icon {
+      transition: fill 0.2s ease-in-out, opacity 0.3s ease-in-out;
+    }
+    > .persistent-queueicon--closequeue {
+      opacity: 0;
+    }
+}
+
+.is-open-modal .persistent-queuebutton {
+    > .persistent-queueicon--openqueue {
+      opacity: 0;
+    }
+    > .persistent-queueicon--closequeue {
+      opacity: 1;
+    }
+}
+
+.is-open-modal {
+  overflow: hidden;
 }
 
 // ManagedItem Publish Statuses

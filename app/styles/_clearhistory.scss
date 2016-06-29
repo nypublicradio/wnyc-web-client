@@ -1,0 +1,63 @@
+.clearhistory {
+  position: relative;
+  height: 2em;
+
+  .clearhistory-main,
+  .clearhistory-confirmation {
+    position: absolute;
+    top: 0;
+    right: 22px;
+    transition: all .3s ease;
+
+    @include mq($wide) {
+      right: 0;
+    }
+  }
+
+  .clearhistory-confirmation {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: rgba(74, 74, 74, 0.7);
+
+  .clearhistory-button {
+    border: none;
+    pointer: cursor;
+    pointer: hand;
+
+    &:hover,
+    &:focus {
+      color: #128cf4;
+    }
+
+    &:active {
+      color: #013f73;
+    }
+  }
+
+  &.is-confirming {
+    .clearhistory-main {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      @include translateX(-100px);
+    }
+
+    .clearhistory-confirmation {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+  }
+}
+
+.touch .clearhistory-confirmation .clearhistory-button {
+  display: inline-block;
+  padding: 0 16px;
+}
+
+

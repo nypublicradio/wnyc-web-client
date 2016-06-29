@@ -1,87 +1,87 @@
-/* globals moment */
-import Ember from 'ember';
 import service from 'ember-service/inject';
-import LegacySupport from 'overhaul/mixins/legacy-support';
+import moment from 'moment';
+import Component from 'ember-component';
+import computed, { and, equal, readOnly, or } from 'ember-computed';
+import get from 'ember-metal/get';
+import set from 'ember-metal/set';
 
-const {
-  Component,
-  get,
-  set,
-  computed,
-} = Ember;
+const STATUSES = {
+  LIVE: 'On Air Now',
+  LATEST: 'Latest Episode',
+  UPCOMING: 'Upcoming Episode'
+};
 
-export default Component.extend(LegacySupport, {
-  whatsOn: service(),
-  sessionManager: service(),
+export default Component.extend({
+  whatsOn:            service(),
+  audio:              service(),
 
-  tagName: 'article',
-  status: null,
-  isFeatured: false,
-  isFeaturedAndNotNarrow: computed.and('media.isSmallAndUp', 'isFeatured'),
-  isLive: computed.equal('status', 'live'),
-  isLatest: computed.readOnly('item.isLatest'),
-  isListenableNow: computed.or('item.audioAvailable', 'isLive'),
-  isListenableEventually: computed('status', {
-    get() {
-      const status = get(this, 'status');
-      const audioEventually = get(this, 'item.audioEventually');
-      return status !== 'live' && status !== null && audioEventually;
+  status:             null,
+  streamSlug:         null,
+  isFeatured:         false,
+
+  isLive:             equal('status', STATUSES.LIVE),
+  isLatest:           readOnly('item.isLatest'),
+  isListenableNow:    or('item.audioAvailable', 'isLive'),
+  isFancyFeatured:    and('item.largeTeaseLayout', 'item.imageMain', 'isFeatured', 'media.isSmallAndUp'),
+
+  tagName:            'article',
+  classNameBindings:  ['featuredClasses'],
+
+  itemId: computed('isLive', 'streamSlug', 'item.id', function() {
+    return get(this, 'isLive') ? get(this, 'streamSlug') : get(this, 'item.id');
+  }),
+  isCurrentAudio: computed('audio.currentId', 'itemId', function() {
+    return get(this, 'audio.currentId') === get(this, 'itemId');
+  }),
+  listenState: computed('isCurrentAudio', 'audio.playState', function() {
+    return get(this, 'isCurrentAudio') ? get(this, 'audio.playState') : 'is-paused';
+  }),
+  isListenableEventually: computed('status', function() {
+    const status = get(this, 'status');
+    const audioEventually = get(this, 'item.audioEventually');
+    return status !==  STATUSES.LIVE && status !== null && audioEventually;
+  }),
+  featuredClasses: computed('isFeatured', 'item.largeTeaseLayout', 'media.isSmallAndUp', function() {
+    const isFeatured = get(this, 'isFeatured');
+    const lgTease = get(this, 'item.largeTeaseLayout');
+    const isSmallAndUp = get(this, 'media.isSmallAndUp');
+    if (isFeatured && lgTease && isSmallAndUp) {
+      return 'box--dark box--featured';
+    } else if (isFeatured) {
+      return 'box--nearwhite box--featured';
     }
   }),
-  classNameBindings: ['featuredClasses'],
-  lgTeaseAndImage: computed.and('item.largeTeaseLayout', 'item.imageMain', 'isFeaturedAndNotNarrow'),
-  featuredClasses: computed('isFeatured', 'item.largeTeaseLayout', 'media.isSmallAndUp', {
-    get() {
-      const isFeatured = get(this, 'isFeatured');
-      const lgTease = get(this, 'item.largeTeaseLayout');
-      const isSmallAndUp = get(this, 'media.isSmallAndUp');
-      if (isFeatured && lgTease && isSmallAndUp) {
-        return 'box--dark box--featured';
-      } else if (isFeatured) {
-        return 'box--nearwhite box--featured';
-      }
-    },
-    set(k, v) {
-      return v;
-    }
+  showParent: computed('parentTitle', 'item.headers.brand.title', function() {
+    let parentTitle = get(this, 'parentTitle');
+    let brandTitle = get(this, 'item.headers.brand.title');
+    return parentTitle !== brandTitle;
   }),
-  label: computed('status', {
-    get() {
-      const status = get(this, 'status');
+  endtimeLabel: computed('endtime', function() {
+    const endtime = get(this, 'endtime');
+    const timeObj = moment(endtime);
 
-      switch(status) {
-        case 'live':
-          return 'On Air Now';
-        case 'upcoming':
-          return 'Upcoming Episode';
-        case 'latest':
-          return 'Latest Episode';
-        default:
-          return '';
-      }
+    if (timeObj.minutes() === 0) {
+      return `until ${timeObj.format('h A')}`;
+    } else {
+      return `until ${timeObj.format('h:mm A')}`;
     }
   }),
-  endtimeLabel: computed('endtime', {
-    get() {
-      const endtime = get(this, 'endtime');
-      const timeObj = moment(endtime);
 
-      if (timeObj.minutes() === 0) {
-        return `until ${timeObj.format('h A')}`;
-      } else {
-        return `until ${timeObj.format('h:mm A')}`;
-      }
-    }
-  }),
-  init() {
+  didRender() {
     this._super(...arguments);
-    const hideLinks = get(this, 'hideLinks');
-    const story = get(this, 'item');
-    if (hideLinks) {
-      set(story, 'headers.links', null);
-    }
-
     this._checkWhatsOn();
+  },
+
+  actions: {
+    listen: function listen(model, streamSlug) {
+      let audio = get(this, 'audio');
+      let currentAudio = get(this, 'audio.currentAudio.id');
+      if (currentAudio === streamSlug && get(this, 'audio.isPlaying')) {
+        audio.pause();
+      } else {
+        audio.playStream(streamSlug);
+      }
+    }
   },
 
   _checkWhatsOn() {
@@ -98,15 +98,15 @@ export default Component.extend(LegacySupport, {
   },
 
   _updateStatus(results) {
-    const [isLive, endtime, livestream] = results;
+    const [isLive, endtime, streamSlug] = results;
     if (isLive) {
-      set(this, 'status', 'live');
+      set(this, 'status', STATUSES.LIVE);
       set(this, 'endtime', endtime);
-      set(this, 'livestream', livestream);
+      set(this, 'streamSlug', streamSlug);
     } else if (this._isUpcoming()){
-      set(this, 'status', 'upcoming');
+      set(this, 'status', STATUSES.UPCOMING);
     } else {
-      set(this, 'status', 'latest');
+      set(this, 'status', STATUSES.LATEST);
     }
   },
 

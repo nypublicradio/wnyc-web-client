@@ -1,0 +1,143 @@
+{{#if beta}}
+  {{beta-trial
+    enterBeta=(action 'enterBeta')
+    onDismiss=(action 'dismissBeta')
+    exitBeta=(action 'exitBeta')
+    beta=beta}}
+{{/if}}
+
+<div class="l-page" id='site-chrome'>
+
+  <div class="sitechrome-top">
+    <div class="sitechrome-topbody">
+      {{#if beta.isBetaSite}}
+        <div class="sitechrome-topbody-left" id="beta-nav" data-test-selector="beta-nav"></div>
+      {{/if}}
+      <div class="sitechrome-topbody-right">
+        {{#if media.isMediumAndUp}}
+        <div class="text text--white flush{{unless media.isLargeAndUp ' text--small'}}">
+            <p>WNYC is New York&apos;s Public Radio Station. We depend on the donations of listeners like you.</p>
+          </div>
+          <!-- .text -->
+        {{/if}}
+        {{#unless media.isMiddleNarrowAndUp}}
+          <h1>
+            <span class="for-screenreaders">WNYC Navigation</span>
+            {{#link-to 'index' classNames='link--nodecor'}}
+              {{wnyc-svg icon='logo-wnyc' className='icon--wnyc-logo-nav'}}
+            {{/link-to}}
+          </h1>
+        {{/unless}}
+        <button class="sitechrome-btn">Donate {{if media.isMiddleNarrowAndUp 'Now'}}</button>
+      </div>
+    </div>
+  </div>
+  <!-- .sitechrome-top -->
+
+  <nav class="l-page-nav {{unless media.isMiddleNarrowAndUp 'x-scrollable'}}">
+    {{#if media.isMiddleNarrowAndUp}}
+    <div class="sitechrome-corner">
+      <h1>
+        <span class="for-screenreaders">WNYC Navigation</span>
+        {{#link-to 'index' classNames='link--nodecor'}}
+          {{wnyc-svg icon='logo-wnyc' className='icon--wnyc-logo-nav'}}
+        {{/link-to}}
+      </h1>
+    </div>
+    {{/if}}
+    <div class="scrollable-body">
+      <ul class="list list--noborder flush aligncenter text--upper text--white text--spacing text--heavy text--small {{unless media.isMiddleNarrowAndUp 'list--inline list--spaced'}}">
+        <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
+          {{#link-to 'djangorendered' 'search' class='inherit'}}
+            {{wnyc-svg icon='search' className='icon--menu icon--search'}}
+            Search
+          {{/link-to}}
+        </li>
+        <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
+          {{#link-to 'index' class='inherit'}}
+            {{wnyc-svg icon='listen-live' className='icon--menu icon--listenlive'}}
+            Listen Live
+          {{/link-to}}
+        </li>
+        <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
+          {{#link-to 'djangorendered' 'schedule' class='inherit'}}
+          {{wnyc-svg icon='schedule' className='icon--menu icon--schedule'}}
+          Schedule
+          {{/link-to}}
+        </li>
+        <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
+          {{#link-to 'shows' class='inherit'}}
+          {{wnyc-svg icon='close' className='icon--menu icon--shows'}}
+          Shows
+          {{/link-to}}
+        </li>
+        <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
+          {{#link-to 'djangorendered' 'topics' class='inherit'}}
+          {{wnyc-svg icon='topics' className='icon--menu icon--topics'}}
+          Topics
+          {{/link-to}}
+        </li>
+        <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
+          {{#link-to 'djangorendered' 'support' class='inherit'}}
+          {{wnyc-svg icon='gift' className='icon--menu icon--gift'}}
+          Ways to Give
+          {{/link-to}}
+        </li>
+        {{#unless media.isMiddleNarrowAndUp}}
+          {{#if session.isAuthenticated}}
+          <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
+            {{#link-to 'djangorendered' 'users/me' class='inherit'}}
+              My Account
+            {{/link-to}}
+          </li>
+          <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
+            <button class="btn--blank btn--white text--spacing text--upper h5" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
+          </li>
+          {{else}}
+          <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
+            {{#link-to 'login' class='inherit h5'}}
+            Sign In
+            {{/link-to}}
+          </li>
+          {{/if}}
+        {{/unless}}
+      </ul>
+    </div>
+    <!-- .x-scrollable-body -->
+
+    {{#if media.isMiddleNarrowAndUp}}
+    <div class="l-bottom">
+      <div class="l-highlight--dark">
+        <div class="box box--slim">
+          <div class="box--topborder">
+            <div class="text text--upper text--white text--spacing aligncenter">
+            {{#if session.isAuthenticated}}
+              {{#link-to 'djangorendered' 'users/me' class='inherit h5'}}
+              My Account
+              {{/link-to}}
+              <button class="btn--blank btn--white text--spacing text--upper h5" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
+            {{else}}
+              {{#link-to 'login' class='inherit h5'}}
+              Sign In
+              {{/link-to}}
+            {{/if}}
+            </div>
+            <!-- .text -->
+          </div>
+          <!-- .box-topborder -->
+        </div>
+        <!-- .box -->
+      </div>
+    </div>
+    <!-- .l-bottom -->
+    {{/if}}
+  </nav>
+
+  <div class="l-full">
+
+    {{yield}}
+
+  </div>
+
+  {{partial 'components/site-chrome/site-footer'}}
+</div>

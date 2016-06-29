@@ -1,0 +1,50 @@
+.tabbedlist {
+  margin: 16px 0 36px 22px;
+
+  @include mq($wide) {
+    margin: 16px 0 60px 0;
+  }
+
+  &-list {
+    list-style: none;
+    margin-bottom: 0;
+    padding: 0;
+  }
+
+  &-tab {
+    margin: 0 35px 7px 0;
+    display: inline-block;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &-button {
+    padding-bottom: 4px;
+    color: $lightgray;
+    cursor: pointer;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+
+    .is-active & {
+      color: $darkergray;
+    }
+  }
+
+  &-marker {
+    background: #de1e3d;
+    height: 3px;
+    width: 100%;
+  }
+
+  &-page {
+    color: black;
+  }
+
+}
+
+

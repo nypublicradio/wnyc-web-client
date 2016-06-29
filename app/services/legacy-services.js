@@ -33,7 +33,7 @@ export default Service.extend({
         category: 'Cross-Domain Player',
         action: 'Click Through to Player',
         label: `${story.get('headers.brand.title')} - ${title}`,
-        model: {cmsPK: id}  // conform to how the data-warehouse metrics adapter expects
+        model: story
       });
     }
   },

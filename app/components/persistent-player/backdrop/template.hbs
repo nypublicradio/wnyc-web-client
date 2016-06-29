@@ -1,0 +1,11 @@
+<svg>
+  <defs>
+    <filter id="blur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10" />
+    </filter>
+  </defs>
+  <image
+    filter="url(#blur)"
+    preserveAspectRatio="xMidYMid slice"
+    xlink:href="{{backdropImageUrl}}" x="0" y="0" height="100%" width="100%" />
+</svg>

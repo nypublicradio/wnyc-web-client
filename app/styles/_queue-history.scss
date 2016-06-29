@@ -1,0 +1,246 @@
+.queue-header {
+  background: #ffffff;
+  padding: 0 22px 0.75em;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+  color: black;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.player-history,
+.player-queue {
+  .l-holygrail-middle,
+  .l-holygrail-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .liquid-animating [data-id] {
+    background: white;
+  }
+
+  > .liquid-container {
+    &,
+    > .liquid-child {
+      overflow: visible;
+    }
+  }
+
+  .list {
+    background: $nearwhite;
+  }
+
+  .sortable-item {
+    @include transition(all 0.125s);
+    position: relative;
+  }
+
+  .queueitem-draghandle {
+    position: absolute;
+    left: -50px;
+    top: 0;
+    height: 100%;
+    width: 50px;
+
+    > .icon {
+      display: none;
+      height: 100%;
+      width: 8px;
+      box-sizing: border-box;
+      margin: auto 17px auto 25px;
+      path {
+        fill: #cccccc;
+      }
+    }
+  }
+
+  .sortable-item {
+    cursor: move;
+    cursor: ns-resize;
+    cursor: -webkit-grab;
+    cursor: grab;
+    transition: box-shadow 0.125s ease, all 0.125s ease;
+    box-shadow: 0 0 8px -8px rgba(0, 0, 0, 0.3),
+                0 0 8px -8px rgba(0, 0, 0, 0.3);
+  }
+  .sortable-item.is-dragging {
+    cursor: -webkit-grabbing;
+    cursor: grabbing;
+    transition: box-shadow 0.125s ease;
+    box-shadow: 0 8px 8px -8px  rgba(0, 0, 0, 0.3),
+                0 -8px 8px -8px rgba(0, 0, 0, 0.3);
+    z-index: 20;
+  }
+
+  .sortable-item.is-dropping {
+    box-shadow: 0 0 8px -8px rgba(0, 0, 0, 1),
+                0 0 8px -8px rgba(0, 0, 0, 1);
+    z-index: 20;
+  }
+
+  .list-item {
+    background: #ffffff;
+    padding: 0;
+    border-top: 1px solid rgb(221, 221, 221);
+    border-bottom: none;
+
+    &:last-child {
+      border-bottom: 1px solid rgb(221, 221, 221);
+    }
+  }
+  .now-playing {
+    margin-bottom: 50px;
+  }
+  .queuelist-empty {
+    background: #ffffff;
+    color: $darkergray;
+    font-size: 14px;
+    padding: 8px 22px;
+  }
+}
+
+.queueitem {
+  padding: 22px 22px;
+
+  .queueitem-showtitle {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 5px;
+    a {
+      color: $darkergray;
+    }
+  }
+
+  .queueitem-title {
+    display: block;
+    /* spacing between title and duration */
+    word-spacing: 0.8em;
+
+    .queueitem-itemtitle {
+      font-size: 16px;
+      word-spacing: normal;
+      a {
+        color: $darkergray;
+      }
+
+      @include mq($wide) {
+        font-size: 24px;
+        line-height: 34px;
+      }
+    }
+
+    .queueitem-duration {
+      display: inline-block;
+      margin-left: 4px;
+      align-self: flex-end;
+      font-size: 12px;
+      color: $lightgray;
+      white-space: nowrap;
+      word-spacing: normal;
+    }
+  }
+
+  .queueitem-title a, .queueitem-showtitle a {
+    text-decoration: none;
+    border-bottom: none;
+
+    &:hover,
+    &:focus {
+      color: #128cf4;
+    }
+    &:active {
+      color: #013f73;
+    }
+  }
+
+  .queueitem-controls {
+    display: block;
+    margin-top: 8px;
+
+    button {
+      margin: 0 24px 0 0;
+    }
+
+    > .queueitem-sharebutton {
+      display: inline-block;
+    }
+
+    > .queueitem-sharebutton button .icon {
+      width: 21px;
+      height: 16px;
+    }
+    > .queueitem-deletebutton .icon {
+      width: 15px;
+      height: 18px;
+    }
+
+    button .icon {
+      display: inline-block;
+      polygon, rect, circle, path  {
+        fill: $lightgray;
+      }
+    }
+    button:hover .icon {
+      polygon, rect, circle, path {
+        fill: #128cf4;
+      }
+    }
+    button:active .icon {
+      polygon, rect, circle, path {
+        fill: #1068b2;
+      }
+    }
+  }
+}
+
+@include mq($wide) {
+  .queue-header,
+  .queueitem {
+    padding-left: 0;
+    padding-right: 0px;
+
+    .queueitem-info {
+      position: relative;
+      padding-right: 100px;
+    }
+
+    .queueitem-controls {
+      margin: 0;
+      visibility: hidden;
+      position: absolute;
+      width: 90px;
+      top: calc(50% - 13px);
+      right: -8px;
+    }
+  }
+  .queueitem:hover {
+    > .queueitem-draghandle > .icon {
+      display: block;
+    }
+    .queueitem-controls {
+      visibility: visible;
+    }
+  }
+
+  .player-history,
+  .player-queue {
+    .queuelist-empty {
+      padding: 22px 0;
+      font-size: 14px;
+      border-top: 1px solid rgb(221, 221, 221);
+    }
+  }
+}
+
+.touch .queueitem {
+  // always show queue-item on touch screen
+  .queueitem-controls {
+    visibility: visible;
+  }
+  // don't show drag handle. touch drag isn't implemented yet
+  .queueitem-draghandle .icon {
+    display: none;
+  }
+}

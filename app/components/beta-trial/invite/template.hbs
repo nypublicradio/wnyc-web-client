@@ -1,0 +1,43 @@
+{{#ember-wormhole to=betaInvite}}
+<div class="l-full l-highlight--darknavy l-padtop">
+  <div class="l-constrained">
+
+    <div class="l-flexrow--mqmd{{if media.isSmallOnly ' aligncenter'}}">
+      <div class="l-col--flex l-col--cv nudge-big">
+        <div class="text text--white flush l-flex-noshrink">
+          <h2 class="h2 nudge{{if media.isMediumAndUp ' right-bar'}}">
+            {{#if media.isMiddleNarrowAndUp}}
+            <svg class="icon--beta-icon">
+              <use xlink:href=""></use>
+            </svg>
+            {{/if}}
+            Switch to WNYC Beta
+          </h2>
+        </div>
+        <div class="text text--white flush">
+          <span class="text--medium text--medium" data-test-selector="beta-tease">
+            {{beta.tease}}
+          </span>
+        </div>
+      </div>
+
+      <div class="l-col--flex l-col--right l-flex-noshrink nudge-big">
+        <div class="btn-group">
+          <button {{action 'enterBeta'}} data-test-selector="beta-enter" class="btn thickbtn btn--white btn--large btn--strongtext btn--smalltext">Try Now</button>
+          {{#if media.isMiddleNarrowAndUp}}
+          <button {{action 'dismiss'}} data-test-selector="beta-dismiss" class="btn btn--link btn--icon btn--linkicon btn--white btn--smalltext btn--strongtext">
+            <span>Maybe Later</span> <svg class="icon--inline icon--close"><use xlink:href=""></use></svg>
+          </button>
+          {{/if}}
+        </div>
+        {{#unless media.isMiddleNarrowAndUp}}
+        <button {{action 'dismiss'}} data-test-selector="beta-dismiss" class="btn btn--blank l-abs l-topright">
+           <svg class="icon--inline icon--close"><use xlink:href=""></use></svg>
+        </button>
+        {{/unless}}
+      </div>
+    </div>
+
+  </div>
+</div>
+{{/ember-wormhole}}

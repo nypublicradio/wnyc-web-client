@@ -5,26 +5,29 @@
     {{/google-ad}}
 
     {{#if model.channel.hasMarquee}}
-      {{x-marquee model=model.channel}}
+      {{x-marquee model=model.channel user=model.user}}
     {{else}}
-      {{#if model.channel.hasFeatured}}
-        {{channel-header model=model.channel}}
+      {{#if model.channel.featured}}
+        {{channel-header model=model.channel user=model.user}}
       {{else}}
-        {{channel-header model=model.channel classNames='flush'}}
+        {{channel-header model=model.channel user=model.user classNames='flush'}}
       {{/if}}
     {{/if}}
 
-    <div class="l-constrained">        
+    <div class="l-constrained">
       <main class="l-col2of3">
 
-        {{#if model.channel.hasFeatured}}
+        {{#if model.channel.featured}}
         <section>
           <h1 class="for-screenreaders">Featured Item</h1>
           {{story-tease
+            parentTitle=model.channel.title
+            user=model.user
             item=model.channel.featured
             hideLinks=true
             isFeatured=true
-            class='box box--bgoverflow'}}
+            class='box box--bgoverflow'
+            region='FeaturedItem'}}
         </section>
         {{/if}}
 
@@ -38,6 +41,12 @@
 
         {{outlet}}
 
+        {{page-numbers 
+          currentPage=pageNumbers.page
+          totalPages=pageNumbers.totalPages
+          showFL=true
+          action="pageNumberClicked"}}
+
       </main>
 
       <aside class="l-col1of3">
@@ -46,13 +55,13 @@
           {{#if model.channel.tease}}
           <div class="box box--nopad">
             <div class="box-heading">
-              <h1 class="h5 text--gray">About the {{capitalize-word model.channel.listingObjectType}}</h1>
+              <h1 class="h5">About the {{capitalize-word model.channel.listingObjectType}}</h1>
             </div>
             <div class="text text--medium">
               <div class="text-body text-body--nopad text-body--forceinline">
                 {{{model.channel.tease}}}
                 {{#if model.channel.producingOrganizations}}
-                  {{producing-orgs model.channel.producingOrganizations}}
+                  Produced by {{producing-orgs model.channel.producingOrganizations}}.
                 {{/if}}
               </div>
             </div>

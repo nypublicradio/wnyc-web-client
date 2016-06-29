@@ -1,6 +1,9 @@
 import DS from 'ember-data';
+
 export default DS.JSONAPISerializer.extend({
   normalizeResponse(store, typeClass, payload, id) {
+    let featuredStory = payload.data.attributes.featured;
+    delete payload.data.attributes.featured;
     payload.included = payload.included || [];
 
     // id will have a trailing slash because it is derived from the URL and we
@@ -22,6 +25,18 @@ export default DS.JSONAPISerializer.extend({
       attributes: payload.data.attributes.about
     });
 
+    if (featuredStory) {
+      this.store.push({data: {attributes: featuredStory, type: 'story', id: featuredStory.id}});
+
+      payload.data.relationships = {
+        featured: {
+          data: {
+            type: 'story',
+            id: featuredStory.id
+          }
+        }
+      };
+    }
     return payload;
   }
 });

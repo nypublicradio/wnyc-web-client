@@ -7,14 +7,23 @@
   out of the old JS.
 */
 import Ember from 'ember';
-import { clearAlienDom } from 'overhaul/lib/alien-dom';
+import config from 'overhaul/config/environment';
+import { removeAlienListeners } from 'overhaul/lib/alien-dom';
 import { runOnce } from 'overhaul/services/legacy-loader';
-const { $ } = Ember;
+const { $, get } = Ember;
 
 export function homepageCleanup(element = document.body) {
+  // remove these if they're empty, otherwise they cause layout issues
   Array.from(element.querySelectorAll('#twitterbox, #technical-message'))
     .forEach(n => !n.children.length && n.parentElement.removeChild(n));
-  element.querySelector('#header').classList.add('home');
+
+  // these media buttons are added to the DOM by legacy JS, so we don't want
+  // to save them to the ember data model
+  Array.from(element.querySelectorAll('.media_buttons'))
+    .forEach(n => {
+      while(n.hasChildNodes()) { n.removeChild(n.firstChild); }
+    });
+
   return element;
 }
 
@@ -40,9 +49,6 @@ export function beforeTeardown(/* element, page */) {
   // player.js listens for a storage event with a handler defined on the wnyc object,
   // which is triggered by logic outside of Ember; unbind to avoid throwing errors
   $(window).off('unload storage');
-  if (window.wnyc && window.wnyc.xdPlayer) {
-    window.wnyc.xdPlayer.teardown();
-  }
 
   // The mailchimp popup signup form is badly behaved -- it insists on
   // being the only AMD loader on the page. So here we clear it away
@@ -52,27 +58,20 @@ export function beforeTeardown(/* element, page */) {
 
   // Most pages don't actually overwrite this if it exists, so it can
   // end up accumulating unexpected cruft.
+  let apis = window.wnyc.apis;
+  let Decoder = window.wnyc.Decoder;
   window.wnyc = undefined;
 
-  // some legacy CSS needs help to work properly. see legacy/_screen.scss
-  document.body.classList.remove('home');
+  window.wnyc = { apis, Decoder };
 
-  // bootstraps story adds a bunch of click handlers at run time that need to be
+  // unknown scripts are setting overflow inline on the homepage
+  if (location.pathname === '/') {
+    $('body').css('overflow', '');
+  }
+
+  // story bootstraps adds a bunch of click handlers at run time that need to be
   // removed otherwise they will pile up
-  $(document)
-    .off('click',  '.js-accordionButton')
-    .off('click',  '.js-dropdownClickable')
-    .off('click',  '.js-captionBtn')
-    .off('click',  '.js-listen')
-    .off('click',  '.js-queue')
-    .off('click',  '.js-share')
-    .off('submit', '#morningBriefSignup')
-    .off('keyup',  '#morningBriefEmailInput')
-    .off('click', '.js-toggleButton');
-
-  $('.js-embedText').off('click');
-
-  clearAlienDom();
+  removeAlienListeners();
 }
 
 // This gets run by the django-page model when it's figuring out how
@@ -81,20 +80,43 @@ export function beforeTeardown(/* element, page */) {
 // Element is not yet inserted into any document, and you can modify
 // it here as needed.
 export function beforeAppend(element, page) {
-
+  let sm2 = element.querySelector('#sm2-container');
+  if (sm2) {
+    sm2.parentElement.removeChild(sm2);
+  }
   if (page.get('id') === '/') {
     element = homepageCleanup(element);
-    Array.from(element.querySelectorAll('.media_buttons'))
-    .forEach(n => {
-      while(n.hasChildNodes()) { n.removeChild(n.firstChild); }
-    });
   }
 
   if (page.get('id') === 'search/') {
     element = searchpageCleanup(element);
   }
 
-  return element;
+  if (config.featureFlags['site-chrome']) {
+    let container = document.createElement('div');
+    if (get(page, 'wnycContent')) {
+      Array.from(element.querySelectorAll('.l-full, .l-full + .l-constrained'))
+        .forEach(n => container.appendChild(n));
+    } else if (get(page, 'wnycChannel')) {
+      container.appendChild(element.querySelector('#js-listings'));
+    } else {
+      let legacyContent = element.querySelector('#site') || element.querySelector('#flatpage');
+      if (!legacyContent) {
+        // maybe it's a flat page
+        legacyContent = element;
+      }
+      let newContent = document.createElement('div');
+      newContent.className = 'l-constrained';
+      while (legacyContent.firstChild) {
+        newContent.appendChild(legacyContent.firstChild);
+      }
+      container.appendChild(newContent);
+    }
+    // container's childNodes are appended to the DOM; container is discarded
+    return container;
+  } else {
+    return element;
+  }
 }
 
 // All the dynamically discovered Javascript that comes along with the

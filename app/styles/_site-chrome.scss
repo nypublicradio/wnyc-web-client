@@ -10,25 +10,158 @@
 }
 
 .sitechrome-top {
+  //height: 64px;
+  padding-top: 20px;
   background: $red;
-  height: 83px;
   @extend %vertical-rhythm;
+
+  @include mq($middle-narrow-only) {
+    margin-bottom: 0;
+  }
+  @include mq($middle-narrow-and-up) {
+    padding-top: 0;
+    height: 83px;
+  }
+}
+
+.sitechrome-topbody {
+  @include display-flex;
+  @include flex-wrap(wrap);
+
+  @include mq($middle-narrow-and-up) {
+    height: 100%;
+  }
+
+  @include mq($medium-and-up) {
+    @include flex-wrap(nowrap);
+  }
+}
+
+.sitechrome-topbody-left {
+  @include flex-basis(100%);
+  @include order(2);
+  @include display-flex;
+  @include justify-content(space-between);
+  @include align-items(center);
+
+  padding: 5px 15px;
+  padding: 5px rems(15);
+
+  border-top: 1px solid rgba(white, 0.23);
+
+  @include mq($middle-narrow-and-up) {
+    border: none;
+  }
+
+  @include mq($medium-and-up) {
+    @include flex(1 0 300px);
+    @include justify-content(space-around);
+    @include order(0);
+    padding: 0;
+    margin-left: 15px;
+  }
+
+  > .btn {
+    @include mq($small-only) {
+      @include fontsize(11);
+    }
+  }
+
+  > .btn:after {
+    @include mq($medium-and-up) {
+      content: '|';
+      margin-left: 10px;
+      opacity: 0.25;
+    }
+  }
+
+  > .btn:last-child:after {
+    content: none;
+  }
+}
+
+.sitechrome-topbody-right {
+  @include display-flex;
+  @include justify-content(space-between);
+  @include align-items(center);
+
+  @include order(1);
+  @include flex-basis(100%);
+
+  margin-bottom: 15px;
+  padding: 0 15px;
+  padding: 0 rems(15);
+
+  @include mq($middle-narrow-and-up) {
+    margin-bottom: 0;
+    @include justify-content(flex-end);
+  }
+
+  @include mq($medium-and-up) {
+    @include flex(1 1 auto);
+    @include order(0);
+
+    > .text {
+      padding: 0 15px;
+    }
+  }
+
+  > .btn {
+  }
+
+  > h1 {
+    margin: 0;
+  }
 }
 
 .sitechrome-list {
   margin: 0;
   padding: 0;
   list-style: none;
+  @extend .list;
+  @extend .list--noborder;
 }
 
 .sitechrome-listitem {
   text-align: center;
   @extend %vertical-rhythm;
+  @extend .list-item;
 
   > a {
     color: white;
     text-transform: uppercase;
     letter-spacing: 1px;
     @include fontsize(14);
+  }
+}
+
+// .btn.btn--large.btn--white
+.sitechrome-btn {
+  display: inline-block;
+  border-radius: 25px;
+  color: white;
+  border: 2px solid white;
+  padding: 2px 18px 2px 18px;
+  background: transparent;
+
+  @include fontsize(12);
+  font-weight: 700;
+  line-height: 30px;
+  letter-spacing: 2px;
+
+  cursor: pointer;
+  text-transform: uppercase;
+
+  @include transition(background-color $transition-timing, border-color $transition-timing, color $transition-timing);
+
+  @include flex-shrink(0);
+
+  @include mq($middle-narrow-and-up) {
+    line-height: 36px;
+  }
+
+  &:hover,
+  &:focus {
+    border-color: rgba(white, 0.5);
   }
 }

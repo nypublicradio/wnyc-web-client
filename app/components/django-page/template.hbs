@@ -8,9 +8,23 @@
   {{#if features.embeddedComponents}}
     {{#each page.embeddedEmberComponents as |ec|}}
       {{#ember-wormhole to=ec.id replaceDestination=true}}
-        {{component ec.componentName embeddedAttrs=ec.args}}
+        {{component
+          ec.componentName
+          classNames=ec.componentName
+          currentAudio=(if (eq ec.componentName 'listen-button.embedded') audio.currentId)
+          playState=(if (eq ec.componentName 'listen-button.embedded') audio.playState)
+          embeddedAttrs=ec.args}}
       {{/ember-wormhole}}
     {{/each}}
+  {{/if}}
+  {{#if beta}}
+    {{#unless features.siteChrome}}
+      {{beta-trial
+        beta=beta
+        exitBeta=(action 'exitBeta')
+        onDismiss=(action 'dismissBeta')
+        enterBeta=(action 'enterBeta')}}
+    {{/unless}}
   {{/if}}
 {{else}}
   {{loading-templates type=loadingType}}
