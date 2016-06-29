@@ -54,9 +54,9 @@ test('normalizeHref should return expected values', function(assert) {
 
   a.href = `/foo/bar`;
   ops = normalizeHref(a, wnycURL);
-  assert.deepEqual(ops, {url: `${wnycURL}foo/bar`, href: 'foo/bar' }, 'root-relative hrefs');
+  assert.deepEqual(ops, {url: `${wnycURL}foo/bar`, href: 'foo/bar', isExternal: false }, 'root-relative hrefs');
 
   a.href = `${wnycURL}foo/bar`;
   ops = normalizeHref(a, wnycURL);
-  assert.deepEqual(ops, {url: `${wnycURL}foo/bar`, href: 'foo/bar' }, 'absolute urls');
+  assert.deepEqual(ops, {url: `${wnycURL}foo/bar`, href: 'foo/bar', isExternal: false }, 'absolute urls');
 });

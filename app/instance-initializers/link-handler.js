@@ -40,14 +40,16 @@ function _trackEvent(data, instance) {
 export function normalizeHref(node, base = location) {
   let href = node.getAttribute('href') || '';
   let url = new URL(href, base).toString();
+  let isExternal = false;
   if (href.startsWith('#')) {
     href = href;
   } else if (url.indexOf(wnycURL) === 0) {
     href = url.replace(wnycURL, '').replace(/^\//, '') || '/';
   } else if (!href.startsWith('/')) {
     href = '';
+    isExternal = true;
   }
-  return {url, href};
+  return {url, href, isExternal};
 }
 
 export function shouldHandleLink(node, base = location) {
@@ -62,8 +64,6 @@ export function shouldHandleLink(node, base = location) {
     // ignore clicks from ember actions
     return false;
   } else if (!href || href.startsWith('#') || href.startsWith('mailto')) {
-    // TODO: improve so external links are explicit
-    // href will be empty string for external links
     // ignore href-less or otherwise implemented links
     return false;
   } else if (href.split('.').length > 1) {
@@ -82,7 +82,7 @@ export default {
     $body.off('click.href-to', 'a');
     // TODO: abstract from django component
     $body.on('click.href-to', 'a', function({currentTarget, preventDefault}) {
-      let { url, href } = normalizeHref(currentTarget);
+      let { url, href, isExternal } = normalizeHref(currentTarget);
       let validLink = shouldHandleLink(currentTarget);
       let $target = $(currentTarget);
 
@@ -105,7 +105,7 @@ export default {
 
         beforeTeardown();
         return false;
-      } else {
+      } else if (isExternal) {
         $target.attr('target', '_blank');
       }
       return true;
