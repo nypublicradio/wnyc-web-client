@@ -84,11 +84,18 @@ export default Service.extend({
     });
   },
   playFromPk(id, context) {
+    let oldContext = get(this, 'currentContext');
+
+    // Don't set to loading if already playing the item,
+    // because we won't get a loaded event.
+    if (get(this, 'currentId') !== id) {
+      set(this, 'isLoading', true);
+    }
     set(this, 'currentId', id);
+    set(this, 'playedOnce', true); // opens player
+
     this.okraBridge.playSoundFor('ondemand', id);
 
-    set(this, 'playedOnce', true); // opens player
-    set(this, 'isLoading', true);
 
     get(this, 'store').findRecord('story', id).then(story => {
 
@@ -100,6 +107,11 @@ export default Service.extend({
 
       if (context === 'queue') {
         this.removeFromQueue(id);
+        // if starting the queue with an item already playing from another context,
+        // replay from the start
+        if (oldContext !== 'queue' && get(this, 'currentAudio.id') === id) {
+          this.okraBridge.setPosition(0);
+        }
       } else if (context ==='history') {
         if (get(this, 'isPlaying') && get(this, 'currentAudio.id') === id) {
           this.okraBridge.setPosition(0);
@@ -119,9 +131,15 @@ export default Service.extend({
     });
   },
   playStream(slug, context = '') {
+    // Don't set to loading if already playing the item,
+    // because we won't get a loaded event.
+    if (get(this, 'currentId') !== slug) {
+      set(this, 'isLoading', true);
+    }
+
+    // TODO: why setting currentId instead of relying on the computed?
     set(this, 'currentId', slug);
     set(this, 'playedOnce', true); // opens player
-    set(this, 'isLoading', true);
 
     get(this, 'store').findRecord('stream', slug).then(stream => {
       set(this, 'currentAudio', stream);
