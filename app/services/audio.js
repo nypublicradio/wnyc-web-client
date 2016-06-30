@@ -225,7 +225,6 @@ export default Service.extend({
     if (nextUp) {
       this.play(nextUp.get('id'), 'queue');
     } else {
-      set(this, 'isPlaying', false);
       set(this, 'currentContext', null);
       //We can switch to streaming here
     }
