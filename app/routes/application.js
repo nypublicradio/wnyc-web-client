@@ -46,16 +46,9 @@ export default Route.extend(ApplicationRouteMixin, {
       installBridge();
     }
 
-    let poll = get(this, 'poll');
-    let interval = 60 * 1000;
     let store = get(this, 'store');
-    let pollFunction = () => {store.findAll('stream');};
-    poll.setup(pollFunction, interval);
-    // Don't run poll service in test environment
-    // because tests will wait forever for polling to finish.
-    if (config.environment !== 'test') {
-      poll.start();
-    }
+    let pollFunction = () => store.findAll('stream');
+    get(this, 'poll').addPoll({interval: 60 * 1000, callback: pollFunction});
   },
   actions: {
     willTransition() {
