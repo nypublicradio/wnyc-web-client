@@ -3,13 +3,15 @@
     LIVE NOW on <a href='{{stream.scheduleUrl}}'
      target={{is-external stream.scheduleUrl}}
      data-tracking-category='Persistent Player'
-     data-tracking-action='Click Through to Schedule'>{{stream.name}}</a>
+     data-tracking-action='Click Through to Schedule'
+     data-tracking-label='{{stream.name}}'>{{stream.name}}</a>
   </span>
   <span class="streaminfoline-stationlinks">
     <a href='{{stream.scheduleUrl}}'
        target={{is-external stream.scheduleUrl}}
        data-tracking-category='Persistent Player'
-       data-tracking-action='Click Through to Schedule'>SCHEDULE</a>
+       data-tracking-action='Click Through to Schedule'
+       data-tracking-label='{{stream.name}}'>SCHEDULE</a>
     {{#if stream.playlistUrl}}
     <a href='/streams/{{stream.id}}'
        data-tracking-category='Persistent Player'
