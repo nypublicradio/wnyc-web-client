@@ -57,5 +57,5 @@ export default Service.extend({
     } else {
       console.warn(`No poll was found for ${key} {$value}`);
     }
-  }
+  },
 });
