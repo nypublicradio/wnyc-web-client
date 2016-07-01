@@ -64,7 +64,7 @@ export default Component.extend({
     if (get(this, 'isErrored')) {
       return;
     }
-    let playContext = get(this, 'playContext');
+    let playContext = get(this, 'playContext') || get(this, 'region');
     let audio = get(this, 'audio');
     if (get(this, 'isPlaying')) {
       audio.pause();
