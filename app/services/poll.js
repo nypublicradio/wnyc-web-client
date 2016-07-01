@@ -1,58 +1,61 @@
 import Service from 'ember-service';
-import { later, cancel } from 'ember-runloop';
-import get from 'ember-metal/get';
-import set from 'ember-metal/set';
-
-// NOTE: When ember-cli runs tests, it waits for all timers
-// (i.e. Ember.later calls) to finish before ending the test
-// process. This means tests will never finish if the poll
-// service has been started.
-//
-// Don't call poll.start() in your test environment.
-//
-// More information: https://github.com/emberjs/ember.js/issues/3008
+import { bind } from 'ember-runloop';
 
 export default Service.extend({
-  interval: 5000,
-  onPoll: function() {},
-  schedule(fn, interval) {
-    return later(this, function() {
-      fn.apply(this);
-      set(this, 'timer', this.schedule(fn));
-    }, interval);
+  init() {
+    this._super(...arguments);
+    this.set('_polls', []);
   },
-  stop: function() {
-    let timer = this.get('timer');
-    if (timer) {
-      cancel(timer);
-    } else {
-      console.warn('Attempted to stop polling, but no timer was found. (Was polling started?)');
-    }
-  },
-  start: function() {
-    set(this, 'timer', this.schedule(this.get('onPoll')));
-  },
-  setup: function(onPoll, intervalMs) {
-    if (intervalMs <= 1) {
-      throw new Error('Polling interval must be greater than 1');
-    }
-    set(this, 'onPoll', onPoll);
-    set(this, 'interval', intervalMs);
-  },
-  willDestroy: function() {
-    let timer = this.get('timer');
-    if (timer) {
-      this.stop();
-    }
+  willDestroy() {
+    this.stopAll();
   },
 
-  addPoll({interval, callback, label, wait}) {
+  addPoll({interval, callback, label}) {
     if (interval <= 1) {
       throw new Error('Polling interval must be greater than 1');
     }
 
-    let poll = this._schedule(callback, interval);
-    let id = Ember.guidFor(poll);
-    this._polls.pushObject({label, handle, poll})
+    let handle = this._schedule(callback, interval);
+    let poll = { handle, callback, interval };
+    if (label) {
+      poll.label = label;
+    }
+    this._polls.pushObject(poll);
+    return handle;
+  },
+
+  startPoll(oldHandle) {
+    let newHandle = this._startPoll('handle', oldHandle);
+    return newHandle;
+  },
+  startPollByLabel(label) {
+    let newHandle = this._startPoll('label', label);
+    return newHandle;
+  },
+
+  stopPoll(handle) {
+    clearInterval(handle);
+  },
+  stopPollByLabel(label) {
+    let { handle } = this._polls.findBy('label', label);
+    this.stopPoll(handle);
+  },
+  stopAll() {
+    let handles = this._polls.mapBy('handle');
+    handles.forEach(this.stopPoll);
+  },
+
+  _schedule(fn, interval) {
+    return setInterval(bind(this, fn), interval);
+  },
+  _startPoll(key, value) {
+    let poll = this._polls.findBy(key, value);
+    if (poll) {
+      let {callback, interval} = poll;
+      let newHandle = this._schedule(callback, interval);
+      return newHandle;
+    } else {
+      console.warn(`No poll was found for ${key} {$value}`);
+    }
   }
 });
