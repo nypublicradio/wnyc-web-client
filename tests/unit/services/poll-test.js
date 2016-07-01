@@ -53,3 +53,27 @@ test('it calls a function repeatedly', function(assert) {
     done();
   }, delay);
 });
+
+test('it maintains multiple polls', function(assert) {
+  asset.expect(2);
+
+  let service = this.subject();
+  let done = assert.async();
+
+  let poll1 = service.addPoll({interval: 200, callback: () => assert.ok('callback called')});
+  let poll2 = service.addPoll({interval: 200, callback: () => assert.ok('callback called')});
+
+  later(function() {
+    service.stopAll();
+  })
+});
+
+test('it can cancel multiple polls');
+
+test('it can cancel a poll via Id');
+
+test('it can cancel a poll by label');
+
+test('it can start a poll by Id');
+
+test('it can start a poll by label');

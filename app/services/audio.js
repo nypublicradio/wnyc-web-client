@@ -11,6 +11,7 @@ import { classify as upperCamelize } from 'ember-string';
 const FIFTEEN_SECONDS = 1000 * 15;
 
 export default Service.extend({
+  poll:             service(),
   metrics:          service(),
   store:            service(),
   session:          service(),
@@ -84,6 +85,8 @@ export default Service.extend({
     });
   },
   playFromPk(id, context) {
+    this._firstTimeInit();
+
     let oldContext = get(this, 'currentContext');
 
     // Don't set to loading if already playing the item,
@@ -92,10 +95,8 @@ export default Service.extend({
       set(this, 'isLoading', true);
     }
     set(this, 'currentId', id);
-    set(this, 'playedOnce', true); // opens player
 
     this.okraBridge.playSoundFor('ondemand', id);
-
 
     get(this, 'store').findRecord('story', id).then(story => {
 
@@ -131,6 +132,8 @@ export default Service.extend({
     });
   },
   playStream(slug, context = '') {
+    this._firstTimeInit();
+
     // Don't set to loading if already playing the item,
     // because we won't get a loaded event.
     if (get(this, 'currentId') !== slug) {
@@ -139,7 +142,6 @@ export default Service.extend({
 
     // TODO: why setting currentId instead of relying on the computed?
     set(this, 'currentId', slug);
-    set(this, 'playedOnce', true); // opens player
 
     get(this, 'store').findRecord('stream', slug).then(stream => {
       set(this, 'currentAudio', stream);
@@ -265,5 +267,14 @@ export default Service.extend({
       label = `${region}${analyticsCode}`;
     }
     metrics.trackEvent({category, action, label, model: story});
+  },
+
+  _firstTimeInit() {
+    if (get(this, 'playedOnce')) {
+      // already setup
+      return;
+    }
+
+    set(this 'playedOnce', true); // opens the player
   }
 });
