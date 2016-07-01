@@ -4,6 +4,7 @@
   {{/text-crawl}}
   {{#share-button
     story=currentAudio
+    type=(if isAudiostream 'stream' 'ondemand')
     region="Player"}}
     SHARE
   {{/share-button}}
