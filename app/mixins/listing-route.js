@@ -45,7 +45,10 @@ export default Mixin.create({
     this._super(...arguments);
     let channelType = get(this, 'channelType')
     let { channel } = this.modelFor(channelType)
-    controller.set('channelTitle', get(channel, 'title'));
+    controller.setProperties({
+      channelTitle: get(channel, 'title'),
+      channelType
+    });
   },
 
   actions: {
