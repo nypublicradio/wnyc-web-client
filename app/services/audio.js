@@ -89,13 +89,19 @@ export default Service.extend({
   playFromPk(id, context) {
     this._firstTimePlay();
 
+    let shouldTrack = true;
     let oldContext = get(this, 'currentContext');
 
     // Don't set to loading if already playing the item,
     // because we won't get a loaded event.
     if (get(this, 'currentId') !== id) {
       set(this, 'isLoading', true);
+    } else {
+      // if the passed in ID matches what's playing, don't fire another
+      // event
+      shouldTrack = false;
     }
+
     set(this, 'currentId', id);
 
     this.okraBridge.playSoundFor('ondemand', id);
@@ -124,13 +130,15 @@ export default Service.extend({
       set(this, 'currentAudio', story);
       set(this, 'currentContext', context);
 
-      this._trackPlayerEvent({
-        action: `Played Story "${story.get('title')}"`,
-        withRegion: true,
-        region: upperCamelize(context),
-        withAnalytics: true,
-        story
-      });
+      if (shouldTrack) {
+        this._trackPlayerEvent({
+          action: `Played Story "${story.get('title')}"`,
+          withRegion: true,
+          region: upperCamelize(context),
+          withAnalytics: true,
+          story
+        });
+      }
     });
   },
   playStream(slug, context = '') {
@@ -140,6 +148,10 @@ export default Service.extend({
     // because we won't get a loaded event.
     if (get(this, 'currentId') !== slug) {
       set(this, 'isLoading', true);
+    } else {
+      // if the passed in ID matches what's playing, don't fire another
+      // event
+      shouldTrack = false;
     }
 
     // TODO: why setting currentId instead of relying on the computed?
@@ -157,15 +169,17 @@ export default Service.extend({
 
       this.okraBridge.playSoundFor('stream', get(stream, 'bbModel'));
 
-      RSVP.Promise.resolve(get(stream, 'story')).then(story => {
-        if (story) {
-          this._trackPlayerEvent({
-            action: `Streamed Story "${get(story, 'title')}" on "${get(stream, 'name')}"`,
-            withAnalytics: true,
-            story
-          });
-        }
-      });
+      if (shouldTrack) {
+        RSVP.Promise.resolve(get(stream, 'story')).then(story => {
+          if (story) {
+            this._trackPlayerEvent({
+              action: `Streamed Story "${get(story, 'title')}" on "${get(stream, 'name')}"`,
+              withAnalytics: true,
+              story
+            });
+          }
+        });
+      }
     });
   },
 
