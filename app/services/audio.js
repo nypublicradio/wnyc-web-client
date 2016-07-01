@@ -160,18 +160,21 @@ export default Service.extend({
     set(this, 'currentId', slug);
 
     get(this, 'store').findRecord('stream', slug).then(stream => {
+      let wasStream = get(this, 'currentAudio.audioType') === 'stream';
+      let oldStream = get(this, 'currentAudio.name');
+      let streamName = get(stream, 'name');
+
       set(this, 'currentAudio', stream);
       set(this, 'currentContext', context);
-
-      let streamName = get(stream, 'name');
-      this._trackPlayerEvent({
-        action: 'Launched Stream',
-        label: streamName,
-      });
 
       this.okraBridge.playSoundFor('stream', get(stream, 'bbModel'));
 
       if (shouldTrack) {
+        this._trackPlayerEvent({
+          action: 'Launched Stream',
+          label: streamName,
+        });
+
         RSVP.Promise.resolve(get(stream, 'story')).then(story => {
           if (story) {
             this._trackPlayerEvent({
@@ -181,6 +184,13 @@ export default Service.extend({
             });
           }
         });
+
+        if (wasStream) {
+          this._trackPlayerEvent({
+            action: 'Switched Stream to Stream',
+            label: `from ${get(this, 'currentAudio.name')} to ${streamName}`
+          })
+        }
       }
     });
   },
