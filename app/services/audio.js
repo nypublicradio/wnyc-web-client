@@ -144,6 +144,8 @@ export default Service.extend({
   playStream(slug, context = '') {
     this._firstTimePlay();
 
+    let shouldTrack = true;
+
     // Don't set to loading if already playing the item,
     // because we won't get a loaded event.
     if (get(this, 'currentId') !== slug) {
