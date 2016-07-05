@@ -162,7 +162,7 @@ export default Service.extend({
     get(this, 'store').findRecord('stream', slug).then(stream => {
       let wasStream = get(this, 'currentAudio.audioType') === 'stream';
       let oldStream = get(this, 'currentAudio.name');
-      let streamName = get(stream, 'name');
+      let newStream = get(stream, 'name');
 
       set(this, 'currentAudio', stream);
       set(this, 'currentContext', context);
@@ -188,7 +188,7 @@ export default Service.extend({
         if (wasStream) {
           this._trackPlayerEvent({
             action: 'Switched Stream to Stream',
-            label: `from ${get(this, 'currentAudio.name')} to ${streamName}`
+            label: `from ${oldStream} to ${newStream}`
           })
         }
       }
