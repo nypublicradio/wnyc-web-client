@@ -1,9 +1,6 @@
 import config from 'overhaul/config/environment';
 import html from './helpers/django-html';
 
-// Mirage is diabled by default when using --proxy
-// In development (without --proxy) and test environments, these handlers will be used
-
 // Note for future people: schema.modelName.create() doesn't generate attributes in mirage factories. Create the objects using server.create in default.js (for local dev), or in the test
 
 // Mirage is diabled by default when using --proxy
@@ -88,13 +85,12 @@ export default function() {
     }
   });
 
-  /*------------------------------------------------------------
-    passthroughs
-  --------------------------------------------------------------*/
+  this.get(`${baseUrl}/account/api/v1/is_logged_in/`, {isAuthenticated: true});
 
-  this.post(`${config.wnycAccountRoot}/api/v1/listenaction/create/`, function() {
-    return true;
-  });
+  this.post(`${baseUrl}/account/api/v1/accounts/logout/`, {successful_logout: true});
+
+  this.get(`${baseUrl}/api/v1/list/comments/24/:storyId/`, 'comment');
+  this.get(`${baseUrl}/api/v2/related/:storyId/`, 'story');
 
   this.post(`${config.wnycAccountRoot}/api/v1/listenaction/create/:pk/:action`, function() {
     return true;
@@ -121,7 +117,6 @@ export default function() {
   this.get(`${baseUrl}`, function(schema) {
     let home = schema.djangoPages.find('/');
     return home.attrs.text;
-    // return html;
   });
 
   this.get(`${baseUrl}/\*id`, 'django-page');
