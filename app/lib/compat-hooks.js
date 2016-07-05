@@ -128,3 +128,27 @@ export function mangleJavascript(scriptTag, sourceCode) {
   }
   return sourceCode;
 }
+
+// on first-loads, ember will consume the document with which it was booted, so
+// we have to do some clean up regarding present ember asset scripts, ember views
+// and server-side DOM scripts
+export function serializeInlineDoc(inlineDoc) {
+  let toClean = [];
+
+  // By this point, ember has already booted a view into the Document, so
+  // we need to clean it from the version we save as our data model, otherwise
+  // we get problems from recursive ember views and ember trying to boot again
+  Array.from(inlineDoc.querySelectorAll('.ember-view')).forEach(n => toClean.push(n));
+  toClean.push(inlineDoc.querySelector('script[src*="assets/vendor"]'));
+  toClean.push(inlineDoc.querySelector('script[src*="assets/overhaul"]'));
+  toClean.push(inlineDoc.querySelector('link[href*="assets/vendor"]'));
+  toClean.push(inlineDoc.querySelector('link[href*="assets/overhaul"]'));
+
+  // any content scripts have already done their work, so remove them so they don't
+  // run again
+  Array.from(inlineDoc.querySelectorAll('main > article script')).forEach(n => toClean.push(n));
+
+  toClean.forEach(n => n && n.parentNode.removeChild(n));
+
+  return inlineDoc;
+}
