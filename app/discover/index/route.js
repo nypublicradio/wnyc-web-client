@@ -32,7 +32,7 @@ export default Ember.Route.extend({
         });
       }
 
-      stories.filter(story => {
+      stories = stories.filter(story => {
         return !excludedIds.contains(story.id);
       });
     }

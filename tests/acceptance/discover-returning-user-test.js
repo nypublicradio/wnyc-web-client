@@ -245,7 +245,22 @@ test('playlist does not show excluded item when loaded from the store', function
   session.set('data.discover-excluded-story-ids', [exclude.id]);
   visit('/discover/playlist');
   andThen(() => {
-    assert.equal($(`.discover-playlist-story-title a:contains(${exclude.title})`).length, 0, "excluded story should not be there when loaded from the queue");
+    assert.equal($(`.discover-playlist-story-title a:contains(${exclude.title})`).length, 0, "excluded story should not be there when loaded from the store");
+  });
+});
+
+
+test('playlist shows all the fields when loaded from the queue/session', function(assert) {
+  server.createList('discover-story', 12);
+  let stories = server.db.discoverStories;
+  let session = currentSession(this.application);
+  let example = stories[0];
+  session.set('data.discover-queue',  []);
+  session.set('data.discover-excluded-story-ids', []);
+  visit('/discover/playlist');
+  andThen(() => {
+    assert.equal($(`.discover-playlist-story-title a:contains(${example.title})`).length, 1, "should show story title");
+    assert.equal($(`.discover-playlist-story-show-title a:contains(${example.show.show_title})`).length, 1, "should display show title");
   });
 });
 
