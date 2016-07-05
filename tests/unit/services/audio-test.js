@@ -103,7 +103,7 @@ test('it only sets up the player ping once', function(assert) {
       counter++;
       assert.equal(label, 'playerPing');
     }
-  }
+  };
   Ember.run(() => {
     service.set('poll', pollStub);
     service.set('okraBridge', okraStub);
