@@ -96,3 +96,14 @@ export function addAlienLanding(id, coordinates) {
     return false;
   }
 }
+
+// this method could be a one line, but in testing it would open a new window,
+// so let's us override in testing with a method of our own, located at 
+// `window.assign`.
+export function assign(url) {
+  if (Ember.testing) {
+    window.assign(url);
+  } else {
+    window.location.assign(url);
+  }
+}

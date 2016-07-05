@@ -2,6 +2,7 @@ import Ember from 'ember';
 import moment from 'moment';
 import ENV from 'overhaul/config/environment';
 import { canonicalize } from 'overhaul/services/script-loader';
+import { assign } from 'overhaul/lib/alien-dom';
 
 export default Ember.Route.extend({
   queryParams: {
@@ -35,7 +36,7 @@ export default Ember.Route.extend({
         // redirected the request to a new destination which does not respect
         // our CORS request. reassign the url to the location and let's see
         // what happens
-        location.assign(`${canonicalize(ENV.wnycURL)}/${upstream_url}`);
+        assign(`${canonicalize(ENV.wnycURL)}/${upstream_url}`);
       });
   }
 });

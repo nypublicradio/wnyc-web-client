@@ -99,3 +99,19 @@ skip('alien doms with beta trials keep the beta bar if it has not been dismissed
     assert.ok(Ember.$('[data-test-selector=beta-tease]').length, 'beta trial tease is visible afer transition');
   });
 });
+
+test('it retries the server on a request error', function(assert) {
+  assert.expect(1);
+  server.get('/unknown-url', function() {
+    // we do this in order to simulate the unrecoverable errors generated when
+    // Ember tries to AJAX load a url from another domain.
+    throw 'simulating a CORS error';
+  });
+
+  window.assign = function() {
+    assert.ok(true, 'location.assign was called');
+  };
+
+  visit('/unknown-url')
+    .catch(() => delete window.assign);
+});
