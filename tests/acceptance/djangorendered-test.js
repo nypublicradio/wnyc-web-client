@@ -180,3 +180,33 @@ test('loading a page with a bad ?play param', function(assert) {
     assert.notOk(Ember.$('.persistent-player').length, 'persistent player should not be visible');
   });
 });
+
+test('scripts embedded within content do not run twice', function(assert) {
+  // TODO: remove once https://github.com/nypublicradio/puppysite/pull/202 lands
+  server.create('story', {slug: 'foo'});
+  //
+  let page = server.create('djangoPage', {
+    id: 'story/foo/',
+    slug: 'foo',
+    body: `
+<script type="text/javascript">
+(function(){
+
+  var p = document.createElement("p");
+  p.innerHTML = "Added this paragraph!";
+  document.querySelector("section.text").appendChild(p);
+
+})();
+</script>
+`
+  });
+
+  djangoPage
+    .bootstrap(page)
+    .visit(page);
+
+  andThen(function() {
+    assert.equal(find('section.text p').length, 1, 'should only be one p tag');
+  });
+});
+
