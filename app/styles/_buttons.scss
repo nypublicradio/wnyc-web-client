@@ -547,6 +547,25 @@
   }
 }
 
+// bump specificity to override
+// .flag-body>:last-child setting
+// margin-bottom to 0
+.btn-group.btn-group--storytease {
+  margin-bottom: -1.5rem;
+  > * {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.btn-group--storyheader {
+  @include mq($wide) {
+    margin-bottom: -1.5rem;
+    > * {
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+
 /**
  * Toggle Button:
  * `.btn--toggle > .btn-togglecontent`
