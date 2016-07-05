@@ -11,6 +11,7 @@ moduleFor('service:audio', 'Unit | Service | audio', {
   // Specify the other units that are required for this test.
   needs: ['model:story','adapter:story','serializer:story',
           //'model:discover/stores',
+          'service:poll',
           'service:listen-history'],
 
   beforeEach() {
@@ -90,6 +91,29 @@ test('service records a listen when a story is played', function(assert) {
   return wait().then(() => {
     assert.equal(storySentToListen.id, 2, "service should have called addListen on listen object");
   });
+});
+
+test('it only sets up the player ping once', function(assert) {
+  assert.expect(2);
+
+  let counter = 0;
+  let service = this.subject();
+  let pollStub = {
+    addPoll({interval, callback, label}) {
+      counter++;
+      assert.equal(label, 'playerPing');
+    }
+  }
+  Ember.run(() => {
+    service.set('poll', pollStub);
+    service.set('okraBridge', okraStub);
+    service.play(1);
+  });
+
+  return wait().then(() => {
+    assert.equal(counter, 1, 'service should only call addPoll once');
+  });
+
 });
 
 

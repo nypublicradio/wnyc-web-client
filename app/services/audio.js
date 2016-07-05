@@ -85,7 +85,7 @@ export default Service.extend({
     });
   },
   playFromPk(id, context) {
-    this._firstTimeInit();
+    this._firstTimePlay();
 
     let oldContext = get(this, 'currentContext');
 
@@ -132,7 +132,7 @@ export default Service.extend({
     });
   },
   playStream(slug, context = '') {
-    this._firstTimeInit();
+    this._firstTimePlay();
 
     // Don't set to loading if already playing the item,
     // because we won't get a loaded event.
@@ -269,12 +269,25 @@ export default Service.extend({
     metrics.trackEvent({category, action, label, model: story});
   },
 
-  _firstTimeInit() {
+  _firstTimePlay() {
     if (get(this, 'playedOnce')) {
       // already setup
       return;
     }
 
-    set(this 'playedOnce', true); // opens the player
+    set(this, 'playedOnce', true); // opens the player
+    get(this, 'poll').addPoll({
+      interval: 1000 * 60 * 2, // two minutes
+      callback: this._trackPing,
+      label: 'playerPing'
+    });
+  },
+
+  _trackPing() {
+    get(this, 'metrics').trackEvent('GoogleAnalytics', {
+      category: 'Persistent Player',
+      action: '2 Minute Ping',
+      value: get(this, 'isPlaying') ? 1 : 0
+    });
   }
 });
