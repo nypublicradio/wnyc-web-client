@@ -172,7 +172,7 @@ export default Service.extend({
       if (shouldTrack) {
         this._trackPlayerEvent({
           action: 'Launched Stream',
-          label: streamName,
+          label: newStream,
         });
 
         RSVP.Promise.resolve(get(stream, 'story')).then(story => {
@@ -189,7 +189,7 @@ export default Service.extend({
           this._trackPlayerEvent({
             action: 'Switched Stream to Stream',
             label: `from ${oldStream} to ${newStream}`
-          })
+          });
         }
       }
     });
