@@ -125,7 +125,8 @@ export default Service.extend({
     this.sendPauseListenAction(this.get('currentId'));
   },
   playFromPk(id, context) {
-    this._firstTimeInit();
+    this._firstTimePlay();
+    
     let shouldTrack = true;
 
     let oldContext = get(this, 'currentContext');

@@ -12,7 +12,7 @@ installBridge();
 moduleFor('service:audio', 'Unit | Service | audio', {
   // Specify the other units that are required for this test.
   needs: ['model:story','adapter:story','serializer:story',
-          'model:discover/stores',
+          'model:discover/stories',
           'service:listen-actions',
           'service:poll',
           'service:metrics',
