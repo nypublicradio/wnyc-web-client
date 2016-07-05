@@ -3,14 +3,14 @@ import serialize from 'overhaul/mirage/utils/serialize';
 
 export default Factory.extend({
   id: '/',
-  slug: '/',
   text() {
-    let {id, slug} = this;
-    let wormholes;
-    let json;
-    let content;
-    let type;
-    let testMarkup = this.testMarkup;
+    let { id } = this,
+      wormholes,
+      json,
+      content,
+      type,
+      slug,
+      testMarkup = this.testMarkup;
 
     if (/^(shows|articles|tags)/.test(id)) {
       type = 'channel';
@@ -45,6 +45,12 @@ export default Factory.extend({
       };
       wormholes = '<div id="js-listings"></div>';
     } else if (type === 'story') {
+      slug = id.match(/^story\/([^\/]+)\//)[1];
+
+      let story = server.create('story', {slug});
+      server.createList('comment', 5, {story});
+      server.createList('story', 5, {story});
+
       json = serialize(server.schema.stories.where({slug}).models[0]);
       wormholes = `
         <div class="l-full"></div>

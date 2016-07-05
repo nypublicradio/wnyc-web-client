@@ -141,12 +141,12 @@ module.exports = function(environment) {
 
     ENV.googleAPIv3Key = '';
     ENV.googleAnalyticsKey = '';
-    ENV.wnycAPI = 'http://test.com';
-    ENV.wnycAccountRoot = 'http://test.com/account';
-    ENV.wnycEtagAPI = 'http://test.com/etag';
-    ENV.wnycStaticURL = 'http://test.com/static';
-    ENV.wnycURL = '//test.com';
-    ENV.wnycBetaURL = 'http://test.com';
+    ENV.wnycAPI = 'http://example.com';
+    ENV.wnycAccountRoot = 'http://example.com/account';
+    ENV.wnycEtagAPI = 'http://example.com/etag';
+    ENV.wnycStaticURL = 'http://example.com/static';
+    ENV.wnycURL = '//example.com';
+    ENV.wnycBetaURL = 'http://example.com';
   }
 
   if (environment === 'production') {

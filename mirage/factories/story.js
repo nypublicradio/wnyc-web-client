@@ -4,7 +4,7 @@ export default Factory.extend({
   slug(id) {
     return `story-${id}`;
   },
-  itemTypeId: id => id,
+  itemTypeId: 24,
   headers() {
     return {};
   },

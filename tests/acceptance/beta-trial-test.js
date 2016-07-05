@@ -40,6 +40,8 @@ test('when a trial is active, I can enter the beta', function(assert) {
     assert.ok('enterBeta was called');
   };
 
+  server.create('djangoPage', {id:'/'});
+
   visit('/');
 
   andThen(() => {
@@ -53,6 +55,8 @@ test('when a trial is active, I can dismiss the beta invite', function(assert) {
   };
 
   //appendIfNot('beta-nav');
+  server.create('djangoPage', {id:'/'});
+
   visit('/');
 
   andThen(() => {
@@ -61,6 +65,9 @@ test('when a trial is active, I can dismiss the beta invite', function(assert) {
 });
 
 test('when a trial is active, display the invite message on all routes', function(assert) {
+  server.create('djangoPage', {id: '/'});
+  server.create('djangoPage', {id: 'story/foo/'});
+
   visit('/');
 
   andThen(function() {
@@ -86,6 +93,7 @@ moduleForAcceptance('Acceptance | on the beta site', {
 });
 
 test('when I am on the beta site, I can exit the beta', function(assert) {
+  server.create('djangoPage', {id:'/'});
   withFeature('site-chrome');
   assertRun = function() {
     assert.ok('exitBeta was called');
@@ -102,6 +110,7 @@ test('when I am on the beta site, I can exit the beta', function(assert) {
 
 // this dom node is rendered by a component that's only in beta
 test('when I am on the beta site, I can see the beta nav menu', function(assert) {
+  server.create('djangoPage', {id:'/'});
   withFeature('site-chrome');
   //appendIfNot('beta-nav');
   visit('/');
@@ -127,6 +136,7 @@ moduleForAcceptance('Acceptance | retired beta trial', {
 });
 
 test('when a trial has been retired, I am shown the exit interview and can dismiss it', function(assert) {
+  server.create('djangoPage', {id:'/'});
   appendIfNot('site-chrome');
   visit('/');
 

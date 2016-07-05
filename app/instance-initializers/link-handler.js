@@ -105,7 +105,7 @@ export default {
 
         beforeTeardown();
         return false;
-      } else if (isExternal) {
+      } else if (isExternal && !Ember.testing) {
         $target.attr('target', '_blank');
       }
       return true;
