@@ -9,8 +9,3 @@ test('it exists', function(assert) {
   let adapter = this.subject();
   assert.ok(adapter);
 });
-
-test('it uses the make_radio API', function(assert) {
-  let adapter = this.subject();
-  assert.equal(adapter.namespace, "api/v1/make_radio/");
-});

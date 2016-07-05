@@ -7,11 +7,6 @@ export default Factory.extend({
     return faker.random.number(1000000);
   },
 
-  pk()    { return this.id; },
-  cmsPK() { return this.id; },
-  // make sure this is a number too, or else weird stuff happens.
-  // Should be able to fix this once the id toJSON changes happen
-
   // this needs to be only numbers, or the audio service will think this it's a 'stream' instead of 'onDemand'.
 
   title() { return faker.lorem.sentence(); },
@@ -23,17 +18,22 @@ export default Factory.extend({
   // audio. If this isn't unique, play status gets totally borked
 
   type(i) { return faker.list.random('nprarticle', 'article')(i); },
-  newsdate() { return faker.date.recent(); },
-  detail_api_url() { return `/api/story/${this.pk}/`; },
-  estimated_duration(i) {
+
+  dateLine() { return faker.date.recent(); },
+
+
+  estimatedDuration(i) {
     return Math.floor(faker.random.number.range(60, 3000)(i)); },
-  show() {
-    let show_pk = faker.random.uuid();
+  headers() { // this is where the show info is
+    let show_slug = faker.lorem.words(1);
     return {
-      show_pk: show_pk,
-      show_url: `show/${show_pk}`,
-      show_slug: faker.lorem.words(1),
-      show_title: faker.lorem.sentence()
+      brand: {
+        url: `show/${show_slug}`,
+        title: faker.lorem.sentence(),
+        logoImage: {
+
+        }
+      }
     };
   }
 });

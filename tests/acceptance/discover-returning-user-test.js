@@ -260,7 +260,7 @@ test('playlist shows all the fields when loaded from the queue/session', functio
   visit('/discover/playlist');
   andThen(() => {
     assert.equal($(`.discover-playlist-story-title a:contains(${example.title})`).length, 1, "should show story title");
-    assert.equal($(`.discover-playlist-story-show-title a:contains(${example.show.show_title})`).length, 1, "should display show title");
+    assert.equal($(`.discover-playlist-story-show-title a:contains(${example.headers.brand.title})`).length, 1, "should display show title");
   });
 });
 

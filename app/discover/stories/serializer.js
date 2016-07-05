@@ -6,18 +6,18 @@ export default JSONAPISerializer.extend({
     return {
       data: payload.data.map(result => {
         return {
-          id: result.pk,
+          id: result.id,
           type: 'discover.stories',
           attributes: {
-            title:              result.title,
-            showTitle:          Ember.get(result,'show.show_title'),
-            showUrl:            Ember.get(result,'show.show_url'),
-            summary:            result.tease,
-            estimatedDuration:  result.estimated_duration,
-            date:               result.newsdate,
-            audio:              result.audio,
-            url:                result.url,
-            cmsPK:              result.pk
+            title:              Ember.get(result,'attributes.title'),
+            showTitle:          Ember.get(result,'attributes.headers.brand.title'),
+            showUrl:            Ember.get(result,'attributes.headers.brand.url'),
+            estimatedDuration:  Ember.get(result,'attributes.estimatedDuration'),
+            date:               Ember.get(result,'attributes.dateLine'),
+            summary:            Ember.get(result,'attributes.tease'),
+            audio:              Ember.get(result,'attributes.audio'),
+            url:                Ember.get(result,'attributes.url'),
+            cmsPK:              result.id
           }
         };
       })

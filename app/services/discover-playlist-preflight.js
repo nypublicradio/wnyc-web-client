@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import RSVP from 'rsvp';
 import ENV from '../config/environment';
 const {
   get
@@ -16,7 +15,7 @@ export default Ember.Service.extend({
   topics: [],
 
   storiesFromShows(slugs) {
-    let url = [ENV.wnycAPI, 'api/v3/show_story_query'].join("/");
+    let url = [ENV.wnycURL, 'api/v3/show_story_query'].join("/");
 
     return Ember.$.ajax({
       data: {
@@ -31,7 +30,7 @@ export default Ember.Service.extend({
   },
 
   storiesFromTopics(tags) {
-    let url = [ENV.wnycAPI, 'api/v3/tag_story_query'].join("/");
+    let url = [ENV.wnycURL, 'api/v3/tag_story_query'].join("/");
 
     return Ember.$.ajax({
       data: {

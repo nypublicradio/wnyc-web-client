@@ -15,6 +15,7 @@ moduleForModel('discover/stories', 'Unit | Serializer | discover/stories', {
 
 test('it serializes the data', function(assert) {
   server.create('discover-story');
+
   this.store().query('discover/stories', {}).then(records => {
     let keysToCheck = ['title', 'showTitle', 'showUrl', 'summary', 'estimatedDuration', 'date', 'audio', 'url', 'cmsPK'];
     assert.equal(records.get('length'), 1, "no records were returned");
@@ -30,7 +31,7 @@ test('it serializes the data', function(assert) {
 
 test('it serializes the data if show is blank', function(assert) {
   server.create('discover-story', {
-    show: {}
+    headers: {}
   });
   this.store().query('discover/stories', {}).then(records => {
     assert.equal(records.get('length'), 1, "no records were returned");
