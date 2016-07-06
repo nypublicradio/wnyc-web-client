@@ -62,7 +62,17 @@ export default Factory.extend({
     }
 
     return `
-      <div id="header"></div>
+      <div id="header">
+        <form method="GET" action="/search/" id="search-form" class="promoted-layer animate-transforms"
+          data-ember-component="embedded.header-search-field">
+          <input id="search-input" name="q" class="promoted-layer animate-transforms js-animate-input"
+            data-input="#search-input"
+            data-classTarget="#search-wrapper">
+          <label for="search-input" class="promoted-layer animate-opacity js-animate-input"
+            data-input="#search-input"
+            data-classTarget="#search-wrapper">Search</label>
+        </form>
+      </div>
       ${testMarkup || ''}
       ${wormholes || ''}
       <script type="text/x-wnyc-marker" data-url="${id}"></script>
