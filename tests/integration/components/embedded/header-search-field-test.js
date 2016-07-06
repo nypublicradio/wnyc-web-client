@@ -22,4 +22,4 @@ test('it calls the passesd in search attr on submit', function(assert) {
   this.$('#search-input').val('foo');
   this.$('#search-input').change();
   this.$('form').submit();
-})
+});
