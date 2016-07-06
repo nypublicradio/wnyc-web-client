@@ -6,7 +6,6 @@ export default Factory.extend({
   text() {
     let {
       id,
-      slug,
       testMarkup,
       body
     } = this,
