@@ -16,6 +16,7 @@ export default Controller.extend({
     showModal(which) {
       this._scrollY = window.scrollY;
       this.set('modal', which);
+      this._wasModal = true;
 
       let metrics = get(this, 'metrics');
       metrics.trackEvent({
@@ -30,6 +31,7 @@ export default Controller.extend({
       }
       window.scrollTo(0, this._scrollY);
       this.set('modal', null);
+      this._wasModal = true;
     },
   }
 });

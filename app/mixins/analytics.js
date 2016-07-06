@@ -10,9 +10,14 @@ const {
 export default Mixin.create({
   metrics: service(),
 
-  didTransition() {
+  didTransition([ applicationTransition ]) {
+    let { controller } = applicationTransition.handler;
     this._super(...arguments);
-    this._trackPage();
+
+    if (!controller._wasModal) {
+      this._trackPage();
+    }
+    controller._wasModal = false;
   },
 
   _trackPage() {
