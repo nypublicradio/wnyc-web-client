@@ -101,7 +101,7 @@ test('it only sets up the player ping once', function(assert) {
   let pollStub = {
     addPoll({interval, callback, label}) {
       counter++;
-      assert.equal(label, 'playerPing');
+      assert.equal(label, 'playerPing', 'the correct poll was added');
     }
   };
   Ember.run(() => {
@@ -114,6 +114,26 @@ test('it only sets up the player ping once', function(assert) {
     assert.equal(counter, 1, 'service should only call addPoll once');
   });
 
+});
+
+test('it calls the GoogleAnalytics ping event', function(assert) {
+  let done = assert.async();
+  let service = this.subject();
+  let metricsStub = {
+    trackEvent() {
+      assert.ok(true, 'trackEvent was called');
+      done();
+    }
+  };
+
+  Ember.run(() => {
+    service.set('metrics', metricsStub);
+    service.set('okraBridge', okraStub);
+    service.set('sessionPing', 500);
+    service.play(1);
+  });
+
+  return wait();
 });
 
 

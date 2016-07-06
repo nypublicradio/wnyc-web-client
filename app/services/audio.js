@@ -9,6 +9,7 @@ import RSVP from 'rsvp';
 import { classify as upperCamelize } from 'ember-string';
 
 const FIFTEEN_SECONDS = 1000 * 15;
+const TWO_MINUTES     = 1000 * 60 * 2;
 
 export default Service.extend({
   poll:             service(),
@@ -28,6 +29,7 @@ export default Service.extend({
 
   currentAudio:     null,
   currentContext:   null,
+  sessionPing:      TWO_MINUTES,
 
   isPlaying: readOnly('okraBridge.isPlaying'),
   isLoading: computed('okraBridge.isLoading', {
@@ -277,8 +279,8 @@ export default Service.extend({
 
     set(this, 'playedOnce', true); // opens the player
     get(this, 'poll').addPoll({
-      interval: 1000 * 60 * 2, // two minutes
-      callback: this._trackPing,
+      interval: get(this, 'sessionPing'),
+      callback: bind(this, this._trackPing),
       label: 'playerPing'
     });
   },
