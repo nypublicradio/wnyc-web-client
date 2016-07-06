@@ -1,5 +1,5 @@
 import config from 'overhaul/config/environment';
-import { skip } from 'qunit';
+import { skip, test } from 'qunit';
 import { plantBetaTrial } from 'overhaul/tests/helpers/beta';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import djangoPage from 'overhaul/tests/pages/django-page';
@@ -119,6 +119,23 @@ skip('imagesLoaded callback is fired for images in alien dom', function(assert) 
       assert.ok(Ember.$('#test').hasClass('is-loaded'), 'images should have is-loaded class from django-page component');
       done();
     });
+  });
+});
+
+test('it properly routes to the search page', function(assert) {
+  withFeature('django-page-routing');
+  let home = server.create('django-page', {id: '/'});
+  server.create('django-page', {id: 'search/?q=foo'});
+
+  djangoPage
+    .bootstrap(home)
+    .visit(home);
+
+  fillIn('#search-input', 'foo');
+  triggerEvent('#search-form', 'submit');
+
+  andThen(function() {
+    assert.equal(currentURL(), '/search/?q=foo');
   });
 });
 
