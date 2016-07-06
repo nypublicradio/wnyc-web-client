@@ -7,6 +7,9 @@ export default Ember.Route.extend({
   queryParams: {
     scheduleStation: {
       refreshModel: true
+    },
+    q: {
+      refreshModel: true
     }
   },
   beforeModel() {

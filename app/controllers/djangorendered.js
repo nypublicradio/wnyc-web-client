@@ -1,7 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  queryParams: ['scheduleStation', 'next'],
+  queryParams: ['scheduleStation', 'next', 'q'],
   scheduleStation: null,
-  next: null
+  next: null,
+  q: null
 });
