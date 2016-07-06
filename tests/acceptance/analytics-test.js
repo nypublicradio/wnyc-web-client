@@ -13,14 +13,20 @@ moduleForAcceptance('Acceptance | Analytics', {
 });
 
 test('it does not log a pageview when opening the queue', function(assert) {
+  assert.expect(2);
+
   analyticsStub.reopen({
     trackPage() {
       assert.ok(true, 'trackPage was called');
     }
   });
-  assert.expect(1);
 
   server.create('django-page', {id: '/'});
   visit('/');
   click('.floating-queuebutton');
+
+  andThen(() => {
+    assert.equal(find('.l-sliding-modal').length, 1, 'modal is open');
+    click('.floating-queuebutton');
+  });
 });
