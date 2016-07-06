@@ -21,6 +21,8 @@ export default DS.Adapter.extend({
       } else {
         url = ENV.wnycURL;
       }
+    } else if (ENV.environment === 'test') {
+      url = ENV.wnycURL;
     }
     return fetch(`${canonicalize(url)}${id === '/' ? '' : id}`, { headers: {'X-WNYC-EMBER':1}})
       .then(response => response.text());
