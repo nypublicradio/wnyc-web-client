@@ -3,7 +3,7 @@ import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.JSONAPIAdapter.extend({
-  host: ENV.wnycAPI,
+  host: ENV.wnycURL,
   namespace: `api/v3/make_playlist/`,
   query: function(store, type, query /*, recordArray */ ) {
     let url = [this.host, this.namespace].join('/');
