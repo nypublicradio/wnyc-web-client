@@ -29,9 +29,9 @@ export default Component.extend({
   }),
   title: computed('inQueue', function() {
     if (get(this, 'inQueue')) {
-      return `Add ${get(this, 'itemTitle')} to Your Queue`;
-    } else {
       return `Remove ${get(this, 'itemTitle')} from Your Queue`;
+    } else {
+      return `Add ${get(this, 'itemTitle')} to Your Queue`;
     }
   }),
 
