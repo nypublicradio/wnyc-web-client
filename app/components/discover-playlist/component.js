@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   audio:          Ember.inject.service(),
 
   classNames:        ['discover-playlist-container'],
-  classNameBindings: ['collapsedHeader:mod-collapsed-header', 'isDraggingItem:is-dragging-item'],
+  classNameBindings: ['isDraggingItem:is-dragging-item'],
 
   // Computed properties from a service. These are a little hinky
   audioReady:     Ember.computed.alias('audio.isReady'),
@@ -69,10 +69,6 @@ export default Ember.Component.extend({
       // that will work itself next time the list loads
 
       // this.get('orderedStories').removeObject(item);
-    },
-
-    scrollPointReached(direction) {
-      this.set('collapsedHeader', direction === 'down');
     },
 
     dragStarted(/* item */) {

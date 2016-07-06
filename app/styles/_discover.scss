@@ -205,13 +205,6 @@ body.discover.index_loading .sitechrome-page-content-area {
 }
 
 .discover-playlist-header-container {
-  /* this is relative to the content area */
-
-  position:absolute;
-  top:0;
-  left: 0;
-  right:0;
-
   @include display-flex;
   @include justify-content(center);
   @include align-items(center);
@@ -233,24 +226,22 @@ body.discover.index_loading .sitechrome-page-content-area {
   }
 }
 
-.mod-collapsed-header {
-  .discover-playlist-header-container {
-    position:fixed;
-    top:0;
-    height:100px;
-    left:1.5rem;
-    right:1.5rem;
-    background: url(/assets/img/backgrounds/pattern_grey.png) fixed;
-    text-align:left;
-    height:100px;
-    z-index:2;
+.mod-sticky-header{
+  position:fixed;
+  top:0;
+  left:1.5rem;
+  right:1.5rem;
+  background: url(/assets/img/backgrounds/pattern_grey.png) fixed;
+  text-align:left;
+  z-index:2;
 
-    @include mq($middle-narrow-and-up) {
-      left: 144px;
-      right:0;
-    }
+  @include mq($middle-narrow-and-up) {
+    left: calc(144px + 1.5rem);
+    right:1.5rem;
   }
 
+  // This is the collapsed header style
+  
   .discover-playlist-header {
     @include display-flex;
     @include justify-content(space-between);
@@ -294,10 +285,6 @@ body.discover.index_loading .sitechrome-page-content-area {
     top:0;
     right:0;
   }
-}
-
-.discover-playlist-container {
-  padding-top:15rem;
 }
 
 .discover-playlist-header-button {
@@ -428,15 +415,11 @@ body.discover.index_loading .sitechrome-page-content-area {
   @include flex-direction(column);
   width:100%;
   @include justify-content(center);
-  // @include align-content(center);
-  // @include align-items(flex-start);
-
 }
 
 .discover-playlist-story-info-basic {
   @include display-flex;
   @include flex-direction(row);
-  // @include flex-wrap(nowrap);
   @include justify-content(space-between);
   @include align-items(center);
   min-height:4rem;
@@ -826,7 +809,7 @@ body.discover.index_loading .sitechrome-page-content-area {
   color:#FFF;
 
   &:after {
-    bottom: -35px;
+    bottom: -19px;
     left: 50%;
     border: solid transparent;
     content: " ";
@@ -836,8 +819,8 @@ body.discover.index_loading .sitechrome-page-content-area {
     pointer-events: none;
     border-color: rgba(255, 255, 255, 0);
     border-bottom-color: #FFF;
-    border-width: 30px;
-    margin-left: -30px;
+    border-width: 15px;
+    margin-left: -15px;
   }
 }
 

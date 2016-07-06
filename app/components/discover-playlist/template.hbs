@@ -1,52 +1,51 @@
-<div class="discover-playlist-header-container">
-  <div class="discover-playlist-header">
-    {{yield (hash
-      button=(component 'discover-playlist-play-button' click=(action 'toggle'))
-      isPlaying=isPlaying
-      isPaused=isPaused
-      isNotStarted=isNotStarted
-    )}}
+{{#sticky-page-header use='bottom' offset="100"}}
+  <div class="discover-playlist-header-container">
+    <div class="discover-playlist-header">
+      {{yield (hash
+        button=(component 'discover-playlist-play-button' click=(action 'toggle'))
+        isPlaying=isPlaying
+        isPaused=isPaused
+        isNotStarted=isNotStarted
+      )}}
+    </div>
   </div>
-</div>
+{{/sticky-page-header}}
 
-{{#way-point action=(action "scrollPointReached") offset="105"}}
+{{#sortable-group class="discover-playlist" tagName="ul" onChange="reorderItems" handle=".discover-playlist-item-handle" as |group|}}
+  {{#each orderedStories as |story|}}
+    {{#sortable-item id=(concat 'story-' story.id) class=(if (array-contains removedItemIds story.id) 'discover-playlist-item is-deleted' 'discover-playlist-item')
+      tagName="li"
+      group=group
+      model=story
+      handle=".discover-playlist-item-handle"
+      onDragStart="dragStarted"
+      onDragStop="dragStopped"
+    }}
 
-  {{#sortable-group class="discover-playlist" tagName="ul" onChange="reorderItems" handle=".discover-playlist-item-handle" as |group|}}
-    {{#each orderedStories as |story|}}
-      {{#sortable-item id=(concat 'story-' story.id) class=(if (array-contains removedItemIds story.id) 'discover-playlist-item is-deleted' 'discover-playlist-item')
-        tagName="li"
-        group=group
-        model=story
-        handle=".discover-playlist-item-handle"
-        onDragStart="dragStarted"
-        onDragStop="dragStopped"
-      }}
+      <span class="discover-playlist-item-handle">
+        {{wnyc-svg icon="reorder"}}
+      </span>
 
-        <span class="discover-playlist-item-handle">
-          {{wnyc-svg icon="reorder"}}
-        </span>
+      {{#discover-playlist-story isCurrentTrack=(eq story.id currentPlaylistStoryPk) isPlaying=(and isPlaying (eq story.id currentPlaylistStoryPk))}}
+        {{playlist-play-indicator
+            title=story.title
+            itemPK=story.id
+            class="discover-playlist-story-play-button"
+            isReady=audioReady
+            isPlaying=(and (eq story.id currentPlaylistStoryPk) isPlaying)
+            onPause=(action 'pauseTrack' story.id)
+            onPlay=(action 'playTrack' story.id)
+          }}
 
-        {{#discover-playlist-story isCurrentTrack=(eq story.id currentPlaylistStoryPk) isPlaying=(and isPlaying (eq story.id currentPlaylistStoryPk))}}
-          {{playlist-play-indicator
-              title=story.title
-              itemPK=story.id
-              class="discover-playlist-story-play-button"
-              isReady=audioReady
-              isPlaying=(and (eq story.id currentPlaylistStoryPk) isPlaying)
-              onPause=(action 'pauseTrack' story.id)
-              onPlay=(action 'playTrack' story.id)
-            }}
+        {{discover-playlist-story-info story=story}}
+      {{/discover-playlist-story}}
 
-          {{discover-playlist-story-info story=story}}
-        {{/discover-playlist-story}}
-
-        <span class="discover-playlist-item-delete" {{action 'removeItem' story}}>
-          {{wnyc-svg icon="close"}}
-        </span>
-      {{/sortable-item}}
-    {{/each}}
-  {{/sortable-group}}
-{{/way-point}}
+      <span class="discover-playlist-item-delete" {{action 'removeItem' story}}>
+        {{wnyc-svg icon="close"}}
+      </span>
+    {{/sortable-item}}
+  {{/each}}
+{{/sortable-group}}
 
 <button {{action 'findMore'}} class="discover-playlist-find-more rounded-caps-button mod-hollow-blue">
   Find Me Some More

@@ -1,0 +1,14 @@
+{{#way-point offset=offset action=(action 'topScrollPointReached')}}{{/way-point}}
+<div class="sticky-page-header {{if sticky 'mod-sticky-header'}}">
+  {{yield}}
+</div>
+{{#way-point offset=offset action=(action 'bottomScrollPointReached')}}{{/way-point}}
+
+<div class='sticky-page-header-spacer'>
+  {{! We set this element to the height of the sticky page header before it
+      falls out of the document flow and into fixed positioning.
+
+      I initially had these things absolutely positioned with some container
+      padding to offset things, but that involved too many magic numbers.
+  }}
+</div>

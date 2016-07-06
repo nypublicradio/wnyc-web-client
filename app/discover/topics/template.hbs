@@ -1,21 +1,14 @@
-<header class="discover-setup-header">
-  <div class="discover-setup-header-action">
-    <button class="rounded-caps-button" {{action 'back'}}>Back</button>
-  </div>
-  <div class="discover-setup-header-content">
-    <span class="discover-setup-title-step-count">Step 1 of 2</span>
-    <h2 class="discover-setup-title-step-title h2 text--white">Pick Your Topics</h2>
-
-    <span class="discover-setup-title-error">&nbsp;
-      {{#if (and showError hasNotSelectedATopic)}}
-        Please select at least one topic
-      {{/if}}
-    </span>
-  </div>
-  <div class="discover-setup-header-action">
-    <button class="rounded-caps-button {{if (not hasNotSelectedATopic) 'mod-filled-red'}}" {{action 'next' currentTopicSelection}}>Next</button>
-  </div>
-</header>
+{{#sticky-page-header}}
+  {{discover-setup-header
+    stepLabel="Step 1 of 2"
+    errorText = (if (and showError hasNotSelectedATopic) 'Please select at least one topic')
+    title="Pick Your Topics"
+    nextButtonEnabled=(not hasNotSelectedATopic)
+    nextButtonText="Next"
+    onNext=(route-action 'next' currentTopicSelection)
+    onBack=(route-action 'back')
+  }}
+{{/sticky-page-header}}
 
 {{discover-topic-list
   topics=model.topics

@@ -65,6 +65,8 @@
     "ember-multiselect-checkboxes": "0.9.0",
     "ember-resolver": "^2.0.3",
     "ember-responsive": "1.2.7",
+    "ember-scroll-to": "0.5.1",
+    "ember-route-action-helper": "0.3.2",
     "ember-simple-auth": "1.1.0-beta.4",
     "ember-sortable": "1.8.1",
     "ember-truth-helpers": "1.2.0",

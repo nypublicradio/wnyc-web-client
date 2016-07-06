@@ -1,17 +1,13 @@
-<header class="discover-setup-header">
-  <div class="discover-setup-header-action">
-    <button class="rounded-caps-button" {{action 'back'}}>Back</button>
-  </div>
-  <div class="discover-setup-header-content">
-    <span class="discover-setup-title-step-count">Step 2 of 2</span>
-    <h2 class="discover-setup-title-step-title h2 text--white">Pick Your Shows</h2>
-    <span class="discover-setup-title-error">&nbsp;
-    </span>
-  </div>
-  <div class="discover-setup-header-action">
-    <button class="rounded-caps-button mod-filled-red" {{action 'next' currentShowSelection}}>Create Station</button>
-  </div>
-</header>
+{{#sticky-page-header}}
+  {{discover-setup-header
+    stepLabel="Step 2 of 2"
+    title="Pick Your Shows"
+    nextButtonEnabled=true
+    nextButtonText="Create Station"
+    onNext=(route-action 'next' currentShowSelection)
+    onBack=(route-action 'back')
+  }}
+{{/sticky-page-header}}
 
 {{discover-show-list
   shows=model.shows

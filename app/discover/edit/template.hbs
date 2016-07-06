@@ -1,28 +1,30 @@
-<header class="discover-setup-header">
-  <div class="discover-setup-header-action">
-    <button {{action 'cancel'}}  class="rounded-caps-button mod-with-icon discover-setup-header-cancel-button">
-      {{wnyc-svg icon="close"}}<span>Cancel</span>
-    </button>
-  </div>
-  <div>
-    <h2 class="discover-setup-title-step-title h2 text--white">Customize Your Playlist</h2>
-  </div>
-  <div class="discover-setup-header-action">
-    <button class="rounded-caps-button mod-filled-red" {{action 'refresh'}}>Refresh Station</button>
-  </div>
-</header>
+{{#sticky-page-header}}
+  <header class="discover-setup-header">
+    <div class="discover-setup-header-action">
+      <button {{action 'cancel'}}  class="rounded-caps-button mod-with-icon discover-setup-header-cancel-button">
+        {{wnyc-svg icon="close"}}<span>Cancel</span>
+      </button>
+    </div>
+    <div>
+      <h2 class="discover-setup-title-step-title h2 text--white">Customize Your Playlist</h2>
+    </div>
+    <div class="discover-setup-header-action">
+      <button class="rounded-caps-button mod-filled-red" {{action 'refresh'}}>Refresh Station</button>
+    </div>
+  </header>
 
-<div class="discover-setup-tab-container">
-  <div class="discover-setup-tab">
-    {{#link-to 'discover.edit.topics' class='discover-setup-tab-link discover-setup-tab-link-topics'}}
-      Pick Topics
-    {{/link-to}}
+  <div class="discover-setup-tab-container">
+    <div class="discover-setup-tab">
+      {{#link-to 'discover.edit.topics' class='discover-setup-tab-link discover-setup-tab-link-topics'}}
+        Pick Topics
+      {{/link-to}}
+    </div>
+    <div class="discover-setup-tab">
+      {{#link-to 'discover.edit.shows' class='discover-setup-tab-link discover-setup-tab-link-shows'}}
+        Pick Shows
+      {{/link-to}}
+    </div>
   </div>
-  <div class="discover-setup-tab">
-    {{#link-to 'discover.edit.shows' class='discover-setup-tab-link discover-setup-tab-link-shows'}}
-      Pick Shows
-    {{/link-to}}
-  </div>
-</div>
+{{/sticky-page-header}}
 
 {{outlet}}
