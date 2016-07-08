@@ -28,6 +28,7 @@ export default function() {
     width: '100%',
     height: '100%',
     top: 0,
+    '-webkit-overflow-scrolling': 'touch'
   });
 
   return animate(el, {translateY}, animationOptions)
