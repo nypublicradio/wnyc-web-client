@@ -57,6 +57,7 @@ export default function() {
     return body;
   });
 
+  this.get(`/api/v3/shows`);
   this.get(`${baseUrl}/api/v3/shows`);
   this.get(`${baseUrl}/api/v3/bucket/:slug`, 'bucket');
   this.get(`${baseUrl}/api/v3/story/detail/:id`, 'story');

@@ -11,8 +11,11 @@ body.discover .sitechrome-page-content-area {
   // TODO: Maybe, make sitechrome have no margin on the bottom and leave it
   // up to the feature to set a padding.
 
-  padding:1.5rem;
   min-height:80vh;
+}
+
+body.discover .discover {
+  padding:1.5rem;
 }
 
 body.discover #site-chrome {
@@ -23,16 +26,48 @@ body.discover.index_loading .sitechrome-page-content-area {
   padding:0;
 }
 
+/*
+  liquid fire sets some transform properties on these elements
+  and that messes up fixed positioning by making them fixed
+  relative to the container. We need to override these and set
+  overflow hidden on the discover content area so things don't bleed.
+*/
+body.discover .liquid-container {
+  height: 100%;
+
+  position: relative;
+  overflow: initial;
+  -webkit-transform: initial;
+  -moz-transform:    initial;
+  transform:         initial;
+  z-index:1;
+
+  .liquid-child {
+    -webkit-transform: initial;
+    -moz-transform:    initial;
+    transform:         initial;
+  }
+}
+
+body.discover .sitechrome-page-content-area {
+  overflow:hidden;
+}
+
+body.discover .discover-fadeable-background {
+  z-index:0;
+  opacity:0; // this is handled by liquid fire
+  @include absolute-fill();
+}
+
 .discover-welcome-screen {
-  @include absolute-fill(); /* It's this way to prepare for the transitions upcoming */
   @include display-flex;
   @include flex-direction(column);
   @include align-items(center);
   @include justify-content(center);
-  background: url(/assets/img/backgrounds/pattern_red.jpg);
   @include transition(background $transition-timing);
   background-size:cover;
   color: #FFFFFF;
+  padding-top:4rem;
   padding-bottom:4rem;
 
   .player-wrapper {
@@ -82,12 +117,6 @@ body.discover.index_loading .sitechrome-page-content-area {
 .discover-welcome-screen-icon,
 .discover-welcome-screen-button {
   margin: 0.5rem;
-}
-
-.discover-welcome-screen.is-transitioning {
-  @include transition(background $transition-timing);
-  background: url(/assets/img/backgrounds/pattern_grey.png);
-  background-size:cover;
 }
 
 .discover-loading {
@@ -181,10 +210,8 @@ body.discover.index_loading .sitechrome-page-content-area {
 
 .discover-playlist-header {
   @include display-flex;
-  @include flex-direction(column);
+  @include flex-direction(column-reverse);
   @include flex-wrap(nowrap);
-  @include align-items(center);
-  @include justify-content(space-between);
   text-align:center;
   color:#FFF;
   padding:20px 0;
@@ -212,11 +239,15 @@ body.discover.index_loading .sitechrome-page-content-area {
 }
 
 .discover-edit-playlist-link {
+  @include display-flex;
+  @include justify-content(flex-end);
+  @include align-items(flex-end);
+  @include flex-direction(row);
+
   color:$red;
   font-size:rems(12);
   font-weight:bold;
   text-transform: uppercase;
-  position:absolute;
   right:2rem;
   top:2rem;
   border:0;
@@ -226,7 +257,15 @@ body.discover.index_loading .sitechrome-page-content-area {
   }
 }
 
+// Get this out of the way when we're animating, because
+// fixed position elements dont' play nice with liquid-fire
+.liquid-animating .mod-sticky-header {
+  opacity:0;
+  @include transition(opacity 0.25s ease-in);
+}
+
 .mod-sticky-header{
+  opacity:1;
   position:fixed;
   top:0;
   left:1.5rem;
@@ -241,7 +280,7 @@ body.discover.index_loading .sitechrome-page-content-area {
   }
 
   // This is the collapsed header style
-  
+
   .discover-playlist-header {
     @include display-flex;
     @include justify-content(space-between);

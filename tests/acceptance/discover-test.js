@@ -10,7 +10,7 @@ moduleForAcceptance('Acceptance | discover',
 );
 
 test('can visit discover from the home page', function(assert) {
-  visit('/');
+  visit('/login');
 
   andThen(function() {
     click('.l-page-nav .list-item [href*="discover"]');
