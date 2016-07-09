@@ -17,18 +17,25 @@ export default Ember.Route.extend({
   },
 
   actions: {
-    back() {
+    back(selectedShowSlugs) {
       let prefs = this.get('discoverPrefs');
       prefs.set('currentSetupStep', 'topics');
+      prefs.set('selectedShowSlugs', selectedShowSlugs);
       this.transitionTo('discover.topics');
     },
     next(selectedShowSlugs) {
-      let prefs = this.get('discoverPrefs');
-      prefs.set('selectedShowSlugs', selectedShowSlugs);
-      prefs.set('setupComplete', true);
-      prefs.save();
+      if (selectedShowSlugs.length === 0) {
+        this.controllerFor('discover.shows').set('showError', true);
+      }
+      else {
+        this.controllerFor('discover.shows').set('showError', false);
+        let prefs = this.get('discoverPrefs');
+        prefs.set('selectedShowSlugs', selectedShowSlugs);
+        prefs.set('setupComplete', true);
+        prefs.save();
 
-      this.transitionTo('discover.index');
+        this.transitionTo('discover.index');
+      }
     }
   }
 });

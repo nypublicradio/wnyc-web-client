@@ -56,6 +56,7 @@ body.discover .sitechrome-page-content-area {
 body.discover .discover-fadeable-background {
   z-index:0;
   opacity:0; // this is handled by liquid fire
+  width: 100%;
   @include absolute-fill();
 }
 
@@ -765,10 +766,11 @@ body.discover .discover-fadeable-background {
 .discover-show-list > div { // this is the multi-select checkbox component
   @include display-flex;
   @include flex-wrap(wrap);
-
   @include flex-direction(row);
   @include align-items(flex-start);
   @include justify-content(space-between);
+  max-width:1000px;
+  margin: auto auto;
 }
 
 .discover-show {

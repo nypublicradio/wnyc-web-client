@@ -6,7 +6,7 @@
     nextButtonEnabled=(not hasNotSelectedATopic)
     nextButtonText="Next"
     onNext=(route-action 'next' currentTopicSelection)
-    onBack=(route-action 'back')
+    onBack=(route-action 'back' currentTopicSelection)
   }}
 {{/sticky-page-header}}
 

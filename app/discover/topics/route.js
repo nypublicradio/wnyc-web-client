@@ -11,9 +11,10 @@ export default Ember.Route.extend({
     });
   },
   actions: {
-    back() {
+    back(selectedTopicTags) {
       let prefs = this.get('discoverPrefs');
       prefs.set('currentSetupStep', 'start');
+      prefs.set('selectedTopicTags', selectedTopicTags);
       this.transitionTo('discover.start');
     },
     next(selectedTopicTags) {

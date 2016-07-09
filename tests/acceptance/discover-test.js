@@ -1,10 +1,15 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
+import { currentSession } from 'overhaul/tests/helpers/ember-simple-auth';
 
 moduleForAcceptance('Acceptance | discover',
   {
     beforeEach() {
       window.Modernizr.touch = false;
+      let session = currentSession(this.application);
+      session.set('data.discover-shows',  []);
+      session.set('data.discover-topics', []);
+      session.set('data.discover-excluded-story-ids', []);
     }
   }
 );
@@ -153,6 +158,37 @@ test('shows are saved in a session and maintained upon next visit in initial flo
   });
 });
 
+
+test('show selections are maintained if you go back to topics screen', function(assert) {
+  server.createList('discover-topic', 5);
+  let shows = server.createList('show', 5);
+  let testShow = shows[0];
+  visit('/discover/start');
+  click('button:contains("Create My Own")');
+  andThen(function() {
+    click(".discover-topic input");
+    andThen(function() {
+      click("button:contains('Next')");
+      andThen(function() {
+        assert.equal(currentURL(), '/discover/start/shows', "should be on shows step");
+        assert.equal($(`.discover-show[data-slug="${testShow.slug}"] input`).prop('checked'), true, "show should be selected");
+        click(`.discover-show[data-slug="${testShow.slug}"]`);
+        andThen(function() {
+          click("button:contains('Back')");
+          andThen(function() {
+            click("button:contains('Next')");
+            andThen(function() {
+              assert.equal($(`.discover-show[data-slug="${testShow.slug}"]`).length, 1, "test show should exist");
+              assert.equal($(`.discover-show[data-slug="${testShow.slug}"] input`).prop('checked'), false, "should not be checked");
+            });
+          });
+        });
+      });
+    });
+  });
+});
+
+
 test('all shows are selected by default', function(assert) {
   server.createList('discover-topic', 5);
   let shows = server.createList('show', 5);
@@ -166,6 +202,63 @@ test('all shows are selected by default', function(assert) {
     andThen(function() {
       assert.equal(currentURL(), '/discover/start/shows');
       assert.equal($(`.discover-show input:checked`).length, shows.length, "all shows should be selected");
+    });
+  });
+});
+
+
+test('create station button is disabled if no shows are selected', function(assert) {
+  visit('/discover/start');
+  server.createList('discover-topic', 20);
+  server.createList('show', 2);
+
+  andThen(function() {
+    click('button:contains("Create My Own")');
+    andThen(function() {
+      click(".discover-topic input");
+      click("button:contains('Next')");
+
+      andThen(function() {
+        assert.equal($('button.mod-filled-red').length, 1, "Button should be red");
+
+        click($(".discover-show")[0]);
+        click($(".discover-show")[1]);
+
+        andThen(() => {
+          assert.equal(currentURL(), '/discover/start/shows');
+          assert.equal($('button.mod-filled-red').length, 0, "Button should not be red");
+        });
+      });
+    });
+  });
+});
+
+test('create station button should show error if clicked if no shows are selected', function(assert) {
+  visit('/discover/start');
+  server.createList('discover-topic', 20);
+  server.createList('show', 2);
+
+  andThen(function() {
+    click('button:contains("Create My Own")');
+    andThen(function() {
+      click(".discover-topic input");
+      click("button:contains('Next')");
+
+      andThen(function() {
+        assert.equal($('button.mod-filled-red').length, 1, "Button should be red");
+
+        click($(".discover-show")[0]);
+        click($(".discover-show")[1]);
+
+        andThen(() => {
+          click($('button:contains("Create Station")'));
+
+          andThen(() => {
+            assert.equal($('.discover-setup-title-error').text().length > 0, true);
+            assert.equal(currentURL(), '/discover/start/shows');
+          });
+        });
+      });
     });
   });
 });
@@ -194,7 +287,6 @@ test('setup picks up where you left off if you bail half way through', function(
   });
 });
 
-
 test('should be able to go back to welcome screen if you really want to', function(assert) {
   server.createList('discover-topic', 5);
   server.createList('show', 5);
@@ -219,7 +311,6 @@ test('should be able to go back to welcome screen if you really want to', functi
     });
   });
 });
-
 
 test('nav link sends you to start page', function(assert) {
   server.createList('discover-topic', 5);

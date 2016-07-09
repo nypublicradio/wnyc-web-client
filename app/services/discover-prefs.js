@@ -29,13 +29,13 @@ export default Ember.Service.extend({
   },
 
   setDefaultShows(slugs) {
-    if (this.get('selectedShowSlugs').length === 0) {
+    if ((this.get('selectedShowSlugs') || []).length === 0) {
       this.set('selectedShowSlugs', slugs);
     }
   },
 
   setDefaultTopics(tags) {
-    if (this.get('selectedTopicTags').length === 0) {
+    if ((this.get('selectedTopicTags') || []).length === 0) {
       this.set('selectedTopicTags', tags);
     }
   },

@@ -32,6 +32,7 @@ export default Ember.Component.extend({
   updateShows(shows) {
     Ember.run.once(() => {
       this.sendAction('onShowsUpdated', shows.mapBy('slug'));
+      this.sendAction('onNoneSelected', shows.length === 0);
     });
   },
 
