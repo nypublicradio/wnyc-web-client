@@ -51,7 +51,7 @@ export default function() {
   this.transition(
     this.fromRoute('discover.index'),
     this.toRoute(['discover.edit', 'discover.edit.topics']),
-    this.use('scrollThen', 'toLeftWithReset', {easing: 'ease-in-out', duration: duration(100)})
+    this.use('toLeftWithReset', {easing: 'ease-in-out', duration: duration(100)})
   );
 
   this.transition(
