@@ -2,6 +2,11 @@ import moveOver from "./move-over";
 import { animate } from "liquid-fire";
 
 export default function loadingTransition(opts={}) {
+  let direction = 1;
+  if (opts['direction'] === 'fromLeft') {
+    direction = -1;
+  }
+
   let loadingScreen, otherScreen;
 
   if (this.oldElement.find('.discover-loading').length > 0) {
@@ -10,7 +15,7 @@ export default function loadingTransition(opts={}) {
     otherScreen = this.newElement;
 
     return animate(loadingScreen, {opacity: 0, duration: 0.5}, opts).then(() => {
-      return moveOver.call(this, 'x', -1).then(() => {
+      return moveOver.call(this, 'x', (-1 * direction)).then(() => {
         window.$('.liquid-child').css('transform', 'initial');
       });
   });
@@ -21,7 +26,7 @@ export default function loadingTransition(opts={}) {
     otherScreen = this.oldElement;
 
     loadingScreen.css('opacity', 0);
-    return moveOver.call(this, 'x', 1).then(() => {
+    return moveOver.call(this, 'x', (1 * direction)).then(() => {
       return animate(loadingScreen, {opacity: 1, duration: 0.5}, opts).then(() => {
         window.$('.liquid-child').css('transform', 'initial');
       });

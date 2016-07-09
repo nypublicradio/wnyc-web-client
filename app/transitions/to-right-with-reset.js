@@ -1,5 +1,4 @@
 import moveOver from "./move-over";
-import { stop} from "liquid-fire";
 
 export default function() {
   var el = document.getElementsByTagName('html');

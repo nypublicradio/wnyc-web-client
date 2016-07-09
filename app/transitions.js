@@ -78,6 +78,12 @@ export default function() {
   );
 
   this.transition(
+    this.fromRoute('discover.shows'),
+    this.toRoute('discover.index_loading'),
+    this.use('discoverLoading', {direction: 'fromLeft'})
+  );
+
+  this.transition(
     this.fromRoute('discover.index_loading'),
     this.use('discoverLoading')
   );
