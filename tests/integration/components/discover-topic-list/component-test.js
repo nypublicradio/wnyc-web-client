@@ -27,27 +27,27 @@ test('select all selects all topics', function(assert) {
   assert.equal(this.get('currentlySelectedTopics').length, this.get('topics').length);
 });
 
-test('select none selects none', function(assert) {
+test('clear all selects none', function(assert) {
   this.set('topics', topics);
   this.render(hbs`{{discover-topic-list topics=topics onTopicsUpdated=(action (mut currentlySelectedTopics))}}`);
 
   this.$('a:contains("Select All")').click();
-  this.$('a:contains("Select None")').click();
+  this.$('a:contains("Clear All")').click();
   assert.equal(this.get('currentlySelectedTopics').length, 0);
 });
 
-test('select none only shows up when all are selected', function(assert) {
+test('Clear All only shows up when all are selected', function(assert) {
   this.set('topics', topics.slice(0, 3));
   this.render(hbs`{{discover-topic-list topics=topics}}`);
 
   this.$('.discover-topic')[0].click();
-  assert.equal(this.$('a:contains("Select None")').length, 0, "Should be 'Select All' when not all are selected");
+  assert.equal(this.$('a:contains("Clear All")').length, 0, "Should be 'Select All' when not all are selected");
 
   this.$('.discover-topic')[1].click();
-  assert.equal(this.$('a:contains("Select None")').length, 0, "Should be 'Select All' when not all are selected");
+  assert.equal(this.$('a:contains("Clear All")').length, 0, "Should be 'Select All' when not all are selected");
 
   this.$('.discover-topic')[2].click();
-  assert.equal(this.$('a:contains("Select None")').length, 1, "Should be 'Select None' when all are selected");
+  assert.equal(this.$('a:contains("Clear All")').length, 1, "Should be 'Clear All' when all are selected");
 });
 
 test('passing in selected topics renders selected items', function(assert) {
