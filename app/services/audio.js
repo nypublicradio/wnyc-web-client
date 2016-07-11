@@ -142,14 +142,22 @@ export default Service.extend({
       set(this, 'currentContext', context);
 
       if (shouldTrack) {
-        this._trackPlayerEvent({
-          action: `Played Story "${story.get('title')}"`,
-          withRegion: true,
-          region: upperCamelize(context),
-          withAnalytics: true,
-          story
-        });
-        this.sendPlayListenAction(id);
+        if (context === 'queue') {
+          this._trackPlayerEvent({
+            action: 'Played Story from Queue',
+            label: story.get('title'),
+            story
+          });
+        } else {
+          this._trackPlayerEvent({
+            action: `Played Story "${story.get('title')}"`,
+            withRegion: true,
+            region: upperCamelize(context),
+            withAnalytics: true,
+            story
+          });
+          this.sendPlayListenAction(id);
+        }
       }
     });
   },
