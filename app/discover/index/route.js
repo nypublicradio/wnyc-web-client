@@ -75,7 +75,7 @@ export default Ember.Route.extend({
 
       discoverQueue.get('items').forEach(item => {
         let itemId        = get(item, 'id');
-        listenActions.sendSkip(itemId, 'discover');
+        listenActions.sendSkip(itemId, 'NYPR_Web');
         prefs.excludeStoryId(itemId);
       });
       discoverQueue.emptyQueue();
@@ -87,7 +87,7 @@ export default Ember.Route.extend({
       let prefs         = this.get('discoverPrefs');
       let itemId        = get(item, 'id');
 
-      listenActions.sendDelete(itemId, 'discover');
+      listenActions.sendDelete(itemId, 'NYPR_Web');
 
       // Make sure this doesn't show up again
       prefs.excludeStoryId(itemId);
