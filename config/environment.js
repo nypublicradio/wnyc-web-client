@@ -79,8 +79,11 @@ module.exports = function(environment) {
     // these are provided via a .env file or else by Django's EmberAdapter
     googleAnalyticsKey: process.env.GOOGLE_ANALYTICS,
     googleAPIv3Key: process.env.GOOGLE_API_V3_KEY,
-    wnycAPI: process.env.wnyc_api,
-    wnycDemoAPI: process.env.wnyc_demo_api,
+    wnycAPI: process.env.WNYC_API,
+    showsDiscoverStation: "active-shows",
+    showsAPIKey: "hummingbird",
+    moreShowsDiscoverStation: "archived-shows",
+    moreShowsAPIKey: "mammoth",
     wnycAccountRoot: process.env.WNYC_ACCOUNT_ROOT,
     wnycEtagAPI: process.env.WNYC_ETAG_API,
     wnycStaticURL: process.env.WNYC_STATIC_URL,
