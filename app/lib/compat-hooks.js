@@ -144,10 +144,6 @@ export function serializeInlineDoc(inlineDoc) {
   toClean.push(inlineDoc.querySelector('link[href*="assets/vendor"]'));
   toClean.push(inlineDoc.querySelector('link[href*="assets/overhaul"]'));
 
-  // any content scripts have already done their work, so remove them so they don't
-  // run again
-  Array.from(inlineDoc.querySelectorAll('main > article script')).forEach(n => toClean.push(n));
-
   toClean.forEach(n => n && n.parentNode.removeChild(n));
 
   return inlineDoc;
