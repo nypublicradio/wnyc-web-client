@@ -181,7 +181,7 @@ test('loading a page with a bad ?play param', function(assert) {
   });
 });
 
-test('scripts embedded within content do not run twice', function(assert) {
+test('deferred scripts embedded within content do not run twice', function(assert) {
   // TODO: remove once https://github.com/nypublicradio/puppysite/pull/202 lands
   server.create('story', {slug: 'foo'});
   //
@@ -189,7 +189,7 @@ test('scripts embedded within content do not run twice', function(assert) {
     id: 'story/foo/',
     slug: 'foo',
     body: `
-<script type="text/javascript">
+<script type="text/javascript-deferred">
 (function(){
 
   var p = document.createElement("p");
