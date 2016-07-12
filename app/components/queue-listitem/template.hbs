@@ -51,6 +51,11 @@
       </div>
     </div>
     <!-- .l-holygrail-right -->
+    {{#if isCurrent}}
+      <div class="queueitem-playingicon">
+        {{wnyc-svg className="icon" icon="speaker"}}
+      </div>
+    {{/if}}
     {{#if draggable}}
       <div class="queueitem-draghandle">
         {{wnyc-svg className="icon" icon="reorder"}}

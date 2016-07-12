@@ -1,8 +1,7 @@
 {{#liquid-bind (hash queue=audio.queue.items currentAudio=audio.currentAudio playingFromQueue=playingFromQueue) as |props|}}
 
 {{#if (and props.playingFromQueue props.currentAudio)}}
-  <h3 class="queue-header">NOW PLAYING</h3>
-  <div class="now-playing">
+  <div class='list--nowplaying'>
     <div class='list-item'>
       {{queue-listitem
         dataId=props.currentAudio.id
@@ -12,7 +11,6 @@
         playContext='queue'}}
     </div>
   </div>
-  <h3 class="queue-header">UP NEXT</h3>
 {{/if}}
 
 {{#sortable-group tagName='div' classNames='list list--borderflip' onChange='reorderItems' as |group|}}
@@ -26,7 +24,9 @@
       removeAction=(action 'removeFromQueue')}}
   {{/sortable-item}}
 {{else}}
-  <div class="queuelist-empty">Your queue is empty! Add audio by selecting the “+ Queue” button next to the pieces that you want to add.</div>
+  {{#unless (and props.playingFromQueue props.currentAudio)}}
+    <div class="queuelist-empty">Your queue is empty! Add audio by selecting the “+ Queue” button next to the pieces that you want to add.</div>
+  {{/unless}}
 {{/each}}
 {{/sortable-group}}
 

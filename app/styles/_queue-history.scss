@@ -37,7 +37,7 @@
     position: relative;
   }
 
-  .queueitem-draghandle {
+  @mixin queue-left-icon($width, $margin-right, $color) {
     position: absolute;
     left: -50px;
     top: 0;
@@ -45,14 +45,38 @@
     width: 50px;
 
     > .icon {
-      display: none;
+      display: block;
       height: 100%;
-      width: 8px;
+      width: $width;
       box-sizing: border-box;
-      margin: auto 17px auto 25px;
+      margin-top: auto;
+      margin-bottom: auto;
+      margin-left: 50px - $width - $margin-right;
+      margin-right: $margin-right;
       path {
-        fill: #cccccc;
+        fill: $color;
       }
+    }
+  }
+
+  .queueitem-draghandle {
+    @include queue-left-icon(8px, 17px, $lightgray);
+    > .icon {
+      display: none;
+    }
+  }
+
+  .queueitem-playingicon {
+    @include queue-left-icon(16px, 13px, $red);
+    > .icon {
+      display: none;
+    }
+  }
+
+  .list--nowplaying {
+    position: relative;
+    .queueitem-playingicon > .icon {
+      display: block;
     }
   }
 
@@ -89,9 +113,6 @@
     &:last-child {
       border-bottom: 1px solid rgb(241, 241, 241);
     }
-  }
-  .now-playing {
-    margin-bottom: 50px;
   }
   .queuelist-empty {
     background: #ffffff;
