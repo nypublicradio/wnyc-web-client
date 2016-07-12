@@ -88,7 +88,7 @@ test('deferred scripts embedded within content do not run twice', function(asser
     id: 'story/foo/',
     slug: 'foo',
     body: `
-<script type="text/javascript-deferred">
+<script type="text/deferred-javascript">
 (function(){
 
   var p = document.createElement("p");
