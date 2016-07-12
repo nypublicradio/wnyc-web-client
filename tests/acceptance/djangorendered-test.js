@@ -182,9 +182,6 @@ test('loading a page with a bad ?play param', function(assert) {
 });
 
 test('deferred scripts embedded within content do not run twice', function(assert) {
-  // TODO: remove once https://github.com/nypublicradio/puppysite/pull/202 lands
-  server.create('story', {slug: 'foo'});
-  //
   let page = server.create('djangoPage', {
     id: 'story/foo/',
     slug: 'foo',
