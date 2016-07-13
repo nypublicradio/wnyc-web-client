@@ -27,8 +27,7 @@ export default function() {
     position: 'fixed',
     width: '100%',
     height: '100%',
-    top: 0,
-    '-webkit-overflow-scrolling': 'touch'
+    top: 0
   });
 
   return animate(el, {translateY}, animationOptions)
