@@ -7,18 +7,21 @@
     Sit back and just listen, or tell it what you like and don’t like - it will adapt to you.
     </h3>
 
-    {{! Todo: Abstract this into an icon-button component that allows left/right options, etc }}
-    {{#playlist.button class="discover-playlist-header-button mod-with-icon"}}
-      {{#if playlist.isNotStarted}}
-        <span>Start Listening</span>{{wnyc-svg icon="arrow-down"}}
+    {{#if playlist.isNotStarted}}
+      {{#playlist.button class="discover-playlist-header-button mod-filled-red" icon='arrow-down' iconPlacement='right'}}
+        Start Listening
+      {{/playlist.button}}
+    {{else}}
+      {{#if playlist.isPaused}}
+        {{#playlist.button class="discover-playlist-header-button mod-filled-red" icon='play' iconPlacement='left'}}
+          Continue Listening
+        {{/playlist.button}}
       {{else}}
-        {{#if playlist.isPaused}}
-          {{wnyc-svg icon="play"}}<span>Continue Listening</span>
-        {{else}}
-          {{wnyc-svg icon="pause"}}<span>Pause</span>
-        {{/if}}
+        {{#playlist.button class="discover-playlist-header-button mod-filled-red" icon='pause' iconPlacement='left'}}
+          Pause
+        {{/playlist.button}}
       {{/if}}
-    {{/playlist.button}}
+    {{/if}}
   </div>
   {{#link-to 'discover.edit' class="discover-edit-playlist-link"}}
     Edit My Shows & Topics

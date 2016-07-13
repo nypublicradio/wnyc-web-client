@@ -2,7 +2,7 @@
   <div class="discover-playlist-header-container">
     <div class="discover-playlist-header">
       {{yield (hash
-        button=(component 'discover-playlist-play-button' click=(action 'toggle'))
+        button=(component 'action-button' click=(action 'toggle'))
         isPlaying=isPlaying
         isPaused=isPaused
         isNotStarted=isNotStarted

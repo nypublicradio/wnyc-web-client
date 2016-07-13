@@ -1,6 +1,8 @@
 <header class="discover-setup-header">
   <div class="discover-setup-header-action">
-    <button class="rounded-caps-button" {{action 'back'}}>Back</button>
+    {{#action-button click=(action 'back')}}
+      Back
+    {{/action-button}}
   </div>
   <div class="discover-setup-header-content">
     <span class="discover-setup-title-step-count">{{stepLabel}}</span>
@@ -10,6 +12,8 @@
     </span>
   </div>
   <div class="discover-setup-header-action">
-    <button class="rounded-caps-button {{if nextButtonEnabled 'mod-filled-red'}}" {{action 'next'}}>{{nextButtonText}}</button>
+    {{#action-button class=(if nextButtonEnabled 'mod-filled-red') click=(action 'next')}}
+      {{nextButtonText}}
+    {{/action-button}}
   </div>
 </header>

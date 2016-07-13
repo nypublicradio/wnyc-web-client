@@ -924,13 +924,21 @@ body.discover .discover-fadeable-background {
   }
 }
 
-.rounded-caps-button.mod-with-icon {
+// Action button styling
+.rounded-caps-button.mod-with-icon > div {
   @include display-flex;
-  @include flex-wrap(nowrap);
   @include align-items(center);
   @include justify-content(space-between);
+  @include flex-direction(row);
   text-align: center;
 
+  div.action-button-icon {
+    @include display-flex;
+    @include align-items(center);
+  }
+  span.action-button-text {
+
+  }
   svg {
     path {
       fill: #FFF;
@@ -938,11 +946,10 @@ body.discover .discover-fadeable-background {
     width:15px;
   }
 
-  > svg + span {
-    display:inline-block;
+  > .action-button-icon + .action-button-text {
     margin-left:5px;
   }
-  > span + svg {
+  > .action-button-text + .action-button-icon {
     margin-left:5px;
   }
 }

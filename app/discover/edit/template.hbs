@@ -1,15 +1,17 @@
 {{#sticky-page-header}}
   <header class="discover-setup-header">
     <div class="discover-setup-header-action">
-      <button {{action 'cancel'}}  class="rounded-caps-button mod-with-icon discover-setup-header-cancel-button">
-        {{wnyc-svg icon="close"}}<span>Cancel</span>
-      </button>
+      {{#action-button class="discover-setup-header-cancel-button" click=(route-action 'cancel') icon="close" iconPlacement="left"}}
+        Cancel
+      {{/action-button}}
     </div>
     <div>
       <h2 class="discover-setup-title-step-title h2 text--white">Customize Your Playlist</h2>
     </div>
     <div class="discover-setup-header-action">
-      <button class="rounded-caps-button mod-filled-red" {{action 'refresh'}}>Refresh Station</button>
+      {{#action-button class="mod-filled-red" click=(route-action 'refresh')}}
+        Refresh Station
+      {{/action-button}}
     </div>
   </header>
 
