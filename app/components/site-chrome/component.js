@@ -9,6 +9,7 @@ var $window = Ember.$(window),
 
 export default Ember.Component.extend(BetaActionsMixin, {
   session: service(),
+  metrics: service(),
   // we load SVGs via the <use> element, which requires the asset loaded
   // on the same domain
   svgURL: config.wnycSvgURL,
@@ -39,6 +40,10 @@ export default Ember.Component.extend(BetaActionsMixin, {
 
   actions: {
     logout() {
+      this.get('metrics').trackEvent({
+        category: 'WNYC Menu',
+        label: 'Clicked Logout',
+      });
       this.get('session').invalidate();
     }
   }

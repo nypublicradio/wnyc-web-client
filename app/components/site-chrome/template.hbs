@@ -6,6 +6,10 @@
     beta=beta}}
 {{/if}}
 
+{{!--
+  Using <a> tags here instead of ember {{link-to}} helpers in order to run google analytics tracking events on the links. Global link handler catches clicks on links with data-tracking properties and runs an event tracking function before routing the link. More in /overhaul/app/instance-initializers/link-handler.js
+--}}
+
 <div class="l-page" id='site-chrome'>
 
   <div class="sitechrome-top">
@@ -23,12 +27,21 @@
         {{#unless media.isMiddleNarrowAndUp}}
           <h1>
             <span class="for-screenreaders">WNYC Navigation</span>
-            {{#link-to 'index' classNames='link--nodecor'}}
+            <a href="/" 
+              class="link--nodecor"
+              title="WNYC Logo"
+              data-tracking-category="WNYC Menu"
+              data-tracking-action="Clicked WNYC Logo">
               {{wnyc-svg icon='logo-wnyc' className='icon--wnyc-logo-nav'}}
-            {{/link-to}}
+            </a>
           </h1>
         {{/unless}}
-        <a class="sitechrome-btn" href="https://pledge3.wnyc.org/donate/main/onestep/?utm_source=wnyc&utm_medium=wnyc-86x27&utm_content=wnyc-header-beta&utm_campaign=pledge" target="_blank">Donate {{if media.isMiddleNarrowAndUp 'Now'}}</a>
+        <a class="sitechrome-btn" 
+        href="https://pledge3.wnyc.org/donate/main/onestep/?utm_source=wnyc&utm_medium=wnyc-86x27&utm_content=wnyc-header-beta&utm_campaign=pledge" 
+        title="Donate"
+        data-tracking-category="WNYC Menu"
+        data-tracking-action="Clicked Donate Button"
+        target="_blank">Donate {{if media.isMiddleNarrowAndUp 'Now'}}</a>
       </div>
     </div>
   </div>
@@ -39,71 +52,101 @@
     <div class="sitechrome-corner">
       <h1>
         <span class="for-screenreaders">WNYC Navigation</span>
-        {{#link-to 'index' classNames='link--nodecor'}}
+        <a href="/" 
+          class="link--nodecor"
+          title="WNYC Logo"
+          data-tracking-category="WNYC Menu"
+          data-tracking-action="Clicked WNYC Logo">
           {{wnyc-svg icon='logo-wnyc' className='icon--wnyc-logo-nav'}}
-        {{/link-to}}
+        </a>
       </h1>
     </div>
     {{/if}}
     <div class="scrollable-body">
       <ul class="list list--noborder flush aligncenter text--upper text--white text--spacing text--heavy text--small {{unless media.isMiddleNarrowAndUp 'list--inline list--spaced'}}">
         <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
-          {{#link-to 'djangorendered' 'search' class='inherit'}}
+          <a href="/search" 
+            class="inherit"
+            title="Search"
+            data-tracking-category="WNYC Menu"
+            data-tracking-action="Clicked Search">
             {{wnyc-svg icon='search' className='icon--menu icon--search'}}
             Search
-          {{/link-to}}
+          </a>
         </li>
         <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
-          {{#link-to 'stream' class='inherit'}}
+          <a href="/streams" 
+            class="inherit"
+            title="Listen Live"
+            data-tracking-category="WNYC Menu"
+            data-tracking-action="Clicked Listen Live">
             {{wnyc-svg icon='listen-live' className='icon--menu icon--listenlive'}}
             Listen Live
-          {{/link-to}}
+          </a>
         </li>
         <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
-          {{#link-to 'djangorendered' 'schedule' class='inherit'}}
+          <a href="/schedule"
+            class="inherit"
+            title="Schedule"
+            data-tracking-category="WNYC Menu"
+            data-tracking-action="Clicked Schedule">
           {{wnyc-svg icon='schedule' className='icon--menu icon--schedule'}}
           Schedule
-          {{/link-to}}
+          </a>
         </li>
         <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
-          {{#link-to 'shows' class='inherit'}}
-          {{wnyc-svg icon='radio' className='icon--menu icon--shows'}}
+          <a href="/shows" 
+            class="inherit"
+            title="Shows"
+            data-tracking-category="WNYC Menu"
+            data-tracking-action="Clicked Shows">
+          {{wnyc-svg icon='close' className='icon--menu icon--shows'}}
           Shows
-          {{/link-to}}
+          </a>
         </li>
         <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
-          {{#link-to 'djangorendered' 'topics' class='inherit'}}
+          <a href="/topics" 
+            class="inherit"
+            title="Topics"
+            data-tracking-category="WNYC Menu"
+            data-tracking-action="Clicked Topics">
           {{wnyc-svg icon='topics' className='icon--menu icon--topics'}}
           Topics
-          {{/link-to}}
+          </a>
         </li>
         <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
-          {{#link-to 'discover.start' class='inherit'}}
-          {{wnyc-svg icon='antenna' className='icon--menu icon--antenna'}}
-          Discover
-          {{/link-to}}
-        </li>
-        <li class="list-item list-item--short">
-          {{#link-to 'djangorendered' 'support' class='inherit'}}
+          <a href="/support" 
+            class="inherit"
+            title="Ways to Give"
+            data-tracking-category="WNYC Menu"
+            data-tracking-action="Clicked Ways to Give">
           {{wnyc-svg icon='gift' className='icon--menu icon--gift'}}
           Ways to Give
-          {{/link-to}}
+          </a>
         </li>
         {{#unless media.isMiddleNarrowAndUp}}
           {{#if session.isAuthenticated}}
           <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
-            {{#link-to 'djangorendered' 'users/me' class='inherit'}}
+            <a href="/users/me" 
+              class="inherit"
+              title="My Account"
+              data-tracking-category="WNYC Menu"
+              data-tracking-action="Clicked My Account">
               My Account
-            {{/link-to}}
+            </a>
           </li>
           <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
             <button class="btn--blank btn--white text--spacing text--upper h5" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
           </li>
           {{else}}
           <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
-            {{#link-to 'login' class='inherit h5'}}
+            <a href="/login" 
+              class="inherit h5"
+              title="Sign In"
+              data-tracking-category="WNYC Menu"
+              data-tracking-action="Clicked Sign In">
             Sign In
-            {{/link-to}}
+            </a>
           </li>
           {{/if}}
         {{/unless}}
@@ -118,14 +161,22 @@
           <div class="box--topborder">
             <div class="h5 text--airy text--upper text--white text--spacing aligncenter">
             {{#if session.isAuthenticated}}
-                {{#link-to 'djangorendered' 'users/me' class='inherit'}}
-                My Account
-                {{/link-to}}
+                <a href="/users/me" 
+                  class="inherit"
+                  title="My Account"
+                  data-tracking-category="WNYC Menu"
+                  data-tracking-action="Clicked My Account">
+                  My Account
+                </a>
               <button class="btn--blank btn--white text--spacing text--upper" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
             {{else}}
-              {{#link-to 'login' class='inherit'}}
+              <a href="/login" 
+                class="inherit"
+                title="Sign In"
+                data-tracking-category="WNYC Menu"
+                data-tracking-action="Clicked Sign In">
               Sign In
-              {{/link-to}}
+              </a>
             {{/if}}
             </div>
             <!-- .text -->

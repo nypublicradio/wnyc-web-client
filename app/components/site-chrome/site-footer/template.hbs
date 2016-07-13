@@ -1,3 +1,7 @@
+{{!--
+  Using <a> tags here instead of ember {{link-to}} helpers in order to run google analytics tracking events on the links. Global link handler catches clicks on links with data-tracking properties and runs an event tracking function before routing the link. More in /overhaul/app/instance-initializers/link-handler.js
+--}}
+
 <footer class="l-full flush" id="footer">
   <div class="for-screenreaders">
     <h1>Document Footer</h1>
@@ -39,20 +43,100 @@
 
               <div class="l-flex1of2 l-flex1of2--fixed">
                 <ul class="list list--noborder align--mq-centertoleft">
-                  <li class="list-item list-item--tiny">{{link-to 'On Air Schedule' 'djangorendered' 'schedule' class='link--capbold'}}</li>
-                  <li class="list-item list-item--tiny">{{link-to 'Daily Newsletter' 'djangorendered' 'newsletters' class='link--capbold'}}</li>
-                  <li class="list-item list-item--tiny">{{link-to 'Download Our Apps' 'djangorendered' 'mobile' class='link--capbold'}}</li>
-                  <li class="list-item list-item--tiny">{{link-to 'Events' 'djangorendered' 'events' class='link--capbold'}}</li>
-                  <li class="list-item list-item--tiny">{{link-to 'Weather' 'djangorendered' 'weather' class='link--capbold'}}</li>
+                  <li class="list-item list-item--tiny">
+                    <a href="/schedule"
+                      class="link--capbold"
+                      title="On Air Schedule"
+                      data-tracking-category="WNYC Menu"
+                      data-tracking-action="Clicked On Air Schedule">
+                      On Air Schedule
+                    </a>
+                  </li>
+                  <li class="list-item list-item--tiny">
+                    <a href="/newsletters"
+                      class="link--capbold"
+                      title="Daily Newsletter"
+                      data-tracking-category="WNYC Menu"
+                      data-tracking-action="Clicked Daily Newsletter">
+                      Daily Newsletter
+                    </a>
+                  </li>
+                  <li class="list-item list-item--tiny">
+                    <a href="/mobile"
+                      class="link--capbold"
+                      title="Download Our Apps"
+                      data-tracking-category="WNYC Menu"
+                      data-tracking-action="Clicked Download Our Apps">
+                      Download Our Apps
+                    </a>
+                  </li>
+                  <li class="list-item list-item--tiny">
+                   <a href="/events"
+                      class="link--capbold"
+                      title="Events"
+                      data-tracking-category="WNYC Menu"
+                      data-tracking-action="Clicked Events">
+                      Events
+                    </a>
+                  </li>
+                  <li class="list-item list-item--tiny">
+                    <a href="/weather"
+                      class="link--capbold"
+                      title="Weather"
+                      data-tracking-category="WNYC Menu"
+                      data-tracking-action="Clicked Weather">
+                      Weather
+                    </a>
+                  </li>
                 </ul>
               </div>
               <div class="l-flex1of2 l-flex1of2--fixed">
                 <ul class="list list--noborder align--mq-centertoleft">
-                  <li class="list-item list-item--tiny">{{link-to 'Community' 'djangorendered' 'community' class='link--capbold'}}</li>
-                  <li class="list-item list-item--tiny">{{link-to 'Giveaways' 'djangorendered' 'giveaways' class='link--capbold'}}</li>
-                  <li class="list-item list-item--tiny">{{link-to 'Audio Archives' 'serie' 'archives-preservation' class='link--capbold'}}</li>
-                  <li class="list-item list-item--tiny">{{link-to 'Audio Help' 'djangorendered' 'audio/help' class='link--capbold'}}</li>
-                  <li class="list-item list-item--tiny">{{link-to 'Support WNYC' 'djangorendered' 'support' class='link--capbold'}}</li>
+                  <li class="list-item list-item--tiny">
+                    <a href="/community"
+                      class="link--capbold"
+                      title="Community"
+                      data-tracking-category="WNYC Menu"
+                      data-tracking-action="Clicked Community">
+                      Community
+                    </a>
+                  </li>
+                  <li class="list-item list-item--tiny">
+                    <a href="/giveaways"
+                      class="link--capbold"
+                      title="Giveaways"
+                      data-tracking-category="WNYC Menu"
+                      data-tracking-action="Clicked Giveaways">
+                      Giveaways
+                    </a>
+                  </li>
+                  <li class="list-item list-item--tiny">
+                    <a href="/series/archives-preservation"
+                      class="link--capbold"
+                      title="Audio Archives"
+                      data-tracking-category="WNYC Menu"
+                      data-tracking-action="Clicked Audio Archives">
+                      Audio Archives
+                    </a>
+                  </li>
+                  <li class="list-item list-item--tiny">
+                    <a href="/audio/help"
+                      class="link--capbold"
+                      title="Audio Help"
+                      data-tracking-category="WNYC Menu"
+                      data-tracking-action="Clicked Audio Help">
+                      Audio Help
+                    </a>
+                  </li>
+                  <li class="list-item list-item--tiny">
+                    <a href="/support"
+                      class="link--capbold"
+                      title="Support WNYC"
+                      data-tracking-category="WNYC Menu"
+                      data-tracking-action="Clicked Support WNYC">
+                      Support WNYC
+                    </a>
+                  </li>
                 </ul>
               </div>
 
@@ -71,12 +155,60 @@
               </h2>
               <!-- .h2 -->
               <ul class="list list--noborder align--mq-centertoleft">
-                <li class="list-item list-item--tiny">{{link-to 'About Us' 'djangorendered' 'about' class='link--capbold'}}</li>
-                <li class="list-item list-item--tiny">{{link-to 'Contact Us' 'djangorendered' 'contact' class='link--capbold'}}</li>
-                <li class="list-item list-item--tiny">{{link-to 'Become a Sponsor' 'djangorendered' 'sponsor' class='link--capbold'}}</li>
-                <li class="list-item list-item--tiny">{{link-to 'Careers' 'djangorendered' 'careers' class='link--capbold'}}</li>
-                <li class="list-item list-item--tiny">{{link-to 'Press' 'djangorendered' 'press' class='link--capbold'}}</li>
-                <li class="list-item list-item--tiny">{{link-to 'Give Us Feedback' 'djangorendered' 'feedback' class='link--capbold'}}</li>
+                <li class="list-item list-item--tiny">
+                  <a href="/about" 
+                    title="About Us" 
+                    class="link--capbold"
+                    data-tracking-category="WNYC Menu"
+                    data-tracking-action="Clicked About Us">
+                    About Us
+                  </a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/contact" 
+                    title="Contact Us"
+                    class="link--capbold" 
+                    data-tracking-category="WNYC Menu"
+                    data-tracking-action="Clicked Contact Us">
+                    Contact Us
+                  </a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/sponsor" 
+                    title="Become a Sponsor"
+                    class="link--capbold" 
+                    data-tracking-category="WNYC Menu"
+                    data-tracking-action="Clicked Become a Sponsor">
+                    Become a Sponsor
+                  </a>
+                </li>
+                <li class="list-item list-item--tiny">
+                 <a href="/careers" 
+                    title="Careers"
+                    class="link--capbold" 
+                    data-tracking-category="WNYC Menu"
+                    data-tracking-action="Clicked Careers">
+                    Careers
+                  </a>                  
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/press" 
+                    title="Press"
+                    class="link--capbold" 
+                    data-tracking-category="WNYC Menu"
+                    data-tracking-action="Clicked Press">
+                    Press
+                  </a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/feedback" 
+                    title="Give Us Feedback"
+                    class="link--capbold" 
+                    data-tracking-category="WNYC Menu"
+                    data-tracking-action="Clicked Give Us Feedback">
+                    Give Us Feedback
+                  </a>
+                </li>
               </ul>
             </div>
           <!-- .align -->
@@ -91,50 +223,49 @@
             <!-- .h2 -->
             <ul class="list list--noborder align--mq-centertoleft">
               <li class="list-item list-item--tiny">
-                
-                <a href="http://www.facebook.com/wnyc" class="link--white" title="Facebook" target="_blank">
+                <a href="http://www.facebook.com/wnyc" class="link--white" title="Facebook" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Facebook">
                   <i class="fa fa-facebook text--white"></i>
                   <span class="link--capbold">Facebook</span>
                 </a>
               </li>
               <li class="list-item list-item--tiny">
-                <a href="http://www.twitter.com/wnyc" class="link--white" title="Twitter" target="_blank">
+                <a href="http://www.twitter.com/wnyc" class="link--white" title="Twitter" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Twitter">
                   <i class="fa fa-twitter text--white"></i>
                   <span class="link--capbold">Twitter</span>
                 </a>
               </li>
               <li class="list-item list-item--tiny">
-                <a href="https://twitter.com/WNYC/lists/wnyc-shows/members" class="link--white" title="Twitter" target="_blank">
+                <a href="https://twitter.com/WNYC/lists/wnyc-shows/members" class="link--white" title="Twitter" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Our Shows">
                   <i class="fa fa-twitter text--white"></i>
                   <span class="link--capbold">Our Shows</span>
                 </a>
               </li>
               <li class="list-item list-item--tiny">
-                <a href="https://twitter.com/WNYC/lists/wnyc-people/members" class="link--white" title="Twitter" target="_blank">
+                <a href="https://twitter.com/WNYC/lists/wnyc-people/members" class="link--white" title="Twitter" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Our People">
                   <i class="fa fa-twitter text--white"></i>
                   <span class="link--capbold">Our People</span>
                 </a>
               </li>
               <li class="list-item list-item--tiny">
-                <a href="https://www.instagram.com/wnyc" title="Instagram" class="link--white" target="_blank">
+                <a href="https://www.instagram.com/wnyc" title="Instagram" class="link--white" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Instagram">
                   <i class="fa fa-instagram text--white"></i> 
                   <span class="link--capbold">Instagram</span>
                 </a>
               </li>
               <li class="list-item list-item--tiny">
-                <a href="https://www.snapchat.com/add/wnycradio" title="Snapchat" class="link--white" target="_blank">
+                <a href="https://www.snapchat.com/add/wnycradio" title="Snapchat" class="link--white" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Snapchat">
                   <i class="fa fa-snapchat-ghost text--white"></i>
                   <span class="link--capbold">Snapchat</span>
                 </a>
               </li>
               <li class="list-item list-item--tiny">
-                <a href="https://www.youtube.com/user/wnycradio" class="link--white" title="YouTube" target="_blank">
+                <a href="https://www.youtube.com/user/wnycradio" class="link--white" title="YouTube" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked YouTube">
                   <i class="fa fa-youtube text--white"></i>
                   <span class="link--capbold">YouTube</span>
                 </a>
               </li>
               <li class="list-item list-item--tiny">
-                <a href="http://wnyc.tumblr.com" class="link--white" title="Tumblr" target="_blank">
+                <a href="http://wnyc.tumblr.com" class="link--white" title="Tumblr" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Tumblr">
                   <i class="fa fa-tumblr text--white"></i>
                   <span class="link--capbold">Tumblr</span>
                 </a>
@@ -164,16 +295,16 @@
                 <h1 class="h5 inline text--white text--upper">Our Sites:</h1>
               </li>
               <li class="list-item list-item--tiny">
-                <a class="link--capbold" href="http://www.wqxr.org" title="WQXR" target="_blank">WQXR</a>
+                <a class="link--capbold" href="http://www.wqxr.org" title="WQXR" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked WQXR">WQXR</a>
               </li>
               <li class="list-item list-item--tiny">
-                <a class="link--capbold" href="http://www.njpr.org" title="NJPR" target="_blank">NJPR</a>
+                <a class="link--capbold" href="http://www.njpr.org" title="NJPR" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked NJPR">NJPR</a>
               </li>
               <li class="list-item list-item--tiny">
-                <a class="link--capbold" href="http://www.thegreenespace.org" title="The Greene Space" target="_blank">The Greene Space</a>
+                <a class="link--capbold" href="http://www.thegreenespace.org" title="The Greene Space" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked The Greene Space">The Greene Space</a>
               </li>
               <li class="list-item list-item--tiny">
-                <a class="link--capbold" href="http://www.wnycstudios.org" title="WNYC Studios" target="_blank">WNYC Studios</a>
+                <a class="link--capbold" href="http://www.wnycstudios.org" title="WNYC Studios" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked WNYC Studios">WNYC Studios</a>
               </li>
             </ul>
           </nav>
@@ -192,32 +323,32 @@
         <h2 class="for-screenreaders">Social</h2>
         <ul class="list list--noborder list--flex aligncenter flush">
           <li class="list-item list-item--tiny">
-            <a href="http://www.facebook.com/wnyc" class="text--white" title="Facebook" target="_blank">
+            <a href="http://www.facebook.com/wnyc" class="text--white" title="Facebook" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Facebook">
                 <i class="fa fa-facebook fa-2x"></i>
             </a>
           </li>
           <li class="list-item list-item--tiny">
-            <a href="http://www.twitter.com/wnyc" class="text--white" title="Twitter" target="_blank">
+            <a href="http://www.twitter.com/wnyc" class="text--white" title="Twitter" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Twitter">
                 <i class="fa fa-twitter fa-2x"></i>
             </a>
           </li>
           <li class="list-item list-item--tiny">
-            <a href="https://www.instagram.com/wnyc" class="text--white" title="Instagram" target="_blank">
+            <a href="https://www.instagram.com/wnyc" class="text--white" title="Instagram" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Instagram">
                 <i class="fa fa-instagram fa-2x"></i>
             </a>
           </li>
           <li class="list-item list-item--tiny">
-            <a href="https://www.snapchat.com/add/wnycradio" class="text--white" title="Snapchat" target="_blank">
+            <a href="https://www.snapchat.com/add/wnycradio" class="text--white" title="Snapchat" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Snapchat">
                 <i class="fa fa-snapchat-ghost fa-2x"></i>
             </a>
           </li>
           <li class="list-item list-item--tiny">
-            <a href="https://www.youtube.com/user/wnycradio" class="text--white" title="YouTube" target="_blank">
+            <a href="https://www.youtube.com/user/wnycradio" class="text--white" title="YouTube" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked YouTube">
                 <i class="fa fa-youtube fa-2x"></i>
             </a>
           </li>
           <li class="list-item list-item--tiny">
-            <a href="http://wnyc.tumblr.com" class="text--white" title="Tumblr" target="_blank">
+            <a href="http://wnyc.tumblr.com" class="text--white" title="Tumblr" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Tumblr">
                 <i class="fa fa-tumblr fa-2x"></i>
             </a>
           </li>
@@ -237,11 +368,21 @@
                 <h2>Legal Nav</h2>
               </div>
               <ul class="list list--noborder flush {{if media.isMiddleNarrowAndUp 'list--flex'}}">
-                <li class="list-item list-item--tiny"><a href="http://www.newyorkpublicradio.org" class="link--capbold">&copy; {{moment-format (now) 'YYYY'}} New York Public Radio</a></li>
-                <li class="list-item list-item--tiny"><a href="/terms/" class="link--capbold">Terms of Use</a></li>
-                <li class="list-item list-item--tiny"><a href="/privacy/" class="link--capbold">Privacy Policy</a></li>
-                <li class="list-item list-item--tiny"><a href="/corrections/" class="link--capbold">Corrections</a></li>
-                <li class="list-item list-item--tiny"><a href="/articles/wnyc-contest-rules" class="link--capbold">Contest Rules</a></li>
+                <li class="list-item list-item--tiny">
+                  <a href="http://www.newyorkpublicradio.org" class="link--capbold" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Copyright">&copy; {{moment-format (now) 'YYYY'}} New York Public Radio</a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/terms/" class="link--capbold" title="Terms of Use" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Terms of Use">Terms of Use</a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/privacy/" class="link--capbold" title="Privacy Policy" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Privacy Policy">Privacy Policy</a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/corrections/" class="link--capbold" title="Corrections" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Corrections">Corrections</a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/articles/wnyc-contest-rules" class="link--capbold" title="Contest Rules" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Contest Rules">Contest Rules</a>
+                </li>
               </ul>
             </nav>
             <!-- .align -->
