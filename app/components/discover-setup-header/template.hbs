@@ -1,6 +1,6 @@
 <header class="discover-setup-header">
   <div class="discover-setup-header-action">
-    {{#action-button click=(action 'back')}}
+    {{#action-button click=(action 'back') icon="left-caret" iconPlacement="left"}}
       Back
     {{/action-button}}
   </div>
@@ -12,7 +12,7 @@
     </span>
   </div>
   <div class="discover-setup-header-action">
-    {{#action-button class=(if nextButtonEnabled 'mod-filled-red') click=(action 'next')}}
+    {{#action-button class=(if nextButtonEnabled 'mod-filled-red') click=(action 'next')  icon=nextButtonIcon iconPlacement="right"}}
       {{nextButtonText}}
     {{/action-button}}
   </div>

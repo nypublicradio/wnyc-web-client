@@ -945,12 +945,8 @@ body.discover .discover-fadeable-background {
     }
     width:15px;
   }
-
-  > .action-button-icon + .action-button-text {
-    margin-left:5px;
-  }
-  > .action-button-text + .action-button-icon {
-    margin-left:5px;
+  > .action-button-text  {
+    margin: 0 5px;
   }
 }
 
