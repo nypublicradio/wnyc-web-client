@@ -142,7 +142,7 @@ export default Service.extend({
       set(this, 'currentContext', context);
 
       if (shouldTrack) {
-        if (context === 'queue') {
+        if (context === 'queue' || context === 'history') {
           this._trackPlayerEvent({
             action: 'Played Story from Queue',
             label: story.get('title'),
