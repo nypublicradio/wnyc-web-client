@@ -7,8 +7,8 @@ export default Ember.Route.extend({
     let prefs = this.get('discoverPrefs');
 
     return this.store.query('shows', {
-      discover_station: 'wnyc',
-      api_key: 'imagination'
+      discover_station: 'wnyc_v2',
+      api_key: 'trident'
     }).then((shows) => {
       prefs.setDefaultShows(shows.mapBy('slug'));
 
