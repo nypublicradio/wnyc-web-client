@@ -11,7 +11,7 @@ test('it can accept an icon argument and places it to the right by default', fun
   assert.equal(this.$('.action-button-icon svg').length, 1, "should have icon");
   assert.equal(this.$('.action-button-text + .action-button-icon').length, 1, "should have icon to the right");
 
-  this.render(hbs`{{action-button icon='play'}}Play{{/action-button}}`);
+  this.render(hbs`{{#action-button icon='play'}}Play{{/action-button}}`);
   assert.equal(this.$('.action-button-text').text().trim(), 'Play');
   assert.equal(this.$('.action-button-icon svg').length, 1, "should have icon");
   assert.equal(this.$('.action-button-text + .action-button-icon').length, 1, "should have icon to the right");
