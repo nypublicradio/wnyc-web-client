@@ -1,5 +1,5 @@
 import moveOver from "./move-over";
-
+import fixPositioningAfterTransition from '../utils/fix-positioning-after-transition';
 export default function() {
   var el = document.getElementsByTagName('html');
 
@@ -7,7 +7,7 @@ export default function() {
     el, 'scroll', {offset: 0, duration: 100}
   ).then(() => {
     return moveOver.call(this, 'x', -1).then(() => {
-      window.$('.liquid-child').css('transform', 'initial');
+      fixPositioningAfterTransition();
     });
   });
 }

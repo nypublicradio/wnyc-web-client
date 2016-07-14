@@ -1,5 +1,6 @@
 import moveOver from "./move-over";
 import { animate } from "liquid-fire";
+import fixPositioningAfterTransition from '../utils/fix-positioning-after-transition';
 
 export default function initialTransition(opts={}) {
   let background = window.$(".discover-fadeable-background");
@@ -20,7 +21,7 @@ export default function initialTransition(opts={}) {
     ).then(() => {
       return animate(background, {opacity: 0, duration: 0.5}, opts).then(() => {
         return moveOver.call(this, 'x', -1).then(() => {
-          window.$('.liquid-child').css('transform', 'initial');
+          fixPositioningAfterTransition();
         });
       });
     });
@@ -33,7 +34,7 @@ export default function initialTransition(opts={}) {
     ).then(() => {
       return moveOver.call(this, 'x', 1).then(() => {
         return animate(background, {opacity: 1, duration: 0.5}, opts).then(() => {
-          window.$('.liquid-child').css('transform', 'initial');
+          fixPositioningAfterTransition();
         });
       });
     });

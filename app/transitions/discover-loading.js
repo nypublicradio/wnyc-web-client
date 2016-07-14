@@ -1,5 +1,6 @@
 import moveOver from "./move-over";
 import { animate } from "liquid-fire";
+import fixPositioningAfterTransition from '../utils/fix-positioning-after-transition';
 
 export default function loadingTransition(opts={}) {
   let direction = 1;
@@ -16,7 +17,7 @@ export default function loadingTransition(opts={}) {
 
     return animate(loadingScreen, {opacity: 0, duration: 0.5}, opts).then(() => {
       return moveOver.call(this, 'x', (-1 * direction)).then(() => {
-        window.$('.liquid-child').css('transform', 'initial');
+        fixPositioningAfterTransition();
       });
   });
   }
@@ -28,7 +29,7 @@ export default function loadingTransition(opts={}) {
     loadingScreen.css('opacity', 0);
     return moveOver.call(this, 'x', (1 * direction)).then(() => {
       return animate(loadingScreen, {opacity: 1, duration: 0.5}, opts).then(() => {
-        window.$('.liquid-child').css('transform', 'initial');
+        fixPositioningAfterTransition();
       });
     });
   }
