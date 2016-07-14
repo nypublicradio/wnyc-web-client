@@ -94,7 +94,7 @@
                  // but other WNYC styles override this
     @include fontsize(16);
     @extend %vertical-rhythm;
-    line-height: 1.6rem;
+    line-height: 1.8rem;
 
     > h1:last-child,
     > h2:last-child,
@@ -160,14 +160,6 @@
     padding-top: 30px;
     padding-bottom: 30px;
   }
-}
-
-/* extra line height */
-.text--airy {
-  line-height: 1.7rem;
-}
-.text--airy-more {
-  line-height: 1.8rem;
 }
 
 /**

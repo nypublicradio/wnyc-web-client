@@ -125,18 +125,23 @@
 }
 
 /* shows A-Z page */
-.shows-list ul li .flag-image>img {
-  min-width: 135px; 
-  min-height: 135px;
-  @include mq($small-only) {
-    min-width: 70px;
-    min-height: 70px;
-    max-width: 70px;
-    
+.shows-list ul li {
+  
+  .flag-image>img {
+    min-width: 90px; 
+    min-height: 90px;
+    @include mq($small-only) {
+      display: none;
+    }
+  }
+
+  .text-body--nopad > p {
+    margin: 0;
   }
 }
-.featured-show .flag-image>img {
-   @include mq($small-only) {
-    max-width: 110px; 
+
+.featured-show {
+  @include mq($small-only) {
+    display: none;
   }
 }

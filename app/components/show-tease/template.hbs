@@ -9,7 +9,7 @@
               data-tracking-category='Shows A-Z'
               data-tracking-action='Clicked Show "{{show.title}}"'
               data-tracking-label='clicked featured show'>
-        <img src={{image-template show.logoImage.template 250 250 show.logoImage.crop}} class="squarebadge--lg" >
+        <img src={{image-template show.logoImage.template 150 150 show.logoImage.crop}} class="squarebadge--lg" >
       </a>
       {{else}}
       <a href="{{showUrl}}"
@@ -17,7 +17,7 @@
               title="{{show.title}}"
               data-tracking-category='Shows A-Z'
               data-tracking-action='Clicked Show "{{show.title}}"'>
-        <img src={{image-template show.logoImage.template 135 135 show.logoImage.crop}} class="squarebadge">
+        <img src={{image-template show.logoImage.template 90 90 show.logoImage.crop}} class="squarebadge">
       </a>
       {{/if}}
    
@@ -46,7 +46,7 @@
 
         <h4 class="text--small text--lightgray text--spacing text--upper nudge medium-up">{{producing-orgs show.producingOrganizations unlinked=true}}</h4>
 
-        <h2 class="h2 h2--mq-small nudge">
+        <h2 class="h2 h2--mq-small nudge-mini">
            <a href="{{showUrl}}"
               class="link--dark"
               title="{{show.title}}"
@@ -54,7 +54,7 @@
               data-tracking-action='Clicked Show "{{show.title}}"'>{{show.title}}</a>
         </h2>
         
-        <div class="text-body--nopad text--airy medium-up">{{{show.tease}}}</div>
+        <div class="text-body--nopad text--medium medium-up">{{{show.tease}}}</div>
 
       {{/if}}
     </div>
