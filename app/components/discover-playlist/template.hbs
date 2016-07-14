@@ -11,6 +11,8 @@
   </div>
 {{/sticky-page-header}}
 
+<div class="discover-playlist-content-container">
+{{discover-feedback-button}}
 {{#sortable-group class="discover-playlist" tagName="ul" onChange="reorderItems" handle=".discover-playlist-item-handle" as |group|}}
   {{#each orderedStories as |story|}}
     {{#sortable-item id=(concat 'story-' story.id) class=(if (array-contains removedItemIds story.id) 'discover-playlist-item is-deleted' 'discover-playlist-item')
@@ -46,7 +48,7 @@
     {{/sortable-item}}
   {{/each}}
 {{/sortable-group}}
-
+</div>
 <button {{action 'findMore'}} class="discover-playlist-find-more rounded-caps-button mod-hollow-blue">
   Find Me Some More
 </button>

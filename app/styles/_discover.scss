@@ -212,7 +212,7 @@ body.discover .discover-fadeable-background {
 .discover-feedback-button {
   position:absolute;
   right:calc(50% - 400px - 140px);
-  bottom:calc(84px * 4);
+  top:0;
   width:100px;
   font-size:12px;
   color:#FFF;
@@ -226,7 +226,7 @@ body.discover .discover-fadeable-background {
 .discover-feedback-icon {
   width:50px;
   height:50px;
-  margin:0.25rem 0;
+  margin:-6px 0 0.25rem 0;
   display:block;
   path {
     stroke: none;
@@ -242,6 +242,7 @@ body.discover .discover-fadeable-background {
   color:#FFF;
   padding:20px 0;
   min-height:10rem;
+  position:relative;
 }
 
 .discover-playlist-header-content {
@@ -392,7 +393,9 @@ body.discover .discover-fadeable-background {
 
 }
 
-
+.discover-playlist-content-container {
+  position:relative; // for positioning the feedback button
+}
 
 .discover-playlist-item.is-deleted {
   @include transition(opacity $transition-timing ease-in-out, max-height $transition-timing/2 ease-in-out $transition-timing);
