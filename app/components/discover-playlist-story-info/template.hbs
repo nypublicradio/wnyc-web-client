@@ -4,7 +4,7 @@
       <a href="{{story.url}}">{{story.title}}</a>
     </h2>
     <span class="discover-playlist-story-duration">
-      {{abbreviate-time (humanize-duration story.estimatedDuration 'seconds')}}
+      {{story.audioDurationReadable}}
     </span>
     <h3 class="discover-playlist-story-show-title">
       <a href="{{story.showUrl}}">{{story.showTitle}}</a>

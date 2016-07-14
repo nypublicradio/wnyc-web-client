@@ -9,15 +9,16 @@ export default JSONAPISerializer.extend({
           id: result.id,
           type: 'discover.stories',
           attributes: {
-            title:              Ember.get(result,'attributes.title'),
-            showTitle:          Ember.get(result,'attributes.headers.brand.title'),
-            showUrl:            Ember.get(result,'attributes.headers.brand.url'),
-            estimatedDuration:  Ember.get(result,'attributes.estimatedDuration'),
-            date:               Ember.get(result,'attributes.dateLine'),
-            summary:            Ember.get(result,'attributes.tease'),
-            audio:              Ember.get(result,'attributes.audio'),
-            url:                Ember.get(result,'attributes.url'),
-            cmsPK:              result.id
+            title:                  Ember.get(result,'attributes.title'),
+            showTitle:              Ember.get(result,'attributes.headers.brand.title'),
+            showUrl:                Ember.get(result,'attributes.headers.brand.url'),
+            estimatedDuration:      Ember.get(result,'attributes.estimatedDuration'),
+            audioDurationReadable:  Ember.get(result,'attributes.audioDurationReadable'),
+            date:                   Ember.get(result,'attributes.dateLine'),
+            summary:                Ember.get(result,'attributes.tease'),
+            audio:                  Ember.get(result,'attributes.audio'),
+            url:                    Ember.get(result,'attributes.url'),
+            cmsPK:                  result.id
           }
         };
       })

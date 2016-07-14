@@ -21,7 +21,10 @@ export default Factory.extend({
 
   dateLine() { return faker.date.recent(); },
 
-
+  audioDurationReadable(i) {
+    let length = Math.floor(faker.random.number.range(2, 59)(i));
+    return `${length} minutes`;
+  },
   estimatedDuration(i) {
     return Math.floor(faker.random.number.range(60, 3000)(i)); },
   headers() { // this is where the show info is

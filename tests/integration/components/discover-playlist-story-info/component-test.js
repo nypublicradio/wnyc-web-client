@@ -14,7 +14,7 @@ moduleForComponent('discover-playlist-story-info', 'Integration | Component | di
 });
 
 test('it displays duration in the correct format', function(assert) {
-  this.set('story', server.create('discover-story', {estimatedDuration: 120}));
+  this.set('story', server.create('discover-story', {audioDurationReadable: "2 min"}));
 
   this.render(hbs`{{discover-playlist-story-info story=story}}`);
   assert.equal(this.$('.discover-playlist-story-duration').text().trim(), '2 min');
