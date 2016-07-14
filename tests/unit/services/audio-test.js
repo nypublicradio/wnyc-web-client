@@ -22,11 +22,21 @@ moduleFor('service:audio', 'Unit | Service | audio', {
     const sessionStub = Ember.Service.extend({
       data: {} // we only really need the data thing
     });
-
+    const listenActionsStub = Ember.Service.extend({
+      sendPause: function(){},
+      sendComplete: function(){},
+      sendPlay: function(){},
+      sendSkip: function(){},
+      sendDelete: function(){}
+    });
     startMirage(this.container);
 
     this.register('service:session', sessionStub);
     this.inject.service('session', { as: 'session' });
+
+    this.register('service:listen-actions', listenActionsStub);
+    this.inject.service('listen-actions', { as: 'listen-actions' });
+
   },
   afterEach() {
     server.shutdown();
