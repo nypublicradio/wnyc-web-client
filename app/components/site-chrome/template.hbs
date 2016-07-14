@@ -115,7 +115,13 @@
           </a>
         </li>
         <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
-          <a href="/support" 
+          {{#link-to 'discover.start' class='inherit'}}
+          {{wnyc-svg icon='antenna' className='icon--menu icon--antenna'}}
+          Discover
+          {{/link-to}}
+        </li>
+        <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
+          <a href="/support"
             class="inherit"
             title="Ways to Give"
             data-tracking-category="WNYC Menu"
