@@ -1,8 +1,9 @@
 import moveOver from "./move-over";
-import { animate, stop} from "liquid-fire";
+import { animate } from "liquid-fire";
 
 export default function initialTransition(opts={}) {
   let background = window.$(".discover-fadeable-background");
+  var el = document.getElementsByTagName('html');
 
   if (!this.oldElement) {
     // initial render. A little hacky, because we set that background
@@ -14,21 +15,28 @@ export default function initialTransition(opts={}) {
   }
 
   else if (this.oldElement.find('.discover-welcome-screen').length > 0) {
-    stop(this.oldElement);
-    return animate(background, {opacity: 0, duration: 0.5}, opts).then(() => {
-      return moveOver.call(this, 'x', -1).then(() => {
-        window.$('.liquid-child').css('transform', 'initial');
+    return window.$.Velocity(
+      el, 'scroll', {offset: 0, duration: 100}
+    ).then(() => {
+      return animate(background, {opacity: 0, duration: 0.5}, opts).then(() => {
+        return moveOver.call(this, 'x', -1).then(() => {
+          window.$('.liquid-child').css('transform', 'initial');
+        });
       });
     });
   }
   else {
+    this.newElement.show();
     background.css('opacity', 0);
-    return moveOver.call(this, 'x', 1).then(() => {
-      return animate(background, {opacity: 1, duration: 0.5}, opts).then(() => {
-        window.$('.liquid-child').css('transform', 'initial');
+    return window.$.Velocity(
+      el, 'scroll', {offset: 0, duration: 100}
+    ).then(() => {
+      return moveOver.call(this, 'x', 1).then(() => {
+        return animate(background, {opacity: 1, duration: 0.5}, opts).then(() => {
+          window.$('.liquid-child').css('transform', 'initial');
+        });
       });
     });
-
   }
 
 

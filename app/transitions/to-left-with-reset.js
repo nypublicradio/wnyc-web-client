@@ -10,6 +10,4 @@ export default function() {
       window.$('.liquid-child').css('transform', 'initial');
     });
   });
-
-
 }

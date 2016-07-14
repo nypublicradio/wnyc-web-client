@@ -647,6 +647,7 @@ body.discover .discover-fadeable-background {
   font-weight:bold;
   cursor:pointer;
   border-bottom:0!important; // this is defined on the main link style.
+  z-index:0;
   &:hover {
     border:0;
   }
@@ -655,7 +656,7 @@ body.discover .discover-fadeable-background {
     width:7px;
     height:7px;
     margin-bottom:1px;
-    @include transition(all $transition-timing);
+    @include transition(transform $transition-timing);
   }
   svg polygon {
     fill:$lightgray;

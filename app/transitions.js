@@ -45,13 +45,19 @@ export default function() {
 
   this.transition(
     this.toRoute('discover.index'),
-    this.use('scrollThen', 'toRightWithReset', {easing: 'ease-in-out', duration: duration(100)})
+    this.use('toRightWithReset', {easing: 'ease-in-out', duration: duration(100)})
   );
 
   this.transition(
     this.fromRoute('discover.index'),
     this.toRoute(['discover.edit', 'discover.edit.topics']),
     this.use('toLeftWithReset', {easing: 'ease-in-out', duration: duration(100)})
+  );
+
+  this.transition(
+    this.toRoute('discover.index'),
+    this.fromRoute(['discover.edit', 'discover.edit.topics', 'discover.shows']),
+    this.use('toRightWithReset', {easing: 'ease-in-out', duration: duration(100)})
   );
 
   this.transition(
@@ -67,20 +73,35 @@ export default function() {
   );
 
   this.transition(
+    this.includingInitialRender(),
     this.fromRoute('discover.topics'),
-    this.toRoute('discover.start'),
-    this.use('scrollThen', 'discoverStart', {easing: 'ease-in-out', duration: duration(100)})
+    this.toRoute('discover.shows'),
+    this.use('toLeftWithReset', {easing: 'ease-in-out', duration: duration(100)})
   );
 
   this.transition(
-    this.toRoute('discover.index_loading'),
-    this.use('discoverLoading')
+    this.includingInitialRender(),
+    this.fromRoute('discover.shows'),
+    this.toRoute('discover.topics'),
+    this.use('toRightWithReset', {easing: 'ease-in-out', duration: duration(100)})
+  );
+
+
+  this.transition(
+    this.fromRoute('discover.topics'),
+    this.toRoute('discover.start'),
+    this.use('discoverStart', {easing: 'ease-in-out', duration: duration(100)})
   );
 
   this.transition(
     this.fromRoute('discover.shows'),
     this.toRoute('discover.index_loading'),
     this.use('discoverLoading', {direction: 'fromLeft'})
+  );
+
+  this.transition(
+    this.toRoute('discover.index_loading'),
+    this.use('discoverLoading')
   );
 
   this.transition(
