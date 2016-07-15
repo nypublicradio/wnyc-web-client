@@ -6,6 +6,9 @@
   left: $left;
 }
 
+
+body.discover{overflow: auto; height: 100%;}
+
 body.discover .sitechrome-page-content-area {
   margin-top:-1.5rem;
   // TODO: Maybe, make sitechrome have no margin on the bottom and leave it
@@ -220,8 +223,13 @@ body.discover .discover-fadeable-background {
   a {
     color: #8fa2e5;
   }
+  @include transition(opacity 0.25s ease-in);
 }
 
+.liquid-animating .discover-feedback-button {
+  opacity:0;
+  @include transition(opacity 0.25s ease-in);
+}
 
 .discover-feedback-icon {
   width:50px;
