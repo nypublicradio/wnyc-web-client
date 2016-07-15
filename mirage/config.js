@@ -1,5 +1,4 @@
 import config from 'overhaul/config/environment';
-import html from './helpers/django-html';
 
 // Note for future people: schema.modelName.create() doesn't generate attributes in mirage factories. Create the objects using server.create in default.js (for local dev), or in the test
 
@@ -85,13 +84,6 @@ export default function() {
       return { errors };
     }
   });
-
-  this.get(`${baseUrl}/account/api/v1/is_logged_in/`, {isAuthenticated: true});
-
-  this.post(`${baseUrl}/account/api/v1/accounts/logout/`, {successful_logout: true});
-
-  this.get(`${baseUrl}/api/v1/list/comments/24/:storyId/`, 'comment');
-  this.get(`${baseUrl}/api/v2/related/:storyId/`, 'story');
 
   this.post(`${config.wnycAccountRoot}/api/v1/listenaction/create/:pk/:action`, function() {
     return true;
