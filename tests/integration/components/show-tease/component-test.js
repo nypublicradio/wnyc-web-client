@@ -40,7 +40,7 @@ test('it renders', function(assert) {
   assert.equal(this.$('.flag-body .text h4 a').length, 0, 'Producing orgs should not have links');
   assert.equal(this.$('.flag-body .text h2').text().trim(), 'All Things Considered', 'Title should render correctly');
   assert.equal(this.$('.flag-body .text .text-body--nopad').text().trim(), "A wrap-up of the day's news, with features and interviews.", 'Description should render correctly');
-  assert.equal(this.$('.flag-image img').attr("src"), "http://www.wnyc.org/i/135/135/l/99/1/2DQ_1400X1400_NoWNYCSTUDIOS_2.png", "Image is populated");
+  assert.equal(this.$('.flag-image img').attr("src"), "http://www.wnyc.org/i/90/90/l/99/1/2DQ_1400X1400_NoWNYCSTUDIOS_2.png", "Image is populated");
 
 
   // check for edits when it is a featured item
@@ -51,7 +51,7 @@ test('it renders', function(assert) {
   assert.equal(this.$('.flag-body .text h4 a').length, 0, 'Producing orgs should not have links');
   assert.equal(this.$('.flag-body .text h2').text().trim(), 'All Things Considered', 'Title should render correctly');
   assert.equal(this.$('.flag-body .text .h3').text().trim(), "A wrap-up of the day's news, with features and interviews.", 'Description should render correctly');
-  assert.equal(this.$('.flag-image img').attr("src"), "http://www.wnyc.org/i/250/250/l/99/1/2DQ_1400X1400_NoWNYCSTUDIOS_2.png", "Image is populated");
+  assert.equal(this.$('.flag-image img').attr("src"), "http://www.wnyc.org/i/150/150/l/99/1/2DQ_1400X1400_NoWNYCSTUDIOS_2.png", "Image is populated");
 
 
 });
