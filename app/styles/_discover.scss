@@ -164,8 +164,11 @@ body.discover .discover-fadeable-background {
 }
 
 .discover-setup-title-step-count {
-  color:#FFF;
-  font-size:rems(13);
+  color:$lightgray;
+  font-size:rems(12);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
 }
 
 .discover-setup-header-content {
@@ -282,6 +285,7 @@ body.discover .discover-fadeable-background {
 
   color:$red;
   font-size:rems(12);
+  letter-spacing: 2px;
   font-weight:bold;
   text-transform: uppercase;
   right:2rem;
@@ -652,17 +656,18 @@ body.discover .discover-fadeable-background {
 }
 
 .discover-playlist-story-summary-action-link {
-  white-space:nowrap;
-  text-align:right;
+  white-space: nowrap;
+  text-align: right;
   text-transform: uppercase;
-  font-size:rems(12);
-  color:$lightgray;
-  font-weight:bold;
-  cursor:pointer;
-  border-bottom:0!important; // this is defined on the main link style.
-  z-index:0;
+  font-size: rems(12);
+  color: $lightgray;
+  letter-spacing: 2px;
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom: 0!important; // this is defined on the main link style.
+  z-index: 0;
   &:hover {
-    border:0;
+    border: 0;
   }
 
   svg {
@@ -704,6 +709,7 @@ body.discover .discover-fadeable-background {
   text-transform: uppercase;
   font-size: rems(12);
   font-weight: bold;
+  letter-spacing: 2px;
 }
 
 
@@ -767,7 +773,7 @@ body.discover .discover-fadeable-background {
   border-radius:25px;
   color:$charcoal;
   display:inline-block;
-  font-weight: bold;
+  font-weight: 600;
   letter-spacing: 1px;
   min-width: 175px;
   padding:0.5rem 0.75rem;
@@ -915,11 +921,11 @@ body.discover .discover-fadeable-background {
   padding: 2px 15px;
   color: #FFF;
   background: transparent;
-  @include fontsize(14);
-  font-weight:bold;
-  text-transform: uppercase;
+  @include fontsize(16);
+  font-weight: 600;
   line-height: 34px;
   cursor: pointer;
+  letter-spacing: 1px;
 
   @include transition(background-color $transition-timing, border-color $transition-timing, color $transition-timing);
 

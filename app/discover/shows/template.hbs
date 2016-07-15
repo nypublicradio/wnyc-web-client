@@ -4,7 +4,7 @@
     title="Pick Your Shows"
     errorText = (if (and showError hasNotSelectedAShow) 'Please select at least one show')
     nextButtonEnabled=(not hasNotSelectedAShow)
-    nextButtonText="Create Station"
+    nextButtonText="Create Playlist"
     onNext=(route-action 'next' currentShowSelection)
     onBack=(route-action 'back' currentShowSelection)
   }}

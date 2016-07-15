@@ -31,7 +31,7 @@ test('button exists to create new discover station', function(assert) {
   server.createList('discover-topic', 20);
 
   andThen(function() {
-    click('button:contains("Create My Own")');
+    click('button:contains("Get Started")');
 
     andThen(function() {
       assert.equal(currentURL(), '/discover/start/topics');
@@ -44,7 +44,7 @@ test('shows list of topics', function(assert) {
   server.createList('discover-topic', 20);
 
   andThen(function() {
-    click('button:contains("Create My Own")');
+    click('button:contains("Get Started")');
     andThen(function() {
       assert.equal($(".discover-topic").length, 20);
     });
@@ -57,7 +57,7 @@ test('next button is disabled until a topic is selected', function(assert) {
   server.createList('discover-topic', 20);
 
   andThen(function() {
-    click('button:contains("Create My Own")');
+    click('button:contains("Get Started")');
     andThen(function() {
       assert.equal(currentURL(), '/discover/start/topics');
       assert.equal($('button.mod-filled-red').length, 0, "Button should not be red");
@@ -74,7 +74,7 @@ test('next button shows an error if you click it without a topic selected', func
   server.createList('discover-topic', 20);
 
   andThen(function() {
-    click('button:contains("Create My Own")');
+    click('button:contains("Get Started")');
     andThen(function() {
       assert.equal(currentURL(), '/discover/start/topics');
       assert.equal($('.discover-setup-title-error').text().trim(), "");
@@ -91,7 +91,7 @@ test('back goes back to the welcome screen', function(assert) {
   server.createList('discover-topic', 20);
 
   andThen(function() {
-    click('button:contains("Create My Own")');
+    click('button:contains("Get Started")');
     andThen(function() {
       assert.equal(currentURL(), '/discover/start/topics');
       click("button:contains('Back')");
@@ -109,7 +109,7 @@ test('topics are saved in a session and maintained upon next visit in initial fl
   server.create('discover-topic', {title: "Technology", url: "technology"});
 
   andThen(() => {
-    click('button:contains("Create My Own")');
+    click('button:contains("Get Started")');
     andThen(() => {
       assert.equal(currentURL(), '/discover/start/topics', "is on topics");
       click(".discover-topic input[name='music']");
@@ -134,7 +134,7 @@ test('shows are saved in a session and maintained upon next visit in initial flo
   let shows = server.createList('show', 5);
   let testShow = shows[0];
   visit('/discover/start');
-  click('button:contains("Create My Own")');
+  click('button:contains("Get Started")');
 
   andThen(function() {
     click(".discover-topic input");
@@ -144,7 +144,7 @@ test('shows are saved in a session and maintained upon next visit in initial flo
       assert.equal(currentURL(), '/discover/start/shows');
       assert.equal($(`.discover-show[data-slug="${testShow.slug}"] input`).prop('checked'), true);
       click(`.discover-show[data-slug="${testShow.slug}"]`);
-      click("button:contains('Create Station')");
+      click("button:contains('Create Playlist')");
 
       andThen(function() {
         visit('/discover/start/shows');
@@ -164,7 +164,7 @@ test('show selections are maintained if you go back to topics screen', function(
   let shows = server.createList('show', 5);
   let testShow = shows[0];
   visit('/discover/start');
-  click('button:contains("Create My Own")');
+  click('button:contains("Get Started")');
   andThen(function() {
     click(".discover-topic input");
     andThen(function() {
@@ -193,7 +193,7 @@ test('all shows are selected by default', function(assert) {
   server.createList('discover-topic', 5);
   let shows = server.createList('show', 5);
   visit('/discover/start');
-  click('button:contains("Create My Own")');
+  click('button:contains("Get Started")');
 
   andThen(function() {
     click(".discover-topic input");
@@ -207,13 +207,13 @@ test('all shows are selected by default', function(assert) {
 });
 
 
-test('create station button is disabled if no shows are selected', function(assert) {
+test('create playlist button is disabled if no shows are selected', function(assert) {
   visit('/discover/start');
   server.createList('discover-topic', 20);
   server.createList('show', 2);
 
   andThen(function() {
-    click('button:contains("Create My Own")');
+    click('button:contains("Get Started")');
     andThen(function() {
       click(".discover-topic input");
       click("button:contains('Next')");
@@ -233,13 +233,13 @@ test('create station button is disabled if no shows are selected', function(asse
   });
 });
 
-test('create station button should show error if clicked if no shows are selected', function(assert) {
+test('create playlist button should show error if clicked if no shows are selected', function(assert) {
   visit('/discover/start');
   server.createList('discover-topic', 20);
   server.createList('show', 2);
 
   andThen(function() {
-    click('button:contains("Create My Own")');
+    click('button:contains("Get Started")');
     andThen(function() {
       click(".discover-topic input");
       click("button:contains('Next')");
@@ -251,7 +251,7 @@ test('create station button should show error if clicked if no shows are selecte
         click($(".discover-show")[1]);
 
         andThen(() => {
-          click($('button:contains("Create Station")'));
+          click($('button:contains("Create Playlist")'));
 
           andThen(() => {
             assert.equal($('.discover-setup-title-error').text().length > 0, true);
@@ -268,7 +268,7 @@ test('setup picks up where you left off if you bail half way through', function(
   server.createList('show', 5);
 
   visit('/discover/start');
-  click('button:contains("Create My Own")');
+  click('button:contains("Get Started")');
 
   andThen(function() {
     click(".discover-topic input");
@@ -292,7 +292,7 @@ test('should be able to go back to welcome screen if you really want to', functi
   server.createList('show', 5);
 
   visit('/discover/start');
-  click('button:contains("Create My Own")');
+  click('button:contains("Get Started")');
 
   andThen(function() {
     click(".discover-topic input");
