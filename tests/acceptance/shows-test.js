@@ -11,10 +11,10 @@ test('visiting /shows', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/shows');
-    
+
     //one show is featured
     assert.equal( $('.l-highlight--geometric .flag').length, 1, "one featured item is present");
-    
+
     //10 shows are listed, per test data
     assert.equal( $('.shows-list ul li').length, 10, "ten shows are listed" );
 

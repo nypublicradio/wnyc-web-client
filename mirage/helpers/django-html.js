@@ -1,5 +1,3 @@
-import { Factory, faker } from 'ember-cli-mirage';
-
 var HTML = `<html>
   <head>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">

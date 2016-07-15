@@ -69,28 +69,24 @@ test('calling pause calls the okraBridge method', function(assert) {
 });
 
 test('service records a listen when a story is played', function(assert) {
+  assert.expect(1);
+
   let service = this.subject();
-  var storySentToListen;
+  let story = server.create('story');
   let listenStub = {
-    addListen(story) {
-      storySentToListen = story;
+    addListen({ id }) {
+      assert.equal(story.id, id, "service should have called addListen on listen object");
     },
-    indexByStoryPk(){}
+    indexByStoryPk() {}
   };
 
   Ember.run(()=> {
     service.set('listens', listenStub);
-    let currentAudioStub = {
-      id: 2
-    };
-    service.set('currentAudio', currentAudioStub);
     service.set('okraBridge', okraStub);
-    service.play();
+    service.play(story.id);
   });
 
-  return wait().then(() => {
-    assert.equal(storySentToListen.id, 2, "service should have called addListen on listen object");
-  });
+  return wait();
 });
 
 test('it only sets up the player ping once', function(assert) {
@@ -98,6 +94,7 @@ test('it only sets up the player ping once', function(assert) {
 
   let counter = 0;
   let service = this.subject();
+  let story = server.create('story');
   let pollStub = {
     addPoll({interval, callback, label}) {
       counter++;
@@ -107,7 +104,7 @@ test('it only sets up the player ping once', function(assert) {
   Ember.run(() => {
     service.set('poll', pollStub);
     service.set('okraBridge', okraStub);
-    service.play(1);
+    service.play(story.id);
   });
 
   return wait().then(() => {
@@ -119,6 +116,7 @@ test('it only sets up the player ping once', function(assert) {
 test('it calls the GoogleAnalytics ping event', function(assert) {
   let done = assert.async();
   let service = this.subject();
+  let story = server.create('story');
   let metricsStub = {
     trackEvent() {
       assert.ok(true, 'trackEvent was called');
@@ -130,7 +128,7 @@ test('it calls the GoogleAnalytics ping event', function(assert) {
     service.set('metrics', metricsStub);
     service.set('okraBridge', okraStub);
     service.set('sessionPing', 500);
-    service.play(1);
+    service.play(story.id);
   });
 
   return wait();

@@ -1,6 +1,5 @@
 /* jshint node: true, multistr: true */
 
-
 module.exports = function(environment) {
 
   function usingProxy() {
@@ -143,7 +142,7 @@ module.exports = function(environment) {
     ENV.googleAnalyticsKey = '';
     ENV.wnycAPI = 'http://example.com';
     ENV.wnycAccountRoot = 'http://example.com/account';
-    ENV.wnycEtagAPI = 'http://example.com/etag';
+    ENV.wnycEtagAPI = 'http://example.com/api/v1/browser_id/';
     ENV.wnycStaticURL = 'http://example.com/static';
     ENV.wnycURL = '//example.com';
     ENV.wnycBetaURL = 'http://example.com';

@@ -7,7 +7,7 @@ export default Serializer.extend({
   // aren't embedding any records with this request. it just needs to be set
   // to true to work.
   embed: true,
-  serialize(response, request) {
+  serialize(response) {
     return response.text;
   }
 });

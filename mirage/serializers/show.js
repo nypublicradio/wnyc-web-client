@@ -1,6 +1,9 @@
 import ApplicationSerializer from './application';
+import { dasherize } from 'ember-string';
 
 export default ApplicationSerializer.extend({
+  include: ['apiResponse'],
+  keyForRelationship: key => dasherize(key),
   typeKeyForModel(model) {
     // This is a Mirage serialization bug, the wrong serializer
     // is being used for 'story'.

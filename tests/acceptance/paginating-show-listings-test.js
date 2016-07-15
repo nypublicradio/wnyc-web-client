@@ -11,7 +11,19 @@ moduleForAcceptance('Acceptance | Django Page | paginating show listings', {
 });
 
 test('showing pagination for a list of episodes', function(assert) {
-  let show = server.create('show');
+  let apiResponse = server.create('api-response', {
+    id: 'shows/foo/episodes/1',
+    teaseList: server.createList('story', 50)
+  });
+
+  let show = server.create('show', {
+    id: 'shows/foo/',
+    linkroll: [
+      {navSlug: 'episodes', title: 'Episodes'}
+    ],
+    apiResponse
+  });
+
   server.create('django-page', {id: show.id});
 
   djangoPage
@@ -24,7 +36,13 @@ test('showing pagination for a list of episodes', function(assert) {
 });
 
 test('showing no pagination on about pages', function(assert) {
-  let show = server.create('show', {firstPage: 'about'});
+  let show = server.create('show', {
+    id: 'shows/foo/',
+    linkroll: [
+      {navSlug: 'about', title: 'About'},
+    ],
+    apiResponse: server.create('api-response', { id: 'shows/foo/about' })
+  });
   server.create('django-page', {id: show.id});
 
   djangoPage
@@ -37,7 +55,18 @@ test('showing no pagination on about pages', function(assert) {
 });
 
 test('showing no pagination on story detail listing pages', function(assert) {
-  let show = server.create('show', {firstPage: 'story'});
+  let apiResponse = server.create('api-response', {
+    id: 'shows/foo/story/1',
+    story: server.create('story')
+  });
+
+  let show = server.create('show', {
+    id: 'shows/foo/',
+    linkroll: [
+      {navSlug: 'story', title: 'Story'}
+    ],
+    apiResponse
+  });
   server.create('django-page', {id: show.id});
 
   djangoPage
@@ -50,7 +79,26 @@ test('showing no pagination on story detail listing pages', function(assert) {
 });
 
 test('can go back and forward', function(assert) {
-  let show = server.create('show');
+  let api1 = 'shows/foo/episodes/1';
+  let api2 = 'shows/foo/episodes/2';
+
+  let apiResponse = server.create('api-response', {
+    id: api1,
+    teaseList: server.createList('story', 50)
+  });
+  server.create('api-response', {
+    id: api2,
+    teaseList: server.createList('story', 50)
+  });
+
+  let show = server.create('show', {
+    id: 'shows/foo/',
+    linkroll: [
+      {navSlug: 'episodes', title: 'Episodes'},
+    ],
+    apiResponse
+  });
+
   server.create('django-page', {id: show.id});
   let firstStoryTitle;
 
@@ -64,18 +112,38 @@ test('can go back and forward', function(assert) {
   });
   andThen(function() {
     assert.notEqual(firstStoryTitle, showPage.storyTitles()[0], 'first story title should be different');
-    assert.equal(currentURL(), `/${show.id}${show.linkroll[0].navSlug}/2`, 'uses nav slug when paginating');
+    assert.equal(currentURL(), `/${api2}`, 'uses nav slug when paginating');
     showPage.clickBack();
   });
   andThen(function() {
-    assert.equal(currentURL(), `/${show.id}${show.linkroll[0].navSlug}/1`, 'uses nav slug when paginating');
+    assert.equal(currentURL(), `/${api1}`, 'uses nav slug when paginating');
     assert.equal(firstStoryTitle, showPage.storyTitles()[0], 'first story title should be the same');
   });
 });
 
 test('can navigate to a specified page of results', function(assert) {
-  let show = server.create('show');
+  let api1 = 'shows/foo/episodes/1';
+  let api5 = 'shows/foo/episodes/5';
+
+  let apiResponse = server.create('api-response', {
+    id: api1,
+    teaseList: server.createList('story', 50)
+  });
+  server.create('api-response', {
+    id: api5,
+    teaseList: server.createList('story', 50)
+  });
+
+  let show = server.create('show', {
+    id: 'shows/foo/',
+    linkroll: [
+      {navSlug: 'episodes', title: 'Episodes'},
+    ],
+    apiResponse
+  });
+
   server.create('django-page', {id: show.id});
+
   let firstStoryTitle;
 
   djangoPage
@@ -87,6 +155,6 @@ test('can navigate to a specified page of results', function(assert) {
   });
   andThen(function() {
     assert.notEqual(firstStoryTitle, showPage.storyTitles()[0]);
-    assert.equal(currentURL(), `/${show.id}${show.linkroll[0].navSlug}/5`, 'uses nav slug when paginating');
+    assert.equal(currentURL(), `/${api5}`, 'uses nav slug when paginating');
   });
 });

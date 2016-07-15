@@ -6,7 +6,7 @@ export default Serializer.extend({
     if (request && request.url.match('related')) {
       return {
         results: story.data.map(({id, attributes}) => Object.assign({id}, attributes))
-      }
+      };
     } else {
       return story;
     }

@@ -2,11 +2,10 @@ import { Factory } from 'ember-cli-mirage';
 
 export default Factory.extend({
   type: 'list',
+  teaseList: [],
+  story: null,
   totalCount() {
-    if (this.type === 'about') {
-      return 0;
-    }
-    return this.type === 'list' ? 1000 : 1;
+    return this.teaseList ? this.teaseList.length : 0;
   },
   //teaseList() {
   //  if (this.type === 'list') {

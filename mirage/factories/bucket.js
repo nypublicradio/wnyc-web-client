@@ -13,4 +13,4 @@ function bucketItems() {
 
 export default Factory.extend({
   bucketItems
-})
+});

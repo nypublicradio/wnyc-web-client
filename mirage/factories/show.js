@@ -6,7 +6,7 @@ function generateProducingOrg() {
     url: faker.internet.url(),
     name: faker.company.companyName(),
     logo: {}
-  }
+  };
 }
 
 function generateLogo() {
@@ -14,7 +14,7 @@ function generateLogo() {
     creditsUrl: '',
     template: faker.image.image(135, 135),
     crop: 'c'
-  }
+  };
 }
 
 export default Factory.extend({
@@ -40,18 +40,6 @@ export default Factory.extend({
   logoImage: generateLogo,
   tease: faker.lorem.sentences,
   firstPage: 'list',
-  linkroll() {
-    if (this.firstPage === 'about') {
-      return [
-        {"href":null,"navSlug":"about","title":"About"},
-        {"href":null,"navSlug":"episodes","title":"Episodes"}
-      ];
-    }
-    return [
-      {"href":null,"navSlug":"episodes","title":"Episodes"},
-      {"href":null,"navSlug":"about","title":"About"}
-    ];
-  },
 
   sidebarChunks() {
     return [

@@ -12,7 +12,12 @@ moduleForAcceptance('Acceptance | Django Page | Show Page', {
 
 test('smoke test', function(assert) {
   let show = server.create('show', {
-    socialLinks: [{title: 'facebook', href: 'http://facebook.com'}]
+    id: 'shows/foo/',
+    linkroll: [
+      {navSlug: 'episodes', title: 'Episodes'}
+    ],
+    socialLinks: [{title: 'facebook', href: 'http://facebook.com'}],
+    apiResponse: server.create('api-response', { id: 'shows/foo/episodes/1' })
   });
   server.create('django-page', {id: show.id});
 
@@ -27,7 +32,13 @@ test('smoke test', function(assert) {
 });
 
 test('about smoke test', function(assert) {
-  let show = server.create('show', {firstPage: 'about'});
+  let show = server.create('show', {
+    id: 'shows/foo/',
+    linkroll: [
+      {navSlug: 'about', title: 'About'},
+    ],
+    apiResponse: server.create('api-response', { id: 'shows/foo/about' })
+  });
   server.create('django-page', {id: show.id});
 
   djangoPage
@@ -40,7 +51,19 @@ test('about smoke test', function(assert) {
 });
 
 test('visiting a show - story page smoke test', function(assert) {
-  let show = server.create('show', {firstPage: 'story'});
+  let apiResponse = server.create('api-response', {
+    id: 'shows/foo/story/1',
+    type: 'story',
+    story: server.create('story')
+  });
+
+  let show = server.create('show', {
+    id: 'shows/foo/',
+    linkroll: [
+      {navSlug: 'story', title: 'Story'}
+    ],
+    apiResponse
+  });
   server.create('django-page', {id: show.id});
 
   djangoPage
@@ -53,20 +76,22 @@ test('visiting a show - story page smoke test', function(assert) {
 });
 
 test('using a nav-link', function(assert) {
-  let show = server.create('show', {
-    linkroll: [
-      {"href": null, "navSlug": "episodes", "title": "Episodes"},
-      {"href": null, "navSlug": "next-link", "title": "Next Link"}
-    ]
+  let apiResponse = server.create('api-response', {
+    id: 'shows/foo/episodes/1',
+    teaseList: server.createList('story', 50)
   });
-
-  let story = server.create('story', {
-    title: "Story Title"
-  });
-
   server.create('api-response', {
-    id: `${show.id}${show.linkroll[1].navSlug}/1`,
-    teaseList: [server.schema.stories.find(story.id)]
+    id: 'shows/foo/next-link/1',
+    teaseList: server.createList('story', 1, {title: 'Story Title'})
+  });
+
+  let show = server.create('show', {
+    id: 'shows/foo/',
+    linkroll: [
+      {navSlug: 'episodes', title: 'Episodes'},
+      {navSlug: 'next-link', title: 'Next Link'}
+    ],
+    apiResponse
   });
 
   server.create('django-page', {id: show.id});
@@ -83,7 +108,15 @@ test('using a nav-link', function(assert) {
 });
 
 test('null social links should not break page', function(assert) {
-  let show = server.create('show', {socialLinks: null});
+  let apiResponse = server.create('api-response', {
+    id: 'shows/foo/recent_stories/1',
+    teaseList: server.createList('story', 50)
+  });
+  let show = server.create('show', {
+    id: 'shows/foo/',
+    socialLinks: null,
+    apiResponse
+  });
   server.create('django-page', {id: show.id});
 
   djangoPage
@@ -96,7 +129,15 @@ test('null social links should not break page', function(assert) {
 });
 
 test('undefined social links should not break page', function(assert) {
-  let show = server.create('show', {socialLinks: undefined});
+  let apiResponse = server.create('api-response', {
+    id: 'shows/foo/recent_stories/1',
+    teaseList: server.createList('story', 50)
+  });
+  let show = server.create('show', {
+    id: 'shows/foo/',
+    socialLinks: undefined,
+    apiResponse
+  });
   server.create('django-page', {id: show.id});
 
   djangoPage
