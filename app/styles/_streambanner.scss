@@ -1,16 +1,12 @@
 .streambanner {
-  &-header {
-    margin: auto 15px 9px;
-    font-size: 12px;
-    line-height: 22px;
-    font-weight: 600;
-    letter-spacing: 2px;
-  }
-  &-station {
+  &-title {
     font-size: 14px;
     line-height: 24px;
+    margin-bottom: 7px;
+    font-weight: 400 !important;
+  }
+  &-station {
     font-weight: 600;
-    margin-bottom: 5px;
   }
   &-episode {
     font-size: 14px;
@@ -18,10 +14,10 @@
     margin-bottom: 17px;
   }
   &-card {
-    margin: auto 15px;
-    padding: 16px 12px;
+    margin: 5% 4% 10%;
+    padding: 15px 10px;
     background-color: white;
-    box-shadow: 0 2px 4px 0 rgba(black, 0.2);
+    box-shadow: 0 1px 4px 0 rgba(black, 0.25);
   }
   &-controls {
     display: flex;
