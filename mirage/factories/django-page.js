@@ -18,6 +18,8 @@ export default Factory.extend({
       type = 'channel';
     } else if (/^story/.test(id)) {
       type = 'story';
+    } else if (id === '/') {
+      type = 'home';
     } else {
       type = 'legacy';
     }
@@ -46,6 +48,10 @@ export default Factory.extend({
             <div id="related"></div><div id="comments"></comments>
           </div>
         </div>`;
+    } else if (type === 'home') {
+      wormholes = `
+        <div id="stream-banner" class="clearfix"></div>
+      `;
     } else if (type === 'legacy') {
 
     }
