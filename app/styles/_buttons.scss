@@ -54,7 +54,7 @@
     display: inline-block;
     border-radius: 25px;
     border: 2px solid;
-    border-color: rgba($lightgray, .2);
+    border-color: rgba($lightgray, 0.2);
 
     padding: 0px 13px;
     color: $lightgray;
@@ -72,7 +72,7 @@
 
     &:hover,
     &:focus {
-      border-color: rgba($darkgray, .2);
+      border-color: rgba($darkgray, 0.2);
       color: $gray;
       opacity: 1;
     }
@@ -263,12 +263,12 @@
  */
 .btn--white {
     color: white;
-    border-color: rgba(white, .2);
+    border-color: rgba(white, 0.2);
 
     &:hover,
     &:focus {
       color: white;
-      border-color: rgba(white,.7);
+      border-color: rgba(white, 0.7);
     }
 }
 
@@ -405,6 +405,23 @@
     }
 }
 
+
+@mixin btn--red {
+  background-color: $red;
+  border-color: $red;
+  color: white;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    background-color: $darkred;
+    border-color: $darkred;
+    color: white;
+    opacity: 1;
+  }
+}
+
+
 /**
  * Media Query Buttons:
  * Sometimes we need to change a button's colors based on the current MQ.
@@ -421,12 +438,12 @@
 .btn--mq-graywhite {
   @include mq($medium-and-up) {
     color: white;
-    border-color: rgba(255,255,255,.2);
+    border-color: rgba(white, 0.2);
 
     &:hover,
     &:focus {
       color: white;
-      border-color: rgba(255,255,255,.7);
+      border-color: rgba(white, 0.7);
     }
   }
 }
@@ -445,7 +462,7 @@
     background-color: transparent;
     border-radius: 0;
     border: none;
-    border-bottom: 1px solid rgba(204,204,204,0.8);
+    border-bottom: 1px solid rgba(204, 204, 204, 0.8);
     padding: 0;
     font-weight: normal;
     letter-spacing: normal;
@@ -458,7 +475,7 @@
     &:focus {
       color: $blue;
       background-color: transparent;
-      border-color: rgba(204,204,204,0.8);
+      border-color: rgba(204, 204, 204, 0.8);
     }
 }
 
@@ -479,7 +496,7 @@
     border: none;
 
     > span {
-        border-bottom: 1px solid rgba(204,204,204,0.8);
+        border-bottom: 1px solid rgba(204, 204, 204, 0.8);
     }
 
     // beta maybe later button
@@ -671,11 +688,21 @@
     }
   }
   // hover state will be controlled manually in javascript with .is-hovering class
-  &.is-hovering {
+  // focus state for these buttons should match hover state
+  &.is-hovering,
+  &:focus {
     @each $prop, $value in zip($props, $hover) {
       #{$prop}: #{$value};
     }
   }
+}
+
+@mixin lightgray-btn-jshover {
+  @include js-hover(
+    $props:  (color,      border-color),
+    $base:   ($lightgray, rgba($lightgray, 0.3)),
+    $hover:  ($gray,      rgba($darkgray, 0.5))
+  );
 }
 
 @mixin gray-btn-jshover {
@@ -683,7 +710,7 @@
     $props:  (color,       border-color),
     $base:   ($darkergray, rgba($lightgray, 0.2)),
     $hover:  ($darkergray, rgba($lightgray, 0.5))
-  )
+  );
 }
 
 @mixin white-btn-jshover {
@@ -691,7 +718,44 @@
     $props:  (color, border-color),
     $base:   (white, rgba($lightgray, 0.6)),
     $hover:  (white, white)
-  )
+  );
+}
+
+@mixin blue-btn-jshover {
+  @include js-hover(
+    $props:  (background-color, border-color),
+    $base:   ($blue, $blue),
+    $hover:  ($darkblue, $darkblue)
+  );
+}
+
+@mixin red-btn-jshover {
+  @include js-hover(
+    $props:  (background-color, border-color),
+    $base:   ($red, $red),
+    $hover:  ($darkred, $darkred)
+  );
+}
+
+@mixin listen-btn-transitions {
+  white-space: nowrap; // helps transitions
+
+  @include transition(
+    width 200ms cubic-bezier(0.17, 0.89, 0.39, 1.25),
+    opacity $transition-timing,
+    background-color $transition-timing,
+    border-color $transition-timing,
+    color $transition-timing);
+
+  &.is-loading,
+  &.is-playing {
+    @include transition(
+      width 200ms cubic-bezier(1, 0, 0, 1),
+      opacity $transition-timing,
+      background-color $transition-timing,
+      border-color $transition-timing,
+      color $transition-timing);
+  }
 }
 
 // Ember Button Components
@@ -728,13 +792,13 @@
 
     &:focus,
     &:hover {
-      border-color: rgba($darkgray, .2);
+      border-color: rgba($darkgray, 0.2);
       color: $lightgray;
       opacity: 1;
     }
 
     &.is-hovering {
-      border-color: rgba($darkgray, .2);
+      border-color: rgba($darkgray, 0.2);
       color: $lightgray;
       opacity: 1;
     }
@@ -755,7 +819,7 @@
 
 @mixin blue-svg {
   polygon, rect, circle, path {
-    fill: #128cf4;
+    fill: $blue;
   }
 }
 
@@ -766,15 +830,13 @@
     @include align-self(center);
   }
 
-  &.blue-boss,
-  &.blue-minion,
   &.blue-circle {
     @include btn;
     @include btn--blue;
     @include btn--strongtext;
 
     @include transition(
-      width 200ms cubic-bezier(.17,.89,.39,1.25),
+      width 200ms cubic-bezier(0.17, 0.89, 0.39, 1.25),
       opacity $transition-timing,
       background-color $transition-timing,
       border-color $transition-timing,
@@ -783,29 +845,32 @@
 
   &.blue-boss,
   &.blue-minion {
-    white-space: nowrap; // helps transitions
+    @include btn;
+    @include btn--blue;
+    @include btn--strongtext;
+    @include blue-btn-jshover;
+    @include listen-btn-transitions;
+
     overflow: hidden;
-
-    &:focus,
-    &:hover {
-      background-color: $blue;
-      border-color: $blue;
-    }
-
-    &.is-hovering {
-      background-color: $darkblue;
-      border-color: $darkblue;
-    }
 
     &.is-loading,
     &.is-playing {
-      @include transition(
-        width 200ms cubic-bezier(1, 0, 0, 1),
-        opacity $transition-timing,
-        background-color $transition-timing,
-        border-color $transition-timing,
-        color $transition-timing);
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
 
+  &.red-minion {
+    @include btn;
+    @include btn--red;
+    @include btn--strongtext;
+    @include red-btn-jshover;
+    @include listen-btn-transitions;
+
+    overflow: hidden;
+
+    &.is-loading,
+    &.is-playing {
       padding-left: 0;
       padding-right: 0;
     }
@@ -840,39 +905,13 @@
     @include btn--strongtext;
     @include btn--smalltext;
     @include thickbtn;
+    @include lightgray-btn-jshover;
+    @include listen-btn-transitions;
 
-    @include transition(
-      width 200ms cubic-bezier(.17,.89,.39,1.25),
-      opacity $transition-timing,
-      background-color $transition-timing,
-      border-color $transition-timing,
-      color $transition-timing);
-
-    white-space: nowrap; // helps transitions
     overflow: hidden;
-
-    border-color: rgba(136, 136, 136, 0.3);
-    color: $lightgray;
-
-    &:hover {
-      border-color: rgba(136, 136, 136, 0.3);
-      color: $lightgray;
-    }
-
-    &.is-hovering {
-      border-color: rgba(68, 68, 68, 0.5);
-      color: #666;
-    }
 
     &.is-loading,
     &.is-playing {
-      @include transition(
-        width 200ms cubic-bezier(1, 0, 0, 1),
-        opacity $transition-timing,
-        background-color $transition-timing,
-        border-color $transition-timing,
-        color $transition-timing);
-
       padding-left: 0;
       padding-right: 0;
     }
@@ -884,12 +923,14 @@
   position: relative;
 
   .blue-boss &,
-  .blue-minion & {
+  .blue-minion &,
+  .red-minion & {
     width: 18px;
     margin-right: 2px;
   }
 
-  .blue-minion & {
+  .blue-minion &,
+  .red-minion & {
     @include scale(0.6, 0.6);
   }
 
@@ -922,6 +963,7 @@
 
   .blue-boss & > svg,
   .blue-minion & > svg,
+  .red-minion & > svg,
   .blue-circle & > svg {
     @include white-svg;
     width: 16px;
@@ -936,7 +978,7 @@
   .blue-hollow:hover &,
   .blue-hollow:focus & {
     polygon, rect, circle, path {
-      fill: #1068b2;
+      fill: $darkblue;
     }
   }
 
@@ -1023,52 +1065,26 @@
 
   .blue-boss &,
   .blue-minion &,
+  .red-minion &,
   .blue-circle & {
-    &:before {
-      @include outer-spinner(
-        $primary: rgba(255, 255, 255, 0),
-        $accent: white
-      );
-    }
-
-    &:after {
-      @include inner-spinner(
-        $primary: rgba(255, 255, 255, 0),
-        $accent: white
-      );
-    }
+    @include spinner(
+      $primary: rgba(white, 0),
+      $accent: white
+    );
   }
 
   .blue-hollow & {
-    &:before {
-      @include outer-spinner(
-        $primary: rgba(255, 255, 255, 0),
-        $accent: #128cf4
-      );
-    }
-
-    &:after {
-      @include inner-spinner(
-        $primary: rgba(255, 255, 255, 0),
-        $accent: #128cf4
-      );
-    }
+    @include spinner(
+      $primary: rgba(white, 0),
+      $accent: $blue
+    );
   }
 
   .white-hollow & {
-    &:before {
-      @include outer-spinner(
-        $primary: rgba(255, 255, 255, 0),
-        $accent: rgba(255, 255, 255, 0.2)
-      );
-    }
-
-    &:after {
-      @include inner-spinner(
-        $primary: rgba(255, 255, 255, 0),
-        $accent: rgba(255, 255, 255, 0.2)
-      );
-    }
+    @include spinner(
+        $primary: rgba(white, 0),
+        $accent: rgba(white, 0.2)
+    );
   }
 
   &.blue-hollow {
@@ -1090,39 +1106,13 @@
     @include btn--strongtext;
     @include btn--smalltext;
     @include thickbtn;
+    @include lightgray-btn-jshover;
+    @include listen-btn-transitions;
 
-    @include transition(
-      width 200ms cubic-bezier(.17,.89,.39,1.25),
-      opacity $transition-timing,
-      background-color $transition-timing,
-      border-color $transition-timing,
-      color $transition-timing);
-
-    white-space: nowrap; // helps transitions
     overflow: hidden;
-
-    border-color: rgba(136, 136, 136, 0.3);
-    color: $lightgray;
-
-    &:hover {
-      border-color: rgba(136, 136, 136, 0.3);
-      color: $lightgray;
-    }
-
-    &.is-hovering {
-      border-color: rgba(68, 68, 68, 0.5);
-      color: #666;
-    }
 
     &.is-loading,
     &.is-playing {
-      @include transition(
-        width 200ms cubic-bezier(1, 0, 0, 1),
-        opacity $transition-timing,
-        background-color $transition-timing,
-        border-color $transition-timing,
-        color $transition-timing);
-
       padding-left: 0;
       padding-right: 0;
     }
@@ -1134,12 +1124,14 @@
   position: relative;
 
   .blue-boss &,
-  .blue-minion & {
+  .blue-minion &,
+  .red-minion {
     width: 18px;
     margin-right: 4px;
   }
 
-  .blue-minion & {
+  .blue-minion &,
+  .red-minion {
     @include scale(0.6, 0.6);
   }
 
@@ -1172,6 +1164,7 @@
 
   .blue-boss & > svg,
   .blue-minion & > svg,
+  .red-minion & > svg,
   .blue-circle & > svg {
     @include white-svg;
     width: 18px;
@@ -1186,7 +1179,7 @@
   .blue-hollow:hover &,
   .blue-hollow:focus & {
     polygon, rect, circle, path {
-      fill: #1068b2;
+      fill: $darkblue;
     }
   }
 
@@ -1260,51 +1253,25 @@
 
   .blue-boss &,
   .blue-minion &,
+  .red-minion &,
   .blue-circle & {
-    &:before {
-      @include outer-spinner(
-        $primary: rgba(255, 255, 255, 0),
-        $accent: white
-      );
-    }
-
-    &:after {
-      @include inner-spinner(
-        $primary: rgba(255, 255, 255, 0),
-        $accent: white
-      );
-    }
+    @include spinner(
+      $primary: rgba(white, 0),
+      $accent: white
+    );
   }
 
   .blue-hollow & {
-    &:before {
-      @include outer-spinner(
-        $primary: rgba(255, 255, 255, 0),
-        $accent: #128cf4
-      );
-    }
-
-    &:after {
-      @include inner-spinner(
-        $primary: rgba(255, 255, 255, 0),
-        $accent: #128cf4
-      );
-    }
+    @include spinner(
+      $primary: rgba(white, 0),
+      $accent: $blue
+    );
   }
 
   .white-hollow & {
-    &:before {
-      @include outer-spinner(
-        $primary: rgba(255, 255, 255, 0),
-        $accent: rgba(255, 255, 255, 0.2)
-      );
-    }
-
-    &:after {
-      @include inner-spinner(
-        $primary: rgba(255, 255, 255, 0),
-        $accent: rgba(255, 255, 255, 0.2)
-      );
-    }
+    @include spinner(
+      $primary: rgba(white, 0),
+      $accent: rgba(white, 0.2)
+    );
   }
 }

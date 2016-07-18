@@ -22,14 +22,7 @@ body {
 body:not(.ember-application),
 .loading-page,
 .loading-spinner {
-
-  &:after {
-    @include outer-spinner;
-  }
-
-  &:before {
-    @include inner-spinner;
-  }
+  @include spinner;
 }
 
 #js-listings {
