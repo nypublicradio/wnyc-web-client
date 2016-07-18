@@ -1,31 +1,25 @@
 import Component from 'ember-component';
 import computed from 'ember-computed';
+import get from 'ember-metal/get';
 
 export default Component.extend({
   classNames: ['listen-ui'],
-
+  wideTypes: ['blue-boss', 'blue-minion', 'blue-circle', 'red-minion', 'gray-minion'],
+  roundTypes: ['blue-hollow', 'white-hollow'],
   playIcon: computed('type', function() {
-    switch(this.get('type')) {
-      case 'blue-boss':
-      case 'blue-minion':
-      case 'blue-circle':
-      case 'gray-minion':
-        return 'play';
-      case 'blue-hollow':
-      case 'white-hollow':
-        return 'play-circle';
+    let type = get(this, 'type');
+    if (get(this, 'wideTypes').includes(type)) {
+      return 'play';
+    } else if (get(this, 'roundTypes').includes(type)) {
+      return 'play-circle';
     }
   }),
   pauseIcon: computed('type', function() {
-    switch(this.get('type')) {
-      case 'blue-boss':
-      case 'blue-minion':
-      case 'blue-circle':
-      case 'gray-minion':
-        return 'pause';
-      case 'blue-hollow':
-      case 'white-hollow':
-        return 'pause-circle';
+    let type = get(this, 'type');
+    if (get(this, 'wideTypes').includes(type)) {
+      return 'pause';
+    } else if (get(this, 'roundTypes').includes(type)) {
+      return 'pause-circle';
     }
   })
 });

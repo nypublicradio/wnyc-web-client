@@ -1,0 +1,24 @@
+{{#if media.isSmallOnly}}
+  <h3 class="streambanner-header">ON AIR NOW</h3>
+  <div class="streambanner-card">
+    <div class="streambanner-title">
+      <span class="streambanner-station">{{showTitle}}</span>
+       on
+      <span class="streambanner-station">{{stream.name}}</span>
+    </div>
+    <div class="streambanner-episode">
+      {{episodeTitle}}
+    </div>
+    <div class="streambanner-controls">
+      {{#listen-button
+        class='streambanner-listenbutton'
+        type='red-minion'
+        state=(if (eq slug audio.currentAudio.id) audio.playState)
+        itemPK=slug
+        itemTitle=stream.name}}
+        Listen Live
+      {{/listen-button}}
+      <a class="streambanner-link" href="/streams">All Live Streams »</a>
+    </div>
+  </div>
+{{/if}}

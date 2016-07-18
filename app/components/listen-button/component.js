@@ -17,7 +17,7 @@ export default Component.extend({
 
   disabled:             not('audio.isReady'),
   isPlaying:            equal('state', STATES.PLAYING),
-  isExpandable:         match('type', /(blue|gray)-(minion|boss)/),
+  isExpandable:         match('type', /(blue|gray|red)-(minion|boss)/),
   'aria-label':         readOnly('title'),
   'data-test-selector': 'listen-button',
 
