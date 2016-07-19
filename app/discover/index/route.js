@@ -7,7 +7,6 @@ export default Ember.Route.extend({
   session:       Ember.inject.service(),
   discoverQueue: Ember.inject.service(),
   listenActions: Ember.inject.service(),
-  preflight:     Ember.inject.service('discover-playlist-preflight'),
   discoverPrefs: Ember.inject.service(),
 
   model() {
@@ -17,7 +16,6 @@ export default Ember.Route.extend({
     var stories;
 
     if (queuedStories.length > 0) {
-
       if (queuedStories.mapBy('id').compact().length > 0) {
         // these are already instantiated ember objects from the store
         stories = queuedStories;
@@ -38,27 +36,20 @@ export default Ember.Route.extend({
       });
     }
     else {
-      let preflight         = this.get('preflight');
       let topicTags         = prefs.get('selectedTopicTags');
       let excludedShowSlugs = prefs.get('excludedShowSlugs');
 
-      stories = Ember.RSVP.hash({
-        showStories: preflight.storiesFromShows(excludedShowSlugs),
-        tagStories: preflight.storiesFromTopics(topicTags)
-      }).then((results) => {
-        return this.store.query('discover.stories', {
-          show_stories: results.showStories,
-          tag_stories:  results.tagStories,
-          duration:     10800,
-          _nocache:     Date.now()
-        }).then(stories => {
-          return stories.filter(s => !excludedIds.contains(s.id));
-        });
-      }, function(/*error*/) {
-
+      stories = this.store.query('discover.stories', {
+        shows:            excludedShowSlugs,
+        tags:             topicTags,
+        api_key:          'trident',
+        discover_station: 'wnyc-v2',
+        duration:         10800,
+        _nocache:         Date.now()
+      }).then(stories => {
+        return stories.filter(s => !excludedIds.contains(s.id));
       });
     }
-
 
     return Ember.RSVP.hash({
       stories: stories
@@ -69,15 +60,7 @@ export default Ember.Route.extend({
   },
   actions: {
     findMore() {
-      let listenActions = this.get('listenActions');
       let discoverQueue = this.get('discoverQueue');
-      let prefs         = this.get('discoverPrefs');
-
-      discoverQueue.get('items').forEach(item => {
-        let itemId        = get(item, 'id');
-        listenActions.sendSkip(itemId, 'NYPR_Web');
-        prefs.excludeStoryId(itemId);
-      });
       discoverQueue.emptyQueue();
 
       this.refresh();

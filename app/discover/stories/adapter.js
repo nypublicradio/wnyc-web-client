@@ -4,23 +4,22 @@ import DS from 'ember-data';
 
 export default DS.JSONAPIAdapter.extend({
   host: ENV.wnycURL,
-  namespace: `api/v3/make_playlist/`,
+  namespace: `api/v3/refresh_playlist/`,
   query: function(store, type, query /*, recordArray */ ) {
     let url = [this.host, this.namespace].join('/');
 
     // We have to format these query params to support the APIs non-standard
     // comma delimited, semicolon separated params.
-    //http://wnyc.demo2.wnyc.net/api/v3/make_playlist/?show_stories=588656,587978,588011,587995;tag_stories=587885,588697,587966,588007,582980
+    ///api/v3/refresh_playlist/?duration=10800&api_key=trident;discover_station=wnyc-v2;shows=;tags=a-l,a-mm,a-nn,a-oo;browser_id=5f8cd39b9632ee4f
 
+    let showSlugs = (query.shows || []).join(",");
+    let tagIds = (query.tags || []).join(",");
 
-    let storyIds = (query.show_stories || []).join(",");
-    let tagIds = (query.tag_stories || []).join(",");
+    delete query.shows;
+    delete query.tags;
 
-    delete query.show_stories;
-    delete query.tag_stories;
-    // query = {};
     // Put it in the URL so the ajax internals don't go escaping it
-    url = url + `?show_stories=${storyIds};tag_stories=${tagIds}`;
+    url = url + `?shows=${showSlugs};tags=${tagIds}`;
 
     return new Ember.RSVP.Promise(function(resolve, reject) {
       Ember.$.getJSON(url, query).then(function(data) {

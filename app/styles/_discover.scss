@@ -926,7 +926,7 @@ body.discover .discover-fadeable-background {
   line-height: 34px;
   cursor: pointer;
   letter-spacing: 1px;
-
+  
   @include transition(background-color $transition-timing, border-color $transition-timing, color $transition-timing);
 
   &:not([disabled]) {

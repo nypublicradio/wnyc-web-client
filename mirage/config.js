@@ -66,6 +66,22 @@ export default function() {
   this.get(`${baseUrl}/api/v3/story/detail/:id`, 'story');
   this.get(`${baseUrl}/api/v3/channel/\*id`, 'api-response');
 
+  this.get(`${baseUrl}/api/v3/refresh_playlist`, function(schema) {
+    let stories = schema.discoverStories.all().models;
+    
+    let data = stories.map(s => {
+      return {
+        type: "Story",
+        id: s.id,
+        attributes: s
+      };
+    });
+
+    return {
+      data: data
+    };
+  });
+
   /*------------------------------------------------------------
     identity management (account) endpoints
   --------------------------------------------------------------*/

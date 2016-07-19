@@ -39,6 +39,4 @@ export default function initialTransition(opts={}) {
       });
     });
   }
-
-
 }
