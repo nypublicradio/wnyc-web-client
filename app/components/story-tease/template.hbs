@@ -56,7 +56,7 @@
 
         {{#if item.audioAvailable}}
           {{queue-button
-            type=(if isFancyFeatured 'gray-to-white' 'just-gray')
+            type=(if isFancyFeatured 'queue-button--fancyfeature' 'just-gray')
             itemPK=item.id
             itemTitle=item.title
             duration=item.audioDurationReadable

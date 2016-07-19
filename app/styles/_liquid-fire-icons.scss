@@ -22,14 +22,16 @@
   + span {
     margin-left: 17px;
   }
-  
+
   .left {
     width: 12px;
+    background-color: currentColor;
   }
-  
+
   .right {
     width: 12px;
     @include transform(rotateZ(90deg) translateZ(0));
+    background-color: currentColor;
   }
 
   &[data-state="is-check"] {
@@ -41,74 +43,6 @@
     .right {
       width: 13px;
       @include transform(rotate(121deg) translate(-1px, -2px));
-    }
-  }
-
-  .just-gray > & > {
-    .left,
-    .right {
-      background-color: rgba(51, 51, 51, 1);
-    }
-  }
-
-  .just-gray.is-hovering > & > {
-    .left,
-    .right {
-      background-color: rgba(51, 51, 51, 1);
-    }
-  }
-
-  .gray-to-white > & > {
-    .left,
-    .right {
-      background-color: rgba(51, 51, 51, 1);
-    }
-  }
-
-  .gray-to-white.is-hovering > & > {
-    .left,
-    .right {
-      background-color: rgba(51, 51, 51, 1);
-    }
-  }
-
-  @include mq($small-and-up) {
-    .gray-to-white > & > {
-      .left,
-      .right {
-        background-color: white;
-      }
-    }
-
-    .gray-to-white.is-hovering > & > {
-      .left,
-      .right {
-        background-color: white;
-      }
-    }
-
-  }
-
-  @include mq($small-and-up) {
-    .gray-to-white > & > {
-      .left,
-      .right {
-        background-color: white;
-      }
-    }
-
-    .gray-to-white.is-hovering > & > {
-      .left,
-      .right {
-        background-color: white;
-      }
-    }
-  }
-  
-  .small-blue > & > {
-    .left,
-    .right {
-      background-color: rgba(136, 136, 136, 1);
     }
   }
 

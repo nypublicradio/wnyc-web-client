@@ -5,12 +5,13 @@ import fetch from 'fetch';
 
 export default SessionService.extend({
   syncBrowserId(report = true) {
+    let legacyId = window.localStorage.getItem('browserId');
     let { browserId } = this.get('data');
-    if (browserId) {
+    if (legacyId || browserId) {
       if (report) {
-        reportBrowserId(browserId);
+        reportBrowserId(legacyId || browserId);
       }
-      return RSVP.Promise.resolve(browserId);
+      return RSVP.Promise.resolve(legacyId || browserId);
     }
 
     return getBrowserId().then( ({ browser_id }) => {

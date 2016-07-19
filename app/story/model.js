@@ -4,6 +4,7 @@ import ENV from '../config/environment';
 import get from 'ember-metal/get';
 import computed from 'ember-computed';
 import parseAnalyticsCode from '../utils/analytics-code-parser';
+import { shareMetadata } from 'overhaul/helpers/share-metadata';
 const { attr, Model } = DS;
 
 export default Model.extend({
@@ -75,7 +76,9 @@ export default Model.extend({
       };
     }
   }),
-
+  shareMetadata: computed(function() {
+    return shareMetadata(this);
+  }),
   // so Ember Simple Auth inludes a records ID when it saves
   toJSON() {
     var serializer = this.store.serializerFor('story');

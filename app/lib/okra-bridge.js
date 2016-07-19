@@ -115,6 +115,11 @@ export const OkraBridge = Ember.Object.extend({
 
     });
   },
+  teardown() {
+    WEB_PLAYER_CONTROLLER.then(playerController => {
+      playerController.off('player:finished', get(this, 'onFinished'));
+    });
+  },
   playSoundFor(type, pkOrModel) {
     if (type === 'ondemand') {
       Okra.then(o => o.execute('playOnDemand', pkOrModel));

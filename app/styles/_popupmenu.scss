@@ -41,38 +41,4 @@
     opacity: 1;
     transform: scale(1,1);
   }
-
-  .popupmenu-list {
-    list-style: none;
-    margin: 0;
-    padding: 17px;
-  }
-
-  .popupmenu-listitem {
-    display: block;
-    width: 100%;
-    text-align: center;
-    margin: 0  0 11px 0;
-    padding: 0;
-  }
-
-  .popupmenu-listitem:last-child {
-    margin-bottom: 0px;
-  }
-
-  .popupmenu-listitem a {
-    font-family: "Open Sans", sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    display: inline-block;
-    width: 100%;
-    text-decoration: none;
-    border: none;
-    color: $darkergray;
-
-    &:hover,
-    &:focus {
-      color: #128cf4;
-    }
-  }
 }

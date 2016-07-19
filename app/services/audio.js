@@ -10,6 +10,7 @@ import { classify as upperCamelize } from 'ember-string';
 
 const FIFTEEN_SECONDS = 1000 * 15;
 const TWO_MINUTES     = 1000 * 60 * 2;
+const PLATFORM        = 'NYPR_Web';
 
 export default Service.extend({
   poll:             service(),
@@ -19,6 +20,7 @@ export default Service.extend({
   //discoverQueue:    service('discover-queue'),
   listens:          service('listen-history'),
   queue:            service('listen-queue'),
+  listenActions:    service(),
   isReady:          readOnly('okraBridge.isReady'),
   position:         readOnly('okraBridge.position'),
   duration:         readOnly('okraBridge.duration'),
@@ -57,6 +59,9 @@ export default Service.extend({
   init() {
     set(this, 'okraBridge', OkraBridge.create({ onFinished: bind(this, 'finishedTrack') }));
   },
+  willDestroy() {
+    this.okraBridge.teardown();
+  },
 
   /* TRACK LOGIC --------------------------------------------------------------*/
 
@@ -85,6 +90,8 @@ export default Service.extend({
       region: upperCamelize(context),
       withAnalytics: true
     });
+
+    this.sendPauseListenAction(this.get('currentId'));
   },
   playFromPk(id, context) {
     this._firstTimePlay();
@@ -138,6 +145,7 @@ export default Service.extend({
           withAnalytics: true,
           story
         });
+        this.sendPlayListenAction(id);
       }
     });
   },
@@ -268,6 +276,8 @@ export default Service.extend({
       withAnalytics: true,
     });
 
+    this.sendCompleteListenAction(this.get('currentId'));
+
     if (get(this, 'currentContext') === 'queue') {
       this.playNextInQueue();
     }
@@ -275,6 +285,18 @@ export default Service.extend({
 
   addToHistory(story) {
     this.get('listens').addListen(story);
+  },
+
+  sendCompleteListenAction(pk) {
+    this.get('listenActions').sendComplete(pk, PLATFORM);
+  },
+
+  sendPlayListenAction(pk) {
+    this.get('listenActions').sendPlay(pk, PLATFORM);
+  },
+
+  sendPauseListenAction(pk) {
+    this.get('listenActions').sendPause(pk, PLATFORM, get(this, 'position'));
   },
 
   _trackPlayerEvent(options) {

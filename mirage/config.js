@@ -86,6 +86,14 @@ export default function() {
     passthroughs
   --------------------------------------------------------------*/
 
+  this.post(`${config.wnycAccountRoot}/api/v1/listenaction/create/`, function() {
+    return true;
+  });
+
+  this.post(`${config.wnycAccountRoot}/api/v1/listenaction/create/:pk/:action`, function() {
+    return true;
+  });
+
   // Let this one slip by, we've got a http-proxy for it
   this.passthrough(`/api/v1/dynamic-script-loader`);
   this.passthrough(`${baseUrl}/api/v1/dynamic-script-loader`);
@@ -102,5 +110,6 @@ export default function() {
   });
 
   this.get(`${baseUrl}/\*id`, 'django-page');
+  this.get('/api/v1/story/:id', 'story');
 
 }

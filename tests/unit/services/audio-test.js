@@ -2,16 +2,20 @@ import Ember from 'ember';
 import { moduleFor, test } from 'ember-qunit';
 import startMirage from 'overhaul/tests/helpers/setup-mirage-for-integration';
 import wait from 'ember-test-helpers/wait';
+import { installBridge } from 'overhaul/lib/okra-bridge';
 
-const okraStub = {
-  playSoundFor() {}
-};
+// for OkraBridge compat
+window.EMBER_TESTING = true;
+
+installBridge();
 
 moduleFor('service:audio', 'Unit | Service | audio', {
   // Specify the other units that are required for this test.
   needs: ['model:story','adapter:story','serializer:story',
           //'model:discover/stores',
+          'service:listen-actions',
           'service:poll',
+          'service:metrics',
           'service:listen-history'],
 
   beforeEach() {
@@ -57,11 +61,13 @@ test('calling pause calls the okraBridge method', function(assert) {
   let okraBridge = {
     pauseSound() {
       testFlag = true;
-    }
+    },
+    teardown() {}
   };
 
   Ember.run(()=> {
     service.set('okraBridge', okraBridge);
+    service.set('currentId', 1);
     service.pause();
   });
 
@@ -82,7 +88,6 @@ test('service records a listen when a story is played', function(assert) {
 
   Ember.run(()=> {
     service.set('listens', listenStub);
-    service.set('okraBridge', okraStub);
     service.play(story.id);
   });
 
@@ -103,7 +108,6 @@ test('it only sets up the player ping once', function(assert) {
   };
   Ember.run(() => {
     service.set('poll', pollStub);
-    service.set('okraBridge', okraStub);
     service.play(story.id);
   });
 
@@ -126,7 +130,6 @@ test('it calls the GoogleAnalytics ping event', function(assert) {
 
   Ember.run(() => {
     service.set('metrics', metricsStub);
-    service.set('okraBridge', okraStub);
     service.set('sessionPing', 500);
     service.play(story.id);
   });
@@ -134,31 +137,62 @@ test('it calls the GoogleAnalytics ping event', function(assert) {
   return wait();
 });
 
+test('it sends a listen action on play and not resume', function(assert) {
+  assert.expect(1);
 
-// TODO: fix this. This fails half the time due to a destroyed object error when
-// the model bridge tries to set isReady on the service
+  let service = this.subject();
+  let story = server.create('story');
+  let listenActionStub = {
+    sendPlay() {
+      assert.ok(true, 'sendPlay was called');
+    },
+    sendPause() {}
+  };
+  Ember.run(() => {
+    service.set('listenActions', listenActionStub);
+    service.play(story.id);
+  });
 
-// test('it sets currently playing id when playing', function(assert) {
-//   var promise = new Ember.RSVP.Promise(function(resolve, reject){
-//     window.Okra.on('initialize:after', function() {
-//       resolve();
-//     });
-//     window.XDPlayer.on('initialize:after', function() {
-//       window.Okra.start();
-//     });
-//     window.XDPlayer.start();
-//   });
-//
-//   let service = this.subject();
-//   let story = server.create('discover-story');
-//   server.createList('show', 5);
-//   server.createList('story', 5);
-//
-//   return promise.then(() => {
-//     service.playOnDemand(story.id);
-//
-//     return wait().then(() => {
-//       assert.equal(service.get('currentAudio.id'), story.id);
-//     });
-//   });
-// });
+  Ember.run(() => service.pause());
+
+  Ember.run(() => service.play(story.id));
+
+  return wait();
+});
+
+test('it sends a listen action on pause', function(assert) {
+  let service = this.subject();
+  let story = server.create('story');
+  let listenActionStub = {
+    sendPause() {
+      assert.ok(true, 'sendPause was called');
+    },
+    sendPlay() {}
+  };
+  Ember.run(() => {
+    service.set('listenActions', listenActionStub);
+    service.play(story.id);
+  });
+
+  Ember.run(() => service.pause());
+});
+
+test('it sends a listen action on completed event', function(assert) {
+  // let done = assert.async();
+  let service = this.subject();
+  let story = server.create('story');
+  let listenActionStub = {
+    sendComplete() {
+      assert.ok(true, 'sendComplete was called');
+      // done();
+    }
+  };
+
+  Ember.run(() => {
+    service.set('listenActions', listenActionStub);
+    service.set('currentAudio', story.attrs);
+  });
+  Ember.run(() => {
+    service.okraBridge.onFinished();
+  });
+});

@@ -1,4 +1,22 @@
-{{#popup-menu links=shareLinks}}
-  {{wnyc-svg className="icon" icon="share"}}
-  {{yield}}
+{{#popup-menu text=text icon="share" as |closePopup|}}
+  <ul class="sharebutton-list">
+    <li class="sharebutton-listitem">
+      <button {{action 'popupShareWindow' 'Facebook' (share-url 'Facebook' metadata)}}
+      onclick={{action closePopup}}
+      >Facebook</button>
+    </li>
+    <li class="sharebutton-listitem">
+      <button {{action 'popupShareWindow' 'Twitter' (share-url 'Twitter' metadata)}}
+      onclick={{action closePopup}}
+      >Twitter</button>
+    </li>
+    <li class="sharebutton-listitem">
+      <a href={{share-url 'Email' metadata}}
+        data-tracking-category="Persistent Player"
+        data-tracking-action='Shared Story "{{metadata.shareText}}"'
+        data-tracking-label='{{region}}|{{metadata.analyticsCode}}|{{type}}|Email'
+        onclick={{action closePopup}}
+        >Email</a>
+    </li>
+  </ul>
 {{/popup-menu}}

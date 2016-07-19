@@ -1,85 +1,108 @@
 import { moduleForComponent, test } from 'ember-qunit';
+import wait from 'ember-test-helpers/wait';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('popup-menu', 'Integration | Component | popup menu', {
   integration: true,
-  beforeEach() {
-    this.set('links', [{
-      text: "Facebook",
-      href:  `https:\/\/www.facebook.com/`,
-      target: '_blank'
-    },{
-      text: "Twitter",
-      href: `https:\/\/twitter.com/`,
-      target: '_blank'
-    }]);
-  }
 });
 
-let initAndOpenPopup = function(context) {
-  context.render(hbs`
-    {{#popup-menu links=links}}
-      Select A Link
-    {{/popup-menu}}
-    <div id="dummy">outside of the popup</div>
-  `);
-  context.$('.popupmenu-button')[0].click();
+let isOpen = function(context, selectorPrefix = '') {
+  let selector = selectorPrefix + '.popupmenu';
+  return context.$(selector).hasClass('is-open');
 };
 
-let isOpen = function(context) {
-  return context.$('.popupmenu').hasClass('is-open');
-};
-
-let isClosed = function(context) {
-  return !isOpen(context);
+let isClosed = function(context, selectorPrefix) {
+  return !isOpen(context, selectorPrefix);
 };
 
 test('it renders', function(assert) {
   this.render(hbs`
-    {{#popup-menu links=links}}
-      Select A Link
+    {{#popup-menu text='Text'}}
+      <div class='find-me'></div>
     {{/popup-menu}}
   `);
-  assert.equal(this.$('button').text().trim(), 'Select A Link');
-  assert.equal(this.$('a').size(), 2);
+  assert.equal(this.$('.popupmenu-button').text().trim(), 'Text', 'button text should render');
+  assert.equal(this.$('.find-me').size(), 1, 'block contents should render');
 });
 
 test('it toggles the popup when you click the button', function(assert) {
-  this.render(hbs`
-    {{#popup-menu links=links}}
-      Select A Link
-    {{/popup-menu}}
-  `);
-
-  assert.ok(isClosed(this), 'popup begins closed');
-
+  assert.expect(3);
+  this.render(hbs`{{popup-menu}}`);
+  assert.ok(isClosed(this), 'popup should begin closed');
   this.$('.popupmenu-button')[0].click();
-  assert.ok(isOpen(this), 'popup opens');
 
-  this.$('.popupmenu-button')[0].click();
-  assert.ok(isClosed(this), 'popup closes');
+  wait().then(() => {
+    assert.ok(isOpen(this), 'popup should open after clicking the button');
+    this.$('.popupmenu-button')[0].click();
+  });
+
+  return wait().then(() => {
+    assert.ok(isClosed(this), 'popup should close after clicking the button again');
+  });
 });
 
 test('it closes the popup when you click outside', function(assert) {
-  initAndOpenPopup(this);
-  this.$('#dummy')[0].click();
-  assert.ok(isClosed(this), 'popup closes');
+  assert.expect(1);
+  this.render(hbs`{{popup-menu}} <div id="outside">outside</div>`);
+  this.$('.popupmenu-button')[0].click();
+
+  wait().then(() => {
+    this.$('#outside')[0].click();
+  });
+
+  return wait().then(() => {
+    assert.ok(isClosed(this), 'popup should close after clicking outside');
+  });
+});
+
+test('it closes the popup when you send a close action', function(assert) {
+  assert.expect(1);
+  this.render(hbs`{{#popup-menu as |close|}} <button id="close" {{action close}}>close</button> {{/popup-menu}}`);
+  this.$('.popupmenu-button')[0].click();
+
+  wait().then(() => {
+    this.$('#close')[0].click();
+  });
+
+  return wait().then(() => {
+    assert.ok(isClosed(this), 'popup should close after clicking button with close action');
+  });
 });
 
 test('it does not close the popup when you click on the bubble', function(assert) {
-  initAndOpenPopup(this);
-  this.$('.popupmenu-popup')[0].click();
-  assert.ok(isOpen(this), 'popup stays open');
-});
+  assert.expect(1);
+  this.render(hbs`{{popup-menu}}`);
+  this.$('.popupmenu-button')[0].click();
 
-test('it closes the popup when you click a link', function(assert) {
-  assert.expect(2);
-  initAndOpenPopup(this);
-
-  $(window).on('click', function(e) {
-    assert.ok(e.target.href, 'looks like it\'s going to open a link');
+  wait().then(() => {
+    this.$('.popupmenu-popup')[0].click();
   });
 
-  this.$('.popupmenu-listitem a')[0].click();
-  assert.ok(isClosed(this), 'popup closes');
+  return wait().then(() => {
+    assert.ok(isOpen(this), 'popup should remain open after clicking bubble');
+  });
+});
+
+test('it works correctly with two buttons', function(assert) {
+  assert.expect(6);
+  this.render(hbs`
+    {{#popup-menu class="b1" text="1"}}{{/popup-menu}}
+    {{#popup-menu class="b2" text="2"}}{{/popup-menu}}
+  `);
+  assert.ok(isClosed(this, '.b1'), 'popup 1 should begin closed');
+  assert.ok(isClosed(this, '.b2'), 'popup 2 should begin closed');
+
+  this.$('.b1 .popupmenu-button')[0].click();
+
+  wait().then(() => {
+    assert.ok(isOpen(this, '.b1'), 'popup 1 should open after clicking button 1');
+    assert.ok(isClosed(this, '.b2'), 'popup 2 should remain closed after clicking button 1');
+    this.$('.b2 .popupmenu-button')[0].click();
+  });
+
+  return wait().then(() => {
+    assert.ok(isClosed(this, '.b1'), 'popup 1 should close after clicking button 2');
+    assert.ok(isOpen(this, '.b2'), 'popup 2 should open after clicking button 2');
+  });
+
 });

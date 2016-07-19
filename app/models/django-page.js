@@ -30,7 +30,7 @@ export default DS.Model.extend({
     if (metaTitle) {
       return metaTitle.getAttribute('content');
     } else if (titleTag){
-      return titleTag.innerHTML;
+      return titleTag.textContent;
     }
   }),
 

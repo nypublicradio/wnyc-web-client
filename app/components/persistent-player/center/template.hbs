@@ -2,12 +2,11 @@
   {{#text-crawl watch=currentAudio}}
     {{persistent-player.audio-metadata currentAudio=currentAudio}}
   {{/text-crawl}}
-  {{#share-button
+  {{share-button
     story=currentAudio
     type=(if isAudiostream 'stream' 'ondemand')
-    region="Player"}}
-    SHARE
-  {{/share-button}}
+    region="Player"
+    text="SHARE"}}
 </div>
 
 {{#if isAudiostream}}

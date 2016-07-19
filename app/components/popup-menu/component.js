@@ -1,94 +1,91 @@
-import Ember from 'ember';
-
-const {
-  Component,
-  set,
-  get,
-  $
-} = Ember;
-
-const {htmlSafe} = Ember.String;
+import Component from 'ember-component';
+import get from 'ember-metal/get';
+import set from 'ember-metal/set';
+import { next } from 'ember-runloop';
+import { htmlSafe } from 'ember-string';
 
 export default Component.extend({
-  links: [],
   classNames: ['popupmenu'],
   classNameBindings: ['isOpen'],
   tagName: 'div',
   isOpen: false,
-  didInsertElement() {
-    $(window).on(`click.${this.elementId}`, (e) => {
-        let target = e.target;
-        let popup = this.$('.popupmenu-popup')[0];
-        let button = this.$('.popupmenu-button')[0];
-        // Close popup when clicking outside popup or button, or when clicking a link
-        if ((!(target === popup  || $.contains(popup, target)) &&
-             !(target === button || $.contains(button, target))) ||
-             target.tagName === 'A'
-          ) {
-          Ember.run(() => {
-            this.send('closePopup');
-          });
-        }
-    });
+  popupStyle: htmlSafe(''),
+  pointerStyle: htmlSafe(''),
+  screenMargin: 5,
+  clickOutside() {
+    this.send('closePopup');
   },
-  willDestroyElement() {
-    $(window).off(`click.${this.elementId}`);
+  actions: {
+    togglePopup: function() {
+      if (get(this, 'isOpen')) {
+        this.send('closePopup');
+      } else {
+        this.send('openPopup');
+      }
+    },
+    openPopup() {
+      set(this, 'isOpen', true);
+      this._adjustPopupPosition();
+    },
+    closePopup() {
+      set(this, 'isOpen', false);
+    }
   },
-  adjustPopupPosition () {
-    let popupElem = this.$('.popupmenu-popup').get(0);
-    let pointerElem = this.$('.popupmenu-popup-pointer').get(0);
+  _adjustPopupPosition() {
+    let popupElem = this.$('.popupmenu-popup')[0];
 
     // reset the style before calculations
     // default in css should be left: 0;
     // calculations assume popup starts left aligned with button
-    popupElem.removeAttribute('style');
+    set(this, 'popupStyle', htmlSafe(''));
+    // wait for style change to propogate before calculating
+    next(this, function() {
+      let popupRect = popupElem.getBoundingClientRect();
+      let buttonRect = this.$('.popupmenu-button')[0].getBoundingClientRect();
 
-    let popupRect = popupElem.getBoundingClientRect();
-    let buttonRect = this.$('.popupmenu-button').get(0).getBoundingClientRect();
-    let viewportWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+      // Align center of popup with center of button using popupOffset
+      let popupOffset = this._calcMidpointOffset(buttonRect, popupRect);
 
-    // Align center popup with center of button using popupOffset
-    let popupOffset = this._calcXMidpoint(buttonRect) - this._calcXMidpoint(popupRect);
+      // get an additional offset to keep the popup onscreen;
+      let offscreenOffset = this._calcOffscreenOffset(popupRect, popupOffset);
 
-    // How close to the edge of the screen is popup allowed to get?
-    const screenMargin = 5;
+      // move the popup window.
+      let popupStyle = htmlSafe(`left: ${popupOffset + offscreenOffset}px`);
+      set(this, 'popupStyle', popupStyle);
 
-    // Accounting for popUpOffset and screenMargin,
-    // check if popup is out of bounds,
-    // and calculate offscreenOffset to move popup back onscreen.
-    let offscreenOffset = 0;
-    if (popupRect.left + popupOffset < screenMargin) {
-      offscreenOffset = screenMargin - (popupRect.left + popupOffset);
-    } else if (popupRect.right + popupOffset > viewportWidth - screenMargin) {
-      offscreenOffset = viewportWidth - (popupRect.right + popupOffset + screenMargin);
-    }
-
-    // move the popup window.
-    let styleString = htmlSafe(`left: ${popupOffset + offscreenOffset}px`);
-    popupElem.setAttribute('style', styleString);
-
-    // If we pushed the popup back onscreen, we need to move the pointer the
-    // other way to keep it centered;
-    // 50% of popup width (center) - offscreenOffset to point the pointer
-    // at the center of the button
-    styleString = htmlSafe(`left: ${this._calcWidth(popupRect)/2 - offscreenOffset}px`);
-    pointerElem.setAttribute('style', styleString);
-  },
-  actions: {
-    togglePopup: function() {
-      this.toggleProperty('isOpen');
-      if (get(this, 'isOpen')) {
-        this.adjustPopupPosition();
+      // If we pushed the popup back onscreen, we need to move the pointer the
+      // other way to keep it centered;
+      if (offscreenOffset) {
+        // 50% of popup width (center) - offscreenOffset to point the pointer
+        // at the center of the button
+        let pointerStyle = htmlSafe(`left: ${this._calcWidth(popupRect)/2 - offscreenOffset}px`);
+        set(this, 'pointerStyle', pointerStyle);
       }
-    },
-    closePopup: function() {
-      set(this, 'isOpen', false);
+    });
+  },
+  _calcMidpointOffset(rect1, rect2) {
+    //get the difference between the x midpoint of two position rects.
+    return this._calcXMidpoint(rect1) - this._calcXMidpoint(rect2);
+  },
+  _calcOffscreenOffset(rect, startingOffset) {
+    // Taking a position rect and a startingOffset,
+    // and accounting for screenMargin,
+    // check if that rect is out of bounds of the viewportWidth,
+    // and calculate an offscreenOffset to move rect back onscreen.
+    let viewportWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    let screenMargin = get(this, 'screenMargin');
+    let offscreenOffset = 0;
+    if (rect.left + startingOffset < screenMargin) {
+      offscreenOffset = screenMargin - (rect.left + startingOffset);
+    } else if (rect.right + startingOffset > viewportWidth - screenMargin) {
+      offscreenOffset = viewportWidth - (rect.right + startingOffset + screenMargin);
     }
+    return offscreenOffset;
   },
   _calcXMidpoint(boundingRect) {
     return (boundingRect.right + boundingRect.left) / 2;
   },
   _calcWidth(boundingRect) {
     return boundingRect.right - boundingRect.left;
-  }
+  },
 });

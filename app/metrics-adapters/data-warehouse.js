@@ -97,7 +97,7 @@ export default BaseAdapter.extend({
     delete options.host;
 
     options.xhrFields = { withCredentials: true };
-    options.data.browser_id = get(browserId, 'identity');
+    options.data.browser_id = browserId;
     options.data.referrer_from_js = document.referrer;
 
     const url = this._serialize(`${host}/${endpoint}/`, options.data);

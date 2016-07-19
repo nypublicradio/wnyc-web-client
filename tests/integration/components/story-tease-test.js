@@ -9,7 +9,6 @@ moduleForComponent('story-tease', 'Integration | Component | story tease', {
     startMirage(this.container);
   },
   afterEach() {
-    delete window.wnyc;
     server.shutdown();
   }
 });

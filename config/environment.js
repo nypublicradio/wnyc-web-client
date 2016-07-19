@@ -30,7 +30,7 @@ module.exports = function(environment) {
     },
     // required for what's on widget compat
     exportApplicationGlobal: true,
-    QP_WHITELIST: ['q', 'scheduleStation', 'next'], // see puppy/settings/base_settings.py
+    QP_WHITELIST: ['q', 'scheduleStation', 'next', 'n'], // see puppy/settings/base_settings.py
 
     sentry: {
       dsn: process.env.SENTRY_DSN,

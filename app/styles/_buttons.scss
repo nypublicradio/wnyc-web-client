@@ -657,6 +657,43 @@
   @include thickbtn;
 }
 
+// sometimes you need to manually control an element's
+// hover state with javascript because of weird
+// animaton/ember/liquid-fire stuff
+@mixin js-hover($props: (), $base: (), $hover: ()) {
+  @each $prop, $value in zip($props, $base) {
+    #{$prop}: #{$value};
+  }
+  // override the :hover pseudo-class to match the base state
+  &:hover {
+     @each $prop, $value in zip($props, $base) {
+      #{$prop}: #{$value};
+    }
+  }
+  // hover state will be controlled manually in javascript with .is-hovering class
+  &.is-hovering {
+    @each $prop, $value in zip($props, $hover) {
+      #{$prop}: #{$value};
+    }
+  }
+}
+
+@mixin gray-btn-jshover {
+  @include js-hover(
+    $props:  (color,       border-color),
+    $base:   ($darkergray, rgba($lightgray, 0.2)),
+    $hover:  ($darkergray, rgba($lightgray, 0.5))
+  )
+}
+
+@mixin white-btn-jshover {
+  @include js-hover(
+    $props:  (color, border-color),
+    $base:   (white, rgba($lightgray, 0.6)),
+    $hover:  (white, white)
+  )
+}
+
 // Ember Button Components
 .queue-button {
   @include btn;
@@ -664,47 +701,24 @@
   @include btn--smalltext;
   @include thickbtn;
 
-  &.gray-to-white {
-    border-color: rgba(136, 136, 136, 0.2);
-    color: rgba(51, 51, 51, 1);
-
-    &:hover {
-      border-color: rgba(136, 136, 136, 0.5);
-    }
-
-    &.is-hovering {
-      border-color: rgba(136, 136, 136, 0.5);
-    }
+  &.queue-button--fancyfeature {
+    @include gray-btn-jshover;
 
     @include mq($small-and-up) {
-      border-color: rgba(136, 136, 136, 0.6);
-      color: rgba(255, 255, 255, 1);
-
-      &:hover {
-        border-color: rgba(136, 136, 136, 0.6);
-        color: rgba(255, 255, 255, 1);
-      }
-
-      &.is-hovering {
-        border-color: rgba(255, 255, 255, 1);
-      }
+      @include white-btn-jshover;
     }
-    
+  }
+
+  &.queue-button--storyheader {
+    @include gray-btn-jshover;
+
+    @include mq($medium-and-up) {
+      @include white-btn-jshover;
+    }
   }
 
   &.just-gray {
-    border-color: rgba(136, 136, 136, 0.3);
-    color: rgba(51, 51, 51, 1);
-
-    &:hover {
-      border-color: rgba(136, 136, 136, 0.3);
-      color: rgba(136, 136, 136, 1);
-    }
-
-    &.is-hovering {
-      border-color: rgba(136, 136, 136, 0.5);
-      color: rgba(51, 51, 51, 1);
-    }
+    @include gray-btn-jshover;
   }
 
   &.small-blue {
@@ -715,13 +729,13 @@
     &:focus,
     &:hover {
       border-color: rgba($darkgray, .2);
-      color: $gray;
+      color: $lightgray;
       opacity: 1;
     }
 
     &.is-hovering {
       border-color: rgba($darkgray, .2);
-      color: $gray;
+      color: $lightgray;
       opacity: 1;
     }
   }
@@ -729,7 +743,7 @@
 
 @mixin gray-svg {
   polygon, rect, circle, path {
-    fill: rgba(136, 136, 136, 1);
+    fill: $lightgray;
   }
 }
 
@@ -838,11 +852,11 @@
     overflow: hidden;
 
     border-color: rgba(136, 136, 136, 0.3);
-    color: rgba(136, 136, 136, 1);
+    color: $lightgray;
 
     &:hover {
       border-color: rgba(136, 136, 136, 0.3);
-      color: rgba(136, 136, 136, 1);
+      color: $lightgray;
     }
 
     &.is-hovering {
@@ -1088,11 +1102,11 @@
     overflow: hidden;
 
     border-color: rgba(136, 136, 136, 0.3);
-    color: rgba(136, 136, 136, 1);
+    color: $lightgray;
 
     &:hover {
       border-color: rgba(136, 136, 136, 0.3);
-      color: rgba(136, 136, 136, 1);
+      color: $lightgray;
     }
 
     &.is-hovering {

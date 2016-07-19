@@ -1,7 +1,8 @@
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo } from 'ember-data/relationships';
-import { readOnly } from 'ember-computed';
+import computed, { readOnly } from 'ember-computed';
+import { shareMetadata } from 'overhaul/helpers/share-metadata';
 
 export default Model.extend({
   audioType:            'stream',
@@ -24,5 +25,9 @@ export default Model.extend({
   currentStory:         belongsTo('story'),
   playlist:             belongsTo('playlist'),
 
-  story:                readOnly('currentStory')
+  story:                readOnly('currentStory'),
+
+  shareMetadata:        computed('currentShow', 'currentPlaylistItem', function() {
+    return shareMetadata(this);
+  })
 });

@@ -8,7 +8,6 @@ moduleForComponent('client-infinite-scroll', 'Integration | Component | client i
     startMirage(this.container);
   },
   afterEach() {
-    delete window.wnyc;
     server.shutdown();
   }
 });

@@ -21,12 +21,12 @@ export function shareMetadata(story) {
         let parentTitle = get(story, 'headers.brand.title');
         shareText = [parentTitle, title].filter(t => t).join(' - ');
         shareUrl = get(story, 'url');
-        analyticsCode = get(story, 'analyticsCode');
+        analyticsCode = get(story, 'analyticsCode') || '';
       }
     }
 
     return({shareText, shareUrl, analyticsCode});
 }
 
-export default helper;
+export default helper(shareMetadata);
 
