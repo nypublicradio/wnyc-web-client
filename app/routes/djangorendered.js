@@ -32,7 +32,7 @@ export default Ember.Route.extend({
     }
     return this.store.find('django-page', upstream_url)
       .catch((err) => {
-        if (err.response.status === 404 || 500) {
+        if (err.response.status === 404 || err.response.status === 500) {
           throw err;
         }
         // retrieving this upstream_url failed, possibly because the server
