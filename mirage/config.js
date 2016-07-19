@@ -38,6 +38,10 @@ export default function() {
     };
   });
 
+  this.post(`${config.wnycAccountRoot}/api/v1/listenaction/create/`, () => true);
+
+  this.post(`${config.wnycAccountRoot}/api/v1/listenaction/create/:pk/:action`, () => true);
+
   this.post(`${baseUrl}/api/v1/analytics/ga/`, {});
 
   /*------------------------------------------------------------
@@ -83,18 +87,6 @@ export default function() {
       });
       return { errors };
     }
-  });
-
-  this.post(`${config.wnycAccountRoot}/api/v1/listenaction/create/:pk/:action`, function() {
-    return true;
-  });
-
-  this.post(`${config.wnycAccountRoot}/api/v1/listenaction/create/`, function() {
-    return true;
-  });
-
-  this.post(`${config.wnycAccountRoot}/api/v1/listenaction/create/:pk/:action`, function() {
-    return true;
   });
 
   // Let this one slip by, we've got a http-proxy for it
