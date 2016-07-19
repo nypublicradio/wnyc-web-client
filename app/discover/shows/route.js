@@ -11,29 +11,28 @@ export default Ember.Route.extend({
       discover_station: 'wnyc_v2',
       api_key: 'trident'
     }).then((shows) => {
-      prefs.setDefaultShows(shows.mapBy('slug'));
       return Ember.RSVP.hash({
         shows: shows,
-        selectedShowSlugs: prefs.get('selectedShowSlugs')
+        excludedShowSlugs: prefs.get('excludedShowSlugs')
       });
     });
   },
 
   actions: {
-    back(selectedShowSlugs) {
+    back(excludedShowSlugs) {
       let prefs = this.get('discoverPrefs');
       prefs.set('currentSetupStep', 'topics');
-      prefs.set('selectedShowSlugs', selectedShowSlugs);
+      prefs.set('excludedShowSlugs', excludedShowSlugs);
       this.transitionTo('discover.topics');
     },
-    next(selectedShowSlugs) {
-      if (selectedShowSlugs.length === 0) {
+    next(excludedShowSlugs, hasNotSelectedShow) {
+      if (hasNotSelectedShow) {
         this.controllerFor('discover.shows').set('showError', true);
       }
       else {
         this.controllerFor('discover.shows').set('showError', false);
         let prefs = this.get('discoverPrefs');
-        prefs.set('selectedShowSlugs', selectedShowSlugs);
+        prefs.set('excludedShowSlugs', excludedShowSlugs);
         prefs.set('setupComplete', true);
         prefs.save();
 

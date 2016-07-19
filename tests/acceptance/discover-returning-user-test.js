@@ -14,7 +14,7 @@ moduleForAcceptance('Acceptance | discover returning user', {
     server.create('discover-topic', {title: "Technology", url: "technology"});
     server.createList('discover-story', 10);
     let shows = server.createList('show', 10);
-    session.set('data.discover-shows',  [shows[0].slug]); // set some saved shows
+    session.set('data.discover-excluded-shows',  [shows[0].slug]); // set some excluded shows
     session.set('data.discover-topics', ['music']); // set some saved topics
     session.set('data.discover-excluded-story-ids', []);
 
@@ -75,8 +75,8 @@ test('shows are saved in a session and maintained upon next visit in edit flow',
   visit('/discover/playlist');
 
   let session = currentSession(this.application);
-  let stories = server.createList('show', 10);
-  session.set('data.discover-shows',  [stories[0].slug]); // set some saved stories
+  let shows = server.createList('show', 10);
+  session.set('data.discover-excluded-shows',  [shows[0].slug]); // set some excluded shows
 
   andThen(function() {
     click(".discover-edit-playlist-link");
@@ -85,8 +85,8 @@ test('shows are saved in a session and maintained upon next visit in edit flow',
       andThen(function() {
         assert.equal(currentURL(), '/discover/edit/shows');
         assert.equal($(".discover-show input").length, server.db.shows.length, "all should be present");
-        assert.equal($(".discover-show input:checked").length, 1, "1 should be checked");
-        assert.equal($(`.discover-show input[name="${stories[0].slug}"]:checked`).length, 1, "correct one should be checked");
+        assert.equal($(".discover-show input:not(:checked)").length, 1, "1 should be not be checked");
+        assert.equal($(`.discover-show input[name="${shows[0].slug}"]:not(:checked)`).length, 1, "correct one should be checked");
       });
     });
   });
@@ -144,8 +144,8 @@ test('selected topics are retained temporarily when switching between tabs', fun
 
 test('selected shows are not retained if you hit cancel', function(assert) {
   let session = currentSession(this.application);
-  let stories = server.createList('show', 10);
-  session.set('data.discover-shows',  [stories[0].slug]); // set some saved stories
+  let shows = server.createList('show', 10);
+  session.set('data.discover-excluded-shows',  [shows[0].slug]); // set some excluded shows
 
   visit('/discover/edit/topics');
 

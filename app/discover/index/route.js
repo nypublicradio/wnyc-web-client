@@ -38,12 +38,12 @@ export default Ember.Route.extend({
       });
     }
     else {
-      let preflight = this.get('preflight');
-      let topicTags = prefs.get('selectedTopicTags');
-      let showSlugs = prefs.get('selectedShowSlugs');
+      let preflight         = this.get('preflight');
+      let topicTags         = prefs.get('selectedTopicTags');
+      let excludedShowSlugs = prefs.get('excludedShowSlugs');
 
       stories = Ember.RSVP.hash({
-        showStories: preflight.storiesFromShows(showSlugs),
+        showStories: preflight.storiesFromShows(excludedShowSlugs),
         tagStories: preflight.storiesFromTopics(topicTags)
       }).then((results) => {
         return this.store.query('discover.stories', {

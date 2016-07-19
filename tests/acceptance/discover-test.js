@@ -7,7 +7,7 @@ moduleForAcceptance('Acceptance | discover',
     beforeEach() {
       window.Modernizr.touch = false;
       let session = currentSession(this.application);
-      session.set('data.discover-shows',  []);
+      session.set('data.discover-excluded-shows',  []);
       session.set('data.discover-topics', []);
       session.set('data.discover-excluded-story-ids', []);
     }
@@ -129,7 +129,7 @@ test('topics are saved in a session and maintained upon next visit in initial fl
   });
 });
 
-test('shows are saved in a session and maintained upon next visit in initial flow', function(assert) {
+test('show exclusions are saved in a session and maintained upon next visit in initial flow', function(assert) {
   server.createList('discover-topic', 5);
   let shows = server.createList('show', 5);
   let testShow = shows[0];
@@ -159,7 +159,7 @@ test('shows are saved in a session and maintained upon next visit in initial flo
 });
 
 
-test('show selections are maintained if you go back to topics screen', function(assert) {
+test('show exclusions are maintained if you go back to topics screen', function(assert) {
   server.createList('discover-topic', 5);
   let shows = server.createList('show', 5);
   let testShow = shows[0];
@@ -198,7 +198,6 @@ test('all shows are selected by default', function(assert) {
   andThen(function() {
     click(".discover-topic input");
     click("button:contains('Next')");
-
     andThen(function() {
       assert.equal(currentURL(), '/discover/start/shows');
       assert.equal($(`.discover-show input:checked`).length, shows.length, "all shows should be selected");
@@ -217,7 +216,6 @@ test('create playlist button is disabled if no shows are selected', function(ass
     andThen(function() {
       click(".discover-topic input");
       click("button:contains('Next')");
-
       andThen(function() {
         assert.equal($('button.mod-filled-red').length, 1, "Button should be red");
 
@@ -237,25 +235,27 @@ test('create playlist button should show error if clicked if no shows are select
   visit('/discover/start');
   server.createList('discover-topic', 20);
   server.createList('show', 2);
-
   andThen(function() {
     click('button:contains("Get Started")');
     andThen(function() {
       click(".discover-topic input");
-      click("button:contains('Next')");
-
       andThen(function() {
-        assert.equal($('button.mod-filled-red').length, 1, "Button should be red");
+        click("button:contains('Next')");
 
-        click($(".discover-show")[0]);
-        click($(".discover-show")[1]);
+        andThen(function() {
+          assert.equal($(`.discover-show input:checked`).length, 2, "all shows should be selected");
+          assert.equal($('button.mod-filled-red').length, 1, "Button should be red");
 
-        andThen(() => {
-          click($('button:contains("Create Playlist")'));
+          click($(".discover-show")[0]);
+          click($(".discover-show")[1]);
 
           andThen(() => {
-            assert.equal($('.discover-setup-title-error').text().length > 0, true);
-            assert.equal(currentURL(), '/discover/start/shows');
+            click($('button:contains("Create Playlist")'));
+
+            andThen(() => {
+              assert.equal($('.discover-setup-title-error').text().length > 0, true);
+              assert.equal(currentURL(), '/discover/start/shows');
+            });
           });
         });
       });

@@ -6,15 +6,13 @@ export default Ember.Route.extend({
   model() {
     let prefs = this.get('discoverPrefs');
 
-    return this.store.query('shows', {
+    return this.store.findAll('shows', {
       discover_station: 'wnyc_v2',
       api_key: 'trident'
     }).then((shows) => {
-      prefs.setDefaultShows(shows.mapBy('slug'));
-
       return Ember.RSVP.hash({
         shows: shows,
-        selectedShowSlugs: prefs.get('selectedShowSlugs')
+        excludedShowSlugs: prefs.get('excludedShowSlugs')
       });
     });
   }

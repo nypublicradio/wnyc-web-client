@@ -23,30 +23,30 @@ test('it exists', function(assert) {
 
 test('it initializes topics and shows as empty on initialize', function(assert) {
   let service = this.subject();
-  assert.deepEqual(service.get('selectedShowSlugs'), []);
+  assert.deepEqual(service.get('excludedShowSlugs'), []);
   assert.deepEqual(service.get('selectedTopicTags'), []);
 });
 
 test('it saves to the session when asked to save', function(assert) {
   let service = this.subject();
 
-  service.set('selectedShowSlugs', ['show-slug']);
+  service.set('excludedShowSlugs', ['show-slug']);
   service.set('selectedTopicTags', ['topic-tag']);
   service.save();
 
   assert.deepEqual(service.get('session.data.discover-topics'), ['topic-tag']);
-  assert.deepEqual(service.get('session.data.discover-shows'), ['show-slug']);
+  assert.deepEqual(service.get('session.data.discover-excluded-shows'), ['show-slug']);
 });
 
 test('it loads data from the session on loadFromSession', function(assert) {
   let service = this.subject();
 
   service.set('session.data.discover-topics', ['topic-tag']);
-  service.set('session.data.discover-shows', ['show-slug']);
+  service.set('session.data.discover-excluded-shows', ['show-slug']);
 
   service.loadFromSession();
 
-  assert.deepEqual(service.get('selectedShowSlugs'), ['show-slug']);
+  assert.deepEqual(service.get('excludedShowSlugs'), ['show-slug']);
   assert.deepEqual(service.get('selectedTopicTags'), ['topic-tag']);
 });
 

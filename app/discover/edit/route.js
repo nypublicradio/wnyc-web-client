@@ -12,9 +12,9 @@ export default Ember.Route.extend({
     }
   },
   actions: {
-    updateShowSelection(showSlugs) {
+    updateShowSelection(excludedShowSlugs) {
       let prefs = this.get('discoverPrefs');
-      prefs.set('selectedShowSlugs', showSlugs);
+      prefs.set('excludedShowSlugs', excludedShowSlugs);
     },
     updateTopicSelection(topicTags) {
       let prefs = this.get('discoverPrefs');

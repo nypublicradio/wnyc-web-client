@@ -17,13 +17,13 @@ export default Ember.Service.extend({
   loadFromSession() {
     let session = this.get('session');
     let topics  = session.getWithDefault('data.discover-topics', []);
-    let shows   = session.getWithDefault('data.discover-shows', []);
+    let shows   = session.getWithDefault('data.discover-excluded-shows', []);
     let setupComplete = session.getWithDefault('data.discover-setup-complete', false);
     let currentSetupStep = session.getWithDefault('data.discover-current-setup-step', 'start');
     session.set('data.discover-excluded-story-ids', session.getWithDefault('data.discover-excluded-story-ids', []));
 
     this.set('selectedTopicTags', topics);
-    this.set('selectedShowSlugs', shows);
+    this.set('excludedShowSlugs', shows);
     this.set('setupComplete', setupComplete);
     this.set('currentSetupStep', currentSetupStep);
   },
@@ -46,7 +46,7 @@ export default Ember.Service.extend({
 
   save() {
     let session = this.get('session');
-    session.set('data.discover-shows', this.get('selectedShowSlugs'));
+    session.set('data.discover-excluded-shows', this.get('excludedShowSlugs'));
     session.set('data.discover-topics', this.get('selectedTopicTags'));
     session.set('data.discover-setup-complete', this.get('setupComplete'));
     session.set('data.discover-current-setup-step', this.get('currentSetupStep'));

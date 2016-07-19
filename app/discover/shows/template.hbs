@@ -5,14 +5,14 @@
     errorText = (if (and showError hasNotSelectedAShow) 'Please select at least one show')
     nextButtonEnabled=(not hasNotSelectedAShow)
     nextButtonText="Create Playlist"
-    onNext=(route-action 'next' currentShowSelection)
-    onBack=(route-action 'back' currentShowSelection)
+    onNext=(route-action 'next' currentShowExclusion hasNotSelectedAShow)
+    onBack=(route-action 'back' currentShowExclusion)
   }}
 {{/sticky-page-header}}
 
 {{discover-show-list
   shows=model.shows
-  selectedShowSlugs=model.selectedShowSlugs
-  onShowsUpdated=(action (mut currentShowSelection))
+  excludedShowSlugs=model.excludedShowSlugs
+  onShowsUpdated=(action (mut currentShowExclusion))
   onNoneSelected=(action (mut hasNotSelectedAShow))
 }}
