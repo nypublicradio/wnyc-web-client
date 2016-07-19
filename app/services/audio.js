@@ -324,8 +324,7 @@ export default Service.extend({
 
     if (get(this, 'currentContext') === 'queue') {
       this.playNextInQueue();
-    }
-    else if (context === 'discover') {
+    } else if (get(this, 'currentContext') === 'discover') {
       let nextTrack = this.get('discoverQueue').nextItem(this.get('currentAudio.id'));
       if (nextTrack) {
         this.play(get(nextTrack, 'id'), 'discover');
