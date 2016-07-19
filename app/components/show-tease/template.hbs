@@ -27,7 +27,9 @@
     <div class="text">
       {{#if featuredSpot}}
 
-        <h4 class="text--small text--lightgray text--spacing text--upper nudge medium-up">{{producing-orgs show.producingOrganizations unlinked=true}}</h4>
+        {{#unless simpleLayout}}
+          <h4 class="text--small text--lightgray text--spacing text--upper nudge medium-up">{{producing-orgs show.producingOrganizations unlinked=true}}</h4>
+        {{/unless}}
 
         <h2 class="h1 h2--mq-small nudge text--white">
             <a href="{{showUrl}}"
@@ -38,13 +40,17 @@
               data-tracking-label='clicked featured show'>{{show.title}}</a>
         </h2>
         
-        <div class="h3 text--white medium-up">
-          {{{show.tease}}}
-        </div>
+        {{#unless simpleLayout}}
+          <div class="h3 text--white medium-up">
+            {{{show.tease}}}
+          </div>
+        {{/unless}}
 
       {{else}}
 
+        {{#unless simpleLayout}}
         <h4 class="text--small text--lightgray text--spacing text--upper nudge medium-up">{{producing-orgs show.producingOrganizations unlinked=true}}</h4>
+        {{/unless}}
 
         <h2 class="h2 h2--mq-small nudge-mini">
            <a href="{{showUrl}}"
@@ -54,7 +60,9 @@
               data-tracking-action='Clicked Show "{{show.title}}"'>{{show.title}}</a>
         </h2>
         
+        {{#unless simpleLayout}}
         <div class="text-body--nopad text--medium medium-up">{{{show.tease}}}</div>
+        {{/unless}}
 
       {{/if}}
     </div>

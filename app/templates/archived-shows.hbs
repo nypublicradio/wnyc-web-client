@@ -1,7 +1,7 @@
 <div class="l-constrained l-constrained--mq-med">
 
   <section class="aligncenter nudge-large">
-    <div class="l-skinnier--mq-med">
+    <div class="box">
       <h1 class="h1 h1--extrabold h1--mq-small nudge">More Shows</h1>
     </div>
   </section>
@@ -10,7 +10,7 @@
     <ul class="list list--borderbottom">
       {{#each model as |show|}}
         <li class="list-item list-item--tall">
-          {{show-tease show=show trackingCategory="Archived Shows"}} 
+          {{show-tease show=show trackingCategory="Archived Shows" simpleLayout=true}} 
         </li>
         {{/each}}
       </ul>
