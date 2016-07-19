@@ -1,0 +1,19 @@
+<div class="l-constrained l-constrained--mq-med">
+
+  <section class="aligncenter nudge-large">
+    <div class="l-skinnier--mq-med">
+      <h1 class="h1 h1--extrabold h1--mq-small nudge">More Shows</h1>
+    </div>
+  </section>
+
+  <section class="shows-list">
+    <ul class="list list--borderbottom">
+      {{#each model as |show|}}
+        <li class="list-item list-item--tall">
+          {{show-tease show=show trackingCategory="Archived Shows"}} 
+        </li>
+        {{/each}}
+      </ul>
+  </section>
+
+</div>

@@ -27,6 +27,7 @@ Router.map(function() {
   this.route('story', { path: 'story/:slug' });
   if (config.environment === 'test' || config.featureFlags['site-chrome']) {
     this.route('shows', {path: 'shows'});
+    this.route('archived-shows', {path: 'archived-shows'});
   }
   this.route('show', {path: 'shows/:slug'}, subpageRoutes);
   this.route('article', {path: 'articles/:slug'}, subpageRoutes);

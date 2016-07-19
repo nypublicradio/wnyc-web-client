@@ -6,7 +6,7 @@
         <div class="text nudge-big">
           <h3 class="h5 aligncenter text--upper text--white text--spacing-sm">Featured Show</h3>
         </div>
-        {{show-tease show=model.featured featuredSpot=true}}
+        {{show-tease show=model.featured featuredSpot=true trackingCategory="Shows A-Z"}}
       </div>
     </div>
   </div>
@@ -37,7 +37,7 @@
         <p class="text aligncenter">no results found</p>
       </div>
     {{else}}
-      {{client-infinite-scroll shows=filteredShows}}
+      {{client-infinite-scroll shows=model.allShows trackingCategory="Shows A-Z"}}
     {{/if}}
   </section>
 

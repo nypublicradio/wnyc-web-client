@@ -6,7 +6,7 @@
       <a href="{{showUrl}}"
               class="flag-image link--nodecor"
               title="{{show.title}}"
-              data-tracking-category='Shows A-Z'
+              data-tracking-category='{{trackingCategory}}'
               data-tracking-action='Clicked Show "{{show.title}}"'
               data-tracking-label='clicked featured show'>
         <img src={{image-template show.logoImage.template 150 150 show.logoImage.crop}} class="squarebadge--lg" >
@@ -15,7 +15,7 @@
       <a href="{{showUrl}}"
               class="flag-image link--nodecor"
               title="{{show.title}}"
-              data-tracking-category='Shows A-Z'
+              data-tracking-category='{{trackingCategory}}'
               data-tracking-action='Clicked Show "{{show.title}}"'>
         <img src={{image-template show.logoImage.template 90 90 show.logoImage.crop}} class="squarebadge">
       </a>
@@ -33,7 +33,7 @@
             <a href="{{showUrl}}"
               class="link--white"
               title="{{show.title}}"
-              data-tracking-category='Shows A-Z'
+              data-tracking-category='{{trackingCategory}}'
               data-tracking-action='Clicked Show "{{show.title}}"'
               data-tracking-label='clicked featured show'>{{show.title}}</a>
         </h2>
@@ -50,7 +50,7 @@
            <a href="{{showUrl}}"
               class="link--dark"
               title="{{show.title}}"
-              data-tracking-category='Shows A-Z'
+              data-tracking-category='{{trackingCategory}}'
               data-tracking-action='Clicked Show "{{show.title}}"'>{{show.title}}</a>
         </h2>
         
