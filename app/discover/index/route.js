@@ -40,8 +40,8 @@ export default Ember.Route.extend({
       let excludedShowSlugs = prefs.get('excludedShowSlugs');
 
       stories = this.store.query('discover.stories', {
-        shows:            excludedShowSlugs,
-        tags:             topicTags,
+        shows:            excludedShowSlugs.join(","),
+        tags:             topicTags.join(","),
         api_key:          'trident',
         discover_station: 'wnyc-v2',
         duration:         10800,

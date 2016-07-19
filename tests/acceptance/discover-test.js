@@ -215,16 +215,18 @@ test('create playlist button is disabled if no shows are selected', function(ass
     click('button:contains("Get Started")');
     andThen(function() {
       click(".discover-topic input");
-      click("button:contains('Next')");
       andThen(function() {
-        assert.equal($('button.mod-filled-red').length, 1, "Button should be red");
+        click("button:contains('Next')");
+        andThen(function() {
+          assert.equal($('button.mod-filled-red').length, 1, "Button should be red");
 
-        click($(".discover-show")[0]);
-        click($(".discover-show")[1]);
+          click($(".discover-show")[0]);
+          click($(".discover-show")[1]);
 
-        andThen(() => {
-          assert.equal(currentURL(), '/discover/start/shows');
-          assert.equal($('button.mod-filled-red').length, 0, "Button should not be red");
+          andThen(() => {
+            assert.equal(currentURL(), '/discover/start/shows');
+            assert.equal($('button.mod-filled-red').length, 0, "Button should not be red");
+          });
         });
       });
     });

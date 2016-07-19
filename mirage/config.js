@@ -30,14 +30,6 @@ export default function() {
     };
   });
 
-  this.get(`${baseUrl}/api/v1/make_radio`, function(schema) {
-    let stories = schema.discoverStories.all().models;
-    return {
-      count: stories.length,
-      results: stories.map(c => c.attrs)
-    };
-  });
-
   this.post(`${config.wnycAccountRoot}/api/v1/listenaction/create/`, () => true);
 
   this.post(`${config.wnycAccountRoot}/api/v1/listenaction/create/:pk/:action`, () => true);
@@ -66,9 +58,9 @@ export default function() {
   this.get(`${baseUrl}/api/v3/story/detail/:id`, 'story');
   this.get(`${baseUrl}/api/v3/channel/\*id`, 'api-response');
 
-  this.get(`${baseUrl}/api/v3/refresh_playlist`, function(schema) {
+  this.get(`${baseUrl}/api/v3/make_playlist`, function(schema) {
     let stories = schema.discoverStories.all().models;
-    
+
     let data = stories.map(s => {
       return {
         type: "Story",
