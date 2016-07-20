@@ -207,9 +207,10 @@ test('all shows are selected by default', function(assert) {
 
 
 test('create playlist button is disabled if no shows are selected', function(assert) {
-  visit('/discover/start');
   server.createList('discover-topic', 20);
   server.createList('show', 2);
+
+  visit('/discover/start');
 
   andThen(function() {
     click('button:contains("Get Started")');
@@ -234,9 +235,11 @@ test('create playlist button is disabled if no shows are selected', function(ass
 });
 
 test('create playlist button should show error if clicked if no shows are selected', function(assert) {
-  visit('/discover/start');
   server.createList('discover-topic', 20);
   server.createList('show', 2);
+
+  visit('/discover/start');
+
   andThen(function() {
     click('button:contains("Get Started")');
     andThen(function() {

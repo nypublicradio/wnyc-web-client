@@ -1,62 +1,46 @@
 import Ember from 'ember';
-const {
-  get
-} = Ember;
 
 export default Ember.Component.extend({
   classNames:['discover-show-list'],
   shows: [],
-  selectedShows: [],
-                     // component I used wants the models
-
-  excludedShows: [],
+  showSlugs:     Ember.computed.mapBy('shows', 'slug'),
+  selectedShowSlugs: [],
+  excludedShowSlugs: [],
 
   didReceiveAttrs() {
-    let excludedShowSlugs = this.get('excludedShowSlugs') || [];
-    var excludedShows = this.get('excludedShows') || [];
-    var selectedShows = this.get('selectedShows') || [];
-
-    if (excludedShowSlugs) {
-      // Now we'll find the matching objects in the discover topics,
-      // and add them to the selectedTopics list
-      this.get('shows').forEach(function(show) {
-        if (excludedShowSlugs.contains(get(show, 'slug'))) {
-          excludedShows.addObject(show);
-        }
-        else {
-          selectedShows.addObject(show);
-        }
-      });
-    }
-
-    this.set('excludedShows', excludedShows);
-    this.set('selectedShows', selectedShows);
+    this.set('selectedShowSlugs', this.get('showSlugs').reject(item => {
+      return this.get('excludedShowSlugs').contains(item);
+    }));
 
     this._super(...arguments);
   },
 
   initializeShows: Ember.on('init', function() {
-    Ember.run.once(() => {
-      this.sendAction('onShowsUpdated', this.get('excludedShows').mapBy('slug'));
-      this.sendAction('onNoneSelected', this.get('selectedShows').length === 0);
-    });
+    this.updateShows(this.get('excludedShowSlugs'), this.get('selectedShowSlugs'));
   }),
 
+  updateShows(excludedShowSlugs, selectedShowSlugs) {
+    Ember.run.once(() => {
+      this.sendAction('onShowsUpdated', excludedShowSlugs.slice());
+      this.sendAction('onNoneSelected', selectedShowSlugs.length === 0);
+    });
+  },
+
   actions: {
-    onMultiselectChangeEvent(selectedShows, changedShows, action) {
-      let shows         = this.get('selectedShows');
-      let excludedShows = this.get('excludedShows');
+    onMultiselectChangeEvent(shows, value, action) {
+      let excludedShowSlugs = this.get('excludedShowSlugs');
+      let selectedShowSlugs = this.get('selectedShowSlugs');
+
       if (action === 'added') {
-        shows.addObject(changedShows);
-        excludedShows.removeObject(changedShows);
+        selectedShowSlugs.addObject(value);
+        excludedShowSlugs.removeObject(value);
       }
       else if (action === 'removed') {
-        shows.removeObject(changedShows);
-        excludedShows.addObject(changedShows);
+        selectedShowSlugs.removeObject(value);
+        excludedShowSlugs.addObject(value);
       }
 
-      this.sendAction('onShowsUpdated', excludedShows.mapBy('slug'));
-      this.sendAction('onNoneSelected', selectedShows.length === 0);
+      this.updateShows(excludedShowSlugs, selectedShowSlugs);
     }
   }
 });

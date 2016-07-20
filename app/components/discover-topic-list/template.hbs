@@ -1,4 +1,9 @@
-{{#multiselect-checkboxes options=topics selection=selectedTopics tagName='div' onchange=(action 'onMultiselectChangeEvent') as |topic isSelected|}}
+{{#multiselect-checkboxes
+  options=topics
+  selection=selectedTopicTags
+  valueProperty='url'
+  tagName='div'
+  onchange=(action 'onMultiselectChangeEvent') as |topic isSelected|}}
   {{discover-topic title=topic.title url=topic.url isSelected=isSelected}}
 
   {{! Adding this <hr> element and then doing a couple of nth-of-type selectors to

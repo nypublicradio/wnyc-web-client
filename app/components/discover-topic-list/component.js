@@ -1,62 +1,44 @@
 import Ember from 'ember';
-const {
-  get
-} = Ember;
 
 export default Ember.Component.extend({
   classNames:['discover-topic-list'],
+  topics: [],
+  topicTags:  Ember.computed.mapBy('topics', 'urls'),
+  selectedTopicTags: [],
 
-  selectedTopics: [], // these are the models, and the multi-select checkbox
-                      // component I used wants the models
-
-  didReceiveAttrs() {
-    this._super(...arguments);
-
-    let selectedTopicTags = this.get('selectedTopicTags') || [];
-    var selectedTopics = [];
-    if (selectedTopicTags) {
-      // Now we'll find the matching objects in the discover topics,
-      // and add them to the selectedTopics list
-      this.get('topics').forEach(function(topic) {
-        if (selectedTopicTags.contains(get(topic, 'url'))) {
-          selectedTopics.addObject(topic);
-        }
-      });
-    }
-    this.set('selectedTopics', selectedTopics);
-  },
-
-  allSelected: Ember.computed('selectedTopics.length', 'topics.length', function() {
-    return this.get('topics').slice().length === this.get('selectedTopics').length;
+  allSelected: Ember.computed('selectedTopicTags.length', 'topicTags.length', function() {
+    return this.get('topics').slice().length === this.get('selectedTopicTags').length;
   }),
 
   initializeTopics: Ember.on('init', function() {
-    this.updateTopics((this.get('selectedTopics') || []));
+    this.updateTopics((this.get('selectedTopicTags') || []));
   }),
 
   updateTopics(topics) {
     Ember.run.once(() => {
-      this.set('selectedTopics', topics);
+      this.set('selectedTopicTags', topics.slice());
+      // don't want this bound to the session stuff passed in or saving gets hinky
+
       this.sendAction('onNoneSelected', topics.length === 0);
-      this.sendAction('onTopicsUpdated', topics.mapBy('url'));
+      this.sendAction('onTopicsUpdated', topics);
     });
   },
 
   actions: {
     selectAll() {
-      this.updateTopics(this.get('topics').slice());
+      this.updateTopics(this.get('topics'));
     },
     selectNone() {
       this.updateTopics([]);
     },
-    onMultiselectChangeEvent(selectedTopics, changedTopics, action) {
-      let topics = this.get('selectedTopics');
+    onMultiselectChangeEvent(selectedTopics, value, action) {
+      let topics = this.get('selectedTopicTags');
 
       if (action === 'added') {
-        topics.addObject(changedTopics);
+        topics.addObject(value);
       }
       else if (action === 'removed') {
-        topics.removeObject(changedTopics);
+        topics.removeObject(value);
       }
 
       this.updateTopics(topics);
