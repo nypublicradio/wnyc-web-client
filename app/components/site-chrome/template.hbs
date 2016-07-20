@@ -116,11 +116,14 @@
           Topics
           </a>
         </li>
-        <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
-          {{#link-to 'discover.start' class='inherit'}}
-          {{wnyc-svg icon='antenna' className='icon--menu icon--antenna'}}
-          Discover
-          {{/link-to}}
+        <li class="list-item list-item--short">
+          <a href="/discover/start" 
+              class="inherit"
+              title="Discover"
+              data-tracking-category="WNYC Menu"
+              data-tracking-action="Clicked Discover">
+              Discover
+            </a>
         </li>
         {{#unless media.isMiddleNarrowAndUp}}
           {{#if session.isAuthenticated}}
