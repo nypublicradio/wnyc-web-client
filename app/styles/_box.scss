@@ -23,10 +23,6 @@
   border: solid 1px #979797;
 }
 
-.box--nopad {
-  padding: 0;
-}
-
 .box--nearwhite {
     background-color: $nearwhite;
 }
@@ -96,6 +92,14 @@
   @include mq($small-only){
     padding: 25px 35px 20px;
   }
+}
+
+.box--nopad {
+  padding: 0;
+}
+
+.box--nopad-top {
+  padding-top: 0;
 }
 
 .box--topborder {

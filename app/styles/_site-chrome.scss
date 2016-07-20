@@ -1,24 +1,33 @@
 .sitechrome-corner {
-  background: $red;
   height: 83px;
   padding: 20px;
-  @extend %vertical-rhythm;
 
   > h1 {
     margin: 0;
+  }
+
+  .icon--wnyc-logo-nav #wnyc-logo{
+    fill: $darkestgray;
+  }
+
+  .nav--homepage & {
+    .icon--wnyc-logo-nav #wnyc-logo{
+      fill: white;
+    }
   }
 }
 
 .sitechrome-top {
   //height: 64px;
   padding-top: 20px;
-  background: $red;
+  background: #FFF;
   @extend %vertical-rhythm;
 
   @include mq($middle-narrow-only) {
     margin-bottom: 0;
+    background: $red;
 
-    .fixedNav & {
+    .fixed-nav & {
       margin-bottom: 57px;
     }
   }
@@ -30,27 +39,39 @@
 }
 
 .sitechrome-nav {
+  background-color: white;
+  @include transition(background-color 250ms ease);
   //for mobile header snap
   -webkit-transform: translate3d(0px,0px,0px);
   transform: translate3d(0px,0px,0px);
-  
-  a:hover {
-    opacity: 0.8;
+
+  a, button {
+    color: $darkestgray;
   }
-  button:hover {
+  a:hover, button:hover {
     opacity: 0.8;
   }
 
   @include mq($middle-narrow-only) {
     margin-bottom: 24px;
+    a, button {
+      color: white;
+    }
   }
 
-  .fixedNav & {
+  .fixed-nav & {
     position: fixed;
     position: sticky;
     top: 0;
     z-index: $zIndex-fixedNav;
     width: 100%;
+  }
+
+  &.nav--homepage{
+    background-color: $red;
+    a, button {
+      color: white;
+    }
   }
 }
 
@@ -131,16 +152,21 @@
     @include flex(1 1 auto);
     @include order(0);
 
-    > .text {
+    .cta-text {
       padding: 0 15px;
+      display: inline-block;
     }
   }
 
   > .btn {
   }
 
-  > h1 {
+  h1 {
     margin: 0;
+  }
+
+  .sitechrome-search {
+    max-width: 320px;
   }
 }
 
@@ -152,26 +178,14 @@
   @extend .list--noborder;
 }
 
-.sitechrome-listitem {
-  text-align: center;
-  @extend %vertical-rhythm;
-  @extend .list-item;
 
-  > a {
-    color: white;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    @include fontsize(14);
-
-  }
-}
 
 // .btn.btn--large.btn--white
 .sitechrome-btn {
   display: inline-block;
   border-radius: 25px;
   color: white;
-  border: 2px solid white;
+  border: none;
   padding: 2px 18px 2px 18px;
   background: transparent;
   white-space:nowrap;
@@ -181,9 +195,8 @@
   letter-spacing: 2px;
 
   cursor: pointer;
-  text-transform: uppercase;
 
-  @include transition(background-color $transition-timing, border-color $transition-timing, color $transition-timing);
+  @include transition(background-color $transition-timing, color $transition-timing);
 
   @include flex-shrink(0);
 
@@ -191,8 +204,15 @@
     line-height: 36px;
   }
 
+  @include mq($middle-narrow-only) {
+    border: 2px solid white;
+    &:hover,&:focus {
+      border-color: rgba(white, 0.5);
+    }
+  }
+
   &:hover,
   &:focus {
-    border-color: rgba(white, 0.5);
+    background: rgba($red, 0.9);
   }
 }

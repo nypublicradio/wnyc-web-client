@@ -27,21 +27,17 @@
     </div>
   </section>
 
-  <section>
-    {{search-box action="filterShows" class="gray-search"}}
+  <section class="shows-search">
+    {{search-box placeholder="Search for a show" key-up=(action "filterShows") searchbox-class="searchbox--gray"}}
   </section>
 
   <section class="shows-list">
-    {{#if isSearching}}
-      <div class="doubledown box box--luxe">
-        <div class="loading-spinner text"></div>
-      </div>
-    {{else if noResults}}
+    {{#if noResults}}
       <div class="doubledown box box--luxe">
         <p class="text aligncenter">no results found</p>
       </div>
     {{else}}
-      {{client-infinite-scroll shows=model.allShows}}
+      {{client-infinite-scroll shows=filteredShows}}
     {{/if}}
   </section>
 

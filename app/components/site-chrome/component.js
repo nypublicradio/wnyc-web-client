@@ -10,10 +10,12 @@ var $window = Ember.$(window),
 export default Ember.Component.extend(BetaActionsMixin, {
   session: service(),
   metrics: service(),
+  router: service('wnyc-routing'),
   // we load SVGs via the <use> element, which requires the asset loaded
   // on the same domain
   svgURL: config.wnycSvgURL,
   fixedNavOffset: 0,
+  classNameBindings: ["fixed-nav"],
 
   didInsertElement: function() {
     this._super(...arguments);
@@ -31,14 +33,13 @@ export default Ember.Component.extend(BetaActionsMixin, {
   },
 
   checkOffset: function() {
-    if ($document.scrollTop() >= this.get('fixedNavOffset') ){
-      this.$().addClass("fixedNav");
-    } else {
-      this.$().removeClass("fixedNav");
-    }
+    this.set("fixed-nav", $document.scrollTop() >= this.get('fixedNavOffset') );
   },
 
   actions: {
+    routeSearch(val) {
+      this.get('router').transitionTo('djangorendered', ['search/'], {"q": val});
+    },
     logout() {
       this.get('metrics').trackEvent({
         category: 'WNYC Menu',

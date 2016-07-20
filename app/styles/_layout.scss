@@ -38,7 +38,6 @@
 }
 
 .l-page-nav {
-  background-color: $rouge;
   position: relative;
 
   @include mq($middle-narrow-and-up) {
@@ -48,11 +47,11 @@
     height: 100%;
     width: 144px;
     padding-bottom: 117px;
-    background-color: $navy;
   }
 
   @include mq($short-only) {
     > .scrollable-body {
+      
       max-height: calc(100% - 106px);
       overflow-y: auto;
       height: 100%; 
@@ -70,10 +69,11 @@
 
   &.x-scrollable {
     > .scrollable-body {
+      background-color: $rouge;
       overflow-x: scroll;
       white-space: nowrap;
-      padding: 0 25px;
-      padding: 0 rems(25);
+      padding: 5px 25px;
+      padding: rems(5) rems(25);
       padding-right: 35%; //width of the gradient; see below
     }
 

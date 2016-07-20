@@ -20,7 +20,7 @@ test('should trigger external action on keyup', function(assert) {
     assert.equal(actual, expected, 'Submitted value is passed to external action');
   });
 
-  this.render(hbs`{{search-box action=filterShows}}`);
+  this.render(hbs`{{search-box key-up=(action this.filterShows)}}`);
 
   // add text to the search box and trigger a keyup
   this.$('.searchbox input').val('Show Name');

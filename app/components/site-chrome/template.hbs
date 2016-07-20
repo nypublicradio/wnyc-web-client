@@ -18,36 +18,50 @@
         <div class="sitechrome-topbody-left" id="beta-nav" data-test-selector="beta-nav"></div>
       {{/if}}
       <div class="sitechrome-topbody-right">
-        {{#if media.isMediumAndUp}}
-        <div class="text text--white flush{{unless media.isLargeAndUp ' text--small'}}">
-            <p>WNYC is public radio, supported by listeners like you.</p>
+
+         <div class="l-flex1of2 sitechrome-search">
+          {{#if media.isMiddleNarrowAndUp}}
+            {{search-box placeholder="I heard something... Help me find it" enter=(action "routeSearch") searchbox-class="searchbox--gray searchbox--slim"}}
+          {{else}}
+            <h1>
+              <span class="for-screenreaders">WNYC Navigation</span>
+              <a href="/" 
+                class="link--nodecor"
+                title="WNYC Logo"
+                data-tracking-category="WNYC Menu"
+                data-tracking-action="Clicked WNYC Logo">
+                {{wnyc-svg icon='logo-wnyc' className='icon--wnyc-logo-nav'}}
+              </a>
+            </h1>
+          {{/if}}
+        </div>
+
+        <div class="l-flex1of2">
+          <div class="alignright">
+            {{#if media.isLargeAndUp}}
+              {{#if isHomepage}}
+              <div class="cta-text text flush text--medium">
+                <p>WNYC is public radio, supported by listeners like you.</p>
+              </div>
+              {{/if}}
+            {{/if}}
+            <a class="sitechrome-btn" 
+            href="https://pledge3.wnyc.org/donate/main/onestep/?utm_source=wnyc&utm_medium=wnyc-86x27&utm_content=wnyc-header-beta&utm_campaign=pledge" 
+            title="Donate"
+            data-tracking-category="WNYC Menu"
+            data-tracking-action="Clicked Donate Button"
+            target="_blank">Donate</a>
           </div>
-          <!-- .text -->
-        {{/if}}
-        {{#unless media.isMiddleNarrowAndUp}}
-          <h1>
-            <span class="for-screenreaders">WNYC Navigation</span>
-            <a href="/" 
-              class="link--nodecor"
-              title="WNYC Logo"
-              data-tracking-category="WNYC Menu"
-              data-tracking-action="Clicked WNYC Logo">
-              {{wnyc-svg icon='logo-wnyc' className='icon--wnyc-logo-nav'}}
-            </a>
-          </h1>
-        {{/unless}}
-        <a class="sitechrome-btn" 
-        href="https://pledge3.wnyc.org/donate/main/onestep/?utm_source=wnyc&utm_medium=wnyc-86x27&utm_content=wnyc-header-beta&utm_campaign=pledge" 
-        title="Donate"
-        data-tracking-category="WNYC Menu"
-        data-tracking-action="Clicked Donate Button"
-        target="_blank">Donate {{if media.isMiddleNarrowAndUp 'Now'}}</a>
+        </div>
+
       </div>
+      <!-- .sitechrome-topbody-right -->
     </div>
+    <!-- .sitechrome-topbody -->
   </div>
   <!-- .sitechrome-top -->
 
-  <nav class="l-page-nav sitechrome-nav {{unless media.isMiddleNarrowAndUp 'x-scrollable'}}">
+  <nav class="l-page-nav sitechrome-nav {{if isHomepage 'nav--homepage'}} {{unless media.isMiddleNarrowAndUp 'x-scrollable'}}">
     {{#if media.isMiddleNarrowAndUp}}
     <div class="sitechrome-corner">
       <h1>
@@ -63,34 +77,24 @@
     </div>
     {{/if}}
     <div class="scrollable-body">
-      <ul class="list list--noborder flush aligncenter text--upper text--white text--spacing text--heavy text--small {{unless media.isMiddleNarrowAndUp 'list--inline list--spaced'}}">
-        <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
-          <a href="/search" 
-            class="inherit"
-            title="Search"
-            data-tracking-category="WNYC Menu"
-            data-tracking-action="Clicked Search">
-            {{wnyc-svg icon='search' className='icon--menu icon--search'}}
-            Search
-          </a>
-        </li>
-        <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
+      <div class="{{if media.isMiddleNarrowAndUp 'box box--slim box--nopad-top'}}">
+
+      <ul class="list list--noborder flush alignright text--spacing text--semi {{unless media.isMiddleNarrowAndUp 'list--inline list--spaced text--small' 'text--medium '}}">
+        <li class="list-item list-item--short">
           <a href="/streams" 
             class="inherit"
             title="Listen Live"
             data-tracking-category="WNYC Menu"
             data-tracking-action="Clicked Listen Live">
-            {{wnyc-svg icon='listen-live' className='icon--menu icon--listenlive'}}
             Listen Live
           </a>
         </li>
-        <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
+        <li class="list-item list-item--short">
           <a href="/schedule"
             class="inherit"
             title="Schedule"
             data-tracking-category="WNYC Menu"
             data-tracking-action="Clicked Schedule">
-          {{wnyc-svg icon='schedule' className='icon--menu icon--schedule'}}
           Schedule
           </a>
         </li>
@@ -100,8 +104,7 @@
             title="Shows"
             data-tracking-category="WNYC Menu"
             data-tracking-action="Clicked Shows">
-            {{wnyc-svg icon='radio' className='icon--menu icon--shows'}}
-            Shows
+          Shows
           </a>
         </li>
         <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
@@ -110,7 +113,6 @@
             title="Topics"
             data-tracking-category="WNYC Menu"
             data-tracking-action="Clicked Topics">
-          {{wnyc-svg icon='topics' className='icon--menu icon--topics'}}
           Topics
           </a>
         </li>
@@ -119,16 +121,6 @@
           {{wnyc-svg icon='antenna' className='icon--menu icon--antenna'}}
           Discover
           {{/link-to}}
-        </li>
-        <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
-          <a href="/support"
-            class="inherit"
-            title="Ways to Give"
-            data-tracking-category="WNYC Menu"
-            data-tracking-action="Clicked Ways to Give">
-          {{wnyc-svg icon='gift' className='icon--menu icon--gift'}}
-          Ways to Give
-          </a>
         </li>
         {{#unless media.isMiddleNarrowAndUp}}
           {{#if session.isAuthenticated}}
@@ -141,8 +133,8 @@
               My Account
             </a>
           </li>
-          <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
-            <button class="btn--blank btn--white text--spacing text--upper h5" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
+          <li class="list-item list-item--short">
+            <button class="btn--blank btn--white text--spacing h5" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
           </li>
           {{else}}
           <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
@@ -158,15 +150,18 @@
         {{/unless}}
       </ul>
     </div>
+    <!-- .box -->
+    </div>
     <!-- .x-scrollable-body -->
 
     {{#if media.isMiddleNarrowAndUp}}
     <div class="l-bottom">
-      <div class="l-highlight--dark">
         <div class="box box--slim">
-          <div class="box--topborder">
-            <div class="h5 text--airy text--upper text--white text--spacing aligncenter">
+          <ul class="list list--noborder flush alignright text--spacing text--semi text--medium">
+            {{!-- <div class="h5 text--airy text--heavy text--spacing alignright"> --}}
+            
             {{#if session.isAuthenticated}}
+            <li class="list-item list-item--short">
                 <a href="/users/me" 
                   class="inherit"
                   title="My Account"
@@ -174,8 +169,12 @@
                   data-tracking-action="Clicked My Account">
                   My Account
                 </a>
-              <button class="btn--blank btn--white text--spacing text--upper" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
+              </li>
+              <li class="list-item list-item--short">
+              <button class="btn--blank text--spacing" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
+            </li>
             {{else}}
+            <li class="list-item list-item--short">
               <a href="/login" 
                 class="inherit"
                 title="Sign In"
@@ -183,14 +182,13 @@
                 data-tracking-action="Clicked Sign In">
               Sign In
               </a>
+            </li>
             {{/if}}
-            </div>
-            <!-- .text -->
-          </div>
-          <!-- .box-topborder -->
+          </ul>
+            {{!-- </div>
+            <!-- .text --> --}}
         </div>
         <!-- .box -->
-      </div>
     </div>
     <!-- .l-bottom -->
     {{/if}}

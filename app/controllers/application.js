@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import Controller from 'ember-controller';
 import service from 'ember-service/inject';
 import get from 'ember-metal/get';
@@ -12,6 +13,8 @@ export default Controller.extend({
 
   noErrors:     not('audio.hasErrors'),
   showPlayer:   and('noErrors', 'audio.playedOnce'),
+
+  isHomepage: Ember.computed.match('currentRouteName', /^index(_loading)?$/),
 
   actions: {
     showModal(which) {

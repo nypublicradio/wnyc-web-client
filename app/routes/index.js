@@ -4,6 +4,7 @@ export default Ember.Route.extend({
   model() {
     return this.store.findRecord('django-page', '/');
   },
+
   actions: {
     //TODO: for legacy compat, remove for new homepage
     didTransition() {
