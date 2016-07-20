@@ -14,6 +14,7 @@ moduleForModel('discover/stories', 'Unit | Serializer | discover/stories', {
 // as this is going through the adapter/serializer/model path
 
 test('it serializes the data', function(assert) {
+  let done = assert.async();
   server.create('discover-story');
 
   this.store().query('discover/stories', {}).then(records => {
@@ -26,10 +27,14 @@ test('it serializes the data', function(assert) {
         assert.ok(!!value, `${key} exists in story serialization`);
       });
     });
+
+    done();
   });
 });
 
 test('it serializes the data if show is blank', function(assert) {
+  let done = assert.async();
+
   server.create('discover-story', {
     headers: {}
   });
@@ -40,5 +45,7 @@ test('it serializes the data if show is blank', function(assert) {
       assert.ok(!record.get('showTitle'), "show title should be blank");
       assert.ok(!record.get('showUrl'), "show url should be blank");
     });
+
+    done();
   });
 });

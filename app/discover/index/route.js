@@ -42,8 +42,6 @@ export default Ember.Route.extend({
       stories = this.store.query('discover.stories', {
         shows:            excludedShowSlugs.join(","),
         tags:             topicTags.join(","),
-        api_key:          'trident',
-        discover_station: 'wnyc-v2',
         duration:         10800,
         _nocache:         Date.now()
       }).then(stories => {

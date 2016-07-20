@@ -10,6 +10,7 @@ moduleForModel('discover/topics', 'Unit | Serializer | discover/topics', {
 });
 
 test('it serializes the data', function(assert) {
+  let done = assert.async();
   server.createList('discover-topic', 25);
   this.store().query('discover/topics', {}).then(records => {
     let keysToCheck = ['title', 'url'];
@@ -19,5 +20,6 @@ test('it serializes the data', function(assert) {
       var value = record.get(key);
       assert.ok(!!value, `${key} exists in topic serialization`);
     });
+    done();
   });
 });
