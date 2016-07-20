@@ -297,7 +297,7 @@ export default Service.extend({
   flashError(flashVersion) {
     this._trackPlayerEvent({
       action: 'Flash Error',
-      lable: flashVersion
+      label: flashVersion
     });
   },
 
