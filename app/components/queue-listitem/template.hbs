@@ -4,17 +4,7 @@
     <!-- .l-holygrail-left -->
     <div class="l-holygrail-middle">
       <div class="queueitem-info">
-        {{#if story.headers.brand.url}}
-          <div class="text text--medium text--gray flush queueitem-showtitle">
-            <a href='{{story.headers.brand.url}}?modal=null'
-               title='{{story.headers.brand.title}}'
-               data-tracking-category='Persistent Player'
-               data-tracking-action='Click Through to Show "{{story.headers.brand.title}}"'
-               data-tracking-region='{{region}}'
-               data-tracking-model='{{story.id}}'>{{story.headers.brand.title}}</a>
-          </div>
-        {{/if}}
-        <div class="text text--medium flush queueitem-title">
+        <div class="text flush queueitem-title">
           <span class="queueitem-itemtitle">
             <a href='{{story.url}}?modal=null'
                title='{{story.title}}'
@@ -25,6 +15,16 @@
           </span>
           <span class="queueitem-duration">{{story.audioDurationReadable}}</span>
         </div>
+        {{#if story.headers.brand.url}}
+          <div class="text text--medium text--gray flush queueitem-showtitle">
+            <a href='{{story.headers.brand.url}}?modal=null'
+               title='{{story.headers.brand.title}}'
+               data-tracking-category='Persistent Player'
+               data-tracking-action='Click Through to Show "{{story.headers.brand.title}}"'
+               data-tracking-region='{{region}}'
+               data-tracking-model='{{story.id}}'>{{story.headers.brand.title}}</a>
+          </div>
+        {{/if}}
         <div class="queueitem-controls">
           {{share-button
             classNames="queueitem-sharebutton"
