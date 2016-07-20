@@ -178,13 +178,11 @@ test('it sends a listen action on pause', function(assert) {
 });
 
 test('it sends a listen action on completed event', function(assert) {
-  // let done = assert.async();
   let service = this.subject();
   let story = server.create('story');
   let listenActionStub = {
     sendComplete() {
       assert.ok(true, 'sendComplete was called');
-      // done();
     }
   };
 
@@ -194,5 +192,18 @@ test('it sends a listen action on completed event', function(assert) {
   });
   Ember.run(() => {
     service.okraBridge.onFinished();
+  });
+});
+
+test('it fires error events', function(assert) {
+  assert.expect(2);
+  let service = this.subject();
+  service.set('errorEvent', () => assert.ok('errorEvent was fired'));
+  service.set('flashError', () => assert.ok('flashError was fired'));
+
+  return wait().then(() => {
+    /*global Okra*/
+    Okra.request('audioService').trigger('player:error');
+    Okra.request('audioService').trigger('flashVersionError');
   });
 });

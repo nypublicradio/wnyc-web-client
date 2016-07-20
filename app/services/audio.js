@@ -57,7 +57,11 @@ export default Service.extend({
   }),
 
   init() {
-    set(this, 'okraBridge', OkraBridge.create({ onFinished: bind(this, 'finishedTrack') }));
+    set(this, 'okraBridge', OkraBridge.create({
+       onFinished: bind(this, 'finishedTrack'),
+       onError: bind(this, 'errorEvent'),
+       onFlashError: bind(this, 'flashError')
+      }));
   },
   willDestroy() {
     this.okraBridge.teardown();
@@ -281,6 +285,20 @@ export default Service.extend({
     if (get(this, 'currentContext') === 'queue') {
       this.playNextInQueue();
     }
+  },
+
+  errorEvent(model, errorCode, errorName, errorMessage, currentItem) {
+    this._trackPlayerEvent({
+      action: 'Failed to Play Story',
+      label: `${currentItem ? currentItem.title : ''}|${errorMessage}`
+    });
+  },
+
+  flashError(flashVersion) {
+    this._trackPlayerEvent({
+      action: 'Flash Error',
+      lable: flashVersion
+    });
   },
 
   addToHistory(story) {

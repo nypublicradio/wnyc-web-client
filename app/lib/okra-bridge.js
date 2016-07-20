@@ -104,20 +104,26 @@ export const OkraBridge = Ember.Object.extend({
         // progress includes the duration and a normalized time
         'player:progress': m => throttle(this, () => set(this, 'position', m.progress), 1000),
         'audioStatusChanged': bind(this, '_updateIsPlaying'),
-        'player:finished': get(this, 'onFinished'),
-        'player:buffered': bind(this, '_updateBuffered')
+        'player:buffered':    bind(this, '_updateBuffered'),
+        'player:finished':    get(this, 'onFinished'),
+        'player:error':       get(this, 'onError'),
+        'flashVersionError':  get(this, 'onFlashError')
       });
 
       playerModel.on({
-        'change:duration': bind(this, '_updateDuration'),
-        'change:sound': bind(this, '_changeSound')
+        'change:duration':  bind(this, '_updateDuration'),
+        'change:sound':     bind(this, '_changeSound')
       });
 
     });
   },
   teardown() {
     WEB_PLAYER_CONTROLLER.then(playerController => {
-      playerController.off('player:finished', get(this, 'onFinished'));
+      playerController.off({
+        'player:finished':    get(this, 'onFinished'),
+        'player:error':       get(this, 'onError'),
+        'flashVersionError':  get(this, 'flashError')
+      });
     });
   },
   playSoundFor(type, pkOrModel) {
