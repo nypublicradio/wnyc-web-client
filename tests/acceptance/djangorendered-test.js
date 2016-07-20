@@ -50,7 +50,7 @@ test('on a search page with a query', function(assert) {
   });
 });
 
-test('it properly routes to the search page', function(assert) {
+skip('it properly routes to the search page', function(assert) {
   withFeature('django-page-routing');
   let home = server.create('django-page', {id: '/'});
   server.create('django-page', {id: 'search/?q=foo'});
@@ -67,7 +67,7 @@ test('it properly routes to the search page', function(assert) {
   });
 });
 
-test('it retries the server on a request error', function(assert) {
+skip('it retries the server on a request error', function(assert) {
   assert.expect(1);
   // we do this in order to simulate the unrecoverable errors generated when
   // Ember tries to AJAX load a url from another domain.
