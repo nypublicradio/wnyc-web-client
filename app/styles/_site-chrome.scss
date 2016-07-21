@@ -1,5 +1,4 @@
 .sitechrome-corner {
-  height: 83px;
   padding: 20px;
 
   > h1 {
@@ -7,7 +6,7 @@
   }
 
   .icon--wnyc-logo-nav #wnyc-logo{
-    fill: $darkestgray;
+    fill: $red;
   }
 
   .nav--homepage & {
@@ -44,6 +43,8 @@
   //for mobile header snap
   -webkit-transform: translate3d(0px,0px,0px);
   transform: translate3d(0px,0px,0px);
+  border-right: 1px solid $lightestgray;
+  width: 166px;
 
   a, button {
     color: $darkestgray;
@@ -68,6 +69,7 @@
   }
 
   &.nav--homepage{
+    border-right: 1px solid $red;
     background-color: $red;
     a, button {
       color: white;

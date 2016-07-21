@@ -249,11 +249,7 @@
   }
 }
 
-body.home {
-  background: #e8e8e8;
-}
-
 // override screen_wnyc_responsive_header_home_overrides.css
-body:not(.home) {
-  background: white;
+body {
+  background: white !important;
 }
