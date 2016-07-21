@@ -10,24 +10,24 @@ test('it displays the correct time', function(assert) {
     inputMs: 0,
     expected: '0:00'
   },{    description: 'should display correct time for seconds < 10',
-    inputMs: 5 * 1000,
-    expected: '0:05'
+    inputMs: 1 * 1000,
+    expected: '0:01'
   },{
     description: 'should display correct time for seconds > 10',
-    inputMs: 15 * 1000,
-    expected: '0:15'
+    inputMs: 10 * 1000,
+    expected: '0:10'
   },{
     description: 'should display correct time for minutes < 10',
-    inputMs: 5 * 60 * 1000,
-    expected: '5:00'
+    inputMs: 1 * 60 * 1000,
+    expected: '1:00'
   },{
     description: 'should display correct time for minutes > 10',
-    inputMs: 15 * 60 * 1000,
-    expected: '15:00'
+    inputMs: 10 * 60 * 1000,
+    expected: '10:00'
   },{
     description: 'should display correct time for hours',
-    inputMs: 2 * 60 * 60 * 1000,
-    expected: '2:00:00'
+    inputMs: 1 * 60 * 60 * 1000,
+    expected: '1:00:00'
   }];
 
   testCases.forEach(testCase => {
