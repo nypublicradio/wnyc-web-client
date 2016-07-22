@@ -32,7 +32,7 @@
 }
 
 .l-page {
-  @include mq($middle-narrow-and-up) {
+  @include mq($large-and-up) {
     padding-left: 166px;
   }
 }
@@ -40,7 +40,7 @@
 .l-page-nav {
   position: relative;
 
-  @include mq($middle-narrow-and-up) {
+  @include mq($large-and-up) {
     position: fixed;
     left: 0;
     top: 0;

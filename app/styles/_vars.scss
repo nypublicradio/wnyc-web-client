@@ -311,6 +311,7 @@ $middle-middle-and-up: "(min-width: #{$middle-middle}px)";
 
 $narrow-only: "(max-width: #{$narrow - 1}px)";
 $middle-narrow-only: "(max-width: #{$middle-narrow - 1}px)";
+$large-only: "(max-width: #{$large - 1}px)";
 $small-only: "(max-width: #{$medium - 1}px)";
 $medium-only: "(max-width: #{$large - 1}px)";
 

@@ -19,7 +19,7 @@ export default Ember.Component.extend(BetaActionsMixin, {
 
   didInsertElement: function() {
     this._super(...arguments);
-    if (!this.get("media.isMiddleNarrowAndUp")) { //only on mobile
+    if (!this.get("media.isLargeAndUp")) { //only on mobile
       this.set('fixedNavOffset',  this.$('.sitechrome-nav').offset().top); //get default top offset
       $window.on('scroll.fixednav', bind(this, this.checkOffset));
     }
@@ -27,7 +27,7 @@ export default Ember.Component.extend(BetaActionsMixin, {
  
   willDestroyElement: function() {
     this._super(...arguments);
-    if (!this.get("media.isMiddleNarrowAndUp")) {
+    if (!this.get("media.isLargeAndUp")) {
       $window.off('scroll.fixednav');
     }
   },

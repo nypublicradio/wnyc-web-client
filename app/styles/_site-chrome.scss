@@ -22,7 +22,7 @@
   background: #FFF;
   @extend %vertical-rhythm;
 
-  @include mq($middle-narrow-only) {
+  @include mq($large-only) {
     margin-bottom: 0;
     background: $red;
 
@@ -30,7 +30,7 @@
       margin-bottom: 57px;
     }
   }
-  @include mq($middle-narrow-and-up) {
+  @include mq($large-and-up) {
     padding-top: 0;
     height: 83px;
   }
@@ -53,8 +53,9 @@
     opacity: 0.8;
   }
 
-  @include mq($middle-narrow-only) {
+  @include mq($large-only) {
     margin-bottom: 24px;
+    width: auto;
     a, button {
       color: white;
     }
@@ -81,7 +82,7 @@
   @include display-flex;
   @include flex-wrap(wrap);
 
-  @include mq($middle-narrow-and-up) {
+  @include mq($large-and-up) {
     height: 100%;
   }
 
@@ -102,7 +103,7 @@
 
   border-top: 1px solid rgba(white, 0.23);
 
-  @include mq($middle-narrow-and-up) {
+  @include mq($large-and-up) {
     border: none;
   }
 
@@ -145,7 +146,7 @@
   padding: 0 15px;
   padding: 0 rems(15);
 
-  @include mq($middle-narrow-and-up) {
+  @include mq($large-and-up) {
     margin-bottom: 0;
     @include justify-content(flex-end);
   }
@@ -202,11 +203,11 @@
 
   @include flex-shrink(0);
 
-  @include mq($middle-narrow-and-up) {
+  @include mq($large-and-up) {
     line-height: 36px;
   }
 
-  @include mq($middle-narrow-only) {
+  @include mq($large-only) {
     border: 2px solid white;
     &:hover,&:focus {
       border-color: rgba(white, 0.5);
