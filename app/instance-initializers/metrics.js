@@ -8,7 +8,7 @@ const {
 export function initialize(applicationInstance) {
   const metrics = applicationInstance.lookup('service:metrics');
   const endpoint = 'api/v1/analytics/ga';
-  const mailchimp = String(window.location).match(/utm_term=(\d+_\w+-\w+-\w+)/);
+  //const mailchimp = String(window.location).match(/utm_term=(\d+_\w+-\w+-\w+)/);
 
   metrics.activateAdapters([{
     name: 'DataWarehouse',
