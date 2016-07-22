@@ -16,6 +16,9 @@ export default Ember.Component.extend(BetaActionsMixin, {
   svgURL: config.wnycSvgURL,
   fixedNavOffset: 0,
   classNameBindings: ["fixed-nav"],
+  currentUrl: Ember.computed("currentPath", function(){
+    return window.location.pathname;
+  }),
 
   didInsertElement: function() {
     this._super(...arguments);
