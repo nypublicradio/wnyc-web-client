@@ -17,7 +17,6 @@ export default Route.extend(ApplicationRouteMixin, {
 
   beforeModel() {
     let metrics = get(this, 'metrics');
-    let mailchimp = String(window.location).match(/utm_term=(\d+_\w+-\w+-\w+)/);
 
     this._syncBrowserId();
 
@@ -26,13 +25,6 @@ export default Route.extend(ApplicationRouteMixin, {
 
     if (config.environment !== 'test') {
       metrics.identify('GoogleAnalytics', {isAuthenticated: false});
-    }
-
-    if (mailchimp) {
-      metrics.trackEvent('DataWarehouse', {
-        eventName: 'trackMailChimpID',
-        mailchimp: encodeURIComponent(mailchimp[1])
-      });
     }
 
     get(this, 'asyncWriter').install();
