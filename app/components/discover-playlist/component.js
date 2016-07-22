@@ -95,10 +95,6 @@ export default Ember.Component.extend({
       this.sendAction('onUpdateItems', presentAndOrderedItems);
     },
 
-    findMore() {
-      this.sendAction('onFindMore');
-    },
-
     toggle() {
       let storyPk = this.get('currentPlaylistStoryPk');
 

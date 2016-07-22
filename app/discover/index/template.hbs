@@ -1,6 +1,4 @@
-{{! show playlist with chosen stories, save story IDs in session data for return visits }}
-
-{{#discover-playlist stories=model.stories onFindMore='findMore' onRemoveItem='removeItem' as |playlist|}}
+{{#discover-playlist stories=model.stories onRemoveItem='removeItem' as |playlist|}}
   <div class="discover-playlist-header-content"> {{! for the flex layout shifts }}
     <h1 class="discover-playlist-header-title h1">Your Discover Playlist</h1>
     <h3 class="discover-playlist-header-subtitle h3">We put together some audio specifically for you, based on your favorite shows and topics. <br/>
@@ -28,4 +26,16 @@
   {{/link-to}}
 {{/discover-playlist}}
 
-{{outlet}}
+<div class="discover-playlist-footer">
+  <button {{action (route-action 'findMore')}} class="discover-playlist-find-more rounded-caps-button mod-hollow-blue">
+    Find Me Some More
+  </button>
+</div>
+{{#if noNewResults}}
+  <div class="discover-playlist-no-results">
+    <p>
+      There are no more stories that match your selections. {{#link-to 'discover.edit'}}Edit topics and shows{{/link-to}}.
+    </p>
+    <p>Or check back tomorrow.</p>
+  </div>
+{{/if}}

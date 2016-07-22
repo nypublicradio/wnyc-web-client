@@ -215,6 +215,27 @@ body.discover .discover-fadeable-background {
   border-radius:5px;
   max-width:800px;
 }
+.discover-playlist-footer {
+  text-align: center;
+}
+
+.rounded-caps-button.discover-playlist-find-more {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.discover-playlist-no-results {
+  text-align: center;
+  color: #FFF;
+  margin: 1rem 0;
+  p {
+    padding: 0;
+    margin: 0;
+  }
+  a {
+    color: #8fa2e5;
+  }
+}
 
 .discover-feedback-button {
   position:absolute;
@@ -926,7 +947,7 @@ body.discover .discover-fadeable-background {
   line-height: 34px;
   cursor: pointer;
   letter-spacing: 1px;
-  
+
   @include transition(background-color $transition-timing, border-color $transition-timing, color $transition-timing);
 
   &:not([disabled]) {
