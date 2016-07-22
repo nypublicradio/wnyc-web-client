@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames:['discover-topic-list'],
   topics: [],
-  topicTags:  Ember.computed.mapBy('topics', 'urls'),
+  topicTags:  Ember.computed.mapBy('topics', 'url'),
   selectedTopicTags: [],
 
   allSelected: Ember.computed('selectedTopicTags.length', 'topicTags.length', function() {
@@ -26,7 +26,7 @@ export default Ember.Component.extend({
 
   actions: {
     selectAll() {
-      this.updateTopics(this.get('topics'));
+      this.updateTopics(this.get('topicTags'));
     },
     selectNone() {
       this.updateTopics([]);

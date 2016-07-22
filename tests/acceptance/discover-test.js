@@ -51,6 +51,22 @@ test('shows list of topics', function(assert) {
   });
 });
 
+test('select all button selects all topics', function(assert) {
+  visit('/discover/start');
+  server.createList('discover-topic', 20);
+
+  andThen(function() {
+    click('button:contains("Get Started")');
+    andThen(function() {
+      assert.equal($(".discover-topic").length, 20);
+      click('a:contains("Select All")');
+      andThen(function() {
+        assert.equal($(".discover-topic.is-selected").length, 20);
+      });
+    });
+  });
+});
+
 
 test('next button is disabled until a topic is selected', function(assert) {
   visit('/discover/start');
