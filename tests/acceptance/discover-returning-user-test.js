@@ -17,16 +17,7 @@ moduleForAcceptance('Acceptance | discover returning user', {
     session.set('data.discover-excluded-shows',  [shows[0].slug]); // set some excluded shows
     session.set('data.discover-topics', ['music']); // set some saved topics
     session.set('data.discover-excluded-story-ids', []);
-
-    let serializedStories = server.db.discoverStories.map(story => {
-      return {data: {
-        id: story.id,
-        type: "discover.stories",
-        attributes: story
-      }};
-    });
-
-    session.set('data.discover-queue',  serializedStories); // set some saved stories
+    session.set('data.discover-queue',  server.db.discoverStories); // set some saved stories
   }
 });
 

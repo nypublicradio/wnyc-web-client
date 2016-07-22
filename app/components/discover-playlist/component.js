@@ -23,8 +23,8 @@ export default Ember.Component.extend({
     return !this.get('isPlaying') && !this.get('isPaused');
   }),
 
-  currentTrackIsInPlaylist: Ember.computed('orderedStories', 'currentAudioId', function() {
-    return !!this.get('orderedStories').findBy('id', this.get('currentAudioId'));
+  currentTrackIsInPlaylist: Ember.computed('stories', 'currentAudioId', function() {
+    return !!this.get('stories').findBy('id', this.get('currentAudioId'));
   }),
 
   currentPlaylistStoryPk:   Ember.computed('currentTrackIsInPlaylist', function() {
@@ -33,11 +33,7 @@ export default Ember.Component.extend({
     }
   }),
 
-  // this is what we interact with
-  orderedStories: Ember.computed.or('customSortedStories', 'stories'),
-  // customSortedStories is what the sortable sets after reordering
-
-  stillVisibleStories: Ember.computed.setDiff('orderedStories', 'removedItems'),
+  stillVisibleStories: Ember.computed.setDiff('stories', 'removedItems'),
   visibleCount: Ember.computed.alias('stillVisibleStories.length'),
   refreshAutomaticallyIfZero: Ember.observer('visibleCount', function() {
     if (this.get('itemCount') === 0) {
@@ -57,18 +53,11 @@ export default Ember.Component.extend({
       // This will trigger the CSS effect to remove it/hide it from the list
       this.get('removedItems').addObject(item);
 
-      // delete it from the queue
-      this.get('queue').removeItem(item);
-
-      // this will fire the listen action
+      // this will fire the listen action and delete it from the queue
       this.sendAction('onRemoveItem', item);
 
-
-
-      // we don't want to actually delete it from this ordered stories
+      // we don't want to actually delete it from the stories object
       // that will work itself next time the list loads
-
-      // this.get('orderedStories').removeObject(item);
     },
 
     dragStarted(/* item */) {
@@ -88,10 +77,10 @@ export default Ember.Component.extend({
         return removedItemIds.contains(item.id);
       });
 
-      // Update queue with only the items that haven't been deleted
-      this.set('customSortedStories', presentAndOrderedItems);
+      this.set('stories', presentAndOrderedItems);
       this.set('removedItems', []); // clear out removed/hidden items
-      this.get('queue').updateQueue(presentAndOrderedItems.copy());
+
+      // this sends it up to get updated in the queue
       this.sendAction('onUpdateItems', presentAndOrderedItems);
     },
 
@@ -105,7 +94,7 @@ export default Ember.Component.extend({
         this.send('playTrack', storyPk);
       }
       else {
-        let story = this.get('orderedStories').get('firstObject');
+        let story = this.get('stories').get('firstObject');
         this.send('playTrack', story.id);
         this.get('scroller').scrollVertical(Ember.$(`span[data-story-id="${story.id}"]`), {offset: -100, duration: 500});
       }

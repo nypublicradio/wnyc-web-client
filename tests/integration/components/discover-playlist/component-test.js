@@ -103,14 +103,3 @@ test('clicking delete on a track sends a delete action', function(assert) {
 
   assert.equal(this.get('itemRemoved').id, server.db.discoverStories[0].id);
 });
-
-test('clicking delete on a track sends delete to discover queue', function(assert) {
-  assert.expect(1);
-
-  this.set('stories', server.createList('discover-story', 5));
-
-  this.render(hbs`{{discover-playlist audioReady=true stories=stories}}`);
-  this.$('.discover-playlist-item-delete:first').click();
-
-  assert.equal(this.get('queue.itemDeleted').id, server.db.discoverStories[0].id);
-});

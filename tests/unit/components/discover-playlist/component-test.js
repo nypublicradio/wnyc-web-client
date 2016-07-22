@@ -92,40 +92,12 @@ test('currentPlaylistStoryPk is set when the current audio matches a story in th
   assert.equal(component.get('currentPlaylistStoryPk'), 1, "matching story should return story pk");
 });
 
-test('delete action sends delete to discover queue and marks item as deleted', function(assert) {
+test('delete action sends onDeleteItem and marks item as deleted', function(assert) {
   var component = this.subject();
   component.set('stories', stories);
-
-  var itemDeleted;
-  let queueStub = {
-    removeItem(item) {
-      itemDeleted = item;
-    }
-  };
-  component.set('queue', queueStub);
   component.set('removedItems', []);
 
   let story = stories[0];
   component.send('removeItem', story);
-
-  assert.equal(itemDeleted, story, "should send first deleted item to service");
-  console.log(component.get('removedItems'));
-
   assert.equal(component.get('removedItems').length, 1, "item should be added to removed items list");
-});
-
-test('reordering items sends updates to discover queue', function(assert) {
-  var component = this.subject();
-  component.set('stories', stories);
-
-  var newQueue;
-  let queueStub = {
-    updateQueue(items) {
-      newQueue = items;
-    }
-  };
-
-  component.set('queue', queueStub);
-  component.send('reorderItems', [{id:10}, {id:11}]);
-  assert.deepEqual(newQueue.map(n => n.id), [10, 11]);
 });

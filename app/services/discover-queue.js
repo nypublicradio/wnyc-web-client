@@ -11,21 +11,6 @@ export default Ember.Service.extend({
   history: service('listen-history'),
   count:   computed.alias('session.data.discover-queue.length'),
 
-  init() {
-    let items = this.get('session').getWithDefault('data.discover-queue', emberArray());
-    
-    if (items.length > 0 && items[0].cmsPK) {
-      // reset after serialization changes
-      // we can remove this after release, this just helps anyone who tried this in dev
-      this.set('items', []);
-    }
-    else {
-      this.set('items', items);
-    }
-
-    this._super(...arguments);
-  },
-
   addItem(item) {
     let session       = this.get('session');
     let discoverQueue = session.getWithDefault('data.discover-queue', emberArray());

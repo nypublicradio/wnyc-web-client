@@ -1,4 +1,4 @@
-{{#discover-playlist stories=model.stories onRemoveItem='removeItem' as |playlist|}}
+{{#discover-playlist stories=model.stories onRemoveItem='removeItem' onUpdateItems='updateItems' as |playlist|}}
   <div class="discover-playlist-header-content"> {{! for the flex layout shifts }}
     <h1 class="discover-playlist-header-title h1">Your Discover Playlist</h1>
     <h3 class="discover-playlist-header-subtitle h3">We put together some audio specifically for you, based on your favorite shows and topics. <br/>

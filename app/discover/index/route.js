@@ -4,57 +4,28 @@ const {
 } = Ember;
 
 export default Ember.Route.extend({
-  session:       Ember.inject.service(),
-  discoverQueue: Ember.inject.service(),
-  listenActions: Ember.inject.service(),
-  discoverPrefs: Ember.inject.service(),
-  scroller:      Ember.inject.service(),
+  session:          Ember.inject.service(),
+  discoverQueue:    Ember.inject.service(),
+  listenActions:    Ember.inject.service(),
+  discoverPrefs:    Ember.inject.service(),
+  scroller:         Ember.inject.service(),
+
+  hasQueuedStories: Ember.computed.gt('discoverQueue.items.length', 0),
 
   model() {
-    this.controllerFor('discover.index').set('noNewResults', false);
-
     var stories;
-    if (this.get('isFindingMore')) {
-      stories = this._loadStoriesFromServer().then(s => {
-        if (s.length === 0) {
-          this.controllerFor('discover.index').set('noNewResults', true);
-          return this._loadStoriesFromQueue();
-        }
-        else {
-          return s;
-        }
-      });
-    }
-    else if (this._hasQueuedStories()) {
+    if (this.get('hasQueuedStories')) {
       stories = this._loadStoriesFromQueue();
     }
     else {
       stories = this._loadStoriesFromServer();
     }
 
-    return Ember.RSVP.hash({
-      stories: stories
-    });
+    return Ember.RSVP.hash({stories});
   },
+
   afterModel(model) {
-    let stories = model.stories.toArray();
-    // .toArray() so the playlist items don't get bound to the session object
-    //  which will cause unwanted things to happen when deleting items
-
-    if (this.controllerFor('discover.index').get('noNewResults')) {
-      Ember.run.scheduleOnce('afterRender', this, function(){
-        this.get('scroller').scrollVertical(Ember.$('.discover-playlist-footer'), {duration: 500});
-      });
-    }
-    else {
-      this.get('discoverQueue').updateQueue(stories);
-    }
-  },
-
-  _hasQueuedStories() {
-    let queuedStories = this.get('discoverQueue.items');
-
-    return queuedStories.length > 0;
+    this._updateDiscoverQueue(model.stories);
   },
 
   _loadStoriesFromQueue() {
@@ -63,26 +34,11 @@ export default Ember.Route.extend({
     let excludedIds   = prefs.get('excludedStoryIds');
     let queuedStories = this.get('discoverQueue.items');
 
-    if (queuedStories.mapBy('id').compact().length > 0) {
-      // these are already instantiated ember objects from the store
-      stories = queuedStories;
-    }
-    else {
-      // push the stories into the store
-      queuedStories.forEach((story) => { this.store.push(story); });
-
-      // make sure we're only getting the ones that were in the queue
-      let ids = queuedStories.map(i => i.data.id);
-      stories = this.store.peekAll('discover.stories').filter(story => {
-        return ids.contains(story.id);
-      });
-    }
-
-    stories = stories.filter(story => {
+    stories = queuedStories.filter(story => {
       return !excludedIds.contains(story.id);
     });
 
-    return stories;
+    return stories.copy();
   },
 
   _loadStoriesFromServer() {
@@ -104,10 +60,39 @@ export default Ember.Route.extend({
     return stories;
   },
 
+  _updateDiscoverQueue(stories) {
+    // The queue is the up to date list of items that should be visible in the playlist,
+    // but the playlist holds on to deleted items a little longer in order to hide them with css effects
+
+    // If the stories in the playlist get bound to the queue, then when we remove an item
+    // from the queue the playlist will yank that sucker right out without
+    // doing our super sweet CSS effect. That's why we do a .copy() right here.
+
+    this.get('discoverQueue').updateQueue(stories.copy());
+  },
+
   actions: {
     findMore() {
-      this.set('isFindingMore', true);
-      this.refresh();
+      let controller = this.controllerFor('discover.index');
+
+      // TODO: add button effect for when find more is getting more items
+      controller.set('findingMore', true);
+      controller.set('noNewResults', false);
+
+      this._loadStoriesFromServer().then(stories => {
+        if (Ember.isEmpty(stories)) {
+          controller.set('noNewResults', true);
+          return this._loadStoriesFromQueue();
+        }
+        else {
+          return stories;
+        }
+      }).then(s => {
+        this.set('currentModel.stories', s);
+        this._updateDiscoverQueue(s);
+      }).finally(() => {
+        controller.set('findingMore', false);
+      });
     },
     removeItem(item) {
       let listenActions = this.get('listenActions');
@@ -115,9 +100,13 @@ export default Ember.Route.extend({
       let itemId        = get(item, 'id');
 
       listenActions.sendDelete(itemId, 'NYPR_Web');
+      this.get('discoverQueue').removeItem(item);
 
       // Make sure this doesn't show up again
       prefs.excludeStoryId(itemId);
+    },
+    updateItems(items) {
+      this._updateDiscoverQueue(items);
     },
     edit() {
       this.transitionTo('discover.edit');

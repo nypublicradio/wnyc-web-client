@@ -14,7 +14,7 @@
 <div class="discover-playlist-content-container">
 {{discover-feedback-button}}
 {{#sortable-group class="discover-playlist" tagName="ul" onChange="reorderItems" handle=".discover-playlist-item-handle" as |group|}}
-  {{#each orderedStories as |story|}}
+  {{#each stories as |story|}}
     {{#sortable-item class=(if (array-contains removedItemIds story.id) 'discover-playlist-item is-deleted' 'discover-playlist-item')
       tagName="li"
       group=group
