@@ -107,7 +107,7 @@ export default Ember.Component.extend({
       else {
         let story = this.get('orderedStories').get('firstObject');
         this.send('playTrack', story.id);
-        this.get('scroller').scrollVertical(Ember.$(`#story-${story.id}`), {offset: -100, duration: 500});
+        this.get('scroller').scrollVertical(Ember.$(`span[data-story-id="${story.id}"]`), {offset: -100, duration: 500});
       }
     },
 

@@ -15,7 +15,7 @@
 {{discover-feedback-button}}
 {{#sortable-group class="discover-playlist" tagName="ul" onChange="reorderItems" handle=".discover-playlist-item-handle" as |group|}}
   {{#each orderedStories as |story|}}
-    {{#sortable-item id=(concat 'story-' story.id) class=(if (array-contains removedItemIds story.id) 'discover-playlist-item is-deleted' 'discover-playlist-item')
+    {{#sortable-item class=(if (array-contains removedItemIds story.id) 'discover-playlist-item is-deleted' 'discover-playlist-item')
       tagName="li"
       group=group
       model=story
@@ -24,7 +24,7 @@
       onDragStop="dragStopped"
     }}
 
-      <span class="discover-playlist-item-handle">
+      <span class="discover-playlist-item-handle" data-story-id="{{story.id}}">
         {{wnyc-svg icon="reorder"}}
       </span>
 
@@ -42,7 +42,7 @@
         {{discover-playlist-story-info story=story}}
       {{/discover-playlist-story}}
 
-      <span class="discover-playlist-item-delete" {{action 'removeItem' story}}>
+      <span class="discover-playlist-item-delete" {{action 'removeItem' story}} data-story-id="{{story.id}}">
         {{wnyc-svg icon="close"}}
       </span>
     {{/sortable-item}}

@@ -270,7 +270,7 @@ test('deleting an item sends a delete listen action', function(assert) {
   visit('/discover/playlist');
 
   andThen(() => {
-    click(`#story-${story.id} .discover-playlist-item-delete`);
+    click(`.discover-playlist-item-delete[data-story-id="${story.id}"]`);
     andThen(() => {
       assert.equal(listenActionSent, true, "action should have been called");
     });
@@ -282,7 +282,7 @@ test('deleting an item removes the item from the list', function(assert) {
   var story = stories[0];
   visit('/discover/playlist');
   andThen(() => {
-    click(`#story-${story.id} .discover-playlist-item-delete`);
+    click(`.discover-playlist-item-delete[data-story-id="${story.id}"]`);
     andThen(() => {
       return new RSVP.Promise(function(resolve) {
         // pause while making the test wait
@@ -290,7 +290,7 @@ test('deleting an item removes the item from the list', function(assert) {
             resolve();
         }, 1000);
       }).then(function() {
-        assert.equal($(`#story-${story.id}.is-deleted`).length, 1, "item should be marked as deleted");
+        assert.equal($(`[data-story-id="${story.id}"]`).parent('.is-deleted').length, 1, "item should be marked as deleted");
       });
     });
   });
@@ -400,8 +400,8 @@ test('reording the list after deleting does not bring back the deleted item', fu
   let test1 = stories[4];
   let test2 = stories[2];
 
-  click(`#story-${test1.id} .discover-playlist-item-delete`);
-  click(`#story-${test2.id} .discover-playlist-item-delete`);
+  click(`.discover-playlist-item-delete[data-story-id="${test1.id}"]`);
+  click(`.discover-playlist-item-delete[data-story-id="${test2.id}"]`);
 
   andThen(() => {
     let originalOrder = currentVisiblePlaylistOrder();
