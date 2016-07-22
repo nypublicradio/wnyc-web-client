@@ -11,7 +11,7 @@ export default Ember.Route.extend({
   scroller:      Ember.inject.service(),
 
   model() {
-    this.set('noNewResults', false);
+    this.controllerFor('discover.index').set('noNewResults', false);
 
     var stories;
     if (this.get('isFindingMore')) {
