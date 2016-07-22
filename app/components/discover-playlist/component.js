@@ -2,7 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   session:        Ember.inject.service(),
-  queue:          Ember.inject.service('discover-queue'),
   scroller:       Ember.inject.service(),
   audio:          Ember.inject.service(),
 
