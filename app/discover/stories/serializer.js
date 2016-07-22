@@ -2,6 +2,8 @@ import Ember from 'ember';
 import JSONAPISerializer from 'ember-data/serializers/json-api';
 
 export default JSONAPISerializer.extend({
+  keyForAttribute(key) { return key; },
+
   normalizeQueryResponse(store, primaryModelClass, payload) {
     return {
       data: payload.data.map(result => {

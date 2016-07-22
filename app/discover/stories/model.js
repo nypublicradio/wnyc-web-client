@@ -18,13 +18,6 @@ export default Model.extend({
     var serializer = this.store.serializerFor(this._internalModel.modelName);
     var snapshot   = this._internalModel.createSnapshot();
     let serialized = serializer.serialize(snapshot, {includeId: true});
-
-    // The snapshotter converts camelCased attributes to dasherized, and we
-    // don't want that, because store.push() wants them as they exist in the model
-
-    // There might be a better way to do this.
-
-    serialized.data.attributes = snapshot._attributes;
     return serialized;
   }
 });
