@@ -48,9 +48,14 @@ module.exports = function(environment) {
         /https?:\/\/((demo2-wnyc)\.)?wqxr\.org\/static\/.*\.js/
       ],
       ravenOptions: {
-        shouldSendCallback: function() {
-          // only send 1% of errors
-          var sampleRate = 1;
+        shouldSendCallback: function({extra}) {
+          var TOO_LONG = 1000 * 60 * 60 * 24; // one day
+          if (extra['session:duration'] > TOO_LONG) {
+            return false;
+          }
+
+          // only send 5% of errors
+          var sampleRate = 5;
           return (Math.random() * 100 <= sampleRate);
         },
         ignoreUrls: [
@@ -59,6 +64,7 @@ module.exports = function(environment) {
           // Chrome extensions
           /extensions\//i,
           /^chrome:\/\//i,
+          /chartbeat/i,
         ],
         ignoreErrors: [
           'adsafeprotected',

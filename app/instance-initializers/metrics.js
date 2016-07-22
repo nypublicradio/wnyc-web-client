@@ -26,12 +26,12 @@ export function initialize(applicationInstance) {
     environments: ['development', 'production'],
   }]);
 
-  if (mailchimp !== null) {
-    metrics.trackEvent('DataWarehouse', {
-      eventName: 'trackMailChimpID',
-      mailchimp: encodeURIComponent(mailchimp[1])
-    });
-  }
+  // if (mailchimp !== null) {
+  //   metrics.trackEvent('DataWarehouse', {
+  //     eventName: 'trackMailChimpID',
+  //     mailchimp: encodeURIComponent(mailchimp[1])
+  //   });
+  // }
 }
 
 export default {
