@@ -105,7 +105,14 @@ export default function() {
   );
 
   this.transition(
-    this.fromRoute('discover.index_loading'),
-    this.use('discoverLoading')
+    this.fromRoute('discover.index'),
+    this.toRoute('discover.index_loading'),
+    this.use('discoverLoadingFade')
   );
+  this.transition(
+    this.fromRoute('discover.index_loading'),
+    this.toRoute('discover.index'),
+    this.use('discoverLoadingFade')
+  );
+
 }

@@ -11,7 +11,7 @@ export default function loadingTransition(opts={}) {
   let loadingScreen, otherScreen;
 
   if (this.oldElement.find('.discover-loading').length > 0) {
-    // console.log('fade in loading screen, slide in other view')
+    // fade in loading screen, slide in other view
     loadingScreen = this.oldElement;
     otherScreen = this.newElement;
 
@@ -22,7 +22,7 @@ export default function loadingTransition(opts={}) {
   });
   }
   else {
-    // console.log('slide out other view, fade in loading screen')
+    // slide out other view, fade in loading screen
     loadingScreen = this.newElement;
     otherScreen = this.oldElement;
 
