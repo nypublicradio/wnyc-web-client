@@ -50,7 +50,7 @@ module.exports = function(deployTarget) {
 
   if (deployTarget === 'production') {
     // remove JS sourcemaps from production
-    ENV.s3.filePattern = '**/*.{js,css,png,gif,ico,jpg,xml,txt,svg,swf,eot,ttf,woff,woff2}';
+    // ENV.s3.filePattern = '**/*.{js,css,png,gif,ico,jpg,xml,txt,svg,swf,eot,ttf,woff,woff2}';
   }
 
   return ENV;
