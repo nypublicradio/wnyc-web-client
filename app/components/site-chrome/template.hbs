@@ -11,7 +11,6 @@
 --}}
 
 <div class="l-page" id='site-chrome'>
-
   <div class="sitechrome-top">
     <div class="sitechrome-topbody">
       {{#if beta.isBetaSite}}
@@ -19,7 +18,7 @@
       {{/if}}
       <div class="sitechrome-topbody-right">
 
-         
+        
           {{#if media.isLargeAndUp}}
           <div class="l-flex1of2 sitechrome-search">
             {{search-box placeholder="I heard something... Help me find it" enter=(action "routeSearch") searchbox-class="searchbox--gray searchbox--slim"}}
@@ -83,7 +82,7 @@
       <div class="{{if media.isLargeAndUp 'box box--nopad-top'}}">
 
       <ul class="list list--noborder flush text--spacing text--semi {{unless media.isLargeAndUp 'list--inline list--spaced text--small' 'alignright text--medium '}}">
-        <li class="list-item list-item--short">
+        <li class="list-item list-item--short {{active-link '/streams'}}">
           <a href="/streams" 
             class="inherit"
             title="Listen Live"
@@ -92,7 +91,7 @@
             Listen Live
           </a>
         </li>
-        <li class="list-item list-item--short">
+        <li class="list-item list-item--short {{active-link '/schedule'}}">
           <a href="/schedule"
             class="inherit"
             title="Schedule"
@@ -119,7 +118,7 @@
           Topics
           </a>
         </li>
-        <li class="list-item list-item--short">
+        <li class="list-item list-item--short {{active-link '/discover/start'}}">
           <a href="/discover/start" 
               class="inherit"
               title="Discover"
@@ -129,7 +128,7 @@
             </a>
         </li>
         {{#unless media.isLargeAndUp}}
-        <li class="list-item list-item--short">
+        <li class="list-item list-item--short {{active-link '/search'}}">
           <a href="/search/" 
               class="inherit"
               title="Search"
