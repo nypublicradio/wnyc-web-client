@@ -1,7 +1,7 @@
 <ul class="list list--borderbottom">
   {{#each activeShows as |show|}}
     <li class="list-item list-item--medium">
-       {{show-tease show=show trackingCategory=trackingCategory simpleLayout=false}} 
+       {{show-tease show=show trackingCategory=trackingCategory}} 
     </li>
   {{/each}}
   {{#if isFetching}}
