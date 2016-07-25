@@ -29,16 +29,11 @@ export default Ember.Route.extend({
   },
 
   _loadStoriesFromQueue() {
-    var stories;
     let prefs         = this.get('discoverPrefs');
     let excludedIds   = prefs.get('excludedStoryIds');
     let queuedStories = this.get('discoverQueue.items');
 
-    stories = queuedStories.filter(story => {
-      return !excludedIds.contains(story.id);
-    });
-
-    return stories.copy();
+    return queuedStories.reject(story => excludedIds.contains(story.id));
   },
 
   _loadStoriesFromServer() {
@@ -54,7 +49,7 @@ export default Ember.Route.extend({
       duration:         10800,
       _nocache:         Date.now()
     }).then(stories => {
-      return stories.filter(s => !excludedIds.contains(s.id));
+      return stories.reject(s => excludedIds.contains(s.id));
     });
 
     return stories;
