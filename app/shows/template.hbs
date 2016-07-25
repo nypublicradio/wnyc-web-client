@@ -37,7 +37,7 @@
         <p class="text aligncenter">no results found</p>
       </div>
     {{else}}
-      {{client-infinite-scroll shows=model.allShows trackingCategory="Shows A-Z"}}
+      {{client-infinite-scroll shows=filteredShows trackingCategory="Shows A-Z"}}
     {{/if}}
   </section>
 
