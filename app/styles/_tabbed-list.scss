@@ -1,18 +1,18 @@
 .tabbedlist {
-  margin: 16px 0 36px 22px;
+  margin: 0 0 43px 22px;
 
   @include mq($wide) {
-    margin: 16px 0 60px 0;
+    margin: 0 0 60px 0;
   }
 
   &-list {
     list-style: none;
-    margin-bottom: 0;
+    margin-bottom: 7px;
     padding: 0;
   }
 
   &-tab {
-    margin: 0 35px 7px 0;
+    margin: 0 35px 0px 0;
     display: inline-block;
 
     &:last-child {
@@ -21,6 +21,7 @@
   }
 
   &-button {
+    padding-top: 22px;
     padding-bottom: 4px;
     color: $lightgray;
     cursor: pointer;
