@@ -37,7 +37,13 @@
         <p class="text aligncenter">no results found</p>
       </div>
     {{else}}
-      {{client-infinite-scroll shows=filteredShows trackingCategory="Shows A-Z"}}
+     <ul class="list list--borderbottom">
+      {{#each filteredShows as |show|}}
+        <li class="list-item list-item--medium">
+           {{show-tease show=show trackingCategory=trackingCategory}} 
+        </li>
+      {{/each}}
+    </ul>
     {{/if}}
   </section>
 
