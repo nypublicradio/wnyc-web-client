@@ -100,6 +100,7 @@ export function beforeAppend(element, page) {
     } else if (get(page, 'wnycChannel')) {
       container.appendChild(element.querySelector('#js-listings'));
     } else if (page.get('id')==="streams/") {
+      // TODO: is there a better way to detect this?
       return container;
     } else {
       let legacyContent = element.querySelector('#site') || element.querySelector('#flatpage');
