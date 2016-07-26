@@ -11,5 +11,11 @@ export default Route.extend({
       //featured: this.store.findRecord('bucket', 'wnyc-shows-featured').then(b => b.get('bucketItems.firstObject'))
     });
   },
+  
+  actions: {
+    willTransition() {
+      this.controller.send("resetSearchFilter");
+    }
+  },
 
 });

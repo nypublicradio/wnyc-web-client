@@ -20,6 +20,9 @@ export default Ember.Controller.extend({
   searchText: "",
 
   actions: {
+    resetSearchFilter() {
+      this.set("searchText", "");
+    },
     filterShows(val) {
       this.set("searchText", val);
     }

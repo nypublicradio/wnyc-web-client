@@ -37,7 +37,14 @@ test('searching /shows', function(assert) {
       //no longer expect 10 shows
       assert.notEqual($('.shows-list li').length, 10, "filtering results in less than 10 shows");
     });
+  });
 
+  server.create('djangoPage', {id:'/'});
+  visit('/');
+  visit('/shows');
+
+  andThen(function() {
+    assert.equal($('.shows-list li').length, 10, "all shows visible after navigating");
   });
 });
   
