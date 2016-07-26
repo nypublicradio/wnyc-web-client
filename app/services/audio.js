@@ -28,8 +28,8 @@ export default Service.extend({
   session:          service(),
   //discoverQueue:    service('discover-queue'),
   listens:          service('listen-history'),
-  listenActions:    service('listen-actions'),
   queue:            service('listen-queue'),
+  listenActions:    service(),
   isReady:          readOnly('okraBridge.isReady'),
   position:         readOnly('okraBridge.position'),
   duration:         readOnly('okraBridge.duration'),
@@ -314,7 +314,7 @@ export default Service.extend({
 
   /* EVENTS AND HELPERS -------------------------------------------------------*/
 
-  onFinishedTrack() {
+  finishedTrack() {
     this._trackPlayerEvent({
       action: 'Finished Story',
       withAnalytics: true,
