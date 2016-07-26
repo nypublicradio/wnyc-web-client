@@ -148,7 +148,7 @@
 @mixin btn--large {
   padding: 3px 18px;
   line-height: 36px;
-  @include fontsize(20);
+  @include fontsize(16);
 }
 
 .btn--large {

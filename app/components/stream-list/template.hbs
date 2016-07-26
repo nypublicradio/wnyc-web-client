@@ -7,15 +7,15 @@
   </div>
 
   <div class="l-holygrail-middle streamitem-info">
-    <div class="streamitem-title">
-      <a href="{{stream.scheduleUrl}}">{{stream.name}}</a>
-    </div>
-    <div class="streamitem-description">
-      <a href="{{stream.currentShow.showUrl}}">{{stream.currentShow.showTitle}}</a>
+    <h2 class="text text--semi nudge-mini">
+      <a href="{{stream.scheduleUrl}}" class="link--dark">{{stream.name}}</a>
+    </h2>
+    <div class="text--medium">
+      <a href="{{stream.currentShow.showUrl}}" class="link--dark">{{stream.currentShow.showTitle}}</a>
       {{!-- Has a current story/episode --}}
       {{#if stream.currentShow.episodeTitle}}
         -
-        <a href="{{stream.currentShow.episodeUrl}}">{{stream.currentShow.episodeTitle}}</a>
+        <a href="{{stream.currentShow.episodeUrl}}" class="link--dark">{{stream.currentShow.episodeTitle}}</a>
       {{/if}}
       {{!-- Music stream with a playing song--}}
       {{#if stream.hasPlaylists}}
