@@ -99,6 +99,8 @@ export function beforeAppend(element, page) {
         .forEach(n => container.appendChild(n));
     } else if (get(page, 'wnycChannel')) {
       container.appendChild(element.querySelector('#js-listings'));
+    } else if (page.get('id')==="streams/") {
+      return container;
     } else {
       let legacyContent = element.querySelector('#site') || element.querySelector('#flatpage');
       if (!legacyContent) {
