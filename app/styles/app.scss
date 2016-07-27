@@ -99,6 +99,10 @@ body:not(.simplified_wrapper):not(.container_stripped) > :not(
   padding-top: 10px;
   padding-bottom: 10px;
   border-radius: 5px;
+  @include mq($large-and-up) {
+    margin-left: 175px;
+    margin-right: 25px;
+  }
 }
 
 #browser-warn .close {
