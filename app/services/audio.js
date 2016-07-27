@@ -26,7 +26,7 @@ export default Service.extend({
   metrics:          service(),
   store:            service(),
   session:          service(),
-  //discoverQueue:    service('discover-queue'),
+  discoverQueue:    service(),
   listens:          service('listen-history'),
   queue:            service('listen-queue'),
   listenActions:    service(),
@@ -320,15 +320,15 @@ export default Service.extend({
     });
 
     this.sendCompleteListenAction(this.get('currentId'));
+    let context = get(this, 'currentContext');
 
-    if (get(this, 'currentContext') === 'queue') {
+    if (context === 'queue') {
       this.playNextInQueue();
-    } else if (get(this, 'currentContext') === 'discover') {
-      let nextTrack = this.get('discoverQueue').nextItem(this.get('currentAudio.id'));
+    } else if (context === 'discover') {
+      let nextTrack = this.get('discoverQueue').nextItem(this.get('currentId'));
       if (nextTrack) {
         this.play(get(nextTrack, 'id'), 'discover');
-      }
-      else {
+      } else {
         set(this, 'isPlaying', false);
         set(this, 'currentContext', null);
       }
