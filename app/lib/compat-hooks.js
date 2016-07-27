@@ -99,7 +99,7 @@ export function beforeAppend(element, page) {
         .forEach(n => container.appendChild(n));
     } else if (get(page, 'wnycChannel')) {
       container.appendChild(element.querySelector('#js-listings'));
-    } else if (page.get('id')==="streams/") {
+    } else if ( page.get('id').match(/^streams\//i) ) {
       // TODO: is there a better way to detect this?
       return container;
     } else {
