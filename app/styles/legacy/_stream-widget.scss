@@ -1,11 +1,39 @@
-#stream_launch_widget {
+// override legacy styles with specifity
+div#stream_launch_widget {
     * {
         box-sizing: content-box;
     }
 
-    .show {
-        width: 55%;
+    // flex layout
+    @include display-flex;
+    & > button#popup-btn {
+        @include flex(0 0 121px);
+        width: 121px;
+    }
+    & > div#stations_wrapper {
+        @include flex(0 0 115px);
+        width: 115px;
+    }
+    & > div.show {
+        @include flex(1);
+        width: auto;
+        @include display-flex;
+        & > div.image {
+            @include flex(0 0 50px);
+            width: 50px;
+        }
+        & > div.head {
+            @include flex(1);
+            width: auto;
+        }
+    }
+    & > div.util {
+        position: static;
+        @include flex(0 0 95px);
+        width: 95px;
+    }
 
+    .show {
         .item-title {
           font-size: 14px;
           line-height: 23px;
@@ -56,9 +84,5 @@
 #stream_launch_widget .show .head a[href]:hover {
   text-decoration: none !important;
   border-bottom-color: white;
-}
-
-#popup-btn {
-    width: 121px;
 }
 
