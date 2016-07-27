@@ -3,10 +3,10 @@ import ENV from '../config/environment';
 
 export default Ember.Service.extend({
   session: Ember.inject.service(),
-  browserId: Ember.computed.alias('session.data.browserId'),
 
   init() {
     this.set('queue', []);
+    this.get('session').syncBrowserId(id => this.set('browserId', id));
   },
 
   sendPlay(pk, context) {
@@ -36,7 +36,6 @@ export default Ember.Service.extend({
 
   /* ------------------------------------------------------------ */
 
-
   _flushQueue() {
     let queue = this.get('queue');
 
@@ -44,15 +43,19 @@ export default Ember.Service.extend({
       return;
     }
 
-    if (queue.length === 1) {
-      let item = queue[0];
-      this._sendSingleListenAction(item.pk, item.action, item.context, item.value, item.ts);
-    }
-    else {
-      this._sendBulkListenActions(queue);
-    }
+    this.get('session').syncBrowserId(false).then(id => {
+      this.set('browserId', id);
 
-    this.set('queue', []);
+      if (queue.length === 1) {
+        let item = queue[0];
+        this._sendSingleListenAction(item.pk, item.action, item.context, item.value, item.ts);
+      }
+      else {
+        this._sendBulkListenActions(queue);
+      }
+
+      this.set('queue', []);
+    });
   },
 
   _queueListenAction(pk, action, context, value) {

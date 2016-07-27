@@ -14,6 +14,12 @@ moduleFor('service:listen-actions', 'Unit | Service | listen-actions', {
     const sessionStub = Ember.Service.extend({
       data: {
         browserId: 'secrets'
+      },
+
+      syncBrowserId: function() {
+        return new Ember.RSVP.Promise((resolve) => {
+          resolve('secrets');
+        });
       }
     });
 

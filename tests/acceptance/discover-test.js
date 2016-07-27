@@ -1,6 +1,7 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import { currentSession } from 'overhaul/tests/helpers/ember-simple-auth';
+import ENV from 'overhaul/config/environment';
 
 moduleForAcceptance('Acceptance | discover',
   {
@@ -174,7 +175,6 @@ test('show exclusions are saved in a session and maintained upon next visit in i
   });
 });
 
-
 test('show exclusions are maintained if you go back to topics screen', function(assert) {
   server.createList('discover-topic', 5);
   let shows = server.createList('show', 5);
@@ -204,7 +204,6 @@ test('show exclusions are maintained if you go back to topics screen', function(
   });
 });
 
-
 test('all shows are selected by default', function(assert) {
   server.createList('discover-topic', 5);
   let shows = server.createList('show', 5);
@@ -220,7 +219,6 @@ test('all shows are selected by default', function(assert) {
     });
   });
 });
-
 
 test('create playlist button is disabled if no shows are selected', function(assert) {
   server.createList('discover-topic', 20);
@@ -277,6 +275,54 @@ test('create playlist button should show error if clicked if no shows are select
               assert.equal($('.discover-setup-title-error').text().length > 0, true);
               assert.equal(currentURL(), '/discover/start/shows');
             });
+          });
+        });
+      });
+    });
+  });
+});
+
+test('playlist request sends stories and tags in correct format', function(assert) {
+  server.createList('discover-topic', 20);
+  server.createList('show', 5);
+
+  visit('/discover/start');
+
+  var done = assert.async();
+
+
+  andThen(function() {
+    click('button:contains("Get Started")');
+    andThen(function() {
+      click($(".discover-topic input")[0]).then(() => {
+        click($(".discover-topic input")[1]);
+      }).then(() => {
+        click($(".discover-topic input")[2]);
+      });
+
+      andThen(function() {
+        click("button:contains('Next')");
+
+        andThen(function() {
+          click($(".discover-show")[0]).then(() => {
+            click($(".discover-show")[1]);
+          });
+
+          andThen(() => {
+            click($('button:contains("Create Playlist")'));
+            //
+            let url =[ENV.wnycURL, 'api/v3/make_playlist'].join("/");
+
+            server.get(url, function(schema, request) {
+
+              let topics = server.db.discoverTopics.slice(0,3).mapBy('url').join(',');
+              let shows = server.db.shows.slice(0,2).mapBy('slug').join(',');
+              assert.equal(request.queryParams.tags, topics);
+              assert.equal(request.queryParams.shows, shows);
+              done();
+            });
+
+
           });
         });
       });
