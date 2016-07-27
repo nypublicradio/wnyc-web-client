@@ -102,6 +102,54 @@ test('if find more returns no more items, the old queue is present and an error 
       let url =[ENV.wnycURL, 'api/v3/make_playlist'].join("/");
       server.get(url, function() {
         secondRequestCalled = true;
+        let data = server.db.discoverStories.map(s => {
+          return {
+            type: "Story",
+            id: s.id,
+            attributes: s
+          };
+        });
+        return {data: data};
+      });
+
+      click(".discover-playlist-find-more");
+      andThen(function() {
+        assert.equal(currentURL(), '/discover/playlist');
+        assert.equal(secondRequestCalled, true, "response with no results should have been triggered");
+
+        let matchResults = server.db.discoverStories.map(story => {
+          return ($(`.discover-playlist-story-title a:contains(${story.title})`).length === 1);
+        });
+
+        let matchCount = matchResults.filter(r => (r === true)).length;
+        assert.ok((matchResults.uniq().length === 1) && (matchResults.uniq()[0] === true), `Should have matched all the stories in the queue but matched ${matchCount}`);
+
+        assert.equal($(".discover-playlist-no-results").length, 1, "playlist no results error area should be visible");
+      });
+    });
+  });
+});
+
+
+test('if find more returns the same list of items, the old queue are displayed and an error message is shown', function(assert) {
+  let session = currentSession(this.application);
+  var secondRequestCalled = false;
+  session.set('data.discover-excluded-story-ids', []);
+  visit('/discover/playlist');
+
+  andThen(function() {
+    assert.equal(currentURL(), '/discover/playlist');
+
+    let matchResults = server.db.discoverStories.map(story => {
+      return ($(`.discover-playlist-story-title a:contains(${story.title})`).length === 1);
+    }).uniq();
+    assert.ok((matchResults.length === 1) && (matchResults[0] === true), "Should have matched all the stories in the db");
+    assert.equal($(".discover-playlist-no-results").length, 0, "playlist no results error area should not be visible");
+
+    andThen(function() {
+      let url =[ENV.wnycURL, 'api/v3/make_playlist'].join("/");
+      server.get(url, function() {
+        secondRequestCalled = true;
         return {data: []};
       });
 

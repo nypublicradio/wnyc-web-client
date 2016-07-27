@@ -66,6 +66,17 @@ export default Ember.Route.extend({
     this.get('discoverQueue').updateQueue(stories.copy());
   },
 
+  _hasNoNewResults(stories) {
+    if (Ember.isEmpty(stories)) {
+      return true;
+    }
+    else {
+      let oldStoryIds = this._loadStoriesFromQueue().mapBy('id');
+      let newStoryIds = stories.mapBy('id');
+      return Ember.isEmpty(newStoryIds.reject(s => oldStoryIds.contains(s)));
+    }
+  },
+
   actions: {
     findMore() {
       let controller = this.controllerFor('discover.index');
@@ -75,7 +86,7 @@ export default Ember.Route.extend({
       controller.set('noNewResults', false);
 
       this._loadStoriesFromServer().then(stories => {
-        if (Ember.isEmpty(stories)) {
+        if (this._hasNoNewResults(stories)) {
           controller.set('noNewResults', true);
           return this._loadStoriesFromQueue();
         }
