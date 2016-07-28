@@ -78,6 +78,7 @@ module.exports = function(environment) {
     // these are provided via a .env file or else by Django's EmberAdapter
     googleAnalyticsKey: process.env.GOOGLE_ANALYTICS,
     googleAPIv3Key: process.env.GOOGLE_API_V3_KEY,
+    typekit: { kitId: 'ifl2zxi' },
     wnycAPI: process.env.WNYC_API,
     showsDiscoverStation: "active-shows",
     showsAPIKey: "hummingbird",
@@ -130,11 +131,7 @@ module.exports = function(environment) {
       // passed in --proxy to the command line
       enabled: mirageEnabled
     };
-    
-    ENV.typekit = {
-        kitId: 'ifl2zxi'
-    }
-    
+        
   }
 
   if (environment === 'test') {
@@ -161,15 +158,10 @@ module.exports = function(environment) {
     ENV.wnycStaticURL = 'http://example.com/static';
     ENV.wnycURL = '//example.com';
     ENV.wnycBetaURL = 'http://example.com';
-    ENV.typekit = {
-        kitId: 'ifl2zxi'
-    }
   }
 
   if (environment === 'production') {
-    ENV.typekit = {
-        kitId: 'ifl2zxi'
-    }
+
   }
 
   return ENV;
