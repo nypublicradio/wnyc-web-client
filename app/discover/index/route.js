@@ -12,6 +12,11 @@ export default Ember.Route.extend({
 
   hasQueuedStories: Ember.computed.gt('discoverQueue.items.length', 0),
 
+  setupController(controller) {
+    controller.set('noNewResults', false);
+    return this._super(...arguments);
+  },
+
   model() {
     var stories;
     if (this.get('hasQueuedStories')) {
