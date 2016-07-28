@@ -518,22 +518,21 @@
 /**
  * Cap Bold Link
  * `.link--capbold`
- * A link style that caps, bolds, and sizes the text to the 12. Also it's white.
+ * A link style that caps, bolds, and sizes the text to the 12.
  *
  *      @example
  *      a.link--capbold(href="http://www.wnyc.org/shows/bl") The Brian Lehrer Show
  */
 .link--capbold {
-  color: white;
   font-weight: 600;
   @include fontsize(12);
   text-transform: uppercase;
   letter-spacing: 1px;
+  border: none;
 
   &:hover,
   &:focus {
-    text-decoration: none;
-    border-bottom-color: white;
+    color: $red;
   }
 }
 

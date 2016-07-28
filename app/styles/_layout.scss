@@ -105,8 +105,8 @@
     position: relative;
 }
 
-.l-highlight--dark {
-  background-color: $navy;
+.l-highlight--gray {
+  background-color: $graywhite;
   @extend %clearfix;
 }
 
@@ -115,12 +115,12 @@
   @extend %clearfix;
 }
 
-.l-highlight--mq--charcoalnavy {
-    background-color: $charcoal;
+.l-highlight--mq--graydark {
+    background-color: $nearwhite;
     @extend %clearfix;
 
     @include mq($middle-narrow-and-up) {
-        background-color: $navy;
+        background-color: $graywhite;
     }
 }
 
