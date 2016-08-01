@@ -44,7 +44,7 @@
 
 .sitechrome-nav {
   background-color: white;
-  @include transition(background-color 50ms ease);
+  @include transition(all 50ms ease);
   //for mobile header snap
   -webkit-transform: translate3d(0px,0px,0px);
   transform: translate3d(0px,0px,0px);
