@@ -251,5 +251,10 @@
 
 // override screen_wnyc_responsive_header_home_overrides.css
 body {
-  background: $nearwhite !important;
+  background: white !important;
+  
+  &.home {
+    background: $nearwhite !important;
+  }
+  
 }
