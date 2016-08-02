@@ -322,14 +322,13 @@ h3 {
 h3.date,
 h3.date a,
 h3.episode-number {
-  font-size: 13px;
-  color: #555;
+  font-size: 16px;
+  line-height: 25.6px;
   font-weight: normal;
+  margin: 0;
 }
 
 .story-headergroup .byline {
-  font-size: 13px;
-  color: #555;
   margin: 0 0 15px 0;
 }
 
@@ -1462,8 +1461,6 @@ ul.storylinks li,
 ul.series-navlinks li {
   margin: 10px 0;
   padding-left: 0;
-  color: #666;
-  font-size: 9px;    /* for annotations */
   line-height: 1.5em;
 }
 
@@ -1471,8 +1468,6 @@ ul.series-navlinks li {
 .series-navlinks li a {
   margin-right: 5px; /* for annotations */
   margin-top: 1px;   /* for annotations */
-  padding-left: 20px;
-  font-size: 10px;
 }
 
 .side-storylinks h4 {
@@ -1584,9 +1579,7 @@ ul.series-navlinks li {
 }
 
 p.byline {
-  font-size: 9px;
-  margin-bottom: 10px;
-  color: #666;
+  margin-bottom: 0 !important;
 }
 
 .channel-item p.byline {
@@ -1635,11 +1628,6 @@ p.byline {
   font-size: 10px;
   color: #666;
   font-weight: 300;
-}
-
-.article-wide, .article-wide p {
-  font-size: 15px;
-  line-height: 1.87em;
 }
 
 .article-wide p {
@@ -1927,26 +1915,6 @@ ul.article-playlist {
 }
 
 /* Other Lists */
-.segment-tease h3.date,
-.episode-tease h3.date,
-.show-tease h3.date,
-.profile-tease h3.date,
-.event-tease h3.date,
-.playlist-tease h3.date,
-.tiny-tease h3.date,
-.blurb-tease  h3.date,
-.segment-tease p,
-.episode-tease p,
-.show-tease p,
-.profile-tease p,
-.event-tease p,
-.playlist-tease p,
-.tiny-tease p,
-.blurb-tease p {
-  margin: 0;
-  font-size: 10px;
-}
-
 .segment-tease .media_buttons,
 .episode-tease .media_buttons,
 .show-tease .media_buttons,
@@ -1976,6 +1944,10 @@ ul.article-playlist {
   clear: both;
 }
 
+.prod-org {
+  display: inline;
+}
+
 .show-tease {
   border-bottom: 1px solid #eee;
 }
@@ -1992,8 +1964,20 @@ ul.article-playlist {
 .blurb-tease h2.title,
 #current-episode h2.title {
   font-size: 24px;
-  font-weight: 400;
   clear: none;
+  margin-bottom: 5px;
+  line-height: 2.125rem;
+  
+  > a {
+    color: #333;
+    font-weight: 600;
+    border: none;
+    
+    &:hover,
+    &:focus {
+      color: $blue;
+    }
+  }
 }
 
 .show-tease h2.title {
@@ -2006,7 +1990,7 @@ ul.article-playlist {
 .event-tease .media_buttons a.first,
 .playlist-tease.media_buttons a.first,
 .tiny-tease .media_buttons a.first {
-        padding-left: 18px;
+        padding-left: 0;
         background-position: 0px center;
 }
 
@@ -2018,11 +2002,14 @@ ul.article-playlist {
   height: auto;
 }
 
-.event-tease h2.event-channel a {
-  color: #999;
-  text-transform: uppercase;
-  padding: 5px 0;
-  font-size: 9px;
+h2.event-channel {
+  margin: 0;
+  
+  > a {
+    color: #999;
+    text-transform: uppercase;
+    border: none;
+  }
 }
 
 .event-tease h3.subtitle {
