@@ -11,7 +11,7 @@
      story=listen.story
      playState=audio.playState
      playContext='history'
-     removeAction=(action 'removeFromHistory')}}
+     removeAction=(action 'removeFromHistory' listen.story.id)}}
   </div>
 {{else}}
   <div class="queuelist-empty">Your listening history is empty… Start listening!</div>
