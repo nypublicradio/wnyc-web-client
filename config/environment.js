@@ -80,6 +80,8 @@ module.exports = function(environment) {
     googleAPIv3Key: process.env.GOOGLE_API_V3_KEY,
     typekit: { kitId: 'ifl2zxi' },
     wnycAPI: process.env.WNYC_API,
+    discoverStation: "wnyc-v2",
+    discoverAPIKey: "trident",
     showsDiscoverStation: "active-shows",
     showsAPIKey: "hummingbird",
     moreShowsDiscoverStation: "archived-shows",

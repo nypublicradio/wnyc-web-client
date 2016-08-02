@@ -7,7 +7,7 @@ export default Ember.Route.extend({
 
   model() {
     return Ember.RSVP.hash({
-      topics: this.store.query('discover.topics', {discover_station: ENV.discoverStation}),
+      topics: this.store.query('discover.topics', {discover_station: ENV.discoverTopicsKey}),
       selectedTopicTags: this.get('discoverPrefs.selectedTopicTags')
     });
   },
