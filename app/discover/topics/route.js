@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import ENV from '../../config/environment';
 
 export default Ember.Route.extend({
   session: Ember.inject.service(),
@@ -6,7 +7,7 @@ export default Ember.Route.extend({
 
   model() {
     return Ember.RSVP.hash({
-      topics: this.store.query("discover.topics", {discover_station: "wnyc"}),
+      topics: this.store.query('discover.topics', {discover_station: ENV.discoverStation}),
       selectedTopicTags: this.get('discoverPrefs.selectedTopicTags')
     });
   },
