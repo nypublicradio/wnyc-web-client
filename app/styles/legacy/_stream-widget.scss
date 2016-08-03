@@ -4,8 +4,9 @@ div#stream_launch_widget {
         box-sizing: content-box;
     }
 
+    display: none; // hidden by default on most pages
+
     // flex layout
-    @include display-flex;
     & > button#popup-btn {
         @include flex(0 0 121px);
         width: 121px;
@@ -76,8 +77,11 @@ div#stream_launch_widget {
         padding: 0;
     }
 
-    @include mq($small-only) {
-        display: none;
+}
+body.home div#stream_launch_widget {
+    // display only on the home page
+    @include mq($medium-and-up) {
+        @include display-flex;
     }
 }
 
