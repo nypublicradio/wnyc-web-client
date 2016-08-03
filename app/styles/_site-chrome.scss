@@ -71,7 +71,7 @@
     a:hover, button:hover {
       color: white;
     }
-    .list-item.active a{
+    .list-item.active a {
       opacity: 1;
       border-bottom: 1px solid white;
     }
@@ -88,7 +88,7 @@
     width: 100%;
   }
 
-  &.nav--homepage{
+  &.nav--homepage {
     border-right: 1px solid $red;
     background-color: $red;
     a, button {
