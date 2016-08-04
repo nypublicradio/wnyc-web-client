@@ -16,6 +16,8 @@ export default Controller.extend({
 
   isHomepage: Ember.computed.match('currentRouteName', /^index(_loading)?$/),
 
+  pageNavigating: 1,
+
   actions: {
     showModal(which) {
       this._scrollY = window.scrollY;

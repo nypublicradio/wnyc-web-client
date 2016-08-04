@@ -1,5 +1,5 @@
 {{#if features.siteChrome}}
-  {{#site-chrome beta=beta isHomepage=isHomepage currentPath=currentPath}}
+  {{#site-chrome beta=beta isHomepage=isHomepage pageNavigating=pageNavigating}}
     {{#unless error}}
       {{outlet}}
     {{else}}

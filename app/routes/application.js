@@ -56,6 +56,8 @@ export default Route.extend(ApplicationRouteMixin, {
     },
     didTransition() {
       this.controller.set('error', null);
+      //change a property so that site-chrome component is aware of navigation
+      this.controller.incrementProperty('pageNavigating', 1);
     },
     willTransition() {
       //close queue/history modal when we open a new page

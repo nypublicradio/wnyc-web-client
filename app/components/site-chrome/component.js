@@ -16,7 +16,7 @@ export default Ember.Component.extend(BetaActionsMixin, {
   svgURL: config.wnycSvgURL,
   fixedNavOffset: 0,
   classNameBindings: ["fixed-nav"],
-  currentUrl: Ember.computed("currentPath", function(){
+  currentUrl: Ember.computed("pageNavigating", function(){
     return window.location.pathname;
   }),
 

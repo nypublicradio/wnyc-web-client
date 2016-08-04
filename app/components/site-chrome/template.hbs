@@ -90,11 +90,14 @@
           </a>
         </li>
         <li class="list-item list-item--short {{active-link '/schedule' currentUrl}}">
+          
+  {{!--         {{#link-to 'djangorendered' 'schedule' class="inherit" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Schedule" preventDefault=false}}Schedule{{/link-to}} --}}
           <a href="/schedule"
             class="inherit"
             title="Schedule"
-            data-tracking-category="WNYC Menu"
-            data-tracking-action="Clicked Schedule">
+            data-tracking-category="WNYC Menu" 
+            data-tracking-action="Clicked Schedule"
+            >
           Schedule
           </a>
         </li>
