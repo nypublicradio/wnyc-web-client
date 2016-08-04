@@ -16,9 +16,6 @@ export default Ember.Component.extend(BetaActionsMixin, {
   svgURL: config.wnycSvgURL,
   fixedNavOffset: 0,
   classNameBindings: ["fixed-nav"],
-  currentUrl: Ember.computed("pageNavigating", function(){
-    return window.location.pathname;
-  }),
 
   didInsertElement: function() {
     this._super(...arguments);
@@ -37,6 +34,18 @@ export default Ember.Component.extend(BetaActionsMixin, {
 
   checkOffset: function() {
     this.set("fixed-nav", $document.scrollTop() >= this.get('fixedNavOffset') );
+  },
+
+  click: function(e){
+    if (e.target.tagName === "A"){
+      console.log("click event", e);
+      //send tracking
+      this.get('metrics').trackEvent({
+        category: 'WNYC Menu',
+        action: "Clicked " + e.text,
+      });
+      
+    }
   },
 
   actions: {

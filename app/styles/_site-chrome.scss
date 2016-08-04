@@ -225,11 +225,11 @@
 }
 
 .sitechrome-list {
+  @extend .list;
+  @extend .list--noborder;
   margin: 0;
   padding: 0;
   list-style: none;
-  @extend .list;
-  @extend .list--noborder;
 }
 
 

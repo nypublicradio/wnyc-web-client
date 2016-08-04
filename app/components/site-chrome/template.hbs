@@ -80,7 +80,11 @@
       <div class="{{if media.isLargeAndUp 'box box--slim box--nopad-top'}}">
 
       <ul class="list list--noborder flush text--spacing text--semi {{unless media.isLargeAndUp 'list--inline list--spaced text--small' 'alignright text--medium '}}">
-        <li class="list-item list-item--short {{active-link '/streams' currentUrl}}">
+        
+        {{#link-to "stream" tagName="li" href=false class="list-item list-item--short" }}
+          {{link-to "Listen Live" "stream" class="inherit" preventDefault=false}}
+        {{/link-to}}
+       {{!--  <li class="list-item list-item--short {{active-link '/streams' currentUrl}}">
           <a href="/streams" 
             class="inherit"
             title="Listen Live"
@@ -88,80 +92,70 @@
             data-tracking-action="Clicked Listen Live">
             Listen Live
           </a>
-        </li>
-        <li class="list-item list-item--short {{active-link '/schedule' currentUrl}}">
-  {{!--  link-to active state doesn't work on djangorendered pages? --}}
-  {{!--       {{#link-to 'djangorendered' 'schedule' class="inherit" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Schedule" preventDefault=false}}Schedule{{/link-to}} --}}
+        </li> --}}
+        
+        {{#link-to 'djangorendered' 'schedule' tagName='li' href="false" class="list-item list-item--short" }} 
+          {{link-to "Schedule" 'djangorendered' 'schedule' class="inherit" preventDefault=false}}
+        {{/link-to}} 
+          {{!--         
+          <li class="list-item list-item--short {{active-link '/schedule' currentUrl}}">
           <a href="/schedule"
             class="inherit"
             title="Schedule"
             data-tracking-category="WNYC Menu"
             data-tracking-action="Clicked Schedule">
           Schedule
-          </a>
-        </li>
-        <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
+          </a> 
+          </li>
+          --}}
+        
+        {{#link-to "shows" tagName="li" href=false class="list-item list-item--short" }}
+          {{link-to "Shows" "shows" class="inherit" preventDefault=false}}
+        {{/link-to}}
+          {{!-- 
+          <li class="list-item list-item--short {{active-link '/shows' currentUrl}}">
           <a href="/shows" 
             class="inherit"
             title="Shows"
             data-tracking-category="WNYC Menu"
             data-tracking-action="Clicked Shows">
           Shows
-          </a>
-        </li>
-        <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
-          <a href="/topics" 
-            class="inherit"
-            title="Topics"
-            data-tracking-category="WNYC Menu"
-            data-tracking-action="Clicked Topics">
-          Topics
-          </a>
-        </li>
-        <li class="list-item list-item--short {{active-link '/discover/start' currentUrl}}">
-          <a href="/discover/start"
-              class="inherit" 
-              title="Discover"
-              data-tracking-category="WNYC Menu"
-              data-tracking-action="Clicked Discover">
-            Discover
-            </a>
-        </li>
+          </a> 
+        </li> 
+        --}}
+
+        {{#link-to 'djangorendered' 'topics' tagName='li' href="false" class="list-item list-item--short" }} 
+          {{link-to "Topics" 'djangorendered' 'topics' class="inherit" preventDefault=false}}
+        {{/link-to}}
+
+        {{#link-to 'discover.start' tagName='li' href="false" class="list-item list-item--short" }} 
+          {{link-to "Discover" 'discover.start' class="inherit" preventDefault=false}}
+        {{/link-to}}
+ 
         {{#unless media.isLargeAndUp}}
-        <li class="list-item list-item--short {{active-link '/search' currentUrl}}">
-          <a href="/search/" 
-              class="inherit"
-              title="Search"
-              data-tracking-category="WNYC Menu"
-              data-tracking-action="Clicked Search">
-            Search
-            </a>
-        </li>
+
+          {{#link-to 'djangorendered' 'search' tagName='li' href="false" class="list-item list-item--short" }} 
+            {{link-to "Search" 'djangorendered' 'search' class="inherit" preventDefault=false}}
+          {{/link-to}}
+   
           {{#if session.isAuthenticated}}
-          <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
-            <a href="/users/me" 
-              class="inherit"
-              title="My Account"
-              data-tracking-category="WNYC Menu"
-              data-tracking-action="Clicked My Account">
-              My Account
-            </a>
-          </li>
-          <li class="list-item list-item--short">
-            <button class="btn--blank btn--white text--spacing h5" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
-          </li>
+
+            {{#link-to 'login' tagName='li' href="false" class="list-item list-item--short" }} 
+              {{link-to "My Account" 'login' class="inherit" preventDefault=false}}
+            {{/link-to}}
+      
+            <li class="list-item list-item--short">
+              <button class="btn--blank btn--white text--spacing h5" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
+            </li>
+
           {{else}}
-          <li class="list-item {{if media.isShortAndUp 'list-item--short' 'list-item--mini'}}">
-            <a href="/login" 
-              class="inherit"
-              class="h5"
-              title="Sign In"
-              data-tracking-category="WNYC Menu"
-              data-tracking-action="Clicked Sign In">
-            Sign In
-            </a>
-          </li>
+
+            {{#link-to 'login' tagName='li' href="false" class="list-item list-item--short" }} 
+              {{link-to "Sign In" 'login' class="inherit" preventDefault=false}}
+            {{/link-to}}
+
           {{/if}}
+          
         {{/unless}}
       </ul>
     </div>
@@ -178,28 +172,21 @@
             {{!-- <div class="h5 text--heavy text--spacing alignright"> --}}
             
             {{#if session.isAuthenticated}}
-            <li class="list-item list-item--short {{active-link '/users/me' currentUrl}}">
-                <a href="/users/me" 
-                  class="inherit"
-                  title="My Account"
-                  data-tracking-category="WNYC Menu"
-                  data-tracking-action="Clicked My Account">
-                  My Account
-                </a>
-              </li>
+
+              {{#link-to 'djangorendered' 'users/me' tagName='li' href="false" class="list-item list-item--short" }} 
+                {{link-to "My Account" 'djangorendered' 'users/me' class="inherit" preventDefault=false}}
+              {{/link-to}}
+          
               <li class="list-item list-item--short">
-              <button class="btn--blank text--spacing" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
-            </li>
+                <button class="btn--blank text--spacing" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
+              </li>
+
             {{else}}
-            <li class="list-item list-item--short {{active-link '/login' currentUrl}}">
-              <a href="/login" 
-                class="inherit"
-                title="Sign In"
-                data-tracking-category="WNYC Menu"
-                data-tracking-action="Clicked Sign In">
-              Sign In
-              </a>
-            </li>
+
+            {{#link-to 'login' tagName='li' href="false" class="list-item list-item--short" }} 
+              {{link-to "Sign In" 'login' class="inherit" preventDefault=false}}
+            {{/link-to}}
+ 
             {{/if}}
           </ul>
             {{!-- </div>
