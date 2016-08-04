@@ -79,6 +79,12 @@
       padding-left: 0;
     }
   }
+  
+  .list-item:last-child {
+      @include mq($small-only) {
+        margin-right: 75px !important;              
+      }
+  }
 
   .fixed-nav & {
     position: fixed;
@@ -99,6 +105,11 @@
   &:not(.x-scrollable) {
     .list-item {
       padding-right: 10px;
+    }
+    .list--noborder {
+        > .list-heading {
+            @extend %vertical-rhythm;
+        }
     }
     .list-item.active {
       background-color: rgba($red, 0.05);
