@@ -38,13 +38,11 @@ export default Ember.Component.extend(BetaActionsMixin, {
 
   click: function(e){
     if (e.target.tagName === "A"){
-      console.log("click event", e);
       //send tracking
       this.get('metrics').trackEvent({
         category: 'WNYC Menu',
         action: "Clicked " + e.text,
       });
-      
     }
   },
 

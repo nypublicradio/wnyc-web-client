@@ -84,45 +84,14 @@
         {{#link-to "stream" tagName="li" href=false class="list-item list-item--short" }}
           {{link-to "Listen Live" "stream" class="inherit" preventDefault=false}}
         {{/link-to}}
-       {{!--  <li class="list-item list-item--short {{active-link '/streams' currentUrl}}">
-          <a href="/streams" 
-            class="inherit"
-            title="Listen Live"
-            data-tracking-category="WNYC Menu"
-            data-tracking-action="Clicked Listen Live">
-            Listen Live
-          </a>
-        </li> --}}
         
         {{#link-to 'djangorendered' 'schedule' tagName='li' href="false" class="list-item list-item--short" }} 
           {{link-to "Schedule" 'djangorendered' 'schedule' class="inherit" preventDefault=false}}
         {{/link-to}} 
-          {{!--         
-          <li class="list-item list-item--short {{active-link '/schedule' currentUrl}}">
-          <a href="/schedule"
-            class="inherit"
-            title="Schedule"
-            data-tracking-category="WNYC Menu"
-            data-tracking-action="Clicked Schedule">
-          Schedule
-          </a> 
-          </li>
-          --}}
         
         {{#link-to "shows" tagName="li" href=false class="list-item list-item--short" }}
           {{link-to "Shows" "shows" class="inherit" preventDefault=false}}
         {{/link-to}}
-          {{!-- 
-          <li class="list-item list-item--short {{active-link '/shows' currentUrl}}">
-          <a href="/shows" 
-            class="inherit"
-            title="Shows"
-            data-tracking-category="WNYC Menu"
-            data-tracking-action="Clicked Shows">
-          Shows
-          </a> 
-        </li> 
-        --}}
 
         {{#link-to 'djangorendered' 'topics' tagName='li' href="false" class="list-item list-item--short" }} 
           {{link-to "Topics" 'djangorendered' 'topics' class="inherit" preventDefault=false}}
@@ -155,7 +124,7 @@
             {{/link-to}}
 
           {{/if}}
-          
+
         {{/unless}}
       </ul>
     </div>
