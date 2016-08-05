@@ -3,17 +3,19 @@
 
     <div class="flag-image">
       {{#if pageNotFound}}
-      <img alt="Page Not Found"
-        src="/assets/img/error/404_tote{{if media.isSmallOnly "_small"}}.png"
-        class="error-img"
-      />
+        {{#if media.isSmallOnly}}
+          <img alt="Page Not Found" src="/assets/img/error/404_tote_small.png" class="error-img" />
+        {{else}}
+          <img alt="Page Not Found" src="/assets/img/error/404_tote.png" class="error-img" />
+        {{/if}}
       {{/if}}
 
       {{#if serverError}}
-      <img alt="Server Error"
-        src="/assets/img/error/500_tote{{if media.isSmallOnly "_small"}}.png"
-        class="error-img"
-      />
+        {{#if media.isSmallOnly}}
+          <img alt="Server Error" src="/assets/img/error/500_tote_small.png" class="error-img" />
+        {{else}}
+          <img alt="Server Error" src="/assets/img/error/500_tote.png" class="error-img" />
+        {{/if}}
       {{/if}}
     </div>
 
