@@ -55,7 +55,6 @@ export default Service.extend({
   currentAudio:     null,
   currentContext:   null,
   sessionPing:      TWO_MINUTES,
-  _waitingForOkra:  null,
 
   currentId: computed('currentAudio.id', {
     get() {
@@ -73,14 +72,6 @@ export default Service.extend({
     }
   }),
 
-  playIfWaiting() {
-    let inWaiting = this.get('_waitingForOkra');
-    if (!inWaiting) {
-      return;
-    }
-    this.play(inWaiting.id, inWaiting.context);
-  },
-
   /* TRACK LOGIC --------------------------------------------------------------*/
 
   play(pk, playContext) {
@@ -91,12 +82,6 @@ export default Service.extend({
 
     if (!id) {
       return;
-    }
-    if (!this.get('isReady')) {
-      this.set('_waitingForOkra', {id, context});
-      return;
-    } else {
-      this.set('_waitingForOkra', null);
     }
 
     if (/^\d*$/.test(id)) {
@@ -161,6 +146,12 @@ export default Service.extend({
 
     get(this, 'store').findRecord('story', id).then(story => {
       set(this, 'hasErrors', false);
+
+    /* TODO: send a play signal to the low-level interface
+        you'll probaby wantto do it in this promise call back since 
+        the `audio` attr on the retrieved `story` instance is a URL
+        to the audio file.
+    --------------------------------------------------------------*/
 
     /* TODO: send a play signal to the low-level interface
         you'll probaby wantto do it in this promise call back since 
