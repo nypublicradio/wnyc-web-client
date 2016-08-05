@@ -15,13 +15,6 @@ export const dependencies = Object.freeze({
     'js/util.js',
   ],
   'js/lib/jquery/jquery.xdr.js': ['js/lib/jquery/jquery.ba-postmessage.js'],
-  'installBridge': [
-    'js/lib/marionette/xd_player/okra/core.js',
-    'js/lib/marionette/xd_player/core.js',
-    'js/lib/marionette/xd_player/okra/requests.js',
-    'js/lib/marionette/xd_player/okra/ondemand/controller.js',
-    'js/lib/marionette/xd_player/web_player_controller.js'
-  ],
   'js/lib/wnyc/search.js': ['js/jquery-ui-1.8.23.min.js'],
   'js/lib/jquery/autoload.js': ['js/lib/wnyc/search.js']
 });
