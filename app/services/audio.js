@@ -2,7 +2,6 @@ import Service from 'ember-service';
 import service from 'ember-service/inject';
 import get from 'ember-metal/get';
 import set from 'ember-metal/set';
-import { OkraBridge } from '../lib/okra-bridge';
 import computed, { readOnly, alias, or } from 'ember-computed';
 import { bind } from 'ember-runloop';
 import { assign } from 'ember-platform';
@@ -34,12 +33,22 @@ export default Service.extend({
   listens:          service('listen-history'),
   queue:            service('listen-queue'),
   listenActions:    service(),
-  isReady:          readOnly('okraBridge.isReady'),
-  position:         readOnly('okraBridge.position'),
-  duration:         readOnly('okraBridge.duration'),
-  percentLoaded:    readOnly('okraBridge.percentLoaded'),
-  isMuted:          readOnly('okraBridge.isMuted'),
-  volume:           alias('okraBridge.volume'),
+  
+  /* TODO: make the low-level interface available
+  -----------------------------------------------------------*/
+   
+  /* TODO: low-level interface needs to expose these props
+   
+  isReady:
+  position: needs a setter
+  duration:
+  percentLoaded:
+  isMuted:
+  volume: needs a setter
+  isPlaying:
+  isLoading: needs a setter
+  ------------------------------------------------------------*/
+  
   currentStory:     or('currentAudio.story', 'currentAudio'),
 
   bumperPlayed:     false,
@@ -48,13 +57,6 @@ export default Service.extend({
   sessionPing:      TWO_MINUTES,
   _waitingForOkra:  null,
 
-  isPlaying: readOnly('okraBridge.isPlaying'),
-  isLoading: computed('okraBridge.isLoading', {
-    get() {
-      return get(this, 'okraBridge.isLoading');
-    },
-    set(k, v) { return v; }
-  }),
   currentId: computed('currentAudio.id', {
     get() {
       return get(this, 'currentAudio.id');
@@ -77,20 +79,6 @@ export default Service.extend({
       return;
     }
     this.play(inWaiting.id, inWaiting.context);
-  },
-
-  init() {
-    set(this, 'okraBridge', OkraBridge.create({
-      onFinished: bind(this, 'finishedTrack'),
-      onError: bind(this, 'errorEvent'),
-      onFlashError: bind(this, 'flashError')
-    }));
-
-    this.okraBridge.on('ready', this, 'playIfWaiting');
-  },
-  willDestroy() {
-    this.okraBridge.off('ready', this, 'playIfWaiting');
-    this.okraBridge.teardown();
   },
 
   /* TRACK LOGIC --------------------------------------------------------------*/
@@ -121,7 +109,10 @@ export default Service.extend({
   },
 
   pause() {
-    this.okraBridge.pauseSound();
+
+    /* TODO: send a pause signal to the low-level interface
+    --------------------------------------------------------------*/
+    
     let context = get(this, 'currentContext') || '';
 
     this._trackPlayerEvent({
@@ -168,10 +159,14 @@ export default Service.extend({
 
     set(this, 'currentId', id);
 
-    this.okraBridge.playSoundFor('ondemand', id);
-
     get(this, 'store').findRecord('story', id).then(story => {
       set(this, 'hasErrors', false);
+
+    /* TODO: send a play signal to the low-level interface
+        you'll probaby wantto do it in this promise call back since 
+        the `audio` attr on the retrieved `story` instance is a URL
+        to the audio file.
+    --------------------------------------------------------------*/
 
       // independent of context, if this item is already the first item in your
       // listening history, don't bother adding it again
@@ -184,11 +179,17 @@ export default Service.extend({
         // if starting the queue with an item already playing from another context,
         // replay from the start
         if (oldContext !== 'queue' && get(this, 'currentAudio.id') === id) {
-          this.okraBridge.setPosition(0);
+          
+          /* TODO: send a `restart` or `set position to 0` signal to the low-level interface
+          --------------------------------------------------------------------*/
+          
         }
       } else if (context ==='history') {
         if (get(this, 'isPlaying') && get(this, 'currentAudio.id') === id) {
-          this.okraBridge.setPosition(0);
+          
+          /* TODO: send a `restart` or `set position to 0` signal to the low-level interface
+          --------------------------------------------------------------------*/
+          
         }
       }
 
@@ -248,7 +249,8 @@ export default Service.extend({
       set(this, 'currentAudio', stream);
       set(this, 'currentContext', context);
 
-      this.okraBridge.playSoundFor('stream', get(stream, 'bbModel'));
+    /* TODO: send a play signal to the low-level interface for the given stream
+    --------------------------------------------------------------*/
 
       if (shouldTrack) {
         let label = newStream;
@@ -305,12 +307,17 @@ export default Service.extend({
 
   setPosition(percentage) {
     let position = percentage * get(this, 'duration');
-    this.okraBridge.setPosition(position);
+    
+    /* TODO: send a `set position` signal to the low-level interface for the given position
+    ------------------------------------------------------------------------*/
+    
   },
 
   rewind() {
     let currentPosition = get(this, 'position');
-    this.okraBridge.setPosition(currentPosition - FIFTEEN_SECONDS);
+    
+    /* TODO: send a `set position` signal to the low-level interface for the CURRENT position MINUS FIFTEEN SECONDS
+    ------------------------------------------------------------------------*/
 
     this._trackPlayerEvent({
       action: 'Skip Fifteen Seconds Back',
@@ -320,7 +327,9 @@ export default Service.extend({
 
   fastForward() {
     let currentPosition = get(this, 'position');
-    this.okraBridge.setPosition(currentPosition + FIFTEEN_SECONDS);
+    
+    /* TODO: send a `set position` signal to the low-level interface for the CURRENT position PLUS FIFTEEN SECONDS
+    ------------------------------------------------------------------------*/
 
     this._trackPlayerEvent({
       action: 'Skip Fifteen Seconds Ahead',
@@ -329,7 +338,10 @@ export default Service.extend({
   },
 
   toggleMute() {
-    this.okraBridge.toggleMute();
+    
+    /* TODO: send a `toggleMute` signal to the low-level interface
+    -------------------------------------------------------------------------*/
+    
   },
 
 
@@ -369,6 +381,8 @@ export default Service.extend({
 
   /* EVENTS AND HELPERS -------------------------------------------------------*/
 
+  /* TODO: register this callback to an `audioFinished` event on the low-level interface
+  ----------------------------------------------------------------------*/
   finishedTrack() {
     let context = get(this, 'currentContext') || '';
     let bumper = get(this, 'bumperState');
