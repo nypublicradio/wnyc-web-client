@@ -1,7 +1,6 @@
 import Route from 'ember-route';
 import get from 'ember-metal/get';
 import config from 'overhaul/config/environment';
-import {installBridge} from '../lib/okra-bridge';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 import service from 'ember-service/inject';
 
@@ -32,10 +31,6 @@ export default Route.extend(ApplicationRouteMixin, {
     }
 
     window.WNYC_LEGACY_LOADER = get(this, 'legacyLoader');
-
-    if (config.environment !== 'test') {
-      installBridge();
-    }
 
     let store = get(this, 'store');
     let pollFunction = () => store.findAll('stream');
