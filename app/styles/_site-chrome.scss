@@ -86,6 +86,12 @@
       }
   }
 
+  //override legacy alignright style from screen.css
+  .alignright {
+    margin: 0;
+    float: none;
+  }
+
   .fixed-nav & {
     position: fixed;
     position: sticky;
