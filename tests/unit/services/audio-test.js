@@ -2,12 +2,6 @@ import Ember from 'ember';
 import { moduleFor, test } from 'ember-qunit';
 import startMirage from 'overhaul/tests/helpers/setup-mirage-for-integration';
 import wait from 'ember-test-helpers/wait';
-import { installBridge } from 'overhaul/lib/okra-bridge';
-
-// for OkraBridge compat
-window.EMBER_TESTING = true;
-
-installBridge();
 
 moduleFor('service:audio', 'Unit | Service | audio', {
   // Specify the other units that are required for this test.
