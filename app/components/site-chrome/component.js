@@ -3,6 +3,7 @@ import service from 'ember-service/inject';
 import config from 'overhaul/config/environment';
 import BetaActionsMixin from 'overhaul/mixins/beta-actions';
 import { bind } from 'ember-runloop';
+import moment from 'moment';
 
 var $window = Ember.$(window),
   $document = Ember.$(document);

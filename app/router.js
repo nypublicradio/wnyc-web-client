@@ -36,6 +36,8 @@ Router.map(function() {
   this.route('blog', {path: 'blogs/:slug'}, subpageRoutes);
   this.route('stream', {path: 'streams'});
   this.route('playlist', {path: 'streams/:id'});
+  this.route('schedule');
+  this.route('topics');
 
   // This is our catch all route that can render any existing page
   // from the django site. It will be used when there's nothing more

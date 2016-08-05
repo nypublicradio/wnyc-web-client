@@ -9,7 +9,6 @@
 {{!--
   Using <a> tags here instead of ember {{link-to}} helpers in order to run google analytics tracking events on the links. Global link handler catches clicks on links with data-tracking properties and runs an event tracking function before routing the link. More in /overhaul/app/instance-initializers/link-handler.js
 --}}
-
 <div class="l-page" id='site-chrome'>
   <div class="sitechrome-top">
     <div class="sitechrome-topbody">
@@ -81,23 +80,23 @@
 
       <ul class="list list--noborder flush text--spacing text--semi {{unless media.isLargeAndUp 'list--inline list--spaced text--small' 'alignright text--medium '}}">
         
-        {{#link-to "stream" tagName="li" href=false class="list-item list-item--short" }}
-          {{link-to "Listen Live" "stream" class="inherit" preventDefault=false}}
+        {{#link-to 'stream' tagName='li' href=false class="list-item list-item--short" }}
+          {{link-to 'Listen Live' 'stream' class="inherit" preventDefault=false}}
         {{/link-to}}
         
-        {{#link-to 'djangorendered' 'schedule' tagName='li' href="false" class="list-item list-item--short" }} 
-          {{link-to "Schedule" 'djangorendered' 'schedule' class="inherit" preventDefault=false}}
+        {{#link-to 'schedule' tagName='li' href="false" class="list-item list-item--short" }} 
+          {{link-to 'Schedule' 'schedule' class="inherit" preventDefault=false}}
         {{/link-to}} 
         
-        {{#link-to "shows" tagName="li" href=false class="list-item list-item--short" }}
-          {{link-to "Shows" "shows" class="inherit" preventDefault=false}}
+        {{#link-to 'shows' tagName="li" href=false class="list-item list-item--short" }}
+          {{link-to 'Shows' 'shows' class="inherit" preventDefault=false}}
         {{/link-to}}
 
-        {{#link-to 'djangorendered' 'topics' tagName='li' href="false" class="list-item list-item--short" }} 
-          {{link-to "Topics" 'djangorendered' 'topics' class="inherit" preventDefault=false}}
+        {{#link-to 'topics' current-when='topics tag' tagName='li' href="false" class="list-item list-item--short" }} 
+          {{link-to 'Topics' 'topics' class="inherit" preventDefault=false}}
         {{/link-to}}
 
-        {{#link-to 'discover.start' current-when='discover' tagName='li' href="false" class="list-item list-item--short" }} 
+        {{#link-to 'discover.start' tagName='li' href="false" class="list-item list-item--short" }} 
           {{link-to 'Discover' 'discover.start' class="inherit" preventDefault=false}}
         {{/link-to}}
  
@@ -120,7 +119,7 @@
           {{else}}
 
             {{#link-to 'login' tagName='li' href="false" class="list-item list-item--short" }} 
-              {{link-to "Sign In" 'login' class="inherit" preventDefault=false}}
+              {{link-to 'Sign In' 'login' class="inherit" preventDefault=false}}
             {{/link-to}}
 
           {{/if}}
