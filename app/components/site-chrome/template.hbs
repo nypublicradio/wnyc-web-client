@@ -97,20 +97,20 @@
           {{link-to "Topics" 'djangorendered' 'topics' class="inherit" preventDefault=false}}
         {{/link-to}}
 
-        {{#link-to 'discover.start' tagName='li' href="false" class="list-item list-item--short" }} 
-          {{link-to "Discover" 'discover.start' class="inherit" preventDefault=false}}
+        {{#link-to 'discover.start' current-when='discover' tagName='li' href="false" class="list-item list-item--short" }} 
+          {{link-to 'Discover' 'discover.start' class="inherit" preventDefault=false}}
         {{/link-to}}
  
         {{#unless media.isLargeAndUp}}
 
           {{#link-to 'djangorendered' 'search' tagName='li' href="false" class="list-item list-item--short" }} 
-            {{link-to "Search" 'djangorendered' 'search' class="inherit" preventDefault=false}}
+            {{link-to 'Search' 'djangorendered' 'search' class="inherit" preventDefault=false}}
           {{/link-to}}
    
           {{#if session.isAuthenticated}}
 
             {{#link-to 'login' tagName='li' href="false" class="list-item list-item--short" }} 
-              {{link-to "My Account" 'login' class="inherit" preventDefault=false}}
+              {{link-to 'My Account' 'login' class="inherit" preventDefault=false}}
             {{/link-to}}
       
             <li class="list-item list-item--short">
