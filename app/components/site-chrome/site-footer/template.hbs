@@ -251,6 +251,8 @@
                   <span>Twitter</span>
                 </a>
               </li>
+              {{#if media.isLargeAndUp}}
+              {{!-- These twitter links don't work on mobile, hide on tablets --}}
               <li class="list-item list-item--tiny">
                 <a href="https://twitter.com/WNYC/lists/wnyc-shows/members" class="link--capbold" title="Twitter" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Our Shows">
                   <i class="fa fa-twitter"></i>
@@ -263,6 +265,7 @@
                   <span>Our People</span>
                 </a>
               </li>
+              {{/if}}
               <li class="list-item list-item--tiny">
                 <a href="https://www.instagram.com/wnyc" class="link--capbold" title="Instagram" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Instagram">
                   <i class="fa fa-instagram"></i> 
