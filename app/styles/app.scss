@@ -7,8 +7,7 @@ body:not(.simplified_wrapper):not(.container_stripped) > :not(
   .ember-view,
   #qunit, // except for testing
   #qunit-fixture,
-  #ember-testing-container,
-  #sm2-container // display: none breaks JS <> Flash communication in Safari
+  #ember-testing-container
   ) {
   display: none;
 }

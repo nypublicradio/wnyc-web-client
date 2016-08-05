@@ -77,10 +77,6 @@ export function beforeTeardown(/* element, page */) {
 // Element is not yet inserted into any document, and you can modify
 // it here as needed.
 export function beforeAppend(element, page) {
-  let sm2 = element.querySelector('#sm2-container');
-  if (sm2) {
-    sm2.parentElement.removeChild(sm2);
-  }
   if (page.get('id') === '/') {
     element = homepageCleanup(element);
   }
