@@ -42,7 +42,7 @@
 
   @include mq($large-and-up) {
     position: fixed;
-    z-index: $zIndex-fixedNav;
+    z-index: $zIndex--fixedNav;
     left: 0;
     top: 0;
     height: 100%;
