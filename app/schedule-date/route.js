@@ -19,7 +19,7 @@ export default Route.extend({
     let year = params.year;
     let month = params.month;
     let day = params.day;
-    let station = params.scheduleStation; 
+    let station = params.scheduleStation || "wnyc-fm939"; 
     return this.store.find('django-page', `schedule/${year}/${month}/${day}/?scheduleStation=${station}`);
   }
 });
