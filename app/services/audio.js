@@ -287,17 +287,17 @@ export default Service.extend({
     }
   },
 
-  errorEvent(model, errorCode, errorName, errorMessage, currentItem) {
+  errorEvent(model, errorCode, errorName, errorMessage, {piece}) {
     this._trackPlayerEvent({
-      action: 'Failed to Play Story',
-      label: `${currentItem ? currentItem.title : ''}|${errorMessage}`
+      action: 'Sound Error',
+      label: `audio: ${piece.attributes.audio} | pk: ${piece.id} | title: ${piece.attributes.title} | error: ${errorMessage}`
     });
   },
 
   flashError(flashVersion) {
     this._trackPlayerEvent({
-      action: 'Flash Error',
-      label: flashVersion
+      action: 'Sound Error',
+      label: `Flash error with version ${flashVersion}`
     });
   },
 
