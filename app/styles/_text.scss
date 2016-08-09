@@ -77,7 +77,7 @@
 /**
  * Text Block:
  * `.text`
- * A useful wrapper for any text, anywhere. Sets the color, font size, 
+ * A useful wrapper for any text, anywhere. Sets the color, font size,
  * adds a bottom margin for vertical rhythm, and makes sure that last
  * child elements do not have a bottom margin
  *
@@ -220,7 +220,7 @@
 /**
  * Forced Inline Text:
  * `.text-body--forceinline`
- * All children are set to `display: inline`. Used to concatenate 
+ * All children are set to `display: inline`. Used to concatenate
  * block elements into a single line when delivered from a WYSIWYG editor.
  *
  *      @example
@@ -472,7 +472,7 @@
 /**
  * Link with Bottom Padding
  * `.link--padbtm`
- * Add a 5px padding to the bottom of the link. Useful for links with icons to 
+ * Add a 5px padding to the bottom of the link. Useful for links with icons to
  * create some spacing between the underline decoration and the link contents.
  *
  *      @example
@@ -553,7 +553,7 @@
  * Blue/White MQ Text Link
  *
  *      @example
- *      div.text--mq-bluewhite 
+ *      div.text--mq-bluewhite
  *          a. I am a link. And you won't see me.
  */
 .text--mq-bluewhite {
@@ -579,7 +579,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    
+
     > * {
         display: inline;
     }
