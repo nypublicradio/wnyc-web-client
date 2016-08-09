@@ -56,7 +56,7 @@
 }
 
 // required to override some unused liquid-fire styles
-// e.g. allows sliging-modal to slide into place
+// e.g. allows sliding-modal to slide into place
 .modal-wrapper.liquid-container {
   @include transform(none);
 }
