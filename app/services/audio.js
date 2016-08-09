@@ -287,10 +287,14 @@ export default Service.extend({
     }
   },
 
-  errorEvent(model, errorCode, errorName, errorMessage, {piece}) {
+  errorEvent(model, errorCode, errorName, errorMessage, currentItem) {
+    let piece = currentItem && currentItem.piece || {};
+    let attributes = piece.attributes || {};
+    let { audio, title } = attributes;
+    let { id } = piece;
     this._trackPlayerEvent({
       action: 'Sound Error',
-      label: `audio: ${piece.attributes.audio} | pk: ${piece.id} | title: ${piece.attributes.title} | error: ${errorMessage}`
+      label: `audio: ${audio} | pk: ${id} | title: ${title} | error: ${errorMessage}`
     });
   },
 
