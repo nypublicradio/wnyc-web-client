@@ -14,7 +14,6 @@ export default Route.extend({
   },
  
   model() {
-    console.log("schedule");
     let todaysSchedule = `schedule/${moment().format('YYYY/MMM/DD').toLowerCase()}/?scheduleStation=wnyc-fm939`;
     return this.store.find('django-page', todaysSchedule);
   }

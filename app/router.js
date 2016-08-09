@@ -36,8 +36,8 @@ Router.map(function() {
   this.route('blog', {path: 'blogs/:slug'}, subpageRoutes);
   this.route('stream', {path: 'streams'});
   this.route('playlist', {path: 'streams/:id'});
+  this.route('schedule-date', {path: 'schedule/:year/:month/:day'});
   this.route('schedule');
-  this.route('schedule-date', {path: 'schedule/:year/:month/:day/?:scheduleStation'});
   this.route('topics');
 
   // This is our catch all route that can render any existing page

@@ -10,13 +10,7 @@ export default Ember.Route.extend({
       refreshModel: true
     }
   },
-  // beforeModel() {
-  //   console.log("djangorendered");
-  //   let { upstream_url } = this.paramsFor('djangorendered');
-  //   if (upstream_url === 'schedule') {
-  //     this.replaceWith('schedule', `schedule/${moment().format('YYYY/MMM/DD').toLowerCase()}`);
-  //   }
-  // },
+
   model({ upstream_url }, { queryParams }) {
     // This adds trailing slashes, because the server's redirect
     // doesn't otherwise work correctly due to the proxying I'm using

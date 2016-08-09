@@ -41,7 +41,7 @@ export function normalizeHref(node, base = location) {
   let href = node.getAttribute('href') || '';
   let url = new URL(href, base).toString();
   let isExternal = false;
-  if (href.startsWith('#') || href.startsWith('mailto:')) {
+  if ( href.startsWith('#') || href.startsWith('?') || href.startsWith('mailto:')) {
     href = href;
   } else if (url.startsWith(wnycURL)) {
     href = url.replace(wnycURL, '').replace(/^\//, '') || '/';
@@ -63,7 +63,7 @@ export function shouldHandleLink(node, base = location) {
   } else if (node.getAttribute('data-ember-action')) {
     // ignore clicks from ember actions
     return false;
-  } else if (!href || href.startsWith('#') || href.startsWith('mailto:')) {
+  } else if (!href || href.startsWith('#') || href.startsWith('?') || href.startsWith('mailto:')) {
     // ignore href-less or otherwise implemented links
     return false;
   } else if (href.split('.').length > 1) {

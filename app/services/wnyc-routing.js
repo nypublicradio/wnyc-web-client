@@ -26,13 +26,11 @@ export default Ember.Service.extend({
     let routeName = handlers[handlers.length -1].handler;
     let params = [];
     handlers.forEach(h => {
-      // It's possible for routes to have more than one parameter, but
-      // we aren't capable of reflecting that in this API, and we
-      // aren't using that feature.
-      let p = Object.keys(h.params)[0];
-      if (p) {
-        params.push(h.params[p]);
-      }
+      // Originally the parameters were stripped down to just one param. 
+      // Added all params for the schedule-date route and it appears to not break anything
+      Object.keys(h.params).forEach(function(keyName) {
+        params.push(h.params[keyName]);
+      });
     });
     return { routeName, params, queryParams };
   }

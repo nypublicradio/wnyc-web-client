@@ -12,10 +12,7 @@ export default Route.extend({
       refreshModel: true
     }
   },
-
   model(params) {
-    console.dir(params);
-    console.log("schedule date");
     let year = params.year;
     let month = params.month;
     let day = params.day;
