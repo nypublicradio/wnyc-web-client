@@ -27,6 +27,7 @@ test('smoke test', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), `${show.id}`);
+    assert.equal(find('.sitechrome-btn').attr('href'), 'http://donate.com', 'donate button should be set to default value');
     assert.ok(showPage.facebookIsVisible());
   });
 });
@@ -146,5 +147,33 @@ test('undefined social links should not break page', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), `${show.id}`);
+  });
+});
+
+test('visiting a show with a different donate URL', function(assert) {
+  let show = server.create('show', {
+    id: 'shows/foo/',
+    donateURL: 'http://foo.com',
+    apiResponse: server.create('api-response', { id: 'shows/foo/recent_stories/1' })
+  });
+  server.create('django-page', {id: show.id});
+  server.create('django-page', {id: '/'});
+
+  // seems to help with random errors:
+  // "Called start() while already started (test's semaphore was 0 already)"
+  andThen(function() {
+    djangoPage
+      .bootstrap(show)
+      .visit(show);
+  });
+
+  andThen(function() {
+    assert.equal(find('.sitechrome-btn').attr('href'), 'http://foo.com', 'donate button should point to provided donate url');
+    
+    click(find('a[href="/"]'));
+  });
+  
+  andThen(function() {
+    assert.equal(find('.sitechrome-btn').attr('href'), 'http://donate.com', 'donate button should point to default url after navigating');
   });
 });

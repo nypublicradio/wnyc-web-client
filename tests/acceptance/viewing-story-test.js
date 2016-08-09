@@ -21,10 +21,34 @@ moduleForAcceptance('Acceptance | Django Page | Story Detail', {
 
 test('smoke test', function(assert) {
   assert.equal(currentURL(), `story/${this.story.slug}/`);
+    assert.equal(find('.sitechrome-btn').attr('href'), 'http://donate.com', 'donate button should be set to default value');
 });
 
 test('view comments', function(assert) {
   storyPage.clickShowComments();
 
   andThen(() => assert.ok(storyPage.commentsVisible));
+});
+
+moduleForAcceptance('Acceptance | Django Page | Story Donate URLs', {
+  afterEach() {
+    resetHTML();
+  }
+});
+
+test('visiting a story with a different donate URL', function(assert) {
+  let donateStory = server.create('story', { donateURL: 'http://foo.com' });
+  let id = `story/${donateStory.slug}/`;
+  server.create('django-page', {
+    id,
+    slug: donateStory.slug
+  });
+  
+  djangoPage
+    .bootstrap({id})
+    .visit({id});
+    
+  andThen(function() {
+    assert.equal(find('.sitechrome-btn').attr('href'), 'http://foo.com', 'donate button should point to provided donate url');
+  });
 });

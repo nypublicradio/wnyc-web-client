@@ -29,6 +29,10 @@ export default Route.extend({
   afterModel({ channel }) {
     const channelTitle = get(channel, 'title');
     const metrics = get(this, 'metrics');
+    
+    if (channel.get('donateURL')) {
+      this.send('updateDonateLink', channel.get('donateURL'));
+    }
 
     metrics.trackEvent({
       category: `Viewed ${get(channel, 'listingObjectType').capitalize()}`,

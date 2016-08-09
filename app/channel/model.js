@@ -42,6 +42,7 @@ export default DS.Model.extend({
     }
   }),
   donateChunk: DS.attr(),
+  donateURL: DS.attr(),
 
   linkroll: DS.attr(),
   bgColor: DS.attr('string'),

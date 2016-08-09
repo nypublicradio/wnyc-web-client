@@ -21,6 +21,7 @@ export default Model.extend({
   cmsPK: attr('string'),
   dateLine: attr('string'),
   dateLineDatetime: attr('string'),
+  donateURL: attr('string'),
   editLink: attr('string'),
   headers: attr(),
   imageMain: attr(),
