@@ -24,11 +24,11 @@ body:not(.simplified_wrapper):not(.container_stripped) > :not(
 @import 'vars';
 @import 'base';
 @import 'z-index';
-@import 'text';
 @import 'layout';
 @import 'utilities';
 
 @import 'box';
+@import 'text';
 @import 'icons';
 @import 'badges';
 @import 'tabs';
