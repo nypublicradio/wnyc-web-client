@@ -17,6 +17,9 @@ export default Ember.Route.extend({
       this.replaceWith('discover.start');
     }
   },
+  activate(){
+    window.scrollTo(0,0);
+  },
   actions: {
     resetPlaylist() {
       this.get('discoverQueue').emptyQueue();
