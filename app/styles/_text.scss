@@ -241,6 +241,13 @@
     }
 }
 
+.text-body--forceblock {
+    > *,
+    > * > * {
+        display: block;
+    }
+}
+
 /**
  * Normal Weight Text:
  * `.text--normal`

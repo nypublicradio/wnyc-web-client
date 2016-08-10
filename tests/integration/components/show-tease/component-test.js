@@ -42,7 +42,7 @@ test('it renders', function(assert) {
   assert.equal(this.$('.flag-body .text h2').text().trim(), 'All Things Considered', 'Title should render correctly');
   assert.equal(this.$('.flag-body .text .text-body--nopad').text().trim(), "A wrap-up of the day's news, with features and interviews.", 'Description should render correctly');
   assert.equal(this.$('.flag-image img').attr("src"), "http://www.wnyc.org/i/90/90/l/99/1/2DQ_1400X1400_NoWNYCSTUDIOS_2.png", "Image is populated");
-  assert.equal(this.$('.flag-body .text a').attr("data-tracking-category"), "Test Category", "Tracking Category should render on title link");
+  assert.equal(this.$('.flag-body .text h2 a').attr("data-tracking-category"), "Test Category", "Tracking Category should render on title link");
   assert.equal(this.$('a.flag-image').attr("data-tracking-category"), "Test Category", "Tracking Category should render on image link" );
 
 
@@ -66,7 +66,7 @@ test('it renders', function(assert) {
   assert.equal(this.$('.flag-body .text h2').text().trim(), 'All Things Considered', 'Title should render correctly');
   assert.equal(this.$('.flag-body .text .text-body--nopad').length, 0, 'Description not render');
   assert.equal(this.$('.flag-image img').attr("src"), "http://www.wnyc.org/i/90/90/l/99/1/2DQ_1400X1400_NoWNYCSTUDIOS_2.png", "Image is populated");
-  assert.equal(this.$('.flag-body .text a').attr("data-tracking-category"), "Test Category", "Tracking Category should render on title link");
+  assert.equal(this.$('.flag-body .text h2 a').attr("data-tracking-category"), "Test Category", "Tracking Category should render on title link");
   assert.equal(this.$('a.flag-image').attr("data-tracking-category"), "Test Category", "Tracking Category should render on image link" );
 
 });

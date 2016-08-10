@@ -52,13 +52,14 @@
         <h4 class="text--small text--lightgray text--spacing text--upper nudge medium-up">{{producing-orgs show.producingOrganizations unlinked=true}}</h4>
         {{/unless}}
 
-        <a href="{{showUrl}}"
-           title="{{show.title}}"
+        <h2 class="h2 h2--mq-small nudge-mini link--dark">
+          <a href="{{showUrl}}"
+           title="{{show.title}}" 
+           class="text-body--forceblock"
            data-tracking-category='{{trackingCategory}}'
-           data-tracking-action='Clicked Show "{{show.title}}"'>
-           <h2 class="h2 h2--mq-small nudge-mini link--dark">
-           {{show.title}}</h2>
-        </a>
+           data-tracking-action='Clicked Show "{{show.title}}"'> 
+           {{show.title}}</a>
+        </h2>
         
         {{#unless simpleLayout}}
         <div class="text-body--nopad text--medium medium-up">{{{show.tease}}}</div>
