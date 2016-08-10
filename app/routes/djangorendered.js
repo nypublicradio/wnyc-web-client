@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import moment from 'moment';
 import ENV from 'overhaul/config/environment';
 import { canonicalize } from 'overhaul/services/script-loader';
 import { assign } from 'overhaul/lib/alien-dom';
