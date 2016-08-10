@@ -1,8 +1,7 @@
-<div class="l-flexrow l-flexcol--center doubledown">
+<div class="doubledown">
+  <div class="flag">
 
-  <div class="l-col">
-    <div class="nudge">
-      
+    <div class="flag-image">
       {{#if pageNotFound}}
       <img alt="Page Not Found"
         src="/assets/img/error/404_tote{{if media.isSmallOnly "_small"}}.png"
@@ -16,30 +15,27 @@
         class="error-img"
       />
       {{/if}}
-     
     </div>
-  </div>
 
-  <div class="l-col l-flexcol--center">
-    <div class="error-text-block">
-   
-      <h1 class="h2">
-        {{#if pageNotFound}}Sorry, this page can’t be found.{{/if}}
-        {{#if serverError}}Oops, something went wrong...{{/if}}
-      </h1>
+    <div class="flag-body">
+      <div class="error-text-block"> 
+        <h1 class="h2">
+          {{#if pageNotFound}}Sorry, this page can’t be found.{{/if}}
+          {{#if serverError}}Oops, something went wrong...{{/if}}
+        </h1>
 
-      <div class="text text--430">
-        {{#if pageNotFound}}
-        <p>You may have typed the address incorrectly or you may have used an outdated link. Try <a href="/search" title="Search" data-tracking-category="Error Page"  data-tracking-action="Clicked Search">searching</a> for it, or browse our site for more stories.</p>
-        {{/if}}
+        <div class="text text--430">
+          {{#if pageNotFound}}
+          <p>You may have typed the address incorrectly or you may have used an outdated link. Try <a href="/search" title="Search" data-tracking-category="Error Page"  data-tracking-action="Clicked Search">searching</a> for it, or browse our site for more stories.</p>
+          {{/if}}
 
-        {{#if serverError}}
-        <p>We're experiencing an internal server error. Please try again later. </p>
-        {{/if}}
+          {{#if serverError}}
+          <p>We're experiencing an internal server error. Please try again later. </p>
+          {{/if}}
+        </div>
       </div>
-
     </div>
+    
   </div>
-
 </div>
 
