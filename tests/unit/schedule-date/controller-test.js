@@ -2,7 +2,7 @@ import { moduleFor, test } from 'ember-qunit';
 
 moduleFor('controller:schedule-date', 'Unit | Controller | schedule date', {
   // Specify the other units that are required for this test.
-  // needs: ['controller:foo']
+  needs: ['service:metrics', 'service:session']
 });
 
 // Replace this with your real tests.
