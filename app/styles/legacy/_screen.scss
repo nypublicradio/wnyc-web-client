@@ -1133,6 +1133,12 @@ ul.sidetouts li p.date {
   filter:alpha(opacity=60);
 }
 
+/* schedule page */
+
+.print-schedule a {
+	margin: -68px 5px 0 0;
+}
+
 /* schedule page calendar - NOT show calendar */
 
 #schedule_datepicker {
