@@ -26,7 +26,7 @@ export default Component.extend({
   classNameBindings:    ['isHovering', 'measurableState', 'type'],
   attributeBindings:    ['aria-label', 'title', 'disabled', 'data-test-selector', 'style'],
 
-  title: computed(function() {
+  title: computed('itemTitle', function() {
     return `Listen to ${get(this, 'itemTitle')}`;
   }),
   style: computed('width', function() {
