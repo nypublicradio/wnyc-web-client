@@ -46,6 +46,7 @@ Router.map(function() {
   // specific.
   this.route('djangorendered', { path: '*upstream_url' });
   this.route('login');
+  this.route('forgot-password');
 
   this.route('discover', function() {
     this.route('start');
