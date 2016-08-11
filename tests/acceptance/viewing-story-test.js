@@ -38,7 +38,9 @@ moduleForAcceptance('Acceptance | Django Page | Story Donate URLs', {
 
 test('visiting a story with a different donate URL', function(assert) {
   let donateStory = server.create('story', {
-    headerDonateChunk: '<a href="http://foo.com" class="foo">donate to foo</a>',
+    extendedStory: {
+      headerDonateChunk: '<a href="http://foo.com" class="foo">donate to foo</a>',
+    }
   });
   let id = `story/${donateStory.slug}/`;
   server.create('django-page', {
