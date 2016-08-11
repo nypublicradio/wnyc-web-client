@@ -11,28 +11,20 @@
   &:hover {
     color: $blue;
   }
-  
 }
 
 .station-nav {
   margin-top: 10px;
   
-  li.list-item {
-    padding-bottom: 5px;
-    margin-right: 20px;
-    
-    a {
-      font-size: 14px;
-      color: $lightgray;
-    }
-    
+  ul.schedule-tabs li a {    
+    font-weight: 600;
   }
   
-  .ui-tabs-selected {
-    border-bottom: 3px solid $red;
+  ul.schedule-tabs li:not(.ui-tabs-selected) a {
+    color: $lightgray !important;
     
-    a {
-      color: $darkergray;
+    &:hover {
+      color: $red !important;
     }
   }
 }
@@ -43,12 +35,11 @@ ul.schedule-dates {
     
   li.yesterday,
   li.tomorrow {
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    
     a {
-      font-weight: 700; 
+      font-size: 12px !important;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 700 !important;       
     }
     
     a:hover {
@@ -89,10 +80,8 @@ ul.schedule-table {
         
         &:hover {
           color: $blue;
-        }
-        
+        }  
       }
-      
     }
     
     div.time {
@@ -133,9 +122,7 @@ ul.schedule-table {
         margin: 0 0 0 105px;
         width: auto;
       }
-      
     }
-    
   }
 
   ul.hosts {
