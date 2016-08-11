@@ -21,7 +21,7 @@ moduleForAcceptance('Acceptance | Django Page | Story Detail', {
 
 test('smoke test', function(assert) {
   assert.equal(currentURL(), `story/${this.story.slug}/`);
-    assert.equal(find('.sitechrome-btn').attr('href'), 'http://donate.com', 'donate button should be set to default value');
+  assert.ok(find('.sitechrome-btn'), 'donate button should be the default');
 });
 
 test('view comments', function(assert) {
@@ -37,7 +37,9 @@ moduleForAcceptance('Acceptance | Django Page | Story Donate URLs', {
 });
 
 test('visiting a story with a different donate URL', function(assert) {
-  let donateStory = server.create('story', { donateURL: 'http://foo.com' });
+  let donateStory = server.create('story', {
+    headerDonateChunk: '<a href="http://foo.com" class="foo">donate to foo</a>',
+  });
   let id = `story/${donateStory.slug}/`;
   server.create('django-page', {
     id,
@@ -49,6 +51,6 @@ test('visiting a story with a different donate URL', function(assert) {
     .visit({id});
     
   andThen(function() {
-    assert.equal(find('.sitechrome-btn').attr('href'), 'http://foo.com', 'donate button should point to provided donate url');
+    assert.equal(find('.foo').text(), 'donate to foo', 'donate chunk should match');
   });
 });
