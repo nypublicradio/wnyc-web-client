@@ -14,6 +14,7 @@ export default Ember.Component.extend(BetaActionsMixin, {
   // we load SVGs via the <use> element, which requires the asset loaded
   // on the same domain
   svgURL: config.wnycSvgURL,
+  donateURL: config.wnycDonateURL,
   fixedNavOffset: 0,
   classNameBindings: ["fixed-nav"],
 
