@@ -11,6 +11,14 @@ import { classify as upperCamelize } from 'ember-string';
 const FIFTEEN_SECONDS = 1000 * 15;
 const TWO_MINUTES     = 1000 * 60 * 2;
 const PLATFORM        = 'NYPR_Web';
+const ERRORS = {
+  SOUNDMANAGER_FAILED_CREATE_SOUND: 'SoundManager failed when attempting to create a sound.',
+  SOUNDMANAGER_TIMEOUT: 'SoundManager failed to initialize before timing out.',
+  SOUND_NOT_LOADED: 'There is no sound currently loaded in the player.',
+  SOUND_FAILED_TO_LOAD: 'The current sound failed to load.',
+  DELEGATE_NOT_PROVIDED: 'A delegate to handle the current file format was not provided.',
+  SUITABLE_DELEGATE_NOT_FOUND: 'A suitable delegate for the provided audio was not found.'
+};
 
 export default Service.extend({
   poll:             service(),
@@ -295,14 +303,25 @@ export default Service.extend({
     }
   },
 
-  errorEvent(model, errorCode, errorName, errorMessage, currentItem) {
-    let piece = currentItem && currentItem.piece || {};
-    let attributes = piece.attributes || {};
-    let { audio, title } = attributes;
-    let { id } = piece;
+  errorEvent(model, errorCode, errorName, errorMessage, ...rest) {
+    let label;
+    if (errorMessage === ERRORS.SOUNDMANAGER_TIMEOUT) {
+      let status = rest[0];
+      label = `timeout | success: ${status.success} | error: ${status.error.type}`;
+    } else if (errorMessage === ERRORS.SOUNDMANAGER_FAILED_CREATE_SOUND) {
+      let [ ops ] = rest;
+      label = `failed with options: ${Object.keys(ops).map(k => `${k}: ${ops[k]}`).join(' | ')}`;
+    } else {
+      let currentItem = rest[0];
+      let piece = currentItem && currentItem.piece || {};
+      let attributes = piece.attributes || {};
+      let { audio, title } = attributes;
+      let { id } = piece;
+      label = `audio: ${audio} | pk: ${id} | title: ${title} | error: ${errorMessage}`;
+    }
     this._trackPlayerEvent({
       action: 'Sound Error',
-      label: `audio: ${audio} | pk: ${id} | title: ${title} | error: ${errorMessage}`
+      label
     });
   },
 
