@@ -1,0 +1,145 @@
+.scheduled-item-link,
+.program .tease {
+  display: none;
+}
+
+.print-schedule a {
+	margin: -84px 5px 0 0 !important;
+  color: $gray;
+  font-size: 12px;
+  
+  &:hover {
+    color: $blue;
+  }
+  
+}
+
+.station-nav {
+  margin-top: 10px;
+  
+  li.list-item {
+    padding-bottom: 5px;
+    margin-right: 20px;
+    
+    a {
+      font-size: 14px;
+      color: $lightgray;
+    }
+    
+  }
+  
+  .ui-tabs-selected {
+    border-bottom: 3px solid $red;
+    
+    a {
+      color: $darkergray;
+    }
+  }
+}
+
+ul.schedule-dates {
+  border-bottom: 1px solid $nearwhite;
+  padding-bottom: 10px;
+    
+  li.yesterday,
+  li.tomorrow {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    
+    a {
+      font-weight: 700; 
+    }
+    
+    a:hover {
+      color: $blue;
+      border-color: white;
+    }    
+  }
+} 
+   
+ul.schedule-table {
+  margin: 5px 0 0 0;
+  
+  .event {
+    border-bottom: 1px solid $nearwhite;
+    padding: 20px 0;
+  }
+  
+  li.head {
+    font-size: 16px;
+    font-weight: normal;
+    color: $darkergray;
+    background: none;
+    border: none;
+    margin: 0;
+    height: auto;
+    padding: 0;
+    line-height: 27px;
+    
+    div.program {
+      height: auto;
+      
+      a {
+        font-size: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #333;
+        font-weight: 700;
+        
+        &:hover {
+          color: $blue;
+        }
+        
+      }
+      
+    }
+    
+    div.time {
+      color: $lightergray;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    
+    .arrow {
+      display: none;
+    }
+    
+  }
+  
+
+  li.details { 
+    display: list-item !important;
+    
+    .text {
+      font-size: 16px;
+      margin-bottom: (1.25 / 2) * 1rem;
+
+      p {
+        margin-bottom: (1.25 / 2) * 1rem;
+      }
+    }
+    
+    .program {
+      border: none;
+      padding: 0;
+      
+      .image {
+        display: none;
+      }
+      
+      .text {
+        float: left;
+        margin: 0 0 0 105px;
+        width: auto;
+      }
+      
+    }
+    
+  }
+
+  ul.hosts {
+    display: none;
+  }
+}
+

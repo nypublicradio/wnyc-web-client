@@ -1133,12 +1133,6 @@ ul.sidetouts li p.date {
   filter:alpha(opacity=60);
 }
 
-/* schedule page */
-
-.print-schedule a {
-	margin: -68px 5px 0 0;
-}
-
 /* schedule page calendar - NOT show calendar */
 
 #schedule_datepicker {
@@ -4563,26 +4557,6 @@ button {
   }
 }
 
-ul.schedule-table {
-  li.head {
-    font-size: 14px;
-    height: 37px;
-    line-height: 16px;
-  }
-
-  li.details .text {
-    font-size: 14px;
-    margin-bottom: (1.25 / 2) * 1rem;
-
-    p {
-      margin-bottom: (1.25 / 2) * 1rem;
-    }
-  }
-
-  ul.hosts {
-    padding: 0;
-  }
-}
 .schedule-header > h2 {
   font-weight: 600;
 }
