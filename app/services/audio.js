@@ -17,7 +17,8 @@ const ERRORS = {
   SOUND_NOT_LOADED: 'There is no sound currently loaded in the player.',
   SOUND_FAILED_TO_LOAD: 'The current sound failed to load.',
   DELEGATE_NOT_PROVIDED: 'A delegate to handle the current file format was not provided.',
-  SUITABLE_DELEGATE_NOT_FOUND: 'A suitable delegate for the provided audio was not found.'
+  SUITABLE_DELEGATE_NOT_FOUND: 'A suitable delegate for the provided audio was not found.',
+  FLASH_FAILURE: 'There was a failure issued from flash.'
 };
 
 export default Service.extend({
@@ -311,6 +312,9 @@ export default Service.extend({
     } else if (errorMessage === ERRORS.SOUNDMANAGER_FAILED_CREATE_SOUND) {
       let [ ops ] = rest;
       label = `failed with options: ${Object.keys(ops).map(k => `${k}: ${ops[k]}`).join(' | ')}`;
+    } else if (errorMessage === ERRORS.FLASH_FAILURE) {
+      let [ message, level, code ] = rest;
+      label = `flash failure | message: ${message} | level: ${level} | code: ${code}`;
     } else {
       let currentItem = rest[0];
       let piece = currentItem && currentItem.piece || {};
