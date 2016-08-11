@@ -2,9 +2,11 @@
   <h4 class="streambanner-header bucket-title">ON AIR NOW</h4>
   <div class="streambanner-card">
     <h2 class="streambanner-title">
-      <span class="streambanner-station">{{showTitle}}</span>
-       on
-      <span class="streambanner-station">{{stream.name}}</span>
+      {{#if stream.name}}
+        <span class="streambanner-station">{{showTitle}}</span>
+         on
+        <span class="streambanner-station">{{stream.name}}</span>
+      {{/if}}
     </h2>
     <div class="streambanner-episode">
       {{episodeTitle}}
