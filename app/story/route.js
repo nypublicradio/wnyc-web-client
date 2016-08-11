@@ -25,8 +25,8 @@ export default Ember.Route.extend({
     let metrics = get(this, 'metrics');
     let {containers:action, title:label} = get(model, 'story.analytics');
     
-    if (get(model, 'story.donateURL')) {
-      this.send('updateDonateLink', get(model, 'story.donateURL'));
+    if (get(model, 'story.headerDonateChunk')) {
+      this.send('updateDonateChunk', get(model, 'story.headerDonateChunk'));
     }
 
     metrics.trackEvent({

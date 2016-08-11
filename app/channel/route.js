@@ -30,8 +30,8 @@ export default Route.extend({
     const channelTitle = get(channel, 'title');
     const metrics = get(this, 'metrics');
     
-    if (channel.get('donateURL')) {
-      this.send('updateDonateLink', channel.get('donateURL'));
+    if (channel.get('headerDonateChunk')) {
+      this.send('updateDonateChunk', channel.get('headerDonateChunk'));
     }
 
     metrics.trackEvent({

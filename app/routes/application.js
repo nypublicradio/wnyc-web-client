@@ -60,10 +60,10 @@ export default Route.extend(ApplicationRouteMixin, {
     willTransition() {
       //close queue/history modal when we open a new page
       this.controller.send('closeModal');
-      this.send('updateDonateLink', config.wnycDonateURL);
+      this.send('updateDonateChunk', false);
     },
-    updateDonateLink(donateURL) {
-      this.controller.set('donateURL', donateURL);
+    updateDonateChunk(donateChunk) {
+      this.controller.set('headerDonateChunk', donateChunk);
     }
   },
 
