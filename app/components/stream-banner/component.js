@@ -10,9 +10,7 @@ export default Component.extend({
   stream: computed('slug', function() {
     let slug = get(this, 'slug');
     if (slug) {
-      console.log('slug', slug);
       let stream = get(this, 'store').findRecord('stream', slug);
-      console.log('stream', stream);
       return stream;
     }
   }),
