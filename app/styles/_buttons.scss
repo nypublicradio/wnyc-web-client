@@ -843,28 +843,13 @@
       color $transition-timing);
   }
 
+
   &.blue-boss,
-  &.blue-minion {
+  &.blue-minion,
+  &.red-minion,
+  &.gray-minion {
     @include btn;
-    @include btn--blue;
     @include btn--strongtext;
-    @include blue-btn-jshover;
-    @include listen-btn-transitions;
-
-    overflow: hidden;
-
-    &.is-loading,
-    &.is-playing {
-      padding-left: 0;
-      padding-right: 0;
-    }
-  }
-
-  &.red-minion {
-    @include btn;
-    @include btn--red;
-    @include btn--strongtext;
-    @include red-btn-jshover;
     @include listen-btn-transitions;
 
     overflow: hidden;
@@ -879,6 +864,24 @@
   &.blue-boss {
     @include btn--large;
     padding-left: 13px;
+  }
+
+  &.blue-boss,
+  &.blue-minion {
+    @include btn--blue;
+    @include blue-btn-jshover;
+  }
+
+  &.red-minion {
+    @include btn--red;
+    @include red-btn-jshover;
+  }
+
+  &.gray-minion {
+    @include btn--large;
+    @include btn--smalltext;
+    @include thickbtn;
+    @include lightgray-btn-jshover;
   }
 
   &.blue-circle {
@@ -896,24 +899,6 @@
 
     @include mq($wide) {
       width: 55px;
-    }
-  }
-
-  &.gray-minion {
-    @include btn;
-    @include btn--large;
-    @include btn--strongtext;
-    @include btn--smalltext;
-    @include thickbtn;
-    @include lightgray-btn-jshover;
-    @include listen-btn-transitions;
-
-    overflow: hidden;
-
-    &.is-loading,
-    &.is-playing {
-      padding-left: 0;
-      padding-right: 0;
     }
   }
 }
