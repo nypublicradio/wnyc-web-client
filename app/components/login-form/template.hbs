@@ -23,7 +23,7 @@
         {{input value=password type='password' placeholder='Password' name='password' class="input--block nudge"}}
 
         <button class='submit' type="submit">Sign In</button>
-        <div><a href="{{ENV.wnycAccountRoot}}/in_iframe/accounts/password/reset/?src={{ENV.wnycURL}}/accounts/password/reset/&next={{previousURL}}&site=WNYC">Forgot your password?</a></div>
+        
         <div>{{link-to "Forgot your password?" "forgot-password" }}</div>
         <div>New user? <a href="/in_iframe/accounts/register/?next=http://www.wnyc.org/">Sign up</a>.</div>
         <div>Trying to <a href="http://www.wnyc.org/support/faq/#10" target="_blank" class="external-link">access your membership account</a>?</div>

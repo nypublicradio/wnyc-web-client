@@ -10,15 +10,6 @@ test('it renders', function(assert) {
   // Handle any actions with this.on('myAction', function(val) { ... });
 
   this.render(hbs`{{forgot-pw}}`);
+  assert.equal(this.$('iframe').length, 1);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#forgot-pw}}
-      template block text
-    {{/forgot-pw}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });
