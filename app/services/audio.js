@@ -310,8 +310,8 @@ export default Service.extend({
       let status = rest[0];
       label = `timeout | success: ${status.success} | error: ${status.error.type}`;
     } else if (errorMessage === ERRORS.SOUNDMANAGER_FAILED_CREATE_SOUND) {
-      let [ ops ] = rest;
-      label = `failed with options: ${Object.keys(ops).map(k => `${k}: ${ops[k]}`).join(' | ')}`;
+      let ops = rest[0];
+      label = `failed to load ${ops.url || ops.serverURL}`;
     } else if (errorMessage === ERRORS.FLASH_FAILURE) {
       let [ message, level, code ] = rest;
       label = `flash failure | message: ${message} | level: ${level} | code: ${code}`;
