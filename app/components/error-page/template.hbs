@@ -2,6 +2,7 @@
   <div class="flag">
 
     <div class="flag-image">
+    {{!-- These image sources are written out as a static string so that the ember-cli will detect them and replace with fingerprinted versions --}}
       {{#if pageNotFound}}
         {{#if media.isSmallOnly}}
           <img alt="Page Not Found" src="/assets/img/error/404_tote_small.png" class="error-img" />
@@ -40,4 +41,3 @@
     
   </div>
 </div>
-
