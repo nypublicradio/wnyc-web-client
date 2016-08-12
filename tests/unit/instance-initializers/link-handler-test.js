@@ -21,6 +21,7 @@ const linksToIgnore = [
   { node: makeAnchor({'href': 'http://www.example.com', 'class': 'stf'}), label: 'admin links' },
   { node: makeAnchor({'data-ember-action': 'foo'}), label: 'ember action' },
   { node: makeAnchor({'href': '#'}), label: 'hash href' },
+  { node: makeAnchor({'href': '?foo=bar'}), label: 'querystring href' },
   { node: makeAnchor({'href': 'mailto:'}), label: 'mailto href' },
   { node: makeAnchor({'href': 'http://foo.com'}), label: 'other domain' },
   { node: makeAnchor({'href': 'http://foo.com/file.pdf'}), label: 'absolute url to a file' },
@@ -63,4 +64,8 @@ test('normalizeHref should return expected values', function(assert) {
   a.href = `mailto:`;
   ops = normalizeHref(a, wnycURL);
   assert.deepEqual(ops, {url: `mailto:`, href: 'mailto:', isExternal: false }, 'mailto:');
+
+  a.href = `?foo=bar`;
+  ops = normalizeHref(a, wnycURL);
+  assert.deepEqual(ops, {url: `${wnycURL}?foo=bar`, href: '?foo=bar', isExternal: false }, '?foo=bar');
 });
