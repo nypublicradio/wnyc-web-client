@@ -1,11 +1,11 @@
 /**
- * stacked button group
- * the idea is to create a module that wraps buttons and botton like objects
- * so that they can be stacked vertically, aligned center, and the container
- * object is as wide as the widest child.
- * It's this last bit which is tough to do strictly in CSS, but it does seem
- * to work when the .btn-group--stacked is a flex-child itself.
- */
+* stacked button group
+* the idea is to create a module that wraps buttons and botton like objects
+* so that they can be stacked vertically, aligned center, and the container
+* object is as wide as the widest child.
+* It's this last bit which is tough to do strictly in CSS, but it does seem
+* to work when the .btn-group--stacked is a flex-child itself.
+*/
 .btn-group--stacked {
   @include display-flex;
   @include flex-direction(column);
@@ -37,9 +37,10 @@
     line-height: initial !important;
   }
 }
+
 /***
- * Buttons:
- */
+* Buttons:
+*/
 
 /**
  * Button:
@@ -50,55 +51,51 @@
  *      button.btn Click Me
  */
 @mixin btn {
-    position: relative; // for transition icons
-    display: inline-block;
-    border-radius: 25px;
-    border: 2px solid;
-    border-color: rgba($lightgray, 0.2);
+  position: relative; // for transition icons
+  display: inline-block;
+  border-radius: 25px;
+  border: 2px solid;
+  border-color: rgba($lightgray, 0.2);
 
-    padding: 0px 13px;
-    color: $lightgray;
-    background: transparent;
-    @include fontsize(14);
-    line-height: 34px;
+  padding: 0px 13px;
+  color: $lightgray;
+  background: transparent;
+  @include fontsize(14);
+  line-height: 34px;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    @include transition(
-      opacity $transition-timing,
-      background-color $transition-timing,
-      border-color $transition-timing,
-      color $transition-timing);
+  @include transition(
+  opacity $transition-timing,
+  background-color $transition-timing,
+  border-color $transition-timing,
+  color $transition-timing);
 
-    &:hover,
-    &:focus {
-      border-color: rgba($darkgray, 0.2);
-      color: $gray;
-      opacity: 1;
-    }
+  &:hover,
+  &:focus {
+    border-color: rgba($darkgray, 0.2);
+    color: $gray;
+    opacity: 1;
+  }
 
-    &[disabled] {
-      opacity: 0.15;
-    }
+  &[disabled] {
+    opacity: 0.15;
+    cursor: not-allowed;
+  }
 }
 
 .btn {
   @include btn;
 }
 
-.btn[disabled] {
-  opacity:0.5;
-  cursor:not-allowed;
-}
-
 /**
- * Heavy Button:
- * `.btn--heavy`
- * Make the button bold.
- *
- *      @example
- *      button.btn.btn--heavy Something to Emphasize
- */
+* Heavy Button:
+* `.btn--heavy`
+* Make the button bold.
+*
+*      @example
+*      button.btn.btn--heavy Something to Emphasize
+*/
 .btn--heavy {
   font-weight: 600;
   letter-spacing: 1px;
@@ -109,32 +106,32 @@
 }
 
 /**
- * Blank Button:
- * `.btn--blank`
- * An empty button. Useful for icons or interactive buttons
- * to be style other ways
- *
- *      @example
- *      button.btn.btn--blank I'm a button but I look like nothing special
- */
+* Blank Button:
+* `.btn--blank`
+* An empty button. Useful for icons or interactive buttons
+* to be style other ways
+*
+*      @example
+*      button.btn.btn--blank I'm a button but I look like nothing special
+*/
 .btn--blank {
-    padding: 0;
-    border: 0;
-    border-radius: 0;
-    color: #333;
-    // IE doesn't support initial
-    color: initial;
-    text-align: left;
-    background-color: transparent;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: #333;
+  // IE doesn't support initial
+  color: initial;
+  text-align: left;
+  background-color: transparent;
 
-    &:not([disabled]) {
-      &:hover,
-      &:focus {
-          background: none;
-          border: none;
-          color: inherit;
-      }
+  &:not([disabled]) {
+    &:hover,
+    &:focus {
+      background: none;
+      border: none;
+      color: inherit;
     }
+  }
 }
 
 /**
@@ -157,29 +154,29 @@
 
 
 /**
- * Medium Button:
- * `.btn--medium`
- * It's a little mediumer than your standard button.
- *
- *      @example
- *      button.btn.btn--medium Just Right.
- */
+* Medium Button:
+* `.btn--medium`
+* It's a little mediumer than your standard button.
+*
+*      @example
+*      button.btn.btn--medium Just Right.
+*/
 .btn--medium {
-    padding: 0px 16px;
-    line-height: 50px;
+  padding: 0px 16px;
+  line-height: 50px;
 }
 
 /**
- * Small Button:
- * `.btn--small`
- * It's a little smaller than your standard button.
- *
- *      @example
- *      button.btn.btn--small Can you see me? I'm small.
- */
+* Small Button:
+* `.btn--small`
+* It's a little smaller than your standard button.
+*
+*      @example
+*      button.btn.btn--small Can you see me? I'm small.
+*/
 .btn--small {
-    padding: 0 5px;
-    line-height: 20px;
+  padding: 0 5px;
+  line-height: 20px;
 }
 
 /**
@@ -192,11 +189,11 @@
  *          i.fa.fa-twitter
  */
 @mixin btn--circle {
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    padding: 0;
-    text-align: center;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  text-align: center;
 }
 
 .btn--circle {
@@ -213,13 +210,12 @@
  *          i.fa.fa-twitter
  */
 @mixin btn--fat {
-    width: 40px;
-    height: 40px;
+  width: 40px;
+  height: 40px;
 
-    .fa {
-      font-size: 18px;
-    }
-
+  .fa {
+    font-size: 18px;
+  }
 }
 
 .btn--fat {
@@ -227,63 +223,62 @@
 }
 
 /**
- * Squared Off Button:
- * `.btn--squared`
- * Squared off button with rounded corners.
- *
- *      @example
- *      button.btn.btn--squared Submit
- */
+* Squared Off Button:
+* `.btn--squared`
+* Squared off button with rounded corners.
+*
+*      @example
+*      button.btn.btn--squared Submit
+*/
 .btn--squared {
-    border-radius: 6px;
-    padding: 0 8px;
+  border-radius: 6px;
+  padding: 0 8px;
 }
 
 /**
- * Strict Square Button:
- * `.btn--strictsquare`
- * No rounded corners whatsoever.
- *
- *      @example
- *      button.btn.btn--strictsquare Enter
- */
+* Strict Square Button:
+* `.btn--strictsquare`
+* No rounded corners whatsoever.
+*
+*      @example
+*      button.btn.btn--strictsquare Enter
+*/
 .btn--strictsquare {
-    border-radius: 0;
+  border-radius: 0;
 }
 
 /**
- * Square Button:
- * `.btn--square-small`
- * A 45px width and height button.
- *
- *      @example
- *      button.btn.btn--strictsquare.btn--square-small Hi
- */
+* Square Button:
+* `.btn--square-small`
+* A 45px width and height button.
+*
+*      @example
+*      button.btn.btn--strictsquare.btn--square-small Hi
+*/
 .btn--square-small {
-    width: 45px;
-    height: 45px;
+  width: 45px;
+  height: 45px;
 }
 
 /**
- * White Button:
- * `.btn--white`
- *
- *      @example
- *      .l-full(style="background-color: rgba(0,0,0,0.15)")
- *          button.btn.btn--white Useful on a dark background
- */
+* White Button:
+* `.btn--white`
+*
+*      @example
+*      .l-full(style="background-color: rgba(0,0,0,0.15)")
+*          button.btn.btn--white Useful on a dark background
+*/
 .btn--white {
-    color: white;
-    border-color: rgba(white, 0.2);
+  color: white;
+  border-color: rgba(white, 0.2);
 
-    &:not([disabled]) {
-      &:focus,
-      &:hover {
-        color: white;
-        border-color: rgba(white,.7);
-      }
+  &:not([disabled]) {
+    &:hover,
+    &:focus {
+      color: white;
+      border-color: rgba(white,.7);
     }
-
+  }
 }
 
 .btn--whitetext {
@@ -291,36 +286,36 @@
 }
 
 /**
- * Pink Button:
- * `.btn--pink`
- * Make your button stand out with a pink background
- *
- *      @example
- *      button.btn.btn--pink You Know You Want to Click
- */
+* Pink Button:
+* `.btn--pink`
+* Make your button stand out with a pink background
+*
+*      @example
+*      button.btn.btn--pink You Know You Want to Click
+*/
 .btn--pink {
-    background-color: $pink;
-    border-color: $pink;
-    color: white;
+  background-color: $pink;
+  border-color: $pink;
+  color: white;
 
-    &:not([disabled]) {
-      &:hover,
-      &:focus {
-          color: white;
-      }
+  &:not([disabled]) {
+    &:hover,
+    &:focus {
+        color: white;
     }
+  }
 }
 
 /**
- * Button with Pink Text:
- * `.btn--pinktext`
- * A regular button but the text is pink.
- *
- *      @example
- *      button.btn.btn--pinktext Click Here
- */
+* Button with Pink Text:
+* `.btn--pinktext`
+* A regular button but the text is pink.
+*
+*      @example
+*      button.btn.btn--pinktext Click Here
+*/
 .btn--pinktext {
-    color: $pink;
+  color: $pink;
 }
 
 /**
@@ -352,101 +347,101 @@
 }
 
 /**
- * Button with Blue Text:
- * `.btn--bluetext`
- * A regular button but the text is blue.
- *
- *      @example
- *      button.btn.btn--bluetext Click Here
- */
+* Button with Blue Text:
+* `.btn--bluetext`
+* A regular button but the text is blue.
+*
+*      @example
+*      button.btn.btn--bluetext Click Here
+*/
 .btn--bluetext {
-    color: $blue;
+  color: $blue;
 }
 
 /**
- * Green Button:
- * `.btn--green`
- *
- *      @example
- *      button.btn.btn--green Click
- */
+* Green Button:
+* `.btn--green`
+*
+*      @example
+*      button.btn.btn--green Click
+*/
 .btn--green {
-    background-color: $lightgreen;
-    border-color: $lightgreen;
-    color: $darkgray;
+  background-color: $lightgreen;
+  border-color: $lightgreen;
+  color: $darkgray;
 
-    &:not([disabled]) {
-      &:focus,
-      &:hover {
-        background-color: $darkgreen;
-        border-color: $darkgreen;
-        color: $lightgreen;
-      }
+  &:not([disabled]) {
+    &:hover,
+    &:focus {
+      background-color: $darkgreen;
+      border-color: $darkgreen;
+      color: $lightgreen;
     }
+  }
 }
 
 /**
- * Black Button:
- * `.btn--black`
- *
- *      @example
- *      button.btn.btn--black Click Here
- */
+* Black Button:
+* `.btn--black`
+*
+*      @example
+*      button.btn.btn--black Click Here
+*/
 .btn--black {
-    color: white;
-    background-color: black;
-    border-color: black;
+  color: white;
+  background-color: black;
+  border-color: black;
 
-    &:not([disabled]) {
-      &:focus,
-      &:hover {
-        background-color: $pink;
-        border-color: $pink;
-        color: white;
-      }
+  &:not([disabled]) {
+    &:hover,
+    &:focus {
+      background-color: $pink;
+      border-color: $pink;
+      color: white;
     }
+  }
 }
 
 /**
- * Button with Black Text:
- * `.btn--blacktext`
- *
- *      @example
- *      button.btn.btn--blacktext Submit Comment
- */
+* Button with Black Text:
+* `.btn--blacktext`
+*
+*      @example
+*      button.btn.btn--blacktext Submit Comment
+*/
 .btn--blacktext {
-    color: $darkergray;
+  color: $darkergray;
 
-    &:not([disabled]) {
-      &:focus,
-      &:hover {
-          color: $pink;
-      }
-
-      &.active {
-          color: black;
-      }
+  &:not([disabled]) {
+    &:hover,
+    &:focus {
+      color: $pink;
     }
+
+    &.active {
+      color: black;
+    }
+  }
 }
 
 /**
- * Red Button:
- * `.btn--red`
- * Make your button stand out with a red background
- *
- *      @example
- *      button.btn.btn--red You Know You Want to Click
- */
+* Red Button:
+* `.btn--red`
+* Make your button stand out with a red background
+*
+*      @example
+*      button.btn.btn--red You Know You Want to Click
+*/
 .btn--red {
-    background-color: $red;
-    border-color: $red;
-    color: white;
+  background-color: $red;
+  border-color: $red;
+  color: white;
 
-    &:not([disabled]) {
-      &:hover {
-          color: white;
-      }
+  &:not([disabled]) {
+    &:hover {
+      color: white;
     }
+  }
 }
 
 
@@ -467,18 +462,18 @@
 
 
 /**
- * Media Query Buttons:
- * Sometimes we need to change a button's colors based on the current MQ.
- * These should be created according to special MQ cases.
- */
+* Media Query Buttons:
+* Sometimes we need to change a button's colors based on the current MQ.
+* These should be created according to special MQ cases.
+*/
 
 /**
- * `.btn--mq-graywhite`
- * Gray/White MQ Button
- *
- *      @example
- *      button.btn.btn--mq-graywhite Gray at Narrow. White at wide.
- */
+* `.btn--mq-graywhite`
+* Gray/White MQ Button
+*
+*      @example
+*      button.btn.btn--mq-graywhite Gray at Narrow. White at wide.
+*/
 .btn--mq-graywhite {
   @include mq($medium-and-up) {
     color: white;
@@ -493,113 +488,113 @@
 }
 
 /**
- * Button Link:
- * `.btn--link`
- * If you have you a button that should look
- * like a regular link, use this modifier
- *
- *      @example
- *      button.btn.btn--link Show Comments
- */
+* Button Link:
+* `.btn--link`
+* If you have you a button that should look
+* like a regular link, use this modifier
+*
+*      @example
+*      button.btn.btn--link Show Comments
+*/
 .btn--link {
-    color: #333;
+  color: #333;
+  background-color: transparent;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid rgba(204,204,204,0.8);
+  padding: 0;
+  font-weight: normal;
+  letter-spacing: normal;
+  // IE doesn't support intial
+  letter-spacing: initial;
+  @include fontsize($base-font);
+  line-height: #{$line-height}px;
+
+  &:hover,
+  &:focus {
+    color: $blue;
     background-color: transparent;
-    border-radius: 0;
-    border: none;
-    border-bottom: 1px solid rgba(204, 204, 204, 0.8);
-    padding: 0;
-    font-weight: normal;
-    letter-spacing: normal;
-    // IE doesn't support intial
-    letter-spacing: initial;
-    @include fontsize($base-font);
-    line-height: #{$line-height}px;
+    border-color: rgba(204,204,204,0.8);
+  }
+}
+
+/**
+* Button Link with Icon:
+* If you've got a button that should look like a link,
+* and you want to include an icon, you can add `.btn--linkicon`
+* to the `<button>`, and wrap the link text in a span.
+*
+* Also include `.btn--icon` for proper spacing after the icon.
+*
+*      @example
+*      button.btn.btn--icon.btn--link.btn--linkicon
+*          i.fa.fa-comment
+*          span 2 Comments
+*/
+.btn--linkicon {
+  border: none;
+
+  > span {
+    border-bottom: 1px solid rgba(204,204,204,0.8);
+  }
+
+  // beta maybe later button
+  &.btn--white {
+    > span {
+      border-color: rgba(white, 0);
+      color: white;
+    }
 
     &:hover,
     &:focus {
-      color: $blue;
-      background-color: transparent;
-      border-color: rgba(204, 204, 204, 0.8);
-    }
-}
-
-/**
- * Button Link with Icon:
- * If you've got a button that should look like a link,
- * and you want to include an icon, you can add `.btn--linkicon`
- * to the `<button>`, and wrap the link text in a span.
- *
- * Also include `.btn--icon` for proper spacing after the icon.
- *
- *      @example
- *      button.btn.btn--icon.btn--link.btn--linkicon
- *          i.fa.fa-comment
- *          span 2 Comments
- */
-.btn--linkicon {
-    border: none;
-
-    > span {
-        border-bottom: 1px solid rgba(204, 204, 204, 0.8);
-    }
-
-    // beta maybe later button
-    &.btn--white {
       > span {
-        border-color: rgba(white, 0);
         color: white;
+        border-color: rgba(white, 1);
       }
-
-      &:hover,
-      &:focus {
-        > span {
-          color: white;
-          border-color: rgba(white, 1);
-        }
-      }
-
-      &:active {
-        opacity: 0.60;
-      }
-
-      @include transition(opacity 125ms ease, border-color 125ms ease);
     }
+
+    &:active {
+      opacity: 0.60;
+    }
+
+    @include transition(opacity 125ms ease, border-color 125ms ease);
+  }
 }
 
 /**
- * Button Group:
- * Group some buttons together and they will line up nicely
- *
- *      @example
- *      .btn-group
- *          button.btn.btn--large Listen
- *          button.btn Queue
- *          button.btn.btn--circle
- *              i.fa.fa-ellipsis-h
- */
+* Button Group:
+* Group some buttons together and they will line up nicely
+*
+*      @example
+*      .btn-group
+*          button.btn.btn--large Listen
+*          button.btn Queue
+*          button.btn.btn--circle
+*              i.fa.fa-ellipsis-h
+*/
 .btn-group {
-    font-size: 0;
+  font-size: 0;
 
-    > * {
-        margin-right: 10px;
-        vertical-align: middle;
-        display: inline-block;
-    }
+  > * {
+    margin-right: 10px;
+    vertical-align: middle;
+    display: inline-block;
+  }
 
-    > :last-child {
-        margin-right: 0;
-    }
+  > :last-child {
+    margin-right: 0;
+  }
 }
 
-.btn-group--withvr{
+.btn-group--withvr {
 
-    > * {
-        @extend %vertical-rhythm;
+  > * {
+    @extend %vertical-rhythm;
 
-        @include mq($medium-and-up) {
-            margin-bottom: 0;
-        }
+    @include mq($medium-and-up) {
+      margin-bottom: 0;
     }
+  }
 }
 
 .btn-group--closer {
@@ -628,46 +623,46 @@
 }
 
 /**
- * Toggle Button:
- * `.btn--toggle > .btn-togglecontent`
- * When a button has content you want to want to toggle on clicks, use these
- * classes. They can applied directly to buttons used for other purposes
- * such as accordions or tabs and will not interrupt functionality.
- *
- * The important thing is to add a data-state attribute set to either `first` or
- * `second`. This corresponds to which child will be displayed by default.
- *
- * Requires `js/overhaul/main.js` but should probably split into its own mod.
- *
- *      @example
- *      button.btn.btn--toggle.js-toggleButton(data-state="first")
- *          .btn-togglecontent Toggle State 1
- *          .btn-togglecontent Toggle State 2
- */
+* Toggle Button:
+* `.btn--toggle > .btn-togglecontent`
+* When a button has content you want to want to toggle on clicks, use these
+* classes. They can applied directly to buttons used for other purposes
+* such as accordions or tabs and will not interrupt functionality.
+*
+* The important thing is to add a data-state attribute set to either `first` or
+* `second`. This corresponds to which child will be displayed by default.
+*
+* Requires `js/overhaul/main.js` but should probably split into its own mod.
+*
+*      @example
+*      button.btn.btn--toggle.js-toggleButton(data-state="first")
+*          .btn-togglecontent Toggle State 1
+*          .btn-togglecontent Toggle State 2
+*/
 .btn--toggle {
-    position: relative;
-    // override base `.btn` transition so there is no
-    // conflict with the btn-togglecontent transitions
-    //@include transition(none);
+  position: relative;
+  // override base `.btn` transition so there is no
+  // conflict with the btn-togglecontent transitions
+  //@include transition(none);
 }
 
 .btn-togglecontent {
-    @include transition(all 150ms ease);
+  @include transition(all 150ms ease);
 
-    &:first-child {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-    }
+  &:first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
 }
 
 .btn--block {
-    display: block;
-    padding: 8px;
-    width: 100%;
+  display: block;
+  padding: 8px;
+  width: 100%;
 }
 
 @mixin btn--smalltext {

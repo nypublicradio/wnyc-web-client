@@ -1,9 +1,9 @@
 import config from 'overhaul/config/environment';
 
-// Note for future people: schema.modelName.create() doesn't generate attributes in mirage factories. Create the objects using server.create in default.js (for local dev), or in the test
-
 // Mirage is diabled by default when using --proxy
 // In development (without --proxy) and test environments, these handlers will be used
+
+// Note for future people: schema.modelName.create() doesn't generate attributes in mirage factories. Create the objects using server.create in default.js (for local dev), or in the test
 
 export default function() {
   this.logging = false;
@@ -96,7 +96,10 @@ export default function() {
       return { errors };
     }
   });
-
+  
+  /*------------------------------------------------------------
+    passthroughs
+  --------------------------------------------------------------*/
   // Let this one slip by, we've got a http-proxy for it
   this.passthrough(`/api/v1/dynamic-script-loader`);
   this.passthrough(`${baseUrl}/api/v1/dynamic-script-loader`);

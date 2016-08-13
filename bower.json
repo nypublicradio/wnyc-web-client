@@ -13,6 +13,7 @@
     "lodash": "4.3.0",
     "normalize.css": "3.0.3",
     "raven-js": "~2.1",
-    "SoundManager2": "soundmanager2#*"
+    "SoundManager2": "soundmanager2#*",
+    "jquery-waypoints": "~2.0.5"
   }
 }

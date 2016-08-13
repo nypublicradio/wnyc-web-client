@@ -126,9 +126,8 @@ export default Service.extend({
   },
   playFromPk(id, context) {
     this._firstTimePlay();
-    
+  
     let shouldTrack = true;
-
     let oldContext = get(this, 'currentContext');
 
     // Don't set to loading if already playing the item,

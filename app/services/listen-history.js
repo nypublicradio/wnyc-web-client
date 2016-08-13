@@ -49,7 +49,6 @@ export default Service.extend({
   historyFor(id) {
     let session = this.get('session');
     let listens = session.getWithDefault('data.listens', []);
-
     return listens.filterBy('story.id', id);
   },
 
