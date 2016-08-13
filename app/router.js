@@ -25,6 +25,7 @@ Router.map(function() {
   // This is an example of a route that we've customized beyond the
   // default behavior in the `djangorendered` route.
   this.route('story', { path: 'story/:slug' });
+
   if (config.environment === 'test' || config.featureFlags['site-chrome']) {
     this.route('shows');
     this.route('archived-shows');
