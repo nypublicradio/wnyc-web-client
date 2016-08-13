@@ -2,19 +2,31 @@ import Ember from 'ember';
 import moment from 'moment';
 
 export function humanizeDuration(params/*, hash*/) {
-  var humanized;
-  if (params[0] < 60) {
-    return `${params[0]} seconds`;
-  }
-  else {
-     humanized = moment.duration(params[0], params[1]).humanize();
-  }
+  let h = moment.duration(params[0], 'seconds').get('hours');
+  let m = moment.duration(params[0], 'seconds').get('minutes');
+  let s = moment.duration(params[0], 'seconds').get('seconds');
 
-  if (humanized === 'an hour') {
-    return '1 hour';
+  if (h > 0) {
+    return `${withUnits(h, 'hour')} ${withUnits(m, 'minute')}`.trim();
+  }
+  else if (m > 0) {
+    if (s > 29) {
+      m = m + 1; // round up the minutes
+    }
+    return `${withUnits(m, 'minute')}`.trim();
   }
   else {
-    return humanized;
+    return `${withUnits(s, 'second')}`.trim();
+  }
+}
+
+function withUnits(value, singularUnit) {
+  var unit = `${value === 1 ? singularUnit : `${singularUnit}s`}`;
+  if (value > 0) {
+    return `${value} ${unit}`;
+  }
+  else {
+    return "";
   }
 }
 
