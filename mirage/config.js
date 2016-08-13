@@ -13,7 +13,7 @@ export default function() {
     legacy (v1) endpoints
   --------------------------------------------------------------*/
 
-  this.get(`${baseUrl}/api/v1/story/:slug`);
+  this.get(`${baseUrl}/api/v1/story/:id`);
   this.get(`${baseUrl}/api/v1/browser_id/`, {success: true});
   this.get(`${baseUrl}/api/v1/list/comments/24/:storyId/`, 'comment');
 
