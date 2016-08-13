@@ -1,20 +1,21 @@
 import Ember from 'ember';
-const {
-  helper
-} = Ember.Helper;
+import moment from 'moment';
 
-export default helper(function(seconds) {
-  if (seconds < 60) {
-    seconds = 60;
+export function humanizeDuration(params/*, hash*/) {
+  var humanized;
+  if (params[0] < 60) {
+    return `${params[0]} seconds`;
   }
-  let durations = [];
-  let minutes = Math.floor(seconds/ 60);
-  let hours = Math.floor(seconds/ 3600);
-  if (hours > 0){
-    durations.push(`${hours} h`);
+  else {
+     humanized = moment.duration(params[0], params[1]).humanize();
   }
-  if (minutes){
-    durations.push(`${minutes} min`);
+
+  if (humanized === 'an hour') {
+    return '1 hour';
   }
-  return durations.join(' ');
-});
+  else {
+    return humanized;
+  }
+}
+
+export default Ember.Helper.helper(humanizeDuration);
