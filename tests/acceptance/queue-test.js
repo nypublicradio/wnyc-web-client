@@ -1,8 +1,8 @@
 import { test } from 'qunit';
 import run from 'ember-runloop';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
-import '../helpers/ember-sortable/test-helpers';
-/* global reorder */
+import 'overhaul/tests/helpers/ember-sortable/test-helpers'; /* global reorder */
+
 import queuePage from 'overhaul/tests/pages/queue';
 
 moduleForAcceptance('Acceptance | queue');
@@ -30,6 +30,7 @@ test('Queue initial state should be open and empty', function(assert) {
 
 test('Queue should sort when you drag an item', function(assert) {
   assert.expect(6);
+  var done = assert.async();
 
   this.application.injectTestHelpers();
 
@@ -52,26 +53,16 @@ test('Queue should sort when you drag an item', function(assert) {
     assert.equal(queuePage.stories(1).title(), 'Story 0', 'story 0 should be first');
     assert.equal(queuePage.stories(2).title(), 'Story 1', 'story 1 should be second');
 
-    // drag story 0 down
-    // https://github.com/jgwhite/ember-sortable/blob/master/addon/helpers/drag.js
-    // drag(
-    //   'mouse',
-    //   '.player-queue .sortable-item:first-child',
-    //   function() {
-    //     return {dy: 300, dx: 0};
-    //   }
-    // );
+    // drag story 0 below story 1
     reorder(
       'mouse',
-      '.player-queue .sortable-item',
-      '.sortable-item:contains(Story 1)',
-      '.sortable-item:contains(Story 0)'
-    );
-
-  });
-
-  andThen(function() {
-    assert.equal(queuePage.stories(1).title(), 'Story 1', 'story 1 should be first after dragging');
-    assert.equal(queuePage.stories(2).title(), 'Story 0', 'story 0 should be second after dragging');
+      '.player-queue .queueitem',
+      '.queueitem:contains(Story 1)',
+      '.queueitem:contains(Story 0)'
+    ).then(function() {
+      assert.equal(queuePage.stories(1).title(), 'Story 1', 'story 1 should be first after dragging');
+      assert.equal(queuePage.stories(2).title(), 'Story 0', 'story 0 should be second after dragging');
+      done();
+    });
   });
 });
