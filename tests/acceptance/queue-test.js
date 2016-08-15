@@ -8,21 +8,16 @@ import queuePage from 'overhaul/tests/pages/queue';
 moduleForAcceptance('Acceptance | queue');
 
 test('visiting /?modal=queue-history', function(assert) {
-  assert.expect(1);
-  var done = assert.async();
   server.create('djangoPage', {id:'/'});
 
   queuePage.visit();
 
   andThen(function() {
     assert.equal(currentURL(), '/?modal=queue-history');
-    done();
   });
 });
 
 test('Queue initial state should be open and empty', function(assert) {
-  assert.expect(2);
-  var done = assert.async();
   server.create('djangoPage', {id:'/'});
 
   queuePage.visit();
@@ -30,16 +25,10 @@ test('Queue initial state should be open and empty', function(assert) {
   andThen(function() {
     assert.ok(queuePage.queueIsVisible, 'Queue should exists');
     assert.equal(queuePage.stories().count(), 0, 'Queue should be empty');
-    done();
   });
 });
 
 test('Queue should sort when you drag an item', function(assert) {
-  assert.expect(6);
-  var done = assert.async();
-
-  this.application.injectTestHelpers();
-
   let listenQueue = this.application.__container__.lookup('service:listen-queue');
   server.createList('story', 2);
   run(() => {
@@ -68,7 +57,6 @@ test('Queue should sort when you drag an item', function(assert) {
     ).then(function() {
       assert.equal(queuePage.stories(1).title(), 'Story 1', 'story 1 should be first after dragging');
       assert.equal(queuePage.stories(2).title(), 'Story 0', 'story 0 should be second after dragging');
-      done();
     });
   });
 });
