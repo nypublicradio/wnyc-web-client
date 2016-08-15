@@ -8,16 +8,21 @@ import queuePage from 'overhaul/tests/pages/queue';
 moduleForAcceptance('Acceptance | queue');
 
 test('visiting /?modal=queue-history', function(assert) {
+  assert.expect(1);
+  var done = assert.async();
   server.create('djangoPage', {id:'/'});
 
   queuePage.visit();
 
   andThen(function() {
     assert.equal(currentURL(), '/?modal=queue-history');
+    done();
   });
 });
 
 test('Queue initial state should be open and empty', function(assert) {
+  assert.expect(2);
+  var done = assert.async();
   server.create('djangoPage', {id:'/'});
 
   queuePage.visit();
@@ -25,6 +30,7 @@ test('Queue initial state should be open and empty', function(assert) {
   andThen(function() {
     assert.ok(queuePage.queueIsVisible, 'Queue should exists');
     assert.equal(queuePage.stories().count(), 0, 'Queue should be empty');
+    done();
   });
 });
 
