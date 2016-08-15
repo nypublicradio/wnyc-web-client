@@ -14,10 +14,12 @@ moduleForAcceptance('Acceptance | Analytics', {
 
 test('it does not log a pageview when opening the queue', function(assert) {
   assert.expect(2);
+  let done = assert.async();
 
   analyticsStub.reopen({
     trackPage() {
       assert.ok(true, 'trackPage was called');
+      done();
     }
   });
 
