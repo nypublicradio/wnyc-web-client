@@ -29,6 +29,8 @@
   }
 
   .list {
+    position: relative;
+    margin-bottom: 0;
     background: $nearwhite;
   }
 
@@ -68,16 +70,6 @@
 
   .queueitem-playingicon {
     @include queue-left-icon(16px, 13px, $red);
-    > .icon {
-      display: none;
-    }
-  }
-
-  .list--nowplaying {
-    position: relative;
-    .queueitem-playingicon > .icon {
-      display: block;
-    }
   }
 
   .sortable-item {

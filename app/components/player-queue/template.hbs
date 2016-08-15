@@ -1,7 +1,7 @@
 {{#liquid-bind (hash queue=audio.queue.items currentAudio=audio.currentAudio playingFromQueue=playingFromQueue) as |props|}}
 
 {{#if (and props.playingFromQueue props.currentAudio)}}
-  <div class='list--nowplaying'>
+  <div class='list'>
     <div class='list-item'>
       {{queue-listitem
         dataId=props.currentAudio.id
