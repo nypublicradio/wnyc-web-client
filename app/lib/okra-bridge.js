@@ -90,13 +90,14 @@ const PLAYER_MODEL = WEB_PLAYER_CONTROLLER.then(c => c.playerModel);
 // the ServiceBridge is mixed into the Ember audio-service to act as a proxy to
 // the underlaying Okra functions. Remember the idea is that Okra is our SSOT,
 // so we're listening to and setting values on Okra as much as possible
-export const OkraBridge = Ember.Object.extend({
+export const OkraBridge = Ember.Object.extend(Ember.Evented, {
   isReady: false,
   isPlaying: false,
   isLoading: false,
   init() {
     all([WEB_PLAYER_CONTROLLER, PLAYER_MODEL]).then(([playerController, playerModel]) => {
       set(this, 'isReady', true);
+      this.trigger('ready');
 
       // web_player_controller wraps the playerModel's backbone `change` events
       // and does some data massaging before publishing to the rest of the app
