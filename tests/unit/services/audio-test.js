@@ -39,19 +39,18 @@ test('it exists', function(assert) {
 });
 
 test('passing a pk to play calls playFromPk', function(assert) {
+  let done = assert.async();
   let service = this.subject();
+  
   function playFromPk() {
-    testFlag = true;
+    assert.ok(true, "should have called playFromPk");
+    done();
   }
-
-  let testFlag = false;
 
   Ember.run(()=> {
     service.set('playFromPk', playFromPk);
     service.play(1);
   });
-
-  assert.equal(testFlag, true, "should have called playFromPk");
 });
 
 test('calling pause calls the okraBridge method', function(assert) {
