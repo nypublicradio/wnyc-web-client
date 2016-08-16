@@ -47,10 +47,8 @@ test('passing a pk to play calls playFromPk', function(assert) {
     done();
   }
 
-  Ember.run(()=> {
-    service.set('playFromPk', playFromPk);
-    service.play(1);
-  });
+  service.set('playFromPk', playFromPk);
+  service.play(1);
 });
 
 test('calling pause calls the okraBridge method', function(assert) {
@@ -127,13 +125,9 @@ test('it calls the GoogleAnalytics ping event', function(assert) {
     }
   };
 
-  Ember.run(() => {
-    service.set('metrics', metricsStub);
-    service.set('sessionPing', 500);
-    service.play(story.id);
-  });
-
-  return wait();
+  service.set('metrics', metricsStub);
+  service.set('sessionPing', 500);
+  service.play(story.id);
 });
 
 test('it sends a listen action on play and not resume', function(assert) {
@@ -174,6 +168,7 @@ test('it sends a listen action on pause', function(assert) {
   });
 
   Ember.run(() => service.pause());
+  return wait();
 });
 
 test('it sends a listen action on completed event', function(assert) {
