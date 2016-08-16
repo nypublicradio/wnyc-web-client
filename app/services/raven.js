@@ -10,6 +10,9 @@ export default RavenLogger.extend({
   releaseMetaName: 'revision',
   init() {
     Ember.$(document).ajaxError((event, jqXHR, ajaxSettings, thrownError) => {
+      if (Ember.testing) {
+        return;
+      }
       let {
         type,
         url,
