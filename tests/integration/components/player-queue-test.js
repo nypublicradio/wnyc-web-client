@@ -62,8 +62,8 @@ test('it renders the now playing item when playing from queue', function(assert)
   this.set('audio', nowPlayingWithItems);
   this.render(hbs`{{player-queue audio=audio playingFromQueue=true}}`);
 
-  assert.equal(this.$('.list--nowplaying > .list-item').length, 1, 'should render nowplaying item');
-  assert.equal(this.$('.list--nowplaying > .list-item:contains(listitem-a)').length, 1, 'should render nowplaying item title');
+  assert.equal(this.$('.list-item[data-test-name="now-playing-item"]').length, 1, 'should render one now playing item');
+  assert.equal(this.$('.list-item[data-test-name="now-playing-item"]:contains(listitem-a)').length, 1, 'should render title of the now playing item');
   assert.ok(this.$('.list-item:contains(listitem-b)').length, 'should render title of list item 2');
   assert.ok(this.$('.list-item:contains(listitem-c)').length, 'should render title of list item 3');
 });
@@ -72,14 +72,14 @@ test('it does not render the now playing item when not playing from queue', func
   this.set('audio', nowPlayingWithItems);
   this.render(hbs`{{player-queue audio=audio playingFromQueue=false}}`);
 
-  assert.equal(this.$('.list--nowplaying > .list-item').length, 0, 'should not render nowplaying item');
+  assert.equal(this.$('.list-item[data-test-name="now-playing-item"]').length, 0, 'should not render now playing item');
 });
 
 test('it does not render the empty message when list is empty but now playing from queue', function(assert) {
   this.set('audio', nowPlayingEmpty);
   this.render(hbs`{{player-queue audio=audio playingFromQueue=true}}`);
 
-  assert.equal(this.$('.list--nowplaying > .list-item').length, 1, 'should render nowplaying item');
+  assert.equal(this.$('.list-item[data-test-name="now-playing-item"]').length, 1, 'should render now playing item');
   assert.notOk(this.$('.queuelist-empty').length, 'should not render an empty queue message div');
 });
 
