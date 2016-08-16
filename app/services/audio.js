@@ -4,7 +4,8 @@ import get from 'ember-metal/get';
 import set from 'ember-metal/set';
 import { OkraBridge } from '../lib/okra-bridge';
 import computed, { readOnly, alias, or } from 'ember-computed';
-import { bind } from 'ember-runloop';
+import observer from 'ember-metal/observer';
+import { bind, once } from 'ember-runloop';
 import RSVP from 'rsvp';
 import { classify as upperCamelize } from 'ember-string';
 
@@ -41,6 +42,7 @@ export default Service.extend({
   currentAudio:     null,
   currentContext:   null,
   sessionPing:      TWO_MINUTES,
+  _waitingForOkra:  null,
 
   isPlaying: readOnly('okraBridge.isPlaying'),
   isLoading: computed('okraBridge.isLoading', {
@@ -64,13 +66,20 @@ export default Service.extend({
       return 'is-paused';
     }
   }),
+  
+  playIfWaiting: observer('isReady', function() {
+    once(this, function() {
+      let { id, context } = this.get('_waitingForOkra');
+      this.play(id, context);
+    });
+  }),
 
   init() {
     set(this, 'okraBridge', OkraBridge.create({
-       onFinished: bind(this, 'finishedTrack'),
-       onError: bind(this, 'errorEvent'),
-       onFlashError: bind(this, 'flashError')
-      }));
+     onFinished: bind(this, 'finishedTrack'),
+     onError: bind(this, 'errorEvent'),
+     onFlashError: bind(this, 'flashError')
+    }));
   },
   willDestroy() {
     this.okraBridge.teardown();
@@ -87,6 +96,13 @@ export default Service.extend({
     if (!id) {
       return;
     }
+    if (!this.get('isReady')) {
+      this.set('_waitingForOkra', {id, context});
+      return;
+    } else {
+      this.set('_waitingForOkra', null);
+    }
+    
     if (/^\d*$/.test(id)) {
       return this.playFromPk(id, context);
     } else {
