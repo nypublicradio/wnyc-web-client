@@ -14,8 +14,13 @@ export default Route.extend(ApplicationRouteMixin, {
   session: service(),
   poll: service(),
   store: service(),
+  audio: service(),
 
-  beforeModel() {
+  beforeModel({ queryParams }) {
+    if (queryParams.play) {
+      this.get('audio').play(queryParams.play);
+    }
+    
     let metrics = get(this, 'metrics');
 
     this._syncBrowserId();
