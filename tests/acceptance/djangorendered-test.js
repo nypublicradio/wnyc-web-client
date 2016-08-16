@@ -139,3 +139,30 @@ skip('alien doms with beta trials keep the beta bar if it has not been dismissed
     assert.ok(Ember.$('[data-test-selector=beta-tease]').length, 'beta trial tease is visible afer transition');
   });
 });
+
+moduleForAcceptance('Acceptance | Django Rendered | Play From Param', {
+  beforeEach() {
+    window.onbeforeunload = escapeNavigation;
+  },
+  afterEach() {
+    window.onbeforeunload = undefined;
+    resetHTML();
+  }
+});
+
+test('loading a page with the ?play param', function(assert) {
+  Ember.$.Velocity.mock = true;
+  
+  let id = '123';
+  
+  server.create('story', {id, title: 'Foo'});
+  let home = server.create('django-page', {id: `/bar?play=${id}`});
+  djangoPage
+    .bootstrap(home)
+    .visit(home);
+
+  andThen(() => {
+    assert.ok(Ember.$('.persistent-player').length, 'persistent player should be visible');
+    assert.equal(Ember.$('[data-test-selector=persistent-player-story-title]').text(), 'Foo', 'Foo story should be loaded in player UI');
+  });
+});

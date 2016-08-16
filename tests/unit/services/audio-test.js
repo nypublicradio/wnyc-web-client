@@ -207,3 +207,24 @@ test('it fires error events', function(assert) {
     Okra.request('audioService').trigger('flashVersionError');
   });
 });
+
+test('it delays early calls to play until after okraBrige isReady', function(assert) {
+  
+  let id = 123;
+  server.create('story', {id});
+  let otherId = 456;
+  server.create('story', {id: otherId});
+  
+  let service = this.subject();
+  assert.notOk(service.get('okraBridge.isReady'), 'okra not ready yet');
+  service.play(id);
+  assert.deepEqual(service.get('_waitingForOkra'), {id, context: ''}, 'holds onto last played item');
+  
+  return wait().then(() => {
+    assert.equal(service.get('_waitingForOkra'), null, 'clears private attr');
+    service.play(otherId);
+    assert.equal(service.get('currentId'), otherId, 'plays afterwards OK');
+    
+    return wait();
+  });
+});
