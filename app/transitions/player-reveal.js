@@ -1,8 +1,8 @@
 import { animate, Promise } from 'liquid-fire';
 
 export default function() {
+  this.newElement.css('visibility', '');
   if (!this.newValue) {
-    this.newElement.css('visibility', '');
     let player = this.newElement.find('.persistent-player');
     let floatingQueueButton = this.oldElement.find('.persistent-queuebutton');
     player.css({ transform: 'translateY(80px)' });
