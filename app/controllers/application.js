@@ -1,7 +1,7 @@
 import Controller from 'ember-controller';
 import service from 'ember-service/inject';
 import get from 'ember-metal/get';
-import { readOnly } from 'ember-computed';
+import { and, not } from 'ember-computed';
 
 export default Controller.extend({
   audio:        service(),
@@ -10,7 +10,8 @@ export default Controller.extend({
   modal:        null,
   queryParams:  ['modal'],
 
-  showPlayer:   readOnly('audio.playedOnce'),
+  noErrors:     not('audio.hasErrors'),
+  showPlayer:   and('noErrors', 'audio.playedOnce'),
 
   actions: {
     showModal(which) {

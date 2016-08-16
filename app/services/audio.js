@@ -145,6 +145,7 @@ export default Service.extend({
     this.okraBridge.playSoundFor('ondemand', id);
 
     get(this, 'store').findRecord('story', id).then(story => {
+      set(this, 'hasErrors', false);
 
       // independent of context, if this item is already the first item in your
       // listening history, don't bother adding it again
@@ -186,7 +187,8 @@ export default Service.extend({
           });
         }
       }
-    });
+    })
+    .catch(() => this.set('hasErrors', true));
   },
   playStream(slug, context = '') {
     this._firstTimePlay();
@@ -207,6 +209,7 @@ export default Service.extend({
     set(this, 'currentId', slug);
 
     get(this, 'store').findRecord('stream', slug).then(stream => {
+      set(this, 'hasErrors', false);
       let wasStream = get(this, 'currentAudio.audioType') === 'stream';
       let oldStream = get(this, 'currentAudio.name');
       let newStream = get(stream, 'name');
@@ -239,7 +242,8 @@ export default Service.extend({
           });
         }
       }
-    });
+    })
+    .catch(() => this.set('hasErrors', true));
   },
 
   setPosition(percentage) {
