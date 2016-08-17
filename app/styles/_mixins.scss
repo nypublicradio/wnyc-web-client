@@ -3,11 +3,11 @@
 @mixin spinner(
 $primary: rgba(239,239,239,1),
 $accent: rgba(176,176,175,1),
-$innerWidth: 14,
-$innerHeight: 14,
-$outerWidth: 30,
-$outerHeight: 30,
-$borderWidth: 6,
+$innerWidth: 14px,
+$innerHeight: 14px,
+$outerWidth: 30px,
+$outerHeight: 30px,
+$borderWidth: 6px,
 $top: 0px,
 $left: 0px,
 $right: 0px,
@@ -17,11 +17,11 @@ $bottom: 0px
     content: '';
     display: block;
     position: absolute;
-    top: #{$top}px; left: #{$left}px; right: #{$right}px; bottom: #{$bottom}px;
+    top: #{$top}; left: #{$left}; right: #{$right}; bottom: #{$bottom};
     margin: auto;
-    width: #{$innerWidth}px;
-    height: #{$innerWidth}px;
-    border: #{$borderWidth}px solid $primary;
+    width: #{$innerWidth};
+    height: #{$innerWidth};
+    border: #{$borderWidth} solid $primary;
     border-radius: 50%;
     border-left-color: $accent;
     border-top-color: $accent;
@@ -33,11 +33,11 @@ $bottom: 0px
     content: '';
     display: block;
     position: absolute;
-    top: #{$top}px; left: #{$left}px; right: #{$right}px; bottom: #{$bottom}px;
+    top: #{$top}; left: #{$left}; right: #{$right}; bottom: #{$bottom};
     margin: auto;
-    width: #{$outerWidth}px;
-    height: #{$outerHeight}px;
-    border: #{$borderWidth}px solid $primary;
+    width: #{$outerWidth};
+    height: #{$outerHeight};
+    border: #{$borderWidth} solid $primary;
     border-radius: 50%;
     border-left-color: $accent;
     border-top-color: $accent;
