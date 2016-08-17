@@ -34,7 +34,8 @@ export default Ember.Route.extend({
       category: 'Viewed Story',
       action,
       label,
-      model: get(model, 'story')
+      id: get(model, 'story.id'),
+      type: get(model, 'story.itemType')
     });
   }
 });

@@ -48,14 +48,13 @@ export default BaseAdapter.extend({
 
   defaultSend(options) {
     const {
-      model,
       category,
       action,
       label,
+      id:cms_id,
+      type:cms_type
     } = options;
 
-    const cms_id = model ? get(model, 'id') || '' : '';
-    const cms_type = model ? get(model, 'itemType') || '' : '';
     this.send({ category, action, label, cms_id, cms_type });
   },
 

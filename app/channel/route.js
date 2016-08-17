@@ -39,7 +39,8 @@ export default Route.extend({
     metrics.trackEvent({
       category: `Viewed ${get(channel, 'listingObjectType').capitalize()}`,
       action: channelTitle,
-      model: channel
+      id: channel.get('cmsPK'),
+      type: channel.get('listingObjectType')
     });
   },
   setupController(controller, model) {
