@@ -119,6 +119,8 @@ export default function() {
 
   this.post(`${config.wnycAccountRoot}/api/v1/listenaction/create/:pk/:action`, () => true);
   
+  this.post(`${config.wnycAccountRoot}/api/most/view/managed_item/:id`, () => true);
+  
   this.post(`${config.wnycAccountRoot}/api/v1/analytics/ga`, () => true);
 
   /*------------------------------------------------------------
