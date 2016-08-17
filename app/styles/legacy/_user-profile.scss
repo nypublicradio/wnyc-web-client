@@ -1,0 +1,28 @@
+.profile-nav li a {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  margin: -1px 0 0;
+  padding: 10px 20px;
+  width: auto;
+  font-size: 16px;
+  font-weight: normal;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.profile-nav {
+  margin-top: 20px;
+  clear: both;
+}
+
+.profile-head-row {
+  font-family: 'Open Sans', sans-serif;
+  color: $darkergray;
+}
+
+.profile-avatar img {
+  border-radius: 50px;
+}
+
+.simplified_wrapper .loading-spinner {
+  display: none;
+} 

@@ -41,6 +41,10 @@ a {
   color: #0073d5;
   text-decoration: none;
   word-wrap: break-word;
+  
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .more:after  {
@@ -2774,9 +2778,10 @@ h4.schedule-link {
   height: 52px;
   width: 100%;
   border: 0;
-  background: #eeeced;
-  padding: 10px;
-  //margin: 0;
+  background: white;
+  border: 1px solid $lightestgray;
+  padding: 10px 20px;
+  font-size: 1rem;
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
@@ -2845,8 +2850,8 @@ h4.schedule-link {
   background: #338fdd;
   color: white;
   cursor: pointer;
-  text-transform: uppercase;
-  font-size: 13px;
+  font-size: 1rem;
+  font-weight: 600;
           transition: background 80ms ease-in 0s;
      -moz-transition: background 80ms ease-in 0s;
   -webkit-transition: background 80ms ease-in 0s;
@@ -4317,7 +4322,7 @@ a.stf[href] {
 }
 
 .simplified_wrapper #pass_through_frame {
-  position: absolute;
+  position: relative !important;
   left: 50%;
   width: 320px;
   margin: 4em 0 0 -160px;
