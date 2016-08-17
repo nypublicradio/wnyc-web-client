@@ -1,0 +1,9 @@
+<li class="list-item list-item--short">
+  {{listen-button
+    type='white-hollow'
+    state=(if (eq 'wnyc-fm939' audio.currentAudio.id) audio.playState)
+    itemPK='wnyc-fm939'
+    itemTitle='WNYC 93.9 FM'}}
+
+  {{link-to 'Listen Live' 'stream' class="inherit" preventDefault=false}}
+</li>

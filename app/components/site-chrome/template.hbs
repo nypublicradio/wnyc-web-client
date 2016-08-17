@@ -47,8 +47,8 @@
             {{#if headerDonateChunk}}
               {{{headerDonateChunk}}}
             {{else}}
-              <a class="sitechrome-btn" 
-              href={{donateURL}} 
+              <a class="sitechrome-btn"
+              href={{donateURL}}
               title="Donate"
               data-tracking-category="WNYC Menu"
               data-tracking-action="Clicked Donate Button"
@@ -69,7 +69,7 @@
     <div class="sitechrome-corner">
       <h1>
         <span class="for-screenreaders">WNYC Navigation</span>
-        <a href="/" 
+        <a href="/"
           class="link--nodecor"
           title="WNYC Logo"
           data-tracking-category="WNYC Menu"
@@ -83,46 +83,54 @@
       <div class="{{if media.isLargeAndUp 'box box--slim box--nopad-top'}}">
 
       <ul class="list list--noborder flush text--spacing text--semi {{unless media.isLargeAndUp 'list--inline list--spaced text--small' 'alignright text--medium '}}">
-        
+
+        {{#if media.isLargeAndUp}}
+          {{partial 'components/site-chrome/nav-streambutton'}}
+        {{else}}
+          {{#link-to 'stream' tagName='li' href=false class="list-item list-item--short" }}
+            {{link-to 'Listen Live' 'stream' class="inherit" preventDefault=false}}
+          {{/link-to}}
+        {{/if}}
+
         {{#link-to 'stream' tagName='li' href=false class="list-item list-item--short" }}
-          {{link-to 'Listen Live' 'stream' class="inherit" preventDefault=false}}
+          {{link-to 'All Streams' 'stream' class="inherit" preventDefault=false}}
         {{/link-to}}
-        
-        {{#link-to 'schedule' current-when="schedule schedule-date" tagName='li' href="false" class="list-item list-item--short" }} 
+
+        {{#link-to 'schedule' current-when="schedule schedule-date" tagName='li' href="false" class="list-item list-item--short" }}
           {{link-to 'Schedule' 'schedule' class="inherit" preventDefault=false}}
-        {{/link-to}} 
-        
+        {{/link-to}}
+
         {{#link-to 'shows' current-when="shows show" tagName="li" href=false class="list-item list-item--short" }}
           {{link-to 'Shows' 'shows' class="inherit" preventDefault=false}}
         {{/link-to}}
 
-        {{#link-to 'topics' current-when='topics tag' tagName='li' href="false" class="list-item list-item--short" }} 
+        {{#link-to 'topics' current-when='topics tag' tagName='li' href="false" class="list-item list-item--short" }}
           {{link-to 'Topics' 'topics' class="inherit" preventDefault=false}}
         {{/link-to}}
 
-        {{!-- #link-to 'discover.start' current-when="discover" tagName='li' href="false" class="list-item list-item--short" --}} 
+        {{!-- #link-to 'discover.start' current-when="discover" tagName='li' href="false" class="list-item list-item--short" --}}
           {{!-- link-to 'Discover' 'discover.start' class="inherit" preventDefault=false --}}
         {{!-- /link-to --}}
- 
+
         {{#unless media.isLargeAndUp}}
 
-          {{#link-to 'djangorendered' 'search' tagName='li' href="false" class="list-item list-item--short" }} 
+          {{#link-to 'djangorendered' 'search' tagName='li' href="false" class="list-item list-item--short" }}
             {{link-to 'Search' 'djangorendered' 'search' class="inherit" preventDefault=false}}
           {{/link-to}}
-   
+
           {{#if session.isAuthenticated}}
 
-            {{#link-to 'login' tagName='li' href="false" class="list-item list-item--short" }} 
+            {{#link-to 'login' tagName='li' href="false" class="list-item list-item--short" }}
               {{link-to 'My Account' 'login' class="inherit" preventDefault=false}}
             {{/link-to}}
-      
+
             <li class="list-item list-item--short">
               <button class="btn--blank btn--white text--spacing h5" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
             </li>
 
           {{else}}
 
-            {{#link-to 'login' tagName='li' href="false" class="list-item list-item--short" }} 
+            {{#link-to 'login' tagName='li' href="false" class="list-item list-item--short" }}
               {{link-to 'Sign In' 'login' class="inherit" preventDefault=false}}
             {{/link-to}}
 
@@ -142,23 +150,23 @@
 
           <ul class="list list--noborder flush alignright text--spacing text--semi text--medium">
             {{!-- <div class="h5 text--heavy text--spacing alignright"> --}}
-            
+
             {{#if session.isAuthenticated}}
 
-              {{#link-to 'djangorendered' 'users/me' tagName='li' href="false" class="list-item list-item--short" }} 
+              {{#link-to 'djangorendered' 'users/me' tagName='li' href="false" class="list-item list-item--short" }}
                 {{link-to "My Account" 'djangorendered' 'users/me' class="inherit" preventDefault=false}}
               {{/link-to}}
-          
+
               <li class="list-item list-item--short">
                 <button class="btn--blank text--spacing" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
               </li>
 
             {{else}}
 
-            {{#link-to 'login' tagName='li' href="false" class="list-item list-item--short" }} 
+            {{#link-to 'login' tagName='li' href="false" class="list-item list-item--short" }}
               {{link-to "Sign In" 'login' class="inherit" preventDefault=false}}
             {{/link-to}}
- 
+
             {{/if}}
           </ul>
             {{!-- </div>
