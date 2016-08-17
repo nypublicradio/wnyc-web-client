@@ -3,6 +3,7 @@ import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import djangoPage from 'overhaul/tests/pages/django-page';
 import showPage from 'overhaul/tests/pages/show';
 import { resetHTML } from 'overhaul/tests/helpers/html';
+import config from 'overhaul/config/environment';
 
 moduleForAcceptance('Acceptance | Django Page | Show Page', {
   afterEach() {
@@ -174,4 +175,48 @@ test('visiting a show with a different header donate chunk', function(assert) {
   andThen(function() {
     assert.ok(findWithAssert('.sitechrome-btn'), 'donate chunk should reset after navigating');
   });
+});
+
+test('metrics properly reports channel attrs', function(assert) {
+  let done = assert.async();
+  let show = server.create('show', {
+    id: 'shows/foo/',
+    cmsPK: 123,
+    linkroll: [
+      {navSlug: 'episodes', title: 'Episodes'}
+    ],
+    socialLinks: [{title: 'facebook', href: 'http://facebook.com'}],
+    apiResponse: server.create('api-response', { id: 'shows/foo/episodes/1' })
+  });
+  
+  server.create('django-page', {id: show.id});
+  server.post(`${config.wnycAccountRoot}/api/v1/analytics/ga`, (schema, {queryParams, requestBody}) => {
+    // skip trackPageView event
+    if (queryParams.category === '_trackPageView') {
+      return true;
+    }
+    let postParams = {};
+    requestBody.split('&').forEach(kv => {
+      let params = kv.split('=');
+      let k = params[0];
+      let v = decodeURIComponent(params[1]).replace(/\+/g, ' ');
+      if (['category', 'action', 'cms_id', 'cms_type'].contains(k)) {
+        postParams[k] = v;
+      }
+    });
+    let { category, action, /* label,*/ cms_id, cms_type } = queryParams;
+    let testObj = {
+      category: 'Viewed Show',
+      action: show.title,
+      cms_id: '123',
+      cms_type: 'show'
+    };
+    assert.deepEqual({category, action, cms_id, cms_type}, testObj, 'GET params match up');
+    assert.deepEqual(postParams, testObj, 'POST params match up');
+    done();
+  });
+  
+  djangoPage
+    .bootstrap(show)
+    .visit(show);
 });
