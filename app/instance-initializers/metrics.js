@@ -12,7 +12,6 @@ export function initialize(applicationInstance) {
 
   metrics.activateAdapters([{
     name: 'DataWarehouse',
-    environments: ['development', 'production'],
     config: {
       host: wnycAccountRoot,
       endpoint: endpoint,
