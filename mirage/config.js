@@ -16,6 +16,10 @@ export default function() {
   this.get(`${baseUrl}/api/v1/story/:id`);
   this.get(`${baseUrl}/api/v1/browser_id/`, {success: true});
   this.get(`${baseUrl}/api/v1/list/comments/24/:storyId/`, 'comment');
+  this.get(`${baseUrl}/api/v1/list/streams/`, {count: 0, results:[]});
+  this.get(`${baseUrl}/api/v1/list/streams/:slug`, {});
+  this.get(`${baseUrl}/api/v1/whats_on/`, {});
+  this.get(`${baseUrl}/api/v1/whats_on/:slug`, {});
 
   this.get(`/api/v1/story/:slug`, function(schema, request) { // backbone makes this ajax request to the audio
     let results = schema.discoverStories.all().models.filter(function(d) {
