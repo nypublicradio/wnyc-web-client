@@ -114,7 +114,9 @@ export default function() {
       return { errors };
     }
   });
-  
+
+  this.post(`${config.wnycAccountRoot}/api/v1/analytics/ga`, () => true);
+
   /*------------------------------------------------------------
     passthroughs
   --------------------------------------------------------------*/
