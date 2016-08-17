@@ -115,11 +115,16 @@ export default function() {
     }
   });
 
+  this.post(`${config.wnycAccountRoot}/api/v1/listenaction/create/`, () => true);
+
+  this.post(`${config.wnycAccountRoot}/api/v1/listenaction/create/:pk/:action`, () => true);
+  
   this.post(`${config.wnycAccountRoot}/api/v1/analytics/ga`, () => true);
 
   /*------------------------------------------------------------
     passthroughs
   --------------------------------------------------------------*/
+
   // Let this one slip by, we've got a http-proxy for it
   this.passthrough(`/api/v1/dynamic-script-loader`);
   this.passthrough(`${baseUrl}/api/v1/dynamic-script-loader`);
