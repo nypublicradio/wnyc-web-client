@@ -19,7 +19,7 @@ export default BaseAdapter.extend({
   },
 
   init() {
-    const config = get(this, 'config');
+    const config = get(this, 'config') || {};
     const {
       debug:isDebug
     } = config;
