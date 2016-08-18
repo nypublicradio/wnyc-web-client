@@ -59,6 +59,10 @@
   button:focus {
     opacity: 0.8;
   }
+  
+  @include mq($medium-and-up) {
+    width: 166px;
+  }
 
   @include mq($large-only) {
     margin-bottom: 24px;
@@ -100,7 +104,6 @@
   }
 
   &.nav--homepage {
-    border-right: 1px solid $red;
     background-color: $red;
 
     a, button,
