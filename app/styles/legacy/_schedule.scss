@@ -4,7 +4,7 @@
 }
 
 .print-schedule a {
-	margin: -84px 5px 0 0 !important;
+	margin: -78px 5px 0 0 !important;
   color: $gray;
   font-size: 12px;
   
@@ -16,6 +16,7 @@
 .station-nav {
   margin-top: 10px;
   height: auto !important;
+  border: none !important;
   
   ul.schedule-tabs li a {    
     font-weight: 600;
@@ -31,11 +32,14 @@
 }
 
 ul.schedule-dates {
+  border-top: 1px solid $nearwhite;
   border-bottom: 1px solid $nearwhite;
-  padding-bottom: 10px;
+  padding: 10px 0;
     
   li.yesterday,
   li.tomorrow {
+    width: auto !important;
+    
     a {
       font-size: 12px !important;
       letter-spacing: 2px;
