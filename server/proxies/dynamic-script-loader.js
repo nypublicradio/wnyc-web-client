@@ -1,5 +1,4 @@
 /*jshint node:true*/
-var proxyPath = '/dynamicScriptLoader';
 var url = require('url');
 
 module.exports = function(app) {
