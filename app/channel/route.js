@@ -8,6 +8,7 @@ const {
 } = Ember;
 const { hash: waitFor } = Ember.RSVP;
 const inflector = new Inflector(Inflector.defaultRules);
+import { retryFromServer } from 'overhaul/lib/compat-hooks';
 
 export default Route.extend({
   session: service(),
@@ -24,7 +25,8 @@ export default Route.extend({
         channel: page.get('wnycChannel'),
         user: this.get('session.data.user')
       });
-    });
+    })
+    .catch(e => retryFromServer(e, listingSlug.replace(/\/*$/, '/')));
   },
   afterModel({ channel }) {
     const channelTitle = get(channel, 'title');

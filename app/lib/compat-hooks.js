@@ -8,8 +8,9 @@
 */
 import Ember from 'ember';
 import config from 'overhaul/config/environment';
-import { removeAlienListeners } from 'overhaul/lib/alien-dom';
+import { removeAlienListeners, assign } from 'overhaul/lib/alien-dom';
 import { runOnce } from 'overhaul/services/legacy-loader';
+import { canonicalize } from 'overhaul/services/script-loader';
 const { $, get } = Ember;
 
 export function homepageCleanup(element = document.body) {
@@ -146,4 +147,18 @@ export function serializeInlineDoc(inlineDoc) {
   toClean.forEach(n => n && n.parentNode.removeChild(n));
 
   return inlineDoc;
+}
+
+// retrieving this destinationPath failed, possibly because the server
+// redirected the request to a new destination which does not respect
+// our CORS request. reassign the url to the location and let's see
+// what happens
+// if it's a 404 or 500, throw it so status code handlers at a higher
+// level can respond
+export function retryFromServer(error, destinationPath) {
+  let { response } = error;
+  if (response && (response.status === 404 || response.status === 500)) {
+    throw error;
+  }
+  assign(`${canonicalize(config.wnycURL)}/${destinationPath}`);
 }
