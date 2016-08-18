@@ -67,7 +67,7 @@
     "ember-truth-helpers": "1.2.0",
     "ember-wormhole": "noslouch/ember-wormhole#9894221257d5a7d7247c3fb20ecd093eea2d6c0a",
     "glob": "^4.5.3",
-    "http-proxy": "^1.13.3",
+    "http-proxy": "^1.14.0",
     "liquid-fire": "ember-animation/liquid-fire#aa30ff92d4b26bac22799d1c79a07a60a3dce9c9",
     "loader.js": "^4.0.1",
     "morgan": "^1.6.1"
