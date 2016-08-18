@@ -12,6 +12,8 @@ export default Component.extend({
       return 'play';
     } else if (get(this, 'roundTypes').includes(type)) {
       return 'play-circle';
+    } else {
+      return 'play-hollow';
     }
   }),
   pauseIcon: computed('type', function() {
@@ -20,6 +22,8 @@ export default Component.extend({
       return 'pause';
     } else if (get(this, 'roundTypes').includes(type)) {
       return 'pause-circle';
+    } else {
+      return 'pause-hollow';
     }
   })
 });

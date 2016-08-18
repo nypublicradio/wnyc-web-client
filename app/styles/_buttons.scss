@@ -846,19 +846,22 @@
 
 @mixin gray-svg {
   polygon, rect, circle, path {
-    fill: $lightgray;
+    color: $lightgray;
+    fill: currentColor;
   }
 }
 
 @mixin white-svg {
   polygon, rect, circle, path {
-    fill: white;
+    color: white;
+    fill: currentColor;
   }
 }
 
 @mixin blue-svg {
   polygon, rect, circle, path {
-    fill: $blue;
+    color: $blue;
+    fill: currentColor;
   }
 }
 
@@ -940,6 +943,10 @@
       width: 55px;
     }
   }
+
+  &.white-hollow-small {
+    width: 24px;
+  }
 }
 
 .listen-ui {
@@ -975,6 +982,10 @@
     }
   }
 
+  .white-hollow-small & {
+    width: 24px;
+  }
+
   > svg {
     position: absolute;
     top: 0;
@@ -1002,13 +1013,15 @@
   .blue-hollow:hover &,
   .blue-hollow:focus & {
     polygon, rect, circle, path {
-      fill: $darkblue;
+      color: $darkblue;
+      fill: currentColor;
     }
   }
 
   .blue-hollow:active & {
     polygon, rect, circle, path {
-      fill: #013f73;
+      color: #013f73;
+      fill: currentColor;
     }
   }
 
@@ -1022,13 +1035,26 @@
     }
   }
 
-  .white-hollow:hover &,
-  .white-hollow:focus & {
-    polygon, rect, circle, path {
-      fill: #ccc;
+  .white-hollow-small & > svg {
+    @include white-svg;
+    width: 24px;
+    path, polygon {
+      stroke: currentColor;
+      stroke-width: 0.6px
     }
   }
 
+  .white-hollow-small:hover &,
+  .white-hollow-small:focus &,
+  .white-hollow:hover &,
+  .white-hollow:focus & {
+    polygon, rect, circle, path {
+      color: #ccc;
+      fill: currentColor;
+    }
+  }
+
+  .white-hollow-small:active &,
   .white-hollow:active & {
     @include blue-svg;
   }
@@ -1104,6 +1130,7 @@
     );
   }
 
+  .white-hollow-small &,
   .white-hollow & {
     @include spinner(
         $primary: rgba(white, 0),
@@ -1122,6 +1149,10 @@
     @include mq($wide) {
       width: 55px;
     }
+  }
+
+  &.white-hollow-small {
+    width: 24px;
   }
 
   &.gray-minion {
@@ -1176,6 +1207,10 @@
     }
   }
 
+  .white-hollow-small & {
+    width: 24px;
+  }
+
   > svg {
     position: absolute;
     top: 0;
@@ -1223,6 +1258,12 @@
     }
   }
 
+  .white-hollow-small & > svg {
+    @include white-svg;
+    width: 24px;
+  }
+  .white-hollow-small:hover &,
+  .white-hollow-small:focus &,
   .white-hollow:hover &,
   .white-hollow:focus & {
     polygon, rect, circle, path {
@@ -1230,6 +1271,7 @@
     }
   }
 
+  .white-hollow-small:active &,
   .white-hollow:active & {
     @include blue-svg;
   }
@@ -1292,6 +1334,7 @@
     );
   }
 
+  .white-hollow small &,
   .white-hollow & {
     @include spinner(
       $primary: rgba(white, 0),
