@@ -87,6 +87,10 @@ module.exports = function(defaults) {
 
   // Okra-Bridge
   app.import('vendor/wnyc-legacy/lib/wnyc/reversable_enum.js');
+  
+  if (env === 'development') {
+    app.import('vendor/wnyc-legacy/lib/wnyc/url.js');
+  }
 
   app.import('vendor/wnyc-legacy/lib/backbone/decoders/decoder.js');
   app.import('vendor/wnyc-legacy/lib/backbone/decoders/multi_file_decoder.js');
