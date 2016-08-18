@@ -30,10 +30,6 @@
   @include mq($large-only) {
     margin-bottom: 0;
     background: $red;
-
-    .fixed-nav & {
-      margin-bottom: 57px;
-    }
   }
   @include mq($large-and-up) {
     padding-top: 0;
@@ -46,10 +42,10 @@
   background-color: white;
   @include transition(all 50ms ease);
   //for mobile header snap
-  -webkit-transform: translate3d(0px,0px,0px);
-  transform: translate3d(0px,0px,0px);
-  border-right: 1px solid $lightestgray;
-  width: 166px;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: $zIndex--fixedNav;
 
   a, button {
     font-family: 'Museo Sans Rounded', 'Open Sans', sans-serif;
@@ -101,14 +97,6 @@
   ul.alignright {
     margin: 0;
     float: none;
-  }
-
-  .fixed-nav & {
-    position: fixed;
-    position: sticky;
-    top: 0;
-    z-index: $zIndex--fixedNav;
-    width: 100%;
   }
 
   &.nav--homepage {
