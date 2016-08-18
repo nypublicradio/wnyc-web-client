@@ -128,7 +128,8 @@
   margin: 3.5px;
   height: 100%;
 
-  > button {
+  > button,
+  > button.listen-button {
     min-width: 26px;
     text-align: center;
     height: 100%;

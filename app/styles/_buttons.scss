@@ -844,26 +844,120 @@
   }
 }
 
-@mixin gray-svg {
+@mixin svg-color($color) {
   polygon, rect, circle, path {
-    color: $lightgray;
+    color: $color;
     fill: currentColor;
   }
+}
+
+@mixin gray-svg {
+  @include svg-color($lightgray);
 }
 
 @mixin white-svg {
-  polygon, rect, circle, path {
-    color: white;
-    fill: currentColor;
-  }
+  @include svg-color(white);
 }
 
 @mixin blue-svg {
-  polygon, rect, circle, path {
-    color: $blue;
-    fill: currentColor;
+  @include svg-color($blue);
+}
+
+@mixin btn-wide {
+  @include btn;
+  @include btn--strongtext;
+  @include listen-btn-transitions;
+
+  overflow: hidden;
+
+  &.is-loading,
+  &.is-playing {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .listen-ui {
+    width: 18px;
+    margin-right: 4px;
+
+    > svg {
+      width: 18px;
+    }
   }
 }
+
+@mixin btn-boss {
+  @include btn-wide;
+  @include btn--large;
+
+  padding-left: 13px;
+}
+
+@mixin btn-minion {
+  @include btn-wide;
+
+  .listen-ui {
+    @include scale(0.6, 0.6);
+  }
+}
+
+@mixin btn-minion-hollow {
+  @include btn-wide;
+  @include btn--large;
+  @include btn--smalltext;
+  @include thickbtn;
+
+  .listen-ui {
+    > svg {
+      width: 13px;
+    }
+  }
+}
+
+@mixin btn-size($size) {
+  width: $size;
+  height: $size;
+
+  .listen-ui {
+    width: $size;
+    height: $size;
+
+    > svg {
+      width: $size;
+      height: $size;
+    }
+  }
+}
+
+
+@mixin white-listen-spinner {
+  .listen-spinner {
+    @include spinner(
+      $primary: rgba(white, 0),
+      $accent: white
+    );
+  }
+}
+
+@mixin transparent-listen-spinner {
+  .listen-spinner {
+    @include spinner(
+      $primary: rgba(white, 0),
+      $accent: rgba(white, 0.2)
+    );
+  }
+}
+
+@mixin blue-listen-spinner {
+  .listen-spinner {
+    @include spinner(
+      $primary: rgba(white, 0),
+      $accent: $blue
+    );
+  }
+}
+
+// Listen Buttons
 
 .listen-button {
   position: relative;
@@ -872,421 +966,131 @@
     @include align-self(center);
   }
 
-  &.blue-circle {
-    @include btn;
-    @include btn--blue;
-    @include btn--strongtext;
-
-    @include transition(
-      width 200ms cubic-bezier(0.17, 0.89, 0.39, 1.25),
-      opacity $transition-timing,
-      background-color $transition-timing,
-      border-color $transition-timing,
-      color $transition-timing);
-  }
-
-
-  &.blue-boss,
-  &.blue-minion,
-  &.red-minion,
-  &.gray-minion {
-    @include btn;
-    @include btn--strongtext;
-    @include listen-btn-transitions;
-
-    overflow: hidden;
-
-    &.is-loading,
-    &.is-playing {
-      padding-left: 0;
-      padding-right: 0;
-    }
-  }
-
   &.blue-boss {
-    @include btn--large;
-    padding-left: 13px;
-  }
+    @include btn-boss;
 
-  &.blue-boss,
-  &.blue-minion {
     @include btn--blue;
     @include blue-btn-jshover;
+    @include white-listen-spinner;
+    @include white-svg;
+  }
+
+  &.blue-minion {
+    @include btn-minion;
+
+    @include btn--blue;
+    @include blue-btn-jshover;
+    @include white-listen-spinner;
+    @include white-svg;
   }
 
   &.red-minion {
+    @include btn-minion;
+
     @include btn--red;
     @include red-btn-jshover;
+    @include white-listen-spinner;
+    @include white-svg;
   }
 
   &.gray-minion {
-    @include btn--large;
-    @include btn--smalltext;
-    @include thickbtn;
+    @include btn-minion-hollow;
+
     @include lightgray-btn-jshover;
+    @include white-listen-spinner;
+    @include gray-svg;
+  }
+
+  &.blue-hollow {
+    @include btn-size(44px);
+
+    @include blue-svg;
+    @include blue-listen-spinner;
+
+    &:hover .listen-ui,
+    &:focus .listen-ui {
+      @include svg-color($darkblue);
+    }
+    &:active .listen-ui {
+      @include svg-color(#013f73);
+    }
+  }
+
+  &.white-hollow {
+    @include btn-size(48px);
+    @include mq($wide) {
+      @include btn-size(55px);
+    }
+
+    @include white-svg;
+    @include transparent-listen-spinner;
+
+    &:hover .listen-ui,
+    &:focus .listen-ui {
+      @include svg-color(#ccc);
+    }
+    &:active .listen-ui {
+      @include blue-svg;
+    }
+  }
+
+  &.white-hollow-small {
+    @include btn-size(24px);
+
+    @include white-svg;
+    @include transparent-listen-spinner;
+
+    &:hover .listen-ui,
+    &:focus .listen-ui {
+      @include svg-color(#ccc);
+    }
+    &:active .listen-ui {
+      @include blue-svg;
+    }
   }
 
   &.blue-circle {
+    @include btn;
     @include btn--circle;
     @include btn--fat;
-  }
-
-  &.blue-hollow {
-    width: 44px;
-    height: 44px;
-  }
-
-  &.white-hollow {
-    width: 48px;
-
-    @include mq($wide) {
-      width: 55px;
-    }
-  }
-
-  &.white-hollow-small {
-    width: 24px;
-  }
-}
-
-.listen-ui {
-  display: inline-block;
-  position: relative;
-
-  .blue-boss &,
-  .blue-minion &,
-  .red-minion & {
-    width: 18px;
-    margin-right: 2px;
-  }
-
-  .blue-minion &,
-  .red-minion & {
-    @include scale(0.6, 0.6);
-  }
-
-  .blue-circle & {
-    width: 18px;
-    @include scale(0.8, 0.8);
-  }
-
-  .blue-hollow & {
-    width: 44px;
-  }
-
-  .white-hollow & {
-    width: 48px;
-
-    @include mq($wide) {
-      width: 55px;
-    }
-  }
-
-  .white-hollow-small & {
-    width: 24px;
-  }
-
-  > svg {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    @include transition(opacity 0.3s ease-in-out, fill 0.2s ease-in-out);
-  }
-
-  .blue-boss & > svg,
-  .blue-minion & > svg,
-  .red-minion & > svg,
-  .blue-circle & > svg {
-    @include white-svg;
-    width: 16px;
-  }
-
-  .blue-hollow & > svg {
-    @include blue-svg;
-    width: 44px;
-    height: 44px;
-  }
-
-  .blue-hollow:hover &,
-  .blue-hollow:focus & {
-    polygon, rect, circle, path {
-      color: $darkblue;
-      fill: currentColor;
-    }
-  }
-
-  .blue-hollow:active & {
-    polygon, rect, circle, path {
-      color: #013f73;
-      fill: currentColor;
-    }
-  }
-
-  .white-hollow & > svg {
-    @include white-svg;
-    width: 48px;
-
-    @include mq($wide) {
-      width: 55px;
-      height: 55px;
-    }
-  }
-
-  .white-hollow-small & > svg {
-    @include white-svg;
-    width: 24px;
-    path, polygon {
-      stroke: currentColor;
-      stroke-width: 0.6px
-    }
-  }
-
-  .white-hollow-small:hover &,
-  .white-hollow-small:focus &,
-  .white-hollow:hover &,
-  .white-hollow:focus & {
-    polygon, rect, circle, path {
-      color: #ccc;
-      fill: currentColor;
-    }
-  }
-
-  .white-hollow-small:active &,
-  .white-hollow:active & {
-    @include blue-svg;
-  }
-
-  .gray-minion & > svg {
-    @include gray-svg;
-    width: 12px;
-  }
-
-  .icon--pause {
-    opacity: 0;
-  }
-  .listen-spinner {
-    &:before,
-    &:after {
-      opacity: 0;
-    }
-  }
-
-  .is-loading & {
-    width: 100%;
-
-    .listen-spinner {
-      &:before,
-      &:after {
-        opacity: 1;
-      }
-    }
-
-    .icon--pause,
-    .icon--play {
-      opacity: 0;
-    }
-  }
-
-  .is-playing & {
-    width: 100%;
-
-    .icon--pause {
-      opacity: 1;
-    }
-
-    .icon--play {
-      opacity: 0;
-    }
-    .listen-spinner {
-      &:before,
-      &:after {
-        opacity: 0;
-      }
-    }
-  }
-}
-
-.listen-spinner {
-  display: inline-block;
-  @include transition(opacity 150ms ease);
-
-  .blue-boss &,
-  .blue-minion &,
-  .red-minion &,
-  .blue-circle & {
-    @include spinner(
-      $primary: rgba(white, 0),
-      $accent: white
-    );
-  }
-
-  .blue-hollow & {
-    @include spinner(
-      $primary: rgba(white, 0),
-      $accent: $blue
-    );
-  }
-
-  .white-hollow-small &,
-  .white-hollow & {
-    @include spinner(
-        $primary: rgba(white, 0),
-        $accent: rgba(white, 0.2)
-    );
-  }
-
-  &.blue-hollow {
-    width: 44px;
-    height: 44px;
-  }
-
-  &.white-hollow {
-    width: 48px;
-
-    @include mq($wide) {
-      width: 55px;
-    }
-  }
-
-  &.white-hollow-small {
-    width: 24px;
-  }
-
-  &.gray-minion {
-    @include btn;
-    @include btn--large;
-    @include btn--strongtext;
-    @include btn--smalltext;
-    @include thickbtn;
-    @include lightgray-btn-jshover;
     @include listen-btn-transitions;
 
-    overflow: hidden;
+    .listen-ui {
+      width: 18px;
+      @include scale(0.8, 0.8);
 
-    &.is-loading,
-    &.is-playing {
-      padding-left: 0;
-      padding-right: 0;
+      > svg {
+        width: 18px;
+      }
     }
-  }
-}
 
-.listen-ui {
-  display: inline-block;
-  position: relative;
-
-  .blue-boss &,
-  .blue-minion &,
-  .red-minion {
-    width: 18px;
-    margin-right: 4px;
-  }
-
-  .blue-minion &,
-  .red-minion {
-    @include scale(0.6, 0.6);
-  }
-
-  .blue-circle & {
-    width: 18px;
-    @include scale(0.8, 0.8);
-  }
-
-  .blue-hollow & {
-    width: 44px;
-  }
-
-  .white-hollow & {
-    width: 48px;
-
-    @include mq($wide) {
-      width: 55px;
-    }
-  }
-
-  .white-hollow-small & {
-    width: 24px;
-  }
-
-  > svg {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    @include transition(opacity 0.3s ease-in-out, fill 0.2s ease-in-out);
-  }
-
-  .blue-boss & > svg,
-  .blue-minion & > svg,
-  .red-minion & > svg,
-  .blue-circle & > svg {
+    @include btn--blue;
     @include white-svg;
-    width: 18px;
+    @include white-listen-spinner;
   }
 
-  .blue-hollow & > svg {
-    @include blue-svg;
-    width: 44px;
-    height: 44px;
-  }
 
-  .blue-hollow:hover &,
-  .blue-hollow:focus & {
-    polygon, rect, circle, path {
-      fill: $darkblue;
+  .listen-ui {
+    display: inline-block;
+    position: relative;
+
+    > svg {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      @include transition(opacity 0.3s ease-in-out, fill 0.2s ease-in-out);
+    }
+
+    .icon--pause,
+    .listen-spinner {
+      opacity: 0;
     }
   }
 
-  .blue-hollow:active & {
-    polygon, rect, circle, path {
-      fill: #013f73;
-    }
-  }
-
-  .white-hollow & > svg {
-    @include white-svg;
-    width: 48px;
-
-    @include mq($wide) {
-      width: 55px;
-      height: 55px;
-    }
-  }
-
-  .white-hollow-small & > svg {
-    @include white-svg;
-    width: 24px;
-  }
-  .white-hollow-small:hover &,
-  .white-hollow-small:focus &,
-  .white-hollow:hover &,
-  .white-hollow:focus & {
-    polygon, rect, circle, path {
-      fill: #ccc;
-    }
-  }
-
-  .white-hollow-small:active &,
-  .white-hollow:active & {
-    @include blue-svg;
-  }
-
-  .gray-minion & > svg {
-    @include gray-svg;
-    width: 12px;
-  }
-
-  .icon--pause,
-  .listen-spinner {
-    opacity: 0;
-  }
-
-  .is-loading & {
+  &.is-loading .listen-ui {
     width: 100%;
 
     .listen-spinner {
@@ -1299,7 +1103,7 @@
     }
   }
 
-  .is-playing & {
+  &.is-playing .listen-ui {
     width: 100%;
 
     .icon--pause {
@@ -1311,34 +1115,10 @@
       opacity: 0;
     }
   }
-}
 
-.listen-spinner {
-  display: inline-block;
-  @include transition(opacity 150ms ease);
-
-  .blue-boss &,
-  .blue-minion &,
-  .red-minion &,
-  .blue-circle & {
-    @include spinner(
-      $primary: rgba(white, 0),
-      $accent: white
-    );
-  }
-
-  .blue-hollow & {
-    @include spinner(
-      $primary: rgba(white, 0),
-      $accent: $blue
-    );
-  }
-
-  .white-hollow small &,
-  .white-hollow & {
-    @include spinner(
-      $primary: rgba(white, 0),
-      $accent: rgba(white, 0.2)
-    );
+  .listen-spinner {
+    display: inline-block;
+    @include transition(opacity 150ms ease);
   }
 }
+
