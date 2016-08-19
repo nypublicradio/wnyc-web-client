@@ -84,7 +84,12 @@
 
       <ul class="list list--noborder flush text--spacing text--semi {{unless media.isLargeAndUp 'list--inline list--spaced text--small' 'alignright text--medium '}}">
 
-        {{site-chrome.nav-streambutton}}
+        <li class="list-item list-item--short">
+          {{site-chrome.nav-streambutton
+          slug='wnyc-fm939'
+          buttonType=(if isHomepage 'white-hollow-small' 'red-hollow-small')
+          buttonClasses='stream-launcher text--spacing text--semi'}}
+        </li>
 
         {{#link-to 'stream' tagName='li' href=false class="list-item list-item--short" }}
           {{link-to 'All Streams' 'stream' class="inherit" preventDefault=false}}
