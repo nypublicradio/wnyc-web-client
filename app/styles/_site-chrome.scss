@@ -65,6 +65,7 @@
 
   @include mq($large-only) {
     margin-bottom: 24px;
+    padding-right: 10px;
     width: auto;
     a, button,
     a:hover, button:hover {
@@ -83,6 +84,20 @@
       @include mq($small-only) {
         margin-right: 75px !important;
       }
+  }
+
+  .stream-launcher {
+    width: 100%;
+    text-align: right;
+
+    .listen-ui {
+      width: 24px;
+    }
+
+    span {
+      display: inline-block;
+      margin-left: 4px;
+    }
   }
 
   //override legacy alignright style from screen.css

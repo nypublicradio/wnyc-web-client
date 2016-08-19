@@ -1,18 +1,11 @@
 <li class="list-item list-item--short">
-  {{#holygrail-layout as |g|}}
-
-    {{#g.left}}
-      {{listen-button
-        type='white-hollow-small'
-        state=(if (eq 'wnyc-fm939' audio.currentAudio.id) audio.playState)
-        itemPK='wnyc-fm939'
-        itemTitle='WNYC 93.9 FM'
-        playContext='nav'}}
-    {{/g.left}}
-
-    {{#g.right}}
-      {{link-to 'Listen Live' 'stream' class="inherit" preventDefault=false}}
-    {{/g.right}}
-
-  {{/holygrail-layout}}
+  {{#listen-button
+    type=(if isHomepage 'white-hollow-small' 'red-hollow-small')
+    state=(if (eq 'wnyc-fm939' audio.currentAudio.id) audio.playState)
+    itemPK='wnyc-fm939'
+    itemTitle='WNYC 93.9 FM'
+    playContext='nav'
+    class='stream-launcher text--spacing text--semi'}}
+    <span>Listen Live</span>
+  {{/listen-button}}
 </li>

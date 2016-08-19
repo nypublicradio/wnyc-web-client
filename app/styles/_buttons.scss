@@ -957,6 +957,15 @@
   }
 }
 
+@mixin red-listen-spinner {
+  .listen-spinner {
+    @include spinner(
+      $primary: rgba(white, 0),
+      $accent: $red
+    );
+  }
+}
+
 // Listen Buttons
 
 .listen-button {
@@ -1041,11 +1050,33 @@
     @include transparent-listen-spinner;
 
     &:hover .listen-ui,
-    &:focus .listen-ui {
+    &:focus .listen-ui,
+    &:active .listen-ui {
       @include svg-color(#ccc);
     }
+  }
+
+  &.red-hollow-small {
+    @include btn-size(24px);
+
+    @include red-listen-spinner;
+
+    svg .outer {
+      fill: rgba($lightgray, 0.2);
+    }
+    svg .inner {
+      fill: $red;
+    }
+
+    &:hover .listen-ui,
+    &:focus .listen-ui,
     &:active .listen-ui {
-      @include blue-svg;
+      svg .outer {
+        fill: rgba($darkgray, 0.3);
+      }
+      svg .inner {
+        fill: $darkred;
+      }
     }
   }
 
