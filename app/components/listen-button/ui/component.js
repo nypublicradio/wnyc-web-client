@@ -2,28 +2,22 @@ import Component from 'ember-component';
 import computed from 'ember-computed';
 import get from 'ember-metal/get';
 
+const ICON_SUFFIXES = {
+  'blue-hollow':  '-circle',
+  'white-hollow': '-circle',
+  'white-hollow-small': '-hollow-small',
+  'red-hollow-small':   '-hollow-small'
+};
+
 export default Component.extend({
   classNames: ['listen-ui'],
-  wideTypes: ['blue-boss', 'blue-minion', 'blue-circle', 'red-minion', 'gray-minion'],
-  roundTypes: ['blue-hollow', 'white-hollow'],
-  playIcon: computed('type', function() {
-    let type = get(this, 'type');
-    if (get(this, 'wideTypes').includes(type)) {
-      return 'play';
-    } else if (get(this, 'roundTypes').includes(type)) {
-      return 'play-circle';
-    } else {
-      return 'play-hollow';
-    }
+  iconSuffix: computed('type', function() {
+    return ICON_SUFFIXES[get(this, 'type')] || '';
   }),
-  pauseIcon: computed('type', function() {
-    let type = get(this, 'type');
-    if (get(this, 'wideTypes').includes(type)) {
-      return 'pause';
-    } else if (get(this, 'roundTypes').includes(type)) {
-      return 'pause-circle';
-    } else {
-      return 'pause-hollow';
-    }
+  playIcon: computed('iconSuffix', function() {
+    return `play${get(this, 'iconSuffix')}`;
+  }),
+  pauseIcon: computed('iconSuffix', function() {
+    return `pause${get(this, 'iconSuffix')}`;
   })
 });
