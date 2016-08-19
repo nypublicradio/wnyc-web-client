@@ -40,16 +40,6 @@
 .l-page-nav {
   position: relative;
 
-  @include mq($large-and-up) {
-    position: fixed;
-    z-index: $zIndex--fixedNav;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 144px;
-    padding-bottom: 117px;
-  }
-
   @include mq($short-only) {
     > .scrollable-body {
 

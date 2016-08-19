@@ -61,13 +61,20 @@
   }
   
   @include mq($medium-and-up) {
+    position: fixed;
     width: 166px;
+    left: 0;
+    height: 100%;
+    padding-bottom: 117px;
   }
 
   @include mq($large-only) {
     margin-bottom: 24px;
-    padding-right: 10px;
-    width: auto;
+    //width: auto;
+    a, button,
+    a:hover, button:hover {
+      color: white;
+    }
     .list-item.active a {
       opacity: 1;
       color: $darkerred;
