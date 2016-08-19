@@ -7,13 +7,8 @@ export default Component.extend({
   audio: service(),
   store: service(),
   tagName: '',
-  slug: null,
-  stream: computed('slug', function() {
-    let slug = get(this, 'slug');
-    if (slug) {
-      return get(this, 'store').findRecord('stream', slug);
-    }
-  }),
+  slug: '',
+  name: '',
   actions: {
     listenLive(slug) {
       get(this, 'audio').playStream(slug);

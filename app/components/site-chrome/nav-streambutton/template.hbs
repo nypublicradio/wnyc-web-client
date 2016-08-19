@@ -1,15 +1,13 @@
-{{#if stream}}
-  {{#if media.isLargeAndUp}}
-    {{#listen-button
-      type=buttonType
-      state=(if (eq slug audio.currentAudio.id) audio.playState)
-      itemPK=slug
-      itemTitle=stream.name
-      playContext='nav'
-      class=buttonClasses}}
-      <span>Listen Live</span>
-    {{/listen-button}}
-  {{else}}
-    <button {{action 'listenLive' slug}} class="inherit" href>Listen Live</button>
-  {{/if}}
+{{#if media.isLargeAndUp}}
+  {{#listen-button
+    type=buttonType
+    state=(if (eq slug audio.currentAudio.id) audio.playState)
+    itemPK=slug
+    itemTitle=name
+    playContext='nav'
+    class=buttonClasses}}
+    <span>Listen Live</span>
+  {{/listen-button}}
+{{else}}
+  <button {{action 'listenLive' slug}} class="inherit" href title="Listen to {{name}}">Listen Live</button>
 {{/if}}
