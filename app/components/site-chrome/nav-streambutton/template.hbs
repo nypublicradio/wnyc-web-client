@@ -1,11 +1,13 @@
-<li class="list-item list-item--short">
+{{#if media.isLargeAndUp}}
   {{#listen-button
     type=(if isHomepage 'white-hollow-small' 'red-hollow-small')
     state=(if (eq 'wnyc-fm939' audio.currentAudio.id) audio.playState)
-    itemPK='wnyc-fm939'
+    itemPK=stationSlug
     itemTitle='WNYC 93.9 FM'
     playContext='nav'
     class='stream-launcher text--spacing text--semi'}}
     <span>Listen Live</span>
   {{/listen-button}}
-</li>
+{{else}}
+  <button {{action 'listenLive' stationSlug}} class="inherit" href>Listen Live</button>
+{{/if}}

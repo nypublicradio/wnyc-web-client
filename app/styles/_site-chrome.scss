@@ -52,11 +52,9 @@
   width: 166px;
 
   a, button {
-    color: $darkestgray;
-  }
-
-  a {
     font-family: 'Museo Sans Rounded', 'Open Sans', sans-serif;
+    letter-spacing: 2px;
+    color: $darkestgray;
   }
 
   a:hover, button:hover {

@@ -84,13 +84,7 @@
 
       <ul class="list list--noborder flush text--spacing text--semi {{unless media.isLargeAndUp 'list--inline list--spaced text--small' 'alignright text--medium '}}">
 
-        {{#if media.isLargeAndUp}}
-          {{partial 'components/site-chrome/nav-streambutton'}}
-        {{else}}
-          {{#link-to 'stream' tagName='li' href=false class="list-item list-item--short" }}
-            {{link-to 'Listen Live' 'stream' class="inherit" preventDefault=false}}
-          {{/link-to}}
-        {{/if}}
+        {{site-chrome.nav-streambutton}}
 
         {{#link-to 'stream' tagName='li' href=false class="list-item list-item--short" }}
           {{link-to 'All Streams' 'stream' class="inherit" preventDefault=false}}
