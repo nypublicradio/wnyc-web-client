@@ -105,11 +105,13 @@ export default DS.JSONAPISerializer.extend({
         jsonData.attributes.currentPlaylistItem = {};
         this._copyCamelizedKeys(whatsOn.current_playlist_item, jsonData.attributes.currentPlaylistItem);
       }
-      jsonData.attributes.future = [];
-      whatsOn.future.forEach((playlistItem, index) => {
-        jsonData.attributes.future[index] = {};
-        this._copyCamelizedKeys(playlistItem, jsonData.attributes.future[index]);
-      });
+      if (whatsOn.future) {
+        jsonData.attributes.future = [];
+        whatsOn.future.forEach((playlistItem, index) => {
+          jsonData.attributes.future[index] = {};
+          this._copyCamelizedKeys(playlistItem, jsonData.attributes.future[index]);
+        });
+      }
     }
     return jsonData;
   }
