@@ -3,11 +3,11 @@
 
   > h1 {
     margin: 0;
-    
+
     > a:hover {
       opacity: 1;
     }
-    
+
   }
 
   .icon--wnyc-logo-nav #wnyc-logo{
@@ -54,11 +54,11 @@
   a, button {
     color: $darkestgray;
   }
-  
+
   a {
-    font-family: 'Museo Sans Rounded', 'Open Sans', sans-serif;; 
+    font-family: 'Museo Sans Rounded', 'Open Sans', sans-serif;
   }
-  
+
   a:hover, button:hover {
     opacity: 0.8;
   }
@@ -78,10 +78,10 @@
       padding-left: 0;
     }
   }
-  
+
   .list-item:last-child {
       @include mq($small-only) {
-        margin-right: 75px !important;              
+        margin-right: 75px !important;
       }
   }
 
@@ -240,10 +240,10 @@
   color: white;
   border: none;
   padding: 2px 18px 2px 18px;
-  background: transparent;
+  background: $red;
   white-space:nowrap;
-  
-  @include fontsize(16);
+
+  @include fontsize(14);
   line-height: 30px;
   letter-spacing: 2px;
 
