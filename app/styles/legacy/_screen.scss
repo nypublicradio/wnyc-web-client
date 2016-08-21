@@ -3661,6 +3661,22 @@ form.filters #decimal label {
 
 /* Calendar */
 
+@media screen and (max-width: 800px) {
+  .primary_event {
+    padding: 15px 0;
+    border-bottom: 1px solid $lightestgray;
+    
+    .mediumimage {
+      display: none;
+    }
+    
+    .text-right {
+      float: left;
+      width: auto;
+    }
+  }
+}
+
 #event-calendar {
   margin: 0px;
   padding: 30px 0px 0px 0px;
