@@ -763,15 +763,74 @@ table#show-number-archive {
 .bigbox_ad p,
 .littlebox_ad p {
   text-align: center;
-  color: #bbb;
-  text-transform:uppercase;
-  margin-bottom: 5px;
-  font-size: 8px;
+  color: $lightgray;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 5px 0;
+  font-size: 12px;
 }
 
 .ad_container {
   text-align: center;
 }
+
+/* horizontal tablet */
+@media screen and (min-width: 1024px) and (max-width: 1256px) {
+  #wnyc-home-sidebar-top, .sideblock.bigbox_ad {
+    float: none !important;
+    margin: 1.3em auto;
+    width: 300px;
+    display: block !important;
+  }
+  .top-stories {
+    width: 100% !important;
+    float: none;
+    overflow: auto;
+  }
+  #home-secondary li {
+    width: 48%;
+  }
+  .bucket li, 
+  #damost ol li {
+    width: 30%;
+  }
+  #home_bigbox2_bg {
+    display: block;
+    margin: 1em auto;
+    clear: both;
+  }
+}
+
+/* Wider than standard desktop size */
+@media screen and (min-width: 1140px) {
+
+  #wnyc_home,
+  #header-inner,
+  #footer-inner,
+  #site {
+    width: 100%;
+  }
+  
+  #home-primary h2 {
+    font-size: 24px;
+    line-height: 31px;
+  }
+
+  #header_nav_right li {
+    float: right;
+  }
+
+  #header_container #header_login {
+    margin-top: 3em;
+    margin-right: 1.4em;
+  }
+
+  #home-secondary li {
+    margin-right: 20px;
+  }
+
+}
+
 
 /*blocks*/
 
