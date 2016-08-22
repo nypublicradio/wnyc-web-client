@@ -1116,7 +1116,9 @@
     }
 
     .icon--pause,
-    .listen-spinner {
+    .listen-spinner,
+    .listen-spinner:after,
+    .listen-spinner:before {
       opacity: 0;
     }
   }
@@ -1124,7 +1126,9 @@
   &.is-loading .listen-ui {
     width: 100%;
 
-    .listen-spinner {
+    .listen-spinner,
+    .listen-spinner:after,
+    .listen-spinner:before {
       opacity: 1;
     }
 
@@ -1142,12 +1146,16 @@
     }
 
     .icon--play,
-    .listen-spinner {
+    .listen-spinner,
+    .listen-spinner:after,
+    .listen-spinner:before {
       opacity: 0;
     }
   }
 
-  .listen-spinner {
+  .listen-spinner,
+  .listen-spinner:after,
+  .listen-spinner:before {
     display: inline-block;
     @include transition(opacity 150ms ease);
   }
