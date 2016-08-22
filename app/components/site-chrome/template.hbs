@@ -114,8 +114,8 @@
 
         {{#unless media.isLargeAndUp}}
 
-          {{#link-to 'djangorendered' 'search' tagName='li' href="false" class="list-item list-item--short" }}
-            {{link-to 'Search' 'djangorendered' 'search' class="inherit" preventDefault=false}}
+          {{#link-to 'djangorendered' 'search/' tagName='li' href="false" class="list-item list-item--short" }}
+            {{link-to 'Search' 'djangorendered' 'search/' class="inherit" preventDefault=false}}
           {{/link-to}}
 
           {{#if session.isAuthenticated}}
