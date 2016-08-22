@@ -1052,7 +1052,7 @@
     &:hover .listen-ui,
     &:focus .listen-ui,
     &:active .listen-ui {
-      @include svg-color(#ccc);
+      opacity: 0.8;
     }
   }
 
@@ -1072,10 +1072,10 @@
     &:focus .listen-ui,
     &:active .listen-ui {
       svg .outer {
-        fill: rgba($darkgray, 0.3);
+        fill: rgba($lightgray, 0.16);
       }
       svg .inner {
-        fill: $darkred;
+        fill: rgba($red, 0.8);
       }
     }
   }
