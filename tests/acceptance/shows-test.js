@@ -55,10 +55,10 @@ test('searching with no results /shows', function(assert) {
   visit('/shows');
   fillIn(".shows-search .searchbox input", "Nonsense Message");
   keyEvent('.shows-search .searchbox input', 'keyup', 13);
-  
+
   //show the no results found message
-  andThen(function() {  
-    assert.equal(this.$(".shows-list").text().trim(), 'no results found', "No results message displays");
+  andThen(function() {
+    assert.equal(this.$(".shows-list").text().trim(), "Sorry, but no matching shows were found. Try a different spelling or other words in the title of the show you're looking for. If you're looking for something other than a show name, try our sitewide search.", "No results message displays");
   });
 
 });
