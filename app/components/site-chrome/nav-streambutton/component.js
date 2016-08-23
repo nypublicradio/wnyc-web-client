@@ -4,7 +4,6 @@ import service from 'ember-service/inject';
 
 export default Component.extend({
   audio: service(),
-  store: service(),
   tagName: '',
   slug: '',
   name: '',
