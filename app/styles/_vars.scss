@@ -311,9 +311,11 @@ $middle-middle-and-up: "(min-width: #{$middle-middle}px)";
 
 $narrow-only: "(max-width: #{$narrow - 1}px)";
 $middle-narrow-only: "(max-width: #{$middle-narrow - 1}px)";
-$large-only: "(max-width: #{$large - 1}px)";
+$large-only: "(min-width: #{$medium}px) and (max-width: #{$large - 1}px)";
 $small-only: "(max-width: #{$medium - 1}px)";
 $medium-only: "(max-width: #{$large - 1}px)";
+
+$up-to-large: "(max-width: #{$large - 1}px)";
 
 $ipad-only: "(min-device-width : 768px) and (max-device-width : 1024px)";
 
