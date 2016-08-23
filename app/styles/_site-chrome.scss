@@ -60,7 +60,7 @@
     opacity: 0.8;
   }
   
-  @include mq($medium-and-up) {
+  @include mq($large-and-up) {
     position: fixed;
     width: 166px;
     left: 0;
