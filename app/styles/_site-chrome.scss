@@ -22,16 +22,16 @@
 }
 
 .sitechrome-top {
-  //height: 64px;
   padding-top: 20px;
-  background: #FFF;
   @extend %vertical-rhythm;
+  background: $red;
 
-  @include mq($large-only) {
+  @include mq($up-to-large) {
     margin-bottom: 0;
-    background: $red;
   }
+  
   @include mq($large-and-up) {
+    background: white;
     padding-top: 0;
     height: 83px;
   }
@@ -46,11 +46,13 @@
   position: sticky;
   top: 0;
   z-index: $zIndex--fixedNav;
-
-  a, button {
-    font-family: 'Museo Sans Rounded', 'Open Sans', sans-serif;
+  margin-bottom: 24px;
+  
+  a,
+  button {
+    color: white;
     letter-spacing: 2px;
-    color: $darkestgray;
+    font-family: 'Museo Sans Rounded', 'Open Sans', sans-serif;; 
   }
 
   a:hover,
@@ -60,27 +62,21 @@
     opacity: 0.8;
   }
   
+  .list-item.active a {
+    opacity: 1;
+    border-bottom: 1px solid white;
+  }
+  
   @include mq($large-and-up) {
     position: fixed;
     width: 166px;
     left: 0;
     height: 100%;
     padding-bottom: 117px;
-  }
 
-  @include mq($large-only) {
-    margin-bottom: 24px;
-    //width: auto;
-    a, button,
-    a:hover, button:hover {
-      color: white;
-    }
-    .list-item.active a {
-      opacity: 1;
-      color: $darkerred;
-    }
-    .box {
-      padding-left: 0;
+    a,
+    button {
+      color: $darkestgray;
     }
   }
 
@@ -112,11 +108,12 @@
 
   &.nav--homepage {
     background-color: $red;
-
-    a, button,
-    a:hover, button:hover,
-    a:focus, button:focus {
-      color: white;
+    
+    @include mq($large-and-up) {
+      a,
+      button {
+        color: white;
+      }
     }
   }
 
@@ -251,8 +248,7 @@
   display: inline-block;
   border-radius: 25px;
   color: white;
-  border: none;
-  font-weight: 600;
+  border: 2px solid white;
   padding: 2px 18px 2px 18px;
   background: $red;
   white-space: nowrap;
