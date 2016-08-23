@@ -562,6 +562,11 @@
             background-repeat: no-repeat;
             @include filter(blur(4px));
             @include rotateX(180deg);
+            @include edgeOnly {
+              // Don't blur image on Edge because of this issue:
+              // http://stackoverflow.com/questions/35727233/filter-blur-not-working-on-ms-edge
+              @include filter(none);
+            }
         }
     }
 

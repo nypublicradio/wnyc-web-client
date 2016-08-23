@@ -47,3 +47,10 @@ $bottom: 0px
     transform-origin: 50% 50%;
   }
 }
+
+@mixin edgeOnly {
+  // https://jeffclayton.wordpress.com/2015/04/07/css-hacks-for-windows-10-and-spartan-browser-preview/
+  @supports (-ms-ime-align:auto) {
+     @content;
+  }
+}
