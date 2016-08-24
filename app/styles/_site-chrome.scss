@@ -57,7 +57,10 @@
     color: $darkestgray;
   }
 
-  a:hover, button:hover {
+  a:hover,
+  button:hover,
+  a:focus,
+  button:focus {
     opacity: 0.8;
   }
 
@@ -65,10 +68,6 @@
     margin-bottom: 24px;
     padding-right: 10px;
     width: auto;
-    a, button,
-    a:hover, button:hover {
-      color: white;
-    }
     .list-item.active a {
       opacity: 1;
       border-bottom: 1px solid white;
@@ -279,6 +278,6 @@
 
   &:hover,
   &:focus {
-    background: rgba($red, 0.9);
+    background: rgba($red, 0.8);
   }
 }
