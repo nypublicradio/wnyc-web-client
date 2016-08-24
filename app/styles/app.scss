@@ -3,7 +3,7 @@
 //
 
 // hide everything not ember so we can control the UI over the alien DOM
-body:not(.simplified_wrapper):not(.container_stripped) > :not(
+body > :not(
   .ember-view,
   #qunit, // except for testing
   #qunit-fixture,

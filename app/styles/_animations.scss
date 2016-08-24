@@ -19,7 +19,7 @@ body {
 }
 
 #js-listings,
-body:not(.ember-application):not([data-testing]):not(.simplified_wrapper):not(.container_stripped),
+body:not(.ember-application),
 .loading-page,
 .loading-spinner {
   @include spinner;
