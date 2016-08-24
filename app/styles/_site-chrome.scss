@@ -114,7 +114,10 @@
   &.nav--homepage {
     border-right: 1px solid $red;
     background-color: $red;
-    a, button {
+
+    a, button,
+    a:hover, button:hover,
+    a:focus, button:focus {
       color: white;
     }
   }
@@ -271,7 +274,8 @@
 
   @include mq($large-only) {
     border: 2px solid white;
-    &:hover,&:focus {
+    &:hover,
+    &:focus {
       border-color: rgba(white, 0.5);
     }
   }
@@ -279,5 +283,6 @@
   &:hover,
   &:focus {
     background: rgba($red, 0.8);
+    border: 0;
   }
 }
