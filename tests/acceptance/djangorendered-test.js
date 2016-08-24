@@ -206,36 +206,3 @@ test('deferred scripts embedded within content do not run twice', function(asser
     assert.equal(find('section.text p').length, 1, 'should only be one p tag');
   });
 });
-
-moduleForAcceptance('Acceptance | Django Rendered | Beta Trial', {
-  beforeEach() {
-    window.onbeforeunload = escapeNavigation;
-    config.betaTrials.active = true;
-    config.betaTrials.preBeta = true;
-  },
-  afterEach() {
-    window.onbeforeunload = undefined;
-    resetHTML();
-  }
-});
-
-skip('alien doms with beta trials keep the beta bar if it has not been dismissed', function(assert) {
-  plantBetaTrial();
-
-  withFeature('django-page-routing');
-  let djangoHTML = `<a href="${wnycURL}/foo" id="link">click me</a>`;
-  let page = server.create('django-page', {testMarkup: djangoHTML});
-  server.create('django-page', {id: 'foo/'});
-
-  djangoPage
-    .bootstrap(page)
-    .visit(page)
-    .alienClick('#link');
-
-  andThen(() => {
-    assert.equal(currentURL(), '/foo');
-  });
-  andThen(() => {
-    assert.ok(Ember.$('[data-test-selector=beta-tease]').length, 'beta trial tease is visible afer transition');
-  });
-});

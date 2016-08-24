@@ -34,7 +34,7 @@
 ul.schedule-dates {
   border-top: 1px solid $nearwhite;
   border-bottom: 1px solid $nearwhite;
-  padding: 10px 0;
+  padding: 10px 0 5px 0 !important;
     
   li.yesterday,
   li.tomorrow {
@@ -184,7 +184,7 @@ ul.schedule-table {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between; 
-    padding: 0;
+    padding: 10px 0;
     
     li.yesterday,
     li.tomorrow,
