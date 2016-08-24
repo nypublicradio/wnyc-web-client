@@ -70,7 +70,7 @@
     width: auto;
     .list-item.active a {
       opacity: 1;
-      border-bottom: 1px solid white;
+      color: $darkerred;
     }
     .box {
       padding-left: 0;
@@ -254,9 +254,10 @@
   border-radius: 25px;
   color: white;
   border: none;
+  font-weight: 600;
   padding: 2px 18px 2px 18px;
   background: $red;
-  white-space:nowrap;
+  white-space: nowrap;
 
   @include fontsize(14);
   line-height: 30px;
@@ -270,19 +271,12 @@
 
   @include mq($large-and-up) {
     line-height: 36px;
+    border: 0;
   }
 
   &:hover,
   &:focus {
-    background: rgba($red, 0.9);
+    background: rgba($red, 0.8);
     border-color: rgba(white, 0.5);
-  }
-
-  @include mq($large-and-up) {
-    border: 0;
-    &:hover,
-    &:focus {
-      background: rgba($red, 0.8);
-    }
   }
 }
