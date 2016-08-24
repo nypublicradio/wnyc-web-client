@@ -272,17 +272,18 @@
     line-height: 36px;
   }
 
-  @include mq($large-only) {
-    border: 2px solid white;
-    &:hover,
-    &:focus {
-      border-color: rgba(white, 0.5);
-    }
-  }
-
   &:hover,
   &:focus {
     background: rgba($red, 0.8);
     border: 0;
+  }
+
+  @include mq($large-only) {
+    border: 2px solid white;
+    &:hover,
+    &:focus {
+      background: rgba($red, 0.9);
+      border-color: rgba(white, 0.5);
+    }
   }
 }
