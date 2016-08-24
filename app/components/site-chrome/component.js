@@ -1,11 +1,13 @@
 import Component from 'ember-component';
 import service from 'ember-service/inject';
 import BetaActionsMixin from 'overhaul/mixins/beta-actions';
+import config from 'overhaul/config/environment';
 
 export default Component.extend(BetaActionsMixin, {
   session: service(),
   metrics: service(),
   router: service('wnyc-routing'),
+  donateURL: config.wnycDonateURL,
  
   click: function({target}){
     if (target.tagName === "A"){
