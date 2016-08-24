@@ -274,16 +274,15 @@
 
   &:hover,
   &:focus {
-    background: rgba($red, 0.8);
-    border: 0;
+    background: rgba($red, 0.9);
+    border-color: rgba(white, 0.5);
   }
 
-  @include mq($large-only) {
-    border: 2px solid white;
+  @include mq($large-and-up) {
+    border: 0;
     &:hover,
     &:focus {
-      background: rgba($red, 0.9);
-      border-color: rgba(white, 0.5);
+      background: rgba($red, 0.8);
     }
   }
 }
