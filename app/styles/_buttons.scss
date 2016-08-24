@@ -904,7 +904,6 @@
 @mixin btn-minion-hollow {
   @include btn-wide;
   @include btn--large;
-  @include btn--smalltext;
   @include thickbtn;
 
   .listen-ui {
@@ -1160,4 +1159,3 @@
     @include transition(opacity 150ms ease);
   }
 }
-
