@@ -9,7 +9,7 @@
   {{#g.left}}
     {{persistent-player.left
       playState=audio.playState
-      currentTitle=(or currentAudio.currentStory.title currentAudio.title)
+      currentTitle=(or currentAudio.title (concat currentAudio.currentShow.showTitle ' on ' currentAudio.name))
       playOrPause=(action 'playOrPause')
       rewind=(action 'rewind')
       fastForward=(action 'fastForward')}}

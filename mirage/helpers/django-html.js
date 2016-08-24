@@ -401,7 +401,7 @@ var HTML = `<html>
       <div class="l-full">
       <div class="l-constrained">
           <div id="stream_launch_widget">
-    <button id="popup-btn" class="js-popup-btn" aria-label="Launch the popup player." tabindex="0" data-category="Listen">
+    <button id="popup-btn" class="js-popup-btn" aria-label="Launch the live stream player." tabindex="0" data-category="Listen">
       <div class="icon"></div>
       <span class="popup-btn-label">Listen</span>
     </button>
