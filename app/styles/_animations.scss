@@ -1,4 +1,4 @@
-body:not(.ember-application),
+body:not(.ember-application):not([data-testing]):not(.simplified_wrapper):not(.container_stripped),
 .loading-page {
   width: 100%;
   min-height: 100vh;
