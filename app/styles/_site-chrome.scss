@@ -52,7 +52,7 @@
   button {
     color: white;
     letter-spacing: 2px;
-    font-family: 'Museo Sans Rounded', 'Open Sans', sans-serif;; 
+    font-family: 'Museo Sans Rounded', 'Open Sans', sans-serif;
   }
 
   a:hover,
@@ -73,11 +73,17 @@
     left: 0;
     height: 100%;
     padding-bottom: 117px;
+    border-right: 1px solid $lightestgray;
 
     a,
-    button {
+    button,
+    a:hover,
+    button:hover,
+    a:focus,
+    button:focus {
       color: $darkestgray;
     }
+  
   }
 
   .list-item:last-child {
@@ -110,8 +116,14 @@
     background-color: $red;
     
     @include mq($large-and-up) {
+      border-color: $red;
+      
       a,
-      button {
+      button,
+      a:focus,
+      button:focus,
+      a:hover,
+      button:hover {
         color: white;
       }
     }
