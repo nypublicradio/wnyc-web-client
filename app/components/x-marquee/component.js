@@ -14,9 +14,6 @@ export default Component.extend({
     let urlString = imageTemplate([marquee.template, 1200,  200, marquee.crop, 99]);
 
     set(this, 'marqueeImageCSS', htmlSafe(`background: url(${urlString}) no-repeat center center ${bgColor};`));
-    set(this, 'marqueeGradientCSS', htmlSafe(
-      `background-image: -webkit-radial-gradient(rgba(255, 255, 255,0) 200px, ${bgColor} 620px);
-       background-image: radial-gradient(rgba(255, 255, 255,0) 200px, ${bgColor} 620px);`
-    ));
+    set(this, 'marqueeGradientCSS', htmlSafe(`background-image: radial-gradient(rgba(255, 255, 255,0) 200px, ${bgColor} 620px);`));
   }
 });
