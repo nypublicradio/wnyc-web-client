@@ -5,7 +5,7 @@ moduleForComponent('stream-banner', 'Integration | Component | stream banner', {
   integration: true
 });
 
-// TODO: use mirage for this
+// TODO: use mirage for this?
 const dummyStreamShowWithEpisode = {
   id:   "slug",
   slug: "slug",
