@@ -1,26 +1,28 @@
-{{#if media.isSmallOnly}}
-  <h4 class="streambanner-header bucket-title">ON AIR NOW</h4>
-  <div class="streambanner-card">
-    <h2 class="streambanner-title">
-      {{#if stream.name}}
-        <span class="streambanner-station">{{showTitle}}</span>
-         on
-        <span class="streambanner-station">{{stream.name}}</span>
-      {{/if}}
-    </h2>
-    <div class="streambanner-episode">
+<h4 class="streambanner-header bucket-title">ON AIR NOW</h4>
+<div class="streambanner-card">
+  <h2 class="streambanner-title">
+    {{#if stream.name}}
+      <span class="streambanner-station">{{showTitle}}</span>
+       on
+      <span class="streambanner-station">{{stream.name}}</span>
+    {{/if}}
+  </h2>
+  <div class="streambanner-details">
+    {{#if currentSong}}
+      {{song-metadata currentSong}}
+    {{else}}
       {{episodeTitle}}
-    </div>
-    <div class="streambanner-controls">
-      {{#listen-button
-        class='streambanner-listenbutton'
-        type='red-minion'
-        state=(if (eq slug audio.currentAudio.id) audio.playState)
-        itemPK=slug
-        itemTitle=stream.name}}
-        Listen Live
-      {{/listen-button}}
-      <a class="streambanner-link" href="/streams">All Live Streams »</a>
-    </div>
+    {{/if}}
   </div>
-{{/if}}
+  <div class="streambanner-controls">
+    {{#listen-button
+      class='streambanner-listenbutton'
+      type='red-minion'
+      state=(if (eq slug audio.currentAudio.id) audio.playState)
+      itemPK=slug
+      itemTitle=stream.name}}
+      Listen Live
+    {{/listen-button}}
+    <a class="streambanner-link" href="/streams">All Live Streams »</a>
+  </div>
+</div>

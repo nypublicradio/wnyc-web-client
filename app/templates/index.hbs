@@ -1,7 +1,9 @@
 {{#django-page page=model.page}}
 
-  {{#ember-wormhole to='stream-banner'}}
-    {{stream-banner stream=model.featuredStream}}
-  {{/ember-wormhole}}
+  {{#if media.isSmallOnly}}
+    {{#ember-wormhole to='stream-banner'}}
+      {{stream-banner stream=model.featuredStream}}
+    {{/ember-wormhole}}
+  {{/if}}
 
 {{/django-page}}

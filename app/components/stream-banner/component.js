@@ -4,9 +4,9 @@ import { readOnly } from 'ember-computed';
 
 export default Component.extend({
   audio: service(),
-  store: service(),
   stream: null,
   slug: readOnly('stream.slug'),
-  showTitle: readOnly('stream.currentShow.title'),
-  episodeTitle: readOnly('stream.currentShow.episodeTitle')
+  showTitle: readOnly('stream.currentShow.showTitle'),
+  episodeTitle: readOnly('stream.currentShow.episodeTitle'),
+  currentSong: readOnly('stream.currentPlaylistItem.catalogEntry')
 });
