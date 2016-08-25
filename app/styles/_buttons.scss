@@ -878,10 +878,10 @@
 
   .listen-ui {
     width: 18px;
-    margin-right: 4px;
+    margin-right: 2px;
 
     > svg {
-      width: 18px;
+      width: 13px;
     }
   }
 }
@@ -897,7 +897,9 @@
   @include btn-wide;
 
   .listen-ui {
-    @include scale(0.6, 0.6);
+    @include scale(0.8, 0.8);
+    
+    margin-right: 0px;
   }
 }
 
