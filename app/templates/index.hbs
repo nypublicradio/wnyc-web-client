@@ -1,7 +1,7 @@
-{{#django-page page=model}}
+{{#django-page page=model.page}}
 
   {{#ember-wormhole to='stream-banner'}}
-    {{stream-banner slug='wnyc-fm939'}}
+    {{stream-banner stream=model.featuredStream}}
   {{/ember-wormhole}}
 
 {{/django-page}}
