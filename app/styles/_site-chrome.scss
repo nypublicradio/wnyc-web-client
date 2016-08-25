@@ -54,17 +54,25 @@
     letter-spacing: 2px;
     font-family: 'Museo Sans Rounded', 'Open Sans', sans-serif;
   }
+  
+  a {
+    padding-bottom: 10px
+  }
 
   a:hover,
   button:hover,
   a:focus,
   button:focus {
     opacity: 0.8;
+    color: white;
   }
   
   .list-item.active a {
     opacity: 1;
-    border-bottom: 1px solid white;
+    
+    @include mq($medium-only) {
+      border-bottom: 4px solid $red;
+    }
   }
   
   @include mq($large-and-up) {
@@ -74,6 +82,10 @@
     height: 100%;
     padding-bottom: 117px;
     border-right: 1px solid $lightestgray;
+    
+    a {
+      padding-bottom: 0;
+    }
 
     a,
     button,
