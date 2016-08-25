@@ -12,6 +12,9 @@
     "normalize.css": "3.0.3",
     "raven-js": "~2.1",
     "SoundManager2": "soundmanager2#*",
-    "waypoints": "~4.0.0"
+    "howler.js": "^2.0.0",
+    "soundmanager": "V2.97a.20140901",
+    "ember-cli-soundmanager-shim": "^0.0.1",
+    "jquery-waypoints": "~2.0.5"
   }
 }

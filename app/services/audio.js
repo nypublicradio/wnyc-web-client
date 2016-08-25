@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import Service from 'ember-service';
 import service from 'ember-service/inject';
 import get from 'ember-metal/get';
@@ -33,22 +34,21 @@ export default Service.extend({
   listens:          service('listen-history'),
   queue:            service('listen-queue'),
   listenActions:    service(),
-  
-  /* TODO: make the low-level interface available
-  -----------------------------------------------------------*/
-   
+
+  audioPledge:      service(),
+  isReady:          computed.readOnly('audioPledge.isReady'),
+  isPlaying:        computed.readOnly('audioPledge.isPlaying'),
+  isLoading:        computed.readOnly('audioPledge.isLoading'),
+  isMuted:          computed.readOnly('audioPledge.isMuted'),
+  duration:         computed.readOnly('audioPledge.duration'),
+  position:         computed.alias('audioPledge.position'),
+  volume:           computed.alias('audioPledge.volume'),
+
   /* TODO: low-level interface needs to expose these props
-   
-  isReady:
-  position: needs a setter
-  duration:
+
   percentLoaded:
-  isMuted:
-  volume: needs a setter
-  isPlaying:
-  isLoading: needs a setter
   ------------------------------------------------------------*/
-  
+
   currentStory:     or('currentAudio.story', 'currentAudio'),
 
   bumperPlayed:     false,
@@ -97,8 +97,9 @@ export default Service.extend({
 
     /* TODO: send a pause signal to the low-level interface
     --------------------------------------------------------------*/
-    
+
     let context = get(this, 'currentContext') || '';
+    this.get('audioPledge').pause();
 
     this._trackPlayerEvent({
       action: 'Pause',
@@ -135,7 +136,7 @@ export default Service.extend({
     // Don't set to loading if already playing the item,
     // because we won't get a loaded event.
     if (get(this, 'currentId') !== id) {
-      set(this, 'isLoading', true);
+      // set(this, 'isLoading', true);
     } else {
       // if the passed in ID matches what's playing, don't fire another
       // event
@@ -153,8 +154,10 @@ export default Service.extend({
         to the audio file.
     --------------------------------------------------------------*/
 
+      return this.get('audioPledge').play(story.get('audio'));
+
     /* TODO: send a play signal to the low-level interface
-        you'll probaby wantto do it in this promise call back since 
+        you'll probaby wantto do it in this promise call back since
         the `audio` attr on the retrieved `story` instance is a URL
         to the audio file.
     --------------------------------------------------------------*/
@@ -170,17 +173,17 @@ export default Service.extend({
         // if starting the queue with an item already playing from another context,
         // replay from the start
         if (oldContext !== 'queue' && get(this, 'currentAudio.id') === id) {
-          
+
           /* TODO: send a `restart` or `set position to 0` signal to the low-level interface
           --------------------------------------------------------------------*/
-          
+
         }
       } else if (context ==='history') {
         if (get(this, 'isPlaying') && get(this, 'currentAudio.id') === id) {
-          
+
           /* TODO: send a `restart` or `set position to 0` signal to the low-level interface
           --------------------------------------------------------------------*/
-          
+
         }
       }
 
@@ -221,7 +224,7 @@ export default Service.extend({
     // Don't set to loading if already playing the item,
     // because we won't get a loaded event.
     if (get(this, 'currentId') !== slug) {
-      set(this, 'isLoading', true);
+      // set(this, 'isLoading', true);
     } else {
       // if the passed in ID matches what's playing, don't fire another
       // event
@@ -239,6 +242,20 @@ export default Service.extend({
 
       set(this, 'currentAudio', stream);
       set(this, 'currentContext', context);
+
+      let bbModel = stream.get('bbModel');
+      let {aac_streams, mobile_stream, windows_streams} = bbModel;
+      let mountPoints = {};
+      try {
+        mountPoints = Object.assign(bbModel.urls, {aac_streams, mobile_stream, windows_streams});
+      } catch(e) {}
+
+      let urls = Object.keys(mountPoints).map(k => Ember.isArray(mountPoints[k]) ? mountPoints[k][0] : mountPoints[k]);
+
+
+
+
+      return this.get('audioPledge').play(urls);
 
     /* TODO: send a play signal to the low-level interface for the given stream
     --------------------------------------------------------------*/
@@ -298,17 +315,16 @@ export default Service.extend({
 
   setPosition(percentage) {
     let position = percentage * get(this, 'duration');
-    
+
+    this.get('audioPledge').setPosition(position);
     /* TODO: send a `set position` signal to the low-level interface for the given position
     ------------------------------------------------------------------------*/
-    
+
   },
 
   rewind() {
     let currentPosition = get(this, 'position');
-    
-    /* TODO: send a `set position` signal to the low-level interface for the CURRENT position MINUS FIFTEEN SECONDS
-    ------------------------------------------------------------------------*/
+    set(this, 'position', currentPosition - FIFTEEN_SECONDS);
 
     this._trackPlayerEvent({
       action: 'Skip Fifteen Seconds Back',
@@ -318,9 +334,7 @@ export default Service.extend({
 
   fastForward() {
     let currentPosition = get(this, 'position');
-    
-    /* TODO: send a `set position` signal to the low-level interface for the CURRENT position PLUS FIFTEEN SECONDS
-    ------------------------------------------------------------------------*/
+    set(this, 'position', currentPosition + FIFTEEN_SECONDS);
 
     this._trackPlayerEvent({
       action: 'Skip Fifteen Seconds Ahead',
@@ -329,10 +343,10 @@ export default Service.extend({
   },
 
   toggleMute() {
-    
+
     /* TODO: send a `toggleMute` signal to the low-level interface
     -------------------------------------------------------------------------*/
-    
+
   },
 
 
