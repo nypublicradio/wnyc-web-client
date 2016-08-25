@@ -51,7 +51,7 @@
       </div>
     </div>
     <!-- .l-holygrail-right -->
-    {{#if isCurrent}}
+    {{#if (and isCurrent (eq playContext 'queue'))}}
       <div class="queueitem-playingicon">
         {{wnyc-svg className="icon" icon="speaker"}}
       </div>
