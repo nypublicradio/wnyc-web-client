@@ -319,9 +319,6 @@ $up-to-large: "(max-width: #{$large - 1}px)";
 
 $ipad-only: "(min-device-width : 768px) and (max-device-width : 1024px)";
 
-//needs to be replaced with $medium-and-up in partials
-$wide: "(min-width: #{$medium}px)";
-
 .narrow-only {
     @include mq($small-and-up) {
         // >= 321px

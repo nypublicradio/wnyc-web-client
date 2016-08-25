@@ -9,7 +9,7 @@
     right: 22px;
     transition: all .3s ease;
 
-    @include mq($wide) {
+    @include mq($medium-and-up) {
       right: 0;
     }
   }

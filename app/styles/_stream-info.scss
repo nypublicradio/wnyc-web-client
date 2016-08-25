@@ -3,7 +3,7 @@
   color: #000000;
   padding: 10px 0 0 0;
 
-  @include mq($wide) {
+  @include mq($medium-and-up) {
     padding: 53px 0 40px 0;
   }
 

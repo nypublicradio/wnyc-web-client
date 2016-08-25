@@ -10,7 +10,7 @@
     color: white;
     font-weight: 600;
 
-    @include mq($wide) {
+    @include mq($medium-and-up) {
       padding-bottom: 15px;
     }
 
@@ -26,7 +26,7 @@
       min-width: 153px;
       @include flex(0 1 153px);
 
-      @include mq($wide) {
+      @include mq($medium-and-up) {
         min-width: 230px;
         @include flex(0 1 230px);
       }
@@ -38,7 +38,7 @@
     .l-holygrail-right {
       min-width: 70px;
 
-      @include mq($wide) {
+      @include mq($medium-and-up) {
         min-width: 194px;
       }
     }
@@ -78,7 +78,7 @@
 
       &:hover {
         border-bottom-color: #ffffff;
-        @include mq($wide) {
+        @include mq($medium-and-up) {
           border-bottom-color: inherit;
         }
       }
@@ -86,7 +86,7 @@
   }
   .streaminfoline-stationlinks {
     display: none;
-    @include mq($wide) {
+    @include mq($medium-and-up) {
       display: inline;
     }
   }
@@ -94,7 +94,7 @@
   .sharebutton {
     display: none;
 
-    @include mq($wide) {
+    @include mq($medium-and-up) {
       display: inline-block;
       margin-left: 8px;
 
@@ -148,7 +148,7 @@
     }
   }
 
-  @include mq($wide) {
+  @include mq($medium-and-up) {
     margin: 0px;
 
     .l-holygrail-right & {
@@ -183,7 +183,7 @@ button.persistent-skipbutton {
     margin-left: 14px;
   }
 
-  @include mq($wide) {
+  @include mq($medium-and-up) {
     > .icon {
       width: 30px;
 
@@ -202,7 +202,7 @@ button.persistent-skipbutton {
   + button {
     margin-left: 15px;
 
-    @include mq($wide) {
+    @include mq($medium-and-up) {
       margin-left: 20px;
     }
   }
@@ -238,7 +238,7 @@ button.persistent-skipbutton {
 //    height: 100%;
 //  }
 //
-//  @include mq($wide) {
+//  @include mq($medium-and-up) {
 //    width: 55px;
 //    height: 55px;
 //    margin-left: 20px;
@@ -449,7 +449,7 @@ button.persistent-queuebutton.is-open-modal {
 /* Progress Bar */
 
 .persistent-progress {
-  @include mq($wide) {
+  @include mq($medium-and-up) {
     @include display-flex;
     @include align-items(center);
 
@@ -485,7 +485,7 @@ button.persistent-queuebutton.is-open-modal {
 .volume {
   display: none;
 
-  @include mq($wide) {
+  @include mq($medium-and-up) {
     @include display-flex(inline-flex);
   }
 }
@@ -523,7 +523,7 @@ button.persistent-queuebutton.is-open-modal {
     min-width: 90px;
     @include flex(0 0 90px);
 
-    @include mq($wide) {
+    @include mq($medium-and-up) {
       min-width: 95px;
       @include flex(0 0 95px);
     }
@@ -536,7 +536,7 @@ button.persistent-queuebutton.is-open-modal {
   button.persistent-playbutton {
     margin-left: 18px;
 
-    @include mq($wide) {
+    @include mq($medium-and-up) {
       margin-left: 26px;
     }
   }
@@ -554,7 +554,7 @@ button.persistent-queuebutton.is-open-modal {
   top: -40px;
   height: 40px;
   padding: 11px 13px 12px 13px;
-  @include mq($wide) {
+  @include mq($medium-and-up) {
     top: -35px;
     height: 35px;
     padding: 8px 13px 10px 13px;

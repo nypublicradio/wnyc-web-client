@@ -5,7 +5,7 @@
     max-width: calc(100% - 5px);
     overflow: hidden;
 
-    @include mq($wide) {
+    @include mq($medium-and-up) {
       max-width: calc(100% - 69px);
     }
 

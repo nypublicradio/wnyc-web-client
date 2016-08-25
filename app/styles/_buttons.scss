@@ -614,7 +614,7 @@
 }
 
 .btn-group--storyheader {
-  @include mq($wide) {
+  @include mq($medium-and-up) {
     margin-bottom: -1.5rem;
     > * {
       margin-bottom: 1.5rem;
@@ -1028,7 +1028,7 @@
 
   &.white-hollow {
     @include btn-size(48px);
-    @include mq($wide) {
+    @include mq($medium-and-up) {
       @include btn-size(55px);
     }
 

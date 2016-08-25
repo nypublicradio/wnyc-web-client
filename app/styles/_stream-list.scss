@@ -2,7 +2,7 @@
   &.l-constrained {
     padding: 0;
     overflow-x: hidden;
-    @include mq($wide) {
+    @include mq($medium-and-up) {
       padding: 0 15px;
     }
   }
@@ -10,7 +10,7 @@
 
 .streamlist-header {
   margin: 0 22px;
-  @include mq($wide) {
+  @include mq($medium-and-up) {
     margin: 35px 0 0;
     @include display-flex;
     align-items: baseline;
@@ -20,7 +20,7 @@
     font-size: 24px;
     font-weight: 600;
     margin: 0;
-    @include mq($wide) {
+    @include mq($medium-and-up) {
       font-size: 32px;
       display: inline-block;
       @include flex(1 0 auto);
@@ -29,7 +29,7 @@
   nav {
     display: block;
     margin-bottom: 21px;
-    @include mq($wide) {
+    @include mq($medium-and-up) {
       display: inline-block;
       margin-bottom: 30px;
       @include flex(1 0 auto);
@@ -68,7 +68,7 @@
 
   .streamitem {
     padding: 25px 22px 20px;
-    @include mq($wide) {
+    @include mq($medium-and-up) {
       padding: 30px 0;
     }
 
@@ -76,7 +76,7 @@
 
     .streamitem-imagelink {
       display: none;
-      @include mq($wide) {
+      @include mq($medium-and-up) {
         display: inline-block;
         align-self: center;
         margin-right: 20px;
@@ -97,7 +97,7 @@
     .l-holygrail-right {
       min-width: 67px;
       @include flex(0 0 67px);
-      @include mq($wide) {
+      @include mq($medium-and-up) {
         min-width: 170px;
         @include flex(0 0 170px);
       }
