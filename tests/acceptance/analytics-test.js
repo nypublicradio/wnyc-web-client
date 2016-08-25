@@ -1,6 +1,5 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
-import djangoPage from 'overhaul/tests/pages/django-page';
 import config from 'overhaul/config/environment';
 
 moduleForAcceptance('Acceptance | Analytics');
@@ -17,14 +16,9 @@ test('it does not log a pageview when opening the queue', function(assert) {
     return true;
   });
 
-  let home = server.create('django-page', {id: '/'});
-  djangoPage
-    .bootstrap(home)
-    .visit(home);
-  
-  andThen(() => {
-    click('.floating-queuebutton');
-  });
+  server.create('django-page', {id: '/'});
+  visit('/');
+  click('.floating-queuebutton');
 
   andThen(() => {
     assert.equal(find('.l-sliding-modal').length, 1, 'modal is open');

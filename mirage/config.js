@@ -48,10 +48,6 @@ export default function() {
     };
   });
 
-  this.post(`${config.wnycAccountRoot}/api/v1/listenaction/create/`, () => true);
-
-  this.post(`${config.wnycAccountRoot}/api/v1/listenaction/create/:pk/:action`, () => true);
-
   this.post(`${baseUrl}/api/v1/analytics/ga/`, {});
 
   /*------------------------------------------------------------
