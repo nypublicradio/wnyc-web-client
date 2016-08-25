@@ -2,7 +2,7 @@
 {{#liquid-bind activeTabIndex as |currentIndex|}}
 <ul class="list list--inline flush">
   {{#each parsedLinks as |link index|}}
-    <li class="{{if (eq index currentIndex) 'is-active '}}list-item list-item--tiny">
+    <li class="{{if (eq index currentIndex) 'is-active '}}list-item list-item--nav">
       {{#if link.navSlug}}
         <a href={{link.href}} {{action 'transition' link.navSlug index bubbles=false}} class="link link--dark link--nodecor tab-link">{{link.title}}</a>
       {{else}}
