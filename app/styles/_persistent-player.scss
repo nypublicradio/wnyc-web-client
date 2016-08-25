@@ -524,8 +524,8 @@ button.persistent-queuebutton.is-open-modal {
     @include flex(0 0 90px);
 
     @include mq($wide) {
-      min-width: 135px;
-      @include flex(0 0 135px);
+      min-width: 95px;
+      @include flex(0 0 95px);
     }
   }
 
