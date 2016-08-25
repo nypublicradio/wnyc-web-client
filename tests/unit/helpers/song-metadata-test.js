@@ -40,7 +40,7 @@ test('it works with multiple musicians', function(assert) {
       },
       instruments: ["strings"]
     }, {
-      : {
+      musician: {
         name: "musician 3"
       },
       instruments: ["percussion"]
