@@ -95,6 +95,7 @@ module.exports = function(defaults) {
   app.import('vendor/wnyc-legacy/lib/backbone/decoders/decoder.js');
   app.import('vendor/wnyc-legacy/lib/backbone/decoders/multi_file_decoder.js');
   app.import('vendor/wnyc-legacy/lib/backbone/decoders/rtmp_decoder.js');
+  app.import('vendor/wnyc-legacy/lib/backbone/decoders/icecast_decoder.js');
 
   app.import('vendor/wnyc-legacy/lib/backbone/models/sound_manager_player.js');
 
