@@ -122,7 +122,10 @@ export default Service.extend({
       withAnalytics: true
     });
 
-    this.sendPauseListenAction(this.get('currentId'));
+    if (get(this, 'currentAudio.audioType') !== 'stream') {
+      // we're not set up to handle pause listen actions from streams atm
+      this.sendPauseListenAction(this.get('currentId'));
+    }
   },
   playFromPk(id, context) {
     this._firstTimePlay();
