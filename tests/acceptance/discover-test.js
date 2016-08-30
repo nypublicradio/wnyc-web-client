@@ -15,7 +15,7 @@ moduleForAcceptance('Acceptance | discover',
   }
 );
 
-skip('can visit discover from the home page', function(assert) {
+test('can visit discover from the home page', function(assert) {
   visit('/login');
 
   andThen(function() {
@@ -379,7 +379,7 @@ test('should be able to go back to welcome screen if you really want to', functi
   });
 });
 
-skip('nav link sends you to start page', function(assert) {
+test('nav link sends you to start page', function(assert) {
   server.createList('discover-topic', 5);
   server.createList('show', 5);
   visit('/login');
