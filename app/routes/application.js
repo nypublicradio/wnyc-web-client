@@ -4,7 +4,6 @@ import config from 'overhaul/config/environment';
 import {installBridge} from '../lib/okra-bridge';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 import service from 'ember-service/inject';
-import { getUserData } from 'overhaul/authenticators/nypr';
 
 export default Route.extend(ApplicationRouteMixin, {
   metrics: service(),
@@ -24,9 +23,6 @@ export default Route.extend(ApplicationRouteMixin, {
     let metrics = get(this, 'metrics');
 
     this._syncBrowserId();
-
-    // TODO: once login is handled via ESA, this won't be necessary
-    this._checkLoggedIn();
 
     if (config.environment !== 'test') {
       metrics.identify('GoogleAnalytics', {isAuthenticated: false});
@@ -69,19 +65,12 @@ export default Route.extend(ApplicationRouteMixin, {
 
   sessionAuthenticated() {
     this._super(...arguments);
-    get(this, 'metrics').identify('GoogleAnalytics', {isAuthenticated: true});
+    if (config.environment !== 'test') {
+      get(this, 'metrics').identify('GoogleAnalytics', {isAuthenticated: true});
+    }
   },
 
   _syncBrowserId() {
     return get(this, 'session').syncBrowserId();
   },
-  _checkLoggedIn() {
-    return getUserData().then(json => {
-      if (json.isAuthenticated) {
-        this.get('session').set('data.user', json);
-      } else {
-        this.get('session').set('data.user', null);
-      }
-    });
-  }
 });
