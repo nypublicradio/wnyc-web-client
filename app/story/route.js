@@ -16,7 +16,7 @@ export default Ember.Route.extend({
         story,
         getComments: () => comments,
         getRelatedStories: () => relatedStories,
-        user: get(this, 'session.data.user'),
+        user: get(this, 'session.data.authenticated'),
         browserId: get(this, 'session.data.browserId')
       });
     });

@@ -23,7 +23,7 @@ export default Route.extend({
       return waitFor({
         page,
         channel: page.get('wnycChannel'),
-        user: this.get('session.data.user')
+        user: this.get('session.data.authenticated')
       });
     })
     .catch(e => retryFromServer(e, listingSlug.replace(/\/*$/, '/')));
