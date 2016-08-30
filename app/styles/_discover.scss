@@ -7,62 +7,69 @@
 }
 
 
-body.discover{overflow: auto; height: 100%;}
-
-body.discover .sitechrome-page-content-area {
-  margin-top:-1.5rem;
-  // TODO: Maybe, make sitechrome have no margin on the bottom and leave it
-  // up to the feature to set a padding.
-
-  min-height:80vh;
-}
-
-body.discover .discover {
-  padding:1.5rem;
-}
-
-body.discover #site-chrome {
-  background: url(/assets/img/backgrounds/pattern_grey.png) fixed;
-}
-
-body.discover.index_loading .sitechrome-page-content-area {
-  padding:0;
-}
-
-/*
-  liquid fire sets some transform properties on these elements
-  and that messes up fixed positioning by making them fixed
-  relative to the container. We need to override these and set
-  overflow hidden on the discover content area so things don't bleed.
-*/
-body.discover .liquid-container {
+body.discover {
+  overflow: auto;
   height: 100%;
+  
+  .sitechrome-page-content-area {
+    margin-top: -1.5rem;
+    // TODO: Maybe, make sitechrome have no margin on the bottom and leave it
+    // up to the feature to set a padding.
 
-  position: relative;
-  overflow: initial;
-  -webkit-transform: initial;
-  -moz-transform:    initial;
-  transform:         initial;
-  z-index:1;
+    min-height: 80vh;
+  }
+  
+  .discover {
+    padding: 1.5rem;
+  }
 
-  .liquid-child {
+  .sitechrome-top {
+    background: rgba(black, .3);
+  }
+  
+  #site-chrome {
+    background-color: $discoblue;
+  }
+  
+  >.index_loading .sitechrome-page-content-area {
+    padding: 0;
+  }
+  
+  /*
+    liquid fire sets some transform properties on these elements
+    and that messes up fixed positioning by making them fixed
+    relative to the container. We need to override these and set
+    overflow hidden on the discover content area so things don't bleed.
+  */
+  .liquid-container {
+    height: 100%;
+
+    position: relative;
+    overflow: initial;
     -webkit-transform: initial;
     -moz-transform:    initial;
     transform:         initial;
+    z-index: 1;
+
+    .liquid-child {
+      -webkit-transform: initial;
+      -moz-transform:    initial;
+      transform:         initial;
+    }
   }
-}
-
-body.discover .sitechrome-page-content-area {
-  overflow:hidden;
-}
-
-body.discover .discover-fadeable-background {
-  z-index:0;
-  opacity:0; // this is handled by liquid fire
-  width: 100%;
-  @include absolute-fill();
-  background: url(/assets/img/backgrounds/pattern_red.jpg);
-}
+  
+  .sitechrome-page-content-area {
+    overflow:hidden;
+  }
+  
+  .discover-fadeable-background {
+    z-index: 0;
+    opacity: 0; // this is handled by liquid fire
+    width: 100%;
+    @include absolute-fill();
+    background: url(/assets/img/backgrounds/pattern_red.jpg);
+  }
+}  
 
 .discover-welcome-screen {
   @include display-flex;

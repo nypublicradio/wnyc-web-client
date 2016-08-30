@@ -68,7 +68,7 @@
       top: 0;
       height: 100%;
       width: 35%;
-      @include background-image(linear-gradient(to right, rgba(141, 33, 48, 0.0), #8d2131));
+      @include background-image(linear-gradient(to right, rgba(141, 33, 48, 0.0), $rouge));
     }
   }
 }
@@ -101,8 +101,8 @@
   @extend %clearfix;
 }
 
-.l-highlight--darknavy {
-  background-color: $darknavy;
+.l-highlight--navy {
+  background-color: $navy;
   @extend %clearfix;
 }
 
