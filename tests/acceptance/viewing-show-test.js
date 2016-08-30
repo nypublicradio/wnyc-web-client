@@ -4,6 +4,7 @@ import djangoPage from 'overhaul/tests/pages/django-page';
 import showPage from 'overhaul/tests/pages/show';
 import { resetHTML } from 'overhaul/tests/helpers/html';
 import config from 'overhaul/config/environment';
+import { authenticateSession } from 'overhaul/tests/helpers/ember-simple-auth';
 
 moduleForAcceptance('Acceptance | Django Page | Show Page', {
   afterEach() {
@@ -30,6 +31,28 @@ test('smoke test', function(assert) {
     assert.equal(currentURL(), `${show.id}`);
     assert.ok(findWithAssert('.sitechrome-btn'), 'donate chunk should reset after navigating');
     assert.ok(showPage.facebookIsVisible());
+    assert.notOk(find('[data-test-selector="admin-link"]').length, 'edit link should not be visible');
+  });
+});
+
+test('authenticated smoke test', function(assert) {
+  authenticateSession(this.application, {is_staff: true});
+  let show = server.create('show', {
+    id: 'shows/foo/',
+    linkroll: [
+      {navSlug: 'episodes', title: 'Episodes'}
+    ],
+    socialLinks: [{title: 'facebook', href: 'http://facebook.com'}],
+    apiResponse: server.create('api-response', { id: 'shows/foo/episodes/1' })
+  });
+  server.create('django-page', {id: show.id});
+
+  djangoPage
+    .bootstrap(show)
+    .visit(show);
+
+  andThen(() => {
+    andThen(() => assert.ok(find('[data-test-selector="admin-link"]').length, 'edit links are visible'));
   });
 });
 

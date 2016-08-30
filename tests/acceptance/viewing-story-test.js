@@ -4,31 +4,59 @@ import djangoPage from 'overhaul/tests/pages/django-page';
 import storyPage from 'overhaul/tests/pages/story';
 import { resetHTML } from 'overhaul/tests/helpers/html';
 import config from 'overhaul/config/environment';
+import { authenticateSession } from 'overhaul/tests/helpers/ember-simple-auth';
+
 
 moduleForAcceptance('Acceptance | Django Page | Story Detail', {
-  beforeEach() {
-    this.story = server.create('story');
-    let id = `story/${this.story.slug}/`;
-    server.create('django-page', {id, slug: this.story.slug});
-
-    djangoPage
-      .bootstrap({id})
-      .visit({id});
-  },
   afterEach() {
     resetHTML();
   }
 });
 
 test('smoke test', function(assert) {
-  assert.equal(currentURL(), `story/${this.story.slug}/`);
-  assert.ok(find('.sitechrome-btn'), 'donate button should be the default');
+  let story = server.create('story');
+  let id = `story/${story.slug}/`;
+  server.create('django-page', {id, slug: story.slug});
+
+  djangoPage
+    .bootstrap({id})
+    .visit({id});
+    
+  andThen(() => {
+    assert.equal(currentURL(), `story/${story.slug}/`);
+    assert.ok(find('.sitechrome-btn'), 'donate button should be the default');
+  });
 });
 
-test('view comments', function(assert) {
+test('view comments as regular user', function(assert) {
+  let story = server.create('story');
+  let id = `story/${story.slug}/`;
+  server.create('django-page', {id, slug: story.slug});
+
+  djangoPage
+    .bootstrap({id})
+    .visit({id});
+    
   storyPage.clickShowComments();
 
-  andThen(() => assert.ok(storyPage.commentsVisible));
+  andThen(() => {
+    assert.ok(storyPage.commentsVisible, 'comments are visible');
+    assert.notOk(find('.js-feature-comment').length, 'feature controls are visible');
+  });
+});
+
+test('view comments as staff user', function(assert) {
+  authenticateSession(this.application, {is_staff: true});
+  
+  let story = server.create('story');
+  let id = `story/${story.slug}/`;
+  server.create('django-page', {id, slug: story.slug});
+
+  djangoPage
+    .bootstrap({id})
+    .visit({id});
+  storyPage.clickShowComments();
+  andThen(() => assert.ok(find('.js-feature-comment').length, 'feature controls are visible'));
 });
 
 moduleForAcceptance('Acceptance | Django Page | Story Donate URLs', {
