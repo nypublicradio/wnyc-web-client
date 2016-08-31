@@ -1,23 +1,25 @@
-import Ember from 'ember';
+import Controller from 'ember-controller';
+import computed from 'ember-computed';
+import get from 'ember-metal/get';
+import service from 'ember-service/inject';
 
-export default Ember.Controller.extend({
-  filteredShows: Ember.computed("model.allShows", "searchText", function(){
-    var query = this.get("searchText");
-    var shows = this.store.peekAll('shows');
-    if (query.length > 0){
-      query = query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'); //remove any regex characters
-      var regex = new RegExp(query, 'i'); //case insensitive
-      let result = shows.filter(function(s) {
-        return regex.test(s.get("title"));
+export default Controller.extend({
+  store: service(),
+  filteredShows: computed('model.allShows', 'searchText', function() {
+    let searchText = get(this, 'searchText');
+    let shows = get(this, 'store').peekAll('shows');
+    let result = shows.toArray();
+    if (searchText.length > 0){
+      let query = searchText.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'); //remove any regex characters
+      let regex = new RegExp(query, 'i'); //case insensitive
+      result = shows.filter(function(show) {
+        return regex.test(show.get('title'));
       });
-      return result;
-    } else {
-      return shows;
     }
+    return result.sortBy('sortableTitle');
   }),
-
-  noResults: Ember.computed.equal("filteredShows.length",0),
-  searchText: "",
+  noResults: computed.equal('filteredShows.length', 0),
+  searchText: '',
 
   actions: {
     resetSearchFilter() {
