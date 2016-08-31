@@ -9,9 +9,7 @@ const {
   computed,
   isEmpty,
   $,
-  Inflector
 } = Ember;
-const inflector = new Inflector(Inflector.defaultRules);
 
 export default Mixin.create({
   pageNumbers: service(),
@@ -55,29 +53,17 @@ export default Mixin.create({
     loading() {
       $('main > section:last-of-type').css('opacity', 0.5)
     },
-    pageNumberClicked(number) {
-      const channelType = get(this, 'channelType')
-      const navSlug = this._getNavSlug(channelType)
-      this._scrollToOffset(channelType)
-      if (navSlug) {
-        this.transitionTo(`${channelType}.well.page`, navSlug, number)
-      } else {
-        this.transitionTo(`${channelType}.well`, number)
-      }
+    pageNumberClicked(page) {
+      const channelType = get(this, 'channelType');
+      const navSlug = this._getNavSlug(channelType);
+      this._scrollToOffset(channelType);
+      this.transitionTo(`${channelType}.page`, `${navSlug}/${page}`);
     }
-  },
-
-  buildId(channelType, page) {
-    const { slug } = this.paramsFor(channelType)
-    const navSlug = this._getNavSlug(channelType)
-    const path = `${inflector.pluralize(channelType)}/${slug}/${navSlug ? `${navSlug}` : 'recent_stories'}`
-
-    return `${path}/${page}`
   },
 
   _getNavSlug(channelType) {
     const { channel } = this.modelFor(channelType)
-    const {navSlug} = this.paramsFor(`${channelType}.well`)
+    const { navSlug } = this.paramsFor(`${channelType}.page`)
     const linkRollSlug = get(channel, 'linkroll.firstObject.navSlug')
     const hasLinkRoll = get(channel, 'hasLinkroll')
 
