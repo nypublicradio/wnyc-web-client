@@ -16,9 +16,7 @@ const Router = Ember.Router.extend(AnalyticsMixin, {
 });
 
 function subpageRoutes() {
-  this.route('well', {path: ':navSlug'}, function() {
-    this.route('page', {path: ':page'});
-  });
+  this.route('page', {path: '*page_params'});
 }
 
 Router.map(function() {
