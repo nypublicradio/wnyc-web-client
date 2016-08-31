@@ -1,4 +1,6 @@
-<label class="visuallyhidden" id="playpause-label">Play/Pause</label>
-{{wnyc-svg className="icon icon--play" icon=playIcon}}
-{{wnyc-svg className="icon icon--pause" icon=pauseIcon}}
-<i class="listen-spinner"></i>
+{{#unless (eq type 'vanilla')}}
+  <label class="visuallyhidden" id="playpause-label">Play/Pause</label>
+  {{wnyc-svg className="icon icon--play" icon=playIcon}}
+  {{wnyc-svg className="icon icon--pause" icon=pauseIcon}}
+  <i class="listen-spinner"></i>
+{{/unless}}
