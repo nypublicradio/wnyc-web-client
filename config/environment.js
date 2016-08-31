@@ -82,6 +82,7 @@ module.exports = function(environment) {
     wnycAPI: process.env.WNYC_API,
     discoverStation: "wnyc-v2",
     discoverAPIKey: "trident",
+    discoverTopicsKey: "wnyc",
     showsDiscoverStation: "active-shows",
     showsAPIKey: "hummingbird",
     moreShowsDiscoverStation: "archived-shows",
