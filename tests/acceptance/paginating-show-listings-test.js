@@ -159,3 +159,37 @@ test('can navigate to a specified page of results', function(assert) {
     assert.equal(currentURL(), `/${api5}`, 'uses nav slug when paginating');
   });
 });
+
+test('can land on a page number', function(assert) {
+  let api1 = 'shows/foo/episodes/1';
+  let api5 = 'shows/foo/episodes/5';
+
+  let apiResponse = server.create('api-response', {
+    id: api5,
+    teaseList: server.createList('story', 50)
+  });
+  server.create('api-response', {
+    id: api1,
+    teaseList: server.createList('story', 50)
+  });
+
+  let show = server.create('show', {
+    id: 'shows/foo/',
+    linkroll: [
+      {navSlug: 'episodes', title: 'Episodes'},
+    ],
+    apiResponse
+  });
+
+  server.create('django-page', {id: show.id});
+
+  djangoPage
+    .bootstrap(show);
+  
+  visit(`/${api5}`);
+
+  andThen(function() {
+    assert.equal(currentURL(), `/${api5}`, 'can land directly on a page of results');
+    assert.equal(find('.pagefooter-current').text().trim(), '5', 'current page number is 5');
+  });
+});
