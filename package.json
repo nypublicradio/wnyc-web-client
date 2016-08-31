@@ -46,7 +46,6 @@
     "ember-cli-mirage": "0.2.1",
     "ember-cli-moment-shim": "1.2.0",
     "ember-cli-page-object": "0.11.1",
-    "ember-cli-pagination": "nypublicradio/ember-cli-pagination",
     "ember-cli-qunit": "^1.4.0",
     "ember-cli-release": "0.2.8",
     "ember-cli-sentry": "2.4.1",
