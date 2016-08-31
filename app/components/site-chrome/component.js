@@ -4,11 +4,12 @@ import BetaActionsMixin from 'overhaul/mixins/beta-actions';
 import config from 'overhaul/config/environment';
 
 export default Component.extend(BetaActionsMixin, {
+  audio: service(),
   session: service(),
   metrics: service(),
   router: service('wnyc-routing'),
   donateURL: config.wnycDonateURL,
- 
+
   click: function({target}){
     if (target.tagName === "A"){
       //send tracking
