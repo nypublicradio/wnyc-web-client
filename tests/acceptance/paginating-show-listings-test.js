@@ -151,6 +151,7 @@ test('can navigate to a specified page of results', function(assert) {
     .visit(show);
 
   andThen(function() {
+    firstStoryTitle = showPage.storyTitles()[0];
     showPage.clickPage(5);
   });
   andThen(function() {
