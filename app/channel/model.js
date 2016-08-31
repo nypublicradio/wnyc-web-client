@@ -1,5 +1,6 @@
 import DS from 'ember-data';
 import Ember from 'ember';
+import { normalizeForSorting } from '../helpers/normalize-for-sorting';
 
 const {
   computed,
@@ -10,6 +11,9 @@ export default DS.Model.extend({
   slug: DS.attr('string'),
   cmsPK: DS.attr('number'),
   title: DS.attr('string'),
+  sortableTitle: computed('title', function() {
+    return normalizeForSorting([ get(this, 'title') ]);
+  }),
   about: DS.belongsTo('api-response', {async: false}),
 
   sidebarChunks: DS.attr(), // Array of custom html markup
