@@ -47,11 +47,10 @@
   "onevar": false,
   "plusplus": false,
   "regexp": false,
-  "undef": true,
+  "esversion": 6,
   "sub": true,
   "strict": false,
   "white": false,
   "eqnull": true,
-  "esnext": true,
   "unused": true
 }

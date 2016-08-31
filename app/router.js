@@ -12,7 +12,8 @@ const Router = Ember.Router.extend(AnalyticsMixin, {
     if (transition.targetName !== 'login') {
       this.get('session').set('attemptedTransition', transition);
     }
-  }
+  },
+  rootURL: config.rootURL
 });
 
 function subpageRoutes() {

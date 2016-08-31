@@ -1,4 +1,4 @@
-/* jshint node: true, multistr: true */
+/* jshint node: true */
 
 module.exports = function(environment) {
 
@@ -11,7 +11,7 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'overhaul',
     environment: environment,
-    baseURL: '/',
+    rootURL: '/',
     locationType: 'auto',
     'ember-metrics': {
       includeAdapters: ['google-analytics', 'data-warehouse']
@@ -34,7 +34,7 @@ module.exports = function(environment) {
 
     sentry: {
       dsn: process.env.SENTRY_DSN,
-      debug: process.env.DEPLOY_TARGET !== 'production',
+      //debug: process.env.DEPLOY_TARGET !== 'production',
       development: environment !== 'production',
       includePaths: [
         process.env.WNYC_URL,

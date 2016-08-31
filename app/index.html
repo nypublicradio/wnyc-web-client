@@ -9,8 +9,8 @@
     
     {{content-for "head"}}
 
-    <link rel="stylesheet" href="assets/vendor.css">
-    <link rel="stylesheet" href="assets/overhaul.css">
+    <link rel="stylesheet" href="{{rootURL}}assets/vendor.css">
+    <link rel="stylesheet" href="{{rootURL}}assets/overhaul.css">
 
     {{content-for "head-footer"}}
   </head>
@@ -29,9 +29,8 @@
         //debugMode: false
       };
     </script>
-
-    <script src="assets/vendor.js"></script>
-    <script src="assets/overhaul.js"></script>
+    <script src="{{rootURL}}assets/vendor.js"></script>
+    <script src="{{rootURL}}assets/overhaul.js"></script>
 
     {{content-for "body-footer"}}
   </body>
