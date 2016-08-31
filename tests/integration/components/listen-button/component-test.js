@@ -10,13 +10,13 @@ let MockAudio = function() {
   this.lastPlayed = null;
   this.lastContext = null;
   this.isReady = true;
-}
+};
 
 MockAudio.prototype.play = function(id, context) {
   this.playCount += 1;
   this.lastPlayed = id;
   this.lastContext = context;
-}
+};
 
 test('it renders', function(assert) {
   this.render(hbs`{{listen-button}}`);
