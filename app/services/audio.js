@@ -104,11 +104,11 @@ export default Service.extend({
     } else {
       this.set('_waitingForOkra', null);
     }
-    
+
     if (/^\d*$/.test(id)) {
       return this.playFromPk(id, context);
     } else {
-      return this.playStream(id);
+      return this.playStream(id, context);
     }
   },
   pause() {
@@ -223,9 +223,13 @@ export default Service.extend({
       this.okraBridge.playSoundFor('stream', get(stream, 'bbModel'));
 
       if (shouldTrack) {
+        let label = newStream;
+        if (context === 'nav') {
+          label += '|Navigation';
+        }
         this._trackPlayerEvent({
           action: 'Launched Stream',
-          label: newStream,
+          label,
         });
 
         RSVP.Promise.resolve(get(stream, 'story')).then(story => {
