@@ -6,21 +6,12 @@ const {
   Mixin,
   get,
   set,
-  computed,
   isEmpty,
   $,
 } = Ember;
 
 export default Mixin.create({
   pageNumbers: service(),
-
-  channelTitle: computed({
-    get() {
-      const { channel } = this.modelFor(get(this, 'channelType'))
-      const channelTitle = get(channel, 'title')
-      return channelTitle
-    }
-  }).readOnly(),
 
   beforeModel() {
     let channelType = this.routeName.split('.')[0]
