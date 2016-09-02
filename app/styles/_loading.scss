@@ -3,6 +3,8 @@
 .legacy-loading,
 .story-loading,
 .shows-loading {
+  background-color: white;
+  
   .thin-line { background-color: #f2f2f2; overflow: hidden; height: 14px; margin-bottom: 14px; border-radius: 2px;}
   .bg-gray1 { background-color: #f2f2f2; overflow: hidden; }
   .bg-gray2 { background-color: #e0e0e0; overflow: hidden; }
@@ -22,4 +24,8 @@
   .flag-image--squeeze > div { margin-top: -10px; margin-bottom: -10px; }
   .loading-page { top: 56px; }
   #brand-logo { background-image: url(/assets/svg/wnyc-sprite-vector.svg); }
+}
+
+.channel-loading {
+  margin-top: -24px;
 }
