@@ -8,6 +8,7 @@ import 'overhaul/tests/helpers/ember-sortable/test-helpers';
 
 moduleForAcceptance('Acceptance | discover returning user', {
   beforeEach() {
+    Ember.$.Velocity.mock = true;
     let session = currentSession(this.application);
     server.create('discover-topic', {title: "Music", url: "music"});
     server.create('discover-topic', {title: "Art", url: "art"});
@@ -18,6 +19,9 @@ moduleForAcceptance('Acceptance | discover returning user', {
     session.set('data.discover-topics', ['music']); // set some saved topics
     session.set('data.discover-excluded-story-ids', []);
     session.set('data.discover-queue',  server.db.discoverStories); // set some saved stories
+  },
+  afterEach() {
+    Ember.$.Velocity.mock = false;
   }
 });
 

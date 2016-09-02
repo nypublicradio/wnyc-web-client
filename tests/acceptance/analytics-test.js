@@ -2,7 +2,14 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import config from 'overhaul/config/environment';
 
-moduleForAcceptance('Acceptance | Analytics');
+moduleForAcceptance('Acceptance | Analytics', {
+  beforeEach() {
+    Ember.$.Velocity.mock = true;  
+  },
+  afterEach() {
+    Ember.$.Velocity.mock = false;
+  }
+});
 
 test('it does not log a pageview when opening the queue', function(assert) {
   assert.expect(2);
