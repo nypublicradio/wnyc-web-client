@@ -28,7 +28,7 @@ test('has data-is-playing attribute when audio is playing', function(assert) {
 
 test('does not have data-is-playing attribute when audio is not playing', function(assert) {
   this.render(hbs`{{playlist-play-indicator isPlaying=false}}`);
-  assert.equal(this.$('[data-is-playing]').length, 1);
+  assert.equal(this.$('[data-is-playing]').length, 0);
 });
 
 test('sends pause action on click when playing', function(assert) {
