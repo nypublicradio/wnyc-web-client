@@ -47,6 +47,7 @@ test('addToQueueById returns a Promise that resolves to the added story', functi
     service.addToQueueById(1)
       .then(story => assert.equal(story.get('title'), 'foo story'));
   });
+  return wait();
 });
 
 test('a story can be removed from the queue by id', function(assert) {
@@ -117,6 +118,7 @@ test('can replace the queue in one action', function(assert) {
     service.reset(newOrder);
     assert.deepEqual(service.get('items'), newOrder);
   });
+  return wait();
 });
 
 test('can retrieve the next item', function(assert) {
