@@ -116,7 +116,11 @@ figure {
  *      button Submit
  */
 button {
-    @include appearance(none);
+  @include appearance(none);
+  border: 0;
+  padding: 0;
+  outline: none;
+  background: none;
 }
 
 /**

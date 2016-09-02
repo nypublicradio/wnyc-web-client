@@ -1095,6 +1095,10 @@
         width: 18px;
       }
     }
+    
+    .icon--play {
+      left: 2px; //center play button in small circles
+    }
 
     @include btn--blue;
     @include white-svg;
