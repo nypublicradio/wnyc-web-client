@@ -80,7 +80,9 @@ export default DS.Model.extend({
         // target it here.
         args.itemTitle = args.itemTitle ? decodeURIComponent(args.itemTitle) : '';
       } catch(e) {
-        console.warn('could not parse', el.getAttribute('data-ember-args'));
+        if (!Ember.testing) {
+          console.warn('could not parse', el.getAttribute('data-ember-args'));
+        }
         args = { error: e };
       }
       return {
