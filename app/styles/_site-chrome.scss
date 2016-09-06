@@ -155,7 +155,7 @@
 
   &:not(.x-scrollable) {
     .list-item {
-      padding-right: 10px;
+      padding: 10px 20px 10px 0;
     }
     .list--noborder {
         > .list-heading {
@@ -165,7 +165,6 @@
     .list-item.active {
       background-color: rgba($red, 0.05);
       border-left: 4px solid $red;
-      margin-left: -10px;
       a {
         color: $red;
         border: none;
