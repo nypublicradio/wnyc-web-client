@@ -85,15 +85,26 @@
       <ul class="list list--noborder flush text--spacing text--semi {{unless media.isLargeAndUp 'list--inline list--spaced text--small' 'alignright text--medium '}}">
 
         <li class="list-item list-item--short">
-          {{#listen-button
-            type= (if media.isLargeAndUp (if isHomepage 'white-hollow-small' 'red-hollow-small')      'vanilla')
-            state=(if media.isLargeAndUp (if (eq 'wnyc-fm939' audio.currentAudio.id) audio.playState) 'is-paused')
-            itemPK='wnyc-fm939'
-            itemTitle='WNYC 93.9 FM'
-            playContext='nav'
-            class=(if media.isLargeAndUp 'stream-launcher text--spacing text--semi')}}
-            <span>Listen Live</span>
-          {{/listen-button}}
+          {{#if media.isLargeAndUp}}
+            {{#listen-button
+              type=(if isHomepage 'white-hollow-small' 'red-hollow-small')
+              state=(if (eq 'wnyc-fm939' audio.currentAudio.id) audio.playState)
+              itemPK='wnyc-fm939'
+              itemTitle='WNYC 93.9 FM'
+              playContext='nav'
+              class=(if media.isLargeAndUp 'stream-launcher text--spacing text--semi')}}
+              <span>Listen Live</span>
+            {{/listen-button}}
+          {{else}}
+            {{#listen-button
+              type='vanilla'
+              state='is-paused'
+              itemPK='wnyc-fm939'
+              itemTitle='WNYC 93.9 FM'
+              playContext='nav'}}
+              <span>Listen Live</span>
+            {{/listen-button}}
+          {{/if}}
         </li>
 
         {{#link-to 'stream' tagName='li' href=false class="list-item list-item--short" }}
