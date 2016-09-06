@@ -6,6 +6,71 @@ import { Response } from 'ember-cli-mirage';
 
 // Note for future people: schema.modelName.create() doesn't generate attributes in mirage factories. Create the objects using server.create in default.js (for local dev), or in the test
 
+const whatsOn = [
+  {
+    'wnyc-am820': {
+      name: 'WNYC AM 820',
+      slug: 'wnyc-am820',
+      id: '1'
+    },
+    'q2': {
+      name: 'Q2',
+      slug: 'q2',
+    },
+    'jonathan-channel': {
+      name: 'The Jonathan Channel',
+      slug: 'jonathan-channel',
+    },
+    'njpr': {
+      name: 'NJPR',
+      slug: 'njpr',
+    },
+    'wnyc-fm939': {
+      name: 'WNYC 93.9FM',
+      slug: 'wnyc-fm939',
+    },
+    'wqxr': {
+      name: 'WQXR New York',
+      slug: 'wqxr',
+    },
+    'wqxr-special': {
+      name: 'Operavore',
+      slug: 'wqxr-special',
+    }
+  }
+];
+
+const streams = [
+  {
+    name: 'Operavore',
+    slug: 'wqxr-special',
+  },
+  {
+    name: 'WQXR New York',
+    slug: 'wqxr',
+  },
+  {
+    name: 'WNYC 93.9FM',
+    slug: 'wnyc-fm939'
+  },
+  {
+    name: 'WNYC AM 820',
+    slug: 'wnyc-am820',
+  },
+  {
+    name: 'Q2',
+    slug: 'q2',
+  },
+  {
+    name: 'The Jonathan Channel',
+    slug: 'jonathan-channel',
+  },
+  {
+    name: 'NJPR',
+    slug: 'njpr',
+  },
+];
+
 export default function() {
   this.logging = false;
   let baseUrl = config.wnycURL;
@@ -17,9 +82,13 @@ export default function() {
   this.get(`${baseUrl}/api/v1/story/:id`);
   this.get(`${baseUrl}/api/v1/browser_id/`, {success: true});
   this.get(`${baseUrl}/api/v1/list/comments/24/:storyId/`, 'comment');
-  this.get(`${baseUrl}/api/v1/whats_on/`, {});
+  this.get(`${baseUrl}/api/v1/whats_on/`, () => {
+    return whatsOn;
+  });
   this.get(`${baseUrl}/api/v1/whats_on/:slug`, {});
-  this.get(`${baseUrl}/api/v1/list/streams/`, {count: 0, results:[]});
+  this.get(`${baseUrl}/api/v1/list/streams/`, () => {
+    return { results: streams, count: streams.length };
+  });
   this.get(`${baseUrl}/api/v1/list/streams/:slug`, (schema, request) => {
     return {'slug': request.params.slug};
   });
@@ -116,9 +185,9 @@ export default function() {
   this.post(`${config.wnycAccountRoot}/api/v1/listenaction/create/`, () => true);
 
   this.post(`${config.wnycAccountRoot}/api/v1/listenaction/create/:pk/:action`, () => true);
-  
+
   this.post(`${config.wnycAccountRoot}/api/most/view/managed_item/:id`, () => true);
-  
+
   this.post(`${config.wnycAccountRoot}/api/v1/analytics/ga`, () => true);
 
   /*------------------------------------------------------------

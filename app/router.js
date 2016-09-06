@@ -38,6 +38,7 @@ Router.map(function() {
     this.route('date', {path: ':year/:month/:day'});
   });
   this.route('topics');
+  this.route('settings');
 
   this.route('login');
   this.route('forgot-password');
@@ -55,7 +56,7 @@ Router.map(function() {
     this.route('index', { path: 'playlist'});
     this.route('redirect', { path: '/'} );
   });
-  
+
   // This is our catch all route that can render any existing page
   // from the django site. It will be used when there's nothing more
   // specific.

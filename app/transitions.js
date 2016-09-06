@@ -36,7 +36,10 @@ export default function() {
       use: ['fly-to', { duration: 250 }]
     })
   );
-
+  this.transition(
+    this.hasClass('toggle-container'),
+    this.use('slideToggle')
+  );
   this.transition(
     this.includingInitialRender(),
     this.toValue((newVal, oldVal) => newVal === 'queue-history' || oldVal === 'queue-history'),

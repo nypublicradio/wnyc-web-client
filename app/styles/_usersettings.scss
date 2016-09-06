@@ -1,0 +1,128 @@
+$ember-power-select-default-border-radius: 1px;
+$ember-power-select-disabled-option-color: $lightergray;
+
+@import 'ember-power-select';
+
+
+.user-settings {
+  padding-right: 72px;
+  padding-left: 72px;
+  min-height: 600px;
+}
+
+.user-setting {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding-bottom: 36px;
+
+  label {
+    padding-bottom: 30px;
+    max-width: 500px;
+  }
+
+  > div {
+    align-self: center;
+  }
+}
+
+.setting-desc {
+  @include fontsize(14);
+  color: $gray;
+}
+
+.autoplay {
+  display: flex;
+
+  .toggle {
+    @include fontsize(14);
+    cursor: pointer;
+    width: 71px;
+    height: 36px;
+    border-radius: 100px;
+    background-color: $red;
+    display: flex;
+    justify-content: center;
+  }
+
+  .label {
+    align-self: center;
+    margin: 0;
+    color: #fff;
+    flex-grow: 1;
+    padding-left: 5px;
+    order: 1;
+  }
+
+  .inactive-toggle {
+    background-color: $lightergray;
+
+    .switch {
+      order: 1;
+    }
+
+    .label {
+      order: 2;
+    }
+  }
+
+  .switch {
+    border-radius: 100px;
+    height: 31px;
+    width: 32px;
+    background-color: #fff;
+    margin: 2px;
+    order: 2;
+  }
+}
+
+.autoplay-options {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+
+  label {
+    padding-bottom: 10px;
+  }
+}
+
+.ember-power-select-trigger {
+  width: 300px;
+  height: 48px;
+}
+
+.ember-power-select-selected-item {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.ember-power-select-status-icon {
+  right: 10px;
+  border-width: 8px 8px 0 8px;
+  border-color: #333 transparent transparent transparent;
+}
+
+.autoplay-inactive {
+  color: $lightergray;
+
+  .ember-power-select-status-icon {
+    border-color: $lightergray transparent transparent transparent;
+  }
+}
+
+.ember-power-select-trigger[aria-disabled=true] {
+  border: solid 1px $lightestgray;
+  color: $lightergray;
+}
+
+@media only screen and (min-width: 800px) {
+  .user-setting {
+    flex-flow: row nowrap;
+  }
+
+  .autoplay-options {
+    flex-flow: row nowrap;
+    align-items: center;
+  }
+}

@@ -77,7 +77,7 @@ module.exports = function(environment) {
     siteName: 'WNYC',
     renderGoogleAds: true,
     // these are provided via a .env file or else by Django's EmberAdapter
-    // fall back to demo GA key  
+    // fall back to demo GA key
     googleAnalyticsKey: process.env.GOOGLE_ANALYTICS || 'UA-46158613-1',
     nprGoogleAnalyticsKey: 'UA-18188937-11',
     googleAPIv3Key: process.env.GOOGLE_API_V3_KEY,
@@ -99,8 +99,9 @@ module.exports = function(environment) {
     // put beta host at the root so it can be overridden by Django
     wnycBetaURL: process.env.WNYC_BETA_URL,
     featureFlags: {
-      'discover': true,
-      'other-discover': process.env.OTHER_DISCOVER
+      'discover': process.env.DISCOVER,
+      'other-discover': process.env.OTHER_DISCOVER,
+      'autoplay-prefs': process.env.DEPLOY_TARGET === 'demo'
     },
     betaTrials: {
       betaInviteLanding: '#full-page-transforms-wrapper',
@@ -126,7 +127,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
     // ENV.LOG_LEGACY_LOADER = true;
-
+    ENV['featureFlags']['autoplay-prefs'] = true;
 
     var mirageEnabled = !usingProxy();
     ENV['ember-cli-mirage'] = {
@@ -136,7 +137,7 @@ module.exports = function(environment) {
       // passed in --proxy to the command line
       enabled: mirageEnabled
     };
-        
+
   }
 
   if (environment === 'test') {

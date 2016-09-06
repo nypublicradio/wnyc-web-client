@@ -138,14 +138,19 @@
 
         {{#unless media.isLargeAndUp}}
 
-          {{#link-to 'djangorendered' 'search/' tagName='li' href="false" class="list-item list-item--short" }}
+          {{#link-to 'djangorendered' 'search/' tagName='li' href=false class="list-item list-item--short" }}
             {{link-to 'Search' 'djangorendered' 'search/' class="inherit" preventDefault=false}}
           {{/link-to}}
 
-          {{#if session.isAuthenticated}}
+          {{#if features.autoplayPrefs}}
+            {{#link-to 'settings' tagName='li' href=false class="list-item list-item--short" }}
+              {{link-to 'Settings' 'settings' class="inherit" preventDefault=false}}
+            {{/link-to}}
+          {{/if}}
 
-            {{#link-to 'login' tagName='li' href="false" class="list-item list-item--short" }}
-              {{link-to 'My Account' 'login' class="inherit" preventDefault=false}}
+          {{#if session.isAuthenticated}}
+            {{#link-to 'djangorendered' 'users/me' tagName='li' href="false" class="list-item list-item--short" }}
+              {{link-to "My Account" 'djangorendered' 'users/me' class="inherit" preventDefault=false}}
             {{/link-to}}
 
             <li class="list-item list-item--short">
@@ -153,7 +158,6 @@
             </li>
 
           {{else}}
-
             {{#link-to 'login' tagName='li' href="false" class="list-item list-item--short" }}
               {{link-to 'Sign In' 'login' class="inherit" preventDefault=false}}
             {{/link-to}}
@@ -174,9 +178,13 @@
 
           <ul class="list list--noborder flush alignright text--spacing text--semi text--medium">
             {{!-- <div class="h5 text--heavy text--spacing alignright"> --}}
+            {{#if features.autoplayPrefs}}
+              {{#link-to 'settings' tagName='li' href=false class="list-item list-item--short" }}
+                {{link-to 'Settings' 'settings' class="inherit" preventDefault=false}}
+              {{/link-to}}
+            {{/if}}
 
             {{#if session.isAuthenticated}}
-
               {{#link-to 'djangorendered' 'users/me' tagName='li' href="false" class="list-item list-item--short" }}
                 {{link-to "My Account" 'djangorendered' 'users/me' class="inherit" preventDefault=false}}
               {{/link-to}}
@@ -184,13 +192,10 @@
               <li class="list-item list-item--short">
                 <button class="btn--blank text--spacing" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
               </li>
-
             {{else}}
-
-            {{#link-to 'login' tagName='li' href="false" class="list-item list-item--short" }}
-              {{link-to "Sign In" 'login' class="inherit" preventDefault=false}}
-            {{/link-to}}
-
+              {{#link-to 'login' tagName='li' href="false" class="list-item list-item--short" }}
+                {{link-to "Sign In" 'login' class="inherit" preventDefault=false}}
+              {{/link-to}}
             {{/if}}
           </ul>
             {{!-- </div>
