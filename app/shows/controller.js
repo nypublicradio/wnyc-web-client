@@ -7,7 +7,7 @@ export default Controller.extend({
   store: service(),
   filteredShows: computed('model.allShows', 'searchText', function() {
     let searchText = get(this, 'searchText');
-    let shows = get(this, 'store').peekAll('shows');
+    let shows = get(this, 'model.allShows');
     let result = shows.toArray();
     if (searchText.length > 0){
       let query = searchText.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'); //remove any regex characters
