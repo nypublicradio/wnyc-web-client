@@ -27,3 +27,9 @@ test('it does not remove parts of words that match articles', function(assert) {
   const expected = 'these are tests';
   assert.strictEqual(result, expected);
 });
+
+test('it does not remove articles in the middle of titles', function(assert) {
+  let result = normalizeForSorting(['Concerts from the Library of Congress']);
+  const expected = 'concerts from the library of congress';
+  assert.strictEqual(result, expected);
+});
