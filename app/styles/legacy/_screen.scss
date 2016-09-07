@@ -3726,19 +3726,21 @@ form.filters #decimal label {
 /* Calendar */
 
 @media screen and (max-width: 800px) {
-  .primary_event {
-    padding: 15px 0;
-    border-bottom: 1px solid $lightestgray;
-    
+  .primary_event {    
     .mediumimage {
       display: none;
     }
     
     .text-right {
-      float: left;
-      width: auto;
+      width: 100% !important;
+      float: left !important;
     }
   }
+}
+
+.primary_event {
+  padding: 15px 0 !important;
+  border-bottom: 1px solid $lightestgray;
 }
 
 #event-calendar {
