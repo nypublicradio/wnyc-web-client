@@ -49,14 +49,16 @@ test('Queue should sort when you drag an item', function(assert) {
     assert.equal(queuePage.stories(2).title(), 'Story 1', 'story 1 should be second');
 
     // drag story 0 below story 1
-    reorder(
-      'mouse',
-      '.player-queue .queueitem',
-      '.queueitem:contains(Story 1)',
-      '.queueitem:contains(Story 0)'
-    ).then(function() {
-      assert.equal(queuePage.stories(1).title(), 'Story 1', 'story 1 should be first after dragging');
-      assert.equal(queuePage.stories(2).title(), 'Story 0', 'story 0 should be second after dragging');
+    run(() => {
+      reorder(
+        'mouse',
+        '.player-queue .queueitem',
+        '.queueitem:contains(Story 1)',
+        '.queueitem:contains(Story 0)'
+      ).then(function() {
+        assert.equal(queuePage.stories(1).title(), 'Story 1', 'story 1 should be first after dragging');
+        assert.equal(queuePage.stories(2).title(), 'Story 0', 'story 0 should be second after dragging');
+      });
     });
   });
 });
