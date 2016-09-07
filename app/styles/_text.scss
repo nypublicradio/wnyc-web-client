@@ -292,19 +292,6 @@
 }
 
 /**
- * Large Text:
- * `.text--large`
- * A modifier to make text 18px
- *
- *      @example
- *      .text.text--large
- *          p This is more important.
- */
-.text--large {
-    @include fontsize(18);
-}
-
-/**
  * Medium Text:
  * `.text--medium`
  * A modifier to make text 14px
@@ -315,6 +302,7 @@
  */
 .text--medium {
     @include fontsize(14);
+    line-height: 1.5rem;
 }
 
 /**
