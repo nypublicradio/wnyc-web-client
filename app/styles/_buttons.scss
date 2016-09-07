@@ -736,19 +736,11 @@
   }
 }
 
-@mixin lightgray-btn-jshover {
-  @include js-hover(
-    $props:  (color,      border-color),
-    $base:   ($lightgray, rgba($lightgray, 0.3)),
-    $hover:  ($gray,      rgba($darkgray, 0.5))
-  );
-}
-
 @mixin gray-btn-jshover {
   @include js-hover(
     $props:  (color,       border-color),
     $base:   ($darkergray, rgba($lightgray, 0.2)),
-    $hover:  ($darkergray, rgba($lightgray, 0.5))
+    $hover:  ($darkergray, rgba($darkgray, 0.3))
   );
 }
 
@@ -853,6 +845,10 @@
 
 @mixin gray-svg {
   @include svg-color($lightgray);
+}
+
+@mixin darkergray-svg {
+  @include svg-color($darkergray);
 }
 
 @mixin white-svg {
@@ -1006,9 +1002,9 @@
   &.gray-minion {
     @include btn-minion-hollow;
 
-    @include lightgray-btn-jshover;
-    @include white-listen-spinner;
-    @include gray-svg;
+    @include gray-btn-jshover;
+    @include blue-listen-spinner;
+    @include darkergray-svg;
   }
 
   &.blue-hollow {
