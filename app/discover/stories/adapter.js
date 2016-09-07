@@ -3,10 +3,9 @@ import DS from 'ember-data';
 import service from 'ember-service/inject';
 
 export default DS.JSONAPIAdapter.extend({
-  host: ENV.wnycURL,
-  namespace: `api/v3/make_playlist/`,
+  host: ENV.wnycAPI,
+  namespace: `api/v3/reco_proxy/`,
   session: service(),
-
 
   buildURL() {
     return [this.host, this.namespace].join('/');
