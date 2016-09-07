@@ -15,7 +15,7 @@ export default Component.extend({
       pages.push({
         dots: i > 10,
         page: i,
-        current: i === currentPage
+        current: i === Number(currentPage)
       });
     }
     return pages;
