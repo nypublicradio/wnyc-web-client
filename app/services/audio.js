@@ -367,13 +367,24 @@ export default Service.extend({
     if (context === 'queue') {
       this.playNextInQueue();
     } else if (context === 'discover') {
-      let nextTrack = this.get('discoverQueue').nextItem(this.get('currentId'));
-      if (nextTrack) {
-        this.play(get(nextTrack, 'id'), 'discover');
-      } else {
-        set(this, 'isPlaying', false);
-        set(this, 'currentContext', null);
-      }
+      this.playDiscoverQueue();
+    }
+
+    let currentContext = get(this, 'currentContext');
+
+    if (!currentContext) {
+      var session = this.get('session');
+      this.play('wnyc-fm939');
+    }
+  },
+
+  playDiscoverQueue() {
+    let nextTrack = this.get('discoverQueue').nextItem(this.get('currentId'));
+    if (nextTrack) {
+      this.play(get(nextTrack, 'id'), 'discover');
+    } else {
+      set(this, 'isPlaying', false);
+      set(this, 'currentContext', null);
     }
   },
 
