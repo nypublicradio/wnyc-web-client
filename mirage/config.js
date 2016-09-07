@@ -73,7 +73,7 @@ export default function() {
   this.get(`${baseUrl}/api/v3/story/detail/:id`, 'story');
   this.get(`${baseUrl}/api/v3/channel/\*id`, 'api-response');
 
-  this.get(`${baseUrl}/api/v3/make_playlist`, function(schema) {
+  this.get(`${baseUrl}/api/v3/reco_proxy`, function(schema) {
     let stories = schema.discoverStories.all().models;
 
     let data = stories.map(s => {

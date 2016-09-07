@@ -151,7 +151,7 @@ test('if find more returns no more items, the old queue is present and an error 
     assert.equal($(".discover-playlist-no-results").length, 0, "playlist no results error area should not be visible");
 
     andThen(function() {
-      let url =[ENV.wnycURL, 'api/v3/make_playlist'].join("/");
+      let url =[ENV.wnycAPI, 'api/v3/reco_proxy'].join("/");
       server.get(url, function() {
         secondRequestCalled = true;
         let data = server.db.discoverStories.map(s => {
@@ -199,7 +199,7 @@ test('if find more returns the same list of items, the old queue are displayed a
     assert.equal($(".discover-playlist-no-results").length, 0, "playlist no results error area should not be visible");
 
     andThen(function() {
-      let url =[ENV.wnycURL, 'api/v3/make_playlist'].join("/");
+      let url =[ENV.wnycAPI, 'api/v3/reco_proxy'].join("/");
       server.get(url, function() {
         secondRequestCalled = true;
         return {data: []};
@@ -238,7 +238,7 @@ test('if find more returns new items, the new items are displayed', function(ass
     assert.ok((matchResults.length === 1) && (matchResults[0] === true), "Should have matched all the stories in the db");
     assert.equal($(".discover-playlist-no-results").length, 0, "playlist no results error area should not be visible");
 
-    let url =[ENV.wnycURL, 'api/v3/make_playlist'].join("/");
+    let url =[ENV.wnycAPI, 'api/v3/reco_proxy'].join("/");
 
     let stories = server.createList('discover-story', 5);
 
