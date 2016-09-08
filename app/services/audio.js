@@ -12,6 +12,10 @@ import { classify as upperCamelize } from 'ember-string';
 const FIFTEEN_SECONDS = 1000 * 15;
 const TWO_MINUTES     = 1000 * 60 * 2;
 const PLATFORM        = 'NYPR_Web';
+const CONTINUOUS_PLAYER_BUMPERS = {
+  'wnyc-fm939': 'http://www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/streambumper/streambumper000001_wnycfm.mp3',
+};
+const PLAYER_BUMPER = 'continuous-player-bumper';
 const ERRORS = {
   SOUNDMANAGER_FAILED_CREATE_SOUND: 'SoundManager failed when attempting to create a sound.',
   SOUNDMANAGER_TIMEOUT: 'SoundManager failed to initialize before timing out.',
@@ -76,6 +80,13 @@ export default Service.extend({
   },
 
   init() {
+    let session = this.get('session');
+    if (!session.get('data.userPrefs')) {
+      session.set('data.userPrefs', {
+        activePref: 'default_stream',
+        activeStream: 'wnyc-fm939'
+      });
+    }
     set(this, 'okraBridge', OkraBridge.create({
       onFinished: bind(this, 'finishedTrack'),
       onError: bind(this, 'errorEvent'),
@@ -108,10 +119,13 @@ export default Service.extend({
 
     if (/^\d*$/.test(id)) {
       return this.playFromPk(id, context);
+    } else if (/^http|^https/.test(id)) {
+      return this.playBumper(id, context);
     } else {
       return this.playStream(id, context);
     }
   },
+
   pause() {
     this.okraBridge.pauseSound();
     let context = get(this, 'currentContext') || '';
@@ -122,7 +136,7 @@ export default Service.extend({
       region: upperCamelize(context),
       withAnalytics: true
     });
-    
+
     if (get(this, 'currentAudio.audioType') === 'stream') {
       this._trackPlayerEventForNpr({
         category: 'Engagement',
@@ -285,6 +299,11 @@ export default Service.extend({
     .catch(() => this.set('hasErrors', true));
   },
 
+  playBumper(url) {
+    this.set('currentContext', 'continuous-player-bumper');
+    this.okraBridge.playSoundFor('continuous-player-bumper', url);
+  },
+
   setPosition(percentage) {
     let position = percentage * get(this, 'duration');
     this.okraBridge.setPosition(position);
@@ -346,7 +365,6 @@ export default Service.extend({
       this.play(nextUp.get('id'), 'queue');
     } else {
       set(this, 'currentContext', null);
-      //We can switch to streaming here
     }
   },
 
@@ -363,18 +381,21 @@ export default Service.extend({
     });
 
     this.sendCompleteListenAction(this.get('currentId'));
+    let context = get(this, 'currentContext');
+    let { activePref, activeStream } = get(this, 'session.data.userPrefs');
+    let preferredStream = activeStream || 'wnyc-fm939';
 
     if (context === 'queue') {
       this.playNextInQueue();
     } else if (context === 'discover') {
       this.playDiscoverQueue();
+    } else if (context === 'continuous-player-bumper' && activePref !== 'no_autoplay') {
+      this.playStream(activeStream);
     }
 
     let currentContext = get(this, 'currentContext');
-
-    if (!currentContext) {
-      var session = this.get('session');
-      this.play('wnyc-fm939');
+    if ((!currentContext || currentContext === 'home-page') && activePref !== 'no_autoplay') {
+      this.play(CONTINUOUS_PLAYER_BUMPERS[preferredStream], 'continuous-player-bumper');
     }
   },
 
@@ -455,7 +476,7 @@ export default Service.extend({
     }
     metrics.trackEvent({category, action, label, model: story});
   },
-  
+
   _trackPlayerEventForNpr(options) {
     let metrics = get(this, 'metrics');
     metrics.trackEvent('NprAnalytics', assign(options, {isNpr: true}));

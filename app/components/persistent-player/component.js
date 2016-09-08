@@ -1,24 +1,19 @@
-import { inject } from 'ember';
 import Component from 'ember-component';
 import service from 'ember-service/inject';
-import { reads, equal, computed } from 'ember-computed';
+import { reads, equal } from 'ember-computed';
 import get from 'ember-metal/get';
+import Ember from 'ember';
+
 
 export default Component.extend({
   audio: service(),
-  session: inject(),
+  session: service(),
   currentAudio: reads('audio.currentAudio'),
   isPlaying: equal('audio.playState', 'is-playing'),
   classNames: ['persistent-player', 'l-flexcontent', 'l-highlight--blur'],
   classNameBindings: ['isAudiostream'],
   isAudiostream: equal('currentAudio.audioType', 'stream'),
-  isPlayingAudioCue: equal('currentAudio.id', 1),
-  sessionSettings: computed('session.data.userPrefs', function(){
-    var prefs = this.get('session.data.userPrefs');
-    return {
-      disableAutoPlay: prefs.activePref === 'Do Not Autoplay',
-    };
-  }),
+  revealNotification: true,
   actions: {
     playOrPause() {
       if (get(this, 'isPlaying')) {
@@ -26,6 +21,12 @@ export default Component.extend({
       } else {
         get(this, 'audio').play();
       }
+    },
+    dismissNotification() {
+      this.set('revealNotification', false);
+    },
+    cancelAutoplay() {
+      this.set('revealNotification', false);
     },
     setPosition(p) {
       get(this, 'audio').setPosition(p);

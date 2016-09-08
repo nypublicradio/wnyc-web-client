@@ -128,6 +128,15 @@ export const OkraBridge = Ember.Object.extend(Ember.Evented, {
     } else if (type === 'stream') {
       let model = Ember.Object.create(pkOrModel);
       WEB_PLAYER_CONTROLLER.then(player => player.playStream(model));
+    } else if (type === 'continuous-player-bumper') {
+      let model = Ember.Object.create({
+        url: pkOrModel,
+        audio: pkOrModel,
+        pk: pkOrModel
+      });
+      WEB_PLAYER_CONTROLLER.then(player => {
+        player.playRemoteFile(model);
+      });
     }
   },
   pauseSound() {
@@ -213,5 +222,5 @@ export const OkraBridge = Ember.Object.extend(Ember.Evented, {
   _updateDuration(x, duration) {
     this._duration = duration;
     throttle(this, () => set(this, 'duration', this._duration), 500, false);
-  },
+  }
 });

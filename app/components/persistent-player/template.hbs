@@ -1,10 +1,15 @@
+
+{{#if revealNotification}}
+  {{#persistent-player.notification oncancel=(action 'cancelAutoplay')}}
+    <div class='dismiss-notification' {{action 'dismissNotification'}}>
+      {{wnyc-svg icon='close'}}
+    </div>
+  {{/persistent-player.notification}}
+{{/if}}
+
 {{persistent-player.backdrop
   image=currentAudio.imageMain.url
   fallbackImage=currentAudio.headers.brand.logoImage.url}}
-
-{{#if persistent-player.isPlayingAudioCue}}
-  {{persistent-player.notification settings=sessionSettings position=audio.position}}
-{{/if}}
 
 {{#holygrail-layout as |g|}}
 

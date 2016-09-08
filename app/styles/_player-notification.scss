@@ -1,0 +1,27 @@
+.notification {
+  background-color: #128cf4;
+  position: fixed;
+  bottom: 95px;
+  width: 100%;
+  font-weight: 500;
+
+  .player-notification {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .dismiss-notification {
+    cursor: pointer;
+    margin: auto 0;
+    flex-grow: 0.20;
+    align-self: center;
+    path {
+      fill: white;
+    }
+  }
+}

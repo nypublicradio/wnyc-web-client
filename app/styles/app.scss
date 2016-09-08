@@ -61,6 +61,7 @@ body:not(.simplified_wrapper):not(.container_stripped) > :not(
 @import 'modal';
 @import 'utils';
 @import 'persistent-player';
+@import 'player-notification';
 @import 'queue-history';
 @import 'tabbed-list';
 @import 'stream-list';
