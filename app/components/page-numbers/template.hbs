@@ -1,31 +1,31 @@
 {{#if hasPages}}
 <section id="pagefooter">
   <h1 class="for-screenreaders">Pagination</h1>
-    {{#if canStepBackward}}
+    {{#unless onFirstPage}}
         <span class="pagefooter-previous">
             <a href="#" {{action "incrementPage" -1 bubbles=false}} class="page-indicators">Prev</a>
             <button {{action "incrementPage" -1}} class="btn btn-page-mobile btn--large btn--blacktext">&lsaquo; Prev</button>
         </span>
-    {{/if}}
+    {{/unless}}
 
-    {{#each pageItems as |item|}}
-        {{#if item.dots}}
+    {{#each pages as |page|}}
+        {{#if page.dots}}
         <span class="dots">...</span>
         {{/if}}
-        {{#if item.current}}
-            <span class="pagefooter-current">{{item.page}}</span>
+        {{#if page.current}}
+            <span class="pagefooter-current">{{page.page}}</span>
         {{else}}
             <span class="pagefooter-link">
-                <a href="#" {{action "pageClicked" item.page bubbles=false}}>{{item.page}}</a>
+                <a href="#" {{action "pageClicked" page.page bubbles=false}}>{{page.page}}</a>
             </span>
         {{/if}}
     {{/each}}
 
-    {{#if canStepForward}}
+    {{#unless onLastPage}}
         <span class="pagefooter-next">
             <a href="#" {{action "incrementPage" 1 bubbles=false}} class="page-indicators">Next</a> 
             <button {{action "incrementPage" 1}} class="btn btn-page-mobile btn--large {{currentPageClass}} btn--blacktext">Next &rsaquo;</button>
         </span>
-    {{/if}}
+    {{/unless}}
 </section>
 {{/if}}
