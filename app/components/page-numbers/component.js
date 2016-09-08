@@ -50,7 +50,6 @@ export default Component.extend({
     let bounds = get(this, 'bounds');
     let totalPages = get(this, 'totalPages');
     let currentPage = get(this, 'currentPage');
-    let centerPage = get(this, 'centerPage');
     
     let pages = [];
     for (let i = bounds.lower; i <= bounds.upper; i++) {
@@ -59,7 +58,10 @@ export default Component.extend({
         current: i === currentPage
       });
     }
-    if (bounds.lower > 2) { // make it 1 ... <page number>
+    
+    // only add dots if the lower boundary is more than
+    // on away from the first page, i.e. is it greater than 2
+    if (bounds.lower > 2) {
       pages[0].dots = true;
     }
     
@@ -69,12 +71,12 @@ export default Component.extend({
       });
     }
      
-    // make it <page number> ... <total pages> but only if they are not
-    // sequential
-    if ((totalPages - bounds.upper) > 1) {
+    if (bounds.upper !== totalPages) {
       pages.push({
         page: totalPages,
-        dots: centerPage < (totalPages - bounds.range)
+        // only add dots if the upper boundary is more
+        // than one away from the totalPages
+        dots: (totalPages - bounds.upper) > 1
       });
     }
     return pages;
