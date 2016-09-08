@@ -19,7 +19,6 @@ test('it renders', function(assert) {
 });
 
 test('it renders dots correctly', function(assert) {
-  let numbers;
   this.render(hbs`
     {{page-numbers
       currentPage=1
