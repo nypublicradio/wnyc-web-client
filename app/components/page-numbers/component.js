@@ -27,7 +27,7 @@ export default Component.extend({
       
       return {
         lower: centerPage - (pagesToShowIsEven ? range - 1 : range),
-        upper: centerPage + range,
+        upper: (centerPage + range) > totalPages ? totalPages : centerPage + range,
         range
       };
     }
