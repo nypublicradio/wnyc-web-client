@@ -56,9 +56,10 @@ export function beforeTeardown(/* element, page */) {
   // end up accumulating unexpected cruft.
   let apis = window.wnyc.apis;
   let Decoder = window.wnyc.Decoder;
+  let url = window.wnyc.url;
   window.wnyc = undefined;
 
-  window.wnyc = { apis, Decoder };
+  window.wnyc = { apis, Decoder, url };
 
   // unknown scripts are setting overflow inline on the homepage
   if (location.pathname === '/') {
