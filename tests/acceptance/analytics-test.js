@@ -30,5 +30,6 @@ test('it does not log a pageview when opening the queue', function(assert) {
   andThen(() => {
     assert.equal(find('.l-sliding-modal').length, 1, 'modal is open');
     click('.floating-queuebutton');
+    return wait();
   });
 });
