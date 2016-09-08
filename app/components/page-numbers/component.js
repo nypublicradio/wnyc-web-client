@@ -8,7 +8,6 @@ export default Component.extend({
   hasPages: gt('totalPages', 0),
   hasOnePage: equal('totalPages', 1),
   pagesToShow: 10,
-  pageSize: 10,
   
   bounds: computed('centerPage', 'pagesToShow', 'totalPages', function() {
     let pagesToShow = get(this, 'pagesToShow');
