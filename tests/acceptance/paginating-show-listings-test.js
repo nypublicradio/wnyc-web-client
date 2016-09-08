@@ -223,3 +223,51 @@ test('it only shows ten pages at a time', function(assert) {
     assert.equal(find('.pagefooter-link:last').text().trim(), '50', 'final link should be 50');
   });
 });
+
+test('clicking on a page number takes to the page of the correct tab', function(assert) {
+  let episodesPage1 = 'shows/foo/episodes/1';
+  let apiResponse = server.create('api-response', {
+    id: episodesPage1,
+    teaseList: server.createList('story', 10),
+    totalCount: 60
+  });
+  let segmentsPage1 = 'shows/foo/segments/1';
+  let segmentsPage3 = 'shows/foo/segments/3';
+  
+  server.create('api-response', {
+    id: segmentsPage1,
+    teaseList: server.createList('story', 10),
+    totalCount: 60
+  });
+  server.create('api-response', {
+    id: segmentsPage3,
+    teaseList: server.createList('story', 10),
+    totalCount: 60
+  });
+  
+  let show = server.create('show', {
+    id: 'shows/foo/',
+    linkroll: [
+      {navSlug: 'episodes', title: 'Episodes'},
+      {navSlug: 'segments', title: 'Segments'}
+    ],
+    apiResponse
+  });
+
+  server.create('django-page', {id: show.id});
+  
+  djangoPage
+    .bootstrap(show)
+    .visit(show);
+  
+  andThen(() => {
+    showPage.clickNavLink('Segments');
+  });
+  andThen(() => {
+    showPage.clickPage(3);
+  });
+  andThen(() => {
+    assert.equal(currentURL(), `/${segmentsPage3}`);
+  });
+  
+});
