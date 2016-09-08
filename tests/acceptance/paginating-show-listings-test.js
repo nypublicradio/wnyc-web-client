@@ -123,15 +123,16 @@ test('can go back and forward', function(assert) {
 
 test('can navigate to a specified page of results', function(assert) {
   let api1 = 'shows/foo/episodes/1';
-  let api5 = 'shows/foo/episodes/5';
+  let api4 = 'shows/foo/episodes/4';
 
   let apiResponse = server.create('api-response', {
     id: api1,
-    teaseList: server.createList('story', 50)
+    teaseList: server.createList('story', 10),
+    totalCount: 500
   });
   server.create('api-response', {
-    id: api5,
-    teaseList: server.createList('story', 50)
+    id: api4,
+    teaseList: server.createList('story', 10)
   });
 
   let show = server.create('show', {
@@ -152,11 +153,11 @@ test('can navigate to a specified page of results', function(assert) {
 
   andThen(function() {
     firstStoryTitle = showPage.storyTitles()[0];
-    showPage.clickPage(5);
+      showPage.clickPage(4);
   });
   andThen(function() {
     assert.notEqual(firstStoryTitle, showPage.storyTitles()[0]);
-    assert.equal(currentURL(), `/${api5}`, 'uses nav slug when paginating');
+    assert.equal(currentURL(), `/${api4}`, 'uses nav slug when paginating');
   });
 });
 
@@ -166,7 +167,8 @@ test('can land on a page number', function(assert) {
 
   let apiResponse = server.create('api-response', {
     id: api5,
-    teaseList: server.createList('story', 50)
+    teaseList: server.createList('story', 10),
+    totalCount: 60
   });
   server.create('api-response', {
     id: api1,
@@ -191,5 +193,33 @@ test('can land on a page number', function(assert) {
   andThen(function() {
     assert.equal(currentURL(), `/${api5}`, 'can land directly on a page of results');
     assert.equal(find('.pagefooter-current').text().trim(), '5', 'current page number is 5');
+  });
+});
+
+test('it only shows ten pages at a time', function(assert) {
+  let apiResponse = server.create('api-response', {
+    id: `shows/foo/episodes/1`,
+    teaseList: server.createList('story', 10),
+    totalCount: 500
+  });
+  
+  let show = server.create('show', {
+    id: 'shows/foo/',
+    linkroll: [{navSlug: 'episodes', title: 'Episodes'}],
+    apiResponse
+  });
+  
+  server.create('django-page', {id: show.id});
+  
+  djangoPage
+    .bootstrap(show)
+    .visit(show);
+  
+  andThen(function() {
+    assert.equal(find('.pagefooter-current').length, 1, 'one current page number');
+    assert.equal(find('.pagefooter-link').length, 10, 'links 2-9 and one final page');
+    assert.equal(find('.dots').length, 1, 'should only be one set of dots');
+    assert.equal(find('.dots').next('.pagefooter-link').text().trim(), '50', 'final link should follow dots');
+    assert.equal(find('.pagefooter-link:last').text().trim(), '50', 'final link should be 50');
   });
 });
