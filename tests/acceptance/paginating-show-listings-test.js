@@ -153,7 +153,7 @@ test('can navigate to a specified page of results', function(assert) {
 
   andThen(function() {
     firstStoryTitle = showPage.storyTitles()[0];
-      showPage.clickPage(4);
+    showPage.clickPage(4);
   });
   andThen(function() {
     assert.notEqual(firstStoryTitle, showPage.storyTitles()[0]);
