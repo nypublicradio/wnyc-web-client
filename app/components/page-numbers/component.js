@@ -60,14 +60,19 @@ export default Component.extend({
         current: i === currentPage
       });
     }
+    if (bounds.lower > 2) { // make it 1 ... <page number>
+      pages[0].dots = true;
+    }
     
     if (bounds.lower !== 1) {
       pages.unshift({
         page: 1,
-        dots: centerPage > bounds.range + 1
       });
     }
-    if (bounds.upper !== totalPages) {
+     
+    // make it <page number> ... <total pages> but only if they are not
+    // sequential
+    if ((totalPages - bounds.upper) > 1) {
       pages.push({
         page: totalPages,
         dots: centerPage < (totalPages - bounds.range)
