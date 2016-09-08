@@ -13,9 +13,9 @@
         <span class="dots">...</span>
         {{/if}}
         {{#if page.current}}
-            <span class="pagefooter-current">{{page.page}}</span>
+            <span class="pagefooter-current" data-test-selector="page">{{page.page}}</span>
         {{else}}
-            <span class="pagefooter-link">
+            <span class="pagefooter-link" data-test-selector="page">
                 <a href="#" {{action "pageClicked" page.page bubbles=false}}>{{page.page}}</a>
             </span>
         {{/if}}
