@@ -196,7 +196,7 @@ export const OkraBridge = Ember.Object.extend(Ember.Evented, {
       if (html5AudioElement) {
         // we're in an HTML5 context
         html5AudioElement.onsuspend = function() {
-          if (this.paused) {
+          if (this.paused && this.duration === Infinity) {
             // network is idling, so teardown the sound to reset
             backbone.teardown();
           }
