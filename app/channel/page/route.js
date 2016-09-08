@@ -18,8 +18,8 @@ export default Route.extend(ListingRouteMixin, {
     return this.store.findRecord('api-response', id)
       .then(m => {
         // wait until models are loaded to keep UI consistent
-        set(this, 'pageNumbers.page', page || 1);
-        set(this, 'pageNumbers.totalPages', get(m, 'totalPages'));
+        set(this, 'pageNumbers.page', Number(page) || 1);
+        set(this, 'pageNumbers.totalPages', Number(get(m, 'totalPages')));
 
         return m;
       });

@@ -21,7 +21,7 @@ export default Route.extend(ListingRouteMixin, {
       .then(m => {
         // wait until models are loaded to keep UI consistent
         set(this, 'pageNumbers.page', 1);
-        set(this, 'pageNumbers.totalPages', get(m, 'totalPages'));
+        set(this, 'pageNumbers.totalPages', Number(get(m, 'totalPages')));
 
         return m;
       });
