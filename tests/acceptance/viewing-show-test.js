@@ -103,7 +103,7 @@ test('visiting a show - story page smoke test', function(assert) {
 test('using a nav-link', function(assert) {
   let apiResponse = server.create('api-response', {
     id: 'shows/foo/episodes/1',
-    teaseList: server.createList('story', 50)
+    teaseList: server.createList('story', 10)
   });
   server.create('api-response', {
     id: 'shows/foo/next-link/1',
@@ -135,7 +135,7 @@ test('using a nav-link', function(assert) {
 test('null social links should not break page', function(assert) {
   let apiResponse = server.create('api-response', {
     id: 'shows/foo/recent_stories/1',
-    teaseList: server.createList('story', 50)
+    teaseList: server.createList('story', 10)
   });
   let show = server.create('show', {
     id: 'shows/foo/',
@@ -156,7 +156,7 @@ test('null social links should not break page', function(assert) {
 test('undefined social links should not break page', function(assert) {
   let apiResponse = server.create('api-response', {
     id: 'shows/foo/recent_stories/1',
-    teaseList: server.createList('story', 50)
+    teaseList: server.createList('story', 10)
   });
   let show = server.create('show', {
     id: 'shows/foo/',

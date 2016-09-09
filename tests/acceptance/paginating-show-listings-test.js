@@ -13,7 +13,8 @@ moduleForAcceptance('Acceptance | Django Page | paginating show listings', {
 test('showing pagination for a list of episodes', function(assert) {
   let apiResponse = server.create('api-response', {
     id: 'shows/foo/episodes/1',
-    teaseList: server.createList('story', 50)
+    teaseList: server.createList('story', 10),
+    totalCount: 50
   });
 
   let show = server.create('show', {
@@ -84,11 +85,13 @@ test('can go back and forward', function(assert) {
 
   let apiResponse = server.create('api-response', {
     id: api1,
-    teaseList: server.createList('story', 50)
+    teaseList: server.createList('story', 10),
+    totalCount: 50
   });
   server.create('api-response', {
     id: api2,
-    teaseList: server.createList('story', 50)
+    teaseList: server.createList('story', 10),
+    totalCount: 50
   });
 
   let show = server.create('show', {
@@ -310,5 +313,4 @@ test('clicking on a page number takes to the page of the correct tab', function(
   andThen(() => {
     assert.equal(currentURL(), `/${segmentsPage3}`);
   });
-  
 });
