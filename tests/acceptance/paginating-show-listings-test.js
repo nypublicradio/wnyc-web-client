@@ -121,6 +121,47 @@ test('can go back and forward', function(assert) {
   });
 });
 
+test('proper paginating for listing pages without a linkroll', function(assert) {
+  // api-responses without a linkroll associated are just the stories associated
+  // with the listing object
+  let api1 = 'shows/foo/recent_stories/1';
+  let api2 = 'shows/foo/recent_stories/2';
+
+  let apiResponse = server.create('api-response', {
+    id: api1,
+    teaseList: server.createList('story', 10),
+    totalCount: 50
+  });
+  server.create('api-response', {
+    id: api2,
+    teaseList: server.createList('story', 10),
+    totalCount: 50
+  });
+
+  let show = server.create('show', {
+    id: 'shows/foo/',
+    apiResponse
+  });
+
+  server.create('django-page', {id: show.id});
+
+  djangoPage
+    .bootstrap(show)
+    .visit(show);
+
+  andThen(function() {
+    assert.equal(currentURL(), 'shows/foo/');
+    showPage.clickNext();
+  });
+  andThen(function() {
+    assert.equal(currentURL(), '/shows/foo/2', 'correct url when paginating');
+    showPage.clickBack();
+  });
+  andThen(function() {
+    assert.equal(currentURL(), '/shows/foo/1', 'adds page number when going back');
+  });
+});
+
 test('can navigate to a specified page of results', function(assert) {
   let api1 = 'shows/foo/episodes/1';
   let api4 = 'shows/foo/episodes/4';
