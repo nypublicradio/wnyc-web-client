@@ -48,7 +48,7 @@ export default Mixin.create({
       const channelType = get(this, 'channelType');
       const navSlug = this._getNavSlug(channelType);
       this._scrollToOffset(channelType);
-      this.transitionTo(`${channelType}.page`, `${navSlug}/${page}`);
+      this.transitionTo(`${channelType}.page`, navSlug ? `${navSlug}/${page}` : page);
     }
   },
 
