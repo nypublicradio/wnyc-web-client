@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import config from 'overhaul/config/environment';
+import service from 'ember-service/inject';
 const {
   get
 } = Ember;
@@ -10,6 +12,7 @@ export default Ember.Route.extend({
   discoverPrefs:    Ember.inject.service(),
   scroller:         Ember.inject.service(),
   metrics:          Ember.inject.service(),
+  experimentalGroup: config.experimentalGroup,
 
   hasQueuedStories: Ember.computed.gt('discoverQueue.items.length', 0),
 
@@ -17,6 +20,23 @@ export default Ember.Route.extend({
     controller.set('noNewResults', false);
     return this._super(...arguments);
   },
+
+  // Google Experiment D4W - START
+  store: service(),
+  beforeModel() {
+    let prefs = get(this, 'discoverPrefs');
+    let setupComplete = get(prefs, 'setupComplete');
+    if (get(this, 'experimentalGroup') === 2 && !setupComplete) {
+      return get(this, 'store').query("discover.topics", {discover_station: config.discoverTopicsKey}).then(function(topics) {
+        let topicTags = topics.toArray().map(topic => get(topic, 'url'));
+        prefs.setDefaultTopics(topicTags);
+        prefs.set('currentSetupStep', '');
+        prefs.set('setupComplete', true);
+        prefs.save();
+      });
+    }
+  },
+  // Google Experiment D4W - END
 
   model() {
     var stories;
