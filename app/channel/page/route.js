@@ -12,6 +12,12 @@ export default Route.extend(ListingRouteMixin, {
     let channelType = get(this, 'channelType');
     let { slug } = this.paramsFor(channelType);
     let [navSlug, page] = page_params.split('/');
+    if (!page && /^\d+$/.test(navSlug)) {
+      // navSlug is a page, so URL is something like shows/bl/5
+      // we use recent_stories as the lookup for those stories
+      page = navSlug;
+      navSlug = 'recent_stories';
+    }
     let id = `${inflect.pluralize(channelType)}/${slug}/${navSlug}/${page || 1}`;
     set(this, 'pageNumbers.totalPages', 0);
 
