@@ -43,11 +43,7 @@ export default Service.extend({
   duration:         computed.readOnly('audioPledge.duration'),
   position:         computed.alias('audioPledge.position'),
   volume:           computed.alias('audioPledge.volume'),
-
-  /* TODO: low-level interface needs to expose these props
-
-  percentLoaded:
-  ------------------------------------------------------------*/
+  percentLoaded:    computed.alias('audioPledge.percentLoaded'),
 
   currentStory:     or('currentAudio.story', 'currentAudio'),
 
@@ -145,16 +141,13 @@ export default Service.extend({
 
     set(this, 'currentId', id);
 
-    get(this, 'store').findRecord('story', id).then(story => {
-      set(this, 'hasErrors', false);
+    let story;
+    let urlPromise = get(this, 'store').findRecord('story', id).then(s => {
+      story = s;
+      return s.get('audio');
+    });
 
-    /* TODO: send a play signal to the low-level interface
-        you'll probaby wantto do it in this promise call back since 
-        the `audio` attr on the retrieved `story` instance is a URL
-        to the audio file.
-    --------------------------------------------------------------*/
-
-      return this.get('audioPledge').play(story.get('audio'));
+    return this.get('audioPledge').play(urlPromise).then(sound => {
 
     /* TODO: send a play signal to the low-level interface
         you'll probaby wantto do it in this promise call back since
