@@ -89,9 +89,10 @@ test('visiting a story with a different donate URL', function(assert) {
 moduleForAcceptance('Acceptance | Django Page | Story Detail Analytics');
 
 test('metrics properly reports story attrs', function(assert) {
-  let done = assert.async();
   let story = server.create('story');
   let id = `story/${story.slug}/`;
+  
+  assert.expect(3);
   server.create('django-page', {id, slug: story.slug});
 
   server.post(`${config.wnycAccountRoot}/api/v1/analytics/ga`, (schema, {queryParams, requestBody}) => {
@@ -118,7 +119,10 @@ test('metrics properly reports story attrs', function(assert) {
     };
     assert.deepEqual({category, action, cms_id, cms_type, label}, testObj, 'GET params match up');
     assert.deepEqual(postParams, testObj, 'POST params match up');
-    done();
+  });
+  
+  server.post(`${config.wnycAccountRoot}/api/most/view/managed_item/:pk`, (schema, {params}) => {
+    assert.equal(params.pk, story.id, 'reports a managed item view');
   });
   
   djangoPage
