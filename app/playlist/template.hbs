@@ -1,14 +1,10 @@
-{{#django-page page=model.page}}
-  {{#ember-wormhole to="wnyc-ember-main"}}
-      <div class="l-constrained">
-        <main class="l-col2of3">
-          {{stream-playlist stream=model.streaminfo}}
-        </main>
-        <aside class="l-col1of3">
-          <div class="l-skinny">
-            {{google-ad ad="rightRail" class="align--mq-centertoright channel-ad"}}
-          </div>
-        </aside>
-      </div>
-  {{/ember-wormhole}}
-{{/django-page}}
+<div class="l-constrained">
+  <main class="l-col2of3">
+    {{stream-playlist stream=model.streaminfo}}
+  </main>
+  <aside class="l-col1of3">
+    <div class="l-skinny">
+      {{google-ad ad="rightRail" class="align--mq-centertoright channel-ad"}}
+    </div>
+  </aside>
+</div>
