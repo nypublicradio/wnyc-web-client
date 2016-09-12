@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import config from 'overhaul/config/environment';
 import service from 'ember-service/inject';
+import { inExperimentalGroup } from 'overhaul/helpers/in-experimental-group';
 const {
   get
 } = Ember;
@@ -26,7 +27,7 @@ export default Ember.Route.extend({
   beforeModel() {
     let prefs = get(this, 'discoverPrefs');
     let setupComplete = get(prefs, 'setupComplete');
-    if (get(this, 'experimentalGroup') === 2 && !setupComplete) {
+    if (inExperimentalGroup([2]) && !setupComplete) {
       return get(this, 'store').query("discover.topics", {discover_station: config.discoverTopicsKey}).then(function(topics) {
         let topicTags = topics.toArray().map(topic => get(topic, 'url'));
         prefs.setDefaultTopics(topicTags);

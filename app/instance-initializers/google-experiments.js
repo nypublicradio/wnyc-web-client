@@ -1,8 +1,8 @@
-import config from 'overhaul/config/environment';
-
 export function initialize(/* appInstance */) {
   if (window.cxApi) {
-    config.experimentalGroup = window.cxApi.chooseVariation();
+    // initializing google experiments api here
+    // so an experiment variation is always chosen.
+    window.cxApi.chooseVariation();
   }
 }
 

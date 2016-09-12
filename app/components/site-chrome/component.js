@@ -9,7 +9,6 @@ export default Component.extend(BetaActionsMixin, {
   metrics: service(),
   router: service('wnyc-routing'),
   donateURL: config.wnycDonateURL,
-  experimentalGroup: config.experimentalGroup,
 
   click: function({target}){
     if (target.tagName === "A"){
