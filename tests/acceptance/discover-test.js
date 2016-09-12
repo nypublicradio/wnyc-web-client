@@ -411,10 +411,7 @@ test('should be able to go back to welcome screen if you really want to', functi
 });
 
 test('nav link sends you to start page', function(assert) {
-<<<<<<< b53e7540a7e5688b9e9f1a55b48405ae532bbeda
   withFeature('discover');
-=======
->>>>>>> Add tests for d4w experiment
   server.createList('discover-topic', 5);
   server.createList('show', 5);
   server.create('djangoPage', {id:'/'});
@@ -454,17 +451,6 @@ moduleForAcceptance('Acceptance | discover group 2',
   }
 );
 
-test('can visit discover from the home page', function(assert) {
-  server.create('djangoPage', {id:'/'});
-  visit('/');
-  andThen(function() {
-    click('.l-page-nav .list-item [href*="discover"]');
-  });
-  andThen(function() {
-    assert.equal(currentURL(), '/discover/start');
-  });
-});
-
 test('landing page goes straight to playlist', function(assert) {
   server.create('djangoPage', {id:'/'});
   visit('/');
@@ -475,7 +461,7 @@ test('landing page goes straight to playlist', function(assert) {
     click('button:contains("Get Started")');
   });
   andThen(function() {
-    assert.equal(currentURL(), '/discover/playlist');
+    assert.equal(currentURL(), '/discover/playlist', 'it should go straight to the playlist');
   });
 });
 
