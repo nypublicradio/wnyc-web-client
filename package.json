@@ -72,7 +72,6 @@
     "ember-sortable": "1.8.2",
     "ember-truth-helpers": "1.2.0",
     "ember-waypoints": "0.1.0",
-    "ember-welcome-page": "^1.0.1",
     "ember-wormhole": "nypublicradio/ember-wormhole",
     "glob": "^4.5.3",
     "http-proxy": "^1.14.0",
