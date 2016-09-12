@@ -133,13 +133,10 @@ export default BaseAdapter.extend({
   },
 
   _viewedStory(options) {
-    let { model } = options;
-    let pk = model ? get(model, 'id') : '';
-
     this.defaultSend(options);
     //TODO: are we calling trackManagedItemView for listing objects?
-    if (pk) {
-      this._trackManagedItemView(pk);
+    if (options.id) {
+      this._trackManagedItemView(options.id);
     }
   },
 
