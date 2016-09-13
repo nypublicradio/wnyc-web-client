@@ -1,9 +1,11 @@
 import Ember from 'ember';
+import service from 'ember-service/inject';
 
 export default Ember.Component.extend({
-  session:        Ember.inject.service(),
-  scroller:       Ember.inject.service(),
-  audio:          Ember.inject.service(),
+  session:  service(),
+  scroller: service(),
+  audio:    service(),
+  metrics:  service(),
 
   classNames:        ['discover-playlist-container'],
   classNameBindings: ['isDraggingItem:is-dragging-item'],
@@ -68,6 +70,11 @@ export default Ember.Component.extend({
     },
 
     reorderItems(itemModels, draggedModel) {
+      get(this, 'metrics').trackEvent({
+        category: 'Discover',
+        action: 'Moved Story',
+        label: draggedModel.id
+      });
       this.set('justDragged', draggedModel);
 
       // This is a good time to actually delete the hidden items

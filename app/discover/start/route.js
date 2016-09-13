@@ -1,7 +1,10 @@
-import Ember from 'ember';
+import Route from 'ember-route';
+import service from 'ember-service/inject';
+import get from 'ember-metal/get';
 
-export default Ember.Route.extend({
-  discoverPrefs: Ember.inject.service(),
+export default Route.extend({
+  discoverPrefs: service(),
+  metrics: service(),
 
   setupController(controller) {
     controller.set('isMobile', window.Modernizr.touch);
@@ -21,8 +24,18 @@ export default Ember.Route.extend({
       // browsing direct, allow it
     }
   },
+  afterModel() {
+    get(this, 'metrics').trackEvent({
+      category: 'Discover',
+      action: 'Discover Entered'
+    });
+  },
   actions: {
     next() {
+      get(this, 'metrics').trackEvent({
+        category: 'Discover',
+        action: 'Clicked Get Started'
+      });
       let prefs = this.get('discoverPrefs');
       prefs.set('currentSetupStep', 'topics');
       prefs.save();

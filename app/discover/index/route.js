@@ -1,16 +1,19 @@
 import Ember from 'ember';
-const {
-  get
-} = Ember;
+import Route from 'ember-route';
+import computed from 'ember-computed';
+import get from 'ember-metal/get';
+import set from 'ember-metal/set';
+import service from 'ember-service/inject';
 
-export default Ember.Route.extend({
-  session:          Ember.inject.service(),
-  discoverQueue:    Ember.inject.service(),
-  listenActions:    Ember.inject.service(),
-  discoverPrefs:    Ember.inject.service(),
-  scroller:         Ember.inject.service(),
+export default Route.extend({
+  session:       service(),
+  discoverQueue: service(),
+  listenActions: service(),
+  discoverPrefs: service(),
+  scroller:      service(),
+  metrics:       service(),
 
-  hasQueuedStories: Ember.computed.gt('discoverQueue.items.length', 0),
+  hasQueuedStories: computed.gt('discoverQueue.items.length', 0),
 
   setupController(controller) {
     controller.set('noNewResults', false);
@@ -19,10 +22,14 @@ export default Ember.Route.extend({
 
   model() {
     var stories;
-    if (this.get('hasQueuedStories')) {
+    if (get(this, 'hasQueuedStories')) {
       stories = this._loadStoriesFromQueue();
     }
     else {
+      get(this, 'metrics').trackEvent({
+        category: 'Discover',
+        action: 'Create Playlist in Discover',
+      });
       stories = this._loadStoriesFromServer();
     }
 
@@ -34,16 +41,16 @@ export default Ember.Route.extend({
   },
 
   _loadStoriesFromQueue() {
-    let prefs         = this.get('discoverPrefs');
+    let prefs         = get(this, 'discoverPrefs');
     let excludedIds   = prefs.get('excludedStoryIds');
-    let queuedStories = this.get('discoverQueue.items');
+    let queuedStories = get(this, 'discoverQueue.items');
 
     return queuedStories.reject(story => excludedIds.contains(story.id));
   },
 
   _loadStoriesFromServer() {
     var stories;
-    let prefs             = this.get('discoverPrefs');
+    let prefs             = get(this, 'discoverPrefs');
     let excludedIds       = prefs.get('excludedStoryIds');
     let topicTags         = prefs.get('selectedTopicTags');
     let excludedShowSlugs = prefs.get('excludedShowSlugs');
@@ -68,7 +75,7 @@ export default Ember.Route.extend({
     // from the queue the playlist will yank that sucker right out without
     // doing our super sweet CSS effect. That's why we do a .copy() right here.
 
-    this.get('discoverQueue').updateQueue(stories.copy());
+    get(this, 'discoverQueue').updateQueue(stories.copy());
   },
 
   _hasNoNewResults(stories) {
@@ -84,6 +91,10 @@ export default Ember.Route.extend({
 
   actions: {
     findMore() {
+      get(this, 'metrics').trackEvent({
+        category: 'Discover',
+        action: 'Clicked Find More in Discover',
+      });
       let controller = this.controllerFor('discover.index');
 
       controller.set('findingMore', true);
@@ -98,7 +109,7 @@ export default Ember.Route.extend({
           return stories;
         }
       }).then(s => {
-        this.set('currentModel.stories', s);
+        set(this, 'currentModel.stories', s);
         this._updateDiscoverQueue(s);
       }).finally(() => {
         this.get('scroller').scrollVertical('.sitechrome-top', {duration: 500});
@@ -106,12 +117,12 @@ export default Ember.Route.extend({
       });
     },
     removeItem(item) {
-      let listenActions = this.get('listenActions');
-      let prefs         = this.get('discoverPrefs');
+      let listenActions = get(this, 'listenActions');
+      let prefs         = get(this, 'discoverPrefs');
       let itemId        = get(item, 'id');
 
       listenActions.sendDelete(itemId, 'NYPR_Web');
-      this.get('discoverQueue').removeItem(item);
+      get(this, 'discoverQueue').removeItem(item);
 
       // Make sure this doesn't show up again
       prefs.excludeStoryId(itemId);
