@@ -1,14 +1,23 @@
 
 <div class='player-notification'>
-  {{#if elapsed}}
-    <p>
-      Your episode is over. In {{secondsRemaining}} seconds, we'll tune you to WNYC FM.
-      <span {{action 'oncancel'}}>Cancel</span> /
+  {{#if didNotElapse}}
+    <p class='notification-message'>
+      Your episode is over. In {{secondsRemaining}} seconds, we'll tune you to {{preferredStream}}.
     </p>
+    <span class='notification-action' {{action 'dismiss' true}}>
+      Cancel
+    </span> /
   {{else}}
-    <p>
-      We tuned you to WNYC FM after your episode ended. ||Settings Link||.
+    <p class='notification-message'>
+      We tuned you to {{preferredStream}} after your episode ended.
     </p>
   {{/if}}
-  {{yield}}
+
+  <div {{action 'dismiss'}}>
+    {{link-to 'Change Settings' 'settings' classNames='notification-action'}}
+  </div>
+
+  <div class='dismiss-notification' {{action 'dismiss'}}>
+    {{wnyc-svg icon='close'}}
+  </div>
 </div>

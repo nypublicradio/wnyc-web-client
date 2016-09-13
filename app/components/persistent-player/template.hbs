@@ -1,10 +1,10 @@
 
 {{#if revealNotification}}
-  {{#persistent-player.notification oncancel=(action 'cancelAutoplay')}}
-    <div class='dismiss-notification' {{action 'dismissNotification'}}>
-      {{wnyc-svg icon='close'}}
-    </div>
-  {{/persistent-player.notification}}
+  {{
+    persistent-player.notification
+    dismissNotification=(action 'dismissNotification')
+    preferredStream=preferredStream
+  }}
 {{/if}}
 
 {{persistent-player.backdrop

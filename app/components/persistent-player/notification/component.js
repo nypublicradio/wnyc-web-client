@@ -2,26 +2,25 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNames: ['notification', 'notification-active'],
-  elapsed: true,
-  audioCueElapsed: false,
+  didNotElapse: Ember.computed.gt('secondsRemaining', 0),
   secondsRemaining: 15,
-  startCountdown: Ember.on('init', function(){
+  startCountdown: Ember.on('init', function() {
     var id = setInterval(() => {
       var seconds = this.decrementProperty('secondsRemaining');
       if (seconds === 0) {
-        this.set('elapsed', false);
         clearInterval(this.get('_intervalId'));
       }
     }, 1000);
     this.set('_intervalId', id);
   }),
 
+  clearCountdown: Ember.on('willDestroyElement', function() {
+    clearInterval(this.get('_intervalId'));
+  }),
+
   actions: {
-    oncancel() {
-      if (this.get('secondsRemaining') > 0) {
-        clearInterval(this.get('_intervalId'));
-      }
-      this.oncancel();
+    dismiss(cancelAutoplay = false) {
+      this.sendAction('dismissNotification', cancelAutoplay);
     }
   }
 });

@@ -13,7 +13,28 @@ export default Component.extend({
   classNames: ['persistent-player', 'l-flexcontent', 'l-highlight--blur'],
   classNameBindings: ['isAudiostream'],
   isAudiostream: equal('currentAudio.audioType', 'stream'),
-  revealNotification: true,
+  revealNotification: Ember.computed('session.data.userPrefs', function(){
+    // this needs to change
+    let session = get(this, 'session');
+    let pref = get(session, 'data.userPrefs.activeStream');
+    let currentContext = get(this, 'audio.currentContext');
+    if (pref === 'default_stream') {
+      return currentContext === 'continuous-player-bumper' || currentContext === null;
+    } else {
+      return false;
+    }
+  }),
+  showNotification: Ember.observer('audio.currentContext', function() {
+    // this needs to change
+    var ctxt = get(this, 'audio.currentContext');
+    var session = get(this, 'session');
+
+    this.set(
+      'revealNotification',
+      ctxt === 'continuous-player-bumper' || !ctxt
+    );
+    this.set('preferredStream', session.get('data.userPrefs.activeStream'));
+  }),
   actions: {
     playOrPause() {
       if (get(this, 'isPlaying')) {
@@ -22,10 +43,10 @@ export default Component.extend({
         get(this, 'audio').play();
       }
     },
-    dismissNotification() {
-      this.set('revealNotification', false);
-    },
-    cancelAutoplay() {
+    dismissNotification(cancelAutoplay = false) {
+      if (cancelAutoplay) {
+        get(this, 'audio').pause();
+      }
       this.set('revealNotification', false);
     },
     setPosition(p) {

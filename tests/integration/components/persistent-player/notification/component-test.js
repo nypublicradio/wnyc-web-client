@@ -6,19 +6,21 @@ moduleForComponent('persistent-player/notification', 'Integration | Component | 
 });
 
 test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  this.set('preferredStream', 'WNYC 93.9FM');
+  this.on('dismiss', function() {
+    assert.equal(this.$('.player-notification').length, 0);
+  });
 
-  this.render(hbs`{{persistent-player/notification}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  this.render(hbs`{{persistent-player.notification preferredStream=preferredStream}}`);
+  let actualText = this.$('.player-notification p').text().trim();
+  let expectedText = 'Your episode is over. In 15 seconds, we\'ll tune you to WNYC 93.9FM.';
+  assert.equal(actualText, expectedText);
 
-  // Template block usage:
-  this.render(hbs`
-    {{#persistent-player/notification}}
-      template block text
-    {{/persistent-player/notification}}
-  `);
+  this.set('secondsRemaining', 0);
+  this.render(hbs`{{persistent-player.notification secondsRemaining=secondsRemaining preferredStream=preferredStream}}`);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  let actualElapsedText = this.$('.player-notification p').text().trim();
+  let expectedElapsedText = 'We tuned you to WNYC 93.9FM after your episode ended.';
+  assert.equal(actualElapsedText, expectedElapsedText);
 });

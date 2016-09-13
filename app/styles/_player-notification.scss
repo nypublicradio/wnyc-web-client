@@ -1,9 +1,14 @@
 .notification {
-  background-color: #128cf4;
+  background-color: $blue;
   position: fixed;
   bottom: 95px;
   width: 100%;
   font-weight: 500;
+
+  .notification-action {
+    cursor: pointer;
+    color: $link-gold;
+  }
 
   .player-notification {
     display: flex;
@@ -11,9 +16,6 @@
     padding: 10px;
   }
 
-  p {
-    margin: 0;
-  }
 
   .dismiss-notification {
     cursor: pointer;
@@ -24,4 +26,8 @@
       fill: white;
     }
   }
+}
+
+.notification-message {
+  margin: 0;
 }

@@ -383,19 +383,18 @@ export default Service.extend({
     this.sendCompleteListenAction(this.get('currentId'));
     let context = get(this, 'currentContext');
     let { activePref, activeStream } = get(this, 'session.data.userPrefs');
-    let preferredStream = activeStream || 'wnyc-fm939';
 
     if (context === 'queue') {
       this.playNextInQueue();
     } else if (context === 'discover') {
       this.playDiscoverQueue();
-    } else if (context === 'continuous-player-bumper' && activePref !== 'no_autoplay') {
+    } else if (context === 'continuous-player-bumper' && activePref === 'default_stream') {
       this.playStream(activeStream);
     }
 
     let currentContext = get(this, 'currentContext');
-    if ((!currentContext || currentContext === 'home-page') && activePref !== 'no_autoplay') {
-      this.play(CONTINUOUS_PLAYER_BUMPERS[preferredStream], 'continuous-player-bumper');
+    if ((!currentContext || currentContext === 'home-page') && activePref === 'default_stream') {
+      this.play(CONTINUOUS_PLAYER_BUMPERS[activeStream], 'continuous-player-bumper');
     }
   },
 
