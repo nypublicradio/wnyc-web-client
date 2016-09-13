@@ -1,6 +1,7 @@
 import Route from 'ember-route';
 import service from 'ember-service/inject';
 import get from 'ember-metal/get';
+import { inExperimentalGroup } from 'overhaul/helpers/in-experimental-group';
 
 export default Route.extend({
   discoverPrefs: service(),
@@ -44,7 +45,13 @@ export default Route.extend({
       prefs.set('currentSetupStep', 'topics');
       prefs.save();
 
-      this.transitionTo('discover.topics');
+      // Google Experiment D4W - START
+      if (inExperimentalGroup([1])) {
+        this.transitionTo('discover.topics');
+      } else if (inExperimentalGroup([2])) {
+        this.transitionTo('discover.index');
+      }
+      // Google Experiment D4W - END
     }
   }
 });

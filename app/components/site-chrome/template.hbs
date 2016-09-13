@@ -125,15 +125,9 @@
 
         {{#if (or features.discover features.otherDiscover)}}
         {{!-- Google Experiment D4W - START --}}
-        {{#if (in-experimental-group 1)}}
+        {{#if (or (in-experimental-group 1) (in-experimental-group 2)) }}
           {{#link-to 'discover.start' current-when="discover" tagName='li' href="false" class="list-item list-item--short"}}
             {{link-to 'Discover' 'discover.start' class="inherit" preventDefault=false}}
-          {{/link-to}}
-        {{/if}}
-
-        {{#if (in-experimental-group 2)}}
-          {{#link-to 'discover' current-when="discover" tagName='li' href="false" class="list-item list-item--short"}}
-            {{link-to 'Discover' 'discover' class="inherit" preventDefault=false}}
           {{/link-to}}
         {{/if}}
         {{!-- Google Experiment D4W - END --}}
