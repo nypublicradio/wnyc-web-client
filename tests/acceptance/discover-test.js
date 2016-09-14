@@ -451,7 +451,18 @@ moduleForAcceptance('Acceptance | discover group 2',
   }
 );
 
-test('landing page goes straight to playlist', function(assert) {
+test('it should', function(assert) {
+  server.create('djangoPage', {id:'/'});
+  visit('/');
+  andThen(function() {
+    click('.l-page-nav .list-item [href*="discover"]');
+  });
+  andThen(function() {
+    assert.equal(currentURL(), '/discover/start');
+  });
+});
+
+test('can visit discover from the home page', function(assert) {
   server.create('djangoPage', {id:'/'});
   visit('/');
   andThen(function() {
@@ -461,7 +472,7 @@ test('landing page goes straight to playlist', function(assert) {
     click('button:contains("Get Started")');
   });
   andThen(function() {
-    assert.equal(currentURL(), '/discover/playlist', 'it should go straight to the playlist');
+    assert.equal(currentURL(), '/discover/playlist');
   });
 });
 
