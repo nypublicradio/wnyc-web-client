@@ -321,15 +321,16 @@ export default Service.extend({
   /* EVENTS AND HELPERS -------------------------------------------------------*/
 
   finishedTrack() {
+    let context = get(this, 'currentContext') || '';
+
     this._trackPlayerEvent({
       action: 'Finished Story',
       withRegion: true,
-      region: upperCamelize(get(this, 'currentContext')),
+      region: upperCamelize(context),
       withAnalytics: true,
     });
 
     this.sendCompleteListenAction(this.get('currentId'));
-    let context = get(this, 'currentContext');
 
     if (context === 'queue') {
       this.playNextInQueue();

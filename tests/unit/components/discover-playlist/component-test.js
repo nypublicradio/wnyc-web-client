@@ -1,4 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
+import get from 'ember-metal/get';
+import set from 'ember-metal/set';
 import Ember from 'ember';
 
 moduleForComponent('discover-playlist', 'Unit | Component | discover playlist', {
@@ -10,10 +12,19 @@ moduleForComponent('discover-playlist', 'Unit | Component | discover playlist', 
       currentAudio: {id: 'audioPK'},
       isPlaying: false
     });
-
+    const metricsStub = Ember.Service.extend({
+      trackEvent(event) {
+        set(this, 'lastTrackedEvent', event);
+        set(this, 'trackedEventCount', get(this, 'trackedEventCount') + 1);
+      },
+      lastTrackedEvent: null,
+      trackedEventCount: 0,
+    });
 
     this.register('service:audio', audioStub);
     this.inject.service('audio', { as: 'audio' });
+    this.register('service:metrics', metricsStub);
+    this.inject.service('metrics', { as: 'metrics' });
   }
 });
 
@@ -100,4 +111,39 @@ test('delete action sends onDeleteItem and marks item as deleted', function(asse
   let story = stories[0];
   component.send('removeItem', story);
   assert.equal(component.get('removedItems').length, 1, "item should be added to removed items list");
+});
+
+test('removeItem sends removed item event to metrics', function(assert) {
+  var component = this.subject();
+  component.set('stories', stories);
+  component.set('removedItems', []);
+
+  let story = stories[0];
+  component.send('removeItem', story);
+  assert.equal(component.get('metrics.trackedEventCount'), 1, "it should only send one metrics event");
+  assert.deepEqual(component.get('metrics.lastTrackedEvent'),
+    {
+      category: 'Discover',
+      action: 'Removed Story from Discover',
+      value: 1
+    },
+    "it should send the removed item metrics event");
+});
+
+test('reorderItems sends moved item event to metrics', function(assert) {
+  var component = this.subject();
+  component.set('stories', stories);
+  component.set('removedItems', []);
+
+  let reorderedStories = stories.slice(0).reverse();
+  let story = stories[0];
+  component.send('reorderItems', reorderedStories, story);
+  assert.equal(component.get('metrics.trackedEventCount'), 1, "it should only send one metrics event");
+  assert.deepEqual(component.get('metrics.lastTrackedEvent'),
+    {
+      category: 'Discover',
+      action: 'Moved Story',
+      value: 1
+    },
+    "it should send the moved item metrics event");
 });

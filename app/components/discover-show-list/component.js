@@ -37,7 +37,8 @@ export default Component.extend({
     onMultiselectChangeEvent(shows, value, action) {
       let excludedShowSlugs = get(this, 'excludedShowSlugs');
       let selectedShowSlugs = get(this, 'selectedShowSlugs');
-      let title = get(this, 'shows').findBy('slug', value).get('title');
+      let show = get(this, 'shows').findBy('slug', value);
+      let title = get(show, 'title');
       if (action === 'added') {
         get(this, 'metrics').trackEvent({
           category: 'Discover',

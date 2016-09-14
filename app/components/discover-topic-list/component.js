@@ -48,7 +48,8 @@ export default Component.extend({
     },
     onMultiselectChangeEvent(selectedTopics, value, action) {
       let topics = get(this, 'selectedTopicTags');
-      let title = get(this, 'topics').findBy('url', value).get('title');
+      let topic = get(this, 'topics').findBy('url', value);
+      let title = get(topic, 'title');
       if (action === 'added') {
         get(this, 'metrics').trackEvent({
           category: 'Discover',
