@@ -461,7 +461,21 @@ test('can visit discover from the home page', function(assert) {
     click('.l-page-nav .list-item [href*="discover"]');
   });
   andThen(function() {
-    assert.equal(currentURL(), '/discover/playlist', 'it should go straight to the playlist');
+    assert.equal(currentURL(), '/discover/start');
+  });
+});
+
+test('landing page goes straight to playlist', function(assert) {
+  server.create('djangoPage', {id:'/'});
+  visit('/');
+  andThen(function() {
+    click('.l-page-nav .list-item [href*="discover"]');
+  });
+  andThen(function() {
+    click('button:contains("Get Started")');
+  });
+  andThen(function() {
+    assert.equal(currentURL(), '/discover/playlist');
   });
 });
 
@@ -471,6 +485,9 @@ test('it automatically selects all topics', function(assert) {
   visit('/');
   andThen(function() {
     click('.l-page-nav .list-item [href*="discover"]');
+  });
+  andThen(function() {
+    click('button:contains("Get Started")');
   });
   andThen(function() {
     click('a:contains("Edit My Shows & Topics")');
