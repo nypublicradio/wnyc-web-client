@@ -1,5 +1,7 @@
 import Ember from 'ember';
 import ENV from '../config/environment';
+import { inExperimentalGroup } from 'overhaul/helpers/in-experimental-group';
+
 export default Ember.Route.extend({
   session:       Ember.inject.service(),
   discoverQueue: Ember.inject.service('discover-queue'),
@@ -8,7 +10,7 @@ export default Ember.Route.extend({
   setupController(controller) {
     // Don't use liquid fire in testing until we figure out why
     // it makes acceptance tests fail
-    
+
     controller.set('useLiquid', ENV.environment !== 'testing');
   },
   beforeModel() {
