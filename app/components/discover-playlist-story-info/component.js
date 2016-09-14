@@ -1,6 +1,5 @@
 import Component from 'ember-component';
 import service from 'ember-service/inject';
-import computed from 'ember-computed';
 import get from 'ember-metal/get';
 
 export default Component.extend({
@@ -14,10 +13,10 @@ export default Component.extend({
       if (get(this, 'showSummary') === false) {
         get(this, 'metrics').trackEvent({
           category: 'Discover',
-          action: 'Expanded Sumary',
-          value: get(this, 'story.pk');
+          action: 'Expanded Summary',
+          value: Number(get(this, 'story.id'))
         });
-      };
+      }
       this.toggleProperty('showSummary');
     }
   }

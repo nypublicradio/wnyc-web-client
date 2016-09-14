@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import get from 'ember-metal/get';
 import service from 'ember-service/inject';
 
 export default Ember.Component.extend({
@@ -51,6 +52,12 @@ export default Ember.Component.extend({
   removedItems: [],
   actions: {
     removeItem(item) {
+      get(this, 'metrics').trackEvent({
+        category: 'Discover',
+        action: 'Removed Story from Discover',
+        value: Number(item.id)
+      });
+
       // This will trigger the CSS effect to remove it/hide it from the list
       this.get('removedItems').addObject(item);
 
@@ -73,7 +80,7 @@ export default Ember.Component.extend({
       get(this, 'metrics').trackEvent({
         category: 'Discover',
         action: 'Moved Story',
-        label: draggedModel.id
+        value: Number(draggedModel.id)
       });
       this.set('justDragged', draggedModel);
 

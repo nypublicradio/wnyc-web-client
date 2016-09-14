@@ -65,7 +65,7 @@ export default Service.extend({
       return 'is-paused';
     }
   }),
-  
+
   playIfWaiting() {
     let inWaiting = this.get('_waitingForOkra');
     if (!inWaiting) {
@@ -80,7 +80,7 @@ export default Service.extend({
       onError: bind(this, 'errorEvent'),
       onFlashError: bind(this, 'flashError')
     }));
-    
+
     this.okraBridge.on('ready', this, 'playIfWaiting');
   },
   willDestroy() {
@@ -129,7 +129,7 @@ export default Service.extend({
   },
   playFromPk(id, context) {
     this._firstTimePlay();
-  
+
     let shouldTrack = true;
     let oldContext = get(this, 'currentContext');
 
@@ -323,6 +323,8 @@ export default Service.extend({
   finishedTrack() {
     this._trackPlayerEvent({
       action: 'Finished Story',
+      withRegion: true,
+      region: upperCamelize(get(this, 'currentContext')),
       withAnalytics: true,
     });
 

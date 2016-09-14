@@ -1,21 +1,23 @@
 import Component from 'ember-component';
+import computed, { mapBy } from 'ember-computed';
+import on from 'ember-evented/on';
 import { once } from 'ember-runloop';
 import service from 'ember-service/inject';
 import get from 'ember-metal/get';
-import set from 'ember-metal/get';
+import set from 'ember-metal/set';
 
 export default Component.extend({
   classNames:['discover-topic-list'],
   topics: [],
-  topicTags:  Ember.computed.mapBy('topics', 'url'),
+  topicTags: mapBy('topics', 'url'),
   selectedTopicTags: [],
-  metrics: service();
+  metrics: service(),
 
-  allSelected: Ember.computed('selectedTopicTags.length', 'topicTags.length', function() {
+  allSelected: computed('selectedTopicTags.length', 'topicTags.length', function() {
     return get(this, 'topics').slice().length === get(this, 'selectedTopicTags').length;
   }),
 
-  initializeTopics: Ember.on('init', function() {
+  initializeTopics: on('init', function() {
     this.updateTopics((get(this, 'selectedTopicTags') || []));
   }),
 
@@ -46,12 +48,12 @@ export default Component.extend({
     },
     onMultiselectChangeEvent(selectedTopics, value, action) {
       let topics = get(this, 'selectedTopicTags');
-
+      let title = get(this, 'topics').findBy('url', value).get('title');
       if (action === 'added') {
         get(this, 'metrics').trackEvent({
           category: 'Discover',
           action: 'Selected Topic',
-          label: value.title
+          label: title
         });
         topics.addObject(value);
       }
@@ -59,7 +61,7 @@ export default Component.extend({
         get(this, 'metrics').trackEvent({
           category: 'Discover',
           action: 'Deselected Topic',
-          label: value.title
+          label: title
         });
         topics.removeObject(value);
       }

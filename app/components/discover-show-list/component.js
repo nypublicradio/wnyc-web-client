@@ -1,11 +1,10 @@
-import Ember from 'ember';
 import Component from 'ember-component';
 import { mapBy } from 'ember-computed';
 import { once } from 'ember-runloop';
-import { on } from 'ember-evented';
+import on from 'ember-evented/on';
 import service from 'ember-service/inject';
 import get from 'ember-metal/get';
-import set from 'ember-metal/get';
+import set from 'ember-metal/set';
 
 export default Component.extend({
   classNames:['discover-show-list'],
@@ -38,12 +37,12 @@ export default Component.extend({
     onMultiselectChangeEvent(shows, value, action) {
       let excludedShowSlugs = get(this, 'excludedShowSlugs');
       let selectedShowSlugs = get(this, 'selectedShowSlugs');
-
+      let title = get(this, 'shows').findBy('slug', value).get('title');
       if (action === 'added') {
         get(this, 'metrics').trackEvent({
           category: 'Discover',
           action: 'Selected Show',
-          label: value.title
+          label: title
         });
         selectedShowSlugs.addObject(value);
         excludedShowSlugs.removeObject(value);
@@ -52,7 +51,7 @@ export default Component.extend({
         get(this, 'metrics').trackEvent({
           category: 'Discover',
           action: 'Deselected Show',
-          label: value.title
+          label: title
         });
         selectedShowSlugs.removeObject(value);
         excludedShowSlugs.addObject(value);
