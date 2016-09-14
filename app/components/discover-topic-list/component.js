@@ -1,29 +1,25 @@
-import Component from 'ember-component';
-import computed, { mapBy } from 'ember-computed';
-import on from 'ember-evented/on';
-import { once } from 'ember-runloop';
+import Ember from 'ember';
 import service from 'ember-service/inject';
 import get from 'ember-metal/get';
-import set from 'ember-metal/set';
 
-export default Component.extend({
+export default Ember.Component.extend({
+  metrics: service(),
   classNames:['discover-topic-list'],
   topics: [],
-  topicTags: mapBy('topics', 'url'),
+  topicTags:  Ember.computed.mapBy('topics', 'url'),
   selectedTopicTags: [],
-  metrics: service(),
 
-  allSelected: computed('selectedTopicTags.length', 'topicTags.length', function() {
-    return get(this, 'topics').slice().length === get(this, 'selectedTopicTags').length;
+  allSelected: Ember.computed('selectedTopicTags.length', 'topicTags.length', function() {
+    return this.get('topics').slice().length === this.get('selectedTopicTags').length;
   }),
 
-  initializeTopics: on('init', function() {
-    this.updateTopics((get(this, 'selectedTopicTags') || []));
+  initializeTopics: Ember.on('init', function() {
+    this.updateTopics((this.get('selectedTopicTags') || []));
   }),
 
   updateTopics(topics) {
-    once(() => {
-      set(this, 'selectedTopicTags', topics.slice());
+    Ember.run.once(() => {
+      this.set('selectedTopicTags', topics.slice());
       // don't want this bound to the session stuff passed in or saving gets hinky
 
       this.sendAction('onNoneSelected', topics.length === 0);
@@ -37,7 +33,7 @@ export default Component.extend({
         category: 'Discover',
         action: 'Selected All Topics',
       });
-      this.updateTopics(get(this, 'topicTags'));
+      this.updateTopics(this.get('topicTags'));
     },
     selectNone() {
       get(this, 'metrics').trackEvent({
@@ -47,9 +43,10 @@ export default Component.extend({
       this.updateTopics([]);
     },
     onMultiselectChangeEvent(selectedTopics, value, action) {
-      let topics = get(this, 'selectedTopicTags');
+      let topics = this.get('selectedTopicTags');
       let topic = get(this, 'topics').findBy('url', value);
       let title = get(topic, 'title');
+
       if (action === 'added') {
         get(this, 'metrics').trackEvent({
           category: 'Discover',

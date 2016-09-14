@@ -1,19 +1,17 @@
 import Ember from 'ember';
-import Route from 'ember-route';
-import computed from 'ember-computed';
-import get from 'ember-metal/get';
-import set from 'ember-metal/set';
-import service from 'ember-service/inject';
+const {
+  get
+} = Ember;
 
-export default Route.extend({
-  session:       service(),
-  discoverQueue: service(),
-  listenActions: service(),
-  discoverPrefs: service(),
-  scroller:      service(),
-  metrics:       service(),
+export default Ember.Route.extend({
+  session:          Ember.inject.service(),
+  discoverQueue:    Ember.inject.service(),
+  listenActions:    Ember.inject.service(),
+  discoverPrefs:    Ember.inject.service(),
+  scroller:         Ember.inject.service(),
+  metrics:          Ember.inject.service(),
 
-  hasQueuedStories: computed.gt('discoverQueue.items.length', 0),
+  hasQueuedStories: Ember.computed.gt('discoverQueue.items.length', 0),
 
   setupController(controller) {
     controller.set('noNewResults', false);
@@ -22,7 +20,7 @@ export default Route.extend({
 
   model() {
     var stories;
-    if (get(this, 'hasQueuedStories')) {
+    if (this.get('hasQueuedStories')) {
       stories = this._loadStoriesFromQueue();
     }
     else {
@@ -41,16 +39,16 @@ export default Route.extend({
   },
 
   _loadStoriesFromQueue() {
-    let prefs         = get(this, 'discoverPrefs');
+    let prefs         = this.get('discoverPrefs');
     let excludedIds   = prefs.get('excludedStoryIds');
-    let queuedStories = get(this, 'discoverQueue.items');
+    let queuedStories = this.get('discoverQueue.items');
 
     return queuedStories.reject(story => excludedIds.contains(story.id));
   },
 
   _loadStoriesFromServer() {
     var stories;
-    let prefs             = get(this, 'discoverPrefs');
+    let prefs             = this.get('discoverPrefs');
     let excludedIds       = prefs.get('excludedStoryIds');
     let topicTags         = prefs.get('selectedTopicTags');
     let excludedShowSlugs = prefs.get('excludedShowSlugs');
@@ -75,7 +73,7 @@ export default Route.extend({
     // from the queue the playlist will yank that sucker right out without
     // doing our super sweet CSS effect. That's why we do a .copy() right here.
 
-    get(this, 'discoverQueue').updateQueue(stories.copy());
+    this.get('discoverQueue').updateQueue(stories.copy());
   },
 
   _hasNoNewResults(stories) {
@@ -109,7 +107,7 @@ export default Route.extend({
           return stories;
         }
       }).then(s => {
-        set(this, 'currentModel.stories', s);
+        this.set('currentModel.stories', s);
         this._updateDiscoverQueue(s);
       }).finally(() => {
         this.get('scroller').scrollVertical('.sitechrome-top', {duration: 500});
@@ -117,12 +115,12 @@ export default Route.extend({
       });
     },
     removeItem(item) {
-      let listenActions = get(this, 'listenActions');
-      let prefs         = get(this, 'discoverPrefs');
+      let listenActions = this.get('listenActions');
+      let prefs         = this.get('discoverPrefs');
       let itemId        = get(item, 'id');
 
       listenActions.sendDelete(itemId, 'NYPR_Web');
-      get(this, 'discoverQueue').removeItem(item);
+      this.get('discoverQueue').removeItem(item);
 
       // Make sure this doesn't show up again
       prefs.excludeStoryId(itemId);

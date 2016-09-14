@@ -1,33 +1,29 @@
-import Component from 'ember-component';
-import { mapBy } from 'ember-computed';
-import { once } from 'ember-runloop';
-import on from 'ember-evented/on';
+import Ember from 'ember';
 import service from 'ember-service/inject';
 import get from 'ember-metal/get';
-import set from 'ember-metal/set';
 
-export default Component.extend({
+export default Ember.Component.extend({
+  metrics: service(),
   classNames:['discover-show-list'],
   shows: [],
-  showSlugs: mapBy('shows', 'slug'),
+  showSlugs:     Ember.computed.mapBy('shows', 'slug'),
   selectedShowSlugs: [],
   excludedShowSlugs: [],
-  metrics: service(),
 
   didReceiveAttrs() {
-    set(this, 'selectedShowSlugs', get(this, 'showSlugs').reject(item => {
-      return get(this, 'excludedShowSlugs').contains(item);
+    this.set('selectedShowSlugs', this.get('showSlugs').reject(item => {
+      return this.get('excludedShowSlugs').contains(item);
     }));
 
     this._super(...arguments);
   },
 
-  initializeShows: on('init', function() {
-    this.updateShows(get(this, 'excludedShowSlugs'), get(this, 'selectedShowSlugs'));
+  initializeShows: Ember.on('init', function() {
+    this.updateShows(this.get('excludedShowSlugs'), this.get('selectedShowSlugs'));
   }),
 
   updateShows(excludedShowSlugs, selectedShowSlugs) {
-    once(() => {
+    Ember.run.once(() => {
       this.sendAction('onShowsUpdated', excludedShowSlugs.slice());
       this.sendAction('onNoneSelected', selectedShowSlugs.length === 0);
     });
@@ -35,10 +31,11 @@ export default Component.extend({
 
   actions: {
     onMultiselectChangeEvent(shows, value, action) {
-      let excludedShowSlugs = get(this, 'excludedShowSlugs');
-      let selectedShowSlugs = get(this, 'selectedShowSlugs');
+      let excludedShowSlugs = this.get('excludedShowSlugs');
+      let selectedShowSlugs = this.get('selectedShowSlugs');
       let show = get(this, 'shows').findBy('slug', value);
       let title = get(show, 'title');
+
       if (action === 'added') {
         get(this, 'metrics').trackEvent({
           category: 'Discover',
