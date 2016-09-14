@@ -17,6 +17,13 @@ export default Ember.Route.extend({
       this.replaceWith('discover.start');
     }
   },
+  redirect() {
+    // Google Experiment D4W - START
+    if (!( inExperimentalGroup([1]) || inExperimentalGroup([2]) )) {
+      this.transitionTo('djangorendered', ['/']);
+    }
+    // Google Experiment D4W - END
+  },
   activate(){
     window.scrollTo(0,0);
   },
