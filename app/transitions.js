@@ -25,6 +25,10 @@ export default function() {
     this.use('playerReveal')
   );
   this.transition(
+    this.hasClass('notification'),
+    this.use('notificationReveal')
+  );
+  this.transition(
     this.includingInitialRender(),
     this.childOf('.tabs-header'),
     this.use('navigationBar')

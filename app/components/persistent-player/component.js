@@ -8,32 +8,41 @@ import Ember from 'ember';
 export default Component.extend({
   audio: service(),
   session: service(),
-  currentAudio: reads('audio.currentAudio'),
-  isPlaying: equal('audio.playState', 'is-playing'),
+  store: service(),
   classNames: ['persistent-player', 'l-flexcontent', 'l-highlight--blur'],
   classNameBindings: ['isAudiostream'],
+  currentAudio: reads('audio.currentAudio'),
+  isPlaying: equal('audio.playState', 'is-playing'),
   isAudiostream: equal('currentAudio.audioType', 'stream'),
-  revealNotification: Ember.computed('session.data.userPrefs', function(){
-    // this needs to change
+  bumperDuration: 0,
+  preferredStream: Ember.computed('session.data.user-prefs-active-stream', function(){
+    let session = this.get('session');
+    let slug = session.get('data.user-prefs-active-stream') || 'wnyc-fm939';
+    let stream = this.get('store').peekRecord('stream', slug);
+    // juuuuuust in case....
+    if (stream) {
+      return stream.get('name');
+    }
+
+    return slug;
+  }),
+  revealNotification: Ember.computed('audio.duration', 'audio.currentContext', function() {
+    // this is really, really ugly. Is there an easier way to hook into the audio
+    // player's current content?
     let session = get(this, 'session');
-    let pref = get(session, 'data.userPrefs.activeStream');
-    let currentContext = get(this, 'audio.currentContext');
-    if (pref === 'default_stream') {
-      return currentContext === 'continuous-player-bumper' || currentContext === null;
-    } else {
+    let ctxt = get(this, 'audio.currentContext');
+    let duration = get(this, 'audio.duration') / 1000;
+    let autoplay = session.getWithDefault('data.user-prefs-active-autoplay', 'default_stream');
+    if (autoplay !== 'default_stream') {
       return false;
     }
-  }),
-  showNotification: Ember.observer('audio.currentContext', function() {
-    // this needs to change
-    var ctxt = get(this, 'audio.currentContext');
-    var session = get(this, 'session');
 
-    this.set(
-      'revealNotification',
-      ctxt === 'continuous-player-bumper' || !ctxt
-    );
-    this.set('preferredStream', session.get('data.userPrefs.activeStream'));
+    if (duration < 11 && (ctxt === 'continuous-player-bumper' || !ctxt)) {
+      this.set('bumperDuration', Math.floor(duration));
+      return this.get('isPlaying');
+    }
+
+    return false;
   }),
   actions: {
     playOrPause() {

@@ -1,11 +1,14 @@
 
-{{#if revealNotification}}
+{{#liquid-if revealNotification class='notification-wrapper'}}
   {{
     persistent-player.notification
     dismissNotification=(action 'dismissNotification')
     preferredStream=preferredStream
+    duration=audio.duration
+    position=audio.position
+    secondsRemaining=bumperDuration
   }}
-{{/if}}
+{{/liquid-if}}
 
 {{persistent-player.backdrop
   image=currentAudio.imageMain.url

@@ -2,8 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNames: ['notification', 'notification-active'],
-  didNotElapse: Ember.computed.gt('secondsRemaining', 0),
-  secondsRemaining: 15,
+  didNotElapse: Ember.computed.gte('secondsRemaining', 0.5),
+  didAnimate: false,
   startCountdown: Ember.on('init', function() {
     var id = setInterval(() => {
       var seconds = this.decrementProperty('secondsRemaining');

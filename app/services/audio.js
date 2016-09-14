@@ -8,14 +8,17 @@ import { bind } from 'ember-runloop';
 import { assign } from 'ember-platform';
 import RSVP from 'rsvp';
 import { classify as upperCamelize } from 'ember-string';
+import Ember from 'ember';
 
 const FIFTEEN_SECONDS = 1000 * 15;
 const TWO_MINUTES     = 1000 * 60 * 2;
 const PLATFORM        = 'NYPR_Web';
 const CONTINUOUS_PLAYER_BUMPERS = {
   'wnyc-fm939': 'http://www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/streambumper/streambumper000001_wnycfm.mp3',
+  'wqxr': 'http://www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/streambumper/streambumper000003_wqxr.mp3',
+  'q2': 'http://www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/streambumper/streambumper000006_q2.mp3'
 };
-const PLAYER_BUMPER = 'continuous-player-bumper';
+
 const ERRORS = {
   SOUNDMANAGER_FAILED_CREATE_SOUND: 'SoundManager failed when attempting to create a sound.',
   SOUNDMANAGER_TIMEOUT: 'SoundManager failed to initialize before timing out.',
@@ -80,13 +83,6 @@ export default Service.extend({
   },
 
   init() {
-    let session = this.get('session');
-    if (!session.get('data.userPrefs')) {
-      session.set('data.userPrefs', {
-        activePref: 'default_stream',
-        activeStream: 'wnyc-fm939'
-      });
-    }
     set(this, 'okraBridge', OkraBridge.create({
       onFinished: bind(this, 'finishedTrack'),
       onError: bind(this, 'errorEvent'),
@@ -300,7 +296,13 @@ export default Service.extend({
   },
 
   playBumper(url) {
-    this.set('currentContext', 'continuous-player-bumper');
+    // currentAudio probably doesnt need to be set. FIXME.
+    this.setProperties({
+      currentContext: 'continuous-player-bumper',
+      currentAudio: Ember.Object.create({
+        audioType: 'bumper'
+      })
+    });
     this.okraBridge.playSoundFor('continuous-player-bumper', url);
   },
 
@@ -382,7 +384,8 @@ export default Service.extend({
 
     this.sendCompleteListenAction(this.get('currentId'));
     let context = get(this, 'currentContext');
-    let { activePref, activeStream } = get(this, 'session.data.userPrefs');
+    let activePref = this.getWithDefault('session.data.user-prefs-active-autoplay', 'default_stream');
+    let activeStream = this.getWithDefault('session.data.user-prefs-active-stream', 'wnyc-fm939');
 
     if (context === 'queue') {
       this.playNextInQueue();

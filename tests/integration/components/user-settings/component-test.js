@@ -3,14 +3,11 @@ import startMirage from 'overhaul/tests/helpers/setup-mirage-for-integration';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
-const SessionStub = Ember.Service.extend({
-  data: {
-    userPrefs: {
-      activeStream: null,
-      activePref: null
-    }
-  }
-});
+// const SessionStub = Ember.Service.extend({
+//   data: {
+//     'user-prefs-active-stream':
+//   }
+// });
 
 moduleForComponent('user-settings', 'Integration | Component | user settings', {
   integration: true,

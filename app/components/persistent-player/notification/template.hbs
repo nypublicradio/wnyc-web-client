@@ -13,11 +13,11 @@
     </p>
   {{/if}}
 
-  <div {{action 'dismiss'}}>
+  <div class='dismiss-notification' {{action 'dismiss'}}>
     {{link-to 'Change Settings' 'settings' classNames='notification-action'}}
   </div>
 
-  <div class='dismiss-notification' {{action 'dismiss'}}>
+  <div class='dismiss-notification close-icon' {{action 'dismiss'}}>
     {{wnyc-svg icon='close'}}
   </div>
 </div>
