@@ -236,22 +236,7 @@ export default Service.extend({
       set(this, 'currentAudio', stream);
       set(this, 'currentContext', context);
 
-      let bbModel = stream.get('bbModel');
-      let {aac_streams, mobile_stream, windows_streams} = bbModel;
-      let mountPoints = {};
-      try {
-        mountPoints = Object.assign(bbModel.urls, {aac_streams, mobile_stream, windows_streams});
-      } catch(e) {}
-
-      let urls = Object.keys(mountPoints).map(k => Ember.isArray(mountPoints[k]) ? mountPoints[k][0] : mountPoints[k]);
-
-
-
-
-      return this.get('audioPledge').play(urls);
-
-    /* TODO: send a play signal to the low-level interface for the given stream
-    --------------------------------------------------------------*/
+      return this.get('audioPledge').play(stream.get('urls'));
 
       if (shouldTrack) {
         let label = newStream;

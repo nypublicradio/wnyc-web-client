@@ -57,7 +57,19 @@ export default DS.JSONAPISerializer.extend({
     });
   },
   _apiFormatStream(data) {
-    let attributes = data;
+    let keys = [
+      'has_playlists', 
+      'image_logo', 
+      'name',
+      'slug',
+      'schedule_url',
+      'short_description',
+      'playlist_url',
+      'whats_on'
+    ];
+    let attributes = {};
+    keys.forEach(k => attributes[k] = data[k]);
+    attributes.urls = this._findPreferredStreams(data);
     let jsonData = {
       id: data.slug,
       type: 'stream',
@@ -115,5 +127,32 @@ export default DS.JSONAPISerializer.extend({
       }
     }
     return jsonData;
+  },
+
+  // given an object with a urls key, return a sorted array with stream mounts 
+  // in this order:
+  // [hls, icecast aac, icecast mp3]
+  _findPreferredStreams({ urls }) {
+    if (!urls) {
+      return [];
+    }
+    let { userAgent }   = navigator;
+    let browser = {
+      mobile  : userAgent.indexOf('Mobile') > -1,
+      android : userAgent.indexOf('Android') > -1,
+      ios     : userAgent.indexOf('iPhone') > -1 || userAgent.indexOf('iPad') > -1
+    };
+    let { ipod, mobile_aac, aac, mp3 } = urls;
+    aac = aac[0];
+    mp3 = mp3[0];
+    
+    // Mobile browsers should receive the AAC stream specific to mobile
+    // for our analytics.  But if there's no mobile stream, then they
+    // should receive the regular AAC stream.
+    if ((browser.mobile || browser.android || browser.ios) && mobile_aac) {
+      aac = mobile_aac;
+    }
+    
+    return [ ipod.match(/hls.wnyc.org.*m3u8$/) ? ipod : null, aac, mp3 ].compact();
   }
 });

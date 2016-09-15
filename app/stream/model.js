@@ -21,6 +21,7 @@ export default Model.extend({
   currentPlaylistItem:  attr(),
   future:               attr(),
   bbModel:              attr(),
+  urls:                 attr(),
 
   currentStory:         belongsTo('story'),
   playlist:             belongsTo('playlist'),
