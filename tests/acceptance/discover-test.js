@@ -8,7 +8,7 @@ moduleForAcceptance('Acceptance | discover',
   {
     beforeEach() {
       Ember.$.Velocity.mock = true;
-      window.Modernizr.touch = false;
+      window.Modernizr.touchevents = false;
       let session = currentSession(this.application);
       session.set('data.discover-excluded-shows',  []);
       session.set('data.discover-topics', []);
@@ -407,13 +407,13 @@ test('nav link sends you to start page', function(assert) {
 });
 
 test('mobile users get the app download page', function(assert) {
-  let oldTouchSetting = window.Modernizr.touch;
-  window.Modernizr.touch = true; //spoof this thing
+  let oldTouchSetting = window.Modernizr.touchevents;
+  window.Modernizr.touchevents = true; //spoof this thing
   server.createList('discover-topic', 5);
   visit('/discover/start/topics');
   andThen(function() {
     assert.equal(currentURL(), '/discover/start');
     assert.equal($("a:contains('Download It Now')").length, 1);
-    window.Modernizr.touch = oldTouchSetting; // restore this thing
+    window.Modernizr.touchevents = oldTouchSetting; // restore this thing
   });
 });

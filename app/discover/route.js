@@ -13,7 +13,7 @@ export default Ember.Route.extend({
     controller.set('useLiquid', ENV.environment !== 'testing');
   },
   beforeModel() {
-    if (window.Modernizr.touch) {
+    if (window.Modernizr.touchevents) {
       // Show download links
       this.replaceWith('discover.start');
     }
