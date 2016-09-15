@@ -33,12 +33,15 @@ export default Component.extend({
     let ctxt = get(this, 'audio.currentContext');
     let duration = get(this, 'audio.duration') / 1000;
     let autoplay = session.getWithDefault('data.user-prefs-active-autoplay', 'default_stream');
+
     if (autoplay !== 'default_stream') {
       return false;
     }
 
     if (duration < 11 && (ctxt === 'continuous-player-bumper' || !ctxt)) {
-      this.set('bumperDuration', Math.floor(duration));
+      if (ctxt) {
+        this.set('bumperDuration', Math.floor(duration));
+      }
       return this.get('isPlaying');
     }
 
