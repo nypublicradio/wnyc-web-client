@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import { camelizeKeys } from 'overhaul/helpers/camelize-keys';
 
 export default DS.JSONAPISerializer.extend({
   keyForAttribute(key) {
@@ -40,52 +41,65 @@ export default DS.JSONAPISerializer.extend({
       attributes
     };
   },
-  _attachWhatsOn(jsonData, whatsOn) {
-    if (whatsOn) {
-      if (whatsOn.current_show) {
-        jsonData.attributes.currentShow = {};
-        this._copyCamelizedKeys(whatsOn.current_show, jsonData.attributes.currentShow);
-        if (whatsOn.current_show.show_title) {
-          jsonData.attributes.currentShow.episodeTitle = whatsOn.current_show.title;
-          jsonData.attributes.currentShow.episodeUrl = whatsOn.current_show.url;
-        } else {
-          jsonData.attributes.currentShow.showTitle = whatsOn.current_show.title;
-          jsonData.attributes.currentShow.showUrl = whatsOn.current_show.url;
-          jsonData.attributes.currentShow.episodeTitle = null;
-          jsonData.attributes.currentShow.episodeUrl = null;
-        }
-        if (whatsOn.current_show.episode_pk) {
-          jsonData.relationships = jsonData.relationships || {};
-          jsonData.relationships.currentStory = {
-            data: {
-              type: 'story',
-              id: whatsOn.current_show.episode_pk
-            }
-          };
-        }
-        if (whatsOn.has_playlists) {
-          jsonData.relationships = jsonData.relationships || {};
-          jsonData.relationships.playlist = {
-            data: {
-              type: 'playlist',
-              id: jsonData.id
-            }
-          };
-        }
+
+  _attachWhatsOn(json, whatsOn) {
+    if (!whatsOn) {
+      return json;
+    }
+    
+    let {
+      attributes,
+      relationships
+    } = json;
+    
+    let {
+      current_show,
+      has_playlists,
+      current_playlist_item,
+      future
+    } = whatsOn;
+    
+    if (current_show) {
+      attributes.current_show = current_show;
+      if (current_show.show_title) {
+        attributes.current_show.episodeTitle = current_show.title;
+        attributes.current_show.episodeUrl = current_show.url;
+      } else {
+        attributes.current_show.showTitle = current_show.title;
+        attributes.current_show.showUrl = current_show.url;
+        attributes.current_show.episodeTitle = null;
+        attributes.current_show.episodeUrl = null;
       }
-      if (whatsOn.current_playlist_item) {
-        jsonData.attributes.currentPlaylistItem = {};
-        this._copyCamelizedKeys(whatsOn.current_playlist_item, jsonData.attributes.currentPlaylistItem);
+      if (current_show.episode_pk) {
+        relationships = relationships || {};
+        relationships.currentStory = {
+          data: {
+            type: 'story',
+            id: current_show.episode_pk
+          }
+        };
       }
-      if (whatsOn.future) {
-        jsonData.attributes.future = [];
-        whatsOn.future.forEach((playlistItem, index) => {
-          jsonData.attributes.future[index] = {};
-          this._copyCamelizedKeys(playlistItem, jsonData.attributes.future[index]);
-        });
+      if (has_playlists) {
+        relationships = relationships || {};
+        relationships.playlist = {
+          data: {
+            type: 'playlist',
+            id: json.id
+          }
+        };
       }
     }
-    return jsonData;
+    if (current_playlist_item) {
+      attributes.current_playlist_item = camelizeKeys([ current_playlist_item ]);
+    }
+    if (future) {
+      attributes.future = [];
+      future.forEach((p, i) => attributes.future[i] = camelizeKeys([ p ]));
+    }
+      
+    json.attributes = attributes;
+    json.relationships = relationships;
+    return json;
   },
 
   // given an object with a urls key, return a sorted array with stream mounts 
