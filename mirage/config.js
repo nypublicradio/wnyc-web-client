@@ -6,85 +6,6 @@ import { Response } from 'ember-cli-mirage';
 
 // Note for future people: schema.modelName.create() doesn't generate attributes in mirage factories. Create the objects using server.create in default.js (for local dev), or in the test
 
-const whatsOn = [
-  {
-    'wnyc-am820': {
-      name: 'WNYC AM 820',
-      slug: 'wnyc-am820',
-      id: '1',
-      audio_bumper: 'http://wnyc-am820.mp3'
-    },
-    'q2': {
-      name: 'Q2',
-      slug: 'q2',
-      audio_bumper: 'http://q2.mp3'
-    },
-    'jonathan-channel': {
-      name: 'The Jonathan Channel',
-      slug: 'jonathan-channel',
-      audio_bumper: 'http://jonathan-channel.mp3'
-    },
-    'njpr': {
-      name: 'NJPR',
-      slug: 'njpr',
-      audio_bumper: 'http://njpr.mp3'
-    },
-    'wnyc-fm939': {
-      name: 'WNYC 93.9FM',
-      slug: 'wnyc-fm939',
-      audio_bumper: 'http://wnyc-fm939.mp3'
-    },
-    'wqxr': {
-      name: 'WQXR New York',
-      slug: 'wqxr',
-      audio_bumper: 'http://wqxr.mp3'
-    },
-    'wqxr-special': {
-      name: 'Operavore',
-      slug: 'wqxr-special',
-      audio_bumper: 'http://wqxr-special.mp3'
-    }
-  }
-];
-
-const streams = [
-  {
-    name: 'Operavore',
-    slug: 'wqxr-special',
-    audio_bumper: 'http://wqxr-special.mp3'
-  },
-  {
-    name: 'WQXR New York',
-    slug: 'wqxr',
-    audio_bumper: 'http://wqxr.mp3'
-  },
-  {
-    name: 'WNYC 93.9FM',
-    slug: 'wnyc-fm939',
-    audio_bumper: 'http://wnyc-fm939.mp3'
-  },
-  {
-    name: 'WNYC AM 820',
-    slug: 'wnyc-am820',
-    audio_bumper: 'http://wnyc-am820.mp3'
-  },
-  {
-    name: 'Q2',
-    slug: 'q2',
-    audio_bumper: 'http://q2.mp3'
-  },
-  {
-    name: 'The Jonathan Channel',
-    slug: 'jonathan-channel',
-    audio_bumper: 'http://jonathan-channel.mp3'
-  },
-  {
-    name: 'NJPR',
-    slug: 'njpr',
-    audio_bumper: 'http://njpr.mp3'
-  },
-];
-
 export default function() {
   this.logging = false;
   let baseUrl = config.wnycURL;
@@ -96,16 +17,10 @@ export default function() {
   this.get(`${baseUrl}/api/v1/story/:id`);
   this.get(`${baseUrl}/api/v1/browser_id/`, {success: true});
   this.get(`${baseUrl}/api/v1/list/comments/24/:storyId/`, 'comment');
-  this.get(`${baseUrl}/api/v1/whats_on/`, () => {
-    return whatsOn;
-  });
-  this.get(`${baseUrl}/api/v1/whats_on/:slug`, {});
-  this.get(`${baseUrl}/api/v1/list/streams/`, () => {
-    return { results: streams, count: streams.length };
-  });
-  this.get(`${baseUrl}/api/v1/list/streams/:slug`, (schema, request) => {
-    return {'slug': request.params.slug};
-  });
+  this.get(`${baseUrl}/api/v1/whats_on/`);
+  this.get(`${baseUrl}/api/v1/whats_on/:slug`, 'whats-on');
+  this.get(`${baseUrl}/api/v1/list/streams/`);
+  this.get(`${baseUrl}/api/v1/list/streams/:slug`, 'stream');
 
   this.get(`/api/v1/story/:slug`, function(schema, request) { // backbone makes this ajax request to the audio
     let results = schema.discoverStories.all().models.filter(function(d) {
