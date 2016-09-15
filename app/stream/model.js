@@ -20,7 +20,6 @@ export default Model.extend({
   currentShow:          attr(),
   currentPlaylistItem:  attr(),
   future:               attr(),
-  bbModel:              attr(),
   urls:                 attr(),
 
   currentStory:         belongsTo('story'),

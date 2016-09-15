@@ -1,40 +1,4 @@
 import DS from 'ember-data';
-import Ember from 'ember';
-
-// bbModel needs getMimeTypes
-const { isArray } = Ember;
-const agent   = navigator.userAgent;
-const browser = {
-    mobile  : agent.indexOf('Mobile') > -1,
-    android : agent.indexOf('Android') > -1,
-    ios     : agent.indexOf('iPhone') > -1 || agent.indexOf('iPad') > -1
-  };
-const getMimeTypes = function() {
-  var urls = this.get('urls');
-  if (urls == null) { return; }
-  var mimeTypes = [];
-  var mobileMP3StreamWasUsed = false;
-  // Mobile browsers should receive the MP3 stream specific to mobile
-  // for our analytics.  But if there's no mobile stream, then they
-  // should receive the regular MP3 stream.
-  // this gets around firewalls blocking AAC streams at WNYC HQ
-  if ((browser.mobile || browser.android || browser.ios) && urls.mobile) {
-    var mp3Mobile = urls.mobile;
-    if (!isArray(mp3Mobile)) {
-      // why are these urls exposed as Arrays to the rest of the app?
-      mp3Mobile = [mp3Mobile];
-    }
-    mimeTypes.push({ type: 'audio/mpeg', url: mp3Mobile });
-    mobileMP3StreamWasUsed = true;
-  }
-  if (!mobileMP3StreamWasUsed && isArray(urls.mp3) && urls.mp3.length > 0) {
-      mimeTypes.push({ type: 'audio/mpeg', url: urls.mp3 });
-  }
-  if (isArray(urls.aac) && urls.aac.length > 0) {
-    mimeTypes.push({ type: 'audio/aac', url: urls.aac });
-  }
-  return mimeTypes;
-};
 
 export default DS.JSONAPISerializer.extend({
   normalizeFindRecordResponse(store, primaryModelClass, payload/*, id, requestType*/) {
@@ -75,8 +39,6 @@ export default DS.JSONAPISerializer.extend({
       type: 'stream',
       attributes: {}
     };
-    jsonData.attributes.bbModel = data;
-    jsonData.attributes.bbModel.getMimeTypes = getMimeTypes;
     this._copyCamelizedKeys(attributes, jsonData.attributes);
     delete jsonData.attributes.id;
     return jsonData;
