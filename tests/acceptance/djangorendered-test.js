@@ -8,6 +8,7 @@ const { wnycURL } = config;
 import {
   resetHTML
 } from 'overhaul/tests/helpers/html';
+import 'overhaul/tests/helpers/inject-dummy-sound';
 
 function escapeNavigation() {
   return 'leaving';
@@ -151,6 +152,9 @@ moduleForAcceptance('Acceptance | Django Rendered | Play From Param', {
 });
 
 test('loading a page with the ?play param', function(assert) {
+  injectDummySound();
+  
+  server.logging = true;
   Ember.$.Velocity.mock = true;
   
   let id = '123';
