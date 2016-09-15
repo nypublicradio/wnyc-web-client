@@ -17,6 +17,7 @@ export default Factory.extend({
   },
   commentsEnabled: true,
   dateLineDatetime: faker.date.recent,
+  audio: () => faker.internet.url() + '.mp3',
   analyticsCode: 'ExperimentalStory:trump-rubio-super-tuesday-morning-politics $A1$AD771$V0$Ms$D1$HS1$HC0$B0$SS+Everything You Need to Know About the 2016 Election+$C$SThe Brian Lehrer Show$T!news!politics!2016_election!super_tuesday!$AP/bl/bl022916apod.mp3$',
   analytics() {
     return {
