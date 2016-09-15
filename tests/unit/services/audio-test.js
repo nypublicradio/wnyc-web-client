@@ -53,6 +53,13 @@ moduleFor('service:audio', 'Unit | Service | audio', {
   }
 });
 
+const audioPledgeStub = {
+  play(promise) {
+    return Ember.RSVP.Promise.resolve(promise);
+  },
+  pause() {}
+};
+
 test('it exists', function(assert) {
   let service = this.subject();
   assert.ok(service);
@@ -71,27 +78,6 @@ test('passing a pk to play calls playFromPk', function(assert) {
   service.play(1);
 });
 
-test('calling pause calls the okraBridge method', function(assert) {
-  let service = this.subject();
-
-  let testFlag = false;
-  let okraBridge = {
-    pauseSound() {
-      testFlag = true;
-    },
-    teardown() {},
-    off() {}
-  };
-
-  Ember.run(()=> {
-    service.set('okraBridge', okraBridge);
-    service.set('currentId', 1);
-    service.pause();
-  });
-
-  assert.equal(testFlag, true, 'service should have called pause on okraBridge');
-});
-
 test('service records a listen when a story is played', function(assert) {
   assert.expect(1);
 
@@ -106,6 +92,7 @@ test('service records a listen when a story is played', function(assert) {
 
   Ember.run(()=> {
     service.set('listens', listenStub);
+    service.set('audioPledge', audioPledgeStub);
     service.play(story.id);
   });
 
@@ -124,8 +111,10 @@ test('it only sets up the player ping once', function(assert) {
       assert.equal(label, 'playerPing', 'the correct poll was added');
     }
   };
+
   Ember.run(() => {
     service.set('poll', pollStub);
+    service.set('audioPledge', audioPledgeStub);
     service.play(story.id);
   });
 
@@ -148,7 +137,8 @@ test('it calls the GoogleAnalytics ping event', function(assert) {
 
   service.set('metrics', metricsStub);
   service.set('sessionPing', 500);
-  service.play(story.id);
+  service.set('audioPledge', audioPledgeStub);
+  Ember.run(() => service.play(story.id));
 });
 
 test('it sends a listen action on play and not resume', function(assert) {
@@ -164,6 +154,7 @@ test('it sends a listen action on play and not resume', function(assert) {
   };
   Ember.run(() => {
     service.set('listenActions', listenActionStub);
+    service.set('audioPledge', audioPledgeStub);
     service.play(story.id);
   });
 
@@ -185,6 +176,7 @@ test('it sends a listen action on pause', function(assert) {
   };
   Ember.run(() => {
     service.set('listenActions', listenActionStub);
+    service.set('audioPledge', audioPledgeStub);
     service.play(story.id);
   });
 

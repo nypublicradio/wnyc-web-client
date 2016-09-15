@@ -108,6 +108,7 @@ test('deferred scripts embedded within content do not run twice', function(asser
 
 moduleForAcceptance('Acceptance | Django Rendered | Beta Trial', {
   beforeEach() {
+    server.create('stream');
     window.onbeforeunload = escapeNavigation;
     config.betaTrials.active = true;
     config.betaTrials.preBeta = true;
@@ -140,6 +141,7 @@ skip('alien doms with beta trials keep the beta bar if it has not been dismissed
 
 moduleForAcceptance('Acceptance | Django Rendered | Play From Param', {
   beforeEach() {
+    server.create('stream');
     window.onbeforeunload = escapeNavigation;
   },
   afterEach() {
