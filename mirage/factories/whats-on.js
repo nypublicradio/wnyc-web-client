@@ -1,10 +1,12 @@
 import { Factory, faker } from 'ember-cli-mirage';
 
 export default Factory.extend({
-  audio_type: 'stream',
-  image_logo: () => faker.image.imageUrl(75, 75),
   name: faker.name.firstName,
-  audioBumper: faker.internet.url,
+  current_playlist_item: null,
+  current_show: null,
+  future: [],
+  has_playlists: false,
+  expires_ts: Date.now() + 10000000,
   slug: (i) => {
     switch (i) {
       case 0:
@@ -24,17 +26,5 @@ export default Factory.extend({
       default:
         return faker.lorem.words(2).join('-');
     }
-  },
-  schedule_url: faker.internet.url,
-  short_description: faker.lorem.sentence,
-  playlist_url: faker.internet.url,
-  whats_on: 100,
-  urls: () => {
-    return {
-      ipod: faker.internet.url(),
-      mobile_aac: faker.internet.url(),
-      aac: [faker.internet.url()],
-      mp3: [faker.internet.url()]
-    };
   }
 });
