@@ -80,6 +80,8 @@
     "ember-waypoints": "nypublicradio/ember-waypoints",
     "ember-wormhole": "nypublicradio/ember-wormhole",
     "glob": "^4.5.3",
+    "grunt": "^1.0.1",
+    "grunt-modernizr": "^1.0.2",
     "http-proxy": "^1.14.0",
     "liquid-fire": "0.24.1",
     "loader.js": "^4.0.1",

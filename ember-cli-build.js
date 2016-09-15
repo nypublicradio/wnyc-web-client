@@ -3,6 +3,7 @@
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var mergeTrees = require('broccoli-merge-trees');
 var mv = require('broccoli-stew').mv;
+var fs = require('fs');
 
 var env = EmberApp.env();
 
@@ -36,6 +37,13 @@ module.exports = function(defaults) {
     'ember-cli-mirage': { directory: defaults.project.root + '/mirage' }
   });
 
+  try {
+    fs.accessSync('vendor/modernizr/modernizr-build.js');
+    app.import('vendor/modernizr/modernizr-build.js');
+  } catch(e) {
+    console.log('there was a problem importing the modernizr build. please run grunt modernizr:dist first.');
+  }
+  
   app.import('vendor/polyfills/url.js');
   app.import('bower_components/normalize.css/normalize.css');
 
