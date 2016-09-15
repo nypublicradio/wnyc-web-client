@@ -2,7 +2,6 @@
 import ENV from 'overhaul/config/environment';
 import Ember from 'ember';
 import { canonicalize } from 'overhaul/services/script-loader';
-import { beforeTeardown } from 'overhaul/lib/compat-hooks';
 const { $ } = Ember;
 let { wnycURL } = ENV;
 wnycURL = canonicalize(wnycURL);
@@ -119,8 +118,6 @@ export default {
         let { routeName, params, queryParams } = router.recognize(href);
         router.transitionTo(routeName, params, queryParams);
         preventDefault();
-
-        beforeTeardown();
         return false;
       } else if (isExternal && !Ember.testing) {
         $target.attr('target', '_blank');

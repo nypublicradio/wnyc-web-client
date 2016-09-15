@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ENV from 'overhaul/config/environment';
 import get from 'ember-metal/get';
 import { retryFromServer } from 'overhaul/lib/compat-hooks';
-import service from 'ember-service/inject';
+import { beforeTeardown } from 'overhaul/lib/compat-hooks';
 
 export default Ember.Route.extend({
   queryParams: {
@@ -36,5 +36,9 @@ export default Ember.Route.extend({
       page: path,
       title
     });
+  },
+  willTransition() {
+    beforeTeardown();
+    return true;
   }
 });
