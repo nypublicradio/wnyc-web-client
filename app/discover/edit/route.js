@@ -1,14 +1,21 @@
 import Ember from 'ember';
+import get from 'ember-metal/get';
 
 export default Ember.Route.extend({
-  session: Ember.inject.service(),
+  session:       Ember.inject.service(),
   discoverPrefs: Ember.inject.service(),
   discoverQueue: Ember.inject.service(),
   listenActions: Ember.inject.service(),
+  metrics:       Ember.inject.service(),
 
   redirect(model, transition) {
     if (transition.targetName === "discover.edit.index") {
       this.transitionTo('discover.edit.topics');
+    } else {
+      get(this, 'metrics').trackEvent({
+        category: 'Discover',
+        action: 'Clicked Edit in Discover'
+      });
     }
   },
   actions: {
