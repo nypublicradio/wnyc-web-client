@@ -14,16 +14,6 @@ const FIFTEEN_SECONDS = 1000 * 15;
 const TWO_MINUTES     = 1000 * 60 * 2;
 const PLATFORM        = 'NYPR_Web';
 
-const ERRORS = {
-  SOUNDMANAGER_FAILED_CREATE_SOUND: 'SoundManager failed when attempting to create a sound.',
-  SOUNDMANAGER_TIMEOUT: 'SoundManager failed to initialize before timing out.',
-  SOUND_NOT_LOADED: 'There is no sound currently loaded in the player.',
-  SOUND_FAILED_TO_LOAD: 'The current sound failed to load.',
-  DELEGATE_NOT_PROVIDED: 'A delegate to handle the current file format was not provided.',
-  SUITABLE_DELEGATE_NOT_FOUND: 'A suitable delegate for the provided audio was not found.',
-  FLASH_FAILURE: 'There was a failure issued from flash.'
-};
-
 export default Service.extend({
   poll:             service(),
   metrics:          service(),
@@ -90,10 +80,6 @@ export default Service.extend({
   },
 
   pause() {
-
-    /* TODO: send a pause signal to the low-level interface
-    --------------------------------------------------------------*/
-
     let context = get(this, 'currentContext') || '';
     this.get('audioPledge').pause();
 
@@ -123,19 +109,16 @@ export default Service.extend({
       this.sendPauseListenAction(this.get('currentId'));
     }
   },
+
   playFromPk(id, context) {
     this._firstTimePlay();
 
     let shouldTrack = true;
     let oldContext = get(this, 'currentContext');
 
-    // Don't set to loading if already playing the item,
-    // because we won't get a loaded event.
-    if (get(this, 'currentId') !== id) {
-      // set(this, 'isLoading', true);
-    } else {
-      // if the passed in ID matches what's playing, don't fire another
-      // event
+    // if the passed in ID matches what's playing, don't fire another
+    // event
+    if (get(this, 'currentId') === id) {
       shouldTrack = false;
     }
 
@@ -147,14 +130,7 @@ export default Service.extend({
       return s.get('audio');
     });
 
-    return this.get('audioPledge').play(urlPromise).then(sound => {
-
-    /* TODO: send a play signal to the low-level interface
-        you'll probaby wantto do it in this promise call back since
-        the `audio` attr on the retrieved `story` instance is a URL
-        to the audio file.
-    --------------------------------------------------------------*/
-
+    return this.get('audioPledge').play(urlPromise).then((/*sound*/) => {
       // independent of context, if this item is already the first item in your
       // listening history, don't bother adding it again
       if (get(this, 'listens').indexByStoryPk(id) !== 0) {
@@ -209,25 +185,28 @@ export default Service.extend({
     })
     .catch(() => this.set('hasErrors', true));
   },
+
   playStream(slug, context = '') {
     this._firstTimePlay();
 
     let shouldTrack = true;
 
-    // Don't set to loading if already playing the item,
-    // because we won't get a loaded event.
-    if (get(this, 'currentId') !== slug) {
-      // set(this, 'isLoading', true);
-    } else {
-      // if the passed in ID matches what's playing, don't fire another
-      // event
+    // if the passed in ID matches what's playing, don't fire another
+    // event
+    if (get(this, 'currentId') === slug) {
       shouldTrack = false;
     }
 
     // TODO: why setting currentId instead of relying on the computed?
     set(this, 'currentId', slug);
+    
+    let stream;
+    let urlPromise = get(this, 'store').findRecord('stream', slug).then(s => {
+      stream = s;
+      return s.get('urls');
+    });
 
-    get(this, 'store').findRecord('stream', slug).then(stream => {
+    return this.get('audioPledge').play(urlPromise).then((/*sound*/) => {
       set(this, 'hasErrors', false);
       let wasStream = get(this, 'currentAudio.audioType') === 'stream';
       let oldStream = get(this, 'currentAudio.name');
@@ -235,8 +214,6 @@ export default Service.extend({
 
       set(this, 'currentAudio', stream);
       set(this, 'currentContext', context);
-
-      return this.get('audioPledge').play(stream.get('urls'));
 
       if (shouldTrack) {
         let label = newStream;
@@ -413,38 +390,6 @@ export default Service.extend({
     } else {
       this._flushContext();
     }
-  },
-
-  errorEvent(model, errorCode, errorName, errorMessage, ...rest) {
-    let label;
-    if (errorMessage === ERRORS.SOUNDMANAGER_TIMEOUT) {
-      let status = rest[0];
-      label = `timeout | success: ${status.success} | error: ${status.error.type}`;
-    } else if (errorMessage === ERRORS.SOUNDMANAGER_FAILED_CREATE_SOUND) {
-      let ops = rest[0];
-      label = `failed to load ${ops.url || ops.serverURL}`;
-    } else if (errorMessage === ERRORS.FLASH_FAILURE) {
-      let [ message, level, code ] = rest;
-      label = `flash failure | message: ${message} | level: ${level} | code: ${code}`;
-    } else {
-      let currentItem = rest[0];
-      let piece = currentItem && currentItem.piece || {};
-      let attributes = piece.attributes || {};
-      let { audio, title } = attributes;
-      let { id } = piece;
-      label = `audio: ${audio} | pk: ${id} | title: ${title} | error: ${errorMessage}`;
-    }
-    this._trackPlayerEvent({
-      action: 'Sound Error',
-      label
-    });
-  },
-
-  flashError(flashVersion) {
-    this._trackPlayerEvent({
-      action: 'Sound Error',
-      label: `Flash error with version ${flashVersion}`
-    });
   },
 
   addToHistory(story) {
