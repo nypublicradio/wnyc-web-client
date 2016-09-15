@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import Service from 'ember-service';
 import service from 'ember-service/inject';
 import get from 'ember-metal/get';
@@ -26,14 +25,14 @@ export default Service.extend({
   listenActions:    service(),
 
   audioPledge:      service(),
-  isReady:          computed.readOnly('audioPledge.isReady'),
-  isPlaying:        computed.readOnly('audioPledge.isPlaying'),
-  isLoading:        computed.readOnly('audioPledge.isLoading'),
-  isMuted:          computed.readOnly('audioPledge.isMuted'),
-  duration:         computed.readOnly('audioPledge.duration'),
-  position:         computed.alias('audioPledge.position'),
-  volume:           computed.alias('audioPledge.volume'),
-  percentLoaded:    computed.alias('audioPledge.percentLoaded'),
+  isReady:          readOnly('audioPledge.isReady'),
+  isPlaying:        readOnly('audioPledge.isPlaying'),
+  isLoading:        readOnly('audioPledge.isLoading'),
+  isMuted:          readOnly('audioPledge.isMuted'),
+  duration:         readOnly('audioPledge.duration'),
+  position:         alias('audioPledge.position'),
+  volume:           alias('audioPledge.volume'),
+  percentLoaded:    alias('audioPledge.percentLoaded'),
 
   currentStory:     or('currentAudio.story', 'currentAudio'),
 
@@ -142,17 +141,11 @@ export default Service.extend({
         // if starting the queue with an item already playing from another context,
         // replay from the start
         if (oldContext !== 'queue' && get(this, 'currentAudio.id') === id) {
-
-          /* TODO: send a `restart` or `set position to 0` signal to the low-level interface
-          --------------------------------------------------------------------*/
-
+          this.setPosition(0);
         }
       } else if (context ==='history') {
         if (get(this, 'isPlaying') && get(this, 'currentAudio.id') === id) {
-
-          /* TODO: send a `restart` or `set position to 0` signal to the low-level interface
-          --------------------------------------------------------------------*/
-
+          this.setPosition(0);
         }
       }
 
