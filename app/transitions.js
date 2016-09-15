@@ -28,13 +28,6 @@ export default function() {
     this.hasClass('notification-wrapper'),
     this.use('notificationReveal')
   );
-  // this.transition(
-  //   this.hasClass('notification-wrapper'),
-  //   this.use('toUp', {
-  //     duration: 500
-  //   })
-  // );
-
   this.transition(
     this.includingInitialRender(),
     this.childOf('.tabs-header'),

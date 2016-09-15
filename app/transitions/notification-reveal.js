@@ -1,8 +1,8 @@
 import { animate } from 'liquid-fire';
 
 export default function() {
-  this.newElement.css('visibility', '');
   if (this.newValue) {
+    this.newElement.css('visibility', '');
     let notification = this.newElement.find('.notification');
     notification.css({ transform: 'translateY(0)', 'z-index': -1 });
     let notificationAnimationOptions = {easing: [0.17, 0.89, 1, 1], duration: 500};
