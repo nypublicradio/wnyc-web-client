@@ -11,10 +11,8 @@
     "Faker": "~3.0.0",
     "normalize.css": "3.0.3",
     "raven-js": "~2.1",
-    "SoundManager2": "soundmanager2#*",
-    "howler.js": "^2.0.0",
-    "soundmanager": "V2.97a.20140901",
-    "ember-cli-soundmanager-shim": "^0.0.1",
-    "jquery-waypoints": "~2.0.5"
+    "jquery-waypoints": "~2.0.5",
+    "hls.js": "^0.6.1",
+    "howler.js": "^2.0.0"
   }
 }
