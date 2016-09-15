@@ -3,7 +3,11 @@ import run from 'ember-runloop';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import historyPage from 'overhaul/tests/pages/history';
 
-moduleForAcceptance('Acceptance | history');
+moduleForAcceptance('Acceptance | history', {
+  beforeEach() {
+    server.create('stream');
+  }
+});
 
 test('visiting /?modal=queue-history', function(assert) {
   assert.expect(2);

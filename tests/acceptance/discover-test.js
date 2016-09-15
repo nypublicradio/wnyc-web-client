@@ -13,6 +13,7 @@ moduleForAcceptance('Acceptance | discover',
       session.set('data.discover-excluded-shows',  []);
       session.set('data.discover-topics', []);
       session.set('data.discover-excluded-story-ids', []);
+      server.create('stream');
     },
     afterEach() {
       Ember.$.Velocity.mock = false;

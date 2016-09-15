@@ -7,6 +7,7 @@ import queuePage from 'overhaul/tests/pages/queue';
 
 moduleForAcceptance('Acceptance | queue', {
   beforeEach() {
+    server.create('stream');
     Ember.$.Velocity.mock = true;
   },
   afterEach() {

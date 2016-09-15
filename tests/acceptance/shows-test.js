@@ -1,7 +1,11 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 
-moduleForAcceptance('Acceptance | shows');
+moduleForAcceptance('Acceptance | shows', {
+  beforeEach() {
+    server.create('stream');
+  }
+});
 
 
 test('visiting /shows', function(assert) {

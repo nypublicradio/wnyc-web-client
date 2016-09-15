@@ -15,6 +15,7 @@ function escapeNavigation() {
 
 moduleForAcceptance('Acceptance | Django Rendered | Proper Re-renders', {
   beforeEach() {
+    server.create('stream');
     window.onbeforeunload = escapeNavigation;
   },
   afterEach() {

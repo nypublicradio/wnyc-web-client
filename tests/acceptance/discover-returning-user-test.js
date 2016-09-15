@@ -20,6 +20,8 @@ moduleForAcceptance('Acceptance | discover returning user', {
     session.set('data.discover-topics', ['music']); // set some saved topics
     session.set('data.discover-excluded-story-ids', []);
     session.set('data.discover-queue',  server.db.discoverStories); // set some saved stories
+    
+    server.create('stream');
   },
   afterEach() {
     Ember.$.Velocity.mock = false;

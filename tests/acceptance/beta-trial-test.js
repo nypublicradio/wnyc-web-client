@@ -28,6 +28,8 @@ moduleForAcceptance('Acceptance | active beta trial', {
     plantBetaTrial();
     config.betaTrials.isBetaSite = false;
     config.betaTrials.preBeta = true;
+    
+    server.create('stream');
   },
   afterEach() {
     clearBetaCookies();

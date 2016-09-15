@@ -6,6 +6,7 @@ import sinon from 'sinon';
 moduleForAcceptance('Acceptance | Analytics', {
   beforeEach() {
     Ember.$.Velocity.mock = true;
+    server.create('stream');
   },
   afterEach() {
     Ember.$.Velocity.mock = false;
@@ -79,4 +80,3 @@ test('it logs a homepage bucket event when you click a story on the home page', 
     done();
   });
 });
-
