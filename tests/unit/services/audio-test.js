@@ -8,8 +8,11 @@ moduleFor('service:audio', 'Unit | Service | audio', {
   needs: ['model:story','adapter:story','serializer:story',
           'model:discover/stories',
           'service:poll',
-          'service:listen-history'
-        ],
+          'service:metrics',
+          'service:audio-pledge',
+          'service:sound-cache',
+          'service:debug-logger',
+          'service:listen-history'],
 
   beforeEach() {
     const bumperState = Ember.Service.extend({
