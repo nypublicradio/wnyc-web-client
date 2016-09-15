@@ -33,7 +33,7 @@ Router.map(function() {
   this.route('tag', {path: 'tags/:slug'}, subpageRoutes);
   this.route('blog', {path: 'blogs/:slug'}, subpageRoutes);
   this.route('stream', {path: 'streams'});
-  this.route('playlist', {path: 'streams/:id'});
+  this.route('playlist', {path: 'streams/:slug'});
   this.route('schedule', function() {
     this.route('date', {path: ':year/:month/:day'});
   });
