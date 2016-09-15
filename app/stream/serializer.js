@@ -1,25 +1,25 @@
 import DS from 'ember-data';
 
 export default DS.JSONAPISerializer.extend({
-  normalizeFindRecordResponse(store, primaryModelClass, payload/*, id, requestType*/) {
-    let jsonData = this._apiFormatStream(payload.stream);
-    return {data: this._attachWhatsOn(jsonData, payload.whatsOn)};
+  keyForAttribute(key) {
+    return key.underscore();
   },
-  normalizeFindAllResponse(store, primaryModelClass, payload/*, id, requestType*/) {
-    payload.streams = payload.streams.results.sort((a, b) => a.id - b.id);
-    payload.data = payload.streams.map((stream) => {
-      let jsonData = this._apiFormatStream(stream);
-      return this._attachWhatsOn(jsonData, payload.whatsOn[stream.slug]);
+
+  normalizeFindRecordResponse(store, modelClass, {stream, whatsOn}, ...rest) {
+    let json = this._apiFormatStream(stream);
+    let transformed = {data: this._attachWhatsOn(json, whatsOn)};
+    return this._super(store, modelClass, transformed, ...rest);
+  },
+
+  normalizeFindAllResponse(store, modelClass, { streams, whatsOn }, ...rest) {
+    streams = streams.results.sort((a, b) => a.id - b.id);
+    let data = streams.map((stream) => {
+      let json = this._apiFormatStream(stream);
+      return this._attachWhatsOn(json, whatsOn[stream.slug]);
     });
-    delete payload.streams;
-    delete payload.whatsOn;
-    return payload;
+    return this._super(store, modelClass, { data }, ...rest);
   },
-  _copyCamelizedKeys(source, target) {
-    Object.keys(source).forEach(function(key) {
-      target[key.camelize()] = source[key];
-    });
-  },
+
   _apiFormatStream(data) {
     let keys = [
       'has_playlists', 
@@ -34,14 +34,11 @@ export default DS.JSONAPISerializer.extend({
     let attributes = {};
     keys.forEach(k => attributes[k] = data[k]);
     attributes.urls = this._findPreferredStreams(data);
-    let jsonData = {
+    return {
       id: data.slug,
       type: 'stream',
-      attributes: {}
+      attributes
     };
-    this._copyCamelizedKeys(attributes, jsonData.attributes);
-    delete jsonData.attributes.id;
-    return jsonData;
   },
   _attachWhatsOn(jsonData, whatsOn) {
     if (whatsOn) {
