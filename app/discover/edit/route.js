@@ -17,8 +17,8 @@ export default Ember.Route.extend({
       prefs.set('excludedShowSlugs', excludedShowSlugs);
     },
     noTopicsSelected(hasNotSelectedATopic) {
-      this.controllerFor('discover.edit').set('hasNotSelectedATopic', hasNotSelectedATopic);
-      this.controllerFor('discover.edit').set('showError', hasNotSelectedATopic);
+      this.controller.set('hasNotSelectedATopic', hasNotSelectedATopic);
+      this.controller.set('showError', hasNotSelectedATopic);
     },
     updateTopicSelection(selectedTopicTags) {
       let prefs = this.get('discoverPrefs');
@@ -29,7 +29,7 @@ export default Ember.Route.extend({
       this.transitionTo('discover.index');
     },
     refresh() {
-      if (this.controllerFor('discover.edit').get('hasNotSelectedATopic')) {
+      if (this.controller.get('hasNotSelectedATopic')) {
         return;
       }
       this.get('discoverPrefs').save();
