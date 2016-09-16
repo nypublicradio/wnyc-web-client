@@ -54,6 +54,7 @@ Router.map(function() {
     });
 
     this.route('index', { path: 'playlist'});
+    this.route('redirect', { path: '/'} );
   });
   
   // This is our catch all route that can render any existing page
