@@ -90,18 +90,20 @@ body.discover.start .sitechrome-top {
 }
 
 body.discover .sitechrome-top {
-  @include transition(background-color $transition-timing);
-  position: absolute;
-  top: 0;
-  z-index: 1;
-  width: 100%;
-  @include mq($medium-and-up) {
+  @include mq($large-and-up) {
+    @include transition(background-color $transition-timing);
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    width: 100%;
     width: calc(100% - 166px); // side nav
   }
 }
 
 body.discover .sitechrome-page-content-area {
-  padding-top: 107px; // top nav height + margin
+  @include mq($large-and-up) {
+    padding-top: 107px; // top nav height + margin
+  }
 }
 
 .discover-welcome-screen {
@@ -112,8 +114,8 @@ body.discover .sitechrome-page-content-area {
   @include transition(background $transition-timing);
   background-size:cover;
   color: #FFFFFF;
-  padding-top:4rem;
-  padding-bottom:4rem;
+  padding-top:6rem;
+  padding-bottom:6rem;
 
   .player-wrapper {
     display:none;
@@ -123,6 +125,18 @@ body.discover .sitechrome-page-content-area {
     @include justify-content(space-around);
     padding-bottom:0;
   }
+}
+
+.discover-welcome-screen-header {
+  text-align: center;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 2.2;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  border-bottom: 1px solid white;
+  margin-bottom: 31px;
 }
 
 .discover-welcome-screen-title-area {
@@ -153,7 +167,7 @@ body.discover .sitechrome-page-content-area {
 }
 
 .discover-welcome-screen-title, .discover-welcome-screen-subtitle {
-  max-width:350px;
+  max-width:400px;
   text-align:center;
   color:#FFF;
 }
