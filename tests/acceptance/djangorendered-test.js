@@ -140,21 +140,28 @@ skip('alien doms with beta trials keep the beta bar if it has not been dismissed
   });
 });
 
+let oldException;
 moduleForAcceptance('Acceptance | Django Rendered | Play From Param', {
   beforeEach() {
     server.create('stream');
     window.onbeforeunload = escapeNavigation;
+    oldException = Ember.Test.adapter.exception;
+    Ember.Test.adapter.exception = function(e) {
+      if (!/\[ember-hifi\] URL Promise failed because Not Found/.test(e)) {
+        throw e;
+      }
+    };
   },
   afterEach() {
     window.onbeforeunload = undefined;
     resetHTML();
+    Ember.Test.adapter.exception = oldException;
   }
 });
 
 test('loading a page with the ?play param', function(assert) {
   injectDummyConnection();
   
-  server.logging = true;
   Ember.$.Velocity.mock = true;
   
   let id = '123';
