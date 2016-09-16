@@ -167,10 +167,10 @@ test('loading a page with the ?play param', function(assert) {
   let id = '123';
   
   server.create('story', {id, title: 'Foo'});
-  let home = server.create('django-page', {id: `/bar?play=${id}`});
+  let home = server.create('django-page', {id: 'bar/'});
   djangoPage
     .bootstrap(home)
-    .visit(home);
+    .visit({id: `/bar?play=${id}`});
 
   andThen(() => {
     assert.ok(Ember.$('.persistent-player').length, 'persistent player should be visible');
@@ -184,10 +184,10 @@ test('loading a page with a bad ?play param', function(assert) {
   Ember.$.Velocity.mock = true;
   
   let id = '1';
-  let home = server.create('django-page', {id: `/bar?play=${id}`});
+  let home = server.create('django-page', {id: 'bar/'});
   djangoPage
     .bootstrap(home)
-    .visit(home);
+    .visit({id: `/bar?play=${id}`});
   
   andThen(() => {
     assert.notOk(Ember.$('.persistent-player').length, 'persistent player should not be visible');
