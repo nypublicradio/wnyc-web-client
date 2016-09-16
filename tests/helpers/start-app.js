@@ -3,6 +3,7 @@ import Application from '../../app';
 import config from '../../config/environment';
 import './alien-dom-click';
 import './ember-sortable/test-helpers';
+import './google-analytics-stub';
 
 export default function startApp(attrs) {
   let application;
