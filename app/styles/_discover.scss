@@ -30,6 +30,30 @@ body.discover {
 
   .discover {
     padding: 1.5rem 1.5rem 6rem 1.5rem;
+
+    /*
+      liquid fire sets some transform properties on these elements
+      and that messes up fixed positioning by making them fixed
+      relative to the container. We need to override these and set
+      overflow hidden on the discover content area so things don't bleed.
+    */
+    .liquid-container {
+      height: 100%;
+
+      position: relative;
+      overflow: initial;
+      -webkit-transform: initial;
+      -moz-transform:    initial;
+      transform:         initial;
+      z-index: $zIndex--isVisible;
+
+      .liquid-child {
+        -webkit-transform: initial;
+        -moz-transform:    initial;
+        transform:         initial;
+      }
+    }
+
   }
 
   .sitechrome-top {
@@ -42,29 +66,6 @@ body.discover {
 
   >.index_loading .sitechrome-page-content-area {
     padding: 0;
-  }
-
-  /*
-    liquid fire sets some transform properties on these elements
-    and that messes up fixed positioning by making them fixed
-    relative to the container. We need to override these and set
-    overflow hidden on the discover content area so things don't bleed.
-  */
-  .liquid-container {
-    height: 100%;
-
-    position: relative;
-    overflow: initial;
-    -webkit-transform: initial;
-    -moz-transform:    initial;
-    transform:         initial;
-    z-index: $zIndex--modalwrapper;
-
-    .liquid-child {
-      -webkit-transform: initial;
-      -moz-transform:    initial;
-      transform:         initial;
-    }
   }
 
   .sitechrome-page-content-area {
