@@ -40,10 +40,6 @@ Router.map(function() {
   this.route('schedule');
   this.route('topics');
 
-  // This is our catch all route that can render any existing page
-  // from the django site. It will be used when there's nothing more
-  // specific.
-  this.route('djangorendered', { path: '*upstream_url' });
   this.route('login');
   this.route('forgot-password');
 
@@ -59,6 +55,11 @@ Router.map(function() {
 
     this.route('index', { path: 'playlist'});
   });
+  
+  // This is our catch all route that can render any existing page
+  // from the django site. It will be used when there's nothing more
+  // specific.
+  this.route('djangorendered', { path: '*upstream_url' });
 });
 
 export default Router;
