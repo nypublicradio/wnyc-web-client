@@ -290,6 +290,7 @@ $middle-narrow: 476;
 $middle-middle: 701;
 $medium: 801;
 $large: 1025;
+$wide: 1250;
 
 $large-and-up: "(min-width: #{$large}px)";
 $medium-and-up: "(min-width: #{$medium}px)";
@@ -304,6 +305,7 @@ $small-only: "(max-width: #{$medium - 1}px)";
 $medium-only: "(max-width: #{$large - 1}px)";
 
 $up-to-large: "(max-width: #{$large - 1}px)";
+$up-to-wide: "(max-width: #{$wide}px)";
 
 $ipad-only: "(min-device-width : 768px) and (max-device-width : 1024px)";
 

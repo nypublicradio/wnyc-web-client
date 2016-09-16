@@ -1,21 +1,21 @@
 {{#discover-playlist stories=model.stories onRemoveItem='removeItem' onUpdateItems='updateItems' as |playlist|}}
   <div class="discover-playlist-header-content"> {{! for the flex layout shifts }}
     <h1 class="discover-playlist-header-title h1">Your Discover Playlist</h1>
-    <h3 class="discover-playlist-header-subtitle h3">We put together some audio specifically for you, based on your favorite shows and topics. <br/>
+    <h3 class="discover-playlist-header-subtitle text text--normal">We put together some audio specifically for you, based on your favorite shows and topics. <br/>
     Sit back and just listen, or tell it what you like and don’t like - it will adapt to you.
     </h3>
 
     {{#if playlist.isNotStarted}}
-      {{#playlist.button class="discover-playlist-header-button mod-filled-red" icon='arrow-down' iconPlacement='right'}}
+      {{#playlist.button class="discover-playlist-header-button" icon='arrow-down' iconPlacement='right'}}
         Start Listening
       {{/playlist.button}}
     {{else}}
       {{#if playlist.isPaused}}
-        {{#playlist.button class="discover-playlist-header-button mod-filled-red" icon='play' iconPlacement='left'}}
+        {{#playlist.button class="discover-playlist-header-button" icon='play' iconPlacement='left'}}
           Continue Listening
         {{/playlist.button}}
       {{else}}
-        {{#playlist.button class="discover-playlist-header-button mod-filled-red" icon='pause' iconPlacement='left'}}
+        {{#playlist.button class="discover-playlist-header-button" icon='pause' iconPlacement='left'}}
           Pause
         {{/playlist.button}}
       {{/if}}

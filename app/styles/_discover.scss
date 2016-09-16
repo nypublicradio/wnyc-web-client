@@ -11,6 +11,15 @@ body.discover {
   overflow: auto;
   height: 100%;
   
+  a {
+    transition: border-color 0ms;
+    
+    &:hover {
+      color: $blue;
+      border-bottom: none;      
+    }
+  }
+  
   .sitechrome-page-content-area {
     margin-top: -1.5rem;
     // TODO: Maybe, make sitechrome have no margin on the bottom and leave it
@@ -20,7 +29,7 @@ body.discover {
   }
   
   .discover {
-    padding: 1.5rem;
+    padding: 1.5rem 1.5rem 6rem 1.5rem;
   }
 
   .sitechrome-top {
@@ -256,6 +265,7 @@ body.discover {
     color: #8fa2e5;
   }
   @include transition(opacity 0.25s ease-in);
+  @include mq($up-to-wide) {display: none;}
 }
 
 .liquid-animating .discover-feedback-button {
@@ -311,7 +321,7 @@ body.discover {
   @include align-items(flex-end);
   @include flex-direction(row);
 
-  color:$red;
+  color:white;
   font-size:rems(12);
   letter-spacing: 2px;
   font-weight:bold;
@@ -455,7 +465,7 @@ body.discover {
   @include justify-content(flex-start);
 
   position:absolute;
-  left:-20px;
+  left:-25px;
   top:0;
   bottom:0;
   width:20px;
@@ -465,11 +475,11 @@ body.discover {
     cursor:grabbing;
   }
   svg {
-    width:9px;
-    height:20px;
+    width:11px;
+    height:22px;
   }
   path {
-    fill:$lightgray;
+    fill:white;
   }
 }
 
@@ -494,7 +504,7 @@ body.discover {
     height:20px;
   }
   path {
-    fill:$lightgray;
+    fill:white;
   }
 }
 
@@ -547,6 +557,7 @@ body.discover {
 
     opacity:1;
     max-height:200px;
+    margin-bottom:10px;
   }
 }
 
@@ -627,7 +638,7 @@ body.discover {
   &:hover {
     opacity:1;
     .svg-path-pause-icon, .svg-path-play-icon, .svg-path-circle-icon {
-      fill: $darkred;
+      fill: $red;
     }
   }
 }
@@ -688,7 +699,7 @@ body.discover {
   text-align: right;
   text-transform: uppercase;
   font-size: rems(12);
-  color: $lightgray;
+  color: $lightergray;
   letter-spacing: 2px;
   font-weight: bold;
   cursor: pointer;
@@ -715,6 +726,11 @@ body.discover {
       transform:rotate(180deg);
     }
   }
+  
+  &:hover svg polygon {
+    fill:$blue;
+    stroke:$blue;
+  }
 }
 
 .discover-playlist-story-title {
@@ -727,10 +743,11 @@ body.discover {
 
 .discover-playlist-story-duration {
   text-transform: uppercase;
-  font-size: rems(11);
+  font-size: rems(12);
   font-weight: bold;
   color: $lightergray;
   white-space: nowrap;
+  letter-spacing: 2px;
 }
 
 .discover-playlist-story-show-title {
@@ -960,14 +977,11 @@ body.discover {
   &:not([disabled]) {
     &:hover, &:focus {
       color: #FFF;
-      border-color:#FFF;
-      background-color: rgba(255, 255, 255, 0.2);
+      border-color:rgba(255, 255, 255, 0.5);
       opacity:1;
     }
     &:active {
-      color: $red;
       border-color:#FFF;
-      background-color: #FFF;
     }
   }
 }
@@ -988,13 +1002,17 @@ body.discover {
 
   }
   svg {
-    path {
+    path,
+    polygon {
       fill: #FFF;
+      margin: 0 0 0 3px;
     }
-    width:15px;
+    width:11px;
+    position: relative;
+    top: 1px;
   }
   > .action-button-text  {
-    margin: 0 5px;
+    margin: 0 5px 0 10px;
   }
 }
 
