@@ -27,7 +27,7 @@ body.discover {
 
     min-height: 80vh;
   }
-  
+
   .discover {
     padding: 1.5rem 1.5rem 6rem 1.5rem;
   }
@@ -35,15 +35,15 @@ body.discover {
   .sitechrome-top {
     background: rgba(black, .3);
   }
-  
+
   #site-chrome {
     background-color: $discoblue;
   }
-  
+
   >.index_loading .sitechrome-page-content-area {
     padding: 0;
   }
-  
+
   /*
     liquid fire sets some transform properties on these elements
     and that messes up fixed positioning by making them fixed
@@ -58,7 +58,7 @@ body.discover {
     -webkit-transform: initial;
     -moz-transform:    initial;
     transform:         initial;
-    z-index: 1;
+    z-index: $zIndex--modalwrapper;
 
     .liquid-child {
       -webkit-transform: initial;
@@ -66,11 +66,11 @@ body.discover {
       transform:         initial;
     }
   }
-  
+
   .sitechrome-page-content-area {
     overflow:hidden;
   }
-  
+
   .discover-fadeable-background {
     z-index: 0;
     opacity: 0; // this is handled by liquid fire
@@ -78,7 +78,7 @@ body.discover {
     @include absolute-fill();
     background: url(/assets/img/backgrounds/pattern_red.jpg);
   }
-}  
+}
 
 .discover-welcome-screen {
   @include display-flex;
