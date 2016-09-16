@@ -6,9 +6,35 @@
   left: $left;
 }
 
+body.discover{overflow: auto; height: 100%;}
 
-body.discover {
-  overflow: auto;
+body.discover .sitechrome-page-content-area {
+  margin-top: 0px;
+  // TODO: Maybe, make sitechrome have no margin on the bottom and leave it
+  // up to the feature to set a padding.
+
+  min-height: 100vh;
+}
+
+body.discover .discover {
+  padding:1.5rem;
+}
+
+body.discover #site-chrome {
+  background: url(/assets/img/backgrounds/pattern_grey.png) fixed;
+}
+
+body.discover.index_loading .sitechrome-page-content-area {
+  padding:0;
+}
+
+/*
+  liquid fire sets some transform properties on these elements
+  and that messes up fixed positioning by making them fixed
+  relative to the container. We need to override these and set
+  overflow hidden on the discover content area so things don't bleed.
+*/
+body.discover .liquid-container {
   height: 100%;
   
   a {
