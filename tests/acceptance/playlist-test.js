@@ -21,6 +21,6 @@ test('visiting /streams/wnyc-fm939', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/streams/wnyc-fm939');
-    assert.equal(find('.streaminfo-currentshow').text().trim(), 'Episode Foo until 9 am.');
+    assert.equal(find('a[href="http://fooshow.com"]').text().trim(), 'Episode Foo');
   });
 });
