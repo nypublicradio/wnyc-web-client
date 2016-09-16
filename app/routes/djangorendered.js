@@ -10,6 +10,8 @@ export default Ember.Route.extend({
       refreshModel: true
     }
   },
+  
+  metrics: service(),
 
   model({ upstream_url }, { queryParams }) {
     // This adds trailing slashes, because the server's redirect
