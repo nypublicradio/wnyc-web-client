@@ -14,7 +14,7 @@ test('visiting /streams/wnyc-fm939', function(assert) {
       show_title: 'Foo Show',
       title: 'Episode Foo',
       url: 'http://fooshow.com',
-      end: 1473944415542 // 9 am
+      end: "2016-09-15T13:00:15.542Z" // 9 am
     }
   });
   visit('/streams/wnyc-fm939');
