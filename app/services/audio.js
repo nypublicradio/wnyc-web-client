@@ -24,15 +24,15 @@ export default Service.extend({
   queue:            service('listen-queue'),
   listenActions:    service(),
 
-  audioPledge:      service(),
-  isReady:          readOnly('audioPledge.isReady'),
-  isPlaying:        readOnly('audioPledge.isPlaying'),
-  isLoading:        readOnly('audioPledge.isLoading'),
-  isMuted:          readOnly('audioPledge.isMuted'),
-  duration:         readOnly('audioPledge.duration'),
-  position:         alias('audioPledge.position'),
-  volume:           alias('audioPledge.volume'),
-  percentLoaded:    alias('audioPledge.percentLoaded'),
+  hifi:             service(),
+  isReady:          readOnly('hifi.isReady'),
+  isPlaying:        readOnly('hifi.isPlaying'),
+  isLoading:        readOnly('hifi.isLoading'),
+  isMuted:          readOnly('hifi.isMuted'),
+  duration:         readOnly('hifi.duration'),
+  position:         alias('hifi.position'),
+  volume:           alias('hifi.volume'),
+  percentLoaded:    alias('hifi.percentLoaded'),
 
   currentStory:     or('currentAudio.story', 'currentAudio'),
 
@@ -80,7 +80,7 @@ export default Service.extend({
 
   pause() {
     let context = get(this, 'currentContext') || '';
-    this.get('audioPledge').pause();
+    this.get('hifi').pause();
 
     this._trackPlayerEvent({
       action: 'Pause',
@@ -129,7 +129,7 @@ export default Service.extend({
       return s.get('audio');
     });
 
-    return this.get('audioPledge').play(urlPromise).then((/*sound*/) => {
+    return this.get('hifi').play(urlPromise).then((/*sound*/) => {
       // independent of context, if this item is already the first item in your
       // listening history, don't bother adding it again
       if (get(this, 'listens').indexByStoryPk(id) !== 0) {
@@ -199,7 +199,7 @@ export default Service.extend({
       return s.get('urls');
     });
 
-    return this.get('audioPledge').play(urlPromise).then((/*sound*/) => {
+    return this.get('hifi').play(urlPromise).then((/*sound*/) => {
       set(this, 'hasErrors', false);
       let wasStream = get(this, 'currentAudio.audioType') === 'stream';
       let oldStream = get(this, 'currentAudio.name');
@@ -264,7 +264,7 @@ export default Service.extend({
   setPosition(percentage) {
     let position = percentage * get(this, 'duration');
 
-    this.get('audioPledge').setPosition(position);
+    this.get('hifi').setPosition(position);
     /* TODO: send a `set position` signal to the low-level interface for the given position
     ------------------------------------------------------------------------*/
 

@@ -19,7 +19,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "audio-pledge": "nypublicradio/audio-pledge",
+    "ember-hifi": "*",
     "broccoli-asset-rev": "^2.4.2",
     "broccoli-merge-trees": "^1.0.0",
     "broccoli-sourcemap-concat": "^1.1.6",

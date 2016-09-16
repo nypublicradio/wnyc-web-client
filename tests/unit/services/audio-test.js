@@ -9,7 +9,7 @@ moduleFor('service:audio', 'Unit | Service | audio', {
           'model:discover/stories',
           'service:poll',
           'service:metrics',
-          'service:audio-pledge',
+          'service:hifi',
           'service:sound-cache',
           'service:debug-logger',
           'service:listen-history'],
@@ -53,7 +53,7 @@ moduleFor('service:audio', 'Unit | Service | audio', {
   }
 });
 
-const audioPledgeStub = {
+const hifiStub = {
   play(promise) {
     return Ember.RSVP.Promise.resolve(promise);
   },
@@ -92,7 +92,7 @@ test('service records a listen when a story is played', function(assert) {
 
   Ember.run(()=> {
     service.set('listens', listenStub);
-    service.set('audioPledge', audioPledgeStub);
+    service.set('hifi', hifiStub);
     service.play(story.id);
   });
 
@@ -114,7 +114,7 @@ test('it only sets up the player ping once', function(assert) {
 
   Ember.run(() => {
     service.set('poll', pollStub);
-    service.set('audioPledge', audioPledgeStub);
+    service.set('hifi', hifiStub);
     service.play(story.id);
   });
 
@@ -137,7 +137,7 @@ test('it calls the GoogleAnalytics ping event', function(assert) {
 
   service.set('metrics', metricsStub);
   service.set('sessionPing', 500);
-  service.set('audioPledge', audioPledgeStub);
+  service.set('hifi', hifiStub);
   Ember.run(() => service.play(story.id));
 });
 
@@ -154,7 +154,7 @@ test('it sends a listen action on play and not resume', function(assert) {
   };
   Ember.run(() => {
     service.set('listenActions', listenActionStub);
-    service.set('audioPledge', audioPledgeStub);
+    service.set('hifi', hifiStub);
     service.play(story.id);
   });
 
@@ -176,7 +176,7 @@ test('it sends a listen action on pause', function(assert) {
   };
   Ember.run(() => {
     service.set('listenActions', listenActionStub);
-    service.set('audioPledge', audioPledgeStub);
+    service.set('hifi', hifiStub);
     service.play(story.id);
   });
 
