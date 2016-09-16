@@ -45,6 +45,7 @@ export default Service.extend({
   isMuted:          readOnly('okraBridge.isMuted'),
   volume:           alias('okraBridge.volume'),
   currentStory:     or('currentAudio.story', 'currentAudio'),
+  bumperDuration:   null,
 
   currentAudio:     null,
   currentContext:   null,
@@ -86,7 +87,7 @@ export default Service.extend({
     set(this, 'okraBridge', OkraBridge.create({
       onFinished: bind(this, 'finishedTrack'),
       onError: bind(this, 'errorEvent'),
-      onFlashError: bind(this, 'flashError')
+      onFlashError: bind(this, 'flashError'),
     }));
 
     this.okraBridge.on('ready', this, 'playIfWaiting');
@@ -386,7 +387,7 @@ export default Service.extend({
     let context = get(this, 'currentContext');
     let activePref = this.getWithDefault('session.data.user-prefs-active-autoplay', 'default_stream');
     let activeStream = this.getWithDefault('session.data.user-prefs-active-stream', 'wnyc-fm939');
-
+    console.log(context, 'track ended');
     if (context === 'queue') {
       this.playNextInQueue();
     } else if (context === 'discover') {

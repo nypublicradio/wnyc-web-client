@@ -132,7 +132,8 @@ export const OkraBridge = Ember.Object.extend(Ember.Evented, {
       let model = Ember.Object.create({
         url: pkOrModel,
         audio: pkOrModel,
-        pk: pkOrModel
+        pk: pkOrModel,
+        isRemoteFile: true
       });
       WEB_PLAYER_CONTROLLER.then(player => {
         player.playRemoteFile(model);

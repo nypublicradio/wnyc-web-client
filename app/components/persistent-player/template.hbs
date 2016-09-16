@@ -1,12 +1,9 @@
-
-{{#liquid-if revealNotification class='notification-wrapper'}}
-  {{
-    persistent-player.notification
+{{#liquid-if continuousPlayEnabled class='notification-wrapper'}}
+  {{persistent-player.notification
     dismissNotification=(action 'dismissNotification')
-    preferredStream=preferredStream
     duration=audio.duration
     position=audio.position
-    secondsRemaining=bumperDuration
+    currentContext=audio.currentContext
   }}
 {{/liquid-if}}
 

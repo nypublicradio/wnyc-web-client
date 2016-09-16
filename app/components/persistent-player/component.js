@@ -7,46 +7,22 @@ import Ember from 'ember';
 
 export default Component.extend({
   audio: service(),
-  session: service(),
   store: service(),
   classNames: ['persistent-player', 'l-flexcontent', 'l-highlight--blur'],
   classNameBindings: ['isAudiostream'],
   currentAudio: reads('audio.currentAudio'),
   isPlaying: equal('audio.playState', 'is-playing'),
   isAudiostream: equal('currentAudio.audioType', 'stream'),
-  bumperDuration: 0,
-  preferredStream: Ember.computed('session.data.user-prefs-active-stream', function(){
-    let session = this.get('session');
-    let slug = session.get('data.user-prefs-active-stream') || 'wnyc-fm939';
-    let stream = this.get('store').peekRecord('stream', slug);
-    // juuuuuust in case....
-    if (stream) {
-      return stream.get('name');
-    }
-
-    return slug;
-  }),
-  revealNotification: Ember.computed('audio.duration', 'audio.currentContext', function() {
-    // this is really, really ugly. Is there an easier way to hook into the audio
-    // player's current content?
-    let session = get(this, 'session');
-    let ctxt = get(this, 'audio.currentContext');
-    let duration = get(this, 'audio.duration') / 1000;
-    let autoplay = session.getWithDefault('data.user-prefs-active-autoplay', 'default_stream');
-
-    if (autoplay !== 'default_stream') {
+  didDismiss: false,
+  continuousPlayEnabled: Ember.computed('audio.currentContext', 'currentAudio.audioType', function() {
+    let { audio, didDismiss } = this.getProperties('audio', 'didDismiss');
+    if (didDismiss) {
       return false;
     }
 
-    if (duration < 11 && (ctxt === 'continuous-player-bumper' || !ctxt)) {
-      if (ctxt) {
-        this.set('bumperDuration', Math.floor(duration));
-      }
-      return this.get('isPlaying');
-    }
-
-    return false;
+    return audio.get('currentContext') === 'continuous-player-bumper' || audio.get('currentAudio.audioType') === 'stream';
   }),
+
   actions: {
     playOrPause() {
       if (get(this, 'isPlaying')) {
@@ -59,7 +35,7 @@ export default Component.extend({
       if (cancelAutoplay) {
         get(this, 'audio').pause();
       }
-      this.set('revealNotification', false);
+      this.set('didDismiss', true);
     },
     setPosition(p) {
       get(this, 'audio').setPosition(p);
