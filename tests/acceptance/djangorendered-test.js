@@ -8,7 +8,7 @@ const { wnycURL } = config;
 import {
   resetHTML
 } from 'overhaul/tests/helpers/html';
-import 'overhaul/tests/helpers/inject-dummy-connection';
+import 'overhaul/tests/helpers/hifi-acceptance-helper';
 
 function escapeNavigation() {
   return 'leaving';
@@ -160,7 +160,6 @@ moduleForAcceptance('Acceptance | Django Rendered | Play From Param', {
 });
 
 test('loading a page with the ?play param', function(assert) {
-  injectDummyConnection();
   
   Ember.$.Velocity.mock = true;
   
@@ -179,7 +178,6 @@ test('loading a page with the ?play param', function(assert) {
 });
 
 test('loading a page with a bad ?play param', function(assert) {
-  injectDummyConnection();
   
   Ember.$.Velocity.mock = true;
   
