@@ -24,9 +24,7 @@ export default Route.extend(ApplicationRouteMixin, {
 
     this._syncBrowserId();
 
-    if (config.environment !== 'test') {
-      metrics.identify('GoogleAnalytics', {isAuthenticated: false});
-    }
+    metrics.identify('GoogleAnalytics', {isAuthenticated: false});
 
     get(this, 'asyncWriter').install();
     if (config.renderGoogleAds && window.googletag) {
@@ -65,9 +63,7 @@ export default Route.extend(ApplicationRouteMixin, {
 
   sessionAuthenticated() {
     this._super(...arguments);
-    if (config.environment !== 'test') {
-      get(this, 'metrics').identify('GoogleAnalytics', {isAuthenticated: true});
-    }
+    get(this, 'metrics').identify('GoogleAnalytics', {isAuthenticated: true});
   },
 
   _syncBrowserId() {
