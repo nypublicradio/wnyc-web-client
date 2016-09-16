@@ -1,7 +1,7 @@
 import ENV from '../config/environment';
 import DS from 'ember-data';
 import Ember from 'ember';
-//import fetch from 'fetch';
+import fetch from 'fetch';
 
 export default DS.JSONAPIAdapter.extend({
   host: ENV.wnycAPI,
@@ -20,6 +20,16 @@ export default DS.JSONAPIAdapter.extend({
   },
   findRecord(store, type, id/*, snapshot*/) {
     var url = [this.host, 'api/v3', 'story', 'detail', id].join('/') + '/';
-    return Ember.$.ajax(url);
+    return fetch(url).then(checkStatus).then(r => r.json());
   }
 });
+
+function checkStatus(response) {
+  if (response.status >= 200 && response.status < 300) {
+    return response;
+  } else {
+    var error = new Error(response.statusText);
+    error.response = response;
+    throw error;
+  }
+}
