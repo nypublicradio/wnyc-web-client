@@ -32,6 +32,23 @@ test('visiting discover/edit starts you on topics', function(assert) {
   });
 });
 
+test('you can not edit and choose zero topics', function(assert) {
+  visit('/discover/edit');
+  andThen(function() {
+    click('a:contains(Pick Topics)');
+  });
+  andThen(function() {
+    click('.discover-topic:contains(Music)');
+  });
+  andThen(function() {
+    click('button:contains(Refresh Playlist)');
+  });
+  andThen(function() {
+    assert.equal(currentURL(), '/discover/edit/topics', 'it should not leave the page');
+    assert.equal($('.discover-setup-title-error').text().trim(), 'Please select at least one topic', 'it should show an error message');
+  });
+});
+
 test('you can browse directly to shows tab', function(assert) {
   visit('/discover/edit/shows');
   andThen(() => {
