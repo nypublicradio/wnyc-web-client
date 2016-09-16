@@ -16,7 +16,6 @@ function setupStreams() {
 }
 
 test('visiting /streams', function(assert) {
-  server.logging = true;
   setupStreams();
   
   visit('/streams');
