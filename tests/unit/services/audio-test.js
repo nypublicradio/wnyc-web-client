@@ -10,8 +10,6 @@ moduleFor('service:audio', 'Unit | Service | audio', {
           'service:poll',
           'service:metrics',
           'service:hifi',
-          'service:sound-cache',
-          'service:debug-logger',
           'service:listen-history'],
 
   beforeEach() {
