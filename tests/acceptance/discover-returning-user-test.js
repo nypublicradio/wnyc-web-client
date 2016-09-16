@@ -25,6 +25,14 @@ moduleForAcceptance('Acceptance | discover returning user', {
   }
 });
 
+test('returning users are redirected /discover -> /discover/playlist', function(assert) {
+  visit('/discover');
+  
+  andThen(function() {
+    assert.equal(currentURL(), '/discover/start', 'should be on start page');
+  });
+});
+
 test('visiting discover/edit starts you on topics', function(assert) {
   visit('/discover/edit');
   andThen(function() {

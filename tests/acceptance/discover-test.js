@@ -27,6 +27,14 @@ test('can visit discover from the home page', function(assert) {
   });
 });
 
+test('first-time users are redirected /discover -> /discover/start', function(assert) {
+  visit('/discover');
+  
+  andThen(function() {
+    assert.equal(currentURL(), '/discover/start', 'should be on start page');
+  });
+});
+
 test('button exists to create new discover station', function(assert) {
   visit('/discover/start');
   server.createList('discover-topic', 20);
