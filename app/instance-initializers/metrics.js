@@ -22,7 +22,6 @@ export function initialize(applicationInstance) {
     config: {
       id
     },
-    environments: ['development', 'production'],
   }]);
 
   // if (mailchimp !== null) {
