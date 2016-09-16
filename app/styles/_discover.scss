@@ -85,6 +85,25 @@ body.discover {
   }
 }
 
+body.discover.start .sitechrome-top {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+body.discover .sitechrome-top {
+  @include transition(background-color $transition-timing);
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  @include mq($medium-and-up) {
+    width: calc(100% - 166px); // side nav
+  }
+}
+
+body.discover .sitechrome-page-content-area {
+  padding-top: 107px; // top nav height + margin
+}
+
 .discover-welcome-screen {
   @include display-flex;
   @include flex-direction(column);
