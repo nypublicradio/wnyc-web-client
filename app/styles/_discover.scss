@@ -265,7 +265,9 @@ body.discover {
     color: #8fa2e5;
   }
   @include transition(opacity 0.25s ease-in);
-  @include mq($up-to-wide) {display: none;}
+  @include mq($up-to-wide) {
+    display: none;
+  }
 }
 
 .liquid-animating .discover-feedback-button {
