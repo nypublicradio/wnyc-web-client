@@ -30,9 +30,6 @@ export default Ember.Route.extend({
       this.send('updateDonateChunk', get(model, 'story.extendedStory.headerDonateChunk'));
     }
     
-    // must run before trackPageview
-    metrics.invoke('nprDimensions', 'GoogleAnalytics', { nprVals });
-    //
     metrics.trackEvent({
       eventName: 'viewedStory',
       category: 'Viewed Story',
@@ -41,5 +38,7 @@ export default Ember.Route.extend({
       id: get(model, 'story.id'),
       type: get(model, 'story.itemType')
     });
+    
+    metrics.invoke('trackPage', 'NprAnalytics', { nprVals, isNpr: true });
   }
 });

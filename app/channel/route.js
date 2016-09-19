@@ -37,15 +37,14 @@ export default Route.extend({
       this.send('updateDonateChunk', channel.get('headerDonateChunk'));
     }
 
-    // must run before trackPageview
-    metrics.invoke('nprDimensions', 'GoogleAnalytics', { nprVals });
-    //
     metrics.trackEvent({
       category: `Viewed ${get(channel, 'listingObjectType').capitalize()}`,
       action: channelTitle,
       id: channel.get('cmsPK'),
       type: channel.get('listingObjectType')
     });
+
+    metrics.invoke('trackPage', 'NprAnalytics', { nprVals, isNpr: true });
   },
   setupController(controller, model) {
     let { navSlug } = this.paramsFor(`${this.routeName}.well`);
