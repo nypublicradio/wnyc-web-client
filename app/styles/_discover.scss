@@ -463,7 +463,7 @@ body.discover {
 }
 
 .discover-playlist-container {
-  .discover-playlist-item {
+  .discover-playlist-item + .discover-playlist-item {
     border-top-width: 1px;
     border-top-style: solid;
     border-top-color: #e9e9e9;
