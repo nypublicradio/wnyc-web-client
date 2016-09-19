@@ -6,35 +6,8 @@
   left: $left;
 }
 
-body.discover{overflow: auto; height: 100%;}
-
-body.discover .sitechrome-page-content-area {
-  margin-top: 0px;
-  // TODO: Maybe, make sitechrome have no margin on the bottom and leave it
-  // up to the feature to set a padding.
-
-  min-height: 100vh;
-}
-
-body.discover .discover {
-  padding:1.5rem;
-}
-
-body.discover #site-chrome {
-  background: url(/assets/img/backgrounds/pattern_grey.png) fixed;
-}
-
-body.discover.index_loading .sitechrome-page-content-area {
-  padding:0;
-}
-
-/*
-  liquid fire sets some transform properties on these elements
-  and that messes up fixed positioning by making them fixed
-  relative to the container. We need to override these and set
-  overflow hidden on the discover content area so things don't bleed.
-*/
-body.discover .liquid-container {
+body.discover { 
+  overflow: auto;
   height: 100%;
   
   a {
@@ -44,14 +17,14 @@ body.discover .liquid-container {
       color: $blue;
       border-bottom: none;      
     }
-  }
-  
+  }  
+
   .sitechrome-page-content-area {
-    margin-top: -1.5rem;
+    margin-top: 0px;
     // TODO: Maybe, make sitechrome have no margin on the bottom and leave it
     // up to the feature to set a padding.
 
-    min-height: 80vh;
+    min-height: 100vh;
   }
 
   .discover {
@@ -79,23 +52,34 @@ body.discover .liquid-container {
         transform:         initial;
       }
     }
-
   }
 
   .sitechrome-top {
     background: rgba(black, .3);
+    
+    @include mq($large-and-up) {
+      @include transition(background-color $transition-timing);
+      position: absolute;
+      top: 0;
+      z-index: 1;
+      width: calc(100% - 166px); // side nav
+    }
   }
 
   #site-chrome {
     background-color: $discoblue;
   }
 
-  >.index_loading .sitechrome-page-content-area {
-    padding: 0;
+  > .index_loading .sitechrome-page-content-area {
+    padding:0;
   }
 
   .sitechrome-page-content-area {
     overflow:hidden;
+    
+    @include mq($large-and-up) {
+      padding-top: 107px; // top nav height margin
+    }
   }
 
   .discover-fadeable-background {
@@ -109,28 +93,11 @@ body.discover .liquid-container {
     background-position: top left;
     background-size: cover;
   }
-}
-
-body.discover.start .sitechrome-top {
-  background-color: rgba(0, 0, 0, 0.3);
-}
-
-body.discover .sitechrome-top {
-  @include mq($large-and-up) {
-    @include transition(background-color $transition-timing);
-    position: absolute;
-    top: 0;
-    z-index: 1;
-    width: 100%;
-    width: calc(100% - 166px); // side nav
+  
+  &.start .sitechrome-top {
+    background-color: rgba(0, 0, 0, 0.3);
   }
-}
-
-body.discover .sitechrome-page-content-area {
-  @include mq($large-and-up) {
-    padding-top: 107px; // top nav height + margin
-  }
-}
+}  
 
 .discover-welcome-screen {
   @include display-flex;
@@ -500,7 +467,7 @@ body.discover .sitechrome-page-content-area {
 }
 
 .discover-playlist-container {
-  .discover-playlist-item + .discover-playlist-item {
+  .discover-playlist-item {
     border-top-width: 1px;
     border-top-style: solid;
     border-top-color: #e9e9e9;
