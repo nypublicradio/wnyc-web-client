@@ -25,10 +25,8 @@ Router.map(function() {
   // default behavior in the `djangorendered` route.
   this.route('story', { path: 'story/:slug' });
 
-  if (config.environment === 'test' || config.featureFlags['site-chrome']) {
-    this.route('shows');
-    this.route('archived-shows');
-  }
+  this.route('shows');
+  this.route('archived-shows');
   this.route('show', {path: 'shows/:slug'}, subpageRoutes);
   this.route('article', {path: 'articles/:slug'}, subpageRoutes);
   this.route('serie', {path: 'series/:slug'}, subpageRoutes);

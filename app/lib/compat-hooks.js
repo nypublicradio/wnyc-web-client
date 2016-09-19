@@ -85,39 +85,35 @@ export function beforeAppend(element, page) {
     element = homepageCleanup(element);
   }
 
-  if (config.featureFlags['site-chrome']) {
-    let container = document.createElement('div');
-    if (get(page, 'wnycContent')) {
-      Array.from(element.querySelectorAll('.l-full, .l-full + .l-constrained'))
-        .forEach(n => container.appendChild(n));
-    } else if (get(page, 'wnycChannel')) {
-      container.appendChild(element.querySelector('#js-listings'));
-    } else if ( page.get('id') && page.get('id').match(/^streams\//i) ) {
-      // TODO: is there a better way to detect this?
-      return container;
-    } else {
-      let legacyContent = element.querySelector('#site') || element.querySelector('#flatpage');
-      if (!legacyContent) {
-        // maybe it's a flat page
-        legacyContent = element;
-      }
-      let newContent = document.createElement('div');
-      if (!$(legacyContent).hasClass('graphic-responsive')){
-        newContent.classList.add('l-constrained');
-      }
-      if (page.get('id') === 'search/') {
-        newContent.classList.add('search');
-      }
-      while (legacyContent.firstChild) {
-        newContent.appendChild(legacyContent.firstChild);
-      }
-      container.appendChild(newContent);
-    }
-    // container's childNodes are appended to the DOM; container is discarded
+  let container = document.createElement('div');
+  if (get(page, 'wnycContent')) {
+    Array.from(element.querySelectorAll('.l-full, .l-full + .l-constrained'))
+      .forEach(n => container.appendChild(n));
+  } else if (get(page, 'wnycChannel')) {
+    container.appendChild(element.querySelector('#js-listings'));
+  } else if ( page.get('id') && page.get('id').match(/^streams\//i) ) {
+    // TODO: is there a better way to detect this?
     return container;
   } else {
-    return element;
+    let legacyContent = element.querySelector('#site') || element.querySelector('#flatpage');
+    if (!legacyContent) {
+      // maybe it's a flat page
+      legacyContent = element;
+    }
+    let newContent = document.createElement('div');
+    if (!$(legacyContent).hasClass('graphic-responsive')){
+      newContent.classList.add('l-constrained');
+    }
+    if (page.get('id') === 'search/') {
+      newContent.classList.add('search');
+    }
+    while (legacyContent.firstChild) {
+      newContent.appendChild(legacyContent.firstChild);
+    }
+    container.appendChild(newContent);
   }
+  // container's childNodes are appended to the DOM; container is discarded
+  return container;
 }
 
 // All the dynamically discovered Javascript that comes along with the
