@@ -23,7 +23,7 @@ export default BaseAdapter.extend({
         // NPR Dimensions begin at slot 6
         window.ga('npr.set', `dimension${i + 6}`, nprVals[i] || 'None');
       }
-      window.ga('npr.send', 'pageview', {page, title});
+      window.ga('npr.send', {hitType: 'pageview', page, title});
       
       // for testing
       return true;

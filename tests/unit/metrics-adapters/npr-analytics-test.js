@@ -23,7 +23,7 @@ test('it fails gracefully if window.ga does not exist', function(assert) {
 
 test('it fires the correct pageview event', function(assert) {
   let adapter = this.subject({config: {id: config.nprGoogleAnalyticsKey}});
-  window.ga = function(command, hitType) {
+  window.ga = function(command, {hitType}) {
     if (command === 'npr.send') {
       assert.equal(command, 'npr.send', 'should prefix send with npr label');
       assert.equal(hitType, 'pageview', 'should send an npr pageview');
