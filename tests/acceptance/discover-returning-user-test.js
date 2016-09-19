@@ -25,11 +25,34 @@ moduleForAcceptance('Acceptance | discover returning user', {
   }
 });
 
-test('returning users are redirected /discover -> /discover/playlist', function(assert) {
+test('users who finished setup are redirected /discover -> /discover/playlist', function(assert) {
+  let session = currentSession(this.application);
+  session.set('data.discover-setup-complete', true);
   visit('/discover');
   
   andThen(function() {
-    assert.equal(currentURL(), '/discover/start', 'should be on start page');
+    assert.equal(currentURL(), '/discover/playlist', 'should be on the playlist page');
+  });
+});
+
+test('users who finished step 1 are redirect to finish the flow', function(assert) {
+  let session = currentSession(this.application);
+  session.set('data.discover-current-setup-step', 'topics');
+  visit('/discover');
+  
+  
+  andThen(function() {
+    assert.equal(currentURL(), '/discover/start/topics', 'should be on the choose topics page');
+  });
+});
+
+test('users who finished step 2 are redirect to finish the flow', function(assert) {
+  let session = currentSession(this.application);
+  session.set('data.discover-current-setup-step', 'shows');
+  visit('/discover');
+  
+  andThen(function() {
+    assert.equal(currentURL(), '/discover/start/shows', 'should be on the choose shows page');
   });
 });
 
