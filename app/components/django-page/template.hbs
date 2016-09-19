@@ -18,15 +18,6 @@
       {{/ember-wormhole}}
     {{/each}}
   {{/if}}
-  {{#if beta}}
-    {{#unless features.siteChrome}}
-      {{beta-trial
-        beta=beta
-        exitBeta=(action 'exitBeta')
-        onDismiss=(action 'dismissBeta')
-        enterBeta=(action 'enterBeta')}}
-    {{/unless}}
-  {{/if}}
 {{else}}
   {{loading-templates type=loadingType}}
 {{/if}}
