@@ -123,9 +123,11 @@
           {{link-to 'Topics' 'topics' class="inherit" preventDefault=false}}
         {{/link-to}}
 
+        {{#if features.discover}}
         {{#link-to 'discover.start' current-when="discover" tagName='li' href="false" class="list-item list-item--short"}}
           {{link-to 'Discover' 'discover.start' class="inherit" preventDefault=false}}
         {{/link-to}}
+        {{/if}}
 
         {{#unless media.isLargeAndUp}}
 
