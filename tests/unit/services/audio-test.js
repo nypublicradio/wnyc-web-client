@@ -13,9 +13,7 @@ moduleFor('service:audio', 'Unit | Service | audio', {
   // Specify the other units that are required for this test.
   needs: ['model:story','adapter:story','serializer:story',
           'model:discover/stories',
-          'service:listen-actions',
           'service:poll',
-          'service:metrics',
           'service:listen-history'],
 
   beforeEach() {
@@ -29,6 +27,9 @@ moduleFor('service:audio', 'Unit | Service | audio', {
       sendSkip: function(){},
       sendDelete: function(){}
     });
+    const metricsStub = Ember.Service.extend({
+      trackEvent() {}
+    });
     startMirage(this.container);
 
     this.register('service:session', sessionStub);
@@ -36,6 +37,9 @@ moduleFor('service:audio', 'Unit | Service | audio', {
 
     this.register('service:listen-actions', listenActionsStub);
     this.inject.service('listen-actions', { as: 'listen-actions' });
+    
+    this.register('service:metrics', metricsStub);
+    this.inject.service('metrics');
 
   },
   afterEach() {
@@ -232,3 +236,51 @@ test('it delays early calls to play until after okraBrige isReady', function(ass
     return wait();
   });
 });
+
+// TODO: skip until we merge in stream mirage factories
+// moduleFor('service:audio', 'Unit | Service | Audio Analytics', {
+//   // Specify the other units that are required for this test.
+//   needs: ['model:story','adapter:story','serializer:story',
+//           'model:discover/stories',
+//           'service:listen-actions',
+//           'service:poll',
+//           'service:metrics',
+//           'service:listen-history'],
+// 
+//   beforeEach() {
+//     const sessionStub = Ember.Service.extend({
+//       data: {} // we only really need the data thing
+//     });
+//     const listenActionsStub = Ember.Service.extend({
+//       sendPause: function(){},
+//       sendComplete: function(){},
+//       sendPlay: function(){},
+//       sendSkip: function(){},
+//       sendDelete: function(){}
+//     });
+//     startMirage(this.container);
+// 
+//     this.register('service:session', sessionStub);
+//     this.inject.service('session', { as: 'session' });
+// 
+//     this.register('service:listen-actions', listenActionsStub);
+//     this.inject.service('listen-actions', { as: 'listen-actions' });
+// 
+//   },
+//   afterEach() {
+//     server.shutdown();
+//     delete window.ga;
+//   }
+// });
+// 
+// test('it sends npr events', function(assert) {
+//   window.ga = function() {
+//     debugger;
+//   }
+//   let stream = server.create('stream');
+//   
+//   Ember.run(() => {
+//     service.playStream(stream.slug);
+//   })
+//   
+// });
