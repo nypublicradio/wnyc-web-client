@@ -94,7 +94,6 @@ moduleForAcceptance('Acceptance | on the beta site', {
 
 test('when I am on the beta site, I can exit the beta', function(assert) {
   server.create('djangoPage', {id:'/'});
-  withFeature('site-chrome');
   assertRun = function() {
     assert.ok('exitBeta was called');
   };
@@ -111,7 +110,6 @@ test('when I am on the beta site, I can exit the beta', function(assert) {
 // this dom node is rendered by a component that's only in beta
 test('when I am on the beta site, I can see the beta nav menu', function(assert) {
   server.create('djangoPage', {id:'/'});
-  withFeature('site-chrome');
   //appendIfNot('beta-nav');
   visit('/');
 

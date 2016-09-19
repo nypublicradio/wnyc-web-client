@@ -3,7 +3,6 @@ import { skip, test } from 'qunit';
 import { plantBetaTrial } from 'overhaul/tests/helpers/beta';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import djangoPage from 'overhaul/tests/pages/django-page';
-import 'overhaul/tests/helpers/with-feature';
 import Ember from 'ember';
 const { wnycURL } = config;
 import {
@@ -51,7 +50,6 @@ test('on a search page with a query', function(assert) {
 });
 
 skip('it properly routes to the search page', function(assert) {
-  withFeature('django-page-routing');
   let home = server.create('django-page', {id: '/'});
   server.create('django-page', {id: 'search/?q=foo'});
 
@@ -122,7 +120,6 @@ moduleForAcceptance('Acceptance | Django Rendered | Beta Trial', {
 skip('alien doms with beta trials keep the beta bar if it has not been dismissed', function(assert) {
   plantBetaTrial();
 
-  withFeature('django-page-routing');
   let djangoHTML = `<a href="${wnycURL}/foo" id="link">click me</a>`;
   let page = server.create('django-page', {testMarkup: djangoHTML});
   server.create('django-page', {id: 'foo/'});
