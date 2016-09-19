@@ -2,6 +2,7 @@ import { test, skip } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import { currentSession } from 'overhaul/tests/helpers/ember-simple-auth';
 import ENV from 'overhaul/config/environment';
+import 'overhaul/tests/helpers/with-feature';
 
 moduleForAcceptance('Acceptance | discover',
   {
@@ -16,6 +17,7 @@ moduleForAcceptance('Acceptance | discover',
 );
 
 test('can visit discover from the home page', function(assert) {
+  withFeature('discover');
   visit('/login');
 
   andThen(function() {
@@ -388,6 +390,7 @@ test('should be able to go back to welcome screen if you really want to', functi
 });
 
 test('nav link sends you to start page', function(assert) {
+  withFeature('discover');
   server.createList('discover-topic', 5);
   server.createList('show', 5);
   visit('/login');
