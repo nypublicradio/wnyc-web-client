@@ -16,7 +16,7 @@ export default Ember.Route.extend({
   afterModel() {
     const metrics = get(this, 'metrics');
     // must run before trackPageview
-    metrics.invoke('nprDimensions', 'GoogleAnalytics', {});
+    metrics.invoke('trackPage', 'NprAnalytics', {});
     //
   }
 });
