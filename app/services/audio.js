@@ -5,6 +5,7 @@ import set from 'ember-metal/set';
 import { OkraBridge } from '../lib/okra-bridge';
 import computed, { readOnly, alias, or } from 'ember-computed';
 import { bind } from 'ember-runloop';
+import { assign } from 'ember-platform';
 import RSVP from 'rsvp';
 import { classify as upperCamelize } from 'ember-string';
 
@@ -446,7 +447,7 @@ export default Service.extend({
   
   _trackPlayerEventForNpr(options) {
     let metrics = get(this, 'metrics');
-    metrics.trackEvent('NprAnalytics', options);
+    metrics.trackEvent('NprAnalytics', assign(options, {isNpr: true}));
   },
 
   _firstTimePlay() {

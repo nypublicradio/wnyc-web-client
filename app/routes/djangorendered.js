@@ -27,10 +27,10 @@ export default Ember.Route.extend({
     return this.store.find('django-page', upstream_url)
       .catch(e => retryFromServer(e, upstream_url));
   },
-  afterModel() {
-    const metrics = get(this, 'metrics');
-    // must run before trackPageview
-    metrics.invoke('trackPage', 'NprAnalytics', {});
-    //
+  afterModel(page) {
+    let metrics = get(this, 'metrics');
+    let path = document.location.pathname; // e.g. '/shows/bl/'
+    let title = get(page, 'title').trim(); // this should be something dynamic
+    metrics.invoke('trackPage', 'NprAnalytics', {isNpr: true, page: path, title});
   }
 });

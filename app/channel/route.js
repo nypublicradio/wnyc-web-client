@@ -44,7 +44,12 @@ export default Route.extend({
       type: channel.get('listingObjectType')
     });
 
-    metrics.invoke('trackPage', 'NprAnalytics', { nprVals, isNpr: true });
+    metrics.invoke('trackPage', 'NprAnalytics', {
+      page: `/${get(this, 'listingSlug')}`,
+      title: channelTitle,
+      nprVals,
+      isNpr: true
+    });
   },
   setupController(controller, model) {
     let { navSlug } = this.paramsFor(`${this.routeName}.well`);

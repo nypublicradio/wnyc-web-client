@@ -39,6 +39,11 @@ export default Ember.Route.extend({
       type: get(model, 'story.itemType')
     });
     
-    metrics.invoke('trackPage', 'NprAnalytics', { nprVals, isNpr: true });
+    metrics.invoke('trackPage', 'NprAnalytics', {
+      page: `/story/${get(model, 'story.slug')}`,
+      title: label,
+      nprVals,
+      isNpr: true
+    });
   }
 });
