@@ -86,13 +86,17 @@ test('visiting a story with a different donate URL', function(assert) {
   });
 });
 
-moduleForAcceptance('Acceptance | Django Page | Story Detail Analytics');
+moduleForAcceptance('Acceptance | Django Page | Story Detail Analytics', {
+  afterEach() {
+    delete window.ga;
+  }
+});
 
 test('metrics properly reports story attrs', function(assert) {
   let story = server.create('story');
   let id = `story/${story.slug}/`;
   
-  assert.expect(3);
+  assert.expect(4);
   server.create('django-page', {id, slug: story.slug});
 
   server.post(`${config.wnycAccountRoot}/api/v1/analytics/ga`, (schema, {queryParams, requestBody}) => {
@@ -124,6 +128,12 @@ test('metrics properly reports story attrs', function(assert) {
   server.post(`${config.wnycAccountRoot}/api/most/view/managed_item/:pk`, (schema, {params}) => {
     assert.equal(params.pk, story.id, 'reports a managed item view');
   });
+  
+  window.ga = function(command) {
+    if (command === 'npr.send') {
+      assert.ok('called npr.send');
+    }
+  };
   
   djangoPage
     .bootstrap({id})

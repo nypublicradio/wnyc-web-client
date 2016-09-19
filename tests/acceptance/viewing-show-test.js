@@ -200,8 +200,13 @@ test('visiting a show with a different header donate chunk', function(assert) {
   });
 });
 
+moduleForAcceptance('Acceptance | Django Page | Show Page Analytics', {
+  afterEach() {
+    delete window.ga;
+  }
+});
+
 test('metrics properly reports channel attrs', function(assert) {
-  let done = assert.async();
   let show = server.create('show', {
     id: 'shows/foo/',
     cmsPK: 123,
@@ -212,7 +217,9 @@ test('metrics properly reports channel attrs', function(assert) {
     apiResponse: server.create('api-response', { id: 'shows/foo/episodes/1' })
   });
   
+  assert.expect(3);
   server.create('django-page', {id: show.id});
+  
   server.post(`${config.wnycAccountRoot}/api/v1/analytics/ga`, (schema, {queryParams, requestBody}) => {
     // skip trackPageView event
     if (queryParams.category === '_trackPageView') {
@@ -236,8 +243,13 @@ test('metrics properly reports channel attrs', function(assert) {
     };
     assert.deepEqual({category, action, cms_id, cms_type}, testObj, 'GET params match up');
     assert.deepEqual(postParams, testObj, 'POST params match up');
-    done();
   });
+  
+  window.ga = function(command) {
+    if (command === 'npr.send') {
+      assert.ok('called npr.send');
+    }
+  };
   
   djangoPage
     .bootstrap(show)
