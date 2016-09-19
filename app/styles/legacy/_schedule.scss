@@ -203,6 +203,11 @@ ul.schedule-table {
       display: none;
     }
     
+    li.today {
+      text-transform: none !important;
+      letter-spacing: 0 !important;
+    }
+    
     .action-button-icon {
       top: 0;
       
