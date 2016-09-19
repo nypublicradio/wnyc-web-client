@@ -4,7 +4,6 @@
 // Generally, the idea is to use Okra as our single source of truth for things
 // like playlists, sound position, volume, duration, etc.
 import Ember from 'ember';
-import config from 'overhaul/config/environment';
 import set from 'ember-metal/set';
 import get from 'ember-metal/get';
 import computed from 'ember-computed';
@@ -14,7 +13,7 @@ const { Promise, all } = rsvp;
 
 let XDPlayer;
 
-function resolveOkra(resolve, reject) {
+function resolveOkra(resolve) {
   let interval = setInterval(() => {
     if (typeof window.Okra !== 'undefined') {
       clearInterval(interval);
