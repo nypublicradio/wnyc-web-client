@@ -77,7 +77,9 @@ module.exports = function(environment) {
     siteName: 'WNYC',
     renderGoogleAds: true,
     // these are provided via a .env file or else by Django's EmberAdapter
-    googleAnalyticsKey: process.env.GOOGLE_ANALYTICS || 'UA-46158613-1', // demo GA key
+    // fall back to demo GA key  
+    googleAnalyticsKey: process.env.GOOGLE_ANALYTICS || 'UA-46158613-1',
+    nprGoogleAnalyticsKey: 'UA-18188937-11',
     googleAPIv3Key: process.env.GOOGLE_API_V3_KEY,
     typekit: { kitId: 'ifl2zxi' },
     wnycAPI: process.env.WNYC_API,
@@ -152,8 +154,6 @@ module.exports = function(environment) {
     ENV.betaTrials.legacyNavLinkLanding = '#ember-testing';
     ENV.betaTrials.betaInviteLanding = '#ember-testing';
 
-    ENV.googleAPIv3Key = '';
-    ENV.googleAnalyticsKey = '';
     ENV.wnycAPI = 'http://example.com';
     ENV.wnycAccountRoot = 'http://example.com/account';
     ENV.wnycEtagAPI = 'http://example.com/api/v1/browser_id/';

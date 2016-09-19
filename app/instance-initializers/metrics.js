@@ -1,7 +1,8 @@
 import ENV from 'overhaul/config/environment';
 
 const {
-  googleAnalyticsKey: id,
+  googleAnalyticsKey,
+  nprGoogleAnalyticsKey,
   wnycAccountRoot
 } = ENV;
 
@@ -20,8 +21,13 @@ export function initialize(applicationInstance) {
   }, {
     name: 'GoogleAnalytics',
     config: {
-      id
+      id: googleAnalyticsKey
     },
+  }, {
+    name: 'NprAnalytics',
+    config: {
+      id: nprGoogleAnalyticsKey
+    }
   }]);
 
   // if (mailchimp !== null) {
