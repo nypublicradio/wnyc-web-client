@@ -121,6 +121,20 @@ export default Service.extend({
       region: upperCamelize(context),
       withAnalytics: true
     });
+    
+    if (get(this, 'currentAudio.audioType') === 'stream') {
+      this._trackPlayerEventForNpr({
+        category: 'Engagement',
+        action: 'Stream_Pause',
+        label: `Streaming_${get(this, 'currentAudio.name')}`
+      });
+    } else {
+      this._trackPlayerEventForNpr({
+        category: 'Engagement',
+        action: 'On_demand_audio_pause',
+        label: get(this, 'currentAudio.audio')
+      });
+    }
 
     if (get(this, 'currentAudio.audioType') !== 'stream') {
       // we're not set up to handle pause listen actions from streams atm
@@ -180,6 +194,11 @@ export default Service.extend({
           withAnalytics: true,
           story
         });
+        this._trackPlayerEventForNpr({
+          category: 'Engagement',
+          action: 'On_demand_audio_play',
+          label: get(story, 'audio')
+        });
         this.sendPlayListenAction(id);
 
         if (context === 'queue' || context === 'history') {
@@ -232,6 +251,12 @@ export default Service.extend({
           label,
         });
 
+        this._trackPlayerEventForNpr({
+          category: 'Engagement',
+          action: 'Stream_Play',
+          label: `Streaming_${newStream}`
+        });
+
         RSVP.Promise.resolve(get(stream, 'story')).then(story => {
           if (story) {
             this._trackPlayerEvent({
@@ -246,6 +271,12 @@ export default Service.extend({
           this._trackPlayerEvent({
             action: 'Switched Stream to Stream',
             label: `from ${oldStream} to ${newStream}`
+          });
+
+          this._trackPlayerEventForNpr({
+            category: 'Engagement',
+            action: 'Stream_Change',
+            label: `Streaming_${newStream}`
           });
         }
       }
@@ -411,6 +442,11 @@ export default Service.extend({
       label = `${region}${analyticsCode}`;
     }
     metrics.trackEvent({category, action, label, model: story});
+  },
+  
+  _trackPlayerEventForNpr(options) {
+    let metrics = get(this, 'metrics');
+    metrics.trackEvent('NprAnalytics', options);
   },
 
   _firstTimePlay() {
