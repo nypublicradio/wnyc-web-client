@@ -15,16 +15,12 @@ const { Promise, all } = rsvp;
 let XDPlayer;
 
 function resolveOkra(resolve, reject) {
-  if (config.featureFlags['persistent-player']) {
-    let interval = setInterval(() => {
-      if (typeof window.Okra !== 'undefined') {
-        clearInterval(interval);
-        resolve(window.Okra);
-      }
-    }, 20);
-  } else {
-    reject('Okra failed to load: Feature flag not set.');
-  }
+  let interval = setInterval(() => {
+    if (typeof window.Okra !== 'undefined') {
+      clearInterval(interval);
+      resolve(window.Okra);
+    }
+  }, 20);
 }
 
 export const Okra = new Promise(resolveOkra);
