@@ -30,7 +30,11 @@ export default Ember.Route.extend({
   afterModel(page) {
     let metrics = get(this, 'metrics');
     let path = document.location.pathname; // e.g. '/shows/bl/'
-    let title = get(page, 'title').trim(); // this should be something dynamic
-    metrics.invoke('trackPage', 'NprAnalytics', {isNpr: true, page: path, title});
+    let title = (get(page, 'title') || '').trim();
+    metrics.invoke('trackPage', 'NprAnalytics', {
+      isNpr: true,
+      page: path,
+      title
+    });
   }
 });
