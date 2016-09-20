@@ -10,12 +10,12 @@ export default Ember.Route.extend({
 
   redirect(model, transition) {
     if (transition.targetName === "discover.edit.index") {
-      this.transitionTo('discover.edit.topics');
-    } else {
       get(this, 'metrics').trackEvent({
         category: 'Discover',
         action: 'Clicked Edit in Discover'
       });
+
+      this.transitionTo('discover.edit.topics');
     }
   },
   actions: {
@@ -52,6 +52,13 @@ export default Ember.Route.extend({
       if (error) {
         return;
       }
+
+      get(this, 'metrics').trackEvent({
+        category: 'Discover',
+        action: 'Create Playlist in Discover',
+        label: 'Refresh Playlist'
+      });
+
       this.get('discoverPrefs').save();
       this.get('discoverQueue').emptyQueue();
       this.transitionTo('discover.index');

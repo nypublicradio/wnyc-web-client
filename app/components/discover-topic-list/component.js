@@ -33,6 +33,7 @@ export default Ember.Component.extend({
         category: 'Discover',
         action: 'Selected All Topics',
       });
+
       this.updateTopics(this.get('topicTags'));
     },
     selectNone() {
@@ -40,6 +41,7 @@ export default Ember.Component.extend({
         category: 'Discover',
         action: 'Cleared All Topics',
       });
+
       this.updateTopics([]);
     },
     onMultiselectChangeEvent(selectedTopics, value, action) {
@@ -53,6 +55,7 @@ export default Ember.Component.extend({
           action: 'Selected Topic',
           label: title
         });
+
         topics.addObject(value);
       }
       else if (action === 'removed') {
@@ -61,6 +64,7 @@ export default Ember.Component.extend({
           action: 'Deselected Topic',
           label: title
         });
+
         topics.removeObject(value);
       }
 

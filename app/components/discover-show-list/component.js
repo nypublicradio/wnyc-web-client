@@ -42,6 +42,7 @@ export default Ember.Component.extend({
           action: 'Selected Show',
           label: title
         });
+
         selectedShowSlugs.addObject(value);
         excludedShowSlugs.removeObject(value);
       }
@@ -51,6 +52,7 @@ export default Ember.Component.extend({
           action: 'Deselected Show',
           label: title
         });
+
         selectedShowSlugs.removeObject(value);
         excludedShowSlugs.addObject(value);
       }

@@ -1,9 +1,11 @@
 import Ember from 'ember';
 import ENV from '../../config/environment';
+import get from 'ember-metal/get';
 
 export default Ember.Route.extend({
   session: Ember.inject.service(),
   discoverPrefs: Ember.inject.service(),
+  metrics: Ember.inject.service(),
 
   model() {
     return Ember.RSVP.hash({
@@ -15,13 +17,13 @@ export default Ember.Route.extend({
     this._super(...arguments);
     controller.set('loadingDirection', null);
   },
-  
+
   actions: {
     back(selectedTopicTags) {
       let prefs = this.get('discoverPrefs');
       prefs.set('currentSetupStep', 'start');
       prefs.set('selectedTopicTags', selectedTopicTags);
-      
+
       this.controller.set('loadingDirection', 'back');
       this.transitionTo('discover.start');
     },
@@ -32,6 +34,12 @@ export default Ember.Route.extend({
       }
       else {
         this.controller.setProperties({showError: false, loadingDirection: 'next'});
+        get(this, 'metrics').trackEvent({
+          category: 'Discover',
+          action: 'Clicked Next in Discover'
+        });
+
+        this.controllerFor('discover.topics').set('showError', false);
         prefs.set('selectedTopicTags', selectedTopicTags);
         prefs.set('currentSetupStep', 'shows');
         prefs.save();

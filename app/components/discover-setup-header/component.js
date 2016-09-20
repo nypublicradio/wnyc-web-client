@@ -10,10 +10,6 @@ export default Component.extend({
   isLoadingNext: equal('loadingDirection', 'next'),
   actions: {
     next() {
-      get(this, 'metrics').trackEvent({
-        category: 'Discover',
-        action: 'Clicked Next in Discover'
-      });
       this.sendAction('onNext');
     },
     back() {
@@ -21,6 +17,7 @@ export default Component.extend({
         category: 'Discover',
         action: 'Clicked Back in Discover'
       });
+
       this.sendAction('onBack');
     }
   }

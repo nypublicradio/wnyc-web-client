@@ -24,10 +24,6 @@ export default Ember.Route.extend({
       stories = this._loadStoriesFromQueue();
     }
     else {
-      get(this, 'metrics').trackEvent({
-        category: 'Discover',
-        action: 'Create Playlist in Discover',
-      });
       stories = this._loadStoriesFromServer();
     }
 
@@ -93,6 +89,7 @@ export default Ember.Route.extend({
         category: 'Discover',
         action: 'Clicked Find More in Discover',
       });
+
       let controller = this.controllerFor('discover.index');
 
       controller.set('findingMore', true);
