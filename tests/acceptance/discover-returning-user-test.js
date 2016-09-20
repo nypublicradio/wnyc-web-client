@@ -73,11 +73,30 @@ test('you can not edit and choose zero topics', function(assert) {
     click('.discover-topic:contains(Music)');
   });
   andThen(function() {
+    assert.equal($('.discover-topic.is-selected').length, 0, 'no topics should be selected');
     click('button:contains(Refresh Playlist)');
   });
   andThen(function() {
     assert.equal(currentURL(), '/discover/edit/topics', 'it should not leave the page');
     assert.equal($('.discover-setup-title-error').text().trim(), 'Please select at least one topic', 'it should show an error message');
+  });
+});
+
+test('you can not edit and choose zero shows', function(assert) {
+  visit('/discover/edit');
+  andThen(function() {
+    click('a:contains(Pick Shows)');
+  });
+  andThen(function() {
+    $('.discover-show.is-selected').click();
+  });
+  andThen(function() {
+    assert.equal($('.discover-show.is-selected').length, 0, 'no shows should be selected');
+    click('button:contains(Refresh Playlist)');
+  });
+  andThen(function() {
+    assert.equal(currentURL(), '/discover/edit/shows', 'it should not leave the page');
+    assert.equal($('.discover-setup-title-error').text().trim(), 'Please select at least one show', 'it should show an error message');
   });
 });
 
