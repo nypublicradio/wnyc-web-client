@@ -41,7 +41,7 @@ export function normalizeHref(node, base = location) {
   let href = node.getAttribute('href') || '';
   let url = new URL(href, base).toString();
   let isExternal = false;
-  if ( href.startsWith('#') || href.startsWith('?') || href.startsWith('mailto:')) {
+  if ( href.startsWith('#') ||  href.startsWith('mailto:')) {
     href = href;
   } else if (url.startsWith(wnycURL)) {
     href = url.replace(wnycURL, '').replace(/^\//, '') || '/';
