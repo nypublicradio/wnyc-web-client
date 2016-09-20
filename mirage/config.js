@@ -1,4 +1,5 @@
 import config from 'overhaul/config/environment';
+import { Response } from 'ember-cli-mirage';
 
 // Mirage is diabled by default when using --proxy
 // In development (without --proxy) and test environments, these handlers will be used
@@ -138,5 +139,15 @@ export default function() {
     return home.attrs.text;
   });
 
-  this.get(`${baseUrl}/\*id`, 'django-page');
+  this.get(`${baseUrl}/\*id`, function(schema, {queryParams, params}) {
+    let { id } = params;
+    let page = schema.djangoPages.find(id);
+    if (!page) {
+      // try with queryParams
+      id += '?' + Object.keys(queryParams)
+        .map(p => `${p}=${queryParams[p]}`).join('&');
+      page = schema.djangoPages.find(id);
+    }
+    return page || new Response(404);
+  });
 }
