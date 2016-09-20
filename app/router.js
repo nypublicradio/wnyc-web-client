@@ -34,8 +34,9 @@ Router.map(function() {
   this.route('blog', {path: 'blogs/:slug'}, subpageRoutes);
   this.route('stream', {path: 'streams'});
   this.route('playlist', {path: 'streams/:id'});
-  this.route('schedule-date', {path: 'schedule/:year/:month/:day'});
-  this.route('schedule');
+  this.route('schedule', function() {
+    this.route('date', {path: ':year/:month/:day'});
+  });
   this.route('topics');
 
   this.route('login');
