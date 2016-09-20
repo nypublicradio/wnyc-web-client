@@ -70,7 +70,7 @@ test('select all button selects all topics', function(assert) {
     click('button:contains("Get Started")');
     andThen(function() {
       assert.equal($(".discover-topic").length, 20);
-      click('a:contains("Select All")');
+      click('button:contains("Select All")');
       andThen(function() {
         assert.equal($(".discover-topic.is-selected").length, 20);
       });
