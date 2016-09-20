@@ -31,7 +31,6 @@ body.ember-application.discover {
   }
 
   .discover {
-    padding: 1.5rem 1.5rem 6rem 1.5rem;
 
     /*
       liquid fire sets some transform properties on these elements
@@ -187,7 +186,7 @@ body.ember-application.discover {
 
 .discover-setup-header {
   padding:1rem 0 0.5rem;
-  margin-bottom:0;
+  margin: 0 1.5rem;
   @include display-flex;
   @include flex-direction(row);
   @include flex-wrap(nowrap);
@@ -240,6 +239,7 @@ body.ember-application.discover {
 /* Discover Playlist ------------------------------------------------*/
 
 .discover-playlist-container {
+  margin: 1.5rem 1.5rem 0 1.5rem;
   @include display-flex;
   @include flex-direction(column);
   @include flex-wrap(nowrap);
@@ -259,6 +259,7 @@ body.ember-application.discover {
 }
 .discover-playlist-footer {
   text-align: center;
+  margin-bottom: 6rem;
 }
 
 .rounded-caps-button.discover-playlist-find-more {
@@ -790,6 +791,7 @@ body.ember-application.discover {
   border-radius:6px;
   text-align:center;
   padding:1rem;
+  margin: 0 1.5rem 6rem;
 }
 
 .discover-topic, .discover-topic-bubble-select-all {
@@ -877,6 +879,7 @@ body.ember-application.discover {
   border-radius:6px;
   text-align:center;
   padding:3rem 2rem 2rem;
+  margin: 0 1.5rem 6rem;
 }
 
 .discover-show-list > div { // this is the multi-select checkbox component
