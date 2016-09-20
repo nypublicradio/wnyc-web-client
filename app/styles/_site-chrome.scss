@@ -79,6 +79,10 @@
     }    
   }
   
+  .list-item > a {
+    border-bottom-color: $red;
+  }
+  
   .list-item.active a {
     opacity: 1;
     
