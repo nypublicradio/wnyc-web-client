@@ -13,7 +13,8 @@ export default Ember.Route.extend({
   },
   actions: {
     noShowsSelected(hasNotSelectedAShow) {
-      this.controller.set('hasNotSelectedAShow', hasNotSelectedAShow);
+      let parentController = this.controllerFor('discover.edit');
+      parentController.set('hasNotSelectedAShow', hasNotSelectedAShow);
       this.send('showError');
     },
     updateShowSelection(excludedShowSlugs) {
@@ -21,7 +22,8 @@ export default Ember.Route.extend({
       prefs.set('excludedShowSlugs', excludedShowSlugs);
     },
     noTopicsSelected(hasNotSelectedATopic) {
-      this.controller.set('hasNotSelectedATopic', hasNotSelectedATopic);
+      let parentController = this.controllerFor('discover.edit');
+      parentController.set('hasNotSelectedATopic', hasNotSelectedATopic);
       this.send('showError');
     },
     updateTopicSelection(selectedTopicTags) {
@@ -29,15 +31,18 @@ export default Ember.Route.extend({
       prefs.set('selectedTopicTags', selectedTopicTags);
     },
     showError() {
-      let showError = this.controller.get('hasNotSelectedATopic') || this.controller.get('hasNotSelectedAShow');
-      this.controller.set('showError', showError);
+      let parentController = this.controllerFor('discover.edit');
+      let error = parentController.get('hasNotSelectedATopic') || parentController.get('hasNotSelectedAShow');
+      this.controller.set('showError', error);
     },
     cancel() {
       this.get('discoverPrefs').discard();
       this.transitionTo('discover.index');
     },
     refresh() {
-      if (this.controller.get('hasNotSelectedATopic')) {
+      let parentController = this.controllerFor('discover.edit');
+      let error = parentController.get('hasNotSelectedATopic') || parentController.get('hasNotSelectedAShow');
+      if (error) {
         return;
       }
       this.get('discoverPrefs').save();
