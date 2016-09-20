@@ -250,11 +250,12 @@
 }
 
 // override screen_wnyc_responsive_header_home_overrides.css
-body {
-  background: white !important;
+// or better yet, let's not load this legacy CSS anymore?
+body.ember-application {
+  background: white;
   
   &.home {
-    background: $nearwhite !important;
+    background: $nearwhite;
   }
   
 }

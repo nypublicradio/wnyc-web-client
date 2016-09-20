@@ -6,9 +6,12 @@
   left: $left;
 }
 
-body.discover { 
+// TODO: get rid of .ember-application when we get rid of body overrides in
+// _home-compat
+body.ember-application.discover { 
   overflow: auto;
   height: 100%;
+  background-color: $discoblue;
   
   a {
     transition: border-color 0ms;
@@ -64,10 +67,6 @@ body.discover {
       z-index: 1;
       width: calc(100% - 166px); // side nav
     }
-  }
-
-  #site-chrome {
-    background-color: $discoblue;
   }
 
   > .index_loading .sitechrome-page-content-area {
@@ -377,8 +376,7 @@ body.discover {
   top:0;
   left:1.5rem;
   right:1.5rem;
-  // background-color:$darkergray;
-  background: url(/assets/img/backgrounds/pattern_grey.png) fixed;
+  background-color: $discoblue;
   text-align:left;
   z-index:2;
 
