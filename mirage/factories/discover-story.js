@@ -1,4 +1,5 @@
 import { Factory, faker } from 'ember-cli-mirage';
+import moment from 'moment';
 
 /* This is representing the response we're getting from the API. This is different than the discover/story model format we're using in the discover feature. Data gets transformed a bit by the serializer */
 
@@ -20,6 +21,7 @@ export default Factory.extend({
   type(i) { return faker.list.random('nprarticle', 'article')(i); },
 
   dateLine() { return faker.date.recent(); },
+  dateLineDatetime() { return moment(faker.date.recent()).format(); },
 
   audioDurationReadable(i) {
     let length = Math.floor(faker.random.number.range(2, 59)(i));

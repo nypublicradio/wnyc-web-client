@@ -2,6 +2,7 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import startMirage from 'overhaul/tests/helpers/setup-mirage-for-integration';
 import wait from 'ember-test-helpers/wait';
+import moment from 'moment';
 
 moduleForComponent('discover-playlist-story-info', 'Integration | Component | discover playlist story info', {
   integration: true,
@@ -18,6 +19,27 @@ test('it displays duration in the correct format', function(assert) {
 
   this.render(hbs`{{discover-playlist-story-info story=story}}`);
   assert.equal(this.$('.discover-playlist-story-duration').text().trim(), '2 min');
+});
+
+test('it displays the date in the correct format', function(assert) {
+  this.set('story', server.create('discover-story', {dateLineDatetime: "2016-01-01T12:00:00-04:00"}));
+
+  this.render(hbs`{{discover-playlist-story-info story=story}}`);
+  assert.equal(this.$('.discover-playlist-story-date').text().trim(), 'Jan 1, 2016');
+});
+
+test('it displays the date in the correct format for yesterday', function(assert) {
+  this.set('story', server.create('discover-story', {dateLineDatetime: moment().subtract(1, 'days').format()}));
+
+  this.render(hbs`{{discover-playlist-story-info story=story}}`);
+  assert.equal(this.$('.discover-playlist-story-date').text().trim(), 'Yesterday');
+});
+
+test('it displays the date in the correct format for today', function(assert) {
+  this.set('story', server.create('discover-story', {dateLineDatetime: moment().format()}));
+
+  this.render(hbs`{{discover-playlist-story-info story=story}}`);
+  assert.equal(this.$('.discover-playlist-story-date').text().trim(), 'Today');
 });
 
 test('it displays the name of the story', function(assert) {

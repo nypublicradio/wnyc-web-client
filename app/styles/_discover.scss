@@ -8,11 +8,11 @@
 
 // TODO: get rid of .ember-application when we get rid of body overrides in
 // _home-compat
-body.ember-application.discover { 
+body.ember-application.discover {
   overflow: auto;
   height: 100%;
   background-color: $discoblue;
-  
+
   .sitechrome-page-content-area {
     margin-top: 0px;
     // TODO: Maybe, make sitechrome have no margin on the bottom and leave it
@@ -24,12 +24,12 @@ body.ember-application.discover {
   .discover {
     a {
       transition: border-color 0ms;
-      
+
       &:hover {
         color: $blue;
-        border-bottom: none;      
+        border-bottom: none;
       }
-    }  
+    }
 
     /*
       liquid fire sets some transform properties on these elements
@@ -57,7 +57,7 @@ body.ember-application.discover {
 
   .sitechrome-top {
     background: rgba(black, .3);
-    
+
     @include mq($large-and-up) {
       @include transition(background-color $transition-timing);
       position: absolute;
@@ -73,7 +73,7 @@ body.ember-application.discover {
 
   .sitechrome-page-content-area {
     overflow:hidden;
-    
+
     @include mq($large-and-up) {
       padding-top: 107px; // top nav height margin
     }
@@ -90,7 +90,7 @@ body.ember-application.discover {
     background-position: top left;
     background-size: cover;
   }
-}  
+}
 
 .discover-welcome-screen {
   @include display-flex;
@@ -368,7 +368,7 @@ body.ember-application.discover {
   &:hover {
     border:0;
   }
-  
+
   .animated-loading-icon {
     margin-right: 5px;
   }
@@ -764,7 +764,7 @@ body.ember-application.discover {
       transform:rotate(180deg);
     }
   }
-  
+
   &:hover svg polygon {
     fill:$blue;
     stroke:$blue;
@@ -779,6 +779,7 @@ body.ember-application.discover {
   display:inline-block;
 }
 
+.discover-playlist-story-date,
 .discover-playlist-story-duration {
   text-transform: uppercase;
   font-size: rems(12);
@@ -786,6 +787,8 @@ body.ember-application.discover {
   color: $lightergray;
   white-space: nowrap;
   letter-spacing: 2px;
+  display: inline-block;
+  margin-right: 0.5rem;
 }
 
 .discover-playlist-story-show-title {
@@ -896,7 +899,7 @@ body.ember-application.discover {
 .shows_loading .discover-show-list {
   @include display-flex;
   min-height: 60vh;
-  
+
   .animated-loading-icon {
     @include justify-content(center);
   }

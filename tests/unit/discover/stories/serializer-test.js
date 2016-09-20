@@ -18,7 +18,7 @@ test('it serializes the data', function(assert) {
   server.create('discover-story');
 
   this.store().query('discover/stories', {}).then(records => {
-    let keysToCheck = ['title', 'showTitle', 'showUrl', 'summary', 'estimatedDuration', 'date', 'audio', 'url', 'cmsPK'];
+    let keysToCheck = ['title', 'showTitle', 'showUrl', 'summary', 'estimatedDuration', 'dateLine', 'dateLineDatetime', 'audio', 'url', 'cmsPK'];
     assert.equal(records.get('length'), 1, "no records were returned");
 
     records.forEach((record) => {
