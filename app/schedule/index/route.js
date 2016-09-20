@@ -6,7 +6,7 @@ export default Route.extend({
     if (transition.targetName !== 'schedule.date') {
       let year  = moment().format('YYYY');
       let month = moment().format('MMM').toLowerCase();
-      let day   = moment().format('DD')
+      let day   = moment().format('DD');
       this.replaceWith('schedule.date', year, month, day, {
         queryParams: {
           scheduleStation: 'wnyc-fm939'
