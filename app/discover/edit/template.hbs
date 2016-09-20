@@ -9,10 +9,13 @@
       <h2 class="discover-setup-title-step-title h2 text--white">Customize Your Playlist</h2>
       <span class="discover-setup-title-error">&nbsp;
         {{if (and showError hasNotSelectedATopic) 'Please select at least one topic'}}
+        {{if (and showError hasNotSelectedAShow) 'Please select at least one show'}}
       </span>
     </div>
     <div class="discover-setup-header-action">
-      {{#action-button class=(if (not hasNotSelectedATopic) 'mod-filled-red') click=(route-action 'refresh')}}
+      {{#action-button
+        class=(if (not (or hasNotSelectedATopic hasNotSelectedAShow)) 'mod-filled-red')
+        click=(route-action 'refresh')}}
         Refresh Playlist
       {{/action-button}}
     </div>

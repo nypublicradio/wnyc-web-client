@@ -12,17 +12,25 @@ export default Ember.Route.extend({
     }
   },
   actions: {
+    noShowsSelected(hasNotSelectedAShow) {
+      this.controller.set('hasNotSelectedAShow', hasNotSelectedAShow);
+      this.send('showError');
+    },
     updateShowSelection(excludedShowSlugs) {
       let prefs = this.get('discoverPrefs');
       prefs.set('excludedShowSlugs', excludedShowSlugs);
     },
     noTopicsSelected(hasNotSelectedATopic) {
       this.controller.set('hasNotSelectedATopic', hasNotSelectedATopic);
-      this.controller.set('showError', hasNotSelectedATopic);
+      this.send('showError');
     },
     updateTopicSelection(selectedTopicTags) {
       let prefs = this.get('discoverPrefs');
       prefs.set('selectedTopicTags', selectedTopicTags);
+    },
+    showError() {
+      let showError = this.controller.get('hasNotSelectedATopic') || this.controller.get('hasNotSelectedAShow');
+      this.controller.set('showError', showError);
     },
     cancel() {
       this.get('discoverPrefs').discard();
