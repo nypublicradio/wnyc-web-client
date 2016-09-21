@@ -3,27 +3,6 @@ import hbs from 'htmlbars-inline-precompile';
 import { faker  } from 'ember-cli-mirage';
 import Ember from 'ember';
 
-const { getOwner  } = Ember;
-
-let featuresService = Ember.Service.extend({
-  features: {},
-  isEnabled(feature) {
-    let features = this.get('features');
-    return features[feature];
-  },
-  enable(feature) {
-    let features = this.get('features');
-    features[feature] = true;
-  },
-  disable(feature) {
-    let features = this.get('features');
-    features[feature] = false;
-  },
-  disableAll() {
-    this.set('features', {});
-  }
-});
-
 let store;
 
 function createDjangoPage(attrs) {
@@ -37,13 +16,7 @@ moduleForComponent('django-page', 'Integration | Component | django page', {
   integration: true,
   beforeEach() {
     store = this.container.lookup('service:store');
-    this.register('service:features', featuresService);
-    getOwner(this).inject('component', 'features', 'service:features');
   },
-  afterEach() {
-    let featureFlags = this.container.lookup('service:features');
-    featureFlags.disableAll();
-  }
 });
 
 test('it renders', function(assert) {
