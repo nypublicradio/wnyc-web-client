@@ -47,7 +47,7 @@
     dotRadius=2
     lineWidth=2}}
   {{/if}}
-  <button {{action (route-action 'findMore')}} class="discover-playlist-find-more rounded-caps-button mod-hollow-blue">
+  <button {{action (route-action 'findMore')}} class="discover-playlist-find-more rounded-caps-button mod-hollow-blue" disabled={{findingMore}}>
     Find Me Some More
   </button>
 </div>

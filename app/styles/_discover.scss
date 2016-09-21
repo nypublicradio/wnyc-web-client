@@ -266,6 +266,11 @@ body.ember-application.discover {
   text-transform: uppercase;
 }
 
+.rounded-caps-button.discover-playlist-find-more[disabled] {
+  cursor: wait;
+  opacity: 0.5;
+}
+
 .discover-playlist-no-results {
   text-align: center;
   color: #FFF;
