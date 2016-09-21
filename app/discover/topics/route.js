@@ -11,20 +11,27 @@ export default Ember.Route.extend({
       selectedTopicTags: this.get('discoverPrefs.selectedTopicTags')
     });
   },
+  setupController(controller, model) {
+    this._super(...arguments);
+    controller.set('loadingDirection', null);
+  },
+  
   actions: {
     back(selectedTopicTags) {
       let prefs = this.get('discoverPrefs');
       prefs.set('currentSetupStep', 'start');
       prefs.set('selectedTopicTags', selectedTopicTags);
+      
+      this.controller.set('loadingDirection', 'back');
       this.transitionTo('discover.start');
     },
     next(selectedTopicTags) {
       let prefs = this.get('discoverPrefs');
       if (selectedTopicTags.length === 0) {
-        this.controllerFor('discover.topics').set('showError', true);
+        this.controller.set('showError', true);
       }
       else {
-        this.controllerFor('discover.topics').set('showError', false);
+        this.controller.setProperties({showError: false, loadingDirection: 'next'});
         prefs.set('selectedTopicTags', selectedTopicTags);
         prefs.set('currentSetupStep', 'shows');
         prefs.save();

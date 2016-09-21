@@ -18,20 +18,26 @@ export default Ember.Route.extend({
       });
     });
   },
+  setupController(controller, model) {
+    this._super(...arguments);
+    controller.set('loadingDirection', null);
+  },
 
   actions: {
     back(excludedShowSlugs) {
       let prefs = this.get('discoverPrefs');
       prefs.set('currentSetupStep', 'topics');
       prefs.set('excludedShowSlugs', excludedShowSlugs);
+      
+      this.controller.set('loadingDirection', 'back');
       this.transitionTo('discover.topics');
     },
     next(excludedShowSlugs, hasNotSelectedShow) {
       if (hasNotSelectedShow) {
-        this.controllerFor('discover.shows').set('showError', true);
+        this.controller.set('showError', true);
       }
       else {
-        this.controllerFor('discover.shows').set('showError', false);
+        this.controller.setProperties({showError: false, loadingDirection: 'next'});
         let prefs = this.get('discoverPrefs');
         prefs.set('excludedShowSlugs', excludedShowSlugs);
         prefs.set('setupComplete', true);
