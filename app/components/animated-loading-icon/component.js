@@ -12,9 +12,11 @@ export default Ember.Component.extend({
 
   dotRadius: 10, // Radius of the middle dot
   lineWidth: 8,
+  outerScale: 24,
+  innerScale: 12,
 
   didRender() {
-    this.loadingIcon = new LoadingIcon(this.$('#loading-anim')[0], this.getProperties('radius', 'width', 'height', 'lineWidth', 'color', 'dotRadius'));
+    this.loadingIcon = new LoadingIcon(this.$('#loading-anim')[0], this.getProperties('radius', 'width', 'height', 'lineWidth', 'color', 'dotRadius', 'innerScale', 'outerScale'));
     this.animate();
   },
   animate() {

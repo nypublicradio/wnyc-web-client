@@ -95,6 +95,8 @@ export default function(canvas, options) {
       var ringRadius    = this.options.radius;
       var ringLineWidth = this.options.lineWidth;
       var dotRadius     = this.options.dotRadius;
+      var outerScale    = this.options.outerScale;
+      var innerScale    = this.options.innerScale;
 
       var innerRing = new Ring({
         center : ringCenter,
@@ -104,7 +106,7 @@ export default function(canvas, options) {
         lineWidth : ringLineWidth,
         color: color,
         update : function(progress) {
-          var scaleFactor = 12;
+          var scaleFactor = innerScale;
           if(progress < 0.2) {
             this.radius = ringRadius + cubicEaseIn(normalizeProgress(progress, 0.0, 0.05)) * scaleFactor;
           } else if (progress > 0.85) {
@@ -123,7 +125,7 @@ export default function(canvas, options) {
         lineWidth : ringLineWidth,
         color: color,
         update : function(progress) {
-          var scaleFactor = 24;
+          var scaleFactor = outerScale;
           if(progress < 0.2) {
             this.radius = ringRadius + cubicEaseIn(normalizeProgress(progress, 0.03, 0.13)) * scaleFactor;
           } else {
@@ -186,7 +188,9 @@ export default function(canvas, options) {
       lineWidth: 10,
       dotRadius: 25,
       width: 128,
-      height: 128
+      height: 128,
+      outerScale: 24,
+      innerScale: 12
     });
 
     this.options.center = [Math.floor(this.options.width / 2), Math.floor(this.options.height / 2)];
