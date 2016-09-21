@@ -1,17 +1,27 @@
-import Ember from 'ember';
+import Component from 'ember-component';
+import { htmlSafe } from 'ember-string';
+import computed from 'ember-computed';
 
-export default Ember.Component.extend({
+
+export default Component.extend({
   use: 'top', // use the top scroll point by default
-  offset: 0,
-
-  onStickyChange: Ember.observer('sticky', function() {
+  offset() {
+    return -this.element.clientHeight;
+  },
+  spacerHeight: 0,
+  
+  spacerStyle: computed('spacerHeight', function() {
+    return htmlSafe(`height: ${this.get('spacerHeight')}px;`);
+  }),
+  
+  willUpdate() {
     let height = this.$('.sticky-page-header').height();
     if (!this.get('sticky')) {
       height = 0;
     }
-    this.$('.sticky-page-header-spacer').css('height', height);
-  }),
-
+    this.set('spacerHeight', height);
+  },
+  
   actions: {
     topScrollPointReached(direction) {
       if (this.get('use') === 'top') {
@@ -23,5 +33,5 @@ export default Ember.Component.extend({
         this.set('sticky', direction === 'down');
       }
     }
-  }
+  },
 });
