@@ -11,7 +11,7 @@ export default Ember.Route.extend({
       selectedTopicTags: this.get('discoverPrefs.selectedTopicTags')
     });
   },
-  setupController(controller, model) {
+  setupController(controller/*, model*/) {
     this._super(...arguments);
     controller.set('loadingDirection', null);
   },

@@ -18,7 +18,7 @@ export default Ember.Route.extend({
       });
     });
   },
-  setupController(controller, model) {
+  setupController(controller/*, model*/) {
     this._super(...arguments);
     controller.set('loadingDirection', null);
   },
