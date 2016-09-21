@@ -11,27 +11,28 @@ const browser = {
   };
 const getMimeTypes = function() {
   var urls = this.get('urls');
-  if (urls == null) {return;}
+  if (urls == null) { return; }
   var mimeTypes = [];
-  var mobileAACStreamWasUsed = false;
-  // Mobile browsers should receive the AAC stream specific to mobile
+  var mobileMP3StreamWasUsed = false;
+  // Mobile browsers should receive the MP3 stream specific to mobile
   // for our analytics.  But if there's no mobile stream, then they
-  // should receive the regular AAC stream.
-  if ((browser.mobile || browser.android || browser.ios) && urls.mobile_aac) {
-    var aacMobile = urls.mobile_aac;
-    if (!isArray(aacMobile)) {
-      aacMobile = [aacMobile];
+  // should receive the regular MP3 stream.
+  // this gets around firewalls blocking AAC streams at WNYC HQ
+  if ((browser.mobile || browser.android || browser.ios) && urls.mobile) {
+    var mp3Mobile = urls.mobile;
+    if (!isArray(mp3Mobile)) {
+      // why are these urls exposed as Arrays to the rest of the app?
+      mp3Mobile = [mp3Mobile];
     }
-    mimeTypes.push({ type: 'audio/aac', url: aacMobile });
-    mobileAACStreamWasUsed = true;
+    mimeTypes.push({ type: 'audio/mpeg', url: mp3Mobile });
+    mobileMP3StreamWasUsed = true;
   }
-  if (!mobileAACStreamWasUsed && isArray(urls.aac) && urls.aac.length) {
-      mimeTypes.push({ type: 'audio/aac', url: urls.aac });
+  if (!mobileMP3StreamWasUsed && isArray(urls.mp3) && urls.mp3.length) {
+      mimeTypes.push({ type: 'audio/mpeg', url: urls.mp3 });
   }
-  if (isArray(urls.mp3) && urls.mp3.length) {
-    mimeTypes.push({ type: 'audio/mpeg', url: urls.mp3 });
+  if (isArray(urls.aac) && urls.aac.length) {
+    mimeTypes.push({ type: 'audio/aac', url: urls.aac });
   }
-  console.log(mimeTypes);
   return mimeTypes;
 };
 
