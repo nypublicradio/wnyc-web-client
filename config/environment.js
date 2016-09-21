@@ -96,7 +96,8 @@ module.exports = function(environment) {
     // put beta host at the root so it can be overridden by Django
     wnycBetaURL: process.env.WNYC_BETA_URL,
     featureFlags: {
-      'discover': process.env.DISCOVER
+      'discover': process.env.DISCOVER,
+      'other-discover': process.env.OTHER_DISCOVER
     },
     betaTrials: {
       betaInviteLanding: '#full-page-transforms-wrapper',

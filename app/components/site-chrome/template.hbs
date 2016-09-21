@@ -123,7 +123,7 @@
           {{link-to 'Topics' 'topics' class="inherit" preventDefault=false}}
         {{/link-to}}
 
-        {{#if features.discover}}
+        {{#if (or features.discover features.otherDiscover)}}
         {{#link-to 'discover.start' current-when="discover" tagName='li' href="false" class="list-item list-item--short"}}
           {{link-to 'Discover' 'discover.start' class="inherit" preventDefault=false}}
         {{/link-to}}

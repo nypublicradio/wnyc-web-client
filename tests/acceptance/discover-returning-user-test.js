@@ -3,6 +3,7 @@ import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import { currentSession } from 'overhaul/tests/helpers/ember-simple-auth';
 import ENV from 'overhaul/config/environment';
 import RSVP from 'rsvp';
+import config from 'overhaul/config/environment';
 
 import 'overhaul/tests/helpers/ember-sortable/test-helpers';
 
@@ -136,6 +137,7 @@ test('shows are saved in a session and maintained upon next visit in edit flow',
 });
 
 test('if find more returns no more items, the old queue is present and an error message is shown', function(assert) {
+  let discoverPath = config.featureFlags['other-discover'] ? 'reco_proxy' : 'make_playlist';
   let session = currentSession(this.application);
   var secondRequestCalled = false;
   session.set('data.discover-excluded-story-ids', []);
@@ -151,7 +153,7 @@ test('if find more returns no more items, the old queue is present and an error 
     assert.equal($(".discover-playlist-no-results").length, 0, "playlist no results error area should not be visible");
 
     andThen(function() {
-      let url =[ENV.wnycAPI, 'api/v3/reco_proxy'].join("/");
+      let url = [ENV.wnycAPI, 'api/v3', discoverPath].join("/");
       server.get(url, function() {
         secondRequestCalled = true;
         let data = server.db.discoverStories.map(s => {
@@ -184,6 +186,7 @@ test('if find more returns no more items, the old queue is present and an error 
 
 
 test('if find more returns the same list of items, the old queue are displayed and an error message is shown', function(assert) {
+  let discoverPath = config.featureFlags['other-discover'] ? 'reco_proxy' : 'make_playlist';
   let session = currentSession(this.application);
   var secondRequestCalled = false;
   session.set('data.discover-excluded-story-ids', []);
@@ -199,7 +202,7 @@ test('if find more returns the same list of items, the old queue are displayed a
     assert.equal($(".discover-playlist-no-results").length, 0, "playlist no results error area should not be visible");
 
     andThen(function() {
-      let url =[ENV.wnycAPI, 'api/v3/reco_proxy'].join("/");
+      let url = [ENV.wnycAPI, 'api/v3', discoverPath].join("/");
       server.get(url, function() {
         secondRequestCalled = true;
         return {data: []};
@@ -224,6 +227,7 @@ test('if find more returns the same list of items, the old queue are displayed a
 });
 
 test('if find more returns new items, the new items are displayed', function(assert) {
+  let discoverPath = config.featureFlags['other-discover'] ? 'reco_proxy' : 'make_playlist';
   let session = currentSession(this.application);
   var secondRequestCalled = false;
   session.set('data.discover-excluded-story-ids', []);
@@ -238,7 +242,7 @@ test('if find more returns new items, the new items are displayed', function(ass
     assert.ok((matchResults.length === 1) && (matchResults[0] === true), "Should have matched all the stories in the db");
     assert.equal($(".discover-playlist-no-results").length, 0, "playlist no results error area should not be visible");
 
-    let url =[ENV.wnycAPI, 'api/v3/reco_proxy'].join("/");
+    let url = [ENV.wnycAPI, 'api/v3', discoverPath].join("/");
 
     let stories = server.createList('discover-story', 5);
 
