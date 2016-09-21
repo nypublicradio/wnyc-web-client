@@ -317,6 +317,7 @@ body.ember-application.discover {
   @include display-flex;
   @include flex-direction(column-reverse);
   @include flex-wrap(nowrap);
+  @include align-items(flex-end);
   text-align:center;
   color:#FFF;
   padding:20px 0;
@@ -347,8 +348,9 @@ body.ember-application.discover {
 .discover-edit-playlist-link {
   @include display-flex;
   @include justify-content(flex-end);
-  @include align-items(flex-end);
+  @include align-items(center);
   @include flex-direction(row);
+  @include flex-basis(34px);
 
   color:white;
   font-size:rems(12);
@@ -361,6 +363,10 @@ body.ember-application.discover {
 
   &:hover {
     border:0;
+  }
+  
+  .animated-loading-icon {
+    margin-right: 5px;
   }
 }
 

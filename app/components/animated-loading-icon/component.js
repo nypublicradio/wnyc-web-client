@@ -2,6 +2,8 @@ import Ember from 'ember';
 import LoadingIcon from '../../utils/animated-loading-icon';
 
 export default Ember.Component.extend({
+  classNames: ['animated-loading-icon'],
+  
   width: 68,
   height: 68,
   color: "#FFF",
