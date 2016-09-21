@@ -13,15 +13,6 @@ body.ember-application.discover {
   height: 100%;
   background-color: $discoblue;
   
-  a {
-    transition: border-color 0ms;
-    
-    &:hover {
-      color: $blue;
-      border-bottom: none;      
-    }
-  }  
-
   .sitechrome-page-content-area {
     margin-top: 0px;
     // TODO: Maybe, make sitechrome have no margin on the bottom and leave it
@@ -31,6 +22,14 @@ body.ember-application.discover {
   }
 
   .discover {
+    a {
+      transition: border-color 0ms;
+      
+      &:hover {
+        color: $blue;
+        border-bottom: none;      
+      }
+    }  
 
     /*
       liquid fire sets some transform properties on these elements
