@@ -22,6 +22,16 @@
     {{/if}}
   </div>
   {{#link-to 'discover.edit' class="discover-edit-playlist-link"}}
+  {{#if isLoading}}
+  {{animated-loading-icon
+    width=34
+    height=34
+    outerScale=12
+    innerScale=6
+    radius=0.0025
+    dotRadius=2
+    lineWidth=2}}
+  {{/if}}
     Edit My Shows & Topics
   {{/link-to}}
 {{/discover-playlist}}

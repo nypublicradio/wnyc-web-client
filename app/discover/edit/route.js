@@ -35,6 +35,14 @@ export default Ember.Route.extend({
       this.get('discoverPrefs').save();
       this.get('discoverQueue').emptyQueue();
       this.transitionTo('discover.index');
+    },
+    loading(transition) {
+      try {
+        let controller = this.controllerFor('discover.index');
+        controller.set('isLoading', true);
+        transition.promise.finally(() => controller.set('isLoading', false));
+      } catch(e) {}
+      return true;
     }
   }
 });
