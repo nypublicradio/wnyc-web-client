@@ -382,13 +382,13 @@ body.ember-application.discover {
   position:fixed;
   top:0;
   left:1.5rem;
-  right: 0;
+  right: 1.5rem;
   background-color: $discoblue;
   text-align:left;
   z-index:2;
 
-  @include mq($middle-narrow-and-up) {
-    left: calc(144px + 1.5rem);
+  @include mq($large-and-up) {
+    left: 166px; // sitechrome-nav width
   }
 
   // This is the collapsed header style
@@ -435,6 +435,7 @@ body.ember-application.discover {
     position:relative;
     top:0;
     right:0;
+    @include flex(1 25%);
   }
 }
 
