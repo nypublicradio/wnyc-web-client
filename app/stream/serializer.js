@@ -27,10 +27,10 @@ const getMimeTypes = function() {
     mimeTypes.push({ type: 'audio/mpeg', url: mp3Mobile });
     mobileMP3StreamWasUsed = true;
   }
-  if (!mobileMP3StreamWasUsed && isArray(urls.mp3) && urls.mp3.length) {
+  if (!mobileMP3StreamWasUsed && isArray(urls.mp3) && urls.mp3.length > 0) {
       mimeTypes.push({ type: 'audio/mpeg', url: urls.mp3 });
   }
-  if (isArray(urls.aac) && urls.aac.length) {
+  if (isArray(urls.aac) && urls.aac.length > 0) {
     mimeTypes.push({ type: 'audio/aac', url: urls.aac });
   }
   return mimeTypes;
