@@ -888,6 +888,15 @@ body.ember-application.discover {
   margin: 0 1.5rem 6rem;
 }
 
+.shows_loading .discover-show-list {
+  @include display-flex;
+  min-height: 60vh;
+  
+  .animated-loading-icon {
+    @include justify-content(center);
+  }
+}
+
 .discover-show-list > div { // this is the multi-select checkbox component
   @include display-flex;
   @include flex-wrap(wrap);
