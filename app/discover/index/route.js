@@ -86,7 +86,6 @@ export default Ember.Route.extend({
     findMore() {
       let controller = this.controllerFor('discover.index');
 
-      // TODO: add button effect for when find more is getting more items
       controller.set('findingMore', true);
       controller.set('noNewResults', false);
 
@@ -102,6 +101,7 @@ export default Ember.Route.extend({
         this.set('currentModel.stories', s);
         this._updateDiscoverQueue(s);
       }).finally(() => {
+        this.get('scroller').scrollVertical('.sitechrome-top', {duration: 500});
         controller.set('findingMore', false);
       });
     },
