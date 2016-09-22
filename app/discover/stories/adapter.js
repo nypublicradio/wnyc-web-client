@@ -4,11 +4,11 @@ import service from 'ember-service/inject';
 
 const { featureFlags } = ENV;
 const host = featureFlags['other-discover'] ? ENV.wnycAPI : ENV.wnycURL;
-const namespace = `api/v3/${featureFlags['other-discover'] ? 'reco_proxy' : 'make_playlist'}/`;
+const path = featureFlags['other-discover'] ? 'reco_proxy' : 'make_playlist';
 
 export default DS.JSONAPIAdapter.extend({
   host,
-  namespace,
+  namespace: `api/v3/${path}/`,
   session: service(),
 
   buildURL() {
