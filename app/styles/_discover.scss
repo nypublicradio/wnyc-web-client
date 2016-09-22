@@ -299,6 +299,7 @@ body.ember-application.discover {
   font-size:12px;
   color:#FFF;
   opacity:0.8;
+  font-weight:600;
   a {
     color: #8fa2e5;
   }
@@ -371,7 +372,7 @@ body.ember-application.discover {
   @include flex-basis(34px);
   @include align-self(flex-end);
 
-  color:white;
+  color:$discopurple;
   font-size:rems(12);
   letter-spacing: 2px;
   font-weight:bold;
@@ -379,13 +380,26 @@ body.ember-application.discover {
   right:2rem;
   top:2rem;
   border:0;
-
+  
+  svg path {
+    fill:$discopurple;
+  }
+  
   &:hover {
     border:0;
+    
+    svg path {
+      fill:$blue;
+    }
   }
 
   .animated-loading-icon {
     margin-right: 5px;
+  }
+  
+  svg {
+    width: 18px;
+    margin-right: 10px;
   }
 }
 
@@ -478,7 +492,6 @@ body.ember-application.discover {
   @include align-items(center);
   position:relative;
   overflow:visible;
-  max-height:200px;
   // @include justify-content(left);
 }
 
@@ -570,7 +583,7 @@ body.ember-application.discover {
 .discover-playlist-story {
   min-height: 5rem;
   width:100%;
-  padding:10px 10px;
+  padding:15px 10px 15px 8px;
   border-left:3px solid transparent;
 
   @include display-flex;
@@ -598,7 +611,7 @@ body.ember-application.discover {
   @include flex-direction(row);
   @include justify-content(space-between);
   @include align-items(center);
-  min-height:4rem;
+  min-height:5rem;
 }
 
 .discover-playlist-story-info-extended {
@@ -613,7 +626,7 @@ body.ember-application.discover {
 
     opacity:1;
     max-height:200px;
-    margin-bottom:10px;
+    margin:10px 20px 0 0;
   }
 }
 
@@ -626,7 +639,7 @@ body.ember-application.discover {
   height:100%;
   width:rems(60);
   position:relative;
-  min-height:4rem;
+  min-height:5rem;
 
   &:before {
     /*  Make this nice and centered */
@@ -637,7 +650,7 @@ body.ember-application.discover {
     @include justify-content(center);
     @include absolute-fill();
 
-    color:$lightgray;
+    color:$lightergray;
     font-size:24px;
 
     /* CSS counter so we can hide and show it and style it easier than the li counter */
@@ -772,8 +785,8 @@ body.ember-application.discover {
     @include transition(transform $transition-timing);
   }
   svg polygon {
-    fill:$lightgray;
-    stroke:$lightgray;
+    fill:$lightergray;
+    stroke:$lightergray;
   }
 
   &.is-shown {
@@ -790,10 +803,9 @@ body.ember-application.discover {
 }
 
 .discover-playlist-story-title {
-  margin:0;
-  margin-right:5px;
+  margin:0 5px 3px 0;
   font-weight:normal;
-  font-size: rems(15);
+  font-size: rems(16);
   display:inline-block;
 }
 
@@ -814,6 +826,7 @@ body.ember-application.discover {
   font-size: rems(12);
   font-weight: bold;
   letter-spacing: 2px;
+  margin: 0;
 }
 
 
@@ -890,7 +903,6 @@ body.ember-application.discover {
 
 
   &:hover {
-    // TODO: TBD after feedback from marine
     color:$charcoal;
     background-color: rgba(0, 0, 0, 0.02);
     border: 1px solid rgba(0, 0, 0, 0.15);
@@ -952,7 +964,7 @@ body.ember-application.discover {
   svg {
     width:30px;
     height:30px;
-    box-shadow: 0 0 3px #333;
+    box-shadow: 0 0 3px rgba(0,0,0,.2);
     border-radius: 50%;
     background-color:transparent;
   }
@@ -993,11 +1005,11 @@ body.ember-application.discover {
 
 .discover-setup-tab {
   font-size:rems(20);
-  font-weight:bold;
+  font-weight:600;
 }
 
 .discover-setup-tab-link {
-  color:$gray;
+  color:rgba(255,255,255,.6);
   &:focus {
     opacity:1;
   }
@@ -1008,6 +1020,7 @@ body.ember-application.discover {
 .discover.edit.topics .discover-setup-tab-link-topics  {
   position:relative;
   color:#FFF;
+  border:none;
 
   &:after {
     bottom: -19px;
@@ -1087,8 +1100,8 @@ body.ember-application.discover {
 }
 
 .rounded-caps-button.mod-hollow-blue {
-  border-color:#8fa2e5;
-  color:#8fa2e5;
+  border-color:$discopurple;
+  color:$discopurple;
   &:not([disabled]) {
     &:hover, &:focus {
       color: #FFF;
@@ -1097,7 +1110,7 @@ body.ember-application.discover {
       opacity:1;
     }
     &:active {
-      color: #8fa2e5;
+      color: $discopurple;
       border-color:#FFF;
       background-color: #FFF;
     }
