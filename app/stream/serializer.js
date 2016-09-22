@@ -104,7 +104,8 @@ export default DS.JSONAPISerializer.extend({
 
   // given an object with a urls key, return a sorted array with stream mounts 
   // in this order:
-  // [hls, icecast aac, icecast mp3]
+  // mobile platforms: [hls, icecast aac, icecast mp3]
+  // non-mobile (desktop) platforms: [icecast mp3, icecast aac]
   _findPreferredStreams({ urls }) {
     if (!urls) {
       return [];
@@ -115,20 +116,21 @@ export default DS.JSONAPISerializer.extend({
       android : userAgent.indexOf('Android') > -1,
       ios     : userAgent.indexOf('iPhone') > -1 || userAgent.indexOf('iPad') > -1
     };
-    let { ipod, aac, mp3, mobile_aac, mobile:mobile_mp3 } = urls;
+    let { ipod:hls, aac, mp3, mobile_aac, mobile:mobile_mp3 } = urls;
     
     // why are these arrays?
     aac = aac[0];
     mp3 = mp3[0];
     
-    // Mobile browsers should receive the AAC and MP3 stream specific to mobile
-    // for our analytics.  But if there's no mobile stream, then they
-    // should receive the regular AAC/MP3 stream.
     if (browser.mobile || browser.android || browser.ios) {
+      // there are mobile-specific mount points for mp3 and aac
       aac = mobile_aac ? mobile_aac : aac;
       mp3 = mobile_mp3 ? mobile_mp3 : mp3;
+      
+      // only offer hls streams on mobile for now
+      return [hls, aac, mp3];
+    } else {
+      return [mp3, aac];
     }
-    
-    return [ ipod.match(/hls.wnyc.org.*m3u8$/) ? ipod : null, aac, mp3 ].compact();
   }
 });
