@@ -143,6 +143,19 @@ test(`it should log the correct events during onboarding`, function(assert) {
   });
 });
 
+test(`it should not log a 'discover entered' event when redirected past the splash page`, function(assert) {
+  server.create('django-page', {id: '/'});
+  withFeature('discover');
+  visit('/discover/start'); // discover event 1
+  click('button:contains(Get Started)'); // discover event 2
+  visit('/');
+  click('a:contains(Discover)'); // no discover event
+  andThen(() => {
+    assert.strictEqual(this.metrics.get('trackedEvents').length,
+      2,
+      `it should not log an extra 'discover entered' event`);
+  });
+});
 
 moduleForAcceptance('Acceptance | discover metrics returning user',
   {
