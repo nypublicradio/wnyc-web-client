@@ -12,6 +12,6 @@
     "normalize.css": "3.0.3",
     "raven-js": "~2.1",
     "SoundManager2": "soundmanager2#*",
-    "jquery-waypoints": "~2.0.5"
+    "waypoints": "~4.0.0"
   }
 }
