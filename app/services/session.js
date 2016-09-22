@@ -11,13 +11,12 @@ export default SessionService.extend({
       if (report) {
         reportBrowserId(legacyId || browserId);
       }
-      return RSVP.Promise.resolve(legacyId || browserId);
+      return RSVP.Promise.resolve(legacyId || browserId)
+        .then(id => this.set('data.browserId', id));
     }
 
-    return getBrowserId().then( ({ browser_id }) => {
-      this.set('data.browserId', browser_id);
-      return browser_id;
-    });
+    return getBrowserId()
+      .then( ({ browser_id }) => this.set('data.browserId', browser_id));
   }
 });
 
