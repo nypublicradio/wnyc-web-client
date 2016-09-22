@@ -396,9 +396,14 @@ export default Service.extend({
       this.playStream(activeStream);
     }
 
-    let currentContext = get(this, 'currentContext');
-    if ((!currentContext || currentContext === 'home-page') && activePref === 'default_stream') {
-      this.play(CONTINUOUS_PLAYER_BUMPERS[activeStream], 'continuous-player-bumper');
+    if ((!context || context === 'home-page')) {
+      if (activePref === 'queue') {
+        // skip the audio bumper, go straight to queue
+        this.playNextInQueue();
+      } else if (activePref === 'default_stream'){
+        // play the audio bumper first before playing stream
+        this.play(CONTINUOUS_PLAYER_BUMPERS[activeStream], 'continuous-player-bumper');
+      }
     }
   },
 

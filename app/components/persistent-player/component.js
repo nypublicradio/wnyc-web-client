@@ -14,7 +14,7 @@ export default Component.extend({
   isPlaying: equal('audio.playState', 'is-playing'),
   isAudiostream: equal('currentAudio.audioType', 'stream'),
   didDismiss: false,
-  continuousPlayEnabled: Ember.computed('audio.currentContext', 'currentAudio.audioType', function() {
+  continuousPlayEnabled: Ember.computed('audio.currentContext', 'currentAudio.audioType', 'didDismiss', function() {
     let { audio, didDismiss } = this.getProperties('audio', 'didDismiss');
     if (didDismiss) {
       return false;
@@ -31,7 +31,7 @@ export default Component.extend({
         get(this, 'audio').play();
       }
     },
-    dismissNotification(cancelAutoplay = false) {
+    dismissNotification(cancelAutoplay) {
       if (cancelAutoplay) {
         get(this, 'audio').pause();
       }
