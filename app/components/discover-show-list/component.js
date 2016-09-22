@@ -39,7 +39,7 @@ export default Ember.Component.extend({
       if (action === 'added') {
         get(this, 'metrics').trackEvent({
           category: 'Discover',
-          action: 'Selected Show',
+          action: 'Selected Show in Discover',
           label: title
         });
 
@@ -49,7 +49,7 @@ export default Ember.Component.extend({
       else if (action === 'removed') {
         get(this, 'metrics').trackEvent({
           category: 'Discover',
-          action: 'Deselected Show',
+          action: 'Deselected Show in Discover',
           label: title
         });
 

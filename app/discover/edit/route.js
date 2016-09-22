@@ -10,11 +10,6 @@ export default Ember.Route.extend({
 
   redirect(model, transition) {
     if (transition.targetName === "discover.edit.index") {
-      get(this, 'metrics').trackEvent({
-        category: 'Discover',
-        action: 'Clicked Edit in Discover'
-      });
-
       this.transitionTo('discover.edit.topics');
     }
   },

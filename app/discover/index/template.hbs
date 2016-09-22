@@ -23,7 +23,10 @@
       {{/if}}
     {{/if}}
   </div>
-  {{#link-to 'discover.edit' class="discover-edit-playlist-link"}}
+  <a href='/discover/edit'
+     class="discover-edit-playlist-link"
+     data-tracking-category='Discover'
+     data-tracking-action='Clicked Edit in Discover'>
   {{#if isLoading}}
   {{animated-loading-icon
     width=34
@@ -35,7 +38,7 @@
     lineWidth=2}}
   {{/if}}
     Edit My Shows & Topics
-  {{/link-to}}
+  </a>
 {{/discover-playlist}}
 
 <div class="discover-playlist-footer">

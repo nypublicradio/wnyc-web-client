@@ -55,7 +55,7 @@ export default Ember.Component.extend({
       get(this, 'metrics').trackEvent({
         category: 'Discover',
         action: 'Removed Story from Discover',
-        value: Number(item.id)
+        value: Number(get(item, 'id'))
       });
 
       // This will trigger the CSS effect to remove it/hide it from the list
@@ -80,7 +80,7 @@ export default Ember.Component.extend({
       get(this, 'metrics').trackEvent({
         category: 'Discover',
         action: 'Moved Story',
-        value: Number(draggedModel.id)
+        value: Number(get(draggedModel, 'id'))
       });
       this.set('justDragged', draggedModel);
 

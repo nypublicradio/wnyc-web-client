@@ -14,6 +14,12 @@ export default Route.extend({
     let prefs = this.get('discoverPrefs');
 
     if (!prefs.get('setupComplete')) {
+      if (prefs.get('currentSetupStep') === 'start') {
+        get(this, 'metrics').trackEvent({
+          category: 'Discover',
+          action: 'Discover Entered'
+        });
+      }
       this.transitionTo(`discover.${prefs.get('currentSetupStep')}`);
     }
     else if (transition.targetName === 'discover.start'){
@@ -21,14 +27,12 @@ export default Route.extend({
       this.replaceWith('discover.index');
     }
     else {
+      get(this, 'metrics').trackEvent({
+        category: 'Discover',
+        action: 'Discover Entered'
+      });
       // browsing direct, allow it
     }
-  },
-  afterModel() {
-    get(this, 'metrics').trackEvent({
-      category: 'Discover',
-      action: 'Discover Entered'
-    });
   },
   actions: {
     next() {
