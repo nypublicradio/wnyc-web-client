@@ -157,6 +157,7 @@
     padding-right: 15px;
     padding-left: rems(15);
     padding-right: rems(15);
+    padding-top: rems(25);
 
     @include mq($medium-and-up) {
         padding: 0 25px;

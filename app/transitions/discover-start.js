@@ -6,7 +6,7 @@ export default function initialTransition(opts={}) {
   let background = window.$(".discover-fadeable-background");
   var el = document.getElementsByTagName('html');
 
-  if (!this.oldElement) {
+  if ((!this.oldElement) && (window.innerWidth >= 1025)) {
     // initial render. A little hacky, because we set that background
     // image to 0 opacity in the dom and have to modify it now. That's
     background.css('opacity', 1);

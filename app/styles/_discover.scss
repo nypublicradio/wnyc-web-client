@@ -18,7 +18,7 @@ body.ember-application.discover {
     // TODO: Maybe, make sitechrome have no margin on the bottom and leave it
     // up to the feature to set a padding.
 
-    min-height: 100vh;
+    min-height: 100vh;    
   }
   
   @include mq($medium-only) {
@@ -29,8 +29,6 @@ body.ember-application.discover {
   }
 
   .sitechrome-top {
-    background: rgba(black, .3);
-
     @include mq($large-and-up) {
       @include transition(background-color $transition-timing);
       position: absolute;
@@ -61,7 +59,7 @@ body.ember-application.discover {
         border-bottom: none;
       }
     }
-
+    
     /*
       liquid fire sets some transform properties on these elements
       and that messes up fixed positioning by making them fixed
@@ -96,6 +94,10 @@ body.ember-application.discover {
     background-repeat: no-repeat;
     background-position: top left;
     background-size: cover;
+    
+    @include mq($up-to-large) {
+      opacity: .4;
+    }
   }
 }
 
@@ -115,7 +117,7 @@ body.ember-application.discover {
   }
 
   @include mq($small-only) {
-    @include justify-content(space-around);
+    padding-top:0;
     padding-bottom:0;
   }
 }
@@ -124,7 +126,7 @@ body.ember-application.discover {
   text-align: center;
   display: inline-block;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 2.2;
   letter-spacing: 5px;
   text-transform: uppercase;
@@ -156,6 +158,20 @@ body.ember-application.discover {
   path {
     color:#FFF;
     fill:#FFF;
+  }
+}
+
+.discover-welcome-screen-title {
+  @include mq($small-only) {
+    font-size:rems(24);
+    line-height:rems(34);
+  }
+}
+
+.discover-welcome-screen-subtitle {
+  @include mq($small-only) {
+    font-size:rems(14);
+    line-height:rems(24);
   }
 }
 
@@ -902,7 +918,6 @@ body.ember-application.discover {
   border: 1px solid rgba(0, 0, 0, 0.15);
   input { display:none; }
   @include transition(background-color $transition-timing, border-color $transition-timing, color $transition-timing);
-
 
   &:hover {
     color:$charcoal;
