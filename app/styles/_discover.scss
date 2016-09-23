@@ -28,6 +28,29 @@ body.ember-application.discover {
     }
   }
 
+  .sitechrome-top {
+    background: rgba(black, .3);
+
+    @include mq($large-and-up) {
+      @include transition(background-color $transition-timing);
+      position: absolute;
+      top: 0;
+      z-index: 1;
+      width: calc(100% - 166px); // side nav
+    }
+  }
+
+  > .index_loading .sitechrome-page-content-area {
+    padding:0;
+  }
+
+  .sitechrome-page-content-area {
+    overflow:hidden;
+
+    @include mq($large-and-up) {
+      padding-top: 107px; // top nav height margin
+    }
+  }
 
   .discover {
     a {
@@ -60,30 +83,6 @@ body.ember-application.discover {
         -moz-transform:    initial;
         transform:         initial;
       }
-    }
-  }
-
-  .sitechrome-top {
-    background: rgba(black, .3);
-
-    @include mq($large-and-up) {
-      @include transition(background-color $transition-timing);
-      position: absolute;
-      top: 0;
-      z-index: 1;
-      width: calc(100% - 166px); // side nav
-    }
-  }
-
-  > .index_loading .sitechrome-page-content-area {
-    padding:0;
-  }
-
-  .sitechrome-page-content-area {
-    overflow:hidden;
-
-    @include mq($large-and-up) {
-      padding-top: 107px; // top nav height margin
     }
   }
 
