@@ -20,6 +20,14 @@ body.ember-application.discover {
 
     min-height: 100vh;
   }
+  
+  @include mq($medium-only) {
+    .sitechrome-nav {
+      // override position: sticky for platforms that support it
+      position: relative;
+    }
+  }
+
 
   .discover {
     a {
