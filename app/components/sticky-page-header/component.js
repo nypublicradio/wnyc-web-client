@@ -4,18 +4,17 @@ import computed from 'ember-computed';
 
 
 export default Component.extend({
-  use: 'top', // use the top scroll point by default
-  offset() {
-    return -this.element.clientHeight;
-  },
   spacerHeight: 0,
   
   spacerStyle: computed('spacerHeight', function() {
     return htmlSafe(`height: ${this.get('spacerHeight')}px;`);
   }),
+  offset: computed('sticky', function() {
+    return this.get('sticky') ? -100 : -285;
+  }),
   
   willUpdate() {
-    let height = this.$('.sticky-page-header').height();
+    let height = this.$('.sticky-page-header').height() + -this.get('offset');
     if (!this.get('sticky')) {
       height = 0;
     }
@@ -23,15 +22,9 @@ export default Component.extend({
   },
   
   actions: {
-    topScrollPointReached(direction) {
-      if (this.get('use') === 'top') {
-        this.set('sticky', direction === 'down');
-      }
+    trigger(direction) {
+      let sticky = direction === 'down';
+      this.set('sticky', sticky);
     },
-    bottomScrollPointReached(direction) {
-      if (this.get('use') === 'bottom') {
-        this.set('sticky', direction === 'down');
-      }
-    }
   },
 });

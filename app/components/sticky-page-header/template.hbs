@@ -1,4 +1,4 @@
-{{#way-point offset=offset action=(action 'topScrollPointReached')}}{{/way-point}}
+{{#way-point offset=offset action=(action 'trigger')}}
 <div class="sticky-page-header {{if sticky 'mod-sticky-header'}}">
   {{yield}}
 </div>
@@ -11,4 +11,4 @@
       padding to offset things, but that involved too many magic numbers.
   }}
 </div>
-{{#way-point offset=offset action=(action 'bottomScrollPointReached')}}{{/way-point}}
+{{/way-point}}
