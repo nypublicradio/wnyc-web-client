@@ -67,14 +67,14 @@ test(`it should log the correct events during onboarding`, function(assert) {
       `it should log a selected topic event when you click a topic`);
   });
 
-  click('a:contains(Select All)');
+  click('button:contains(Select All)');
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Selected All Topics'),
       `it should log a selected all topics event when click select all`);
   });
 
-  click('a:contains(Clear All)');
+  click('button:contains(Clear All)');
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Cleared All Topics'),
@@ -237,14 +237,14 @@ test(`it should log the correct events when starting with a playlist`, function(
       `it should log a selected topic event when you click a topic`);
   });
 
-  click('a:contains(Select All)');
+  click('button:contains(Select All)');
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Selected All Topics'),
       `it should log a selected all topics event when click select all`);
   });
 
-  click('a:contains(Clear All)');
+  click('button:contains(Clear All)');
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Cleared All Topics'),
