@@ -33,8 +33,15 @@ function _trackEvent(data, instance) {
       label = region;
     }
   }
-
-  metrics.trackEvent({category, action, label, model});
+  let eventToTrack = {category, action};
+  // don't add empty properties to events
+  if (label) {
+    eventToTrack.label = label;
+  }
+  if (model) {
+    eventToTrack.model = model;
+  }
+  metrics.trackEvent(eventToTrack);
 }
 
 export function normalizeHref(node, base = location) {
