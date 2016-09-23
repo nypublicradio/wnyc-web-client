@@ -93,6 +93,7 @@ export default Service.extend({
     this.okraBridge.on('ready', this, 'playIfWaiting');
   },
   willDestroy() {
+    this.okraBridge.off('ready', this, 'playIfWaiting');
     this.okraBridge.teardown();
   },
 
@@ -387,7 +388,6 @@ export default Service.extend({
     let context = get(this, 'currentContext');
     let activePref = this.getWithDefault('session.data.user-prefs-active-autoplay', 'default_stream');
     let activeStream = this.getWithDefault('session.data.user-prefs-active-stream', 'wnyc-fm939');
-    console.log(context, 'track ended');
     if (context === 'queue') {
       this.playNextInQueue();
     } else if (context === 'discover') {

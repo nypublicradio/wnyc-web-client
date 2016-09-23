@@ -73,7 +73,8 @@ test('calling pause calls the okraBridge method', function(assert) {
     pauseSound() {
       testFlag = true;
     },
-    teardown() {}
+    teardown() {},
+    off() {}
   };
 
   Ember.run(()=> {
@@ -195,6 +196,7 @@ test('it sends a listen action on completed event', function(assert) {
   };
 
   Ember.run(() => {
+    service.set('play', () => {});
     service.set('listenActions', listenActionStub);
     service.set('currentAudio', story.attrs);
   });
