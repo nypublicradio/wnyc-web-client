@@ -836,7 +836,8 @@ body.ember-application.discover {
   border-radius:6px;
   text-align:center;
   padding:1rem;
-  margin: 0 1.5rem 6rem;
+  margin: 0 auto 6rem auto;
+  max-width: 900px;
 }
 
 .discover-topic, .discover-topic-bubble-select-all {
@@ -923,7 +924,8 @@ body.ember-application.discover {
   border-radius:6px;
   text-align:center;
   padding:3rem 2rem 2rem;
-  margin: 0 1.5rem 6rem;
+  margin: 0 auto 6rem auto;
+  max-width: 900px;
 }
 
 .shows_loading .discover-show-list {
@@ -1001,6 +1003,8 @@ body.ember-application.discover {
   @include justify-content(space-around);
   padding:1rem 0;
   margin-top:1.5rem;
+  max-width: 900px;
+  margin: 1.5rem auto 0 auto;
 }
 
 .discover-setup-tab {
