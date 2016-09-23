@@ -15,6 +15,7 @@ const mockMetrics = Ember.Service.extend({
     }
   },
   trackPage() {},
+  identify() {},
   activateAdapters() {}
 });
 
