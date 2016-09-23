@@ -313,13 +313,16 @@ test('selected topics are not retained if you hit cancel', function(assert) {
     assert.equal($(".discover-topic input[name='music']").prop('checked'), true, "Checkbox was not checked");
     assert.equal($(".discover-topic input[name='art']").prop('checked'), false, "Checkbox was checked when it shouldn't be");
     assert.equal($(".discover-topic input[name='technology']").prop('checked'), false, "Checkbox was checked when it shouldn't be");
+    click(".discover-topic input[name='music']");
     click(".discover-topic input[name='art']");
     andThen(() =>{
+      assert.equal($(".discover-topic input[name='music']").prop('checked'), false, "Checkbox was not selected");
       assert.equal($(".discover-topic input[name='art']").prop('checked'), true, "Checkbox was selected");
       click('button:contains("Cancel")');
       andThen(() =>{
         click(".discover-edit-playlist-link");
         andThen(() =>{
+          assert.equal($(".discover-topic input[name='music']").prop('checked'), true, "Checkbox state should have been reset to saved state");
           assert.equal($(".discover-topic input[name='art']").prop('checked'), false, "Checkbox state should have been reset to saved state");
         });
       });
@@ -333,14 +336,17 @@ test('selected topics are retained temporarily when switching between tabs', fun
     assert.equal($(".discover-topic input[name='music']").prop('checked'), true, "Checkbox was not checked");
     assert.equal($(".discover-topic input[name='art']").prop('checked'), false, "Checkbox was checked when it shouldn't be");
     assert.equal($(".discover-topic input[name='technology']").prop('checked'), false, "Checkbox was checked when it shouldn't be");
+    click(".discover-topic input[name='music']");
     click(".discover-topic input[name='art']");
     andThen(() =>{
+      assert.equal($(".discover-topic input[name='music']").prop('checked'), false, "Checkbox was deselected");
       assert.equal($(".discover-topic input[name='art']").prop('checked'), true, "Checkbox was selected");
       click('.discover-setup-tab-link-shows');
       andThen(() =>{
         assert.equal(currentURL(), '/discover/edit/shows');
         click('.discover-setup-tab-link-topics');
         andThen(() =>{
+          assert.equal($(".discover-topic input[name='music']").prop('checked'), false, "Checkbox state should have stayed the same");
           assert.equal($(".discover-topic input[name='art']").prop('checked'), true, "Checkbox state should have stayed the same");
         });
       });
