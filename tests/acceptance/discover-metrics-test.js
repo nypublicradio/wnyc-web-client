@@ -41,21 +41,21 @@ moduleForAcceptance('Acceptance | discover metrics',
   }
 );
 
-test(`it should log the correct events during onboarding`, function(assert) {
+test('it should log the correct events during onboarding', function(assert) {
   withFeature('discover');
 
   visit('/discover/start');
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Discover Entered'),
-      `it should log a discover entered event when visiting the splash page`);
+      'it should log a discover entered event when visiting the splash page');
   });
 
   click('button:contains(Get Started)');
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Clicked Get Started'),
-      `it should log a clicked get started event when you click get started`);
+      'it should log a clicked get started event when you click get started');
   });
 
 
@@ -64,21 +64,21 @@ test(`it should log the correct events during onboarding`, function(assert) {
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Selected Topic', {label: 'Test Topic'}),
-      `it should log a selected topic event when you click a topic`);
+      'it should log a selected topic event when you click a topic');
   });
 
   click('button:contains(Select All)');
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Selected All Topics'),
-      `it should log a selected all topics event when click select all`);
+      'it should log a selected all topics event when click select all');
   });
 
   click('button:contains(Clear All)');
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Cleared All Topics'),
-      `it should log a cleared all topics event when click clear all`);
+      'it should log a cleared all topics event when click clear all');
   });
 
   click('.discover-topic:contains(Example Topic)');
@@ -86,7 +86,7 @@ test(`it should log the correct events during onboarding`, function(assert) {
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Deselected Topic', {label: 'Example Topic'}),
-      `it should log a deselected topic event when you click a selected topic`);
+      'it should log a deselected topic event when you click a selected topic');
   });
 
 
@@ -95,7 +95,7 @@ test(`it should log the correct events during onboarding`, function(assert) {
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Clicked Next in Discover'),
-      `it should log a clicked next event when you click next`);
+      'it should log a clicked next event when you click next');
   });
 
 
@@ -104,14 +104,14 @@ test(`it should log the correct events during onboarding`, function(assert) {
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Deselected Show in Discover', {label: this.shows[0].title}),
-      `it should log a deselected show event when you click a selected show`);
+      'it should log a deselected show event when you click a selected show');
   });
 
   click(`.discover-show:contains(${this.shows[0].title})`);
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Selected Show in Discover', {label: this.shows[0].title}),
-      `it should log a selected show event when you click a show`);
+      'it should log a selected show event when you click a show');
   });
 
 
@@ -119,17 +119,17 @@ test(`it should log the correct events during onboarding`, function(assert) {
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Clicked Back in Discover'),
-      `it should log a clicked back event when you click back from shows`);
+      'it should log a clicked back event when you click back from shows');
   });
 
   click('button:contains(Back)');
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents').slice(-2)[0],
       discoverEvent('Clicked Back in Discover'),
-      `it should log a clicked back event when you click back from topics`);
+      'it should log a clicked back event when you click back from topics');
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Discover Entered'),
-      `it even logs a discover entered event when visiting the splash while going back`);
+      'it even logs a discover entered event when visiting the splash while going back');
   });
 
   click('button:contains(Get Started)');
@@ -138,11 +138,11 @@ test(`it should log the correct events during onboarding`, function(assert) {
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Create Playlist in Discover'),
-      `it should log a create playlist event when you click create playlist`);
+      'it should log a create playlist event when you click create playlist');
   });
 });
 
-test(`it should not log a 'discover entered' event when redirected past the splash page`, function(assert) {
+test('it should not log a "discover entered" event when redirected past the splash page', function(assert) {
   server.create('django-page', {id: '/'});
   withFeature('discover');
   visit('/discover/start'); // discover event 1
@@ -152,7 +152,7 @@ test(`it should not log a 'discover entered' event when redirected past the spla
   andThen(() => {
     assert.strictEqual(this.metrics.get('trackedEvents').length,
       2,
-      `it should not log an extra 'discover entered' event`);
+      'it should not log an extra "discover entered" event');
   });
 });
 
@@ -178,7 +178,7 @@ moduleForAcceptance('Acceptance | discover metrics returning user',
   }
 );
 
-test(`it should log the correct events when starting with a playlist`, function(assert) {
+test('it should log the correct events when starting with a playlist', function(assert) {
   withFeature('discover');
   visit('/discover/playlist');
 
@@ -186,14 +186,14 @@ test(`it should log the correct events when starting with a playlist`, function(
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Expanded Summary', {value: Number(this.stories[0].id) }),
-      `it should log an expanded summary event when you click summary`);
+      'it should log an expanded summary event when you click summary');
   });
 
   click('a:contains(Summary)');
   andThen(() => {
     assert.strictEqual(this.metrics.get('trackedEvents').length,
       1,
-      `it should not log a second expanded summary event when you click summary to close it`);
+      'it should not log a second expanded summary event when you click summary to close it');
   });
 
   drag('mouse',
@@ -203,28 +203,28 @@ test(`it should log the correct events when starting with a playlist`, function(
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Moved Story', {value: Number(this.stories[0].id) }),
-      `it should log a moved event when you reorder the playlist`);
+      'it should log a moved event when you reorder the playlist');
   });
 
   click(`.discover-playlist-item-delete[data-story-id=${this.stories[1].id}]`);
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Removed Story from Discover', {value: Number(this.stories[1].id) }),
-      `it should log a removed event when you click the remove button`);
+      'it should log a removed event when you click the remove button');
   });
 
   click('button:contains(Find Me Some More)');
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Clicked Find More in Discover'),
-      `it should log a clicked find more event when you click find me some more`);
+      'it should log a clicked find more event when you click find me some more');
   });
 
   click('a:contains(Edit My Shows & Topics)');
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Clicked Edit in Discover'),
-      `it should log a clicked edit event when you click edit`);
+      'it should log a clicked edit event when you click edit');
   });
 
 
@@ -234,21 +234,21 @@ test(`it should log the correct events when starting with a playlist`, function(
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Selected Topic', {label: 'Test Topic'}),
-      `it should log a selected topic event when you click a topic`);
+      'it should log a selected topic event when you click a topic');
   });
 
   click('button:contains(Select All)');
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Selected All Topics'),
-      `it should log a selected all topics event when click select all`);
+      'it should log a selected all topics event when click select all');
   });
 
   click('button:contains(Clear All)');
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Cleared All Topics'),
-      `it should log a cleared all topics event when click clear all`);
+      'it should log a cleared all topics event when click clear all');
   });
 
   click('.discover-topic:contains(Example Topic)');
@@ -256,7 +256,7 @@ test(`it should log the correct events when starting with a playlist`, function(
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Deselected Topic', {label: 'Example Topic'}),
-      `it should log a deselected topic event when you click a selected topic`);
+      'it should log a deselected topic event when you click a selected topic');
   });
 
 
@@ -267,14 +267,14 @@ test(`it should log the correct events when starting with a playlist`, function(
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Deselected Show in Discover', {label: this.shows[0].title}),
-      `it should log a deselected show event when you click a selected show`);
+      'it should log a deselected show event when you click a selected show');
   });
 
   click(`.discover-show:contains(${this.shows[0].title})`);
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Selected Show in Discover', {label: this.shows[0].title}),
-      `it should log a selected show event when you click a show`);
+      'it should log a selected show event when you click a show');
   });
 
 
@@ -282,11 +282,11 @@ test(`it should log the correct events when starting with a playlist`, function(
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Create Playlist in Discover', {label: 'Refresh Playlist'}),
-      `it should log a create playlist event with a refresh label when you click refresh`);
+      'it should log a create playlist event with a refresh label when you click refresh');
   });
 });
 
-test(`it shouldn't log a clicked edit event when visiting /discover/edit directly`, function(assert) {
+test('it shouldn\'t log a clicked edit event when visiting /discover/edit directly', function(assert) {
   withFeature('discover');
   visit('/discover/edit');
   andThen(() => {
