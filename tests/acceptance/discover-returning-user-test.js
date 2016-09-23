@@ -360,22 +360,25 @@ test('selected shows are not retained if you hit cancel', function(assert) {
   session.set('data.discover-excluded-shows',  [shows[0].slug]); // set some excluded shows
 
   visit('/discover/edit/topics');
+  click('a:contains(Pick Shows)');
+  andThen(() => {
+    assert.equal($(`.discover-show input[name='${shows[0].slug}']`).prop('checked'), false, 'it should start unchecked');
+    assert.equal($(`.discover-show input[name='${shows[1].slug}']`).prop('checked'), true, 'it should start checked');
+  });
 
-  andThen(function() {
-    assert.equal($(".discover-topic input[name='music']").prop('checked'), true, "Checkbox was not checked");
-    assert.equal($(".discover-topic input[name='art']").prop('checked'), false, "Checkbox was checked when it shouldn't be");
-    assert.equal($(".discover-topic input[name='technology']").prop('checked'), false, "Checkbox was checked when it shouldn't be");
-    click(".discover-topic input[name='art']");
-    andThen(() =>{
-      assert.equal($(".discover-topic input[name='art']").prop('checked'), true, "Checkbox was selected");
-      click('button:contains("Cancel")');
-      andThen(() =>{
-        click(".discover-edit-playlist-link");
-        andThen(() =>{
-          assert.equal($(".discover-topic input[name='art']").prop('checked'), false, "Checkbox state should have been reset to saved state");
-        });
-      });
-    });
+  click(`.discover-show input[name='${shows[0].slug}']`);
+  click(`.discover-show input[name='${shows[1].slug}']`);
+  andThen(() => {
+    assert.equal($(`.discover-show input[name='${shows[0].slug}']`).prop('checked'), true, 'it should be deselected');
+    assert.equal($(`.discover-show input[name='${shows[1].slug}']`).prop('checked'), false, 'it should be selected');
+  });
+
+  click('button:contains("Cancel")');
+  click(".discover-edit-playlist-link");
+  click('a:contains(Pick Shows)');
+  andThen(() => {
+    assert.equal($(`.discover-show input[name='${shows[0].slug}']`).prop('checked'), false, "Checkbox state should have been reset to saved state");
+    assert.equal($(`.discover-show input[name='${shows[1].slug}']`).prop('checked'), true, "Checkbox state should have been reset to saved state");
   });
 });
 
