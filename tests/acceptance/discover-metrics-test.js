@@ -1,6 +1,7 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import { currentSession } from 'overhaul/tests/helpers/ember-simple-auth';
+import { registerAndInjectMock, registerMockOnInstance } from 'overhaul/tests/helpers/register-mock';
 import 'overhaul/tests/helpers/with-feature';
 import get from 'ember-metal/get';
 
@@ -12,7 +13,9 @@ const mockMetrics = Ember.Service.extend({
     if (event && event.category === 'Discover') {
       get(this, 'trackedEvents').pushObject(event);
     }
-  }
+  },
+  trackPage() {},
+  activateAdapters() {}
 });
 
 const discoverEvent = function(action, otherProperties={}) {
@@ -24,8 +27,8 @@ moduleForAcceptance('Acceptance | discover metrics',
     beforeEach() {
       Ember.$.Velocity.mock = true;
       window.Modernizr.touch = false;
-      let session = currentSession(this.application);
       let application = this.application;
+      let session = currentSession(application);
       session.set('data.discover-excluded-shows',  []);
       session.set('data.discover-topics', []);
       session.set('data.discover-excluded-story-ids', []);
@@ -33,11 +36,7 @@ moduleForAcceptance('Acceptance | discover metrics',
       server.create('discover-topic', {title: "Example Topic", url: "example-topic"});
       server.createList('discover-story', 2);
       this.shows = server.createList('show', 2);
-      application.register('service:mockMetrics', mockMetrics);
-      application.inject('controller', 'metrics', 'service:mockMetrics');
-      application.inject('route',      'metrics', 'service:mockMetrics');
-      application.inject('component',  'metrics', 'service:mockMetrics');
-      this.metrics = application.__container__.lookup('service:mockMetrics');
+      this.metrics = registerAndInjectMock(application, 'service:mockMetrics', mockMetrics, 'metrics');
     }
   }
 );
@@ -162,8 +161,8 @@ moduleForAcceptance('Acceptance | discover metrics returning user',
     beforeEach() {
       Ember.$.Velocity.mock = true;
       window.Modernizr.touch = false;
-      let session = currentSession(this.application);
       let application = this.application;
+      let session = currentSession(application);
       server.create('discover-topic', {title: "Test Topic", url: "test-topic"});
       server.create('discover-topic', {title: "Example Topic", url: "example-topic"});
       server.create('discover-topic', {title: "Third Topic", url: "third-topic"});
@@ -173,11 +172,8 @@ moduleForAcceptance('Acceptance | discover metrics returning user',
       session.set('data.discover-topics', ['example-topic']); // set some saved topics
       session.set('data.discover-excluded-story-ids', []);
       session.set('data.discover-queue',  server.db.discoverStories); // set some saved stories
-      application.register('service:mockMetrics', mockMetrics);
-      application.inject('controller', 'metrics', 'service:mockMetrics');
-      application.inject('route',      'metrics', 'service:mockMetrics');
-      application.inject('component',  'metrics', 'service:mockMetrics');
-      this.metrics = application.__container__.lookup('service:mockMetrics');
+      // register mock directly on the instance to fool the link handler
+      this.metrics = registerMockOnInstance(application, 'service:metrics', mockMetrics);
     }
   }
 );
