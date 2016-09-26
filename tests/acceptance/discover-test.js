@@ -20,11 +20,22 @@ moduleForAcceptance('Acceptance | discover group 0',
 );
 
 test('can not visit discover from the home page', function(assert) {
+  withFeature('discover');
   server.create('djangoPage', {id:'/'});
   visit('/');
 
   andThen(function() {
     assert.equal($('.l-page-nav .list-item [href*="discover"]').length, 0, 'it should not show a discover link');
+  });
+});
+
+
+test('it redirects users not in the experiment to the home page', function(assert) {
+  server.create('djangoPage', {id:'/'});
+  visit('/discover');
+
+  andThen(function() {
+    assert.equal(currentURL(), '/');
   });
 });
 
