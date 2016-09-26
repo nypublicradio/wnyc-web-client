@@ -22,7 +22,7 @@ export default Ember.Route.extend({
   redirect() {
     // Google Experiment D4W - START
     if (!( inExperimentalGroup([1]) || inExperimentalGroup([2]) )) {
-      this.transitionTo('djangorendered', '/');
+      this.transitionTo('djangorendered', '');
     }
     // Google Experiment D4W - END
   },
