@@ -8,9 +8,13 @@ import 'overhaul/tests/helpers/with-feature';
 moduleForAcceptance('Acceptance | discover group 0',
   {
     beforeEach() {
+      Ember.$.Velocity.mock = true;
       // Google Experiment D4W - Group 0;
       mockExperimentalGroup(0);
       window.Modernizr.touch = false;
+    },
+    afterEach() {
+      Ember.$.Velocity.mock = false;
     }
   }
 );
@@ -27,6 +31,7 @@ test('can not visit discover from the home page', function(assert) {
 moduleForAcceptance('Acceptance | discover group 1',
   {
     beforeEach() {
+      Ember.$.Velocity.mock = true;
       // Google Experiment D4W - Group 1;
       mockExperimentalGroup(1);
       window.Modernizr.touch = false;
@@ -34,6 +39,9 @@ moduleForAcceptance('Acceptance | discover group 1',
       session.set('data.discover-excluded-shows',  []);
       session.set('data.discover-topics', []);
       session.set('data.discover-excluded-story-ids', []);
+    },
+    afterEach() {
+      Ember.$.Velocity.mock = false;
     }
   }
 );
@@ -440,6 +448,7 @@ test('mobile users get the app download page', function(assert) {
 moduleForAcceptance('Acceptance | discover group 2',
   {
     beforeEach() {
+      Ember.$.Velocity.mock = true;
       // Google Experiment D4W - Group 2;
       mockExperimentalGroup(2);
       window.Modernizr.touch = false;
@@ -447,6 +456,9 @@ moduleForAcceptance('Acceptance | discover group 2',
       session.set('data.discover-excluded-shows',  []);
       session.set('data.discover-topics', []);
       session.set('data.discover-excluded-story-ids', []);
+    },
+    afterEach() {
+      Ember.$.Velocity.mock = false;
     }
   }
 );
