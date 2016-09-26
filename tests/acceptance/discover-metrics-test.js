@@ -217,11 +217,11 @@ test('it should log the correct events when starting with a playlist', function(
       'it should log a removed event when you click the remove button');
   });
 
-  click('button:contains(Find Me Some More)');
+  click('button:contains(Refresh Playlist)');
   andThen(() => {
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Clicked Find More in Discover'),
-      'it should log a clicked find more event when you click find me some more');
+      'it should log a clicked find more event when you click refresh playlist');
   });
 
   click('a:contains(Edit My Shows & Topics)');
