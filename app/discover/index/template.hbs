@@ -3,9 +3,7 @@
 {{#discover-playlist stories=model.stories onRemoveItem='removeItem' onUpdateItems='updateItems' as |playlist|}}
   <div class="discover-playlist-header-content"> {{! for the flex layout shifts }}
     <h1 class="discover-playlist-header-title h1">Your Discover Playlist</h1>
-    <h3 class="discover-playlist-header-subtitle text text--normal">We put together some audio specifically for you, based on your favorite shows and topics. <br/>
-    Sit back and just listen, or tell it what you like and don’t like - it will adapt to you.
-    </h3>
+    <h3 class="discover-playlist-header-subtitle text text--normal">Your playlist is customized to the shows and topics you choose.</h3>
 
     {{#if playlist.isNotStarted}}
       {{#playlist.button class="discover-playlist-header-button" icon='arrow-down' iconPlacement='right'}}
@@ -53,7 +51,7 @@
     lineWidth=2}}
   {{/if}}
   <button {{action (route-action 'findMore')}} class="discover-playlist-find-more rounded-caps-button mod-hollow-blue" disabled={{findingMore}}>
-    Find Me Some More
+    Refresh Playlist
   </button>
 </div>
 {{#if noNewResults}}

@@ -344,9 +344,15 @@ body.ember-application.discover {
   @include justify-content(space-between);
 }
 
-.discover-playlist-header-title, .discover-playlist-header-subtitle, .discover-playlist-header-button {
+.discover-playlist-header-title, .discover-playlist-header-button {
   margin:0.75rem;
   color:#FFF;
+}
+
+.discover-playlist-header-subtitle {
+  margin:0 0.75rem 0.75rem 0.75rem;
+  color:#FFF;
+  font-weight:600;
 }
 
 .discover-playlist-header-container {
