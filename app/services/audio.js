@@ -30,9 +30,9 @@ export default Service.extend({
   isLoading:        readOnly('hifi.isLoading'),
   isMuted:          readOnly('hifi.isMuted'),
   duration:         readOnly('hifi.duration'),
+  percentLoaded:    readOnly('hifi.percentLoaded'),
   position:         alias('hifi.position'),
   volume:           alias('hifi.volume'),
-  percentLoaded:    alias('hifi.percentLoaded'),
 
   currentStory:     or('currentAudio.story', 'currentAudio'),
 
@@ -264,10 +264,7 @@ export default Service.extend({
   setPosition(percentage) {
     let position = percentage * get(this, 'duration');
 
-    this.get('hifi').setPosition(position);
-    /* TODO: send a `set position` signal to the low-level interface for the given position
-    ------------------------------------------------------------------------*/
-
+    set(this, 'position', position);
   },
 
   rewind() {
