@@ -474,18 +474,8 @@ moduleForAcceptance('Acceptance | discover group 2',
   }
 );
 
-test('it should', function(assert) {
-  server.create('djangoPage', {id:'/'});
-  visit('/');
-  andThen(function() {
-    click('.l-page-nav .list-item [href*="discover"]');
-  });
-  andThen(function() {
-    assert.equal(currentURL(), '/discover/start');
-  });
-});
-
 test('can visit discover from the home page', function(assert) {
+  withFeature('discover');
   server.create('djangoPage', {id:'/'});
   visit('/');
   andThen(function() {
@@ -500,6 +490,7 @@ test('can visit discover from the home page', function(assert) {
 });
 
 test('it automatically selects all topics', function(assert) {
+  withFeature('discover');
   server.create('djangoPage', {id:'/'});
   server.createList('discover-topic', 20);
   visit('/');
