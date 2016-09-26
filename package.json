@@ -64,7 +64,7 @@
     "ember-moment": "6.1.0",
     "ember-multiselect-checkboxes": "0.10.0",
     "ember-page-title": "3.0.6",
-    "ember-power-select": "nypublicradio/ember-power-select#nypr-fork",
+    "ember-power-select": "^1.0.0-beta.19",
     "ember-resolver": "^2.0.3",
     "ember-responsive": "1.2.7",
     "ember-route-action-helper": "1.0.0",
