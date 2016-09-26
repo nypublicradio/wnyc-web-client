@@ -30,6 +30,7 @@ body.ember-application.discover {
 
   .sitechrome-top {
     @include mq($large-and-up) {
+      background: rgba(black, .3);
       @include transition(background-color $transition-timing);
       position: absolute;
       top: 0;
@@ -83,7 +84,7 @@ body.ember-application.discover {
       }
     }
   }
-
+  
   .discover-fadeable-background {
     z-index: 0;
     opacity: 0; // this is handled by liquid fire
