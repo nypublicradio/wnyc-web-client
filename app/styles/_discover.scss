@@ -25,6 +25,7 @@ body.ember-application.discover {
     .sitechrome-nav {
       // override position: sticky for platforms that support it
       position: relative;
+      margin-bottom: 0;
     }
   }
 
@@ -118,7 +119,7 @@ body.ember-application.discover {
   }
 
   @include mq($small-only) {
-    padding-top:0;
+    padding-top:45px;
     padding-bottom:0;
   }
 }
@@ -167,19 +168,6 @@ body.ember-application.discover {
     font-size:rems(24);
     line-height:rems(34);
   }
-}
-
-.discover-welcome-screen-subtitle {
-  @include mq($small-only) {
-    font-size:rems(14);
-    line-height:rems(24);
-  }
-}
-
-.discover-welcome-screen-title, .discover-welcome-screen-subtitle {
-  max-width:400px;
-  text-align:center;
-  color:#FFF;
 }
 
 .discover-welcome-screen-title, .discover-welcome-screen-subtitle,
