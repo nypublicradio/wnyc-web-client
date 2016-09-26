@@ -482,6 +482,18 @@ test('can visit discover from the home page', function(assert) {
     click('.l-page-nav .list-item [href*="discover"]');
   });
   andThen(function() {
+    assert.equal(currentURL(), '/discover/start');
+  });
+});
+
+test('landing page goes straight to playlist', function(assert) {
+  withFeature('discover');
+  server.create('djangoPage', {id:'/'});
+  visit('/');
+  andThen(function() {
+    click('.l-page-nav .list-item [href*="discover"]');
+  });
+  andThen(function() {
     click('button:contains("Get Started")');
   });
   andThen(function() {
