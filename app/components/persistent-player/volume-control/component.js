@@ -32,21 +32,21 @@ export default Component.extend({
       window.getSelection().removeAllRanges();
     }
     if (e.target.classList.contains('volume-slider-handle')) {
-      this.$().on('mousemove', '.volume-slider', this.click.bind(this));
+      this.$().on('mousemove', '.volume-slider-wrapper', this.click.bind(this));
     }
   },
   mouseUp() {
-    this.$().off('mousemove', '.volume-slider');
+    this.$().off('mousemove', '.volume-slider-wrapper');
   },
   mouseLeave() {
-    this.$().off('mousemove', '.volume-slider');
+    this.$().off('mousemove', '.volume-slider-wrapper');
   },
   _setVolume(target, x) {
-    if (!isEmpty(this.$(target).closest('.volume-slider'))) {
-      let $controls = this.$('.volume-slider');
+    if (!isEmpty(this.$(target).closest('.volume-slider-wrapper'))) {
+      let $controls = this.$('.volume-slider-wrapper');
       let offset = $controls.offset();
-      let leftLimit = offset.left;
-      let rightLimit = offset.left + $controls.width();
+      let leftLimit = offset.left + parseFloat($controls.css('padding-left'));
+      let rightLimit = leftLimit + $controls.width();
       let p;
       if (x < leftLimit) {
         p = 0;
@@ -55,6 +55,7 @@ export default Component.extend({
       } else {
         p = (x - leftLimit) / $controls.width();
       }
+      console.log(leftLimit, x, rightLimit, '-->', p * 100);
       get(this, 'setVolume')(p * 100);
       if (p > 0 && get(this,'isMuted')) {
         this.send('toggleMute');

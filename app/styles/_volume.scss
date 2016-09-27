@@ -1,46 +1,98 @@
-$volume-width: 62px;
 $button-width: 50px;
+$slider-width: 76px;
+$slider-height: 3px;
+$handle-diameter:  15px;
+$handle-radius:  $handle-diameter / 2;
+$slider-spacing-left:  $handle-diameter;
+$slider-spacing-right: $handle-radius;
+$slider-spacing: $slider-spacing-left + $slider-spacing-right;
 
 .persistent-player--controls .volume {
-  min-width: $button-width;
-  overflow: hidden;
-  white-space: nowrap;
-  height: 100%;
-  padding-left: 52px;
   margin-top: 0;
-
-  .volume-control {
-
-    padding: 3px 4px;
-
-    @include translateX(0px);
-    width: $button-width;
-    &.volume-hover,
-    &:hover,
-    &:focus {
-      width: $volume-width + $button-width + 30px;
-
-      .volume-slider-track, {
-        @include translateX(0px);
-      }
-      .volume-slider-handle {
-        @include translateX(-7.5px);
-      }
-    }
-  }
+  min-width: $button-width;
+  height: 100%;
+  white-space: nowrap;
+  margin-left: 42px;
+  text-wrap
 
   .touch & {
     display: none;
   }
 }
 
-.volume-button {
+.volume-control {
+  @include display-flex;
   height: 100%;
-  width: 41px;
-  outline: 0;
-  padding: 25px 10px 0 0;
   cursor: pointer;
+  outline: 0;
+
+  &.volume-hover,
+  &:hover,
+  &:focus {
+    .volume-slider-wrapper, {
+      width: $slider-width + $slider-spacing;
+      padding-left:  $slider-spacing-left;
+      padding-right: $slider-spacing-right;
+    }
+  }
+}
+
+.volume-slider-wrapper {
+  width: 0;
+  padding: 0;
+  display: block;
   position: relative;
+  touch-action: none;
+  height: 100%;
+  overflow: hidden;
+  @include transition(width .3s cubic-bezier(0.4, 0.4, 0.265, 1.55), padding .3s cubic-bezier(0.4, 0.4, 0.265, 1.55));
+}
+
+.volume-slider {
+  display: block;
+  position: relative;
+  height: 100%;
+  width: $slider-width;
+}
+
+.volume-slider-track {
+  background: white;
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 0;
+  height: $slider-height;
+  margin-top: -$slider-height / 2;
+  width: 100%;
+
+  &:after {
+    @extend .volume-slider-track;
+    content: '';
+    width: $slider-width;
+    background: rgba(white, 0.2);
+    z-index: -1;
+  }
+}
+
+.volume-slider-handle {
+  position: absolute;
+  top: 50%;
+  width: $handle-diameter;
+  height: $handle-diameter;
+  border-radius: 50%;
+  background: #128cf4;
+  margin-top: -$handle-radius;
+  left: 100%;
+  @include translateX(-$handle-radius);
+}
+
+.volume-button {
+  display: block;
+  position: relative;
+  min-width: $button-width;
+  height: 100%;
+  outline: 0;
+  cursor: pointer;
 
   .icon {
     path {
@@ -50,67 +102,12 @@ $button-width: 50px;
     width: 28px;
     position: absolute;
     top: 22px;
-    left: 5px;
+    right: 5px;
   }
 
   &:focus {
     outline: 0;
   }
-}
-
-.volume-control {
-  display: inline-block;
-  vertical-align: middle;
-  width: $button-width;
-  height: 100%;
-  cursor: pointer;
-  overflow: hidden;
-  outline: 0;
-
-  @include transition(width .3s cubic-bezier(0.4, 0.4, 0.265, 1.55));
-}
-
-.volume-slider {
-  touch-action: none;
-  height: 100%;
-  position: absolute;
-  left: $button-width + 3;
-  top: 0;
-  width: $volume-width;
-}
-
-.volume-slider-track {
-  background: white;
-  position: absolute;
-  display: block;
-  top: 50%;
-  left: 0;
-  height: 3px;
-  margin-top: -1.5px;
-  width: #{$volume-width - 4};
-
-  @include translateX(50px);
-  @include transition(transform .3s cubic-bezier(0.19, 1, 0.22, 1));
-
-  &:after {
-    @extend .volume-slider-track;
-    content: '';
-    width: $volume-width;
-    background: rgba(white, 0.2);
-    z-index: -1;
-  }
-}
-
-.volume-slider-handle {
-  position: absolute;
-  top: 50%;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background: #128cf4;
-  margin-top: -7.5px;
-  left: #{$volume-width};
-  @include transition(transform .3s cubic-bezier(0.4, 0.4, 0.265, 1.55));
 }
 
 .volume-button {
