@@ -249,7 +249,7 @@ body.ember-application.discover {
   @include display-flex;
   @include flex-direction(column);
   @include flex-wrap(nowrap);
-  @include align-items(center);
+  @include align-items(stretch);
   @include justify-content(space-between);
 }
 
@@ -258,7 +258,7 @@ body.ember-application.discover {
   list-style:decimal;
   counter-reset: discover-playlist-counter;
   padding:0;
-  margin:0;
+  margin:0 auto;
   margin-bottom:2rem;
   border-radius:5px;
   max-width:800px;
@@ -328,7 +328,8 @@ body.ember-application.discover {
   @include display-flex;
   @include flex-direction(column-reverse);
   @include flex-wrap(nowrap);
-  @include align-items(flex-end);
+  @include align-items(center);
+  @include flex-basis(100%);
   text-align:center;
   color:#FFF;
   padding:20px 0;
@@ -368,6 +369,7 @@ body.ember-application.discover {
   @include align-items(center);
   @include flex-direction(row);
   @include flex-basis(34px);
+  @include align-self(flex-end);
 
   color:white;
   font-size:rems(12);
@@ -455,6 +457,7 @@ body.ember-application.discover {
     top:0;
     right:0;
     @include flex(1 25%);
+    @include align-self(initial);
   }
 }
 
