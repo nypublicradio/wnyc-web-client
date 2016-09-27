@@ -1,5 +1,7 @@
 import { Factory, faker } from 'ember-cli-mirage';
-import Ember from 'ember';
+import { dasherize } from 'ember-string';
+
+const slugify = str => dasherize(str.replace(/[^a-z0-9_\-\s]/gi, '-'));
 
 function generateProducingOrg() {
   return {
@@ -21,7 +23,7 @@ export default Factory.extend({
   id(id) {
     return `shows/${this.firstPage}-${id}/`;
   },
-  slug: () => Ember.String.dasherize(faker.name.findName()),
+  slug: () => slugify(faker.name.findName()),
   about: {
     body: '<h1>About</h1>'
   },
