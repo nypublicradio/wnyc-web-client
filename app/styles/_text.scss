@@ -26,7 +26,7 @@
 
     @include mq($small-only) {
         @include fontsize($base-font*1.5);
-        line-height: 1;
+        line-height: 2.125rem;
     }
 }
 .h1--extrabold {
@@ -48,6 +48,11 @@
 .h3 {
     @include fontsize($base-font); /* 16px */
     font-weight: 600;
+    
+    @include mq($small-only) {
+        @include fontsize($base-font*0.875);
+        line-height: 1.5rem;
+    }
 }
 .h4 {
     @include fontsize($base-font*0.875); /* 14px */
