@@ -4,7 +4,7 @@ import { animate, Promise } from "liquid-fire";
 export default function slideToggle() {
   const animationSettings = {
     easing: [0.2, 0.2, 0.2, 0.2],
-    duration: 300
+    duration: 250
   };
   let oldStick = this.oldElement.find('.switch');
   let oldText = this.oldElement.find('.label');

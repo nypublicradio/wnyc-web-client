@@ -9,11 +9,13 @@
     </p>
   {{/if}}
 
-  <div class='dismiss-notification' {{action 'dismiss' true}}>
-    {{link-to 'Change Settings' 'settings' classNames='notification-action'}}
-  </div>
+  <div class='notification-action'>
+    <div class='dismiss-notification' {{action 'dismiss' true}}>
+      {{link-to 'Change Settings' 'settings' classNames='notification-action'}}
+    </div>
 
-  <div class='dismiss-notification close-icon' {{action 'dismiss'}}>
-    {{wnyc-svg icon='close'}}
+    <div class='dismiss-notification close-icon' {{action 'dismiss'}}>
+      {{wnyc-svg icon='close'}}
+    </div>
   </div>
 </div>

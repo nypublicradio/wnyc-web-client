@@ -1,13 +1,14 @@
 $ember-power-select-default-border-radius: 1px;
-$ember-power-select-disabled-option-color: $lightergray;
-$ember-power-select-option-padding: 0;
+$ember-power-select-disabled-option-color: $lightestgray;
+$ember-power-select-option-padding: 10px;
+$ember-power-select-border-color: $lightestgray;
+$ember-power-select-disabled-background-color: #fff;
 
 @import 'ember-power-select';
 
-
 .user-settings {
-  padding-right: 72px;
-  padding-left: 72px;
+  padding-left: 22px;
+  padding-right: 48px;
   min-height: 600px;
 }
 
@@ -15,11 +16,17 @@ $ember-power-select-option-padding: 0;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  padding-bottom: 36px;
+  padding-bottom: 21px;
 
   label {
-    padding-bottom: 30px;
+    padding-bottom: 14px;
     max-width: 500px;
+
+    div:first-child {
+      @include fontsize(16);
+      font-weight: 600;
+      padding-bottom: 5px;
+    }
   }
 
   > div {
@@ -29,11 +36,20 @@ $ember-power-select-option-padding: 0;
 
 .setting-desc {
   @include fontsize(14);
-  color: $gray;
+  line-height: 24px;
+  color: $darkergray;
+}
+
+.settings-sep {
+  max-width: 800px;
+  height: 3px;
+  border: solid 1px $nearwhite;
+  margin: 6px 0 39px 0;
 }
 
 .autoplay {
   display: flex;
+  margin-top: 20px;
 
   .toggle {
     @include fontsize(14);
@@ -51,8 +67,10 @@ $ember-power-select-option-padding: 0;
     margin: 0;
     color: #fff;
     flex-grow: 1;
-    padding-left: 5px;
+    padding-left: 7px;
+    padding-right: 8px;
     order: 1;
+    font-weight: 600;
   }
 
   .inactive-toggle {
@@ -64,12 +82,14 @@ $ember-power-select-option-padding: 0;
 
     .label {
       order: 2;
+      padding-left: 4px;
+      padding-right: 8px;
     }
   }
 
   .switch {
     border-radius: 100px;
-    height: 31px;
+    height: 32px;
     width: 32px;
     background-color: #fff;
     margin: 2px;
@@ -88,7 +108,7 @@ $ember-power-select-option-padding: 0;
 }
 
 .ember-power-select-trigger {
-  width: 300px;
+  min-width: 250px;
   height: 48px;
 }
 
@@ -99,8 +119,8 @@ $ember-power-select-option-padding: 0;
 }
 
 .ember-power-select-status-icon {
-  right: 10px;
-  border-width: 8px 8px 0 8px;
+  right: 15.5px;
+  border-width: 6px 6px 0 6px;
   border-color: #333 transparent transparent transparent;
 }
 
@@ -108,18 +128,47 @@ $ember-power-select-option-padding: 0;
   color: $lightergray;
 
   .ember-power-select-status-icon {
-    border-color: $lightergray transparent transparent transparent;
+    border-color: $lightestgray transparent transparent transparent;
   }
 }
 
+.ember-basic-dropdown {
+  flex-grow: 1;
+}
+
 .ember-power-select-trigger[aria-disabled=true] {
-  border: solid 1px $lightestgray;
-  color: $lightergray;
+  border: solid 1px $nearwhite;
 }
 
 @media only screen and (min-width: 800px) {
+  .user-settings {
+    padding-right: 0;
+    padding-left: 72px;
+  }
+
   .user-setting {
     flex-flow: row nowrap;
+
+    label {
+      padding-bottom: 3px;
+      padding-right: 123px;
+
+      div:first-child {
+        @include fontsize(24);
+      }
+    }
+  }
+
+  .settings-sep {
+    margin: 6px 0 18px 0;
+  }
+
+  .ember-basic-dropdown {
+    flex-grow: 0;
+  }
+
+  .user-stream .ember-basic-dropdown {
+    margin-top: 20px;
   }
 
   .autoplay-options {
