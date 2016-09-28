@@ -9,8 +9,9 @@ const {
 const { hash: waitFor } = Ember.RSVP;
 const inflector = new Inflector(Inflector.defaultRules);
 import { retryFromServer } from 'overhaul/lib/compat-hooks';
+import PlayParamMixin from 'overhaul/mixins/play-param';
 
-export default Route.extend({
+export default Route.extend(PlayParamMixin, {
   session: service(),
   metrics: service(),
 

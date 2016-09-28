@@ -200,6 +200,26 @@ test('visiting a show with a different header donate chunk', function(assert) {
   });
 });
 
+test('show pages with a play param', function(assert) {
+  let story = server.create('story');
+  let show = server.create('show', {
+    id: 'shows/foo/',
+    apiResponse: server.create('api-response', { id: 'shows/foo/recent_stories/1' })
+  });
+  server.create('django-page', {id: show.id});
+
+  djangoPage
+    .bootstrap(show)
+    .visit({id: show.id + `?play=${story.id}`});
+    
+  andThen(function() {
+    assert.equal(currentURL(), `${show.id}?play=${story.id}`);
+    assert.ok(Ember.$('.persistent-player').length, 'persistent player should be visible');
+    assert.equal(Ember.$('[data-test-selector=persistent-player-story-title]').text(), story.title, `${story.title} should be loaded in player UI`);
+  });
+  
+});
+
 moduleForAcceptance('Acceptance | Django Page | Show Page Analytics', {
   afterEach() {
     delete window.ga;
