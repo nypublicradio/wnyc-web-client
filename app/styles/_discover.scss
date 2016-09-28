@@ -679,6 +679,7 @@ body.ember-application.discover {
   }
 }
 .playlist-play-indicator-button {
+  min-height: 5rem;
   background: transparent;
   @include fontsize(14);
   line-height: 34px;
