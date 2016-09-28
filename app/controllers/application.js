@@ -8,8 +8,9 @@ export default Controller.extend({
   audio:        service(),
   metrics:      service(),
 
+  queryParams:  ['modal', 'play'],
   modal:        null,
-  queryParams:  ['modal'],
+  play:         null,
 
   noErrors:     not('audio.hasErrors'),
   showPlayer:   and('noErrors', 'audio.playedOnce'),
