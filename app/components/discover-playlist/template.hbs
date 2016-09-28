@@ -14,7 +14,20 @@
 <div class="discover-playlist-content-container">
 {{discover-feedback-button}}
 <div class="discover-refresh-bar-container">
-  <button class="discover-refresh-bar" {{action 'findMore'}}>Refresh Playlist</button>
+  <button class="discover-refresh-bar" {{action 'findMore'}}>
+  {{#if findingMore}}
+  {{! #128cf4 is $blue }}
+  {{animated-loading-icon
+    color='#128cf4'
+    width=18
+    height=18
+    outerScale=8
+    innerScale=4
+    radius=0.025
+    dotRadius=1
+    lineWidth=2}}
+  {{/if}}
+    Refresh Playlist</button>
 </div>
 {{#sortable-group class="discover-playlist" tagName="ul" onChange="reorderItems" handle=".discover-playlist-item-handle" as |group|}}
   {{#each stories as |story|}}
