@@ -4,7 +4,7 @@ $slider-height: 3px;
 $handle-diameter:  15px;
 $handle-radius:  $handle-diameter / 2;
 $slider-spacing-left:  $handle-diameter;
-$slider-spacing-right: $handle-radius;
+$slider-spacing-right: $handle-radius + 2px;
 $slider-spacing: $slider-spacing-left + $slider-spacing-right;
 
 .persistent-player--controls .volume {
@@ -31,21 +31,21 @@ $slider-spacing: $slider-spacing-left + $slider-spacing-right;
   &:focus {
     .volume-slider-wrapper, {
       width: $slider-width + $slider-spacing;
-      padding-left:  $slider-spacing-left;
-      padding-right: $slider-spacing-right;
+      @include transition(width .3s cubic-bezier(0.4, 0.4, 0.265, 1.55));
     }
   }
 }
 
 .volume-slider-wrapper {
   width: 0;
-  padding: 0;
-  display: block;
+  display: inline-block;
   position: relative;
   touch-action: none;
   height: 100%;
   overflow: hidden;
-  @include transition(width .3s cubic-bezier(0.4, 0.4, 0.265, 1.55), padding .3s cubic-bezier(0.4, 0.4, 0.265, 1.55));
+  // when transitioning width to 0, make sure bezier curve doesn't go above the 1 line, because that will
+  // cause width to go negative in safari and probably have unintended effects.
+  @include transition(width .3s cubic-bezier(0.4, 0.4, 0.265, 0.99));
 }
 
 .volume-slider {
@@ -53,6 +53,8 @@ $slider-spacing: $slider-spacing-left + $slider-spacing-right;
   position: relative;
   height: 100%;
   width: $slider-width;
+  margin-left:  $slider-spacing-left;
+  margin-right: $slider-spacing-right;
 }
 
 .volume-slider-track {
@@ -87,9 +89,10 @@ $slider-spacing: $slider-spacing-left + $slider-spacing-right;
 }
 
 .volume-button {
-  display: block;
-  position: relative;
+  display: inline-block;
+  flex-basis: $button-width;
   min-width: $button-width;
+  position: relative;
   height: 100%;
   outline: 0;
   cursor: pointer;
