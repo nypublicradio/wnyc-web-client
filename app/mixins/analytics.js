@@ -8,12 +8,13 @@ export default Mixin.create({
 
   didTransition([ applicationTransition ]) {
     let { controller } = applicationTransition.handler;
-    this._super(...arguments);
-
     if (!controller._wasModal) {
       this._trackPage();
     }
     controller._wasModal = false;
+      
+    let ret = this._super(...arguments);
+    return ret === false ? super : true;
   },
 
   _trackPage() {
