@@ -1,6 +1,6 @@
 {{title "Discover Playlist"}}
 
-{{#discover-playlist stories=model.stories onRemoveItem='removeItem' onUpdateItems='updateItems' as |playlist|}}
+{{#discover-playlist stories=model.stories onRemoveItem='removeItem' onUpdateItems='updateItems' findMore='findMore' as |playlist|}}
   <div class="discover-playlist-header-content"> {{! for the flex layout shifts }}
     <h1 class="discover-playlist-header-title h1">Your Discover Playlist</h1>
     <h3 class="discover-playlist-header-subtitle text text--normal">Your playlist is customized to the shows and topics you choose.</h3>
@@ -51,7 +51,7 @@
     dotRadius=2
     lineWidth=2}}
   {{/if}}
-  <button {{action (route-action 'findMore')}} class="discover-playlist-find-more rounded-caps-button mod-hollow-blue" disabled={{findingMore}}>
+  <button {{action 'findMore'}} class="discover-playlist-find-more rounded-caps-button mod-hollow-blue" disabled={{findingMore}}>
     Refresh Playlist
   </button>
 </div>

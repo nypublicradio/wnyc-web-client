@@ -13,6 +13,9 @@
 
 <div class="discover-playlist-content-container">
 {{discover-feedback-button}}
+<div class="discover-refresh-bar-container">
+  <button class="discover-refresh-bar" {{action 'findMore'}}>Refresh Playlist</button>
+</div>
 {{#sortable-group class="discover-playlist" tagName="ul" onChange="reorderItems" handle=".discover-playlist-item-handle" as |group|}}
   {{#each stories as |story|}}
     {{#sortable-item class=(if (array-contains removedItemIds story.id) 'discover-playlist-item is-deleted' 'discover-playlist-item')

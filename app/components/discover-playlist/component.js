@@ -119,6 +119,10 @@ export default Ember.Component.extend({
 
     playTrack(pk) {
       this.get('audio').play(pk, 'discover');
+    },
+    
+    findMore() {
+      this.sendAction('findMore');
     }
   }
 });
