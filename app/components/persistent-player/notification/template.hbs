@@ -1,12 +1,23 @@
 <div class='player-notification'>
   {{#if (and didNotElapse (eq currentContext 'continuous-player-bumper'))}}
     <p class='notification-message'>
-      Your episode is over. In {{remaining}} seconds, we'll tune you to {{preferredStream.name}}.
+      Your episode is over. In {{remaining}} seconds,
+      {{#if streamEnabled}}
+        we'll tune you to {{preferredStream.name}}.
+      {{else}}
+        your audio queue will begin to play.
+      {{/if}}
     </p>
   {{else}}
-    <p class='notification-message'>
-      We tuned you to {{preferredStream.name}} after your episode ended.
-    </p>
+      <p class='notification-message'>
+        We
+        {{#if streamEnabled}}
+          tuned you to {{preferredStream.name}}
+        {{else}}
+          began playing your audio queue
+        {{/if}}
+        after your episode ended.
+      </p>
   {{/if}}
 
   <div class='notification-action'>

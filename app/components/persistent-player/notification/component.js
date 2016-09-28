@@ -9,6 +9,10 @@ export default Ember.Component.extend({
 
   session: service(),
   store: service(),
+  streamEnabled: Ember.computed('session.data.user-prefs-active-autoplay', function(){
+    let session = this.get('session');
+    return session.get('data.user-prefs-active-autoplay') === 'default_stream';
+  }),
   preferredStream: Ember.computed('session.data.user-prefs-active-stream', function(){
     let slug = this.get('session.data.user-prefs-active-stream') || 'wnyc-fm939';
     return this.get('store').peekRecord('stream', slug);

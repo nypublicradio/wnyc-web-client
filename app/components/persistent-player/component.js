@@ -16,11 +16,17 @@ export default Component.extend({
   didDismiss: false,
   continuousPlayEnabled: Ember.computed('audio.currentContext', 'currentAudio.audioType', 'didDismiss', function() {
     let { audio, didDismiss } = this.getProperties('audio', 'didDismiss');
+    let { currentContext, currentAudio } = audio.getProperties('currentContext', 'currentAudio');
+    let audioType = currentAudio.get('audioType');
     if (didDismiss) {
       return false;
     }
 
-    return audio.get('currentContext') === 'continuous-player-bumper' || audio.get('currentAudio.audioType') === 'stream';
+    if (currentContext === 'continuous-player-bumper') {
+      return true;
+    }
+
+    return audioType === 'stream' || currentContext === 'queue';
   }),
 
   actions: {

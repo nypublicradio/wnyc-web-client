@@ -16,7 +16,8 @@ const PLATFORM        = 'NYPR_Web';
 const CONTINUOUS_PLAYER_BUMPERS = {
   'wnyc-fm939': 'http://www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/streambumper/streambumper000001_wnycfm.mp3',
   'wqxr': 'http://www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/streambumper/streambumper000003_wqxr.mp3',
-  'q2': 'http://www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/streambumper/streambumper000006_q2.mp3'
+  'q2': 'http://www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/streambumper/streambumper000006_q2.mp3',
+  'queue': 'http://www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/streambumper/streambumper000008_audio_queue.mp3'
 };
 
 const ERRORS = {
@@ -361,12 +362,16 @@ export default Service.extend({
     get(this, 'queue').reset(newQueue);
   },
 
-  playNextInQueue() {
+  playNextInQueue(startBumper = false) {
     let queue = get(this, 'queue');
     let nextUp = queue.nextItem();
 
     if (nextUp) {
-      this.play(nextUp.get('id'), 'queue');
+      if (startBumper) {
+        this.play(CONTINUOUS_PLAYER_BUMPERS.queue, 'continuous-player-bumper');
+      } else {
+        this.play(nextUp.get('id'), 'queue');
+      }
     } else {
       set(this, 'currentContext', null);
     }
@@ -385,22 +390,27 @@ export default Service.extend({
     });
 
     this.sendCompleteListenAction(this.get('currentId'));
-    let context = get(this, 'currentContext');
     let activePref = this.getWithDefault('session.data.user-prefs-active-autoplay', 'default_stream');
     let activeStream = this.getWithDefault('session.data.user-prefs-active-stream', 'wnyc-fm939');
     if (context === 'queue') {
       this.playNextInQueue();
     } else if (context === 'discover') {
       this.playDiscoverQueue();
-    } else if (context === 'continuous-player-bumper' && activePref === 'default_stream') {
-      this.playStream(activeStream);
+    } else if (context === 'continuous-player-bumper') {
+      if (activePref === 'default_stream') {
+        this.playStream(activeStream);
+      } else {
+        this.playNextInQueue();
+      }
     }
+
+    context = get(this, 'currentContext');
 
     if ((!context || context === 'home-page')) {
       if (activePref === 'queue') {
         // skip the audio bumper, go straight to queue
-        this.playNextInQueue();
-      } else if (activePref === 'default_stream'){
+        this.playNextInQueue(true);
+      } else if (activePref === 'default_stream') {
         // play the audio bumper first before playing stream
         this.play(CONTINUOUS_PLAYER_BUMPERS[activeStream], 'continuous-player-bumper');
       }
