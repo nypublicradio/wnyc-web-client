@@ -13,14 +13,14 @@ export default Ember.Mixin.create({
         this.get('audio').play(play);
       }
       
-      let super = this._super(...arguments);
-      return super === false ? super : true;
+      let ret = this._super(...arguments);
+      return ret === false ? ret : true;
     },
     willTransition() {
       this.controllerFor('application').set('play', null);
       
-      let super = this._super(...arguments);
-      return super === false ? super : true;
+      let ret = this._super(...arguments);
+      return ret === false ? ret : true;
     }
   }
 });
