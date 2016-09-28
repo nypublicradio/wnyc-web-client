@@ -55,7 +55,6 @@ export default Component.extend({
       } else {
         p = (x - leftLimit) / $controls.width();
       }
-      console.log(leftLimit, x, rightLimit, '-->', p * 100);
       get(this, 'setVolume')(p * 100);
       if (p > 0 && get(this,'isMuted')) {
         this.send('toggleMute');
