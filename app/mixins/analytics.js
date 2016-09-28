@@ -14,7 +14,7 @@ export default Mixin.create({
     controller._wasModal = false;
       
     let ret = this._super(...arguments);
-    return ret === false ? super : true;
+    return ret === false ? ret : true;
   },
 
   _trackPage() {
