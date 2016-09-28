@@ -4,8 +4,9 @@ import get from 'ember-metal/get';
 import service from 'ember-service/inject';
 import { retryFromServer } from 'overhaul/lib/compat-hooks';
 import { beforeTeardown } from 'overhaul/lib/compat-hooks';
+import PlayParamMixin from 'overhaul/mixins/play-param';
 
-export default Route.extend({
+export default Route.extend(PlayParamMixin, {
   queryParams: {
     q: {
       refreshModel: true
