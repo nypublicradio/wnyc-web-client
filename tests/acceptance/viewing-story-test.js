@@ -59,6 +59,22 @@ test('view comments as staff user', function(assert) {
   andThen(() => assert.ok(find('.js-feature-comment').length, 'feature controls are visible'));
 });
 
+test('story pages with a play param', function(assert) {
+  let story = server.create('story');
+  let id = `story/${story.slug}/`;
+  server.create('django-page', {id, slug: story.slug});
+
+  djangoPage
+    .bootstrap({id})
+    .visit({id: id + `?play=${story.id}`});
+    
+  andThen(function() {
+    assert.equal(currentURL(), `story/${story.slug}/?play=${story.id}`);
+    assert.ok(Ember.$('.persistent-player').length, 'persistent player should be visible');
+    assert.equal(Ember.$('[data-test-selector=persistent-player-story-title]').text(), story.title, `${story.title} should be loaded in player UI`);
+  });
+});
+
 moduleForAcceptance('Acceptance | Django Page | Story Donate URLs', {
   afterEach() {
     resetHTML();

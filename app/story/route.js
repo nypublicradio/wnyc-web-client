@@ -1,9 +1,10 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
+import PlayParamMixin from 'overhaul/mixins/play-param';
 const { get } = Ember;
 const { hash: waitFor } = Ember.RSVP;
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(PlayParamMixin, {
   metrics: service(),
   session: service(),
   setupController(controller) {
