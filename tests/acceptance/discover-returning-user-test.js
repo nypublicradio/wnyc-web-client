@@ -250,7 +250,8 @@ test('if find more returns the same list of items, the old queue are displayed a
 test('if find more returns new items, the new items are displayed', function(assert) {
   let discoverPath = config.featureFlags['other-discover'] ? 'reco_proxy' : 'make_playlist';
   let session = currentSession(this.application);
-  var secondRequestCalled = false;
+  let secondRequestCalled = false;
+  let thirdRequestCalled = false;
   session.set('data.discover-excluded-story-ids', []);
   visit('/discover/playlist');
 
@@ -284,6 +285,39 @@ test('if find more returns new items, the new items are displayed', function(ass
       andThen(function() {
         assert.equal(currentURL(), '/discover/playlist');
         assert.equal(secondRequestCalled, true, "response with second results have been triggered");
+
+        let matchResults = stories.map(story => {
+          return ($(`.discover-playlist-story-title a:contains(${story.title})`).length === 1);
+        });
+
+        let matchCount = matchResults.filter(r => (r === true)).length;
+        assert.ok((matchResults.uniq().length === 1) && (matchResults.uniq()[0] === true), `Should have matched all the new stories but matched ${matchCount}`);
+
+        assert.equal($(".discover-playlist-no-results").length, 0, "playlist no results error area should not be visible");
+      });
+    });
+
+    andThen(function() {
+      stories = server.createList('discover-story', 5);
+      
+      server.get(url, function() {
+        thirdRequestCalled = true;
+        let data = stories.map(s => {
+          return {
+            type: "Story",
+            id: s.id,
+            attributes: s
+          };
+        });
+        return {data: data};
+      });
+    });
+
+    andThen(function() {
+      click(".discover-refresh-bar");
+      andThen(function() {
+        assert.equal(currentURL(), '/discover/playlist');
+        assert.equal(thirdRequestCalled, true, "response with third results have been triggered");
 
         let matchResults = stories.map(story => {
           return ($(`.discover-playlist-story-title a:contains(${story.title})`).length === 1);
