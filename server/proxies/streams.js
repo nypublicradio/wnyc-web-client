@@ -11,11 +11,11 @@ module.exports = function(app) {
     console.error(err, req.url);
   });
 
-  app.use(streamPath, function(req, res, next){
-    proxy.web(req, res, { target: 'http://api.wnyc.org/api/v1/list/streams/' });
-  });
-  
-  app.use(whatsOnPath, function(req, res) {
-    proxy.web(req, res, { target: 'http://api.wnyc.org/api/v1/whats_on/' });
-  });
+  // app.use(streamPath, function(req, res, next){
+    // proxy.web(req, res, { target: 'http://api.wnyc.org/api/v1/list/streams/' });
+  // });
+
+  // app.use(whatsOnPath, function(req, res) {
+  //   proxy.web(req, res, { target: 'http://api.wnyc.org/api/v1/whats_on/' });
+  // });
 };

@@ -26,6 +26,7 @@ export default Model.extend({
   playlist:             belongsTo('playlist'),
 
   story:                readOnly('currentStory'),
+  audioBumper:          attr('string'),
 
   shareMetadata:        computed('currentShow', 'currentPlaylistItem', function() {
     return shareMetadata(this);
