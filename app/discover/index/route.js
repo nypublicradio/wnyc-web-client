@@ -13,7 +13,6 @@ export default Ember.Route.extend({
   discoverPrefs:    Ember.inject.service(),
   scroller:         Ember.inject.service(),
   metrics:          Ember.inject.service(),
-  experimentalGroup: config.experimentalGroup,
 
   hasQueuedStories: Ember.computed.gt('discoverQueue.items.length', 0),
 
