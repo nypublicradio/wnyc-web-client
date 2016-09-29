@@ -42,7 +42,7 @@ export default Service.extend({
   isMuted:          readOnly('okraBridge.isMuted'),
   volume:           alias('okraBridge.volume'),
   currentStory:     or('currentAudio.story', 'currentAudio'),
-  bumperDuration:   null,
+  didBumperPlay:    false,
 
   currentAudio:     null,
   currentContext:   null,
@@ -394,6 +394,7 @@ export default Service.extend({
     } else if (context === 'discover') {
       this.playDiscoverQueue();
     } else if (context === 'continuous-player-bumper') {
+      this.set('didBumperPlay', true);
       if (activePref === 'default_stream') {
         this.playStream(activeStream);
       } else {

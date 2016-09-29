@@ -14,9 +14,9 @@ export default Component.extend({
   isPlaying: equal('audio.playState', 'is-playing'),
   isAudiostream: equal('currentAudio.audioType', 'stream'),
   didDismiss: false,
-  continuousPlayEnabled: Ember.computed('audio.currentContext', 'currentAudio.audioType', 'didDismiss', function() {
+  continuousPlayEnabled: Ember.computed('audio.currentContext', 'currentAudio.audioType', 'didDismiss', 'audio.didBumperPlay', function() {
     let { audio, didDismiss } = this.getProperties('audio', 'didDismiss');
-    let { currentContext, currentAudio } = audio.getProperties('currentContext', 'currentAudio');
+    let { currentContext, currentAudio, didBumperPlay } = audio.getProperties('currentContext', 'currentAudio', 'didBumperPlay');
     let audioType = currentAudio.get('audioType');
     if (didDismiss) {
       return false;
@@ -26,7 +26,11 @@ export default Component.extend({
       return true;
     }
 
-    return audioType === 'stream' || currentContext === 'queue';
+    if (currentContext === 'queue' || audioType === 'stream') {
+      return didBumperPlay;
+    }
+
+    return false;
   }),
 
   actions: {
