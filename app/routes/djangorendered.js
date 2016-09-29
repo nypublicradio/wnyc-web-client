@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import ENV from 'overhaul/config/environment';
 import get from 'ember-metal/get';
+import service from 'ember-service/inject';
 import { retryFromServer } from 'overhaul/lib/compat-hooks';
 import { beforeTeardown } from 'overhaul/lib/compat-hooks';
 
