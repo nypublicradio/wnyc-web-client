@@ -182,59 +182,6 @@ test('it sends a listen action on pause', function(assert) {
   return wait();
 });
 
-test('it sends a listen action on completed event', function(assert) {
-  let service = this.subject();
-  let story = server.create('story');
-  let listenActionStub = {
-    sendComplete() {
-      assert.ok(true, 'sendComplete was called');
-    }
-  };
-
-  Ember.run(() => {
-    service.set('play', () => {});
-    service.set('listenActions', listenActionStub);
-    service.set('currentAudio', story.attrs);
-  });
-  Ember.run(() => {
-    service.okraBridge.onFinished();
-  });
-});
-
-test('it fires error events', function(assert) {
-  assert.expect(2);
-  let service = this.subject();
-  service.set('errorEvent', () => assert.ok('errorEvent was fired'));
-  service.set('flashError', () => assert.ok('flashError was fired'));
-
-  return wait().then(() => {
-    /*global Okra*/
-    Okra.request('audioService').trigger('player:error');
-    Okra.request('audioService').trigger('flashVersionError');
-  });
-});
-
-test('it delays early calls to play until after okraBrige isReady', function(assert) {
-
-  let id = 123;
-  server.create('story', {id});
-  let otherId = 456;
-  server.create('story', {id: otherId});
-
-  let service = this.subject();
-  assert.notOk(service.get('okraBridge.isReady'), 'okra not ready yet');
-  service.play(id);
-  assert.deepEqual(service.get('_waitingForOkra'), {id, context: ''}, 'holds onto last played item');
-
-  return wait().then(() => {
-    assert.equal(service.get('_waitingForOkra'), null, 'clears private attr');
-    service.play(otherId);
-    assert.equal(service.get('currentId'), otherId, 'plays afterwards OK');
-
-    return wait();
-  });
-});
-
 test('with the bumper-state enabled, the bumper will act on a finished track event', function(assert) {
   const service = this.subject();
   let didChange = false;
