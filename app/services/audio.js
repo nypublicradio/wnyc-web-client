@@ -13,12 +13,8 @@ import Ember from 'ember';
 const FIFTEEN_SECONDS = 1000 * 15;
 const TWO_MINUTES     = 1000 * 60 * 2;
 const PLATFORM        = 'NYPR_Web';
-const CONTINUOUS_PLAYER_BUMPERS = {
-  'wnyc-fm939': 'http://www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/streambumper/streambumper000001_wnycfm.mp3',
-  'wqxr': 'http://www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/streambumper/streambumper000003_wqxr.mp3',
-  'q2': 'http://www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/streambumper/streambumper000006_q2.mp3',
-  'queue': 'http://www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/streambumper/streambumper000008_audio_queue.mp3'
-};
+const QUEUE_BUMPER    = '/streambumper/streambumper000008_audio_queue.mp3';
+const PODTRAC         = 'http://www.podtrac.com/pts/redirect.mp3/audio.wnyc.org';
 
 const ERRORS = {
   SOUNDMANAGER_FAILED_CREATE_SOUND: 'SoundManager failed when attempting to create a sound.',
@@ -368,7 +364,7 @@ export default Service.extend({
 
     if (nextUp) {
       if (startBumper) {
-        this.play(CONTINUOUS_PLAYER_BUMPERS.queue, 'continuous-player-bumper');
+        this.play(`${PODTRAC}${QUEUE_BUMPER}`, 'continuous-player-bumper');
       } else {
         this.play(nextUp.get('id'), 'queue');
       }
@@ -392,6 +388,7 @@ export default Service.extend({
     this.sendCompleteListenAction(this.get('currentId'));
     let activePref = this.getWithDefault('session.data.user-prefs-active-autoplay', 'default_stream');
     let activeStream = this.getWithDefault('session.data.user-prefs-active-stream', 'wnyc-fm939');
+
     if (context === 'queue') {
       this.playNextInQueue();
     } else if (context === 'discover') {
@@ -412,7 +409,14 @@ export default Service.extend({
         this.playNextInQueue(true);
       } else if (activePref === 'default_stream') {
         // play the audio bumper first before playing stream
-        this.play(CONTINUOUS_PLAYER_BUMPERS[activeStream], 'continuous-player-bumper');
+        // if a story ends on the home page and the streams have not all been
+        // fully loaded, then using `peekRecord` would cause issues.
+        // is there a better way to handle this without having to embed a promise?
+        // it seems like this would be an edge case.
+        this.get('store').findRecord('stream', activeStream).then(stream => {
+          let url = `${PODTRAC}${stream.get('audioBumper')}`;
+          this.play(url, 'continuous-player-bumper');
+        });
       }
     }
   },
