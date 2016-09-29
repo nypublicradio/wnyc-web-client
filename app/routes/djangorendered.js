@@ -1,11 +1,11 @@
-import Ember from 'ember';
 import ENV from 'overhaul/config/environment';
+import Route from 'ember-route';
 import get from 'ember-metal/get';
 import service from 'ember-service/inject';
 import { retryFromServer } from 'overhaul/lib/compat-hooks';
 import { beforeTeardown } from 'overhaul/lib/compat-hooks';
 
-export default Ember.Route.extend({
+export default Route.extend({
   queryParams: {
     q: {
       refreshModel: true
@@ -28,6 +28,7 @@ export default Ember.Route.extend({
     return this.store.find('django-page', upstream_url)
       .catch(e => retryFromServer(e, upstream_url));
   },
+
   afterModel(page) {
     let metrics = get(this, 'metrics');
     let path = document.location.pathname; // e.g. '/shows/bl/'
@@ -38,8 +39,11 @@ export default Ember.Route.extend({
       title
     });
   },
-  willTransition() {
-    beforeTeardown();
-    return true;
+
+  actions: {
+    willTransition() {
+      beforeTeardown();
+      return true;
+    }
   }
 });
