@@ -1,7 +1,7 @@
 import { Factory, faker } from 'ember-cli-mirage';
 import { dasherize } from 'ember-string';
 
-const slugify = str => dasherize(str.replace(/[^a-z0-9_\-\s]/gi, '-'));
+const slugify = str => dasherize(str.replace(/[^\w\s]/gi, '-'));
 
 function generateProducingOrg() {
   return {
