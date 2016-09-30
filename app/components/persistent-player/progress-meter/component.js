@@ -62,19 +62,19 @@ export default Component.extend({
     set(this, 'isHovering', false);
   },
   touchStart(e) {
-    e.preventDefault();
-    if (get(this, 'isLoaded')) {
-        let touch = e.originalEvent.changedTouches[0];
-        set(this, 'isTouching', true);
-        this._updateAudioPosition(touch);
-        this._startDragging(touch);
-        e.stopPropagation();
+    if (get(this, 'isLoaded') && e.target.classList.contains('progress-playhead')) {
+      e.preventDefault();
+      let touch = e.originalEvent.changedTouches[0];
+      set(this, 'isTouching', true);
+      this._startDragging(touch);
     }
   },
   touchEnd(e) {
-    let touch = e.originalEvent.changedTouches[0];
+    if (get(this, 'isLoaded') && e.target.classList.contains('progress-playhead')) {
+      let touch = e.originalEvent.changedTouches[0];
+      this._updateAudioPosition(touch);
+    }
     set(this, 'isTouching', false);
-    this._updateAudioPosition(touch);
     this._cancelDragging();
   },
   touchCancel() {
