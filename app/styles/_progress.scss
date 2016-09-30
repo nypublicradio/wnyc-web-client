@@ -71,6 +71,6 @@
     .progress.is-touching & {
       transform: scale(3.3, 3.3) translateY(-7px);
       opacity: 0.75;
-      @include transition(opacity 200ms linear 100ms, transform 200ms ease 100ms);
+      @include transition(opacity 200ms linear 200ms, transform 200ms ease-out 200ms);
     }
 }
