@@ -89,17 +89,21 @@ export default Component.extend({
     set(this, 'isDragging', true);
     if (touch) {
       this.$().on('touchmove', function(e) {
-        e.preventDefault();
-        let event = e.originalEvent;
-        let movedTouch = findTouch(event.touches, touch.identifier);
-        if (movedTouch) {
-          this._updateAudioPosition(movedTouch);
-        }
+        Ember.run(() => {
+          e.preventDefault();
+          let event = e.originalEvent;
+          let movedTouch = findTouch(event.touches, touch.identifier);
+          if (movedTouch) {
+            this._updateAudioPosition(movedTouch);
+          }
+        });
       }.bind(this));
     } else {
       this.$().on('mousemove', function(e) {
-        e.preventDefault();
-        this._updateAudioPosition(e);
+        Ember.run(() => {
+          e.preventDefault();
+          this._updateAudioPosition(e);
+        });
       }.bind(this));
     }
   },
