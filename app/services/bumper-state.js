@@ -14,8 +14,15 @@ export default Ember.Service.extend({
   queue: service('listen-queue'),
   session: service(),
   store: service(),
+  audio: service(),
   autoplayPref: readOnly('session.data.user-prefs-active-autoplay'),
   autoplayStream: readOnly('session.data.user-prefs-active-stream'),
+  isPlaying: computed('audio.isPlaying', 'audio.currentAudio', function() {
+    let audio = this.get('audio');
+    if (audio.get('isPlaying') && audio.get('currentAudio.audioType') === 'bumper') {
+      this.set('revealNotificationBar', true);
+    }
+  }),
   didPlayBumper: false,
   revealNotificationBar: false,
   isEnabled: computed('autoplayPref', 'queue.items.[]', function() {
