@@ -1,11 +1,18 @@
 import { test } from 'qunit';
 import run from 'ember-runloop';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
-import 'overhaul/tests/helpers/ember-sortable/test-helpers'; /* global reorder */
+import 'overhaul/tests/helpers/ember-sortable/test-helpers';
 
 import queuePage from 'overhaul/tests/pages/queue';
 
-moduleForAcceptance('Acceptance | queue');
+moduleForAcceptance('Acceptance | queue', {
+  beforeEach() {
+    Ember.$.Velocity.mock = true;
+  },
+  afterEach() {
+    Ember.$.Velocity.mock = false;
+  }
+});
 
 test('visiting /?modal=queue-history', function(assert) {
   server.create('djangoPage', {id:'/'});
@@ -31,15 +38,14 @@ test('Queue initial state should be open and empty', function(assert) {
 test('Queue should sort when you drag an item', function(assert) {
   let listenQueue = this.application.__container__.lookup('service:listen-queue');
   server.createList('story', 2);
+  server.create('djangoPage', {id:'/'});
+
   run(() => {
     listenQueue.addToQueueById(1);
     listenQueue.addToQueueById(2);
   });
 
-  andThen(function() {
-    server.create('djangoPage', {id:'/'});
-    queuePage.visit();
-  });
+  queuePage.visit();
 
   andThen(function() {
     assert.ok(queuePage.queueIsVisible, 'Queue should exist');
@@ -47,18 +53,16 @@ test('Queue should sort when you drag an item', function(assert) {
 
     assert.equal(queuePage.stories(1).title(), 'Story 0', 'story 0 should be first');
     assert.equal(queuePage.stories(2).title(), 'Story 1', 'story 1 should be second');
+  });
 
-    // drag story 0 below story 1
-    run(() => {
-      reorder(
-        'mouse',
-        '.player-queue .queueitem',
-        '.queueitem:contains(Story 1)',
-        '.queueitem:contains(Story 0)'
-      ).then(function() {
-        assert.equal(queuePage.stories(1).title(), 'Story 1', 'story 1 should be first after dragging');
-        assert.equal(queuePage.stories(2).title(), 'Story 0', 'story 0 should be second after dragging');
-      });
-    });
+  // drag story 0 below story 1
+  drag('mouse',
+    `.queueitem:contains(Story 0)`,
+    function() {return {dy: 400, dx:0};}
+  );
+
+  andThen(function() {
+    assert.equal(queuePage.stories(1).title(), 'Story 1', 'story 1 should be first after dragging');
+    assert.equal(queuePage.stories(2).title(), 'Story 0', 'story 0 should be second after dragging');
   });
 });
