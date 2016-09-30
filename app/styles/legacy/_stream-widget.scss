@@ -17,6 +17,7 @@ div#stream_launch_widget {
     }
     & > div.show {
         @include flex(1);
+        min-width: 0;
         width: auto;
         @include display-flex;
         & > div.image {
@@ -46,6 +47,7 @@ div#stream_launch_widget {
 
     .head {
         width: auto;
+        overflow: hidden;
     }
 
     .head h4 {
