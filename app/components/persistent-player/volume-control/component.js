@@ -36,10 +36,10 @@ export default Component.extend({
     }
   },
   mouseUp() {
-    this.$().off('mousemove', '.volume-slider');
+    this.$().off('mousemove', '.progress-wrapper');
   },
   mouseLeave() {
-    this.$().off('mousemove', '.volume-slider');
+    this.$().off('mousemove', '.progress-wrapper');
   },
   _setVolume(target, x) {
     if (!isEmpty(this.$(target).closest('.volume-slider'))) {

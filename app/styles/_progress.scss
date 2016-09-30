@@ -1,69 +1,73 @@
 .progress {
     position: absolute;
-    height: 5px;
-    bottom: 15px;
+    height: 10px;
+    .touch & {
+      height: 34px;
+    }
+    bottom: 95px;
     left: 0;
     right: 0;
 
     @include display-flex;
-    //&:hover > .progress-wrapper {
-    //    @include scale3d(1,1,1);
-    //}
+}
 
-    &:hover .progress-playhead {
-      opacity: 1;
-    }
+.progress-wrapper,
+.progress-bg,
+.progress-downloaded,
+.progress-played {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  max-height: 5px;
+  height: 100%;
 }
 
 .progress-wrapper {
-    height: 5px;
-    position: relative;
-    margin: auto;
-    @include flex-basis(100%);
-
-    // @include mq("(min-width: 800px)"){
-    //     @include scale3d(1,0.22222,1);
-    //     @include transition(transform 150ms ease);
-    // }
+  width: 100%;
+  border-left: 50px solid black;
+  border-right: 50px solid black;
 }
 
 .progress-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
-    background-color: rgba(white, 0.4);
+  width: 100%;
+  background-color: rgba($darkergray, 0.75);
 }
 
 .progress-downloaded {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 0%;
-    height: 100%;
     background-color: rgba(white, 0.3);
 }
 
 .progress-played {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
+    width: 0%;
     background-color: #4a90e2;
 }
 
 .progress-playhead {
     position: absolute;
-    height: 17px;
-    width: 2px;
+    height: 22px;
+    width: 22px;
+    transform: scale(0, 0);
     left: 0;
     opacity: 0;
-    background-color: white;
-    top: 0;
+    background-color: #4a90e2;
     bottom: 0;
-    margin: -7px 0;
+    border-radius: 50%;
+    margin: -7px -11px;
+    @include transition(opacity 200ms linear, transform 200ms ease);
 
-    @include transition(opacity 150ms ease);
+    .is-loaded & {
+      opacity: 1;
+    }
+
+    .touch &,
+    .is-dragging &,
+    .progress:hover & {
+      transform: scale(1, 1);
+    }
+
+    .progress.is-touching & {
+      transform: scale(3, 3) translateY(-6px);
+      opacity: 0.75;
+    }
 }
