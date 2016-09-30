@@ -8,29 +8,20 @@ import Ember from 'ember';
 export default Component.extend({
   audio: service(),
   store: service(),
+  bumper: service('bumper-state'),
   classNames: ['persistent-player', 'l-flexcontent', 'l-highlight--blur'],
   classNameBindings: ['isAudiostream'],
   currentAudio: reads('audio.currentAudio'),
   isPlaying: equal('audio.playState', 'is-playing'),
   isAudiostream: equal('currentAudio.audioType', 'stream'),
   didDismiss: false,
-  continuousPlayEnabled: Ember.computed('audio.currentContext', 'currentAudio.audioType', 'didDismiss', 'audio.didBumperPlay', function() {
-    let { audio, didDismiss } = this.getProperties('audio', 'didDismiss');
-    let { currentContext, currentAudio, didBumperPlay } = audio.getProperties('currentContext', 'currentAudio', 'didBumperPlay');
-    let audioType = currentAudio.get('audioType');
+  continuousPlayEnabled: Ember.computed('didDismiss', 'bumper.revealNotificationBar', function() {
+    let { bumper, didDismiss } = this.getProperties('bumper', 'didDismiss');
     if (didDismiss) {
       return false;
     }
 
-    if (currentContext === 'continuous-player-bumper') {
-      return true;
-    }
-
-    if (currentContext === 'queue' || audioType === 'stream') {
-      return didBumperPlay;
-    }
-
-    return false;
+    return bumper.get('revealNotificationBar');
   }),
 
   actions: {

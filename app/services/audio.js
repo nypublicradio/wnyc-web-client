@@ -32,6 +32,7 @@ export default Service.extend({
   store:            service(),
   session:          service(),
   discoverQueue:    service(),
+  bumperState:      service(),
   listens:          service('listen-history'),
   queue:            service('listen-queue'),
   listenActions:    service(),
@@ -42,7 +43,6 @@ export default Service.extend({
   isMuted:          readOnly('okraBridge.isMuted'),
   volume:           alias('okraBridge.volume'),
   currentStory:     or('currentAudio.story', 'currentAudio'),
-  didBumperPlay:    false,
 
   currentAudio:     null,
   currentContext:   null,
@@ -101,7 +101,7 @@ export default Service.extend({
     // i.e. there will always be a context, but there might not always be a pk
     let id = pk || get(this, 'currentAudio.id');
     let context = playContext || get(this, 'currentContext') || '';
-
+    console.log(id, pk, playContext);
     if (!id) {
       return;
     }
@@ -294,15 +294,15 @@ export default Service.extend({
     .catch(() => this.set('hasErrors', true));
   },
 
-  playBumper(url) {
+  playBumper(url, bumperContext) {
     // currentAudio probably doesnt need to be set. FIXME.
     this.setProperties({
-      currentContext: 'continuous-player-bumper',
+      currentContext: bumperContext,
       currentAudio: Ember.Object.create({
         audioType: 'bumper'
       })
     });
-    this.okraBridge.playSoundFor('continuous-player-bumper', url);
+    this.okraBridge.playSoundFor(bumperContext, url);
   },
 
   setPosition(percentage) {
@@ -358,18 +358,14 @@ export default Service.extend({
     get(this, 'queue').reset(newQueue);
   },
 
-  playNextInQueue(startBumper = false) {
+  playNextInQueue() {
     let queue = get(this, 'queue');
     let nextUp = queue.nextItem();
 
     if (nextUp) {
-      if (startBumper) {
-        this.play(`${PODTRAC}${QUEUE_BUMPER}`, 'continuous-player-bumper');
-      } else {
-        this.play(nextUp.get('id'), 'queue');
-      }
+      this.play(nextUp.get('id'), 'queue');
     } else {
-      set(this, 'currentContext', null);
+      this._flushContext();
     }
   },
 
@@ -377,6 +373,7 @@ export default Service.extend({
 
   finishedTrack() {
     let context = get(this, 'currentContext') || '';
+    let bumper = get(this, 'bumperState');
 
     this._trackPlayerEvent({
       action: 'Finished Story',
@@ -386,40 +383,23 @@ export default Service.extend({
     });
 
     this.sendCompleteListenAction(this.get('currentId'));
-    let activePref = this.getWithDefault('session.data.user-prefs-active-autoplay', 'default_stream');
-    let activeStream = this.getWithDefault('session.data.user-prefs-active-stream', 'wnyc-fm939');
 
     if (context === 'queue') {
       this.playNextInQueue();
     } else if (context === 'discover') {
       this.playDiscoverQueue();
-    } else if (context === 'continuous-player-bumper') {
-      this.set('didBumperPlay', true);
-      if (activePref === 'default_stream') {
-        this.playStream(activeStream);
-      } else {
-        this.playNextInQueue();
-      }
+    } else if (context === 'home-page' || context === 'continuous-player-bumper') {
+      this._flushContext();
     }
 
-    context = get(this, 'currentContext');
-
-    if ((!context || context === 'home-page')) {
-      if (activePref === 'queue') {
-        // skip the audio bumper, go straight to queue
-        this.playNextInQueue(true);
-      } else if (activePref === 'default_stream') {
-        // play the audio bumper first before playing stream
-        // if a story ends on the home page and the streams have not all been
-        // fully loaded, then using `peekRecord` would cause issues.
-        // is there a better way to handle this without having to embed a promise?
-        // it seems like this would be an edge case.
-        this.get('store').findRecord('stream', activeStream).then(stream => {
-          let url = `${PODTRAC}${stream.get('audioBumper')}`;
-          this.play(url, 'continuous-player-bumper');
-        });
-      }
+    if (bumper.get('isEnabled')) {
+      let next = bumper.getNext(context);
+      this.play(...next);
     }
+  },
+
+  _flushContext() {
+    set(this, 'currentContext', null);
   },
 
   playDiscoverQueue() {
@@ -427,8 +407,7 @@ export default Service.extend({
     if (nextTrack) {
       this.play(get(nextTrack, 'id'), 'discover');
     } else {
-      set(this, 'isPlaying', false);
-      set(this, 'currentContext', null);
+      this._flushContext();
     }
   },
 
