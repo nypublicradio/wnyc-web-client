@@ -30,3 +30,21 @@ test('clicking on /schedule', function(assert) {
     assert.equal(currentURL(), `/schedule/${date}?scheduleStation=wnyc-fm939`);
   });
 });
+
+test('transitioning to a specific schedule', function(assert) {
+  let date = moment().format('YYYY/MMM/DD').toLowerCase();
+  server.create('django-page', {
+    id: '/',
+    testMarkup: `
+    <a href="/schedule/?scheduleStation=wqxr" id="foo">foo</a>
+    `
+  });
+  server.create('django-page', {id: `schedule/${date}/?scheduleStation=wqxr`});
+  
+  visit('/');
+  click('#foo');
+  
+  andThen(function() {
+    assert.equal(currentURL(), `/schedule/${date}?scheduleStation=wqxr`);
+  });
+});
