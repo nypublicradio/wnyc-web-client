@@ -128,7 +128,7 @@ export const OkraBridge = Ember.Object.extend(Ember.Evented, {
     } else if (type === 'stream') {
       let model = Ember.Object.create(pkOrModel);
       WEB_PLAYER_CONTROLLER.then(player => player.playStream(model));
-    } else if (type === 'continuous-player-bumper') {
+    } else if (type === 'continuous-play-bumper') {
       let model = Ember.Object.create({
         url: pkOrModel,
         audio: pkOrModel,

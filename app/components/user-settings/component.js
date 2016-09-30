@@ -39,10 +39,6 @@ export default Ember.Component.extend({
   session: Ember.inject.service(),
   classNames: ['settings-body'],
 
-  didRender() {
-    window.scrollTo(0, 0);
-  },
-
   actions: {
     toggleAutoplay(enableAutoplay) {
       let session = this.get('session');

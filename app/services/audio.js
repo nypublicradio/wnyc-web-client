@@ -13,8 +13,6 @@ import Ember from 'ember';
 const FIFTEEN_SECONDS = 1000 * 15;
 const TWO_MINUTES     = 1000 * 60 * 2;
 const PLATFORM        = 'NYPR_Web';
-const QUEUE_BUMPER    = '/streambumper/streambumper000008_audio_queue.mp3';
-const PODTRAC         = 'http://www.podtrac.com/pts/redirect.mp3/audio.wnyc.org';
 
 const ERRORS = {
   SOUNDMANAGER_FAILED_CREATE_SOUND: 'SoundManager failed when attempting to create a sound.',
@@ -84,7 +82,7 @@ export default Service.extend({
     set(this, 'okraBridge', OkraBridge.create({
       onFinished: bind(this, 'finishedTrack'),
       onError: bind(this, 'errorEvent'),
-      onFlashError: bind(this, 'flashError'),
+      onFlashError: bind(this, 'flashError')
     }));
 
     this.okraBridge.on('ready', this, 'playIfWaiting');
@@ -101,7 +99,7 @@ export default Service.extend({
     // i.e. there will always be a context, but there might not always be a pk
     let id = pk || get(this, 'currentAudio.id');
     let context = playContext || get(this, 'currentContext') || '';
-    console.log(id, pk, playContext);
+
     if (!id) {
       return;
     }
@@ -388,7 +386,7 @@ export default Service.extend({
       this.playNextInQueue();
     } else if (context === 'discover') {
       this.playDiscoverQueue();
-    } else if (context === 'home-page' || context === 'continuous-player-bumper') {
+    } else if (context === 'home-page' || context === 'continuous-play-bumper') {
       this._flushContext();
     }
 

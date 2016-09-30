@@ -18,7 +18,7 @@ test('it renders with the bumper duration countdown', function(assert) {
   this.setProperties({
     duration: 15000,
     position: 0,
-    currentContext: 'continuous-player-bumper'
+    currentContext: 'continuous-play-bumper'
   });
 
   this.on('dismiss', function() {
@@ -37,7 +37,7 @@ test('it renders after the bumper duration countdown', function(assert) {
   this.setProperties({
     duration: 15000,
     position: 15500,
-    currentContext: 'continuous-player-bumper'
+    currentContext: 'continuous-play-bumper'
   });
 
   this.on('dismiss', function() {

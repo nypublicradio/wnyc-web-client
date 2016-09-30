@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
 import computed, { readOnly } from 'ember-computed';
+const QUEUE_BUMPER    = '/streambumper/streambumper000008_audio_queue.mp3';
 
 export default Ember.Service.extend({
   init() {
@@ -23,9 +24,8 @@ export default Ember.Service.extend({
       this.set('revealNotificationBar', true);
     }
   }),
-  didPlayBumper: false,
   revealNotificationBar: false,
-  isEnabled: computed('autoplayPref', 'queue.items.[]', function() {
+  isEnabled: computed('autoplayPref', 'queue.items.length', function() {
     let { autoplayPref, queue } = this.getProperties('autoplayPref', 'queue');
     // if there is nothing left in the queue, then it is redundant/unecessary to
     // play the bumper file. The `play` function will still be called on the audio,
@@ -41,7 +41,7 @@ export default Ember.Service.extend({
   getNext(prevContext) {
     // determine which stage the continuous-play is in
     let { autoplayStream, autoplayPref } = this.getProperties('autoplayStream', 'autoplayPref');
-    if (prevContext === 'continuous-player-bumper') {
+    if (prevContext === 'continuous-play-bumper') {
       // the bumper had played, so setup the default content from the user settings
       return this.setupContent(autoplayPref, autoplayStream);
     } else {
@@ -68,11 +68,16 @@ export default Ember.Service.extend({
     let nextItem;
     this.set('revealNotificationBar', true);
     if (autoplayPref === 'default_stream') {
-      nextItem = this.get('store').peekRecord('stream', autoplayStream).get('audioBumper');
+      let stream = this.get('store').peekRecord('stream', autoplayStream);
+      if (stream) {
+        nextItem = stream.get('audioBumper');
+      } else {
+        nextItem = QUEUE_BUMPER;
+      }
     } else {
-      nextItem = 'http://audio.wnyc.org/streambumper/streambumper000008_audio_queue.mp3';
+      nextItem = QUEUE_BUMPER;
     }
 
-    return [nextItem, 'continuous-player-bumper'];
+    return [nextItem, 'continuous-play-bumper'];
   }
 });
