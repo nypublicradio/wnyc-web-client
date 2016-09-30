@@ -24,9 +24,11 @@
 
 .progress-wrapper {
   width: 100%;
-  .touch & {
-    border-left: 50px solid black;
-    border-right: 50px solid black;
+  @include mq($small-only) {
+    .touch & {
+      border-left: 50px solid black;
+      border-right: 50px solid black;
+    }
   }
 }
 
