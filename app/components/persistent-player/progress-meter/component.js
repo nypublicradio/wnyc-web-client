@@ -32,9 +32,9 @@ export default Component.extend({
     let {isHovering, isDragging, mousePosition, position, duration} =
       Ember.getProperties(this, 'isHovering', 'isDragging', 'mousePosition', 'position', 'duration');
 
-    if (isHovering || isDragging) {
+    if (isHovering || isDragging || !window.Modernizr.touch) {
       p = mousePosition;
-    } else if (window.Modernizr.touch) {
+    } else {
       p = position/duration;
     }
     return htmlSafe(`left: ${p * 100}%;`);
@@ -48,7 +48,7 @@ export default Component.extend({
   },
 
   mouseDown(e) {
-    if (get(this, 'duration')) {
+    if (get(this, 'isLoaded') && e.which === 1 /* left click */) {
       this._updateAudioPosition(e);
       if (e.target.classList.contains('progress-playhead')) {
         this._startDragging();
@@ -63,7 +63,7 @@ export default Component.extend({
   },
   touchStart(e) {
     e.preventDefault();
-    if (get(this, 'duration')) {
+    if (get(this, 'isLoaded')) {
         let touch = e.originalEvent.changedTouches[0];
         set(this, 'isTouching', true);
         this._updateAudioPosition(touch);

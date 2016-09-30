@@ -24,8 +24,10 @@
 
 .progress-wrapper {
   width: 100%;
-  border-left: 50px solid black;
-  border-right: 50px solid black;
+  .touch & {
+    border-left: 50px solid black;
+    border-right: 50px solid black;
+  }
 }
 
 .progress-bg {
