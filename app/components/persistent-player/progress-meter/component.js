@@ -29,10 +29,10 @@ export default Component.extend({
   }),
   playheadPosition: computed('mousePosition', 'isHovering', 'isDragging', 'position', 'duration', function() {
     let p;
-    let {isHovering, isDragging, mousePosition, position, duration} =
-      Ember.getProperties(this, 'isHovering', 'isDragging', 'mousePosition', 'position', 'duration');
+    let {isHovering, isDragging, isTouching, mousePosition, position, duration} =
+      Ember.getProperties(this, 'isHovering', 'isDragging', 'isTouching', 'mousePosition', 'position', 'duration');
 
-    if (isHovering || isDragging || !window.Modernizr.touch) {
+    if (isHovering || isDragging || isTouching) {
       p = mousePosition;
     } else {
       p = position/duration;
@@ -64,7 +64,9 @@ export default Component.extend({
   touchStart(e) {
     if (get(this, 'isLoaded') && e.target.classList.contains('progress-playhead')) {
       e.preventDefault();
+      e.stopPropagation();
       let touch = e.originalEvent.changedTouches[0];
+      this._updateAudioPosition(touch);
       set(this, 'isTouching', true);
       this._startDragging(touch);
     }
@@ -73,9 +75,9 @@ export default Component.extend({
     if (get(this, 'isLoaded') && e.target.classList.contains('progress-playhead')) {
       let touch = e.originalEvent.changedTouches[0];
       this._updateAudioPosition(touch);
+      set(this, 'isTouching', false);
+      this._cancelDragging();
     }
-    set(this, 'isTouching', false);
-    this._cancelDragging();
   },
   touchCancel() {
     set(this, 'isTouching', false);

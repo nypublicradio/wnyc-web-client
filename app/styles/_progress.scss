@@ -51,13 +51,16 @@
     position: absolute;
     height: 22px;
     width: 22px;
+    margin: -8px -16px;
+    .touch & {
+      height: 34px;
+      width: 34px;
+      margin: -14px -16px;
+    }
     transform: scale(0, 0);
     left: 0;
     opacity: 0;
-    background-color: #4a90e2;
     bottom: 0;
-    border-radius: 50%;
-    margin: -7px -11px;
     @include transition(opacity 200ms linear, transform 200ms);
 
     .is-loaded & {
@@ -70,9 +73,23 @@
       transform: scale(1, 1);
     }
 
-    .progress.is-touching & {
+    .touch .progress.is-touching & {
       transform: scale(3.3, 3.3) translateY(-7px);
       opacity: 0.75;
       @include transition(opacity 200ms linear 200ms, transform 200ms ease-out 200ms);
+    }
+
+    &:after {
+      content: '';
+      height: 22px;
+      width: 22px;
+      background-color: #4a90e2;
+      border-radius: 50%;
+      opacity: 1;
+      display: block;
+      position: absolute;
+      top: 11px;
+      left: calc(50% - 11px);
+      top: calc(50% - 11px);
     }
 }
