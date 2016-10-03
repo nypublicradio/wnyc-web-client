@@ -32,10 +32,7 @@ export default Component.extend({
         get(this, 'audio').play();
       }
     },
-    dismissNotification(cancelAutoplay) {
-      if (cancelAutoplay) {
-        get(this, 'audio').pause();
-      }
+    dismissNotification() {
       this.set('didDismiss', true);
     },
     setPosition(p) {

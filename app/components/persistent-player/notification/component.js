@@ -21,8 +21,8 @@ export default Ember.Component.extend({
   didNotElapse: Ember.computed.gte('remaining', 0),
   didAnimate: false,
   actions: {
-    dismiss(cancelAutoplay = false) {
-      this.get('dismissNotification')(cancelAutoplay);
+    dismiss() {
+      this.get('dismissNotification')();
     }
   }
 });
