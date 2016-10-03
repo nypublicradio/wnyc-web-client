@@ -13,12 +13,11 @@
     renderInPlace=true
     searchEnabled=false
     classNames='setting-opts'
+    loadingMessage='Retrieving Stream List...'
     onchange=(action 'selectStream') as |stream|}}
     {{stream.name}}
   {{/power-select}}
 </div>
-
-<div class='settings-sep'></div>
 
 <div class='user-setting user-autoplay'>
   <label for='autoplay-pref'>
@@ -52,7 +51,6 @@
     searchEnabled=false
     classNames='setting-opts'
     disabled=enableAutoplay
-    loadingMessage='Retrieving Stream List...'
     onchange=(action 'selectAutoPlayPref') as |pref|}}
     {{pref.name}}
   {{/power-select}}

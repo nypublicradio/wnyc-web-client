@@ -9,6 +9,10 @@ export default Ember.Route.extend({
   metrics: service(),
   
   model() {
+    // hacky way just to get all those stinking stream models in so /settings
+    // doesn't only pick up the wnyc stream before the promise resolves
+    // (and screws up the option list)
+    this.store.findAll('stream');
     let page = this.store.findRecord('django-page', '/');
     let featuredStream = this.store.findRecord('stream', 'wnyc-fm939');
     return hash({page, featuredStream});

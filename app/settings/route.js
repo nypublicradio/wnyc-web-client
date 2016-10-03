@@ -8,7 +8,7 @@ export default Ember.Route.extend({
   },
 
   actions: {
-    willTransition() {
+    didTransition() {
       window.scrollTo(0, 0);
     }
   }

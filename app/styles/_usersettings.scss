@@ -8,7 +8,7 @@ $ember-power-select-disabled-background-color: #fff;
 
 .user-settings {
   padding-left: 22px;
-  padding-right: 48px;
+  padding-right: 26px;
   min-height: 600px;
 }
 
@@ -16,7 +16,6 @@ $ember-power-select-disabled-background-color: #fff;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  padding-bottom: 21px;
 
   label {
     padding-bottom: 14px;
@@ -34,17 +33,19 @@ $ember-power-select-disabled-background-color: #fff;
   }
 }
 
+.user-stream {
+  padding-bottom: 65px;
+  border-bottom: 1px solid $nearwhite;
+}
+
 .setting-desc {
   @include fontsize(14);
   line-height: 24px;
   color: $darkergray;
 }
 
-.settings-sep {
-  max-width: 800px;
-  height: 3px;
-  border: solid 1px $nearwhite;
-  margin: 6px 0 39px 0;
+.user-autoplay {
+  padding-top: 39px;
 }
 
 .autoplay {
@@ -169,6 +170,14 @@ $ember-power-select-disabled-background-color: #fff;
 
   .ember-basic-dropdown {
     flex-grow: 0;
+  }
+
+  .user-autoplay {
+    padding-top: 39px;
+  }
+
+  .user-stream {
+    padding-bottom: 26px;
   }
 
   .user-stream .ember-basic-dropdown {
