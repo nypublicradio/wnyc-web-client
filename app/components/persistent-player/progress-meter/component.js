@@ -16,6 +16,7 @@ export default Component.extend({
   isHovering: false,
   isDragging: false,
   isTouching: false,
+  lastInteraction: '',
   classNames: ['progress'],
   classNameBindings: ['isHovering', 'isDragging', 'isTouching', 'isLoaded'],
   downloadedPercentage: computed('downloaded', function() {
@@ -29,10 +30,15 @@ export default Component.extend({
   }),
   playheadPosition: computed('mousePosition', 'isHovering', 'isDragging', 'position', 'duration', function() {
     let p;
-    let {isHovering, isDragging, isTouching, mousePosition, position, duration} =
-      Ember.getProperties(this, 'isHovering', 'isDragging', 'isTouching', 'mousePosition', 'position', 'duration');
+    let {isHovering, isDragging, isTouching, lastInteraction, mousePosition, position, duration} =
+      Ember.getProperties(this, 'isHovering', 'isDragging', 'isTouching', 'lastInteraction', 'mousePosition', 'position', 'duration');
 
-    if (isHovering || isDragging || isTouching) {
+    // If you are using a touchscreen we want the handle to track with current position when you aren't touching it.
+    // Same goes for mouse hover on a hybrid device with mouse and touchscreen.
+    // But if you just hovered with a mouse on a non-touchscreen, we don't want the slider to jump to current position
+    // because it's animating to hidden.
+
+    if (isHovering || isDragging || isTouching || (lastInteraction === 'mouse' && !window.Modernizr.touch)) {
       p = mousePosition;
     } else {
       p = position/duration;
@@ -56,10 +62,13 @@ export default Component.extend({
     }
   },
   mouseUp() {
+    set(this, 'lastInteraction', 'mouse');
     this._cancelDragging();
   },
   mouseLeave() {
+    set(this, 'lastInteraction', 'mouse');
     set(this, 'isHovering', false);
+    this._cancelDragging();
   },
   touchStart(e) {
     if (get(this, 'isLoaded') && e.target.classList.contains('progress-playhead')) {
@@ -73,6 +82,7 @@ export default Component.extend({
   },
   touchEnd(e) {
     if (get(this, 'isLoaded') && e.target.classList.contains('progress-playhead')) {
+      set(this, 'lastInteraction', 'touch');
       let touch = e.originalEvent.changedTouches[0];
       this._updateAudioPosition(touch);
       set(this, 'isTouching', false);
@@ -80,6 +90,7 @@ export default Component.extend({
     }
   },
   touchCancel() {
+    set(this, 'lastInteraction', 'touch');
     set(this, 'isTouching', false);
     this._cancelDragging();
   },
