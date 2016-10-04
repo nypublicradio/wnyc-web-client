@@ -3,20 +3,23 @@ import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import {
   authenticateSession,
   currentSession,
-  invalidateSession
 } from 'overhaul/tests/helpers/ember-simple-auth';
 
-moduleForAcceptance('Acceptance | settings authenticated', {
+moduleForAcceptance('Acceptance | settings', {
   beforeEach() {
     authenticateSession(this.application);
     let session = currentSession(this.application);
     session.set('data.user-prefs-active-stream', 'wqxr');
-    session.set('data.user-prefs-active-autoplay', 'no_autoplay');
+    session.set('data.user-prefs-active-autoplay', 'default_stream');
   }
 });
 
-test('visiting /settings', function(assert) {
+test('visiting /settings and selecting my queue as an autoplay preference', function(assert) {
   visit('/settings');
+
+  click('.autoplay-options .ember-power-select-trigger');
+  click('.autoplay-options .ember-power-select-option:last');
+
   andThen(function() {
     assert.equal(currentURL(), '/settings');
 
@@ -25,7 +28,7 @@ test('visiting /settings', function(assert) {
     assert.equal(actualStream, expectedStream);
 
     var actualPref = $('.autoplay-options .ember-power-select-selected-item').text().trim();
-    var expectedPref = 'Do Not Autoplay';
+    var expectedPref = 'My Queue';
     assert.equal(actualPref, expectedPref);
   });
 });
@@ -44,40 +47,13 @@ test('after visiting settings, user can select different stream', function(asser
   });
 });
 
-test('after visiting settings, user can select different autoplay pref', function(assert) {
+test('after visiting settings, user can toggle off autoplay settings', function(assert) {
   visit('/settings');
 
-  click('.toggle').then(() => {
-    click('.autoplay-options .ember-power-select-trigger');
-    click('.autoplay-options .ember-power-select-option:first');
-  });
-
+  click('.toggle');
   andThen(function() {
-    var actualPref = $('.autoplay-options .ember-power-select-selected-item').text().trim();
-    var expectedPref = 'My Default Stream';
-    assert.equal(actualPref, expectedPref);
-  });
-});
-
-moduleForAcceptance('Acceptance | settings inauthenticated', {
-  beforeEach() {
-    invalidateSession(this.application);
-    let session = currentSession(this.application);
-
-    session.set('data.user-prefs-active-stream', null);
-    session.set('data.user-prefs-active-autoplay', null);
-  }
-});
-
-test('visiting /settings', function(assert) {
-  visit('/settings');
-
-
-  andThen(function() {
-    assert.equal(currentURL(), '/settings');
-
-    var expectedTagLength = 1;
-    var actualTagLength = $('.user-settings p').length;
-    assert.equal(expectedTagLength, actualTagLength);
+    var expectedElementCount = $('.autoplay-inactive').length;
+    var actualElementCount = 1;
+    assert.equal(expectedElementCount, actualElementCount);
   });
 });

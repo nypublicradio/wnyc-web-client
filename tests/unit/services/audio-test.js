@@ -9,6 +9,10 @@ window.EMBER_TESTING = true;
 
 installBridge();
 
+const bumperStub = Ember.Service.extend({
+  isEnabled: false
+});
+
 moduleFor('service:audio', 'Unit | Service | audio', {
   // Specify the other units that are required for this test.
   needs: ['model:story','adapter:story','serializer:story',
@@ -32,12 +36,15 @@ moduleFor('service:audio', 'Unit | Service | audio', {
     });
     startMirage(this.container);
 
+    this.register('service:bumper-state', bumperStub);
+    this.inject.service('bumper-state', { as: 'bumperState' });
+
     this.register('service:session', sessionStub);
     this.inject.service('session', { as: 'session' });
 
     this.register('service:listen-actions', listenActionsStub);
     this.inject.service('listen-actions', { as: 'listen-actions' });
-    
+
     this.register('service:metrics', metricsStub);
     this.inject.service('metrics');
 
@@ -55,7 +62,7 @@ test('it exists', function(assert) {
 test('passing a pk to play calls playFromPk', function(assert) {
   let done = assert.async();
   let service = this.subject();
-  
+
   function playFromPk() {
     assert.ok(true, "should have called playFromPk");
     done();
@@ -219,22 +226,22 @@ test('it fires error events', function(assert) {
 });
 
 test('it delays early calls to play until after okraBrige isReady', function(assert) {
-  
+
   let id = 123;
   server.create('story', {id});
   let otherId = 456;
   server.create('story', {id: otherId});
-  
+
   let service = this.subject();
   assert.notOk(service.get('okraBridge.isReady'), 'okra not ready yet');
   service.play(id);
   assert.deepEqual(service.get('_waitingForOkra'), {id, context: ''}, 'holds onto last played item');
-  
+
   return wait().then(() => {
     assert.equal(service.get('_waitingForOkra'), null, 'clears private attr');
     service.play(otherId);
     assert.equal(service.get('currentId'), otherId, 'plays afterwards OK');
-    
+
     return wait();
   });
 });
@@ -248,7 +255,7 @@ test('it delays early calls to play until after okraBrige isReady', function(ass
 //           'service:poll',
 //           'service:metrics',
 //           'service:listen-history'],
-// 
+//
 //   beforeEach() {
 //     const sessionStub = Ember.Service.extend({
 //       data: {} // we only really need the data thing
@@ -261,28 +268,28 @@ test('it delays early calls to play until after okraBrige isReady', function(ass
 //       sendDelete: function(){}
 //     });
 //     startMirage(this.container);
-// 
+//
 //     this.register('service:session', sessionStub);
 //     this.inject.service('session', { as: 'session' });
-// 
+//
 //     this.register('service:listen-actions', listenActionsStub);
 //     this.inject.service('listen-actions', { as: 'listen-actions' });
-// 
+//
 //   },
 //   afterEach() {
 //     server.shutdown();
 //     delete window.ga;
 //   }
 // });
-// 
+//
 // test('it sends npr events', function(assert) {
 //   window.ga = function() {
 //     debugger;
 //   }
 //   let stream = server.create('stream');
-//   
+//
 //   Ember.run(() => {
 //     service.playStream(stream.slug);
 //   })
-//   
+//
 // });

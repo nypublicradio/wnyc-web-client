@@ -11,31 +11,38 @@ const whatsOn = [
     'wnyc-am820': {
       name: 'WNYC AM 820',
       slug: 'wnyc-am820',
-      id: '1'
+      id: '1',
+      audio_bumper: 'something.mp3'
     },
     'q2': {
       name: 'Q2',
       slug: 'q2',
+      audio_bumper: 'something.mp3'
     },
     'jonathan-channel': {
       name: 'The Jonathan Channel',
       slug: 'jonathan-channel',
+      audio_bumper: 'something.mp3'
     },
     'njpr': {
       name: 'NJPR',
       slug: 'njpr',
+      audio_bumper: 'something.mp3'
     },
     'wnyc-fm939': {
       name: 'WNYC 93.9FM',
       slug: 'wnyc-fm939',
+      audio_bumper: 'something.mp3'
     },
     'wqxr': {
       name: 'WQXR New York',
       slug: 'wqxr',
+      audio_bumper: 'something.mp3'
     },
     'wqxr-special': {
       name: 'Operavore',
       slug: 'wqxr-special',
+      audio_bumper: 'something.mp3'
     }
   }
 ];
@@ -44,30 +51,37 @@ const streams = [
   {
     name: 'Operavore',
     slug: 'wqxr-special',
+    audio_bumper: 'something.mp3'
   },
   {
     name: 'WQXR New York',
     slug: 'wqxr',
+    audio_bumper: 'something.mp3'
   },
   {
     name: 'WNYC 93.9FM',
-    slug: 'wnyc-fm939'
+    slug: 'wnyc-fm939',
+    audio_bumper: 'something.mp3'
   },
   {
     name: 'WNYC AM 820',
     slug: 'wnyc-am820',
+    audio_bumper: 'something.mp3'
   },
   {
     name: 'Q2',
     slug: 'q2',
+    audio_bumper: 'something.mp3'
   },
   {
     name: 'The Jonathan Channel',
     slug: 'jonathan-channel',
+    audio_bumper: 'something.mp3'
   },
   {
     name: 'NJPR',
     slug: 'njpr',
+    audio_bumper: 'something.mp3'
   },
 ];
 
