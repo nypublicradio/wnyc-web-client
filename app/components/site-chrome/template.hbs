@@ -127,7 +127,10 @@
         {{!-- Google Experiment D4W - START --}}
         {{#if (or (in-experimental-group 1) (in-experimental-group 2)) }}
           {{#link-to 'discover.start' current-when="discover" tagName='li' href="false" class="list-item list-item--short"}}
-            {{link-to 'Discover' 'discover.start' class="inherit" preventDefault=false}}
+            {{#link-to 'discover.start' class="inherit" preventDefault=false}}
+              <span class="new">NEW!</span>
+              Discover
+            {{/link-to}}
           {{/link-to}}
         {{/if}}
         {{!-- Google Experiment D4W - END --}}

@@ -111,7 +111,14 @@
     button:focus {
       color: $darkestgray;
     }
-  
+
+    .new {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.7px;
+      color: #d0021b;
+    }
+
   }
 
   .list-item:last-child {
@@ -153,6 +160,10 @@
       a:hover,
       button:hover {
         color: white;
+      }
+
+      .new {
+        color: #f8e71c;
       }
     }
   }
