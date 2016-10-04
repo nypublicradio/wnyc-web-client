@@ -59,6 +59,11 @@ export default Service.extend({
 
   /* TRACK LOGIC --------------------------------------------------------------*/
 
+  init() {
+    this.get('hifi').on('audio-ended', () => this.finishedTrack());
+    this._super(...arguments);
+  },
+
   play(pk, playContext) {
     // TODO: might be better to switch the arg order for better api design
     // i.e. there will always be a context, but there might not always be a pk
@@ -192,7 +197,7 @@ export default Service.extend({
 
     // TODO: why setting currentId instead of relying on the computed?
     set(this, 'currentId', slug);
-    
+
     let stream;
     let urlPromise = get(this, 'store').findRecord('stream', slug).then(s => {
       stream = s;
@@ -288,10 +293,7 @@ export default Service.extend({
   },
 
   toggleMute() {
-
-    /* TODO: send a `toggleMute` signal to the low-level interface
-    -------------------------------------------------------------------------*/
-
+    get(this, 'hifi').toggleMute();
   },
 
 
@@ -331,8 +333,6 @@ export default Service.extend({
 
   /* EVENTS AND HELPERS -------------------------------------------------------*/
 
-  /* TODO: register this callback to an `audioFinished` event on the low-level interface
-  ----------------------------------------------------------------------*/
   finishedTrack() {
     let context = get(this, 'currentContext') || '';
     let bumper = get(this, 'bumperState');
