@@ -1,4 +1,5 @@
 .notification {
+  @include fontsize(12);
   background-color: $blue;
   position: fixed;
   bottom: 95px;
@@ -52,4 +53,17 @@
   margin: 0;
   padding: 10px;
   align-self: center;
+}
+
+// ipad messes with the alignment of the text a little bit
+@media only screen and (min-width: 600px) {
+  .notification {
+    @include fontsize(16);
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .notification {
+    @include fontsize(20);
+  }
 }

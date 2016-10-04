@@ -19,39 +19,40 @@
   {{/power-select}}
 </div>
 
-<div class='user-setting user-autoplay'>
-  <label for='autoplay-pref'>
-    <div>Automatic Play</div>
-    <div class='setting-desc'>
-      When you finish listening to an episode or segment on-demand, we’ll autoplay
-      your favorite stream or your queue.
-    </div>
-  </label>
-
-
-  <div class='setting-opts autoplay'>
-    {{#liquid-bind enableAutoplay use='slideToggle' class='toggle-container' as |disableAutoplay|}}
-      <div class='toggle autoplay-toggle {{if disableAutoplay "inactive-toggle" ""}}' {{action 'toggleAutoplay' enableAutoplay}}>
-        <span class='switch'></span>
-        <span class='label'>{{if disableAutoplay "OFF" "ON"}}</span>
+<div class='user-autoplay'>
+  <div class='user-setting toggle-preference'>
+    <label for='autoplay-pref'>
+      <div>Automatic Play</div>
+      <div class='setting-desc'>
+        When you finish listening to an episode or segment on-demand, we’ll autoplay
+        your favorite stream or your queue.
       </div>
-    {{/liquid-bind}}
+    </label>
+
+
+    <div class='setting-opts autoplay'>
+      {{#liquid-bind enableAutoplay use='slideToggle' class='toggle-container' as |disableAutoplay|}}
+        <div class='toggle autoplay-toggle {{if disableAutoplay "inactive-toggle" ""}}' {{action 'toggleAutoplay' enableAutoplay}}>
+          <span class='switch'></span>
+          <span class='label'>{{if disableAutoplay "OFF" "ON"}}</span>
+        </div>
+      {{/liquid-bind}}
+    </div>
   </div>
-</div>
+  <div class='autoplay-options {{if enableAutoplay "autoplay-inactive" "autoplay-active"}}'>
+    <label for='autoplay-option'>
+      Automatically begin playing:
+    </label>
 
-<div class='autoplay-options {{if enableAutoplay "autoplay-inactive" "autoplay-active"}}'>
-  <label for='autoplay-option'>
-    Automatically begin playing:
-  </label>
-
-  {{#power-select
-    selected=activePref
-    options=autoPlayPrefs
-    renderInPlace=true
-    searchEnabled=false
-    classNames='setting-opts'
-    disabled=enableAutoplay
-    onchange=(action 'selectAutoPlayPref') as |pref|}}
-    {{pref.name}}
-  {{/power-select}}
+    {{#power-select
+      selected=activePref
+      options=autoPlayPrefs
+      renderInPlace=true
+      searchEnabled=false
+      classNames='setting-opts'
+      disabled=enableAutoplay
+      onchange=(action 'selectAutoPlayPref') as |pref|}}
+      {{pref.name}}
+    {{/power-select}}
+  </div>
 </div>

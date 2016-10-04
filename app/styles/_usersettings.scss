@@ -8,7 +8,7 @@ $ember-power-select-disabled-background-color: #fff;
 
 .user-settings {
   padding-left: 22px;
-  padding-right: 26px;
+  padding-right: 22px;
   min-height: 600px;
 }
 
@@ -102,6 +102,7 @@ $ember-power-select-disabled-background-color: #fff;
   display: flex;
   flex-flow: column;
   justify-content: space-between;
+  padding-top: 10px;
 
   label {
     padding-bottom: 10px;
@@ -144,19 +145,29 @@ $ember-power-select-disabled-background-color: #fff;
 @media only screen and (min-width: 800px) {
   .user-settings {
     padding-right: 0;
-    padding-left: 72px;
+    padding-left: 32px;
+    min-width: 800px;
+
+    label {
+      max-width: 400px;
+    }
 
     h1 {
       margin-bottom: 40px;
     }
   }
 
+  .autoplay {
+    min-width: 250px;
+    justify-content: flex-end;
+    align-self: center;
+  }
+
   .user-setting {
     flex-flow: row nowrap;
 
     label {
-      padding-bottom: 3px;
-      padding-right: 123px;
+      flex-grow: 1;
 
       div:first-child {
         @include fontsize(24);
@@ -186,6 +197,5 @@ $ember-power-select-disabled-background-color: #fff;
 
   .autoplay-options {
     flex-flow: row nowrap;
-    align-items: center;
   }
 }

@@ -9,11 +9,10 @@ export default Ember.Component.extend({
   */
   autoPlayPrefs: [
     { name: 'My Default Stream', field: 'default_stream' },
-    { name: 'My Queue', field: 'queue' },
-    { name: 'Do Not Autoplay', field: 'no_autoplay' }
+    { name: 'My Queue', field: 'queue' }
   ],
 
-  enableAutoplay: computed.equal('activePref.field', 'no_autoplay'),
+  enableAutoplay: computed.equal('session.data.user-prefs-active-autoplay', 'no_autoplay'),
   activeStream: computed('session.data.user-prefs-active-stream', function(){
     var streams = this.get('streams');
     var currentStream = this.get('session.data.user-prefs-active-stream');
@@ -30,24 +29,21 @@ export default Ember.Component.extend({
   activePref: computed('session.data.user-prefs-active-autoplay', function() {
     var prefs = this.get('autoPlayPrefs');
     var pref = this.get('session.data.user-prefs-active-autoplay');
-    if (pref) {
-      return prefs.find(p => p.field === pref);
+
+    if (pref === 'no_autoplay') {
+      return prefs.find(p => p.field === this.get('prevAutoplayPref'));
     }
 
-    return this.get('autoPlayPrefs.firstObject');
+    return prefs.find(p => p.field === pref);
   }),
   session: Ember.inject.service(),
   classNames: ['settings-body'],
-
+  prevAutoplayPref: 'default_stream',
   actions: {
     toggleAutoplay(enableAutoplay) {
       let session = this.get('session');
-
-      if (enableAutoplay) {
-        session.set('data.user-prefs-active-autoplay', 'default_stream');
-      } else {
-        session.set('data.user-prefs-active-autoplay', 'no_autoplay');
-      }
+      let value = enableAutoplay ? this.get('prevAutoplayPref') : 'no_autoplay';
+      session.set('data.user-prefs-active-autoplay', value);
     },
 
     selectStream(stream) {
@@ -60,6 +56,7 @@ export default Ember.Component.extend({
       // until we resolve what the user preference endpoint will be, set the
       // session.data.userPref.activePref
       let session = this.get('session');
+      this.set('prevAutoplayPref', field === 'default_stream' ? field : 'queue');
       session.set('data.user-prefs-active-autoplay', field);
     }
   }
