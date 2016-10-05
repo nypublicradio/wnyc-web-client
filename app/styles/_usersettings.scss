@@ -7,8 +7,8 @@ $ember-power-select-disabled-background-color: #fff;
 @import 'ember-power-select';
 
 .user-settings {
-  padding-left: 22px;
-  padding-right: 22px;
+  padding-left: 0;
+  padding-right: 0;
   min-height: 600px;
 }
 
@@ -144,9 +144,8 @@ $ember-power-select-disabled-background-color: #fff;
 
 @media only screen and (min-width: 800px) {
   .user-settings {
-    padding-right: 0;
-    padding-left: 32px;
     min-width: 800px;
+    max-width: 1120px;
 
     label {
       max-width: 400px;
