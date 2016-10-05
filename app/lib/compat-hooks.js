@@ -135,14 +135,14 @@ export function serializeInlineDoc(inlineDoc) {
   // By this point, ember has already booted a view into the Document, so
   // we need to clean it from the version we save as our data model, otherwise
   // we get problems from recursive ember views and ember trying to boot again
-  for (let n of inlineDoc.querySelectorAll('.ember-view')) { toClean.push(n); }
+  toClean.push(...inlineDoc.querySelectorAll('.ember-view'));
   toClean.push(inlineDoc.querySelector('script[src*="assets/vendor"]'));
   toClean.push(inlineDoc.querySelector('script[src*="assets/overhaul"]'));
   toClean.push(inlineDoc.querySelector('link[href*="assets/vendor"]'));
   toClean.push(inlineDoc.querySelector('link[href*="assets/overhaul"]'));
   // any included google ad scripts have also already run, so clean them out so
   // see errors from intializing ads in occupied divs
-  for (let n of inlineDoc.querySelectorAll('.google-ads')) { toClean.push(n); }
+  toClean.push(...inlineDoc.querySelectorAll('.google-ads'));
 
   toClean.forEach(n => n && n.parentNode.removeChild(n));
 
