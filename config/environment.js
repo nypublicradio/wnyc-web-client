@@ -72,7 +72,7 @@ module.exports = function(environment) {
         ]
       }
     },
-
+    queueAudioBumperURL: 'http://audio.wnyc.org/news/news20090427_swine_flu_aviles.mp3',
     siteSlug: 'wnyc',
     siteName: 'WNYC',
     renderGoogleAds: true,
@@ -143,6 +143,7 @@ module.exports = function(environment) {
   if (environment === 'test') {
     // Testem prefers this...
     ENV.locationType = 'none';
+    ENV.queueAudioBumperURL = 'http://audio-bumper.com/thucyides.mp3';
 
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;

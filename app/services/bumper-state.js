@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
 import computed, { readOnly } from 'ember-computed';
-const QUEUE_BUMPER = 'http://audio.wnyc.org/news/news20090427_swine_flu_aviles.mp3';
+import ENV from 'overhaul/config/environment';
+const { queueAudioBumperURL } = ENV;
 
 export default Ember.Service.extend({
   init() {
@@ -74,10 +75,10 @@ export default Ember.Service.extend({
       if (stream) {
         nextItem = stream.get('audioBumper');
       } else {
-        nextItem = QUEUE_BUMPER;
+        nextItem = queueAudioBumperURL;
       }
     } else {
-      nextItem = QUEUE_BUMPER;
+      nextItem = queueAudioBumperURL;
     }
 
     return [nextItem, 'continuous-play-bumper'];

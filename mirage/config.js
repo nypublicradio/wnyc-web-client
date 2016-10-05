@@ -12,37 +12,37 @@ const whatsOn = [
       name: 'WNYC AM 820',
       slug: 'wnyc-am820',
       id: '1',
-      audio_bumper: 'something.mp3'
+      audio_bumper: 'http://wnyc-am820.mp3'
     },
     'q2': {
       name: 'Q2',
       slug: 'q2',
-      audio_bumper: 'something.mp3'
+      audio_bumper: 'http://q2.mp3'
     },
     'jonathan-channel': {
       name: 'The Jonathan Channel',
       slug: 'jonathan-channel',
-      audio_bumper: 'something.mp3'
+      audio_bumper: 'http://jonathan-channel.mp3'
     },
     'njpr': {
       name: 'NJPR',
       slug: 'njpr',
-      audio_bumper: 'something.mp3'
+      audio_bumper: 'http://njpr.mp3'
     },
     'wnyc-fm939': {
       name: 'WNYC 93.9FM',
       slug: 'wnyc-fm939',
-      audio_bumper: 'something.mp3'
+      audio_bumper: 'http://wnyc-fm939.mp3'
     },
     'wqxr': {
       name: 'WQXR New York',
       slug: 'wqxr',
-      audio_bumper: 'something.mp3'
+      audio_bumper: 'http://wqxr.mp3'
     },
     'wqxr-special': {
       name: 'Operavore',
       slug: 'wqxr-special',
-      audio_bumper: 'something.mp3'
+      audio_bumper: 'http://wqxr-special.mp3'
     }
   }
 ];
@@ -51,37 +51,37 @@ const streams = [
   {
     name: 'Operavore',
     slug: 'wqxr-special',
-    audio_bumper: 'something.mp3'
+    audio_bumper: 'http://wqxr-special.mp3'
   },
   {
     name: 'WQXR New York',
     slug: 'wqxr',
-    audio_bumper: 'something.mp3'
+    audio_bumper: 'http://wqxr.mp3'
   },
   {
     name: 'WNYC 93.9FM',
     slug: 'wnyc-fm939',
-    audio_bumper: 'something.mp3'
+    audio_bumper: 'http://wnyc-fm939.mp3'
   },
   {
     name: 'WNYC AM 820',
     slug: 'wnyc-am820',
-    audio_bumper: 'something.mp3'
+    audio_bumper: 'http://wnyc-am820.mp3'
   },
   {
     name: 'Q2',
     slug: 'q2',
-    audio_bumper: 'something.mp3'
+    audio_bumper: 'http://q2.mp3'
   },
   {
     name: 'The Jonathan Channel',
     slug: 'jonathan-channel',
-    audio_bumper: 'something.mp3'
+    audio_bumper: 'http://jonathan-channel.mp3'
   },
   {
     name: 'NJPR',
     slug: 'njpr',
-    audio_bumper: 'something.mp3'
+    audio_bumper: 'http://njpr.mp3'
   },
 ];
 
