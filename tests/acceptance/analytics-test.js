@@ -42,3 +42,31 @@ test('it does not log a pageview when opening and closing the queue', function(a
   });
 });
 
+test('it logs a homepage bucket event when you click a story on the home page', function(assert) {
+  assert.expect(2);
+  let done = assert.async();
+  let homepageBucketEvent = sinon.spy();
+
+  server.post(`${config.wnycAccountRoot}/api/v1/analytics/ga`, (schema, {queryParams}) => {
+    if (queryParams.category === 'Homepage Bucket') {
+      homepageBucketEvent(queryParams);
+    }
+    return wait();
+  });
+
+  let story = server.create('story');
+  let id = `story/${story.slug}/`;
+  let testMarkup = `<div id="wnyc-home"><a href="/${id}/" id="test-link">story link</a></div>`;
+  server.create('django-page', {id, slug: story.slug});
+  server.create('django-page', {id: '/', testMarkup});
+
+  visit('/');
+  click('#test-link');
+
+  andThen(() => {
+    assert.equal(currentURL(), `/${id}/`, 'opened story page');
+    assert.ok(homepageBucketEvent.calledOnce, 'bucket event was triggered once after clicking link');
+    done();
+  });
+});
+
