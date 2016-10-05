@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model() {
-    return this.store.findAll('stream').then(streams => {
+    return this.store.findAll('stream', { reload: true }).then(streams => {
       return streams.filterBy('audioBumper');
     });
   },
