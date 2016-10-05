@@ -140,6 +140,9 @@ export function serializeInlineDoc(inlineDoc) {
   toClean.push(inlineDoc.querySelector('script[src*="assets/overhaul"]'));
   toClean.push(inlineDoc.querySelector('link[href*="assets/vendor"]'));
   toClean.push(inlineDoc.querySelector('link[href*="assets/overhaul"]'));
+  // any included google ad scripts have also already run, so clean them out so
+  // see errors from intializing ads in occupied divs
+  Array.from(inlineDoc.querySelectorAll('.google-ads')).forEach(n => toClean.push(n));
 
   toClean.forEach(n => n && n.parentNode.removeChild(n));
 
