@@ -56,7 +56,7 @@ test('it logs a homepage bucket event when you click a story on the home page', 
 
   let story = server.create('story');
   let id = `story/${story.slug}/`;
-  let testMarkup = `<div id="wnyc-home"><a href="/${id}/" id="test-link">story link</a></div>`;
+  let testMarkup = `<div id="wnyc-home"><a href="${config.wnycAccountRoot}/${id}/" id="test-link">story link</a></div>`;
   server.create('django-page', {id, slug: story.slug});
   server.create('django-page', {id: '/', testMarkup});
 
