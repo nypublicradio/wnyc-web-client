@@ -15,20 +15,13 @@ export default Ember.Component.extend({
   enableAutoplay: computed.equal('session.data.user-prefs-active-autoplay', 'no_autoplay'),
   activeStream: computed('session.data.user-prefs-active-stream', function(){
     var streams = this.get('streams');
-    var currentStream = this.get('session.data.user-prefs-active-stream');
-    var stream;
-    if (currentStream) {
-      stream = streams.findBy('slug', currentStream);
-    } else {
-      stream = streams.get('firstObject');
-    }
-
-    return stream;
+    var currentStream = this.get('session.data.user-prefs-active-stream') || 'wnyc-fm939';
+    return streams.findBy('slug', currentStream);
   }),
   // and this, too
   activePref: computed('session.data.user-prefs-active-autoplay', function() {
     var prefs = this.get('autoPlayPrefs');
-    var pref = this.get('session.data.user-prefs-active-autoplay');
+    var pref = this.get('session.data.user-prefs-active-autoplay') || 'default_stream';
 
     if (pref === 'no_autoplay') {
       return prefs.find(p => p.field === this.get('prevAutoplayPref'));
@@ -52,6 +45,7 @@ export default Ember.Component.extend({
       let session = this.get('session');
       session.set('data.user-prefs-active-stream', stream.get('slug'));
     },
+
     selectAutoPlayPref({ field }) {
       // until we resolve what the user preference endpoint will be, set the
       // session.data.userPref.activePref

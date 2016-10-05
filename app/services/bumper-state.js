@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
 import computed, { readOnly } from 'ember-computed';
-const QUEUE_BUMPER    = '/streambumper/streambumper000008_audio_queue.mp3';
+const QUEUE_BUMPER = 'http://audio.wnyc.org/news/news20090427_swine_flu_aviles.mp3';
 
 export default Ember.Service.extend({
   init() {
@@ -40,7 +40,9 @@ export default Ember.Service.extend({
 
   getNext(prevContext) {
     // determine which stage the continuous-play is in
-    let { autoplayStream, autoplayPref } = this.getProperties('autoplayStream', 'autoplayPref');
+    let autoplayStream = this.getWithDefault('autoplayStream', 'wnyc-fm939');
+    let autoplayPref = this.getWithDefault('autoplayPref', 'default_stream');
+
     if (prevContext === 'continuous-play-bumper') {
       // the bumper had played, so setup the default content from the user settings
       return this.setupContent(autoplayPref, autoplayStream);
