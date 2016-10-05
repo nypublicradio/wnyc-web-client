@@ -268,9 +268,6 @@ body.ember-application.discover {
 }
 
 .discover-refresh-bar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%; // it's a button so width must be specified
   padding: 14px 0;
   color: $blue;
@@ -284,7 +281,13 @@ body.ember-application.discover {
     background-color: $lightestgray;
   }
   
-  > .animated-loading-icon {
+  > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  > span > .animated-loading-icon {
     display: flex;
     margin-right: 8px;
   }
