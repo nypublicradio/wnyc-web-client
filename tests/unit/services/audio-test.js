@@ -2,16 +2,14 @@ import Ember from 'ember';
 import { moduleFor, test } from 'ember-qunit';
 import startMirage from 'overhaul/tests/helpers/setup-mirage-for-integration';
 import wait from 'ember-test-helpers/wait';
+import hifiNeeds from 'overhaul/tests/helpers/hifi-needs';
 
 moduleFor('service:audio', 'Unit | Service | audio', {
   // Specify the other units that are required for this test.
-  needs: ['model:story','adapter:story','serializer:story',
+  needs: [...hifiNeeds, 'model:story','adapter:story','serializer:story',
           'model:discover/stories',
           'service:poll',
           'service:metrics',
-          'service:hifi',
-          'service:sound-cache',
-          'service:debug-logger',
           'service:listen-history'],
 
   beforeEach() {
