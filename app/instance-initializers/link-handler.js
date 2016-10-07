@@ -44,6 +44,11 @@ function _trackEvent(data, instance) {
   metrics.trackEvent(eventToTrack);
 }
 
+function _trackLegacyEvent(event, instance) {
+  let legacyAnalytics = instance.lookup('service:legacy-analytics');
+  legacyAnalytics.dispatch(event);
+}
+
 export function normalizeHref(node, base = location) {
   let href = node.getAttribute('href') || '';
   let url = new URL(href, base).toString();
@@ -88,7 +93,8 @@ export default {
 
     $body.off('click.href-to', 'a');
     // TODO: abstract from django component
-    $body.on('click.href-to', 'a', function({currentTarget, preventDefault}) {
+    $body.on('click.href-to', 'a', function(event) {
+      let { currentTarget, preventDefault } = event;
       let { url, href, isExternal } = normalizeHref(currentTarget);
       let validLink = shouldHandleLink(currentTarget);
       let $target = $(currentTarget);
@@ -99,6 +105,10 @@ export default {
       }
 
       if (validLink) {
+
+        if ($target.closest('.django-content').length > 0 ) {
+          _trackLegacyEvent(event, instance);
+        }
 
         if (url === location.toString()) {
           // could be a valid link, but we still want to short circuit if we'll

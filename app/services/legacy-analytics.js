@@ -21,7 +21,7 @@ export default Service.extend({
   store: service(),
 
   dispatch(e) {
-    let {target} = e;
+    let target = e.currentTarget || e.target;
 
     if (contains(MENU_SELECTORS, target)) {
       this._trackLinkWithText(e, 'WNYC Menu');
@@ -86,7 +86,7 @@ export default Service.extend({
       case 'SharedT':
         sharedVia = 'Twitter';
         break;
-      default: 
+      default:
         sharedVia = '';
         break;
     }
