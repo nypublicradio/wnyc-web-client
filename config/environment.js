@@ -72,7 +72,7 @@ module.exports = function(environment) {
         ]
       }
     },
-    queueAudioBumperURL: 'http://audio.wnyc.org/news/news20090427_swine_flu_aviles.mp3',
+    queueAudioBumperURL: 'http://audio.wnyc.org/streambumper/streambumper000008_audio_queue.mp3',
     siteSlug: 'wnyc',
     siteName: 'WNYC',
     renderGoogleAds: true,

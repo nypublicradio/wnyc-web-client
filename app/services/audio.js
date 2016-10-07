@@ -42,6 +42,7 @@ export default Service.extend({
   volume:           alias('okraBridge.volume'),
   currentStory:     or('currentAudio.story', 'currentAudio'),
 
+  bumperPlayed:     false,
   currentAudio:     null,
   currentContext:   null,
   sessionPing:      TWO_MINUTES,
@@ -372,6 +373,8 @@ export default Service.extend({
   finishedTrack() {
     let context = get(this, 'currentContext') || '';
     let bumper = get(this, 'bumperState');
+    let discoverQueue = get(this, 'discoverQueue');
+    let currentId = get(this, 'currentId');
 
     this._trackPlayerEvent({
       action: 'Finished Story',
@@ -380,7 +383,7 @@ export default Service.extend({
       withAnalytics: true,
     });
 
-    this.sendCompleteListenAction(this.get('currentId'));
+    this.sendCompleteListenAction(currentId);
 
     if (context === 'queue') {
       this.playNextInQueue();
@@ -390,7 +393,14 @@ export default Service.extend({
       this._flushContext();
     }
 
-    if (bumper.get('isEnabled')) {
+    if (context === 'discover' && discoverQueue.nextTrack(currentId)) {
+      // Once discover becomes a selectable choice for audio preferences
+      // then this can get moved into the bumper-state service.
+      return;
+    }
+
+    if (get(bumper, 'isEnabled')) {
+      set(this, 'bumperPlayed', true);
       let next = bumper.getNext(context);
       this.play(...next);
     }

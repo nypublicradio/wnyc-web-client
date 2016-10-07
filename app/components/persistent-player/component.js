@@ -1,8 +1,8 @@
 import Component from 'ember-component';
 import service from 'ember-service/inject';
-import { reads, equal } from 'ember-computed';
+import { reads, equal, not, and } from 'ember-computed';
 import get from 'ember-metal/get';
-import Ember from 'ember';
+import set from 'ember-metal/set';
 
 
 export default Component.extend({
@@ -15,14 +15,8 @@ export default Component.extend({
   isPlaying: equal('audio.playState', 'is-playing'),
   isAudiostream: equal('currentAudio.audioType', 'stream'),
   didDismiss: false,
-  continuousPlayEnabled: Ember.computed('didDismiss', 'bumper.revealNotificationBar', function() {
-    let { bumper, didDismiss } = this.getProperties('bumper', 'didDismiss');
-    if (didDismiss) {
-      return false;
-    }
-
-    return bumper.get('revealNotificationBar');
-  }),
+  didNotDismiss: not('didDismiss'),
+  continuousPlayEnabled: and('didNotDismiss', 'bumper.revealNotificationBar'),
 
   actions: {
     playOrPause() {
@@ -33,7 +27,7 @@ export default Component.extend({
       }
     },
     dismissNotification() {
-      this.set('didDismiss', true);
+      set(this, 'didDismiss', true);
     },
     setPosition(p) {
       get(this, 'audio').setPosition(p);

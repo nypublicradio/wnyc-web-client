@@ -9,18 +9,20 @@ window.EMBER_TESTING = true;
 
 installBridge();
 
-const bumperStub = Ember.Service.extend({
-  isEnabled: false
-});
-
 moduleFor('service:audio', 'Unit | Service | audio', {
   // Specify the other units that are required for this test.
   needs: ['model:story','adapter:story','serializer:story',
           'model:discover/stories',
           'service:poll',
-          'service:listen-history'],
+          'service:listen-history'
+        ],
 
   beforeEach() {
+    const bumperState = Ember.Service.extend({
+      revealNotificationBar: false,
+      isEnabled: false
+    });
+
     const sessionStub = Ember.Service.extend({
       data: {} // we only really need the data thing
     });
@@ -36,7 +38,7 @@ moduleFor('service:audio', 'Unit | Service | audio', {
     });
     startMirage(this.container);
 
-    this.register('service:bumper-state', bumperStub);
+    this.register('service:bumper-state', bumperState);
     this.inject.service('bumper-state', { as: 'bumperState' });
 
     this.register('service:session', sessionStub);
@@ -47,7 +49,6 @@ moduleFor('service:audio', 'Unit | Service | audio', {
 
     this.register('service:metrics', metricsStub);
     this.inject.service('metrics');
-
   },
   afterEach() {
     server.shutdown();
