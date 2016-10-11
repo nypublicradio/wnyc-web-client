@@ -17,7 +17,12 @@ export default Ember.Service.extend({
   audio: service(),
   autoplayPref: readOnly('session.data.user-prefs-active-autoplay'),
   autoplayStream: readOnly('session.data.user-prefs-active-stream'),
-  revealNotificationBar: computed.reads('audio.bumperPlayed'),
+  durationLoaded: computed.gt('audio.duration', 0),
+  bumperLoaded: computed.and('durationLoaded', 'audio.isPlaying'),
+  bumperPlaying: computed.and('bumperLoaded', 'bumperStarted'),
+  bumperDidPlay: false,
+  bumperStarted: false,
+  revealNotificationBar: computed.or('bumperPlaying', 'bumperDidPlay'),
   isEnabled: computed('autoplayPref', 'queue.items.length', function() {
     const { autoplayPref, queue } = getProperties(this, 'autoplayPref', 'queue');
     // if there is nothing left in the queue, then it is redundant/unecessary to
@@ -47,6 +52,7 @@ export default Ember.Service.extend({
   },
 
   setupContent(autoplayPref, autoplayStream) {
+    this.set('bumperDidPlay', true);
     if (autoplayPref === 'default_stream') {
       return [autoplayStream, 'stream'];
     } else {
@@ -57,6 +63,7 @@ export default Ember.Service.extend({
   },
 
   setupBumper(autoplayPref, autoplayStream) {
+    this.set('bumperStarted', true);
     let nextItem;
     if (autoplayPref === 'default_stream') {
       let stream = get(this, 'store').peekRecord('stream', autoplayStream);
