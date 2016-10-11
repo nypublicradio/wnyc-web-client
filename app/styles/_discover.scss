@@ -1096,7 +1096,7 @@ body.ember-application.discover {
 .rounded-caps-button {
   display:inline-block;
   border-radius: 25px;
-  border: 2px solid #FFF;
+  border: 2px solid #FFF !important;
   border-color: #FFF;
   padding: 2px 15px;
   color: #FFF;
