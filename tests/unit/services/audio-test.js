@@ -23,6 +23,12 @@ moduleFor('service:audio', 'Unit | Service | audio', {
       isEnabled: false
     });
 
+    const featureStub = Ember.Service.extend({
+      isEnabled() {
+        return false;
+      }
+    });
+
     const sessionStub = Ember.Service.extend({
       data: {} // we only really need the data thing
     });
@@ -37,6 +43,9 @@ moduleFor('service:audio', 'Unit | Service | audio', {
       trackEvent() {}
     });
     startMirage(this.container);
+
+    this.register('service:features', featureStub);
+    this.inject.service('features');
 
     this.register('service:bumper-state', bumperState);
     this.inject.service('bumper-state', { as: 'bumperState' });

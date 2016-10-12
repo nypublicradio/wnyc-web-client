@@ -31,6 +31,7 @@ export default Service.extend({
   session:          service(),
   discoverQueue:    service(),
   bumperState:      service(),
+  features:         service(),
   listens:          service('listen-history'),
   queue:            service('listen-queue'),
   listenActions:    service(),
@@ -391,6 +392,10 @@ export default Service.extend({
       this.playDiscoverQueue();
     } else if (context === 'home-page' || context === 'continuous-play-bumper') {
       this._flushContext();
+    }
+
+    if (!this.get('features').isEnabled('autoplay-prefs')){
+      return;
     }
 
     if (context === 'discover' && discoverQueue.nextTrack(currentId)) {
