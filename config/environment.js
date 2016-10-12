@@ -101,7 +101,7 @@ module.exports = function(environment) {
     featureFlags: {
       'discover': process.env.DISCOVER,
       'other-discover': process.env.OTHER_DISCOVER,
-      'autoplay-prefs': process.env.DEPLOY_TARGET === 'demo'
+      'autoplay-prefs': true
     },
     betaTrials: {
       betaInviteLanding: '#full-page-transforms-wrapper',

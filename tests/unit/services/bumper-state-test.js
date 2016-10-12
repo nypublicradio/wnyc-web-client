@@ -4,7 +4,14 @@ import startMirage from 'overhaul/tests/helpers/setup-mirage-for-integration';
 import wait from 'ember-test-helpers/wait';
 import get, { getProperties } from 'ember-metal/get';
 import set from 'ember-metal/set';
-const { A } = Ember;
+const { A, Service } = Ember;
+import 'overhaul/tests/helpers/with-feature';
+
+const FeatureStub = Service.extend({
+  isEnabled() {
+    return true;
+  }
+});
 
 
 moduleFor('service:bumper-state', 'Unit | Service | bumper state', {
@@ -29,9 +36,12 @@ moduleFor('service:bumper-state', 'Unit | Service | bumper state', {
         }
       }
     });
+
     startMirage(this.container);
+    this.register('service:features', FeatureStub);
     this.register('service:session', sessionStub);
     this.inject.service('session');
+    this.inject.service('features');
   },
 
   afterEach() {
@@ -65,6 +75,7 @@ test('calls a function that returns the queue bumper url and the bumper context 
 });
 
 test('calls a function that returns the bumper stream information when the current context is on-demand', function(assert) {
+
   const bumper = this.subject();
   return wait().then(() => {
     const [expectedBumperURL, expectedBumperContext] = ['http://wnyc-fm939.mp3', 'continuous-play-bumper'];

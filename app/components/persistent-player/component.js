@@ -1,6 +1,6 @@
 import Component from 'ember-component';
 import service from 'ember-service/inject';
-import { reads, equal, not, and } from 'ember-computed';
+import computed, { reads, equal, not } from 'ember-computed';
 import get from 'ember-metal/get';
 import set from 'ember-metal/set';
 
@@ -16,7 +16,13 @@ export default Component.extend({
   isAudiostream: equal('currentAudio.audioType', 'stream'),
   didDismiss: false,
   didNotDismiss: not('didDismiss'),
-  continuousPlayEnabled: and('didNotDismiss', 'bumper.revealNotificationBar'),
+  continuousPlayEnabled: computed('didNotDismiss', 'bumper.revealNotificationBar', function(){
+    if (!this.features.isEnabled('autoplay-prefs')){
+      return false;
+    }
+
+    return get(this, 'didNotDismiss') && get(this, 'bumper.revealNotificationBar');
+  }),
 
   actions: {
     playOrPause() {
