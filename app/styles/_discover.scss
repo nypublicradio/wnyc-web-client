@@ -679,6 +679,10 @@ body.ember-application.discover {
   }
 }
 .playlist-play-indicator-button {
+  // this min height should normally be inherited from
+  // .discover-playlist-story-play-button, but due to an IE11 issue:
+  // https://github.com/philipwalton/flexbugs#3-min-height-on-a-flex-container-wont-apply-to-its-flex-items
+  // we set it here also.
   min-height: 5rem;
   background: transparent;
   @include fontsize(14);
