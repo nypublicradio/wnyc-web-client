@@ -16,13 +16,7 @@ export default Component.extend({
   isAudiostream: equal('currentAudio.audioType', 'stream'),
   didDismiss: false,
   didNotDismiss: not('didDismiss'),
-  continuousPlayEnabled: computed('didNotDismiss', 'bumper.revealNotificationBar', function(){
-    if (!this.features.isEnabled('autoplay-prefs')){
-      return false;
-    }
-
-    return get(this, 'didNotDismiss') && get(this, 'bumper.revealNotificationBar');
-  }),
+  continuousPlayEnabled: computed.and('didNotDismiss', 'bumper.revealNotificationBar'),
 
   actions: {
     playOrPause() {
