@@ -24,12 +24,6 @@ moduleFor('service:audio', 'Unit | Service | audio', {
       getNext(obj, context) { return [obj, context]; }
     });
 
-    const featureStub = Ember.Service.extend({
-      isEnabled() {
-        return false;
-      }
-    });
-
     const sessionStub = Ember.Service.extend({
       data: {} // we only really need the data thing
     });
@@ -44,9 +38,6 @@ moduleFor('service:audio', 'Unit | Service | audio', {
       trackEvent() {}
     });
     startMirage(this.container);
-
-    this.register('service:features', featureStub);
-    this.inject.service('features');
 
     this.register('service:bumper-state', bumperState);
     this.inject.service('bumper-state', { as: 'bumperState' });
@@ -257,27 +248,10 @@ test('it delays early calls to play until after okraBrige isReady', function(ass
   });
 });
 
-test('with the autoplay-prefs feature flag off, and the bumper-state is enabled, the bumper will not act on a finished track event', function(assert) {
-  const service = this.subject();
-  let didNotChange = true;
-  service.set('bumperState.isEnabled', true);
-  service.set('currentContext', 'home-page');
-  service.set('_trackPlayerEvent', () => {});
-  service.set('sendCompleteListenAction', () => {});
-  service.set('play', () => { didNotChange = false; });
-  service.finishedTrack();
-
-  return wait().then(() => {
-    assert.ok(didNotChange);
-  });
-});
-
-
-test('with the autoplay-prefs feature flag on, and the bumper-state is disabled, the bumper will act on a finished track event', function(assert) {
+test('with the bumper-state enabled, the bumper will act on a finished track event', function(assert) {
   const service = this.subject();
   let didChange = false;
   service.set('bumperState.isEnabled', true);
-  service.set('features.isEnabled', () => true);
   service.set('currentContext', 'home-page');
   service.set('_trackPlayerEvent', () => {});
   service.set('sendCompleteListenAction', () => {});
