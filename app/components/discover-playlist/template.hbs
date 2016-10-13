@@ -14,7 +14,7 @@
 <div class="discover-playlist-content-container">
 {{discover-feedback-button}}
 <div class="discover-refresh-bar-container">
-  <button class="discover-refresh-bar" {{action 'findMore'}}>
+  <button class="discover-refresh-bar" disabled={{findingMore}} {{action 'findMore'}}>
     {{! firefox does not allow buttons as flex items }}
     <span>
       {{#if findingMore}}
