@@ -2,8 +2,9 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import {
   authenticateSession,
-  currentSession,
+  currentSession
 } from 'overhaul/tests/helpers/ember-simple-auth';
+import 'overhaul/tests/helpers/with-feature';
 
 moduleForAcceptance('Acceptance | settings', {
   beforeEach() {
@@ -56,4 +57,25 @@ test('after visiting settings, user can toggle off autoplay settings', function(
     var actualElementCount = 1;
     assert.equal(expectedElementCount, actualElementCount);
   });
+});
+
+test('if feature flag for autoplay-autoprefs is present, then the link should be clickable and then take you to /settings', function(assert) {
+  withFeature('autoplay-prefs');
+  visit('/');
+  click('.l-bottom .list-item:contains("Settings")');
+  andThen(() => {
+    assert.equal(currentURL(), '/settings');
+  });
+
+});
+
+test('if feature flag for autoplay-autoprefs is absent, then the link should be not be present', function(assert) {
+  visit('/');
+  const el = $('.l-bottom .list-item:contains("Settings")');
+  andThen(() => {
+    const expectedElementCount = 0;
+    const actualElementCount = el.length;
+    assert.equal(expectedElementCount, actualElementCount);
+  });
+
 });

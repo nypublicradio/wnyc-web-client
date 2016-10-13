@@ -7,13 +7,6 @@ import set from 'ember-metal/set';
 const { A, Service } = Ember;
 import 'overhaul/tests/helpers/with-feature';
 
-const FeatureStub = Service.extend({
-  isEnabled() {
-    return true;
-  }
-});
-
-
 moduleFor('service:bumper-state', 'Unit | Service | bumper state', {
   // Specify the other units that are required for this test.
   needs: [
@@ -27,6 +20,12 @@ moduleFor('service:bumper-state', 'Unit | Service | bumper state', {
   ],
 
   beforeEach() {
+    const FeatureStub = Service.extend({
+      isEnabled() {
+        return true;
+      }
+    });
+
     const sessionStub = Ember.Service.extend({
       data: {
         'user-prefs-active-autoplay': 'default_stream',

@@ -295,7 +295,6 @@ export default Service.extend({
   },
 
   playBumper(url, bumperContext) {
-    // currentAudio probably doesnt need to be set. FIXME.
     this.setProperties({
       currentContext: bumperContext,
       currentAudio: Ember.Object.create({
