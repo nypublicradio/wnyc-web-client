@@ -31,15 +31,15 @@ export default Component.extend({
     if (window.getSelection && window.getSelection().removeAllRanges) {
       window.getSelection().removeAllRanges();
     }
-    if (e.target.classList.includes('volume-slider-handle')) {
+    if (e.target.classList.contains('volume-slider-handle')) {
       this.$().on('mousemove', '.volume-slider', this.click.bind(this));
     }
   },
   mouseUp() {
-    this.$().off('mousemove', '.progress-wrapper');
+    this.$().off('mousemove', '.volume-slider');
   },
   mouseLeave() {
-    this.$().off('mousemove', '.progress-wrapper');
+    this.$().off('mousemove', '.volume-slider');
   },
   _setVolume(target, x) {
     if (!isEmpty(this.$(target).closest('.volume-slider'))) {
