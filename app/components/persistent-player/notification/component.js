@@ -16,8 +16,8 @@ export default Ember.Component.extend({
     const pref = get(session, 'data.user-prefs-active-autoplay') || 'default_stream';
     return pref === 'default_stream';
   }),
-  preferredStream: computed('session.data.user-prefs-active-stream', function(){
-    const slug = get(this, 'session.data.user-prefs-active-stream') || 'wnyc-fm939';
+  preferredStream: computed('session.data.user-prefs-active-stream.slug', function(){
+    const slug = get(this, 'session.data.user-prefs-active-stream.slug') || 'wnyc-fm939';
     return get(this, 'store').peekRecord('stream', slug);
   }),
   classNames: ['notification', 'notification-active'],

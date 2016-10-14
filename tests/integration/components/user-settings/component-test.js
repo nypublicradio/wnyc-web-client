@@ -4,7 +4,7 @@ import hbs from 'htmlbars-inline-precompile';
 
 const sessionStub = Ember.Service.extend({
   data: {
-    'user-prefs-active-stream': 'wnyc-fm939',
+    'user-prefs-active-stream': {slug: 'wnyc-fm939', name: 'WNYC 93.9 FM'},
     'user-prefs-active-autoplay': 'default_stream'
   }
 });

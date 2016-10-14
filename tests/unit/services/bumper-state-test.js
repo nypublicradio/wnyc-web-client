@@ -29,7 +29,7 @@ moduleFor('service:bumper-state', 'Unit | Service | bumper state', {
     const sessionStub = Ember.Service.extend({
       data: {
         'user-prefs-active-autoplay': 'default_stream',
-        'user-prefs-active-stream': 'wnyc-fm939',
+        'user-prefs-active-stream': {slug: 'wnyc-fm939', name: 'WNYC 93.9 FM'},
         'queue': {
           'items': A(),
         }
@@ -89,7 +89,7 @@ test('calls a function that returns the bumper stream information when the curre
 test('calls a function that returns the bumper wqxr stream information when the current context is on-demand', function(assert) {
   const wqxrStream = server.create('stream', {slug: 'wqxr'});
   const bumper = this.subject();
-  set(bumper, 'session.data.user-prefs-active-stream', 'wqxr');
+  set(bumper, 'session.data.user-prefs-active-stream', {slug: 'wqxr', name: 'WQXR New York'});
   return wait().then(() => {
     let [expectedBumperURL, expectedBumperContext] = [wqxrStream.audio_bumper, 'continuous-play-bumper'];
     let [actualBumperURL, actualBumperContext] = bumper.getNext('home-page');

@@ -10,7 +10,7 @@ moduleForAcceptance('Acceptance | settings', {
   beforeEach() {
     authenticateSession(this.application);
     let session = currentSession(this.application);
-    session.set('data.user-prefs-active-stream', 'wqxr');
+    session.set('data.user-prefs-active-stream', {slug: 'wqxr', name: 'WQXR New York'});
     session.set('data.user-prefs-active-autoplay', 'default_stream');
     server.createList('stream', 7);
   }

@@ -17,7 +17,7 @@ export default Ember.Service.extend({
   audio: service(),
   features: service(),
   autoplayPref: readOnly('session.data.user-prefs-active-autoplay'),
-  autoplayStream: readOnly('session.data.user-prefs-active-stream'),
+  autoplaySlug: readOnly('session.data.user-prefs-active-stream.slug'),
   durationLoaded: computed.gt('audio.duration', 0),
   audioLoaded: not('audio.isLoading'),
   bumperLoaded: computed.and('durationLoaded', 'audioLoaded'),
@@ -51,23 +51,23 @@ export default Ember.Service.extend({
 
   getNext(prevContext) {
     // determine which stage the continuous-play is in
-    const autoplayStream = get(this, 'autoplayStream') || 'wnyc-fm939';
+    const autoplaySlug = get(this, 'autoplaySlug') || 'wnyc-fm939';
     const autoplayPref = get(this, 'autoplayPref') || 'default_stream';
 
     if (prevContext === 'continuous-play-bumper') {
       // the bumper had played, so setup the default content from the user settings
-      return this.setupContent(autoplayPref, autoplayStream);
+      return this.setupContent(autoplayPref, autoplaySlug);
     } else {
       // the active selection the user was listening to use has ended, so now
       // the bumper gets setup.
-      return this.setupBumper(autoplayPref, autoplayStream);
+      return this.setupBumper(autoplayPref, autoplaySlug);
     }
   },
 
-  setupContent(autoplayPref, autoplayStream) {
+  setupContent(autoplayPref, autoplaySlug) {
     this.set('bumperDidPlay', true);
     if (autoplayPref === 'default_stream') {
-      return [autoplayStream, 'stream'];
+      return [autoplaySlug, 'stream'];
     } else {
       const queue = get(this, 'queue');
       const nextUp = queue.nextItem();
@@ -75,11 +75,11 @@ export default Ember.Service.extend({
     }
   },
 
-  setupBumper(autoplayPref, autoplayStream) {
+  setupBumper(autoplayPref, autoplaySlug) {
     this.set('bumperStarted', true);
     let nextItem;
     if (autoplayPref === 'default_stream') {
-      let stream = get(this, 'store').peekRecord('stream', autoplayStream);
+      let stream = get(this, 'store').peekRecord('stream', autoplaySlug);
       if (stream) {
         nextItem = get(stream, 'audioBumper');
       } else {
