@@ -49,6 +49,16 @@ test('after visiting settings, user can select different stream', function(asser
   });
 });
 
+test('the stream button in the nav should match the default stream', function(assert) {
+  visit('/settings');
+
+  andThen(function() {
+    const actualLabel = $('.stream-launcher').attr('aria-label');
+    const expectedLabel = 'Listen to WQXR New York';
+    assert.equal(actualLabel, expectedLabel);
+  });
+});
+
 test('after visiting settings, user can toggle off autoplay settings', function(assert) {
   visit('/settings');
 
