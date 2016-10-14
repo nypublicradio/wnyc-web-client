@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
-import computed, { readOnly } from 'ember-computed';
+import computed, { readOnly, not } from 'ember-computed';
 import get, { getProperties } from 'ember-metal/get';
 import ENV from 'overhaul/config/environment';
 
@@ -19,7 +19,8 @@ export default Ember.Service.extend({
   autoplayPref: readOnly('session.data.user-prefs-active-autoplay'),
   autoplayStream: readOnly('session.data.user-prefs-active-stream'),
   durationLoaded: computed.gt('audio.duration', 0),
-  bumperLoaded: computed.and('durationLoaded', 'audio.isPlaying'),
+  audioLoaded: not('audio.isLoading'),
+  bumperLoaded: computed.and('durationLoaded', 'audioLoaded'),
   bumperPlaying: computed.and('bumperLoaded', 'bumperStarted'),
   bumperDidPlay: false,
   bumperStarted: false,
