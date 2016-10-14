@@ -277,7 +277,8 @@ export default Service.extend({
     this.setProperties({
       currentContext: bumperContext,
       currentAudio: Ember.Object.create({
-        audioType: 'bumper'
+        audioType: 'bumper',
+        id: url
       })
     });
     return this.get('hifi').play(url);
