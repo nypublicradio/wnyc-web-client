@@ -285,6 +285,20 @@
   color: white;
 }
 
+@mixin btn--white {
+  border-color: rgba(white, 0.2);
+  color: white;
+
+  &:not([disabled]) {
+    &:hover,
+    &:focus {
+      color: white;
+      border-color: rgba(white,.7);
+    }
+  }
+}
+
+
 /**
 * Pink Button:
 * `.btn--pink`
@@ -834,6 +848,16 @@
       opacity: 1;
     }
   }
+}
+
+.callout-button {
+  @include btn;
+  @include btn--large;
+  @include btn--strongtext;
+  @include thickbtn;
+  @include btn--white;
+  white-space: nowrap;
+  height: 46px;
 }
 
 @mixin svg-color($color) {

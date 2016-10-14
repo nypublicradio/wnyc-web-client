@@ -1,0 +1,19 @@
+.callout {
+  &-container {
+    @include display-flex;
+    @include align-items(center);
+    width: 100%;
+    padding: 16px 20px;
+  }
+
+  &-text {
+    color: white;
+    line-height: 1.69;
+    font-weight: 600;
+    padding-right: 2rem;
+  }
+}
+
+.discover-callout {
+  background: $darkgreen;
+}
