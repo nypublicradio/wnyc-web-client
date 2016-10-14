@@ -2,6 +2,7 @@ import Component from 'ember-component';
 import service from 'ember-service/inject';
 import BetaActionsMixin from 'overhaul/mixins/beta-actions';
 import config from 'overhaul/config/environment';
+import { or } from 'ember-computed';
 
 export default Component.extend(BetaActionsMixin, {
   audio: service(),
@@ -9,6 +10,8 @@ export default Component.extend(BetaActionsMixin, {
   metrics: service(),
   router: service('wnyc-routing'),
   donateURL: config.wnycDonateURL,
+  defaultStream:  {slug: 'wnyc-fm939', name: 'WNYC 93.9 FM'},
+  preferredStream: or('session.data.user-prefs-active-stream', 'defaultStream'),
 
   click: function({target}){
     if (target.tagName === "A"){

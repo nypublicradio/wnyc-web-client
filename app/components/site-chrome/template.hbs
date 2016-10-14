@@ -88,19 +88,21 @@
           {{#if media.isLargeAndUp}}
             {{#listen-button
               type=(if isHomepage 'white-hollow-small' 'red-hollow-small')
-              state=(if (eq 'wnyc-fm939' audio.currentAudio.id) audio.playState)
-              itemPK='wnyc-fm939'
-              itemTitle='WNYC 93.9 FM'
+              state=(if (eq preferredStream.slug audio.currentAudio.id) audio.playState)
+              itemPK=preferredStream.slug
+              itemTitle=preferredStream.name
               playContext='nav'
               class=(if media.isLargeAndUp 'stream-launcher text--spacing text--semi')}}
               <span>Listen Live</span>
             {{/listen-button}}
           {{else}}
+            {{!-- This 'button' is a top nav item that looks like a link. it doesn't show an icon to reflect state --}}
+            {{!-- So clicking will always trigger a play action (and not a pause), state is locked to 'is-paused'  --}}
             {{#listen-button
               type='vanilla'
               state='is-paused'
-              itemPK='wnyc-fm939'
-              itemTitle='WNYC 93.9 FM'
+              itemPK=preferredStream.slug
+              itemTitle=preferredStream.name
               playContext='nav'}}
               <span>Listen Live</span>
             {{/listen-button}}
