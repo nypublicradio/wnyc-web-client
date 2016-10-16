@@ -80,11 +80,12 @@ $ember-power-select-disabled-background-color: #fff;
 
     .switch {
       order: 1;
+      margin: 2px 0px 1px 2px;
     }
 
     .label {
       order: 2;
-      padding-left: 4px;
+      padding-left: 3px;
       padding-right: 8px;
     }
   }
@@ -94,7 +95,7 @@ $ember-power-select-disabled-background-color: #fff;
     height: 32px;
     width: 32px;
     background-color: #fff;
-    margin: 2px;
+    margin: 2px 2px 1px 0px;
     order: 2;
   }
 }
