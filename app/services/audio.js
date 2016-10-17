@@ -263,7 +263,7 @@ export default Service.extend({
         audioType: 'bumper'
       })
     });
-    this.okraBridge.playSoundFor(bumperContext, url);
+    return this.get('hifi').play(url);
   },
 
   setPosition(percentage) {
