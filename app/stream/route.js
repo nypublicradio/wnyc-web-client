@@ -3,6 +3,7 @@ import service from 'ember-service/inject';
 
 export default Route.extend({
   audio: service(),
+  titleToken: 'Listen Live to WNYC, WQXR, Q2, Operavore, NJPR, and the Jonathan Channel',
 
   model() {
     return this.store.findAll('stream');

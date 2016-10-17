@@ -11,6 +11,12 @@ export default Ember.Route.extend(PlayParamMixin, {
     controller.set('isMobile', window.Modernizr.touch || window.Modernizr.touchevents);
     return this._super(...arguments);
   },
+  titleToken(model) {
+    return `${get(model, 'story.title')} - ${get(model, 'story.headers.brand.title')}`;
+  },
+  title(tokens) {
+    return `${tokens[0]} - WNYC`;
+  },
   model({ slug }) {
     return this.store.findRecord('django-page', `story/${slug}`.replace(/\/*$/, '/')).then(page => {
       let story = page.get('wnycContent');
@@ -30,11 +36,11 @@ export default Ember.Route.extend(PlayParamMixin, {
     let metrics = get(this, 'metrics');
     let {containers:action, title:label} = get(model, 'story.analytics');
     let nprVals = get(model, 'story.nprAnalyticsDimensions');
-    
+
     if (get(model, 'story.extendedStory.headerDonateChunk')) {
       this.send('updateDonateChunk', get(model, 'story.extendedStory.headerDonateChunk'));
     }
-    
+
     metrics.trackEvent({
       eventName: 'viewedStory',
       category: 'Viewed Story',
@@ -43,7 +49,7 @@ export default Ember.Route.extend(PlayParamMixin, {
       id: get(model, 'story.id'),
       type: get(model, 'story.itemType')
     });
-    
+
     metrics.invoke('trackPage', 'NprAnalytics', {
       page: `/story/${get(model, 'story.slug')}`,
       title: label,

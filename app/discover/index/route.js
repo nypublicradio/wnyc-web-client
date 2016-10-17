@@ -10,6 +10,7 @@ export default Ember.Route.extend({
   discoverPrefs:    Ember.inject.service(),
   scroller:         Ember.inject.service(),
   metrics:          Ember.inject.service(),
+  titleToken: 'Discover Playlist',
 
   hasQueuedStories: Ember.computed.gt('discoverQueue.items.length', 0),
 

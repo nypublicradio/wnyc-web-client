@@ -1,6 +1,9 @@
 import Route from 'ember-route';
 
 export default Route.extend({
+  titleToken(model) {
+    return model.get('title');
+  },
   queryParams: {
     scheduleStation: {
       refreshModel: true

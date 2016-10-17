@@ -6,6 +6,7 @@ export default Ember.Route.extend({
   session: Ember.inject.service(),
   discoverPrefs: Ember.inject.service(),
   metrics: Ember.inject.service(),
+  titleToken: 'Discover Select Shows',
 
   model() {
     let prefs = this.get('discoverPrefs');

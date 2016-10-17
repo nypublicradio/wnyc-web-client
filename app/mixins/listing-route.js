@@ -12,6 +12,11 @@ const {
 
 export default Mixin.create({
   pageNumbers: service(),
+  titleToken() {
+    const channelType = get(this, 'channelType');
+    const { channel } = this.modelFor(channelType);
+    return get(channel, 'title');
+  },
 
   beforeModel() {
     let channelType = this.routeName.split('.')[0]

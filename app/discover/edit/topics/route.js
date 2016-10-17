@@ -3,6 +3,7 @@ import config from 'overhaul/config/environment';
 
 export default Ember.Route.extend({
   discoverPrefs: Ember.inject.service(),
+  titleToken: 'Discover Edit Topics',
 
   model() {
     return Ember.RSVP.hash({

@@ -5,6 +5,7 @@ export default Ember.Route.extend({
   session:       Ember.inject.service(),
   discoverQueue: Ember.inject.service('discover-queue'),
   discoverPrefs: Ember.inject.service(),
+  titleToken: 'Discover',
 
   setupController(controller) {
     // Don't use liquid fire in testing until we figure out why

@@ -3,6 +3,7 @@ import ENV from '../../../config/environment';
 
 export default Ember.Route.extend({
   discoverPrefs: Ember.inject.service(),
+  titleToken: 'Discover Edit Shows',
 
   model() {
     let prefs = this.get('discoverPrefs');

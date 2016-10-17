@@ -8,7 +8,8 @@ const { get } = Ember;
 export default Ember.Route.extend(PlayParamMixin, {
   classNames: ['home'],
   metrics: service(),
-  
+  title: 'WNYC | New York Public Radio, Podcasts, Live Streaming Radio, News',
+
   model() {
     let page = this.store.findRecord('django-page', '/');
     let featuredStream = this.store.findRecord('stream', 'wnyc-fm939');

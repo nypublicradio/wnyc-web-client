@@ -12,8 +12,19 @@ export default Route.extend(PlayParamMixin, {
       refreshModel: true
     }
   },
-  
+
   metrics: service(),
+
+  titleToken(model) {
+    return get(model, 'title');
+  },
+  title(tokens) {
+    if (tokens && tokens.length > 0) {
+      return tokens[0];
+    } else {
+      return 'WNYC | New York Public Radio, Podcasts, Live Streaming Radio, News';
+    }
+  },
 
   model({ upstream_url }, { queryParams }) {
     // This adds trailing slashes, because the server's redirect
