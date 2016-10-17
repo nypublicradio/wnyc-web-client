@@ -57,7 +57,6 @@ export default Component.extend({
   },
 
   mouseDown(e) {
-    console.log('md', e);
     if (get(this, 'isLoaded') && e.which === 1 /* left click */) {
       this._updateAudioPosition(e);
       if (e.target.classList.contains('progress-playhead')) {
@@ -85,6 +84,8 @@ export default Component.extend({
     }
   },
   touchEnd(e) {
+    // prevent emulated mouse events
+    e.preventDefault();
     if (get(this, 'isLoaded') && e.target.classList.contains('progress-playhead')) {
       set(this, 'lastInteraction', 'touch');
       let touch = e.originalEvent.changedTouches[0];
@@ -93,7 +94,9 @@ export default Component.extend({
       this._cancelDragging();
     }
   },
-  touchCancel() {
+  touchCancel(e) {
+    // prevent emulated mouse events
+    e.preventDefault();
     set(this, 'lastInteraction', 'touch');
     set(this, 'isTouching', false);
     this._cancelDragging();
