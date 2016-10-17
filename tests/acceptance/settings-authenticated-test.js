@@ -12,10 +12,12 @@ moduleForAcceptance('Acceptance | settings', {
     let session = currentSession(this.application);
     session.set('data.user-prefs-active-stream', 'wqxr');
     session.set('data.user-prefs-active-autoplay', 'default_stream');
+    server.createList('stream', 7);
   }
 });
 
 test('visiting /settings and selecting my queue as an autoplay preference', function(assert) {
+  let wqxrStream = server.schema.streams.where({slug: 'wqxr'}).models[0];
   visit('/settings');
 
   click('.autoplay-options .ember-power-select-trigger');
@@ -25,8 +27,7 @@ test('visiting /settings and selecting my queue as an autoplay preference', func
     assert.equal(currentURL(), '/settings');
 
     var actualStream = $('.user-stream .ember-power-select-selected-item').text().trim();
-    var expectedStream = 'WQXR New York';
-    assert.equal(actualStream, expectedStream);
+    assert.equal(actualStream, wqxrStream.name);
 
     var actualPref = $('.autoplay-options .ember-power-select-selected-item').text().trim();
     var expectedPref = 'My Queue';
@@ -35,6 +36,7 @@ test('visiting /settings and selecting my queue as an autoplay preference', func
 });
 
 test('after visiting settings, user can select different stream', function(assert) {
+  let stream = server.schema.streams.all().models[2];
   visit('/settings');
 
   click('.user-stream .ember-power-select-trigger').then(() => {
@@ -43,8 +45,7 @@ test('after visiting settings, user can select different stream', function(asser
 
   andThen(function() {
     var actualStream = $('.user-stream .ember-power-select-selected-item').text().trim();
-    var expectedStream = 'WNYC 93.9FM';
-    assert.equal(actualStream, expectedStream);
+    assert.equal(actualStream, stream.name);
   });
 });
 

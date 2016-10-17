@@ -74,10 +74,11 @@ test('calls a function that returns the queue bumper url and the bumper context 
 });
 
 test('calls a function that returns the bumper stream information when the current context is on-demand', function(assert) {
-
+  const wnycStream = server.create('stream');
+  
   const bumper = this.subject();
   return wait().then(() => {
-    const [expectedBumperURL, expectedBumperContext] = ['http://wnyc-fm939.mp3', 'continuous-play-bumper'];
+    const [expectedBumperURL, expectedBumperContext] = [wnycStream.audio_bumper, 'continuous-play-bumper'];
     const [actualBumperURL, actualBumperContext] = bumper.getNext('home-page');
 
     assert.equal(expectedBumperURL, actualBumperURL);
@@ -86,10 +87,11 @@ test('calls a function that returns the bumper stream information when the curre
 });
 
 test('calls a function that returns the bumper wqxr stream information when the current context is on-demand', function(assert) {
+  const wqxrStream = server.create('stream', {slug: 'wqxr'});
   const bumper = this.subject();
   set(bumper, 'session.data.user-prefs-active-stream', 'wqxr');
   return wait().then(() => {
-    let [expectedBumperURL, expectedBumperContext] = ['http://wqxr.mp3', 'continuous-play-bumper'];
+    let [expectedBumperURL, expectedBumperContext] = [wqxrStream.audio_bumper, 'continuous-play-bumper'];
     let [actualBumperURL, actualBumperContext] = bumper.getNext('home-page');
 
     assert.equal(expectedBumperURL, actualBumperURL);

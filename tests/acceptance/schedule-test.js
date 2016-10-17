@@ -2,7 +2,11 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import moment from 'moment';
 
-moduleForAcceptance('Acceptance | schedule');
+moduleForAcceptance('Acceptance | schedule', {
+  beforeEach() {
+    server.create('stream');
+  }
+});
 
 test('visiting /schedule', function(assert) {
   let date = moment().format('YYYY/MMM/DD').toLowerCase();
