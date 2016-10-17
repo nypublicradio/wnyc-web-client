@@ -28,7 +28,7 @@
   @include mq($up-to-large) {
     margin-bottom: 0;
   }
-  
+
   @include mq($large-and-up) {
     background: white;
     padding-top: 0;
@@ -46,18 +46,18 @@
   top: 0;
   z-index: $zIndex--fixedNav;
   margin-bottom: 24px;
-  
+
   a,
   button {
     color: white;
     letter-spacing: 2px;
     font-family: 'Museo Sans Rounded', 'Open Sans', sans-serif;
   }
-  
+
   a {
     padding-bottom: 10px
   }
-                      
+
   a:hover,
   button:hover,
   a:focus,
@@ -65,7 +65,7 @@
     opacity: 0.8;
     color: white;
   }
-  
+
   h1 {
     a,
     a:hover {
@@ -76,21 +76,21 @@
     a:focus {
       opacity: 1;
       border: 1px dotted rgba(0, 0, 0, .2);
-    }    
+    }
   }
-  
+
   .list-item > a {
     border-bottom-color: $red;
   }
-  
+
   .list-item.active a {
     opacity: 1;
-    
+
     @include mq($medium-only) {
       border-bottom: 4px solid $red;
     }
   }
-  
+
   @include mq($large-and-up) {
     position: fixed;
     width: 166px;
@@ -98,7 +98,7 @@
     height: 100%;
     padding-bottom: 117px;
     border-right: 1px solid $lightestgray;
-    
+
     a {
       padding-bottom: 0;
     }
@@ -149,10 +149,10 @@
 
   &.nav--homepage {
     background-color: $red;
-    
+
     @include mq($large-and-up) {
       border-color: $red;
-      
+
       a,
       button,
       a:focus,
@@ -242,6 +242,10 @@
   > .btn:last-child:after {
     content: none;
   }
+}
+
+.box {
+  padding: 0;
 }
 
 .sitechrome-topbody-right {
