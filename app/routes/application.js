@@ -13,8 +13,20 @@ export default Route.extend(ApplicationRouteMixin, {
   poll: service(),
   store: service(),
   audio: service(),
+  title(tokens) {
+    if (tokens && tokens.length > 0) {
+      let lastToken = tokens.slice(-1);
+      return `${lastToken} | WNYC`;
+    } else {
+      return 'WNYC | New York Public Radio, Podcasts, Live Streaming Radio, News';
+    }
+  },
 
-  beforeModel() {
+  beforeModel({ queryParams }) {
+    if (queryParams.play) {
+      this.get('audio').play(queryParams.play);
+    }
+
     let metrics = get(this, 'metrics');
 
     this._syncBrowserId();
