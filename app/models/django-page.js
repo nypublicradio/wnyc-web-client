@@ -25,11 +25,8 @@ export default DS.Model.extend({
   }),
 
   title: Ember.computed('document', function() {
-    let metaTitle = this.get('document').querySelector('meta[name="title-for-ember"]');
     let titleTag = this.get('document').querySelector('title');
-    if (metaTitle) {
-      return metaTitle.getAttribute('content');
-    } else if (titleTag){
+    if (titleTag) {
       return titleTag.textContent;
     }
   }),
