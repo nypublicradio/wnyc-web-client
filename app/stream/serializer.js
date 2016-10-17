@@ -21,6 +21,7 @@ export default DS.JSONAPISerializer.extend({
     return this._super(store, modelClass, { data }, ...rest);
   },
 
+  // TODO: this should be handled by ember
   _apiFormatStream(data) {
     let keys = [
       'has_playlists', 
@@ -30,7 +31,8 @@ export default DS.JSONAPISerializer.extend({
       'schedule_url',
       'short_description',
       'playlist_url',
-      'whats_on'
+      'whats_on',
+      'audio_bumper'
     ];
     let attributes = {};
     keys.forEach(k => attributes[k] = data[k]);

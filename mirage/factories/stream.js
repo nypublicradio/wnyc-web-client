@@ -4,7 +4,7 @@ export default Factory.extend({
   audio_type: 'stream',
   image_logo: () => faker.image.imageUrl(75, 75),
   name: faker.name.firstName,
-  audioBumper: faker.internet.url,
+  audio_bumper: faker.internet.url,
   slug: (i) => {
     switch (i) {
       case 0:
