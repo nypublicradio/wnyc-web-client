@@ -127,9 +127,13 @@ export default DS.JSONAPISerializer.extend({
       aac = mobile_aac ? mobile_aac : aac;
       mp3 = mobile_mp3 ? mobile_mp3 : mp3;
       
-      // only offer hls streams on mobile for now
-      // the mp3 mount point does not have an extension
-      return [hls, aac, {url: mp3, mimeType: 'audio/mpeg'}];
+      // only offer hls streams on iOS for now, does not compute on android
+      // also: the mp3 mount point does not have an extension
+      if (browser.ios) {
+        return [hls, aac, {url: mp3, mimeType: 'audio/mpeg'}];
+      } else {
+        return [aac, {url: mp3, mimeType: 'audio/mpeg'}];
+      }
     } else {
       // the mp3 mount point does not have an extension
       return [{url: mp3, mimeType: 'audio/mpeg'}, aac];
