@@ -42,6 +42,7 @@ export default Route.extend({
 
   actions: {
     willTransition() {
+      this._super(...arguments);
       beforeTeardown();
       return true;
     }
