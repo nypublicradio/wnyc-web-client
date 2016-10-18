@@ -27,20 +27,21 @@ export default Ember.Service.extend({
     if (!this.get('features').isEnabled('autoplay-prefs')) {
       return false;
     }
-    
+
     return this.get('bumperPlaying') || this.get('bumperDidPlay');
   }),
   isEnabled: computed('autoplayPref', 'queue.items.length', function() {
     if (!this.get('features').isEnabled('autoplay-prefs')){
       return false;
     }
-    
+
     const { autoplayPref, queue } = getProperties(this, 'autoplayPref', 'queue');
+    const items = get(queue, 'items') || [];
     // if there is nothing left in the queue, then it is redundant/unecessary to
     // play the bumper file. The `play` function will still be called on the audio,
     // but will not play anything, anyway, because it won't recognize the `id`
     // parameter
-    if (autoplayPref === 'queue' && get(queue, 'items.length') === 0) {
+    if (autoplayPref === 'queue' && items.length === 0) {
       return false;
     } else {
       return autoplayPref !== 'no_autoplay';
