@@ -1,10 +1,11 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
+import PlayParamMixin from 'overhaul/mixins/play-param';
 import rsvp from 'rsvp';
 const { hash } = rsvp;
 const { get } = Ember;
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(PlayParamMixin, {
   classNames: ['home'],
   metrics: service(),
   
