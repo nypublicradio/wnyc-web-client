@@ -7,8 +7,9 @@ export default Route.extend({
   metrics: service(),
 
   setupController(controller) {
-    controller.set('isMobile', window.Modernizr.touch);
+    controller.set('isMobile', window.Modernizr.touch || window.Modernizr.touchevents);
     controller.set('isAndroid', /Android/i.test(window.navigator.userAgent));
+    return this._super(...arguments);
   },
   redirect(model, transition) {
     let prefs = this.get('discoverPrefs');

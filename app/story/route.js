@@ -6,6 +6,10 @@ const { hash: waitFor } = Ember.RSVP;
 export default Ember.Route.extend({
   metrics: service(),
   session: service(),
+  setupController(controller) {
+    controller.set('isMobile', window.Modernizr.touch || window.Modernizr.touchevents);
+    return this._super(...arguments);
+  },
   model({ slug }) {
     return this.store.findRecord('django-page', `story/${slug}`.replace(/\/*$/, '/')).then(page => {
       let story = page.get('wnycContent');
