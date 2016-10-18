@@ -15,7 +15,9 @@ export default DS.Model.extend({
     // Timezones from the API are Eastern timezone, but provided w/o a timezone. 'UTC' is
     // necessary to not shift the time away from ET.
     const timeString = this.get('start').toLocaleTimeString('en-US', { timeZone: 'UTC', hour12: true });
-    const [hours, minutes, seconds, amOrPm] = timeString.split(/[^A-Za-z00-9]/)
+    const hours = timeString.split(/[^A-Za-z00-9]/)[0];
+    const minutes = timeString.split(/[^A-Za-z00-9]/)[1];
+    const amOrPm = timeString.split(/[^A-Za-z00-9]/)[3];
     return `${hours}:${minutes} ${amOrPm}`;
   }),
 });
