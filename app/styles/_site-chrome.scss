@@ -244,10 +244,6 @@
   }
 }
 
-.box {
-  padding: 0;
-}
-
 .sitechrome-topbody-right {
   @include display-flex;
   @include justify-content(space-between);
