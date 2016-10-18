@@ -1,0 +1,57 @@
+@import "mixins";
+
+.schedule-playlists {
+  position: relative;
+
+  .schedule-tabs {
+    @include display-flex;
+    @include flex-flow(row wrap);
+  }
+
+  .schedule-tabs li {
+    @include display-flex;
+
+    border-radius: 3px;
+    height: 30px;
+  }
+
+  .schedule-tabs li.ui-tabs-selected {
+    background-color: #de1e3d;
+  }
+
+  .schedule-tabs li a {
+    background: 0;
+    border-radius: 3px;
+    font-size: 14px;
+    height: 30px;
+    margin: 0 4px;
+    padding: 4px 6px 3px;
+    text-align: center;
+    text-indent: 0;
+    white-space: nowrap;
+  }
+
+  .schedule-tabs li.ui-tabs-selected a {
+    color: white;
+  }
+
+  .print-schedule {
+    position: absolute;
+    top: 50px;
+    right: 0;
+  }
+
+  .schedule-table .head {
+    @include display-flex;
+    @include flex-flow(row nowrap);
+
+    align-items: baseline;
+  }
+
+  .schedule-table .time {
+    @include flex(0 0 100px);
+  }
+  .schedule-table .details {
+    margin-left: 100px;
+  }
+}

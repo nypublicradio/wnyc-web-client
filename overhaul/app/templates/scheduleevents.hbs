@@ -1,0 +1,68 @@
+<div class="l-constrained">
+    {{#google-ad ad="leaderboard" hasMarquee=model.hasMarquee class="l-constrained is-collapsed"}}
+    <div id="leaderboard" class="aligncenter"></div>
+    {{/google-ad}}
+	<div class="container_12 site-container">
+		<div class="grid_8 main schedule-playlists">
+            <h1 class="h1 h1--extrabold h1--mq-small nudge">Daily Schedule</h1>
+            <div id="daily-schedule">
+
+                {{! Station navigation start}}
+                <div id="station-nav" class="station-nav clearfix">
+                    <ul class="schedule-tabs clearfix">
+                        <li class="wnyc-fm939 first ui-tabs-selected">
+                            <a href="?scheduleStation=wnyc-fm939" class="link--dark">WNYC 93.9 FM</a>
+                        </li>
+                        <li class="wnyc-am820">
+                            <a href="?scheduleStation=wnyc-am820" class="link--dark">WNYC AM 820</a>
+                        </li>
+                        <li class="njpr">
+                            <a href="?scheduleStation=njpr" class="link--dark">NJPR</a>
+                        </li>
+                        <li class="special-events-stream">
+                            <a href="?scheduleStation=special-events-stream" class="link--dark">WNYC Special</a>
+                        </li>
+                        <li class="jonathan-channel last">
+                            <a href="?scheduleStation=jonathan-channel" class="link--dark">The Jonathan Channel</a>
+                        </li>
+                    </ul>
+                    <div class="print-schedule">
+                        <a href="http://www.wnyc.org/resources/96650/wnyc-schedule.pdf" target="_blank">
+                            Weekly Schedule (.pdf)
+                        </a>
+                    </div>
+                </div>
+                {{! /Station navigation end}}
+
+                {{! ScheduleEvent list }}
+                <ul class="schedule-table">
+                    {{#each model as |scheduleEvent|}}
+                    <div class="event">
+                        {{#if scheduleEvent.objIsSchedule}}
+                        <li class="head">
+                            <div class="time">{{scheduleEvent.startReadable}}</div>
+                            <div class="program">
+                                <a href={{scheduleEvent.parentUrl}}>{{scheduleEvent.parentTitle}}</a>
+                            </div>
+                        </li>
+                        <li class="details">
+                            <div class="text"><a href={{scheduleEvent.scheduleEventUrl}}>{{scheduleEvent.scheduleEventTitle}}</a></div>
+                        </li>
+                        {{else}}
+                        <li class="head">
+                            <div class="time">{{scheduleEvent.startReadable}}</div>
+                            <div class="program"><a href={{scheduleEvent.scheduleEventUrl}}>{{scheduleEvent.scheduleEventTitle}}</a></div>
+                        </li>
+                        <li class="details">
+                            <a href={{scheduleEvent.parentUrl}}>{{scheduleEvent.parentTitle}}</a>
+                        </li>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </ul>
+                {{! /ScheduleEvent list }}
+
+            </div>
+        </div>
+	</div>
+</div>
