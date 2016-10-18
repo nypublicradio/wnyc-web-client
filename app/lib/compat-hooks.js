@@ -112,6 +112,12 @@ export function beforeAppend(element, page) {
     }
     container.appendChild(newContent);
   }
+  
+  // is there a sitewide chunk? save it from demolition
+  let sitewideChunk = element.querySelector('#wnyc-sitewide');
+  if (sitewideChunk) {
+    container.appendChild(sitewideChunk);
+  }
   // container's childNodes are appended to the DOM; container is discarded
   return container;
 }
