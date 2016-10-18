@@ -343,8 +343,9 @@ export default Service.extend({
 
     if (nextUp) {
       this.play(nextUp.get('id'), 'queue');
+      return true;
     } else {
-      this._flushContext();
+      return this._flushContext();
     }
   },
 
@@ -353,7 +354,6 @@ export default Service.extend({
   finishedTrack() {
     let context = get(this, 'currentContext') || '';
     let bumper = get(this, 'bumperState');
-    let discoverQueue = get(this, 'discoverQueue');
     let currentId = get(this, 'currentId');
     let currentStory = get(this, 'currentStory');
 
@@ -372,21 +372,16 @@ export default Service.extend({
       this.sendCompleteListenAction(currentId);
     }
     
+    let willContinuePlaying = true;
     if (context === 'queue') {
-      this.playNextInQueue();
+      willContinuePlaying = this.playNextInQueue();
     } else if (context === 'discover') {
-      this.playDiscoverQueue();
-    } else if (context === 'home-page' || context === 'continuous-play-bumper') {
-      this._flushContext();
+      willContinuePlaying = this.playDiscoverQueue();
+    } else {
+      willContinuePlaying = this._flushContext();
     }
 
-    if (context === 'discover' && discoverQueue.nextTrack(currentId)) {
-      // Once discover becomes a selectable choice for audio preferences
-      // then this can get moved into the bumper-state service.
-      return;
-    }
-
-    if (get(bumper, 'isEnabled')) {
+    if (get(bumper, 'isEnabled') && !willContinuePlaying) {
       set(this, 'bumperPlayed', true);
       let next = bumper.getNext(context);
       this.play(...next);
@@ -394,15 +389,16 @@ export default Service.extend({
   },
 
   _flushContext() {
-    set(this, 'currentContext', null);
+    return set(this, 'currentContext', null);
   },
 
   playDiscoverQueue() {
     let nextTrack = this.get('discoverQueue').nextItem(this.get('currentId'));
     if (nextTrack) {
       this.play(get(nextTrack, 'id'), 'discover');
+      return true;
     } else {
-      this._flushContext();
+      return this._flushContext();
     }
   },
   
