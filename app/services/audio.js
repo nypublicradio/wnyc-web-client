@@ -134,7 +134,7 @@ export default Service.extend({
       return s.get('audio');
     });
 
-    return this.get('hifi').play(urlPromise).then((/*sound*/) => {
+    return this.get('hifi').play(urlPromise).then(({sound, failures}) => {
       // independent of context, if this item is already the first item in your
       // listening history, don't bother adding it again
       if (get(this, 'listens').indexByStoryPk(id) !== 0) {
@@ -180,8 +180,11 @@ export default Service.extend({
           });
         }
       }
+      if (failures.length) {
+        failures.forEach(failed => this._trackSoundFailure(failed, sound));
+      }
     })
-    .catch(() => this.set('hasErrors', true));
+    .catch(e => this._trackTotalSoundFailure(e));
   },
 
   playStream(slug, context = '') {
@@ -204,7 +207,7 @@ export default Service.extend({
       return s.get('urls');
     });
 
-    return this.get('hifi').play(urlPromise).then((/*sound*/) => {
+    return this.get('hifi').play(urlPromise).then(({sound, failures}) => {
       set(this, 'hasErrors', false);
       let wasStream = get(this, 'currentAudio.audioType') === 'stream';
       let oldStream = get(this, 'currentAudio.name');
@@ -252,8 +255,11 @@ export default Service.extend({
           });
         }
       }
+      if (failures.length) {
+        failures.forEach(failed => this._trackSoundFailure(failed, sound));
+      }
     })
-    .catch(() => this.set('hasErrors', true));
+    .catch(e => this._trackTotalSoundFailure(e));
   },
 
   playBumper(url, bumperContext) {
@@ -368,7 +374,7 @@ export default Service.extend({
       this.play(...next);
     }
   },
-
+  
   _flushContext() {
     set(this, 'currentContext', null);
   },
@@ -422,6 +428,27 @@ export default Service.extend({
     let metrics = get(this, 'metrics');
     metrics.trackEvent('NprAnalytics', assign(options, {isNpr: true}));
   },
+  
+  _trackSoundFailure({connectionName, error, url}, sound) {
+    // let currentAudio = get(this, 'currentAudio');
+    // let title = currentAudio.get(`${currentAudio.get('isStream') ? 'name': 'title'}`);
+    this._trackPlayerEvent({
+      action: `Sound Failover | ${connectionName}`,
+      label: `reason: ${error} | bad url: ${url} | ${sound ? `good url: ${get(sound, 'url')}` : 'no successful url'}`
+    });
+  },
+  
+  _trackTotalSoundFailure(e) {
+    this.set('hasErrors', true);
+    this._trackPlayerEvent({
+      action: 'Sound Error',
+      label: e.message
+    });
+    if (e.failures.length) {
+      e.failures.forEach(failed => this._trackSoundFailure(failed));
+    }
+  },
+
 
   _firstTimePlay() {
     if (get(this, 'playedOnce')) {
