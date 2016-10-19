@@ -268,23 +268,6 @@
 *      .l-full(style="background-color: rgba(0,0,0,0.15)")
 *          button.btn.btn--white Useful on a dark background
 */
-.btn--white {
-  color: white;
-  border-color: rgba(white, 0.2);
-
-  &:not([disabled]) {
-    &:hover,
-    &:focus {
-      color: white;
-      border-color: rgba(white,.7);
-    }
-  }
-}
-
-.btn--whitetext {
-  color: white;
-}
-
 @mixin btn--white {
   border-color: rgba(white, 0.2);
   color: white;
@@ -296,6 +279,14 @@
       border-color: rgba(white,.7);
     }
   }
+}
+
+.btn--white {
+  @include btn--white
+}
+
+.btn--whitetext {
+  color: white;
 }
 
 
