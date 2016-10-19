@@ -1,9 +1,19 @@
 .schedule-playlists {
   position: relative;
 
+  ul {
+    padding: 0;
+    list-style-type: none;
+  }
+
+  .station-nav {
+    height: auto;
+  }
+
   .schedule-tabs {
     @include display-flex;
     @include flex-flow(row wrap);
+
   }
 
   .schedule-tabs li {
@@ -13,23 +23,29 @@
     height: 30px;
   }
 
-  .schedule-tabs li.ui-tabs-selected {
-    background-color: #de1e3d;
+  .schedule-tabs li.active {
+    background-color: $red;
   }
 
   .schedule-tabs li a {
     background: 0;
     border-radius: 3px;
     font-size: 14px;
+    font-weight: 600;
     height: 30px;
     margin: 0 4px;
     padding: 4px 6px 3px;
     text-align: center;
     text-indent: 0;
     white-space: nowrap;
+    color: $lightgray;
+
+    &:hover {
+      color: $red;
+    }
   }
 
-  .schedule-tabs li.ui-tabs-selected a {
+  .schedule-tabs li.active a {
     color: white;
   }
 
@@ -37,19 +53,161 @@
     position: absolute;
     top: 50px;
     right: 0;
+    font-size: 14px;
+
+    @include mq($small-only) {
+      display: none;
+    }
+  }
+
+  .print-schedule a {
+    color: $lightgray;
+
+    &:hover {
+      color: $blue;
+    }
+  }
+
+  .schedule-dates {
+    @include display-flex;
+    @include flex-flow(row nowrap);
+
+    border-top: 1px solid $nearwhite;
+    border-bottom: 1px solid $nearwhite;
+    padding: 15px 0;
+    margin: 10px 0;
+  }
+
+  .schedule-dates li {
+    @include display-flex;
+    @include flex(1 1 auto);
+    @include justify-content(center);
+    @include align-items(center);
+  }
+
+  .schedule-dates li span {
+    @include mq($small-only) {
+      display: none;
+    }
+  }
+
+  .schedule-dates li a {
+    font-size: 12px !important;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700 !important;
+    color: #777;
+
+    &:hover,
+    &:hover path {
+      color: $blue;
+      fill: $blue;
+      border-color: white;
+    }
+  }
+
+  .schedule-dates li.today {
+    text-align: center;
+    font-size: 14px;
+    width: 300px;
+    color: #333;
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .schedule-dates svg {
+    width: 20px;
+
+    path {
+      fill: $lightgray;
+    }
+
+    @include mq($small-only) {
+      width: 26px;
+      height: 26px;
+    }
+  }
+
+  .schedule-dates {
+    .action-button-icon {
+      display: inline;
+      position: relative;
+      top: 2px;
+
+      svg {
+        width: 20px;
+
+        path {
+          fill: $lightgray;
+        }
+      }
+    }
+  }
+
+  .schedule-table .event {
+    border-bottom: 1px solid $nearwhite;
+    padding: 10px 0;
+  }
+
+  .schedule-table.currentlyLoading {
+    transition: all 0.2s ease;
+    opacity: 0.5;
   }
 
   .schedule-table .head {
     @include display-flex;
-    @include flex-flow(row nowrap);
+    @include flex-flow(row wrap);
 
     align-items: baseline;
+    font-size: 16px;
+    font-weight: normal;
+    color: $darkergray;
+    background: none;
+    border: none;
+    margin: 0;
+    height: auto;
+    padding: 0;
+    line-height: 27px;
   }
 
   .schedule-table .time {
     @include flex(0 0 100px);
+
+    color: $lightergray;
+    font-weight: 600;
+    letter-spacing: 1px;
   }
+
+  .schedule-table .program {
+    @include flex(1 0 700px);
+
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .schedule-table .program a {
+    color: #333;
+
+    &:hover {
+      color: $blue;
+    }
+  }
+
   .schedule-table .details {
     margin-left: 100px;
+    font-size: 16px;
+    list-style: none;
+
+    @include mq($small-only) {
+      margin-left: 0;
+    }
+  }
+
+  .schedule-table .text {
+    margin-bottom: 0;
   }
 }
+

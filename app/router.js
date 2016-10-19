@@ -37,6 +37,8 @@ Router.map(function() {
   this.route('schedule', function() {
     this.route('date', {path: ':year/:month/:day'});
   });
+  this.route('scheduleevents-redirect', { path: 'scheduleevents' });
+  this.route('scheduleevents', { path: 'scheduleevents/:year/:month/:day' });
   this.route('topics');
   this.route('settings');
 
@@ -61,7 +63,7 @@ Router.map(function() {
   // from the django site. It will be used when there's nothing more
   // specific.
   this.route('djangorendered', { path: '*upstream_url' });
-  this.route('scheduleevents');
+
 });
 
 export default Router;

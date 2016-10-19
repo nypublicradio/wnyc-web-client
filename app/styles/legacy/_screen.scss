@@ -4596,48 +4596,6 @@ button {
   }
 }
 
-.schedule-tabs {
-  list-style: none;
-  padding: 0;
-}
-
-#station-nav {
-  height: 65px;
-  margin-bottom: (1.25 / 2) * 1rem;
-
-  ul.schedule-tabs li a {
-    height: 30px !important;
-    border-bottom: none;
-  }
-}
-
-.schedule-dates,
-.schedule-table {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-#daily-schedule ul.schedule-dates {
-  li.yesterday,
-  li.tomorrow {
-    width: 140px;
-    a {
-      font-size: 14px;
-      font-weight: 600;
-    }
-  }
-
-  li.today {
-    width: 339px;
-    font-weight: 700;
-  }
-}
-
-.schedule-header > h2 {
-  font-weight: 600;
-}
-
 .clearfix {
   @extend %clearfix;
 }

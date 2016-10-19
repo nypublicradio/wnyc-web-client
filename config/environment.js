@@ -125,6 +125,9 @@ module.exports = function(environment) {
       'object-src': "'self' *.wnyc.net:* *.wnyc.org *.moatads.com *.googlesyndication.com",
       'font-src': "'self' data: fonts.gstatic.com",
       'frame-src': "'self' *"
+    },
+    moment: {
+      includeTimezone: '2010-2020'
     }
   };
 
