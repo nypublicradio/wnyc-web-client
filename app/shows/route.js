@@ -3,7 +3,7 @@ import RSVP from 'rsvp';
 import ENV from 'overhaul/config/environment';
 
 export default Route.extend({
-  titleToken: 'All Shows, Podcasts, and Programs',
+  titleToken: 'All Shows, Podcasts and Programs',
 
   model() {
     return RSVP.hash({
