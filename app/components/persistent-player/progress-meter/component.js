@@ -1,15 +1,7 @@
 import Ember from 'ember';
+import { findTouchById, isFakeClick } from 'overhaul/lib/touch-utils';
 const { Component, computed, get, set } = Ember;
 const { htmlSafe } = Ember.String;
-
-const findTouchById = function(touchList, identifier) {
-  for (let i = 0; i < touchList.length; i++) {
-    let touch = touchList.item(i);
-    if (touch.identifier === identifier) {
-      return touch;
-    }
-  }
-};
 
 export default Component.extend({
   isLoaded: computed.bool('duration'),
@@ -51,13 +43,17 @@ export default Component.extend({
   handlePosition: 0,
 
   mouseMove(e) {
-    // prevent dragging and selecting
-    e.preventDefault();
-    this._updateHandlePosition(e);
+    let isLeftClick = e.which === 1;
+    if (isLeftClick && !isFakeClick(e.originalEvent)) {
+      // prevent dragging and selecting
+      e.preventDefault();
+      this._updateHandlePosition(e);
+    }
   },
 
   mouseDown(e) {
-    if (get(this, 'isLoaded') && e.which === 1 /* left click */) {
+    let isLeftClick = e.which === 1;
+    if (get(this, 'isLoaded') && isLeftClick && !isFakeClick(e.originalEvent)) {
       this._updateAudioPosition(e);
       if (e.target.classList.contains('progress-playhead')) {
         this._startDragging();
