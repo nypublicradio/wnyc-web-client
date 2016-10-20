@@ -181,10 +181,10 @@ export default Service.extend({
         }
       }
       if (failures && failures.length) {
-        failures.forEach(failed => this._trackSoundFailure(failed, sound));
+        failures.forEach(failed => this._trackCodecFailure(failed, sound));
       }
     })
-    .catch(e => this._trackTotalSoundFailure(e));
+    .catch(e => this._trackSoundFailure(e));
   },
 
   playStream(slug, context = '') {
@@ -256,10 +256,10 @@ export default Service.extend({
         }
       }
       if (failures && failures.length) {
-        failures.forEach(failed => this._trackSoundFailure(failed, sound));
+        failures.forEach(failed => this._trackCodecFailure(failed, sound));
       }
     })
-    .catch(e => this._trackTotalSoundFailure(e));
+    .catch(e => this._trackSoundFailure(e));
   },
 
   playBumper(url, bumperContext) {
@@ -429,23 +429,21 @@ export default Service.extend({
     metrics.trackEvent('NprAnalytics', assign(options, {isNpr: true}));
   },
   
-  _trackSoundFailure({connectionName, error, url}, sound) {
-    // let currentAudio = get(this, 'currentAudio');
-    // let title = currentAudio.get(`${currentAudio.get('isStream') ? 'name': 'title'}`);
+  _trackCodecFailure({connectionName, error, url}, sound) {
     this._trackPlayerEvent({
-      action: `Sound Failover | ${connectionName}`,
+      action: `Codec Failure | ${connectionName}`,
       label: `reason: ${error} | bad url: ${url} | ${sound ? `good url: ${get(sound, 'url')}` : 'no successful url'}`
     });
   },
   
-  _trackTotalSoundFailure({message, failures}) {
+  _trackSoundFailure({message, failures}) {
     this.set('hasErrors', true);
     this._trackPlayerEvent({
       action: 'Sound Error',
       label: message
     });
     if (failures && failures.length) {
-      failures.forEach(failed => this._trackSoundFailure(failed));
+      failures.forEach(failed => this._trackCodecFailure(failed));
     }
   },
 
