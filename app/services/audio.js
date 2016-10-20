@@ -180,7 +180,7 @@ export default Service.extend({
           });
         }
       }
-      if (failures.length) {
+      if (failures && failures.length) {
         failures.forEach(failed => this._trackSoundFailure(failed, sound));
       }
     })
@@ -255,7 +255,7 @@ export default Service.extend({
           });
         }
       }
-      if (failures.length) {
+      if (failures && failures.length) {
         failures.forEach(failed => this._trackSoundFailure(failed, sound));
       }
     })
@@ -438,14 +438,14 @@ export default Service.extend({
     });
   },
   
-  _trackTotalSoundFailure(e) {
+  _trackTotalSoundFailure({message, failures}) {
     this.set('hasErrors', true);
     this._trackPlayerEvent({
       action: 'Sound Error',
-      label: e.message
+      label: message
     });
-    if (e.failures.length) {
-      e.failures.forEach(failed => this._trackSoundFailure(failed));
+    if (failures && failures.length) {
+      failures.forEach(failed => this._trackSoundFailure(failed));
     }
   },
 
