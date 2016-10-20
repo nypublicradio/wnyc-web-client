@@ -1,6 +1,6 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
-import { registerAndInjectMock } from 'overhaul/tests/helpers/register-mock';
+import { registerMockOnInstance } from 'overhaul/tests/helpers/register-mock';
 import Service from 'ember-service';
 import { resetHTML } from 'overhaul/tests/helpers/html';
 
@@ -21,7 +21,7 @@ moduleForAcceptance('Acceptance | play param', {
 
 test('play param transitions', function(assert) {
   let application = this.application;
-  let audio = registerAndInjectMock(application, 'service:mockAudio', mockAudio, 'audio');
+  let audio = registerMockOnInstance(application, 'service:audio', mockAudio);
   
   server.create('django-page', {
     id: '/',
