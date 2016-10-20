@@ -1,7 +1,6 @@
-import DS from 'ember-data';
+import ApplicationAdapter from '../adapters/application';
 
-export default DS.JSONAPIAdapter.extend({
-  namespace: 'api/v3',
+export default ApplicationAdapter.extend({
   pathForType: function(type) {
     return type;
   },
