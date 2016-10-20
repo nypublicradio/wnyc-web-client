@@ -1,5 +1,26 @@
+.schedule-container {
+  @include display-flex;
+  @include flex-direction(row);
+}
+
+.schedule-container aside {
+  @include display-flex;
+  @include flex(0 0 350px);
+  @include justify-content(center);
+
+  @include mq($up-to-wide) {
+    display: none;
+  }
+}
+
+.schedule-container main {
+  @include display-flex;
+  @include flex-grow(1);
+}
+
 .schedule-playlists {
   position: relative;
+  width: 100%;
 
   ul {
     padding: 0;
@@ -13,7 +34,6 @@
   .schedule-tabs {
     @include display-flex;
     @include flex-flow(row wrap);
-
   }
 
   .schedule-tabs li {
@@ -51,7 +71,7 @@
 
   .print-schedule {
     position: absolute;
-    top: 50px;
+    top: 15px;
     right: 0;
     font-size: 14px;
 
@@ -146,8 +166,12 @@
   }
 
   .schedule-table .event {
+    @include display-flex;
+    @include flex-flow(row wrap);
+
     border-bottom: 1px solid $nearwhite;
     padding: 10px 0;
+    margin-top: 3px;
   }
 
   .schedule-table.currentlyLoading {
@@ -155,55 +179,40 @@
     opacity: 0.5;
   }
 
-  .schedule-table .head {
+  .schedule-table .details {
     @include display-flex;
-    @include flex-flow(row wrap);
-
-    align-items: baseline;
-    font-size: 16px;
-    font-weight: normal;
-    color: $darkergray;
-    background: none;
-    border: none;
-    margin: 0;
-    height: auto;
-    padding: 0;
-    line-height: 27px;
+    @include flex-direction(column);
+    @include flex(1 0 560px);
   }
 
   .schedule-table .time {
+    @include display-flex;
     @include flex(0 0 100px);
 
     color: $lightergray;
     font-weight: 600;
     letter-spacing: 1px;
+    padding-bottom: 3px;
   }
 
-  .schedule-table .program {
-    @include flex(1 0 700px);
-
+  .schedule-table .program.schedule-event {
     font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
     font-weight: 700;
-  }
+    letter-spacing: 2px;
+    padding: 4px 0;
+    text-transform: uppercase;
 
-  .schedule-table .program a {
-    color: #333;
+    a {
+      color: #333;
 
-    &:hover {
-      color: $blue;
+      &:hover {
+        color: $blue;
+      }
     }
   }
 
-  .schedule-table .details {
-    margin-left: 100px;
-    font-size: 16px;
-    list-style: none;
-
-    @include mq($small-only) {
-      margin-left: 0;
-    }
+  .schedule-table .program.airing p {
+    margin-bottom: 0;
   }
 
   .schedule-table .text {

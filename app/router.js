@@ -34,11 +34,8 @@ Router.map(function() {
   this.route('blog', {path: 'blogs/:slug'}, subpageRoutes);
   this.route('stream', {path: 'streams'});
   this.route('playlist', {path: 'streams/:slug'});
-  this.route('schedule', function() {
-    this.route('date', {path: ':year/:month/:day'});
-  });
-  this.route('scheduleevents-redirect', { path: 'scheduleevents' });
-  this.route('scheduleevents', { path: 'scheduleevents/:year/:month/:day' });
+  this.route('schedule-redirect', { path: 'schedule' });
+  this.route('schedule', { path: 'schedule/:year/:month/:day' });
   this.route('topics');
   this.route('settings');
 

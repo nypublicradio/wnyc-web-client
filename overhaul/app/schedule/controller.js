@@ -21,23 +21,23 @@ export default Ember.Controller.extend({
     return this.get('todaysDateAsMoment').clone().add(-1, 'days').format('dddd');
   }),
   yesterdayLink: Ember.computed('todaysDateAsMoment', function() {
-    var yesterdayMoment = this.get('todaysDateAsMoment').clone().add(-1, 'days');
+    const yesterdayMoment = this.get('todaysDateAsMoment').clone().add(-1, 'days');
     return {
       year: yesterdayMoment.format('YYYY'),
       month: yesterdayMoment.format('MMM').toLowerCase(),
       day: yesterdayMoment.format('DD'),
-    }
+    };
   }),
   tomorrow: Ember.computed('todaysDateAsMoment', function() {
     // Returns the name of tomorrow's day ("Wednesday")
     return this.get('todaysDateAsMoment').clone().add(1, 'days').format('dddd');
   }),
   tomorrowLink: Ember.computed('todaysDateAsMoment', function() {
-    var tomorrowMoment = this.get('todaysDateAsMoment').clone().add(1, 'days');
+    const tomorrowMoment = this.get('todaysDateAsMoment').clone().add(1, 'days');
     return {
       year: tomorrowMoment.format('YYYY'),
       month: tomorrowMoment.format('MMM').toLowerCase(),
       day: tomorrowMoment.format('DD'),
-    }
+    };
   }),
 });

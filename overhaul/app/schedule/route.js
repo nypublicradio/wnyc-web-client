@@ -22,15 +22,15 @@ export default Ember.Route.extend({
       apiQueryParams.scheduleDate = moment().format('YYYY-MM-DD');
     }
 
-    return this.store.query('scheduleevent', apiQueryParams);
+    return this.store.query('schedule', apiQueryParams);
   },
   setupController: function(controller, model) {
     controller.set('params', this.get('params'));
     this._super(controller, model);
   },
   actions: {
-    loading: function(transition, originRoute) {
-      let controller = this.controllerFor('scheduleevents');
+    loading: function(transition) {
+      const controller = this.controllerFor('schedule');
       controller.set('currentlyLoading', 'currentlyLoading');
       transition.promise.finally(function() {
         controller.set('currentlyLoading', null);

@@ -6,7 +6,7 @@ export default Ember.Route.extend({
     const year = moment().tz('America/New_York').format('YYYY');
     const month = moment().tz('America/New_York').format('MMM').toLowerCase();
     const day = moment().tz('America/New_York').format('DD');
-    this.replaceWith('scheduleevents', year, month, day, {
+    this.replaceWith('schedule', year, month, day, {
       queryParams: {
         scheduleStation: queryParams.scheduleStation || 'wnyc-fm939'
       },
