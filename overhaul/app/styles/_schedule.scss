@@ -27,27 +27,29 @@
     list-style-type: none;
   }
 
-  .station-nav {
+  .station-navigation {
     height: auto;
   }
 
-  .schedule-tabs {
+  .schedule-station-tabs {
     @include display-flex;
     @include flex-flow(row wrap);
+
+		margin-bottom: 0;
   }
 
-  .schedule-tabs li {
+  .schedule-station-tabs li {
     @include display-flex;
 
     border-radius: 3px;
     height: 30px;
   }
 
-  .schedule-tabs li.active {
+  .schedule-station-tabs li.active {
     background-color: $red;
   }
 
-  .schedule-tabs li a {
+  .schedule-station-tabs li a {
     background: 0;
     border-radius: 3px;
     font-size: 14px;
@@ -65,11 +67,11 @@
     }
   }
 
-  .schedule-tabs li.active a {
+  .schedule-station-tabs li.active a {
     color: white;
   }
 
-  .print-schedule {
+  .print-wnyc-schedule {
     position: absolute;
     top: 15px;
     right: 0;
@@ -80,7 +82,7 @@
     }
   }
 
-  .print-schedule a {
+  .print-wnyc-schedule a {
     color: $lightgray;
 
     &:hover {
@@ -88,7 +90,7 @@
     }
   }
 
-  .schedule-dates {
+  .schedule-date-control {
     @include display-flex;
     @include flex-flow(row nowrap);
 
@@ -98,20 +100,20 @@
     margin: 10px 0;
   }
 
-  .schedule-dates li {
+  .schedule-date-control li {
     @include display-flex;
     @include flex(1 1 auto);
     @include justify-content(center);
     @include align-items(center);
   }
 
-  .schedule-dates li span {
+  .schedule-date-control li span {
     @include mq($small-only) {
       display: none;
     }
   }
 
-  .schedule-dates li a {
+  .schedule-date-control li a {
     font-size: 12px !important;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -126,7 +128,7 @@
     }
   }
 
-  .schedule-dates li.today {
+  .schedule-date-control li.today {
     text-align: center;
     font-size: 14px;
     width: 300px;
@@ -136,7 +138,7 @@
     text-transform: uppercase;
   }
 
-  .schedule-dates svg {
+  .schedule-date-control svg {
     width: 20px;
 
     path {
@@ -149,7 +151,7 @@
     }
   }
 
-  .schedule-dates {
+  .schedule-date-control {
     .action-button-icon {
       display: inline;
       position: relative;
@@ -171,7 +173,7 @@
 
     border-bottom: 1px solid $nearwhite;
     padding: 10px 0;
-    margin-top: 3px;
+    margin-top: 5px;
   }
 
   .schedule-table.currentlyLoading {
@@ -195,7 +197,7 @@
     padding-bottom: 3px;
   }
 
-  .schedule-table .program.schedule-event {
+  .schedule-table .show-title.schedule-event {
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 2px;
@@ -211,7 +213,7 @@
     }
   }
 
-  .schedule-table .program.airing p {
+  .schedule-table .show-title.airing p {
     margin-bottom: 0;
   }
 
@@ -219,4 +221,3 @@
     margin-bottom: 0;
   }
 }
-

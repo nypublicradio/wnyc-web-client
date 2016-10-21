@@ -10,9 +10,9 @@
                 <div id="daily-schedule">
 
                     {{! Station navigation start}}
-                    <div id="station-nav" class="station-nav">
-                        <ul class="schedule-tabs">
-                            {{#link-to "schedule" params.year params.month params.day (query-params scheduleStation="wnyc-fm939") tagName="li"  class="wnyc-fm939 first ui-tabs-selected"}}
+                    <div id="station-nav" class="station-navigation">
+                        <ul class="schedule-station-tabs">
+                            {{#link-to "schedule" params.year params.month params.day (query-params scheduleStation="wnyc-fm939") tagName="li"  class="wnyc-fm939 first"}}
                             <a href="?scheduleStation=wnyc-fm939" class="link--dark">WNYC 93.9 FM</a>
                             {{/link-to}}
                             {{#link-to "schedule" params.year params.month params.day (query-params scheduleStation="wnyc-am820") tagName="li" class="wnyc-am820"}}
@@ -28,7 +28,7 @@
                             <a href="?scheduleStation=jonathan-channel" class="link--dark">The Jonathan Channel</a>
                             {{/link-to}}
                         </ul>
-                        <div class="print-schedule">
+                        <div class="print-wnyc-schedule">
                             <a href="http://www.wnyc.org/resources/96650/wnyc-schedule.pdf" target="_blank">
                                 Weekly Schedule (.pdf)
                             </a>
@@ -37,7 +37,7 @@
                     {{! /Station navigation end}}
 
                     {{! Date navigation }}
-                    <ul class="schedule-dates">
+                    <ul class="schedule-date-control">
                         <li class="yesterday first">
                             {{#link-to "schedule" yesterdayLink.year yesterdayLink.month yesterdayLink.day (query-params scheduleStation=scheduleStation)}}
                             <div class="action-button-icon">
@@ -71,7 +71,7 @@
                                 <div class="time">{{scheduleEvent.startReadable}}</div>
                             </li>
                             <li class="details">
-                                <div class="schedule-event program">
+                                <div class="schedule-event show-title">
                                     <a href={{scheduleEvent.parentUrl}}>{{scheduleEvent.parentTitle}}</a>
                                 </div>
                                 <div class="text">
@@ -83,7 +83,7 @@
                                 <div class="time">{{scheduleEvent.startReadable}}</div>
                             </li>
                             <li class="details">
-                                <div class="airing program">
+                                <div class="airing show-title">
                                     <p>{{scheduleEvent.scheduleEventTitle}}</p>
                                 </div>
                                 <div class="airing text">
