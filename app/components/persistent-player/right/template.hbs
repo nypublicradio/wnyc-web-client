@@ -1,8 +1,10 @@
-{{persistent-player.volume-control
-  volume=volume
-  toggleMute=toggleMute
-  isMuted=isMuted
-  setVolume=setVolume}}
+{{#if (can-change-volume)}}
+  {{persistent-player.volume-control
+    volume=volume
+    toggleMute=toggleMute
+    isMuted=isMuted
+    setVolume=setVolume}}
+{{/if}}
 
 {{persistent-player.queue-button
   queueLength=queueLength

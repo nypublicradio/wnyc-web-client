@@ -13,10 +13,6 @@ $slider-spacing: $slider-spacing-left + $slider-spacing-right;
   height: 100%;
   white-space: nowrap;
   margin-left: 42px;
-
-  .touch & {
-    display: none;
-  }
 }
 
 .volume-control {
