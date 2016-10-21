@@ -53,14 +53,6 @@ export default Component.extend({
 
   handlePosition: 0,
 
-  mouseMove(e) {
-    if (isLegitClick(e)) {
-      // prevent dragging and selecting
-      e.preventDefault();
-      this._updateHandlePosition(e);
-    }
-  },
-
   mouseDown(e) {
     if (get(this, 'isLoaded') && isLegitClick(e)) {
       this._updateAudioPosition(e);
@@ -72,6 +64,16 @@ export default Component.extend({
   mouseUp() {
     set(this, 'lastInteraction', 'mouse');
     this._cancelDragging();
+  },
+  mouseEnter() {
+    set(this, 'isHovering', true);
+  },
+  mouseMove(e) {
+    if (isLegitClick(e)) {
+      // prevent dragging and selecting
+      e.preventDefault();
+      this._updateHandlePosition(e);
+    }
   },
   mouseLeave() {
     set(this, 'lastInteraction', 'mouse');
@@ -105,10 +107,6 @@ export default Component.extend({
     set(this, 'lastInteraction', 'touch');
     set(this, 'isTouching', false);
     this._cancelDragging();
-  },
-
-  mouseEnter() {
-    set(this, 'isHovering', true);
   },
   _startDragging(touch) {
     set(this, 'isDragging', true);
