@@ -1,7 +1,18 @@
 import Ember from 'ember';
-import { findTouchById, isFakeClick } from 'overhaul/lib/touch-utils';
+import { findTouchById, isSimulatedMouseEvent } from 'overhaul/lib/touch-utils';
 const { Component, computed, get, set } = Ember;
 const { htmlSafe } = Ember.String;
+
+const isLegitClick = function(event) {
+  // We only want left clicks
+  let isLeftClick = event.which === 1;
+  // Sometimes touch events which aren't defaultPrevented send
+  // fake MouseEvents.  We handle TouchEvents separately so
+  // we don't want these
+  let isRealMouse = !isSimulatedMouseEvent(event.originalEvent);
+
+  return isLeftClick && isRealMouse;
+};
 
 export default Component.extend({
   isLoaded: computed.bool('duration'),
@@ -43,8 +54,7 @@ export default Component.extend({
   handlePosition: 0,
 
   mouseMove(e) {
-    let isLeftClick = e.which === 1;
-    if (isLeftClick && !isFakeClick(e.originalEvent)) {
+    if (isLegitClick(e)) {
       // prevent dragging and selecting
       e.preventDefault();
       this._updateHandlePosition(e);
@@ -52,8 +62,7 @@ export default Component.extend({
   },
 
   mouseDown(e) {
-    let isLeftClick = e.which === 1;
-    if (get(this, 'isLoaded') && isLeftClick && !isFakeClick(e.originalEvent)) {
+    if (get(this, 'isLoaded') && isLegitClick(e)) {
       this._updateAudioPosition(e);
       if (e.target.classList.contains('progress-playhead')) {
         this._startDragging();
