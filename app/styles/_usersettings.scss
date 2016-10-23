@@ -20,6 +20,7 @@ $ember-power-select-disabled-background-color: #fff;
   label {
     padding-bottom: 14px;
     max-width: 500px;
+    flex: 1 0 100%;
 
     div:first-child {
       @include fontsize(16);
