@@ -2,6 +2,10 @@ import Ember from 'ember';
 import moment from 'moment';
 
 export default Ember.Route.extend({
+  titleToken() {
+    const fullDayAndDate = this.controllerFor('schedule').get('fullDayAndDate');
+    return `Schedule for ${fullDayAndDate}`;
+  },
   queryParams: {
     scheduleStation: {
       refreshModel: true
