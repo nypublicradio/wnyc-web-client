@@ -3,17 +3,6 @@ import { findTouchById, isSimulatedMouseEvent } from 'overhaul/lib/touch-utils';
 const { Component, computed, get, set } = Ember;
 const { htmlSafe } = Ember.String;
 
-const isLegitClick = function(event) {
-  // We only want left clicks
-  let isLeftClick = event.which === 1;
-  // Sometimes touch events which aren't defaultPrevented send
-  // fake MouseEvents.  We handle TouchEvents separately so
-  // we don't want these
-  let isRealMouse = !isSimulatedMouseEvent(event.originalEvent);
-
-  return isLeftClick && isRealMouse;
-};
-
 export default Component.extend({
   isLoaded: computed.bool('duration'),
   isHovering: false,
@@ -54,7 +43,14 @@ export default Component.extend({
   handlePosition: 0,
 
   mouseDown(e) {
-    if (get(this, 'isLoaded') && isLegitClick(e)) {
+    // We only want left clicks
+    let isLeftClick = e.which === 1;
+    // Sometimes touch events which aren't defaultPrevented send
+    // fake MouseEvents.  We handle TouchEvents separately so
+    // we don't want these
+    let isRealMouse = !isSimulatedMouseEvent(e.originalEvent);
+
+    if (get(this, 'isLoaded') && isLeftClick && isRealMouse) {
       this._updateAudioPosition(e);
       if (e.target.classList.contains('progress-playhead')) {
         this._startDragging();
@@ -69,7 +65,8 @@ export default Component.extend({
     set(this, 'isHovering', true);
   },
   mouseMove(e) {
-    if (isLegitClick(e)) {
+    set(this, 'lastInteraction', 'mouse');
+    if (!isSimulatedMouseEvent(e)) {
       // prevent dragging and selecting
       e.preventDefault();
       this._updateHandlePosition(e);
