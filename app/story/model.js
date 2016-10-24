@@ -99,7 +99,7 @@ export default Model.extend({
   },
   getCurrentSegment() {
     if (!this.get('segmentedAudio')) {
-      return null;
+      return this.get('audio');
     } else {
       return this.get('audio')[this.get('_currentSegment') || 0];
     }

@@ -12,9 +12,9 @@ test('it exists', function(assert) {
 });
 
 test('segment management', function(assert) {
-  let model = this.subject();
+  let model = this.subject({ audio: 'foo.mp3' });
   assert.equal(model.getNextSegment(), null, 'getNextSegment returns null if there are no segments');
-  assert.equal(model.getCurrentSegment(), null, 'getCurrentSegment returns null if there are no segments');
+  assert.equal(model.getCurrentSegment(), model.get('audio'), 'getCurrentSegment returns the audio field if there are no segments');
   
   Ember.run(() => {
     model.set('audio', ['foo', 'bar']);
