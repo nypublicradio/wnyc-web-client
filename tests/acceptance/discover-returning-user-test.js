@@ -2,7 +2,6 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import { currentSession } from 'overhaul/tests/helpers/ember-simple-auth';
 import ENV from 'overhaul/config/environment';
-import { mockExperimentalGroup } from 'overhaul/tests/helpers/mock-experimental-group';
 import RSVP from 'rsvp';
 import config from 'overhaul/config/environment';
 
@@ -11,7 +10,6 @@ import 'overhaul/tests/helpers/ember-sortable/test-helpers';
 moduleForAcceptance('Acceptance | discover returning user', {
   beforeEach() {
     Ember.$.Velocity.mock = true;
-    mockExperimentalGroup(1);
     let session = currentSession(this.application);
     server.create('discover-topic', {title: "Music", url: "music"});
     server.create('discover-topic', {title: "Art", url: "art"});

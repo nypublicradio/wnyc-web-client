@@ -123,18 +123,12 @@
           {{link-to 'Topics' 'topics' class="inherit" preventDefault=false}}
         {{/link-to}}
 
-        {{#if (or features.discover features.otherDiscover)}}
-        {{!-- Google Experiment D4W - START --}}
-        {{#if (or (in-experimental-group 1) (in-experimental-group 2)) }}
-          {{#link-to 'discover.start' current-when="discover" tagName='li' href="false" class="list-item list-item--short"}}
-            {{#link-to 'discover.start' class="inherit" preventDefault=false}}
-              <span class="new">NEW!</span>
-              Discover
-            {{/link-to}}
+        {{#link-to 'discover.start' current-when="discover" tagName='li' href="false" class="list-item list-item--short"}}
+          {{#link-to 'discover.start' class="inherit" preventDefault=false}}
+            <span class="new">NEW!</span>
+            Discover
           {{/link-to}}
-        {{/if}}
-        {{!-- Google Experiment D4W - END --}}
-        {{/if}}
+        {{/link-to}}
 
         {{#unless media.isLargeAndUp}}
 

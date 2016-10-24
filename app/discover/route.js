@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import ENV from '../config/environment';
-import { inExperimentalGroup } from 'overhaul/helpers/in-experimental-group';
 
 export default Ember.Route.extend({
   session:       Ember.inject.service(),
@@ -18,13 +17,6 @@ export default Ember.Route.extend({
       // Show download links
       this.replaceWith('discover.start');
     }
-  },
-  redirect() {
-    // Google Experiment D4W - START
-    if (!( inExperimentalGroup([1]) || inExperimentalGroup([2]) )) {
-      this.transitionTo('index');
-    }
-    // Google Experiment D4W - END
   },
   activate(){
     window.scrollTo(0,0);

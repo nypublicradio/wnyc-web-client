@@ -3,7 +3,6 @@ import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import { currentSession } from 'overhaul/tests/helpers/ember-simple-auth';
 import { registerAndInjectMock, registerMockOnInstance } from 'overhaul/tests/helpers/register-mock';
 import 'overhaul/tests/helpers/with-feature';
-import { mockExperimentalGroup } from 'overhaul/tests/helpers/mock-experimental-group';
 import get from 'ember-metal/get';
 
 const mockMetrics = Ember.Service.extend({
@@ -29,7 +28,6 @@ moduleForAcceptance('Acceptance | discover metrics',
     beforeEach() {
       Ember.$.Velocity.mock = true;
       window.Modernizr.touch = false;
-      mockExperimentalGroup(1);
       let application = this.application;
       let session = currentSession(application);
       session.set('data.discover-excluded-shows',  []);
@@ -164,7 +162,6 @@ moduleForAcceptance('Acceptance | discover metrics returning user',
     beforeEach() {
       Ember.$.Velocity.mock = true;
       window.Modernizr.touch = false;
-      mockExperimentalGroup(1);
       let application = this.application;
       let session = currentSession(application);
       server.create('discover-topic', {title: "Test Topic", url: "test-topic"});
@@ -297,5 +294,3 @@ test('it shouldn\'t log a clicked edit event when visiting /discover/edit direct
     assert.strictEqual(this.metrics.get('trackedEvents').length, 0);
   });
 });
-
-

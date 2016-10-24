@@ -1,50 +1,13 @@
 import { test, skip } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import { currentSession } from 'overhaul/tests/helpers/ember-simple-auth';
-import { mockExperimentalGroup } from 'overhaul/tests/helpers/mock-experimental-group';
 import ENV from 'overhaul/config/environment';
 import 'overhaul/tests/helpers/with-feature';
 
-moduleForAcceptance('Acceptance | discover group 0',
+moduleForAcceptance('Acceptance | discover',
   {
     beforeEach() {
       Ember.$.Velocity.mock = true;
-      // Google Experiment D4W - Group 0;
-      mockExperimentalGroup(0);
-      window.Modernizr.touch = false;
-    },
-    afterEach() {
-      Ember.$.Velocity.mock = false;
-    }
-  }
-);
-
-test('can not visit discover from the home page', function(assert) {
-  withFeature('discover');
-  server.create('djangoPage', {id:'/'});
-  visit('/');
-
-  andThen(function() {
-    assert.equal($('.l-page-nav .list-item [href*="discover"]').length, 0, 'it should not show a discover link');
-  });
-});
-
-
-test('it redirects users not in the experiment to the home page', function(assert) {
-  server.create('djangoPage', {id:'/'});
-  visit('/discover');
-
-  andThen(function() {
-    assert.equal(currentURL(), '/');
-  });
-});
-
-moduleForAcceptance('Acceptance | discover group 1',
-  {
-    beforeEach() {
-      Ember.$.Velocity.mock = true;
-      // Google Experiment D4W - Group 1;
-      mockExperimentalGroup(1);
       window.Modernizr.touch = false;
       let session = currentSession(this.application);
       session.set('data.discover-excluded-shows',  []);
@@ -451,74 +414,5 @@ test('mobile users get the app download page', function(assert) {
     assert.equal(currentURL(), '/discover/start');
     assert.equal($("a:contains('Download It Now')").length, 1);
     window.Modernizr.touch = oldTouchSetting; // restore this thing
-  });
-});
-
-
-
-moduleForAcceptance('Acceptance | discover group 2',
-  {
-    beforeEach() {
-      Ember.$.Velocity.mock = true;
-      // Google Experiment D4W - Group 2;
-      mockExperimentalGroup(2);
-      window.Modernizr.touch = false;
-      let session = currentSession(this.application);
-      session.set('data.discover-excluded-shows',  []);
-      session.set('data.discover-topics', []);
-      session.set('data.discover-excluded-story-ids', []);
-    },
-    afterEach() {
-      Ember.$.Velocity.mock = false;
-    }
-  }
-);
-
-test('can visit discover from the home page', function(assert) {
-  withFeature('discover');
-  server.create('djangoPage', {id:'/'});
-  visit('/');
-  andThen(function() {
-    click('.l-page-nav .list-item [href*="discover"]');
-  });
-  andThen(function() {
-    assert.equal(currentURL(), '/discover/start');
-  });
-});
-
-test('landing page goes straight to playlist', function(assert) {
-  withFeature('discover');
-  server.create('djangoPage', {id:'/'});
-  visit('/');
-  andThen(function() {
-    click('.l-page-nav .list-item [href*="discover"]');
-  });
-  andThen(function() {
-    click('button:contains("Get Started")');
-  });
-  andThen(function() {
-    assert.equal(currentURL(), '/discover/playlist');
-  });
-});
-
-test('it automatically selects all topics', function(assert) {
-  withFeature('discover');
-  server.create('djangoPage', {id:'/'});
-  server.createList('discover-topic', 20);
-  visit('/');
-  andThen(function() {
-    click('.l-page-nav .list-item [href*="discover"]');
-  });
-  andThen(function() {
-    click('button:contains("Get Started")');
-  });
-  andThen(function() {
-    click('a:contains("Edit My Shows & Topics")');
-  });
-  andThen(function() {
-    click('a:contains("Pick Topics")');
-  });
-  andThen(function() {
-    assert.equal($('.discover-topic.is-selected').length, 20, 'it should select all discover topics');
   });
 });
