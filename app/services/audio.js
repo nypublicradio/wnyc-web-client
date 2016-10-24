@@ -273,7 +273,7 @@ export default Service.extend({
   },
 
   setPosition(percentage) {
-    let position = percentage * get(this, 'duration') || 0;
+    let position = (percentage * get(this, 'duration')) || 0;
 
     set(this, 'position', position);
   },
@@ -374,7 +374,7 @@ export default Service.extend({
       this.play(...next);
     }
   },
-  
+
   _flushContext() {
     set(this, 'currentContext', null);
   },
@@ -428,14 +428,14 @@ export default Service.extend({
     let metrics = get(this, 'metrics');
     metrics.trackEvent('NprAnalytics', assign(options, {isNpr: true}));
   },
-  
+
   _trackCodecFailure({connectionName, error, url}, sound) {
     this._trackPlayerEvent({
       action: `Codec Failure | ${connectionName}`,
       label: `reason: ${error} | bad url: ${url} | ${sound ? `good url: ${get(sound, 'url')}` : 'no successful url'}`
     });
   },
-  
+
   _trackSoundFailure({message, failures}) {
     this.set('hasErrors', true);
     this._trackPlayerEvent({
