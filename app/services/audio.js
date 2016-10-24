@@ -184,6 +184,7 @@ export default Service.extend({
       if (failures && failures.length) {
         failures.forEach(failed => this._trackCodecFailure(failed, sound));
       }
+      return {sound, failures};
     })
     .catch(e => this._trackSoundFailure(e));
   },
@@ -259,6 +260,7 @@ export default Service.extend({
       if (failures && failures.length) {
         failures.forEach(failed => this._trackCodecFailure(failed, sound));
       }
+      return {sound, failures};
     })
     .catch(e => this._trackSoundFailure(e));
   },
