@@ -1,20 +1,22 @@
 module.exports = function(grunt) {
-  
+
   grunt.initConfig({
 
     modernizr: {
       dist: {
         dest: 'vendor/modernizr/modernizr-build.js',
         uglify: false,
-        files: {
-          src: [
-            "app/**/*.{js,css,scss}"
-          ]
-        }
+        crawl: false,
+        tests: [
+          "touchevents"
+        ],
+        options: [
+          "setClasses"
+        ]
       }
     }
-    
+
   });
-  
+
   grunt.loadNpmTasks("grunt-modernizr");
 }
