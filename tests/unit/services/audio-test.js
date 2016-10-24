@@ -4,9 +4,13 @@ import startMirage from 'overhaul/tests/helpers/setup-mirage-for-integration';
 import wait from 'ember-test-helpers/wait';
 import hifiNeeds from 'overhaul/tests/helpers/hifi-needs';
 
+import DummyConnection from 'ember-hifi/hifi-connections/dummy-connection';
+
 moduleFor('service:audio', 'Unit | Service | audio', {
   // Specify the other units that are required for this test.
-  needs: [...hifiNeeds, 'model:story','adapter:story','serializer:story',
+  needs: [...hifiNeeds,
+          'model:story','adapter:story','serializer:story',
+          'model:stream','adapter:stream','serializer:stream',
           'model:discover/stories',
           'service:poll',
           'service:metrics',
@@ -74,6 +78,140 @@ test('passing a pk to play calls playFromPk', function(assert) {
 
   service.set('playFromPk', playFromPk);
   service.play(1);
+});
+
+test('can switch from on demand to stream and vice versa', function(assert) {
+  assert.expect(4);
+  
+  const onDemandUrl = '/url.mp3';
+  let story = server.create('story', { audio: onDemandUrl });
+  let stream = server.create('stream');
+  let streamURL = stream.attrs.urls.mp3[0];
+  let audio1 = DummyConnection.create({ url: onDemandUrl });
+  let audio2 = DummyConnection.create({ url: streamURL  });
+  let service = this.subject();
+  service.get('hifi.soundCache').cache(audio1);
+  service.get('hifi.soundCache').cache(audio2);
+  
+  Ember.run(() => {
+    service.play(story.id).then(({sound}) => {
+      assert.equal(sound.get('url'), onDemandUrl, 'story played OK');
+    }).then(() => {
+      service.play(stream.slug).then(({sound}) => {
+        assert.equal(sound.get('url'), streamURL, 'switched to stream OK');
+        service.play(stream.slug).then(({sound}) => {
+          assert.equal(sound.get('url'), streamURL, 'stream played OK');
+        }).then(() => {
+          service.play(story.id).then(({sound}) => {
+            assert.equal(sound.get('url'), onDemandUrl, 'switched to on demand OK');
+          });
+        });
+      })
+    });
+  });
+  
+  Ember.run(() => {
+  });
+  
+  return wait();
+});
+
+test('playing a story with a list of urls plays them in order', function(assert) {
+  assert.expect(2);
+  
+  const ONE_MINUTE = 1000 * 60;
+  let audio1 = DummyConnection.create({
+    url: url1 = '/url1.mp3',
+    duration: duration1 = 30 * ONE_MINUTE
+  });
+  let audio2 = DummyConnection.create({
+    url: url2 = '/url2.mp3',
+    duration: duration2 = 20 * ONE_MINUTE
+  });
+  let episode = server.create('story', {
+    audio: [url1, url2]
+  });
+  let service = this.subject();
+  service.get('hifi.soundCache').cache(audio1);
+  service.get('hifi.soundCache').cache(audio2);
+  
+  Ember.run(() => {
+    service.play(episode.id).then(() => {
+      assert.equal(service.get('hifi.currentSound.url'), audio1.url, 'first audio should be playing');
+      audio1.trigger('audio-ended');
+    });
+  });
+  
+  audio2.on('audio-played', function() {
+    assert.equal(service.get('hifi.currentSound.url'), audio2.url, 'second audio should be playing');
+  });
+  
+  return wait();
+});
+
+test('playing a segment directly starts from 0', function(assert) {
+  const ONE_MINUTE = 1000 * 60;
+  let url = '/audio.mp3';
+  let audio = DummyConnection.create({
+    url,
+    duration: 30 * ONE_MINUTE
+  });
+  let segment = server.create('story', { audio: url });
+  let episode = server.create('story', { audio: [url] });
+  let service = this.subject();
+  
+  service.get('hifi.soundCache').cache(audio);
+  Ember.run(() => {
+    service.play(episode.id).then(() => {
+      service.setPosition(0.5);
+      assert.equal(service.get('position'), (30 * ONE_MINUTE) / 2, 'position on episode audio successfully set');
+      
+      service.play(segment.id).then(() => {
+        assert.equal(service.get('position'), 0, 'audio position should be reset to 0');
+        assert.equal(service.get('hifi.currentSound.url'), url, 'url should be segment url');
+      });
+    });
+  });
+  
+  return wait();
+});
+
+test('segments played as part of an episode always start from 0', function(assert) {
+  assert.expect(2);
+  
+  const ONE_MINUTE = 1000 * 60;
+  let audio1 = DummyConnection.create({
+    url: url1 = '/url1.mp3',
+    duration: duration1 = 30 * ONE_MINUTE
+  });
+  let audio2 = DummyConnection.create({
+    url: url2 = '/url2.mp3',
+    duration: duration2 = 20 * ONE_MINUTE
+  });
+  let episode = server.create('story', {
+    audio: [url1, url2]
+  });
+  let segment = server.create('story', { audio: url2 });
+  let service = this.subject();
+  
+  service.get('hifi.soundCache').cache(audio1);
+  service.get('hifi.soundCache').cache(audio2);
+  Ember.run(() => {
+    service.play(segment.id).then(() => {
+      Ember.run(() => service.setPosition(0.5));
+      assert.equal(service.get('position'), audio2.get('duration') / 2, 'position on segment audio successfully set');
+      
+      service.play(episode.id).then(() => {
+        audio1.trigger('audio-ended');
+      });
+      
+      audio2.on('audio-played', function() {
+        assert.equal(service.get('position'), 0, 'second audio should start from 0');
+      });
+    });
+  });
+  
+  return wait();
 });
 
 test('service records a listen when a story is played', function(assert) {
