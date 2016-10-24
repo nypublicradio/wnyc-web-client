@@ -131,7 +131,8 @@ export default Service.extend({
     let story;
     let urlPromise = get(this, 'store').findRecord('story', id).then(s => {
       story = s;
-      return s.get('audio');
+      // getCurrentSegment returns the audio field if the audio is not segmented
+      return s.getCurrentSegment();
     });
 
     return this.get('hifi').play(urlPromise).then(({sound, failures}) => {
@@ -370,6 +371,11 @@ export default Service.extend({
       // then this can get moved into the bumper-state service.
       return;
     }
+    
+    // FIXME
+    if (get(this, 'currentStory.segmentedAudio')) {
+      return this.playNextSegment();
+    }
 
     if (get(bumper, 'isEnabled')) {
       set(this, 'bumperPlayed', true);
@@ -388,6 +394,22 @@ export default Service.extend({
       this.play(get(nextTrack, 'id'), 'discover');
     } else {
       this._flushContext();
+    }
+  },
+  
+  playNextSegment() {
+    let story = get(this, 'currentStory');
+    let nextSegment = story.getNextSegment();
+    if (nextSegment) {
+      this.get('hifi').play(nextSegment, {position: 0})
+      .then(({sound, failures}) => {
+        if (failures && failures.length) {
+          failures.forEach(failed => this._trackCodecFailure(failed, sound));
+        }
+      })
+      .catch(e => this._trackSoundFailure(e));
+    } else {
+      return false;
     }
   },
 
