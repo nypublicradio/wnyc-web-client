@@ -147,7 +147,7 @@ moduleForAcceptance('Acceptance | Django Rendered | Play From Param', {
     window.onbeforeunload = escapeNavigation;
     oldException = Ember.Test.adapter.exception;
     Ember.Test.adapter.exception = function(e) {
-      if (!/\[ember-hifi\] URL Promise failed because Not Found/.test(e)) {
+      if (!/\[ember-hifi\] URL Promise failed because: Not Found/.test(e)) {
         throw e;
       }
     };
