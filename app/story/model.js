@@ -9,7 +9,7 @@ const { attr, Model } = DS;
 
 export default Model.extend({
   analyticsCode: attr('string'),
-  audio: attr('string'),
+  audio: attr(),
   audioAvailable: attr('boolean'),
   audioDurationReadable: attr('string'),
   audioEventually: attr('boolean'),
@@ -41,6 +41,9 @@ export default Model.extend({
       }
       return body.replace(/\\x3C\/script>/g, '</script>');
     }
+  }),
+  segmentedAudio: computed('audio', function() {
+    return Array.isArray(this.get('audio'));
   }),
   commentSecurityURL(browserId) {
     let data = {
@@ -80,10 +83,25 @@ export default Model.extend({
   shareMetadata: computed(function() {
     return shareMetadata(this);
   }),
+  
   // so Ember Simple Auth inludes a records ID when it saves
   toJSON() {
     var serializer = this.store.serializerFor('story');
     var snapshot = this._internalModel.createSnapshot();
     return serializer.serialize(snapshot, {includeId: true});
+  },
+  getNextSegment() {
+    if (!this.get('segmentedAudio')) {
+      return null;
+    } else {
+      return this.get('audio')[this.incrementProperty('_currentSegment')];
+    }
+  },
+  getCurrentSegment() {
+    if (!this.get('segmentedAudio')) {
+      return null;
+    } else {
+      return this.get('audio')[this.get('_currentSegment') || 0];
+    }
   }
 });
