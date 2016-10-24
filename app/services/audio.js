@@ -135,6 +135,7 @@ export default Service.extend({
     });
 
     return this.get('hifi').play(urlPromise).then(({sound, failures}) => {
+      set(this, 'hasErrors', false);
       // independent of context, if this item is already the first item in your
       // listening history, don't bother adding it again
       if (get(this, 'listens').indexByStoryPk(id) !== 0) {
