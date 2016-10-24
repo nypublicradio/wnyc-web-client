@@ -20,7 +20,6 @@ export function findTouchById(touchList, identifier) {
 // with events from fastclick, which we can detect.
 export function isSimulatedMouseEvent(mouseEvent) {
   if (mouseEvent) {
-    console.log(mouseEvent);
     // https://developer.mozilla.org/en-US/docs/Web/API/InputDeviceCapabilities
     const isChromeFakeEvent = mouseEvent.sourceCapabilities && mouseEvent.sourceCapabilities.firesTouchEvents === true;
     // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/mozInputSource
