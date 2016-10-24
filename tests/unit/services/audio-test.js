@@ -35,13 +35,13 @@ moduleFor('service:audio', 'Unit | Service | audio', {
     startMirage(this.container);
 
     this.register('service:bumper-state', bumperState);
-    this.inject.service('bumper-state', { as: 'bumperState' });
+    this.inject.service('bumper-state');
 
     this.register('service:session', sessionStub);
-    this.inject.service('session', { as: 'session' });
+    this.inject.service('session');
 
     this.register('service:listen-actions', listenActionsStub);
-    this.inject.service('listen-actions', { as: 'listen-actions' });
+    this.inject.service('listen-actions');
 
     this.register('service:metrics', metricsStub);
     this.inject.service('metrics');
