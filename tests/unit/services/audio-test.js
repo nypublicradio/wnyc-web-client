@@ -106,7 +106,7 @@ test('can switch from on demand to stream and vice versa', function(assert) {
             assert.equal(sound.get('url'), onDemandUrl, 'switched to on demand OK');
           });
         });
-      })
+      });
     });
   });
   
