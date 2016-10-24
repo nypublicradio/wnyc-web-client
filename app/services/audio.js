@@ -154,6 +154,11 @@ export default Service.extend({
         if (get(this, 'isPlaying') && get(this, 'currentAudio.id') === id) {
           this.setPosition(0);
         }
+      } else if (this._isAlreadyCurrent(sound)) {
+        // the played audio is the same as the currently playing audio, so just
+        // start it over. this is likely a segment played directly which was
+        // playing as part of a concatenated episode
+        this.setPosition(0);
       }
 
       set(this, 'currentAudio', story);
@@ -472,6 +477,15 @@ export default Service.extend({
     }
   },
 
+  _isAlreadyCurrent(sound) {
+    let oldStory = get(this, 'currentAudio');
+    let isOnDemand = oldStory && oldStory.get('audioType') !== 'stream';
+    if (isOnDemand && oldStory.getCurrentSegment() === sound.get('url')) {
+      return true;
+    } else {
+      return false;
+    }
+  },
 
   _firstTimePlay() {
     if (get(this, 'playedOnce')) {
