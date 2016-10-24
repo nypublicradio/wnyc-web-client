@@ -273,7 +273,7 @@ export default Service.extend({
   },
 
   setPosition(percentage) {
-    let position = percentage * get(this, 'duration');
+    let position = percentage * get(this, 'duration') || 0;
 
     set(this, 'position', position);
   },
