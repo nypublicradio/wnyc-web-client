@@ -41,9 +41,7 @@
                         <li class="yesterday first">
                             {{#link-to "schedule" yesterdayLink.year yesterdayLink.month yesterdayLink.day (query-params scheduleStation=scheduleStation)}}
                             <div class="action-button-icon">
-                                <svg width="8px" height="14px" viewBox="24 24 142 249" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="">
-                                    <path d="M149.521916,25.6284921 C149.521916,25.6284921 156.24121,20.9487603 162.747789,27.4553392 C169.264378,33.9644206 162.747789,39.6601796 162.747789,39.6601796 L51.0598604,151.350611 L157.459942,257.74819 C157.459942,257.74819 162.993037,264.419936 157.049527,270.35844 C151.111023,276.30195 142.815135,270.35844 142.815135,270.35844 L24,151.150408 L149.521916,25.6284921 Z" id="caret" stroke="none" fill="none"></path>
-                                </svg>
+                                {{wnyc-svg icon="left-caret"}}
                             </div>
                             <span>{{yesterday}}</span>
                             {{/link-to}}
@@ -53,9 +51,7 @@
                             {{#link-to "schedule" tomorrowLink.year tomorrowLink.month tomorrowLink.day (query-params scheduleStation=scheduleStation)}}
                             <span>{{tomorrow}}</span>
                             <div class="action-button-icon">
-                                <svg width="8px" height="14px" viewBox="1339 170 16 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="">
-                                    <path d="M1339.53879,203.25242 C1338.90367,202.721829 1338.8178,201.781512 1339.34653,201.146856 L1351.30653,186.799899 L1339.34653,172.453876 C1338.81874,171.81782 1338.9046,170.877036 1339.53879,170.347379 C1340.17205,169.817721 1341.11656,169.903586 1341.64436,170.537775 L1354.40187,185.840916 C1354.63427,186.119044 1354.75,186.459705 1354.75,186.799899 C1354.75,187.14056 1354.63427,187.480754 1354.40187,187.75795 L1341.64436,203.062023 C1341.11656,203.696212 1340.17251,203.782078 1339.53879,203.25242 Z" id="caret-right" stroke="none" fill="none"></path>
-                                </svg>
+                                {{wnyc-svg icon="right-caret"}}
                             </div>
                             {{/link-to}}
                         </li>
