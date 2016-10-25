@@ -1093,10 +1093,10 @@ body.ember-application.discover {
 /* Buttons -- eventually once these are tightened up, we can move these out for all to use */
 
 
-.rounded-caps-button {
+body.ember-application.discover .discover .rounded-caps-button {
   display:inline-block;
   border-radius: 25px;
-  border: 2px solid #FFF !important;
+  border: 2px solid #FFF;
   border-color: #FFF;
   padding: 2px 15px;
   color: #FFF;
@@ -1112,7 +1112,7 @@ body.ember-application.discover {
   &:not([disabled]) {
     &:hover, &:focus {
       color: #FFF;
-      border-color:rgba(255, 255, 255, 0.5);
+      border: 2px solid rgba(255, 255, 255, 0.5);
       opacity:1;
     }
     &:active {
