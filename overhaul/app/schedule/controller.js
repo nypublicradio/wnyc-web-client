@@ -5,12 +5,9 @@ export default Ember.Controller.extend({
   queryParams: ['scheduleStation'],
   scheduleStation: null,
   currentlyLoading: null,
-  todaysDateAsMoment: Ember.computed('params', function() {
+  todaysDateAsMoment: Ember.computed('year', 'month', 'day', function() {
     // Returns moment object for today's date, based on dynamic segment in URL
-    const year = this.get('params.year');
-    const month = this.get('params.month');
-    const day = this.get('params.day');
-    return moment(`${year}-${month}-${day}`, 'YYYY-MMM-DD');
+    return moment(`${this.get('year')}-${this.get('month')}-${this.get('day')}`, 'YYYY-MMM-DD');
   }),
   fullDayAndDate: Ember.computed('todaysDateAsMoment', function () {
     // Returns the full readable day/date, e.g. "Tuesday, October 18, 2016"

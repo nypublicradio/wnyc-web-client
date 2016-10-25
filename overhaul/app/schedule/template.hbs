@@ -12,19 +12,19 @@
                     {{! Station navigation start}}
                     <div id="station-nav" class="station-navigation">
                         <ul class="schedule-station-tabs">
-                            {{#link-to "schedule" params.year params.month params.day (query-params scheduleStation="wnyc-fm939") tagName="li"  class="wnyc-fm939 first"}}
+                            {{#link-to "schedule" year month day (query-params scheduleStation="wnyc-fm939") tagName="li"  class="wnyc-fm939 first"}}
                             <a href="?scheduleStation=wnyc-fm939" class="link--dark">WNYC 93.9 FM</a>
                             {{/link-to}}
-                            {{#link-to "schedule" params.year params.month params.day (query-params scheduleStation="wnyc-am820") tagName="li" class="wnyc-am820"}}
+                            {{#link-to "schedule" year month day (query-params scheduleStation="wnyc-am820") tagName="li" class="wnyc-am820"}}
                             <a href="?scheduleStation=wnyc-am820" class="link--dark">WNYC AM 820</a>
                             {{/link-to}}
-                            {{#link-to "schedule" params.year params.month params.day (query-params scheduleStation="njpr") tagName="li" class="njpr"}}
+                            {{#link-to "schedule" year month day (query-params scheduleStation="njpr") tagName="li" class="njpr"}}
                             <a href="?scheduleStation=njpr" class="link--dark">NJPR</a>
                             {{/link-to}}
-                            {{#link-to "schedule" params.year params.month params.day (query-params scheduleStation="special-events-stream") tagName="li" class="special-events-stream"}}
+                            {{#link-to "schedule" year month day (query-params scheduleStation="special-events-stream") tagName="li" class="special-events-stream"}}
                             <a href="?scheduleStation=special-events-stream" class="link--dark">WNYC Special</a>
                             {{/link-to}}
-                            {{#link-to "schedule" params.year params.month params.day (query-params scheduleStation="jonathan-channel") tagName="li" class="jonathan-channel last"}}
+                            {{#link-to "schedule" year month day (query-params scheduleStation="jonathan-channel") tagName="li" class="jonathan-channel last"}}
                             <a href="?scheduleStation=jonathan-channel" class="link--dark">The Jonathan Channel</a>
                             {{/link-to}}
                         </ul>

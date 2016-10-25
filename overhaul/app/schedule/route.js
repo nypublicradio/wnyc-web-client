@@ -11,25 +11,20 @@ export default Ember.Route.extend({
       refreshModel: true
     }
   },
-  model(params) {
-    this.set('params', params);
+  model({year, month, day}) {
     const apiQueryParams = {};
 
     // Pulled from query string attached to URL; if nothing, wnyc-fm939
     apiQueryParams.scheduleStation = this.get('params.scheduleStation');
 
     // Set API query string scheduleDate to URL's date; otherwise, set to today
-    if (params.year && params.month && params.day) {
-      const scheduleDate = moment(`${params.year} ${params.month} ${params.day}`, 'YYYY MMM DD').format('YYYY-MM-DD');
-      apiQueryParams.scheduleDate = scheduleDate;
-    } else {
-      apiQueryParams.scheduleDate = moment().format('YYYY-MM-DD');
-    }
+    const scheduleDate = moment(`${year} ${month} ${day}`, 'YYYY MMM DD').format('YYYY-MM-DD');
+    apiQueryParams.scheduleDate = scheduleDate;
 
     return this.store.query('schedule', apiQueryParams);
   },
   setupController: function(controller, model) {
-    controller.set('params', this.get('params'));
+    controller.setProperties(this.paramsFor('schedule'));
     this._super(controller, model);
   },
   actions: {
