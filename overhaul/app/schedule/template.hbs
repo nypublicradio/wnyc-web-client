@@ -59,7 +59,7 @@
                     {{! /Date navigation }}
 
                     {{! ScheduleEvent list }}
-                    <ul class="schedule-table {{currentlyLoading}}">
+                    <ul class="schedule-table {{if currentlyLoading 'currently-loading' ''}}">
                         {{#each model as |scheduleEvent|}}
                         <div class="event">
                             {{#if scheduleEvent.objIsSchedule}}

@@ -30,9 +30,9 @@ export default Ember.Route.extend({
   actions: {
     loading: function(transition) {
       const controller = this.controllerFor('schedule');
-      controller.set('currentlyLoading', 'currentlyLoading');
+      controller.set('currentlyLoading', true);
       transition.promise.finally(function() {
-        controller.set('currentlyLoading', null);
+        controller.set('currentlyLoading', false);
       });
     },
   },
