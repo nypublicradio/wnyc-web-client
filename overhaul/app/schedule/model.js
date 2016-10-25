@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import DS from 'ember-data';
+import moment from 'moment';
 
 export default DS.Model.extend({
   start: DS.attr('date'),
@@ -12,12 +13,8 @@ export default DS.Model.extend({
 
   objIsSchedule: Ember.computed.equal('objType', 'ShowSchedule'),
   startReadable: Ember.computed('start', function () {
-    // Timezones from the API are Eastern timezone, but provided w/o a timezone. 'UTC' is
-    // necessary to not shift the time away from ET.
-    const timeString = this.get('start').toLocaleTimeString('en-US', { timeZone: 'UTC', hour12: true });
-    const hours = timeString.split(/[^A-Za-z00-9]/)[0];
-    const minutes = timeString.split(/[^A-Za-z00-9]/)[1];
-    const amOrPm = timeString.split(/[^A-Za-z00-9]/)[3];
-    return `${hours}:${minutes} ${amOrPm}`;
+    // Timezones from the API are Eastern timezone, but provided w/o a
+    // timezone. 'UTC' is necessary to not shift the time away from ET.
+    return moment.utc(this.get('start')).format('h:mm A');
   }),
 });
