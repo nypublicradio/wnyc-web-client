@@ -373,14 +373,14 @@
 .btn--green {
   background-color: $lightgreen;
   border-color: $lightgreen;
-  color: $darkgray;
+  color: white;
 
   &:not([disabled]) {
     &:hover,
     &:focus {
       background-color: $darkgreen;
       border-color: $darkgreen;
-      color: $lightgreen;
+      color: white;
     }
   }
 }
