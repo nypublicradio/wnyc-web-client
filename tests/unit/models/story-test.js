@@ -20,7 +20,15 @@ test('segment management', function(assert) {
     model.set('audio', ['foo', 'bar']);
   });
   
+  assert.equal(model.hasNextSegment(), true, 'if we are not on the last segment, report false');
   assert.equal(model.getCurrentSegment(), 'foo', 'currentSegment should be foo');
+  
   assert.equal(model.getNextSegment(), 'bar', 'nextSegment should be bar');
   assert.equal(model.getCurrentSegment(), 'bar', 'calling getCurrentSegment after getNextSegment should return the incremented value');
+  assert.equal(model.hasNextSegment(), false, 'if we are on the last segment, report false');
+  
+  assert.equal(model.getNextSegment(), 'foo', 'calling getNextSegment at the end of the list should wrap around');
+  model.getNextSegment();
+  model.resetSegments();
+  assert.equal(model.getCurrentSegment(), 'foo', 'currentSegment should be foo');
 });
