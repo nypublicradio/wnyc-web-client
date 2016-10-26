@@ -76,7 +76,7 @@
     "ember-poll": "^1.0.1",
     "ember-query-method": "^0.1.0",
     "ember-resolver": "^2.0.3",
-    "ember-responsive": "1.2.7",
+    "ember-responsive": "2.0.0",
     "ember-route-action-helper": "1.0.0",
     "ember-scroll-to": "0.5.3",
     "ember-simple-auth": "1.1.0",
