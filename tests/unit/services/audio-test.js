@@ -112,24 +112,14 @@ test('can switch from on demand to stream and vice versa', function(assert) {
     });
   });
   
-  Ember.run(() => {
-  });
-  
   return wait();
 });
 
 test('playing a story with a list of urls plays them in order', function(assert) {
   assert.expect(2);
   
-  const ONE_MINUTE = 1000 * 60;
-  let audio1 = DummyConnection.create({
-    url: url1 = '/url1.mp3',
-    duration: duration1 = 30 * ONE_MINUTE
-  });
-  let audio2 = DummyConnection.create({
-    url: url2 = '/url2.mp3',
-    duration: duration2 = 20 * ONE_MINUTE
-  });
+  let audio1 = DummyConnection.create({ url: url1 = '/url1.mp3' });
+  let audio2 = DummyConnection.create({ url: url2 = '/url2.mp3' });
   let episode = server.create('story', {
     audio: [url1, url2]
   });
@@ -139,13 +129,13 @@ test('playing a story with a list of urls plays them in order', function(assert)
   
   Ember.run(() => {
     service.play(episode.id).then(() => {
-      assert.equal(service.get('hifi.currentSound.url'), audio1.url, 'first audio should be playing');
+      assert.equal(service.get('hifi.currentSound.url'), url1, 'first audio should be playing');
       audio1.trigger('audio-ended');
     });
   });
   
   audio2.on('audio-played', function() {
-    assert.equal(service.get('hifi.currentSound.url'), audio2.url, 'second audio should be playing');
+    assert.equal(service.get('hifi.currentSound.url'), url2, 'second audio should be playing');
   });
   
   return wait();
@@ -153,9 +143,8 @@ test('playing a story with a list of urls plays them in order', function(assert)
 
 test('playing a segment directly starts from 0', function(assert) {
   const ONE_MINUTE = 1000 * 60;
-  let url = '/audio.mp3';
   let audio = DummyConnection.create({
-    url,
+    url: url = '/audio.mp3',
     duration: 30 * ONE_MINUTE
   });
   let segment = server.create('story', { audio: url });
@@ -232,7 +221,6 @@ test('episodes played from the queue do not continue to the next item until the 
   
   let hifiSpy = sinon.spy(service.get('hifi'), 'play');
   let queueSpy = sinon.spy(service, 'playNextInQueue');
-  let audio2Spy = sinon.spy(audio2, 'play');
   let audio3Spy = sinon.spy(audio3, 'play');
   
   Ember.run(() => {
@@ -245,7 +233,7 @@ test('episodes played from the queue do not continue to the next item until the 
     });
     
     audio2.on('audio-played', function() {
-      assert.equal(hifiSpy.callCount, 2, 'should only call play twice')
+      assert.equal(hifiSpy.callCount, 2, 'should only call play twice');
       assert.equal(audio3Spy.callCount, 0, 'audio3 should not be played');
       assert.equal(queueSpy.callCount, 0, 'nothing new should be queued by now');
       
@@ -257,7 +245,7 @@ test('episodes played from the queue do not continue to the next item until the 
     });
     
     audio3.on('audio-played', function() {
-      assert.equal(hifiSpy.callCount, 3, 'play calld 3 times')
+      assert.equal(hifiSpy.callCount, 3, 'play called 3 times');
       assert.equal(audio3Spy.callCount, 1, 'audio3 should be played once');
       assert.equal(queueSpy.callCount, 1, 'audio should have been qeueued up');
       assert.ok(audio2.ended, 'audio2 should have ended before starting');
