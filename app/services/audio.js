@@ -353,6 +353,7 @@ export default Service.extend({
     let bumper = get(this, 'bumperState');
     let discoverQueue = get(this, 'discoverQueue');
     let currentId = get(this, 'currentId');
+    let currentStory = get(this, 'currentStory');
 
     this._trackPlayerEvent({
       action: 'Finished Story',
@@ -363,6 +364,13 @@ export default Service.extend({
 
     this.sendCompleteListenAction(currentId);
 
+    if (currentStory && currentStory.hasNextSegment()) {
+      return this.playNextSegment();
+    } else if (currentStory) {
+      // no op on unsegmented stories
+      currentStory.resetSegments();
+    }
+    
     if (context === 'queue') {
       this.playNextInQueue();
     } else if (context === 'discover') {
@@ -375,11 +383,6 @@ export default Service.extend({
       // Once discover becomes a selectable choice for audio preferences
       // then this can get moved into the bumper-state service.
       return;
-    }
-    
-    // FIXME
-    if (get(this, 'currentStory.segmentedAudio')) {
-      return this.playNextSegment();
     }
 
     if (get(bumper, 'isEnabled')) {
