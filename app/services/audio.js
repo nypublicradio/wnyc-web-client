@@ -34,6 +34,7 @@ export default Service.extend({
   position:         alias('hifi.position'),
   volume:           alias('hifi.volume'),
 
+  // TODO: fix up currentStory/currentAudio interfaces for streams and on demands
   currentStory:     or('currentAudio.story', 'currentAudio'),
 
   bumperPlayed:     false,
@@ -154,7 +155,7 @@ export default Service.extend({
         if (get(this, 'isPlaying') && get(this, 'currentAudio.id') === id) {
           this.setPosition(0);
         }
-      } else if (this._isAlreadyCurrent(sound)) {
+      } else if (this._isCurrentSegment(sound)) {
         // the played audio is the same as the currently playing audio, so just
         // start it over. this is likely a segment played directly which was
         // playing as part of a concatenated episode
@@ -480,10 +481,15 @@ export default Service.extend({
     }
   },
 
-  _isAlreadyCurrent(sound) {
+  _isCurrentSegment(sound) {
     let oldStory = get(this, 'currentAudio');
-    let isOnDemand = oldStory && oldStory.get('audioType') !== 'stream';
-    if (isOnDemand && oldStory.getCurrentSegment() === sound.get('url')) {
+    if (!oldStory) {
+      return false;
+    }
+    let isOnDemand = oldStory.get('audioType') !== 'stream';
+    let isSegmented = get(oldStory, 'segmentedAudio');
+    // put `getCurrentSegment` behind the and gates b/c sometimes oldStory is a stream model, which doesn't have `getCurrentSegment`
+    if (isOnDemand && isSegmented && oldStory.getCurrentSegment() === sound.get('url')) {
       return true;
     } else {
       return false;
