@@ -167,6 +167,30 @@ test('playing a segment directly starts from 0', function(assert) {
   return wait();
 });
 
+test('pausing audio picks up from where it left off', function(assert) {
+  const ONE_MINUTE = 1000 * 60;
+  let audio = DummyConnection.create({
+    url: url = '/audio.mp3',
+    duration: 30 * ONE_MINUTE
+  });
+  let story = server.create('story', { audio: url });
+  let service = this.subject();
+  
+  service.get('hifi.soundCache').cache(audio);
+  Ember.run(() => {
+    service.play(story.id).then(() => {
+      service.setPosition(0.5);
+      assert.equal(service.get('position'), (30 * ONE_MINUTE) / 2, 'position on episode audio successfully set');
+      service.pause();
+      service.play(story.id).then(() => {
+        assert.equal(service.get('position'), (30 * ONE_MINUTE) / 2, 'audio picks up where it left off');
+      });
+    });
+  });
+  
+  return wait();
+});
+
 test('segments played as part of an episode always start from 0', function(assert) {
   assert.expect(2);
   
