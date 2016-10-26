@@ -7,7 +7,10 @@ export default Component.extend({
   attributeBindings:  ['data-id'],
   'data-id':          readOnly('dataId'),
   region: computed('playContext', function() {
-    return upperCamelize(get(this, 'playContext'));
+    let playContext = get(this, 'playContext');
+    if (playContext !== undefined) {
+      return upperCamelize(playContext);
+    }
   }),
   state: computed('isCurrent', 'playState', function() {
     return this.get('isCurrent') ? this.get('playState') : null;
