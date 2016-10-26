@@ -11,11 +11,11 @@ export default Ember.Route.extend({
       refreshModel: true
     }
   },
-  model({year, month, day}) {
+  model({year, month, day, scheduleStation}) {
     const apiQueryParams = {};
 
     // Pulled from query string attached to URL; if nothing, wnyc-fm939
-    apiQueryParams.scheduleStation = this.get('params.scheduleStation');
+    apiQueryParams.scheduleStation = scheduleStation;
 
     // Set API query string scheduleDate to URL's date; otherwise, set to today
     const scheduleDate = moment(`${year} ${month} ${day}`, 'YYYY MMM DD').format('YYYY-MM-DD');
