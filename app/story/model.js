@@ -93,6 +93,10 @@ export default Model.extend({
   getNextSegment() {
     if (!this.get('segmentedAudio')) {
       return null;
+    } else if (!this.hasNextSegment()) {
+      // wrap around
+      this.resetSegments();
+      return this.get('audio.firstObject');
     } else {
       return this.get('audio')[this.incrementProperty('_currentSegment')];
     }
@@ -102,6 +106,20 @@ export default Model.extend({
       return this.get('audio');
     } else {
       return this.get('audio')[this.get('_currentSegment') || 0];
+    }
+  },
+  hasNextSegment() {
+    if (!this.get('segmentedAudio')) {
+      return false;
+    } else {
+      return this.getCurrentSegment() !== this.get('audio.lastObject');
+    }
+  },
+  resetSegments() {
+    if (!this.get('segmentedAudio')) {
+      return null;
+    } else {
+      this._currentSegment = 0;
     }
   }
 });
