@@ -94,7 +94,7 @@ test('it renders html tags in metadata', function(assert) {
   setBreakpointForIntegrationTest(this, 'mediumAndUp');
   let onDemandStory = {
     headers: { brand: {title: 'The <em>New</em> Show'}},
-    title: 'The <strong>Big<strong/> Story'
+    title: 'The <strong>Big</strong> Story'
   };
   this.set('currentAudio', onDemandStory);
   this.render(hbs`{{persistent-player.audio-metadata currentAudio=currentAudio media=media}}`);
