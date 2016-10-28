@@ -1,0 +1,11 @@
+{{#if unsupportedBrowser}}
+  {{#if unsupportedMobileBrowser}}
+    {{#recurring-notice id='unsupportedbrowser' showAgain=tomorrow dismissUntil=nextWeek}}
+      Your mobile browser is unsupported. Some site features may not work.
+    {{/recurring-notice}}
+  {{else}}
+    {{#recurring-notice id='unsupportedbrowser' showAgain=tomorrow dismissUntil=nextWeek}}
+      Your browser is unsupported. Some site features may not work.
+    {{/recurring-notice}}
+  {{/if}}
+{{/if}}
