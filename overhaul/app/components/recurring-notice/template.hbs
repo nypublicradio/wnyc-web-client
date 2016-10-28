@@ -1,0 +1,6 @@
+{{#unless seenOrDismissed}}
+  <div class="recurring-notice">
+    <button {{action "dismiss"}} class="recurring-notice-close"></button>
+    {{yield}}
+  </div>
+{{/unless}}
