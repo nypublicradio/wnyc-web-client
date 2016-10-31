@@ -61,7 +61,7 @@ test('it doesnt display the notice if already seen', function(assert) {
   document.cookie = 'testnotification-seen=true';
 
   this.render(hbs`
-    {{#recurring-notice id="testnotification"}}
+    {{#recurring-notice name="testnotification"}}
        This is a test.
     {{/recurring-notice}}
   `);
@@ -75,7 +75,7 @@ test('it doesnt display the notice if already dismissed', function(assert) {
   document.cookie = 'testnotification-dismissed=true';
 
   this.render(hbs`
-    {{#recurring-notice id="testnotification"}}
+    {{#recurring-notice name="testnotification"}}
        This is a test.
     {{/recurring-notice}}
   `);
@@ -91,7 +91,7 @@ test('it sets a seen cookie', function(assert) {
   this.set('showAgain', soon);
 
   this.render(hbs`
-    {{#recurring-notice id="testnotification" showAgain=showAgain}}
+    {{#recurring-notice name="testnotification" showAgain=showAgain}}
        This is a test.
     {{/recurring-notice}}
   `);
@@ -108,14 +108,13 @@ test('it hides the notice when you click the dismiss button', function(assert) {
   this.set('dismissUntil', soon);
 
   this.render(hbs`
-    {{#recurring-notice id="testnotification" dismissUntil=dismissUntil}}
+    {{#recurring-notice name="testnotification" dismissUntil=dismissUntil}}
        This is a test.
     {{/recurring-notice}}
   `);
 
   $('.recurring-notice-close').click();
 
-  let cookies = readCookies();
   assert.equal($('.recurring-notice').length, 0);
 });
 
@@ -126,7 +125,7 @@ test('it sets a dismissed cookie when you click the dismiss button', function(as
   this.set('dismissUntil', soon);
 
   this.render(hbs`
-    {{#recurring-notice id="testnotification" dismissUntil=dismissUntil}}
+    {{#recurring-notice name="testnotification" dismissUntil=dismissUntil}}
        This is a test.
     {{/recurring-notice}}
   `);

@@ -8,21 +8,21 @@ export default Component.extend({
   cookies: service(),
 
   /* settings */
-  id: '',
+  name: '',
   showAgain: new Date(),
   dismissUntil: new Date(),
 
   dismissedNow: false,
-  dismissedBefore: computed('cookies', 'id', function() {
+  dismissedBefore: computed('cookies', 'name', function() {
     let cookies = get(this, 'cookies').read();
-    let id = get(this, 'id');
-    return `${id}-dismissed` in cookies;
+    let name = get(this, 'name');
+    return `${name}-dismissed` in cookies;
   }),
   seeingNow: false,
   seenBefore: computed('cookies', 'cookieName', function() {
     let cookies = get(this, 'cookies').read();
-    let id = get(this, 'id');
-    return `${id}-seen` in cookies;
+    let name = get(this, 'name');
+    return `${name}-seen` in cookies;
   }),
   seen: computed('seeingNow', 'seenBefore', function() {
     let seeingNow = get(this, 'seeingNow');
@@ -34,12 +34,13 @@ export default Component.extend({
 
   didReceiveAttrs() {
       let cookies = get(this, 'cookies');
-      let id = get(this, 'id');
-      let expires = get(this, 'showAgain').toUTCString();
-      if (id) {
+      let name = get(this, 'name');
+      let expires = get(this, 'showAgain');
+
+      if (name) {
         if (!get(this, 'seenBefore')) {
           set(this, 'seeingNow', true);
-          cookies.write(`${id}-seen`, 'true', {expires});
+          cookies.write(`${name}-seen`, 'true', {expires});
         }
       }
   },
@@ -47,10 +48,10 @@ export default Component.extend({
   actions: {
     dismiss() {
       let cookies = get(this, 'cookies');
-      let id = get(this, 'id');
-      let expires = get(this, 'dismissUntil').toUTCString();
+      let name = get(this, 'name');
+      let expires = get(this, 'dismissUntil');
 
-      cookies.write(`${id}-dismissed`, 'true', {expires});
+      cookies.write(`${name}-dismissed`, 'true', {expires});
       set(this, 'dismissedNow', true);
     }
   }
