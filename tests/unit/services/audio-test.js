@@ -191,8 +191,9 @@ test('pausing audio picks up from where it left off', function(assert) {
   return wait();
 });
 
-test('segments played as part of an episode always start from 0', function(assert) {
-  assert.expect(2);
+test('segmented audio management', function(assert) {
+  let done = assert.async();
+  assert.expect(4);
   
   const ONE_MINUTE = 1000 * 60;
   let audio1 = DummyConnection.create({
@@ -203,14 +204,20 @@ test('segments played as part of an episode always start from 0', function(asser
     url: url2 = '/url2.mp3',
     duration: duration2 = 20 * ONE_MINUTE
   });
+  let audio3 = DummyConnection.create({
+    url: url3 = '/url3.mp3',
+    duration: duration3 = 20 * ONE_MINUTE
+  });
   let episode = server.create('story', {
     audio: [url1, url2]
   });
   let segment = server.create('story', { audio: url2 });
+  let story = server.create('story', { audio: url3 });
   let service = this.subject();
   
   service.get('hifi.soundCache').cache(audio1);
   service.get('hifi.soundCache').cache(audio2);
+  service.get('hifi.soundCache').cache(audio3);
   Ember.run(() => {
     service.play(segment.id).then(() => {
       Ember.run(() => service.setPosition(0.5));
@@ -220,8 +227,17 @@ test('segments played as part of an episode always start from 0', function(asser
         audio1.trigger('audio-ended');
       });
       
-      audio2.on('audio-played', function() {
+      audio2.one('audio-played', function() {
         assert.equal(service.get('position'), 0, 'second audio should start from 0');
+        Ember.run(() => service.setPosition(0.5));
+        
+        service.play(story.id).then(() => {
+          service.play(episode.id).then(() => {
+            assert.equal(service.get('hifi.currentSound.url'), url1, 'first segment should be playing');
+            assert.equal(service.get('position'), 0, 'should start from 0');
+            done();
+          });
+        });
       });
     });
   });
