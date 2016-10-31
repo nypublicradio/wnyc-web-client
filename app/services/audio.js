@@ -356,20 +356,21 @@ export default Service.extend({
     let currentId = get(this, 'currentId');
     let currentStory = get(this, 'currentStory');
 
-    this._trackPlayerEvent({
-      action: 'Finished Story',
-      withRegion: true,
-      region: upperCamelize(context),
-      withAnalytics: true,
-    });
-
-    this.sendCompleteListenAction(currentId);
-
+    // finishedTrack fires when continuous play bumper ends
     if (currentStory && currentStory.hasNextSegment()) {
       return this.playNextSegment();
     } else if (currentStory) {
       // no op on unsegmented stories
       currentStory.resetSegments();
+
+      this._trackPlayerEvent({
+        action: 'Finished Story',
+        withRegion: true,
+        region: upperCamelize(context),
+        withAnalytics: true,
+      });
+
+      this.sendCompleteListenAction(currentId);
     }
     
     if (context === 'queue') {
