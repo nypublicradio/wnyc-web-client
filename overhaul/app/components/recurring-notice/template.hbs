@@ -1,6 +1,8 @@
 {{#unless seenOrDismissed}}
   <div class="recurring-notice">
-    <button {{action "dismiss"}} class="recurring-notice-close"></button>
-    {{yield}}
+    <button {{action "dismiss"}} class="recurring-notice-close">{{wnyc-svg icon="close"}}</button>
+    <div class="recurring-notice-message">
+      {{yield}}
+    </div>
   </div>
 {{/unless}}
