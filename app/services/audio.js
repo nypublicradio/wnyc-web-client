@@ -410,11 +410,12 @@ export default Service.extend({
     let story = get(this, 'currentStory');
     let nextSegment = story.getNextSegment();
     if (nextSegment) {
-      this.get('hifi').play(nextSegment, {position: 0})
+      return this.get('hifi').play(nextSegment, {position: 0})
       .then(({sound, failures}) => {
         if (failures && failures.length) {
           failures.forEach(failed => this._trackCodecFailure(failed, sound));
         }
+        return {sound, failures};
       })
       .catch(e => this._trackSoundFailure(e));
     } else {
