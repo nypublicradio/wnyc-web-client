@@ -117,9 +117,10 @@ export default Model.extend({
   },
   resetSegments() {
     if (!this.get('segmentedAudio')) {
-      return null;
+      return this.get('audio');
     } else {
       this._currentSegment = 0;
+      return this.getCurrentSegment();
     }
   }
 });
