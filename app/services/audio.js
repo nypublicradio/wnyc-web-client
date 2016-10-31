@@ -118,13 +118,13 @@ export default Service.extend({
   playFromPk(id, context) {
     this._firstTimePlay();
 
-    let shouldTrack = true;
+    let newStoryPlaying = true;
     let oldContext = get(this, 'currentContext');
 
-    // if the passed in ID matches what's playing, don't fire another
-    // event
+    // if the id is the same, this could be a "resume" or it could the next 
+    // segment in a piece of segmented audio
     if (get(this, 'currentId') === id) {
-      shouldTrack = false;
+      newStoryPlaying = false;
     }
 
     set(this, 'currentId', id);
@@ -132,8 +132,9 @@ export default Service.extend({
     let story;
     let urlPromise = get(this, 'store').findRecord('story', id).then(s => {
       story = s;
-      // getCurrentSegment returns the audio field if the audio is not segmented
-      return s.getCurrentSegment();
+      // resetSegments & getCurrentSegment return the audio value if the 
+      // audio is not segmented
+      return newStoryPlaying ? s.resetSegments() : s.getCurrentSegment();
     });
 
     return this.get('hifi').play(urlPromise).then(({sound, failures}) => {
@@ -165,7 +166,7 @@ export default Service.extend({
       set(this, 'currentAudio', story);
       set(this, 'currentContext', context);
 
-      if (shouldTrack) {
+      if (newStoryPlaying) {
         this._trackPlayerEvent({
           action: `Played Story "${story.get('title')}"`,
           withRegion: true,
@@ -360,9 +361,7 @@ export default Service.extend({
     if (currentStory && currentStory.hasNextSegment()) {
       return this.playNextSegment();
     } else if (currentStory) {
-      // no op on unsegmented stories
-      currentStory.resetSegments();
-
+      // only track if this is the last segment or a valid story
       this._trackPlayerEvent({
         action: 'Finished Story',
         withRegion: true,
