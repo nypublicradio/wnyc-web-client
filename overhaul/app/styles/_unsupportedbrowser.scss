@@ -1,0 +1,64 @@
+.unsupported-browser-notice {
+  .recurring-notice {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 23px 18px 23px 40px;
+    background: $lightgreen;
+    color: white;
+
+    @include mq($large-and-up) {
+      margin-left: 166px;
+      width: calc(100% - 166px);
+    }
+
+    &-close {
+      position: absolute;
+      fill: white;
+      top: 0px;
+      right: 0px;
+      padding: 10px;
+      svg {
+        width: 10px;
+        height: 10px;
+      }
+
+      @include mq($medium-and-up) {
+        top: 0;
+        right: 20px;
+        bottom: 0;
+        padding: 0;
+        height: 100%;
+        svg {
+          width: 15px;
+          height: 15px;
+        }
+      }
+    }
+
+    &-message {
+      text-align: center;
+
+      @include mq($medium-and-up) {
+        text-align: left;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: 16px;
+
+        @include mq($medium-and-up) {
+          font-size: 24px;
+          font-weight: 600;
+        }
+      }
+
+      a {
+        color: $link-gold;
+      }
+
+      margin-right: 40px;
+    }
+  }
+
+}
