@@ -16,6 +16,11 @@ module.exports = function(environment) {
     'ember-metrics': {
       includeAdapters: ['google-analytics', 'data-warehouse']
     },
+    emberHifi: {
+      connections: [{
+        name: 'NativeAudio'
+      }]
+    },
     metricsAdapters: [],
     EmberENV: {
       FEATURES: {
