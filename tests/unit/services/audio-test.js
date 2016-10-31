@@ -313,7 +313,7 @@ test('can play a segmented story all the way through more than once', function(a
     service.play(episode.id).then(() => audio1.trigger('audio-ended'));
   });
   
-  audio2.on('audio-played', function() {
+  audio2.one('audio-played', function() {
     audio2.trigger('audio-ended');
     Ember.run.next(() => {
       service.play(episode.id).then(() => assert.ok('can play twice'));
