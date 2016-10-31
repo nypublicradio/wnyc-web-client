@@ -28,13 +28,14 @@ const readCookies = function() {
 
 
 test('it renders', function(assert) {
-  this.render(hbs`{{recurring-notice}}`);
+  clearCookies();
+  this.render(hbs`{{recurring-notice name="notice1"}}`);
 
   assert.equal(this.$().text().trim(), '');
 
   // Template block usage:
   this.render(hbs`
-    {{#recurring-notice}}
+    {{#recurring-notice name="notice2"}}
       template block text
     {{/recurring-notice}}
   `);
