@@ -14,6 +14,9 @@ const mockAudio = Service.extend({
 });
 
 moduleForAcceptance('Acceptance | play param', {
+  beforeEach() {
+    server.create('stream');
+  },
   afterEach() {
     resetHTML();
   }
