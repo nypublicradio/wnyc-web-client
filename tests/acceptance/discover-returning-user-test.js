@@ -445,9 +445,7 @@ test('deleting an item removes the item from the list', function(assert) {
     andThen(() => {
       return new RSVP.Promise(function(resolve) {
         // pause while making the test wait
-        window.setTimeout(function() {
-            resolve();
-        }, 1000);
+        Ember.run.later(null, resolve, 1000);
       }).then(function() {
         assert.equal($(`[data-story-id="${story.id}"]`).parent('.is-deleted').length, 1, "item should be marked as deleted");
       });
@@ -534,9 +532,7 @@ test('the list can be reordered by dragging', function(assert) {
     return drag('mouse', `#${second} .discover-playlist-item-handle`, offsetFunction).then(() => { // jshint ignore:line
       return new RSVP.Promise(function(resolve) {
         // pause while making the test wait
-        window.setTimeout(function() {
-          resolve();
-        }, 1000);
+        Ember.run.later(null, resolve, 1000);
       }).then(function() {
         let newOrder = currentPlaylistOrder();
         let expectedOrder = [].concat(originalOrder);
@@ -576,9 +572,7 @@ test('reording the list after deleting does not bring back the deleted item', fu
       return drag('mouse', `#${second} .discover-playlist-item-handle`, offsetFunction).then(() => { // jshint ignore:line
         return new RSVP.Promise(function(resolve) {
           // pause while making the test wait
-          window.setTimeout(function() {
-            resolve();
-          }, 1000);
+          Ember.run.later(null, resolve, 1000);
         }).then(function() {
           let newOrder = currentVisiblePlaylistOrder();
           let expectedOrder = [].concat(originalOrder);
