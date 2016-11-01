@@ -3,9 +3,13 @@
     position: relative;
     width: 100%;
     margin: 0;
-    padding: 23px 18px 23px 40px;
+    padding: 18px 14px;
     background: $lightgreen;
     color: white;
+
+    @include mq($medium-and-up) {
+      padding: 23px 18px;
+    }
 
     @include mq($large-and-up) {
       margin-left: 166px;
@@ -38,9 +42,13 @@
 
     &-message {
       text-align: center;
+      font-size: 12px;
+      line-height: 1.8;
 
       @include mq($medium-and-up) {
+        font-size: 16px;
         text-align: left;
+        margin-right: 40px;
       }
 
       h2 {
@@ -56,8 +64,6 @@
       a {
         color: $link-gold;
       }
-
-      margin-right: 40px;
     }
   }
 
