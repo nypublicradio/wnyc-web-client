@@ -23,9 +23,6 @@ export default Route.extend(ApplicationRouteMixin, {
   },
 
   beforeModel({ queryParams }) {
-    if (queryParams.play) {
-      this.get('audio').play(queryParams.play);
-    }
 
     let metrics = get(this, 'metrics');
 
