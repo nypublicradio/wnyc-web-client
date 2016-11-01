@@ -22,7 +22,7 @@ export default Route.extend(ApplicationRouteMixin, {
     }
   },
 
-  beforeModel({ queryParams }) {
+  beforeModel() {
 
     let metrics = get(this, 'metrics');
 
