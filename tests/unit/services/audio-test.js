@@ -13,17 +13,19 @@ moduleFor('service:audio', 'Unit | Service | audio', {
           'model:story','adapter:story','serializer:story',
           'model:stream','adapter:stream','serializer:stream',
           'model:discover/stories',
+          'service:features',
+          'service:bumper-state',
           'service:poll',
           'service:metrics',
           'service:listen-queue',
           'service:listen-history'],
 
   beforeEach() {
-    const bumperState = Ember.Service.extend({
-      revealNotificationBar: false,
-      isEnabled: false,
-      getNext(obj, context) { return [obj, context]; }
-    });
+    // const bumperState = Ember.Service.extend({
+    //   revealNotificationBar: false,
+    //   isEnabled: false,
+    //   // getNext(context) { return [null, context]; }
+    // });
 
     const sessionStub = Ember.Service.extend({
       data: {} // we only really need the data thing
@@ -40,8 +42,8 @@ moduleFor('service:audio', 'Unit | Service | audio', {
     });
     startMirage(this.container);
 
-    this.register('service:bumper-state', bumperState);
-    this.inject.service('bumper-state');
+    // this.register('service:bumper-state', bumperState);
+    // this.inject.service('bumper-state');
 
     this.register('service:session', sessionStub);
     this.inject.service('session');
@@ -430,18 +432,27 @@ test('it sends a listen action on pause', function(assert) {
 });
 
 test('with the bumper-state enabled, the bumper will act on a finished track event', function(assert) {
-  const service = this.subject();
-  let didChange = false;
-  service.set('bumperState.isEnabled', true);
-  service.set('currentContext', 'home-page');
-  service.set('_trackPlayerEvent', () => {});
-  service.set('sendCompleteListenAction', () => {});
-  service.set('play', () => { didChange = true; });
-  service.finishedTrack();
-
-  return wait().then(() => {
-    assert.ok(didChange);
+  let story = server.create('story', { audio: url = '/audio.mp3' });
+  let audio = DummyConnection.create({ url });
+  let done = assert.async();
+  const service = this.subject({
+    currentContext: 'home-page',
+    _trackPlayerEvent() {},
+    sendCompleteListenAction() {},
+    playBumper() {
+      assert.ok('playBumper is called');
+      done();
+    }
   });
+  service.get('hifi.soundCache').cache(audio);
+  service.set('bumperState.isEnabled', true);
+
+  Ember.run(() => {
+    service.play(story.id).then(() => {
+      audio.trigger('audio-ended');
+    });
+  });
+  return wait();
 });
 
 
