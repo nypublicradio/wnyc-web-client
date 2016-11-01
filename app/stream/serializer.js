@@ -66,6 +66,8 @@ export default DS.JSONAPISerializer.extend({
       if (current_show.show_title) {
         attributes.current_show.episodeTitle = current_show.title;
         attributes.current_show.episodeUrl = current_show.url;
+        attributes.current_show.showTitle = current_show.show_title;
+        attributes.current_show.showUrl = current_show.show_url;
       } else {
         attributes.current_show.showTitle = current_show.title;
         attributes.current_show.showUrl = current_show.url;
