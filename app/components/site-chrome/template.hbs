@@ -84,7 +84,7 @@
 
       <ul class="list list--noborder flush text--spacing text--semi {{unless media.isLargeAndUp 'list--inline list--spaced text--small' 'alignright text--medium '}}">
 
-        <li class="list-item list-item--short">
+        <li class="list-item list-item--nav">
           {{#if media.isLargeAndUp}}
             {{#listen-button
               type=(if isHomepage 'white-hollow-small' 'red-hollow-small')
@@ -109,23 +109,23 @@
           {{/if}}
         </li>
 
-        {{#link-to 'stream' tagName='li' href=false class="list-item list-item--short" }}
+        {{#link-to 'stream' tagName='li' href=false class="list-item list-item--nav" }}
           {{link-to 'All Streams' 'stream' class="inherit" preventDefault=false}}
         {{/link-to}}
 
-        {{#link-to 'schedule' current-when="schedule.date" tagName='li' href="false" class="list-item list-item--short" }}
+        {{#link-to 'schedule' current-when="schedule.date" tagName='li' href="false" class="list-item list-item--nav" }}
           {{link-to 'Schedule' 'schedule' class="inherit" preventDefault=false}}
         {{/link-to}}
 
-        {{#link-to 'shows' current-when="shows show" tagName="li" href=false class="list-item list-item--short" }}
+        {{#link-to 'shows' current-when="shows show" tagName="li" href=false class="list-item list-item--nav" }}
           {{link-to 'Shows' 'shows' class="inherit" preventDefault=false}}
         {{/link-to}}
 
-        {{#link-to 'topics' current-when='topics tag' tagName='li' href="false" class="list-item list-item--short" }}
+        {{#link-to 'topics' current-when='topics tag' tagName='li' href="false" class="list-item list-item--nav" }}
           {{link-to 'Topics' 'topics' class="inherit" preventDefault=false}}
         {{/link-to}}
 
-        {{#link-to 'discover.start' current-when="discover" tagName='li' href="false" class="list-item list-item--short"}}
+        {{#link-to 'discover.start' current-when="discover" tagName='li' href="false" class="list-item list-item--nav"}}
           {{#link-to 'discover.start' class="inherit" preventDefault=false}}
             <span class="new">NEW!</span>
             Discover
@@ -134,14 +134,14 @@
 
         {{#unless media.isLargeAndUp}}
 
-          {{#link-to 'djangorendered' 'search/' tagName='li' href=false class="list-item list-item--short" }}
+          {{#link-to 'djangorendered' 'search/' tagName='li' href=false class="list-item list-item--nav" }}
             {{link-to 'Search' 'djangorendered' 'search/' class="inherit" preventDefault=false}}
           {{/link-to}}
 
           {{#if features.autoplayPrefs}}
           {{!-- Google Experiment Continuous Play - START --}}
           {{#if (in-experimental-group 1) }}
-            {{#link-to 'settings' tagName='li' href=false class="list-item list-item--short" }}
+            {{#link-to 'settings' tagName='li' href=false class="list-item list-item--nav" }}
               {{link-to 'Settings' 'settings' class="inherit" preventDefault=false}}
             {{/link-to}}
           {{/if}}
@@ -149,16 +149,16 @@
           {{/if}}
 
           {{#if session.isAuthenticated}}
-            {{#link-to 'djangorendered' 'users/me' tagName='li' href="false" class="list-item list-item--short" }}
+            {{#link-to 'djangorendered' 'users/me' tagName='li' href="false" class="list-item list-item--nav" }}
               {{link-to "My Account" 'djangorendered' 'users/me' class="inherit" preventDefault=false}}
             {{/link-to}}
 
-            <li class="list-item list-item--short">
+            <li class="list-item list-item--nav">
               <button class="btn--blank btn--white text--spacing h5" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
             </li>
 
           {{else}}
-            {{#link-to 'login' tagName='li' href="false" class="list-item list-item--short" }}
+            {{#link-to 'login' tagName='li' href="false" class="list-item list-item--nav" }}
               {{link-to 'Sign In' 'login' class="inherit" preventDefault=false}}
             {{/link-to}}
 
@@ -181,7 +181,7 @@
             {{#if features.autoplayPrefs}}
             {{!-- Google Experiment Continuous Play - START --}}
             {{#if (in-experimental-group 1) }}
-              {{#link-to 'settings' tagName='li' href=false class="list-item list-item--short" }}
+              {{#link-to 'settings' tagName='li' href=false class="list-item list-item--nav" }}
                 {{link-to 'Settings' 'settings' class="inherit" preventDefault=false}}
               {{/link-to}}
             {{/if}}
@@ -189,15 +189,15 @@
             {{/if}}
 
             {{#if session.isAuthenticated}}
-              {{#link-to 'djangorendered' 'users/me' tagName='li' href="false" class="list-item list-item--short" }}
+              {{#link-to 'djangorendered' 'users/me' tagName='li' href="false" class="list-item list-item--nav" }}
                 {{link-to "My Account" 'djangorendered' 'users/me' class="inherit" preventDefault=false}}
               {{/link-to}}
 
-              <li class="list-item list-item--short">
+              <li class="list-item list-item--nav">
                 <button class="btn--blank text--spacing" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
               </li>
             {{else}}
-              {{#link-to 'login' tagName='li' href="false" class="list-item list-item--short" }}
+              {{#link-to 'login' tagName='li' href="false" class="list-item list-item--nav" }}
                 {{link-to "Sign In" 'login' class="inherit" preventDefault=false}}
               {{/link-to}}
             {{/if}}
