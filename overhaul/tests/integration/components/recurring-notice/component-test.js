@@ -29,18 +29,18 @@ const readCookies = function() {
 
 test('it renders', function(assert) {
   clearCookies();
-  this.render(hbs`{{recurring-notice name="notice1"}}`);
+  this.render(hbs`{{recurring-notice name="notice1" class="notice1"}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$('.notice1').length, 1);
 
   // Template block usage:
   this.render(hbs`
-    {{#recurring-notice name="notice2"}}
+    {{#recurring-notice name="notice2" class="notice2"}}
       template block text
     {{/recurring-notice}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$('.notice2').length, 1);
 });
 
 
@@ -53,7 +53,7 @@ test('it displays the notice', function(assert) {
     {{/recurring-notice}}
   `);
 
-  assert.equal($('.recurring-notice').length, 1);
+  assert.equal($('.recurring-notice-message').length, 1);
 });
 
 
