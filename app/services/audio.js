@@ -356,9 +356,10 @@ export default Service.extend({
     let bumper = get(this, 'bumperState');
     let currentId = get(this, 'currentId');
     let currentStory = get(this, 'currentStory');
+    let isOnDemand = get(currentStory, 'audioType') === 'ondemand';
 
     // finishedTrack fires when continuous play bumper ends
-    if (currentStory && currentStory.hasNextSegment()) {
+    if (isOnDemand && currentStory.hasNextSegment()) {
       return this.playNextSegment();
     } else if (currentStory) {
       // only track if this is the last segment or a valid story
