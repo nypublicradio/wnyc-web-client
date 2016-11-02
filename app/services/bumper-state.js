@@ -34,7 +34,7 @@ export default Ember.Service.extend({
   }),
   isEnabled: computed('autoplayPref', 'queue.items.length', function() {
     // Google Experiment Continuous Play - START
-    if (!(this.get('features').isEnabled('autoplay-prefs') && inExperimentalGroup([1]) )){
+    if (!( this.get('features').isEnabled('autoplay-prefs') && inExperimentalGroup([1]) )){
       return false;
     }
     // Google Experiment Continuous Play - END
