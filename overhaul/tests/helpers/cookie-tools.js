@@ -1,6 +1,6 @@
 export function deleteCookie(name) {
   document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-};
+}
 
 export function readCookies() {
   let cookies = {};
@@ -10,10 +10,10 @@ export function readCookies() {
     cookies[key] = value;
   });
   return cookies;
-};
+}
 
 export function clearCookies() {
   Object.keys(readCookies()).forEach(function(key) {
     deleteCookie(key);
   });
-};
+}
