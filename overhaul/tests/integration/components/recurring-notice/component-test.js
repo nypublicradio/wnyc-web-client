@@ -1,31 +1,11 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import moment from 'moment';
+import { clearCookies, readCookies } from 'overhaul/tests/helpers/cookie-tools';
 
 moduleForComponent('recurring-notice', 'Integration | Component | recurring notice', {
   integration: true
 });
-
-const clearCookies = function() {
-  Object.keys(readCookies()).forEach(function(key) {
-    deleteCookie(key);
-  });
-};
-
-const deleteCookie = function(name) {
-  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-};
-
-const readCookies = function() {
-  let cookies = {};
-  document.cookie.split(';').forEach(function(cookie) {
-    let key = cookie.split('=')[0].replace(/^ +/, "");
-    let value = cookie.split('=')[1];
-    cookies[key] = value;
-  });
-  return cookies;
-};
-
 
 test('it renders', function(assert) {
   clearCookies();
