@@ -1,10 +1,10 @@
 {{#if unsupportedBrowser}}
   {{#if unsupportedMobileBrowser}}
-    {{#recurring-notice name='unsupportedbrowser' class='unsupported-browser-notice' showAgain=tomorrow dismissUntil=nextWeek}}
+    {{#recurring-notice name='unsupportedbrowser' class='unsupported-browser-notice' showAgain=tomorrow dismissUntil=twoWeeks}}
       <h2>You are using an outdated Operating System on your iPhone.</h2> Please upgrade. Follow these instructions at <a href="https://support.apple.com/en-us/HT204204">Apple.com.</a>.
     {{/recurring-notice}}
   {{else}}
-    {{#recurring-notice name='unsupportedbrowser' class='unsupported-browser-notice' showAgain=tomorrow dismissUntil=nextWeek}}
+    {{#recurring-notice name='unsupportedbrowser' class='unsupported-browser-notice' showAgain=tomorrow dismissUntil=twoWeeks}}
       <h2>You are using an outdated browser.</h2>
       For a faster, safer and better experience, we recommend that you upgrade now. Go to <a href='http://whatbrowser.org/'>whatbrowser.org</a>.
     {{/recurring-notice}}

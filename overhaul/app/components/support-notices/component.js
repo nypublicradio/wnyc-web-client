@@ -14,5 +14,5 @@ export default Component.extend({
     mobileSafari: bowser.ios && bowser.safari && bowser.osversion < 9,
   },
   tomorrow: moment().add(1, 'days').toDate(),
-  nextWeek: moment().add(7, 'days').toDate(),
+  twoWeeks: moment().add(14, 'days').toDate(),
 });
