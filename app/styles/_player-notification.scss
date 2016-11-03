@@ -9,7 +9,7 @@
   display: flex;
   align-content: center;
 
-  .notification-action {
+  .notification-link {
     color: $link-gold;
   }
 
@@ -49,6 +49,7 @@
   flex-flow: row;
   flex-grow: 1;
   justify-content: space-between;
+  min-width: 150px;
 }
 
 .notification-wrapper.liquid-container {
