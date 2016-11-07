@@ -22,7 +22,14 @@
 
   <div class='notification-action'>
     <div class='notification-change-settings'>
-      {{link-to 'Change Settings' 'settings' classNames='notification-link'}}
+      <a href="/settings"
+          title="Change Settings"
+          data-tracking-category="Persistent Player"
+          data-tracking-action="Continuous Play Notification"
+          data-tracking-label={{if didNotElapse "Click Through to Settings, Pre" "Click Through to Settings, Post"}}
+          class='notification-link'
+          >
+          Change Settings</a>
     </div>
 
     <div class='dismiss-notification close-icon' {{action 'dismiss'}}>

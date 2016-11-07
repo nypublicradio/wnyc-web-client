@@ -27,6 +27,10 @@ export default Component.extend({
       }
     },
     dismissNotification() {
+      get(this, 'audio')._trackPlayerEvent({
+        action: 'Continuous Play Notification',
+        label: 'Click to Close Notification'
+      });
       set(this, 'didDismiss', true);
     },
     setPosition(p) {
