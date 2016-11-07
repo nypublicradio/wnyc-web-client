@@ -424,10 +424,11 @@ test('it sends a listen action on pause', function(assert) {
   Ember.run(() => {
     service.set('listenActions', listenActionStub);
     service.set('hifi', hifiStub);
-    service.play(story.id);
+    service.play(story.id).then(() => {
+      service.pause();
+    });
   });
 
-  Ember.run(() => service.pause());
   return wait();
 });
 

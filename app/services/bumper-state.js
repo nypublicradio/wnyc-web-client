@@ -51,30 +51,38 @@ export default Ember.Service.extend({
       return autoplayPref !== 'no_autoplay';
     }
   }),
+  settingName: computed('autoplayPref', 'autoplaySlug', function() {
+    const autoplaySlug = get(this, 'autoplaySlug') || 'wnyc-fm939';
+    const autoplayPref = get(this, 'autoplayPref') || 'default_stream';
+    if (autoplayPref === 'default_stream') {
+      let stream = get(this, 'store').peekRecord('stream', autoplaySlug);
+      return get(stream, 'name');
+    } else {
+      return 'Queue';
+    }
+  }),
 
-  getNext(prevContext) {
-    // determine which stage the continuous-play is in
+  getNext() {
     const autoplaySlug = get(this, 'autoplaySlug') || 'wnyc-fm939';
     const autoplayPref = get(this, 'autoplayPref') || 'default_stream';
 
-    if (prevContext === 'continuous-play-bumper') {
-      // the bumper had played, so setup the default content from the user settings
-      return this.setupContent(autoplayPref, autoplaySlug);
-    } else {
-      // the active selection the user was listening to use has ended, so now
-      // the bumper gets setup.
-      return this.setupBumper(autoplayPref, autoplaySlug);
-    }
+    return this.setupContent(autoplayPref, autoplaySlug);
+  },
+
+  getBumper() {
+    const autoplaySlug = get(this, 'autoplaySlug') || 'wnyc-fm939';
+    const autoplayPref = get(this, 'autoplayPref') || 'default_stream';
+    return this.setupBumper(autoplayPref, autoplaySlug);
   },
 
   setupContent(autoplayPref, autoplaySlug) {
     this.set('bumperDidPlay', true);
     if (autoplayPref === 'default_stream') {
-      return [autoplaySlug, 'stream'];
+      return autoplaySlug;
     } else {
       const queue = get(this, 'queue');
       const nextUp = queue.nextItem();
-      return [get(nextUp, 'id'), 'queue'];
+      return get(nextUp, 'id');
     }
   },
 
@@ -92,6 +100,6 @@ export default Ember.Service.extend({
       nextItem = ENV.queueAudioBumperURL;
     }
 
-    return [nextItem, 'continuous-play-bumper'];
+    return nextItem;
   }
 });

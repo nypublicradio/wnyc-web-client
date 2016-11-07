@@ -67,11 +67,10 @@ test('calls a function that returns the queue bumper url and the bumper context 
     set(session, 'data.queue', [Ember.Object.create(first), Ember.Object.create(second)]);
     set(session, 'data.user-prefs-active-autoplay', 'queue');
 
-    const [expectedBumperURL, expectedBumperContext] = ['http://audio-bumper.com/thucyides.mp3', 'continuous-play-bumper'];
-    const [actualBumperURL, actualBumperContext] = bumper.getNext('home-page');
+    const expectedBumperURL = 'http://audio-bumper.com/thucyides.mp3';
+    const actualBumperURL = bumper.getBumper();
 
     assert.equal(expectedBumperURL, actualBumperURL);
-    assert.equal(expectedBumperContext, actualBumperContext);
   });
 });
 
@@ -80,11 +79,10 @@ test('calls a function that returns the bumper stream information when the curre
 
   const bumper = this.subject();
   return wait().then(() => {
-    const [expectedBumperURL, expectedBumperContext] = [wnycStream.audio_bumper, 'continuous-play-bumper'];
-    const [actualBumperURL, actualBumperContext] = bumper.getNext('home-page');
+    const expectedBumperURL = wnycStream.audio_bumper;
+    const actualBumperURL = bumper.getBumper();
 
     assert.equal(expectedBumperURL, actualBumperURL);
-    assert.equal(expectedBumperContext, actualBumperContext);
   });
 });
 
@@ -93,11 +91,10 @@ test('calls a function that returns the bumper wqxr stream information when the 
   const bumper = this.subject();
   set(bumper, 'session.data.user-prefs-active-stream', {slug: 'wqxr', name: 'WQXR New York'});
   return wait().then(() => {
-    let [expectedBumperURL, expectedBumperContext] = [wqxrStream.audio_bumper, 'continuous-play-bumper'];
-    let [actualBumperURL, actualBumperContext] = bumper.getNext('home-page');
+    let expectedBumperURL = wqxrStream.audio_bumper;
+    let actualBumperURL = bumper.getBumper();
 
     assert.equal(expectedBumperURL, actualBumperURL);
-    assert.equal(expectedBumperContext, actualBumperContext);
   });
 });
 
@@ -105,11 +102,10 @@ test('calls a function that returns the stream information when the current cont
   const bumper = this.subject();
 
   return wait().then(() => {
-    let [expectedAudioType, expectedStreamContext] = ['wnyc-fm939', 'stream'];
-    let [actualAudioType, actualStreamContext] = bumper.getNext('continuous-play-bumper');
+    let expectedAudioType = 'wnyc-fm939';
+    let actualAudioType = bumper.getNext();
 
     assert.equal(expectedAudioType, actualAudioType);
-    assert.equal(expectedStreamContext, actualStreamContext);
   });
 });
 
