@@ -1,5 +1,5 @@
 <div class='player-notification'>
-  {{#if (and didNotElapse (eq currentContext 'continuous-play-bumper'))}}
+  {{#if preSwitch}}
     <p class='notification-message'>
       Your episode is over. In {{remaining}} seconds,
       {{#if streamEnabled}}
@@ -26,7 +26,7 @@
           title="Change Settings"
           data-tracking-category="Persistent Player"
           data-tracking-action="Continuous Play Notification"
-          data-tracking-label={{if didNotElapse "Click Through to Settings, Pre" "Click Through to Settings, Post"}}
+          data-tracking-label={{if preSwitch 'Click Through to Settings, Pre' 'Click Through to Settings, Post'}}
           class='notification-link'
           >
           Change Settings</a>

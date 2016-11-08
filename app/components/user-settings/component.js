@@ -60,7 +60,7 @@ export default Ember.Component.extend({
       metrics.trackEvent({
         category: "Settings",
         action:   "Continuous Play Target",
-        label:    field === 'queue' ? 'Queue' : this.get('activeStream').name
+        label:    field === 'default_stream' ? this.get('activeStream.name') : 'queue'
       });
 
       let session = this.get('session');

@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
 import get from 'ember-metal/get';
-import computed, { gte } from 'ember-computed';
+import computed, { gte, equal, and } from 'ember-computed';
 
 export default Ember.Component.extend({
   remaining: computed('{duration,position}', function(){
@@ -21,7 +21,9 @@ export default Ember.Component.extend({
     return get(this, 'store').peekRecord('stream', slug);
   }),
   classNames: ['notification', 'notification-active'],
-  didNotElapse: gte('remaining', 0),
+  timeRemaining: gte('remaining', 0),
+  bumperPlaying: equal('audioType', 'bumper'),
+  preSwitch: and('bumperPlaying', 'timeRemaining'),
   didAnimate: false,
   actions: {
     dismiss() {
