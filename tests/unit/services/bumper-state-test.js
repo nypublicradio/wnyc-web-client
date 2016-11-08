@@ -75,7 +75,7 @@ test('calls a function that returns the queue bumper url and the bumper context 
 });
 
 test('calls a function that returns the bumper stream information when the current context is on-demand', function(assert) {
-  const wnycStream = server.create('stream');
+  const wnycStream = server.create('stream', {slug: 'wnyc-fm939'});
 
   const bumper = this.subject();
   return wait().then(() => {
