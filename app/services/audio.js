@@ -191,8 +191,10 @@ export default Service.extend({
     let next = bumper.getNext();
     if (/^\d*$/.test(next)) {
       this._trackAutoplayQueue();
+      return this.play(next, 'queue');
+  } else {
+      return this.play(next, 'Continuous Play');
     }
-    return this.play(next, 'Continuous Play');
   },
 
   playNextSegment() {
