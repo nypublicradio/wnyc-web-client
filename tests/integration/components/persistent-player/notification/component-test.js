@@ -35,7 +35,7 @@ test('it renders with the bumper duration countdown', function(assert) {
     assert.equal(this.$('.player-notification').length, 0);
   });
 
-  this.render(hbs`{{persistent-player.notification duration=duration position=position currentContext=currentContext}}`);
+  this.render(hbs`{{persistent-player.notification duration=duration position=position audioType=audioType}}`);
 
   let actualText = this.$('.player-notification p').text().trim().replace(/\s{2,}/, '');
   let expectedText = 'Your episode is over. In 15 seconds,we\'ll tune you to .';
@@ -54,7 +54,7 @@ test('it renders after the bumper duration countdown', function(assert) {
     assert.equal(this.$('.player-notification').length, 0);
   });
 
-  this.render(hbs`{{persistent-player.notification duration=duration position=position currentContext=currentContext}}`);
+  this.render(hbs`{{persistent-player.notification duration=duration position=position audioType=audioType}}`);
 
   // this kind of makes me NEVER want to split up text with conditional values at all in handlebars
   let text = this.$('.player-notification p').text().trim();
