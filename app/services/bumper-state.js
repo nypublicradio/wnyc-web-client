@@ -66,17 +66,6 @@ export default Ember.Service.extend({
     const autoplaySlug = get(this, 'autoplaySlug') || 'wnyc-fm939';
     const autoplayPref = get(this, 'autoplayPref') || 'default_stream';
 
-    return this._setupAutoplayContent(autoplayPref, autoplaySlug);
-  },
-
-  getBumperUrl() {
-    const autoplaySlug = get(this, 'autoplaySlug') || 'wnyc-fm939';
-    const autoplayPref = get(this, 'autoplayPref') || 'default_stream';
-    return this._setupBumper(autoplayPref, autoplaySlug);
-  },
-
-  _setupAutoplayContent(autoplayPref, autoplaySlug) {
-    this.set('bumperDidPlay', true);
     if (autoplayPref === 'default_stream') {
       return autoplaySlug;
     } else {
@@ -86,8 +75,10 @@ export default Ember.Service.extend({
     }
   },
 
-  _setupBumper(autoplayPref, autoplaySlug) {
-    this.set('bumperStarted', true);
+  getBumperUrl() {
+    const autoplaySlug = get(this, 'autoplaySlug') || 'wnyc-fm939';
+    const autoplayPref = get(this, 'autoplayPref') || 'default_stream';
+
     let nextItem;
     if (autoplayPref === 'default_stream') {
       let stream = get(this, 'store').peekRecord('stream', autoplaySlug);
@@ -99,7 +90,6 @@ export default Ember.Service.extend({
     } else {
       nextItem = ENV.queueAudioBumperURL;
     }
-
     return nextItem;
-  }
+  },
 });

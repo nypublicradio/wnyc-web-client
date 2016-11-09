@@ -37,7 +37,6 @@ export default Service.extend({
   // TODO: fix up currentStory/currentAudio interfaces for streams and on demands
   currentStory:     or('currentAudio.story', 'currentAudio'),
 
-  bumperPlayed:     false,
   currentAudio:     null,
   currentContext:   null,
   sessionPing:      TWO_MINUTES,
@@ -169,7 +168,11 @@ export default Service.extend({
   },
 
   playBumper() {
-    let url = get(this, 'bumperState').getBumperUrl();
+    let bumperState = get(this, 'bumperState');
+    let url = bumperState.getBumperUrl();
+
+    set(bumperState, 'bumperStarted', true);
+
     let context = 'Continuous Play';
     let bumper = Ember.Object.create({
       audioType: 'bumper',
@@ -186,9 +189,11 @@ export default Service.extend({
   },
 
   playAutoplay() {
-    let bumper = get(this, 'bumperState');
-    set(this, 'bumperPlayed', true);
-    let next = bumper.getAutoplayAudioId();
+    let bumperState = get(this, 'bumperState');
+    let next = bumperState.getAutoplayAudioId();
+
+    set(bumperState, 'bumperDidPlay', true);
+
     if (this._audioType(next) === 'ondemand') {
       this._trackAutoplayQueue();
       return this.play(next, 'queue');
