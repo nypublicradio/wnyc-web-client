@@ -118,6 +118,16 @@ test('if the queue is empty and the preference is set to queue, the bumper servi
   });
 });
 
+test('if the queue is undefined and the preference is set to queue, the bumper service will be disabled', function(assert) {
+  const bumper = this.subject();
+  set(bumper, 'session.data.user-prefs-active-autoplay', 'queue');
+  set(bumper, 'session.data.queue', undefined);
+  return wait().then(() => {
+    let actualState = get(bumper, 'autoplayEnabled');
+    assert.equal(actualState, false);
+  });
+});
+
 test('if the queue has items, and the preference is set to queue, the bumper service will be enabled', function(assert) {
   let [first, second] = server.createList('story', 2);
   const bumper = this.subject();

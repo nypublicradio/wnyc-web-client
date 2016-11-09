@@ -40,12 +40,11 @@ export default Ember.Service.extend({
     // Google Experiment Continuous Play - END
 
     const { autoplayPref, queue } = getProperties(this, 'autoplayPref', 'queue');
-    const items = get(queue, 'items') || [];
     // if there is nothing left in the queue, then it is redundant/unecessary to
     // play the bumper file. The `play` function will still be called on the audio,
     // but will not play anything, anyway, because it won't recognize the `id`
     // parameter
-    if (autoplayPref === 'queue' && items.length === 0) {
+    if (autoplayPref === 'queue' && !(queue && queue.nextItem())) {
       return false;
     } else {
       return autoplayPref !== 'no_autoplay';
