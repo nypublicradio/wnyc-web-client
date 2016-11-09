@@ -86,7 +86,7 @@ test('passing a pk to play calls playFromPk', function(assert) {
 
 test('can switch from on demand to stream and vice versa', function(assert) {
   assert.expect(4);
-  
+
   const onDemandUrl = '/url.mp3';
   let story = server.create('story', { audio: onDemandUrl });
   let stream = server.create('stream');
@@ -96,7 +96,7 @@ test('can switch from on demand to stream and vice versa', function(assert) {
   let service = this.subject();
   service.get('hifi.soundCache').cache(audio1);
   service.get('hifi.soundCache').cache(audio2);
-  
+
   Ember.run(() => {
     service.play(story.id).then(({sound}) => {
       assert.equal(sound.get('url'), onDemandUrl, 'story played OK');
@@ -113,13 +113,13 @@ test('can switch from on demand to stream and vice versa', function(assert) {
       });
     });
   });
-  
+
   return wait();
 });
 
 test('playing a story with a list of urls plays them in order', function(assert) {
   assert.expect(2);
-  
+
   let audio1 = DummyConnection.create({ url: url1 = '/url1.mp3' });
   let audio2 = DummyConnection.create({ url: url2 = '/url2.mp3' });
   let episode = server.create('story', {
@@ -128,18 +128,18 @@ test('playing a story with a list of urls plays them in order', function(assert)
   let service = this.subject();
   service.get('hifi.soundCache').cache(audio1);
   service.get('hifi.soundCache').cache(audio2);
-  
+
   Ember.run(() => {
     service.play(episode.id).then(() => {
       assert.equal(service.get('hifi.currentSound.url'), url1, 'first audio should be playing');
       audio1.trigger('audio-ended');
     });
   });
-  
+
   audio2.on('audio-played', function() {
     assert.equal(service.get('hifi.currentSound.url'), url2, 'second audio should be playing');
   });
-  
+
   return wait();
 });
 
@@ -152,20 +152,20 @@ test('playing a segment directly starts from 0', function(assert) {
   let segment = server.create('story', { audio: url });
   let episode = server.create('story', { audio: [url] });
   let service = this.subject();
-  
+
   service.get('hifi.soundCache').cache(audio);
   Ember.run(() => {
     service.play(episode.id).then(() => {
       service.setPosition(0.5);
       assert.equal(service.get('position'), (30 * ONE_MINUTE) / 2, 'position on episode audio successfully set');
-      
+
       service.play(segment.id).then(() => {
         assert.equal(service.get('position'), 0, 'audio position should be reset to 0');
         assert.equal(service.get('hifi.currentSound.url'), url, 'url should be segment url');
       });
     });
   });
-  
+
   return wait();
 });
 
@@ -177,7 +177,7 @@ test('pausing audio picks up from where it left off', function(assert) {
   });
   let story = server.create('story', { audio: url });
   let service = this.subject();
-  
+
   service.get('hifi.soundCache').cache(audio);
   Ember.run(() => {
     service.play(story.id).then(() => {
@@ -189,14 +189,14 @@ test('pausing audio picks up from where it left off', function(assert) {
       });
     });
   });
-  
+
   return wait();
 });
 
 test('segmented audio management', function(assert) {
   let done = assert.async();
   assert.expect(4);
-  
+
   const ONE_MINUTE = 1000 * 60;
   let audio1 = DummyConnection.create({
     url: url1 = '/url1.mp3',
@@ -216,7 +216,7 @@ test('segmented audio management', function(assert) {
   let segment = server.create('story', { audio: url2 });
   let story = server.create('story', { audio: url3 });
   let service = this.subject();
-  
+
   service.get('hifi.soundCache').cache(audio1);
   service.get('hifi.soundCache').cache(audio2);
   service.get('hifi.soundCache').cache(audio3);
@@ -224,15 +224,15 @@ test('segmented audio management', function(assert) {
     service.play(segment.id).then(() => {
       Ember.run(() => service.setPosition(0.5));
       assert.equal(service.get('position'), audio2.get('duration') / 2, 'position on segment audio successfully set');
-      
+
       service.play(episode.id).then(() => {
         audio1.trigger('audio-ended');
       });
-      
+
       audio2.one('audio-played', function() {
         assert.equal(service.get('position'), 0, 'second audio should start from 0');
         Ember.run(() => service.setPosition(0.5));
-        
+
         service.play(story.id).then(() => {
           service.play(episode.id).then(() => {
             assert.equal(service.get('hifi.currentSound.url'), url1, 'first segment should be playing');
@@ -243,7 +243,7 @@ test('segmented audio management', function(assert) {
       });
     });
   });
-  
+
   return wait();
 });
 
@@ -255,48 +255,48 @@ test('episodes played from the queue do not continue to the next item until the 
     audio: [url1, url2]
   });
   let nextStory = server.create('story', { audio: url3 });
-  
+
   let service = this.subject();
   service.get('hifi.soundCache').cache(audio1);
   service.get('hifi.soundCache').cache(audio2);
   service.get('hifi.soundCache').cache(audio3);
-  
+
   let hifiSpy = sinon.spy(service.get('hifi'), 'play');
   let queueSpy = sinon.spy(service, 'playNextInQueue');
   let audio3Spy = sinon.spy(audio3, 'play');
-  
+
   Ember.run(() => {
     service.addToQueue(episodeToQueue.id);
     service.addToQueue(nextStory.id);
-    
+
     service.play(episodeToQueue.id, 'queue').then(() => {
       assert.equal(service.get('hifi.currentSound.url'), url1, 'first audio file should be playing');
       audio1.trigger('audio-ended');
     });
-    
+
     audio2.on('audio-played', function() {
       assert.equal(hifiSpy.callCount, 2, 'should only call play twice');
       assert.equal(audio3Spy.callCount, 0, 'audio3 should not be played');
       assert.equal(queueSpy.callCount, 0, 'nothing new should be queued by now');
-      
+
       Ember.run.next(() => audio2.trigger('audio-ended'));
     });
-    
+
     audio2.on('audio-ended', function() {
       audio2.ended = true;
     });
-    
+
     audio3.on('audio-played', function() {
       assert.equal(hifiSpy.callCount, 3, 'play called 3 times');
       assert.equal(audio3Spy.callCount, 1, 'audio3 should be played once');
       assert.equal(queueSpy.callCount, 1, 'audio should have been qeueued up');
       assert.ok(audio2.ended, 'audio2 should have ended before starting');
     });
-  
+
   });
-  
+
   return wait();
-  
+
 });
 
 
@@ -306,22 +306,22 @@ test('can play a segmented story all the way through more than once', function(a
   let episode = server.create('story', {
     audio: [url1, url2]
   });
-  
+
   let service = this.subject();
   service.get('hifi.soundCache').cache(audio1);
   service.get('hifi.soundCache').cache(audio2);
-  
+
   Ember.run(() => {
     service.play(episode.id).then(() => audio1.trigger('audio-ended'));
   });
-  
+
   audio2.one('audio-played', function() {
     audio2.trigger('audio-ended');
     Ember.run.next(() => {
       service.play(episode.id).then(() => assert.ok('can play twice'));
     });
   });
-  
+
   return wait();
 });
 
@@ -446,7 +446,7 @@ test('with the bumper-state enabled, the bumper will act on a finished track eve
     }
   });
   service.get('hifi.soundCache').cache(audio);
-  service.set('bumperState.isEnabled', true);
+  service.set('bumperState.autoplayEnabled', true);
 
   Ember.run(() => {
     service.play(story.id).then(() => {

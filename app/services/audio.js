@@ -75,11 +75,11 @@ export default Service.extend({
       return;
     }
 
-    if (/^\d*$/.test(id)) {
+    if (this._audioType(id) === 'ondemand') {
       return this.playFromPk(id, context);
-    } else if (/^http|^https/.test(id)) {
+    } else if (this._audioType(id) === 'bumper') {
       return this.playBumper(id, context);
-    } else {
+    } else { //stream
       return this.playStream(id, context);
     }
   },
@@ -169,7 +169,7 @@ export default Service.extend({
   },
 
   playBumper() {
-    let url = get(this, 'bumperState').getBumper();
+    let url = get(this, 'bumperState').getBumperUrl();
     let context = 'Continuous Play';
     let bumper = Ember.Object.create({
       audioType: 'bumper',
@@ -188,11 +188,11 @@ export default Service.extend({
   playAutoplay() {
     let bumper = get(this, 'bumperState');
     set(this, 'bumperPlayed', true);
-    let next = bumper.getNext();
-    if (/^\d*$/.test(next)) {
+    let next = bumper.getAutoplayAudioId();
+    if (this._audioType(next) === 'ondemand') {
       this._trackAutoplayQueue();
       return this.play(next, 'queue');
-  } else {
+    } else { //stream
       return this.play(next, 'Continuous Play');
     }
   },
@@ -266,6 +266,10 @@ export default Service.extend({
     get(this, 'queue').reset(newQueue);
   },
 
+  queueHasNext() {
+    return get(this, 'queue').nextItem();
+  },
+
   playNextInQueue() {
     let queue = get(this, 'queue');
     let nextUp = queue.nextItem();
@@ -299,12 +303,12 @@ export default Service.extend({
   finishedTrack() {
     let currentAudio = get(this, 'currentAudio');
     let currentContext = get(this, 'currentContext');
-    let autoPlayEnabled = get(this, 'bumperState.isEnabled');
+    let autoPlayEnabled = get(this, 'bumperState.autoplayEnabled');
 
-    if (currentAudio.segmentedAudio && currentAudio.hasNextSegment()) {
+    if (get(currentAudio, 'segmentedAudio') && currentAudio.hasNextSegment()) {
       return this.playNextSegment();
     }
-    else if (this._didJustPlayFrom('queue') && get(this, 'queue.items.length') > 0 ) {
+    else if (this._didJustPlayFrom('queue') && this.queueHasNext()) {
       this._trackFinished(currentAudio, currentContext);
       return this.playNextInQueue();
     }
@@ -482,7 +486,7 @@ export default Service.extend({
   _trackPause(audio, context) {
     let type = audio && get(audio, 'audioType');
     if (type === 'bumper') {
-      let bumperSetting = get(this, 'bumperState.settingName');
+      let bumperSetting = get(this, 'bumperState.autoplayChoice');
       this._trackPlayerEvent({
         action: 'Paused Bumper',
         label: `${bumperSetting}|Continuous Play`
@@ -536,7 +540,6 @@ export default Service.extend({
     }
     let isOnDemand = prevStory.get('audioType') !== 'stream';
     let isSegmented = get(prevStory, 'segmentedAudio');
-    console.log(isOnDemand, isSegmented);
     // put `getCurrentSegment` behind the and gates b/c sometimes prevStory is a stream model, which doesn't have `getCurrentSegment`
     if (isOnDemand && isSegmented && prevStory.getCurrentSegment() === sound.get('url')) {
       return true;
@@ -573,6 +576,16 @@ export default Service.extend({
     set(this, 'hasErrors', false);
     set(this, 'currentAudio', audio);
     set(this, 'currentContext', context);
+  },
+
+  _audioType(id) {
+    if (/^\d*$/.test(id)) {
+      return 'ondemand';
+    } else if (/^http|^https/.test(id)) {
+      return 'bumper';
+    } else {
+      return 'stream';
+    }
   },
 
   _formatContext(context) {

@@ -32,7 +32,7 @@ export default Ember.Service.extend({
 
     return this.get('bumperPlaying') || this.get('bumperDidPlay');
   }),
-  isEnabled: computed('autoplayPref', 'queue.items.length', function() {
+  autoplayEnabled: computed('autoplayPref', 'queue.items.length', function() {
     // Google Experiment Continuous Play - START
     if (!( this.get('features').isEnabled('autoplay-prefs') && inExperimentalGroup([1]) )){
       return false;
@@ -51,7 +51,7 @@ export default Ember.Service.extend({
       return autoplayPref !== 'no_autoplay';
     }
   }),
-  settingName: computed('autoplayPref', 'autoplaySlug', function() {
+  autoplayChoice: computed('autoplayPref', 'autoplaySlug', function() {
     const autoplaySlug = get(this, 'autoplaySlug') || 'wnyc-fm939';
     const autoplayPref = get(this, 'autoplayPref') || 'default_stream';
     if (autoplayPref === 'default_stream') {
@@ -62,20 +62,20 @@ export default Ember.Service.extend({
     }
   }),
 
-  getNext() {
+  getAutoplayAudioId() {
     const autoplaySlug = get(this, 'autoplaySlug') || 'wnyc-fm939';
     const autoplayPref = get(this, 'autoplayPref') || 'default_stream';
 
-    return this.setupContent(autoplayPref, autoplaySlug);
+    return this._setupAutoplayContent(autoplayPref, autoplaySlug);
   },
 
-  getBumper() {
+  getBumperUrl() {
     const autoplaySlug = get(this, 'autoplaySlug') || 'wnyc-fm939';
     const autoplayPref = get(this, 'autoplayPref') || 'default_stream';
-    return this.setupBumper(autoplayPref, autoplaySlug);
+    return this._setupBumper(autoplayPref, autoplaySlug);
   },
 
-  setupContent(autoplayPref, autoplaySlug) {
+  _setupAutoplayContent(autoplayPref, autoplaySlug) {
     this.set('bumperDidPlay', true);
     if (autoplayPref === 'default_stream') {
       return autoplaySlug;
@@ -86,7 +86,7 @@ export default Ember.Service.extend({
     }
   },
 
-  setupBumper(autoplayPref, autoplaySlug) {
+  _setupBumper(autoplayPref, autoplaySlug) {
     this.set('bumperStarted', true);
     let nextItem;
     if (autoplayPref === 'default_stream') {

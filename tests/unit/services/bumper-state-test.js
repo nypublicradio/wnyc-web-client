@@ -58,75 +58,72 @@ test('it exists', function(assert) {
 });
 
 
-test('calls a function that returns the queue bumper url and the bumper context previous context was on-demand', function(assert) {
+test('getBumperUrl returns the queue bumper url for the queue when pref is set to queue', function(assert) {
   const [first, second] = server.createList('story', 2);
   const bumper = this.subject();
-  const session = get(bumper, 'session');
 
   return wait().then(() => {
-    set(session, 'data.queue', [Ember.Object.create(first), Ember.Object.create(second)]);
-    set(session, 'data.user-prefs-active-autoplay', 'queue');
+    set(bumper, 'session.data.queue', [Ember.Object.create(first), Ember.Object.create(second)]);
+    set(bumper, 'session.data.user-prefs-active-autoplay', 'queue');
 
     const expectedBumperURL = 'http://audio-bumper.com/thucyides.mp3';
-    const actualBumperURL = bumper.getBumper();
+    const actualBumperURL = bumper.getBumperUrl();
 
     assert.equal(expectedBumperURL, actualBumperURL);
   });
 });
 
-test('calls a function that returns the bumper stream information when the current context is on-demand', function(assert) {
+test('getBumperUrl returns the bumper url when the pref is set to default_stream', function(assert) {
   const wnycStream = server.create('stream', {slug: 'wnyc-fm939'});
-
   const bumper = this.subject();
+
   return wait().then(() => {
     const expectedBumperURL = wnycStream.audio_bumper;
-    const actualBumperURL = bumper.getBumper();
-
+    const actualBumperURL = bumper.getBumperUrl();
     assert.equal(expectedBumperURL, actualBumperURL);
   });
 });
 
-test('calls a function that returns the bumper wqxr stream information when the current context is on-demand', function(assert) {
+test('getBumperUrl returns the wqxr bumper url when the prefs are set to default_stream and wqxr', function(assert) {
   const wqxrStream = server.create('stream', {slug: 'wqxr'});
   const bumper = this.subject();
   set(bumper, 'session.data.user-prefs-active-stream', {slug: 'wqxr', name: 'WQXR New York'});
-  return wait().then(() => {
-    let expectedBumperURL = wqxrStream.audio_bumper;
-    let actualBumperURL = bumper.getBumper();
 
+  return wait().then(() => {
+    const expectedBumperURL = wqxrStream.audio_bumper;
+    const actualBumperURL = bumper.getBumperUrl();
     assert.equal(expectedBumperURL, actualBumperURL);
   });
 });
 
-test('calls a function that returns the stream information when the current context is the bumper', function(assert) {
+test('getAutoplayAudioId the default stream slug when pref is default_stream', function(assert) {
+  const wnycStream = server.create('stream', {slug: 'wnyc-fm939'});
   const bumper = this.subject();
 
   return wait().then(() => {
-    let expectedAudioType = 'wnyc-fm939';
-    let actualAudioType = bumper.getNext();
-
-    assert.equal(expectedAudioType, actualAudioType);
+    const expectedAudio = 'wnyc-fm939';
+    const actualAudio = bumper.getAutoplayAudioId();
+    assert.equal(expectedAudio, actualAudio);
   });
 });
 
 
-test('if the queue is empty and the preference is set to what is in the queue, the bumper service will be disabled', function(assert) {
+test('if the queue is empty and the preference is set to queue, the bumper service will be disabled', function(assert) {
   const bumper = this.subject();
-  const session = get(bumper, 'session');
-  set(session, 'data.user-prefs-active-autoplay', 'queue');
-  set(session, 'data.queue', []);
+  set(bumper, 'session.data.user-prefs-active-autoplay', 'queue');
+  set(bumper, 'session.data.queue', []);
   return wait().then(() => {
-    let actualState = get(bumper, 'isEnabled');
+    let actualState = get(bumper, 'autoplayEnabled');
     assert.equal(actualState, false);
   });
 });
 
-test('if the queue has items, and the preference is set to what is in the queue, the bumper service will be enabled', function(assert) {
+test('if the queue has items, and the preference is set to queue, the bumper service will be enabled', function(assert) {
   let [first, second] = server.createList('story', 2);
   const bumper = this.subject();
-  const { session, queue } = getProperties(bumper, 'session', 'queue');
-  set(session, 'data.queue', A());
-  set(session, 'data.user-prefs-active-autoplay', 'queue');
+  const queue = get(bumper, 'queue');
+  set(bumper, 'session.data.queue', A());
+  set(bumper, 'session.data.user-prefs-active-autoplay', 'queue');
 
   Ember.run(() => {
     queue.addToQueueById(first.id);
@@ -134,18 +131,17 @@ test('if the queue has items, and the preference is set to what is in the queue,
   });
 
   return wait().then(() => {
-    let actualState = get(bumper, 'isEnabled');
+    let actualState = get(bumper, 'autoplayEnabled');
     assert.equal(actualState, true);
   });
 });
 
-
-test('if the queue is empty and the preference is set to "Do Not Autoplay", the bumper service be disabled', function(assert) {
+test('if the queue is empty and the preference is set to no_autoplay, the bumper service be disabled', function(assert) {
   const bumper = this.subject();
   const session = get(bumper, 'session');
   session.set('data.user-prefs-active-autoplay', 'no_autoplay');
   return wait().then(() => {
-    let actualState = get(bumper, 'isEnabled');
+    let actualState = get(bumper, 'autoplayEnabled');
     assert.equal(actualState, false);
   });
 });
