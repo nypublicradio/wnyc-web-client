@@ -2,7 +2,7 @@ import { moduleFor, test } from 'ember-qunit';
 import Ember from 'ember';
 import startMirage from 'overhaul/tests/helpers/setup-mirage-for-integration';
 import wait from 'ember-test-helpers/wait';
-import get, { getProperties } from 'ember-metal/get';
+import get from 'ember-metal/get';
 import set from 'ember-metal/set';
 const { A, Service } = Ember;
 import 'overhaul/tests/helpers/with-feature';
@@ -97,7 +97,7 @@ test('getBumperUrl returns the wqxr bumper url when the prefs are set to default
 });
 
 test('getAutoplayAudioId the default stream slug when pref is default_stream', function(assert) {
-  const wnycStream = server.create('stream', {slug: 'wnyc-fm939'});
+  server.create('stream', {slug: 'wnyc-fm939'});
   const bumper = this.subject();
 
   return wait().then(() => {
