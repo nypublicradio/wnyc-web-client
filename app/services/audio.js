@@ -117,6 +117,10 @@ export default Service.extend({
         this.addToHistory(story);
       }
 
+      // TODO: isCurrentSegment relies on `currentAudio` to compare incoming sound
+      // so this needs to run before _setupAudio otherwise currentAudio and sound
+      // will always match.
+      let restartingSegment = this._isCurrentSegment(sound);
       this._setupAudio(story, context);
 
       if (this._didJustPlayFrom('queue')) {
@@ -129,7 +133,6 @@ export default Service.extend({
       // * clicking a segment (while playing the same segment from an episode)
       let restartingFromQueue = this._didJustPlayFrom('queue') && prevContext !== 'queue' && !newStoryPlaying;
       let restartingFromHistory = this._didJustPlayFrom('history') && get(this, 'isPlaying') && !newStoryPlaying;
-      let restartingSegment = this._isCurrentSegment(sound);
 
       if (restartingFromQueue || restartingFromHistory || restartingSegment) {
         this.setPosition(0);
