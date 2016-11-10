@@ -2,7 +2,7 @@
   <label for='active-stream'>
     <div>Default live stream</div>
     <div class='setting-desc'>
-      Pick your favorite live stream station. Then play at any time just by clicking “Listen Live” in the menu.
+      Set your favorite live stream station. Play at any time just by clicking “Listen Live” in the menu.
     </div>
   </label>
 
@@ -21,9 +21,9 @@
 <div class='user-autoplay'>
   <div class='user-setting toggle-preference'>
     <label for='autoplay-pref'>
-      <div>Autoplay</div>
+      <div>Continuous play</div>
       <div class='setting-desc'>
-        When you finish listening to an episode or segment on-demand, we’ll autoplay
+        When you finish listening to an episode or segment on-demand, we’ll play
         your favorite stream or your queue.
       </div>
     </label>
@@ -40,7 +40,7 @@
   </div>
   <div class='autoplay-options {{if enableAutoplay "autoplay-inactive" "autoplay-active"}}'>
     <label for='autoplay-option'>
-      Automatically begin playing:
+      What to play next:
     </label>
 
     {{#power-select
