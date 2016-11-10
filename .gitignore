@@ -24,3 +24,6 @@ testem.log
 
 # temporary modernizr location until we can make it an add on
 vendor/modernizr/modernizr-build.js
+
+# editor cruft
+.*~
