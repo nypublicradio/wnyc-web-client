@@ -184,6 +184,30 @@ test('pausing audio picks up from where it left off', function(assert) {
   return wait();
 });
 
+test('pausing segemented audio picks up from where it left off', function(assert) {
+  const ONE_MINUTE = 1000 * 60;
+  let audio = DummyConnection.create({
+    url: url = '/audio.mp3',
+    duration: 30 * ONE_MINUTE
+  });
+  let episode = server.create('story', { audio: [url] });
+  let service = this.subject();
+
+  service.get('hifi.soundCache').cache(audio);
+  Ember.run(() => {
+    service.play(episode.id).then(() => {
+      service.setPosition(0.5);
+      assert.equal(service.get('position'), (30 * ONE_MINUTE) / 2, 'position on episode audio successfully set');
+      service.pause();
+      service.play(episode.id).then(() => {
+        assert.equal(service.get('position'), (30 * ONE_MINUTE) / 2, 'audio picks up where it left off');
+      });
+    });
+  });
+
+  return wait();
+});
+
 test('segmented audio management', function(assert) {
   let done = assert.async();
   assert.expect(4);

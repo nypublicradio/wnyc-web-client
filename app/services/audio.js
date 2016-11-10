@@ -120,7 +120,7 @@ export default Service.extend({
       // TODO: isCurrentSegment relies on `currentAudio` to compare incoming sound
       // so this needs to run before _setupAudio otherwise currentAudio and sound
       // will always match.
-      let restartingSegment = this._isCurrentSegment(sound);
+      let restartingSegment = this._isCurrentSegment(sound) && newStoryPlaying;
       this._setupAudio(story, context);
 
       if (this._didJustPlayFrom('queue')) {
