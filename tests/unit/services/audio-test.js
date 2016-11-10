@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { moduleFor, test, skip } from 'ember-qunit';
+import { moduleFor, test } from 'ember-qunit';
 import startMirage from 'overhaul/tests/helpers/setup-mirage-for-integration';
 import wait from 'ember-test-helpers/wait';
 import hifiNeeds from 'overhaul/tests/helpers/hifi-needs';
@@ -21,12 +21,6 @@ moduleFor('service:audio', 'Unit | Service | audio', {
           'service:listen-history'],
 
   beforeEach() {
-    // const bumperState = Ember.Service.extend({
-    //   revealNotificationBar: false,
-    //   isEnabled: false,
-    //   // getNext(context) { return [null, context]; }
-    // });
-
     const sessionStub = Ember.Service.extend({
       data: {} // we only really need the data thing
     });
@@ -41,9 +35,6 @@ moduleFor('service:audio', 'Unit | Service | audio', {
       trackEvent() {}
     });
     startMirage(this.container);
-
-    // this.register('service:bumper-state', bumperState);
-    // this.inject.service('bumper-state');
 
     this.register('service:session', sessionStub);
     this.inject.service('session');
@@ -143,7 +134,7 @@ test('playing a story with a list of urls plays them in order', function(assert)
   return wait();
 });
 
-skip('playing a segment directly starts from 0', function(assert) {
+test('playing a segment directly starts from 0', function(assert) {
   const ONE_MINUTE = 1000 * 60;
   let audio = DummyConnection.create({
     url: url = '/audio.mp3',
