@@ -1,0 +1,73 @@
+machine:
+  node:
+    version: 6.2.1
+  ruby:
+    version: 2.1.1
+
+test:
+  override:
+    - ./node_modules/ember-cli/bin/ember test
+
+dependencies:
+  override:
+    - sudo apt-get update && sudo apt-get install ruby-sass
+    - gem update --system
+    - gem install compass --no-ri --no-rdoc
+    - npm set progress=false
+    - npm install -g bower grunt-cli --registry=https://npm.wnyc.net
+    - npm i --registry=https://npm.wnyc.net
+    - grunt modernizr:dist
+    - bower i
+
+deployment:
+  prod:
+    tag: /v[0-9]+\.[0-9]+\.[0-9]+/
+    commands:
+      - ./node_modules/ember-cli/bin/ember deploy production --verbose --activate:
+          environment:
+            AWS_ACCESS_KEY_ID: $DEPLOY_AWS_ACCESS_KEY_ID
+            AWS_SECRET_ACCESS_KEY: $DEPLOY_AWS_SECRET_ACCESS_KEY
+            AWS_BUCKET: $PROD_AWS_BUCKET
+            AWS_REGION: $PROD_AWS_REGION
+            SSH_TUNNEL_USERNAME: $DEPLOY_SSH_TUNNEL_USERNAME
+            SSH_TUNNEL_HOST: $DEPLOY_SSH_TUNNEL_HOST
+            SSH_TUNNEL_DESTINATION_HOST: $PROD_REDIS_HOST
+            SSH_TUNNEL_DESTINATION_PORT: $PROD_REDIS_PORT
+            FINGERPRINT_PREPEND_URL: $PROD_FINGERPRINT_PREPEND_URL
+            SENTRY_DSN: $PROD_SENTRY_EMBER_DSN
+            SENTRY_PROJECT: $PROD_SENTRY_PROJECT
+            SENTRY_EMBER_SOURCEMAPS_KEY: $PROD_SENTRY_EMBER_SOURCEMAPS_KEY
+  staging:
+    branch: staging
+    commands:
+      - ./node_modules/ember-cli/bin/ember deploy production --verbose:
+          environment:
+            AWS_ACCESS_KEY_ID: $DEPLOY_AWS_ACCESS_KEY_ID
+            AWS_SECRET_ACCESS_KEY: $DEPLOY_AWS_SECRET_ACCESS_KEY
+            AWS_BUCKET: $PROD_AWS_BUCKET
+            AWS_REGION: $PROD_AWS_REGION
+            SSH_TUNNEL_USERNAME: $DEPLOY_SSH_TUNNEL_USERNAME
+            SSH_TUNNEL_HOST: $DEPLOY_SSH_TUNNEL_HOST
+            SSH_TUNNEL_DESTINATION_HOST: $PROD_REDIS_HOST
+            SSH_TUNNEL_DESTINATION_PORT: $PROD_REDIS_PORT
+            FINGERPRINT_PREPEND_URL: $PROD_FINGERPRINT_PREPEND_URL
+            SENTRY_DSN: $PROD_SENTRY_EMBER_DSN
+            SENTRY_PROJECT: $PROD_SENTRY_PROJECT
+            SENTRY_EMBER_SOURCEMAPS_KEY: $PROD_SENTRY_EMBER_SOURCEMAPS_KEY
+  demo:
+    branch: demo
+    commands:
+      - ./node_modules/ember-cli/bin/ember deploy demo --verbose:
+          environment:
+            AWS_ACCESS_KEY_ID: $DEPLOY_AWS_ACCESS_KEY_ID
+            AWS_SECRET_ACCESS_KEY: $DEPLOY_AWS_SECRET_ACCESS_KEY
+            AWS_BUCKET: $DEMO_AWS_BUCKET
+            AWS_REGION: $DEMO_AWS_REGION
+            SSH_TUNNEL_USERNAME: $DEPLOY_SSH_TUNNEL_USERNAME
+            SSH_TUNNEL_HOST: $DEPLOY_SSH_TUNNEL_HOST
+            SSH_TUNNEL_DESTINATION_HOST: $DEMO_REDIS_HOST
+            SSH_TUNNEL_DESTINATION_PORT: $DEMO_REDIS_PORT
+            FINGERPRINT_PREPEND_URL: $DEMO_FINGERPRINT_PREPEND_URL
+            SENTRY_DSN: $DEMO_SENTRY_EMBER_DSN
+            SENTRY_PROJECT: $DEMO_SENTRY_PROJECT
+            SENTRY_EMBER_SOURCEMAPS_KEY: $DEMO_SENTRY_EMBER_SOURCEMAPS_KEY
