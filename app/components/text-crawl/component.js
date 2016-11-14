@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import rsvp from 'rsvp';
-import { scheduleOnce } from 'ember-runloop';
+import { scheduleOnce, bind } from 'ember-runloop';
 const { Promise } = rsvp;
 
 export default Ember.Component.extend({
@@ -28,12 +28,12 @@ export default Ember.Component.extend({
           toScroll
            .velocity({left: [`-${width - 50}px`, 0]}, {duration: 4500, delay: 750})
            .velocity({left: 0}, {duration: 500, 
-             complete: () => {
+             complete: bind(this, () => {
               if (this.isDestroyed || this.isDestroying) {
                 return;
               }
               this.set('isScrolling', false);
-            }
+            })
           });
         }
       });
