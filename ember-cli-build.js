@@ -53,16 +53,6 @@ module.exports = function(defaults) {
   // these are symlinked to their original locations in the puppy
   // source.
   app.import('bower_components/imagesloaded/imagesloaded.pkgd.js');
-  
-//  if (env === 'test') {
-//    // svg for test env
-//    app.import('vendor/wnyc-media/svg/defs.svg', {
-//      destDir: 'media/svg'
-//    });
-//    app.import('vendor/wnyc-media/svg/nav_icons.svg', {
-//      destDir: 'media/svg'
-//    });
-//  }
 
   return app.toTree();
 };
