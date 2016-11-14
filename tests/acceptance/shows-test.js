@@ -21,10 +21,10 @@ test('visiting /shows', function(assert) {
     //assert.equal( $('.l-highlight--geometric .flag').length, 1, "one featured item is present");
     
     //10 shows are listed, per test data
-    assert.equal( $('.shows-list ul li').length, 10, "ten shows are listed" );
+    assert.equal(find('.shows-list ul li').length, 10, "ten shows are listed" );
 
     //ad is there
-    assert.equal( $('#leaderboard').length, 1, "ad is present" );
+    assert.equal(find('#leaderboard').length, 1, "ad is present" );
 
   });
 });
@@ -39,7 +39,7 @@ test('searching /shows', function(assert) {
     keyEvent('.shows-search .searchbox input', 'keyup');
     andThen(function() {  
       //no longer expect 10 shows
-      assert.notEqual($('.shows-list li').length, 10, "filtering results in less than 10 shows");
+      assert.notEqual(find('.shows-list li').length, 10, "filtering results in less than 10 shows");
     });
   });
 
@@ -48,7 +48,7 @@ test('searching /shows', function(assert) {
   visit('/shows');
 
   andThen(function() {
-    assert.equal($('.shows-list li').length, 10, "all shows visible after navigating");
+    assert.equal(find('.shows-list li').length, 10, "all shows visible after navigating");
   });
 });
   
@@ -62,7 +62,7 @@ test('searching with no results /shows', function(assert) {
 
   //show the no results found message
   andThen(function() {
-    assert.equal(this.$(".shows-list").text().trim(), "Sorry, but no matching shows were found. Try a different spelling or other words in the title of the show you're looking for. If you're looking for something other than a show name, try our sitewide search.", "No results message displays");
+    assert.equal(find(".shows-list").text().trim(), "Sorry, but no matching shows were found. Try a different spelling or other words in the title of the show you're looking for. If you're looking for something other than a show name, try our sitewide search.", "No results message displays");
   });
 
 });
