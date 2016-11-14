@@ -77,7 +77,8 @@ test('getBumperUrl returns the bumper url when the pref is set to default_stream
   const wnycStream = server.create('stream', {slug: 'wnyc-fm939'});
   const bumper = this.subject();
 
-  return wait().then(() => {
+  // force wnyc stream into store so getBumperUrl can call peekRecord successfully
+  return bumper.get('store').findRecord('stream', 'wnyc-fm939').then(() => {
     const expectedBumperURL = wnycStream.audio_bumper;
     const actualBumperURL = bumper.getBumperUrl();
     assert.equal(expectedBumperURL, actualBumperURL);
