@@ -13,10 +13,12 @@ test('on sticky set it sets the spacer to the height of the content when sticky'
       <div style="height:200px"></div>
     {{/sticky-page-header}}
   `);
+  
+  let el = this.$('.sticky-page-header-spacer')[0];
 
-  assert.equal(this.$('.sticky-page-header-spacer').height(), 0);
+  assert.equal(window.getComputedStyle(el).height, '0px');
   this.set('sticky', true);
-  assert.equal(this.$('.sticky-page-header-spacer').height(), 200, "header spacer should be height of sticky area");
+  assert.equal(window.getComputedStyle(el).height, '200px', "header spacer should be height of sticky area");
   this.set('sticky', false);
-  assert.equal(this.$('.sticky-page-header-spacer').height(), 0, "header spacer should be zero when sticky is off");
+  assert.equal(window.getComputedStyle(el).height, '0px', "header spacer should be zero when sticky is off");
 });
