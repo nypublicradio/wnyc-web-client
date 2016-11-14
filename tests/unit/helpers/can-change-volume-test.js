@@ -1,5 +1,5 @@
 import { canChangeVolume } from 'overhaul/helpers/can-change-volume';
-import { module } from 'qunit';
+import { module, test } from 'qunit';
 
 module('Unit | Helper | can change volume');
 
