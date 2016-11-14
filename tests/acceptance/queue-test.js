@@ -2,16 +2,17 @@ import { test } from 'qunit';
 import run from 'ember-runloop';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import 'overhaul/tests/helpers/ember-sortable/test-helpers';
+import velocity from 'velocity';
 
 import queuePage from 'overhaul/tests/pages/queue';
 
 moduleForAcceptance('Acceptance | queue', {
   beforeEach() {
     server.create('stream');
-    Ember.$.Velocity.mock = true;
+    velocity.mock = true;
   },
   afterEach() {
-    Ember.$.Velocity.mock = false;
+    velocity.mock = false;
   }
 });
 

@@ -4,6 +4,7 @@ import { currentSession } from 'overhaul/tests/helpers/ember-simple-auth';
 import { registerAndInjectMock, registerMockOnInstance } from 'overhaul/tests/helpers/register-mock';
 import 'overhaul/tests/helpers/with-feature';
 import get from 'ember-metal/get';
+import velocity from 'velocity';
 
 const mockMetrics = Ember.Service.extend({
   init() {
@@ -26,7 +27,7 @@ const discoverEvent = function(action, otherProperties={}) {
 moduleForAcceptance('Acceptance | discover metrics',
   {
     beforeEach() {
-      Ember.$.Velocity.mock = true;
+      velocity.mock = true;
       window.Modernizr.touch = false;
       let application = this.application;
       let session = currentSession(application);
@@ -38,6 +39,9 @@ moduleForAcceptance('Acceptance | discover metrics',
       server.createList('discover-story', 2);
       this.shows = server.createList('show', 2);
       this.metrics = registerAndInjectMock(application, 'service:mockMetrics', mockMetrics, 'metrics');
+    },
+    afterEach() {
+        velocity.mock = false;
     }
   }
 );
@@ -160,7 +164,7 @@ test('it should not log a "discover entered" event when redirected past the spla
 moduleForAcceptance('Acceptance | discover metrics returning user',
   {
     beforeEach() {
-      Ember.$.Velocity.mock = true;
+      velocity.mock = true;
       window.Modernizr.touch = false;
       let application = this.application;
       let session = currentSession(application);
@@ -175,6 +179,9 @@ moduleForAcceptance('Acceptance | discover metrics returning user',
       session.set('data.discover-queue',  server.db.discoverStories); // set some saved stories
       // register mock directly on the instance to fool the link handler
       this.metrics = registerMockOnInstance(application, 'service:metrics', mockMetrics);
+    },
+    afterEach() {
+      velocity.mock = false;
     }
   }
 );

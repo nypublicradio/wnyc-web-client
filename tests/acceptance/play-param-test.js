@@ -3,8 +3,9 @@ import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import { registerMockOnInstance } from 'overhaul/tests/helpers/register-mock';
 import Service from 'ember-service';
 import { resetHTML } from 'overhaul/tests/helpers/html';
+import velocity from 'velocity';
 
-Ember.$.Velocity.mock = true;
+velocity.mock = true;
 
 const mockAudio = Service.extend({
   playParam: null,

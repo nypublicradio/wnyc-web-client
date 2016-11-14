@@ -1,6 +1,7 @@
 import moveOver from "./move-over";
 import { animate } from "liquid-fire";
 import fixPositioningAfterTransition from '../utils/fix-positioning-after-transition';
+import velocity from 'velocity';
 
 export default function initialTransition(opts={}) {
   let background = window.$(".discover-fadeable-background");
@@ -16,7 +17,7 @@ export default function initialTransition(opts={}) {
   }
 
   else if (this.oldElement.find('.discover-welcome-screen').length > 0) {
-    return window.$.Velocity(
+    return velocity(
       el, 'scroll', {offset: 0, duration: 100}
     ).then(() => {
       return animate(background, {opacity: 0, duration: 0.5}, opts).then(() => {
@@ -29,7 +30,7 @@ export default function initialTransition(opts={}) {
   else {
     this.newElement.show();
     background.css('opacity', 0);
-    return window.$.Velocity(
+    return velocity(
       el, 'scroll', {offset: 0, duration: 100}
     ).then(() => {
       return moveOver.call(this, 'x', 1).then(() => {

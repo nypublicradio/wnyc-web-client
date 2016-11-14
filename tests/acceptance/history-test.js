@@ -2,6 +2,7 @@ import { test } from 'qunit';
 import run from 'ember-runloop';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import historyPage from 'overhaul/tests/pages/history';
+import velocity from 'velocity';
 
 moduleForAcceptance('Acceptance | history', {
   beforeEach() {
@@ -11,7 +12,7 @@ moduleForAcceptance('Acceptance | history', {
 
 test('visiting /?modal=queue-history', function(assert) {
   assert.expect(2);
-  $.Velocity.mock = true; //skip animations
+  velocity.mock = true; //skip animations
 
   server.create('djangoPage', {id:'/'});
 
@@ -26,7 +27,7 @@ test('visiting /?modal=queue-history', function(assert) {
 
 test('History initial state should be empty', function(assert) {
   assert.expect(3);
-  $.Velocity.mock = true;
+  velocity.mock = true;
 
   server.create('djangoPage', {id:'/'});
 
@@ -42,7 +43,7 @@ test('History initial state should be empty', function(assert) {
 
 test('History should show items', function(assert) {
   assert.expect(5);
-  $.Velocity.mock = true;
+  velocity.mock = true;
 
   let listenHistory = this.application.__container__.lookup('service:listen-history');
   let stories = server.createList('story', 2);
@@ -70,7 +71,7 @@ test('History should show items', function(assert) {
 
 test('History clear all widget', function(assert) {
   assert.expect(5);
-  $.Velocity.mock = true;
+  velocity.mock = true;
 
   let listenHistory = this.application.__container__.lookup('service:listen-history');
   let stories = server.createList('story', 2);
@@ -108,7 +109,7 @@ test('History clear all widget', function(assert) {
 
 test('History delete button', function(assert) {
   assert.expect(4);
-  $.Velocity.mock = true;
+  velocity.mock = true;
 
   let listenHistory = this.application.__container__.lookup('service:listen-history');
   let stories = server.createList('story', 2);

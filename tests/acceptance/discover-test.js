@@ -3,11 +3,12 @@ import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import { currentSession } from 'overhaul/tests/helpers/ember-simple-auth';
 import ENV from 'overhaul/config/environment';
 import 'overhaul/tests/helpers/with-feature';
+import velocity from 'velocity';
 
 moduleForAcceptance('Acceptance | discover',
   {
     beforeEach() {
-      Ember.$.Velocity.mock = true;
+      velocity.mock = true;
       window.Modernizr.touchevents = false;
       let session = currentSession(this.application);
       session.set('data.discover-excluded-shows',  []);
@@ -16,7 +17,7 @@ moduleForAcceptance('Acceptance | discover',
       server.create('stream');
     },
     afterEach() {
-      Ember.$.Velocity.mock = false;
+      velocity.mock = false;
     }
   }
 );

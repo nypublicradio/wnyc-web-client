@@ -2,14 +2,15 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import config from 'overhaul/config/environment';
 import sinon from 'sinon';
+import velocity from 'velocity';
 
 moduleForAcceptance('Acceptance | Analytics', {
   beforeEach() {
-    Ember.$.Velocity.mock = true;
+    velocity.mock = true;
     server.create('stream');
   },
   afterEach() {
-    Ember.$.Velocity.mock = false;
+    velocity.mock = false;
   }
 });
 
