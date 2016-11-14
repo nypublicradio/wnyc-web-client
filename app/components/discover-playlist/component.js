@@ -87,7 +87,7 @@ export default Ember.Component.extend({
       // This is a good time to actually delete the hidden items
       var removedItemIds = this.get('removedItemIds');
       let presentAndOrderedItems = itemModels.reject((item) => {
-        return removedItemIds.contains(item.id);
+        return removedItemIds.includes(item.id);
       });
 
       this.set('stories', presentAndOrderedItems);

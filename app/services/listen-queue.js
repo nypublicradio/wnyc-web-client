@@ -19,7 +19,7 @@ export default Service.extend({
     let findPromise = get(this, 'store').findRecord('story', id);
 
     findPromise.then(story => {
-      if (!pending.contains(id)) {
+      if (!pending.includes(id)) {
         // story was removed from the queue before it could be resolved
         return;
       } else {

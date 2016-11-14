@@ -6,7 +6,7 @@ export function chooseBetaPayload() {
   let retiredTrial = document.querySelector('#retired-beta');
   let activeTrial = document.querySelector('#active-beta');
   let myTrials = document.cookie.match(/wnyc_trial_\d+_interaction=(?:True|False)/g) || [];
-  let inRetiredTrial = myTrials.contains(`wnyc_trial_${Ember.$(retiredTrial).attr('data-id')}_interaction=True`);
+  let inRetiredTrial = myTrials.includes(`wnyc_trial_${Ember.$(retiredTrial).attr('data-id')}_interaction=True`);
   if (!myTrials.length) {
     return activeTrial;
   }

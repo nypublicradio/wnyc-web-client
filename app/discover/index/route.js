@@ -40,7 +40,7 @@ export default Ember.Route.extend({
     let excludedIds   = prefs.get('excludedStoryIds');
     let queuedStories = this.get('discoverQueue.items');
 
-    return queuedStories.reject(story => excludedIds.contains(story.id));
+    return queuedStories.reject(story => excludedIds.includes(story.id));
   },
 
   _loadStoriesFromServer() {
@@ -56,7 +56,7 @@ export default Ember.Route.extend({
       duration:         10800,
       _nocache:         Date.now()
     }).then(stories => {
-      return stories.reject(s => excludedIds.contains(s.id));
+      return stories.reject(s => excludedIds.includes(s.id));
     });
 
     return stories;
@@ -80,7 +80,7 @@ export default Ember.Route.extend({
     else {
       let oldStoryIds = this._loadStoriesFromQueue().mapBy('id');
       let newStoryIds = stories.mapBy('id');
-      return Ember.isEmpty(newStoryIds.reject(s => oldStoryIds.contains(s)));
+      return Ember.isEmpty(newStoryIds.reject(s => oldStoryIds.includes(s)));
     }
   },
 

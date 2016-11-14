@@ -68,7 +68,7 @@ export function shouldHandleLink(node, base = location) {
   if (node.getAttribute('target') === '_blank') {
     // ignore links bound for a new window
     return false;
-  } else if (Array.from(node.classList).contains('ember-view')) {
+  } else if (Array.from(node.classList).includes('ember-view')) {
     // ignore clicks from ember components
     return false;
   } else if (node.getAttribute('data-ember-action')) {

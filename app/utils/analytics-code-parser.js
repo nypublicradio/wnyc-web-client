@@ -21,11 +21,11 @@ export default function(code) {
 
   for (let i = 0; i < fields.length; i++) {
     let field = fields[i];
-    if (boolFields.contains(field)) {
+    if (boolFields.includes(field)) {
       analyticsObject[field] = match[i] === "1";
-    } else if (numFields.contains(field)) {
+    } else if (numFields.includes(field)) {
       analyticsObject[field] = Number(match[i]);
-    } else if (Object.keys(arrayFields).contains(field)) {
+    } else if (Object.keys(arrayFields).includes(field)) {
       analyticsObject[field] = match[i].split(arrayFields[field]).reject(i => !i);
     } else {
       analyticsObject[field] = match[i];

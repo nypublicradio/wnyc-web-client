@@ -33,7 +33,7 @@ export default Route.extend(PlayParamMixin, {
     upstream_url = upstream_url.replace(/\/*$/, '/');
 
     let qp = Object.keys(queryParams)
-      .filter(q => ENV.QP_WHITELIST.contains(q)).map(p => `${p}=${queryParams[p].replace(/\s/g, '%20')}`);
+      .filter(q => ENV.QP_WHITELIST.includes(q)).map(p => `${p}=${queryParams[p].replace(/\s/g, '%20')}`);
     if (qp.length) {
       upstream_url += `?${qp.join('&')}`;
     }

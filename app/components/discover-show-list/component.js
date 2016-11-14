@@ -12,7 +12,7 @@ export default Ember.Component.extend({
 
   didReceiveAttrs() {
     this.set('selectedShowSlugs', this.get('showSlugs').reject(item => {
-      return this.get('excludedShowSlugs').contains(item);
+      return this.get('excludedShowSlugs').includes(item);
     }));
 
     this._super(...arguments);

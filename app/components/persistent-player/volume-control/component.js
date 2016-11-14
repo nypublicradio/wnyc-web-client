@@ -31,7 +31,7 @@ export default Component.extend({
     if (window.getSelection && window.getSelection().removeAllRanges) {
       window.getSelection().removeAllRanges();
     }
-    if (e.target.classList.contains('volume-slider-handle')) {
+    if (e.target.classList.includes('volume-slider-handle')) {
       this.$().on('mousemove', '.volume-slider', this.click.bind(this));
     }
   },
