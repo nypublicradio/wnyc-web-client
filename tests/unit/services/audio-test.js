@@ -85,6 +85,8 @@ test('can switch from on demand to stream and vice versa', function(assert) {
   let audio1 = DummyConnection.create({ url: onDemandUrl });
   let audio2 = DummyConnection.create({ url: streamURL  });
   let service = this.subject();
+  let done = assert.async();
+  
   service.get('hifi.soundCache').cache(audio1);
   service.get('hifi.soundCache').cache(audio2);
 
@@ -99,20 +101,21 @@ test('can switch from on demand to stream and vice versa', function(assert) {
         }).then(() => {
           service.play(story.id).then(({sound}) => {
             assert.equal(sound.get('url'), onDemandUrl, 'switched to on demand OK');
+            done();
           });
         });
       });
     });
   });
-
-  return wait();
 });
 
 test('playing a story with a list of urls plays them in order', function(assert) {
   assert.expect(2);
 
-  let audio1 = DummyConnection.create({ url: url1 = '/url1.mp3' });
-  let audio2 = DummyConnection.create({ url: url2 = '/url2.mp3' });
+  let url1 = '/url1.mp3';
+  let url2 = '/url2.mp3';
+  let audio1 = DummyConnection.create({ url: url1 });
+  let audio2 = DummyConnection.create({ url: url2 });
   let episode = server.create('story', {
     audio: [url1, url2]
   });
@@ -136,13 +139,15 @@ test('playing a story with a list of urls plays them in order', function(assert)
 
 test('playing a segment directly starts from 0', function(assert) {
   const ONE_MINUTE = 1000 * 60;
+  let url = '/audio.mp3';
   let audio = DummyConnection.create({
-    url: url = '/audio.mp3',
+    url,
     duration: 30 * ONE_MINUTE
   });
   let segment = server.create('story', { audio: url });
   let episode = server.create('story', { audio: [url] });
   let service = this.subject();
+  let done = assert.async();
 
   service.get('hifi.soundCache').cache(audio);
   Ember.run(() => {
@@ -153,17 +158,17 @@ test('playing a segment directly starts from 0', function(assert) {
       service.play(segment.id).then(() => {
         assert.equal(service.get('position'), 0, 'audio position should be reset to 0');
         assert.equal(service.get('hifi.currentSound.url'), url, 'url should be segment url');
+        done();
       });
     });
   });
-
-  return wait();
 });
 
 test('pausing audio picks up from where it left off', function(assert) {
   const ONE_MINUTE = 1000 * 60;
+  let url = '/audio.mp3';
   let audio = DummyConnection.create({
-    url: url = '/audio.mp3',
+    url,
     duration: 30 * ONE_MINUTE
   });
   let story = server.create('story', { audio: url });
@@ -186,8 +191,9 @@ test('pausing audio picks up from where it left off', function(assert) {
 
 test('pausing segemented audio picks up from where it left off', function(assert) {
   const ONE_MINUTE = 1000 * 60;
+  let url = '/audio.mp3';
   let audio = DummyConnection.create({
-    url: url = '/audio.mp3',
+    url,
     duration: 30 * ONE_MINUTE
   });
   let episode = server.create('story', { audio: [url] });
@@ -213,17 +219,25 @@ test('segmented audio management', function(assert) {
   assert.expect(4);
 
   const ONE_MINUTE = 1000 * 60;
+  let url1 = '/url1.mp3';
+  let duration1 = 30 * ONE_MINUTE;
   let audio1 = DummyConnection.create({
-    url: url1 = '/url1.mp3',
-    duration: duration1 = 30 * ONE_MINUTE
+    url: url1,
+    duration: duration1
   });
+  
+  let url2 = '/url2.mp3';
+  let duration2 = 20 * ONE_MINUTE;
   let audio2 = DummyConnection.create({
-    url: url2 = '/url2.mp3',
-    duration: duration2 = 20 * ONE_MINUTE
+    url: url2,
+    duration: duration2
   });
+  
+  let url3 = '/url3.mp3';
+  let duration3 = 20 * ONE_MINUTE;
   let audio3 = DummyConnection.create({
-    url: url3 = '/url3.mp3',
-    duration: duration3 = 20 * ONE_MINUTE
+    url: url3,
+    duration: duration3
   });
   let episode = server.create('story', {
     audio: [url1, url2]
@@ -263,9 +277,12 @@ test('segmented audio management', function(assert) {
 });
 
 test('episodes played from the queue do not continue to the next item until the episode has finished all its segments', function(assert) {
-  let audio1 = DummyConnection.create({ url: url1 = '/url1.mp3' });
-  let audio2 = DummyConnection.create({ url: url2 = '/url2.mp3' });
-  let audio3 = DummyConnection.create({ url: url3 = '/url3.mp3' });
+  let url1 = '/url1.mp3';
+  let audio1 = DummyConnection.create({ url: url1 });
+  let url2 = '/url2.mp3';
+  let audio2 = DummyConnection.create({ url: url2 });
+  let url3 = '/url3.mp3';
+  let audio3 = DummyConnection.create({ url: url3 });
   let episodeToQueue = server.create('story', {
     audio: [url1, url2]
   });
@@ -316,8 +333,11 @@ test('episodes played from the queue do not continue to the next item until the 
 
 
 test('can play a segmented story all the way through more than once', function(assert) {
-  let audio1 = DummyConnection.create({ url: url1 = '/url1.mp3' });
-  let audio2 = DummyConnection.create({ url: url2 = '/url2.mp3' });
+  let url1 = '/url1.mp3';
+  let audio1 = DummyConnection.create({ url: url1 });
+  
+  let url2 = '/url2.mp3';
+  let audio2 = DummyConnection.create({ url: url2 });
   let episode = server.create('story', {
     audio: [url1, url2]
   });
@@ -448,7 +468,8 @@ test('it sends a listen action on pause', function(assert) {
 });
 
 test('with the bumper-state enabled, the bumper will act on a finished track event', function(assert) {
-  let story = server.create('story', { audio: url = '/audio.mp3' });
+  let url = '/audio.mp3';
+  let story = server.create('story', { audio: url });
   let audio = DummyConnection.create({ url });
   let done = assert.async();
   const service = this.subject({
