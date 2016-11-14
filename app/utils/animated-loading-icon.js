@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 /* Copied over from the WNYC iPhone app, and modified
   so we're not depending on Backbone for an animated icon in this here Ember app.
 
@@ -39,12 +37,12 @@ export default function(canvas, options) {
   }
   RingSet.prototype ={
     render : function(ctx) {
-      _.each(this.set, function(item) { item.render(ctx); });
+      this.set.forEach(i => i.render(ctx));
     },
     update : function(progress) {
-      _.each(this.set, function(item) {
-        if(!item.update) { return; }
-        item.update(progress);
+      this.set.forEach(i => {
+        if (!i.update) { return; }
+        i.update(progress);
       });
     }
   };
@@ -182,7 +180,7 @@ export default function(canvas, options) {
     this.ctx = canvas.getContext('2d');
 
     // Assumes default size of 128 x 128, these used to be hard coded
-    this.options = _.defaults(options, {
+    this.options = defaults(options, {
       color: "#777",
       radius: 20,
       lineWidth: 10,
@@ -199,4 +197,13 @@ export default function(canvas, options) {
   }
 
   return new Icon(canvas, options);
+  
+  function defaults(src, target) {
+    Object.keys(target).forEach(k => {
+      if (!src[k]) {
+        src[k] = target[k];
+      }
+    });
+    return src;
+  }
 }

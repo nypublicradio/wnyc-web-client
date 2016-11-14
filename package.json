@@ -68,7 +68,6 @@
     "ember-getowner-polyfill": "1.0.1",
     "ember-hifi": "git://github.com/nypublicradio/ember-hifi#master",
     "ember-load-initializers": "^0.5.1",
-    "ember-lodash": "0.0.7",
     "ember-metrics": "0.6.2",
     "ember-moment": "6.1.0",
     "ember-multiselect-checkboxes": "0.10.0",
