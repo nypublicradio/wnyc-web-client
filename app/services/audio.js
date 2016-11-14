@@ -435,7 +435,7 @@ export default Service.extend({
 
   _trackStreamPlay(stream, context, prevAudio) {
     let wasStream = prevAudio && get(prevAudio, 'audioType') === 'stream';
-    let prevStreamName = get(prevAudio, 'name');
+    let prevStreamName = prevAudio && get(prevAudio, 'name');
     let streamName = get(stream, 'name');
 
     let label = streamName;
