@@ -117,7 +117,7 @@ export default {
 
         let { routeName, params, queryParams } = router.recognize(href);
         router.transitionTo(routeName, params, queryParams);
-        preventDefault();
+        preventDefault.bind(event);
         return false;
       } else if (isExternal && !Ember.testing) {
         $target.attr('target', '_blank');
