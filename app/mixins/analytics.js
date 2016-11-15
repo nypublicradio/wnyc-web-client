@@ -5,6 +5,14 @@ import service from 'ember-service/inject';
 
 export default Mixin.create({
   metrics: service(),
+  
+  willTransition() {
+    let referrer = window.location.toString();
+    this.set('_referrer', referrer);
+      
+    let ret = this._super(...arguments);
+    return ret === false ? ret : true;
+  },
 
   didTransition([ applicationTransition ]) {
     let { controller } = applicationTransition.handler;
