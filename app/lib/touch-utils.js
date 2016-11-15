@@ -1,3 +1,4 @@
+
 // https://developer.mozilla.org/en-US/docs/Web/API/Touch_events#Finding_an_ongoing_touch
 export function findTouchById(touchList, identifier) {
   for (let i = 0; i < touchList.length; i++) {
