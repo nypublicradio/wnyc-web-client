@@ -1,6 +1,6 @@
 import config from 'overhaul/config/environment';
 import { moduleFor } from 'ember-qunit';
-import test from 'overhaul/tests/ember-sinon-qunit/test';
+import test from 'ember-sinon-qunit/test-support/test';
 
 moduleFor('service:metrics', 'Unit | Service | metrics', {
   // Specify the other units that are required for this test.

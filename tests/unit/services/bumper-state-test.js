@@ -90,7 +90,7 @@ test('getBumperUrl returns the wqxr bumper url when the prefs are set to default
   const bumper = this.subject();
   set(bumper, 'session.data.user-prefs-active-stream', {slug: 'wqxr', name: 'WQXR New York'});
 
-  return wait().then(() => {
+  return bumper.get('store').findRecord('stream', 'wqxr').then(() => {
     const expectedBumperURL = wqxrStream.audio_bumper;
     const actualBumperURL = bumper.getBumperUrl();
     assert.equal(expectedBumperURL, actualBumperURL);
