@@ -8,7 +8,6 @@ export default Component.extend({
   isHovering: false,
   isDragging: false,
   isTouching: false,
-  lastInteraction: '',
   classNames: ['progress'],
   classNameBindings: ['isHovering', 'isDragging', 'isTouching', 'isLoaded'],
   downloadedPercentage: computed('downloaded', function() {
@@ -20,18 +19,12 @@ export default Component.extend({
     let duration = get(this, 'duration');
     return htmlSafe(`width: ${(position/duration) * 100}%;`);
   }),
-  playheadPosition: computed('handlePosition', 'isHovering', 'isDragging', 'position', 'duration', function() {
+  playheadPosition: computed('isDragging', 'isTouching', 'handlePosition', 'position', 'duration', function() {
     let p;
-    let {isHovering, isDragging, isTouching, lastInteraction, handlePosition, position, duration} =
-      Ember.getProperties(this, 'isHovering', 'isDragging', 'isTouching', 'lastInteraction', 'handlePosition', 'position', 'duration');
+    let {isDragging, isTouching, handlePosition, position, duration} =
+      Ember.getProperties(this, 'isDragging', 'isTouching', 'handlePosition', 'position', 'duration');
 
-    // If you are using a touchscreen we want the handle to track with current position when you aren't touching it.
-    // Same goes for mouse hover on a hybrid device with mouse and touchscreen.
-    // But if you just hovered with a mouse on a non-touchscreen, we don't want the slider to jump to current position
-    // because it's animating to hidden.
-
-    let noTouch = !window.Modernizr.touchevents;
-    if (isHovering || isDragging || isTouching || (lastInteraction === 'mouse' && noTouch)) {
+    if (isDragging || isTouching) {
       p = handlePosition;
     } else {
       p = position/duration;
@@ -53,18 +46,18 @@ export default Component.extend({
       this._updateAudioPosition(e);
       if (e.target.classList.contains('progress-playhead')) {
         this._startDragging();
+        // prevent dragging and selecting
+        e.preventDefault();
       }
     }
   },
   mouseUp() {
-    set(this, 'lastInteraction', 'mouse');
     this._cancelDragging();
   },
   mouseEnter() {
     set(this, 'isHovering', true);
   },
   mouseMove(e) {
-    set(this, 'lastInteraction', 'mouse');
     if (!isSimulatedMouseEvent(e)) {
       // prevent dragging and selecting
       e.preventDefault();
@@ -72,7 +65,6 @@ export default Component.extend({
     }
   },
   mouseLeave() {
-    set(this, 'lastInteraction', 'mouse');
     set(this, 'isHovering', false);
     this._cancelDragging();
   },
@@ -90,7 +82,6 @@ export default Component.extend({
     // prevent emulated mouse events
     e.preventDefault();
     if (get(this, 'isLoaded') && e.target.classList.contains('progress-playhead')) {
-      set(this, 'lastInteraction', 'touch');
       let touch = e.originalEvent.changedTouches[0];
       this._updateAudioPosition(touch);
       set(this, 'isTouching', false);
@@ -100,7 +91,6 @@ export default Component.extend({
   touchCancel(e) {
     // prevent emulated mouse events
     e.preventDefault();
-    set(this, 'lastInteraction', 'touch');
     set(this, 'isTouching', false);
     this._cancelDragging();
   },
