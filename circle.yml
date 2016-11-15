@@ -52,3 +52,9 @@ deployment:
             SENTRY_DSN: $DEMO_SENTRY_EMBER_DSN
             SENTRY_PROJECT: $DEMO_SENTRY_PROJECT
             SENTRY_EMBER_SOURCEMAPS_KEY: $DEMO_SENTRY_EMBER_SOURCEMAPS_KEY
+
+experimental:
+  notify:
+    branches:
+      only:
+        - master
