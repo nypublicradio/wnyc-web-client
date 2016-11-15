@@ -477,7 +477,7 @@ button.persistent-queuebutton.is-open-modal {
   .progress-playhead {
     top: -1.5px;
 
-    .touch &,
+    .touchevents &,
     .is-dragging &,
     .progress:hover & {
       transform: scale(0.7, 0.7);

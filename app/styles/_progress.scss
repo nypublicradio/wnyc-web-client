@@ -1,7 +1,6 @@
 .progress {
     position: absolute;
     height: 10px;
-    .touch &,
     .touchevents & {
       height: 34px;
     }
@@ -26,7 +25,6 @@
 .progress-wrapper {
   width: 100%;
   @include mq($small-only) {
-    .touch &,
     .touchevents & {
       border-left: 50px solid black;
       border-right: 50px solid black;
@@ -54,7 +52,6 @@
     height: 22px;
     width: 22px;
     margin: -8px -16px;
-    .touch &,
     .touchevents & {
       height: 34px;
       width: 34px;
@@ -70,14 +67,12 @@
       opacity: 1;
     }
 
-    .touch &,
     .touchevents &,
     .is-dragging &,
     .progress:hover & {
       transform: scale(1, 1);
     }
 
-    .touch .progress.is-touching &,
     .touchevents .progress.is-touching &  {
       transform: scale(3.3, 3.3) translateY(-7px);
       opacity: 0.75;

@@ -30,8 +30,7 @@ export default Component.extend({
     // But if you just hovered with a mouse on a non-touchscreen, we don't want the slider to jump to current position
     // because it's animating to hidden.
 
-    // future proofing. We can remove the .touch check once we upgrade Modernizr
-    let noTouch = !(window.Modernizr.touch || window.Modernizr.touchevents);
+    let noTouch = !window.Modernizr.touchevents;
     if (isHovering || isDragging || isTouching || (lastInteraction === 'mouse' && noTouch)) {
       p = handlePosition;
     } else {
