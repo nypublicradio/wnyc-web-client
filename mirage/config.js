@@ -52,6 +52,7 @@ export default function() {
   });
 
   this.post(`${baseUrl}/api/v1/analytics/ga/`, {});
+  this.post(`${baseUrl}/api/v1/itemview`, {});
 
   /*------------------------------------------------------------
     transitional (v2) endpoints
