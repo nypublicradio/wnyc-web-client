@@ -8,29 +8,38 @@ export default Ember.Service.extend({
     this.set('queue', []);
   },
 
-  sendPlay(pk, context) {
-    return this._queueListenAction(pk, 'play', context);
-  },
-
-  sendSkip(pk, context) {
-    return this._queueListenAction(pk, 'skip', context);
+  sendStart(pk, context) {
+    return this._queueListenAction(pk, 'start', context);
   },
 
   sendPause(pk, context, seconds) {
     return this._queueListenAction(pk, 'pause', context, seconds);
   },
+  
+  sendResume(pk, context) {
+    return this._queueListenAction(pk, 'resume', context);
+  },
 
-  sendComplete(pk, context) {
-    return this._queueListenAction(pk, 'complete', context);
+  sendSkip(pk, context) {
+    return this._queueListenAction(pk, 'skip_15_forward', context);
+  },
+
+  sendRewind(pk, context) {
+    return this._queueListenAction(pk, 'skip_15_back', context);
+  },
+
+  sendFinish(pk, context) {
+    return this._queueListenAction(pk, 'finish', context);
+  },
+  
+  sendSetPosition(pk, context) {
+    return this._queueListenAction(pk, 'set_position', context);
   },
 
   sendDelete(pk, context) {
     return this._queueListenAction(pk, 'delete', context);
   },
 
-  sendHeardStream(pk, context) {
-    return this._queueListenAction(pk, 'heardstream', context);
-  },
 
 
   /* ------------------------------------------------------------ */
