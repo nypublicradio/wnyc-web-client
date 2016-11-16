@@ -5,10 +5,10 @@ import service from 'ember-service/inject';
 
 export default Mixin.create({
   metrics: service(),
+  dataPipeline: service(),
   
   willTransition() {
-    let referrer = window.location.toString();
-    this.set('_referrer', referrer);
+    this.set('dataPipeline.currentReferer', window.location.toString());
       
     let ret = this._super(...arguments);
     return ret === false ? ret : true;
