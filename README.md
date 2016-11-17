@@ -31,6 +31,11 @@ This value is controlled by a `.env` file you will create by following the direc
 7. `$ npm install`
 8. `$ bower install`
 
+The `publisher` back end is not set up as a strictly data-only API server and will return HTML with embedded script tags that request agsint the root. To resolve this issue, you should run your local server with the proxy command:
+```sh
+$ ember serve --proxy http://dev.wnyc.net:MY_PORT
+```
+
 ## Related features in the Django app
 
 When we fetch pages from the Django app, we include the `X-WNYC-Ember` HTTP header. This allows Django to suppress certain things (like redundant Javascript libraries) that are unnecessary when the Ember app is managing the client side.
