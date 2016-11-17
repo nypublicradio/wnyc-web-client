@@ -126,18 +126,20 @@ test('metrics properly reports story attrs', function(assert) {
       item_type,
       browser_id,
       client,
-      referer,
-      url
+      referrer,
+      url,
+      site_id
     } = JSON.parse(requestBody);
     let testObj = {
       cms_id: story.id,
       item_type: 'story',
       browser_id: undefined,
       client: 'wnyc_web',
-      referer: location.toString(),
-      url: location.toString()
+      referrer: location.toString(),
+      url: location.toString(),
+      site_id: story.siteId
     };
-    assert.deepEqual({cms_id, item_type, browser_id, client, referer, url}, testObj, 'params match up');
+    assert.deepEqual({cms_id, item_type, browser_id, client, referrer, url, site_id}, testObj, 'params match up');
   });
   
   window.ga = function(command) {
