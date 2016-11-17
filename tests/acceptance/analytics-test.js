@@ -3,6 +3,7 @@ import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-accept
 import config from 'wnyc-web-client/config/environment';
 import sinon from 'sinon';
 import velocity from 'velocity';
+import GoogleAnalytics from 'overhaul/metrics-adapters/google-analytics';
 
 moduleForAcceptance('Acceptance | Analytics', {
   beforeEach() {
@@ -19,11 +20,8 @@ test('it does not log a pageview when opening and closing the queue', function(a
   let done = assert.async();
   var pageViewEvent = sinon.spy();
 
-  server.post(`${config.wnycAccountRoot}/api/v1/analytics/ga`, (schema, {queryParams}) => {
-    if (queryParams.category === '_trackPageView') {
-      pageViewEvent(queryParams);
-    }
-    return wait();
+  GoogleAnalytics.reopen({
+    trackPage: pageViewEvent
   });
 
   server.create('django-page', {id: '/'});
@@ -49,11 +47,10 @@ test('it logs a homepage bucket event when you click a story on the home page', 
   let done = assert.async();
   let homepageBucketEvent = sinon.spy();
 
-  server.post(`${config.wnycAccountRoot}/api/v1/analytics/ga`, (schema, {queryParams}) => {
-    if (queryParams.category === 'Homepage Bucket') {
-      homepageBucketEvent(queryParams);
+  GoogleAnalytics.reopen({
+    trackEvent(ops) {
+      debugger;
     }
-    return wait();
   });
 
   let story = server.create('story');

@@ -41,7 +41,7 @@ export default Ember.Route.extend({
       }
       else {
         this.controller.setProperties({showError: false, loadingDirection: 'next'});
-        get(this, 'metrics').trackEvent({
+        get(this, 'metrics').trackEvent('GoogleAnalytics', {
           category: 'Discover',
           action: 'Create Playlist in Discover'
         });

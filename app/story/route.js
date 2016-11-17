@@ -45,14 +45,14 @@ export default Ember.Route.extend(PlayParamMixin, {
     }
 
     // google analytics
-    metrics.trackEvent({
+    metrics.trackEvent('GoogleAnalytics', {
       category: 'Viewed Story',
       action,
       label,
     });
 
     // NPR
-    metrics.invoke('trackPage', 'NprAnalytics', {
+    metrics.trackPage('NprAnalytics', {
       page: `/story/${get(model, 'story.slug')}`,
       title: label,
       nprVals,

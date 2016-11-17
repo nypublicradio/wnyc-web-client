@@ -17,8 +17,8 @@ export default BaseAdapter.extend({
     }
   },
   
-  trackPage({ page, title, isNpr, nprVals = DEFAULT_NPR_VALS }) {
-    if (window.ga && isNpr) {
+  trackPage({ page, title, nprVals = DEFAULT_NPR_VALS }) {
+    if (window.ga) {
       for (let i = 0; i < nprVals.length; i++) {
         // NPR Dimensions begin at slot 6
         window.ga('npr.set', `dimension${i + 6}`, nprVals[i] || 'none');
@@ -30,8 +30,8 @@ export default BaseAdapter.extend({
     }
   },
 
-  trackEvent({ category, action, label, isNpr }) {
-    if (window.ga && isNpr) {
+  trackEvent({ category, action, label }) {
+    if (window.ga) {
       window.ga('npr.send', 'event', category, action, label);
       
       // for testing

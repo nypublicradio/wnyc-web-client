@@ -86,7 +86,7 @@ export default Ember.Route.extend({
 
   actions: {
     findMore() {
-      get(this, 'metrics').trackEvent({
+      get(this, 'metrics').trackEvent('GoogleAnalytics', {
         category: 'Discover',
         action: 'Clicked Find More in Discover',
       });

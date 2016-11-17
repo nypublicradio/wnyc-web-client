@@ -31,7 +31,7 @@ export default Mixin.create({
       const page = document.location.pathname; // e.g. '/shows/bl/'
       const title = document.title; // this should be something dynamic
 
-      metrics.trackPage({ page, title });
+      metrics.trackPage('GoogleAnalytics', { page, title });
     });
   },
 });

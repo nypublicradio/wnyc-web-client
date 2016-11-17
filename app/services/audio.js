@@ -4,7 +4,6 @@ import get from 'ember-metal/get';
 import set from 'ember-metal/set';
 import computed, { readOnly, alias, or } from 'ember-computed';
 import { bind } from 'ember-runloop';
-import { assign } from 'ember-platform';
 import RSVP from 'rsvp';
 import { classify as upperCamelize } from 'ember-string';
 import Ember from 'ember';
@@ -368,12 +367,12 @@ export default Service.extend({
     if (withRegion || withAnalytics) {
       label = `${region}${analyticsCode}`;
     }
-    metrics.trackEvent({category, action, label, model: story});
+    metrics.trackEvent('GoogleAnalytics', {category, action, label});
   },
 
   _trackPlayerEventForNpr(options) {
     let metrics = get(this, 'metrics');
-    metrics.trackEvent('NprAnalytics', assign(options, {isNpr: true}));
+    metrics.trackEvent('NprAnalytics', options);
   },
 
   _trackAllCodecFailures(failures, sound) {

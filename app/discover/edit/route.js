@@ -48,7 +48,7 @@ export default Ember.Route.extend({
         return;
       }
 
-      get(this, 'metrics').trackEvent({
+      get(this, 'metrics').trackEvent('GoogleAnalytics', {
         category: 'Discover',
         action: 'Create Playlist in Discover',
         label: 'Refresh Playlist'

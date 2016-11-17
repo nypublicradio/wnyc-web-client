@@ -45,17 +45,16 @@ export default Route.extend(PlayParamMixin, {
     }
 
     // google analytics
-    metrics.trackEvent({
+    metrics.trackEvent('GoogleAnalytics', {
       category: `Viewed ${get(channel, 'listingObjectType').capitalize()}`,
       action: channelTitle,
     });
 
     // NPR
-    metrics.invoke('trackPage', 'NprAnalytics', {
+    metrics.trackPage('NprAnalytics', {
       page: `/${get(this, 'listingSlug')}`,
       title: channelTitle,
       nprVals,
-      isNpr: true
     });
     
     // data pipeline
