@@ -8,7 +8,7 @@ export default Mixin.create({
   dataPipeline: service(),
   
   willTransition() {
-    this.set('dataPipeline.currentReferer', window.location.toString());
+    this.set('dataPipeline.currentReferrer', window.location.toString());
       
     let ret = this._super(...arguments);
     return ret === false ? ret : true;

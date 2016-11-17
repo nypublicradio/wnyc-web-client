@@ -8,13 +8,13 @@ export default Ember.Service.extend({
   itemViewPath: 'api/v1/itemview/',
   session: service(),
   
-  currentReferer: null,
+  currentReferrer: null,
   
   reportItemView(incoming) {
     let data = Object.assign({
       browser_id: this.get('session.data.browserId'),
       client: 'wnyc_web',
-      referer: this.get('currentReferer'),
+      referrer: this.get('currentReferrer'),
       url: location.toString()
     }, incoming);
     
