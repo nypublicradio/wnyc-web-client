@@ -48,8 +48,10 @@ test('it logs a homepage bucket event when you click a story on the home page', 
   let homepageBucketEvent = sinon.spy();
 
   GoogleAnalytics.reopen({
-    trackEvent(ops) {
-      debugger;
+    trackEvent({category}) {
+      if (category === 'Homepage Bucket') {
+        homepageBucketEvent();
+      }
     }
   });
 
