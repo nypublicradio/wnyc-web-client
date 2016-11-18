@@ -17,6 +17,7 @@ moduleFor('service:audio', 'Unit | Service | audio', {
           'service:bumper-state',
           'service:poll',
           'service:metrics',
+          'service:data-pipeline',
           'service:listen-queue',
           'service:listen-history'],
 
@@ -24,13 +25,6 @@ moduleFor('service:audio', 'Unit | Service | audio', {
     const sessionStub = Ember.Service.extend({
       data: {}, // we only really need the data thing
       authorize: function() {}
-    });
-    const listenActionsStub = Ember.Service.extend({
-      sendPause: function(){},
-      sendComplete: function(){},
-      sendPlay: function(){},
-      sendSkip: function(){},
-      sendDelete: function(){}
     });
     const metricsStub = Ember.Service.extend({
       trackEvent() {}
@@ -42,9 +36,6 @@ moduleFor('service:audio', 'Unit | Service | audio', {
 
     this.register('service:session', sessionStub);
     this.inject.service('session');
-
-    this.register('service:listen-actions', listenActionsStub);
-    this.inject.service('listen-actions');
 
     this.register('service:metrics', metricsStub);
     this.inject.service('metrics');
@@ -368,24 +359,29 @@ test('can play a segmented story all the way through more than once', function(a
 });
 
 test('service records a listen when a story is played', function(assert) {
-  assert.expect(1);
 
-  let service = this.subject();
+  let done = assert.async();
   let story = server.create('story');
-  let listenStub = {
-    addListen({ id }) {
-      assert.equal(story.id, id, "service should have called addListen on listen object");
-    },
-    indexByStoryPk() {}
-  };
-
-  Ember.run(()=> {
-    service.set('listens', listenStub);
-    service.set('hifi', hifiStub);
-    service.play(story.id);
+  let reportStub = sinon.stub();
+  let service = this.subject({
+      dataPipeline: {
+        reportListenAction: reportStub
+      }
   });
-
-  return wait();
+    
+  Ember.run(() => {
+    service.set('hifi', hifiStub);
+    service.play(story.id).then(() => {
+      service.pause();
+      service.play(story.id).then(() => {
+        assert.equal(reportStub.callCount, 3);
+        assert.ok(reportStub.calledWith('start'), 'sent start listen action');
+        assert.ok(reportStub.calledWith('pause'), 'sent pause listen action');
+        assert.ok(reportStub.calledWith('resume'), 'sent resume listen action');
+        done();
+      });
+    });
+  });
 });
 
 test('it only sets up the player ping once', function(assert) {
