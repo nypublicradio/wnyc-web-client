@@ -13,7 +13,7 @@ export default Ember.Service.extend({
   reportItemView(incoming) {
     let data = Object.assign({
       browser_id: this.get('session.data.browserId'),
-      client: 'wnyc_web',
+      client: config.clientSlug,
       referrer: this.get('currentReferrer'),
       url: location.toString()
     }, incoming);

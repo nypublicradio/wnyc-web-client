@@ -61,7 +61,8 @@ export default Route.extend(PlayParamMixin, {
     dataPipeline.reportItemView({
       cms_id: channel.get('cmsPK'),
       item_type: channel.get('listingObjectType'),
-      site_id: channel.get('siteId')
+      site_id: channel.get('siteId'),
+      client: config.clientSlug
     });
   },
   setupController(controller, model) {
