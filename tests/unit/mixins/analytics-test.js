@@ -13,7 +13,9 @@ test('it works', function(assert) {
 
 test('willTransition saves previous url', function(assert) {
   let AnalyticsObject = Ember.Object.extend(AnalyticsMixin);
-  let subject = AnalyticsObject.create();
+  let subject = AnalyticsObject.create({
+    dataPipeline: {}
+  });
   subject.willTransition();
-  assert.equal(subject.get('_referrer'), location.toString(), '_referrer should current url');
+  assert.equal(subject.get('dataPipeline.currentReferrer'), location.toString(), 'dataPipeline should have currentReferrer should current url');
 });
