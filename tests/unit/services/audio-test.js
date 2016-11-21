@@ -391,6 +391,49 @@ test('service records a listen when a story is played', function(assert) {
   });
 });
 
+test('service records a listen when a stream is played', function(assert) {
+
+  let done = assert.async();
+  let reportStub = sinon.stub();
+  let service = this.subject({
+      dataPipeline: {
+        reportListenAction: reportStub
+      }
+  });
+  let currentStory = server.create('story');
+  let stream = server.create('stream');
+  server.create('whats-on', {
+    current_show: { episode_pk: currentStory.id }
+  });
+  let audio = DummyConnection.create({ url: stream.attrs.urls.mp3[0] });
+  
+  let expected = {
+    audio_type: 'stream',
+    cms_id: currentStory.id,
+    item_type: currentStory.itemType,
+    site_id: currentStory.siteId,
+    stream_id: stream.slug,
+    current_position: 0,
+  };
+    
+  service.get('hifi.soundCache').cache(audio);
+  
+  Ember.run(() => {
+    service.play(stream.slug).then(() => {
+      service.pause();
+      service.play(stream.slug).then(() => {
+        wait().then(() => {
+          assert.equal(reportStub.callCount, 3);
+          assert.deepEqual(reportStub.getCall(0).args, ['start', expected], 'should have received proper attrs');
+          assert.deepEqual(reportStub.getCall(1).args, ['pause', expected], 'should have received proper attrs');
+          assert.deepEqual(reportStub.getCall(2).args, ['resume', expected], 'should have received proper attrs');
+          done();
+        });
+      });
+    });
+  });
+});
+
 test('it only sets up the player ping once', function(assert) {
   assert.expect(2);
 

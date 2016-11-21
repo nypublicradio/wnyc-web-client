@@ -161,6 +161,8 @@ export default Service.extend({
       if (newStreamPlaying) {
         let prevAudio = get(this, 'currentAudio');
         this._trackStreamPlay(stream, context, prevAudio);
+      } else {
+        this._trackResume(stream);
       }
 
       this._setupAudio(stream, context);
@@ -469,6 +471,7 @@ export default Service.extend({
       action: 'Launched Stream',
       label,
     });
+    this.sendPlayListenAction(stream);
 
     this._trackPlayerEventForNpr({
       category: 'Engagement',
