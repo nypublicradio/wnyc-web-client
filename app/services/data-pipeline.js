@@ -14,8 +14,6 @@ const LISTEN_ACTIONS = {
   POSITION: 'set_position'
 };
 
-const DELTA_POLL = 'delta-poller';
-
 export default Ember.Service.extend({
   host:             config.wnycAPI,
   itemViewPath:     'api/v1/itemview/',

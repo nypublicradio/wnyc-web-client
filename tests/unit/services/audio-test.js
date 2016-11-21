@@ -24,7 +24,7 @@ moduleFor('service:audio', 'Unit | Service | audio', {
   beforeEach() {
     const sessionStub = Ember.Service.extend({
       data: {}, // we only really need the data thing
-      authorize: function() {}
+      syncBrowserId(cb) { cb('secrets'); }
     });
     const metricsStub = Ember.Service.extend({
       trackEvent() {}
