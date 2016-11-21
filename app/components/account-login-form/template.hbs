@@ -5,20 +5,25 @@
 
   <div placeholder="you@email.com" class="account-form-separator">or</div>
 
-  <label for="email" class="account-form-label">Email</label>
-  {{input name="email" id="email" placeholder="you@email.com" type="email" class="account-form-input"}}
-  <div class="account-form-input-footer"></div>
+  {{fancy-input
+    label='Email'
+    type='email'
+    placeholder='you@email.com'
+    fieldname='email'
+    value=changeset.email
+    errors=changeset.error.email.validation
+  }}
 
-  <label for="password" class="account-form-label">Password</label>
-  {{input name="password" id="password" placeholder="Enter password" type="password" class="account-form-input"}}
-  <div class="account-form-input-footer">
-    {{#if errors.incorrectPassword}}
-      <span class="account-form-error">this password is incorrect.</span>
-    {{/if}}
-    <span class="account-form-helplink">
-     <a href="/forgot">Forgot password?</a>
-    </span>
-  </div>
+  {{fancy-input
+    label='Password'
+    type='password'
+    placeholder='Enter password'
+    fieldname='password'
+    value=changeset.password
+    errors=changeset.error.password.validation
+    helplinkUrl='/forgot'
+    helplinkText='Forgot Password?'
+  }}
 
-  <input type="button" class="account-form-btn" value="Log in" disabled={{isProcessing}}>
+  <input type="button" class="account-form-btn" value="Log in" {{action 'validate' changeset}} disabled={{isProcessing}}>
 </form>
