@@ -1,5 +1,26 @@
-import Ember from 'ember';
+import Component from 'ember-component';
+import set from 'ember-metal/set';
+import Changeset from 'ember-changeset';
+import SignupValidations from 'overhaul/validations/signup';
+import lookupValidator from 'ember-changeset-validations';
 
-export default Ember.Component.extend({
+export default Component.extend({
+  isProcessing: false,
+  changeset: null,
+  init() {
+    this._super(...arguments);
+    let fields = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: ''
+    };
+    set(this, 'changeset', new Changeset(fields, lookupValidator(SignupValidations), SignupValidations));
+  },
+  actions: {
+    login() {
+
+    },
+  }
 
 });
