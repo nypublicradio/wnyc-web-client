@@ -942,7 +942,6 @@ body.ember-application.discover {
   color:$charcoal;
   display:inline-block;
   font-weight: 600;
-  letter-spacing: 1px;
   min-width: 175px;
   padding:0.5rem 0.75rem;
   text-align:center;
@@ -1105,7 +1104,6 @@ body.ember-application.discover .discover .rounded-caps-button {
   font-weight: 600;
   line-height: 34px;
   cursor: pointer;
-  letter-spacing: 1px;
 
   @include transition(background-color $transition-timing, border-color $transition-timing, color $transition-timing);
 
