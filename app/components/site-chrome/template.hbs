@@ -11,6 +11,7 @@
 --}}
 
 <div class="l-page" id='site-chrome'>
+  {{#unless chromeDisabled}}
   <div class="sitechrome-top">
     <div class="sitechrome-topbody">
       {{#if beta.isBetaSite}}
@@ -168,13 +169,14 @@
     <!-- .l-bottom -->
     {{/if}}
   </nav>
+  {{/unless}}
 
   <div class="l-full sitechrome-page-content-area">
 
     {{yield}}
 
   </div>
-
+  {{#unless chromeDisabled}}
   {{partial 'components/site-chrome/site-footer'}}
-
+  {{/unless}}
 </div>
