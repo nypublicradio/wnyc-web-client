@@ -1,0 +1,198 @@
+@mixin account-input {
+    height: 50px;
+    padding: 12px;
+    border-radius: 4px;
+    background-color: white;
+    border: solid 1px $lightestgray;
+    font-size: 18px;
+    &:focus {
+      border-color: $blue;
+    }
+}
+
+.accounts #site-chrome {
+  padding-left: 0;
+}
+.accounts .sitechrome-page-content-area {
+  @include mq($medium-and-up) {
+    padding-left: 318px;
+  }
+}
+
+.account-togglelogin {
+  position: absolute;
+  right: 30px;
+  top: 35px;
+  font-size: 14px;
+  color: $lightgray;
+  > span {
+    display: none;
+    @include mq($middle-narrow-and-up) {
+      display: inline;
+    }
+  }
+}
+
+.account-promo {
+  width: 0;
+  height: 0;
+
+  &-blurb {
+    display: none;
+  }
+}
+
+@include mq($medium-and-up) {
+  .account-promo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 318px;
+    height: 100vh;
+    background: $lightgray;
+    &-blurb {
+      position: absolute;
+      display: block;
+      left: 30px;
+      bottom: 35px;
+      width: 250px;
+      color: white;
+    }
+    &-heading {
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.9;
+      letter-spacing: 1.7px;
+      margin-bottom: 16px;
+    }
+    &-text {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.7;
+    }
+  }
+}
+
+.account-logo {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  svg {
+    height: 33px;
+    width: 79px;
+  }
+  svg path {
+    fill: $red;
+    @include mq($medium-and-up) {
+      fill: white;
+    }
+  }
+}
+
+.account-form-input-advice {
+  display: none;
+  font-size: 12px;
+  color: $lightgray;
+}
+
+.account-form-input:focus + .account-form-input-footer > .account-form-input-advice {
+  display: inline;
+}
+
+.account-form {
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 100px 30px 0 30px;
+
+  &-heading {
+    padding: 0;
+    color: #333333;
+    font-weight: 400;
+    font-size: 24px;
+    margin: 0 0 20px 0;
+    @include mq($medium-and-up) {
+      width: 400px;
+      font-size: 32px;
+      margin: 0 0 25px 0;
+    }
+  }
+  &-input {
+    display: block;
+    width: 100%;
+    @include account-input;
+  }
+  &-input-footer {
+    @include display-flex;
+    width: 100%;
+    margin-bottom: 18px;
+    > span {
+      @include flex(1);
+    }
+    > .account-form-helplink {
+      text-align: right;
+    }
+  }
+  &-label {
+    display: block;
+    margin-bottom: 6px;
+    height: 17px;
+    font-size: 12px;
+    color: $lightgray;
+  }
+  &-error {
+    color: $red;
+    font-size: 12px;
+  }
+  &-link {
+    font-size: 14px;
+  }
+  &-btn {
+    margin-bottom: 15px;
+  }
+  &-separator {
+    font-size: 16px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    text-align: center;
+    color: $lightgray;
+  }
+  &-separator:before,
+  &-separator:after {
+    background-color: $lightestgray;
+    content: "";
+    display: inline-block;
+    height: 0.5px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+  }
+  &-separator:before {
+      right: 0.5em;
+      margin-left: -50%;
+  }
+  &-separator:after {
+      left: 0.5em;
+      margin-right: -50%;
+  }
+  &-notice {
+    font-size: 12px;
+    line-height: 1.7;
+    text-align: center;
+    color: $lightgray;
+    margin-bottom: 23px;
+  }
+
+  @include mq($medium-and-up) {
+    &-row {
+      position: relative;
+    }
+    &-row .account-form-col2 {
+      width: 193px;
+    }
+    &-row .account-form-col2:last-child {
+      position: absolute;
+      top: 0;
+      left: 200px;
+    }
+  }
+}

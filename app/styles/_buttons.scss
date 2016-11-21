@@ -788,6 +788,7 @@
   }
 }
 
+
 .callout-button {
   @include btn;
   @include btn--large;
@@ -796,6 +797,33 @@
   @include btn--white;
   white-space: nowrap;
   height: 46px;
+}
+
+.account-form-btn {
+  @include btn;
+  @include btn--large;
+  @include btn--blue;
+  @include btn--strongtext;
+  white-space: nowrap;
+  text-align: center;
+  height: 46px;
+  width: 100%;
+}
+
+.fb-btn {
+  background-color: $facebook-purple;
+  border-color: $facebook-purple;
+  color: white;
+
+  &:not([disabled]) {
+    &:hover,
+    &:focus {
+      outline: none;
+      color: white;
+      border-color: #2b457c;
+      background-color: #2b457c;
+    }
+  }
 }
 
 @mixin svg-color($color) {
