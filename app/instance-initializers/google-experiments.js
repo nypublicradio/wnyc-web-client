@@ -8,6 +8,5 @@ export function initialize(/* appInstance */) {
 
 export default {
   name: 'google-experiments',
-  before: 'metrics',
   initialize
 };

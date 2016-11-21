@@ -18,18 +18,8 @@ test('it exists', function(assert) {
 });
 
 test('calling tracking events does not call npr tracking events', function(assert) {
-  let service = this.subject();
-  service.activateAdapters([{
-    name: 'GoogleAnalytics',
-    config: {
-      id: config.googleAnalyticsKey
-    },
-  }, {
-    name: 'NprAnalytics',
-    config: {
-      id: config.nprGoogleAnalyticsKey
-    }
-  }]);
+  let service = this.subject({options: config});
+
   let nprTrackPageSpy = this.spy(service._adapters.NprAnalytics, 'trackPage');
   let nprTrackEventSpy = this.spy(service._adapters.NprAnalytics, 'trackEvent');
   
