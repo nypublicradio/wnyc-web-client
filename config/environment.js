@@ -13,16 +13,23 @@ module.exports = function(environment) {
     environment: environment,
     rootURL: '/',
     locationType: 'auto',
-    'ember-metrics': {
-      includeAdapters: ['google-analytics', 'data-warehouse']
-    },
     emberHifi: {
       connections: [{
         name: 'NativeAudio'
       }],
       alwaysUseSingleAudioElement: true
     },
-    metricsAdapters: [],
+    metricsAdapters: [{
+      name: 'GoogleAnalytics',
+      config: {
+        id: process.env.GOOGLE_ANALYTICS || 'UA-46158613-1'
+      },
+    }, {
+      name: 'NprAnalytics',
+      config: {
+        id: 'UA-18188937-11'
+      }
+    }],
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
