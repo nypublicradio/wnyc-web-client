@@ -7,52 +7,45 @@
 
   <div class="account-form-row">
     <div class="account-form-col2">
-      <label for="first_name" class="account-form-label">First Name</label>
-      {{input name="first_name" id="first_name" placeholder="Enter name" type="text" class="account-form-input" required='true'}}
-      <div class="account-form-input-footer">
-        {{#if errors.firstNameRequired}}
-          <span class="account-form-error">a first name is required.</span>
-        {{/if}}
-      </div>
+      {{fancy-input
+        label='First Name'
+        placeholder='Enter name'
+        fieldname='first_name'
+        value=changeset.firstName
+        errors=changeset.error.firstName.validation
+      }}
     </div>
 
     <div class="account-form-col2">
-      <label for="last_name" class="account-form-label">Last Name</label>
-      {{input name="last_name" id="last_name" placeholder="Enter name" type="text" class="account-form-input" required='true'}}
-      <div class="account-form-input-footer">
-        {{#if errors.lastNameRequired}}
-          <span class="account-form-error">a last name is required.</span>
-        {{/if}}
-      </div>
+      {{fancy-input
+        label='Last Name'
+        placeholder='Enter name'
+        fieldname='last_name'
+        value=changeset.lastName
+        errors=changeset.error.lastName.validation
+      }}
     </div>
   </div>
 
-  <label for="email" class="account-form-label">Email</label>
-  {{input name="email" id="email" placeholder="you@email.com" type="email" class="account-form-input" required='true'}}
-  <div class="account-form-input-footer">
-    {{#if errors.emailRequired}}
-      <span class="account-form-error">an email is required.</span>
-    {{/if}}
-    {{#if errors.emailExists}}
-      <span class="account-form-error">an account already exists for that email. <a href="/accounts/login">Log in</a></span>
-    {{/if}}
-    {{#if errors.emailInvalid}}
-      <span class="account-form-error">this is not a valid email.</span>
-    {{/if}}
-  </div>
+  {{fancy-input
+    label='Email'
+    type='email'
+    placeholder='you@email.com'
+    fieldname='email'
+    value=changeset.email
+    errors=changeset.error.email.validation
+  }}
 
-  <label for="password" class="account-form-label">Password</label>
-  {{input name="password" id="password" placeholder="Enter password" type="password" class="account-form-input" required='true'}}
-  <div class="account-form-input-footer">
-    {{#if errors.passwordRequired}}
-      <span class="account-form-error">a password is required.</span>
-    {{/if}}
-    {{#if errors.passwordInvalid}}
-      <span class="account-form-error">must have at least 8 characters and 1 number</span>
-    {{else}}
-      <span class="account-form-input-advice">must have at least 8 characters and 1 number</span>
-    {{/if}}
-  </div>
+  {{fancy-input
+    label='Password'
+    type='password'
+    placeholder='Enter password'
+    fieldname='password'
+    value=changeset.password
+    errors=changeset.error.password.validation
+    helplinkUrl='/forgot'
+    helplinkText='Forgot Password?'
+  }}
 
   <div class="account-form-notice">
     By proceeding to create your account, you are agreeing to New York Public Radio’s <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>.

@@ -1,0 +1,18 @@
+  <label for="{{fieldname}}" class="account-form-label">{{label}}</label>
+  {{input name=fieldname id=fieldname placeholder=placeholder type=(or type 'text') class="account-form-input" value=value}}
+  <div class="account-form-input-footer">
+    {{#if errors}}
+      <span class="account-form-error">
+        {{#each errors as |error|}}
+          {{error}}<br>
+        {{/each}}
+      </span>
+    {{else}}
+      <span class="account-form-input-advice">{{clue}}</span>
+    {{/if}}
+    {{#if helplinkUrl}}
+      <span class="account-form-helplink">
+        <a href={{helplinkUrl}}>{{helplinkText}}</a>
+      </span>
+    {{/if}}
+  </div>
