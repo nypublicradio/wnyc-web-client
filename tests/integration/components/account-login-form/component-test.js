@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import wait from 'ember-test-helpers/wait';
+\import wait from 'ember-test-helpers/wait';
 import sinon from 'sinon';
 
 moduleForComponent('account-login-form', 'Integration | Component | account login form', {
