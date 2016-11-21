@@ -46,6 +46,7 @@ test('it reports the proper data for an item view', function(assert) {
 });
 
 test('it reports the proper data for ondemand listen actions', function(assert) {
+  let clock = sinon.useFakeTimers();
   let expected = {
     audio_type: 'ondemand',
     client: 'wnyc_web',
@@ -111,6 +112,8 @@ test('it reports the proper data for ondemand listen actions', function(assert) 
     assert.deepEqual(thisData, data, 'sendSetPosition passes in correct data');
   };
   service.reportListenAction('position', Object.assign({audio_type: 'ondemand', current_position: 0}, testData));
+  
+  clock.restore();
 });
 
 test('data pipeline tracks delta properly', function(assert) {
