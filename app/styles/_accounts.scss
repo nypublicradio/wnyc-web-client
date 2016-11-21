@@ -5,6 +5,9 @@
     background-color: white;
     border: solid 1px $lightestgray;
     font-size: 18px;
+    .has-error & {
+      border-color: $red;
+    }
     &:focus {
       border-color: $blue;
     }
