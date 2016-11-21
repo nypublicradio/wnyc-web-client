@@ -5,6 +5,13 @@ export default DS.JSONAPISerializer.extend({
   keyForAttribute(key) {
     return key.underscore();
   },
+  keyForRelationship(key) {
+    if (key === 'currentStory') {
+      return key;
+    } else {
+      return this._super(...arguments);
+    }
+  },
 
   normalizeFindRecordResponse(store, modelClass, {stream, whatsOn}, ...rest) {
     let json = this._apiFormatStream(stream);
