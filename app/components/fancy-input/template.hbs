@@ -1,7 +1,7 @@
   <label for="{{fieldname}}" class="account-form-label">{{label}}</label>
-  {{input name=fieldname id=fieldname placeholder=placeholder type=(or type 'text') class="account-form-input" value=value}}
+  {{input name=fieldname id=fieldname placeholder=placeholder type=(or type 'text') class="account-form-input" value=value focus-out="setTouched"}}
   <div class="account-form-input-footer">
-    {{#if errors}}
+    {{#if hasError}}
       <span class="account-form-error">
         {{#each errors as |error|}}
           {{error}}<br>
