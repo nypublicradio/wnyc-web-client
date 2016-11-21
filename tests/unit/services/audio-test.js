@@ -368,6 +368,13 @@ test('service records a listen when a story is played', function(assert) {
         reportListenAction: reportStub
       }
   });
+  let expected = {
+    audio_type: 'ondemand',
+    cms_id: story.id,
+    item_type: story.itemType,
+    site_id: story.siteId,
+    current_position: undefined
+  };
     
   Ember.run(() => {
     service.set('hifi', hifiStub);
@@ -375,9 +382,9 @@ test('service records a listen when a story is played', function(assert) {
       service.pause();
       service.play(story.id).then(() => {
         assert.equal(reportStub.callCount, 3);
-        assert.ok(reportStub.calledWith('start'), 'sent start listen action');
-        assert.ok(reportStub.calledWith('pause'), 'sent pause listen action');
-        assert.ok(reportStub.calledWith('resume'), 'sent resume listen action');
+        assert.deepEqual(reportStub.getCall(0).args, ['start', expected], 'should have received proper attrs');
+        assert.deepEqual(reportStub.getCall(1).args, ['pause', expected], 'should have received proper attrs');
+        assert.deepEqual(reportStub.getCall(2).args, ['resume', expected], 'should have received proper attrs');
         done();
       });
     });

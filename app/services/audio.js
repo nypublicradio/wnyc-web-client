@@ -7,7 +7,6 @@ import { bind } from 'ember-runloop';
 import RSVP from 'rsvp';
 import { classify as upperCamelize } from 'ember-string';
 import Ember from 'ember';
-import config from 'overhaul/config/environment';
 
 const FIFTEEN_SECONDS = 1000 * 15;
 const TWO_MINUTES     = 1000 * 60 * 2;
@@ -340,44 +339,44 @@ export default Service.extend({
     this.get('listens').addListen(story);
   },
 
-  sendCompleteListenAction({id, itemType, audioType}) {
+  sendCompleteListenAction({id, itemType, audioType, siteId}) {
     let data = {
       audio_type: audioType,
       cms_id: id,
-      site_id: config.siteId,
+      site_id: siteId,
       item_type: itemType,
       current_position: this.get('position')
     };
     this.get('dataPipeline').reportListenAction('finish', data);
   },
 
-  sendPlayListenAction({id, itemType, audioType}) {
+  sendPlayListenAction({id, itemType, audioType, siteId}) {
     let data = {
       audio_type: audioType,
       cms_id: id,
-      site_id: config.siteId,
+      site_id: siteId,
       item_type: itemType,
       current_position: this.get('position')
     };
     this.get('dataPipeline').reportListenAction('start', data);
   },
   
-  sendResumeListenAction({id, itemType, audioType}) {
+  sendResumeListenAction({id, itemType, audioType, siteId}) {
     let data = {
       audio_type: audioType,
       cms_id: id,
-      site_id: config.siteId,
+      site_id: siteId,
       item_type: itemType,
       current_position: this.get('position')
     };
     this.get('dataPipeline').reportListenAction('resume', data);
   },
 
-  sendPauseListenAction({id, itemType, audioType}) {
+  sendPauseListenAction({id, itemType, audioType, siteId}) {
     let data = {
       audio_type: audioType,
       cms_id: id,
-      site_id: config.siteId,
+      site_id: siteId,
       item_type: itemType,
       current_position: this.get('position')
     };
@@ -454,7 +453,7 @@ export default Service.extend({
       action: 'On_demand_audio_play',
       label: get(story, 'audio')
     });
-    this.sendPlayListenAction(story);
+    this.sendPlayListenAction(story.getProperties('id', 'itemType', 'audioType', 'siteId'));
 
     if (context === 'queue' || context === 'history') {
       this._trackPlayerEvent({
@@ -507,7 +506,7 @@ export default Service.extend({
   },
   
   _trackResume(audio) {
-    this.sendResumeListenAction(audio);
+    this.sendResumeListenAction(audio.getProperties('id', 'itemType', 'audioType', 'siteId'));
   },
 
   _trackAutoplayQueue() {
@@ -550,7 +549,7 @@ export default Service.extend({
 
     if (audio && get(audio, 'audioType') !== 'stream') {
       // we're not set up to handle pause listen actions from streams atm
-      this.sendPauseListenAction(audio);
+      this.sendPauseListenAction(audio.getProperties('id', 'itemType', 'audioType', 'siteId'));
     }
   },
 
@@ -562,7 +561,7 @@ export default Service.extend({
       region: upperCamelize(context),
     });
 
-    this.sendCompleteListenAction(story);
+    this.sendCompleteListenAction(story.getProperties('id', 'itemType', 'audioType', 'siteId'));
   },
   
   // TODO: would like to move this and the rest of the above
