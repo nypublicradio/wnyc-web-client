@@ -340,40 +340,13 @@ export default Service.extend({
   addToHistory(story) {
     this.get('listens').addListen(story);
   },
-
-  sendCompleteListenAction(story) {
-    let data = {
-      current_position: this.get('position')
-    };
-    story.forListenAction(data).then(d => {
-      this.get('dataPipeline').reportListenAction('finish', d);
-    });
-  },
-
-  sendPlayListenAction(storyOrStream) {
-    let data = {
-      current_position: this.get('position')
-    };
-    storyOrStream.forListenAction(data).then(d => {
-      this.get('dataPipeline').reportListenAction('start', d);
-    });
-  },
   
-  sendResumeListenAction(storyOrStream) {
+  sendListenAction(storyOrStream, type) {
     let data = {
-      current_position: this.get('position')
+      current_position: this.get('position') || undefined
     };
     storyOrStream.forListenAction(data).then(d => {
-      this.get('dataPipeline').reportListenAction('resume', d);
-    });
-  },
-
-  sendPauseListenAction(storyOrStream) {
-    let data = {
-      current_position: this.get('position')
-    };
-    storyOrStream.forListenAction(data).then(d => {
-      this.get('dataPipeline').reportListenAction('pause', d);
+      this.get('dataPipeline').reportListenAction(type, d);
     });
   },
   
@@ -447,7 +420,7 @@ export default Service.extend({
       action: 'On_demand_audio_play',
       label: get(story, 'audio')
     });
-    this.sendPlayListenAction(story);
+    this.sendListenAction(story, 'start');
 
     if (context === 'queue' || context === 'history') {
       this._trackPlayerEvent({
@@ -471,7 +444,7 @@ export default Service.extend({
       action: 'Launched Stream',
       label,
     });
-    this.sendPlayListenAction(stream);
+    this.sendListenAction(stream, 'start');
 
     this._trackPlayerEventForNpr({
       category: 'Engagement',
@@ -501,7 +474,7 @@ export default Service.extend({
   },
   
   _trackResume(story) {
-    this.sendResumeListenAction(story);
+    this.sendListenAction(story, 'resume');
   },
 
   _trackAutoplayQueue() {
@@ -544,7 +517,7 @@ export default Service.extend({
 
     if (storyOrStream) {
       // we're not set up to handle pause listen actions from streams atm
-      this.sendPauseListenAction(storyOrStream);
+      this.sendListenAction(storyOrStream, 'pause');
     }
   },
 
@@ -556,7 +529,7 @@ export default Service.extend({
       region: upperCamelize(context),
     });
 
-    this.sendCompleteListenAction(story);
+    this.sendListenAction(story, 'finish');
   },
   
   // TODO: would like to move this and the rest of the above
