@@ -33,7 +33,7 @@ export default Route.extend(PlayParamMixin, {
     const channelTitle = get(channel, 'title');
     const metrics = get(this, 'metrics');
     const nprVals = get(channel, 'nprAnalyticsDimensions');
-    
+
     if (channel.get('headerDonateChunk')) {
       this.send('updateDonateChunk', channel.get('headerDonateChunk'));
     }
