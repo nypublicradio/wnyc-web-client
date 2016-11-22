@@ -1,8 +1,6 @@
 <div class="l-modal-body">
   <div class="box box--white box--rounded">
-    <svg class="icon--wnyc-logo-nav-beta icon--wnyc-logo-nav-beta--inverse">
-      <use xlink:href="{{svgURL}}defs.svg#wnyc-logo-beta"></use>
-    </svg>
+    {{!wnyc-svg icon='beta-logo' classNames='icon--wnyc-logo-nav-beta icon--wnyc-logo-nav-beta--inverse'}}
 
     <div class="text flush text--medium" data-test-selector="beta-about">
       {{{beta.welcome_message}}}
@@ -13,4 +11,3 @@
     <button {{action 'closeModal'}} data-test-selector="beta-modal-close">close X</button>
   </div>
 </div>
-
