@@ -125,7 +125,7 @@ test('metrics properly reports story attrs', function(assert) {
       let params = kv.split('=');
       let k = params[0];
       let v = decodeURIComponent(params[1]).replace(/\+/g, ' ');
-      if (['category', 'action', 'label', 'cms_id', 'cms_type'].contains(k)) {
+      if (['category', 'action', 'label', 'cms_id', 'cms_type'].includes(k)) {
         postParams[k] = v;
       }
     });
