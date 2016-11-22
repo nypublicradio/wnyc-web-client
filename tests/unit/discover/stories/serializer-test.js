@@ -1,12 +1,14 @@
-
 import { moduleForModel, test } from 'ember-qunit';
 import startMirage from '../../../helpers/setup-mirage-for-integration';
 
 moduleForModel('discover/stories', 'Unit | Serializer | discover/stories', {
   // Specify the other units that are required for this test.
   needs: ['serializer:discover/stories', 'adapter:discover/stories', 'model:discover/stories', "service:session"],
-  setup() {
+  beforeEach() {
     startMirage(this.container);
+  },
+  afterEach() {
+    server.shutdown();
   }
 });
 

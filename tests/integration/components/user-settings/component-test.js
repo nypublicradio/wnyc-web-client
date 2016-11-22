@@ -16,6 +16,9 @@ moduleForComponent('user-settings', 'Integration | Component | user settings', {
     this.inject.service('session');
     startMirage(this.container);
     server.create('stream', { slug: 'wnyc-fm939', name: 'WNYC 93.9FM', audioBumper: 'blerg' });
+  },
+  afterEach() {
+    server.shutdown();
   }
 });
 
