@@ -66,6 +66,10 @@ export default Service.extend({
     });
     this._super(...arguments);
   },
+  
+  willDestroy() {
+    Ember.$(window).off('beforeunload');
+  },
 
   play(pk, playContext) {
     // TODO: might be better to switch the arg order for better api design
