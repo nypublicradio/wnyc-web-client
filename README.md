@@ -17,6 +17,7 @@ You will need the following software properly installed on your computer. Please
 * [Git](http://git-scm.com/downloads)
 * [Ember CLI](https://ember-cli.com/user-guide/#getting-started) (>= 2.6.0)
 * [Compass](http://compass-style.org/install)
+* [Grunt](http://gruntjs.com/getting-started)
 
 ## Development
 
@@ -24,14 +25,17 @@ As noted above, you must spin up a checkout of [`publisher`](https://github.com/
 
 This value is controlled by a `.env` file you will create by following the directions below. Substitute the value of `MY_PORT` with the port of your `publisher` checkout on `dev.wnyc.net`, or replace it with a different address entirely if you are running the `publisher` app somewhere else.
 
+We use [modernizr](https://modernizr.com/) to detect for certain browser features. Rather than include a full build in the app, there is a single Grunt task included in this project which scans all the `.js` and `.scss` files for mentions of the modernizr API. Step 9 below will generate a modernizr build; do not skip it or you may have mysterious errors.
+
 1. `$ git clone git@github.com:nypublicradio/wnyc-web-client.git && cd wnyc-web-client`
 2. `$ git checkout <working branch>`
 3. `$ cp .env.sample .env`
 4. Edit `.env` with your `publisher` app location
 7. `$ npm install`
 8. `$ bower install`
+9. `$ grunt modernizr:dist`
 
-The `publisher` back end is not set up as a strictly data-only API server and will return HTML with embedded script tags that request agsint the root. To resolve this issue, you should run your local server with the proxy command:
+The `publisher` service is not set up as a strictly data-only API server and will return HTML with embedded script tags that request against the domain root. To resolve this issue, you should run your local server with the proxy command:
 ```sh
 $ ember serve --proxy http://dev.wnyc.net:MY_PORT
 ```
