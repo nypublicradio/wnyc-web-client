@@ -217,7 +217,7 @@ export default Service.extend({
   },
 
   playNextSegment() {
-    let story = get(this, 'currentStory');
+    let story = get(this, 'currentAudio');
     let nextSegment = story.getNextSegment();
     if (nextSegment) {
       return this.get('hifi').play(nextSegment, {position: 0})
