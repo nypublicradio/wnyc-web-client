@@ -11,5 +11,5 @@ test('it has the proper beta actions', function(assert) {
   let expectedActions = ['enterBeta', 'dismissBeta', 'exitBeta'];
   let mixinActions = Object.keys(subject.actions);
 
-  mixinActions.forEach(action => assert.ok(expectedActions.contains(action), `${action} is on mixin`));
+  mixinActions.forEach(action => assert.ok(expectedActions.includes(action), `${action} is on mixin`));
 });
