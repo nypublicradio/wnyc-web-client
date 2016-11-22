@@ -50,12 +50,15 @@
   a,
   button {
     color: white;
-    letter-spacing: 2px;
     font-family: 'Museo Sans Rounded', 'Open Sans', sans-serif;
   }
 
   a {
-    padding-bottom: 10px
+    padding-bottom: 10px;
+    
+    @include mq($medium-only) {
+      font-weight: 600;
+    }
   }
 
   a:hover,
@@ -70,7 +73,7 @@
     a,
     a:hover {
       border: 1px dotted rgba(0, 0, 0, 0);
-      padding: 28px;
+      padding: 22px 10px 26px 28px;      
     }
 
     a:focus {
@@ -93,11 +96,10 @@
 
   @include mq($large-and-up) {
     position: fixed;
-    width: 166px;
+    width: 150px;
     left: 0;
     height: 100%;
     padding-bottom: 117px;
-    border-right: 1px solid $lightestgray;
 
     a {
       padding-bottom: 0;
@@ -145,14 +147,13 @@
   ul.alignright {
     margin: 0;
     float: none;
+    border-right: 1px solid $nearwhite;
   }
 
   &.nav--homepage {
     background-color: $red;
 
     @include mq($large-and-up) {
-      border-color: $red;
-
       a,
       button,
       a:focus,
@@ -160,17 +161,23 @@
       a:hover,
       button:hover {
         color: white;
+        font-weight: 600;
       }
 
       .new {
         color: $link-gold;
+      }
+      
+      ul.alignright {
+        border-color: $red;
       }
     }
   }
 
   &:not(.x-scrollable) {
     .list-item {
-      padding: 10px 20px 10px 0;
+      padding: 1px 18px 1px 0;
+      margin: 13px 0;
     }
     .list--noborder {
         > .list-heading {
@@ -178,8 +185,8 @@
         }
     }
     .list-item.active {
-      background-color: rgba($red, 0.05);
-      border-left: 4px solid $red;
+      border-right: 3px solid $red;
+      
       a {
         color: $red;
         border: none;
