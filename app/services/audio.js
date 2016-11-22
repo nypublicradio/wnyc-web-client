@@ -117,7 +117,7 @@ export default Service.extend({
       if (newStoryPlaying) {
         this._trackOnDemandPlay(story, context);
       } else {
-        this._trackResume(story);
+        this.sendListenAction(story, 'resume');
       }
 
       // independent of context, if this item is already the first item in your
@@ -171,7 +171,7 @@ export default Service.extend({
         let prevAudio = get(this, 'currentAudio');
         this._trackStreamPlay(stream, context, prevAudio);
       } else {
-        this._trackResume(stream);
+        this.sendListenAction(stream, 'resume');
       }
 
       this._setupAudio(stream, context);
@@ -489,10 +489,6 @@ export default Service.extend({
     });
   },
   
-  _trackResume(story) {
-    this.sendListenAction(story, 'resume');
-  },
-
   _trackAutoplayQueue() {
     this._trackPlayerEvent({
       action: 'Launched Queue',
