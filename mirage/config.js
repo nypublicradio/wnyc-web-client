@@ -135,7 +135,7 @@ export default function() {
 
   this.get(`${baseUrl}`, function(schema) {
     let home = schema.djangoPages.find('/');
-    return home.attrs.text;
+    return home ? home.attrs.text : '';
   });
 
   this.get(`${baseUrl}/\*id`, function(schema, {queryParams, params}) {
