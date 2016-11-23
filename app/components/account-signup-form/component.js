@@ -1,4 +1,5 @@
 import Component from 'ember-component';
+import get from 'ember-metal/get';
 import set from 'ember-metal/set';
 import Changeset from 'ember-changeset';
 import SignupValidations from 'overhaul/validations/signup';
@@ -18,8 +19,12 @@ export default Component.extend({
     set(this, 'changeset', new Changeset(fields, lookupValidator(SignupValidations), SignupValidations));
   },
   actions: {
-    login() {
-
+    signUp() {
+      let changeset = get(this, 'changeset')
+      changeset.validate();
+      if (changeset.isValid) {
+        set(this, 'emailSent', true);
+      }
     },
   }
 
