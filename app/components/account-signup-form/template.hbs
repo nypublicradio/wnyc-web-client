@@ -1,3 +1,6 @@
+{{#if emailSent}}
+  {{account-thanks email=changeset.email}}
+{{else}}
 <form class="account-form" {{action 'signUp'}}>
   <h2 class="account-form-heading">Sign up for an account</h2>
 
@@ -53,3 +56,4 @@
 
   <input type="button" class="account-form-btn" value="Sign up" disabled={{isProcessing}}>
 </form>
+{{/if}}
