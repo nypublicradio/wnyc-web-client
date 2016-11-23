@@ -774,8 +774,7 @@ table#show-number-archive {
   text-align: center;
 }
 
-/* horizontal tablet */
-@media screen and (min-width: 1024px) and (max-width: 1256px) {
+@media screen and (min-width: 800px) and (max-width: 980px) {
   #wnyc-home-sidebar-top, .sideblock.bigbox_ad {
     float: none !important;
     margin: 1.3em auto;
@@ -787,8 +786,31 @@ table#show-number-archive {
     float: none;
     overflow: auto;
   }
-  #home-secondary li {
-    width: 48%;
+}
+
+@media screen and (min-width: 981px) and (max-width: 1024px) {
+  #home-secondary .media-wrapper {
+    display: none;
+  }
+  
+  .button-wrapper {
+    position: relative !important; 
+    bottom: 7px !important;
+  }
+}
+
+/* horizontal tablet */
+@media screen and (min-width: 1024px) and (max-width: 1224px) {
+  #wnyc-home-sidebar-top, .sideblock.bigbox_ad {
+    float: none !important;
+    margin: 1.3em auto;
+    width: 300px;
+    display: block !important;
+  }
+  .top-stories {
+    width: 100% !important;
+    float: none;
+    overflow: auto;
   }
   .bucket li, 
   #damost ol li {
@@ -824,11 +846,6 @@ table#show-number-archive {
     margin-top: 3em;
     margin-right: 1.4em;
   }
-
-  #home-secondary li {
-    margin-right: 20px;
-  }
-
 }
 
 
