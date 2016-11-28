@@ -8,7 +8,7 @@ export default Ember.Route.extend(PlayParamMixin, {
   metrics: service(),
   session: service(),
   setupController(controller) {
-    controller.set('isMobile', window.Modernizr.touch || window.Modernizr.touchevents);
+    controller.set('isMobile', window.Modernizr.touchevents);
     return this._super(...arguments);
   },
   titleToken(model) {

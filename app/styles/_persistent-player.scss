@@ -64,7 +64,7 @@
       font-weight: 700;
       margin-right: 5px;
       color: #77a6de;
-      
+
       &:hover {
         border-bottom-color: #77a6de;
       }
@@ -453,18 +453,18 @@ button.persistent-queuebutton.is-open-modal {
     @include display-flex;
     @include align-items(center);
 
-
     > .progress {
       @include flex(1);
       position: relative;
       bottom: 0;
       margin: 0 15px 0 0;
       height: 21px;
-    }
 
-    .progress-wrapper {
-      position: relative;
-      height: 3px;
+      .progress-wrapper {
+        position: relative;
+        height: 3px;
+        top: 10px;
+      }
     }
 
     > .persistent-timelabel {
@@ -472,6 +472,19 @@ button.persistent-queuebutton.is-open-modal {
     }
   }
 }
+
+@include mq($medium-and-up) {
+  .progress-playhead {
+    top: -1.5px;
+
+    .touchevents &,
+    .is-dragging &,
+    .progress:hover & {
+      transform: scale(0.7, 0.7);
+    }
+  }
+}
+
 
 
 .queue {
@@ -545,32 +558,4 @@ button.persistent-queuebutton.is-open-modal {
 // liquid-fire compat
 .player-wrapper.liquid-container {
   @include transform(none);
-}
-
-.persistent-player-feedback {
-  display: inline-block;
-  position: absolute;
-  right: 26px;
-  top: -40px;
-  height: 40px;
-  padding: 11px 13px 12px 13px;
-  @include mq($medium-and-up) {
-    top: -35px;
-    height: 35px;
-    padding: 8px 13px 10px 13px;
-  }
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 17px;
-  color: #ffffff;
-  border: none;
-  border-radius: 4px 4px 0 0;
-  background-color: #128cf4;
-  transition: background-color 0.2s;
-  &:hover {
-    background-color: #1068b3;
-  }
-  &:active {
-    background-color: #013f73;
-  }
 }

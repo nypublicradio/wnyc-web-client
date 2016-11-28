@@ -1,69 +1,95 @@
 .progress {
     position: absolute;
-    height: 5px;
-    bottom: 15px;
+    height: 10px;
+    .touchevents & {
+      height: 34px;
+    }
+    bottom: 95px;
     left: 0;
     right: 0;
-
+    cursor: pointer;
     @include display-flex;
-    //&:hover > .progress-wrapper {
-    //    @include scale3d(1,1,1);
-    //}
+}
 
-    &:hover .progress-playhead {
-      opacity: 1;
-    }
+.progress-wrapper,
+.progress-bg,
+.progress-downloaded,
+.progress-played {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  max-height: 5px;
+  height: 100%;
 }
 
 .progress-wrapper {
-    height: 5px;
-    position: relative;
-    margin: auto;
-    @include flex-basis(100%);
-
-    // @include mq("(min-width: 800px)"){
-    //     @include scale3d(1,0.22222,1);
-    //     @include transition(transform 150ms ease);
-    // }
+  width: 100%;
+  @include mq($small-only) {
+    .touchevents & {
+      border-left: 50px solid black;
+      border-right: 50px solid black;
+    }
+  }
 }
 
 .progress-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
-    background-color: rgba(white, 0.4);
+  width: 100%;
+  background-color: rgba($darkergray, 0.75);
 }
 
 .progress-downloaded {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 0%;
-    height: 100%;
     background-color: rgba(white, 0.3);
 }
 
 .progress-played {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
+    width: 0%;
     background-color: #4a90e2;
 }
 
 .progress-playhead {
     position: absolute;
-    height: 17px;
-    width: 2px;
+    height: 22px;
+    width: 22px;
+    margin: -8px -16px;
+    .touchevents & {
+      height: 34px;
+      width: 34px;
+      margin: -14px -16px;
+    }
+    transform: scale(0, 0);
     left: 0;
     opacity: 0;
-    background-color: white;
-    top: 0;
     bottom: 0;
-    margin: -7px 0;
+    @include transition(opacity 200ms linear, transform 200ms);
 
-    @include transition(opacity 150ms ease);
+    .is-loaded & {
+      opacity: 1;
+    }
+
+    .touchevents &,
+    .is-dragging &,
+    .progress:hover & {
+      transform: scale(1, 1);
+    }
+
+    .touchevents .progress.is-touching &  {
+      transform: scale(3.3, 3.3) translateY(-7px);
+      opacity: 0.75;
+      @include transition(opacity 200ms linear 200ms, transform 200ms ease-out 200ms);
+    }
+
+    &:after {
+      content: '';
+      height: 22px;
+      width: 22px;
+      background-color: #4a90e2;
+      border-radius: 50%;
+      opacity: 1;
+      display: block;
+      position: absolute;
+      top: 11px;
+      left: calc(50% - 11px);
+      top: calc(50% - 11px);
+    }
 }
