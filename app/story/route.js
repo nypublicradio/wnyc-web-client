@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
 import PlayParamMixin from 'wnyc-web-client/mixins/play-param';
+import { beforeTeardown } from 'wnyc-web-client/lib/compat-hooks';
 const { get } = Ember;
 const { hash: waitFor } = Ember.RSVP;
 
@@ -56,5 +57,13 @@ export default Ember.Route.extend(PlayParamMixin, {
       nprVals,
       isNpr: true
     });
+  },
+  
+  actions: {
+    willTransition() {
+      this._super(...arguments);
+      beforeTeardown();
+      return true;
+    }
   }
 });
