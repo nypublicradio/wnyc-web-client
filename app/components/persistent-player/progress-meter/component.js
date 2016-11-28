@@ -97,7 +97,7 @@ export default Component.extend({
   _startDragging(touch) {
     set(this, 'isDragging', true);
     if (touch) {
-      this.$().on('touchmove', Ember.run.bind(this, (e) => {
+      this.$().on('touchmove', Ember.run.bind(this, e => {
         // prevent touch scrolling
         e.preventDefault();
         let event = e.originalEvent;
@@ -107,7 +107,7 @@ export default Component.extend({
         }
       }));
     } else {
-      this.$().on('mousemove', Ember.run.bind(this, (e) => {
+      this.$().on('mousemove', Ember.run.bind(this, e => {
         // prevent dragging and selecting
         e.preventDefault();
         this._updateAudioPosition(e);
