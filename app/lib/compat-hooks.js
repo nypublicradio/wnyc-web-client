@@ -37,11 +37,6 @@ export function beforeTeardown(/* element, page */) {
     window.googletag.destroySlots();
   }
 
-  // toggle_menu_v2.js sets classes way up on <html>, so we may need to clear them.
-  $('html')
-    .removeClass('navigation-open')
-    .removeClass('subnavigation-open');
-
   // player.js listens for a storage event with a handler defined on the wnyc object,
   // which is triggered by logic outside of Ember; unbind to avoid throwing errors
   $(window).off('unload storage');
