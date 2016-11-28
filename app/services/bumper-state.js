@@ -25,7 +25,7 @@ export default Ember.Service.extend({
   bumperStarted: false,
   revealNotificationBar: computed('bumperPlaying', 'bumperDidPlay', function() {
     // Google Experiment Continuous Play - START
-    if (!( this.get('features').isEnabled('autoplay-prefs') && inExperimentalGroup([1]) )) {
+    if (!( this.get('features').isEnabled('autoplay-prefs') )) {
       return false;
     }
     // Google Experiment Continuous Play - END
@@ -34,7 +34,7 @@ export default Ember.Service.extend({
   }),
   autoplayEnabled: computed('autoplayPref', 'queue.items.length', function() {
     // Google Experiment Continuous Play - START
-    if (!( this.get('features').isEnabled('autoplay-prefs') && inExperimentalGroup([1]) )){
+    if (!( this.get('features').isEnabled('autoplay-prefs') )){
       return false;
     }
     // Google Experiment Continuous Play - END
