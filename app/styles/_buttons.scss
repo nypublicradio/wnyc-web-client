@@ -27,7 +27,6 @@
 
 .btn--studio360-override {
   font-weight: 600 !important;
-  letter-spacing: 2px;
   max-width: 120px;
 
   > a {
@@ -98,7 +97,6 @@
 */
 .btn--heavy {
   font-weight: 600;
-  letter-spacing: 1px;
 }
 
 .btn--heavyborder {
@@ -509,9 +507,6 @@
   border-bottom: 1px solid rgba(204,204,204,0.8);
   padding: 0;
   font-weight: normal;
-  letter-spacing: normal;
-  // IE doesn't support intial
-  letter-spacing: initial;
   @include fontsize($base-font);
   line-height: #{$line-height}px;
 
@@ -687,7 +682,6 @@
 }
 
 @mixin btn--strongtext {
-  letter-spacing: 1px;
   font-weight: 600;
 }
 
