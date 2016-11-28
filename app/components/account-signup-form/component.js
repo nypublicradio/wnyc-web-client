@@ -20,9 +20,9 @@ export default Component.extend({
   },
   actions: {
     signUp() {
-      let changeset = get(this, 'changeset')
-      changeset.validate();
-      if (changeset.isValid) {
+      let changeset = get(this, 'changeset');
+      console.log('submit?', changeset);
+      if (get(this, 'changeset.isValid')) {
         set(this, 'emailSent', true);
       }
     },
