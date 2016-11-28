@@ -12,11 +12,11 @@ export default {
     validatePresence(true)
     ],
   email: [
-    validatePresence(true),
-    validateFormat({ type: 'email', allowBlank: true })
+    validateFormat({ type: 'email', allowBlank: true }),
+    validatePresence(true)
     ],
   password: [
-    validatePresence(true),
-    validateLength({ min: 8, allowBlank: true })
+    validateLength({ min: 8, allowBlank: true }),
+    validatePresence(true)
     ]
 };
