@@ -82,7 +82,7 @@
     <div class="scrollable-body">
       <div class="{{if media.isLargeAndUp 'box box--nopad'}}">
 
-      <ul class="list list--noborder flush text--spacing text--semi {{unless media.isLargeAndUp 'list--inline list--spaced text--small' 'alignright text--medium '}}">
+      <ul class="list list--noborder flush {{unless media.isLargeAndUp 'list--inline list--spaced text--small' 'alignright'}}">
 
         <li class="list-item list-item--nav">
           {{#if media.isLargeAndUp}}
@@ -92,7 +92,7 @@
               itemPK=preferredStream.slug
               itemTitle=preferredStream.name
               playContext='nav'
-              class=(if media.isLargeAndUp 'stream-launcher text--spacing text--semi')}}
+              class=(if media.isLargeAndUp 'stream-launcher')}}
               <span>Listen Live</span>
             {{/listen-button}}
           {{else}}
@@ -154,7 +154,7 @@
             {{/link-to}}
 
             <li class="list-item list-item--nav">
-              <button class="btn--blank btn--white text--spacing h5" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
+              <button class="btn--blank btn--white h5" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
             </li>
 
           {{else}}
@@ -176,8 +176,8 @@
         <div class="box box--nopad">
 
 
-          <ul class="list list--noborder flush alignright text--spacing text--semi text--medium">
-            {{!-- <div class="h5 text--heavy text--spacing alignright"> --}}
+          <ul class="list list--noborder flush alignright">
+            {{!-- <div class="h5 text--heavy alignright"> --}}
             {{#if features.autoplayPrefs}}
             {{!-- Google Experiment Continuous Play - START --}}
             {{#if (in-experimental-group 1) }}
@@ -194,7 +194,7 @@
               {{/link-to}}
 
               <li class="list-item list-item--nav">
-                <button class="btn--blank text--spacing" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
+                <button class="btn--blank" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
               </li>
             {{else}}
               {{#link-to 'login' tagName='li' href="false" class="list-item list-item--nav" }}
