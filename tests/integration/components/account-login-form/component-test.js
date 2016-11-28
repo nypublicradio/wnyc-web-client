@@ -7,5 +7,5 @@ moduleForComponent('account-login-form', 'Integration | Component | account logi
 
 test('it renders', function(assert) {
   this.render(hbs`{{account-login-form}}`);
-  assert.equal(this.$('.account-form').length(), 1);
+  assert.equal(this.$('.account-form').length, 1);
 });
