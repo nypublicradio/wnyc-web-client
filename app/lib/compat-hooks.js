@@ -45,6 +45,11 @@ export function beforeTeardown(/* element, page */) {
   // player.js listens for a storage event with a handler defined on the wnyc object,
   // which is triggered by logic outside of Ember; unbind to avoid throwing errors
   $(window).off('unload storage');
+  
+  // the whats on widget only runs on the homepage but sets up an interval that
+  // continues to run. cancel it here so it doesn't run in unsafe contexts
+  let timeoutId = get(window, 'wnyc.apis.whatsOnToday.update.updateTimeoutId');
+  clearInterval(timeoutId);
 
   // The mailchimp popup signup form is badly behaved -- it insists on
   // being the only AMD loader on the page. So here we clear it away
