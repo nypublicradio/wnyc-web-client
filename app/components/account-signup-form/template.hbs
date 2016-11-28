@@ -1,10 +1,10 @@
 {{#if emailSent}}
   {{account-thanks email=changeset.email}}
 {{else}}
-<form class="account-form" {{action 'signUp'}}>
+<form class="account-form" {{action 'signUp' on='submit'}}>
   <h2 class="account-form-heading">Sign up for an account</h2>
 
-  <input type="button" class="account-form-btn fb-btn" value="Sign up with Facebook">
+  <button class="account-form-btn fb-btn">Sign up with Facebook</button>
 
   <div class="account-form-separator">or</div>
 
@@ -54,6 +54,6 @@
     By proceeding to create your account, you are agreeing to New York Public Radio’s <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>.
   </div>
 
-  <input type="button" class="account-form-btn" value="Sign up" disabled={{isProcessing}}>
+  <button type="submit" class="account-form-btn" disabled={{isProcessing}}>Sign Up</button>
 </form>
 {{/if}}
