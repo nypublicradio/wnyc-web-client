@@ -10,21 +10,33 @@ export default Component.extend({
   changeset: null,
   init() {
     this._super(...arguments);
-    let fields = {
+    set(this, 'fields', {
       firstName: '',
       lastName: '',
       email: '',
       password: ''
-    };
-    set(this, 'changeset', new Changeset(fields, lookupValidator(SignupValidations), SignupValidations));
+    });
+    set(this, 'changeset', new Changeset(get(this, 'fields'), lookupValidator(SignupValidations), SignupValidations));
   },
   actions: {
     signUp() {
       let changeset = get(this, 'changeset');
-      console.log('submit?', changeset);
-      if (get(this, 'changeset.isValid')) {
-        set(this, 'emailSent', true);
-      }
+      let snapshot = changeset.snapshot();
+      return changeset
+      .cast(Object.keys(get(this, 'fields')))
+      .validate()
+      .then(() => {
+        if (get(changeset, 'isValid')) {
+          changeset.save()
+          .then(() => {
+            console.log('SIGNING UP WITH', get(this, 'fields'));
+            set(this, 'emailSent', true);
+          })
+        }
+      }).catch(() => {
+        console.log('UPDATE FAILED', get(this, 'fields'), changeset.get('errors'), changeset);
+        changeset.restore(snapshot);
+      });
     },
   }
 
