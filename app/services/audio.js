@@ -68,7 +68,7 @@ export default Service.extend({
     // TODO: might be better to switch the arg order for better api design
     // i.e. there will always be a context, but there might not always be a pk
     let id = pk || get(this, 'currentAudio.id');
-    let context = playContext || get(this, 'currentContext') || '';
+    let context = playContext || '';
 
     if (!id) {
       return;
