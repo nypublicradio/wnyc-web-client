@@ -24,6 +24,9 @@ module.exports = function(defaults) {
       enabled: env === 'production',
       prepend: process.env.FINGERPRINT_PREPEND_URL
     },
+    sourcemaps: {
+      enabled: true,
+    },
     storeConfigInMeta: env !== 'development',
 
     // This project's in-repo addon configuration confuses Mirage and makes it
