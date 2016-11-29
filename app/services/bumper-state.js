@@ -3,7 +3,6 @@ import service from 'ember-service/inject';
 import computed, { readOnly, not } from 'ember-computed';
 import get, { getProperties } from 'ember-metal/get';
 import ENV from 'overhaul/config/environment';
-import { inExperimentalGroup } from 'overhaul/helpers/in-experimental-group';
 
 export default Ember.Service.extend({
   init() {
@@ -25,7 +24,7 @@ export default Ember.Service.extend({
   bumperStarted: false,
   revealNotificationBar: computed('bumperPlaying', 'bumperDidPlay', function() {
     // Google Experiment Continuous Play - START
-    if (!( this.get('features').isEnabled('autoplay-prefs') && inExperimentalGroup([1]) )) {
+    if (!( this.get('features').isEnabled('autoplay-prefs') )) {
       return false;
     }
     // Google Experiment Continuous Play - END
@@ -34,7 +33,7 @@ export default Ember.Service.extend({
   }),
   autoplayEnabled: computed('autoplayPref', 'queue.items.length', function() {
     // Google Experiment Continuous Play - START
-    if (!( this.get('features').isEnabled('autoplay-prefs') && inExperimentalGroup([1]) )){
+    if (!( this.get('features').isEnabled('autoplay-prefs') )){
       return false;
     }
     // Google Experiment Continuous Play - END

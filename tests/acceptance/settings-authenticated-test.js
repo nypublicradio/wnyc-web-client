@@ -5,11 +5,9 @@ import {
   currentSession
 } from 'overhaul/tests/helpers/ember-simple-auth';
 import 'overhaul/tests/helpers/with-feature';
-import { mockExperimentalGroup } from 'overhaul/tests/helpers/mock-experimental-group';
 
 moduleForAcceptance('Acceptance | settings', {
   beforeEach() {
-    mockExperimentalGroup(1);
     authenticateSession(this.application);
     let session = currentSession(this.application);
     session.set('data.user-prefs-active-stream', {slug: 'wqxr', name: 'WQXR New York'});

@@ -6,7 +6,6 @@ import get from 'ember-metal/get';
 import set from 'ember-metal/set';
 const { A, Service } = Ember;
 import 'overhaul/tests/helpers/with-feature';
-import { mockExperimentalGroup } from 'overhaul/tests/helpers/mock-experimental-group';
 
 moduleFor('service:bumper-state', 'Unit | Service | bumper state', {
   // Specify the other units that are required for this test.
@@ -21,7 +20,6 @@ moduleFor('service:bumper-state', 'Unit | Service | bumper state', {
   ],
 
   beforeEach() {
-    mockExperimentalGroup(1);
     const FeatureStub = Service.extend({
       isEnabled() {
         return true;

@@ -150,8 +150,8 @@ module.exports = function(environment) {
   if (environment === 'test') {
     // Testem prefers this...
     ENV.locationType = 'none';
-    
-    ENV.featureFlags['autoplay-prefs'] = false;
+
+    ENV.featureFlags['autoplay-prefs'] = true;
     ENV.queueAudioBumperURL = 'http://audio-bumper.com/thucyides.mp3';
 
     // keep test console output quieter
