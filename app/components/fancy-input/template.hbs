@@ -8,7 +8,9 @@
         {{/each}}
       </span>
     {{else}}
-      <span class="account-form-input-advice">{{clue}}</span>
+      {{#if clue}}
+        <span class="account-form-input-advice">{{clue}}</span>
+      {{/if}}
     {{/if}}
     {{#if helplinkUrl}}
       <span class="account-form-helplink">
