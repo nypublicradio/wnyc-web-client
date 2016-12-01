@@ -56,6 +56,16 @@
               data-tracking-action="Clicked Donate Button"
               target="_blank">Donate</a>
             {{/if}}
+
+            {{#if session.isAuthenticated}}
+              {{link-to "My Account" 'djangorendered' 'users/me' class="inherit" preventDefault=false}}
+
+              <button class="btn--blank btn--white h5" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
+
+            {{else}}
+              {{link-to 'Sign In' 'login' class="inherit" preventDefault=false}}
+
+            {{/if}}
           </div>
         </div>
 
