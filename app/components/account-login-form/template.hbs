@@ -1,7 +1,7 @@
 <form class="account-form" {{action 'login' on=submit}}>
   <h2 class="account-form-heading">Log in to WNYC</h2>
 
-  <input type="button" class="account-form-btn fb-btn" value="Log in with Facebook">
+  <button class="account-form-btn fb-btn"><i class="fa fa-facebook-official fa-2x"></i> Log in with Facebook</button>
 
   <div placeholder="you@email.com" class="account-form-separator">or</div>
 
@@ -25,5 +25,5 @@
     helplinkText='Forgot Password?'
   }}
 
-  <input type="button" class="account-form-btn" value="Log in" {{action 'validate' changeset}} disabled={{isProcessing}}>
+  <button type="submit" class="account-form-btn" {{action 'validate' changeset}} disabled={{isProcessing}}>Log in</button>
 </form>
