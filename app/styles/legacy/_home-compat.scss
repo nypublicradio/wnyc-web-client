@@ -258,4 +258,35 @@ body.ember-application {
     background: $nearwhite;
   }
   
+  #wnyc_home h2 {
+    font-weight: normal;
+  }
+  
+  #top-stories-wrapper .story-wrapper {
+    a h4.show-name {
+      color: $lightgray;
+      font-weight: normal;
+      font-size: 12px;
+    }
+  }
+  
+  .story-wrapper {
+    border-radius: 3px;
+    
+    .media {
+      border-radius: 3px 3px 0 0;
+    }     
+  }
+  
+  @media screen and (min-width:800px) {    
+    #home-primary {
+      h2 {
+        font-size: 20px;
+      }
+      
+      .image {
+        border-radius: 3px 0 0 3px;
+      }
+    }
+  }
 }
