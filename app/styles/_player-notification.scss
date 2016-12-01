@@ -69,12 +69,6 @@
   }
 }
 
-@media only screen and (min-width: 800px) {
-  .notification {
-    @include fontsize(20);
-  }
-}
-
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
   .notification {
     bottom: 80px;
