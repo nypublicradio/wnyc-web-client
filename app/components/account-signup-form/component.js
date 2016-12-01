@@ -31,7 +31,7 @@ export default Component.extend({
           .then(() => {
             console.log('SIGNING UP WITH', get(this, 'fields'));
             set(this, 'emailSent', true);
-          })
+          });
         }
       }).catch(() => {
         console.log('UPDATE FAILED', get(this, 'fields'), changeset.get('errors'), changeset);
