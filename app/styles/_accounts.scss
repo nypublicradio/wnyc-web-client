@@ -52,7 +52,12 @@
     left: 0;
     width: 318px;
     height: 100vh;
-    background: $lightgray;
+    background-color: black;
+    @include responsive-background-image('/assets/img/backgrounds/andrew.jpg', '/assets/img/backgrounds/andrew@2x.jpg');
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: 100%;
+
     &-blurb {
       position: absolute;
       display: block;
@@ -86,9 +91,9 @@
   }
   svg path {
     fill: $red;
-    @include mq($medium-and-up) {
-      fill: white;
-    }
+  }
+  > a {
+    border-width: 0;
   }
 }
 
@@ -151,6 +156,11 @@
   }
   &-btn {
     margin-bottom: 15px;
+    > .fa {
+      margin-right: 6px;
+      font-size: 24px;
+      vertical-align: text-bottom;
+    }
   }
   &-separator {
     font-size: 16px;
@@ -183,9 +193,16 @@
     text-align: center;
     color: $lightgray;
     margin-bottom: 23px;
+    a {
+      color: $lightgray;
+      border-bottom: 1px solid $lightergray;
+    }
+    a: hover {
+      border-bottom: 1px solid $lightergray;
+    }
   }
 
-  @include mq($medium-and-up) {
+  @include mq($middle-narrow-and-up) {
     &-row {
       position: relative;
     }
@@ -195,7 +212,7 @@
     &-row .account-form-col2:last-child {
       position: absolute;
       top: 0;
-      left: 200px;
+      left: 207px;
     }
   }
 }
