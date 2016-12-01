@@ -83,8 +83,8 @@
 
 .account-logo {
   position: absolute;
-  top: 30px;
-  left: 30px;
+  top: 0;
+  left: 0;
   svg {
     height: 33px;
     width: 79px;
@@ -93,13 +93,20 @@
     fill: $red;
   }
   > a {
-    border-width: 0;
+    display: block;
+    padding: 30px;
+    border: 1px solid transparent;
+  }
+  > a:focus {
+    border: 1px dotted rgba(black, 0.2);
   }
 }
 
 .account-form-input-advice {
   display: none;
   font-size: 12px;
+  padding-top: 10px;
+  padding-left: 12px;
   color: $lightgray;
 }
 
@@ -138,6 +145,7 @@
     }
     > .account-form-helplink {
       font-size: 14px;
+      padding-top: 10px;
       text-align: right;
     }
   }
@@ -151,6 +159,8 @@
   &-error {
     color: $red;
     font-size: 12px;
+    padding-top: 10px;
+    padding-left: 12px;
   }
   &-link {
     font-size: 14px;
@@ -196,10 +206,10 @@
     margin-bottom: 23px;
     a {
       color: $lightgray;
-      border-bottom: 1px solid $lightergray;
+      border-bottom: 1px solid rgba($lightgray, 0.3);
     }
-    a: hover {
-      border-bottom: 1px solid $lightergray;
+    a:hover, a:focus {
+      border-bottom: 1px solid rgba($lightgray, 0.8);
     }
   }
 
