@@ -9,7 +9,7 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{search-box}}`);
 
-  assert.equal(this.$(".searchbox input").text().trim(), '', "Initial text is empty");
+  assert.equal(this.$("input").text().trim(), '', "Initial text is empty");
 });
 
 test('should trigger external action on keyup', function(assert) {
@@ -23,8 +23,8 @@ test('should trigger external action on keyup', function(assert) {
   this.render(hbs`{{search-box key-up=(action this.filterShows)}}`);
 
   // add text to the search box and trigger a keyup
-  this.$('.searchbox input').val('Show Name');
-  this.$('.searchbox input').keyup();
+  this.$('input').val('Show Name');
+  this.$('input').keyup();
 
 });
 

@@ -114,68 +114,77 @@
  *  Searchbox
  * `.searchbox input.search`:
  */
-
-.searchbox {
-    position: relative;
-    box-sizing: border-box;
-    padding: 20px 20px 20px 60px; /* room at left for magnifying glass icon */
-    border-radius: 100px;
-    
-    input[type="search"] {
-        border: none;
-        margin-bottom: 0;
-
-        &:focus {
-            outline: none;
-        }
-
-    }
-
-    &.searchbox--gray {
-        background-color: $graywhite;
-
-        input[type="search"] {
-            background-color: $graywhite;
-            color: $lightgray;
-            &::-webkit-input-placeholder {color: $lightgray; opacity: 1 !important;}
-            &::-moz-placeholder {color: $lightgray;}
-            &:-ms-input-placeholder {color: $lightgray;}
-        }
-    }
-
-    &.searchbox--slim {
-        padding: 10px 10px 10px 60px;
-
-        .input-icon {
-            top: 11px;
-            .icon--form {
-                fill: $darkergray;
-            }
-        }
-
-        input[type="search"] {
-            color: $darkergray;
-            font-size: 14px;
-            &::-webkit-input-placeholder {color: $darkergray; opacity: 1 !important;}
-            &::-moz-placeholder {color: $darkergray;}
-            &:-ms-input-placeholder {color: $darkergray;}
-
-            &:focus::-webkit-input-placeholder {opacity: 0 !important;}
-        }
-    }
-
-}
-
-
-.input-icon {
+ 
+@mixin searchbox {
+  position: relative;
+  box-sizing: border-box;
+  padding: 20px 20px 20px 60px; /* room at left for magnifying glass icon */
+  border-radius: 100px;
+  
+  .input-icon {
     position: absolute;
     top: 21px;
     left: 25px;
-    
-    .icon--form {
-        fill: $lightgray;
+
+    svg path {
+        stroke: $lightgray;
     }
- }
+  }
+  
+  input[type="search"] {
+    border: none;
+    margin-bottom: 0;
+
+    &:focus {
+      outline: none;
+    }
+  }   
+}
+
+@mixin searchbox--gray {
+  background-color: $graywhite;
+
+  input[type="search"] {
+    background-color: $graywhite;
+    color: $lightgray;
+    &::-webkit-input-placeholder {color: $lightgray; opacity: 1 !important;}
+    &::-moz-placeholder {color: $lightgray;}
+    &:-ms-input-placeholder {color: $lightgray;}
+  }
+}
+
+@mixin searchbox--slim {
+  padding: 10px 10px 10px 45px;
+
+  .input-icon {
+    top: 11px;
+    left: 20px;
+    
+    .icon--search {
+      width: 14px;
+      height: 15px;
+    }
+  }
+
+  input[type="search"] {
+    font-size: 14px;
+  }
+}
+
+.searchbox {
+  @include searchbox;
+}
+
+.searchbox--shows {
+  @include searchbox;
+  @include searchbox--gray;
+}
+
+.searchbox--chrome {
+  @include searchbox;
+  @include searchbox--gray;
+  @include searchbox--slim;
+}
 
  #login-register iframe {
     border: none;
