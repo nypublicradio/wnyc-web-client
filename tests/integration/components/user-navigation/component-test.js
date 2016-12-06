@@ -1,5 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import wait from 'ember-test-helpers/wait';
 
 moduleForComponent('user-navigation', 'Integration | Component | user navigation', {
   integration: true
@@ -31,5 +32,7 @@ test('clicking the button opens the popup', function(assert) {
   assert.equal(this.$('.user-nav-popup').length, 0, 'popup should start closed');
   this.$('.user-nav-logged-in button').click();
 
-  assert.equal(this.$('.user-nav-popup').length, 1, 'popup should open');
+  return wait().then(() => {
+    assert.equal(this.$('.user-nav-popup').length, 1, 'popup should open');
+  });
 });
