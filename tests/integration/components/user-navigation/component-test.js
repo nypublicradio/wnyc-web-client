@@ -6,19 +6,30 @@ moduleForComponent('user-navigation', 'Integration | Component | user navigation
 });
 
 test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
   this.render(hbs`{{user-navigation}}`);
+  assert.equal(this.$('.user-nav-signup').length, 1);
+});
 
-  assert.equal(this.$().text().trim(), '');
+test('it shows the login state', function(assert) {
+  this.set('isLoggedIn', true);
+  this.render(hbs`{{user-navigation isLoggedIn=isLoggedIn}}`);
+  assert.equal(this.$('.user-nav-logged-in').length, 1);
+});
 
-  // Template block usage:
-  this.render(hbs`
-    {{#user-navigation}}
-      template block text
-    {{/user-navigation}}
-  `);
+test('it says hi to the user with their name', function(assert) {
+  this.set('user', {firstName: 'Matt'});
+  this.set('isLoggedIn', true);
+  this.render(hbs`{{user-navigation isLoggedIn=isLoggedIn user=user}}`);
+  assert.equal(this.$('.user-nav-logged-in').text().trim(), 'Hi, Matt');
+});
 
-  assert.equal(this.$().text().trim(), 'template block text');
+
+test('clicking the button opens the popup', function(assert) {
+  this.set('isLoggedIn', true);
+  this.render(hbs`{{user-navigation isLoggedIn=isLoggedIn}}`);
+
+  assert.equal(this.$('.user-nav-popup').length, 0, 'popup should start closed');
+  this.$('.user-nav-logged-in button').click();
+
+  assert.equal(this.$('.user-nav-popup').length, 1, 'popup should open');
 });
