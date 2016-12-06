@@ -1,0 +1,34 @@
+  {{#if isLoggedIn}}
+    <div class="user-nav-logged-in">
+      {{#click-outside action=(action 'closePopup')}}
+        <button {{action 'togglePopup'}}>
+          <div class="user-nav-avatar">
+          {{#if user.photo}}
+            <img src={{user.photo}}>
+          {{else}}
+            {{wnyc-svg icon="user"}}
+          {{/if}}
+          </div>
+          <span class="user-nav-greeting">Hi, {{or user.firstName 'You'}}</span>
+          <span class="user-nav-triangle"></span>
+        </button>
+        {{#if isPopupOpen}}
+          <div class="user-nav-popup-pointer"></div>
+          <div class="user-nav-popup">
+            <ul class="user-nav-list">
+              <li class="user-nav-listitem"><a href='/settings'>Settings</a></li>
+              <li class="user-nav-listitem"><a>Account</a></li>
+              <li class="user-nav-listitem"><a>Logout</a></li>
+            </ul>
+          </div>
+        {{/if}}
+      {{/click-outside}}
+    </div>
+  {{else}}
+    <div class="user-nav-signup user-nav-link">
+      {{link-to 'Sign Up' 'index' class="inherit" preventDefault=false}}
+    </div>
+    <div class="user-nav-login user-nav-link">
+      {{link-to 'Log In' 'index' class="inherit" preventDefault=false}}
+    </div>
+  {{/if}}
