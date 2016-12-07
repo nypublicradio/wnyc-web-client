@@ -12,7 +12,7 @@
   .notification-link {
     color: $gold;
     border-bottom: 1px solid rgba($gold, .3);
-    
+
     &:hover {
       border-bottom-color: rgba($gold, .8);
     }
@@ -64,8 +64,11 @@
 .notification-message {
   @include flex(1);
   margin: 0;
-  padding: 10px 10px 0 10px;
+  padding: 10px;
   align-self: center;
+  a {
+    margin-left: 10px;
+  }
 }
 
 // ipad messes with the alignment of the text a little bit
