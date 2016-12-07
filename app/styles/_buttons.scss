@@ -788,53 +788,6 @@
   }
 }
 
-// Ember Button Components
-.queue-button {
-  @include btn;
-  @include btn--strongtext;
-  @include btn--smalltext;
-  @include thickbtn;
-
-  &.queue-button--fancyfeature {
-    @include gray-btn-jshover;
-
-    @include mq($small-and-up) {
-      @include white-btn-jshover;
-    }
-  }
-
-  &.queue-button--storyheader {
-    @include gray-btn-jshover;
-
-    @include mq($medium-and-up) {
-      @include white-btn-jshover;
-    }
-  }
-
-  &.just-gray {
-    @include gray-btn-jshover;
-  }
-
-  &.small-blue {
-    @include btn;
-    @include btn--circle;
-    @include btn--fat;
-
-    &:focus,
-    &:hover {
-      border-color: rgba($darkgray, 0.2);
-      color: $lightgray;
-      opacity: 1;
-    }
-
-    &.is-hovering {
-      border-color: rgba($darkgray, 0.2);
-      color: $lightgray;
-      opacity: 1;
-    }
-  }
-}
-
 .callout-button {
   @include btn;
   @include btn--large;
@@ -850,6 +803,24 @@
     color: $color;
     fill: currentColor;
   }
+}
+
+@mixin gray-hollow-svg($color) {
+  svg .outer {
+    fill: rgba($lightgray, 0.2);
+  }
+  svg .inner {
+    fill: $color;
+  }  
+}
+
+@mixin gray-hollow-svg-hover($color) {
+  svg .outer {
+    fill: rgba($darkgray, 0.2);
+  }
+  svg .inner {
+    fill: rgba($color, 1);
+  }  
 }
 
 @mixin gray-svg {
@@ -935,7 +906,6 @@
   }
 }
 
-
 @mixin white-listen-spinner {
   .listen-spinner {
     @include spinner(
@@ -969,6 +939,52 @@
       $primary: rgba(white, 0),
       $accent: $red
     );
+  }
+}
+
+// Queue Buttons
+
+.queue-button {
+  @include btn;
+  @include btn--strongtext;
+  @include btn--smalltext;
+  @include thickbtn;
+
+  &.queue-button--fancyfeature {
+    @include gray-btn-jshover;
+
+    @include mq($small-and-up) {
+      @include white-btn-jshover;
+    }
+  }
+
+  &.queue-button--storyheader {
+    @include gray-btn-jshover;
+
+    @include mq($medium-and-up) {
+      @include white-btn-jshover;
+    }
+  }
+
+  &.just-gray {
+    @include gray-btn-jshover;
+  }
+
+  &.small-blue {
+    @include btn-size(44px);
+
+    &:focus,
+    &:hover {
+      border-color: rgba($darkgray, 0.2);
+      color: $lightgray;
+      opacity: 1;
+    }
+
+    &.is-hovering {
+      border-color: rgba($darkgray, 0.2);
+      color: $lightgray;
+      opacity: 1;
+    }
   }
 }
 
@@ -1019,15 +1035,15 @@
   &.blue-hollow {
     @include btn-size(44px);
 
-    @include blue-svg;
+    @include gray-hollow-svg($blue);
     @include blue-listen-spinner;
 
     &:hover .listen-ui,
     &:focus .listen-ui {
-      @include svg-color($darkblue);
+      @include gray-hollow-svg-hover($blue);
     }
     &:active .listen-ui {
-      @include svg-color(#013f73);
+      @include gray-hollow-svg($gray);
     }
   }
 
@@ -1065,24 +1081,13 @@
   &.red-hollow-small {
     @include btn-size(24px);
 
+    @include gray-hollow-svg($red);
     @include red-listen-spinner;
-
-    svg .outer {
-      fill: rgba($lightgray, 0.2);
-    }
-    svg .inner {
-      fill: $red;
-    }
 
     &:hover .listen-ui,
     &:focus .listen-ui,
     &:active .listen-ui {
-      svg .outer {
-        fill: rgba($lightgray, 0.16);
-      }
-      svg .inner {
-        fill: rgba($red, 0.8);
-      }
+      @include gray-hollow-svg-hover($red);
     }
   }
 
