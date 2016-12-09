@@ -1,0 +1,58 @@
+.design {  
+  .design-nav {
+    background: $red;
+    padding: 10px 0 20px 0;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    
+    ul {
+      margin: 0;
+      min-width: 1250px;
+      color: white;
+      font-weight: 600;
+    }
+    
+    li {
+      display: inline;
+    }
+    
+    a {
+      color: white;
+      border-bottom: 0;
+      padding: 5px 0;
+      margin-right: 20px;
+      
+      &:hover,
+      &.active {
+        border-bottom: 3px solid white;
+      }
+      
+      &.no-link {
+        border: none;
+      }    
+    }
+    
+    .logo {
+      color: white;
+      padding: 0 20px;
+      margin-right: 5px;
+      
+      .icon--wnyc-logo-design {
+        width: 70px;
+        height: 29px;
+        margin: auto;
+        display: inline;
+        top: 8px;
+        position: relative;
+        margin-right: 7px;
+        
+        path {
+          fill: white;
+        }
+      }
+    }
+  }
+}

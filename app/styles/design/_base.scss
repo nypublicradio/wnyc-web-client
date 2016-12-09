@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface|Libre+Baskerville');
+
+.design {  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: auto;
+  // font-family: 'Libre Baskerville', serif;
+  
+  .l-page {
+    padding-left: 0;
+  }
+  
+  h1 {
+    font-size: 42px;
+  }
+  
+  h1, h2, h3 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+  }
+  
+  h3 {
+    color: $lightgray;
+  }
+  
+  pre {
+    background: $nearwhite;
+    padding: 4px 10px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+  
+  a {
+    border-bottom: 1px dotted $lightgray;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;  
+  }
+}
