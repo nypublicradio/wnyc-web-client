@@ -33,7 +33,8 @@ moduleFor('service:bumper-state', 'Unit | Service | bumper state', {
         'queue': {
           'items': A(),
         }
-      }
+      },
+      authorize: function() {}
     });
 
     startMirage(this.container);
