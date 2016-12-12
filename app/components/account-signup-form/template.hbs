@@ -16,6 +16,7 @@
         fieldname='first_name'
         value=changeset.firstName
         errors=changeset.error.firstName.validation
+        submitted=submitTried
       }}
     </div>
 
@@ -26,6 +27,7 @@
         fieldname='last_name'
         value=changeset.lastName
         errors=changeset.error.lastName.validation
+        submitted=submitTried
       }}
     </div>
   </div>
@@ -37,16 +39,18 @@
     fieldname='email'
     value=changeset.email
     errors=changeset.error.email.validation
+    submitted=submitTried
   }}
 
   {{fancy-input
     label='Password'
     type='password'
     placeholder='Enter password'
-    fieldname='password'
-    value=changeset.password
+    fieldname='typedPassword'
+    value=changeset.typedPassword
     clue='Password must be 8 or more characters'
-    errors=changeset.error.password.validation
+    errors=changeset.error.typedPassword.validation
+    submitted=submitTried
   }}
 
   <div class="account-form-notice">

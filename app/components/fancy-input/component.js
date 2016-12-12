@@ -1,11 +1,13 @@
 import Component from 'ember-component';
-import { and } from 'ember-computed';
+import { and, or } from 'ember-computed';
 import set from 'ember-metal/set';
 
 export default Component.extend({
   classNameBindings: ['hasError'],
   touched: false,
-  hasError: and('errors', 'touched'),
+  submitted: false,
+  showError: or('touched', 'submitted'),
+  hasError: and('errors', 'showError'),
   actions: {
     setTouched() {
       set(this, 'touched', true);
