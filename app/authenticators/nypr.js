@@ -1,47 +1,51 @@
 import config from 'overhaul/config/environment';
-import Base from 'ember-simple-auth/authenticators/base';
+// import Base from 'ember-simple-auth/authenticators/base';
 import $ from 'jquery';
-import RSVP from 'rsvp';
+// import RSVP from 'rsvp';
 import service from 'ember-service/inject';
+import OAuth2PasswordGrantAuthenticator from 'ember-simple-auth/authenticators/oauth2-password-grant';
 
-export default Base.extend({
+
+export default OAuth2PasswordGrantAuthenticator.extend({
   session: service(),
+  serverTokenEndpoint: 'http://auth-prod-946918678.us-east-1.elb.amazonaws.com/session',
 
-  restore(user) {
-    this.get('session').set('attemptedTransition', null);
-    return RSVP.Promise.resolve(user);
-  },
+  //restore(user) {
+  //  this._super(...arguments);
+  //  this.get('session').set('attemptedTransition', null);
+  //  return RSVP.Promise.resolve(user);
+  //},
 
-  authenticate(username, password) {
-    return new RSVP.Promise((resolve, reject) => {
-      return $.ajax(`${config.wnycAccountRoot}/api/v1/accounts/login/`, {
-        data: {
-          username,
-          password
-        },
-        method: 'POST',
-        xhrFields: { withCredentials: true }
-      })
-      .then(json => checkAuthentication(json, resolve, reject));
-    });
-  },
+  // authenticate(username, password) {
+  //   return new RSVP.Promise((resolve, reject) => {
+  //     return $.ajax(`${config.wnycAccountRoot}/api/v1/accounts/login/`, {
+  //       data: {
+  //         username,
+  //         password
+  //       },
+  //       method: 'POST',
+  //       xhrFields: { withCredentials: true }
+  //     })
+  //     .then(json => checkAuthentication(json, resolve, reject));
+  //   });
+  // },
 
-  invalidate(/* data */) {
-    let browserId = this.get('session.data.browserId');
-    return new RSVP.Promise((resolve, reject) => {
-      return $.ajax(`${config.wnycAccountRoot}/api/v1/accounts/logout/?bust_cache=${Math.random()}&id=${browserId}`, {
-        method: 'POST',
-        xhrFields: { withCredentials: true }
-      })
-      .then(({successful_logout}) => {
-        if (successful_logout) {
-          resolve();
-        } else {
-          reject();
-        }
-      });
-    });
-  },
+  // invalidate(/* data */) {
+  //   let browserId = this.get('session.data.browserId');
+  //   return new RSVP.Promise((resolve, reject) => {
+  //     return $.ajax(`${config.wnycAccountRoot}/api/v1/accounts/logout/?bust_cache=${Math.random()}&id=${browserId}`, {
+  //       method: 'POST',
+  //       xhrFields: { withCredentials: true }
+  //     })
+  //     .then(({successful_logout}) => {
+  //       if (successful_logout) {
+  //         resolve();
+  //       } else {
+  //         reject();
+  //       }
+  //     });
+  //   });
+  // },
 });
 
 function checkAuthentication({success, errors}, resolve, reject) {
