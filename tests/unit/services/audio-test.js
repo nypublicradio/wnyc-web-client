@@ -22,7 +22,8 @@ moduleFor('service:audio', 'Unit | Service | audio', {
 
   beforeEach() {
     const sessionStub = Ember.Service.extend({
-      data: {} // we only really need the data thing
+      data: {}, // we only really need the data thing
+      authorize: function() {}
     });
     const listenActionsStub = Ember.Service.extend({
       sendPause: function(){},
