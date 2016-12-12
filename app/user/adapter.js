@@ -5,7 +5,6 @@ import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
   authorizer: 'authorizer:nypr',
   host: ENV.wnycAuthAPI,
-  // pathForType: () => 'user',
   buildURL(modelName, id, snapshot, requestType/*, query*/) {
     if (/createRecord|updateRecord/.test(requestType)) {
       return `${this.host}/user`;
