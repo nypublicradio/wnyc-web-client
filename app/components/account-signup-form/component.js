@@ -9,61 +9,51 @@ import service from 'ember-service/inject';
 export default Component.extend({
   store: service(),
   isProcessing: false,
+  submitTried: false,
   changeset: null,
   init() {
     this._super(...arguments);
-    set(this, 'fields', {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: ''
-    });
-    set(this, 'changeset', new Changeset(get(this, 'fields'), lookupValidator(SignupValidations), SignupValidations));
+    set(this, 'newUser', this.get('store').createRecord('user'));
+    set(this, 'changeset', new Changeset(get(this, 'newUser'), lookupValidator(SignupValidations), SignupValidations));
+    get(this, 'changeset').validate();
   },
   actions: {
     signUp() {
+      set(this, 'submitTried', true);
       let changeset = get(this, 'changeset');
       let snapshot = changeset.snapshot();
-      let fields = get(this, 'fields');
-      let newUser;
       return changeset
-      .cast(Object.keys(fields))
+      .cast(['email','firstName','lastName','typedPassword'])
       .validate()
       .then(() => {
         if (get(changeset, 'isValid')) {
+          set(this, 'isProcessing', true);
           changeset.save()
           .then(() => {
-            console.log('SIGNING UP WITH', fields);
-            set(this, 'isProcessing', true);
-            newUser = this.get('store').createRecord('user', {
-              email: fields.email,
-              firstName: fields.firstName,
-              lastName: fields.lastName
-            });
-            // typedPassword will be available to send to our new user api endpoint but won't be persisted to the store
-            newUser.set('typedPassword', fields.password);
-            newUser.save().then(function() {
-
-            }).catch(e => {
-              set(this, 'isProcessing', false);
-              set(this, 'loginFailed', true);
-              console.log('LOGIN FAILED', fields, changeset.get('errors'), changeset);
-              console.log('what went wrong', e);
-              console.log('model errors', newUser.get('errors'));
-            });
+            set(this, 'emailSent', true);
+          })
+          .catch(e => {
+            // server error
+            set(this, 'isProcessing', false);
+            set(this, 'loginFailed', true);
+            changeset.restore(snapshot);
+            applyErrorToChangeset(e.errors, changeset);
+            console.log('SERVER PROBLEM', e.errors);
           });
+        } else {
+          // changeset error
+          set(this, 'isProcessing', false);
+          set(this, 'loginFailed', true);
+          changeset.restore(snapshot);
+          console.log('CLIENT PROBLEM', changeset.get('error'), changeset.get('errors'));
         }
-        set(this, 'isProcessing', false);
-        set(this, 'loginFailed', true);
-        changeset.restore(snapshot);
-        console.log('LOGIN FAILED', fields, changeset.get('errors'), changeset);
-      }).catch(() => {
-        set(this, 'isProcessing', false);
-        set(this, 'loginFailed', true);
-        console.log('LOGIN FAILED', fields, changeset.get('errors'), changeset);
-        changeset.restore(snapshot);
       });
     }
   }
-
 });
+
+let applyErrorToChangeset = function(error, changeset) {
+  if (error.code === "UsernameExistsException") {
+    changeset.pushErrors('email', 'an account already exists for that email. <a href="/accounts/login">Log in</a>');
+  }
+};
