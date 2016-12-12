@@ -6,6 +6,7 @@ export default ApplicationAdapter.extend({
     return 'channel';
   },
   ajaxOptions(urlToDecode, type, options = {}) {
+    options = this._super(...arguments);
     const url = decodeURIComponent(urlToDecode);
 
     return Ember.assign(options, {
