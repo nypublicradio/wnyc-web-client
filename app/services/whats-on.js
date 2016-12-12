@@ -1,5 +1,5 @@
-import ENV from 'wnyc-web-client/config/environment';
-import $ from 'jquery';
+import ENV from 'overhaul/config/environment';
+import wrapAjax from 'overhaul/lib/wrap-ajax';
 import Service from 'ember-service';
 import get from 'ember-metal/get';
 import { canonicalize } from 'wnyc-web-client/services/script-loader';
@@ -13,7 +13,7 @@ export default Service.extend({
     let endPoint = get(this, 'endPoint');
     let url = `${wnycURL}${endPoint}`;
 
-    return $.ajax(url).then(d => this._extractStatus(d, pk));
+    return wrapAjax(url).then(d => this._extractStatus(d, pk));
   },
 
   _extractStatus(data, pk) {
