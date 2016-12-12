@@ -3,7 +3,7 @@ import startMirage from '../../../helpers/setup-mirage-for-integration';
 
 moduleForModel('discover/topics', 'Unit | Serializer | discover/topics', {
   // Specify the other units that are required for this test.
-  needs: ['serializer:discover/topics', 'adapter:discover/topics', 'model:discover/topics'],
+  needs: ['serializer:discover/topics', 'adapter:discover/topics', 'model:discover/topics', 'service:session'],
   beforeEach() {
     startMirage(this.container);
   },
