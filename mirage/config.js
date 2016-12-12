@@ -149,4 +149,29 @@ export default function() {
     }
     return page || new Response(404);
   });
+  
+  /*-------------------------------------------------------------
+  auth microservice
+  ---------------------------------------------------------------*/
+  
+  this.urlPrefix = config.wnycAuthAPI;
+  
+  this.get('/session', (schema, request) => {
+    if (!request.requestHeaders.Authorization) {
+      return new Response(401);
+    }
+    return schema.users.first();
+  });
+  
+  this.patch('/user', (schema, request) => {
+    if (!request.requestHeaders.Authorization) {
+      return new Response(401);
+    }
+    let user = schema.users.first();
+    if (!user) {
+      return new Response(500, {error: {code: 'BadTest', message: 'No users found'}});
+    }
+    return user.update(JSON.parse(request.requestBody));
+  });
+  
 }
