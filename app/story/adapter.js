@@ -18,7 +18,7 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
       options.dataType = 'jsonp';
       options.jsonpCallback = 'RELATED';
       options.cache = true;
-    } 
+    }
     return wrapAjax(options);
   },
   findRecord(store, type, id/*, snapshot*/) {
