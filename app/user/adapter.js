@@ -3,5 +3,8 @@ import DS from 'ember-data';
 
 export default DS.RESTAdapter.extend({
   host: ENV.wnycAuthAPI,
-  pathForType: () => 'user',
+  // pathForType: () => 'user',
+  buildURL() {
+    return `${this.host}/session`;
+  }
 });
