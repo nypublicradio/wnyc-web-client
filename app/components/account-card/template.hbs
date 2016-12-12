@@ -1,0 +1,10 @@
+{{#nypr-card title="Basic Info" edit=edit}}
+
+  {{#if user}}
+  {{basic-info
+    isEditing=isEditing
+    pwChangeset=(changeset password PasswordValidations)
+    basicChangeset=(changeset user BasicInfoValidations)}}
+  {{/if}}
+
+{{/nypr-card}}
