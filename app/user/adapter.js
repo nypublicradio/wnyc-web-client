@@ -6,7 +6,11 @@ export default DS.RESTAdapter.extend(DataAdapterMixin, {
   authorizer: 'authorizer:nypr',
   host: ENV.wnycAuthAPI,
   // pathForType: () => 'user',
-  buildURL() {
-    return `${this.host}/session`;
+  buildURL(modelName, id, snapshot, requestType/*, query*/) {
+    if (requestType === 'createRecord') {
+      return `${this.host}/user`;
+    } else if (requestType.startsWith('find')) {
+      return `${this.host}/session`;
+    }
   }
 });
