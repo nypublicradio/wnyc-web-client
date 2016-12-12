@@ -1,6 +1,7 @@
 import DS from 'ember-data';
 
-export default DS.RESTSerializer.extend({
+export default DS.JSONAPISerializer.extend({
+  keyForAttribute: attr => attr.underscore(),
   serialize(snapshot, options) {
     var json = this._super(snapshot, options);
     json = Object.assign(json, { password: snapshot.record.get('typedPassword') });
