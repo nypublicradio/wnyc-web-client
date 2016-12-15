@@ -1,9 +1,9 @@
-<h2 class="h3 flush" id="commentsForm">Leave a comment</h2>
+<h2 class="text--semi" id="commentsForm">Leave a comment</h2>
 <div class="text">Email addresses are required but never displayed</div>
 
 {{#unless user.is_staff}}
 <fieldset class="fieldset">
-    <label class="h4" for="name">Name</label>
+    <label class="text--medium text--semi" for="name">Name</label>
     {{#if errors.name}}
         <div class="text text--red flush">{{errors.name}}</div>
     {{/if}}
@@ -11,7 +11,7 @@
 </fieldset>
 
 <fieldset class="fieldset">
-    <label class="h4" for="email">Email address</label>
+    <label class="text--medium text--semi" for="email">Email address</label>
     {{#if errors.email}}
         <div class="text text--red flush">{{errors.email}}</div>
     {{/if}}
@@ -20,7 +20,7 @@
 {{/unless}}
 
 <fieldset class="fieldset">
-    <label class="h4" for="commentBox">Comment</label>
+    <label class="text--medium text--semi" for="commentBox">Comment</label>
     {{#if errors.comment}}
         <div class="text text--red flush">{{errors.comment}}</div>
     {{/if}}
@@ -28,15 +28,15 @@
 </fieldset>
 
 <fieldset class="fieldset">
-    <label class="h4" for="location">Location</label>
+    <label class="text--medium text--semi" for="location">Location</label>
     {{input value=location class="input flush" type="text" name="location"}}
 </fieldset>
 
 {{#if user.is_staff}}
 <fieldset class="fieldset">
-    <label class="h4" for="userNameOverride">User name override</label>
+    <label class="text--medium text--semi" for="userNameOverride">User name override</label>
     {{input value=nameOverride class="input flush" name="user_name_override"}}
 </fieldset>
 {{/if}}
 
-<button class="btn btn--graytext btn--squared" disabled={{isDisabled}} {{action 'sendComment'}}>Submit Comment</button>
+<button class="btn btn--blue" disabled={{isDisabled}} {{action 'sendComment'}}>Submit Comment</button>

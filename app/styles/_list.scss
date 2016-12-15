@@ -5,21 +5,8 @@
 }
 
 .list-heading {
-    color: $lightgray;
     border-bottom: 1px solid $lightestgray;
-    text-transform: uppercase;
     letter-spacing: 2px;
-
-    > h1,
-    > h2,
-    > h3,
-    > h4,
-    > h5,
-    > h6 {
-        font-weight: 700;
-        line-height: 32px;
-        margin-bottom: 0;
-    }
 
     + ol > .list-item:first-child {
         border-top: none;
