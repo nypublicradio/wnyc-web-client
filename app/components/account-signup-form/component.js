@@ -8,9 +8,7 @@ import service from 'ember-service/inject';
 
 export default Component.extend({
   store: service(),
-  isProcessing: false,
-  submitTried: false,
-  changeset: null,
+  allowedKeys: ['email','givenName','familyName','typedPassword'],
   init() {
     this._super(...arguments);
     set(this, 'newUser', this.get('store').createRecord('user'));
@@ -18,42 +16,23 @@ export default Component.extend({
     get(this, 'changeset').validate();
   },
   actions: {
-    signUp() {
-      set(this, 'submitTried', true);
-      let changeset = get(this, 'changeset');
-      let snapshot = changeset.snapshot();
-      return changeset
-      .cast(['email','givenName','familyName','typedPassword'])
-      .validate()
-      .then(() => {
-        if (get(changeset, 'isValid')) {
-          set(this, 'isProcessing', true);
-          changeset.save()
-          .then(() => {
-            set(this, 'emailSent', true);
-          })
-          .catch(e => {
-            // server error
-            set(this, 'isProcessing', false);
-            set(this, 'loginFailed', true);
-            changeset.restore(snapshot);
-            applyErrorToChangeset(e.errors, changeset);
-            console.log('SERVER PROBLEM', e.errors);
-          });
-        } else {
-          // changeset error
-          set(this, 'isProcessing', false);
-          set(this, 'loginFailed', true);
-          changeset.restore(snapshot);
-          console.log('CLIENT PROBLEM', changeset.get('error'), changeset.get('errors'));
-        }
-      });
+    onSubmit() {
+      return this.signUp();
+    },
+    onFailure(e) {
+      if (e.errors) {
+        this.applyErrorToChangeset(e.errors, get(this, 'changeset'));
+      }
+    }
+  },
+  signUp() {
+    return get(this, 'changeset').save();
+  },
+  applyErrorToChangeset(error, changeset) {
+    if (error) {
+      if (error.code === "UsernameExistsException") {
+        changeset.pushErrors('email', 'an account already exists for that email. <a href="/accounts/login">Log in</a>');
+      }
     }
   }
 });
-
-let applyErrorToChangeset = function(error, changeset) {
-  if (error.code === "UsernameExistsException") {
-    changeset.pushErrors('email', 'an account already exists for that email. <a href="/accounts/login">Log in</a>');
-  }
-};
