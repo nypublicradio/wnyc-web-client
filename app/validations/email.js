@@ -10,8 +10,5 @@ export default {
   email: [
     validatePresence({ presence: true, message: requiredMessage }),
     validateFormat({ type: 'email', allowBlank: true, message: emailFormatMessage })
-    ],
-  password: [
-    validatePresence({ presence: true, message: requiredMessage}),
     ]
 };
