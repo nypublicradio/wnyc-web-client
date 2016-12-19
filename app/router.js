@@ -60,6 +60,8 @@ Router.map(function() {
   this.route('accounts', function() {
     this.route('login');
     this.route('signup');
+    this.route('forgot');
+    this.route('reset');
   });
 
   // This is our catch all route that can render any existing page

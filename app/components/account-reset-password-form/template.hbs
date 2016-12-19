@@ -1,0 +1,26 @@
+{{#changeset-form changeset=changeset allowedKeys=allowedKeys onSubmit=(action 'onSubmit') formClass='account-form' as |form|}}
+{{#if form.status.success}}
+  <h2 class="account-form-heading">Password Updated</h2>
+
+  <p class="account-form-description">Your password has been successfully updated.</p>
+
+  <button type="submit" class="account-form-btn">Log In</button>
+{{else}}
+  <h2 class="account-form-heading">Reset your password</h2>
+
+  <p class="account-form-description">Create a new password for {{email}}.</p>
+
+  {{fancy-input
+    label='New Password'
+    type='password'
+    placeholder='Enter password'
+    fieldname='password'
+    value=changeset.password
+    errors=changeset.error.password.validation
+    submitted=submitTried
+    clue='must have at least 8 characters and one number'
+  }}
+
+  <button type="submit" class="account-form-btn" disabled={{form.status.processing}}>Reset password</button>
+{{/if}}
+{{/changeset-form}}
