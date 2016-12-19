@@ -1,4 +1,10 @@
-{{#changeset-form changeset=changeset allowedKeys=allowedKeys onSubmit=(action 'onSubmit') formClass='account-form' as |form|}}
+{{#changeset-form
+  changeset=changeset
+  allowedKeys=allowedKeys
+  onSubmit=(action 'onSubmit')
+  formClass='account-form'
+  as |form|
+}}
   {{#if form.status.success}}
     <h2 class="account-form-heading">Check your email</h2>
 

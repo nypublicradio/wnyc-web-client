@@ -4,13 +4,11 @@ import set from 'ember-metal/set';
 import Changeset from 'ember-changeset';
 import EmailValidations from 'overhaul/validations/email';
 import lookupValidator from 'ember-changeset-validations';
-import service from 'ember-service/inject';
 import ENV from 'overhaul/config/environment';
 import fetch from 'fetch';
 import { rejectUnsuccessfulResponses } from 'overhaul/utils/fetch-utils';
 
 export default Component.extend({
-  store: service(),
   allowedKeys: ['email'],
   init() {
     this._super(...arguments);
