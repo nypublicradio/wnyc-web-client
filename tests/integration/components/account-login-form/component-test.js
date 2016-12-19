@@ -27,8 +27,10 @@ test('submitting the form passes the login values to the authenticator', functio
   this.$('label:contains(Password) + input').change();
   this.$('button:contains(Log in)').click();
 
-  assert.ok(authenticate.calledOnce);
-  assert.deepEqual(authenticate.firstCall.args, ['authenticator:nypr', testEmail, testPassword]);
+  return wait().then(() => {
+    assert.equal(authenticate.callCount, 1);
+    assert.deepEqual(authenticate.firstCall.args, ['authenticator:nypr', testEmail, testPassword]);
+  });
 });
 
 test('successful login calls routing service to redirect', function(assert) {
