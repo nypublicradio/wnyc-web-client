@@ -1,4 +1,5 @@
 import { moduleForComponent, test } from 'ember-qunit';
+import wait from 'ember-test-helpers/wait';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('account-signup-form', 'Integration | Component | account signup form', {
@@ -11,6 +12,8 @@ test('it renders', function(assert) {
 });
 
 test('submitting the form tries to save values on a new user model', function(assert) {
+  let done = assert.async();
+  assert.expect(3);
   let save = sinon.stub().returns(Promise.reject({}));
   let fakeUser = {save};
   let createRecord = sinon.stub().returns(fakeUser);
@@ -33,13 +36,16 @@ test('submitting the form tries to save values on a new user model', function(as
   this.$('label:contains(Password) + input').change();
   this.$('button:contains(Sign up)').click();
 
-  delete fakeUser.save;
-  assert.ok(createRecord.calledOnce);
-  assert.ok(save.calledOnce);
-  assert.deepEqual(fakeUser, {
-    givenName: testFirstName,
-    familyName: testLastName,
-    email: testEmail,
-    typedPassword: testPassword
+  wait().then(() => {
+    delete fakeUser.save;
+    assert.ok(createRecord.calledOnce);
+    assert.ok(save.calledOnce);
+    assert.deepEqual(fakeUser, {
+      givenName: testFirstName,
+      familyName: testLastName,
+      email: testEmail,
+      typedPassword: testPassword
+    });
+    done();
   });
 });
