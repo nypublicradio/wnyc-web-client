@@ -85,6 +85,10 @@
   position: absolute;
   top: 0;
   left: 0;
+  // align logo with form
+  @include mq("(min-width: 460px) and (max-width: #{$medium - 1}px)") {
+    left: calc(50% - 230px);
+  }
   svg {
     height: 33px;
     width: 79px;
@@ -130,6 +134,9 @@
       font-size: 32px;
       margin: 0 0 25px 0;
     }
+  }
+  &-description {
+    margin: 0 0 28px 0;
   }
   &-input {
     display: block;
