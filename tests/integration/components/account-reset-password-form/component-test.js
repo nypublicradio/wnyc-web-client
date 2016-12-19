@@ -42,7 +42,8 @@ test('submitting the form sends the correct values to the correct endpoint', fun
   assert.equal(expectedUrl, request.url);
   assert.equal(expectedMethod, request.method);
 
-  assert.equal(testEmail, request.requestBody.get('email'));
-  assert.equal(testPassword, request.requestBody.get('new_password'));
-  assert.equal(testCode, request.requestBody.get('confirmation'));
+  let requestBody = JSON.parse(request.requestBody);
+  assert.equal(testEmail, requestBody.email);
+  assert.equal(testPassword, requestBody.new_password);
+  assert.equal(testCode, requestBody.confirmation);
 });

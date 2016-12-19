@@ -9,9 +9,7 @@ import service from 'ember-service/inject';
 export default Component.extend({
   session: service(),
   routing: service('wnyc-routing'),
-  isProcessing: false,
-  submitTried: false,
-  changeset: null,
+  allowedKeys: ['email', 'password'],
   init() {
     this._super(...arguments);
     set(this, 'fields', {
@@ -22,50 +20,33 @@ export default Component.extend({
     get(this, 'changeset').validate();
   },
   actions: {
-    login() {
-      set(this, 'submitTried', true);
-      let changeset = get(this, 'changeset');
-      let fields = get(this, 'fields');
-      let snapshot = changeset.snapshot();
-      return changeset
-      .cast(Object.keys(fields))
-      .validate()
-      .then(() => {
-        set(this, 'isProcessing', true);
-        if (get(changeset, 'isValid')) {
-          changeset.execute();
-          console.log('ATTEMPTING AUTHENTICATION', fields, changeset.get('errors'), changeset);
-          return get(this, 'session').authenticate('authenticator:nypr', fields.email, fields.password)
-          .then(() => {
-            // after login, redirect to home page
-            get(this, 'routing').transitionTo('index');
-          })
-          .catch(e => {
-            // server error
-            changeset.restore(snapshot);
-            set(this, 'isProcessing', false);
-            applyErrorToChangeset(e.error, changeset);
-            console.log('SERVER ERROR', e.error);
-          });
-        } else {
-          // changeset error
-          changeset.restore(snapshot);
-          set(this, 'isProcessing', false);
-          console.log('CLIENT PROBLEM', changeset.get('error'), changeset.get('errors'));
-          return false;
-        }
-      });
+    onSubmit() {
+      this.authenticate(get(this, 'fields.email'), get(this, 'fields.password'));
     },
-  }
-});
-
-
-let applyErrorToChangeset = function(error, changeset) {
-  if (error && error.code) {
-    // auth service shouldn't return "UserNotFoundException".
-    if (error.code === "UserNotFoundException" || "NotAuthorizedException") {
-      changeset.validate('password');
-      changeset.pushErrors('password', 'Incorrect username or password.');
+    onSuccess() {
+      this.goHome();
+    },
+    onFailure(e) {
+      if (e.errors) {
+        this.applyErrorToChangeset(e.errors, get(this, 'changeset'));
+      }
+    },
+  },
+  authenticate(email, password) {
+    return get(this, 'session').authenticate('authenticator:nypr', email, password);
+  },
+  goHome() {
+    get(this, 'routing').transitionTo('index');
+  },
+  applyErrorToChangeset(error, changeset) {
+    if (error && error.code) {
+      if (error.code === "NotAuthorizedException") {
+        changeset.validate('password');
+        changeset.pushErrors('password', 'Incorrect username or password.');
+      } else if (error.code === "UserNotFoundException") {
+        changeset.validate('email');
+        changeset.pushErrors('email', 'email address not found');
+      }
     }
   }
-};
+});
