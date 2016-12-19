@@ -1,0 +1,26 @@
+{{#changeset-form changeset=changeset allowedKeys=allowedKeys onSubmit=(action 'onSubmit') formClass='account-form' as |form|}}
+  {{#if form.status.success}}
+    <h2 class="account-form-heading">Check your email</h2>
+
+    <p class="account-form-description">We’ve sent an email to {{changeset.email}} with instructions to reset your password.</p>
+
+    <a {{action resend}}>Resend the email</a>
+
+  {{else}}
+    <h2 class="account-form-heading">Reset your password</h2>
+
+    <p class="account-form-description">Don’t worry. It happens to the best of us. Just enter your email and we’ll email you instructions to reset your password.</p>
+
+    {{fancy-input
+      label='Email'
+      type='text'
+      placeholder='you@email.com'
+      fieldname='email'
+      value=changeset.email
+      errors=changeset.error.email.validation
+      submitted=form.status.tried
+    }}
+
+    <button type="submit" class="account-form-btn" disabled={{form.status.processing}}>Submit</button>
+  {{/if}}
+{{/changeset-form}}

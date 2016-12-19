@@ -9,10 +9,10 @@ const emailFormatMessage = 'this is not a valid email address';
 const passwordRulesMessage = 'password must be at least 8 character';
 
 export default {
-  firstName: [
+  givenName: [
     validatePresence({ presence: true, message: requiredMessage })
     ],
-  lastName: [
+  familyName: [
     validatePresence({ presence: true, message: requiredMessage })
     ],
   email: [
