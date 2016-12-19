@@ -23,6 +23,7 @@ export default Component.extend({
       set(this, 'tried', true);
       set(this, 'processing', true);
       let changeset = get(this, 'changeset');
+      let snapshot = changeset.snapshot();
       return changeset.cast(get(this, 'allowedKeys'))
       .validate()
       .then(() => {
@@ -35,11 +36,13 @@ export default Component.extend({
             set(this, 'processing', false);
           })
           .catch(e => {
+            changeset.restore(snapshot);
             set(this, 'failure', true);
             get(this, 'onFailure')(e);
             set(this, 'processing', false);
           });
         } else {
+          changeset.restore(snapshot);
           set(this, 'invalid', true);
           get(this, 'onInvalid')();
           set(this, 'processing', false);

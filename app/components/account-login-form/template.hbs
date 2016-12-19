@@ -1,9 +1,13 @@
-<form class="account-form" {{action 'login' on='submit'}}>
+{{#changeset-form
+  changeset=changeset
+  allowedKeys=allowedKeys
+  onSubmit=(action 'onSubmit')
+  onSuccess=(action 'onSuccess')
+  onFailure=(action 'onFailure')
+  formClass='account-form'
+  as |form|
+}}
   <h2 class="account-form-heading">Log in to WNYC</h2>
-
-  <button class="account-form-btn fb-btn"><i class="fa fa-facebook-official fa-2x"></i> Log in with Facebook</button>
-
-  <div placeholder="you@email.com" class="account-form-separator">or</div>
 
   {{fancy-input
     label='Email'
@@ -27,5 +31,5 @@
     submitted=submitTried
   }}
 
-  <button type="submit" class="account-form-btn" disabled={{isProcessing}}>Log in</button>
-</form>
+  <button type="submit" class="account-form-btn" disabled={{form.state.processing}}>Log in</button>
+{{/changeset-form}}
