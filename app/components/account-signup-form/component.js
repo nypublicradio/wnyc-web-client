@@ -23,7 +23,7 @@ export default Component.extend({
       let changeset = get(this, 'changeset');
       let snapshot = changeset.snapshot();
       return changeset
-      .cast(['email','firstName','lastName','typedPassword'])
+      .cast(['email','givenName','familyName','typedPassword'])
       .validate()
       .then(() => {
         if (get(changeset, 'isValid')) {

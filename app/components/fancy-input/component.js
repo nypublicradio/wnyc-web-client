@@ -4,6 +4,7 @@ import set from 'ember-metal/set';
 
 export default Component.extend({
   classNameBindings: ['hasError'],
+  focused: false,
   touched: false,
   submitted: false,
   showError: or('touched', 'submitted'),
@@ -11,6 +12,9 @@ export default Component.extend({
   actions: {
     setTouched() {
       set(this, 'touched', true);
+    },
+    setFocused() {
+      set(this, 'focused', true);
     }
   }
 });

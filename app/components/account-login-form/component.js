@@ -8,6 +8,7 @@ import service from 'ember-service/inject';
 
 export default Component.extend({
   session: service(),
+  routing: service('wnyc-routing'),
   isProcessing: false,
   submitTried: false,
   changeset: null,
@@ -35,7 +36,10 @@ export default Component.extend({
           changeset.execute();
           console.log('ATTEMPTING AUTHENTICATION', fields, changeset.get('errors'), changeset);
           return get(this, 'session').authenticate('authenticator:nypr', fields.email, fields.password)
-          .then()
+          .then(() => {
+            // after login, redirect to home page
+            get(this, 'routing').transitionTo('index');
+          })
           .catch(e => {
             // server error
             changeset.restore(snapshot);
@@ -55,10 +59,13 @@ export default Component.extend({
   }
 });
 
+
 let applyErrorToChangeset = function(error, changeset) {
-  if (error.code === "UserNotFoundException") {
-    changeset.pushErrors('email', 'we couldn\'t find an account with that address. <a href="/accounts/signup">Sign Up</a>');
-  } else if (error.code === "NotAuthorizedException") {
-    changeset.pushErrors('password', 'this password is incorrect.');
+  if (error && error.code) {
+    // auth service shouldn't return "UserNotFoundException".
+    if (error.code === "UserNotFoundException" || "NotAuthorizedException") {
+      changeset.validate('password');
+      changeset.pushErrors('password', 'Incorrect username or password.');
+    }
   }
 };
