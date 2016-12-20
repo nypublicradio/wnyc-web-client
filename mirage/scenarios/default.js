@@ -12,5 +12,6 @@ export default function(server) {
    server.createList('show', 100);
    server.createList('discover-topic', 20);
    server.createList('discover-story', 20);
+   server.create('user', {id: 'current'});
 
 }
