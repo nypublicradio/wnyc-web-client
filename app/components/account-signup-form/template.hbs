@@ -19,7 +19,7 @@
           fieldname='given_name'
           value=changeset.givenName
           errors=changeset.error.givenName.validation
-          submitted=submitTried
+          submitted=form.status.tried
         }}
       </div>
 
@@ -30,7 +30,7 @@
           fieldname='family_name'
           value=changeset.familyName
           errors=changeset.error.familyName.validation
-          submitted=submitTried
+          submitted=form.status.tried
         }}
       </div>
     </div>
@@ -42,7 +42,7 @@
       fieldname='email'
       value=changeset.email
       errors=changeset.error.email.validation
-      submitted=submitTried
+      submitted=form.status.tried
     }}
 
     {{fancy-input
@@ -53,13 +53,13 @@
       value=changeset.typedPassword
       clue='Password must be 8 or more characters'
       errors=changeset.error.typedPassword.validation
-      submitted=submitTried
+      submitted=form.status.tried
     }}
 
     <div class="account-form-notice">
       By proceeding to create your account, you are agreeing to New York Public Radio’s <a href="/terms" target="_blank">Terms of Service</a> and <a href="/privacy" target="_blank">Privacy Policy</a>.
     </div>
 
-    <button type="submit" class="account-form-btn" disabled={{form.status.processing}}>Sign Up</button>
+    <button type="submit" class="account-form-btn" disabled={{form.status.processing}}>Sign up</button>
   {{/if}}
 {{/changeset-form}}
