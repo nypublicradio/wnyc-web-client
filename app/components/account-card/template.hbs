@@ -1,10 +1,9 @@
-{{#nypr-card title="Basic Info" edit=edit}}
+{{#nypr-card title="Basic Info" edit=(action (mut isEditing) true)}}
 
   {{#if user}}
   {{basic-info
     isEditing=isEditing
-    pwChangeset=(changeset password PasswordValidations)
-    basicChangeset=(changeset user BasicInfoValidations)}}
+    changeset=(changeset user BasicInfoValidations)}}
   {{/if}}
 
 {{/nypr-card}}
