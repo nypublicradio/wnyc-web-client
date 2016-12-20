@@ -62,7 +62,7 @@ test('searching with no results /shows', function(assert) {
 
   //show the no results found message
   andThen(function() {
-    assert.equal(find(".shows-list").text().trim(), "Sorry, but no matching shows were found. Try a different spelling or other words in the title of the show you're looking for. If you're looking for something other than a show name, try our sitewide search.", "No results message displays");
+    assert.equal(find(".shows-list").text().trim(), "Sorry, but no matching shows were found. Try a different spelling or other words in the title of the show you're looking for. If you're looking for something other than a show name, try searching the rest of the website.", "No results message displays");
   });
 
 });

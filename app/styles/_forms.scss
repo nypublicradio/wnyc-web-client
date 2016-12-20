@@ -121,6 +121,10 @@
   padding: 20px 20px 20px 60px; /* room at left for magnifying glass icon */
   border-radius: 100px;
   
+  &:hover {
+    box-shadow: 1px 1px 1px rgba(black, .2);
+  }
+  
   .input-icon {
     position: absolute;
     top: 21px;

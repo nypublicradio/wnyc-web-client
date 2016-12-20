@@ -50,7 +50,7 @@
 .story-wrapper .description {
   &, p {
     font-size: 14px;
-    color: #444;
+    color: $darkergray;
   }
 }
 
@@ -262,17 +262,15 @@ body.ember-application {
     font-weight: normal;
   }
   
-  #top-stories-wrapper .story-wrapper {
+  .story-wrapper {
+    border-radius: 3px;
+
     a h4.show-name {
       color: $lightgray;
       font-weight: normal;
       font-size: 12px;
     }
-  }
-  
-  .story-wrapper {
-    border-radius: 3px;
-    
+        
     .media {
       border-radius: 3px 3px 0 0;
     }     
