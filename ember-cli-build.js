@@ -27,6 +27,9 @@ module.exports = function(defaults) {
     sourcemaps: {
       enabled: true,
     },
+    compassOptions: {
+      outputStyle: env === 'production' ? 'compressed' : 'expanded'
+    },
     storeConfigInMeta: env !== 'development',
 
     // This project's in-repo addon configuration confuses Mirage and makes it
