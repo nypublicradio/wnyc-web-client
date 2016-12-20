@@ -16,7 +16,7 @@
     fieldname='email'
     value=changeset.email
     errors=changeset.error.email.validation
-    submitted=submitTried
+    submitted=form.status.tried
   }}
 
   {{fancy-input
@@ -28,8 +28,8 @@
     errors=changeset.error.password.validation
     helplinkUrl='/forgot'
     helplinkText='Forgot Password?'
-    submitted=submitTried
+    submitted=form.status.tried
   }}
 
-  <button type="submit" class="account-form-btn" disabled={{form.state.processing}}>Log in</button>
+  <button type="submit" class="account-form-btn" disabled={{form.status.processing}}>Log in</button>
 {{/changeset-form}}

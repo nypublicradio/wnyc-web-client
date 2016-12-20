@@ -14,7 +14,7 @@ test('it renders', function(assert) {
 test('submitting the form tries to save values on a new user model', function(assert) {
   let done = assert.async();
   assert.expect(3);
-  let save = sinon.stub().returns(Promise.reject({}));
+  let save = sinon.stub().returns(Promise.resolve({}));
   let fakeUser = {save};
   let createRecord = sinon.stub().returns(fakeUser);
   let store = {createRecord};
@@ -26,20 +26,16 @@ test('submitting the form tries to save values on a new user model', function(as
   let testEmail = 'test@email.com';
   let testPassword = 'password123';
 
-  this.$('label:contains(First Name) + input').val(testFirstName);
-  this.$('label:contains(First Name) + input').change();
-  this.$('label:contains(Last Name) + input').val(testLastName);
-  this.$('label:contains(Last Name) + input').change();
-  this.$('label:contains(Email) + input').val(testEmail);
-  this.$('label:contains(Email) + input').change();
-  this.$('label:contains(Password) + input').val(testPassword);
-  this.$('label:contains(Password) + input').change();
+  this.$('label:contains(First Name) + input').val(testFirstName).change();
+  this.$('label:contains(Last Name) + input').val(testLastName).change();
+  this.$('label:contains(Email) + input').val(testEmail).change();
+  this.$('label:contains(Password) + input').val(testPassword).change();
   this.$('button:contains(Sign up)').click();
 
   wait().then(() => {
     delete fakeUser.save;
-    assert.ok(createRecord.calledOnce);
-    assert.ok(save.calledOnce);
+    assert.equal(createRecord.callCount, 1);
+    assert.equal(save.callCount, 1);
     assert.deepEqual(fakeUser, {
       givenName: testFirstName,
       familyName: testLastName,
