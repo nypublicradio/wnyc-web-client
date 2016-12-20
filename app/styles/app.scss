@@ -17,6 +17,8 @@ body:not(.simplified_wrapper):not(.container_stripped) > :not(
   transform: translateZ(0);
 }
 
+@import "nypr-ui";
+
 @import 'compass';
 @import 'normalize';
 @import 'mixins';
