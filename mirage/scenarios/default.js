@@ -22,5 +22,6 @@ export default function(server) {
    });
 
    server.createList('discover-story', 20);
+   server.create('user', {id: 'current'});
 
 }
