@@ -26,7 +26,7 @@ export default Component.extend({
     }
   },
   signUp() {
-    return get(this, 'changeset').save();
+    return get(this, 'newUser').save();
   },
   applyErrorToChangeset(error, changeset) {
     if (error) {
