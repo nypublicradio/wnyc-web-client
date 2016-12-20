@@ -93,7 +93,8 @@
     "http-proxy": "^1.14.0",
     "liquid-fire": "0.26.4",
     "loader.js": "^4.0.10",
-    "morgan": "^1.6.1"
+    "morgan": "^1.6.1",
+    "nypr-ui": "github:nypublicradio/nypr-ui"
   },
   "ember-addon": {
     "paths": [
