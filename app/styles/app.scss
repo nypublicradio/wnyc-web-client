@@ -26,7 +26,8 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 @import 'layout';
 @import 'utilities';
 
-@import 'nypr-account-settings';
+@import "nypr-ui";
+@import "nypr-account-settings";
 
 @import 'box';
 @import 'text';
