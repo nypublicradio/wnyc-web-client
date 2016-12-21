@@ -176,3 +176,32 @@
     }
   }
 }
+
+.account-header {
+  @include flexbox((
+    display: flex,
+    align-items: center
+  ));
+  
+  @include fontsize(32);
+  font-weight: 400;
+}
+
+.account-avatar {
+  background: $lightestgray;
+  border-radius: 50%;
+  margin-right: 25px;
+  height: 120px;
+  width: 120px;
+  
+  @include flexbox((
+    display: flex,
+    align-items: center,
+    justify-content: center
+  ));
+  
+  > svg {
+    fill: white;
+    width: 62px;
+  } 
+} 
