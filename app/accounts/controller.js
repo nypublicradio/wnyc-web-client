@@ -39,8 +39,19 @@ export default Controller.extend({
   },
   
   actions: {
-    edit() {
-      this.set('isEditing', true);
+    disableAccount() {
+      this.get('model').destroyRecord().then(() => {
+        this.setProperties({
+          disableModal: false,
+          confirmDisableModal: true
+        });
+      });
+    },
+    
+    confirmDisable() {
+      this.get('session').invalidate().then(() => {
+        this.transitionToRoute('index');
+      });
     }
   }
 });
