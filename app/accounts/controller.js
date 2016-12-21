@@ -1,9 +1,15 @@
 import Controller from 'ember-controller';
 import service from 'ember-service/inject';
 import config from 'overhaul/config/environment';
+import fetch from 'fetch';
+
+const FLASH_MESSAGES = {
+  email: 'Your email has been updated. Remember to use this new email the next time you log on.'
+};
 
 export default Controller.extend({
   session: service(),
+  flashMessages: service(),
   
   authenticate(password) {
     let email = this.get('model.email');
@@ -21,6 +27,14 @@ export default Controller.extend({
         },
         body: JSON.stringify({old_password, new_password})
       });
+    });
+  },
+  
+  showFlash(type) {
+    this.get('flashMessages').add({
+      message: FLASH_MESSAGES[type],
+      type: 'success',
+      sticky: true
     });
   },
   
