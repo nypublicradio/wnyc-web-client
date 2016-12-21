@@ -49,14 +49,14 @@
         font-size: 16px;
         border-radius: 0;
         border:none;
-        background: $graywhite;
+        background: $background-lightest;
       }
       
       .submit {
         background-color: white;
         
         &:hover {
-          background-color: $graywhite;
+          background-color: $background-light;
         }
       }
       
@@ -90,7 +90,7 @@
     
     label {
       padding: 6px 0 0 0;
-      color: $lightgray;
+      color: $text-light;
     }
   }
   
@@ -121,7 +121,7 @@
       }
 
       .gsc-cursor-current-page {
-        color: $lightgray;
+        color: $text-light;
         border: none;
         font-weight: normal;       
       }
@@ -136,7 +136,7 @@
   }
   
   .gcsc-branding-text {
-    color: $lightgray;
+    color: $text-light;
   }
 }
 

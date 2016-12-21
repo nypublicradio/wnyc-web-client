@@ -255,7 +255,7 @@ body.ember-application {
   background: white;
   
   &.home {
-    background: $nearwhite;
+    background: $background-light;
   }
   
   #wnyc_home h2 {
@@ -266,7 +266,7 @@ body.ember-application {
     border-radius: 3px;
 
     a h4.show-name {
-      color: $lightgray;
+      color: $text-light;
       font-weight: normal;
       font-size: 12px;
     }

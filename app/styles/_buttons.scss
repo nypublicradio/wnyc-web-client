@@ -54,10 +54,10 @@
   display: inline-block;
   border-radius: 25px;
   border: 2px solid;
-  border-color: rgba($lightgray, 0.2);
+  border-color: $border-medium-light;
 
   padding: 0px 13px;
-  color: $lightgray;
+  color: $text-light;
   background: transparent;
   @include fontsize(14);
   line-height: 34px;
@@ -72,7 +72,7 @@
 
   &:hover,
   &:focus {
-    border-color: rgba($darkgray, 0.2);
+    border-color: $border-dark-light;
     color: $gray;
     opacity: 1;
   }
@@ -287,40 +287,6 @@
   color: white;
 }
 
-
-/**
-* Pink Button:
-* `.btn--pink`
-* Make your button stand out with a pink background
-*
-*      @example
-*      button.btn.btn--pink You Know You Want to Click
-*/
-.btn--pink {
-  background-color: $pink;
-  border-color: $pink;
-  color: white;
-
-  &:not([disabled]) {
-    &:hover,
-    &:focus {
-        color: white;
-    }
-  }
-}
-
-/**
-* Button with Pink Text:
-* `.btn--pinktext`
-* A regular button but the text is pink.
-*
-*      @example
-*      button.btn.btn--pinktext Click Here
-*/
-.btn--pinktext {
-  color: $pink;
-}
-
 /**
  * Blue Button:
  * `.btn--blue`
@@ -398,8 +364,8 @@
   &:not([disabled]) {
     &:hover,
     &:focus {
-      background-color: $pink;
-      border-color: $pink;
+      background-color: $blue;
+      border-color: $blue;
       color: white;
     }
   }
@@ -418,7 +384,7 @@
   &:not([disabled]) {
     &:hover,
     &:focus {
-      color: $pink;
+      color: $blue;
     }
 
     &.active {
@@ -738,15 +704,15 @@
 @mixin gray-btn-jshover {
   @include js-hover(
     $props:  (color,       border-color),
-    $base:   ($darkergray, rgba($lightgray, 0.2)),
-    $hover:  ($darkergray, rgba($darkgray, 0.3))
+    $base:   ($darkergray, $border-medium-light),
+    $hover:  ($darkergray, $border-dark-light)
   );
 }
 
 @mixin white-btn-jshover {
   @include js-hover(
     $props:  (color, border-color),
-    $base:   (white, rgba($lightgray, 0.6)),
+    $base:   (white, $border-medium-light),
     $hover:  (white, white)
   );
 }
@@ -807,7 +773,7 @@
 
 @mixin gray-hollow-svg($color) {
   svg .outer {
-    fill: rgba($lightgray, 0.2);
+    fill: rgba($icon-medium, 0.2);
   }
   svg .inner {
     fill: $color;
@@ -824,7 +790,7 @@
 }
 
 @mixin gray-svg {
-  @include svg-color($lightgray);
+  @include svg-color($icon-medium);
 }
 
 @mixin darkergray-svg {
@@ -976,13 +942,13 @@
     &:focus,
     &:hover {
       border-color: rgba($darkgray, 0.2);
-      color: $lightgray;
+      color: $text-light;
       opacity: 1;
     }
 
     &.is-hovering {
       border-color: rgba($darkgray, 0.2);
-      color: $lightgray;
+      color: $text-light;
       opacity: 1;
     }
   }

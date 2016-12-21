@@ -217,7 +217,7 @@ body.ember-application.discover {
 }
 
 .discover-setup-title-step-count {
-  color:$lightgray;
+  color:$text-light;
   font-size:rems(12);
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -271,14 +271,14 @@ body.ember-application.discover {
   width: 100%; // it's a button so width must be specified
   padding: 14px 0;
   color: $blue;
-  background-color: $nearwhite;
+  background-color: $background-light;
   font-size: 12px;
   font-weight: 600;
   
   @include transition(background-color $transition-timing);
   
   &:hover {
-    background-color: $lightestgray;
+    background-color: $background-light-hover;
   }
   
   > span {
@@ -694,7 +694,7 @@ body.ember-application.discover {
     @include justify-content(center);
     @include absolute-fill();
 
-    color:$lightergray;
+    color:$text-lightest;
     font-size:24px;
 
     /* CSS counter so we can hide and show it and style it easier than the li counter */
@@ -817,7 +817,7 @@ body.ember-application.discover {
   text-align: right;
   text-transform: uppercase;
   font-size: rems(12);
-  color: $lightergray;
+  color: $text-lightest;
   letter-spacing: 2px;
   font-weight: bold;
   cursor: pointer;
@@ -834,8 +834,8 @@ body.ember-application.discover {
     @include transition(transform $transition-timing);
   }
   svg polygon {
-    fill:$lightergray;
-    stroke:$lightergray;
+    fill:$icon-light;
+    stroke:$icon-light;
   }
 
   &.is-shown {
@@ -863,7 +863,7 @@ body.ember-application.discover {
   text-transform: uppercase;
   font-size: rems(12);
   font-weight: bold;
-  color: $lightergray;
+  color: $text-lightest;
   white-space: nowrap;
   letter-spacing: 2px;
   display: inline-block;
@@ -939,7 +939,7 @@ body.ember-application.discover {
   cursor:pointer;
   background-color:#FFF;
   border-radius:25px;
-  color:$charcoal;
+  color:$darkergray;
   display:inline-block;
   font-weight: 600;
   min-width: 175px;
@@ -951,7 +951,6 @@ body.ember-application.discover {
   @include transition(background-color $transition-timing, border-color $transition-timing, color $transition-timing);
 
   &:hover {
-    color:$charcoal;
     background-color: rgba(0, 0, 0, 0.02);
     border: 1px solid rgba(0, 0, 0, 0.15);
   }
@@ -1037,7 +1036,7 @@ body.ember-application.discover {
 .discover-show-image {
   overflow:hidden;
   border-radius:5px;
-  border:1px solid $lightestgray;
+  border:1px solid $border-default;
 }
 
 .discover-show-title {

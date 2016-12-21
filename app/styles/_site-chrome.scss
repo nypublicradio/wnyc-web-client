@@ -111,7 +111,7 @@
     button:hover,
     a:focus,
     button:focus {
-      color: $darkestgray;
+      color: $darkergray;
     }
 
     .new {
@@ -147,7 +147,7 @@
   ul.alignright {
     margin: 0;
     float: none;
-    border-right: 1px solid $nearwhite;
+    border-right: 1px solid $border-light;
   }
 
   &.nav--homepage {

@@ -1,7 +1,7 @@
 $ember-power-select-default-border-radius: 1px;
-$ember-power-select-disabled-option-color: $lightestgray;
+$ember-power-select-disabled-option-color: $border-default;
 $ember-power-select-option-padding: 20px;
-$ember-power-select-border-color: $lightestgray;
+$ember-power-select-border-color: $border-default;
 $ember-power-select-disabled-background-color: #fff;
 
 @import 'ember-power-select';
@@ -36,7 +36,7 @@ $ember-power-select-disabled-background-color: #fff;
 
 .user-stream {
   padding-bottom: 65px;
-  border-bottom: 1px solid $nearwhite;
+  border-bottom: 1px solid $border-light;
 }
 
 .setting-desc {
@@ -76,7 +76,7 @@ $ember-power-select-disabled-background-color: #fff;
   }
 
   .inactive-toggle {
-    background-color: $lightergray;
+    background-color: $background-medium;
 
     .switch {
       order: 1;
@@ -129,10 +129,10 @@ $ember-power-select-disabled-background-color: #fff;
 }
 
 .autoplay-inactive {
-  color: $lightergray;
+  color: $text-lightest;
 
   .ember-power-select-status-icon {
-    border-color: $lightestgray transparent transparent transparent;
+    border-color: $border-default transparent transparent transparent;
   }
 }
 
@@ -141,7 +141,7 @@ $ember-power-select-disabled-background-color: #fff;
 }
 
 .ember-power-select-trigger[aria-disabled=true] {
-  border: solid 1px $nearwhite;
+  border: solid 1px $border-light;
 }
 
 @media only screen and (min-width: 800px) {

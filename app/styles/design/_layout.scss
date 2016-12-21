@@ -14,15 +14,15 @@ $header-height: 66px;
       
       a li {
         padding: 8px 10px;
-        border-bottom: 1px solid $nearwhite;
+        border-bottom: 1px solid $border-light;
         color: $gray;
         
         &.first {
-          border-top: 1px solid $nearwhite;
+          border-top: 1px solid $border-light;
         }
         
         &:hover {
-          background: $graywhite;
+          background: $background-lightest;
           color: black;
         }
       }

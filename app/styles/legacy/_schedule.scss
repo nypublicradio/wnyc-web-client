@@ -23,7 +23,7 @@
   }
   
   ul.schedule-tabs li:not(.ui-tabs-selected) a {
-    color: $lightgray !important;
+    color: $text-light !important;
     
     &:hover {
       color: $red !important;
@@ -32,8 +32,8 @@
 }
 
 ul.schedule-dates {
-  border-top: 1px solid $nearwhite;
-  border-bottom: 1px solid $nearwhite;
+  border-top: 1px solid $border-light;
+  border-bottom: 1px solid $border-light;
   padding: 10px 0 5px 0 !important;
     
   li.yesterday,
@@ -64,7 +64,7 @@ ul.schedule-dates {
       width: 20px;
 
       path {
-        fill: $lightgray;
+        fill: $icon-medium;
       }
     }
   }
@@ -74,7 +74,7 @@ ul.schedule-table {
   margin: 5px 0 0 0;
   
   .event {
-    border-bottom: 1px solid $nearwhite;
+    border-bottom: 1px solid $border-light;
     padding: 20px 0;
   }
   
@@ -106,7 +106,7 @@ ul.schedule-table {
     }
     
     div.time {
-      color: $lightergray;
+      color: $text-lightest;
       font-weight: 600;
       letter-spacing: 1px;
     }
@@ -216,7 +216,7 @@ ul.schedule-table {
         height: 26px;
 
         path {
-          fill: $lightgray;
+          fill: $icon-medium;
         }
       }
     }

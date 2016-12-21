@@ -80,9 +80,10 @@ body:not(.simplified_wrapper):not(.container_stripped) > :not(
 
 // DESIGN SYSTEM
 @import 'design/base';
+@import 'design/content';
+@import 'design/colors';
 @import 'design/layout';
 @import 'design/nav';
-@import 'design/content';
 
 // LEGACY CODE
 @import 'legacy/home-compat';
@@ -146,7 +147,7 @@ body:not(.simplified_wrapper):not(.container_stripped) > :not(
 /**
  * Listen Button:
  *      @example
- *      button.btn.btn--pink.btn--large.btn--icon
+ *      button.btn.btn--blue.btn--large.btn--icon
  *          <i class="fa fa-play"></i> Listen
  */
 
@@ -166,7 +167,7 @@ body:not(.simplified_wrapper):not(.container_stripped) > :not(
  * Featured Audio Button Group:
  *      @example
  *      .btn-group
- *          button.btn.btn--pink.btn--large.btn--icon
+ *          button.btn.btn--blue.btn--large.btn--icon
  *              <i class="fa fa-play"></i> Listen
  *          button.btn.btn--gray.btn--icon
  *              <i class="fa fa-play"></i> Queue
@@ -194,7 +195,7 @@ body:not(.simplified_wrapper):not(.container_stripped) > :not(
  *          h1.h2 BM's Greatest Hits
  *          .l-split
  *              .btn-group
- *                  button.btn.btn--pink.btn--large.btn--icon
+ *                  button.btn.btn--blue.btn--large.btn--icon
  *                      <i class="fa fa-play"></i> Listen
  *                  button.btn.btn--gray.btn--icon
  *                      <i class="fa fa-play"></i> Queue

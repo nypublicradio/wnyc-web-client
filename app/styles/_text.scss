@@ -50,7 +50,7 @@
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: $lightgray;
+    color: $text-light;
     
     @include mq($small-only) {
         @include fontsize($base-font*0.875);
@@ -367,31 +367,7 @@
  *          P Probably not important text
  */
 .text--lightgray {
-    color: $lightgray;
-}
-
-/**
- * Lightestgray:
- * `.text--lightergray`
- *
- *      @example
- *      .text.text--lightergray
- *          P Probably not important text
- */
-.text--lightergray {
-    color: $lightergray;
-}
-
-/**
- * Lightestgray:
- * `.text--lightestgray`
- *
- *      @example
- *      .text.text--lightestgray
- *          P Probably not important text
- */
-.text--lightestgray {
-    color: $lightestgray;
+    color: $text-light;
 }
 
 .text--white {
@@ -417,8 +393,8 @@
  */
 .text--dotted {
     padding: 10px 0;
-    border-top: 1px dotted $lightestgray;
-    border-bottom: 1px dotted $lightestgray;
+    border-top: 1px dotted $border-default;
+    border-bottom: 1px dotted $border-default;
 }
 
 /***
@@ -588,7 +564,7 @@
 
 .text-divide {
   > .text-divide-slash {
-    color: $lightgray;
+    color: $text-light;
   }
 
   > .text-divide-slash:last-child {
