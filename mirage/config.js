@@ -18,9 +18,13 @@ export default function() {
   this.get(`${baseUrl}/api/v1/browser_id/`, {success: true});
   this.get(`${baseUrl}/api/v1/list/comments/24/:storyId/`, 'comment');
   this.get(`${baseUrl}/api/v1/whats_on/`);
+  this.get('/api/v1/whats_on/');
   this.get(`${baseUrl}/api/v1/whats_on/:slug`, 'whats-on');
+  this.get('/api/v1/whats_on/:slug', 'whats-on');
   this.get(`${baseUrl}/api/v1/list/streams/`);
+  this.get('/api/v1/list/streams/');
   this.get(`${baseUrl}/api/v1/list/streams/:slug`, 'stream');
+  this.get('/api/v1/list/streams/:slug', 'stream');
 
   this.get(`/api/v1/story/:slug`, function(schema, request) { // backbone makes this ajax request to the audio
     let results = schema.discoverStories.all().models.filter(function(d) {
@@ -173,6 +177,8 @@ export default function() {
   
   this.urlPrefix = config.wnycAuthAPI;
   
+  this.post('/v1/password', {});
+  
   this.get('/v1/session', (schema, request) => {
     if (!request.requestHeaders.Authorization) {
       return new Response(401);
@@ -194,5 +200,9 @@ export default function() {
   });
   
   this.delete('/user', () => new Response(204));
+  
+  this.urlPrefix = '';
+  
+  this.get('/api/v1/user', {username: ''});
   
 }
