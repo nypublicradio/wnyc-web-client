@@ -1,9 +1,0 @@
-{{#nypr-card title="Basic Info" edit=(action (mut isEditing) true)}}
-
-  {{#if user}}
-  {{basic-info
-    isEditing=isEditing
-    changeset=(changeset user BasicInfoValidations)}}
-  {{/if}}
-
-{{/nypr-card}}
