@@ -5,6 +5,9 @@ import Changeset from 'ember-changeset';
 import SignupValidations from 'overhaul/validations/signup';
 import lookupValidator from 'ember-changeset-validations';
 import service from 'ember-service/inject';
+import ENV from 'overhaul/config/environment';
+import fetch from 'fetch';
+import { rejectUnsuccessfulResponses } from 'overhaul/utils/fetch-utils';
 
 export default Component.extend({
   store: service(),
@@ -34,5 +37,12 @@ export default Component.extend({
         changeset.pushErrors('email', 'an account already exists for that email. <a href="/accounts/login">Log in</a>');
       }
     }
+  },
+  resendConfirmationEmail(email) {
+    let url = `${ENV.wnycAuthAPI}/confirm/resend?email=${email}`;
+    let method = 'GET';
+    let mode = 'cors';
+    return fetch(url, {method, mode})
+    .then(rejectUnsuccessfulResponses);
   }
 });
