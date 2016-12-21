@@ -34,6 +34,10 @@
     padding-top: 0;
     height: 83px;
   }
+  
+  .accounts & {
+    margin-bottom: 0;
+  }
 
 }
 
@@ -329,5 +333,14 @@
   &:focus {
     background: rgba($red, 0.8);
     border-color: rgba(white, 0.5);
+  }
+}
+
+.sitechrome-page-content-area {
+  position: relative;
+  
+  .accounts & {
+    padding-top: 25px;
+    background-color: $nearwhite;
   }
 }
