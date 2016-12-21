@@ -3,20 +3,19 @@
       {{#click-outside action=(action 'closePopup')}}
         <button {{action 'togglePopup'}}>
           <div class="user-nav-avatar">
-          {{#if user.photo}}
-            <img src={{user.photo}}>
+          {{#if user.picture}}
+            <img src={{user.picture}}>
           {{else}}
             {{wnyc-svg icon="user"}}
           {{/if}}
           </div>
-          <span class="user-nav-greeting">Hi, {{or user.firstName 'You'}}</span>
+          <span class="user-nav-greeting">Hi, {{or user.givenName 'You'}}</span>
           <span class="user-nav-triangle"></span>
         </button>
         {{#if isPopupOpen}}
           <div class="user-nav-popup-pointer"></div>
           <div class="user-nav-popup">
             <ul class="user-nav-list">
-              <li class="user-nav-listitem"><a href='/settings'>Settings</a></li>
               <li class="user-nav-listitem"><a>Account</a></li>
               <li class="user-nav-listitem"><a>Logout</a></li>
             </ul>
