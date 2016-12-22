@@ -95,3 +95,49 @@ test('can view & update attrs', function(assert) {
     assert.equal(findWithAssert('input[name=password]').val(), '********', 'displays password asterisks');
   });
 });
+
+test('can update password', function(assert) {
+  const OLD = '1234567890';
+  const NEW = '0987654321';
+  server.create('user');  
+  server.post(`${config.wnycAuthAPI}/v1/password`, (schema, request) => {
+    let body = JSON.parse(request.requestBody);
+    assert.equal(request.requestHeaders.authorization, 'Bearer foo');
+    assert.equal(request.requestHeaders['content-type'], 'application/json');
+    assert.deepEqual(body, {old_password: OLD, new_password: NEW});
+  });
+   
+  authenticateSession(this.application, {access_token: 'foo'});
+  visit('/accounts');
+  
+  click('.nypr-password-card [data-test-selector="edit-button"]');
+  
+  andThen(function() {
+    fillIn('input[name=currentPassword]', OLD);
+    fillIn('input[name=newPassword]', NEW);
+  });
+  
+  click('.nypr-password-card [data-test-selector="save"]');
+});
+
+test('can disable account', function(assert) {
+  assert.expect(1);
+  
+  server.create('user');  
+  server.delete(`${config.wnycAuthAPI}/v1/user`, (schema, {requestHeaders}) => {
+    assert.equal(requestHeaders.Authorization, 'Bearer foo');
+  });
+   
+  authenticateSession(this.application, {access_token: 'foo'});
+  visit('/accounts');
+  
+  click('[data-test-selector="disable-account"]');
+  
+  andThen(function() {
+    click('[data-test-selector="do-disable"]');
+  });
+  
+  andThen(function() {
+    click('[data-test-selector="confirm-disable"]');
+  });
+});
