@@ -34,12 +34,15 @@ export default Component.extend({
   applyErrorToChangeset(error, changeset) {
     if (error) {
       if (error.code === "UsernameExistsException") {
+        changeset.validate('email');
         changeset.pushErrors('email', 'an account already exists for that email. <a href="/accounts/login">Log in</a>');
+      } else {
+        console.log(error);
       }
     }
   },
   resendConfirmationEmail(email) {
-    let url = `${ENV.wnycAuthAPI}/confirm/resend?email=${email}`;
+    let url = `${ENV.wnycAuthAPI}/auth/v1/confirm/resend?email=${email}`;
     let method = 'GET';
     let mode = 'cors';
     return fetch(url, {method, mode})

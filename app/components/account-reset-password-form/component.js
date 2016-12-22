@@ -26,7 +26,7 @@ export default Component.extend({
     }
   },
   resetPassword(email, new_password, confirmation) {
-    let url = `${ENV.wnycAuthAPI}/confirm/password-reset`;
+    let url = `${ENV.wnycAuthAPI}/auth/v1/confirm/password-reset`;
     let method = 'POST';
     let mode = 'cors';
     let headers = { "Content-Type" : "application/json" };
