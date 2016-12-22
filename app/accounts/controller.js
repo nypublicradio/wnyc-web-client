@@ -23,6 +23,7 @@ export default Controller.extend({
       fetch(`${config.wnycAuthAPI}/v1/password`, {
         method: 'POST',
         headers: {
+          'Content-Type': 'application/json',
           Authorization: value
         },
         body: JSON.stringify({old_password, new_password})
