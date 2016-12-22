@@ -57,7 +57,7 @@ Router.map(function() {
     this.route('redirect', { path: '/'} );
   });
   
-  this.route('accounts');
+  this.route('my-account');
 
   this.route('accounts', function() {
     this.route('login');
