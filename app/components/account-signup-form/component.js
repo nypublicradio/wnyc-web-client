@@ -11,7 +11,7 @@ import { rejectUnsuccessfulResponses } from 'overhaul/utils/fetch-utils';
 
 export default Component.extend({
   store: service(),
-  allowedKeys: ['email','givenName','familyName','typedPassword'],
+  allowedKeys: ['email','emailConfirmation','givenName','familyName','typedPassword'],
   init() {
     this._super(...arguments);
     set(this, 'newUser', this.get('store').createRecord('user'));
@@ -26,7 +26,7 @@ export default Component.extend({
       if (e.errors) {
         this.applyErrorToChangeset(e.errors, get(this, 'changeset'));
       }
-    }
+    },
   },
   signUp() {
     return get(this, 'newUser').save();
