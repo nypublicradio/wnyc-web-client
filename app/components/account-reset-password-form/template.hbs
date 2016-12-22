@@ -1,4 +1,4 @@
-{{#changeset-form changeset=changeset allowedKeys=allowedKeys onSubmit=(action 'onSubmit') formClass='account-form' as |form|}}
+{{#nypr-form changeset=changeset allowedKeys=allowedKeys onSubmit=(action 'onSubmit') formClass='account-form' as |form|}}
 {{#if form.status.success}}
   <h2 class="account-form-heading">Password Updated</h2>
 
@@ -23,4 +23,4 @@
 
   <button type="submit" class="account-form-btn" disabled={{form.status.processing}}>Reset password</button>
 {{/if}}
-{{/changeset-form}}
+{{/nypr-form}}
