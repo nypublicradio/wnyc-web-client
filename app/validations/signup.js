@@ -1,26 +1,26 @@
 import {
   validatePresence,
   validateFormat,
-  validateLength,
+  validateConfirmation,
 } from 'ember-changeset-validations/validators';
-
-const requiredMessage = '{description} is required';
-const emailFormatMessage = 'this is not a valid email address';
-const passwordRulesMessage = 'password must be at least 8 character';
+import messages from './custom-messages';
 
 export default {
   givenName: [
-    validatePresence({ presence: true, message: requiredMessage })
+    validatePresence({ presence: true, message: messages.firstNameRequired })
     ],
   familyName: [
-    validatePresence({ presence: true, message: requiredMessage })
+    validatePresence({ presence: true, message: messages.lastNameRequired })
     ],
   email: [
-    validateFormat({ type: 'email', allowBlank: true, message: emailFormatMessage }),
-    validatePresence({ presence: true, message: requiredMessage })
+    validateFormat({ type: 'email', allowBlank: true, message: messages.emailFormat }),
+    validatePresence({ presence: true, message: messages.emailRequired })
     ],
+  emailConfirmation: [
+    validateConfirmation({ on: 'email', allowBlank: true, message: messages.emailConfirmation}),
+  ],
   typedPassword: [
-    validateLength({ min: 8, allowBlank: true, message: passwordRulesMessage }),
-    validatePresence({ presence: true, message: requiredMessage })
+    validateFormat({regex: /^(?=.*?[0-9]).{8,}$/, allowBlank: true, message: messages.passwordRules }),
+    validatePresence({ presence: true, message: messages.passwordRequired })
     ]
 };
