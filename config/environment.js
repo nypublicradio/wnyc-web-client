@@ -98,7 +98,7 @@ module.exports = function(environment) {
     showsAPIKey: "hummingbird",
     moreShowsDiscoverStation: "archived-shows",
     moreShowsAPIKey: "mammoth",
-    wnycAuthAPI: process.env.DEV_AUTH_SERVICE || process.env.AUTH_SERVICE,
+    wnycAuthAPI: process.env.AUTH_SERVICE,
     wnycAccountRoot: process.env.WNYC_ACCOUNT_ROOT,
     wnycEtagAPI: process.env.WNYC_ETAG_API,
     wnycStaticURL: process.env.WNYC_STATIC_URL,
