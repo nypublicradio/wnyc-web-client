@@ -1,6 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import wait from 'ember-test-helpers/wait';
 import hbs from 'htmlbars-inline-precompile';
+import sinon from 'sinon';
 
 moduleForComponent('account-signup-form', 'Integration | Component | account signup form', {
   integration: true
@@ -29,6 +30,7 @@ test('submitting the form tries to save values on a new user model', function(as
   this.$('label:contains(First Name) + input').val(testFirstName).change();
   this.$('label:contains(Last Name) + input').val(testLastName).change();
   this.$('label:contains(Email) + input').val(testEmail).change();
+  this.$('label:contains(Confirm Email) + input').val(testEmail).change();
   this.$('label:contains(Password) + input').val(testPassword).change();
   this.$('button:contains(Sign up)').click();
 
@@ -40,6 +42,7 @@ test('submitting the form tries to save values on a new user model', function(as
       givenName: testFirstName,
       familyName: testLastName,
       email: testEmail,
+      emailConfirmation: testEmail,
       typedPassword: testPassword
     });
     done();
