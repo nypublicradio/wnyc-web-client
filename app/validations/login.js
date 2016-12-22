@@ -2,16 +2,14 @@ import {
   validatePresence,
   validateFormat,
 } from 'ember-changeset-validations/validators';
-
-const requiredMessage = '{description} is required';
-const emailFormatMessage = 'this is not a valid email address';
+import messages from './custom-messages';
 
 export default {
   email: [
-    validatePresence({ presence: true, message: requiredMessage }),
-    validateFormat({ type: 'email', allowBlank: true, message: emailFormatMessage })
+    validatePresence({ presence: true, message: messages.emailRequired }),
+    validateFormat({ type: 'email', allowBlank: true, message: messages.emailFormat })
     ],
   password: [
-    validatePresence({ presence: true, message: requiredMessage}),
+    validatePresence({ presence: true, message: messages.passwordRequired}),
     ]
 };

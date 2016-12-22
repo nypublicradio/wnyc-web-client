@@ -9,6 +9,7 @@
   {{#if form.status.success}}
     {{account-thanks email=changeset.email}}
   {{else}}
+
     <h2 class="account-form-heading">Sign up for an account</h2>
 
     <div class="account-form-row">
@@ -37,11 +38,21 @@
 
     {{nypr-input
       label='Email'
-      type='email'
+      type='text'
       placeholder='you@email.com'
       fieldname='email'
       value=changeset.email
       errors=changeset.error.email.validation
+      submitted=form.status.tried
+    }}
+
+    {{nypr-input
+      label='Confirm Email'
+      type='text'
+      placeholder='you@email.com'
+      fieldname='emailConfirmation'
+      value=changeset.emailConfirmation
+      errors=changeset.error.emailConfirmation.validation
       submitted=form.status.tried
     }}
 
@@ -51,7 +62,7 @@
       placeholder='Enter password'
       fieldname='typedPassword'
       value=changeset.typedPassword
-      clue='Password must be 8 or more characters'
+      clue='must be at least 8 characters and 1 number'
       errors=changeset.error.typedPassword.validation
       submitted=form.status.tried
     }}
