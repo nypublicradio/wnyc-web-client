@@ -1,6 +1,7 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'overhaul/tests/helpers/ember-simple-auth';
+import config from 'overhaul/config/environment';
 
 moduleForAcceptance('Acceptance | accounts');
 
@@ -23,43 +24,74 @@ test('authenticated visiting /accounts', function(assert) {
   });
 });
 
-test('can update user credentials', function(assert) {
+test('can view & update attrs', function(assert) {
   const FIRST = 'zzzzz';
   const LAST = 'xxxxx';
   const USER = 'yyyyy';
-  const EMAIL = 'wwwww';
+  const EMAIL = 'wwwww@ww.ww';
+  const PW = '1234567890';
   let {
-    name,
+    given_name,
     family_name,
-    username,
+    preferred_username,
     email
   } = server.create('user');
+  
+  server.post(`${config.wnycAuthAPI}/v1/session`, (schema, {requestBody}) => {
+    let body = requestBody.split('&').map(s => ({[s.split('=')[0]]: s.split('=')[1]}));
+    assert.equal(decodeURIComponent(body.findBy('username').username), email);
+    assert.equal(body.findBy('password').password, PW);
+    return {access_token: 'secret', expires_in: 3600, token_type: 'bearer'};
+  });
+   
+  server.patch(`${config.wnycAuthAPI}/v1/user`, (schema, request) => {
+    assert.equal(request.requestHeaders.Authorization, 'Bearer secret');
+    
+    return {
+      data: {
+        type: 'user',
+        id: '1',
+        attributes: JSON.parse(request.requestBody)
+      }
+    };
+  });
    
   authenticateSession(this.application, {access_token: 'foo'});
   visit('/accounts');
   
   andThen(function() {
-    assert.equal(findWithAssert('input[name=fullName]').val(), `${name} ${family_name}`, 'displays new fullname');
-    assert.equal(findWithAssert('input[name=username]').val(), username, 'displays new username');
-    assert.equal(findWithAssert('input[name=email]').val(), email, 'displays new email');
-    assert.equal(findWithAssert('input[name=password]').val(), '******', 'displays password asterisks');
+    assert.equal(findWithAssert('input[name=fullName]').val(), `${given_name} ${family_name}`, 'displays old fullname');
+    assert.equal(findWithAssert('input[name=preferredUsername]').val(), preferred_username, 'displays old username');
+    assert.equal(findWithAssert('input[name=email]').val(), email, 'displays old email');
+    assert.equal(findWithAssert('input[name=password]').val(), '********', 'displays password asterisks');
   });
   
-  click('[data-test-selector="edit-button"]');
+  andThen(function() {
+    click('.nypr-basic-info [data-test-selector="edit-button"]');
+  });
   
   andThen(function() {
-    fillIn('input[name=name]', FIRST);
+    fillIn('input[name=givenName]', FIRST);
     fillIn('input[name=familyName]', LAST);
-    fillIn('input[name=username]', USER);
+    fillIn('input[name=preferredUsername]', USER);
     fillIn('input[name=email]', EMAIL);
+
+    find('input[name=email]').click();
+    fillIn('input[name=confirmEmail]', EMAIL);
   });
   
-  click('[data-test-selector="save"]');
+  click('.nypr-basic-info [data-test-selector="save"]');
   
   andThen(function() {
+    fillIn('[name=passwordForEmailChange]', PW);
+    click('[data-test-selector=check-pw]');
+  });
+  
+  andThen(function() {
+    assert.ok(findWithAssert('.alert-success').length, 'shows flash message');
     assert.equal(findWithAssert('input[name=fullName]').val(), `${FIRST} ${LAST}`, 'displays new fullname');
-    assert.equal(findWithAssert('input[name=username]').val(), USER, 'displays new username');
+    assert.equal(findWithAssert('input[name=preferredUsername]').val(), USER, 'displays new username');
     assert.equal(findWithAssert('input[name=email]').val(), EMAIL, 'displays new email');
-    assert.equal(findWithAssert('input[name=password]').val(), '******', 'displays password asterisks');
+    assert.equal(findWithAssert('input[name=password]').val(), '********', 'displays password asterisks');
   });
 });
