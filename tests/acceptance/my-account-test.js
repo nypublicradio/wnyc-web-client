@@ -3,24 +3,24 @@ import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'overhaul/tests/helpers/ember-simple-auth';
 import config from 'overhaul/config/environment';
 
-moduleForAcceptance('Acceptance | accounts');
+moduleForAcceptance('Acceptance | my account');
 
-test('unauthenticated visiting /accounts', function(assert) {
-  visit('/accounts');
+test('unauthenticated visiting /my-account', function(assert) {
+  visit('/my-account');
 
   andThen(function() {
     assert.equal(currentURL(), '/login');
   });
 });
 
-test('authenticated visiting /accounts', function(assert) {
+test('authenticated visiting /my-account', function(assert) {
   authenticateSession(this.application, {access_token: 'foo'});
   server.create('user');
   
-  visit('/accounts');
+  visit('/my-account');
   
   andThen(function() {
-    assert.equal(currentURL(), '/accounts');
+    assert.equal(currentURL(), '/my-account');
   });
 });
 
@@ -57,7 +57,7 @@ test('can view & update attrs', function(assert) {
   });
    
   authenticateSession(this.application, {access_token: 'foo'});
-  visit('/accounts');
+  visit('/my-account');
   
   andThen(function() {
     assert.equal(findWithAssert('input[name=fullName]').val(), `${given_name} ${family_name}`, 'displays old fullname');
@@ -108,7 +108,7 @@ test('can update password', function(assert) {
   });
    
   authenticateSession(this.application, {access_token: 'foo'});
-  visit('/accounts');
+  visit('/my-account');
   
   click('.nypr-password-card [data-test-selector="edit-button"]');
   
@@ -129,7 +129,7 @@ test('can disable account', function(assert) {
   });
    
   authenticateSession(this.application, {access_token: 'foo'});
-  visit('/accounts');
+  visit('/my-account');
   
   click('[data-test-selector="disable-account"]');
   
