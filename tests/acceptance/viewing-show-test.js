@@ -135,6 +135,36 @@ test('using a nav-link', function(assert) {
   });
 });
 
+test('visiting directly to a nav link url', function(assert) {
+  let apiResponse = server.create('api-response', {
+    id: 'shows/foo/episodes/1',
+    teaseList: server.createList('story', 10)
+  });
+  server.create('api-response', {
+    id: 'shows/foo/next-link/1',
+    teaseList: server.createList('story', 1, {title: 'Story Title'})
+  });
+
+  let show = server.create('show', {
+    id: 'shows/foo/',
+    linkroll: [
+      {navSlug: 'episodes', title: 'Episodes'},
+      {navSlug: 'next-link', title: 'Next Link'}
+    ],
+    apiResponse
+  });
+
+  server.create('django-page', {id: show.id});
+
+  djangoPage
+    .bootstrap(show)
+    .visit({id: 'shows/foo/next-link/'});
+
+  andThen(() => {
+    assert.equal(findWithAssert('nav li.is-active > a').text(), 'Next Link');
+  });
+});
+
 test('null social links should not break page', function(assert) {
   let apiResponse = server.create('api-response', {
     id: 'shows/foo/recent_stories/1',
