@@ -6,34 +6,18 @@ import set from 'ember-metal/set';
 
 
 export default Component.extend({
-  audio: service(),
   hifi: service(),
-  store: service(),
   bumper: service('bumper-state'),
   classNames: ['persistent-player', 'l-flexcontent', 'l-highlight--blur'],
   classNameBindings: ['isAudiostream'],
 
-  //input
-  currentAudio: reads('audio.currentAudio'),
+  //
+  isPlaying: reads('hifi.isPlaying'),
+  isAudiostream: reads('hifi.isStream'),
 
-  isPlaying: equal('hifi.isPlaying'),
-
-  audioType: computed('hifi.currentSound', function() {
-    if (get('hifi.isStream')) {
-      return 'stream';
-    }
-    else {
-      return 'ondemand';
-    }
-  }),
-
-
-  // input
-  isAudiostream: equal('audioType', 'stream'),
+  // Notification
   didDismiss: false,
   didNotDismiss: not('didDismiss'),
-
-  //input
   continuousPlayEnabled: computed.and('didNotDismiss', 'bumper.revealNotificationBar'),
 
   // bubble up events
@@ -41,33 +25,25 @@ export default Component.extend({
   // onEvent =
 
   // Passed down to subcomponents
-
+  audio: service(),
+  currentAudio: reads('audio.currentAudio'),
   currentTitle: null,
-
-
-
-
-
-
-
 
 
 
   actions: {
     playOrPause() {
       if (get(this, 'isPlaying')) {
-        this.sendAction('onPause')
-        get(this, 'hifi').pause();
+        this.sendAction('onPause');
+        get(this, 'hifi.currentSound').pause();
       } else {
-        get(this, 'hifi').play();
+        // TODO: Update this hifi gotcha. Audio play without arguments should resume sound
+        this.sendAction('onPlay');
+        get(this, 'hifi.currentSound').play();
       }
     },
     dismissNotification() {
-      this.sendAction('trackPlayer')
-      get(this, 'audio')._trackPlayerEvent({
-        action: 'Continuous Play Notification',
-        label: 'Click to Close Notification'
-      });
+      this.sendAction('onDismissNotification');
       set(this, 'didDismiss', true);
     },
     setPosition(p) {

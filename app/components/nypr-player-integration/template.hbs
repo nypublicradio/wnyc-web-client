@@ -1,5 +1,15 @@
 {{yield (hash
-  title=(or currentAudio.title (concat currentAudio.currentShow.showTitle ' on ' currentAudio.name))
+  currentTitle=currentTitle
 
-  
+  showTitle=showTitle
+  showUrl=showUrl
+  storyTitle=storyTitle
+  storyUrl=storyUrl
+  songDetails=songDetails
+
+
+
+  onPlay=(action 'onPlay')
+  onPause=(action 'onPause')
+  onDismissNotification=(action 'onDismissNotification')
 )}}

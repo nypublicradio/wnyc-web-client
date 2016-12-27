@@ -12,36 +12,100 @@
   fallbackImage=currentAudio.headers.brand.logoImage.url}}
 
 {{#holygrail-layout as |g|}}
-
   {{#g.left}}
-    {{persistent-player.left
-      playState=audio.playState
-      currentTitle=(or currentAudio.title (concat currentAudio.currentShow.showTitle ' on ' currentAudio.name))
-      playOrPause=(action 'playOrPause')
-      rewind=(action 'rewind')
-      fastForward=(action 'fastForward')}}
+    <div class="persistent-player--controls">
+      <button class="btn btn--blank btn--playerdark persistent-skipbutton" {{action 'rewind'}} aria-text="rewind 15 seconds" aria-labelledby="rewind-label">
+        {{!--
+        Moving aria labels inside of buttons. See example 4 here.
+        https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-labelledby_attribute
+
+        Ran into bug in firefox with flexbox justify-content. It was considering absolutely positioned elements as flex items, even though they are out-of-flow. It's current behaviour here is based on an old version of the spec. See https://bugzilla.mozilla.org/show_bug.cgi?id=874718
+        --}}
+        <label class="visuallyhidden" id="rewind-label">Rewind 15 seconds</label>
+        {{wnyc-svg className="icon" icon="rewind15"}}
+      </button>
+
+      {{! Refactor this and take it out }}
+      {{listen-button
+        type='white-hollow'
+        state=audio.playState
+        itemTitle=currentTitle
+        click=(action 'playOrPause')}}
+
+      <button class="btn btn--blank btn--playerdark persistent-skipbutton" {{action 'fastForward'}}  aria-text="skip forward 15 seconds" aria-labelledby="fastforward-label">
+        <label class="visuallyhidden" id="fastforward-label">Skip ahead 15 seconds</label>
+        {{wnyc-svg className="icon" icon="forward15"}}
+      </button>
+    </div>
   {{/g.left}}
 
   {{#g.center}}
-    {{persistent-player.center
-      currentAudio=currentAudio
-      isAudiostream=isAudiostream
-      position=hifi.position
-      duration=hifi.duration
-      downloaded=hifi.percentLoaded
-      setPosition=(action 'setPosition')}}
+    <div class="persistent-playerinfo">
+      <div class="persistent-playerinfoline">
+        {{#text-crawl watch=currentAudio}}
+          {{persistent-player.audio-metadata
+
+            showTitle=showTitle
+            showUrl=showUrl
+
+            storyTitle=storyTitle
+            storyUrl=storyUrl
+
+            audioId=audioId
+            songDetails=songDetails
+          }}
+        {{/text-crawl}}
+
+        {{#if currentAudio.shareMetadata}}
+          {{share-button
+            story=currentAudio
+            type=(if isAudiostream 'stream' 'ondemand')
+            region="Player"
+            text="SHARE"}}
+        {{/if}}
+      </div>
+
+      {{#if isAudiostream}}
+        {{persistent-player.stream-metadata
+          stream=currentAudio}}
+      {{else}}
+        {{#if media.isSmallOnly}}
+          {{persistent-player.timelabel
+            position=hifi.position
+            duration=hifi.duration}}
+        {{/if}}
+
+        <div class="persistent-progress">
+          {{persistent-player.progress-meter
+            downloaded=hifi.percentLoaded
+            position=hifi.position
+            duration=hifi.duration
+            setPosition=(action 'setPosition')}}
+
+          {{#if media.isMediumAndUp}}
+            {{persistent-player.timelabel
+              position=hifi.position
+              duration=hifi.duration}}
+          {{/if}}
+        </div>
+        <!-- .persistent-progress -->
+      {{/if}}
+    </div>
   {{/g.center}}
 
   {{#g.right}}
-    {{#persistent-player.right
-      volume=hifi.volume
-      setVolume=(action 'setVolume')
-      toggleMute=(action 'toggleMute')
-      isMuted=hifi.isMuted}}
+    <div class="persistent-player--controls">
+      {{#if (can-change-volume)}}
+        {{persistent-player.volume-control
+          volume=hifi.volume
+          setVolume=(action 'setVolume')
+          toggleMute=(action 'toggleMute')
+          isMuted=hifi.isMuted}}
+      {{/if}}
 
       {{#if hasBlock}}
         {{yield (hash queueButton=(component 'persistent-player.queue-button'))}}
       {{/if}}
-    {{/persistent-player.right}}
+    </div>
   {{/g.right}}
 {{/holygrail-layout}}

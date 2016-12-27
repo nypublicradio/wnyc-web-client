@@ -7,8 +7,8 @@
      data-tracking-category='Persistent Player'
      data-tracking-action='Click Through to Show "{{showTitle}}"'
      data-tracking-region='Player'
-     data-tracking-model='{{story.id}}'>{{{showTitle}}}</a>
-  {{#if (or storyTitle catalogEntry)}} - {{/if}}
+     data-tracking-model='{{audioId}}'>{{{showTitle}}}</a>
+  {{#if (or storyTitle songDetails)}} - {{/if}}
 {{/if}}
 
 {{!-- Story Link --}}
@@ -21,16 +21,16 @@
      data-tracking-category='Persistent Player'
      data-tracking-action='Click Through to Story'
      data-tracking-region='Player'
-     data-tracking-model='{{story.id}}'>{{{storyTitle}}}</a>
+     data-tracking-model='{{audioId}}'>{{{storyTitle}}}</a>
 {{/if}}
 
 {{!-- Song Info --}}
-{{#if catalogEntry}}
-  {{song-metadata catalogEntry}}
+{{#if songDetails}}
+  {{songDetails}}
 {{/if}}
 
 {{#if (and showTitle media.isSmallOnly)}}
-  {{#if (or storyTitle catalogEntry)}} - {{/if}}
+  {{#if (or storyTitle songDetails)}} - {{/if}}
   <a href='{{showUrl}}'
      title='{{showTitle}}'
      class='link--white'

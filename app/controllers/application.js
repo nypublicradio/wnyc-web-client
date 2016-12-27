@@ -27,6 +27,8 @@ export default Controller.extend({
 
 
   actions: {
+
+
     showModal(which) {
       this._scrollY = window.scrollY;
       this.set('modal', which);

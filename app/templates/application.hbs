@@ -23,7 +23,7 @@
 {{/if}}
 
 
-{{#nypr-player-integration as |data|}}
+{{#nypr-player-integration as |integration|}}
   {{#liquid-unless showPlayer class="player-wrapper"}}
   {{#unless chromeDisabled}}
     <div class="l-fixed l-lowright">
@@ -36,7 +36,20 @@
     </div>
   {{/unless}}
   {{else}}
-    {{#persistent-player as |player|}}
+    {{#persistent-player
+      currentTitle=integration.currentTitle
+      showTitle=integration.showTitle
+      showUrl=integration.showUrl
+
+      storyTitle=integration.storyTitle
+      storyUrl=integration.storyUrl
+      songDetails=integration.songDetails
+
+      onPlay=integration.onPlay
+      onPause=integration.onPause
+      onDismissNotification=integration.onDismissNotification
+
+      as |player|}}
       {{player.queueButton
         queueLength=audio.queue.items.length
         showModal=(action 'showModal')
