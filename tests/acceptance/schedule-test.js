@@ -85,7 +85,7 @@ test('navigating to all streams', function(assert) {
   server.createList('schedule', 10);
   visit('/schedule/2016/jan/01?scheduleStation=wnyc-fm939');
 
-  stationList = ['wnyc-fm939', 'wnyc-am820', 'njpr',
+  let stationList = ['wnyc-fm939', 'wnyc-am820', 'njpr',
                  'special-events-stream', 'jonathan-channel'];
 
   stationList.forEach((link) => {
