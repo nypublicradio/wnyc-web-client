@@ -33,15 +33,15 @@
   {{/g.center}}
 
   {{#g.right}}
-    {{persistent-player.right
+    {{#persistent-player.right
       volume=audio.volume
       setVolume=(action 'setVolume')
       toggleMute=(action 'toggleMute')
-      isMuted=audio.isMuted
-      queueLength=audio.queue.items.length
-      showModal=showModal
-      closeModal=closeModal
-      isOpenModal=isOpenModal}}
-  {{/g.right}}
+      isMuted=audio.isMuted}}
 
+      {{#if hasBlock}}
+        {{yield (hash queueButton=(component 'persistent-player.queue-button'))}}
+      {{/if}}
+    {{/persistent-player.right}}
+  {{/g.right}}
 {{/holygrail-layout}}

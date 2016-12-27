@@ -2,7 +2,7 @@
   {{#unless error}}
     {{outlet}}
   {{else}}
-    {{error-page error=error}}
+    {{error-page erfror=error}}
   {{/unless}}
 {{else if miniChrome}}
   {{#nypr-mini-chrome}}
@@ -22,7 +22,9 @@
   {{/site-chrome}}
 {{/if}}
 
-{{#liquid-unless showPlayer class="player-wrapper"}}
+
+{{#nypr-player-integration as |data|}}
+  {{#liquid-unless showPlayer class="player-wrapper"}}
   {{#unless chromeDisabled}}
     <div class="l-fixed l-lowright">
     {{persistent-player.queue-button
@@ -33,13 +35,16 @@
       isOpenModal=modal}}
     </div>
   {{/unless}}
-{{else}}
-  {{persistent-player
-    showModal=(action 'showModal')
-    closeModal=(action 'closeModal')
-    isOpenModal=modal}}
-{{/liquid-unless}}
-
+  {{else}}
+    {{#persistent-player as |options|}}
+      {{options.queueButton
+        queueLength=audio.queue.items.length
+        showModal=(action 'showModal')
+        closeModal=(action 'closeModal')
+        isOpenModal=modal}}
+    {{/persistent-player}}
+  {{/liquid-unless}}
+{{/nypr-player-integration}}
 {{#liquid-if modal class="modal-wrapper sliding-modal"}}
   {{#x-modal closeModal=(action 'closeModal')}}
     {{component modal}}

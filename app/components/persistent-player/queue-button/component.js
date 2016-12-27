@@ -10,6 +10,7 @@ export default Component.extend({
   closeModal: null,
   isOpenModal: false,
   isFloating: false,
+  
   click() {
     if (get(this, 'isOpenModal')) {
       get(this, 'closeModal')();

@@ -2,7 +2,7 @@ import Ember from 'ember';
 import Controller from 'ember-controller';
 import service from 'ember-service/inject';
 import get from 'ember-metal/get';
-import { and, not } from 'ember-computed';
+import { and, not, reads, equal } from 'ember-computed';
 
 export default Controller.extend({
   audio:        service(),
@@ -16,6 +16,15 @@ export default Controller.extend({
   showPlayer:   and('noErrors', 'audio.playedOnce'),
 
   isHomepage: Ember.computed.match('currentRouteName', /^index(_loading)?$/),
+
+
+  // Persistent Player Component Integration
+
+
+  currentAudio: reads('audio.currentAudio'),
+  isAudioStream: equal('currentAudio.audioType', 'stream'), // unused?
+
+
 
   actions: {
     showModal(which) {
