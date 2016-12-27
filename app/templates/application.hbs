@@ -28,33 +28,42 @@
   {{#unless chromeDisabled}}
     <div class="l-fixed l-lowright">
     {{persistent-player.queue-button
-      isFloating=true
-      queueLength=audio.queue.items.length
-      showModal=(action 'showModal')
-      closeModal=(action 'closeModal')
-      isOpenModal=modal}}
+      isFloating  = true
+      queueLength = audio.queue.items.length
+      showModal   = (action 'showModal')
+      closeModal  = (action 'closeModal')
+      isOpenModal = modal}}
     </div>
   {{/unless}}
   {{else}}
     {{#persistent-player
-      currentTitle=integration.currentTitle
-      showTitle=integration.showTitle
-      showUrl=integration.showUrl
+      storyTitle            = integration.storyTitle
+      storyUrl              = integration.storyUrl
+      songDetails           = integration.songDetails
 
-      storyTitle=integration.storyTitle
-      storyUrl=integration.storyUrl
-      songDetails=integration.songDetails
+      currentTitle          = integration.currentTitle
+      showTitle             = integration.showTitle
+      showUrl               = integration.showUrl
 
-      onPlay=integration.onPlay
-      onPause=integration.onPause
-      onDismissNotification=integration.onDismissNotification
+      streamScheduleUrl     = integration.streamScheduleUrl
+      streamPlaylistUrl     = integration.streamPlaylistUrl
+      streamUrl             = integration.streamUrl
+      streamName            = integration.streamName
+      streamsIndexUrl       = integration.streamIndexUrl
+
+      backdropImageUrl      = integration.backdropImageUrl
+
+      onPlay                = integration.onPlay
+      onPause               = integration.onPause
+      onDismissNotification = integration.onDismissNotification
 
       as |player|}}
+
       {{player.queueButton
-        queueLength=audio.queue.items.length
-        showModal=(action 'showModal')
-        closeModal=(action 'closeModal')
-        isOpenModal=modal}}
+        queueLength = audio.queue.items.length
+        showModal   = (action 'showModal')
+        closeModal  = (action 'closeModal')
+        isOpenModal = modal}}
     {{/persistent-player}}
   {{/liquid-unless}}
 {{/nypr-player-integration}}

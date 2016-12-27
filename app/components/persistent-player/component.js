@@ -6,30 +6,22 @@ import set from 'ember-metal/set';
 
 
 export default Component.extend({
-  hifi: service(),
-  bumper: service('bumper-state'),
-  classNames: ['persistent-player', 'l-flexcontent', 'l-highlight--blur'],
-  classNameBindings: ['isAudiostream'],
+  hifi                 : service(),
+  bumper               : service('bumper-state'),
+  classNames           : ['persistent-player', 'l-flexcontent', 'l-highlight--blur'],
+  classNameBindings    : ['isAudiostream'],
 
-  //
-  isPlaying: reads('hifi.isPlaying'),
-  isAudiostream: reads('hifi.isStream'),
+  isPlaying            : reads('hifi.isPlaying'),
+  isAudiostream        : reads('hifi.isStream'),
 
   // Notification
-  didDismiss: false,
-  didNotDismiss: not('didDismiss'),
+  didDismiss           : false,
+  didNotDismiss        : not('didDismiss'),
   continuousPlayEnabled: computed.and('didNotDismiss', 'bumper.revealNotificationBar'),
 
-  // bubble up events
-
-  // onEvent =
-
-  // Passed down to subcomponents
-  audio: service(),
-  currentAudio: reads('audio.currentAudio'),
-  currentTitle: null,
-
-
+  audio                : service(),
+  currentAudio         : reads('audio.currentAudio'),
+  currentTitle         : null,
 
   actions: {
     playOrPause() {

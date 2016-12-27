@@ -6,34 +6,50 @@ import set from 'ember-metal/set';
 import { songMetadata } from 'overhaul/helpers/song-metadata';
 
 export default Ember.Component.extend({
-  audio:    service(),
-  session:  service(),
-  store:    service(),
-  bumper:   service('bumper-state'),
+  audio             : service(),
+  session           : service(),
+  store             : service(),
+  bumper            : service('bumper-state'),
 
-  currentAudio: reads('audio.currentAudio'),
+  currentAudio      : reads('audio.currentAudio'),
 
-  currentTitle: computed.or('currentAudio.title', '_currentTitleFromShow'),
+  currentTitle      : computed.or('currentAudio.title', '_currentTitleFromShow'),
 
+  story             : or('currentAudio.currentStory', 'currentAudio'),
+  show              : reads('currentAudio.headers.brand'),
+  catalogEntry      : reads('currentAudio.currentPlaylistItem.catalogEntry'),
 
-  story:          or('currentAudio.currentStory', 'currentAudio'),
-  show:           reads('currentAudio.headers.brand'),
-  catalogEntry:   reads('currentAudio.currentPlaylistItem.catalogEntry'),
-
-  showTitle:      or('show.title', 'currentAudio.currentShow.showTitle'),
-  showUrl:        or('show.url', 'currentAudio.currentShow.showUrl'),
-  storyTitle:     or('currentAudio.title', 'currentAudio.currentShow.episodeTitle'),
-  storyUrl:       or('currentAudio.url', 'currentAudio.currentShow.episodeUrl'),
-  songDetails:    computed('catalogEntry', function() {
+  showTitle         : or('show.title', 'currentAudio.currentShow.showTitle'),
+  showUrl           : or('show.url', 'currentAudio.currentShow.showUrl'),
+  storyTitle        : or('currentAudio.title', 'currentAudio.currentShow.episodeTitle'),
+  storyUrl          : or('currentAudio.url', 'currentAudio.currentShow.episodeUrl'),
+  songDetails       : computed('catalogEntry', function() {
     // return songMetadata(get(this, 'catalogEntry'));
   }),
 
+  streamScheduleUrl : reads('currentAudio.scheduleUrl'),
+  streamPlaylistUrl : reads('currentAudio.playlistUrl'),
+  streamUrl         : computed('currentAudio', function() {
+    if (get(this,'streamPlaylistUrl')) {
+      return `/streams/${get(this, 'currentAudio.id')}`;
+    }
+  }),
+  streamName        : reads('currentAudio.name'),
+  streamIndexUrl    : '/streams',
 
-  playingAudioType: 'ondemand', //bumper, stream, ondemand
 
-  queueLength: 0,
 
-  showQueue: false,
+  image             : computed.reads('currentAudio.imageMain.url'),
+  fallbackImage     : computed.reads('currentAudio.headers.brand.logoImage.url'),
+  defaultImageUrl   : '/assets/img/bg/player-background.png',
+  backdropImageUrl  : or('image', 'fallbackImage', 'defaultImageUrl'),
+
+
+  playingAudioType  : 'ondemand', //bumper, stream, ondemand
+
+  queueLength       : 0,
+
+  showQueue         : false,
 
   _currentTitleFromShow: computed('currentAudio', function() {
     return `${this.get('currentAudio.currentShow.showTitle')} on ${this.get('currentAudio.name')}`;
