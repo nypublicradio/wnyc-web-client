@@ -7,6 +7,7 @@ import set from 'ember-metal/set';
 
 export default Component.extend({
   audio: service(),
+  hifi: service(),
   store: service(),
   bumper: service('bumper-state'),
   classNames: ['persistent-player', 'l-flexcontent', 'l-highlight--blur'],
@@ -15,12 +16,20 @@ export default Component.extend({
   //input
   currentAudio: reads('audio.currentAudio'),
 
-  // get from hifi
-  isPlaying: equal('audio.playState', 'is-playing'),
+  isPlaying: equal('hifi.isPlaying'),
+
+  audioType: computed('hifi.currentSound', function() {
+    if (get('hifi.isStream')) {
+      return 'stream';
+    }
+    else {
+      return 'ondemand';
+    }
+  }),
 
 
   // input
-  isAudiostream: equal('currentAudio.audioType', 'stream'),
+  isAudiostream: equal('audioType', 'stream'),
   didDismiss: false,
   didNotDismiss: not('didDismiss'),
 
@@ -31,13 +40,26 @@ export default Component.extend({
 
   // onEvent =
 
+  // Passed down to subcomponents
+
+  currentTitle: null,
+
+
+
+
+
+
+
+
+
+
   actions: {
     playOrPause() {
       if (get(this, 'isPlaying')) {
         this.sendAction('onPause')
-        get(this, 'audio').pause();
+        get(this, 'hifi').pause();
       } else {
-        get(this, 'audio').play();
+        get(this, 'hifi').play();
       }
     },
     dismissNotification() {
@@ -49,19 +71,19 @@ export default Component.extend({
       set(this, 'didDismiss', true);
     },
     setPosition(p) {
-      get(this, 'audio').setPosition(p);
+      get(this, 'hifi').set('position', (p * get(this, 'hifi.currentSound.duration')));
     },
     rewind() {
-      get(this, 'audio').rewind();
+      get(this, 'hifi').rewind(15000);
     },
     fastForward() {
-      get(this, 'audio').fastForward();
+      get(this, 'hifi').fastForward(15000);
     },
     setVolume(vol) {
-      get(this, 'audio').set('volume', vol);
+      get(this, 'hifi').set('volume', vol);
     },
     toggleMute() {
-      get(this, 'audio').toggleMute();
+      get(this, 'hifi').toggleMute();
     },
   }
 });

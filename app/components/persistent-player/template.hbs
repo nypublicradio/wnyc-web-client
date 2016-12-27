@@ -1,9 +1,9 @@
 {{#liquid-if continuousPlayEnabled class='notification-wrapper'}}
   {{persistent-player.notification
     dismissNotification=(action 'dismissNotification')
-    duration=audio.duration
-    position=audio.position
-    audioType=currentAudio.audioType
+    duration=hifi.duration
+    position=hifi.position
+    audioType=audioType
   }}
 {{/liquid-if}}
 
@@ -26,18 +26,18 @@
     {{persistent-player.center
       currentAudio=currentAudio
       isAudiostream=isAudiostream
-      position=audio.position
-      duration=audio.duration
-      downloaded=audio.percentLoaded
+      position=hifi.position
+      duration=hifi.duration
+      downloaded=hifi.percentLoaded
       setPosition=(action 'setPosition')}}
   {{/g.center}}
 
   {{#g.right}}
     {{#persistent-player.right
-      volume=audio.volume
+      volume=hifi.volume
       setVolume=(action 'setVolume')
       toggleMute=(action 'toggleMute')
-      isMuted=audio.isMuted}}
+      isMuted=hifi.isMuted}}
 
       {{#if hasBlock}}
         {{yield (hash queueButton=(component 'persistent-player.queue-button'))}}

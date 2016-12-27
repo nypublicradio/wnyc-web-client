@@ -36,8 +36,8 @@
     </div>
   {{/unless}}
   {{else}}
-    {{#persistent-player as |options|}}
-      {{options.queueButton
+    {{#persistent-player as |player|}}
+      {{player.queueButton
         queueLength=audio.queue.items.length
         showModal=(action 'showModal')
         closeModal=(action 'closeModal')
