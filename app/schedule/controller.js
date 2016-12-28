@@ -14,10 +14,6 @@ export default Controller.extend({
     // Returns the full readable day/date, e.g. "Tuesday, October 18, 2016"
     return this.get('todaysDateAsMoment').clone().format('dddd, MMMM D, YYYY');
   }),
-  yesterday: computed('todaysDateAsMoment', function() {
-    // Returns the name of yesterday's day ("Monday")
-    return this.get('todaysDateAsMoment').clone().add(-1, 'days').format('dddd');
-  }),
   yesterdayLink: computed('todaysDateAsMoment', function() {
     const yesterdayMoment = this.get('todaysDateAsMoment').clone().add(-1, 'days');
     return {
@@ -25,10 +21,6 @@ export default Controller.extend({
       month: yesterdayMoment.format('MMM').toLowerCase(),
       day: yesterdayMoment.format('DD'),
     };
-  }),
-  tomorrow: computed('todaysDateAsMoment', function() {
-    // Returns the name of tomorrow's day ("Wednesday")
-    return this.get('todaysDateAsMoment').clone().add(1, 'days').format('dddd');
   }),
   tomorrowLink: computed('todaysDateAsMoment', function() {
     const tomorrowMoment = this.get('todaysDateAsMoment').clone().add(1, 'days');

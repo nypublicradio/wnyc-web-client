@@ -43,13 +43,13 @@
                             <div class="action-button-icon">
                                 {{wnyc-svg icon="left-caret"}}
                             </div>
-                            <span>{{yesterday}}</span>
+                            <span>{{moment-add todaysDateAsMoment '-1' 'days' 'dddd'}}</span>
                             {{/link-to}}
                         </li>
                         <li class="today">{{fullDayAndDate}}</li>
                         <li class="tomorrow last">
                             {{#link-to "schedule" tomorrowLink.year tomorrowLink.month tomorrowLink.day (query-params scheduleStation=scheduleStation)}}
-                            <span>{{tomorrow}}</span>
+                            <span>{{moment-add todaysDateAsMoment '1' 'days' 'dddd'}}</span>
                             <div class="action-button-icon">
                                 {{wnyc-svg icon="right-caret"}}
                             </div>
