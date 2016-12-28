@@ -62,10 +62,10 @@
                     <ul class="schedule-table {{if currentlyLoading 'currently-loading' ''}}">
                         {{#each model as |scheduleEvent|}}
                         <div class="event">
-                            {{#if scheduleEvent.objIsSchedule}}
                             <li class="time">
                                 <div class="time">{{scheduleEvent.startReadable}}</div>
                             </li>
+                            {{#if scheduleEvent.objIsSchedule}}
                             <li class="details">
                                 <div class="schedule-event show-title">
                                     <a href={{scheduleEvent.parentUrl}}>{{scheduleEvent.parentTitle}}</a>
@@ -75,9 +75,6 @@
                                 </div>
                             </li>
                             {{else}}
-                            <li class="time">
-                                <div class="time">{{scheduleEvent.startReadable}}</div>
-                            </li>
                             <li class="details">
                                 <div class="airing show-title">
                                     <p>{{scheduleEvent.scheduleEventTitle}}</p>
