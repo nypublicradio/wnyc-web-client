@@ -10,7 +10,13 @@ export default function(server) {
      id: '/'
    });
    server.createList('show', 100);
-   server.createList('discover-topic', 20);
+
+   let topics = ["Arts", "Books & Literature", "Business", "Education", "Environment", "Food", "Health", "History", "Media", "Movies", "Music", "Music:Classical", "Music:Opera", "Movies", "News:Local", "News:National", "News:World", "Parenting", "Poetry", "Pop Culture", "Religion & Faith", "Science", "Sports", "Storytelling", "Technology", "Transportation"];
+
+   topics.forEach(t => {
+     server.create('discover-topic', {title: t, url: t});
+   });
+
    server.createList('discover-story', 20);
 
 }

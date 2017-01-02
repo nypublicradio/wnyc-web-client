@@ -8,10 +8,12 @@
     <div class="discover-setup-header-content">
       <h2 class="discover-setup-title-step-title h2 text--white">Customize Your Playlist</h2>
       <span class="discover-setup-title-error">&nbsp;
-        {{if (and showError hasNotSelectedATopic) 'Please select at least one topic'}}
-      </span>
-      <span class="discover-setup-title-error">&nbsp;
-        {{if (and showError hasNotSelectedAShow) 'Please select at least one show'}}
+        {{#if (and showError hasNotSelectedATopic)}}
+          Please select at least one topic
+        {{/if}}
+        {{#if (and showError hasNotSelectedAShow)}}
+          Please select at least one show
+        {{/if}}
       </span>
     </div>
     <div class="discover-setup-header-action">
