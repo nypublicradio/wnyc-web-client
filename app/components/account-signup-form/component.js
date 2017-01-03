@@ -42,7 +42,7 @@ export default Component.extend({
     }
   },
   resendConfirmationEmail(email) {
-    let url = `${ENV.wnycAuthAPI}/auth/v1/confirm/resend?email=${email}`;
+    let url = `${ENV.wnycAuthAPI}/v1/confirm/resend?email=${email}`;
     let method = 'GET';
     let mode = 'cors';
     return fetch(url, {method, mode})
