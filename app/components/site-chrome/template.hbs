@@ -57,8 +57,7 @@
               target="_blank">Donate</a>
             {{/if}}
 
-            {{user-navigation isLoggedIn=true}} {{!-- session.isAuthenticated --}}
-
+            {{user-navigation isLoggedIn=session.isAuthenticated}}
           </div>
         </div>
 
