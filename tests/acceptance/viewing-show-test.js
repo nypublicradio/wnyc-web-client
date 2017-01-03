@@ -40,7 +40,8 @@ test('smoke test', function(assert) {
 });
 
 test('authenticated smoke test', function(assert) {
-  authenticateSession(this.application, {is_staff: true});
+  server.create('user');
+  authenticateSession(this.application, {is_staff: true, access_token: 'foo'});
   let show = server.create('show', {
     id: 'shows/foo/',
     linkroll: [
