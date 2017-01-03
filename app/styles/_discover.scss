@@ -207,7 +207,8 @@ body.ember-application.discover {
 }
 
 .discover-setup-title-step-title {
-  margin:0.5rem;
+  margin: 0.5rem;
+  text-align: center;
 }
 
 .discover-setup-title-error {
@@ -237,6 +238,7 @@ body.ember-application.discover {
   @include display-flex;
   @include flex-wrap(nowrap);
   @include justify-content(flex-start);
+  white-space: nowrap;
 }
 .discover-setup-header-action:last-child {
   @include justify-content(flex-end);
