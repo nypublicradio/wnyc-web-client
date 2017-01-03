@@ -53,8 +53,6 @@ Router.map(function() {
     this.route('index', { path: 'playlist'});
     this.route('redirect', { path: '/'} );
   });
-  
-  this.route('accounts');
 
   this.route('profile');
 
