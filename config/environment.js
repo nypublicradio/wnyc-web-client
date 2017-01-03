@@ -105,7 +105,6 @@ module.exports = function(environment) {
     wnycURL: process.env.WNYC_URL,
     wnycDonateURL: 'https://pledge3.wnyc.org/donate/main/onestep/?utm_source=wnyc&utm_medium=wnyc-86x27&utm_content=wnyc-header-beta&utm_campaign=pledge',
     wnycSvgURL: '/media/svg/',
-    wnycAuthAPI: 'http://api.demo.nypr.digital',
     // put beta host at the root so it can be overridden by Django
     wnycBetaURL: process.env.WNYC_BETA_URL,
     featureFlags: {
