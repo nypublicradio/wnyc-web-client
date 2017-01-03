@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import config from 'overhaul/config/environment';
 import service from 'ember-service/inject';
 import PlayParamMixin from 'overhaul/mixins/play-param';
 const { get } = Ember;
@@ -7,6 +8,8 @@ const { hash: waitFor } = Ember.RSVP;
 export default Ember.Route.extend(PlayParamMixin, {
   metrics: service(),
   session: service(),
+  currentUser: service(),
+  
   setupController(controller) {
     controller.set('isMobile', window.Modernizr.touchevents);
     return this._super(...arguments);
@@ -27,8 +30,9 @@ export default Ember.Route.extend(PlayParamMixin, {
         story,
         getComments: () => comments,
         getRelatedStories: () => relatedStories,
-        user: get(this, 'session.data.authenticated'),
-        browserId: get(this, 'session.data.browserId')
+        user: get(this, 'currentUser.user'),
+        browserId: get(this, 'session.data.browserId'),
+        adminURL: config.wnycAdminURL
       });
     });
   },

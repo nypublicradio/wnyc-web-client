@@ -18,5 +18,11 @@
 
     {{related-stories getStories=model.getRelatedStories}}
   {{/ember-wormhole}}
+  
+  {{#if model.user.isStaff}}
+    {{#ember-wormhole to="edit-story"}}
+        <a href="{{model.adminURL}}/{{model.story.editLink}}" class="btn btn--green" target="_blank" data-test-selector="admin-link">Edit this</a>
+    {{/ember-wormhole}}
+  {{/if}}
 
 {{/django-page}}
