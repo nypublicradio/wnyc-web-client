@@ -173,14 +173,14 @@ export default function() {
   
   this.urlPrefix = config.wnycAuthAPI;
   
-  this.get('/session', (schema, request) => {
+  this.get('/v1/session', (schema, request) => {
     if (!request.requestHeaders.Authorization) {
       return new Response(401);
     }
     return schema.users.first();
   });
   
-  this.patch('/user', (schema, request) => {
+  this.patch('/v1/user', (schema, request) => {
     if (!request.requestHeaders.Authorization) {
       return new Response(401);
     }
