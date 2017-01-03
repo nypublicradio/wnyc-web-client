@@ -14,6 +14,7 @@ import PlayParamMixin from 'overhaul/mixins/play-param';
 export default Route.extend(PlayParamMixin, {
   session: service(),
   metrics: service(),
+  currentUser: service(),
 
   model(params) {
     const channelType = this.routeName;
@@ -24,7 +25,7 @@ export default Route.extend(PlayParamMixin, {
       return waitFor({
         page,
         channel: page.get('wnycChannel'),
-        user: this.get('session.data.authenticated')
+        user: this.get('currentUser.user')
       });
     })
     .catch(e => retryFromServer(e, listingSlug.replace(/\/*$/, '/')));
