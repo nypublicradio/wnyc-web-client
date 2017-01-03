@@ -8,6 +8,7 @@ export default Route.extend(ApplicationRouteMixin, {
   asyncWriter: service(),
   legacyLoader: service(),
   leaderboard: service(),
+  currentUser: service(),
   session: service(),
   poll: service(),
   store: service(),
@@ -26,6 +27,7 @@ export default Route.extend(ApplicationRouteMixin, {
     let metrics = get(this, 'metrics');
 
     this._syncBrowserId();
+    get(this, 'currentUser').load();
 
     metrics.identify('GoogleAnalytics', {isAuthenticated: false});
 
