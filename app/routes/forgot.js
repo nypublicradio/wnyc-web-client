@@ -1,7 +1,6 @@
-import Ember from 'ember';
+import Route from 'ember-route';
 
-export default Ember.Route.extend({
-  titleToken: 'Sign In',
+export default Route.extend({
   setupController() {
     this.send('disableChrome');
   },

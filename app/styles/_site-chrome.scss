@@ -34,8 +34,8 @@
     padding-top: 0;
     height: 83px;
   }
-  
-  .accounts & {
+
+  .chrome-disabled & {
     margin-bottom: 0;
   }
 
@@ -59,7 +59,7 @@
 
   a {
     padding-bottom: 10px;
-    
+
     @include mq($medium-only) {
       font-weight: 600;
     }
@@ -77,7 +77,7 @@
     a,
     a:hover {
       border: 1px dotted rgba(0, 0, 0, 0);
-      padding: 22px 10px 26px 28px;      
+      padding: 22px 10px 26px 28px;
     }
 
     a:focus {
@@ -171,7 +171,7 @@
       .new {
         color: $gold;
       }
-      
+
       ul.alignright {
         border-color: $red;
       }
@@ -190,7 +190,7 @@
     }
     .list-item.active {
       border-right: 3px solid $red;
-      
+
       a {
         color: $red;
         border: none;
@@ -338,8 +338,8 @@
 
 .sitechrome-page-content-area {
   position: relative;
-  
-  .accounts & {
+
+  .chrome-disabled & {
     padding-top: 25px;
     background-color: $nearwhite;
   }

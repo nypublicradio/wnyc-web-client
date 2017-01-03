@@ -1,7 +1,7 @@
-.accounts #site-chrome {
+.chrome-disabled #site-chrome {
   padding-left: 0;
 }
-.accounts .sitechrome-page-content-area {
+.chrome-disabled .sitechrome-page-content-area {
   @include mq($medium-and-up) {
     padding-left: 318px;
   }
@@ -182,7 +182,7 @@
     display: flex,
     align-items: center
   ));
-  
+
   @include fontsize(32);
   font-weight: 400;
 }
@@ -193,15 +193,15 @@
   margin-right: 25px;
   height: 120px;
   width: 120px;
-  
+
   @include flexbox((
     display: flex,
     align-items: center,
     justify-content: center
   ));
-  
+
   > svg {
     fill: white;
     width: 62px;
-  } 
-} 
+  }
+}
