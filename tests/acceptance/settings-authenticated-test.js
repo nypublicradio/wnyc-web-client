@@ -8,7 +8,9 @@ import 'wnyc-web-client/tests/helpers/with-feature';
 
 moduleForAcceptance('Acceptance | settings', {
   beforeEach() {
-    authenticateSession(this.application);
+    server.create('user');
+    authenticateSession(this.application, {access_token: 'foo'});
+    
     let session = currentSession(this.application);
     session.set('data.user-prefs-active-stream', {slug: 'wqxr', name: 'WQXR New York'});
     session.set('data.user-prefs-active-autoplay', 'default_stream');

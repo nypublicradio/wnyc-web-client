@@ -46,7 +46,8 @@ test('view comments as regular user', function(assert) {
 });
 
 test('view comments as staff user', function(assert) {
-  authenticateSession(this.application, {is_staff: true});
+  server.create('user');
+  authenticateSession(this.application, {is_staff: true, access_token: 'foo'});
   
   let story = server.create('story');
   let id = `story/${story.slug}/`;
