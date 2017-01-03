@@ -7,9 +7,9 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
   host: ENV.wnycAuthAPI,
   buildURL(modelName, id, snapshot, requestType/*, query*/) {
     if (/createRecord|updateRecord/.test(requestType)) {
-      return `${this.host}/user`;
-    } else if (requestType.startsWith('find')) {
-      return `${this.host}/session`;
+      return `${this.host}/v1/user`;
+    } else if (requestType.startsWith('query')) {
+      return `${this.host}/v1/session`;
     }
   },
   normalizeErrorResponse(status, headers, payload) {
