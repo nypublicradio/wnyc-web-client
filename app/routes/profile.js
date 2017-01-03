@@ -1,14 +1,11 @@
 import Route from 'ember-route';
+import service from 'ember-service/inject';
+import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
-export default Route.extend({
-  setupController() {
-    this.send('disableChrome');
-  },
-  actions: {
-    willTransition(transition) {
-      if (!transition.targetName.startsWith('accounts')) {
-        this.send('enableChrome');
-      }
-    }
+export default Route.extend(AuthenticatedRouteMixin, {
+  currentUser: service(),
+  
+  model() {
+    return this.get('currentUser.user');
   }
 });
