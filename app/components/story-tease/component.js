@@ -4,6 +4,7 @@ import Component from 'ember-component';
 import computed, { and, equal, readOnly, or } from 'ember-computed';
 import get from 'ember-metal/get';
 import set from 'ember-metal/set';
+import config from 'overhaul/config/environment';
 
 const STATUSES = {
   LIVE: 'On Air Now',
@@ -18,6 +19,7 @@ export default Component.extend({
   status:             null,
   streamSlug:         null,
   isFeatured:         false,
+  adminURL:           config.wnycAdminURL,
 
   isLive:             equal('status', STATUSES.LIVE),
   isLatest:           readOnly('item.isLatest'),
