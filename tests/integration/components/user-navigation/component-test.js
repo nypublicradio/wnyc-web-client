@@ -18,7 +18,7 @@ test('it shows the login state', function(assert) {
 });
 
 test('it says hi to the user with their name', function(assert) {
-  this.set('user', {firstName: 'Matt'});
+  this.set('user', {givenName: 'Matt'});
   this.set('isLoggedIn', true);
   this.render(hbs`{{user-navigation isLoggedIn=isLoggedIn user=user}}`);
   assert.equal(this.$('.user-nav-logged-in').text().trim(), 'Hi, Matt');
