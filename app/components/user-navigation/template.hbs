@@ -3,13 +3,13 @@
       {{#click-outside action=(action 'closePopup')}}
         <button {{action 'togglePopup'}}>
           <div class="user-nav-avatar">
-          {{#if currentUser.user.picture}}
-            <img src={{currentUser.user.picture}}>
+          {{#if user.picture}}
+            <img src={{user.picture}}>
           {{else}}
             {{wnyc-svg icon="user"}}
           {{/if}}
           </div>
-          <span class="user-nav-greeting">Hi, {{or currentUser.user.givenName 'You'}}</span>
+          <span class="user-nav-greeting">Hi, {{or user.givenName 'You'}}</span>
           <span class="user-nav-triangle"></span>
         </button>
         {{#if isPopupOpen}}
@@ -17,7 +17,7 @@
           <div class="user-nav-popup">
             <ul class="user-nav-list">
               <li class="user-nav-listitem">{{link-to 'Account' 'profile' class="inherit" preventDefault=false}}</li>
-              <li class="user-nav-listitem">{{link-to 'Logout' 'logout' class="inherit" preventDefault=false}}</li>
+              <li class="user-nav-listitem">{{link-to 'Log out' 'logout' class="inherit" preventDefault=false}}</li>
             </ul>
           </div>
         {{/if}}
@@ -25,9 +25,9 @@
     </div>
   {{else}}
     <div class="user-nav-signup user-nav-link">
-      {{link-to 'Sign Up' 'accounts.signup' class="inherit" preventDefault=false}}
+      {{link-to 'Sign up' 'signup' class="inherit" preventDefault=false}}
     </div>
     <div class="user-nav-login user-nav-link">
-      {{link-to 'Log In' 'accounts.login' class="inherit" preventDefault=false}}
+      {{link-to 'Log in' 'login' class="inherit" preventDefault=false}}
     </div>
   {{/if}}
