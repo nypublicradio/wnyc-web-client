@@ -24,10 +24,10 @@ test('it renders', function(assert) {
 
 test('submitting the form sends the correct values to the correct endpoint', function(assert) {
   let testEmail = 'test@example.com';
-  let testCode = 'QWERTYUIOP';
+  let testConfirmation = 'QWERTYUIOP';
   this.set('email', testEmail);
-  this.set('code', testCode);
-  this.render(hbs`{{account-reset-password-form email=email code=code}}`);
+  this.set('confirmation', testConfirmation);
+  this.render(hbs`{{account-reset-password-form email=email confirmation=confirmation}}`);
 
   let testPassword = 'password123';
   this.$('label:contains(New Password) + input').val(testPassword);
@@ -45,5 +45,5 @@ test('submitting the form sends the correct values to the correct endpoint', fun
   let requestBody = JSON.parse(request.requestBody);
   assert.equal(testEmail, requestBody.email);
   assert.equal(testPassword, requestBody.new_password);
-  assert.equal(testCode, requestBody.confirmation);
+  assert.equal(testConfirmation, requestBody.confirmation);
 });
