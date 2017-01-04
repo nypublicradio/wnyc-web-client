@@ -22,7 +22,7 @@ export default Component.extend({
   },
   actions: {
     onSubmit() {
-      return this.resetPassword(get(this, 'email'), get(this, 'fields.password'), get(this, 'code'));
+      return this.resetPassword(get(this, 'email'), get(this, 'fields.password'), get(this, 'confirmation'));
     }
   },
   resetPassword(email, new_password, confirmation) {
