@@ -16,8 +16,8 @@
           <div class="user-nav-popup-pointer"></div>
           <div class="user-nav-popup">
             <ul class="user-nav-list">
-              <li class="user-nav-listitem"><a>Account</a></li>
-              <li class="user-nav-listitem"><a>Logout</a></li>
+              <li class="user-nav-listitem">{{link-to 'Account' 'profile' class="inherit" preventDefault=false}}</li>
+              <li class="user-nav-listitem">{{link-to 'Logout' 'logout' class="inherit" preventDefault=false}}</li>
             </ul>
           </div>
         {{/if}}
@@ -25,9 +25,9 @@
     </div>
   {{else}}
     <div class="user-nav-signup user-nav-link">
-      {{link-to 'Sign Up' 'index' class="inherit" preventDefault=false}}
+      {{link-to 'Sign Up' 'accounts.signup' class="inherit" preventDefault=false}}
     </div>
     <div class="user-nav-login user-nav-link">
-      {{link-to 'Log In' 'index' class="inherit" preventDefault=false}}
+      {{link-to 'Log In' 'accounts.login' class="inherit" preventDefault=false}}
     </div>
   {{/if}}
