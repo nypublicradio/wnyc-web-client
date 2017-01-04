@@ -1,10 +1,10 @@
 import Route from 'ember-route';
 
 export default Route.extend({
-  setupController() {
-    this.send('disableChrome');
-  },
   actions: {
+    didTransition() {
+      this.send('disableChrome');
+    },
     willTransition() {
       this.send('enableChrome');
     }
