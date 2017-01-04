@@ -24,20 +24,19 @@ export default Ember.Component.extend({
   storyTitle        : or('currentAudio.title', 'currentAudio.currentShow.episodeTitle'),
   storyUrl          : or('currentAudio.url', 'currentAudio.currentShow.episodeUrl'),
   songDetails       : computed('catalogEntry', function() {
-    // return songMetadata(get(this, 'catalogEntry'));
+    if (this.get('catalogEntry')) {
+      return songMetadata([get(this, 'catalogEntry')]);
+    }
   }),
 
   streamScheduleUrl : reads('currentAudio.scheduleUrl'),
-  streamPlaylistUrl : reads('currentAudio.playlistUrl'),
-  streamUrl         : computed('currentAudio', function() {
-    if (get(this,'streamPlaylistUrl')) {
+  streamPlaylistUrl : computed('currentAudio.playlistUrl', function() {
+    if (get(this,'currentAudio.playlistUrl')) {
       return `/streams/${get(this, 'currentAudio.id')}`;
     }
   }),
   streamName        : reads('currentAudio.name'),
   streamIndexUrl    : '/streams',
-
-
 
   image             : computed.reads('currentAudio.imageMain.url'),
   fallbackImage     : computed.reads('currentAudio.headers.brand.logoImage.url'),

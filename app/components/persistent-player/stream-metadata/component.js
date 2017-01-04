@@ -6,7 +6,6 @@ export default Component.extend({
 
   streamScheduleUrl: null,
   streamPlaylistUrl: null,
-  streamUrl        : null,
   streamName       : null,
   streamsIndexUrl  : null
 });
