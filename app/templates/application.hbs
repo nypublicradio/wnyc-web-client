@@ -56,13 +56,20 @@
       onPause               = integration.onPause
       onDismissNotification = integration.onDismissNotification
 
-      as |player|}}
-
-      {{player.queueButton
-        queueLength = audio.queue.items.length
-        showModal   = (action 'showModal')
-        closeModal  = (action 'closeModal')
-        isOpenModal = modal}}
+      as |area player|}}
+      {{#if area.queue}}
+        {{player.queueButton
+          queueLength       = audio.queue.items.length
+          showModal         = (action 'showModal')
+          closeModal        = (action 'closeModal')
+          isOpenModal       = modal}}
+      {{else if area.share}}
+        {{share-button
+          story             = integration.currentAudio
+          type              = (if integration.isAudiostream 'stream' 'ondemand')
+          region            = "Player"
+          text              = "SHARE"}}
+      {{/if}}
     {{/persistent-player}}
   {{/liquid-unless}}
 {{/nypr-player-integration}}

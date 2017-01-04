@@ -8,7 +8,7 @@
 {{/liquid-if}}
 
 {{persistent-player.backdrop
-  backdropImageUrl  = backdropImageUrl}}
+  backdropImageUrl      = backdropImageUrl}}
 
 {{#holygrail-layout as |g|}}
   {{#g.left}}
@@ -52,17 +52,11 @@
           }}
         {{/text-crawl}}
 
-
-        {{#if shareButton}}
-          {{shareButton}}
-        {{/if}}
-
-        {{#if currentAudio.shareMetadata}}
-          {{share-button
-            story  = currentAudio
-            type   = (if isAudiostream 'stream' 'ondemand')
-            region = "Player"
-            text   = "SHARE"}}
+        {{#if hifi.duration}} {{! only show the share button when the audio has loaded}}
+          {{#if hasBlock}}
+            {{! For consumers to drop in a share button}}
+            {{yield (hash share=true)}}
+          {{/if}}
         {{/if}}
       </div>
 
@@ -110,7 +104,7 @@
       {{/if}}
 
       {{#if hasBlock}}
-        {{yield (hash queueButton=(component 'persistent-player.queue-button'))}}
+        {{yield (hash queue=true) (hash queueButton=(component 'persistent-player.queue-button'))}}
       {{/if}}
     </div>
   {{/g.right}}
