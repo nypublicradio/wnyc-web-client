@@ -21,13 +21,13 @@ export default Component.extend({
   },
   actions: {
     onSubmit() {
-      this.authenticate(get(this, 'fields.email'), get(this, 'fields.password'));
+      return this.authenticate(get(this, 'fields.email'), get(this, 'fields.password'));
     },
     onSuccess() {
       this.goHome();
     },
     onFailure(e) {
-      if (e.errors) {
+      if (e && e.errors) {
         this.applyErrorToChangeset(e.errors, get(this, 'changeset'));
       }
     },

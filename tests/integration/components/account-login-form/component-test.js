@@ -55,3 +55,27 @@ test('successful login calls routing service to redirect', function(assert) {
     assert.ok(transitionTo.called);
   });
 });
+
+
+test('failed login does not redirect', function(assert) {
+  let authenticate = sinon.stub().returns(Promise.reject());
+  let session = {authenticate};
+  let transitionTo = sinon.spy();
+  let routing = {transitionTo};
+  this.set('session', session);
+  this.set('routing', routing);
+  this.render(hbs`{{account-login-form session=session routing=routing}}`);
+
+  let testEmail = 'test@email.com';
+  let testPassword = 'password123';
+
+  this.$('label:contains(Email) + input').val(testEmail);
+  this.$('label:contains(Email) + input').change();
+  this.$('label:contains(Password) + input').val(testPassword);
+  this.$('label:contains(Password) + input').change();
+  this.$('button:contains(Log in)').click();
+
+  return wait().then(() => {
+    assert.ok(transitionTo.notCalled);
+  });
+});
