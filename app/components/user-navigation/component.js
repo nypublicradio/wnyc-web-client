@@ -12,5 +12,12 @@ export default Component.extend({
     togglePopup() {
       this.toggleProperty('isPopupOpen');
     },
+    logout() {
+      this.get('metrics').trackEvent({
+        category: 'WNYC Menu',
+        label: 'Clicked Logout',
+      });
+      this.get('session').invalidate();
+    }
   }
 });
