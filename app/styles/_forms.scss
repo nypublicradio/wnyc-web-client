@@ -6,10 +6,8 @@
 .textarea {
     display: block;
     width: 100%;
-    border: 1px solid $lightestgray;
+    border: 1px solid $border-default;
     padding: 12px;
-    @include fontsize(12);
-    line-height: 1.2rem;
 
     &:focus {
         outline: 1px dotted $darkergray;
@@ -97,7 +95,7 @@
  */
 .textinput--gray {
     background: #eee;
-    border: 1px solid $lightergray;
+    border: 1px solid $border-default;
     padding: 12px;
 
     &:focus {
@@ -131,7 +129,7 @@
     left: 25px;
 
     svg path {
-        stroke: $lightgray;
+        stroke: $icon-medium;
     }
   }
   
@@ -146,14 +144,14 @@
 }
 
 @mixin searchbox--gray {
-  background-color: $graywhite;
+  background-color: $background-lightest;
 
   input[type="search"] {
-    background-color: $graywhite;
-    color: $lightgray;
-    &::-webkit-input-placeholder {color: $lightgray; opacity: 1 !important;}
-    &::-moz-placeholder {color: $lightgray;}
-    &:-ms-input-placeholder {color: $lightgray;}
+    background-color: $background-lightest;
+    color: $text-light;
+    &::-webkit-input-placeholder {color: $text-light; opacity: 1 !important;}
+    &::-moz-placeholder {color: $text-light;}
+    &:-ms-input-placeholder {color: $text-light;}
   }
 }
 

@@ -1,0 +1,49 @@
+$header-height: 66px;
+
+.design {  
+  .design-container {
+    display: flex;
+    flex-direction: row;
+    padding: 50px;
+    margin-top: $header-height;
+    justify-content: center;
+       
+    .design-sidebar {
+      min-width: 200px;
+      margin: 10px 40px 0 0;
+      
+      a li {
+        padding: 8px 10px;
+        border-bottom: 1px solid $border-light;
+        color: $gray;
+        
+        &.first {
+          border-top: 1px solid $border-light;
+        }
+        
+        &:hover {
+          background: $background-lightest;
+          color: black;
+        }
+      }
+    }
+    
+    .design-main {
+      display: flex;
+      flex-direction: column;
+      min-width: 970px;
+    }
+  }
+  
+  .design-full {
+    padding: 50px 0;
+    margin-top: $header-height;
+    min-width: 1220px;
+    align-self: center;
+    text-align: left;
+  }
+  
+  section {
+    margin-bottom: 4rem;
+  }
+}

@@ -1,7 +1,7 @@
 <div class="list" data-test-selector="comment-list">
 {{#each comments as |comment|}}
     <article class="list-item{{if comment.isStaffComment ' list-item--highlight'}}" data-id="{{comment.id}}">
-        <h1 class="h3">
+        <h1 class="text--semi">
         {{#if comment.staffNameOverride}}
             {{comment.staffNameOverride}}
         {{else if comment.location}}
@@ -9,12 +9,12 @@
         {{else}}
             {{comment.author}}
         {{/if}}
-        </h1>
+      </h1>
 
         <div class="text text--prewrap">{{{comment.comment}}}</div>
 
         <div class="l-split flush">
-            <div class="dimmed">{{moment-format comment.publishDate 'MMM D, YYYY, h:mm A'}}</div>
+            <div class="text--small dimmed">{{moment-format comment.publishDate 'MMM D, YYYY, h:mm A'}}</div>
 
             {{#if user.is_staff}}
                 {{comments-admin id=comment.id browserId=browserId}}

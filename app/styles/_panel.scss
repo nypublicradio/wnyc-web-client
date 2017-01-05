@@ -20,7 +20,7 @@
     font-size: medium;
     // IE doesn't support initial
     font-size: initial;
-    border: 1px solid $lightestgray;
+    border: 1px solid $border-default;
 }
 
 /**
@@ -34,14 +34,14 @@
  */
 .panel-link {
     padding: 15px;
-    border-bottom: 1px $lightestgray solid;
+    border-bottom: 1px $border-default solid;
     display: block;
     // so it doesn't cllapse if there's no body
     white-space: nowrap;
 
     &:hover,
     &:focus {
-        border-bottom-color: $lightestgray;
+        border-bottom-color: $border-default;
     }
 }
 

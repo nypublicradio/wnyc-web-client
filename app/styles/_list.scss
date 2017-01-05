@@ -5,21 +5,8 @@
 }
 
 .list-heading {
-    color: $lightgray;
-    border-bottom: 1px solid $lightestgray;
-    text-transform: uppercase;
+    border-bottom: 1px solid $border-default;
     letter-spacing: 2px;
-
-    > h1,
-    > h2,
-    > h3,
-    > h4,
-    > h5,
-    > h6 {
-        font-weight: 700;
-        line-height: 32px;
-        margin-bottom: 0;
-    }
 
     + ol > .list-item:first-child {
         border-top: none;
@@ -114,16 +101,16 @@
 
 .list-item {
     padding: 1.5rem 0;
-    border-top: 1px solid $nearwhite;
+    border-top: 1px solid $border-light;
     margin-bottom: 0;
 
     &:last-child {
-        /* border-bottom: 1px solid $lightergray;*/
+        /* border-bottom: 1px solid $border-default;*/
     }
 
     .list--borderbottom & {
         border-top: none;
-        border-bottom: 1px solid $nearwhite;
+        border-bottom: 1px solid $border-light;
 
         &:last-child {
             border-bottom: none;

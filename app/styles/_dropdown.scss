@@ -64,7 +64,7 @@
 
     .dropdown--nearwhite.dropdown--br > &:after,
     .dropdown--nearwhite.dropdown--bl > &:after {
-      border-bottom-color: $lightestgray;
+      border-bottom-color: $border-default;
     }
 
     .dropdown--white.dropdown--br > &:after,
@@ -83,7 +83,7 @@
     }
 
     .dropdown--nearwhite.dropdown--tl > &:after {
-      border-top-color: $lightestgray;
+      border-top-color: $border-default;
     }
 
     .dropdown--white.dropdown--tl > &:after {

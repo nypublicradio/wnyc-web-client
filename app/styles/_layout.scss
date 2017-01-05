@@ -97,7 +97,7 @@
 }
 
 .l-highlight--gray {
-  background-color: $graywhite;
+  background-color: $background-lightest;
   @extend %clearfix;
 }
 
@@ -107,11 +107,11 @@
 }
 
 .l-highlight--mq--graydark {
-    background-color: $nearwhite;
+    background-color: $background-lightest;
     @extend %clearfix;
 
     @include mq($middle-narrow-and-up) {
-        background-color: $graywhite;
+        background-color: $background-lightest;
     }
 }
 

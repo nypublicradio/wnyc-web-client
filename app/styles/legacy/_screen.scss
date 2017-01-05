@@ -756,7 +756,7 @@ table#show-number-archive {
 .bigbox_ad p,
 .littlebox_ad p {
   text-align: center;
-  color: $lightgray;
+  color: $text-light;
   text-transform: uppercase;
   letter-spacing: 2px;
   margin: 5px 0;
@@ -2831,7 +2831,7 @@ h4.schedule-link {
   width: 100%;
   border: 0;
   background: white;
-  border: 1px solid $lightestgray;
+  border: 1px solid $border-default;
   padding: 10px 20px;
   font-size: 1rem;
   -webkit-box-sizing: border-box;
@@ -3733,7 +3733,7 @@ form.filters #decimal label {
 
 .primary_event {
   padding: 15px 0 !important;
-  border-bottom: 1px solid $lightestgray;
+  border-bottom: 1px solid $border-default;
 }
 
 #event-calendar {

@@ -57,7 +57,7 @@
 }
 
 .tabs-header--border {
-  border-bottom: 1px solid $lightestgray;
+  border-bottom: 1px solid $border-default;
 }
 
 .tab-link {
@@ -81,7 +81,7 @@
 
 .tab-line {
     width: 0;
-    background-color: $pink;
+    background-color: $red;
     display: block;
     height: 4px;
     position: absolute;
