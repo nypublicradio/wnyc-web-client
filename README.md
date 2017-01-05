@@ -1,4 +1,5 @@
 # WNYC Web Client
+[![CircleCI](https://img.shields.io/circleci/project/github/nypublicradio/wnyc-web-client.svg?style=flat-square-blue)](https://circleci.com/gh/nypublicradio/wnyc-web-client) [![GitHub release](https://img.shields.io/github/release/nypublicradio/wnyc-web-client.svg?style=flat-square)](https://github.com/nypublicradio/wnyc-web-client/releases/latest) [![GitHub pull requests](https://img.shields.io/github/issues-pr/nypublicradio/wnyc-web-client.svg?style=flat-square)](https://github.com/nypublicradio/wnyc-web-client/pulls) [![GitHub contributors](https://img.shields.io/github/contributors/nypublicradio/wnyc-web-client.svg?style=flat-square)](https://github.com/nypublicradio/wnyc-web-client/graphs/contributors) 
 
 This is a browser-based client for interfacing with the New York Public Radio digital infrastructure.  This Ember application renders all of www.wnyc.org using the preexisting Django server as a backend data source, consuming HTML documents and JSON payloads to present a dynamic interface. This gives us the benefits of a persistent in-browser application while still using the existing content and infrastructure.
 
