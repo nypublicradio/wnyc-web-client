@@ -24,7 +24,7 @@ export default Component.extend({
     }
   },
   requestPasswordResetEmail(email) {
-    let url = `${ENV.wnycAuthAPI}/password/forgot?email=${email}`;
+    let url = `${ENV.wnycAuthAPI}/v1/password/forgot?email=${email}`;
     let method = 'GET';
     let mode = 'cors';
     return fetch(url, {method, mode})
