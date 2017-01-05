@@ -2,6 +2,7 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
 import config from 'wnyc-web-client/config/environment';
+import { Response } from 'ember-cli-mirage';
 
 moduleForAcceptance('Acceptance | profile', {
   beforeEach() {
@@ -128,6 +129,41 @@ test('can update password', function(assert) {
   });
   
   click('.nypr-password-card [data-test-selector="save"]');
+});
+
+test('trying to update with incorrect password shows error', function(assert) {
+  const OLD = '1234567890';
+  const NEW = '0987654321';
+  server.create('user');  
+  server.post(`${config.wnycAuthAPI}/v1/password`, () => {
+    return new Response(401, {}, {
+      "error": {
+        "code": "UnauthorizedAccess", 
+        "message": "Incorrect username or password."
+      }
+    });
+  });
+   
+  authenticateSession(this.application, {access_token: 'foo'});
+  visit('/profile');
+  
+  click('.nypr-password-card [data-test-selector="edit-button"]');
+  
+  andThen(function() {
+    fillIn('input[name=currentPassword]', OLD);
+    fillIn('input[name=newPassword]', NEW);
+  });
+  
+  click('.nypr-password-card [data-test-selector="save"]');
+  
+  andThen(function() {
+    assert.equal(find('[data-test-selector=save]').length, 1, 'form should not be in editing state');
+    assert.equal(find('.nypr-input-error').text().trim(), 'This password is incorrect.');
+    assert.equal(find('.nypr-input-helplink').text().trim(), 'Forgot password?');
+    assert.equal(find('input[name=currentPassword]').val(), OLD, 'old password should still be there');
+    assert.equal(find('input[name=newPassword]').val(), NEW, 'new password should still be there');
+  });
+  
 });
 
 test('can disable account', function(assert) {
