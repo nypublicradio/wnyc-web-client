@@ -129,6 +129,10 @@ test('can update password', function(assert) {
   });
   
   click('.nypr-password-card [data-test-selector="save"]');
+  
+  andThen(function() {
+    assert.ok(findWithAssert('.alert-success').length, 'shows flash message');
+  });
 });
 
 test('trying to update with incorrect password shows error', function(assert) {
