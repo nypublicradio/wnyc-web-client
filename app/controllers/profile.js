@@ -5,7 +5,8 @@ import fetch from 'fetch';
 import RSVP from 'rsvp';
 
 const FLASH_MESSAGES = {
-  email: 'Your email has been updated. Remember to use this new email the next time you log on.'
+  email: 'Your email has been updated. Remember to use this new email the next time you log on.',
+  password: 'Your password has been updated.'
 };
 
 export default Controller.extend({
@@ -33,6 +34,7 @@ export default Controller.extend({
         .then(response => {
           if (response.ok) {
             resolve();
+            this.showFlash('password');
           } else {
             reject();
           }
