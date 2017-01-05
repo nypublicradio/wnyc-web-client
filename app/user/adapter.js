@@ -1,6 +1,7 @@
 import ENV from '../config/environment';
 import DS from 'ember-data';
 import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
+const { keys } = Object;
 
 export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
   authorizer: 'authorizer:nypr',
@@ -13,6 +14,26 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
       return `${this.host}/v1/session`;
     }
   },
+  
+  // conform with JSON merge patch strategy: "only send what you need"
+  // https://tools.ietf.org/html/rfc7396
+  updateRecord(store, type, snapshot) {
+    let data = {};
+    let serializer = store.serializerFor(type.modelName);
+    let url = this.buildURL(type.modelName, snapshot.id, snapshot, 'updateRecord');
+    let changed = keys(snapshot.record.changedAttributes());
+
+    serializer.serializeIntoHash(data, type, snapshot, { includeId: true });
+    
+    keys(data).forEach(k => {
+      if (!changed.includes(k)) {
+        delete data[k];
+      }
+    });
+
+    return this.ajax(url, 'PATCH', { data: data });
+  },
+
   normalizeErrorResponse(status, headers, payload) {
     if (payload && typeof payload === 'object' && payload.error) {
       return payload.error;
