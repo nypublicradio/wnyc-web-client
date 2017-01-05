@@ -155,6 +155,7 @@ test('trying to update with incorrect password shows error', function(assert) {
   
   andThen(function() {
     fillIn('input[name=currentPassword]', OLD);
+    find('input[name=currentPassword]').focusout();
     fillIn('input[name=newPassword]', NEW);
   });
   
