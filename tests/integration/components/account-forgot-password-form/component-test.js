@@ -32,7 +32,7 @@ test('submitting the form sends the correct values to the correct endpoint', fun
 
   const request = this.requests[0];
 
-  const expectedUrl = `${ENV.wnycAuthAPI}/password/forgot?email=${testEmail}`;
+  const expectedUrl = `${ENV.wnycAuthAPI}/v1/password/forgot?email=${testEmail}`;
   const expectedMethod = 'GET';
 
   assert.equal(expectedUrl, request.url);
