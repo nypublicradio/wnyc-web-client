@@ -25,3 +25,14 @@ test('visiting /streams', function(assert) {
     assert.equal(find('.stream-list li').length, 7, 'should display a list of streams');
   });
 });
+
+test('playing a stream', function(assert) {
+  setupStreams();
+  visit('/streams');
+  
+  click('.stream-list li:first button');
+  
+  andThen(function() {
+    assert.ok(findWithAssert('.persistent-player'), 'persistent player should be visible');
+  });
+});
