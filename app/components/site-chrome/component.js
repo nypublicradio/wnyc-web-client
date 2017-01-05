@@ -9,6 +9,7 @@ export default Component.extend(BetaActionsMixin, {
   session: service(),
   metrics: service(),
   router: service('wnyc-routing'),
+  currentUser: service(),
   donateURL: config.wnycDonateURL,
   defaultStream:  {slug: 'wnyc-fm939', name: 'WNYC 93.9 FM'},
   preferredStream: or('session.data.user-prefs-active-stream', 'defaultStream'),
