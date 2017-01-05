@@ -28,12 +28,5 @@ export default Component.extend(BetaActionsMixin, {
     routeSearch(val) {
       this.get('router').transitionTo('djangorendered', ['search/'], {"q": val});
     },
-    logout() {
-      this.get('metrics').trackEvent({
-        category: 'WNYC Menu',
-        label: 'Clicked Logout',
-      });
-      this.get('session').invalidate();
-    }
   }
 });
