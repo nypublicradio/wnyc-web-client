@@ -2,6 +2,7 @@ import Controller from 'ember-controller';
 import service from 'ember-service/inject';
 import config from 'wnyc-web-client/config/environment';
 import fetch from 'fetch';
+import RSVP from 'rsvp';
 
 const FLASH_MESSAGES = {
   email: 'Your email has been updated. Remember to use this new email the next time you log on.'
@@ -19,14 +20,23 @@ export default Controller.extend({
   changePassword(changeset) {
     let old_password = changeset.get('currentPassword');
     let new_password = changeset.get('newPassword');
-    this.get('session').authorize('authorizer:nypr', (header, value) => {
-      fetch(`${config.wnycAuthAPI}/v1/password`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: value
-        },
-        body: JSON.stringify({old_password, new_password})
+    return new RSVP.Promise((resolve, reject) => {
+      this.get('session').authorize('authorizer:nypr', (header, value) => {
+        fetch(`${config.wnycAuthAPI}/v1/password`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: value
+          },
+          body: JSON.stringify({old_password, new_password})
+        })
+        .then(response => {
+          if (response.ok) {
+            resolve();
+          } else {
+            reject();
+          }
+        });
       });
     });
   },
