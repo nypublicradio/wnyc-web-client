@@ -1,12 +1,12 @@
-{{#site-chrome headerDonateChunk=headerDonateChunk beta=beta isHomepage=isHomepage currentPath=currentPath chromeDisabled=chromeDisabled}}
-  {{#unless error}}
-    {{outlet}}
-  {{else}}
-    {{error-page error=error}}
-  {{/unless}}
-{{/site-chrome}}
-
 {{#unless chromeDisabled}}
+  {{#site-chrome headerDonateChunk=headerDonateChunk beta=beta isHomepage=isHomepage currentPath=currentPath}}
+    {{#unless error}}
+      {{outlet}}
+    {{else}}
+      {{error-page error=error}}
+    {{/unless}}
+  {{/site-chrome}}
+  
   {{#liquid-unless showPlayer class="player-wrapper"}}
     <div class="l-fixed l-lowright">
     {{persistent-player.queue-button
@@ -30,4 +30,8 @@
     {{/x-modal}}
     {{/if}}
   {{/liquid-bind}}
+{{else}}
+
+  {{outlet}}
+  
 {{/unless}}
