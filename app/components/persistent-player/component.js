@@ -1,27 +1,35 @@
 import Component from 'ember-component';
 import service from 'ember-service/inject';
-import computed, { reads, equal, not } from 'ember-computed';
+import computed, { reads, not } from 'ember-computed';
 import get from 'ember-metal/get';
 import set from 'ember-metal/set';
 
 
 export default Component.extend({
-  hifi                 : service(),
-  bumper               : service('bumper-state'),
-  classNames           : ['persistent-player', 'l-flexcontent', 'l-highlight--blur'],
-  classNameBindings    : ['isAudiostream'],
+  hifi                  : service(),
+  classNames            : ['persistent-player', 'l-flexcontent', 'l-highlight--blur'],
+  classNameBindings     : ['isAudiostream'],
 
-  isPlaying            : reads('hifi.isPlaying'),
-  isAudiostream        : reads('hifi.isStream'),
+  isPlaying             : reads('hifi.isPlaying'),
+  isLoading             : reads('hifi.isLoading'),
+  isAudiostream         : reads('hifi.isStream'),
 
   // Notification
-  didDismiss           : false,
-  didNotDismiss        : not('didDismiss'),
-  continuousPlayEnabled: computed.and('didNotDismiss', 'bumper.revealNotificationBar'),
+  didDismiss            : false,
+  didNotDismiss         : not('didDismiss'),
+  displayNotificationBar: computed.and('didNotDismiss', 'revealNotificationBar'),
 
-  audio                : service(),
-  currentAudio         : reads('audio.currentAudio'),
   currentTitle         : null,
+
+  playState: computed('isPlaying', 'isLoading', function() {
+    if (get(this, 'isLoading')) {
+      return 'is-loading';
+    } else if (get(this, 'isPlaying')) {
+      return 'is-playing';
+    } else {
+      return 'is-paused';
+    }
+  }),
 
   actions: {
     playOrPause() {

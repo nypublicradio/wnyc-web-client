@@ -45,6 +45,7 @@ export default Service.extend({
     },
     set(k, v) { return v; }
   }),
+
   playState: computed('isPlaying', 'isLoading', function() {
     if (get(this, 'isLoading')) {
       return 'is-loading';

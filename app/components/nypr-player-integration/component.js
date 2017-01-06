@@ -1,58 +1,58 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
-import computed, { reads, equal, not, or } from 'ember-computed';
+import computed, { reads, or } from 'ember-computed';
 import get from 'ember-metal/get';
-import set from 'ember-metal/set';
 import { songMetadata } from 'overhaul/helpers/song-metadata';
 
 export default Ember.Component.extend({
-  audio             : service(),
-  session           : service(),
-  store             : service(),
-  bumper            : service('bumper-state'),
+  audio                : service(),
+  session              : service(),
+  store                : service(),
 
-  currentAudio      : reads('audio.currentAudio'),
+  /* To determine whether or not to reveal the notification bar. The messaging
+    is handled by the autoplay-message component */
+  bumper               : service('bumper-state'),
+  revealNotificationBar: reads('bumper.revealNotificationBar'),
 
-  currentTitle      : computed.or('currentAudio.title', '_currentTitleFromShow'),
+  currentAudio         : reads('audio.currentAudio'),
+  currentTitle         : or('currentAudio.title', '_currentTitleFromShow'),
+  _currentTitleFromShow: computed('currentAudio', function() {
+    return `${this.get('currentAudio.currentShow.showTitle')} on ${this.get('currentAudio.name')}`;
+  }),
 
-  story             : or('currentAudio.currentStory', 'currentAudio'),
-  show              : reads('currentAudio.headers.brand'),
-  catalogEntry      : reads('currentAudio.currentPlaylistItem.catalogEntry'),
+  story                : or('currentAudio.currentStory', 'currentAudio'),
+  storyTitle           : or('currentAudio.title', 'currentAudio.currentShow.episodeTitle'),
+  storyUrl             : or('currentAudio.url', 'currentAudio.currentShow.episodeUrl'),
 
-  showTitle         : or('show.title', 'currentAudio.currentShow.showTitle'),
-  showUrl           : or('show.url', 'currentAudio.currentShow.showUrl'),
-  storyTitle        : or('currentAudio.title', 'currentAudio.currentShow.episodeTitle'),
-  storyUrl          : or('currentAudio.url', 'currentAudio.currentShow.episodeUrl'),
-  songDetails       : computed('catalogEntry', function() {
+  show                 : reads('currentAudio.headers.brand'),
+  showTitle            : or('show.title', 'currentAudio.currentShow.showTitle'),
+  showUrl              : or('show.url', 'currentAudio.currentShow.showUrl'),
+
+  catalogEntry         : reads('currentAudio.currentPlaylistItem.catalogEntry'),
+  songDetails          : computed('catalogEntry', function() {
     if (this.get('catalogEntry')) {
       return songMetadata([get(this, 'catalogEntry')]);
     }
   }),
 
-  streamScheduleUrl : reads('currentAudio.scheduleUrl'),
-  streamPlaylistUrl : computed('currentAudio.playlistUrl', function() {
+  streamName           : reads('currentAudio.name'),
+  streamScheduleUrl    : reads('currentAudio.scheduleUrl'),
+  streamPlaylistUrl    : computed('currentAudio.playlistUrl', function() {
     if (get(this,'currentAudio.playlistUrl')) {
       return `/streams/${get(this, 'currentAudio.id')}`;
     }
   }),
-  streamName        : reads('currentAudio.name'),
-  streamIndexUrl    : '/streams',
+  streamIndexUrl       : '/streams',
 
-  image             : computed.reads('currentAudio.imageMain.url'),
-  fallbackImage     : computed.reads('currentAudio.headers.brand.logoImage.url'),
-  defaultImageUrl   : '/assets/img/bg/player-background.png',
-  backdropImageUrl  : or('image', 'fallbackImage', 'defaultImageUrl'),
+  image                : reads('currentAudio.imageMain.url'),
+  fallbackImage        : reads('currentAudio.headers.brand.logoImage.url'),
+  defaultImageUrl      : '/assets/img/bg/player-background.png',
+  backdropImageUrl     : or('image', 'fallbackImage', 'defaultImageUrl'),
 
+  playingAudioType     : 'ondemand', //bumper, stream, ondemand
 
-  playingAudioType  : 'ondemand', //bumper, stream, ondemand
-
-  queueLength       : 0,
-
-  showQueue         : false,
-
-  _currentTitleFromShow: computed('currentAudio', function() {
-    return `${this.get('currentAudio.currentShow.showTitle')} on ${this.get('currentAudio.name')}`;
-  }),
+  queueLength          : 0,
+  showQueue            : false,
 
   actions: {
     onDismissNotification() {

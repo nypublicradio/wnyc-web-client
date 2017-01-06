@@ -28,47 +28,52 @@
   {{#unless chromeDisabled}}
     <div class="l-fixed l-lowright">
     {{persistent-player.queue-button
-      isFloating  = true
-      queueLength = audio.queue.items.length
-      showModal   = (action 'showModal')
-      closeModal  = (action 'closeModal')
-      isOpenModal = modal}}
+        isFloating  = true
+        queueLength = audio.queue.items.length
+        showModal   = (action 'showModal')
+        closeModal  = (action 'closeModal')
+        isOpenModal = modal}}
     </div>
   {{/unless}}
   {{else}}
     {{#persistent-player
-      storyTitle            = integration.storyTitle
-      storyUrl              = integration.storyUrl
-      songDetails           = integration.songDetails
+        currentTitle          = integration.currentTitle
 
-      currentTitle          = integration.currentTitle
-      showTitle             = integration.showTitle
-      showUrl               = integration.showUrl
+        storyTitle            = integration.storyTitle
+        storyUrl              = integration.storyUrl
 
-      streamScheduleUrl     = integration.streamScheduleUrl
-      streamName            = integration.streamName
-      streamPlaylistUrl     = integration.streamPlaylistUrl
-      streamsIndexUrl       = integration.streamIndexUrl
+        songDetails           = integration.songDetails
+        showTitle             = integration.showTitle
+        showUrl               = integration.showUrl
 
-      backdropImageUrl      = integration.backdropImageUrl
+        streamScheduleUrl     = integration.streamScheduleUrl
+        streamName            = integration.streamName
+        streamPlaylistUrl     = integration.streamPlaylistUrl
+        streamsIndexUrl       = integration.streamIndexUrl
 
-      onPlay                = integration.onPlay
-      onPause               = integration.onPause
-      onDismissNotification = integration.onDismissNotification
+        backdropImageUrl      = integration.backdropImageUrl
 
+        onPlay                = integration.onPlay
+        onPause               = integration.onPause
+        onDismissNotification = integration.onDismissNotification
+
+        revealNotificationBar = integration.revealNotificationBar
       as |area player|}}
       {{#if area.queue}}
         {{player.queueButton
-          queueLength       = audio.queue.items.length
-          showModal         = (action 'showModal')
-          closeModal        = (action 'closeModal')
-          isOpenModal       = modal}}
+            queueLength       = audio.queue.items.length
+            showModal         = (action 'showModal')
+            closeModal        = (action 'closeModal')
+            isOpenModal       = modal}}
       {{else if area.share}}
         {{share-button
-          story             = integration.currentAudio
-          type              = (if integration.isAudiostream 'stream' 'ondemand')
-          region            = "Player"
-          text              = "SHARE"}}
+            story             = integration.currentAudio
+            type              = (if integration.isAudiostream 'stream' 'ondemand')
+            region            = "Player"
+            text              = "SHARE"}}
+      {{else if area.notification}}
+        {{! This is just the message, the dismiss handler and the flag to show this message is above}}
+        {{autoplay-notification duration=audio.duration position=audio.position audioType=currentAudio.audioType}}
       {{/if}}
     {{/persistent-player}}
   {{/liquid-unless}}

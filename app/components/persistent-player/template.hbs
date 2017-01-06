@@ -1,14 +1,10 @@
-{{#liquid-if continuousPlayEnabled class='notification-wrapper'}}
-  {{persistent-player.notification
-    dismissNotification = (action 'dismissNotification')
-    duration            = hifi.duration
-    position            = hifi.position
-    audioType           = audioType
-  }}
+{{#liquid-if displayNotificationBar class='notification-wrapper'}}
+  {{#persistent-player.notification dismissNotification = (action 'dismissNotification')}}
+    {{yield (hash notification=true)}}
+  {{/persistent-player.notification}}
 {{/liquid-if}}
 
-{{persistent-player.backdrop
-  backdropImageUrl      = backdropImageUrl}}
+{{persistent-player.backdrop backdropImageUrl=backdropImageUrl}}
 
 {{#holygrail-layout as |g|}}
   {{#g.left}}
@@ -27,7 +23,7 @@
       {{! Refactor this and take it out }}
       {{listen-button
         type      = 'white-hollow'
-        state     = audio.playState
+        state     = playState
         itemTitle = currentTitle
         click     = (action 'playOrPause')}}
 
