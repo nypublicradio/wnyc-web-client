@@ -13,7 +13,8 @@ export default Component.extend({
 
   storyTitle:     null,
   storyUrl:       null,
-
+  
+  audioId:        null,
   songDetails:   null,
   
   didReceiveAttrs({oldAttrs, newAttrs}) {

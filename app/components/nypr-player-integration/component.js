@@ -4,6 +4,10 @@ import computed, { reads, or } from 'ember-computed';
 import get from 'ember-metal/get';
 import { songMetadata } from 'overhaul/helpers/song-metadata';
 
+/* A conglomeration of logic that was baked into the persistent player,
+isolated and removed to this component. This component basically translates
+our audio logic into dumb arguments for the player to display */
+
 export default Ember.Component.extend({
   audio                : service(),
   session              : service(),
