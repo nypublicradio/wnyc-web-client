@@ -40,9 +40,6 @@ Router.map(function() {
   this.route('topics');
   this.route('settings');
 
-  this.route('login');
-  this.route('forgot-password');
-
   this.route('discover', function() {
     this.route('start');
     this.route('topics', {path: 'start/topics'});
