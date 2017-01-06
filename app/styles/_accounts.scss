@@ -1,12 +1,3 @@
-.chrome-disabled #site-chrome {
-  padding-left: 0;
-}
-.chrome-disabled .sitechrome-page-content-area {
-  @include mq($medium-and-up) {
-    padding-left: 318px;
-  }
-}
-
 .account-togglelogin {
   position: absolute;
   right: 30px;
