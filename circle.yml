@@ -45,7 +45,7 @@ deployment:
             WNYC_ADMIN_ROOT: $PROD_ADMIN_ROOT
             GOOGLE_TAG_MANAGER_ID: $PROD_GOOGLE_TAG_MANAGER_ID
   demo:
-    branch: demo
+    branch: master
     commands:
       - ./node_modules/ember-cli/bin/ember deploy demo --verbose:
           environment:
