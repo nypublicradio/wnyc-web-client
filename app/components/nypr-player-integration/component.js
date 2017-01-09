@@ -11,7 +11,6 @@ our audio logic into dumb arguments for the player to display */
 export default Ember.Component.extend({
   audio                : service(),
   session              : service(),
-  store                : service(),
 
   /* To determine whether or not to reveal the notification bar. The messaging
     is handled by the autoplay-message component */
