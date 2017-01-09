@@ -1,6 +1,5 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { setBreakpointForIntegrationTest } from 'overhaul/tests/helpers/responsive';
 
 moduleForComponent('persistent-player', 'Integration | Component | persistent player', {
   integration: true

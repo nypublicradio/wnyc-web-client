@@ -20,12 +20,10 @@
         {{wnyc-svg className = "icon" icon = "rewind15"}}
       </button>
 
-      {{! Refactor this and take it out }}
-      {{listen-button
-        type      = 'white-hollow'
-        state     = playState
-        itemTitle = currentTitle
-        click     = (action 'playOrPause')}}
+      {{persistent-player.listen-button
+        state        = playState
+        currentTitle = currentTitle
+        click        = (action 'playOrPause')}}
 
       <button class="btn btn--blank btn--playerdark persistent-skipbutton" {{action 'fastForward'}}  aria-text="skip forward 15 seconds" aria-labelledby="fastforward-label">
         <label class="visuallyhidden" id="fastforward-label">Skip ahead 15 seconds</label>
