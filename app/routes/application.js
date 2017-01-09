@@ -45,19 +45,19 @@ export default Route.extend(ApplicationRouteMixin, {
   actions: {
     error(error/*, transition*/) {
       if (error) {
-        this.controller.set('error', error);
+        this.controllerFor('application').set('error', error);
       }
     },
     didTransition() {
-      this.controller.set('error', null);
+      this.controllerFor('application').set('error', null);
     },
     willTransition() {
       //close queue/history modal when we open a new page
-      this.controller.send('closeModal');
+      this.controllerFor('application').send('closeModal');
       this.send('updateDonateChunk', null);
     },
     updateDonateChunk(donateChunk) {
-      this.controller.set('headerDonateChunk', donateChunk);
+      this.controllerFor('application').set('headerDonateChunk', donateChunk);
     }
   },
 

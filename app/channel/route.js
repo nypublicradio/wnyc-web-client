@@ -29,13 +29,13 @@ export default Route.extend(PlayParamMixin, {
     })
     .catch(e => retryFromServer(e, listingSlug.replace(/\/*$/, '/')));
   },
-  afterModel({ channel }) {
+  afterModel({ channel }, transition) {
     const channelTitle = get(channel, 'title');
     const metrics = get(this, 'metrics');
     const nprVals = get(channel, 'nprAnalyticsDimensions');
     
     if (channel.get('headerDonateChunk')) {
-      this.send('updateDonateChunk', channel.get('headerDonateChunk'));
+      transition.send('updateDonateChunk', channel.get('headerDonateChunk'));
     }
 
     metrics.trackEvent({
