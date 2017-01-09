@@ -7,7 +7,7 @@ body:not(.ember-application):not([data-testing]):not(.simplified_wrapper):not(.c
 }
 
 body {
-  > #site {
+  > .wqxr-main-contents {
     display: none;
   }
 }
