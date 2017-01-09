@@ -12,7 +12,6 @@ moduleFor('service:audio', 'Unit | Service | audio', {
   needs: [...hifiNeeds,
           'model:story','adapter:story','serializer:story',
           'model:stream','adapter:stream','serializer:stream',
-          'model:discover/stories',
           'service:features',
           'service:bumper-state',
           'service:poll',
