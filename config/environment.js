@@ -59,7 +59,7 @@ module.exports = function(environment) {
       //debug: process.env.DEPLOY_TARGET !== 'production',
       development: environment !== 'production',
       includePaths: [
-        process.env.WNYC_URL,
+        process.env.WQXR_URL,
         /https?:\/\/(static|demo-static)\.wnyc\.org/,
         /https?:\/\/media\.wnyc\.org/,
         /https?:\/\/(demo2-wnyc)\.wqxr\.org/
