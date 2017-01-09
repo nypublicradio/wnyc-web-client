@@ -1,4 +1,4 @@
-import { shareMetadata } from 'wnyc-web-client/helpers/share-metadata';
+import { shareMetadata } from 'wqxr-web-client/helpers/share-metadata';
 import { module, test } from 'qunit';
 
 module('Unit | Helper | share metadata');

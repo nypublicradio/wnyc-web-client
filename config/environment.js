@@ -9,7 +9,7 @@ module.exports = function(environment) {
   }
 
   var ENV = {
-    modulePrefix: 'wnyc-web-client',
+    modulePrefix: 'wqxr-web-client',
     environment: environment,
     rootURL: '/',
     locationType: 'auto',
@@ -65,7 +65,7 @@ module.exports = function(environment) {
         /https?:\/\/(demo2-wnyc)\.wqxr\.org/
       ],
       whitelistUrls: [
-        /https?:\/\/(static|demo-static)\.wnyc\.org\/assets\/(vendor|wnyc-web-client)-.*/,
+        /https?:\/\/(static|demo-static)\.wnyc\.org\/assets\/(vendor|wqxr-web-client)-.*/,
         /https?:\/\/media\.wnyc\.org\/static\/.*\.js/,
         /https?:\/\/((demo2-wnyc)\.)?wqxr\.org\/static\/.*\.js/
       ],

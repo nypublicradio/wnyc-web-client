@@ -7,10 +7,10 @@
   out of the old JS.
 */
 import Ember from 'ember';
-import config from 'wnyc-web-client/config/environment';
-import { removeAlienListeners, assign } from 'wnyc-web-client/lib/alien-dom';
-import { runOnce } from 'wnyc-web-client/services/legacy-loader';
-import { canonicalize } from 'wnyc-web-client/services/script-loader';
+import config from 'wqxr-web-client/config/environment';
+import { removeAlienListeners, assign } from 'wqxr-web-client/lib/alien-dom';
+import { runOnce } from 'wqxr-web-client/services/legacy-loader';
+import { canonicalize } from 'wqxr-web-client/services/script-loader';
 const { $, get } = Ember;
 
 export function homepageCleanup(element = document.body) {
@@ -115,9 +115,9 @@ export function serializeInlineDoc(inlineDoc) {
   // we get problems from recursive ember views and ember trying to boot again
   toClean.push(...inlineDoc.querySelectorAll('.ember-view'));
   toClean.push(inlineDoc.querySelector('script[src*="assets/vendor"]'));
-  toClean.push(inlineDoc.querySelector('script[src*="assets/wnyc-web-client"]'));
+  toClean.push(inlineDoc.querySelector('script[src*="assets/wqxr-web-client"]'));
   toClean.push(inlineDoc.querySelector('link[href*="assets/vendor"]'));
-  toClean.push(inlineDoc.querySelector('link[href*="assets/wnyc-web-client"]'));
+  toClean.push(inlineDoc.querySelector('link[href*="assets/wqxr-web-client"]'));
 
   toClean.forEach(n => n && n.parentNode.removeChild(n));
 

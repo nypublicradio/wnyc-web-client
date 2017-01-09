@@ -1,8 +1,8 @@
 import Ember from 'ember';
 import { moduleFor, test } from 'ember-qunit';
-import startMirage from 'wnyc-web-client/tests/helpers/setup-mirage-for-integration';
+import startMirage from 'wqxr-web-client/tests/helpers/setup-mirage-for-integration';
 import wait from 'ember-test-helpers/wait';
-import hifiNeeds from 'wnyc-web-client/tests/helpers/hifi-needs';
+import hifiNeeds from 'wqxr-web-client/tests/helpers/hifi-needs';
 import sinon from 'sinon';
 
 import DummyConnection from 'ember-hifi/hifi-connections/dummy-connection';
@@ -17,7 +17,6 @@ moduleFor('service:audio', 'Unit | Service | audio', {
           'service:bumper-state',
           'service:poll',
           'service:metrics',
-          'service:data-pipeline',
           'service:listen-queue',
           'service:listen-history'],
 
@@ -36,6 +35,9 @@ moduleFor('service:audio', 'Unit | Service | audio', {
 
     this.register('service:session', sessionStub);
     this.inject.service('session');
+
+    this.register('service:listen-actions', listenActionsStub);
+    this.inject.service('listen-actions');
 
     this.register('service:metrics', metricsStub);
     this.inject.service('metrics');
@@ -575,6 +577,8 @@ test('service passes correct attrs to data pipeline to report a livestream liste
       });
     });
   });
+
+  return wait();
 });
 
 test('it only sets up the player ping once', function(assert) {
@@ -619,6 +623,50 @@ test('it calls the GoogleAnalytics ping event', function(assert) {
   Ember.run(() => service.play(story.id));
 });
 
+test('it sends a listen action on play and not resume', function(assert) {
+  assert.expect(1);
+
+  let service = this.subject();
+  let story = server.create('story');
+  let listenActionStub = {
+    sendPlay() {
+      assert.ok(true, 'sendPlay was called');
+    },
+    sendPause() {}
+  };
+  Ember.run(() => {
+    service.set('listenActions', listenActionStub);
+    service.set('hifi', hifiStub);
+    service.play(story.id);
+  });
+
+  Ember.run(() => service.pause());
+
+  Ember.run(() => service.play(story.id));
+
+  return wait();
+});
+
+test('it sends a listen action on pause', function(assert) {
+  let service = this.subject();
+  let story = server.create('story');
+  let listenActionStub = {
+    sendPause() {
+      assert.ok(true, 'sendPause was called');
+    },
+    sendPlay() {}
+  };
+  Ember.run(() => {
+    service.set('listenActions', listenActionStub);
+    service.set('hifi', hifiStub);
+    service.play(story.id).then(() => {
+      service.pause();
+    });
+  });
+
+  return wait();
+});
+
 test('with the bumper-state enabled, the bumper will act on a finished track event', function(assert) {
   let url = '/audio.mp3';
   let story = server.create('story', { audio: url });
@@ -650,6 +698,7 @@ test('with the bumper-state enabled, the bumper will act on a finished track eve
 //   // Specify the other units that are required for this test.
 //   needs: ['model:story','adapter:story','serializer:story',
 //           'model:discover/stories',
+//           'service:listen-actions',
 //           'service:poll',
 //           'service:metrics',
 //           'service:listen-history'],
@@ -669,6 +718,10 @@ test('with the bumper-state enabled, the bumper will act on a finished track eve
 //
 //     this.register('service:session', sessionStub);
 //     this.inject.service('session', { as: 'session' });
+//
+//     this.register('service:listen-actions', listenActionsStub);
+//     this.inject.service('listen-actions', { as: 'listen-actions' });
+//
 //   },
 //   afterEach() {
 //     server.shutdown();

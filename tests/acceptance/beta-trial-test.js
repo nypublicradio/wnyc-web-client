@@ -1,9 +1,9 @@
-import config from 'wnyc-web-client/config/environment';
-import BetaActionsMixin from 'wnyc-web-client/mixins/beta-actions';
-import { plantBetaTrial, clearBetaCookies } from 'wnyc-web-client/tests/helpers/beta';
-import { resetHTML, appendIfNot } from 'wnyc-web-client/tests/helpers/html';
+import config from 'wqxr-web-client/config/environment';
+import BetaActionsMixin from 'wqxr-web-client/mixins/beta-actions';
+import { plantBetaTrial, clearBetaCookies } from 'wqxr-web-client/tests/helpers/beta';
+import { resetHTML, appendIfNot } from 'wqxr-web-client/tests/helpers/html';
 import { test } from 'qunit';
-import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
 import $ from 'jquery';
 
 let assertRun;
@@ -88,7 +88,6 @@ moduleForAcceptance('Acceptance | on the beta site', {
     plantBetaTrial();
     config.betaTrials.isBetaSite = true;
     config.betaTrials.preBeta = false;
-    server.create('stream');
   },
   afterEach() {
     resetHTML();
@@ -130,7 +129,6 @@ moduleForAcceptance('Acceptance | retired beta trial', {
     plantBetaTrial(withExit);
     config.betaTrials.isBetaSite = false;
     config.betaTrials.preBeta = false;
-    server.create('stream');
   },
   afterEach() {
     resetHTML();

@@ -4,7 +4,7 @@ import Component from 'ember-component';
 import computed, { and, equal, readOnly, or } from 'ember-computed';
 import get from 'ember-metal/get';
 import set from 'ember-metal/set';
-import { imageTemplate } from 'wnyc-web-client/helpers/image-template';
+import { imageTemplate } from'wqxr-web-client/helpers/image-template';
 import { htmlSafe } from 'ember-string';
 
 const STATUSES = {

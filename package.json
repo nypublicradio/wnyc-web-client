@@ -1,7 +1,7 @@
 {
-  "name": "wnyc-web-client",
+  "name": "wqxr-web-client",
   "version": "0.0.0",
-  "description": "Small description for wnyc-web-client goes here",
+  "description": "Small description for wqxr-web-client goes here",
   "private": true,
   "directories": {
     "doc": "doc",
@@ -47,7 +47,6 @@
     "ember-cli-document-title": "0.3.3",
     "ember-cli-dotenv": "1.2.0",
     "ember-cli-fastclick": "1.3.0",
-    "ember-cli-flash": "1.4.1",
     "ember-cli-htmlbars": "^1.0.10",
     "ember-cli-htmlbars-inline-precompile": "^0.3.3",
     "ember-cli-inject-live-reload": "^1.4.1",

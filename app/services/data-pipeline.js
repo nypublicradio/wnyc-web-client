@@ -1,7 +1,7 @@
 import Service from 'ember-service';
 import fetch from 'fetch';
 import service from 'ember-service/inject';
-import config from 'wnyc-web-client/config/environment';
+import config from'wqxr-web-client/config/environment';
 import { next } from 'ember-runloop';
 
 const LISTEN_ACTIONS = {

@@ -1,20 +1,15 @@
 import Ember from 'ember';
 import { moduleFor, test } from 'ember-qunit';
-import startMirage from 'wnyc-web-client/tests/helpers/setup-mirage-for-integration';
+import startMirage from 'wqxr-web-client/tests/helpers/setup-mirage-for-integration';
 import wait from 'ember-test-helpers/wait';
 
 moduleFor('service:listen-queue', 'Unit | Service | listen queue', {
-  needs: [
-    'service:session',
-    'model:story',
-    'adapter:story',
-    'serializer:story'
-  ],
+  // Specify the other units that are required for this test.
+  needs: ['service:session', 'model:story', 'adapter:story'],
   beforeEach() {
     startMirage(this.container);
     const sessionStub = Ember.Service.extend({
-      data: {},
-      authorize: function() {}
+      data: {}
     });
 
     this.register('service:session', sessionStub);

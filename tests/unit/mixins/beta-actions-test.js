@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import BetaActionsMixin from 'wnyc-web-client/mixins/beta-actions';
+import BetaActionsMixin from 'wqxr-web-client/mixins/beta-actions';
 import { module, test } from 'qunit';
 
 module('Unit | Mixin | beta actions');

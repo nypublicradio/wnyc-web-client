@@ -1,5 +1,5 @@
 import test from 'ember-sinon-qunit/test-support/test';
-import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
 
 moduleForAcceptance('Acceptance | playlist');
 

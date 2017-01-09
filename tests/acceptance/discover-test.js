@@ -1,8 +1,8 @@
 import { test, skip } from 'qunit';
-import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
-import { currentSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
-import ENV from 'wnyc-web-client/config/environment';
-import 'wnyc-web-client/tests/helpers/with-feature';
+import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
+import { currentSession } from 'wqxr-web-client/tests/helpers/ember-simple-auth';
+import ENV from 'wqxr-web-client/config/environment';
+import 'wqxr-web-client/tests/helpers/with-feature';
 import velocity from 'velocity';
 
 moduleForAcceptance('Acceptance | discover',
@@ -328,7 +328,7 @@ skip('playlist request sends stories and tags in correct format', function(asser
           andThen(() => {
             click($('button:contains("Create Playlist")'));
             //
-            let url =[ENV.wnycAPI, 'api/v3/make_playlist'].join("/");
+            let url =[ENV.wnycURL, 'api/v3/make_playlist'].join("/");
 
             server.get(url, function(schema, request) {
 

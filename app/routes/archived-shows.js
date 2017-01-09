@@ -1,6 +1,6 @@
 import Route from 'ember-route';
 //import RSVP from 'rsvp';
-import ENV from 'wnyc-web-client/config/environment';
+import ENV from 'wqxr-web-client/config/environment';
 
 export default Route.extend({
   titleToken: 'More Shows',

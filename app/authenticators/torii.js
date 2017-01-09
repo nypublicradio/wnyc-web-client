@@ -2,8 +2,8 @@ import Torii from 'ember-simple-auth/authenticators/torii';
 import service from 'ember-service/inject';
 import fetch from 'fetch';
 import RSVP from 'rsvp';
-import config from 'wnyc-web-client/config/environment';
-import { decamelizeKeys } from 'wnyc-web-client/helpers/decamelize-keys';
+import config from'wqxr-web-client/config/environment';
+import { decamelizeKeys } from'wqxr-web-client/helpers/decamelize-keys';
 
 export default Torii.extend({
   torii: service(),

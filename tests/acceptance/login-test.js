@@ -1,13 +1,13 @@
 import { test, skip } from 'qunit';
-import djangoPage from 'wnyc-web-client/tests/pages/django-page';
-import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import djangoPage from 'wqxr-web-client/tests/pages/django-page';
+import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
 import { Response } from 'ember-cli-mirage';
-import config from 'wnyc-web-client/config/environment';
-import { currentSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
+import config from 'wqxr-web-client/config/environment';
+import { currentSession } from 'wqxr-web-client/tests/helpers/ember-simple-auth';
 import 'wnyc-web-client/tests/helpers/with-feature';
-import dummySuccessProviderFb from 'wnyc-web-client/tests/helpers/torii-dummy-success-provider-fb';
-import dummyFailureProvider from 'wnyc-web-client/tests/helpers/torii-dummy-failure-provider';
-import { registerMockOnInstance } from 'wnyc-web-client/tests/helpers/register-mock';
+import dummySuccessProviderFb from'wqxr-web-client/tests/helpers/torii-dummy-success-provider-fb';
+import dummyFailureProvider from'wqxr-web-client/tests/helpers/torii-dummy-failure-provider';
+import { registerMockOnInstance } from'wqxr-web-client/tests/helpers/register-mock';
 
 moduleForAcceptance('Acceptance | login', {
   beforeEach() {

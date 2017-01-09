@@ -1,7 +1,7 @@
 // based on https://github.com/intercom/ember-href-to/blob/master/app/instance-initializers/browser/ember-href-to.js
-import ENV from 'wnyc-web-client/config/environment';
+import ENV from 'wqxr-web-client/config/environment';
 import Ember from 'ember';
-import { canonicalize } from 'wnyc-web-client/services/script-loader';
+import { canonicalize } from 'wqxr-web-client/services/script-loader';
 const { $ } = Ember;
 let { wnycURL } = ENV;
 wnycURL = canonicalize(wnycURL);
@@ -43,7 +43,7 @@ function _trackEvent(data, instance) {
   if (model) {
     eventToTrack.model = model;
   }
-  metrics.trackEvent('GoogleAnalytics', eventToTrack);
+  metrics.trackEvent(eventToTrack);
 }
 
 function _trackLegacyEvent(event, instance) {
@@ -120,7 +120,7 @@ export default {
 
         let { routeName, params, queryParams } = router.recognize(href);
         router.transitionTo(routeName, params, queryParams);
-        preventDefault.bind(event)();
+        preventDefault.bind(event);
         return false;
       } else if (isExternal && !Ember.testing) {
         $target.attr('target', '_blank');

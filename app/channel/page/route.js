@@ -5,7 +5,7 @@ import set from 'ember-metal/set';
 const { Inflector } = Ember;
 
 const inflect = new Inflector(Inflector.defaultRules);
-import ListingRouteMixin from 'wnyc-web-client/mixins/listing-route';
+import ListingRouteMixin from 'wqxr-web-client/mixins/listing-route';
 
 export default Route.extend(ListingRouteMixin, {
   model({ page_params }) {

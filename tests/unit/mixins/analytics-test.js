@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import AnalyticsMixin from 'wnyc-web-client/mixins/analytics';
+import AnalyticsMixin from'wqxr-web-client/mixins/analytics';
 import { module, test } from 'qunit';
 
 module('Unit | Mixin | analytics');

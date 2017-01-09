@@ -1,4 +1,4 @@
-import ListenButton from 'wnyc-web-client/components/listen-button/component';
+import ListenButton from 'wqxr-web-client/components/listen-button/component';
 import computed from 'ember-computed';
 import get from 'ember-metal/get';
 import hbs from 'htmlbars-inline-precompile';

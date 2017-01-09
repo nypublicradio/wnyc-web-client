@@ -1,4 +1,4 @@
-import { normalizeForSorting } from 'wnyc-web-client/helpers/normalize-for-sorting';
+import { normalizeForSorting } from 'wqxr-web-client/helpers/normalize-for-sorting';
 import { module, test } from 'qunit';
 
 module('Unit | Helper | normalize for sorting');

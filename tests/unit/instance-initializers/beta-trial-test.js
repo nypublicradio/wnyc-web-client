@@ -1,10 +1,10 @@
 import Ember from 'ember';
-import config from 'wnyc-web-client/config/environment';
-import { initialize } from 'wnyc-web-client/instance-initializers/beta-trial';
+import config from 'wqxr-web-client/config/environment';
+import { initialize } from 'wqxr-web-client/instance-initializers/beta-trial';
 import { module, test } from 'qunit';
 import destroyApp from '../../helpers/destroy-app';
-import { resetHTML } from 'wnyc-web-client/tests/helpers/html';
-import { plantBetaTrial } from 'wnyc-web-client/tests/helpers/beta';
+import { resetHTML } from 'wqxr-web-client/tests/helpers/html';
+import { plantBetaTrial } from 'wqxr-web-client/tests/helpers/beta';
 
 module('Unit | Instance Initializer | beta trial | active trial', {
   beforeEach: function() {

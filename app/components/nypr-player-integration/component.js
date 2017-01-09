@@ -2,7 +2,7 @@ import Ember from 'ember';
 import service from 'ember-service/inject';
 import computed, { reads, or, and, not, equal } from 'ember-computed';
 import get from 'ember-metal/get';
-import { songMetadata } from 'wnyc-web-client/helpers/song-metadata';
+import { songMetadata } from'wqxr-web-client/helpers/song-metadata';
 
 /* A conglomeration of logic that was baked into the persistent player,
 isolated and removed to this component. This component basically translates

@@ -1,12 +1,12 @@
 import { test } from 'qunit';
-import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
-import { currentSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
-import ENV from 'wnyc-web-client/config/environment';
+import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
+import { currentSession } from 'wqxr-web-client/tests/helpers/ember-simple-auth';
+import ENV from 'wqxr-web-client/config/environment';
 import RSVP from 'rsvp';
-import config from 'wnyc-web-client/config/environment';
+import config from 'wqxr-web-client/config/environment';
 import velocity from 'velocity';
 
-import 'wnyc-web-client/tests/helpers/ember-sortable/test-helpers';
+import 'wqxr-web-client/tests/helpers/ember-sortable/test-helpers';
 
 moduleForAcceptance('Acceptance | discover returning user', {
   beforeEach() {
@@ -414,6 +414,26 @@ test('selected shows are not retained if you hit cancel', function(assert) {
   andThen(() => {
     assert.equal($(`.discover-show input[name='${shows[0].slug}']`).prop('checked'), false, "Checkbox state should have been reset to saved state");
     assert.equal($(`.discover-show input[name='${shows[1].slug}']`).prop('checked'), true, "Checkbox state should have been reset to saved state");
+  });
+});
+
+test('deleting an item sends a delete listen action', function(assert) {
+  let stories = server.db.discoverStories;
+  var story = stories[0];
+
+  let url = [ENV.wnycAccountRoot, 'api/v1/listenaction/create', story.id, 'delete'].join("/");
+  var listenActionSent = false;
+  server.post(url, function() {
+    listenActionSent = true;
+  });
+
+  visit('/discover/playlist');
+
+  andThen(() => {
+    click(`.discover-playlist-item-delete[data-story-id="${story.id}"]`);
+    andThen(() => {
+      assert.equal(listenActionSent, true, "action should have been called");
+    });
   });
 });
 

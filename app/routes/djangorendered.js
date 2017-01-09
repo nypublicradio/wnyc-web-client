@@ -1,10 +1,10 @@
-import ENV from 'wnyc-web-client/config/environment';
+import ENV from 'wqxr-web-client/config/environment';
 import Route from 'ember-route';
 import get from 'ember-metal/get';
 import service from 'ember-service/inject';
-import { retryFromServer } from 'wnyc-web-client/lib/compat-hooks';
-import { beforeTeardown } from 'wnyc-web-client/lib/compat-hooks';
-import PlayParamMixin from 'wnyc-web-client/mixins/play-param';
+import { retryFromServer } from 'wqxr-web-client/lib/compat-hooks';
+import { beforeTeardown } from 'wqxr-web-client/lib/compat-hooks';
+import PlayParamMixin from 'wqxr-web-client/mixins/play-param';
 
 export default Route.extend(PlayParamMixin, {
   queryParams: {
@@ -46,7 +46,8 @@ export default Route.extend(PlayParamMixin, {
     let metrics = get(this, 'metrics');
     let path = document.location.pathname; // e.g. '/shows/bl/'
     let title = (get(page, 'title') || '').trim();
-    metrics.trackPage('NprAnalytics', {
+    metrics.invoke('trackPage', 'NprAnalytics', {
+      isNpr: true,
       page: path,
       title
     });

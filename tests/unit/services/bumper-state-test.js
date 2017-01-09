@@ -1,11 +1,11 @@
 import { moduleFor, test } from 'ember-qunit';
 import Ember from 'ember';
-import startMirage from 'wnyc-web-client/tests/helpers/setup-mirage-for-integration';
+import startMirage from 'wqxr-web-client/tests/helpers/setup-mirage-for-integration';
 import wait from 'ember-test-helpers/wait';
 import get from 'ember-metal/get';
 import set from 'ember-metal/set';
 const { A, Service } = Ember;
-import 'wnyc-web-client/tests/helpers/with-feature';
+import 'wqxr-web-client/tests/helpers/with-feature';
 
 moduleFor('service:bumper-state', 'Unit | Service | bumper state', {
   // Specify the other units that are required for this test.
@@ -16,8 +16,7 @@ moduleFor('service:bumper-state', 'Unit | Service | bumper state', {
     'adapter:stream',
     'serializer:stream',
     'model:story',
-    'adapter:story',
-    'serializer:story'
+    'adapter:story'
   ],
 
   beforeEach() {
@@ -34,8 +33,7 @@ moduleFor('service:bumper-state', 'Unit | Service | bumper state', {
         'queue': {
           'items': A(),
         }
-      },
-      authorize: function() {}
+      }
     });
 
     startMirage(this.container);

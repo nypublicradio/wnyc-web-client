@@ -1,6 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 import sinon from 'sinon';
-import config from 'wnyc-web-client/config/environment';
+import config from'wqxr-web-client/config/environment';
 
 moduleFor('service:data-pipeline', 'Unit | Service | data pipeline', {
   // Specify the other units that are required for this test.

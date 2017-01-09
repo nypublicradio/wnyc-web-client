@@ -1,4 +1,4 @@
-import PageObject from 'wnyc-web-client/tests/page-object';
+import PageObject from 'wqxr-web-client/tests/page-object';
 
 let {
   visitable,

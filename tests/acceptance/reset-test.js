@@ -1,8 +1,8 @@
 import { test } from 'qunit';
-import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import moduleForAcceptance from'wqxr-web-client/tests/helpers/module-for-acceptance';
 import { Response } from 'ember-cli-mirage';
-import config from 'wnyc-web-client/config/environment';
-import { currentSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
+import config from'wqxr-web-client/config/environment';
+import { currentSession } from'wqxr-web-client/tests/helpers/ember-simple-auth';
 
 moduleForAcceptance('Acceptance | reset');
 

@@ -1,4 +1,4 @@
-import { shareUrl } from 'wnyc-web-client/helpers/share-url';
+import { shareUrl } from 'wqxr-web-client/helpers/share-url';
 import { module, test } from 'qunit';
 
 module('Unit | Helper | share url');

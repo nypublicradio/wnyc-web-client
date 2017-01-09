@@ -1,6 +1,6 @@
-import { inExperimentalGroup } from 'wnyc-web-client/helpers/in-experimental-group';
+import { inExperimentalGroup } from 'wqxr-web-client/helpers/in-experimental-group';
 import { module, test } from 'qunit';
-import { mockExperimentalGroup } from 'wnyc-web-client/tests/helpers/mock-experimental-group';
+import { mockExperimentalGroup } from 'wqxr-web-client/tests/helpers/mock-experimental-group';
 
 module('Unit | Helper | in experimental group');
 

@@ -1,4 +1,4 @@
-import { humanizeDuration } from 'wnyc-web-client/helpers/humanize-duration';
+import { humanizeDuration } from 'wqxr-web-client/helpers/humanize-duration';
 import { module, test } from 'qunit';
 
 module('Unit | Helper | humanize duration');

@@ -1,5 +1,5 @@
 import DS from 'ember-data';
-import { camelizeKeys } from 'wnyc-web-client/helpers/camelize-keys';
+import { camelizeKeys } from 'wqxr-web-client/helpers/camelize-keys';
 
 export default DS.JSONAPISerializer.extend({
   keyForAttribute(key) {
@@ -77,7 +77,7 @@ export default DS.JSONAPISerializer.extend({
       }
       if (current_show.episode_pk) {
         relationships = relationships || {};
-        relationships['current-story'] = {
+        relationships.currentStory = {
           data: {
             type: 'story',
             id: current_show.episode_pk
