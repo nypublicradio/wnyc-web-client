@@ -88,6 +88,7 @@ moduleForAcceptance('Acceptance | on the beta site', {
     plantBetaTrial();
     config.betaTrials.isBetaSite = true;
     config.betaTrials.preBeta = false;
+    server.create('stream');
   },
   afterEach() {
     resetHTML();
@@ -129,6 +130,7 @@ moduleForAcceptance('Acceptance | retired beta trial', {
     plantBetaTrial(withExit);
     config.betaTrials.isBetaSite = false;
     config.betaTrials.preBeta = false;
+    server.create('stream');
   },
   afterEach() {
     resetHTML();
