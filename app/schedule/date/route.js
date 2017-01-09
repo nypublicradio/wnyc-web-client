@@ -3,7 +3,7 @@ import moment from 'moment';
 
 export default Route.extend({
   titleToken() {
-    const fullDayAndDate = this.controllerFor('schedule').get('fullDayAndDate');
+    const fullDayAndDate = this.controllerFor('schedule.date').get('fullDayAndDate');
     return `Schedule for ${fullDayAndDate}`;
   },
   queryParams: {
@@ -24,12 +24,12 @@ export default Route.extend({
     return this.store.query('schedule', apiQueryParams);
   },
   setupController: function(controller, model) {
-    controller.setProperties(this.paramsFor('schedule'));
+    controller.setProperties(this.paramsFor('schedule.date'));
     this._super(controller, model);
   },
   actions: {
     loading: function(transition) {
-      const controller = this.controllerFor('schedule');
+      const controller = this.controllerFor('schedule.date');
       controller.set('currentlyLoading', true);
       transition.promise.finally(function() {
         controller.set('currentlyLoading', false);
