@@ -39,20 +39,6 @@ Router.map(function() {
   this.route('topics');
   this.route('settings');
 
-  this.route('discover', function() {
-    this.route('start');
-    this.route('topics', {path: 'start/topics'});
-    this.route('shows', {path: 'start/shows'});
-
-    this.route('edit', function() {
-      this.route('topics');
-      this.route('shows');
-    });
-
-    this.route('index', { path: 'playlist'});
-    this.route('redirect', { path: '/'} );
-  });
-
   this.route('profile');
 
   this.route('login');
