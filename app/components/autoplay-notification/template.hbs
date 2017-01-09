@@ -1,19 +1,4 @@
-{{#if preSwitch}}
-  Your episode is over. In {{remaining}} seconds,
-  {{#if streamEnabled}}
-    we'll tune you to {{preferredStream.name}}.
-  {{else}}
-    your audio queue will begin to play.
-  {{/if}}
-{{else}}
-    We
-    {{#if streamEnabled}}
-      tuned you to {{preferredStream.name}}
-    {{else}}
-      began playing your audio queue
-    {{/if}}
-    after your episode ended.
-{{/if}}
+{{notificationMessage}}
 
 <a href="/settings"
     title="Change Settings"

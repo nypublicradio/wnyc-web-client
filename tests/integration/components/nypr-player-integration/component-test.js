@@ -1,7 +1,5 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { setBreakpointForIntegrationTest } from 'overhaul/tests/helpers/responsive';
-
 
 const sessionStub = Ember.Service.extend({
   data: {

@@ -23,41 +23,96 @@ moduleForComponent('autoplay-notification', 'Integration | Component | autoplay 
   }
 });
 
-test('it renders with the bumper duration countdown', function(assert) {
+test('it renders with the bumper duration countdown with stream message if stream is enabled', function(assert) {
   server.create('stream', { slug: 'wnyc-fm939', name: 'WNYC 93.9FM', audioBumper: 'blergh' });
   this.setProperties({
     duration: 15000,
     position: 0,
-    audioType: 'bumper'
+    audioType: 'bumper',
+    preferredStreamStub: {
+      name: 'WNYC 93.9 FM'
+    },
+    streamEnabledStub: true
   });
 
   this.on('dismiss', function() {
     assert.equal(this.$('.player-notification').length, 0);
   });
 
-  this.render(hbs`{{autoplay-notification duration=duration position=position audioType=audioType}}`);
+  this.render(hbs`{{autoplay-notification preferredStream=preferredStreamStub streamEnabled=streamEnabledStub duration=duration position=position audioType=audioType}}`);
 
-  let actualText = this.$('.player-notification p').text().trim().replace(/\s{2,}/gm, ' ');
-  let expectedText = 'Your episode is over. In 15 seconds, we\'ll tune you to . Change Settings';
+  let actualText = this.$().text().trim().replace(/\s{2,}/gm, ' ');
+  let expectedText = 'Your episode is over. In 15 seconds, we\'ll tune you to WNYC 93.9 FM. Change Settings';
   assert.equal(actualText, expectedText);
 });
 
-test('it renders after the bumper duration countdown', function(assert) {
+test('it renders after the bumper duration countdown with stream message if stream is enabled', function(assert) {
   server.create('stream', { slug: 'wnyc-fm939', name: 'WNYC 93.9FM', audioBumper: 'blerg' });
   this.setProperties({
     duration: 15000,
     position: 15500,
-    audioType: 'bumper'
+    audioType: 'bumper',
+    preferredStreamStub: {
+      name: 'WNYC 93.9 FM'
+    },
+    streamEnabledStub: true
   });
 
   this.on('dismiss', function() {
     assert.equal(this.$('.player-notification').length, 0);
   });
 
-  this.render(hbs`{{autoplay-notification duration=duration position=position audioType=audioType}}`);
+  this.render(hbs`{{autoplay-notification preferredStream=preferredStreamStub streamEnabled=streamEnabledStub duration=duration position=position audioType=audioType}}`);
 
   // this kind of makes me NEVER want to split up text with conditional values at all in handlebars
-  let actualElapsedText = this.$('.player-notification p').text().trim().replace(/\s{2,}/gm, ' ');
-  let expectedElapsedText = 'We tuned you to after your episode ended. Change Settings';
+  let actualElapsedText = this.$().text().trim().replace(/\s{2,}/gm, ' ');
+  let expectedElapsedText = 'We tuned you to WNYC 93.9 FM after your episode ended. Change Settings';
+  assert.equal(actualElapsedText, expectedElapsedText);
+});
+
+test('it renders with the bumper duration countdown with queue message if stream is disabled', function(assert) {
+  server.create('stream', { slug: 'wnyc-fm939', name: 'WNYC 93.9FM', audioBumper: 'blergh' });
+  this.setProperties({
+    duration: 15000,
+    position: 0,
+    audioType: 'bumper',
+    preferredStreamStub: {
+      name: 'WNYC 93.9 FM'
+    },
+    streamEnabledStub: false
+  });
+
+  this.on('dismiss', function() {
+    assert.equal(this.$('.player-notification').length, 0);
+  });
+
+  this.render(hbs`{{autoplay-notification preferredStream=preferredStreamStub streamEnabled=streamEnabledStub duration=duration position=position audioType=audioType}}`);
+
+  let actualText = this.$().text().trim().replace(/\s{2,}/gm, ' ');
+  let expectedText = 'Your episode is over. In 15 seconds, your audio queue will begin to play. Change Settings';
+  assert.equal(actualText, expectedText);
+});
+
+test('it renders after the bumper duration countdown with queue message if stream is disabled', function(assert) {
+  server.create('stream', { slug: 'wnyc-fm939', name: 'WNYC 93.9FM', audioBumper: 'blerg' });
+  this.setProperties({
+    duration: 15000,
+    position: 15500,
+    audioType: 'bumper',
+    preferredStreamStub: {
+      name: 'WNYC 93.9 FM'
+    },
+    streamEnabledStub: false
+  });
+
+  this.on('dismiss', function() {
+    assert.equal(this.$('.player-notification').length, 0);
+  });
+
+  this.render(hbs`{{autoplay-notification preferredStream=preferredStreamStub streamEnabled=streamEnabledStub duration=duration position=position audioType=audioType}}`);
+
+  // this kind of makes me NEVER want to split up text with conditional values at all in handlebars
+  let actualElapsedText = this.$().text().trim().replace(/\s{2,}/gm, ' ');
+  let expectedElapsedText = 'We began playing your audio queue after your episode ended. Change Settings';
   assert.equal(actualElapsedText, expectedElapsedText);
 });
