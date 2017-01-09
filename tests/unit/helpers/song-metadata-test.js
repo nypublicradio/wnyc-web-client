@@ -1,4 +1,4 @@
-import { songMetadata } from 'wnyc-web-client/helpers/song-metadata';
+import { songMetadata } from 'wqxr-web-client/helpers/song-metadata';
 import { module, test } from 'qunit';
 
 module('Unit | Helper | song metadata');

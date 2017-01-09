@@ -1,5 +1,5 @@
-import PageObject from 'wnyc-web-client/tests/page-object';
-import { appendHTML } from 'wnyc-web-client/tests/helpers/html';
+import PageObject from 'wqxr-web-client/tests/page-object';
+import { appendHTML } from 'wqxr-web-client/tests/helpers/html';
 
 let {
   visitable,

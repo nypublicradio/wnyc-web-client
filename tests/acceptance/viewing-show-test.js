@@ -1,9 +1,9 @@
 import { test } from 'qunit';
-import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
-import djangoPage from 'wnyc-web-client/tests/pages/django-page';
-import showPage from 'wnyc-web-client/tests/pages/show';
-import { resetHTML } from 'wnyc-web-client/tests/helpers/html';
-import config from 'wnyc-web-client/config/environment';
+import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
+import djangoPage from 'wqxr-web-client/tests/pages/django-page';
+import showPage from 'wqxr-web-client/tests/pages/show';
+import { resetHTML } from 'wqxr-web-client/tests/helpers/html';
+import config from 'wqxr-web-client/config/environment';
 import sinon from 'sinon';
 
 moduleForAcceptance('Acceptance | Django Page | Show Page', {

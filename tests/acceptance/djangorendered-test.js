@@ -1,14 +1,14 @@
-import config from 'wnyc-web-client/config/environment';
+import config from 'wqxr-web-client/config/environment';
 import { skip, test } from 'qunit';
-import { plantBetaTrial } from 'wnyc-web-client/tests/helpers/beta';
-import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
-import djangoPage from 'wnyc-web-client/tests/pages/django-page';
+import { plantBetaTrial } from 'wqxr-web-client/tests/helpers/beta';
+import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
+import djangoPage from 'wqxr-web-client/tests/pages/django-page';
 import Ember from 'ember';
 const { wnycURL } = config;
 import {
   resetHTML
-} from 'wnyc-web-client/tests/helpers/html';
-import 'wnyc-web-client/tests/helpers/hifi-acceptance-helper';
+} from 'wqxr-web-client/tests/helpers/html';
+import 'wqxr-web-client/tests/helpers/hifi-acceptance-helper';
 
 function escapeNavigation() {
   return 'leaving';
@@ -82,7 +82,7 @@ skip('it retries the server on a request error', function(assert) {
 });
 
 test('deferred scripts embedded within content do not run twice', function(assert) {
-  let page = server.create('django-page', {
+  let page = server.create('djangoPage', {
     id: 'story/foo/',
     slug: 'foo',
     body: `

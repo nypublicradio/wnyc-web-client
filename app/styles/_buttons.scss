@@ -632,7 +632,7 @@
 * The important thing is to add a data-state attribute set to either `first` or
 * `second`. This corresponds to which child will be displayed by default.
 *
-* Requires `js/overhaul/main.js` but should probably split into its own mod.
+* Requires `js/wqxr-web-client/main.js` but should probably split into its own mod.
 *
 *      @example
 *      button.btn.btn--toggle.js-toggleButton(data-state="first")

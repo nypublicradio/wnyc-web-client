@@ -1,4 +1,4 @@
-import { canChangeVolume } from 'wnyc-web-client/helpers/can-change-volume';
+import { canChangeVolume } from 'wqxr-web-client/helpers/can-change-volume';
 import { module, test } from 'qunit';
 
 module('Unit | Helper | can change volume');

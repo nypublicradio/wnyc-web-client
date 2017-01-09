@@ -1,7 +1,7 @@
-import config from 'wnyc-web-client/config/environment';
+import config from 'wqxr-web-client/config/environment';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { canonicalize  } from 'wnyc-web-client/services/script-loader';
+import { canonicalize  } from 'wqxr-web-client/services/script-loader';
 let { wnycURL } = config;
 wnycURL = canonicalize(wnycURL);
 

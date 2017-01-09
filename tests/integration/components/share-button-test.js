@@ -1,8 +1,8 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import wait from 'ember-test-helpers/wait';
 import hbs from 'htmlbars-inline-precompile';
-import { urlEncode } from 'wnyc-web-client/helpers/url-encode';
-import { shareMetadata } from 'wnyc-web-client/helpers/share-metadata';
+import { urlEncode } from 'wqxr-web-client/helpers/url-encode';
+import { shareMetadata } from 'wqxr-web-client/helpers/share-metadata';
 
 moduleForComponent('share-button', 'Integration | Component | share button', {
   integration: true
@@ -66,7 +66,7 @@ test('buttons send correct analytics values when clicked with a story', function
   let trackedEvents = [];
   let region = 'testZone';
   let mockMetrics = {
-    trackEvent(service, trackingObject) {
+    trackEvent(trackingObject) {
       trackedEvents.push(trackingObject);
     }
   };
@@ -103,7 +103,7 @@ test('buttons send correct analytics values when clicked with a stream', functio
   let region = 'testZone';
   let trackedEvents = [];
   let mockMetrics = {
-    trackEvent(service, trackingObject) {
+    trackEvent(trackingObject) {
       trackedEvents.push(trackingObject);
     }
   };

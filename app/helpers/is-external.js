@@ -1,6 +1,6 @@
-import ENV from 'wnyc-web-client/config/environment';
+import ENV from 'wqxr-web-client/config/environment';
 import { helper } from 'ember-helper';
-import { canonicalize } from 'wnyc-web-client/services/script-loader';
+import { canonicalize } from 'wqxr-web-client/services/script-loader';
 let { wnycURL } = ENV;
 wnycURL = canonicalize(wnycURL);
 

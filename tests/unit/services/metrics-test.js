@@ -1,4 +1,4 @@
-import config from 'wnyc-web-client/config/environment';
+import config from 'wqxr-web-client/config/environment';
 import { moduleFor } from 'ember-qunit';
 import test from 'ember-sinon-qunit/test-support/test';
 
@@ -19,8 +19,24 @@ test('it exists', function(assert) {
 });
 
 test('calling tracking events does not call npr tracking events', function(assert) {
-  let service = this.subject({options: config});
-
+  let service = this.subject();
+  service.activateAdapters([{
+    name: 'DataWarehouse',
+    config: {
+      host: config.wnycAccountRoot,
+      endpoint: 'api/v1/analytics/ga',
+    }
+  }, {
+    name: 'GoogleAnalytics',
+    config: {
+      id: config.googleAnalyticsKey
+    },
+  }, {
+    name: 'NprAnalytics',
+    config: {
+      id: config.nprGoogleAnalyticsKey
+    }
+  }]);
   let nprTrackPageSpy = this.spy(service._adapters.NprAnalytics, 'trackPage');
   let nprTrackEventSpy = this.spy(service._adapters.NprAnalytics, 'trackEvent');
 

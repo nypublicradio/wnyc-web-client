@@ -1,9 +1,9 @@
 import { test } from 'qunit';
-import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
-import config from 'wnyc-web-client/config/environment';
+import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
+import config from 'wqxr-web-client/config/environment';
 import sinon from 'sinon';
 import velocity from 'velocity';
-import GoogleAnalytics from 'wnyc-web-client/metrics-adapters/google-analytics';
+import GoogleAnalytics from 'wqxr-web-client/metrics-adapters/google-analytics';
 
 moduleForAcceptance('Acceptance | Analytics', {
   beforeEach() {

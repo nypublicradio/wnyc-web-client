@@ -4,7 +4,7 @@ import ENV from '../config/environment';
 import get from 'ember-metal/get';
 import computed from 'ember-computed';
 import parseAnalyticsCode from '../utils/analytics-code-parser';
-import { shareMetadata } from 'wnyc-web-client/helpers/share-metadata';
+import { shareMetadata } from 'wqxr-web-client/helpers/share-metadata';
 const { attr, Model } = DS;
 
 export default Model.extend({
@@ -29,7 +29,6 @@ export default Model.extend({
   itemTypeId: attr('number'),
   isLatest: attr('boolean'),
   largeTeaseLayout: attr('boolean'),
-  siteId: attr('number'),
   slug: attr('string'),
   tease: attr('string'),
   title: attr('string'),
@@ -124,14 +123,5 @@ export default Model.extend({
       this._currentSegment = 0;
       return this.getCurrentSegment();
     }
-  },
-  
-  forListenAction(data) {
-    return Ember.RSVP.Promise.resolve(Object.assign({
-      audio_type: 'ondemand',
-      cms_id: this.get('id'),
-      site_id: this.get('siteId'),
-      item_type: this.get('itemType'),
-    }, data));
   }
 });

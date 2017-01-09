@@ -1,24 +1,36 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
 import ENV from '../../config/environment';
-import LegacySupportMixin from 'wnyc-web-client/mixins/legacy-support';
-import BetaActionsMixin from 'wnyc-web-client/mixins/beta-actions';
-import { canonicalize } from 'wnyc-web-client/services/script-loader';
+import LegacySupportMixin from 'wqxr-web-client/mixins/legacy-support';
+import BetaActionsMixin from 'wqxr-web-client/mixins/beta-actions';
+import { canonicalize } from 'wqxr-web-client/services/script-loader';
 import {
   isInDom,
   embeddedComponentSetup,
   clearAlienDom,
 } from '../../lib/alien-dom';
 
-const { get, computed } = Ember;
-let { wnycURL, wnycAdminRoot } = ENV;
+const { get, computed, run } = Ember;
+let { wnycURL } = ENV;
 wnycURL = canonicalize(wnycURL);
+
+function doRefresh() {
+  const { googletag } = window;
+
+  if (googletag && googletag.apiReady) {
+    run.schedule('afterRender', this, () => {
+      googletag.cmd.push(() => {
+        googletag.pubads().refresh();
+      });
+    });
+  } else {
+    run.later(this, doRefresh, 500);
+  }
+}
 
 export default Ember.Component.extend(LegacySupportMixin, BetaActionsMixin, {
   audio: service(),
-  session: service(),
   legacyAnalytics: service(),
-  googleAds: service(),
   router: service('wnyc-routing'),
   loadingType: computed('page', function() {
     let id = get(this, 'page.id') || '';
@@ -69,11 +81,10 @@ export default Ember.Component.extend(LegacySupportMixin, BetaActionsMixin, {
         // re-enable any overlaid content so that it can wormhole
         // itself into the server-rendered DOM.
         this.set('showingOverlay', true);
-        this.get('googleAds').refresh();
-
-        if (this.get('session.data.isStaff')) {
-          this.revealStaffLinks(this.$(), wnycAdminRoot);
+        if (ENV.renderGoogleAds) {
+          doRefresh();
         }
+
         this.$().imagesLoaded().progress((i, image) => {
           Ember.run(() => {
             image.img.classList.add('is-loaded');

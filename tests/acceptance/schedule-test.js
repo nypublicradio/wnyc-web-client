@@ -1,5 +1,5 @@
 import { test } from 'qunit';
-import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
 import moment from 'moment';
 
 moduleForAcceptance('Acceptance | schedule', {

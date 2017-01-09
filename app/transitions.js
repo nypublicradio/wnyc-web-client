@@ -1,4 +1,4 @@
-import config from '../wnyc-web-client/config/environment';
+import config from '../wqxr-web-client/config/environment';
 
 function duration(time) {
   return (config.environment === 'test' ? 0 : time);
@@ -46,7 +46,7 @@ export default function() {
   );
   this.transition(
     this.includingInitialRender(),
-    this.hasClass('sliding-modal'),
+    this.toValue((newVal, oldVal) => newVal === 'queue-history' || oldVal === 'queue-history'),
     this.use('slidingModal')
   );
 

@@ -1,8 +1,8 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
-import PlayParamMixin from 'wnyc-web-client/mixins/play-param';
+import PlayParamMixin from 'wqxr-web-client/mixins/play-param';
+import { beforeTeardown } from 'wqxr-web-client/lib/compat-hooks';
 import rsvp from 'rsvp';
-import { beforeTeardown } from 'wnyc-web-client/lib/compat-hooks';
 const { hash } = rsvp;
 const { get } = Ember;
 

@@ -1,4 +1,4 @@
-import loadingIcon from 'wnyc-web-client/utils/animated-loading-icon';
+import loadingIcon from 'wqxr-web-client/utils/animated-loading-icon';
 import { module, test } from 'qunit';
 
 module('Unit | Utility | animated loading icon');

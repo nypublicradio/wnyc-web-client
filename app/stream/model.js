@@ -2,7 +2,7 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo } from 'ember-data/relationships';
 import computed, { readOnly } from 'ember-computed';
-import { shareMetadata } from 'wnyc-web-client/helpers/share-metadata';
+import { shareMetadata } from 'wqxr-web-client/helpers/share-metadata';
 
 export default Model.extend({
   audioType:            'stream',
@@ -30,17 +30,5 @@ export default Model.extend({
 
   shareMetadata:        computed('currentShow', 'currentPlaylistItem', function() {
     return shareMetadata(this);
-  }),
-  
-  forListenAction(data) {
-    return this.get('currentStory').then(s => {
-      return Object.assign({
-        audio_type: 'stream',
-        cms_id: s && s.get('id'),
-        site_id: s && s.get('siteId'),
-        item_type: s && s.get('itemType'),
-        stream_id: this.get('id')
-      }, data);
-    });
-  }
+  })
 });

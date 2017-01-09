@@ -1,7 +1,7 @@
 import Component from 'ember-component';
 import service from 'ember-service/inject';
-import BetaActionsMixin from 'wnyc-web-client/mixins/beta-actions';
-import config from 'wnyc-web-client/config/environment';
+import BetaActionsMixin from 'wqxr-web-client/mixins/beta-actions';
+import config from 'wqxr-web-client/config/environment';
 import { or } from 'ember-computed';
 
 export default Component.extend(BetaActionsMixin, {
@@ -9,7 +9,6 @@ export default Component.extend(BetaActionsMixin, {
   session: service(),
   metrics: service(),
   router: service('wnyc-routing'),
-  currentUser: service(),
   donateURL: config.wnycDonateURL,
   defaultStream:  {slug: 'wnyc-fm939', name: 'WNYC 93.9 FM'},
   preferredStream: or('session.data.user-prefs-active-stream', 'defaultStream'),
@@ -17,7 +16,7 @@ export default Component.extend(BetaActionsMixin, {
   click: function({target}){
     if (target.tagName === "A"){
       //send tracking
-      this.get('metrics').trackEvent('GoogleAnalytics', {
+      this.get('metrics').trackEvent({
         category: 'WNYC Menu',
         action: "Clicked " + target.text,
       });
@@ -28,5 +27,12 @@ export default Component.extend(BetaActionsMixin, {
     routeSearch(val) {
       this.get('router').transitionTo('djangorendered', ['search/'], {"q": val});
     },
+    logout() {
+      this.get('metrics').trackEvent({
+        category: 'WNYC Menu',
+        label: 'Clicked Logout',
+      });
+      this.get('session').invalidate();
+    }
   }
 });
