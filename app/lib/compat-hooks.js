@@ -7,10 +7,10 @@
   out of the old JS.
 */
 import Ember from 'ember';
-import config from 'overhaul/config/environment';
-import { removeAlienListeners, assign } from 'overhaul/lib/alien-dom';
-import { runOnce } from 'overhaul/services/legacy-loader';
-import { canonicalize } from 'overhaul/services/script-loader';
+import config from 'wnyc-web-client/config/environment';
+import { removeAlienListeners, assign } from 'wnyc-web-client/lib/alien-dom';
+import { runOnce } from 'wnyc-web-client/services/legacy-loader';
+import { canonicalize } from 'wnyc-web-client/services/script-loader';
 const { $, get } = Ember;
 
 export function homepageCleanup(element = document.body) {
@@ -129,9 +129,9 @@ export function serializeInlineDoc(inlineDoc) {
   // we get problems from recursive ember views and ember trying to boot again
   toClean.push(...inlineDoc.querySelectorAll('.ember-view'));
   toClean.push(inlineDoc.querySelector('script[src*="assets/vendor"]'));
-  toClean.push(inlineDoc.querySelector('script[src*="assets/overhaul"]'));
+  toClean.push(inlineDoc.querySelector('script[src*="assets/wnyc-web-client"]'));
   toClean.push(inlineDoc.querySelector('link[href*="assets/vendor"]'));
-  toClean.push(inlineDoc.querySelector('link[href*="assets/overhaul"]'));
+  toClean.push(inlineDoc.querySelector('link[href*="assets/wnyc-web-client"]'));
   // any included google ad scripts have also already run, so clean them out so
   // see errors from intializing ads in occupied divs
   toClean.push(...inlineDoc.querySelectorAll('.google-ads'));

@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import GoogleAnalytics from 'overhaul/metrics-adapters/google-analytics';
+import GoogleAnalytics from 'wnyc-web-client/metrics-adapters/google-analytics';
 
 export default Ember.Test.onInjectHelpers(function() {
   GoogleAnalytics.reopen({

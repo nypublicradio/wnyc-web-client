@@ -1,7 +1,7 @@
-import QueueButton from 'overhaul/components/queue-button/component';
+import QueueButton from 'wnyc-web-client/components/queue-button/component';
 import computed from 'ember-computed';
 import get from 'ember-metal/get';
-import layout from 'overhaul/components/queue-button/template';
+import layout from 'wnyc-web-client/components/queue-button/template';
 
 function wnycEmbeddedAttr() {
   return computed('embeddedAttrs', {

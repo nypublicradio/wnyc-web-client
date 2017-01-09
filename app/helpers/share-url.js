@@ -1,5 +1,5 @@
 import { helper } from 'ember-helper';
-import { urlEncode } from 'overhaul/helpers/url-encode';
+import { urlEncode } from 'wnyc-web-client/helpers/url-encode';
 
 export function shareUrl([destination, metadata]) {
   metadata = metadata || {};

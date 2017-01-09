@@ -1,4 +1,4 @@
-import config from 'overhaul/config/environment';
+import config from 'wnyc-web-client/config/environment';
 import Ember from 'ember';
 
 // The Alien DOM is a DOM that exists beyond the reaches of an Ember app's

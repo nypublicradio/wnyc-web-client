@@ -1,10 +1,10 @@
 import { test } from 'qunit';
-import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
-import djangoPage from 'overhaul/tests/pages/django-page';
-import storyPage from 'overhaul/tests/pages/story';
-import { resetHTML } from 'overhaul/tests/helpers/html';
-import config from 'overhaul/config/environment';
-import { authenticateSession } from 'overhaul/tests/helpers/ember-simple-auth';
+import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import djangoPage from 'wnyc-web-client/tests/pages/django-page';
+import storyPage from 'wnyc-web-client/tests/pages/story';
+import { resetHTML } from 'wnyc-web-client/tests/helpers/html';
+import config from 'wnyc-web-client/config/environment';
+import { authenticateSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
 
 
 moduleForAcceptance('Acceptance | Django Page | Story Detail', {

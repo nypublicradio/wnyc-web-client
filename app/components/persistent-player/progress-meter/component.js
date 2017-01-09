@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { findTouchById, isSimulatedMouseEvent } from 'overhaul/lib/touch-utils';
+import { findTouchById, isSimulatedMouseEvent } from 'wnyc-web-client/lib/touch-utils';
 const { Component, computed, get, set } = Ember;
 const { htmlSafe } = Ember.String;
 

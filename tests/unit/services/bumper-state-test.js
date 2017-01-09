@@ -1,11 +1,11 @@
 import { moduleFor, test } from 'ember-qunit';
 import Ember from 'ember';
-import startMirage from 'overhaul/tests/helpers/setup-mirage-for-integration';
+import startMirage from 'wnyc-web-client/tests/helpers/setup-mirage-for-integration';
 import wait from 'ember-test-helpers/wait';
 import get from 'ember-metal/get';
 import set from 'ember-metal/set';
 const { A, Service } = Ember;
-import 'overhaul/tests/helpers/with-feature';
+import 'wnyc-web-client/tests/helpers/with-feature';
 
 moduleFor('service:bumper-state', 'Unit | Service | bumper state', {
   // Specify the other units that are required for this test.

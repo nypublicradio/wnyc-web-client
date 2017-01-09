@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import { moduleFor, test } from 'ember-qunit';
-import startMirage from 'overhaul/tests/helpers/setup-mirage-for-integration';
+import startMirage from 'wnyc-web-client/tests/helpers/setup-mirage-for-integration';
 import wait from 'ember-test-helpers/wait';
 
 moduleFor('service:listen-queue', 'Unit | Service | listen queue', {

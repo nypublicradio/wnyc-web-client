@@ -1,5 +1,5 @@
 import BaseAdapter from 'ember-metrics/metrics-adapters/base';
-import { siteName } from 'overhaul/config/environment';
+import { siteName } from 'wnyc-web-client/config/environment';
 import $ from 'jquery';
 
 const DEFAULT_NPR_VALS = ['NYPR', ...Array(7), siteName, null, document.title, ...Array(3)];

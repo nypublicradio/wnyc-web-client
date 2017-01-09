@@ -1,14 +1,14 @@
-import config from 'overhaul/config/environment';
+import config from 'wnyc-web-client/config/environment';
 import { skip, test } from 'qunit';
-import { plantBetaTrial } from 'overhaul/tests/helpers/beta';
-import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
-import djangoPage from 'overhaul/tests/pages/django-page';
+import { plantBetaTrial } from 'wnyc-web-client/tests/helpers/beta';
+import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import djangoPage from 'wnyc-web-client/tests/pages/django-page';
 import Ember from 'ember';
 const { wnycURL } = config;
 import {
   resetHTML
-} from 'overhaul/tests/helpers/html';
-import 'overhaul/tests/helpers/hifi-acceptance-helper';
+} from 'wnyc-web-client/tests/helpers/html';
+import 'wnyc-web-client/tests/helpers/hifi-acceptance-helper';
 
 function escapeNavigation() {
   return 'leaving';

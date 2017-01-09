@@ -1,7 +1,7 @@
 // based on https://github.com/intercom/ember-href-to/blob/master/app/instance-initializers/browser/ember-href-to.js
-import ENV from 'overhaul/config/environment';
+import ENV from 'wnyc-web-client/config/environment';
 import Ember from 'ember';
-import { canonicalize } from 'overhaul/services/script-loader';
+import { canonicalize } from 'wnyc-web-client/services/script-loader';
 const { $ } = Ember;
 let { wnycURL } = ENV;
 wnycURL = canonicalize(wnycURL);

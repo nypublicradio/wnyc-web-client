@@ -1,7 +1,7 @@
 import { test } from 'qunit';
 import run from 'ember-runloop';
-import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
-import historyPage from 'overhaul/tests/pages/history';
+import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import historyPage from 'wnyc-web-client/tests/pages/history';
 import velocity from 'velocity';
 
 moduleForAcceptance('Acceptance | history', {

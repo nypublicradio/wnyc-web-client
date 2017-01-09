@@ -8,8 +8,8 @@ const {
 } = Ember;
 const { hash: waitFor } = Ember.RSVP;
 const inflector = new Inflector(Inflector.defaultRules);
-import { retryFromServer } from 'overhaul/lib/compat-hooks';
-import PlayParamMixin from 'overhaul/mixins/play-param';
+import { retryFromServer } from 'wnyc-web-client/lib/compat-hooks';
+import PlayParamMixin from 'wnyc-web-client/mixins/play-param';
 
 export default Route.extend(PlayParamMixin, {
   session: service(),

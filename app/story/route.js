@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
-import PlayParamMixin from 'overhaul/mixins/play-param';
+import PlayParamMixin from 'wnyc-web-client/mixins/play-param';
 const { get } = Ember;
 const { hash: waitFor } = Ember.RSVP;
 

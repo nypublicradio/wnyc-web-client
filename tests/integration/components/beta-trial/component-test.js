@@ -1,7 +1,7 @@
 import $ from 'jquery';
-import { generateBetaTrial } from 'overhaul/tests/helpers/beta';
+import { generateBetaTrial } from 'wnyc-web-client/tests/helpers/beta';
 import { moduleForComponent, test } from 'ember-qunit';
-import { resetHTML, appendIfNot } from 'overhaul/tests/helpers/html';
+import { resetHTML, appendIfNot } from 'wnyc-web-client/tests/helpers/html';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('beta-trial', 'Integration | Component | beta trial', {

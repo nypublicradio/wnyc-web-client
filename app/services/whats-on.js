@@ -1,8 +1,8 @@
-import ENV from 'overhaul/config/environment';
+import ENV from 'wnyc-web-client/config/environment';
 import $ from 'jquery';
 import Service from 'ember-service';
 import get from 'ember-metal/get';
-import { canonicalize } from 'overhaul/services/script-loader';
+import { canonicalize } from 'wnyc-web-client/services/script-loader';
 
 let { wnycURL } = ENV;
 wnycURL = canonicalize(wnycURL);

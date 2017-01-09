@@ -1,6 +1,6 @@
 import Route from 'ember-route';
 import get from 'ember-metal/get';
-import config from 'overhaul/config/environment';
+import config from 'wnyc-web-client/config/environment';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 import service from 'ember-service/inject';
 

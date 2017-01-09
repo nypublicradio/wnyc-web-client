@@ -1,9 +1,9 @@
-import config from 'overhaul/config/environment';
-import BetaActionsMixin from 'overhaul/mixins/beta-actions';
-import { plantBetaTrial, clearBetaCookies } from 'overhaul/tests/helpers/beta';
-import { resetHTML, appendIfNot } from 'overhaul/tests/helpers/html';
+import config from 'wnyc-web-client/config/environment';
+import BetaActionsMixin from 'wnyc-web-client/mixins/beta-actions';
+import { plantBetaTrial, clearBetaCookies } from 'wnyc-web-client/tests/helpers/beta';
+import { resetHTML, appendIfNot } from 'wnyc-web-client/tests/helpers/html';
 import { test } from 'qunit';
-import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
+import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import $ from 'jquery';
 
 let assertRun;

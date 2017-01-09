@@ -1,4 +1,4 @@
-import { numericDuration } from 'overhaul/helpers/numeric-duration';
+import { numericDuration } from 'wnyc-web-client/helpers/numeric-duration';
 import { module, test } from 'qunit';
 
 module('Unit | Helper | numeric duration');

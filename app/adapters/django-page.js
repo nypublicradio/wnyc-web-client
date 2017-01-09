@@ -2,7 +2,7 @@ import DS from 'ember-data';
 import fetch from 'fetch';
 import ENV from '../config/environment';
 import { isInDom } from '../lib/alien-dom';
-import { canonicalize } from 'overhaul/services/script-loader';
+import { canonicalize } from 'wnyc-web-client/services/script-loader';
 
 export default DS.Adapter.extend({
   findRecord(store, type, id /*, snapshot */) {

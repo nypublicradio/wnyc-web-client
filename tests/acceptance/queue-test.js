@@ -1,10 +1,10 @@
 import { test } from 'qunit';
 import run from 'ember-runloop';
-import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
-import 'overhaul/tests/helpers/ember-sortable/test-helpers';
+import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import 'wnyc-web-client/tests/helpers/ember-sortable/test-helpers';
 import velocity from 'velocity';
 
-import queuePage from 'overhaul/tests/pages/queue';
+import queuePage from 'wnyc-web-client/tests/pages/queue';
 
 moduleForAcceptance('Acceptance | queue', {
   beforeEach() {

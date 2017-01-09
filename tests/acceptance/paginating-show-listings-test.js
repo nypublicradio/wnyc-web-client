@@ -1,8 +1,8 @@
 import { test } from 'qunit';
-import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
-import djangoPage from 'overhaul/tests/pages/django-page';
-import showPage from 'overhaul/tests/pages/show';
-import { resetHTML } from 'overhaul/tests/helpers/html';
+import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import djangoPage from 'wnyc-web-client/tests/pages/django-page';
+import showPage from 'wnyc-web-client/tests/pages/show';
+import { resetHTML } from 'wnyc-web-client/tests/helpers/html';
 
 moduleForAcceptance('Acceptance | Django Page | paginating show listings', {
   afterEach() {

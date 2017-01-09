@@ -1,4 +1,4 @@
-import { abbreviateTime } from 'overhaul/helpers/abbreviate-time';
+import { abbreviateTime } from 'wnyc-web-client/helpers/abbreviate-time';
 import { module, test } from 'qunit';
 
 module('Unit | Helper | abbreviate time');

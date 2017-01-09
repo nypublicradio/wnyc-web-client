@@ -4,7 +4,7 @@ import ENV from '../config/environment';
 import get from 'ember-metal/get';
 import computed from 'ember-computed';
 import parseAnalyticsCode from '../utils/analytics-code-parser';
-import { shareMetadata } from 'overhaul/helpers/share-metadata';
+import { shareMetadata } from 'wnyc-web-client/helpers/share-metadata';
 const { attr, Model } = DS;
 
 export default Model.extend({

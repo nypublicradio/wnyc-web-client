@@ -1,4 +1,4 @@
-import { camelizeKeys } from 'overhaul/helpers/camelize-keys';
+import { camelizeKeys } from 'wnyc-web-client/helpers/camelize-keys';
 import { module, test } from 'qunit';
 
 module('Unit | Helper | camelize-keys');

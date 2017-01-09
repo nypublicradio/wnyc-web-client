@@ -133,7 +133,7 @@ var HTML = `<html>
         href="/atomfeeds/tags/right_to_die"/>
 
           <link rel="stylesheet" href="http://localhost:4200/assets/vendor.css">
-          <link rel="stylesheet" href="http://localhost:4200/assets/overhaul.css">
+          <link rel="stylesheet" href="http://localhost:4200/assets/wnyc-web-client.css">
 
       <link rel="stylesheet" href="/media/css/enlarge.css" /><link rel="stylesheet" type="text/css" media="all" href="/media/css/screen_wnyc_responsive_header_base.css" /><link rel="stylesheet" type="text/css" media="all" href="/media/css/screen_wnyc_responsive_navigation_base.css" /><link rel="stylesheet" type="text/css" media="all" href="/media/css/screen_wnyc_responsive_header_medium.css" /><link rel="stylesheet" type="text/css" media="all" href="/media/css/screen_wnyc_responsive_navigation_medium.css" /><link rel="stylesheet" type="text/css" media="all" href="/media/css/footer_wnyc.css" /><link rel="stylesheet" type="text/css" media="all" href="/media/css/stream_launch_widget.css" />
 
@@ -161,7 +161,7 @@ var HTML = `<html>
       </script>
 
       <script src="http://localhost:4200/assets/vendor.js"></script>
-      <script src="http://localhost:4200/assets/overhaul.js"></script>
+      <script src="http://localhost:4200/assets/wnyc-web-client.js"></script>
       <script type="text/javascript">
         this.wnyc = this.wnyc || {};
         this.wnyc.noop = function() {};
@@ -216,7 +216,7 @@ var HTML = `<html>
           }
       </script>
 
-      <script type="text/javascript" src="/media/js/overhaul/story/feature_tests.js?_=0.834392306695"></script>
+      <script type="text/javascript" src="/media/js/wnyc-web-client/story/feature_tests.js?_=0.834392306695"></script>
 
   <script type="text/javascript" class="google_ads_boilerplate">
     window.googletag      = window.googletag || {};

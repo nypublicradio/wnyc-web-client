@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import ENV from 'overhaul/config/environment';
+import ENV from 'wnyc-web-client/config/environment';
 import fetch from 'fetch';
 
 export default Ember.Component.extend({

@@ -1,4 +1,4 @@
-import config from 'overhaul/config/environment';
+import config from 'wnyc-web-client/config/environment';
 import Base from 'ember-simple-auth/authenticators/base';
 import $ from 'jquery';
 import RSVP from 'rsvp';

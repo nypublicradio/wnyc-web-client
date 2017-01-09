@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import LoginForm from 'overhaul/components/login-form/component';
+import LoginForm from 'wnyc-web-client/components/login-form/component';
 
 moduleForComponent('login-form', 'Integration | Component | login form', {
   integration: true,

@@ -100,7 +100,7 @@ pre[class*="language-"] {
         <p>
           This section highlights several important pieces of your
           Ember application that make the hybrid architecture
-          possible. The application is in the <code>overhaul</code>
+          possible. The application is in the <code>wnyc-web-client</code>
           subdirectory on the branch <code>efaulkner/prototype</code>
           in the
           repo <code>git.wnyc.net:puppysite</code>. <label for="separate-repo"
@@ -302,15 +302,15 @@ pre[class*="language-"] {
 
         <p>
           Prior to this work, you had two Ember apps embedded in the
-          site: overhaul-story and overhaul-listings. I absorbed
-          overhaul-story into the new Ember app in order to
+          site: wnyc-web-client-story and wnyc-web-client-listings. I absorbed
+          wnyc-web-client-story into the new Ember app in order to
           demonstrate how it should work. You will need to do the same
           with the listings app.<label for="emapp-refactor"
           class="margin-toggle
           sidenote-number"></label><input type="checkbox"
           id="emapp-refactor"
           class="margin-toggle"/><span class="sidenote">In the process
-          of porting overhaul-story, I refactored its data flow to
+          of porting wnyc-web-client-story, I refactored its data flow to
           bring it closer to Ember standard conventions and reduce the
           API surface area between it and your legacy Javascript. It
           would be helpful to review these changes and try to emulate
@@ -339,7 +339,7 @@ pre[class*="language-"] {
 
         <p>
           I recommend dropping the build code
-          in <code>grunt/overhaul.js</code>. Use stock ember-cli to
+          in <code>grunt/wnyc-web-client.js</code>. Use stock ember-cli to
           build the Ember app.
 
           Use <a href="http://ember-cli.github.io/ember-cli-deploy/">ember-cli-deploy</a>

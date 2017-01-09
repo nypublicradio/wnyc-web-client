@@ -1,5 +1,5 @@
-import ApplicationAdapter from 'overhaul/adapters/application';
-import config from 'overhaul/config/environment';
+import ApplicationAdapter from 'wnyc-web-client/adapters/application';
+import config from 'wnyc-web-client/config/environment';
 
 export default ApplicationAdapter.extend({
   pathForType: 'bucket',

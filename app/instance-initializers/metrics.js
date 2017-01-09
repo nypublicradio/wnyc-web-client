@@ -1,4 +1,4 @@
-import ENV from 'overhaul/config/environment';
+import ENV from 'wnyc-web-client/config/environment';
 
 const {
   googleAnalyticsKey,
