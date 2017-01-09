@@ -52,7 +52,7 @@ deployment:
             GOOGLE_TAG_MANAGER_ID: $PROD_GOOGLE_TAG_MANAGER_ID
             PLATFORM_EVENTS_SERVICE: $PROD_PLATFORM_EVENTS_SERVICE
   demo:
-    branch: demo
+    branch: master
     commands:
       - ./node_modules/ember-cli/bin/ember deploy demo --verbose:
           environment:
