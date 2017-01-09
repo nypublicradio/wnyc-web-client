@@ -73,7 +73,7 @@ export function beforeAppend(element, page) {
     // TODO: is there a better way to detect this?
     return container;
   } else {
-    let legacyContent = element.querySelector('#site') || element.querySelector('#flatpage');
+    let legacyContent = element.querySelector('#site') || element.querySelector('#flatpage') || element.querySelector('.wqxr-main-contents');
     if (!legacyContent) {
       // maybe it's a flat page
       legacyContent = element;
