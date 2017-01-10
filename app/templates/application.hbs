@@ -27,7 +27,7 @@
   {{#liquid-unless showPlayer class="player-wrapper"}}
   {{#unless chromeDisabled}}
     <div class="l-fixed l-lowright">
-    {{persistent-player.queue-button
+    {{nypr-player.queue-button
         isFloating  = true
         queueLength = audio.queue.items.length
         showModal   = (action 'showModal')
