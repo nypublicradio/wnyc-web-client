@@ -1,0 +1,46 @@
+{{#if accountValidated}}
+
+  {{#each flashMessages.queue as |flash|}}
+    {{flash-message flash=flash}}
+  {{/each}}
+
+  {{account-login-form}}
+
+{{else}}
+  {{#nypr-form
+    changeset=changeset
+    allowedKeys=allowedKeys
+    onSubmit=(action 'onSubmit')
+    onFailure=(action 'onFailure')
+    formClass='account-form'
+    as |form|
+  }}
+
+    {{#if form.status.success}}
+
+      <h2 class="account-form-heading">Check your email</h2>
+
+      <p class="account-form-description">We’ve sent you an email to {{changeset.email}} to verify your email address.</p>
+      <p class="account-form-description">The link in the email will be valid for 24 hours. Once you click the link in your email, your account will be all set up.</p>
+
+    {{else}}
+
+      <h2 class="account-form-heading">Oops!</h2>
+
+      <p class="account-form-description">The link to verify your email has expired. Enter your email address and we’ll send you a new link.</p>
+
+      {{nypr-input
+        label='Email'
+        type='text'
+        placeholder='you@email.com'
+        fieldname='email'
+        value=changeset.email
+        errors=changeset.error.email.validation
+        submitted=form.status.tried
+      }}
+
+      <button type="submit" class="account-form-btn" disabled={{form.status.processing}}>Submit</button>
+
+    {{/if}}
+  {{/nypr-form}}
+{{/if}}
