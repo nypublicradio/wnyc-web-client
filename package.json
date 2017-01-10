@@ -1,7 +1,7 @@
 {
-  "name": "overhaul",
+  "name": "wnyc-web-client",
   "version": "0.0.0",
-  "description": "Small description for overhaul goes here",
+  "description": "Small description for wnyc-web-client goes here",
   "private": true,
   "directories": {
     "doc": "doc",

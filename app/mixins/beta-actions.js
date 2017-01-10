@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import config from 'overhaul/config/environment';
+import config from 'wnyc-web-client/config/environment';
 
 let { wnycURL } = config;
 

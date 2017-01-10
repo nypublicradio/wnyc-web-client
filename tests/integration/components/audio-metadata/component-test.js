@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { setBreakpointForIntegrationTest } from 'overhaul/tests/helpers/responsive';
+import { setBreakpointForIntegrationTest } from 'wnyc-web-client/tests/helpers/responsive';
 
 
 moduleForComponent('persistent-player.audio-metadata', 'Integration | Component | audio metadata', {

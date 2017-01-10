@@ -1,8 +1,8 @@
 import { test, skip } from 'qunit';
-import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
-import { currentSession } from 'overhaul/tests/helpers/ember-simple-auth';
-import ENV from 'overhaul/config/environment';
-import 'overhaul/tests/helpers/with-feature';
+import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import { currentSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
+import ENV from 'wnyc-web-client/config/environment';
+import 'wnyc-web-client/tests/helpers/with-feature';
 import velocity from 'velocity';
 
 moduleForAcceptance('Acceptance | discover',

@@ -1,4 +1,4 @@
-import ChannelModel from 'overhaul/channel/model';
+import ChannelModel from 'wnyc-web-client/channel/model';
 
 export default ChannelModel;
 

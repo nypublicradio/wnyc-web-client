@@ -1,4 +1,4 @@
-import config from 'overhaul/config/environment';
+import config from 'wnyc-web-client/config/environment';
 import { Response } from 'ember-cli-mirage';
 
 // Mirage is diabled by default when using --proxy

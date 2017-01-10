@@ -1,10 +1,10 @@
 import Ember from 'ember';
-import config from 'overhaul/config/environment';
-import { initialize } from 'overhaul/instance-initializers/beta-trial';
+import config from 'wnyc-web-client/config/environment';
+import { initialize } from 'wnyc-web-client/instance-initializers/beta-trial';
 import { module, test } from 'qunit';
 import destroyApp from '../../helpers/destroy-app';
-import { resetHTML } from 'overhaul/tests/helpers/html';
-import { plantBetaTrial } from 'overhaul/tests/helpers/beta';
+import { resetHTML } from 'wnyc-web-client/tests/helpers/html';
+import { plantBetaTrial } from 'wnyc-web-client/tests/helpers/beta';
 
 module('Unit | Instance Initializer | beta trial | active trial', {
   beforeEach: function() {

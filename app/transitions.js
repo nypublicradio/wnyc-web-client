@@ -1,4 +1,4 @@
-import config from '../overhaul/config/environment';
+import config from '../wnyc-web-client/config/environment';
 
 function duration(time) {
   return (config.environment === 'test' ? 0 : time);

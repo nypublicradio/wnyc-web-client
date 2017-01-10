@@ -1,8 +1,8 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import wait from 'ember-test-helpers/wait';
 import hbs from 'htmlbars-inline-precompile';
-import { urlEncode } from 'overhaul/helpers/url-encode';
-import { shareMetadata } from 'overhaul/helpers/share-metadata';
+import { urlEncode } from 'wnyc-web-client/helpers/url-encode';
+import { shareMetadata } from 'wnyc-web-client/helpers/share-metadata';
 
 moduleForComponent('share-button', 'Integration | Component | share button', {
   integration: true

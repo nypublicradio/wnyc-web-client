@@ -1,6 +1,6 @@
 import { test } from 'qunit';
-import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
-import config from 'overhaul/config/environment';
+import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import config from 'wnyc-web-client/config/environment';
 import sinon from 'sinon';
 import velocity from 'velocity';
 

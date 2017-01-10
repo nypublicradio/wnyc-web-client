@@ -2,7 +2,7 @@ import Ember from 'ember';
 import service from 'ember-service/inject';
 import computed, { readOnly, not } from 'ember-computed';
 import get, { getProperties } from 'ember-metal/get';
-import ENV from 'overhaul/config/environment';
+import ENV from 'wnyc-web-client/config/environment';
 
 export default Ember.Service.extend({
   init() {

@@ -1,5 +1,5 @@
 import { moduleFor, test } from 'ember-qunit';
-import config from 'overhaul/config/environment';
+import config from 'wnyc-web-client/config/environment';
 
 moduleFor('metrics-adapter:npr-analytics', 'npr-analytics adapter', {
   // Specify the other units that are required for this test.

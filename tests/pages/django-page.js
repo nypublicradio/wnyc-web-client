@@ -1,5 +1,5 @@
-import PageObject from 'overhaul/tests/page-object';
-import { appendHTML } from 'overhaul/tests/helpers/html';
+import PageObject from 'wnyc-web-client/tests/page-object';
+import { appendHTML } from 'wnyc-web-client/tests/helpers/html';
 
 let {
   visitable,

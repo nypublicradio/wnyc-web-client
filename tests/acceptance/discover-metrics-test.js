@@ -1,8 +1,8 @@
 import { test } from 'qunit';
-import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
-import { currentSession } from 'overhaul/tests/helpers/ember-simple-auth';
-import { registerAndInjectMock, registerMockOnInstance } from 'overhaul/tests/helpers/register-mock';
-import 'overhaul/tests/helpers/with-feature';
+import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import { currentSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
+import { registerAndInjectMock, registerMockOnInstance } from 'wnyc-web-client/tests/helpers/register-mock';
+import 'wnyc-web-client/tests/helpers/with-feature';
 import get from 'ember-metal/get';
 import velocity from 'velocity';
 

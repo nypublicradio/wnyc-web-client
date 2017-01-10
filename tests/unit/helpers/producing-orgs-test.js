@@ -1,4 +1,4 @@
-import { producingOrgs } from 'overhaul/helpers/producing-orgs';
+import { producingOrgs } from 'wnyc-web-client/helpers/producing-orgs';
 import { module, test } from 'qunit';
 
 module('Unit | Helper | producing orgs');

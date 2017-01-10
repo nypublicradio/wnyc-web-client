@@ -1,10 +1,10 @@
-import ENV from 'overhaul/config/environment';
+import ENV from 'wnyc-web-client/config/environment';
 import Route from 'ember-route';
 import get from 'ember-metal/get';
 import service from 'ember-service/inject';
-import { retryFromServer } from 'overhaul/lib/compat-hooks';
-import { beforeTeardown } from 'overhaul/lib/compat-hooks';
-import PlayParamMixin from 'overhaul/mixins/play-param';
+import { retryFromServer } from 'wnyc-web-client/lib/compat-hooks';
+import { beforeTeardown } from 'wnyc-web-client/lib/compat-hooks';
+import PlayParamMixin from 'wnyc-web-client/mixins/play-param';
 
 export default Route.extend(PlayParamMixin, {
   queryParams: {

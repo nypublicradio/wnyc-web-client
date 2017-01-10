@@ -1,4 +1,4 @@
-import { arrayContains } from 'overhaul/helpers/array-contains';
+import { arrayContains } from 'wnyc-web-client/helpers/array-contains';
 import { module, test } from 'qunit';
 
 module('Unit | Helper | array contains');

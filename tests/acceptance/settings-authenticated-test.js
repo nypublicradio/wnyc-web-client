@@ -1,10 +1,10 @@
 import { test } from 'qunit';
-import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
+import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import {
   authenticateSession,
   currentSession
-} from 'overhaul/tests/helpers/ember-simple-auth';
-import 'overhaul/tests/helpers/with-feature';
+} from 'wnyc-web-client/tests/helpers/ember-simple-auth';
+import 'wnyc-web-client/tests/helpers/with-feature';
 
 moduleForAcceptance('Acceptance | settings', {
   beforeEach() {

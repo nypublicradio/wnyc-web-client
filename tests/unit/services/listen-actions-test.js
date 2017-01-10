@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import { moduleFor, test } from 'ember-qunit';
-import startMirage from 'overhaul/tests/helpers/setup-mirage-for-integration';
-import ENV from 'overhaul/config/environment';
+import startMirage from 'wnyc-web-client/tests/helpers/setup-mirage-for-integration';
+import ENV from 'wnyc-web-client/config/environment';
 // import wait from 'ember-test-helpers/wait';
 
 let originalGetTime = Date.prototype.getTime;

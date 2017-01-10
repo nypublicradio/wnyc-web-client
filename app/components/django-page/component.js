@@ -1,9 +1,9 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
 import ENV from '../../config/environment';
-import LegacySupportMixin from 'overhaul/mixins/legacy-support';
-import BetaActionsMixin from 'overhaul/mixins/beta-actions';
-import { canonicalize } from 'overhaul/services/script-loader';
+import LegacySupportMixin from 'wnyc-web-client/mixins/legacy-support';
+import BetaActionsMixin from 'wnyc-web-client/mixins/beta-actions';
+import { canonicalize } from 'wnyc-web-client/services/script-loader';
 import {
   isInDom,
   embeddedComponentSetup,

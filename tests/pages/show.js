@@ -1,4 +1,4 @@
-import PageObject from 'overhaul/tests/page-object';
+import PageObject from 'wnyc-web-client/tests/page-object';
 
 let {
   visitable,

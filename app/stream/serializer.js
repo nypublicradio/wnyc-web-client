@@ -1,5 +1,5 @@
 import DS from 'ember-data';
-import { camelizeKeys } from 'overhaul/helpers/camelize-keys';
+import { camelizeKeys } from 'wnyc-web-client/helpers/camelize-keys';
 
 export default DS.JSONAPISerializer.extend({
   keyForAttribute(key) {

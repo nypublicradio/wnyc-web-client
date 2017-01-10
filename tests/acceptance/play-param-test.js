@@ -1,8 +1,8 @@
 import { test } from 'qunit';
-import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
-import { registerMockOnInstance } from 'overhaul/tests/helpers/register-mock';
+import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import { registerMockOnInstance } from 'wnyc-web-client/tests/helpers/register-mock';
 import Service from 'ember-service';
-import { resetHTML } from 'overhaul/tests/helpers/html';
+import { resetHTML } from 'wnyc-web-client/tests/helpers/html';
 import velocity from 'velocity';
 
 velocity.mock = true;

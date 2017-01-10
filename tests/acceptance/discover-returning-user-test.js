@@ -1,12 +1,12 @@
 import { test } from 'qunit';
-import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
-import { currentSession } from 'overhaul/tests/helpers/ember-simple-auth';
-import ENV from 'overhaul/config/environment';
+import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import { currentSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
+import ENV from 'wnyc-web-client/config/environment';
 import RSVP from 'rsvp';
-import config from 'overhaul/config/environment';
+import config from 'wnyc-web-client/config/environment';
 import velocity from 'velocity';
 
-import 'overhaul/tests/helpers/ember-sortable/test-helpers';
+import 'wnyc-web-client/tests/helpers/ember-sortable/test-helpers';
 
 moduleForAcceptance('Acceptance | discover returning user', {
   beforeEach() {

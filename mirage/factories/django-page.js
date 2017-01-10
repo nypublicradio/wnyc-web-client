@@ -1,5 +1,5 @@
 import { Factory } from 'ember-cli-mirage';
-import serialize from 'overhaul/mirage/utils/serialize';
+import serialize from 'wnyc-web-client/mirage/utils/serialize';
 
 export default Factory.extend({
   id: '/',

@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
-import startMirage from 'overhaul/tests/helpers/setup-mirage-for-integration';
+import startMirage from 'wnyc-web-client/tests/helpers/setup-mirage-for-integration';
 import wait from 'ember-test-helpers/wait';
 
 moduleForComponent('discover-playlist', 'Integration | Component | discover playlist', {

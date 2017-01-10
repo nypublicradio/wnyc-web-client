@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { initialize } from 'overhaul/instance-initializers/google-experiments';
+import { initialize } from 'wnyc-web-client/instance-initializers/google-experiments';
 import { module, test } from 'qunit';
 import destroyApp from '../../helpers/destroy-app';
 

@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import startMirage from 'overhaul/tests/helpers/setup-mirage-for-integration';
+import startMirage from 'wnyc-web-client/tests/helpers/setup-mirage-for-integration';
 import { faker } from 'ember-cli-mirage';
 
 moduleForComponent('story-tease', 'Integration | Component | story tease', {

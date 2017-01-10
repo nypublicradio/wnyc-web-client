@@ -1,6 +1,6 @@
 import { /*test,*/ skip } from 'qunit';
-import djangoPage from 'overhaul/tests/pages/django-page';
-import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
+import djangoPage from 'wnyc-web-client/tests/pages/django-page';
+import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 
 moduleForAcceptance('Acceptance | login');
 

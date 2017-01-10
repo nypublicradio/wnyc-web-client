@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { todayYesterdayOrDate } from 'overhaul/helpers/today-yesterday-or-date';
+import { todayYesterdayOrDate } from 'wnyc-web-client/helpers/today-yesterday-or-date';
 import { module, test } from 'qunit';
 
 module('Unit | Helper | today yesterday or date');

@@ -1,7 +1,7 @@
 /*global wnyc*/
 import Ember from 'ember';
 import service from 'ember-service/inject';
-import ENV from 'overhaul/config/environment';
+import ENV from 'wnyc-web-client/config/environment';
 const {
   get,
   set,

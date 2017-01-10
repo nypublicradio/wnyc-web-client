@@ -1,6 +1,6 @@
 import DS from 'ember-data';
 import Ember from 'ember';
-import { serializeInlineDoc } from 'overhaul/lib/compat-hooks';
+import { serializeInlineDoc } from 'wnyc-web-client/lib/compat-hooks';
 
 export default DS.Serializer.extend({
   normalizeResponse(store, primaryModelClass, payload, id /*, requestType */) {

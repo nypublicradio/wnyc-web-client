@@ -2,7 +2,7 @@ import Ember from 'ember';
 import Route from 'ember-route';
 import get from 'ember-metal/get';
 import set from 'ember-metal/set';
-import ListingRouteMixin from 'overhaul/mixins/listing-route';
+import ListingRouteMixin from 'wnyc-web-client/mixins/listing-route';
 const { Inflector } = Ember;
 
 const inflect = new Inflector(Inflector.defaultRules);

@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
-import { shouldHandleLink, normalizeHref } from 'overhaul/instance-initializers/link-handler';
-import ENV from 'overhaul/config/environment';
-import { canonicalize } from 'overhaul/services/script-loader';
+import { shouldHandleLink, normalizeHref } from 'wnyc-web-client/instance-initializers/link-handler';
+import ENV from 'wnyc-web-client/config/environment';
+import { canonicalize } from 'wnyc-web-client/services/script-loader';
 let { wnycURL } = ENV;
 wnycURL = canonicalize(wnycURL);
 
