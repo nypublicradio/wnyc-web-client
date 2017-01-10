@@ -36,7 +36,7 @@
     </div>
   {{/unless}}
   {{else}}
-    {{#persistent-player
+    {{#nypr-player
         currentTitle          = integration.currentTitle
 
         storyTitle            = integration.storyTitle
@@ -75,7 +75,7 @@
         {{! This is just the message, the dismiss handler and the flag to show this message is above}}
         {{autoplay-notification duration=audio.duration position=audio.position audioType=currentAudio.audioType}}
       {{/if}}
-    {{/persistent-player}}
+    {{/nypr-player}}
   {{/liquid-unless}}
 {{/nypr-player-integration}}
 {{#liquid-if modal class="modal-wrapper sliding-modal"}}
