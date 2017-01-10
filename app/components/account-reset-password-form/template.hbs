@@ -1,10 +1,11 @@
-{{#nypr-form changeset=changeset allowedKeys=allowedKeys onSubmit=(action 'onSubmit') formClass='account-form' as |form|}}
+{{#nypr-form changeset=changeset allowedKeys=allowedKeys onSubmit=(action 'onSubmit') onSuccess=(action 'onSuccess') formClass='account-form' as |form|}}
 {{#if form.status.success}}
-  <h2 class="account-form-heading">Password Updated</h2>
 
-  <p class="account-form-description">Your password has been successfully updated.</p>
+  {{#each flashMessages.queue as |flash|}}
+    {{flash-message flash=flash}}
+  {{/each}}
 
-  <button type="submit" class="account-form-btn">Log In</button>
+  {{account-login-form}}
 {{else}}
   <h2 class="account-form-heading">Reset your password</h2>
 
