@@ -2,7 +2,7 @@ import Component from 'ember-component';
 import set from 'ember-metal/set';
 import get from 'ember-metal/get';
 import Changeset from 'ember-changeset';
-import LoginValidations from 'overhaul/validations/login';
+import LoginValidations from 'wnyc-web-client/validations/login';
 import lookupValidator from 'ember-changeset-validations';
 import service from 'ember-service/inject';
 
