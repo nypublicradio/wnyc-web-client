@@ -72,6 +72,7 @@ export default Route.extend(ApplicationRouteMixin, {
   sessionAuthenticated() {
     this._super(...arguments);
     get(this, 'metrics').identify('GoogleAnalytics', {isAuthenticated: true});
+    get(this, 'currentUser').load();
   },
 
   _syncBrowserId() {
