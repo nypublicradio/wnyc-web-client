@@ -1,5 +1,5 @@
-import ENV from 'overhaul/config/environment';
-import wrapAjax from 'overhaul/lib/wrap-ajax';
+import ENV from 'wnyc-web-client/config/environment';
+import wrapAjax from 'wnyc-web-client/lib/wrap-ajax';
 import Service from 'ember-service';
 import get from 'ember-metal/get';
 import { canonicalize } from 'wnyc-web-client/services/script-loader';

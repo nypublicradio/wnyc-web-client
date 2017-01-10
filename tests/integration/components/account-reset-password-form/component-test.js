@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import ENV from 'overhaul/config/environment';
+import ENV from 'wnyc-web-client/config/environment';
 import sinon from 'sinon';
 
 moduleForComponent('account-reset-password-form', 'Integration | Component | account reset password form', {

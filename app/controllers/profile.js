@@ -1,6 +1,6 @@
 import Controller from 'ember-controller';
 import service from 'ember-service/inject';
-import config from 'overhaul/config/environment';
+import config from 'wnyc-web-client/config/environment';
 import fetch from 'fetch';
 
 const FLASH_MESSAGES = {
