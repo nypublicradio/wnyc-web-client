@@ -24,13 +24,12 @@ export default Ember.Service.extend({
   poll:         service(),
 
   init() {
-    this.get('session').syncBrowserId(id => this.set('browserId', id));
     this.set('_delta', 0);
   },
   
   reportItemView(incoming = {}) {
     let data = Object.assign({
-      browser_id: this.get('browserId'),
+      browser_id: this.get('session.data.browserId'),
       client: config.clientSlug,
       referrer: this.get('currentReferrer'),
       url: location.toString()
@@ -68,7 +67,7 @@ export default Ember.Service.extend({
   _generateData(incoming, action) {
     return Object.assign({
       action,
-      browser_id: this.get('browserId'),
+      browser_id: this.get('session.data.browserId'),
       client: config.clientSlug,
       referrer: this.get('currentReferrer'),
       url: location.toString(),
