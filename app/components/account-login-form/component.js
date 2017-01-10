@@ -27,8 +27,8 @@ export default Component.extend({
       this.goHome();
     },
     onFailure(e) {
-      if (e && e.errors) {
-        this.applyErrorToChangeset(e.errors, get(this, 'changeset'));
+      if (e && e.error) {
+        this.applyErrorToChangeset(e.error, get(this, 'changeset'));
       }
     },
   },
@@ -40,7 +40,7 @@ export default Component.extend({
   },
   applyErrorToChangeset(error, changeset) {
     if (error && error.code) {
-      if (error.code === "NotAuthorizedException") {
+      if (error.code === "UnauthorizedAccess") {
         changeset.validate('password');
         changeset.pushErrors('password', 'Incorrect username or password.');
       } else if (error.code === "UserNotFoundException") {
