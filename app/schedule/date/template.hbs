@@ -43,13 +43,13 @@
                 <div class="action-button-icon">
                   {{wnyc-svg icon="left-caret"}}
                 </div>
-                <span>{{moment-add todaysDateAsMoment '-1' 'days' 'dddd'}}</span>
+                <span>{{moment-offset (concat year '-' month '-' day) '-1' 'days' 'dddd' 'YYYY-MMM-DD'}}</span>
               {{/link-to}}
             </li>
             <li class="today">{{fullDayAndDate}}</li>
             <li class="tomorrow last">
               {{#link-to "schedule.date" tomorrowLink.year tomorrowLink.month tomorrowLink.day (query-params scheduleStation=scheduleStation)}}
-                <span>{{moment-add todaysDateAsMoment '1' 'days' 'dddd'}}</span>
+                <span>{{moment-offset (concat year '-' month '-' day) '1' 'days' 'dddd' 'YYYY-MMM-DD'}}</span>
                 <div class="action-button-icon">
                   {{wnyc-svg icon="right-caret"}}
                 </div>
