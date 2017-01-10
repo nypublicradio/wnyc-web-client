@@ -2,11 +2,11 @@ import Component from 'ember-component';
 import get from 'ember-metal/get';
 import set from 'ember-metal/set';
 import Changeset from 'ember-changeset';
-import EmailValidations from 'overhaul/validations/email';
+import EmailValidations from 'wnyc-web-client/validations/email';
 import lookupValidator from 'ember-changeset-validations';
-import ENV from 'overhaul/config/environment';
+import ENV from 'wnyc-web-client/config/environment';
 import fetch from 'fetch';
-import { rejectUnsuccessfulResponses } from 'overhaul/utils/fetch-utils';
+import { rejectUnsuccessfulResponses } from 'wnyc-web-client/utils/fetch-utils';
 
 export default Component.extend({
   allowedKeys: ['email'],
