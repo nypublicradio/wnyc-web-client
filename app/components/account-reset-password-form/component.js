@@ -9,6 +9,11 @@ import ENV from 'wnyc-web-client/config/environment';
 import fetch from 'fetch';
 import { rejectUnsuccessfulResponses } from 'wnyc-web-client/utils/fetch-utils';
 
+const FLASH_MESSAGES = {
+  reset: 'Your password has been successfully updated.'
+};
+
+
 export default Component.extend({
   store: service(),
   allowedKeys: ['password'],
@@ -20,11 +25,6 @@ export default Component.extend({
     set(this, 'changeset', new Changeset(get(this, 'fields'), lookupValidator(PasswordValidations), PasswordValidations));
     get(this, 'changeset').validate();
   },
-  actions: {
-    onSubmit() {
-      return this.resetPassword(get(this, 'email'), get(this, 'fields.password'), get(this, 'confirmation'));
-    }
-  },
   resetPassword(email, new_password, confirmation) {
     let url = `${ENV.wnycAuthAPI}/v1/confirm/password-reset`;
     let method = 'POST';
@@ -33,5 +33,20 @@ export default Component.extend({
     let body = JSON.stringify({email, new_password, confirmation});
     return fetch(url, {method, mode, headers, body})
     .then(rejectUnsuccessfulResponses);
+  },
+  showFlash(type) {
+    this.get('flashMessages').add({
+      message: FLASH_MESSAGES[type],
+      type: 'success',
+      sticky: true
+    });
+  },
+  actions: {
+    onSubmit() {
+      return this.resetPassword(get(this, 'email'), get(this, 'fields.password'), get(this, 'confirmation'));
+    },
+    onSuccess() {
+      return this.showFlash('reset');
+    }
   },
 });
