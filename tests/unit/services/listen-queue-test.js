@@ -4,8 +4,12 @@ import startMirage from 'overhaul/tests/helpers/setup-mirage-for-integration';
 import wait from 'ember-test-helpers/wait';
 
 moduleFor('service:listen-queue', 'Unit | Service | listen queue', {
-  // Specify the other units that are required for this test.
-  needs: ['service:session', 'model:story', 'adapter:story'],
+  needs: [
+    'service:session',
+    'model:story',
+    'adapter:story',
+    'serializer:story'
+  ],
   beforeEach() {
     startMirage(this.container);
     const sessionStub = Ember.Service.extend({

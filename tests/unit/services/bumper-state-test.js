@@ -16,7 +16,8 @@ moduleFor('service:bumper-state', 'Unit | Service | bumper state', {
     'adapter:stream',
     'serializer:stream',
     'model:story',
-    'adapter:story'
+    'adapter:story',
+    'serializer:story'
   ],
 
   beforeEach() {

@@ -39,6 +39,7 @@ moduleForAcceptance('Acceptance | discover metrics',
       server.createList('discover-story', 2);
       this.shows = server.createList('show', 2);
       this.metrics = registerAndInjectMock(application, 'service:mockMetrics', mockMetrics, 'metrics');
+      server.create('stream');
     },
     afterEach() {
         velocity.mock = false;
@@ -179,6 +180,7 @@ moduleForAcceptance('Acceptance | discover metrics returning user',
       session.set('data.discover-queue',  server.db.discoverStories); // set some saved stories
       // register mock directly on the instance to fool the link handler
       this.metrics = registerMockOnInstance(application, 'service:metrics', mockMetrics);
+      server.create('stream');
     },
     afterEach() {
       velocity.mock = false;

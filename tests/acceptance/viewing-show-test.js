@@ -7,6 +7,9 @@ import config from 'overhaul/config/environment';
 import { authenticateSession } from 'overhaul/tests/helpers/ember-simple-auth';
 
 moduleForAcceptance('Acceptance | Django Page | Show Page', {
+  beforeEach() {
+    server.create('stream');
+  },
   afterEach() {
     resetHTML();
   }
