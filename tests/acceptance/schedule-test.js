@@ -1,5 +1,5 @@
 import { test } from 'qunit';
-import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
+import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import { faker } from 'ember-cli-mirage';
 import moment from 'moment';
 
