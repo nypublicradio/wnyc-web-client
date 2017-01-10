@@ -1,7 +1,7 @@
 import { test } from 'qunit';
-import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
-import { authenticateSession } from 'overhaul/tests/helpers/ember-simple-auth';
-import config from 'overhaul/config/environment';
+import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import { authenticateSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
+import config from 'wnyc-web-client/config/environment';
 
 moduleForAcceptance('Acceptance | profile', {
   beforeEach() {
