@@ -3,7 +3,11 @@ import moduleForAcceptance from 'overhaul/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'overhaul/tests/helpers/ember-simple-auth';
 import config from 'overhaul/config/environment';
 
-moduleForAcceptance('Acceptance | profile');
+moduleForAcceptance('Acceptance | profile', {
+  beforeEach() {
+    server.create('stream');
+  }
+});
 
 test('unauthenticated visiting /profile', function(assert) {
   visit('/profile');
