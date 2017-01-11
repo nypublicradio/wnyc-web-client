@@ -36,3 +36,36 @@ test('clicking the button opens the popup', function(assert) {
     assert.equal(this.$('.user-nav-popup').length, 1, 'popup should open');
   });
 });
+
+test('clicking the button again closes the popup', function(assert) {
+  this.set('isLoggedIn', true);
+  this.render(hbs`{{user-navigation isLoggedIn=isLoggedIn}}`);
+
+  assert.equal(this.$('.user-nav-popup').length, 0, 'popup should start closed');
+  this.$('.user-nav-logged-in button').click();
+
+  wait().then(() => {
+    assert.equal(this.$('.user-nav-popup').length, 1, 'popup should open');
+    this.$('.user-nav-logged-in button').click();
+  });
+
+  return wait().then(() => {
+    assert.equal(this.$('.user-nav-popup').length, 0, 'popup should close');
+  });
+});
+
+test('clicking outside closes the popup', function(assert) {
+  this.set('isLoggedIn', true);
+  this.render(hbs`<div id="outside">outside</div>{{user-navigation isLoggedIn=isLoggedIn}}`);
+
+  assert.equal(this.$('.user-nav-popup').length, 0, 'popup should start closed');
+  this.$('.user-nav-logged-in button').click();
+
+  wait().then(() => {
+    assert.equal(this.$('.user-nav-popup').length, 1, 'popup should open');
+    this.$('#outside').click();
+  });
+
+  return wait().then(() => {
+    assert.equal(this.$('.user-nav-popup').length, 0, 'popup should close');
+  });});
