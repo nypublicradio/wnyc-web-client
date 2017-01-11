@@ -26,7 +26,7 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
     serializer.serializeIntoHash(data, type, snapshot, { includeId: true });
     
     keys(data).forEach(k => {
-      if (!changed.includes(k)) {
+      if (!changed.includes(k.camelize())) {
         delete data[k];
       }
     });
