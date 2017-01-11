@@ -32,7 +32,7 @@
 </div>
 
 {{#if disableModal}}
-  {{#nypr-account-modal title="Disable online account" closeAction=(action (mut showModal) false) as |m|}}
+  {{#nypr-account-modal title="Disable online account" closeAction=(action (mut disableModal) false) as |m|}}
     {{#m.body}}
     <p>
       This will disable your online account, but you will still be a WNYC member.
