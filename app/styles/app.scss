@@ -23,6 +23,8 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 @import 'layout';
 @import 'utilities';
 
+@import "nypr-ui";
+
 @import 'box';
 @import 'text';
 @import 'icons';
@@ -71,6 +73,7 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 @import 'discover';
 @import 'liquid-fire-icons';
 @import 'error';
+@import 'alt-channel';
 
 // LEGACY CODE
 @import 'legacy/home-compat';
