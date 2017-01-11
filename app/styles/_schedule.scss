@@ -1,0 +1,223 @@
+.schedule-container {
+  @include display-flex;
+  @include flex-direction(row);
+}
+
+.schedule-container aside {
+  @include display-flex;
+  @include flex(0 0 350px);
+  @include justify-content(center);
+
+  @include mq($up-to-wide) {
+    display: none;
+  }
+}
+
+.schedule-container main {
+  @include display-flex;
+  @include flex-grow(1);
+}
+
+.schedule-playlists {
+  position: relative;
+  width: 100%;
+
+  ul {
+    padding: 0;
+    list-style-type: none;
+  }
+
+  .station-navigation {
+    height: auto;
+  }
+
+  .schedule-station-tabs {
+    @include display-flex;
+    @include flex-flow(row wrap);
+
+		margin-bottom: 0;
+  }
+
+  .schedule-station-tabs li {
+    @include display-flex;
+
+    border-radius: 3px;
+    height: 30px;
+  }
+
+  .schedule-station-tabs li.active {
+    background-color: $red;
+  }
+
+  .schedule-station-tabs li a {
+    background: 0;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 600;
+    height: 30px;
+    margin: 0 4px;
+    padding: 4px 6px 3px;
+    text-align: center;
+    text-indent: 0;
+    white-space: nowrap;
+    color: $lightgray;
+
+    &:hover {
+      color: $red;
+    }
+  }
+
+  .schedule-station-tabs li.active a {
+    color: white;
+  }
+
+  .print-wnyc-schedule {
+    position: absolute;
+    top: 15px;
+    right: 0;
+    font-size: 14px;
+
+    @include mq($small-only) {
+      display: none;
+    }
+  }
+
+  .print-wnyc-schedule a {
+    color: $lightgray;
+
+    &:hover {
+      color: $blue;
+    }
+  }
+
+  .schedule-date-control {
+    @include display-flex;
+    @include flex-flow(row nowrap);
+
+    border-top: 1px solid $nearwhite;
+    border-bottom: 1px solid $nearwhite;
+    padding: 15px 0;
+    margin: 10px 0;
+  }
+
+  .schedule-date-control li {
+    @include display-flex;
+    @include flex(1 1 auto);
+    @include justify-content(center);
+    @include align-items(center);
+  }
+
+  .schedule-date-control li span {
+    @include mq($small-only) {
+      display: none;
+    }
+  }
+
+  .schedule-date-control li a {
+    font-size: 12px !important;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700 !important;
+    color: $gray;
+
+    &:hover,
+    &:hover path {
+      color: $blue;
+      fill: $blue;
+      border-color: white;
+    }
+  }
+
+  .schedule-date-control li.today {
+    text-align: center;
+    font-size: 14px;
+    width: 300px;
+    color: #333;
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .schedule-date-control svg {
+    width: 20px;
+
+    path {
+      fill: $lightgray;
+    }
+
+    @include mq($small-only) {
+      width: 26px;
+      height: 26px;
+    }
+  }
+
+  .schedule-date-control {
+    .action-button-icon {
+      display: inline;
+      position: relative;
+      top: 2px;
+
+      svg {
+        width: 20px;
+
+        path {
+          fill: $lightgray;
+        }
+      }
+    }
+  }
+
+  .schedule-table .event {
+    @include display-flex;
+    @include flex-flow(row wrap);
+
+    border-bottom: 1px solid $nearwhite;
+    padding: 10px 0;
+    margin-top: 5px;
+  }
+
+  .schedule-table.currently-loading {
+    transition: all 0.2s ease;
+    opacity: 0.5;
+  }
+
+  .schedule-table .details {
+    @include display-flex;
+    @include flex-direction(column);
+    @include flex(1 0 560px);
+  }
+
+  .schedule-table .time {
+    @include display-flex;
+    @include flex(0 0 100px);
+
+    color: $lightergray;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding-bottom: 3px;
+  }
+
+  .schedule-table .show-title.schedule-event {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 4px 0;
+    text-transform: uppercase;
+
+    a {
+      color: #333;
+
+      &:hover {
+        color: $blue;
+      }
+    }
+  }
+
+  .schedule-table .show-title.airing p {
+    margin-bottom: 0;
+  }
+
+  .schedule-table .text {
+    margin-bottom: 0;
+  }
+}

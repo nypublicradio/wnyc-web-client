@@ -61,6 +61,7 @@ Router.map(function() {
   // from the django site. It will be used when there's nothing more
   // specific.
   this.route('djangorendered', { path: '*upstream_url' });
+
 });
 
 export default Router;

@@ -70,7 +70,7 @@ export default function() {
   this.get(`${baseUrl}/api/v3/bucket/:slug`, 'bucket');
   this.get(`${baseUrl}/api/v3/story/detail/:id`, 'story');
   this.get(`${baseUrl}/api/v3/channel/\*id`, 'api-response');
-
+  this.get(`${baseUrl}/api/v3/schedule/`, 'schedule');
   let discoverPath = config.featureFlags['other-discover'] ? 'reco_proxy' : 'make_playlist';
   this.get(`${baseUrl}/api/v3/${discoverPath}`, function(schema) {
     let stories = schema.discoverStories.all().models;
