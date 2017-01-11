@@ -15,6 +15,24 @@
         {{/if}}
       {{/if}}
     {{/if}}
+    
+    {{#if model.channel.altLayout}}
+      {{#alt-channel-layout
+        navSlugTransition=(action 'navSlugTransition')
+        defaultSlug=defaultSlug
+        navRoot=navRoot
+        channel=model.channel
+        user=model.user item=model.channel.featured}}
+
+        {{outlet}}
+
+        {{page-numbers 
+          currentPage=pageNumbers.page
+          totalPages=pageNumbers.totalPages
+          action="pageNumberClicked"}}
+
+      {{/alt-channel-layout}}
+    {{else}}
 
     <div class="l-constrained">
       <main class="l-col2of3">
@@ -90,5 +108,6 @@
         <!-- .l-skinny -->
       </aside>
     </div>
+    {{/if}}
   {{/ember-wormhole}}
 {{/django-page}}
