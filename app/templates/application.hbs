@@ -6,7 +6,7 @@
       {{error-page error=error}}
     {{/unless}}
   {{/site-chrome}}
-
+  
   {{#liquid-unless showPlayer class="player-wrapper"}}
     <div class="l-fixed l-lowright">
     {{persistent-player.queue-button
@@ -33,5 +33,5 @@
 {{else}}
 
   {{outlet}}
-
+  
 {{/unless}}
