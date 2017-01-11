@@ -1,0 +1,64 @@
+{{#story-tease
+  altChannel=true
+  user=user
+  item=channel.featured
+  hideLinks=true
+  isFeatured=true
+  showParent=false
+  class='box box--bgoverflow flush'
+  playContext='FeaturedItem'}}
+  
+  <div class="l-constrained">
+  {{#holygrail-layout as |g|}}
+    {{#g.left}}
+    <div class="flag flush">
+      <div class="flag-image">
+        <img alt={{channel.title}}
+          class="badge--shadow squarebadge"
+          src={{image-template channel.logoImage.template 80 80 channel.logoImage.crop}}
+          srcset="{{image-template channel.logoImage.template 160 160 channel.logoImage.crop}} 2x,
+            {{image-template channel.logoImage.template 240 240 channel.logoImage.crop}} 3x"
+          width="80" height="80">
+      </div>
+      <!-- .flag-image -->
+      <div class="flag-body">
+        <h1 class="text--large text--white">{{{channel.title}}}</h1>
+      </div>
+    </div>
+    {{/g.left}}
+  {{/holygrail-layout}}
+  </div>
+  
+{{/story-tease}}
+
+<div class="alt-channel-footer aligncenter">
+  <div class="l-medium">
+    <div class="text--white h2">
+      {{{channel.tease}}}
+    </div>
+    {{{channel.chunkSidebarTop}}}
+  </div>
+</div>
+
+<main class="l-medium">
+
+  {{#if channel.linkroll}}
+    {{nav-links
+      classNames="aligncenter tabs-header--padded"
+      defaultSlug=defaultSlug
+      navRoot=navRoot
+      links=channel.linkroll
+      transition=(action navSlugTransition)}}
+  {{/if}}
+
+  {{yield}}
+  
+</main>
+
+<div class="l-highlight--gray">
+  <div class="l-medium">
+    <div class="box--flexpadtop">
+      {{{model.channel.chunkSidebarBottom}}}
+    </div>
+  </div>
+</div>
