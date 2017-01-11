@@ -1,6 +1,6 @@
   {{#if isLoggedIn}}
     <div class="user-nav-logged-in">
-      {{#click-outside action=(action 'closePopup')}}
+      {{#click-outside action=(action (mut isPopupOpen) false)}}
         <button {{action 'togglePopup'}}>
           <div class="user-nav-avatar">
           {{#if user.picture}}
