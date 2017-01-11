@@ -47,7 +47,10 @@ export default RavenLogger.extend({
     this._super(...arguments);
   },
 
-  captureMessage(/* message */) {
+  captureMessage(message, object) {
+    if (object.extra && object.extra.status === 404) {
+      return;
+    }
     return this._super(...arguments);
   },
 

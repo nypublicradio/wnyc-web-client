@@ -53,7 +53,8 @@ export default Route.extend(PlayParamMixin, {
     });
   },
   setupController(controller, model) {
-    let { navSlug } = this.paramsFor(`${this.routeName}.well`);
+    let { page_params = '' } = this.paramsFor(`${this.routeName}.page`);
+    let [navSlug] = page_params.split('/');
     controller.setProperties({
       channelType: this.routeName,
       navRoot: get(this, 'listingSlug'),
