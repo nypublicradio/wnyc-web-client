@@ -8,7 +8,7 @@ const {
 } = Ember;
 const { hash: waitFor } = Ember.RSVP;
 const inflector = new Inflector(Inflector.defaultRules);
-import { retryFromServer } from 'wnyc-web-client/lib/compat-hooks';
+import { retryFromServer, beforeTeardown } from 'wnyc-web-client/lib/compat-hooks';
 import PlayParamMixin from 'wnyc-web-client/mixins/play-param';
 
 export default Route.extend(PlayParamMixin, {
@@ -60,5 +60,13 @@ export default Route.extend(PlayParamMixin, {
       defaultSlug: navSlug,
       model
     });
+  },
+  
+  actions: {
+    willTransition() {
+      this._super(...arguments);
+      beforeTeardown();
+      return true;
+    }
   }
 });
