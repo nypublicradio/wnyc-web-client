@@ -1,7 +1,8 @@
-<ul class="list list--noborder">
+<ul class="list {{if altLayout 'list--borderbottom' 'list--noborder'}}">
   {{#each model.teaseList as |item|}}
   <li class="list-item">
     {{story-tease
+      altLayout=altLayout
       parentTitle=parentTitle
       user=session.data.authenticated
       item=item

@@ -41,7 +41,8 @@ export default Mixin.create({
     let { channel } = this.modelFor(channelType)
     controller.setProperties({
       channelTitle: get(channel, 'title'),
-      channelType
+      channelType,
+      altLayout: get(channel, 'altLayout')
     });
   },
 
