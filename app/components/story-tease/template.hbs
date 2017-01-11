@@ -2,6 +2,12 @@
   <div class="box-mat" style='background-image:url({{image-template item.imageMain.template 0 400 item.imageMain.crop}});'></div>
 {{/if}}
 
+{{#if hasBlock}}
+<div class="story-tease-floating-header">
+  {{yield}}
+</div>  
+{{/if}}
+
 {{#if isFeatured}}
   <div class="text text--small text--upper text--heavy text--spacing nudge {{if isFancyFeatured 'text--lightgray'}}">
     <p>{{status}}</p>
