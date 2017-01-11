@@ -4,13 +4,15 @@
       <div id="leaderboard" class="aligncenter"></div>
     {{/google-ad}}
 
-    {{#if model.channel.hasMarquee}}
-      {{x-marquee model=model.channel user=model.user}}
-    {{else}}
-      {{#if model.channel.featured}}
-        {{channel-header model=model.channel user=model.user}}
+    {{#if (not model.channel.altLayout)}}
+      {{#if model.channel.hasMarquee}}
+        {{x-marquee model=model.channel user=model.user}}
       {{else}}
-        {{channel-header model=model.channel user=model.user classNames='flush'}}
+        {{#if model.channel.featured}}
+          {{channel-header model=model.channel user=model.user}}
+        {{else}}
+          {{channel-header model=model.channel user=model.user classNames='flush'}}
+        {{/if}}
       {{/if}}
     {{/if}}
 
