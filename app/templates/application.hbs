@@ -1,10 +1,21 @@
-{{#site-chrome headerDonateChunk=headerDonateChunk beta=beta isHomepage=isHomepage currentPath=currentPath}}
-  {{#unless error}}
-    {{outlet}}
-  {{else}}
-    {{error-page error=error}}
-  {{/unless}}
-{{/site-chrome}}
+{{#unless miniChrome}}
+  {{#site-chrome headerDonateChunk=headerDonateChunk beta=beta isHomepage=isHomepage currentPath=currentPath}}
+    {{#unless error}}
+      {{outlet}}
+    {{else}}
+      {{error-page error=error}}
+    {{/unless}}
+  {{/site-chrome}}
+{{else}}
+  {{#nypr-mini-chrome}}
+    {{#unless error}}
+      {{outlet}}
+    {{else}}
+      {{error-page error=error}}
+    {{/unless}}
+  {{/nypr-mini-chrome}}
+{{/unless}}
+  
 
 {{#liquid-unless showPlayer class="player-wrapper"}}
   <div class="l-fixed l-lowright">

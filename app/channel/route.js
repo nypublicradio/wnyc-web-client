@@ -37,6 +37,9 @@ export default Route.extend(PlayParamMixin, {
     if (channel.get('headerDonateChunk')) {
       transition.send('updateDonateChunk', channel.get('headerDonateChunk'));
     }
+    if (channel.get('altLayout')) {
+      transition.send('setMiniChrome', true);
+    }
 
     metrics.trackEvent({
       category: `Viewed ${get(channel, 'listingObjectType').capitalize()}`,
