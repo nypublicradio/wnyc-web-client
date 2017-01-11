@@ -50,6 +50,12 @@ test('can view & update attrs', function(assert) {
    
   server.patch(`${config.wnycAuthAPI}/v1/user`, (schema, request) => {
     assert.equal(request.requestHeaders.Authorization, 'Bearer secret');
+    assert.deepEqual(JSON.parse(request.requestBody), {
+      given_name: FIRST,
+      family_name: LAST,
+      preferred_username: USER,
+      email: EMAIL
+    });
     
     return {
       data: {
