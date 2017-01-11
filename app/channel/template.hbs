@@ -8,11 +8,7 @@
       {{#if model.channel.hasMarquee}}
         {{x-marquee model=model.channel user=model.user}}
       {{else}}
-        {{#if model.channel.featured}}
-          {{channel-header model=model.channel user=model.user}}
-        {{else}}
-          {{channel-header model=model.channel user=model.user classNames='flush'}}
-        {{/if}}
+        {{channel-header model=model.channel user=model.user classNames=(unless model.channel.featured 'flush')}}
       {{/if}}
     {{/if}}
     
