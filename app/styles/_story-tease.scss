@@ -1,0 +1,19 @@
+.story-tease.alt-channel {
+  position: relative;
+  text-align: center;
+  padding: 150px 35%;
+  
+  @include flexbox((
+    display: flex,
+    flex-direction: column,
+    justify-content: center,
+    align-items: center
+  ));
+}
+
+.story-tease-floating-header {
+  text-align: left;
+  position: absolute;
+  top: 25px;
+  left: 0;
+}
