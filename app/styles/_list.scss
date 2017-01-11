@@ -124,10 +124,6 @@
     .list--borderbottom & {
         border-top: none;
         border-bottom: 1px solid $nearwhite;
-
-        &:last-child {
-            border-bottom: none;
-        }
     }
 
     > a {
