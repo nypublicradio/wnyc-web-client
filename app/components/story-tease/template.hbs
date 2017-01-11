@@ -8,7 +8,19 @@
   </div>
 {{/if}}
 
-<div class="flag flag--rev flush">
+<div class="flag {{if (not altLayout) 'flag--rev'}} flush">
+  
+  {{#if altLayout}}
+  <a href={{item.url}} class="flag-image link--nodecor middle-narrow-up">
+    <img class="squarebadge badge--shadow" alt="{{item.title}}"
+      src="{{image-template item.imageMain.template 200 200 item.imageMain.crop}}"
+      srcset="{{image-template item.imageMain.template 400 400 item.imageMain.crop}} 2x,
+        {{image-template item.imageMain.template 600 600 item.imageMain.crop}} 3x"
+      width="200" height="200">
+  </a>
+  <!-- .flag-image -->
+  {{/if}}
+
   <div class="flag-body {{if isSmallAndUp 'flag-body--rightpad'}}">
     {{#if (and item.headers.links showParent)}}
       <div class="text text--small nudge-mini">
@@ -22,7 +34,7 @@
       </div>
     {{/if}}
 
-    <div class="text {{if isFancyFeatured 'text--430 text--darkshadow'}}">
+    <div class="text {{if (and isFancyFeatured (not altChannel)) 'text--430 text--darkshadow'}}{{if altChannel 'text--darkshadow'}}">
       <h2 class="{{if isFeatured 'h-featured' 'h2 h2--mq-small'}} nudge-mini">
         {{! #link-to 'story' item.id class="link--dark"}}{{! item.title}}{{! /link-to}}
         <a class="{{if isFancyFeatured 'link--white' 'link--dark'}}" data-test-selector="story-tease-title" href={{item.url}}>
@@ -76,7 +88,7 @@
 
   </div> <!-- .flag-body -->
 
-  {{#if item.imageMain}}
+  {{#if (and item.imageMain (not altLayout))}}
   {{#unless isFancyFeatured}}
   <a href={{item.url}} class="flag-image link--nodecor middle-narrow-up">
     <img alt="{{item.title}}"
