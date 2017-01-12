@@ -12,11 +12,11 @@
   + .account-info {
     padding-top: 125px;
   }
+}
 
-  .account-form & {
-    @include mq($medium-and-up) {
-      // dont cover promo
-      left: 318px;
-    }
+.account-form .alert {
+  @include mq($medium-and-up) {
+    // don't cover promo
+    left: 318px;
   }
 }
