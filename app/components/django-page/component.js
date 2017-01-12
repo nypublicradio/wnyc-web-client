@@ -30,6 +30,7 @@ function doRefresh() {
 
 export default Ember.Component.extend(LegacySupportMixin, BetaActionsMixin, {
   audio: service(),
+  session: service(),
   legacyAnalytics: service(),
   router: service('wnyc-routing'),
   loadingType: computed('page', function() {
@@ -85,6 +86,7 @@ export default Ember.Component.extend(LegacySupportMixin, BetaActionsMixin, {
           doRefresh();
         }
 
+        this.revealStaffLinks(this.get('session'));
         this.$().imagesLoaded().progress((i, image) => {
           Ember.run(() => {
             image.img.classList.add('is-loaded');

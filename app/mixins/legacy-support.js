@@ -30,6 +30,24 @@ export default Mixin.create({
       return legacy.queue(itemPK);
     }
   },
+  revealStaffLinks(session) {
+    let userData = session.get('data.authenticated');
+    if (!get(userData, 'is_staff')) {
+      return;
+    }
+    $('.stf').each(function() {
+      var $elt, $this = $(this);
+      if (this.tagName.toLowerCase() === 'a') {
+        $elt = $this;
+      } else {
+        $this.append($elt = $("<a/>").addClass(this.className));
+      }
+      $elt.html($elt.html() || 'Edit This').attr("target", '_blank');
+      $elt.attr("href", `${get(userData, 'adminUrl')}/${$this.attr('data-url')}`);
+      $this.show();
+      $this.parent().show();
+    });
+  },
   actions: {
     listen(model, streamSlug) {
       const id = get(model, 'id');
