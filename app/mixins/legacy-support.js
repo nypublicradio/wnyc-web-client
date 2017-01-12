@@ -31,7 +31,7 @@ export default Mixin.create({
     }
   },
   revealStaffLinks(session) {
-    let userData = session.get('data.authenticated');
+    let userData = session.getWithDefault('data.authenticated', {});
     if (!get(userData, 'is_staff')) {
       return;
     }
