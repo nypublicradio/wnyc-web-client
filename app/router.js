@@ -9,7 +9,7 @@ const Router = Ember.Router.extend(AnalyticsMixin, {
   willTransition(oldInfos, newInfos, transition) {
     this._super(...arguments);
 
-    if (transition.targetName !== 'login') {
+    if (!['login', 'reset', 'validate'].includes(transition.targetName)) {
       this.get('session').set('attemptedTransition', transition);
     }
   },
