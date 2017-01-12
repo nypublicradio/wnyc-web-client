@@ -1,10 +1,7 @@
 .player-history,
 .player-queue {
-  .l-holygrail-middle,
-  .l-holygrail-right {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  .ember-holygrail-right {
+    align-items: center;
   }
 
   .liquid-animating [data-id] {

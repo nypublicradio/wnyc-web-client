@@ -1,12 +1,13 @@
 <ul class="stream-list">
 {{#each streams as |stream|}}
 {{#if stream.whatsOn}}
-<li class="l-holygrail streamitem">
-  <div class="l-holygrail-left">
-    <a class="streamitem-imagelink" href="{{stream.scheduleUrl}}"><img class="streamitem-image" src={{stream.imageLogo}}></a>
-  </div>
 
-  <div class="l-holygrail-middle streamitem-info">
+{{#holygrail-layout tagName='li' class='streamitem' as |g|}}
+  {{#g.left}}
+    <a class="streamitem-imagelink" href="{{stream.scheduleUrl}}"><img class="streamitem-image" src={{stream.imageLogo}}></a>
+  {{/g.left}}
+
+  {{#g.center class='streamitem-info'}}
     <h2 class="text text--semi nudge-mini">
       <a href="{{stream.scheduleUrl}}" class="link--dark">{{stream.name}}</a>
     </h2>
@@ -26,9 +27,10 @@
         </span>
       {{/if}}
       {{/if}}
-  </div>
-  </div>
-  <div class="l-holygrail-right">
+    </div>
+  {{/g.center}}
+  
+  {{#g.right}}
     {{#if media.isMediumAndUp}}
       {{#listen-button
         type='gray-minion'
@@ -44,8 +46,9 @@
         itemPK=stream.slug
         itemTitle=stream.name}}
     {{/if}}
-  </div>
-</li>
+  {{/g.right}}
+{{/holygrail-layout}}
+
 {{/if}}
 {{/each}}
 </ul>

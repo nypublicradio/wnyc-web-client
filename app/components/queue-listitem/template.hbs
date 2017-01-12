@@ -1,65 +1,61 @@
-<div class="l-holygrail queueitem">
-    <div class="l-holygrail-left">
-    </div>
-    <!-- .l-holygrail-left -->
-    <div class="l-holygrail-middle">
-      <div class="queueitem-info">
-        <div class="text flush queueitem-title">
-          <span class="queueitem-itemtitle">
-            <a href='{{story.url}}?modal=null'
-               title='{{story.title}}'
-               data-tracking-category='Persistent Player'
-               data-tracking-action='Click Through to Story'
-               data-tracking-region='{{region}}'
-               data-tracking-model='{{story.id}}'>{{{story.title}}}</a>
-          </span>
-          <span class="queueitem-duration">{{story.audioDurationReadable}}</span>
+{{#holygrail-layout class="queueitem" as |g|}}
+  {{#g.center}}
+    <div class="queueitem-info">
+      <div class="text flush queueitem-title">
+        <span class="queueitem-itemtitle">
+          <a href='{{story.url}}?modal=null'
+             title='{{story.title}}'
+             data-tracking-category='Persistent Player'
+             data-tracking-action='Click Through to Story'
+             data-tracking-region='{{region}}'
+             data-tracking-model='{{story.id}}'>{{{story.title}}}</a>
+        </span>
+        <span class="queueitem-duration">{{story.audioDurationReadable}}</span>
+      </div>
+      {{#if story.headers.brand.url}}
+        <div class="text text--medium text--gray flush queueitem-showtitle">
+          <a href='{{story.headers.brand.url}}?modal=null'
+             title='{{story.headers.brand.title}}'
+             data-tracking-category='Persistent Player'
+             data-tracking-action='Click Through to Show "{{story.headers.brand.title}}"'
+             data-tracking-region='{{region}}'
+             data-tracking-model='{{story.id}}'>{{{story.headers.brand.title}}}</a>
         </div>
-        {{#if story.headers.brand.url}}
-          <div class="text text--medium text--gray flush queueitem-showtitle">
-            <a href='{{story.headers.brand.url}}?modal=null'
-               title='{{story.headers.brand.title}}'
-               data-tracking-category='Persistent Player'
-               data-tracking-action='Click Through to Show "{{story.headers.brand.title}}"'
-               data-tracking-region='{{region}}'
-               data-tracking-model='{{story.id}}'>{{{story.headers.brand.title}}}</a>
-          </div>
+      {{/if}}
+      <div class="queueitem-controls">
+        {{share-button
+          classNames="queueitem-sharebutton"
+          story=story
+          type="ondemand"
+          region=region}}
+        {{#if removeAction}}
+          <button class="btn btn--blank btn--playerlight queueitem-deletebutton" {{action removeAction story.id}}>
+            {{wnyc-svg className="icon" icon="trash"}}
+          </button>
         {{/if}}
-        <div class="queueitem-controls">
-          {{share-button
-            classNames="queueitem-sharebutton"
-            story=story
-            type="ondemand"
-            region=region}}
-          {{#if removeAction}}
-            <button class="btn btn--blank btn--playerlight queueitem-deletebutton" {{action removeAction story.id}}>
-              {{wnyc-svg className="icon" icon="trash"}}
-            </button>
-          {{/if}}
-        </div>
       </div>
     </div>
-    <!-- .l-holygrail-middle -->
-    <div class="l-holygrail-right">
-      <div class="btn-group">
-        {{listen-button
-          type='blue-hollow'
-          state=state
-          playContext=playContext
-          itemPK=story.id
-          itemTitle=story.title}}
-      </div>
+  {{/g.center}}
+  
+  {{#g.right}}
+    <div class="btn-group">
+      {{listen-button
+        type='blue-hollow'
+        state=state
+        playContext=playContext
+        itemPK=story.id
+        itemTitle=story.title}}
     </div>
-    <!-- .l-holygrail-right -->
-    {{#if (and isCurrent (eq playContext 'queue'))}}
-      <div class="queueitem-playingicon">
-        {{wnyc-svg className="icon" icon="speaker"}}
-      </div>
-    {{/if}}
-    {{#if draggable}}
-      <div class="queueitem-draghandle">
-        {{wnyc-svg className="icon" icon="reorder"}}
-      </div>
-    {{/if}}
+  {{/g.right}}
+{{/holygrail-layout}}
+
+{{#if (and isCurrent (eq playContext 'queue'))}}
+  <div class="queueitem-playingicon">
+    {{wnyc-svg className="icon" icon="speaker"}}
   </div>
-<!-- .l-holygrail -->
+{{/if}}
+{{#if draggable}}
+  <div class="queueitem-draghandle">
+    {{wnyc-svg className="icon" icon="reorder"}}
+  </div>
+{{/if}}

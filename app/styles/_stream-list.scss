@@ -87,14 +87,14 @@
       width: 75px;
     }
 
-    .l-holygrail-left a {
+    .ember-holygrail-left a {
       text-decoration: none;
       transition: none;
     }
-    .l-holygrail-left a:hover {
+    .ember-holygrail-left a:hover {
       border-color: transparent;
     }
-    .l-holygrail-right {
+    .ember-holygrail-right {
       min-width: 67px;
       @include flex(0 0 67px);
       @include mq($medium-and-up) {

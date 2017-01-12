@@ -4,29 +4,6 @@
   @include flex-direction(column);
 }
 
-.l-holygrail {
-  @include display-flex;
-  @include flex-direction(row);
-  @include flex(1 0 auto);
-
-  > .l-holygrail-middle {
-    @include flex-direction(row);
-    @include flex(1);
-  }
-
-  .l-holygrail-centered {
-    @include display-flex;
-    @include flex-direction(column);
-    @include justify-content(center);
-  }
-
-  > .l-holygrail-right,
-  > .l-holygrail-left {
-    @include flex(0 0 auto);
-    @include display-flex;
-  }
-}
-
 .l-modal--shadow {
   @include box-shadow(0px 2px 4px 0px rgba(black, 0.5));
 }

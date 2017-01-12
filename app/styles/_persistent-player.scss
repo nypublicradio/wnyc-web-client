@@ -15,14 +15,14 @@
     }
 
     .l-flexcontext,
-    .l-holygrail,
-    .l-holygrail-left,
-    .l-holygrail-middle,
-    .l-holygrail-right {
+    .ember-holygrail,
+    .ember-holygrail-left,
+    .ember-holygrail-middle,
+    .ember-holygrail-right {
       height: 100%;
     }
 
-    .l-holygrail-left {
+    .ember-holygrail-left {
       min-width: 153px;
       @include flex(0 1 153px);
 
@@ -31,11 +31,11 @@
         @include flex(0 1 230px);
       }
     }
-    .l-holygrail-middle {
+    .ember-holygrail-middle {
       min-width: 0;
       @include flex(1 0 0);
-    };
-    .l-holygrail-right {
+    }
+    .ember-holygrail-right {
       min-width: 70px;
 
       @include mq($medium-and-up) {
@@ -151,7 +151,7 @@
   @include mq($medium-and-up) {
     margin: 0px;
 
-    .l-holygrail-right & {
+    .ember-holygrail-right & {
       justify-content: flex-end;
       margin-right: 10px;
 
@@ -159,7 +159,7 @@
         margin: 0 10px 0 18px;
       }
     }
-    .l-holygrail-middle {
+    .ember-holygrail-middle {
       margin: 0 15px;
     }
   }
@@ -532,7 +532,7 @@ button.persistent-queuebutton.is-open-modal {
 }
 
 .persistent-player.is-audiostream {
-  .l-holygrail-left {
+  .ember-holygrail-left {
     min-width: 90px;
     @include flex(0 0 90px);
 
