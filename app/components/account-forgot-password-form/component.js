@@ -21,7 +21,13 @@ export default Component.extend({
   actions: {
     onSubmit() {
       return this.requestPasswordResetEmail(get(this, 'fields.email'));
-    }
+    },
+    onFailure(e) {
+      if (e) {
+        let error = e.error || e.errors;
+        this.applyErrorToChangeset(error, get(this, 'changeset'));
+      }
+    },
   },
   requestPasswordResetEmail(email) {
     let url = `${ENV.wnycAuthAPI}/v1/password/forgot?email=${email}`;
@@ -29,5 +35,13 @@ export default Component.extend({
     let mode = 'cors';
     return fetch(url, {method, mode})
     .then(rejectUnsuccessfulResponses);
+  },
+  applyErrorToChangeset(error, changeset) {
+    if (error) {
+      if (error.code === "UserNotFoundException") {
+        changeset.validate('email');
+        changeset.pushErrors('email', `We cannot find an account for the email ${changeset.get('email')}. <a href="/signup">Sign up?</a>`);
+      }
+    }
   },
 });

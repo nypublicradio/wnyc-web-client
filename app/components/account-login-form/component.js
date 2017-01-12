@@ -27,8 +27,9 @@ export default Component.extend({
       this.goHome();
     },
     onFailure(e) {
-      if (e && e.error) {
-        this.applyErrorToChangeset(e.error, get(this, 'changeset'));
+      if (e) {
+        let error = e.error || e.errors;
+        this.applyErrorToChangeset(error, get(this, 'changeset'));
       }
     },
   },
@@ -42,10 +43,10 @@ export default Component.extend({
     if (error && error.code) {
       if (error.code === "UnauthorizedAccess") {
         changeset.validate('password');
-        changeset.pushErrors('password', 'Incorrect username or password.');
+        changeset.pushErrors('password', `There was a problem with the email and password for ${changeset.get('email')}. <a href="/signup">Sign up?</a> <a href="/forgot">Forgot password?</a>`);
       } else if (error.code === "UserNotFoundException") {
         changeset.validate('email');
-        changeset.pushErrors('email', 'email address not found');
+        changeset.pushErrors('email', `We cannot find an account for the email ${changeset.get('email')}. <a href="/signup">Sign up?</a> <a href="/forgot">Forgot password?</a>`);
       }
     }
   }
