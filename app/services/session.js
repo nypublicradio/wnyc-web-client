@@ -1,6 +1,7 @@
 import SessionService from 'ember-simple-auth/services/session';
 import config from 'wnyc-web-client/config/environment';
 import fetch from 'fetch';
+import getOwner from 'ember-owner/get';
 
 export default SessionService.extend({
   syncBrowserId(report = true) {
@@ -32,6 +33,11 @@ export default SessionService.extend({
     })
     .then(checkStatus).then(r => r.json())
     .then(({is_staff}) => this.set('data.isStaff', is_staff));
+  },
+  
+  verify(email, password) {
+    let authenticator = getOwner(this).lookup('authenticator:nypr');
+    return authenticator.authenticate(email, password);
   }
 });
 
