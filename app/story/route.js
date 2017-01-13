@@ -10,10 +10,6 @@ export default Ember.Route.extend(PlayParamMixin, {
   session:    service(),
   googleAds:  service(),
   
-  setupController(controller) {
-    controller.set('isMobile', window.Modernizr.touchevents);
-    return this._super(...arguments);
-  },
   titleToken(model) {
     return `${get(model, 'story.title')} - ${get(model, 'story.headers.brand.title')}`;
   },
@@ -61,6 +57,12 @@ export default Ember.Route.extend(PlayParamMixin, {
       nprVals,
       isNpr: true
     });
+  },
+  
+  setupController(controller) {
+    controller.set('isMobile', window.Modernizr.touchevents);
+    controller.set('session', get(this, 'session'));
+    return this._super(...arguments);
   },
   
   actions: {
