@@ -46,7 +46,7 @@ test('view comments as regular user', function(assert) {
 });
 
 test('view comments as staff user', function(assert) {
-  server.get(`${config.wnycAccountRoot}/api/v1/is_logged_in/`, {is_staff: true});
+  server.get(`${config.wnycAdminRoot}/api/v1/is_logged_in/`, {is_staff: true});
   server.create('user');
   
   let story = server.create('story');
