@@ -41,7 +41,7 @@ test('smoke test', function(assert) {
 
 test('authenticated smoke test', function(assert) {
   server.create('user');
-  authenticateSession(this.application, {is_staff: true, access_token: 'foo'});
+  this.get(`${config.wnycAccountRoot}/api/v1/is_logged_in/`, {isStaff: true});
   let show = server.create('show', {
     id: 'shows/foo/',
     linkroll: [
