@@ -25,7 +25,7 @@ export default Component.extend({
   isFancyFeatured:    and('item.largeTeaseLayout', 'item.imageMain', 'isFeatured', 'media.isSmallAndUp'),
 
   tagName:            'article',
-  classNameBindings:  ['featuredClasses', 'altChannel'],
+  classNameBindings:  ['featuredClasses', 'fullScreen'],
   classNames:         ['story-tease'],
 
   itemId: computed('isLive', 'streamSlug', 'item.id', function() {
