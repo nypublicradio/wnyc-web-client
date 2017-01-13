@@ -18,11 +18,11 @@
     <div class="text">
         <a href="/feeds/comments/{{story.itemTypeId}}/{{story.id}}" target="_blank">RSS Feed for Comments</a> | <a href="#commentsForm">Leave a Comment</a>
     </div>
-    {{comments-list comments=comments user=user browserId=browserId}}
+    {{comments-list comments=comments isStaff=isStaff browserId=browserId}}
 {{/if}}
 
 {{#if isShowingForm}}
-    {{comments-form action='saveSuccess' user=user browserId=browserId story=story}}
+    {{comments-form action='saveSuccess' isStaff=isStaff browserId=browserId story=story}}
 
     <div class="text">
         <p>Please stay on topic, be civil, and be brief. By leaving a comment, you agree to our <a href="/privacy">Privacy Policy</a> and <a href="/terms/">Terms Of Use</a>.

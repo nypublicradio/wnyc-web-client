@@ -9,7 +9,8 @@
       defaultSlug=defaultSlug
       navRoot=navRoot
       channel=model.channel
-      user=model.user
+      adminURL=adminURL
+      isStaff=isStaff
       item=model.channel.featured}}
 
       {{outlet}}
@@ -22,9 +23,9 @@
     {{/alt-channel-layout}}
   {{else}}
     {{#if model.channel.hasMarquee}}
-      {{x-marquee model=model.channel user=model.user}}
+        {{x-marquee model=model.channel isStaff=isStaff adminURL=adminURL}}
     {{else}}
-      {{channel-header model=model.channel user=model.user classNames=(unless model.channel.featured 'flush')}}
+      {{channel-header model=model.channel isStaff=isStaff adminURL=adminURL classNames=(unless model.channel.featured 'flush')}}
     {{/if}}
 
   <div class="l-constrained">
@@ -35,7 +36,8 @@
         <h1 class="for-screenreaders">Featured Item</h1>
         {{story-tease
           parentTitle=model.channel.title
-          user=model.user
+          isStaff=isStaff
+          adminURL=adminURL
           item=model.channel.featured
           hideLinks=true
           isFeatured=true
