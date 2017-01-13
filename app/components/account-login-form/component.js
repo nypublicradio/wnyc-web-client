@@ -28,8 +28,7 @@ export default Component.extend({
     },
     onFailure(e) {
       if (e) {
-        let error = e.error || e.errors;
-        this.applyErrorToChangeset(error, get(this, 'changeset'));
+        this.applyErrorToChangeset(e.error, get(this, 'changeset'));
       }
     },
   },
