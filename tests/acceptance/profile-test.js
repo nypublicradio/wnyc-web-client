@@ -138,12 +138,13 @@ test('using bad password to update email shows error', function(assert) {
   
   andThen(function() {
     fillIn('[name=passwordForEmailChange]', PW);
+    find('[name=passwordForEmailChange]').focusout();
     click('[data-test-selector=check-pw]');
   });
   
-  return wait().then(() => {
-    assert.equal(findWithAssert('.nypr-account-modal-body .nypr-input-error').length, 1);
-    assert.equal(find('.nypr-account-modal-body .nypr-input-error').text().trim(), 'Incorrect username or password.');
+  andThen(function() {
+    assert.equal(findWithAssert('.nypr-input-error').length, 1);
+    assert.equal(find('.nypr-input-error').text().trim(), 'Incorrect username or password.');
     assert.equal(findWithAssert('#passwordForEmailChange').val(), PW, 'old password should still be there');
   });
 });
