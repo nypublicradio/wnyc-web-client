@@ -5,9 +5,9 @@
   hideLinks=true
   isFeatured=true
   showParent=false
-  class='box box--bgoverflow flush'
+  class='box flush'
   playContext='FeaturedItem'}}
-  
+
   <div class="l-constrained">
   {{#holygrail-layout as |g|}}
     {{#g.left}}
@@ -22,21 +22,23 @@
       </div>
       <!-- .flag-image -->
       <div class="flag-body">
-        <h1 class="text--large text--white">{{{channel.title}}}</h1>
+        <h1 class="h1 h1--mq-small text--large text--white">{{{channel.title}}}</h1>
       </div>
     </div>
     {{/g.left}}
   {{/holygrail-layout}}
   </div>
-  
+
 {{/story-tease}}
 
-<div class="alt-channel-footer aligncenter">
+<div class="alt-channel-bandeau aligncenter">
   <div class="l-medium">
-    <div class="text--white h2">
+    <div class="text--white">
+      {{{channel.chunkSidebarTop}}}
+    </div>
+    <div class="text--normal text--white h2 h2--mq-small">
       {{{channel.tease}}}
     </div>
-    {{{channel.chunkSidebarTop}}}
   </div>
 </div>
 
@@ -44,7 +46,7 @@
 
   {{#if channel.linkroll}}
     {{nav-links
-      classNames="aligncenter tabs-header--padded"
+      classNames="aligncenter tabs-header--padded text--upper text--bold text--spacing"
       defaultSlug=defaultSlug
       navRoot=navRoot
       links=channel.linkroll
@@ -52,10 +54,10 @@
   {{/if}}
 
   {{yield}}
-  
+
 </main>
 
-<div class="l-highlight--gray">
+<div class="alt-channel-footer l-highlight--gray">
   <div class="l-medium">
     <div class="box--flexpadtop">
       {{{model.channel.chunkSidebarBottom}}}

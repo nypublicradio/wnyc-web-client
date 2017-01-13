@@ -1,19 +1,39 @@
 .story-tease.full-screen {
   position: relative;
   text-align: center;
-  padding: 150px 35%;
-  
+  padding: 150px 0 50px;
+  height: 490px;
+
   @include flexbox((
     display: flex,
     flex-direction: column,
-    justify-content: center,
+    justify-content: flex-end,
     align-items: center
   ));
+
+  @include mq($medium-only) {
+    height: 100%;
+    padding: 150px 8% 50px;
+  }
+
+  .story-tease-meta {
+    max-width: 650px;
+    width: 100%;
+  }
 }
 
 .story-tease-floating-header {
   text-align: left;
   position: absolute;
   top: 25px;
-  left: 0;
+
+  @include mq($small-only) {
+    width: 90%;
+  }
+}
+
+.story-tease--flipped {
+  .h2 {
+    font-weight: normal;
+  }
 }

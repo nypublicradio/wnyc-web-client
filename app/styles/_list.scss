@@ -97,11 +97,16 @@
         display: inline-block;
         margin-right: 15px;
 
+        @include mq($medium-and-up) {
+          margin-right: 30px;
+        }
+
         @include mq($small-and-up) {
           margin-right: 25px;
         }
-        @include mq($medium-and-up) {
-          margin-right: 30px;
+
+        &:last-child {
+          margin-right: 0;
         }
     }
 
@@ -113,7 +118,7 @@
 }
 
 .list-item {
-    padding: 1.5rem 0;
+    padding: 2.4rem 0;
     border-top: 1px solid $nearwhite;
     margin-bottom: 0;
 
@@ -129,6 +134,10 @@
     > a {
       display: block;
     }
+
+    article {
+      margin-bottom: 0;
+    }
 }
 
 .list-item--tall {
@@ -137,7 +146,7 @@
 
 .list-item--medium {
     padding: 1.5rem 0;
-    
+
     @include mq($small-only) {
         padding: 1rem 0;
     }
@@ -145,7 +154,7 @@
 
 .list-item--short {
     padding: 0.6rem 0;
-    
+
     @include mq($medium-only) {
         padding: 0.5rem 0;
     }

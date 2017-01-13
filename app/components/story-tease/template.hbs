@@ -1,21 +1,21 @@
 {{#if isFancyFeatured}}
-  <div class="box-mat" style='background-image:url({{image-template item.imageMain.template 0 400 item.imageMain.crop}});'></div>
+  <div class="box-mat {{if fullScreen 'box-mat--fullscreen'}}" style='background-image:url({{image-template item.imageMain.template 0 400 item.imageMain.crop}});'></div>
 {{/if}}
 
 {{#if hasBlock}}
 <div class="story-tease-floating-header">
   {{yield}}
-</div>  
+</div>
 {{/if}}
 
 {{#if isFeatured}}
-  <div class="text text--small text--upper text--heavy text--spacing nudge {{if isFancyFeatured 'text--lightgray'}}">
+  <div class="text text--small text--upper text--heavy text--spacing nudge {{if isFancyFeatured 'text--white'}}">
     <p>{{status}}</p>
   </div>
 {{/if}}
 
-<div class="flag {{if (not flipped) 'flag--rev'}} flush">
-  
+<div class="story-tease-meta flag {{if flipped 'story-tease--flipped flag--med' 'flag--rev'}} flush">
+
   {{#if flipped}}
   <a href={{item.url}} class="flag-image link--nodecor middle-narrow-up">
     <img class="squarebadge badge--shadow" alt="{{item.title}}"
@@ -51,7 +51,9 @@
 
       <div class="text-body text-body--nopad {{if isFancyFeatured 'text--white text--semi'}}">
         {{{item.tease}}}
-        <span class="dimmed text--small"> ({{moment-format item.dateLineDatetime 'MMM D, YYYY'}})</span>
+        {{#if (not fullScreen)}}
+          <span class="dimmed text--small"> {{moment-format item.dateLineDatetime 'MMM D, YYYY'}}</span>
+        {{/if}}
       </div>
     </div>
 
@@ -59,7 +61,7 @@
       {{#if isListenableNow}}
         {{#listen-button
           isLive=isLive
-          type=(if isFeatured 'blue-boss' 'blue-minion')
+          type=playButton
           state=listenState
           playContext=playContext
           itemPK=itemId

@@ -1,5 +1,13 @@
-.alt-channel-footer {
-  background-color: black;
-  padding: 25px 0;
+.alt-channel-bandeau {
+  background: linear-gradient(20deg, rgba(0,0,0,0.8),rgba(0,0,0,1));
+  padding: 35px 0;
   margin-bottom: 56px;
+
+  p {
+    margin: 0;
+  }
+}
+
+.alt-channel-footer {
+  margin-top: 100px;
 }

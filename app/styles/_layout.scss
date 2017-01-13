@@ -108,7 +108,7 @@
  *          p Just some text in a medium width wrapper
  */
 .l-medium {
-    width: 100%;
+    width: 90%;
     max-width: 800px;
     margin: 0 auto;
 }
@@ -127,6 +127,7 @@
  */
 .l-constrained {
     max-width: 1170px;
+    width: 100%;
     margin: 0 auto;
     @extend %clearfix;
 
@@ -710,7 +711,7 @@
     // }
 
     .flag--med & {
-      padding-right: 30px;
+      padding-right: 35px;
     }
 
     &.flag-image--squeeze > img {

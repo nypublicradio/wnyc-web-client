@@ -41,14 +41,14 @@
     @include transition(font-size $transition-timing ease, line-height $transition-timing ease);
 
     @include mq($small-only) {
-        @include fontsize($base-font);
+        @include fontsize($base-font*1.25); /* 20px */
         line-height: 1.5;
     }
 }
 .h3 {
     @include fontsize($base-font); /* 16px */
     font-weight: 600;
-    
+
     @include mq($small-only) {
         @include fontsize($base-font*0.875);
         line-height: 1.5rem;
@@ -74,8 +74,8 @@
   @include transition(font-size $transition-timing ease, line-height $transition-timing ease);
 
   @include mq($small-only) {
-      @include fontsize(18);
-      line-height: 1.5625rem;
+      @include fontsize(20);
+      line-height: 1.5rem;
   }
 }
 
