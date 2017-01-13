@@ -15,7 +15,7 @@ export default Controller.extend({
   
   authenticate(password) {
     let email = this.get('model.email');
-    return this.get('session').authenticate('authenticator:nypr', email, password);
+    return this.get('session').verify(email, password);
   },
   
   changePassword(changeset) {
