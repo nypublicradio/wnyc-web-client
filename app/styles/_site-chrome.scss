@@ -40,8 +40,10 @@
 }
 
 .sitechrome-topright {
-  display: flex;
-  align-items: flex-end;
+  @include flexbox((
+    display: flex,
+    align-items: flex-end
+  ));
   > a,
   > div {
     height: 100%;
