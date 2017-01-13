@@ -9,10 +9,9 @@ import {
   embeddedComponentSetup,
   clearAlienDom,
 } from '../../lib/alien-dom';
-import config from 'wnyc-web-client/config/environment';
 
 const { get, computed, run } = Ember;
-let { wnycURL } = ENV;
+let { wnycURL, wnycAdminRoot, renderGoogleAds } = ENV;
 wnycURL = canonicalize(wnycURL);
 
 function doRefresh() {
@@ -83,12 +82,12 @@ export default Ember.Component.extend(LegacySupportMixin, BetaActionsMixin, {
         // re-enable any overlaid content so that it can wormhole
         // itself into the server-rendered DOM.
         this.set('showingOverlay', true);
-        if (ENV.renderGoogleAds) {
+        if (renderGoogleAds) {
           doRefresh();
         }
 
         if (this.get('session.data.isStaff')) {
-          this.revealStaffLinks(this.$(), config.wnycAccountRoot);
+          this.revealStaffLinks(this.$(), wnycAdminRoot);
         }
         this.$().imagesLoaded().progress((i, image) => {
           Ember.run(() => {
