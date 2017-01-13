@@ -26,7 +26,7 @@ export default Route.extend(ApplicationRouteMixin, {
 
     let metrics = get(this, 'metrics');
 
-    this._syncBrowserId();
+    get(this, 'session').syncBrowserId();
     get(this, 'currentUser').load();
 
     metrics.identify('GoogleAnalytics', {isAuthenticated: false});
@@ -36,8 +36,7 @@ export default Route.extend(ApplicationRouteMixin, {
 
     window.WNYC_LEGACY_LOADER = get(this, 'legacyLoader');
 
-    let store = get(this, 'store');
-    let pollFunction = () => store.findAll('stream');
+    let pollFunction = () => get(this, 'store').findAll('stream');
     get(this, 'poll').addPoll({interval: 60 * 1000, callback: pollFunction});
   },
 
@@ -73,9 +72,5 @@ export default Route.extend(ApplicationRouteMixin, {
     this._super(...arguments);
     get(this, 'metrics').identify('GoogleAnalytics', {isAuthenticated: true});
     get(this, 'currentUser').load();
-  },
-
-  _syncBrowserId() {
-    return get(this, 'session').syncBrowserId();
   },
 });
