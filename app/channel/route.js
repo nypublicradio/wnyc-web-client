@@ -68,7 +68,7 @@ export default Route.extend(PlayParamMixin, {
       adminURL: `${config.wnycAdminRoot}/admin`
     });
   },
-  
+
   actions: {
     willTransition(transition) {
       let isExiting = !transition.targetName.match(this.routeName);
