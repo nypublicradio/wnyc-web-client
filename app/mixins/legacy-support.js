@@ -30,7 +30,7 @@ export default Mixin.create({
       return legacy.queue(itemPK);
     }
   },
-  revealStaffLinks($element, adminURL) {
+  revealStaffLinks($element, adminRoot) {
     $element.find('.stf').each(function() {
       var $elt, $this = $(this);
       if (this.tagName.toLowerCase() === 'a') {
@@ -39,7 +39,7 @@ export default Mixin.create({
         $this.append($elt = $("<a/>").addClass(this.className));
       }
       $elt.html($elt.html() || 'Edit This').attr("target", '_blank');
-      $elt.attr("href", `${adminURL}/${$this.attr('data-url')}`);
+      $elt.attr("href", `${adminRoot}/admin/${$this.attr('data-url')}`);
       $this.show();
       $this.parent().show();
     });
