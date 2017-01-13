@@ -134,11 +134,13 @@ test('using bad password to update email shows error', function(assert) {
     fillIn('input[name=confirmEmail]', EMAIL);
   });
   
-  click('.nypr-basic-info [data-test-selector="save"]');
+  andThen(function() {
+    click('.nypr-basic-info [data-test-selector="save"]');
+  });
   
   andThen(function() {
     fillIn('[name=passwordForEmailChange]', PW);
-    find('[name=passwordForEmailChange]').focusout();
+    click('[name=passwordForEmailChange]');
     click('[data-test-selector=check-pw]');
   });
   
