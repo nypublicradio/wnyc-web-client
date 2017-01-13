@@ -1,27 +1,4 @@
-/*.btn--playerlight,*/ .persistent-player .popupmenu-button {
-  color: #77a6de;
-  .icon {
-    polygon, rect, circle, path {
-      fill: #77a6de;
-    }
-  }
-  &:focus {
-    color: #128cf4;
-    .icon {
-      polygon, rect, circle, path {
-        fill: #128cf4;
-      }
-    }
-  }
-  &:active  {
-    color: #128cf4;
-    .icon {
-      polygon, rect, circle, path {
-        fill: #128cf4;
-      }
-    }
-  }
-}
+
 
 //.btn--playerdark {
 //  color: #ffffff;
