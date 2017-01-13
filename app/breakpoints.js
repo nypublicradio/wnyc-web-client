@@ -1,3 +1,6 @@
+import Ember from 'ember';
+import nyprPlayerBreakpoints from 'nypr-player/breakpoints';
+
 const narrow = 321;
 const middleNarrow = 476;
 const middleMiddle = 701;
@@ -5,7 +8,7 @@ const medium = 801;
 const large = 1025;
 const short = 700;
 
-export default {
+export default Ember.assign({
   largeAndUp: `(min-width: ${large}px)`,
   mediumAndUp: `(min-width: ${medium}px)`,
   smallAndUp: `(min-width: ${narrow}px)`,
@@ -20,4 +23,4 @@ export default {
   // VERTICAL
   shortAndUp: `(min-height: ${short}px)`,
   shortOnly: `(max-height: ${short}px)`,
-};
+}, nyprPlayerBreakpoints);
