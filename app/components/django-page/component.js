@@ -9,6 +9,7 @@ import {
   embeddedComponentSetup,
   clearAlienDom,
 } from '../../lib/alien-dom';
+import config from 'wnyc-web-client/config/environment';
 
 const { get, computed } = Ember;
 let { wnycURL, wnycAdminRoot } = ENV;
