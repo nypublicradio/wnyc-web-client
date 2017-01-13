@@ -26,6 +26,14 @@ export default SessionService.extend({
 
     return getBrowserId()
       .then( ({ browser_id }) => this.set('data.browserId', browser_id));
+  },
+  
+  staff() {
+    fetch(`${config.wnycAccountRoot}/api/v1/is_logged_in/?bust_cache=${Math.random()}`, {
+      credentials: 'include'
+    })
+    .then(checkStatus).then(r => r.json())
+    .then(({is_staff}) => this.set('data.isStaff', is_staff));
   }
 });
 
