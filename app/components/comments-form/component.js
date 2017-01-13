@@ -26,7 +26,7 @@ export default Ember.Component.extend({
       'comment'
     ];
 
-    if ( !this.get('user.is_staff') ) {
+    if ( !this.get('isStaff') ) {
       requiredFields.push('email');
     }
 
