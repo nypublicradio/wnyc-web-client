@@ -5,5 +5,5 @@ import config from 'wnyc-web-client/config/environment';
 export default Component.extend({
   session: service(),
   tagName: 'section',
-  adminURL: config.wnycAccountRoot
+  adminURL: `${config.wnycAdminRoot}/admin`
 });
