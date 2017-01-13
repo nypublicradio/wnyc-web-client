@@ -42,7 +42,7 @@ export default Mixin.create({
     controller.setProperties({
       channelTitle: get(channel, 'title'),
       channelType,
-      altLayout: get(channel, 'altLayout')
+      flipTease: get(channel, 'altLayout')
     });
   },
 

@@ -14,9 +14,9 @@
   </div>
 {{/if}}
 
-<div class="flag {{if (not altLayout) 'flag--rev'}} flush">
+<div class="flag {{if (not flipped) 'flag--rev'}} flush">
   
-  {{#if altLayout}}
+  {{#if flipped}}
   <a href={{item.url}} class="flag-image link--nodecor middle-narrow-up">
     <img class="squarebadge badge--shadow" alt="{{item.title}}"
       src="{{image-template item.imageMain.template 200 200 item.imageMain.crop}}"
@@ -94,7 +94,7 @@
 
   </div> <!-- .flag-body -->
 
-  {{#if (and item.imageMain (not altLayout))}}
+  {{#if (and item.imageMain (not flipped))}}
   {{#unless isFancyFeatured}}
   <a href={{item.url}} class="flag-image link--nodecor middle-narrow-up">
     <img alt="{{item.title}}"
