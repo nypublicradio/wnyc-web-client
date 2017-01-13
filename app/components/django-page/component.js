@@ -9,10 +9,9 @@ import {
   embeddedComponentSetup,
   clearAlienDom,
 } from '../../lib/alien-dom';
-import config from 'wnyc-web-client/config/environment';
 
 const { get, computed } = Ember;
-let { wnycURL } = ENV;
+let { wnycURL, wnycAdminRoot } = ENV;
 wnycURL = canonicalize(wnycURL);
 
 export default Ember.Component.extend(LegacySupportMixin, BetaActionsMixin, {
@@ -73,7 +72,7 @@ export default Ember.Component.extend(LegacySupportMixin, BetaActionsMixin, {
         this.get('googleAds').refresh();
 
         if (this.get('session.data.isStaff')) {
-          this.revealStaffLinks(this.$(), config.wnycAccountRoot);
+          this.revealStaffLinks(this.$(), wnycAdminRoot);
         }
         this.$().imagesLoaded().progress((i, image) => {
           Ember.run(() => {
