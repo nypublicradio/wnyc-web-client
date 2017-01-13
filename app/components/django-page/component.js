@@ -9,6 +9,7 @@ import {
   embeddedComponentSetup,
   clearAlienDom,
 } from '../../lib/alien-dom';
+import config from 'wnyc-web-client/config/environment';
 
 const { get, computed, run } = Ember;
 let { wnycURL } = ENV;
@@ -85,6 +86,9 @@ export default Ember.Component.extend(LegacySupportMixin, BetaActionsMixin, {
           doRefresh();
         }
 
+        if (this.get('session.data.isStaff')) {
+          this.revealStaffLinks(this.$(), config.wnycAccountRoot);
+        }
         this.$().imagesLoaded().progress((i, image) => {
           Ember.run(() => {
             image.img.classList.add('is-loaded');
