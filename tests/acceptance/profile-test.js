@@ -67,7 +67,7 @@ test('can view & update attrs', function(assert) {
     };
   });
    
-  authenticateSession(this.application, {access_token: 'foo'});
+  authenticateSession(this.application, {access_token: 'secret'});
   visit('/profile');
   
   andThen(function() {
