@@ -95,7 +95,7 @@ export default function() {
   /*------------------------------------------------------------
     identity management (account) endpoints
   --------------------------------------------------------------*/
-  this.get(`${config.wnycAccountRoot}/api/v1/is_logged_in/`, {isAuthenticated: true});
+  this.get(`${config.wnycAccountRoot}/api/v1/is_logged_in/`, {});
   this.get(`${config.wnycAccountRoot}/comments/security_info/`, {security_hash: 'foo', timestamp: Date.now()});
 
   this.post(`${config.wnycAccountRoot}/api/v1/accounts/logout/`, {successful_logout: true});
