@@ -43,16 +43,16 @@ test('it sends the correct values to the endpoint to verify the account', functi
 skip('it shows the login form and success alert when verification succeeds', function(assert) {
   const testUser = 'UserName';
   const testConfirmation = 'QWERTYUIOP';
-  const validateNewAccount = sinon.stub().returns(Promise.resolve());
 
   this.set('username', testUser);
   this.set('confirmation', testConfirmation);
-  this.set('validateNewAccount', validateNewAccount);
 
-  this.render(hbs`{{account-validation-form username=username confirmation=confirmation validateNewAccount=validateNewAccount}}`);
+  sinon.fakeServer.configure({respondImmediately: true});
+  sinon.fakeServer.respondWith([200, {}, ""]);
+
+  this.render(hbs`{{account-validation-form username=username confirmation=confirmation}}`);
 
   return wait().then(() => {
-    assert.equal(validateNewAccount.called, true, 'it calls validate');
     assert.equal(this.$('.account-form').length, 1, 'it should show an account form');
     assert.equal(this.$('button:contains(Log in)').length, 1, 'it should show a login button');
     assert.equal(this.$('.alert-success:contains(Your email has been verified and your online account is now active.)').length, 1, 'it should show a success alert');
