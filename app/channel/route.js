@@ -61,7 +61,7 @@ export default Route.extend(PlayParamMixin, {
       navRoot: get(this, 'listingSlug'),
       defaultSlug: navSlug,
       model,
-      isStaff: get(this, 'session.data.isStaff'),
+      session: get(this, 'session'),
       adminURL: config.wnycAccountRoot
     });
   },
