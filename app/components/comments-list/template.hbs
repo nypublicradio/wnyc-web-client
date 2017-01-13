@@ -16,7 +16,7 @@
         <div class="l-split flush">
             <div class="dimmed">{{moment-format comment.publishDate 'MMM D, YYYY, h:mm A'}}</div>
 
-            {{#if user.is_staff}}
+            {{#if isStaff}}
                 {{comments-admin id=comment.id browserId=browserId}}
             {{/if}}
 

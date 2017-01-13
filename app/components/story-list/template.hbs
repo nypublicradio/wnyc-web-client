@@ -3,7 +3,8 @@
   <li class="list-item">
     {{story-tease
       parentTitle=parentTitle
-      user=session.data.authenticated
+      isStaff=session.data.isStaff
+      adminURL=adminURL
       item=item
       playContext=playContext}}
   </li>

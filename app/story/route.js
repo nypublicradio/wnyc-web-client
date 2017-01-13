@@ -28,7 +28,7 @@ export default Ember.Route.extend(PlayParamMixin, {
         story,
         getComments: () => comments,
         getRelatedStories: () => relatedStories,
-        user: get(this, 'session.data.authenticated'),
+        isStaff: get(this, 'session.data.isStaff'),
         browserId: get(this, 'session.data.browserId')
       });
     });
