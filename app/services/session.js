@@ -17,7 +17,7 @@ export default SessionService.extend({
     }
   },
   
-  staff() {
+  staffAuth() {
     fetch(`${config.wnycAdminRoot}/api/v1/is_logged_in/?bust_cache=${Math.random()}`, {
       credentials: 'include'
     })

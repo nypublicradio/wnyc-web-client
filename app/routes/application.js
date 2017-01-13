@@ -28,7 +28,7 @@ export default Route.extend(ApplicationRouteMixin, {
     let metrics = get(this, 'metrics');
 
     get(this, 'session').syncBrowserId();
-    get(this, 'session').staff();
+    get(this, 'session').staffAuth();
     get(this, 'currentUser').load();
 
     metrics.identify('GoogleAnalytics', {isAuthenticated: false});
