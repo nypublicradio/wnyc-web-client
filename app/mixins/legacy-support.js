@@ -30,12 +30,8 @@ export default Mixin.create({
       return legacy.queue(itemPK);
     }
   },
-  revealStaffLinks(session) {
-    let userData = session.getWithDefault('data.authenticated', {});
-    if (!get(userData, 'is_staff')) {
-      return;
-    }
-    $('.stf').each(function() {
+  revealStaffLinks($element, adminURL) {
+    $element.find('.stf').each(function() {
       var $elt, $this = $(this);
       if (this.tagName.toLowerCase() === 'a') {
         $elt = $this;
@@ -43,7 +39,7 @@ export default Mixin.create({
         $this.append($elt = $("<a/>").addClass(this.className));
       }
       $elt.html($elt.html() || 'Edit This').attr("target", '_blank');
-      $elt.attr("href", `${get(userData, 'adminURL')}/${$this.attr('data-url')}`);
+      $elt.attr("href", `${adminURL}/${$this.attr('data-url')}`);
       $this.show();
       $this.parent().show();
     });
