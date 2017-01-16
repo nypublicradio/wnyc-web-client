@@ -34,7 +34,9 @@
 <div class="alt-channel-bandeau aligncenter">
   <div class="l-medium">
     <div class="text--white">
-      {{{channel.chunkSidebarTop}}}
+      {{#if channel.chunkSidebarTop}}
+        {{django-page page=channel.chunkSidebarTop loadingType='channel-page'}}
+      {{/if}}
     </div>
     <div class="text--normal text--white h2 h2--mq-small">
       {{{channel.tease}}}
@@ -60,7 +62,9 @@
 <div class="alt-channel-footer l-highlight--gray">
   <div class="l-medium">
     <div class="box--flexpadtop">
-      {{{model.channel.chunkSidebarBottom}}}
+      {{#if channel.chunkSidebarBottom}}
+        {{django-page page=channel.chunkSidebarBottom loadingType='channel-page'}}
+      {{/if}}
     </div>
   </div>
 </div>
