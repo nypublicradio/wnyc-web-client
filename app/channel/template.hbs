@@ -74,11 +74,11 @@
             twitter=model.channel.twitter.firstObject
             newsletter=model.channel.newsletter.firstObject}}
 
-          {{{model.channel.chunkSidebarTop}}}
+          {{django-page page=model.channel.chunkSidebarTop loadingType='channel-page'}}
 
           {{google-ad ad="rightRail" class="align--mq-centertoright channel-ad"}}
 
-          {{{model.channel.chunkSidebarBottom}}}
+          {{django-page page=model.channel.chunkSidebarBottom loadingType='channel-page'}}
 
         </div>
         <!-- .l-skinny -->
