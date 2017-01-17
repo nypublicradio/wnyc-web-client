@@ -16,7 +16,7 @@
 
 <div class="story-tease-meta flag {{if flipped 'story-tease--flipped flag--med' 'flag--rev'}} flush">
 
-  {{#if flipped}}
+  {{#if (and item.imageMain flipped)}}
   <a href={{item.url}} class="flag-image link--nodecor middle-narrow-up">
     <img class="squarebadge badge--shadow" alt="{{item.title}}"
       src="{{image-template item.imageMain.template 200 200 item.imageMain.crop}}"
