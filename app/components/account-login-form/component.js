@@ -12,6 +12,7 @@ export default Component.extend({
   session: service(),
   routing: service('wnyc-routing'),
   allowedKeys: ['email', 'password'],
+  triedUnverifiedAccount: false,
   init() {
     this._super(...arguments);
     set(this, 'fields', {
@@ -30,7 +31,11 @@ export default Component.extend({
     },
     onFailure(e) {
       if (e) {
-        this.applyErrorToChangeset(e.error, get(this, 'changeset'));
+        if (e.error && e.error.code === 'VerificationPending') {
+          set(this, 'triedUnverifiedAccount', true);
+        } else {
+          this.applyErrorToChangeset(e.error, get(this, 'changeset'));
+        }
       }
     },
   },
