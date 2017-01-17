@@ -9,6 +9,7 @@ import fetch from 'fetch';
 import { rejectUnsuccessfulResponses } from 'wnyc-web-client/utils/fetch-utils';
 
 export default Component.extend({
+  resendEndpoint: `${ENV.wnycAuthAPI}/v1/password/forgot`,
   allowedKeys: ['email'],
   init() {
     this._super(...arguments);
