@@ -4,9 +4,11 @@ import get from 'ember-metal/get';
 import Changeset from 'ember-changeset';
 import LoginValidations from 'wnyc-web-client/validations/login';
 import lookupValidator from 'ember-changeset-validations';
+import ENV from 'wnyc-web-client/config/environment';
 import service from 'ember-service/inject';
 
 export default Component.extend({
+  resendEndpoint: `${ENV.wnycAuthAPI}/v1/confirm/resend`,
   session: service(),
   routing: service('wnyc-routing'),
   allowedKeys: ['email', 'password'],
