@@ -67,9 +67,12 @@ export default Route.extend(PlayParamMixin, {
   },
   
   actions: {
-    willTransition() {
+    willTransition(transition) {
       this._super(...arguments);
       beforeTeardown();
+      if (get(this, 'currentModel.channel.altLayout')) {
+        transition.send('setMiniChrome', false);
+      }
       return true;
     }
   }
