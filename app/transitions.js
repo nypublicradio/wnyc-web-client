@@ -21,7 +21,7 @@ export default function() {
     })
   );
   this.transition(
-    this.hasClass('player-wrapper'),
+    this.hasClass('nypr-player-wrapper'),
     this.use('playerReveal')
   );
   this.transition(
