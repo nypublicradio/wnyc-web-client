@@ -68,9 +68,10 @@ export default Route.extend(PlayParamMixin, {
   
   actions: {
     willTransition(transition) {
+      let isExiting = !transition.targetName.match(this.routeName);
       this._super(...arguments);
       beforeTeardown();
-      if (get(this, 'currentModel.channel.altLayout')) {
+      if (get(this, 'currentModel.channel.altLayout') && isExiting) {
         transition.send('setMiniChrome', false);
       }
       return true;
