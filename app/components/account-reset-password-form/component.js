@@ -13,7 +13,6 @@ const FLASH_MESSAGES = {
   reset: 'Your password has been successfully updated.'
 };
 
-
 export default Component.extend({
   store: service(),
   allowedKeys: ['password'],
