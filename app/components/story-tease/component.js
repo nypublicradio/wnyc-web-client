@@ -22,10 +22,11 @@ export default Component.extend({
   isLive:             equal('status', STATUSES.LIVE),
   isLatest:           readOnly('item.isLatest'),
   isListenableNow:    or('item.audioAvailable', 'isLive'),
-  isFancyFeatured:    and('item.largeTeaseLayout', 'item.imageMain', 'isFeatured', 'media.isSmallAndUp'),
+  isFancyFeatured:    and('item.largeTeaseLayout', 'item.imageMain', 'isFeatured'),
 
   tagName:            'article',
-  classNameBindings:  ['featuredClasses'],
+  classNameBindings:  ['featuredClasses', 'fullScreen'],
+  classNames:         ['story-tease'],
 
   itemId: computed('isLive', 'streamSlug', 'item.id', function() {
     return get(this, 'isLive') ? get(this, 'streamSlug') : get(this, 'item.id');
@@ -55,6 +56,13 @@ export default Component.extend({
     let parentTitle = get(this, 'parentTitle');
     let brandTitle = get(this, 'item.headers.brand.title');
     return parentTitle !== brandTitle;
+  }),
+  playButton: computed('isFeatured', 'flipped', function() {
+    if (this.get('isFeatured') || this.get('flipped')) {
+      return 'blue-boss';
+    } else {
+      return 'blue-minion';
+    }
   }),
   endtimeLabel: computed('endtime', function() {
     const endtime = get(this, 'endtime');

@@ -1,14 +1,32 @@
 {{#if isFancyFeatured}}
-  <div class="box-mat" style='background-image:url({{image-template item.imageMain.template 0 400 item.imageMain.crop}});'></div>
+  <div class="box-mat {{if fullScreen 'box-mat--fullscreen'}}" style='background-image:url({{image-template item.imageMain.template 0 400 item.imageMain.crop}});'></div>
+{{/if}}
+
+{{#if hasBlock}}
+<div class="story-tease-floating-header">
+  {{yield}}
+</div>
 {{/if}}
 
 {{#if isFeatured}}
-  <div class="text text--small text--upper text--heavy text--spacing nudge {{if isFancyFeatured 'text--lightgray'}}">
+  <div class="text text--small text--upper text--heavy text--spacing nudge {{if isFancyFeatured 'text--white'}}">
     <p>{{status}}</p>
   </div>
 {{/if}}
 
-<div class="flag flag--rev flush">
+<div class="story-tease-meta flag {{if flipped 'story-tease--flipped flag--med' 'flag--rev'}} flush">
+
+  {{#if (and item.imageMain flipped)}}
+  <a href={{item.url}} class="flag-image link--nodecor middle-narrow-up">
+    <img class="squarebadge--md badge--shadow" alt="{{item.title}}"
+      src="{{image-template item.imageMain.template 200 200 item.imageMain.crop}}"
+      srcset="{{image-template item.imageMain.template 400 400 item.imageMain.crop}} 2x,
+        {{image-template item.imageMain.template 600 600 item.imageMain.crop}} 3x"
+      width="200" height="200">
+  </a>
+  <!-- .flag-image -->
+  {{/if}}
+
   <div class="flag-body {{if isSmallAndUp 'flag-body--rightpad'}}">
     {{#if (and item.headers.links showParent)}}
       <div class="text text--small nudge-mini">
@@ -22,18 +40,19 @@
       </div>
     {{/if}}
 
-    <div class="text {{if isFancyFeatured 'text--430 text--darkshadow'}}">
+    <div class="text {{if (and isFancyFeatured (not fullScreen)) 'text--430'}}">
       <h2 class="{{if isFeatured 'h-featured' 'h2 h2--mq-small'}} nudge-mini">
         {{! #link-to 'story' item.id class="link--dark"}}{{! item.title}}{{! /link-to}}
         <a class="{{if isFancyFeatured 'link--white' 'link--dark'}}" data-test-selector="story-tease-title" href={{item.url}}>
-
           {{{item.title}}}
         </a>
       </h2>
 
       <div class="text-body text-body--nopad {{if isFancyFeatured 'text--white text--semi'}}">
         {{{item.tease}}}
-        <span class="dimmed text--small"> ({{moment-format item.dateLineDatetime 'MMM D, YYYY'}})</span>
+        {{#if (not fullScreen)}}
+          <span class="dimmed text--small"> {{moment-format item.dateLineDatetime 'MMM D, YYYY'}}</span>
+        {{/if}}
       </div>
     </div>
 
@@ -41,7 +60,7 @@
       {{#if isListenableNow}}
         {{#listen-button
           isLive=isLive
-          type=(if isFeatured 'blue-boss' 'blue-minion')
+          type=playButton
           state=listenState
           playContext=playContext
           itemPK=itemId
@@ -76,17 +95,15 @@
 
   </div> <!-- .flag-body -->
 
-  {{#if item.imageMain}}
-  {{#unless isFancyFeatured}}
+  {{#if (and item.imageMain (not flipped) (not isFancyFeatured))}}
   <a href={{item.url}} class="flag-image link--nodecor middle-narrow-up">
     <img alt="{{item.title}}"
-        src="{{image-template item.imageMain.template 100 100 item.imageMain.crop}}"
-        srcset="{{image-template item.imageMain.template 200 200 item.imageMain.crop}} 2x,
-            {{image-template item.imageMain.template 300 300 item.imageMain.crop}} 3x"
-        width="100" height="100">
+      src="{{image-template item.imageMain.template 100 100 item.imageMain.crop}}"
+      srcset="{{image-template item.imageMain.template 200 200 item.imageMain.crop}} 2x,
+        {{image-template item.imageMain.template 300 300 item.imageMain.crop}} 3x"
+      width="100" height="100">
   </a>
   <!-- .flag-image -->
-  {{/unless}}
   {{/if}}
 
 </div><!-- .flag -->

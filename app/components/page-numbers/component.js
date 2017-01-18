@@ -5,7 +5,7 @@ import set from 'ember-metal/set';
 
 export default Component.extend({
   
-  hasPages: gt('totalPages', 0),
+  hasPages: gt('totalPages', 1),
   hasOnePage: equal('totalPages', 1),
   pagesToShow: 10,
   

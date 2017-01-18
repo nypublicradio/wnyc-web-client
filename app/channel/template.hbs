@@ -1,18 +1,34 @@
 {{#django-page page=model.page}}
   {{#ember-wormhole to="js-listings"}}
+    {{#unless model.channel.altLayout}}
     {{#google-ad ad="leaderboard" hasMarquee=model.hasMarquee class="l-constrained is-collapsed"}}
       <div id="leaderboard" class="aligncenter"></div>
     {{/google-ad}}
+    {{/unless}}
 
-    {{#if model.channel.hasMarquee}}
-      {{x-marquee model=model.channel user=model.user}}
+    {{#if model.channel.altLayout}}
+      {{#alt-channel-layout
+        navSlugTransition=(action 'navSlugTransition')
+        defaultSlug=defaultSlug
+        navRoot=navRoot
+        channel=model.channel
+        user=model.user
+        item=model.channel.featured}}
+
+        {{outlet}}
+
+        {{page-numbers
+          currentPage=pageNumbers.page
+          totalPages=pageNumbers.totalPages
+          action="pageNumberClicked"}}
+
+      {{/alt-channel-layout}}
     {{else}}
-      {{#if model.channel.featured}}
-        {{channel-header model=model.channel user=model.user}}
+      {{#if model.channel.hasMarquee}}
+        {{x-marquee model=model.channel user=model.user}}
       {{else}}
-        {{channel-header model=model.channel user=model.user classNames='flush'}}
+        {{channel-header model=model.channel user=model.user classNames=(unless model.channel.featured 'flush')}}
       {{/if}}
-    {{/if}}
 
     <div class="l-constrained">
       <main class="l-col2of3">
@@ -41,7 +57,7 @@
 
         {{outlet}}
 
-        {{page-numbers 
+        {{page-numbers
           currentPage=pageNumbers.page
           totalPages=pageNumbers.totalPages
           action="pageNumberClicked"}}
@@ -88,5 +104,6 @@
         <!-- .l-skinny -->
       </aside>
     </div>
+    {{/if}}
   {{/ember-wormhole}}
 {{/django-page}}

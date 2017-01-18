@@ -5,6 +5,10 @@
 .box {
   padding: 30px;
   position: relative;
+
+  @include mq($medium-only) {
+    padding: 30px 15px;
+  }
 }
 
 .box--dark {
@@ -46,7 +50,7 @@
   width: 100%;
   height: 100%;
   background-size: cover;
-  background-position: center;
+  background-position: center 10%;
 
   // allow siblings to stack on top
   ~ * {
@@ -61,7 +65,21 @@
     left: 0;
     height: 100%;
     width: 100%;
-    @include background(linear-gradient(to right, black, rgba(0,0,0,0)));
+    @include background(linear-gradient(to right, black, rgba(0, 0, 0, 0)));
+
+    @include mq($medium-only) {
+      @include background(linear-gradient(to right, black, rgba(0, 0, 0, 0.5)));
+    }
+  }
+
+  &--fullscreen {
+    &:before {
+      @include background(linear-gradient(20deg, black, rgba(0, 0, 0, 0.3)));
+
+      @include mq($medium-only) {
+        @include background(linear-gradient(20deg, black, rgba(0, 0, 0, 0.5)));
+      }
+    }
   }
 }
 

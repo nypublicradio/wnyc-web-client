@@ -8,6 +8,7 @@ const {
 } = Ember;
 
 export default DS.Model.extend({
+  altLayout: DS.attr('boolean'),
   slug: DS.attr('string'),
   cmsPK: DS.attr('number'),
   title: DS.attr('string'),

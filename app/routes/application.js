@@ -58,6 +58,9 @@ export default Route.extend(ApplicationRouteMixin, {
     },
     updateDonateChunk(donateChunk) {
       this.controllerFor('application').set('headerDonateChunk', donateChunk);
+    },
+    setMiniChrome(val) {
+      this.controllerFor('application').set('miniChrome', val);
     }
   },
 

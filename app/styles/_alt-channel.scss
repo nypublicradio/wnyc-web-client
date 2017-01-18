@@ -1,0 +1,25 @@
+.alt-channel-bandeau {
+  background: linear-gradient(20deg, rgba(0,0,0,0.8),rgba(0,0,0,1));
+  padding: 35px 0;
+  margin-bottom: 20px;
+
+  @include mq($medium-only) {
+    margin-bottom: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.alt-channel-links {
+  .tab-link {
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+}
+
+.alt-channel-footer {
+  margin-top: 100px;
+}

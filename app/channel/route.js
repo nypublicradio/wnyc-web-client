@@ -37,6 +37,9 @@ export default Route.extend(PlayParamMixin, {
     if (channel.get('headerDonateChunk')) {
       transition.send('updateDonateChunk', channel.get('headerDonateChunk'));
     }
+    if (channel.get('altLayout')) {
+      transition.send('setMiniChrome', true);
+    }
 
     metrics.trackEvent({
       category: `Viewed ${get(channel, 'listingObjectType').capitalize()}`,
@@ -64,9 +67,13 @@ export default Route.extend(PlayParamMixin, {
   },
   
   actions: {
-    willTransition() {
+    willTransition(transition) {
+      let isExiting = !transition.targetName.match(this.routeName);
       this._super(...arguments);
       beforeTeardown();
+      if (get(this, 'currentModel.channel.altLayout') && isExiting) {
+        transition.send('setMiniChrome', false);
+      }
       return true;
     }
   }

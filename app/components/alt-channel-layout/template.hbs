@@ -1,0 +1,72 @@
+{{#story-tease
+  fullScreen=true
+  user=user
+  item=channel.featured
+  hideLinks=true
+  isFeatured=true
+  showParent=false
+  class='box flush'
+  playContext='FeaturedItem'}}
+
+  <div class="l-constrained">
+  {{#holygrail-layout as |g|}}
+    {{#g.left}}
+    <div class="flag flush">
+      {{#if channel.logoImage}}
+      <div class="flag-image">
+        <img alt={{channel.title}}
+          class="badge--shadow squarebadge"
+          src={{image-template channel.logoImage.template 80 80 channel.logoImage.crop}}
+          srcset="{{image-template channel.logoImage.template 160 160 channel.logoImage.crop}} 2x,
+            {{image-template channel.logoImage.template 240 240 channel.logoImage.crop}} 3x"
+          width="80" height="80">
+      </div>
+      <!-- .flag-image -->
+      {{/if}}
+      <div class="flag-body">
+        <h1 class="h2 h1--mq-small text--large text--white">{{{channel.title}}}</h1>
+      </div>
+    </div>
+    {{/g.left}}
+  {{/holygrail-layout}}
+  </div>
+
+{{/story-tease}}
+
+<div class="alt-channel-bandeau aligncenter">
+  <div class="l-medium">
+    <div class="text--white">
+      {{#if channel.chunkSidebarTop}}
+        {{django-page page=channel.chunkSidebarTop loadingType='channel-page'}}
+      {{/if}}
+    </div>
+    <div class="text--normal text--white h2 h2--mq-small">
+      {{{channel.tease}}}
+    </div>
+  </div>
+</div>
+
+<main class="l-medium">
+
+  {{#if channel.linkroll}}
+    {{nav-links
+      classNames="aligncenter tabs-header--padded alt-channel-links"
+      defaultSlug=defaultSlug
+      navRoot=navRoot
+      links=channel.linkroll
+      transition=(action navSlugTransition)}}
+  {{/if}}
+
+  {{yield}}
+
+</main>
+
+<div class="alt-channel-footer l-highlight--gray">
+  <div class="l-medium">
+    <div class="box--flexpadtop">
+      {{#if channel.chunkSidebarBottom}}
+        {{django-page page=channel.chunkSidebarBottom loadingType='channel-page'}}
+      {{/if}}
+    </div>
+  </div>
+</div>
