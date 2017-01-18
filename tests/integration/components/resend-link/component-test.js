@@ -3,8 +3,6 @@ import hbs from 'htmlbars-inline-precompile';
 import { startMirage }  from 'wnyc-web-client/initializers/ember-cli-mirage';
 import wait from 'ember-test-helpers/wait';
 
-
-
 moduleForComponent('resend-link', 'Integration | Component | resend link', {
   integration: true,
   beforeEach() {
@@ -46,17 +44,17 @@ test('it sends the given email address to the given endpoint when clicked', func
     {{/resend-link}}
   `);
 
-  let endpoint = {hits: []};
+  let requests = [];
   this.server.get(fakeEndpoint, (schema, request) => {
-    endpoint.hits.push(request.queryParams);
+    requests.push(request.queryParams);
     return {};
   }, 200);
 
   this.$('a').click();
 
   return wait().then(() => {
-    assert.equal(endpoint.hits.length, 1);
-    assert.deepEqual(endpoint.hits[0], {email: fakeEmail});
+    assert.equal(requests.length, 1);
+    assert.deepEqual(requests[0], {email: fakeEmail});
   });
 });
 
