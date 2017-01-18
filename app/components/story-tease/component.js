@@ -22,7 +22,7 @@ export default Component.extend({
   isLive:             equal('status', STATUSES.LIVE),
   isLatest:           readOnly('item.isLatest'),
   isListenableNow:    or('item.audioAvailable', 'isLive'),
-  isFancyFeatured:    and('item.largeTeaseLayout', 'item.imageMain', 'isFeatured', 'media.isSmallAndUp'),
+  isFancyFeatured:    and('item.largeTeaseLayout', 'item.imageMain', 'isFeatured'),
 
   tagName:            'article',
   classNameBindings:  ['featuredClasses', 'fullScreen'],

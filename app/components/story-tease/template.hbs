@@ -40,7 +40,7 @@
       </div>
     {{/if}}
 
-    <div class="text {{if (and isFancyFeatured (not fullScreen)) 'text--430 text--darkshadow' 'text--darkshadow'}}">
+    <div class="text {{if (and isFancyFeatured (not fullScreen)) 'text--430'}}">
       <h2 class="{{if isFeatured 'h-featured' 'h2 h2--mq-small'}} nudge-mini">
         {{! #link-to 'story' item.id class="link--dark"}}{{! item.title}}{{! /link-to}}
         <a class="{{if isFancyFeatured 'link--white' 'link--dark'}}" data-test-selector="story-tease-title" href={{item.url}}>

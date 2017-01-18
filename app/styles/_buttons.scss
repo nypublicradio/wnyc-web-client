@@ -811,7 +811,7 @@
   }
   svg .inner {
     fill: $color;
-  }  
+  }
 }
 
 @mixin gray-hollow-svg-hover($color) {
@@ -820,7 +820,7 @@
   }
   svg .inner {
     fill: rgba($color, 1);
-  }  
+  }
 }
 
 @mixin gray-svg {
@@ -874,7 +874,7 @@
 
   .listen-ui {
     @include scale(0.8, 0.8);
-    
+
     margin-right: 0px;
   }
 }
@@ -951,11 +951,7 @@
   @include thickbtn;
 
   &.queue-button--fancyfeature {
-    @include gray-btn-jshover;
-
-    @include mq($small-and-up) {
-      @include white-btn-jshover;
-    }
+    @include white-btn-jshover;
   }
 
   &.queue-button--storyheader {
@@ -1105,7 +1101,7 @@
         width: 18px;
       }
     }
-    
+
     .icon--play {
       left: 2px; //center play button in small circles
     }
