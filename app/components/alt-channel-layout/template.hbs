@@ -12,6 +12,7 @@
   {{#holygrail-layout as |g|}}
     {{#g.left}}
     <div class="flag flush">
+      {{#if channel.logoImage}}
       <div class="flag-image">
         <img alt={{channel.title}}
           class="badge--shadow squarebadge"
@@ -21,6 +22,7 @@
           width="80" height="80">
       </div>
       <!-- .flag-image -->
+      {{/if}}
       <div class="flag-body">
         <h1 class="h2 h1--mq-small text--large text--white">{{{channel.title}}}</h1>
       </div>
