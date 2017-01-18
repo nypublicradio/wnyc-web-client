@@ -13,7 +13,7 @@
 
   @include mq($medium-only) {
     height: 100%;
-    padding: 150px 8% 50px;
+    padding: 110px 8% 30px;
   }
 
   .story-tease-meta {
@@ -29,6 +29,11 @@
 
   @include mq($small-only) {
     width: 90%;
+
+    .squarebadge {
+      width: 50px;
+      height: 50px;
+    }
   }
 }
 
