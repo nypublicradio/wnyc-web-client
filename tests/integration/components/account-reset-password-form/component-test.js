@@ -1,19 +1,16 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import ENV from 'wnyc-web-client/config/environment';
-import sinon from 'sinon';
+import { startMirage }  from 'wnyc-web-client/initializers/ember-cli-mirage';
+import wait from 'ember-test-helpers/wait';
 
 moduleForComponent('account-reset-password-form', 'Integration | Component | account reset password form', {
   integration: true,
   beforeEach() {
-    this.requests = [];
-    this.xhr = sinon.useFakeXMLHttpRequest();
-    this.xhr.onCreate = $.proxy(function(xhr) {
-        this.requests.push(xhr);
-    }, this);
+    this.server = startMirage();
   },
   afterEach() {
-    this.xhr.restore();
+    this.server.shutdown();
   }
 });
 
@@ -29,21 +26,50 @@ test('submitting the form sends the correct values to the correct endpoint', fun
   this.set('confirmation', testConfirmation);
   this.render(hbs`{{account-reset-password-form email=email confirmation=confirmation}}`);
 
+  let api = {hits: []};
+  let url = `${ENV.wnycAuthAPI}/v1/confirm/password-reset`;
+  this.server.post(url, (schema, request) => {
+    api.hits.push(request);
+    return {};
+  }, 200);
+
   let testPassword = 'password123';
   this.$('label:contains(New Password) + input').val(testPassword);
   this.$('label:contains(New Password) + input').change();
   this.$('button:contains(Reset password)').click();
 
-  const request = this.requests[0];
+  return wait().then(() => {
+    assert.equal(api.hits.length, 1);
+    assert.deepEqual(JSON.parse(api.hits[0].requestBody), {email: testEmail, confirmation: testConfirmation, new_password: testPassword});
+  });
+});
 
-  const expectedUrl = `${ENV.wnycAuthAPI}/v1/confirm/password-reset`;
-  const expectedMethod = 'POST';
+test("it shows the 'oops' page when api returns an expired error", function(assert) {
+  let testEmail = 'test@example.com';
+  let testConfirmation = 'QWERTYUIOP';
+  this.set('email', testEmail);
+  this.set('confirmation', testConfirmation);
+  this.render(hbs`{{account-reset-password-form email=email confirmation=confirmation}}`);
 
-  assert.equal(expectedUrl, request.url);
-  assert.equal(expectedMethod, request.method);
+  let api = {hits: []};
+  let url = `${ENV.wnycAuthAPI}/v1/confirm/password-reset`;
+  this.server.post(url, (schema, request) => {
+    api.hits.push(request);
+    return {
+      "error": {
+        "code": "ExpiredCodeException",
+        "message": "Invalid code provided, please request a code again."
+      }
+    };
+  }, 400);
 
-  let requestBody = JSON.parse(request.requestBody);
-  assert.equal(testEmail, requestBody.email);
-  assert.equal(testPassword, requestBody.new_password);
-  assert.equal(testConfirmation, requestBody.confirmation);
+  let testPassword = 'password123';
+  this.$('label:contains(New Password) + input').val(testPassword);
+  this.$('label:contains(New Password) + input').change();
+  this.$('button:contains(Reset password)').click();
+
+  return wait().then(() => {
+    assert.equal(api.hits.length, 1, 'it should call the api reset url');
+    assert.equal(this.$('.account-form-heading:contains(Oops!)').length, 1, 'the heading should say oops');
+  });
 });
