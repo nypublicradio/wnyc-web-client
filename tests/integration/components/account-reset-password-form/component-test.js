@@ -26,10 +26,10 @@ test('submitting the form sends the correct values to the correct endpoint', fun
   this.set('confirmation', testConfirmation);
   this.render(hbs`{{account-reset-password-form email=email confirmation=confirmation}}`);
 
-  let api = {hits: []};
+  let requests = [];
   let url = `${ENV.wnycAuthAPI}/v1/confirm/password-reset`;
   this.server.post(url, (schema, request) => {
-    api.hits.push(request);
+    requests.push(request);
     return {};
   }, 200);
 
@@ -39,8 +39,8 @@ test('submitting the form sends the correct values to the correct endpoint', fun
   this.$('button:contains(Reset password)').click();
 
   return wait().then(() => {
-    assert.equal(api.hits.length, 1);
-    assert.deepEqual(JSON.parse(api.hits[0].requestBody), {email: testEmail, confirmation: testConfirmation, new_password: testPassword});
+    assert.equal(requests.length, 1);
+    assert.deepEqual(JSON.parse(requests[0].requestBody), {email: testEmail, confirmation: testConfirmation, new_password: testPassword});
   });
 });
 
@@ -51,10 +51,10 @@ test("it shows the 'oops' page when api returns an expired error", function(asse
   this.set('confirmation', testConfirmation);
   this.render(hbs`{{account-reset-password-form email=email confirmation=confirmation}}`);
 
-  let api = {hits: []};
+  let requests = [];
   let url = `${ENV.wnycAuthAPI}/v1/confirm/password-reset`;
   this.server.post(url, (schema, request) => {
-    api.hits.push(request);
+    requests.push(request);
     return {
       "error": {
         "code": "ExpiredCodeException",
@@ -69,7 +69,7 @@ test("it shows the 'oops' page when api returns an expired error", function(asse
   this.$('button:contains(Reset password)').click();
 
   return wait().then(() => {
-    assert.equal(api.hits.length, 1, 'it should call the api reset url');
+    assert.equal(requests.length, 1, 'it should call the api reset url');
     assert.equal(this.$('.account-form-heading:contains(Oops!)').length, 1, 'the heading should say oops');
   });
 });

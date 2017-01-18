@@ -25,18 +25,18 @@ test('it sends the correct values to the endpoint to verify the account', functi
   this.set('username', testUser);
   this.set('confirmation', testConfirmation);
 
-  let api = {hits: []};
+  let requests = [];
   let url = `${ENV.wnycAuthAPI}/v1/confirm/sign-up`;
   this.server.get(url, (schema, request) => {
-    api.hits.push(request);
+    requests.push(request);
     return {};
   }, 200);
 
   this.render(hbs`{{account-validation-form username=username confirmation=confirmation}}`);
 
   return wait().then(() => {
-    assert.equal(api.hits.length, 1);
-    assert.deepEqual(api.hits[0].queryParams, {confirmation: testConfirmation, username: testUser});
+    assert.equal(requests.length, 1);
+    assert.deepEqual(requests[0].queryParams, {confirmation: testConfirmation, username: testUser});
   });
 });
 
@@ -46,10 +46,10 @@ test('it shows the login form and success alert when verification succeeds', fun
   this.set('username', testUser);
   this.set('confirmation', testConfirmation);
 
-  let api = {hits: []};
+  let requests = [];
   let url = `${ENV.wnycAuthAPI}/v1/confirm/sign-up`;
   this.server.get(url, (schema, request) => {
-    api.hits.push(request);
+    requests.push(request);
     return {};
   }, 200);
 
@@ -68,10 +68,10 @@ test("it shows the 'oops' page when api returns an expired error", function(asse
   this.set('username', testUser);
   this.set('confirmation', testConfirmation);
 
-  let api = {hits: []};
+  let requests = [];
   let url = `${ENV.wnycAuthAPI}/v1/confirm/sign-up`;
   this.server.get(url, (schema, request) => {
-    api.hits.push(request);
+    requests.push(request);
     return {
       "error": {
         "code": "ExpiredCodeException",
@@ -83,7 +83,7 @@ test("it shows the 'oops' page when api returns an expired error", function(asse
   this.render(hbs`{{account-validation-form username=username confirmation=confirmation}}`);
 
   return wait().then(() => {
-    assert.equal(api.hits.length, 1, 'it should call the api reset url');
+    assert.equal(requests.length, 1, 'it should call the api reset url');
     assert.equal(this.$('.account-form-heading:contains(Oops!)').length, 1, 'the heading should say oops');
   });
 });
