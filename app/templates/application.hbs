@@ -30,7 +30,7 @@
     {{nypr-player.queue-button
         isFloating  = true
         queueLength = audio.queue.items.length
-        showModal   = (action 'showModal')
+        showModal   = (action 'showModal' 'queue-history')
         closeModal  = (action 'closeModal')
         isOpenModal = modal}}
     </div>
@@ -62,7 +62,7 @@
       {{#if area.queue}}
         {{player.queueButton
             queueLength       = audio.queue.items.length
-            showModal         = (action 'showModal')
+            showModal         = (action 'showModal' 'queue-history')
             closeModal        = (action 'closeModal')
             isOpenModal       = modal}}
       {{else if area.share}}
