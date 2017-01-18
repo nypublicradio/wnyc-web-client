@@ -18,7 +18,7 @@
 
   {{#if (and item.imageMain flipped)}}
   <a href={{item.url}} class="flag-image link--nodecor middle-narrow-up">
-    <img class="squarebadge badge--shadow" alt="{{item.title}}"
+    <img class="squarebadge--md badge--shadow" alt="{{item.title}}"
       src="{{image-template item.imageMain.template 200 200 item.imageMain.crop}}"
       srcset="{{image-template item.imageMain.template 400 400 item.imageMain.crop}} 2x,
         {{image-template item.imageMain.template 600 600 item.imageMain.crop}} 3x"

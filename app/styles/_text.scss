@@ -68,14 +68,14 @@
 }
 .h-featured {
   @include fontsize(32);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 2.688rem;
 
   @include transition(font-size $transition-timing ease, line-height $transition-timing ease);
 
   @include mq($small-only) {
-      @include fontsize(20);
-      line-height: 1.5rem;
+      @include fontsize(24);
+      line-height: 2rem;
   }
 }
 
@@ -95,7 +95,7 @@
                  // but other WNYC styles override this
     @include fontsize(16);
     @extend %vertical-rhythm;
-    line-height: 1.8rem;
+    line-height: 1.7rem;
 
     > h1:last-child,
     > h2:last-child,
@@ -115,6 +115,11 @@
     > .text-body > h6:last-child,
     > .text-body > p:last-child {
         margin-bottom: 0;
+    }
+
+    @include mq($medium-only) {
+      @include fontsize(14);
+      line-height: 1.5rem;
     }
 }
 
