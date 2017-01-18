@@ -98,10 +98,10 @@
   {{#if (and item.imageMain (not flipped) (not isFancyFeatured))}}
   <a href={{item.url}} class="flag-image link--nodecor middle-narrow-up">
     <img alt="{{item.title}}"
-        src="{{image-template item.imageMain.template 100 100 item.imageMain.crop}}"
-        srcset="{{image-template item.imageMain.template 200 200 item.imageMain.crop}} 2x,
-            {{image-template item.imageMain.template 300 300 item.imageMain.crop}} 3x"
-        width="100" height="100">
+      src="{{image-template item.imageMain.template 100 100 item.imageMain.crop}}"
+      srcset="{{image-template item.imageMain.template 200 200 item.imageMain.crop}} 2x,
+        {{image-template item.imageMain.template 300 300 item.imageMain.crop}} 3x"
+      width="100" height="100">
   </a>
   <!-- .flag-image -->
   {{/if}}
