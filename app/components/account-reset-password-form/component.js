@@ -15,7 +15,9 @@ const FLASH_MESSAGES = {
 
 export default Component.extend({
   store: service(),
+  resendEndpoint: `${ENV.wnycAuthAPI}/v1/password/forgot`,
   allowedKeys: ['password'],
+  codeExpired: false,
   init() {
     this._super(...arguments);
     set(this, 'fields', {
@@ -31,7 +33,12 @@ export default Component.extend({
     let headers = { "Content-Type" : "application/json" };
     let body = JSON.stringify({email, new_password, confirmation});
     return fetch(url, {method, mode, headers, body})
-    .then(rejectUnsuccessfulResponses);
+    .then(rejectUnsuccessfulResponses)
+    .catch(e => {
+      if (get(e, 'error.code') === 'ExpiredCodeException') {
+        set (this, 'codeExpired', true);
+      }
+    });
   },
   showFlash(type) {
     this.get('flashMessages').add({
