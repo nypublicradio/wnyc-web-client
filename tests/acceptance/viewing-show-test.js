@@ -103,6 +103,51 @@ test('visiting a show - story page smoke test', function(assert) {
   });
 });
 
+test('scripts in well route content will execute', function(assert) {
+  let story = server.create('story', {
+    id: 'story/foo/',
+    slug: 'foo',
+    extendedStory: {
+      body: `test body.
+<script type="text/deferred-javascript">
+(function(){
+
+  var p = document.createElement("p");
+  p.innerHTML = "Added this paragraph!";
+  document.querySelector("[data-test-selector=story-detail] .l-constrained").appendChild(p);
+
+})();
+\\x3C/script>
+`
+  }
+  });
+  
+  let apiResponse = server.create('api-response', {
+    id: 'shows/foo/story/1',
+    type: 'story',
+    story
+  });
+
+  let show = server.create('show', {
+    id: 'shows/foo/',
+    linkroll: [
+      {navSlug: 'story', title: 'Story'}
+    ],
+    apiResponse
+  });
+  server.create('django-page', {id: show.id});
+
+  djangoPage
+    .bootstrap(show)
+    .visit(show);
+
+  andThen(function() {
+    assert.equal(find('[data-test-selector=story-detail] p').length, 1, 'should only be one p tag');
+    let text = find('[data-test-selector=story-detail] .l-constrained').text().split('\n').filter(s => s).join(' ');
+    assert.equal(text, 'test body. Added this paragraph!');
+  });
+});
+
 test('using a nav-link', function(assert) {
   let apiResponse = server.create('api-response', {
     id: 'shows/foo/episodes/1',

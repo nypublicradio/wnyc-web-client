@@ -15,7 +15,7 @@ export default Component.extend({
     return `${type}-loading`;
   }),
   didRender() {
-    if (!Ember.testing) {
+    if (!Ember.testing && this.get('type') !== 'channel-page') {
       window.scrollTo(0, 0);
     }
   }

@@ -24,6 +24,13 @@ export default DS.Model.extend({
       return 'story-detail';
     }
   }),
+  page: computed('contentType', function() {
+    if (['story-detail', 'about-page'].includes(this.get('contentType'))) {
+      return this.store.createRecord('django-page', {
+        text: this.get('aboutPage.escapedBody') || this.get('story.escapedBody')
+      });
+    }
+  }),
   totalCount: DS.attr('number'),
   totalPages: computed('totalCount', {
     get() {
