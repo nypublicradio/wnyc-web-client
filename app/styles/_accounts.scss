@@ -28,7 +28,7 @@
     width: 318px;
     height: 100vh;
     background-color: black;
-    @include responsive-background-image('/assets/img/backgrounds/andrew.jpg', '/assets/img/backgrounds/andrew@2x.jpg');
+    @include responsive-background-image('/assets/img/backgrounds/melissa.jpg', '/assets/img/backgrounds/melissa@2x.jpg');
     background-repeat: no-repeat;
     background-position: top right;
     background-size: 100%;
@@ -40,6 +40,9 @@
       bottom: 35px;
       width: 250px;
       color: white;
+    }
+    &-attribution {
+      font-size: 14px;
     }
     &-heading {
       font-size: 12px;
