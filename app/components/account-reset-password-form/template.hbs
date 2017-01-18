@@ -1,27 +1,37 @@
 {{#nypr-form changeset=changeset allowedKeys=allowedKeys onSubmit=(action 'onSubmit') onSuccess=(action 'onSuccess') formClass='account-form' as |form|}}
-{{#if form.status.success}}
+  {{#if codeExpired}}
+    <h2 class="account-form-heading">Oops!</h2>
 
-  {{#each flashMessages.queue as |flash|}}
-    {{flash-message flash=flash}}
-  {{/each}}
+    <p class="account-form-description">
+    The link to verify your email has expired. Click to resend, and we'll provide a new link.
+    {{#resend-link
+      target=resendEndpoint
+      email=email}}
+      Resend the email
+    {{/resend-link}}</p>
+  {{else if form.status.success}}
 
-  {{account-login-form}}
-{{else}}
-  <h2 class="account-form-heading">Reset your password</h2>
+    {{#each flashMessages.queue as |flash|}}
+      {{flash-message flash=flash}}
+    {{/each}}
 
-  <p class="account-form-description">Create a new password for {{email}}.</p>
+    {{account-login-form}}
+  {{else}}
+    <h2 class="account-form-heading">Reset your password</h2>
 
-  {{nypr-input
-    label='New Password'
-    type='password'
-    placeholder='Enter password'
-    fieldname='password'
-    value=changeset.password
-    errors=changeset.error.password.validation
-    submitted=form.status.tried
-    clue='must have at least 8 characters and one number'
-  }}
+    <p class="account-form-description">Create a new password for {{email}}.</p>
 
-  <button type="submit" class="account-form-btn" disabled={{form.status.processing}}>Reset password</button>
-{{/if}}
+    {{nypr-input
+      label='New Password'
+      type='password'
+      placeholder='Enter password'
+      fieldname='password'
+      value=changeset.password
+      errors=changeset.error.password.validation
+      submitted=form.status.tried
+      clue='must have at least 8 characters and one number'
+    }}
+
+    <button type="submit" class="account-form-btn" disabled={{form.status.processing}}>Reset password</button>
+  {{/if}}
 {{/nypr-form}}

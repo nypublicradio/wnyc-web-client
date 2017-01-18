@@ -31,8 +31,8 @@ export default Component.extend({
     },
     onFailure(e) {
       if (e) {
-        if (e.error && e.error.code === 'VerificationPending') {
-          set(this, 'triedUnverifiedAccount', true);
+        if (e.error && e.error.code === 'AccountNotConfirmed') {
+          set(this, 'triedUnconfirmedAccount', true);
         } else {
           this.applyErrorToChangeset(e.error, get(this, 'changeset'));
         }
@@ -49,10 +49,10 @@ export default Component.extend({
     if (error && error.code) {
       if (error.code === "UnauthorizedAccess") {
         changeset.validate('password');
-        changeset.pushErrors('password', `There was a problem with the email and password for ${changeset.get('email')}. <a href="/signup">Sign up?</a> <a href="/forgot">Forgot password?</a>`);
+        changeset.pushErrors('password', `There was a problem with the email and password for ${changeset.get('email')}. <a href="/signup">Sign up?</a>`);
       } else if (error.code === "UserNotFoundException") {
         changeset.validate('email');
-        changeset.pushErrors('email', `We cannot find an account for the email ${changeset.get('email')}. <a href="/signup">Sign up?</a> <a href="/forgot">Forgot password?</a>`);
+        changeset.pushErrors('email', `We cannot find an account for the email ${changeset.get('email')}. <a href="/signup">Sign up?</a>`);
       }
     }
   }
