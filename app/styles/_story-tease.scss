@@ -31,9 +31,11 @@
     width: 90%;
 
     .flag {
-      @include display-flex;
-      @include align-items(center);
-      @include justify-content(center);
+      @include flexbox((
+        display: flex,
+        align-items: center,
+        justify-content: center
+      ));
 
       &-body {
         width: auto;
