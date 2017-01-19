@@ -84,7 +84,7 @@
 
 .account-form {
   max-width: 460px;
-  margin: 0 auto;
+  margin: 0 auto 75px;
   padding: 100px 30px 0 30px;
 
   &-heading {
@@ -194,5 +194,19 @@
   > svg {
     fill: white;
     width: 62px;
+  }
+}
+
+.account-footer {
+  @include flexbox((
+    display: flex,
+    justify-content: space-around
+  ));
+  max-width: 250px;
+  margin: 0 auto;
+  
+  >  a {
+    @include fontsize(12);
+    color: $gray;
   }
 }
