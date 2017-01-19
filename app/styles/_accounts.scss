@@ -15,7 +15,6 @@
 .account-promo {
   width: 0;
   height: 0;
-
   &-blurb {
     display: none;
   }
@@ -208,5 +207,11 @@
   >  a {
     @include fontsize(12);
     color: $gray;
+  }
+}
+  
+.account-main {
+  @include mq($medium-and-up) {
+    padding-left: 318px;
   }
 }
