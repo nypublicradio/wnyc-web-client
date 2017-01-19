@@ -1,7 +1,7 @@
 .story-tease.full-screen {
   position: relative;
   text-align: center;
-  padding: 150px 0 50px;
+  padding: 150px 0 90px;
   height: 490px;
 
   @include flexbox((
@@ -29,6 +29,18 @@
 
   @include mq($small-only) {
     width: 90%;
+
+    .flag {
+      @include flexbox((
+        display: flex,
+        align-items: center,
+        justify-content: center
+      ));
+
+      &-body {
+        width: auto;
+      }
+    }
 
     .squarebadge {
       width: 50px;
