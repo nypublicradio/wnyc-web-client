@@ -73,7 +73,7 @@ test("it shows the 'oops' page when api returns an expired error", function(asse
   this.server.get(url, (schema, request) => {
     requests.push(request);
     return {
-      "error": {
+      "errors": {
         "code": "ExpiredCodeException",
         "message": "Invalid code provided, please request a code again."
       }

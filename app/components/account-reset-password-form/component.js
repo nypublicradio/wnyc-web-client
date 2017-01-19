@@ -35,7 +35,7 @@ export default Component.extend({
     return fetch(url, {method, mode, headers, body})
     .then(rejectUnsuccessfulResponses)
     .catch(e => {
-      if (get(e, 'error.code') === 'ExpiredCodeException') {
+      if (get(e, 'errors.code') === 'ExpiredCodeException') {
         set (this, 'codeExpired', true);
       }
     });
