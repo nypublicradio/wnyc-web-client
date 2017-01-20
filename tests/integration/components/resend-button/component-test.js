@@ -50,7 +50,7 @@ test('it sends the given email address to the given endpoint when clicked', func
     return {};
   }, 200);
 
-  this.$('a').click();
+  this.$('button').click();
 
   return wait().then(() => {
     assert.equal(requests.length, 1);
@@ -75,7 +75,7 @@ test('it changes to the sent message when clicked', function(assert) {
 
   this.server.get(fakeEndpoint, {}, 200);
 
-  this.$('a').click();
+  this.$('button').click();
 
   return wait().then(() => {
     assert.equal(this.$().text().trim(), successMessage);
@@ -99,7 +99,7 @@ test('it changes to the error message when clicked and endpoint returns an error
 
   this.server.get(fakeEndpoint, {}, 400);
 
-  this.$('a').click();
+  this.$('button').click();
 
   return wait().then(() => {
     assert.equal(this.$().text().trim(), errorMessage);
@@ -124,7 +124,7 @@ test('it resets to the original message', function(assert) {
 
   this.server.get(fakeEndpoint, {}, 200);
 
-  this.$('a').click();
+  this.$('button').click();
 
   return wait().then(() => {
     assert.equal(this.$().text().trim(), 'Resend Email.');
