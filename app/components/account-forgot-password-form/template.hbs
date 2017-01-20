@@ -11,11 +11,11 @@
 
     <p class="account-form-description">We’ve sent an email to {{changeset.email}} with instructions to reset your password.</p>
 
-    {{#resend-link
+    {{#resend-button
       target=resendEndpoint
       email=changeset.email}}
       Resend the email
-    {{/resend-link }}
+    {{/resend-button}}
 
   {{else}}
     <h2 class="account-form-heading">Reset your password</h2>

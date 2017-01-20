@@ -3,7 +3,7 @@ import hbs from 'htmlbars-inline-precompile';
 import { startMirage }  from 'wnyc-web-client/initializers/ember-cli-mirage';
 import wait from 'ember-test-helpers/wait';
 
-moduleForComponent('resend-link', 'Integration | Component | resend link', {
+moduleForComponent('resend-button', 'Integration | Component | resend button', {
   integration: true,
   beforeEach() {
     this.server = startMirage();
@@ -17,15 +17,15 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{resend-link}}`);
+  this.render(hbs`{{resend-button}}`);
 
   assert.equal(this.$().text().trim(), '');
 
   // Template block usage:
   this.render(hbs`
-    {{#resend-link}}
+    {{#resend-button}}
       template block text
-    {{/resend-link}}
+    {{/resend-button}}
   `);
 
   assert.equal(this.$().text().trim(), 'template block text');
@@ -39,9 +39,9 @@ test('it sends the given email address to the given endpoint when clicked', func
   this.set('email', fakeEmail);
 
   this.render(hbs`
-    {{#resend-link target=target email=email autoReset=false}}
+    {{#resend-button target=target email=email autoReset=false}}
       Resend Email.
-    {{/resend-link}}
+    {{/resend-button}}
   `);
 
   let requests = [];
@@ -68,9 +68,9 @@ test('it changes to the sent message when clicked', function(assert) {
   this.set('successMessage', successMessage);
 
   this.render(hbs`
-    {{#resend-link target=target email=email successMessage=successMessage autoReset=false }}
+    {{#resend-button target=target email=email successMessage=successMessage autoReset=false }}
       Resend Email.
-    {{/resend-link}}
+    {{/resend-button}}
   `);
 
   this.server.get(fakeEndpoint, {}, 200);
@@ -92,9 +92,9 @@ test('it changes to the error message when clicked and endpoint returns an error
   this.set('errorMessage', errorMessage);
 
   this.render(hbs`
-    {{#resend-link target=target email=email errorMessage=errorMessage autoReset=false}}
+    {{#resend-button target=target email=email errorMessage=errorMessage autoReset=false}}
       Resend Email.
-    {{/resend-link}}
+    {{/resend-button}}
   `);
 
   this.server.get(fakeEndpoint, {}, 400);
@@ -117,9 +117,9 @@ test('it resets to the original message', function(assert) {
   this.set('resetDelay', 0);
 
   this.render(hbs`
-    {{#resend-link target=target email=email errorMessage=errorMessage resetDelay=resetDelay}}
+    {{#resend-button target=target email=email errorMessage=errorMessage resetDelay=resetDelay}}
       Resend Email.
-    {{/resend-link}}
+    {{/resend-button}}
   `);
 
   this.server.get(fakeEndpoint, {}, 200);
