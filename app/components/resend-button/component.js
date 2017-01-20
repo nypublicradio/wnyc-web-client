@@ -3,6 +3,7 @@ import fetch from 'fetch';
 import { later } from 'ember-runloop';
 
 export default Ember.Component.extend({
+  tagName: '',
   target: null,
   email: null,
   ready: true,
@@ -11,7 +12,7 @@ export default Ember.Component.extend({
   autoReset: true,
   resetDelay: 10000,
   successMessage: 'Email resent',
-  errorMessage: 'Email not resent',
+  errorMessage: 'Email not resent. Try again later',
   actions: {
     resend(target, email) {
       let delay = this.get('resetDelay');

@@ -4,11 +4,11 @@
 
     <p class="account-form-description">
     The link to verify your email has expired. Click to resend, and we'll provide a new link.
-    {{#resend-link
+    {{#resend-button
       target=resendEndpoint
       email=email}}
       Resend the email
-    {{/resend-link}}</p>
+    {{/resend-button}}</p>
   {{else if form.status.success}}
 
     {{#each flashMessages.queue as |flash|}}

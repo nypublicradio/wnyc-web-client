@@ -1,0 +1,27 @@
+.resend-button {
+  color: $blue;
+  border-color: transparent;
+  background-color: transparent;
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    border-color: $blue;
+  }
+
+  &:active {
+    color: $darkblue;
+    border-color: $darkblue;
+  }
+}
+
+.resend-success {
+  color: $lightgray
+}
+
+.resend-error {
+  color: $red
+}
+
