@@ -1,0 +1,44 @@
+{{#text-crawl watch=watch}}
+  {{!-- Show Link --}}
+  {{#if (and showTitle media.isNyprPlayerMediumAndUp)}}
+    <a href='{{showUrl}}'
+       title='{{showTitle}}'
+       class='nypr-player-link'
+       target={{showUrlTarget}}
+       data-tracking-category='Persistent Player'
+       data-tracking-action='Click Through to Show "{{showTitle}}"'
+       data-tracking-region='Player'
+       data-tracking-model='{{audioId}}'>{{{showTitle}}}</a>
+    {{#if (or storyTitle songDetails)}} - {{/if}}
+  {{/if}}
+
+  {{!-- Story Link --}}
+  {{#if storyTitle}}
+    <a href='{{storyUrl}}'
+       title='{{storyTitle}}'
+       class='nypr-player-link'
+       target={{storyUrlTarget}}
+       data-test-selector="nypr-player-story-title"
+       data-tracking-category='Persistent Player'
+       data-tracking-action='Click Through to Story'
+       data-tracking-region='Player'
+       data-tracking-model='{{audioId}}'>{{{storyTitle}}}</a>
+  {{/if}}
+
+  {{!-- Song Info --}}
+  {{#if songDetails}}
+    {{songDetails}}
+  {{/if}}
+
+  {{#if (and showTitle media.isNyprPlayerSmallOnly)}}
+    {{#if (or storyTitle songDetails)}} - {{/if}}
+    <a href='{{showUrl}}'
+       title='{{showTitle}}'
+       class='nypr-player-link'
+       target={{showUrlTarget}}
+       data-tracking-category='Persistent Player'
+       data-tracking-action='Click Through to Show "{{showTitle}}"'
+       data-tracking-region='Player'
+       data-tracking-model='{{story.id}}'>{{{showTitle}}}</a>
+  {{/if}}
+{{/text-crawl}}
