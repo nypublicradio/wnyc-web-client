@@ -9,13 +9,13 @@
   {{#if form.status.success}}
     <h2 class="account-form-heading">Check your email</h2>
 
-    <p class="account-form-description">We’ve sent an email to {{changeset.email}} with instructions to reset your password.</p>
-
+    <p class="account-form-description">We’ve sent an email to {{changeset.email}} with instructions to reset your password. This link will be valid for 1 hour.
+    <br>
     {{#resend-button
       target=resendEndpoint
       email=changeset.email}}
       Resend the email
-    {{/resend-button}}
+    {{/resend-button}}</p>
 
   {{else}}
     <h2 class="account-form-heading">Reset your password</h2>
