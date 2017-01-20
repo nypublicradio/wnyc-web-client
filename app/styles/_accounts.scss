@@ -28,7 +28,7 @@
     width: 318px;
     height: 100vh;
     background-color: black;
-    @include responsive-background-image('/assets/img/backgrounds/melissa.jpg', '/assets/img/backgrounds/melissa@2x.jpg');
+    @include responsive-background-image('/assets/img/backgrounds/melissa_bg.jpg', '/assets/img/backgrounds/melissa_bg@2x.jpg');
     background-repeat: no-repeat;
     background-position: top right;
     background-size: 100%;
