@@ -1,4 +1,5 @@
 @import "nypr-player";
+@import "nypr-ui";
 
 .nypr-player .sharebutton {
   @include mq($nypr-player-medium-and-up) {
@@ -6,6 +7,8 @@
     margin-left: 8px;
 
     .popupmenu-button {
+      @include svg-color(#77a6de);
+      height: 100%;
       width: 60px;
       text-align: right;
       vertical-align: middle;

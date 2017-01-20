@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
-import computed, { reads, or } from 'ember-computed';
+import computed, { reads, or, and, not } from 'ember-computed';
 import get from 'ember-metal/get';
 import { songMetadata } from 'wnyc-web-client/helpers/song-metadata';
 
@@ -15,7 +15,9 @@ export default Ember.Component.extend({
   /* To determine whether or not to reveal the notification bar. The messaging
     is handled by the autoplay-message component */
   bumper               : service('bumper-state'),
-  revealNotificationBar: reads('bumper.revealNotificationBar'),
+  revealNotificationBar: and('didNotDismiss', 'bumper.revealNotificationBar'),
+  didDimiss            : false,
+  didNotDismiss        : not('didDismiss'),
 
   currentAudio         : reads('audio.currentAudio'),
   currentTitle         : or('currentAudio.title', '_currentTitleFromShow'),
@@ -59,6 +61,7 @@ export default Ember.Component.extend({
 
   actions: {
     onDismissNotification() {
+      this.set('didDismiss', true);
       get(this, 'audio')._trackPlayerEvent({
         action: 'Continuous Play Notification',
         label: 'Click to Close Notification'

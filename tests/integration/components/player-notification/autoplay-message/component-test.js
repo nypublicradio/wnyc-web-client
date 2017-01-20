@@ -10,7 +10,7 @@ const sessionStub = Ember.Service.extend({
   }
 });
 
-moduleForComponent('autoplay-notification', 'Integration | Component | autoplay notification', {
+moduleForComponent('player-notification/autoplay-message', 'Integration | Component | player notification/autoplay message', {
   integration: true,
   beforeEach() {
     this.register('service:session', sessionStub);
@@ -64,7 +64,6 @@ test('it renders after the bumper duration countdown with stream message if stre
 
   this.render(hbs`{{autoplay-notification preferredStream=preferredStreamStub streamEnabled=streamEnabledStub duration=duration position=position audioType=audioType}}`);
 
-  // this kind of makes me NEVER want to split up text with conditional values at all in handlebars
   let actualElapsedText = this.$().text().trim().replace(/\s{2,}/gm, ' ');
   let expectedElapsedText = 'We tuned you to WNYC 93.9 FM after your episode ended. Change Settings';
   assert.equal(actualElapsedText, expectedElapsedText);
@@ -111,7 +110,6 @@ test('it renders after the bumper duration countdown with queue message if strea
 
   this.render(hbs`{{autoplay-notification preferredStream=preferredStreamStub streamEnabled=streamEnabledStub duration=duration position=position audioType=audioType}}`);
 
-  // this kind of makes me NEVER want to split up text with conditional values at all in handlebars
   let actualElapsedText = this.$().text().trim().replace(/\s{2,}/gm, ' ');
   let expectedElapsedText = 'We began playing your audio queue after your episode ended. Change Settings';
   assert.equal(actualElapsedText, expectedElapsedText);

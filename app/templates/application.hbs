@@ -22,7 +22,6 @@
   {{/site-chrome}}
 {{/if}}
 
-
 {{#nypr-player-integration as |integration|}}
   {{#liquid-unless showPlayer class="nypr-player-wrapper"}}
   {{#unless chromeDisabled}}
@@ -36,15 +35,14 @@
     </div>
   {{/unless}}
   {{else}}
-    {{#nypr-player
-        currentTitle          = integration.currentTitle
-        backdropImageUrl      = integration.backdropImageUrl
-        onPlay                = integration.onPlay
-        onPause               = integration.onPause
-        onDismissNotification = integration.onDismissNotification
-        revealNotificationBar = integration.revealNotificationBar
-      as |content|}}
 
+    {{#liquid-if integration.revealNotificationBar class='player-notification-wrapper'}}
+      {{#player-notification onDismiss=integration.onDismissNotification}}
+        {{player-notification.autoplay-message duration=audio.duration position=audio.position audioType=currentAudio.audioType}}
+      {{/player-notification}}
+    {{/liquid-if}}
+
+    {{#nypr-player currentTitle=integration.currentTitle backdropImageUrl=integration.backdropImageUrl as |content|}}
         {{#content.for 'trackInfo'}}
           {{nypr-player-integration.track-info
             showTitle      = integration.showTitle
@@ -57,17 +55,17 @@
             songDetails    = integration.songDetails
           }}
 
-          {{#if hifi.duration}} {{! only show the share button when the audio has loaded}}
+          {{#unless hifi.isLoading}} {{! only show the share button when the audio has loaded}}
             {{share-button
               story        = integration.currentAudio
               type         = (if integration.isAudiostream 'stream' 'ondemand')
               region       = "Player"
               text         = "SHARE"}}
-          {{/if}}
+          {{/unless}}
         {{/content.for}}
 
         {{#content.for 'streamInfo'}}
-          {{nypr-player.stream-info
+          {{nypr-player-integration.stream-info
             streamScheduleUrl       = integration.streamScheduleUrl
             streamScheduleUrlTarget = integration.streamScheduleUrlTarget
             streamPlaylistUrl       = integration.streamPlaylistUrl
@@ -86,11 +84,6 @@
               showModal         = (action 'showModal' 'queue-history')
               closeModal        = (action 'closeModal')
               isOpenModal       = modal}}
-        {{/content.for}}
-
-        {{#content.for 'notification'}}
-          {{! This is just the message, the dismiss handler and the flag to show this message is above}}
-          {{autoplay-notification duration=audio.duration position=audio.position audioType=currentAudio.audioType}}
         {{/content.for}}
     {{/nypr-player}}
   {{/liquid-unless}}

@@ -25,7 +25,7 @@ export default function() {
     this.use('playerReveal')
   );
   this.transition(
-    this.hasClass('notification-wrapper'),
+    this.hasClass('player-notification-wrapper'),
     this.use('notificationReveal')
   );
   this.transition(
