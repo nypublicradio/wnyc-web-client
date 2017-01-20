@@ -8,6 +8,7 @@ import { assign } from 'ember-platform';
 import RSVP from 'rsvp';
 import { classify as upperCamelize } from 'ember-string';
 import Ember from 'ember';
+import observer from 'ember-metal/observer';
 
 const FIFTEEN_SECONDS = 1000 * 15;
 const TWO_MINUTES     = 1000 * 60 * 2;
@@ -35,7 +36,8 @@ export default Service.extend({
   volume:           alias('hifi.volume'),
 
   // TODO: fix up currentStory/currentAudio interfaces for streams and on demands
-  currentStory:     or('currentAudio.story', 'currentAudio'),
+  currentStory:         or('currentAudio.story', 'currentAudio'),
+  currentStreamingShow: readOnly('currentAudio.currentShow'),
 
   currentAudio:     null,
   currentContext:   null,
@@ -336,6 +338,20 @@ export default Service.extend({
 
   /* ANALYTICS AND LISTEN ACTIONS -------------------------------------------------------*/
 
+  heardStream: observer('currentStreamingShow.show_title', 'currentStreamingShow.title', function() {
+    let showTitle = get(this, 'currentStreamingShow.show_title') || get(this, 'currentStreamingShow.title');
+    if (this.get('hifi.isStream') && this.get('isPlaying') && showTitle !== this._lastShow) {
+      let streamName = get(this, 'currentAudio.name');
+      let storyTitle = get(this, 'currentAudio.story.title');
+      
+      this._trackPlayerEvent({
+        action: `Streamed Show "${showTitle}" on ${streamName}`,
+        label: storyTitle
+      });
+      this._lastShow = showTitle;
+    }
+  }),
+  
   addToHistory(story) {
     this.get('listens').addListen(story);
   },
