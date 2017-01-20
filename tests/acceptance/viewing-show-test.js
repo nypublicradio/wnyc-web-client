@@ -269,11 +269,11 @@ test('visiting a show with a different header donate chunk', function(assert) {
   andThen(function() {
     assert.equal(find('.foo').text(), 'donate to foo', 'donate chunk should match');
   });
-  
+
   andThen(function() {
     click(find('a[href="/"]'));
   });
-  
+
   andThen(function() {
     assert.ok(findWithAssert('.sitechrome-btn'), 'donate chunk should reset after navigating');
   });
@@ -290,13 +290,13 @@ test('show pages with a play param', function(assert) {
   djangoPage
     .bootstrap(show)
     .visit({id: show.id + `?play=${story.id}`});
-    
+
   andThen(function() {
     assert.equal(currentURL(), `${show.id}?play=${story.id}`);
-    assert.ok(Ember.$('.persistent-player').length, 'persistent player should be visible');
-    assert.equal(Ember.$('[data-test-selector=persistent-player-story-title]').text(), story.title, `${story.title} should be loaded in player UI`);
+    assert.ok(Ember.$('.nypr-player').length, 'persistent player should be visible');
+    assert.equal(Ember.$('[data-test-selector=nypr-player-story-title]').text(), story.title, `${story.title} should be loaded in player UI`);
   });
-  
+
 });
 
 moduleForAcceptance('Acceptance | Django Page | Show Page Analytics', {
@@ -344,13 +344,13 @@ test('metrics properly reports channel attrs', function(assert) {
     };
     assert.deepEqual({cms_id, item_type, browser_id, client, referrer, url, site_id}, testObj, 'params match up');
   });
-  
+
   window.ga = function(command) {
     if (command === 'npr.send') {
       assert.ok('called npr.send');
     }
   };
-  
+
   djangoPage
     .bootstrap(show)
     .visit(show);

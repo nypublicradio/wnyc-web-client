@@ -39,7 +39,7 @@ test('it renders with the bumper duration countdown with stream message if strea
     assert.equal(this.$('.player-notification').length, 0);
   });
 
-  this.render(hbs`{{autoplay-notification preferredStream=preferredStreamStub streamEnabled=streamEnabledStub duration=duration position=position audioType=audioType}}`);
+  this.render(hbs`{{player-notification/autoplay-message preferredStream=preferredStreamStub streamEnabled=streamEnabledStub duration=duration position=position audioType=audioType}}`);
 
   let actualText = this.$().text().trim().replace(/\s{2,}/gm, ' ');
   let expectedText = 'Your episode is over. In 15 seconds, we\'ll tune you to WNYC 93.9 FM. Change Settings';
@@ -62,7 +62,7 @@ test('it renders after the bumper duration countdown with stream message if stre
     assert.equal(this.$('.player-notification').length, 0);
   });
 
-  this.render(hbs`{{autoplay-notification preferredStream=preferredStreamStub streamEnabled=streamEnabledStub duration=duration position=position audioType=audioType}}`);
+  this.render(hbs`{{player-notification/autoplay-message preferredStream=preferredStreamStub streamEnabled=streamEnabledStub duration=duration position=position audioType=audioType}}`);
 
   let actualElapsedText = this.$().text().trim().replace(/\s{2,}/gm, ' ');
   let expectedElapsedText = 'We tuned you to WNYC 93.9 FM after your episode ended. Change Settings';
@@ -85,7 +85,7 @@ test('it renders with the bumper duration countdown with queue message if stream
     assert.equal(this.$('.player-notification').length, 0);
   });
 
-  this.render(hbs`{{autoplay-notification preferredStream=preferredStreamStub streamEnabled=streamEnabledStub duration=duration position=position audioType=audioType}}`);
+  this.render(hbs`{{player-notification/autoplay-message preferredStream=preferredStreamStub streamEnabled=streamEnabledStub duration=duration position=position audioType=audioType}}`);
 
   let actualText = this.$().text().trim().replace(/\s{2,}/gm, ' ');
   let expectedText = 'Your episode is over. In 15 seconds, your audio queue will begin to play. Change Settings';
@@ -108,7 +108,7 @@ test('it renders after the bumper duration countdown with queue message if strea
     assert.equal(this.$('.player-notification').length, 0);
   });
 
-  this.render(hbs`{{autoplay-notification preferredStream=preferredStreamStub streamEnabled=streamEnabledStub duration=duration position=position audioType=audioType}}`);
+  this.render(hbs`{{player-notification/autoplay-message preferredStream=preferredStreamStub streamEnabled=streamEnabledStub duration=duration position=position audioType=audioType}}`);
 
   let actualElapsedText = this.$().text().trim().replace(/\s{2,}/gm, ' ');
   let expectedElapsedText = 'We began playing your audio queue after your episode ended. Change Settings';
