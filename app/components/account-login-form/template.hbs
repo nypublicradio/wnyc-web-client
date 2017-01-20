@@ -10,11 +10,11 @@
   {{#if triedUnconfirmedAccount}}
     <h2 class="account-form-heading">Oops!</h2>
     <p class="account-form-description">The account for {{changeset.email}} hasn’t been verified yet. But don’t worry — verification is easy. Once you click the link in the verification email, your account will be all set up.
-    {{#resend-link
+    {{#resend-button
       target=resendEndpoint
       email=changeset.email}}
       Resend the email
-    {{/resend-link}}</p>
+    {{/resend-button}}</p>
   {{else}}
     {{yield}}
 
