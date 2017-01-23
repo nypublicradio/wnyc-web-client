@@ -15,9 +15,7 @@ export function rejectUnsuccessfulResponses(response) {
       resolve(response);
     } else {
       if (response.json) {
-        response.json().then((r) => {
-          reject(r);
-        });
+        response.json().then(reject);
       } else {
         reject(response);
       }
