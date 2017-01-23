@@ -1,6 +1,8 @@
 <div class="persistent-playerinfoline">
   {{#text-crawl watch=currentAudio}}
-    {{persistent-player.audio-metadata currentAudio=currentAudio}}
+    {{persistent-player.audio-metadata
+      currentAudio=currentAudio
+      showTitle=(or currentAudio.headers.brand.title currentAudio.currentShow.showTitle)}}
   {{/text-crawl}}
   {{#if currentAudio.shareMetadata}}
     {{share-button
