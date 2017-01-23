@@ -31,7 +31,7 @@ export default Component.extend({
     },
     onFailure(e) {
       if (e) {
-        if (e.errors && e.errors.code === 'AccountNotConfirmed') {
+        if (get(e, 'errors.code') === 'AccountNotConfirmed') {
           set(this, 'triedUnconfirmedAccount', true);
         } else {
           this.applyErrorToChangeset(e.errors, get(this, 'changeset'));
