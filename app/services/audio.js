@@ -453,16 +453,6 @@ export default Service.extend({
       label: `Streaming_${streamName}`
     });
 
-    RSVP.Promise.resolve(get(stream, 'story')).then(story => {
-      if (story) {
-        this._trackPlayerEvent({
-          action: `Streamed Story "${get(story, 'title')}" on "${streamName}"`,
-          withAnalytics: true,
-          story
-        });
-      }
-    });
-
     if (wasStream) {
       this._trackPlayerEvent({
         action: 'Switched Stream to Stream',
@@ -545,10 +535,22 @@ export default Service.extend({
     let showTitle = get(stream, 'currentShow.show_title') || get(stream, 'currentShow.title');
     let streamName = get(stream, 'name');
     
+    RSVP.Promise.resolve(get(stream, 'story')).then(story => {
+      let storyTitle = story ? get(story, 'title') : 'no title';
+      
       this._trackPlayerEvent({
         action: `Streamed Show "${showTitle}" on ${streamName}`,
         label: storyTitle
       });
+      
+      if (story) {
+        this._trackPlayerEvent({
+          action: `Streamed Story "${storyTitle}" on "${streamName}"`,
+          withAnalytics: true,
+          story
+        });
+      }
+    });
   },
 
   /* HELPERS -------------------------------------------------------*/
