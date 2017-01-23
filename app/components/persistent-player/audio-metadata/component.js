@@ -1,6 +1,7 @@
 import Component from 'ember-component';
 import { reads, or } from 'ember-computed';
 import service from 'ember-service/inject';
+import get from 'ember-metal/get';
 
 export default Component.extend({
   // TODO: would like to inject an audio-analytics service here
@@ -17,7 +18,7 @@ export default Component.extend({
   didReceiveAttrs({oldAttrs, newAttrs}) {
     this._super(...arguments);
     let currentAudio = this.get('currentAudio');
-    if (!currentAudio || currentAudio.get('audioType') !== 'stream') { return; }
+    if (!currentAudio || get(currentAudio, 'audioType') !== 'stream') { return; }
     if (oldAttrs.showTitle === newAttrs.showTitle) { return; }
     
     this.get('audio').trackStreamData(currentAudio);

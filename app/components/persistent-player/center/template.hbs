@@ -1,5 +1,6 @@
 <div class="persistent-playerinfoline">
   {{#text-crawl watch=currentAudio}}
+    {{! trigger didReceiveAttrs when showTitle updates }}
     {{persistent-player.audio-metadata
       currentAudio=currentAudio
       showTitle=(or currentAudio.headers.brand.title currentAudio.currentShow.showTitle)}}
