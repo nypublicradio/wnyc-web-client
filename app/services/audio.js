@@ -35,7 +35,7 @@ export default Service.extend({
   volume:           alias('hifi.volume'),
 
   // TODO: fix up currentStory/currentAudio interfaces for streams and on demands
-  currentStory:     or('currentAudio.story', 'currentAudio'),
+  currentStory:         or('currentAudio.story', 'currentAudio'),
 
   currentAudio:     null,
   currentContext:   null,
@@ -335,7 +335,6 @@ export default Service.extend({
   },
 
   /* ANALYTICS AND LISTEN ACTIONS -------------------------------------------------------*/
-
   addToHistory(story) {
     this.get('listens').addListen(story);
   },
@@ -351,7 +350,7 @@ export default Service.extend({
   sendPauseListenAction(pk) {
     this.get('listenActions').sendPause(pk, PLATFORM, get(this, 'position'));
   },
-
+  
   _trackPlayerEvent(options) {
     let metrics        = get(this, 'metrics');
     let {action, label, withRegion, region, withAnalytics} = options;
@@ -453,16 +452,6 @@ export default Service.extend({
       label: `Streaming_${streamName}`
     });
 
-    RSVP.Promise.resolve(get(stream, 'story')).then(story => {
-      if (story) {
-        this._trackPlayerEvent({
-          action: `Streamed Story "${get(story, 'title')}" on "${streamName}"`,
-          withAnalytics: true,
-          story
-        });
-      }
-    });
-
     if (wasStream) {
       this._trackPlayerEvent({
         action: 'Switched Stream to Stream',
@@ -538,6 +527,30 @@ export default Service.extend({
 
     this.sendCompleteListenAction(story.id);
   },
+  
+  // TODO: would like to move this and the rest of the above
+  // into an audio analytics service
+  trackStreamData(stream) {
+    let showTitle = get(stream, 'currentShow.show_title') || get(stream, 'currentShow.title');
+    let streamName = get(stream, 'name');
+    
+    RSVP.Promise.resolve(get(stream, 'story')).then(story => {
+      let storyTitle = story ? get(story, 'title') : 'no title';
+      
+      this._trackPlayerEvent({
+        action: `Streamed Show "${showTitle}" on ${streamName}`,
+        label: storyTitle
+      });
+      
+      if (story) {
+        this._trackPlayerEvent({
+          action: `Streamed Story "${storyTitle}" on "${streamName}"`,
+          withAnalytics: true,
+          story
+        });
+      }
+    });
+  },
 
   /* HELPERS -------------------------------------------------------*/
 
@@ -604,6 +617,5 @@ export default Service.extend({
     } else {
       return upperCamelize(context);
     }
-  }
-
+  },
 });

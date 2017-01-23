@@ -20,7 +20,7 @@ test('it displays ondemand story metadata', function(assert) {
     title: 'The Story'
   };
   this.set('currentAudio', onDemandStory);
-  this.render(hbs`{{persistent-player.audio-metadata currentAudio=currentAudio media=media}}`);
+  this.render(hbs`{{persistent-player.audio-metadata currentAudio=currentAudio showTitle=currentAudio.headers.brand.title media=media}}`);
 
   const expected = 'The Show - The Story';
   const actual = this.$().text().trim().replace(/\s+/g,' ');
@@ -35,7 +35,7 @@ test('it reverses metadata order on small screens', function(assert) {
     title: 'The Story'
   };
   this.set('currentAudio', onDemandStory);
-  this.render(hbs`{{persistent-player.audio-metadata currentAudio=currentAudio media=media}}`);
+  this.render(hbs`{{persistent-player.audio-metadata currentAudio=currentAudio showTitle=currentAudio.headers.brand.title media=media}}`);
 
   const expected = 'The Story - The Show';
   const actual = this.$().text().trim().replace(/\s+/g,' ');
@@ -52,7 +52,7 @@ test('it displays stream story metadata correctly', function(assert) {
     }
   };
   this.set('currentAudio', streamShow);
-  this.render(hbs`{{persistent-player.audio-metadata currentAudio=currentAudio media=media}}`);
+  this.render(hbs`{{persistent-player.audio-metadata currentAudio=currentAudio showTitle=(or currentAudio.headers.brand.title currentAudio.currentShow.showTitle) media=media}}`);
 
   const expected = 'The Show - The Episode';
   const actual = this.$().text().trim().replace(/\s+/g,' ');
@@ -82,7 +82,7 @@ test('it displays stream song metadata correctly', function(assert) {
     }
   };
   this.set('currentAudio', streamSong);
-  this.render(hbs`{{persistent-player.audio-metadata currentAudio=currentAudio media=media}}`);
+  this.render(hbs`{{persistent-player.audio-metadata currentAudio=currentAudio showTitle=(or currentAudio.headers.brand.title currentAudio.currentShow.showTitle) media=media}}`);
 
   const expected = 'The Song Show - title, composer, musician (instrument)';
   const actual = this.$().text().trim().replace(/\s+/g,' ');
@@ -97,7 +97,7 @@ test('it renders html tags in metadata', function(assert) {
     title: 'The <strong>Big</strong> Story'
   };
   this.set('currentAudio', onDemandStory);
-  this.render(hbs`{{persistent-player.audio-metadata currentAudio=currentAudio media=media}}`);
+  this.render(hbs`{{persistent-player.audio-metadata currentAudio=currentAudio showTitle=(or currentAudio.headers.brand.title currentAudio.currentShow.showTitle) media=media}}`);
 
   const expected = 'The New Show - The Big Story';
   const actual = this.$().text().trim().replace(/\s+/g,' ');
