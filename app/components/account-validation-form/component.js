@@ -32,12 +32,10 @@ export default Ember.Component.extend({
       this.showFlash('validated');
     })
     .catch((e) => {
-      if (e && e.errors) {
-        if (e.errors.code === "AliasExistsException") {
-          // Account was already validated
-          set(this, 'accountValidated', true);
-          this.showFlash('validated');
-        }
+      if (get(e, 'errors.code') === "AliasExistsException") {
+        // Account was already validated
+        set(this, 'accountValidated', true);
+        this.showFlash('validated');
       }
     });
   },
