@@ -8,7 +8,6 @@ import { assign } from 'ember-platform';
 import RSVP from 'rsvp';
 import { classify as upperCamelize } from 'ember-string';
 import Ember from 'ember';
-import observer from 'ember-metal/observer';
 
 const FIFTEEN_SECONDS = 1000 * 15;
 const TWO_MINUTES     = 1000 * 60 * 2;
@@ -337,21 +336,6 @@ export default Service.extend({
   },
 
   /* ANALYTICS AND LISTEN ACTIONS -------------------------------------------------------*/
-
-  heardStream: observer('currentStreamingShow.show_title', 'currentStreamingShow.title', function() {
-    let showTitle = get(this, 'currentStreamingShow.show_title') || get(this, 'currentStreamingShow.title');
-    if (this.get('hifi.isStream') && this.get('isPlaying') && showTitle !== this._lastShow) {
-      let streamName = get(this, 'currentAudio.name');
-      let storyTitle = get(this, 'currentAudio.story.title');
-      
-      this._trackPlayerEvent({
-        action: `Streamed Show "${showTitle}" on ${streamName}`,
-        label: storyTitle
-      });
-      this._lastShow = showTitle;
-    }
-  }),
-  
   addToHistory(story) {
     this.get('listens').addListen(story);
   },
@@ -367,7 +351,7 @@ export default Service.extend({
   sendPauseListenAction(pk) {
     this.get('listenActions').sendPause(pk, PLATFORM, get(this, 'position'));
   },
-
+  
   _trackPlayerEvent(options) {
     let metrics        = get(this, 'metrics');
     let {action, label, withRegion, region, withAnalytics} = options;
@@ -554,6 +538,18 @@ export default Service.extend({
 
     this.sendCompleteListenAction(story.id);
   },
+  
+  // TODO: would like to move this and the rest of the above
+  // into an audio analytics service
+  trackStreamData(stream) {
+    let showTitle = get(stream, 'currentShow.show_title') || get(stream, 'currentShow.title');
+    let streamName = get(stream, 'name');
+    
+      this._trackPlayerEvent({
+        action: `Streamed Show "${showTitle}" on ${streamName}`,
+        label: storyTitle
+      });
+  },
 
   /* HELPERS -------------------------------------------------------*/
 
@@ -620,6 +616,5 @@ export default Service.extend({
     } else {
       return upperCamelize(context);
     }
-  }
-
+  },
 });
