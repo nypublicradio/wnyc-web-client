@@ -46,10 +46,12 @@
   ));
   > a,
   > div {
+    @include flexbox((
+      justify-content: center,
+      align-self: center
+    ));
     height: 100%;
     margin-right: 10px;
-    justify-content: center;
-    align-self: center;
     white-space: nowrap;
   }
 
