@@ -4,7 +4,6 @@ import djangoPage from 'wnyc-web-client/tests/pages/django-page';
 import storyPage from 'wnyc-web-client/tests/pages/story';
 import { resetHTML } from 'wnyc-web-client/tests/helpers/html';
 import config from 'wnyc-web-client/config/environment';
-import { authenticateSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
 
 
 moduleForAcceptance('Acceptance | Django Page | Story Detail', {
@@ -46,8 +45,8 @@ test('view comments as regular user', function(assert) {
 });
 
 test('view comments as staff user', function(assert) {
+  server.get(`${config.wnycAdminRoot}/api/v1/is_logged_in/`, {is_staff: true});
   server.create('user');
-  authenticateSession(this.application, {is_staff: true, access_token: 'foo'});
   
   let story = server.create('story');
   let id = `story/${story.slug}/`;

@@ -5,12 +5,12 @@
     {{/google-ad}}
 
     {{#if model.channel.hasMarquee}}
-      {{x-marquee model=model.channel user=model.user}}
+      {{x-marquee model=model.channel isStaff=session.data.isStaff adminURL=adminURL}}
     {{else}}
       {{#if model.channel.featured}}
-        {{channel-header model=model.channel user=model.user}}
+        {{channel-header model=model.channel isStaff=session.data.isStaff adminURL=adminURL}}
       {{else}}
-        {{channel-header model=model.channel user=model.user classNames='flush'}}
+        {{channel-header model=model.channel isStaff=session.data.isStaff adminURL=adminURL classNames='flush'}}
       {{/if}}
     {{/if}}
 
@@ -22,7 +22,8 @@
           <h1 class="for-screenreaders">Featured Item</h1>
           {{story-tease
             parentTitle=model.channel.title
-            user=model.user
+            isStaff=session.data.isStaff
+            adminURL=adminURL
             item=model.channel.featured
             hideLinks=true
             isFeatured=true

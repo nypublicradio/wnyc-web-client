@@ -4,7 +4,6 @@ import djangoPage from 'wnyc-web-client/tests/pages/django-page';
 import showPage from 'wnyc-web-client/tests/pages/show';
 import { resetHTML } from 'wnyc-web-client/tests/helpers/html';
 import config from 'wnyc-web-client/config/environment';
-import { authenticateSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
 
 moduleForAcceptance('Acceptance | Django Page | Show Page', {
   beforeEach() {
@@ -39,8 +38,8 @@ test('smoke test', function(assert) {
 });
 
 test('authenticated smoke test', function(assert) {
+  server.get(`${config.wnycAdminRoot}/api/v1/is_logged_in/`, {is_staff: true});
   server.create('user');
-  authenticateSession(this.application, {is_staff: true, access_token: 'foo'});
   let show = server.create('show', {
     id: 'shows/foo/',
     linkroll: [

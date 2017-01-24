@@ -30,8 +30,8 @@
     <!-- .l-col2of3 -->
 
     <div class="l-col1of3 l-col--flex l-col--cv l-col--right">
-      {{#if user.is_staff}}
-        <a href="{{user.adminURL}}/{{model.editLink}}" class="btn btn--green" style="margin:auto;" target="_blank" data-test-selector="admin-link">Edit this</a>
+      {{#if isStaff}}
+        <a href="{{adminURL}}/{{model.editLink}}" class="btn btn--green" style="margin:auto;" target="_blank" data-test-selector="admin-link">Edit this</a>
       {{/if}}
 
       {{#if model.hasHeaderButtons}}

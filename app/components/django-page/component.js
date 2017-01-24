@@ -11,7 +11,7 @@ import {
 } from '../../lib/alien-dom';
 
 const { get, computed, run } = Ember;
-let { wnycURL } = ENV;
+let { wnycURL, wnycAdminRoot, renderGoogleAds } = ENV;
 wnycURL = canonicalize(wnycURL);
 
 function doRefresh() {
@@ -81,10 +81,13 @@ export default Ember.Component.extend(LegacySupportMixin, BetaActionsMixin, {
         // re-enable any overlaid content so that it can wormhole
         // itself into the server-rendered DOM.
         this.set('showingOverlay', true);
-        if (ENV.renderGoogleAds) {
+        if (renderGoogleAds) {
           doRefresh();
         }
 
+        if (this.get('session.data.isStaff')) {
+          this.revealStaffLinks(this.$(), wnycAdminRoot);
+        }
         this.$().imagesLoaded().progress((i, image) => {
           Ember.run(() => {
             image.img.classList.add('is-loaded');

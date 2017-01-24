@@ -8,10 +8,6 @@ const { hash: waitFor } = Ember.RSVP;
 export default Ember.Route.extend(PlayParamMixin, {
   metrics: service(),
   session: service(),
-  setupController(controller) {
-    controller.set('isMobile', window.Modernizr.touchevents);
-    return this._super(...arguments);
-  },
   titleToken(model) {
     return `${get(model, 'story.title')} - ${get(model, 'story.headers.brand.title')}`;
   },
@@ -28,7 +24,7 @@ export default Ember.Route.extend(PlayParamMixin, {
         story,
         getComments: () => comments,
         getRelatedStories: () => relatedStories,
-        user: get(this, 'session.data.authenticated'),
+        isStaff: get(this, 'session.data.isStaff'),
         browserId: get(this, 'session.data.browserId')
       });
     });
@@ -57,6 +53,12 @@ export default Ember.Route.extend(PlayParamMixin, {
       nprVals,
       isNpr: true
     });
+  },
+  
+  setupController(controller) {
+    controller.set('isMobile', window.Modernizr.touchevents);
+    controller.set('session', get(this, 'session'));
+    return this._super(...arguments);
   },
   
   actions: {

@@ -68,8 +68,8 @@
         </div>
       {{/if}}
 
-      {{#if user.is_staff}}
-        <a href="{{user.adminURL}}/{{item.editLink}}" class="btn btn--green" target="_blank" data-test-selector="admin-link">Edit this</a>
+      {{#if isStaff}}
+        <a href="{{adminURL}}/{{item.editLink}}" class="btn btn--green" target="_blank" data-test-selector="admin-link">Edit this</a>
       {{/if}}
     </div>
     <!-- .btn-group -->

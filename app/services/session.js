@@ -1,6 +1,5 @@
 import SessionService from 'ember-simple-auth/services/session';
 import config from 'wnyc-web-client/config/environment';
-import RSVP from 'rsvp';
 import fetch from 'fetch';
 
 export default SessionService.extend({
@@ -11,20 +10,26 @@ export default SessionService.extend({
       if (report) {
         reportBrowserId(legacyId || browserId);
       }
-      return RSVP.Promise.resolve(legacyId || browserId)
-        .then(id => this.set('data.browserId', id));
+      this.set('data.browserId', legacyId || browserId);
+    } else {
+      getBrowserId()
+        .then( ({ browser_id }) => this.set('data.browserId', browser_id));
     }
-
-    return getBrowserId()
-      .then( ({ browser_id }) => this.set('data.browserId', browser_id));
+  },
+  
+  staffAuth() {
+    fetch(`${config.wnycAdminRoot}/api/v1/is_logged_in/?bust_cache=${Math.random()}`, {
+      credentials: 'include'
+    })
+    .then(checkStatus).then(r => r.json())
+    .then(({is_staff}) => this.set('data.isStaff', is_staff));
   }
 });
 
 function reportBrowserId(knownId) {
-  return fetch(config.wnycEtagAPI, {
+  fetch(config.wnycEtagAPI, {
     headers: { 'X-WNYC-BrowserId': knownId }
-  }).then(checkStatus)
-    .then(response => response.json());
+  });
 }
 
 function getBrowserId() {
