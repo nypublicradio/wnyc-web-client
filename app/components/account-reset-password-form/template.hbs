@@ -1,26 +1,38 @@
-{{#nypr-form changeset=changeset allowedKeys=allowedKeys onSubmit=(action 'onSubmit') formClass='account-form' as |form|}}
-{{#if form.status.success}}
-  <h2 class="account-form-heading">Password Updated</h2>
+{{#nypr-form changeset=changeset allowedKeys=allowedKeys onSubmit=(action 'onSubmit') onSuccess=(action 'onSuccess') formClass='account-form' as |form|}}
+  {{#if codeExpired}}
+    <h2 class="account-form-heading">Oops!</h2>
 
-  <p class="account-form-description">Your password has been successfully updated.</p>
+    <p class="account-form-description">
+    The link to reset your password has expired. If you still need to reset your password, click to resend, and we'll provide a new link.
+    <br>
+    {{#resend-button
+      target=resendEndpoint
+      email=email}}
+      Resend the email
+    {{/resend-button}}</p>
+  {{else if form.status.success}}
 
-  <button type="submit" class="account-form-btn">Log In</button>
-{{else}}
-  <h2 class="account-form-heading">Reset your password</h2>
+    {{#each flashMessages.queue as |flash|}}
+      {{flash-message flash=flash}}
+    {{/each}}
 
-  <p class="account-form-description">Create a new password for {{email}}.</p>
+    {{account-login-form}}
+  {{else}}
+    <h2 class="account-form-heading">Reset your password</h2>
 
-  {{nypr-input
-    label='New Password'
-    type='password'
-    placeholder='Enter password'
-    fieldname='password'
-    value=changeset.password
-    errors=changeset.error.password.validation
-    submitted=form.status.tried
-    clue='must have at least 8 characters and one number'
-  }}
+    <p class="account-form-description">Create a new password for {{email}}.</p>
 
-  <button type="submit" class="account-form-btn" disabled={{form.status.processing}}>Reset password</button>
-{{/if}}
+    {{nypr-input
+      label='New Password'
+      type='password'
+      placeholder='Enter password'
+      fieldname='password'
+      value=changeset.password
+      errors=changeset.error.password.validation
+      submitted=form.status.tried
+      clue='must have at least 8 characters and one number'
+    }}
+
+    <button type="submit" class="account-form-btn" disabled={{form.status.processing}}>Reset password</button>
+  {{/if}}
 {{/nypr-form}}

@@ -23,7 +23,7 @@ export default Component.extend({
       return this.signUp();
     },
     onFailure(e) {
-      if (e.errors) {
+      if (e) {
         this.applyErrorToChangeset(e.errors, get(this, 'changeset'));
       }
     },
@@ -33,11 +33,9 @@ export default Component.extend({
   },
   applyErrorToChangeset(error, changeset) {
     if (error) {
-      if (error.code === "UsernameExistsException") {
+      if (error.code === "AccountExists") {
         changeset.validate('email');
-        changeset.pushErrors('email', 'an account already exists for that email. <a href="/accounts/login">Log in</a>');
-      } else {
-        console.log(error);
+        changeset.pushErrors('email', `An account already exists for the email ${changeset.get('email')}.<br/> <a href="/login">Log in?</a> <a href="/forgot">Forgot password?</a>`);
       }
     }
   },

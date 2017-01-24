@@ -1,6 +1,10 @@
 <div class="account-form">
   <h2 class="account-form-heading">Thanks for signing up!</h2>
-  <p>We’ve sent an email to {{email}} to verify your email address. <a {{action 'resend'}}>Resend the email</a></p>
+  <p>We’ve sent an email to {{email}} to verify your email address.     {{#resend-button
+    target=resendEndpoint
+    email=email}}
+    Resend the email
+  {{/resend-button }}</p>
 
   <p>Once you click the link in your email, your account will be all set up.</p>
 </div>

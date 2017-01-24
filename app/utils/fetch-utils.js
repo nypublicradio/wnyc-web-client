@@ -14,7 +14,11 @@ export function rejectUnsuccessfulResponses(response) {
     if (response && response.ok) {
       resolve(response);
     } else {
-      reject(response);
+      if (response.json) {
+        response.json().then(reject);
+      } else {
+        reject(response);
+      }
     }
   });
 }

@@ -4,12 +4,15 @@ import get from 'ember-metal/get';
 import Changeset from 'ember-changeset';
 import LoginValidations from 'wnyc-web-client/validations/login';
 import lookupValidator from 'ember-changeset-validations';
+import ENV from 'wnyc-web-client/config/environment';
 import service from 'ember-service/inject';
 
 export default Component.extend({
+  resendEndpoint: `${ENV.wnycAuthAPI}/v1/confirm/resend`,
   session: service(),
   routing: service('wnyc-routing'),
   allowedKeys: ['email', 'password'],
+  triedUnverifiedAccount: false,
   init() {
     this._super(...arguments);
     set(this, 'fields', {
@@ -21,14 +24,18 @@ export default Component.extend({
   },
   actions: {
     onSubmit() {
-      this.authenticate(get(this, 'fields.email'), get(this, 'fields.password'));
+      return this.authenticate(get(this, 'fields.email'), get(this, 'fields.password'));
     },
     onSuccess() {
       this.goHome();
     },
     onFailure(e) {
-      if (e.errors) {
-        this.applyErrorToChangeset(e.errors, get(this, 'changeset'));
+      if (e) {
+        if (get(e, 'errors.code') === 'AccountNotConfirmed') {
+          set(this, 'triedUnconfirmedAccount', true);
+        } else {
+          this.applyErrorToChangeset(e.errors, get(this, 'changeset'));
+        }
       }
     },
   },
@@ -40,12 +47,12 @@ export default Component.extend({
   },
   applyErrorToChangeset(error, changeset) {
     if (error && error.code) {
-      if (error.code === "NotAuthorizedException") {
+      if (error.code === "UnauthorizedAccess") {
         changeset.validate('password');
-        changeset.pushErrors('password', 'Incorrect username or password.');
+        changeset.pushErrors('password', `There was a problem with the email and password for ${changeset.get('email')}. <a href="/signup">Sign up?</a>`);
       } else if (error.code === "UserNotFoundException") {
         changeset.validate('email');
-        changeset.pushErrors('email', 'email address not found');
+        changeset.pushErrors('email', `We cannot find an account for the email ${changeset.get('email')}. <a href="/signup">Sign up?</a>`);
       }
     }
   }

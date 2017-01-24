@@ -1,7 +1,7 @@
 import Controller from 'ember-controller';
 
 export default Controller.extend({
-  queryParams: ['confirmation', 'email'],
+  queryParams: ['confirmation', 'username'],
   confirmation: null,
-  email: null
+  username: null
 });

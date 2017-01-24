@@ -3,13 +3,20 @@
   padding: 18px 28px;
   color: white;
   font-weight: 600;
-  
+
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  
+
   + .account-info {
     padding-top: 125px;
+  }
+}
+
+.account-form .alert {
+  @include mq($medium-and-up) {
+    // don't cover promo
+    left: 318px;
   }
 }
