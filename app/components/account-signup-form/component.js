@@ -36,6 +36,8 @@ export default Component.extend({
       if (error.code === "AccountExists") {
         changeset.validate('email');
         changeset.pushErrors('email', `An account already exists for the email ${changeset.get('email')}.<br/> <a href="/login">Log in?</a> <a href="/forgot">Forgot password?</a>`);
+        changeset.set('emailConfirmation', null);
+        changeset.set('error.emailConfirmation', null);
       }
     }
   },
