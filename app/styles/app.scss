@@ -6,7 +6,7 @@
 body:not(.simplified_wrapper):not(.container_stripped) {
    > :not(.ember-view):not(#qunit):not(#qunit-fixture):not(#ember-testing-container):not(#modal-overlays) {
     display: none;
-  } 
+  }
 }
 
 // contain fixed layouts
@@ -75,6 +75,7 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 @import 'accounts';
 
 @import 'site-chrome';
+@import 'user-navigation';
 @import 'discover';
 @import 'liquid-fire-icons';
 @import 'error';

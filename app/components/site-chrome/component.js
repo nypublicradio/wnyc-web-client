@@ -9,6 +9,7 @@ export default Component.extend(BetaActionsMixin, {
   session: service(),
   metrics: service(),
   router: service('wnyc-routing'),
+  currentUser: service(),
   donateURL: config.wnycDonateURL,
   defaultStream:  {slug: 'wnyc-fm939', name: 'WNYC 93.9 FM'},
   preferredStream: or('session.data.user-prefs-active-stream', 'defaultStream'),
@@ -27,12 +28,5 @@ export default Component.extend(BetaActionsMixin, {
     routeSearch(val) {
       this.get('router').transitionTo('djangorendered', ['search/'], {"q": val});
     },
-    logout() {
-      this.get('metrics').trackEvent({
-        category: 'WNYC Menu',
-        label: 'Clicked Logout',
-      });
-      this.get('session').invalidate();
-    }
   }
 });

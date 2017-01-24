@@ -6,7 +6,6 @@
     > a:hover {
       opacity: 1;
     }
-
   }
 
   .icon--wnyc-logo-nav #wnyc-logo{
@@ -38,7 +37,27 @@
   .profile & {
     margin-bottom: 0;
   }
+}
 
+.sitechrome-topright {
+  @include flexbox((
+    display: flex,
+    align-items: flex-end
+  ));
+  > a,
+  > div {
+    @include flexbox((
+      justify-content: center,
+      align-self: center
+    ));
+    height: 100%;
+    margin-right: 10px;
+    white-space: nowrap;
+  }
+
+  a {
+    margin-left: auto;
+  }
 }
 
 .sitechrome-nav {
@@ -264,7 +283,7 @@
   @include flex-basis(100%);
 
   margin-bottom: 15px;
-  padding: 0 15px;
+  padding: 0 15px 0 24px 0;
   padding: 0 rems(15);
 
   @include mq($large-and-up) {

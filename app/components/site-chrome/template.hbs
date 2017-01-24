@@ -37,7 +37,7 @@
           {{/if}}
 
         <div class="l-flex1of2">
-          <div class="alignright">
+          <div class="sitechrome-topright">
             {{#if media.isLargeAndUp}}
               {{#if isHomepage}}
               <div class="cta-text text flush text--medium">
@@ -55,6 +55,8 @@
               data-tracking-action="Clicked Donate Button"
               target="_blank">Donate</a>
             {{/if}}
+
+            {{user-navigation isLoggedIn=session.isAuthenticated user=currentUser.user}}
           </div>
         </div>
 
@@ -145,22 +147,6 @@
             {{/link-to}}
           {{/if}}
 
-          {{#if session.isAuthenticated}}
-            {{#link-to 'profile' tagName='li' href="false" class="list-item list-item--nav" }}
-              {{link-to "My Account" 'profile' class="inherit" preventDefault=false}}
-            {{/link-to}}
-
-            <li class="list-item list-item--nav">
-              <button class="btn--blank btn--white h5" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
-            </li>
-
-          {{else}}
-            {{#link-to 'login' tagName='li' href=false class="list-item list-item--nav"}}
-              {{link-to 'Sign In' 'login' class="inherit" preventDefault=false}}
-            {{/link-to}}
-
-          {{/if}}
-
         {{/unless}}
       </ul>
     </div>
@@ -180,20 +166,6 @@
                 {{link-to 'Settings' 'settings' class="inherit" preventDefault=false}}
               {{/link-to}}
             {{/if}}
-
-            {{#if session.isAuthenticated}}
-              {{#link-to 'profile' tagName='li' href="false" class="list-item list-item--nav" }}
-                {{link-to "My Account" 'profile' class="inherit" preventDefault=false}}
-              {{/link-to}}
-
-              <li class="list-item list-item--nav">
-                <button class="btn--blank" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
-              </li>
-            {{else}}
-              {{#link-to 'login' tagName='li' href=false class="list-item list-item--nav"}}
-                {{link-to "Sign In" 'login' class="inherit" preventDefault=false}}
-              {{/link-to}}
-            {{/if}}
           </ul>
             {{!-- </div>
             <!-- .text --> --}}
@@ -209,7 +181,9 @@
     {{yield}}
 
   </div>
-  
+
   {{partial 'components/site-chrome/site-footer'}}
-  
+
 </div>
+
+
