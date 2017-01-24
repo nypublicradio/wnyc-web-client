@@ -185,5 +185,17 @@ export default function() {
   });
   this.delete('/v1/user', () => new Response(204));
   this.get('/v1/user/exists-by-attribute', {username: ''});
-  
+
+  this.get('/v1/confirm/sign-up', (schema, request) => {
+    if (request.queryParams.confirmation === "null" || request.queryParams.confirmation === "null") {
+      return new Response(400, { "errors":
+        {"code": "UserNotFoundException",
+        "message": "Username/client id combination not found.",
+        "values": ["email"]
+        }
+      });
+    } else {
+      return new Response(200);
+    }
+  });
 }
