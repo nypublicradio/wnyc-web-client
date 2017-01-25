@@ -137,6 +137,11 @@
   font-weight: 600;
   font-size: 14px;
   color: white;
+  border: none;
+
+  &:hover {
+    color: $blue;
+  }
 }
 @include mq($large-and-up) {
   .user-nav-link > a {

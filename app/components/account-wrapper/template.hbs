@@ -5,11 +5,12 @@
   </a>
   </div>
   <div class="account-promo-blurb">
-    <div class="account-promo-heading">THE WNYC ONLINE COMMUNITY</div>
+    <!-- <div class="account-promo-heading">THE WNYC ONLINE COMMUNITY</div> -->
     <div class="account-promo-text">
-      <em>“Join the family. I really feel like WNYC provides a sense of community and creates a sense of regional identity.”</em>
+      It's hard sometimes to get out of bed, and it really helps to know I'm going to be listening to WNYC.
       <br><br>
-      <span class="account-promo-attribution">- Melissa from New Jersey</span>
+      <div class="account-promo-name">Tom Mullen</div>
+      <div class="account-promo-profession">Principal, Leaders High School</div>
     </div>
   </div>
 </div>
@@ -17,9 +18,12 @@
 {{yield}}
 
   <div class="account-footer">
-    {{link-to 'Terms' 'djangorendered' 'terms'}}
-    {{link-to 'Privacy' 'djangorendered' 'privacy'}}
-    {{link-to 'Help' 'djangorendered' 'contact' target='_blank'}}
+    <div class="account-footer-links">
+      {{link-to 'Terms' 'djangorendered' 'terms'}}
+      {{link-to 'Privacy' 'djangorendered' 'privacy'}}
+      {{link-to 'Help' 'djangorendered' 'contact' target='_blank'}}
+    </div>
+    <div>&copy; {{moment-format (now) 'YYYY'}} New York Public Radio</div>
   </div>
-  
+
 </div>
