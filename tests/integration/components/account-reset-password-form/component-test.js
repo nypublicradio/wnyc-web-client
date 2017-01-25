@@ -15,7 +15,10 @@ moduleForComponent('account-reset-password-form', 'Integration | Component | acc
 });
 
 test('it renders', function(assert) {
-  this.render(hbs`{{account-reset-password-form}}`);
+  let testEmail = 'test@example.com';
+  let testConfirmation = 'QWERTYUIOP';
+  this.set('email', testEmail);
+  this.set('confirmation', testConfirmation);  this.render(hbs`{{account-reset-password-form email=email confirmation=confirmation}}`);
   assert.equal(this.$('.account-form').length, 1);
 });
 
