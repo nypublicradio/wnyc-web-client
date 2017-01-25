@@ -6,6 +6,7 @@ import PasswordValidations from 'wnyc-web-client/validations/password';
 import lookupValidator from 'ember-changeset-validations';
 import service from 'ember-service/inject';
 import ENV from 'wnyc-web-client/config/environment';
+import RSVP from 'rsvp';
 import fetch from 'fetch';
 import { rejectUnsuccessfulResponses } from 'wnyc-web-client/utils/fetch-utils';
 
@@ -15,11 +16,19 @@ const FLASH_MESSAGES = {
 
 export default Component.extend({
   store: service(),
+  routing: service('wnyc-routing'),
   resendEndpoint: `${ENV.wnycAuthAPI}/v1/password/forgot`,
   allowedKeys: ['password'],
   codeExpired: false,
+  passwordWasReset: false,
   init() {
     this._super(...arguments);
+    if ( !(get(this, 'email') && get(this, 'confirmation')) ) {
+      // if we got here with missing url parameters,
+      // (i.e. typing url, bad copy/paste)
+      // send the user to the 'forgot' page so they can request a reset email
+      return get(this, 'routing').transitionTo('forgot');
+    }
     set(this, 'fields', {
       password: ''
     });
@@ -37,7 +46,11 @@ export default Component.extend({
     .catch(e => {
       if (get(e, 'errors.code') === 'ExpiredCodeException') {
         set (this, 'codeExpired', true);
+      } else {
+        get(this, 'changeset').validate('password');
+        get(this, 'changeset').pushErrors('password', 'There was a problem changing your password.');
       }
+      return RSVP.Promise.reject(e);
     });
   },
   showFlash(type) {
@@ -52,6 +65,7 @@ export default Component.extend({
       return this.resetPassword(get(this, 'email'), get(this, 'fields.password'), get(this, 'confirmation'));
     },
     onSuccess() {
+      this.set('passwordWasReset', true);
       return this.showFlash('reset');
     }
   },
