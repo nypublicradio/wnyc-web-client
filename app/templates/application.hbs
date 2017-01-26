@@ -1,4 +1,10 @@
-{{#if miniChrome}}
+{{#if chromeDisabled}}
+  {{#unless error}}
+    {{outlet}}
+  {{else}}
+    {{error-page error=error}}
+  {{/unless}}
+{{else if miniChrome}}
   {{#nypr-mini-chrome}}
     {{#unless error}}
       {{outlet}}
@@ -6,12 +12,6 @@
       {{error-page error=error}}
     {{/unless}}
   {{/nypr-mini-chrome}}
-{{else if chromeDisabled}}
-  {{#unless error}}
-    {{outlet}}
-  {{else}}
-    {{error-page error=error}}
-  {{/unless}}
 {{else}}
   {{#site-chrome headerDonateChunk=headerDonateChunk beta=beta isHomepage=isHomepage currentPath=currentPath}}
     {{#unless error}}
