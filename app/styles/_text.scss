@@ -421,14 +421,6 @@
  * Text Teatments:
  */
 
-/**
- * Dotted outline:
- * `.text--dotted`
- * adds a dotted top and bottom border to a block of text.
- *
- *      @example
- *      text.text--dotted Apr 1, 2015
- */
 .text--dotted {
     padding: 10px 0;
     border-top: 1px dotted $lightestgray;
@@ -438,15 +430,17 @@
 /***
  * Links:
  */
+@mixin link--gray {
+    color: $lightgray;
+    border-bottom: 1px solid rgba($lightgray, 0.3);
+    
+    &:hover,
+    &:focus {
+      border-color: $blue;
+      color: $blue;
+    }
+}
 
-/**
- * Dark link:
- * `.link--dark`
- * blue on hover, no underline
- *
- *      @example
- *      a.link--dark(href="http://www.wnyc.org/shows/bl") The Brian Lehrer Show
- */
 .link--dark {
     color: $darkergray;
     border: none;
@@ -474,28 +468,10 @@
     }
 }
 
-/**
- * Link with Bottom Padding
- * `.link--padbtm`
- * Add a 5px padding to the bottom of the link. Useful for links with icons to
- * create some spacing between the underline decoration and the link contents.
- *
- *      @example
- *      a.link--padbtm
- *          <i class="fa fa-facebook icon--prefix"></i> Facebook
- */
 .link--padbtm {
     padding-bottom: 5px;
 }
 
-/**
- * No decoration link:
- * `.link--nodecor`
- * no underline on hover
- *
- *      @example
- *      a.link--nodecor(href="http://www.wnyc.org/shows/bl") The Brian Lehrer Show
- */
 .link--nodecor {
     border: none;
 
@@ -516,14 +492,6 @@
     }
 }
 
-/**
- * Cap Bold Link
- * `.link--capbold`
- * A link style that caps, bolds, and sizes the text to the 12.
- *
- *      @example
- *      a.link--capbold(href="http://www.wnyc.org/shows/bl") The Brian Lehrer Show
- */
 .link--capbold {
   font-weight: 600;
   @include fontsize(12);
@@ -553,14 +521,6 @@
  * These should be created according to special MQ cases.
  */
 
-/**
- * `.text--mq-bluewhite`
- * Blue/White MQ Text Link
- *
- *      @example
- *      div.text--mq-bluewhite
- *          a. I am a link. And you won't see me.
- */
 .text--mq-bluewhite {
 
     @include mq($medium-and-up) {

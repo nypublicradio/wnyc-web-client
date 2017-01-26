@@ -152,13 +152,9 @@
     text-align: center;
     color: $lightgray;
     margin-bottom: 23px;
+
     a {
-      color: $lightgray;
-      border-bottom: 1px solid rgba($lightgray, 0.3);
-    }
-    a:hover, a:focus {
-      border-color: $blue;
-      color: $blue;
+      @include link--gray;
     }
   }
 
@@ -225,13 +221,7 @@
     margin-bottom: 5px;
 
     >  a {
-      color: $lightgray;
-      border-bottom: 1px solid rgba($lightgray, 0.3);
-
-      &:hover {
-        color: $blue;
-        border-color: $blue;
-      }
+      @include link--gray;
     }
   }
 }
