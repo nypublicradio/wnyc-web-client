@@ -23,7 +23,7 @@ test('visiting /login', function(assert) {
 test('Log in button is visible at load', function(assert) {
   visit('/login');
 
-  andThen(() => assert.equal(find('button').text().trim(), 'Log in'));
+  andThen(() => assert.equal(find('button:contains(Log in)').length, 1));
 });
 
 test('Submitting valid credentials redirects to previous route', function(assert) {
