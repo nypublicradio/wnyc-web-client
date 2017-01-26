@@ -168,8 +168,8 @@ export default function() {
     }
     return schema.users.first();
   });
-  this.post('/v1/session', {access_token: 'secret', refresh_token: "refresh", expires_in: 3600, token_type: 'bearer'});
-  this.put('/v1/session', {access_token: 'secret', refresh_token: "refresh", expires_in: 3600, token_type: 'bearer'});
+  this.post('/v1/session', {access_token: 'secret', expires_in: 3600, token_type: 'bearer'});
+  this.put('/v1/session', {access_token: 'secret', expires_in: 3600, token_type: 'bearer'});
   this.delete('/v1/session', {});
 
   this.post('/v1/user', {});
