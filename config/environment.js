@@ -19,7 +19,8 @@ module.exports = function(environment) {
     emberHifi: {
       connections: [{
         name: 'NativeAudio'
-      }]
+      }],
+      alwaysUseSingleAudioElement: true
     },
     metricsAdapters: [],
     EmberENV: {
