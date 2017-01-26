@@ -38,10 +38,8 @@
     isOpenModal=modal}}
 {{/liquid-unless}}
 
-{{#liquid-bind modal class="modal-wrapper" as |thisModal|}}
-  {{#if thisModal}}
+{{#liquid-if modal class="modal-wrapper sliding-modal"}}
   {{#x-modal closeModal=(action 'closeModal')}}
-    {{component thisModal}}
+    {{component modal}}
   {{/x-modal}}
-  {{/if}}
-{{/liquid-bind}}
+{{/liquid-if}}
