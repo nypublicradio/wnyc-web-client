@@ -9,11 +9,13 @@
             {{nypr-svg icon="user"}}
           {{/if}}
           </div>
-          <span class="user-nav-greeting">Hi, {{or user.givenName 'You'}}</span>
-          <span class="user-nav-triangle"></span>
+          <span class="user-nav-greeting">{{or user.givenName 'You'}}</span>
         </button>
         {{#if isPopupOpen}}
-          <div class="user-nav-popup-pointer"></div>
+          <div class="user-nav-popup-caret">
+            <span class="user-nav-popup-caret-outer"></span>
+            <span class="user-nav-popup-caret-inner"></span>
+          </div>
           <div class="user-nav-popup">
             <ul class="user-nav-list">
               <li class="user-nav-listitem">

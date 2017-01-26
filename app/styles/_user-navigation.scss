@@ -8,8 +8,8 @@
 
 .user-nav-avatar {
   display: inline-block;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   line-height: 100%;
   background-color: $lightestgray;
@@ -19,7 +19,10 @@
     margin: 0px 4px 0px 10px;
   }
   svg {
-    height: 40px;
+    height: 20px;
+    top: 4px;
+    position: relative;
+    left: 1px;
   }
   path {
     fill: white;
@@ -30,7 +33,7 @@
   display: none;
   font-size: 14px;
   color: white;
-  margin-right: 4px;
+  margin-right: 2px;
   @include mq($medium-and-up) {
     display: inline-block;
     font-weight: 600;
@@ -41,49 +44,53 @@
   }
 }
 
-.user-nav-triangle {
-  display: none;
-  width: 0px;
-  height: 0px;
-  transform-origin: 50% 25%;
-  vertical-align: middle;
-  transition: 250ms cubic-bezier(0.5, 0, 1, 1) transform;
-  border-width: 5px;
-  border-style: solid;
-  border-color: white transparent transparent transparent;
-  @include mq($medium-and-up) {
-    display: inline-block;
-  }
-  @include mq($large-and-up) {
-    border-color: $darkergray transparent transparent transparent;
-  }
-}
-
-.is-popup-open .user-nav-triangle {
-  transform: rotate(-180deg);
-}
-
-.user-nav-popup-pointer {
-  z-index: $zIndex--fix;
+.user-nav-popup-caret {
   position: absolute;
-  top: 51px;
-  left: 23px;
-  height: 12px;
-  width: 12px;
-  transform: rotate(45deg);
-  background-color: #ffffff;
-  box-shadow: 0px 0px 1px rgba(0,0,0, 0.3);
+  overflow: hidden;
+  float: left;
+  top: 33px;
+  left: 16px;
+  width: 18px;
+  height: 10px;
+  z-index: ($zIndex--fix + 1);
+
+  span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    margin-left: -1px;
+
+    &.user-nav-popup-caret-outer {
+      border-bottom: 10px solid rgba(0, 0 ,0 , 0.07);
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      height: auto;
+      width: auto;
+      left: 0;
+      top: 0;
+    }
+
+    &.user-nav-popup-caret-inner {
+      top: 1px;
+      left: 1px;
+      border-left: 9px solid transparent;
+      border-right: 9px solid transparent;
+      border-bottom: 9px solid rgba(255, 255, 255, 0.98);
+    }
+  }
 }
 
 .user-nav-popup {
   z-index: $zIndex--fix;
   position: absolute;
-  top: 57px;
+  top: 43px;
   right: 0px;
   width: 117px;
-  border-radius: 6px;
+  border-radius: 4px;
   background-color: #ffffff;
-  box-shadow: 0px 2px 2px rgba(0,0,0, 0.3);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  border: 0 solid rgba(0,0,0,0.25);
   @include mq($medium-and-up) {
     left: -10px;
     right: auto;
@@ -92,13 +99,12 @@
   .user-nav-list {
     list-style: none;
     margin: 0;
-    padding: 17px;
+    padding: 10px 15px;
   }
 
   .user-nav-listitem {
     display: block;
     width: 100%;
-    text-align: center;
     margin: 0  0 11px 0;
     padding: 0;
   }
