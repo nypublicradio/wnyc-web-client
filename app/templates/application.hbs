@@ -71,7 +71,7 @@
           }}
         {{/content.for}}
 
-        {{#content.for 'action' as |args|}}
+        {{#content.for 'aux' as |args|}}
           {{args.queueButton
               queueLength       = audio.queue.items.length
               showModal         = (action 'showModal' 'queue-history')
