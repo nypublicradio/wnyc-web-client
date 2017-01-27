@@ -10,28 +10,15 @@ import {
   clearAlienDom,
 } from '../../lib/alien-dom';
 
-const { get, computed, run } = Ember;
+const { get, computed } = Ember;
 let { wnycURL } = ENV;
 wnycURL = canonicalize(wnycURL);
-
-function doRefresh() {
-  const { googletag } = window;
-
-  if (googletag && googletag.apiReady) {
-    run.schedule('afterRender', this, () => {
-      googletag.cmd.push(() => {
-        googletag.pubads().refresh();
-      });
-    });
-  } else {
-    run.later(this, doRefresh, 500);
-  }
-}
 
 export default Ember.Component.extend(LegacySupportMixin, BetaActionsMixin, {
   audio: service(),
   session: service(),
   legacyAnalytics: service(),
+  googleAds: service(),
   router: service('wnyc-routing'),
   loadingType: computed('page', function() {
     let id = get(this, 'page.id') || '';
@@ -82,9 +69,7 @@ export default Ember.Component.extend(LegacySupportMixin, BetaActionsMixin, {
         // re-enable any overlaid content so that it can wormhole
         // itself into the server-rendered DOM.
         this.set('showingOverlay', true);
-        if (ENV.renderGoogleAds) {
-          doRefresh();
-        }
+        this.get('googleAds').refresh();
 
         this.revealStaffLinks(this.get('session'));
         this.$().imagesLoaded().progress((i, image) => {
