@@ -106,6 +106,7 @@ test('visiting a story with a different donate URL', function(assert) {
 moduleForAcceptance('Acceptance | Django Page | Story Detail Analytics', {
   afterEach() {
     delete window.ga;
+    window.googletag = { apiReady: true, cmd: [] };
   }
 });
 
@@ -182,7 +183,8 @@ test('google ads test', function(assert) {
     pubads() {
       return {
         setTargeting: setTargetingSpy,
-        refresh: refreshSpy
+        refresh: refreshSpy,
+        addEventListener() {}
       };
     }
   };
@@ -202,7 +204,5 @@ test('google ads test', function(assert) {
     assert.ok(setTargetingSpy.calledWith('series'), 'called set target for series');
     
     assert.ok(refreshSpy.calledOnce, 'refresh was called');
-    
-    window.googletag = null;
   });
 });

@@ -302,6 +302,7 @@ test('show pages with a play param', function(assert) {
 moduleForAcceptance('Acceptance | Django Page | Show Page Analytics', {
   afterEach() {
     delete window.ga;
+    window.googletag = { apiReady: true, cmd: [] };
   }
 });
 
@@ -378,7 +379,8 @@ test('show google ads test', function(assert) {
     },
     pubads() {
       return {
-        refresh: refreshSpy
+        refresh: refreshSpy,
+        addEventListener() {}
       };
     }
   };
@@ -389,7 +391,5 @@ test('show google ads test', function(assert) {
     
   andThen(function() {
     assert.ok(refreshSpy.calledTwice, 'refresh was called twice');
-    
-    window.googletag = null;
   });
 });

@@ -5,6 +5,9 @@ import sinon from 'sinon';
 moduleForAcceptance('Acceptance | shows', {
   beforeEach() {
     server.create('stream');
+  },
+  afterEach() {
+    window.googletag = { apiReady: true, cmd: [] };
   }
 });
 
@@ -23,7 +26,8 @@ test('visiting /shows', function(assert) {
     },
     pubads() {
       return {
-        refresh: refreshSpy
+        refresh: refreshSpy,
+        addEventListener() {}
       };
     }
   };
@@ -44,8 +48,6 @@ test('visiting /shows', function(assert) {
     assert.equal(find('#leaderboard').length, 1, "ad is present" );
 
     assert.ok(refreshSpy.calledOnce, 'refresh was called');
-    
-    window.googletag = null;
   });
 });
 

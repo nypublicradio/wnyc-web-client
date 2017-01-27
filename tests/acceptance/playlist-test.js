@@ -2,7 +2,11 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import sinon from 'sinon';
 
-moduleForAcceptance('Acceptance | playlist');
+moduleForAcceptance('Acceptance | playlist', {
+  afterEach() {
+    window.googletag = { apiReady: true, cmd: [] };
+  }
+});
 
 test('visiting /streams/wnyc-fm939', function(assert) {
   server.create('stream', {
@@ -30,7 +34,8 @@ test('visiting /streams/wnyc-fm939', function(assert) {
     },
     pubads() {
       return {
-        refresh: refreshSpy
+        refresh: refreshSpy,
+        addEventListener() {}
       };
     }
   };
@@ -40,7 +45,5 @@ test('visiting /streams/wnyc-fm939', function(assert) {
     assert.equal(currentURL(), '/streams/wnyc-fm939');
     assert.equal(find('a[href="http://fooshow.com"]').text().trim(), 'Episode Foo');
     assert.ok(refreshSpy.calledOnce, 'refresh was called');
-    
-    window.googletag = null;
   });
 });

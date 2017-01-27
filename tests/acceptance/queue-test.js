@@ -10,6 +10,7 @@ moduleForAcceptance('Acceptance | queue', {
   beforeEach() {
     server.create('stream');
     velocity.mock = true;
+    window.googletag = { apiReady: true, cmd: [] };
   },
   afterEach() {
     velocity.mock = false;

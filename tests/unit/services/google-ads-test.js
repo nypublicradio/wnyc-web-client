@@ -31,6 +31,5 @@ test('it pushes a refesh call into the queue', function(assert) {
   
   let service = this.subject();
   bind(service, service.refresh)();
-  
-  window.googletag = null;
+  window.googletag = { apiReady: true, cmd: [] };
 });

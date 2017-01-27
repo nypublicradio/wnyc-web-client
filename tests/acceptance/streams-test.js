@@ -2,7 +2,11 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import sinon from 'sinon';
 
-moduleForAcceptance('Acceptance | streams');
+moduleForAcceptance('Acceptance | streams', {
+  afterEach() {
+    window.googletag = { apiReady: true, cmd: [] };
+  }
+});
 
 test('visiting /streams', function(assert) {
   server.createList('stream', 7);
@@ -18,7 +22,8 @@ test('visiting /streams', function(assert) {
     },
     pubads() {
       return {
-        refresh: refreshSpy
+        refresh: refreshSpy,
+        addEventListener() {}
       };
     }
   };
@@ -29,8 +34,6 @@ test('visiting /streams', function(assert) {
     assert.equal(currentURL(), '/streams');
     assert.equal(find('.stream-list li').length, 7, 'should display a list of streams');
     assert.ok(refreshSpy.calledOnce, 'refresh was called');
-    
-    window.googletag = null;
   });
 });
 
