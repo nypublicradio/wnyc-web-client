@@ -1,20 +1,9 @@
-<div class="account-promo">
-  <div class="account-logo">
-  <a href="/">
-    {{wnyc-svg icon='logo-wnyc'}}
-  </a>
-  </div>
-  <div class="account-promo-blurb">
-    <!-- <div class="account-promo-heading">THE WNYC ONLINE COMMUNITY</div> -->
-    <div class="account-promo-text">
-      It's hard sometimes to get out of bed, and it really helps to know I'm going to be listening to WNYC.
-      <br><br>
-      <div class="account-promo-name">Tom Mullen</div>
-      <div class="account-promo-profession">Principal, Leaders High School</div>
-    </div>
-  </div>
-</div>
 <div class="account-main">
+  <div class="account-logo">
+    <a href="/">
+      {{wnyc-svg icon='logo-wnyc'}}
+    </a>
+  </div>
 {{yield}}
 
   <div class="account-footer">
@@ -26,4 +15,13 @@
     <div>&copy; {{moment-format (now) 'YYYY'}} New York Public Radio</div>
   </div>
 
+</div>
+<div class="account-promo">
+  <div class="account-promo-blurb">
+    <div class="account-promo-text">
+      <div class="account-promo-quote">"It makes me feel connected. I think WNYC is really one of the things that make New York City such an amazing place."</div>
+      <div class="account-promo-name">Marisa Wu</div>
+      <div class="account-promo-profession">Owner, The Salty Road</div>
+    </div>
+  </div>
 </div>
