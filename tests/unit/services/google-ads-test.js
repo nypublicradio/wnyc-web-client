@@ -13,23 +13,21 @@ test('it exists', function(assert) {
 });
 
 test('it pushes a refesh call into the queue', function(assert) {
-  window.googletag = {
-    apiReady: true,
-    cmd: {
-      push(fn) {
-        fn();
-      }
-    },
-    pubads() {
-      return {
-        refresh() {
-          assert.ok('ok refresh was called');
-        }
-      };
+  window.googletag.cmd = {
+    push(fn) {
+      fn();
     }
+  };
+  window.googletag.pubads = function() {
+    return {
+      refresh() {
+        assert.ok('ok refresh was called');
+      }
+    };
   };
   
   let service = this.subject();
   bind(service, service.refresh)();
-  window.googletag = { apiReady: true, cmd: [] };
+    
+  window.googletag.cmd = [];
 });

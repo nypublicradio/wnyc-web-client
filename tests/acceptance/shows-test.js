@@ -5,9 +5,10 @@ import sinon from 'sinon';
 moduleForAcceptance('Acceptance | shows', {
   beforeEach() {
     server.create('stream');
+    window.googletag = {cmd: [], apiReady: true};
   },
   afterEach() {
-    window.googletag = { apiReady: true, cmd: [] };
+    window.googletag = {cmd: [], apiReady: true};
   }
 });
 
@@ -17,19 +18,16 @@ test('visiting /shows', function(assert) {
   server.create('bucket', {slug: 'wnyc-shows-featured'});
   let refreshSpy = sinon.spy();
 
-  window.googletag = {
-    apiReady: true,
-    cmd: {
-      push(fn) {
-        fn();
-      }
-    },
-    pubads() {
-      return {
-        refresh: refreshSpy,
-        addEventListener() {}
-      };
+  window.googletag.cmd = {
+    push(fn) {
+      fn();
     }
+  };
+  window.googletag.pubads = function() {
+    return {
+      refresh: refreshSpy,
+      addEventListener() {}
+    };
   };
   
   visit('/shows');

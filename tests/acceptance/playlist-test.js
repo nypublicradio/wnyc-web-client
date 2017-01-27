@@ -3,8 +3,11 @@ import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-accept
 import sinon from 'sinon';
 
 moduleForAcceptance('Acceptance | playlist', {
+  beforeEach() {
+    window.googletag = {cmd: [], apiReady: true};
+  },
   afterEach() {
-    window.googletag = { apiReady: true, cmd: [] };
+    window.googletag = {cmd: [], apiReady: true};
   }
 });
 
@@ -25,19 +28,16 @@ test('visiting /streams/wnyc-fm939', function(assert) {
   
   let refreshSpy = sinon.spy();
 
-  window.googletag = {
-    apiReady: true,
-    cmd: {
-      push(fn) {
-        fn();
-      }
-    },
-    pubads() {
-      return {
-        refresh: refreshSpy,
-        addEventListener() {}
-      };
+  window.googletag.cmd = {
+    push(fn) {
+      fn();
     }
+  };
+  window.googletag.pubads = function() {
+    return {
+      refresh: refreshSpy,
+      addEventListener() {}
+    };
   };
   visit('/streams/wnyc-fm939');
 

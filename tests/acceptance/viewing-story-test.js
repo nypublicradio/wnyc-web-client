@@ -104,9 +104,12 @@ test('visiting a story with a different donate URL', function(assert) {
 });
 
 moduleForAcceptance('Acceptance | Django Page | Story Detail Analytics', {
+  beforeEach() {
+    window.googletag = {cmd: [], apiReady: true};
+  },
   afterEach() {
     delete window.ga;
-    window.googletag = { apiReady: true, cmd: [] };
+    window.googletag = {cmd: [], apiReady: true};
   }
 });
 
@@ -173,20 +176,17 @@ test('google ads test', function(assert) {
   let setTargetingSpy = sinon.spy();
   let refreshSpy      = sinon.spy();
 
-  window.googletag = {
-    apiReady: true,
-    cmd: {
-      push(fn) {
-        fn();
-      }
-    },
-    pubads() {
-      return {
-        setTargeting: setTargetingSpy,
-        refresh: refreshSpy,
-        addEventListener() {}
-      };
+  window.googletag.cmd = {
+    push(fn) {
+      fn();
     }
+  };
+  window.googletag.pubads = function() {
+    return {
+      refresh: refreshSpy,
+      setTargeting: setTargetingSpy,
+      addEventListener() {}
+    };
   };
   
   djangoPage

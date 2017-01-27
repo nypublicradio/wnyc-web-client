@@ -300,9 +300,12 @@ test('show pages with a play param', function(assert) {
 });
 
 moduleForAcceptance('Acceptance | Django Page | Show Page Analytics', {
+  beforeEach() {
+    window.googletag = {cmd: [], apiReady: true};
+  },
   afterEach() {
     delete window.ga;
-    window.googletag = { apiReady: true, cmd: [] };
+    window.googletag = {cmd: [], apiReady: true};
   }
 });
 
@@ -370,19 +373,16 @@ test('show google ads test', function(assert) {
   
   let refreshSpy = sinon.spy();
 
-  window.googletag = {
-    apiReady: true,
-    cmd: {
-      push(fn) {
-        fn();
-      }
-    },
-    pubads() {
-      return {
-        refresh: refreshSpy,
-        addEventListener() {}
-      };
+  window.googletag.cmd = {
+    push(fn) {
+      fn();
     }
+  };
+  window.googletag.pubads = function() {
+    return {
+      refresh: refreshSpy,
+      addEventListener() {}
+    };
   };
   
   djangoPage

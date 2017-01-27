@@ -3,8 +3,11 @@ import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-accept
 import sinon from 'sinon';
 
 moduleForAcceptance('Acceptance | streams', {
+  beforeEach() {
+    window.googletag = {cmd: [], apiReady: true};
+  },
   afterEach() {
-    window.googletag = { apiReady: true, cmd: [] };
+    window.googletag = {cmd: [], apiReady: true};
   }
 });
 
@@ -12,20 +15,17 @@ test('visiting /streams', function(assert) {
   server.createList('stream', 7);
   server.createList('whats-on', 7);
   let refreshSpy = sinon.spy();
-
-  window.googletag = {
-    apiReady: true,
-    cmd: {
-      push(fn) {
-        fn();
-      }
-    },
-    pubads() {
-      return {
-        refresh: refreshSpy,
-        addEventListener() {}
-      };
+  
+  window.googletag.cmd = {
+    push(fn) {
+      fn();
     }
+  };
+  window.googletag.pubads = function() {
+    return {
+      refresh: refreshSpy,
+      addEventListener() {}
+    };
   };
   
   visit('/streams');
