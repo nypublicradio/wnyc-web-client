@@ -69,8 +69,6 @@ export function beforeAppend(element, page) {
   if (get(page, 'wnycContent')) {
     Array.from(element.querySelectorAll('.l-full, .l-full + .l-constrained'))
       .forEach(n => container.appendChild(n));
-  } else if (get(page, 'wnycChannel')) {
-    container.appendChild(element.querySelector('#js-listings'));
   } else if ( page.get('id') && page.get('id').match(/^streams\//i) ) {
     // TODO: is there a better way to detect this?
     return container;
