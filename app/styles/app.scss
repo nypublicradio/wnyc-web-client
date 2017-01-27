@@ -54,18 +54,16 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 @import 'accounts';
 @import 'resend-button';
 
-@import 'progress';
 @import 'share';
 @import 'text-crawl';
 @import 'modal';
 @import 'utils';
-@import 'persistent-player';
+@import 'nypr-player-overrides';
 @import 'player-notification';
 @import 'queue-history';
 @import 'tabbed-list';
 @import 'stream-list';
 @import 'stream-info';
-@import 'player-buttons';
 @import 'setting-queuefinish';
 @import 'clearhistory';
 @import 'popupmenu';

@@ -1,0 +1,84 @@
+// These are the defaults in nypr-player
+
+$nypr-player-primary-color    : #FFF;
+$nypr-player-background-color : #333;
+$nypr-player-accent-color     : #128cf4;
+
+@import "nypr-player";
+@import "nypr-ui";
+
+.nypr-player .sharebutton {
+  display: none;
+  @include mq($nypr-player-medium-and-up) {
+    display: inline-block;
+    margin-left: 8px;
+
+    .popupmenu-button {
+      @include svg-color($nypr-player-accent-color);
+      height: 100%;
+      width: 60px;
+      text-align: right;
+      vertical-align: middle;
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba($nypr-player-accent-color, 0.9);
+
+      .icon {
+        display: inline-block;
+        width: 16px;
+        height: 12.5px;
+        color: rgba($nypr-player-accent-color, 0.9);
+        position: relative;
+        top: 2px;
+      }
+    }
+  }
+}
+
+.nypr-player-stream-info {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  top: 4px;
+  position: relative;
+
+  a {
+    font-weight: 700;
+    margin-right: 5px;
+    color: rgba($nypr-player-accent-color, 0.9);
+
+    &:hover {
+      border-bottom-color: $nypr-player-accent-color;
+    }
+  }
+}
+
+.nypr-player-stream-info-station-info {
+  color: rgba($nypr-player-primary-color, 0.3);
+  a {
+    color: $nypr-player-primary-color;
+    font-weight: 700;
+
+    &:hover {
+      border-bottom-color: $nypr-player-primary-color;
+      @include mq($nypr-player-medium-and-up) {
+        border-bottom-color: inherit;
+      }
+    }
+  }
+}
+
+.nypr-player-stream-info-station-links {
+  display: none;
+  @include mq($nypr-player-medium-and-up) {
+    display: inline;
+  }
+}
+
+// liquid-fire compat
+.nypr-player-wrapper.liquid-container {
+  @include transform(none);
+}

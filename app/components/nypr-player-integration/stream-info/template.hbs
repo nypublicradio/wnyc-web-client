@@ -1,6 +1,6 @@
 <span class="nypr-player-stream-info-station-info">
   LIVE NOW on <a href='{{streamScheduleUrl}}'
-   target={{streamScheduleUrlTarget}}
+   target={{is-external streamScheduleUrl}}
    data-tracking-category='Persistent Player'
    data-tracking-action='Click Through to Schedule'
    data-tracking-label='{{streamName}}'>{{streamName}}</a>
@@ -8,21 +8,16 @@
 <span class="nypr-player-stream-info-station-links">
   <a href='{{streamScheduleUrl}}'
      title='Schedule'
-     target={{streamScheduleUrlTarget}}
+     target={{is-external streamScheduleUrl}}
      data-tracking-category='Persistent Player'
      data-tracking-action='Click Through to Schedule'
      data-tracking-label='{{streamName}}'>SCHEDULE</a>
   {{#if streamPlaylistUrl}}
-  <a href='{{streamPlaylistUrl}}'
-     target={{streamPlaylistUrlTarget}}
+  <a href='/streams/{{stream.id}}'
      title='Music Playlist'
      data-tracking-category='Persistent Player'
      data-tracking-action='Click Through to Music Playlist'
-     data-tracking-label='{{streamName}}'>MUSIC PLAYLIST</a>
+     data-tracking-label='{{stream.name}}'>MUSIC PLAYLIST</a>
   {{/if}}
-  {{#if streamsIndexUrl}}
-  <a href='{{streamsIndexUrl}}' target={{streamsIndexUrlTarget}} title='All Live Streams'>
-    ALL LIVE STREAMS
-  </a>
-  {{/if}}
+  {{#link-to 'stream' (query-params modal='null') title='All Live Streams'}}ALL LIVE STREAMS{{/link-to}}
 </span>

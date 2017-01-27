@@ -5,11 +5,9 @@ export default Ember.Component.extend({
 
   showTitle     : null,
   showUrl       : null,
-  showUrlTarget : '',
 
   storyTitle    : null,
   storyUrl      : null,
-  storyUrlTarget: '',
 
   audioId       : null,
   songDetails   : null
