@@ -6,8 +6,10 @@ const { get } = Ember;
 const { hash: waitFor } = Ember.RSVP;
 
 export default Ember.Route.extend(PlayParamMixin, {
-  metrics: service(),
-  session: service(),
+  metrics:    service(),
+  session:    service(),
+  googleAds:  service(),
+  
   setupController(controller) {
     controller.set('isMobile', window.Modernizr.touchevents);
     return this._super(...arguments);
@@ -37,6 +39,8 @@ export default Ember.Route.extend(PlayParamMixin, {
     let metrics = get(this, 'metrics');
     let {containers:action, title:label} = get(model, 'story.analytics');
     let nprVals = get(model, 'story.nprAnalyticsDimensions');
+    
+    get(this, 'googleAds').doTargeting(get(model, 'story'));
 
     if (get(model, 'story.extendedStory.headerDonateChunk')) {
       transition.send('updateDonateChunk', get(model, 'story.extendedStory.headerDonateChunk'));
