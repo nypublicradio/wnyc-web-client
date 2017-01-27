@@ -4,6 +4,8 @@ import Component from 'ember-component';
 import computed, { and, equal, readOnly, or } from 'ember-computed';
 import get from 'ember-metal/get';
 import set from 'ember-metal/set';
+import { imageTemplate } from 'wnyc-web-client/helpers/image-template';
+import { htmlSafe } from 'ember-string';
 
 const STATUSES = {
   LIVE: 'On Air Now',
@@ -73,6 +75,13 @@ export default Component.extend({
     } else {
       return `until ${timeObj.format('h:mm A')}`;
     }
+  }),
+  fancyFeaturedBackground: computed('item.imageMain', function() {
+    let {
+      template,
+      crop
+    } = this.get('item.imageMain');
+    return htmlSafe(`background-image: url(${imageTemplate([template, 0, 400, crop])});`);
   }),
 
   didRender() {
