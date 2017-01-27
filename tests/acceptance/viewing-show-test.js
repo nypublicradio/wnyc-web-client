@@ -5,6 +5,7 @@ import showPage from 'wnyc-web-client/tests/pages/show';
 import { resetHTML } from 'wnyc-web-client/tests/helpers/html';
 import config from 'wnyc-web-client/config/environment';
 import { authenticateSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
+import sinon from 'sinon';
 
 moduleForAcceptance('Acceptance | Django Page | Show Page', {
   beforeEach() {
@@ -352,4 +353,43 @@ test('metrics properly reports channel attrs', function(assert) {
   djangoPage
     .bootstrap(show)
     .visit(show);
+});
+
+test('show google ads test', function(assert) {
+  let show = server.create('show', {
+    id: 'shows/foo/',
+    cmsPK: 123,
+    linkroll: [
+      {navSlug: 'episodes', title: 'Episodes'}
+    ],
+    socialLinks: [{title: 'facebook', href: 'http://facebook.com'}],
+    apiResponse: server.create('api-response', { id: 'shows/foo/episodes/1' })
+  });
+  server.create('django-page', {id: show.id});
+  
+  let refreshSpy = sinon.spy();
+
+  window.googletag = {
+    apiReady: true,
+    cmd: {
+      push(fn) {
+        fn();
+      }
+    },
+    pubads() {
+      return {
+        refresh: refreshSpy
+      };
+    }
+  };
+  
+  djangoPage
+    .bootstrap(show)
+    .visit(show);
+    
+  andThen(function() {
+    assert.ok(refreshSpy.calledTwice, 'refresh was called twice');
+    
+    window.googletag = null;
+  });
 });

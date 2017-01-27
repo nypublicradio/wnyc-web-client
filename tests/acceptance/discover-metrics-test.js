@@ -17,7 +17,8 @@ const mockMetrics = Ember.Service.extend({
   },
   trackPage() {},
   identify() {},
-  activateAdapters() {}
+  activateAdapters() {},
+  invoke() {}
 });
 
 const discoverEvent = function(action, otherProperties={}) {
