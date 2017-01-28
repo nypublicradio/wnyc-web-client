@@ -240,15 +240,14 @@
 
   @include mq($middle-narrow-and-up) {
     &-row {
-      position: relative;
-    }
-    &-row .account-form-col2 {
-      width: 193px;
-    }
-    &-row .account-form-col2:last-child {
-      position: absolute;
-      top: 0;
-      left: 207px;
+      @include flexbox((
+        display: flex,
+        justify-content: space-between
+      ));
+
+      .account-form-col2 {
+        width: 48%;
+      }
     }
   }
 }
