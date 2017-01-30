@@ -27,7 +27,7 @@ test('submitting the form sends the correct values to the correct endpoint', fun
 
   let testEmail = 'test@example.com';
   this.$('label:contains(Email) + input').val(testEmail);
-  this.$('label:contains(Email) + input').change();
+  this.$('label:contains(Email) + input').blur();
   this.$('button:contains(Submit)').click();
 
   const request = this.requests[0];

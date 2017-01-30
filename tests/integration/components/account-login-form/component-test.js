@@ -22,9 +22,9 @@ test('submitting the form passes the login values to the authenticator', functio
   let testPassword = 'password123';
 
   this.$('label:contains(Email) + input').val(testEmail);
-  this.$('label:contains(Email) + input').change();
+  this.$('label:contains(Email) + input').blur();
   this.$('label:contains(Password) + input').val(testPassword);
-  this.$('label:contains(Password) + input').change();
+  this.$('label:contains(Password) + input').blur();
   this.$('button:contains(Log in)').click();
 
   return wait().then(() => {
