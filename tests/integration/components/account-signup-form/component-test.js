@@ -33,11 +33,11 @@ test('submitting the form tries to save values on a new user model', function(as
   let testEmail = 'test@email.com';
   let testPassword = 'password123';
 
-  this.$('label:contains(First Name) + input').val(testFirstName).change();
-  this.$('label:contains(Last Name) + input').val(testLastName).change();
-  this.$('label:contains(Email) + input').val(testEmail).change();
-  this.$('label:contains(Confirm Email) + input').val(testEmail).change();
-  this.$('label:contains(Password) + input').val(testPassword).change();
+  this.$('label:contains(First Name) + input').val(testFirstName).blur();
+  this.$('label:contains(Last Name) + input').val(testLastName).blur();
+  this.$('label:contains(Email) + input').val(testEmail).blur();
+  this.$('label:contains(Confirm Email) + input').val(testEmail).blur();
+  this.$('label:contains(Password) + input').val(testPassword).blur();
   this.$('button:contains(Sign up)').click();
 
   return wait().then(() => {
@@ -69,11 +69,11 @@ skip('submitting the form sends a post to the api', function(assert) {
 
   this.render(hbs`{{account-signup-form}}`);
 
-  this.$('label:contains(First Name) + input').val(testFirstName).change();
-  this.$('label:contains(Last Name) + input').val(testLastName).change();
-  this.$('label:contains(Email) + input').val(testEmail).change();
-  this.$('label:contains(Confirm Email) + input').val(testEmail).change();
-  this.$('label:contains(Password) + input').val(testPassword).change();
+  this.$('label:contains(First Name) + input').val(testFirstName).blur();
+  this.$('label:contains(Last Name) + input').val(testLastName).blur();
+  this.$('label:contains(Email) + input').val(testEmail).blur();
+  this.$('label:contains(Confirm Email) + input').val(testEmail).blur();
+  this.$('label:contains(Password) + input').val(testPassword).blur();
   this.$('button:contains(Sign up)').click();
 
   return wait().then(() => {
