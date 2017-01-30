@@ -23,14 +23,16 @@
 {{/if}}
 
 {{#liquid-unless showPlayer class="player-wrapper"}}
-  <div class="l-fixed l-lowright">
-  {{persistent-player.queue-button
-    isFloating=true
-    queueLength=audio.queue.items.length
-    showModal=(action 'showModal')
-    closeModal=(action 'closeModal')
-    isOpenModal=modal}}
-  </div>
+  {{#unless chromeDisabled}}
+    <div class="l-fixed l-lowright">
+    {{persistent-player.queue-button
+      isFloating=true
+      queueLength=audio.queue.items.length
+      showModal=(action 'showModal')
+      closeModal=(action 'closeModal')
+      isOpenModal=modal}}
+    </div>
+  {{/unless}}
 {{else}}
   {{persistent-player
     showModal=(action 'showModal')
