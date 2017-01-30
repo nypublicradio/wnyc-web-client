@@ -50,7 +50,8 @@
   width: 100%;
   height: 100%;
   background-size: cover;
-  background-position: center 10%;
+  background-position: 150px 40%;
+  background-repeat: no-repeat;
 
   // allow siblings to stack on top
   ~ * {
@@ -65,7 +66,7 @@
     left: 0;
     height: 100%;
     width: 100%;
-    @include background(linear-gradient(to right, black, rgba(0, 0, 0, 0)));
+    @include background(linear-gradient(to right, black 35%, rgba(0,0,0,.3), rgba(0,0,0,.0)));
 
     @include mq($medium-only) {
       @include background(linear-gradient(to right, black, rgba(0, 0, 0, 0.5)));
@@ -73,6 +74,8 @@
   }
 
   &--fullscreen {
+    background-position: center 35%;
+
     &:before {
       @include background(linear-gradient(20deg,rgba(0,0,0,.8),rgba(0,0,0,.1)));
 
