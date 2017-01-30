@@ -1,12 +1,21 @@
 .account-togglelogin {
-  position: absolute;
-  right: 30px;
+  position: relative;
   top: 35px;
+  margin: 0 auto;
+  padding: 0 30px;
+  width: 100%;
+  display: block;
   font-size: 14px;
   color: $lightgray;
+  text-align: right;
+
+  @include mq($small-only) {
+    max-width: 460px;
+  }
+
   > span {
     display: none;
-    @include mq($middle-narrow-and-up) {
+    @include mq($medium-and-up) {
       display: inline;
     }
   }
@@ -15,34 +24,106 @@
 .account-promo {
   width: 0;
   height: 0;
+  min-height: auto;
   &-blurb {
     display: none;
   }
 }
 
+@include mq($medium-and-up, $h-medium) {
+  .login {
+    .account-promo {
+      min-height: 630px;
+    }
+  }
+
+  .signup {
+    .account-promo {
+      min-height: 860px;
+    }
+  }
+}
+
+@include mq($medium-and-up, $h-medium-and-up) {
+  .login {
+    .account-form {
+      height: 470px;
+    }
+
+    .account-promo {
+      min-height: 750px;
+    }
+  }
+
+  .signup {
+    .account-form {
+      height: 770px;
+    }
+
+    .account-promo {
+      min-height: 950px;
+    }
+  }
+}
+
+@include mq($small-only) {
+  .account .promo {
+    min-height: auto;
+  }
+}
+
 @include mq($medium-and-up) {
+  .account-screen {
+    @include flexbox ((
+      display: flex,
+      flex-direction: row
+    ));
+  }
+
   .account-promo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 318px;
+    width: 55%;
     height: 100vh;
-    background-color: black;
-    @include responsive-background-image('/assets/img/backgrounds/melissa_bg.jpg', '/assets/img/backgrounds/melissa_bg@2x.jpg');
+    @include responsive-background-image('/assets/img/backgrounds/marisa_bg@1x.jpg', '/assets/img/backgrounds/marisa_bg@2x.jpg');
+    background-color: $gray;
     background-repeat: no-repeat;
-    background-position: top right;
+    background-position: center left;
     background-size: 100%;
+    background-size: cover;
+    transition: width .45s;
 
     &-blurb {
       position: absolute;
       display: block;
-      left: 30px;
       bottom: 35px;
-      width: 250px;
+      right: 0;
+      width: 560px;
       color: white;
+      background: $red;
+      padding: 25px;
+      margin-bottom: 30px;
+
+      @include mq($medium-only) {
+        width: 320px;
+      }
     }
-    &-attribution {
+    &-quote {
+      font-size: 24px;
+      line-height: 32px;
+      margin-bottom: 10px;
+
+      @include mq($medium-only) {
+        font-size: 16px;
+        line-height: 26px;
+      }
+    }
+    &-name {
       font-size: 14px;
+      text-transform: uppercase;
+    }
+    &-profession {
+      font-weight: 300;
+      opacity: 0.9;
+      font-style: italic;
     }
     &-heading {
       font-size: 12px;
@@ -76,7 +157,7 @@
   }
   > a {
     display: block;
-    padding: 30px;
+    padding: 27px 30px;
     border: 1px solid transparent;
   }
   > a:focus {
@@ -88,6 +169,11 @@
   max-width: 460px;
   margin: 0 auto 75px;
   padding: 100px 30px 0 30px;
+  @include flexbox((
+    display: flex,
+    flex-direction: column,
+    justify-content: center
+  ));
 
   &-heading {
     padding: 0;
@@ -146,26 +232,22 @@
     text-align: center;
     color: $lightgray;
     margin-bottom: 23px;
+
     a {
-      color: $lightgray;
-      border-bottom: 1px solid rgba($lightgray, 0.3);
-    }
-    a:hover, a:focus {
-      border-bottom: 1px solid rgba($lightgray, 0.8);
+      @include link--gray;
     }
   }
 
   @include mq($middle-narrow-and-up) {
     &-row {
-      position: relative;
-    }
-    &-row .account-form-col2 {
-      width: 193px;
-    }
-    &-row .account-form-col2:last-child {
-      position: absolute;
-      top: 0;
-      left: 207px;
+      @include flexbox((
+        display: flex,
+        justify-content: space-between
+      ));
+
+      .account-form-col2 {
+        width: 48%;
+      }
     }
   }
 }
@@ -202,19 +284,48 @@
 .account-footer {
   @include flexbox((
     display: flex,
-    justify-content: space-around
+    flex-direction: column,
+    align-items: center
   ));
-  max-width: 250px;
-  margin: 0 auto;
-  
-  >  a {
-    @include fontsize(12);
-    color: $gray;
+  @include fontsize(12);
+  color: $lightgray;
+  padding-bottom: 40px;
+
+  .account-footer-links {
+    @include flexbox((
+      display: flex,
+      justify-content: space-around
+    ));
+    width: 150px;
+    margin-bottom: 8px;
+
+    >  a {
+      @include link--gray;
+    }
   }
 }
-  
+
 .account-main {
+  @include flexbox((
+    display: flex,
+    flex-direction: column,
+    justify-content: flex-start
+  ));
+
   @include mq($medium-and-up) {
-    padding-left: 318px;
+    width: 45%;
+
+    @include flexbox((
+      justify-content: space-between
+    ));
+    height: 100vh;
+  }
+
+  @include mq($h-medium) {
+    height: initial;
+
+    @include flexbox((
+      justify-content: flex-start
+    ));
   }
 }

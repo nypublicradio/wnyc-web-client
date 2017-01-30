@@ -361,13 +361,15 @@ $ipad-only: "(min-device-width : 768px) and (max-device-width : 1024px)";
 // VERTICAL
 
 $short: 700;
+$medium: 850;
 
-$short-and-up: "(min-height: #{$short}px)";
-
-$short-only: "(max-height: #{$short}px)";
+$h-medium-and-up: "(min-height: #{$medium}px)";
+$h-medium: "(max-height: #{$medium}px)";
+$h-short-and-up: "(min-height: #{$short}px)";
+$h-short: "(max-height: #{$short}px)";
 
 .short-up {
-  @include mq($short-only) {
+  @include mq($h-short) {
     // < 700px
     display: none !important;
   }

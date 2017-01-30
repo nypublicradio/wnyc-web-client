@@ -46,7 +46,7 @@
     text-align: right;
     display: inline-block;
     
-    @include mq($short-only) {
+    @include mq($h-short) {
       display: block;
       text-align: left;
       width: auto;
@@ -57,7 +57,7 @@
   .temps {
     margin-left: 10px;
     
-    @include mq($short-only) {
+    @include mq($h-short) {
       display: block;
       margin: 0;
     }

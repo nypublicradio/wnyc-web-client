@@ -9,7 +9,7 @@
 }}
   {{#if triedUnconfirmedAccount}}
     <h2 class="account-form-heading">Oops!</h2>
-    <p class="account-form-description">The account for {{changeset.email}} hasn’t been verified yet. But don’t worry — verification is easy. Once you click the link in the verification email, your account will be all set up.
+    <p class="account-form-description">The account for {{changeset.email}} hasn’t been verified yet.<br>But don’t worry — verification is easy. Once you click the link in the verification email, your account will be all set up.
     {{#resend-button
       target=resendEndpoint
       email=changeset.email}}
@@ -33,7 +33,7 @@
     {{nypr-input
       label='Password'
       type='password'
-      placeholder='Enter password'
+      placeholder='enter your password'
       fieldname='password'
       value=changeset.password
       errors=changeset.error.password.validation

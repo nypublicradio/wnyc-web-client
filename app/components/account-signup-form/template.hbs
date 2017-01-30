@@ -16,7 +16,7 @@
       <div class="account-form-col2">
         {{nypr-input
           label='First Name'
-          placeholder='Enter name'
+          placeholder='first name'
           fieldname='given_name'
           value=changeset.givenName
           errors=changeset.error.givenName.validation
@@ -27,7 +27,7 @@
       <div class="account-form-col2">
         {{nypr-input
           label='Last Name'
-          placeholder='Enter name'
+          placeholder='last name'
           fieldname='family_name'
           value=changeset.familyName
           errors=changeset.error.familyName.validation
@@ -59,7 +59,7 @@
     {{nypr-input
       label='Password'
       type='password'
-      placeholder='Enter password'
+      placeholder='enter a password'
       fieldname='typedPassword'
       value=changeset.typedPassword
       clue='must be at least 8 characters and 1 number'

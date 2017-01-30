@@ -17,11 +17,11 @@ test('it shows the login state', function(assert) {
   assert.equal(this.$('.user-nav-logged-in').length, 1);
 });
 
-test('it says hi to the user with their name', function(assert) {
+test('it shows their name', function(assert) {
   this.set('user', {givenName: 'Matt'});
   this.set('isLoggedIn', true);
   this.render(hbs`{{user-navigation isLoggedIn=isLoggedIn user=user}}`);
-  assert.equal(this.$('.user-nav-logged-in').text().trim(), 'Hi, Matt');
+  assert.equal(this.$('.user-nav-logged-in').text().trim(), 'Matt');
 });
 
 
