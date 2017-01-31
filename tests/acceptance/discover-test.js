@@ -328,7 +328,7 @@ skip('playlist request sends stories and tags in correct format', function(asser
           andThen(() => {
             click($('button:contains("Create Playlist")'));
             //
-            let url =[ENV.wnycURL, 'api/v3/make_playlist'].join("/");
+            let url =[ENV.wnycAPI, 'api/v3/make_playlist'].join("/");
 
             server.get(url, function(schema, request) {
 
