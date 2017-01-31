@@ -6,6 +6,8 @@ export default {
   firstNameMaxLength:    'your first name must be {max} characters or less',
   lastNameRequired:      'please enter your last name',
   lastNameMaxLength:     'your last name must be {max} characters or less',
+  noLeadingSpace:        'cannot start with a space',
+  noTrailingSpace:       'cannot end with a space',
   emailFormat:           'oops! looks like an invalid email address',
   emailConfirmation:     "oops! this email doesn't match the other one",
   passwordRules:         'must be at least 8 characters and 1 number',
