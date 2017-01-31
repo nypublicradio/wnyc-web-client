@@ -218,6 +218,10 @@
   }
 }
 
+.profile .sitechrome-nav {
+  margin-bottom: 0;
+}
+
 .sitechrome-topbody {
   @include display-flex;
   @include flex-wrap(wrap);
