@@ -22,7 +22,8 @@ export default Component.extend({
     let newLength = get(this, 'queueLength');
     let oldLength = oldAttrs ? oldAttrs.queueLength.value : 0;
 
-    if (newLength <= oldLength) {
+    // guard against users with disabled cookies
+    if (typeof oldLength === 'undefined' || newLength <= oldLength) {
       return;
     }
 

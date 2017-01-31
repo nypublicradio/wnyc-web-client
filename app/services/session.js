@@ -5,7 +5,16 @@ import fetch from 'fetch';
 
 export default SessionService.extend({
   syncBrowserId(report = true) {
-    let legacyId = window.localStorage.getItem('browserId');
+    let legacyId;
+    try {
+      legacyId = window.localStorage.getItem('browserId');
+    } catch(e) {
+      if (e.name === "SecurityError") {
+        console.warn("Cookies are disabled. No local settings allowed.");
+        return RSVP.Promise.resolve(null);
+      }
+    }
+    
     let { browserId } = this.get('data');
     if (legacyId || browserId) {
       if (report) {
