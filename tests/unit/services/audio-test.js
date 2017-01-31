@@ -404,7 +404,7 @@ test('service records a listen when a story is played', function(assert) {
           assert.deepEqual(reportStub.getCall(6).args, ['finish', Object.assign(expected, finishedPosition)], 'should have received proper attrs');
           
           // set_position is special case
-          assert.deepEqual(reportStub.getCall(3).args, ['set_position', Object.assign(expected, setPosition)], 'current_position should be time when action happened, not target time');
+          assert.deepEqual(reportStub.getCall(3).args, ['position', Object.assign(expected, setPosition)], 'current_position should be time when action happened, not target time');
           done();
         });
       });
