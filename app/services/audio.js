@@ -61,7 +61,7 @@ export default Service.extend({
     this.get('hifi').on('audio-ended', () => this.finishedTrack());
     Ember.$(window).on('beforeunload', () => {
       if (this.get('currentAudio')) {
-        this.sendListenAction(this.get('currentAudio'), 'window_close');
+        this.sendListenAction(this.get('currentAudio'), 'close');
       }
     });
     this._super(...arguments);
@@ -234,7 +234,7 @@ export default Service.extend({
   setPosition(percentage) {
     // send listenAction before setting position so we capture the timestamp where
     // the action itself occurs
-    this.sendListenAction(this.get('currentAudio'), 'set_position');
+    this.sendListenAction(this.get('currentAudio'), 'position');
     
     let position = (percentage * get(this, 'duration')) || 0;
     set(this, 'position', position);
