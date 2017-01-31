@@ -31,12 +31,13 @@ export default Route.extend(PlayParamMixin, {
     })
     .catch(e => retryFromServer(e, listingSlug.replace(/\/*$/, '/')));
   },
+
   afterModel({ channel }, transition) {
     let channelTitle = get(channel, 'title');
     let metrics = get(this, 'metrics');
     let dataPipeline = get(this, 'dataPipeline');
     let nprVals = get(channel, 'nprAnalyticsDimensions');
-    
+
     if (channel.get('headerDonateChunk')) {
       transition.send('updateDonateChunk', channel.get('headerDonateChunk'));
     }
@@ -56,7 +57,7 @@ export default Route.extend(PlayParamMixin, {
       title: channelTitle,
       nprVals,
     });
-    
+
     // data pipeline
     dataPipeline.reportItemView({
       cms_id: channel.get('cmsPK'),
@@ -65,6 +66,7 @@ export default Route.extend(PlayParamMixin, {
       client: config.clientSlug
     });
   },
+
   setupController(controller, model) {
     let { page_params = '' } = this.paramsFor(`${this.routeName}.page`);
     let [navSlug] = page_params.split('/');
@@ -77,7 +79,7 @@ export default Route.extend(PlayParamMixin, {
       adminURL: `${config.wnycAdminRoot}/admin`
     });
   },
-  
+
   actions: {
     willTransition(transition) {
       let isExiting = !transition.targetName.match(this.routeName);
