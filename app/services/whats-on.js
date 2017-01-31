@@ -4,14 +4,14 @@ import Service from 'ember-service';
 import get from 'ember-metal/get';
 import { canonicalize } from 'wnyc-web-client/services/script-loader';
 
-let { wnycURL } = ENV;
-wnycURL = canonicalize(wnycURL);
+let { wnycAPI } = ENV;
+wnycAPI = canonicalize(wnycAPI);
 
 export default Service.extend({
   endPoint: 'api/v1/whats_on/',
   isLive(pk) {
     let endPoint = get(this, 'endPoint');
-    let url = `${wnycURL}${endPoint}`;
+    let url = `${wnycAPI}${endPoint}`;
 
     return $.ajax(url).then(d => this._extractStatus(d, pk));
   },

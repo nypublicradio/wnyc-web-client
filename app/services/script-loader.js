@@ -80,7 +80,7 @@ function scriptURL(tag) {
   if (url.indexOf(origin) === 0) {
     return url;
   } else {
-    return `/api/v1/dynamic-script-loader/?url=${encodeURIComponent(canonicalize(url))}`;
+    return `${ENV.wnycAPI}/api/v1/dynamic-script-loader/?url=${encodeURIComponent(canonicalize(url))}`;
   }
 }
 
