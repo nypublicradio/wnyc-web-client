@@ -3,7 +3,7 @@ import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-accept
 import config from 'wnyc-web-client/config/environment';
 import sinon from 'sinon';
 import velocity from 'velocity';
-import GoogleAnalytics from 'overhaul/metrics-adapters/google-analytics';
+import GoogleAnalytics from 'wnyc-web-client/metrics-adapters/google-analytics';
 
 moduleForAcceptance('Acceptance | Analytics', {
   beforeEach() {

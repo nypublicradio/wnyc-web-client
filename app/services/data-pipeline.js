@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import fetch from 'fetch';
 import service from 'ember-service/inject';
-import config from 'overhaul/config/environment';
+import config from 'wnyc-web-client/config/environment';
 
 const LISTEN_ACTIONS = {
   START: 'start',
