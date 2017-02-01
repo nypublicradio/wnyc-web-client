@@ -16,6 +16,7 @@ const FLASH_MESSAGES = {
 export default Ember.Component.extend({
   flashMessages: service(),
   accountValidated: false,
+  codeExpired: false,
   allowedKeys: ['email'],
   init() {
     this._super(...arguments);
@@ -32,10 +33,15 @@ export default Ember.Component.extend({
       this.showFlash('validated');
     })
     .catch((e) => {
+      if (this.isDestroyed || this.isDestroying) {
+        return;
+      }
       if (get(e, 'errors.code') === "AliasExistsException") {
         // Account was already validated
         set(this, 'accountValidated', true);
         this.showFlash('validated');
+      } else {
+        set(this, 'codeExpired', true);
       }
     });
   },
