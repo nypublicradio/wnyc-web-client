@@ -62,7 +62,7 @@
       placeholder='enter a password'
       fieldname='typedPassword'
       value=changeset.typedPassword
-      clue='must be at least 8 characters and 1 number'
+      clue=(if changeset.error.typedPassword 'must be at least 8 characters and 1 number' '')
       errors=changeset.error.typedPassword.validation
       submitted=form.status.tried
     }}
