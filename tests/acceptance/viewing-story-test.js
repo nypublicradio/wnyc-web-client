@@ -5,6 +5,7 @@ import storyPage from 'wnyc-web-client/tests/pages/story';
 import { resetHTML } from 'wnyc-web-client/tests/helpers/html';
 import config from 'wnyc-web-client/config/environment';
 import { authenticateSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
+import sinon from 'sinon';
 
 
 moduleForAcceptance('Acceptance | Django Page | Story Detail', {
@@ -103,8 +104,12 @@ test('visiting a story with a different donate URL', function(assert) {
 });
 
 moduleForAcceptance('Acceptance | Django Page | Story Detail Analytics', {
+  beforeEach() {
+    window.googletag = {cmd: [], apiReady: true};
+  },
   afterEach() {
     delete window.ga;
+    window.googletag = {cmd: [], apiReady: true};
   }
 });
 
@@ -154,4 +159,50 @@ test('metrics properly reports story attrs', function(assert) {
   djangoPage
     .bootstrap({id})
     .visit({id});
+});
+
+test('google ads test', function(assert) {
+  let story = server.create('story', {
+    extendedStory: {
+      tags: 'tags value',
+      series: 'series value',
+      channel: 'channel value',
+      show: 'show value'
+    }
+  });
+  let id = `story/${story.slug}/`;
+  server.create('django-page', {id, slug: story.slug});
+  
+  let setTargetingSpy = sinon.spy();
+  let refreshSpy      = sinon.spy();
+
+  window.googletag.cmd = {
+    push(fn) {
+      fn();
+    }
+  };
+  window.googletag.pubads = function() {
+    return {
+      refresh: refreshSpy,
+      setTargeting: setTargetingSpy,
+      addEventListener() {}
+    };
+  };
+  
+  djangoPage
+    .bootstrap({id})
+    .visit({id});
+  
+  andThen(function() {
+    assert.equal(setTargetingSpy.callCount, 7, 'setTargeting called 7 times');
+    assert.ok(setTargetingSpy.calledWith('url'), 'called set target for url');
+    assert.ok(setTargetingSpy.calledWith('host'), 'called set target for host');
+    assert.ok(setTargetingSpy.calledWith('fullurl'), 'called set target for fullurl');
+    assert.ok(setTargetingSpy.calledWith('tag'), 'called set target for tag');
+    assert.ok(setTargetingSpy.calledWith('show'), 'called set target for show');
+    assert.ok(setTargetingSpy.calledWith('channel'), 'called set target for channel');
+    assert.ok(setTargetingSpy.calledWith('series'), 'called set target for series');
+    
+    assert.ok(refreshSpy.calledOnce, 'refresh was called');
+  });
 });

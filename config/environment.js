@@ -84,7 +84,6 @@ module.exports = function(environment) {
     queueAudioBumperURL: 'http://audio.wnyc.org/streambumper/streambumper000008_audio_queue.mp3',
     siteSlug: 'wnyc',
     siteName: 'WNYC',
-    renderGoogleAds: true,
     // these are provided via a .env file or else by Django's EmberAdapter
     // fall back to demo GA key
     googleAnalyticsKey: process.env.GOOGLE_ANALYTICS || 'UA-46158613-1',
@@ -160,8 +159,6 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
-
-    ENV.renderGoogleAds = false;
 
     ENV.betaTrials.legacyNavLinkLanding = '#ember-testing';
     ENV.betaTrials.betaInviteLanding = '#ember-testing';

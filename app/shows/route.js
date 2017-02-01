@@ -1,9 +1,11 @@
 import Route from 'ember-route';
 import RSVP from 'rsvp';
 import ENV from 'wnyc-web-client/config/environment';
+import service from 'ember-service/inject';
 
 export default Route.extend({
   titleToken: 'All Shows, Podcasts and Programs',
+  googleAds: service(),
 
   model() {
     return RSVP.hash({
@@ -17,6 +19,9 @@ export default Route.extend({
   actions: {
     willTransition() {
       this.controller.send("resetSearchFilter");
+    },
+    didTransition() {
+      this.get('googleAds').refresh();
     }
   },
 

@@ -9,16 +9,16 @@ export default Service.extend({
   adSpaceCleanup(e) {
     if (/leaderboard/.test(e.slot.getAdUnitPath())) {
       if (e.isEmpty) {
-        Ember.$('#leaderboard').parent().addClass('is-collapsed');
+        Ember.$('#leaderboard').addClass('is-collapsed');
       } else {
-        Ember.$('#leaderboard').parent().removeClass('is-collapsed');
+        Ember.$('#leaderboard').removeClass('is-collapsed');
       }
     }
   },
   _resizeLeaderboard(e) {
     let data;
     let shouldOpen;
-    let $leaderboardIframe = Ember.$('#leaderboard > div > iframe');
+    let $leaderboard = Ember.$('#leaderboard > div > iframe, #leaderboard > div');
 
     // lots of things on a page can send a postMessage, but not all of that
     // data is parsable as JSON. this prevents nasty console messages.
@@ -40,9 +40,9 @@ export default Service.extend({
       shouldOpen = data.msg === 'open';
     }
 
-    if ( $leaderboardIframe.length !== 1 ) {
-      $leaderboardIframe = Ember.$('#leaderboard > div > iframe');
+    if ( $leaderboard.length !== 1 ) {
+      $leaderboard = Ember.$('#leaderboard > div > iframe, #leaderboard > div');
     }
-    $leaderboardIframe.css('max-height', shouldOpen ? 415 : 90);
+    $leaderboard.css('max-height', shouldOpen ? 415 : 90);
   }
 });

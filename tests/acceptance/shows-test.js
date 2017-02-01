@@ -1,9 +1,14 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import sinon from 'sinon';
 
 moduleForAcceptance('Acceptance | shows', {
   beforeEach() {
     server.create('stream');
+    window.googletag = {cmd: [], apiReady: true};
+  },
+  afterEach() {
+    window.googletag = {cmd: [], apiReady: true};
   }
 });
 
@@ -11,6 +16,20 @@ moduleForAcceptance('Acceptance | shows', {
 test('visiting /shows', function(assert) {
   server.createList('show', 10);
   server.create('bucket', {slug: 'wnyc-shows-featured'});
+  let refreshSpy = sinon.spy();
+
+  window.googletag.cmd = {
+    push(fn) {
+      fn();
+    }
+  };
+  window.googletag.pubads = function() {
+    return {
+      refresh: refreshSpy,
+      addEventListener() {}
+    };
+  };
+  
   visit('/shows');
 
   andThen(function() {
@@ -26,6 +45,7 @@ test('visiting /shows', function(assert) {
     //ad is there
     assert.equal(find('#leaderboard').length, 1, "ad is present" );
 
+    assert.ok(refreshSpy.calledOnce, 'refresh was called');
   });
 });
 

@@ -31,12 +31,6 @@ export function homepageCleanup(element = document.body) {
 // This gets run by the django-page component right before tearing
 // down the content.
 export function beforeTeardown(/* element, page */) {
-  // we must destroy any presently loaded google ad slots so the next page can
-  // reliably render theirs
-  if (window.googletag && window.googletag.destroySlots) {
-    window.googletag.destroySlots();
-  }
-
   // player.js listens for a storage event with a handler defined on the wnyc object,
   // which is triggered by logic outside of Ember; unbind to avoid throwing errors
   $(window).off('unload storage');
@@ -75,8 +69,6 @@ export function beforeAppend(element, page) {
   if (get(page, 'wnycContent')) {
     Array.from(element.querySelectorAll('.l-full, .l-full + .l-constrained'))
       .forEach(n => container.appendChild(n));
-  } else if (get(page, 'wnycChannel')) {
-    container.appendChild(element.querySelector('#js-listings'));
   } else if ( page.get('id') && page.get('id').match(/^streams\//i) ) {
     // TODO: is there a better way to detect this?
     return container;
@@ -132,9 +124,6 @@ export function serializeInlineDoc(inlineDoc) {
   toClean.push(inlineDoc.querySelector('script[src*="assets/wnyc-web-client"]'));
   toClean.push(inlineDoc.querySelector('link[href*="assets/vendor"]'));
   toClean.push(inlineDoc.querySelector('link[href*="assets/wnyc-web-client"]'));
-  // any included google ad scripts have also already run, so clean them out so
-  // see errors from intializing ads in occupied divs
-  toClean.push(...inlineDoc.querySelectorAll('.google-ads'));
 
   toClean.forEach(n => n && n.parentNode.removeChild(n));
 
