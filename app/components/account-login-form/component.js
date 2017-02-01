@@ -6,6 +6,7 @@ import LoginValidations from 'wnyc-web-client/validations/login';
 import lookupValidator from 'ember-changeset-validations';
 import ENV from 'wnyc-web-client/config/environment';
 import service from 'ember-service/inject';
+import messages from 'wnyc-web-client/validations/custom-messages';
 
 export default Component.extend({
   resendEndpoint: `${ENV.wnycAuthAPI}/v1/confirm/resend`,
@@ -47,7 +48,10 @@ export default Component.extend({
   },
   applyErrorToChangeset(error, changeset) {
     if (error && error.code) {
-      if (error.code === "UnauthorizedAccess") {
+      changeset.rollback(); // so errors don't stack up
+      if (error.message === 'User is disabled') {
+        changeset.pushErrors('email', messages.userDisabled);
+      } else if (error.code === "UnauthorizedAccess") {
         changeset.validate('password');
         changeset.pushErrors('password', `There was a problem with the email and password for ${changeset.get('email')}. <a href="/signup">Sign up?</a>`);
       } else if (error.code === "UserNotFoundException") {
