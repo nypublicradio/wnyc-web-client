@@ -27,3 +27,4 @@ vendor/modernizr/modernizr-build.js
 
 # editor cruft
 .*~
+.DS_Store 
