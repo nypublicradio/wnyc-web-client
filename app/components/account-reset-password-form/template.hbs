@@ -30,7 +30,7 @@
       value=changeset.password
       errors=changeset.error.password.validation
       submitted=form.status.tried
-      clue=(if changeset.error.password 'must be at least 8 characters and 1 number' '')
+      clue=(if changeset.error.password 'must be at least 8 characters and 1 number')
     }}
 
     <button type="submit" class="account-form-btn" disabled={{form.status.processing}}>Reset password</button>
