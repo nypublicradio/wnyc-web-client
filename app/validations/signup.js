@@ -23,7 +23,7 @@ export default {
     validateConfirmation({ on: 'email', allowBlank: true, message: messages.emailConfirmation}),
   ],
   typedPassword: [
-    validateFormat({regex: /^(?=.*?[0-9]).{8,}$/, allowBlank: true, message: messages.passwordRules }),
+    validateFormat({regex: /^(?=[\S]*?[0-9]).{8,}$/, allowBlank: true, message: messages.passwordRules }),
     validatePresence({ presence: true, message: messages.passwordRequired })
     ]
 };
