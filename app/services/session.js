@@ -1,5 +1,6 @@
 import SessionService from 'ember-simple-auth/services/session';
 import config from 'wnyc-web-client/config/environment';
+import RSVP from 'rsvp';
 import fetch from 'fetch';
 import getOwner from 'ember-owner/get';
 
