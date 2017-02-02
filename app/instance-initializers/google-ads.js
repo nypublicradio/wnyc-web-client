@@ -25,7 +25,7 @@ export function initialize({ application }) {
       .addSize([1203, 0], [970, 415])
       .build();
       
-    leaderboard = googletag.defineSlot('/6483581/leaderboard/wnyc_leaderboarddemo', [[728, 90], [970, 415], [300, 50]], 'leaderboard')
+    leaderboard = googletag.defineSlot('/6483581/leaderboard/wnyc_leaderboard', [[728, 90], [970, 415], [300, 50]], 'leaderboard')
       .defineSizeMapping(leaderboard_mapping)
       .addService(googletag.pubads());
       
