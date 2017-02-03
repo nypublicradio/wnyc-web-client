@@ -35,8 +35,18 @@ body.ember-application.discover {
       @include transition(background-color $transition-timing);
       position: absolute;
       top: 0;
-      z-index: 1;
+      z-index: $zIndex--fixedNav;
       width: calc(100% - 150px); // side nav
+
+      .user-nav-greeting {
+        color: white;
+      }
+      .user-nav-link a {
+        color: white;
+        &:hover, &:focus {
+          color: rgba(white, .5);
+        }
+      }
     }
   }
 
