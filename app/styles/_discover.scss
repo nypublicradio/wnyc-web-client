@@ -38,9 +38,14 @@ body.ember-application.discover {
       z-index: $zIndex--fixedNav;
       width: calc(100% - 150px); // side nav
 
-      .user-nav-link,
       .user-nav-greeting {
         color: white;
+      }
+      .user-nav-link a {
+        color: white;
+        &:hover, &:focus {
+          color: rgba(white, .5);
+        }
       }
     }
   }
