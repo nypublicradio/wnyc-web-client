@@ -54,3 +54,27 @@ $bottom: 0px
      @content;
   }
 }
+
+@mixin for-high-dpi-display {
+  // https://css-tricks.com/responsive-images-css/
+  // http://www.hongkiat.com/blog/css-retina-display/
+  @media
+    (-webkit-min-device-pixel-ratio: 1.5),
+    (   min--moz-device-pixel-ratio: 1.5),
+    (     -o-min-device-pixel-ratio: 3/2),
+    (        min-device-pixel-ratio: 1.5),
+    (min-resolution: 192dpi) {
+    @content
+  }
+}
+
+@mixin responsive-background-image($image1x, $image2x) {
+  background-image: url($image1x);
+  // use media query detection to load a higher def image
+  @include for-high-dpi-display {
+    background-image: url($image2x);
+  }
+  // but if the browser supports image-set let it choose for itself
+  background-image: -webkit-image-set( url($image1x) 1x, url($image2x) 2x);
+  background-image: image-set( url($image1x) 1x, url($image2x) 2x);
+}

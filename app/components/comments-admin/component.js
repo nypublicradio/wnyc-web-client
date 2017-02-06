@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ENV from 'wnyc-web-client/config/environment';
 
 export default Ember.Component.extend({
-  cmsUrl: ENV.wnycAccountRoot,
+  adminURL: `${ENV.wnycAdminRoot}/admin`,
   actions: {
     featureMe() {
       let id = this.get('id');

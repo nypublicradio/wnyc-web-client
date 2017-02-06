@@ -9,6 +9,7 @@
 {{!--
   Using double link-to in order to get an active class on the li tag
 --}}
+
 <div class="l-page" id='site-chrome'>
   <div class="sitechrome-top">
     <div class="sitechrome-topbody">
@@ -36,14 +37,7 @@
           {{/if}}
 
         <div class="l-flex1of2">
-          <div class="alignright">
-            {{#if media.isLargeAndUp}}
-              {{#if isHomepage}}
-              <div class="cta-text text flush text--medium">
-                <p>WNYC is public radio, supported by listeners like you.</p>
-              </div>
-              {{/if}}
-            {{/if}}
+          <div class="sitechrome-topright">
             {{#if headerDonateChunk}}
               {{{headerDonateChunk}}}
             {{else}}
@@ -54,6 +48,8 @@
               data-tracking-action="Clicked Donate Button"
               target="_blank">Donate</a>
             {{/if}}
+
+            {{user-navigation isLoggedIn=session.isAuthenticated user=currentUser.user}}
           </div>
         </div>
 
@@ -144,22 +140,6 @@
             {{/link-to}}
           {{/if}}
 
-          {{#if session.isAuthenticated}}
-            {{#link-to 'djangorendered' 'users/me' tagName='li' href=false class="list-item list-item--nav"}}
-              {{link-to "My Account" 'djangorendered' 'users/me' class="inherit" preventDefault=false}}
-            {{/link-to}}
-
-            <li class="list-item list-item--nav">
-              <button class="btn--blank btn--white h5" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
-            </li>
-
-          {{else}}
-            {{#link-to 'login' tagName='li' href=false class="list-item list-item--nav"}}
-              {{link-to 'Sign In' 'login' class="inherit" preventDefault=false}}
-            {{/link-to}}
-
-          {{/if}}
-
         {{/unless}}
       </ul>
     </div>
@@ -179,20 +159,6 @@
                 {{link-to 'Settings' 'settings' class="inherit" preventDefault=false}}
               {{/link-to}}
             {{/if}}
-
-            {{#if session.isAuthenticated}}
-              {{#link-to 'djangorendered' 'users/me' tagName='li' href=false class="list-item list-item--nav"}}
-                {{link-to "My Account" 'djangorendered' 'users/me' class="inherit" preventDefault=false}}
-              {{/link-to}}
-
-              <li class="list-item list-item--nav">
-                <button class="btn--blank" data-test-selector="logout" {{action 'logout'}}>Sign Out</button>
-              </li>
-            {{else}}
-              {{#link-to 'login' tagName='li' href=false class="list-item list-item--nav"}}
-                {{link-to "Sign In" 'login' class="inherit" preventDefault=false}}
-              {{/link-to}}
-            {{/if}}
           </ul>
             {{!-- </div>
             <!-- .text --> --}}
@@ -210,4 +176,5 @@
   </div>
 
   {{partial 'components/site-chrome/site-footer'}}
+
 </div>

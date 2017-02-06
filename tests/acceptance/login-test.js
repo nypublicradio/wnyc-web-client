@@ -1,52 +1,73 @@
-import { /*test,*/ skip } from 'qunit';
+import { test, skip } from 'qunit';
 import djangoPage from 'wnyc-web-client/tests/pages/django-page';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import { Response } from 'ember-cli-mirage';
+import config from 'wnyc-web-client/config/environment';
+import { currentSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
 
-moduleForAcceptance('Acceptance | login');
+moduleForAcceptance('Acceptance | login', {
+  beforeEach() {
+    server.create('stream');
+    server.create('user');
+  }
+});
 
-skip('visiting /login', function(assert) {
+test('visiting /login', function(assert) {
   visit('/login');
 
-  andThen(function() {
+  andThen(() => {
     assert.equal(currentURL(), '/login');
   });
 });
 
-skip('Sign In button is visible at load', function(assert) {
+test('Log in button is visible at load', function(assert) {
   visit('/login');
 
-  andThen(() => assert.equal(find('a[href*=login]').text().trim(), 'Sign In'));
+  andThen(() => assert.equal(find('button:contains(Log in)').length, 1));
 });
 
-skip('Submitting valid credentials redirects to previous route', function(assert) {
-  let page = server.create('django-page', {id: '/foo'});
+test('Submitting valid credentials redirects to previous route', function(assert) {
+  let page = server.create('django-page', {id: '/'});
 
-  djangoPage
-    .bootstrap(page)
-    .visit(page);
+  andThen(() => {
+    djangoPage
+      .bootstrap(page)
+      .visit(page);
+  });
 
-  visit('/login');
   andThen(() => {
-    assert.equal(find('a[href*=login]').text().trim(), 'Sign In');
+    visit('/login');
   });
+
   andThen(() => {
-    fillIn('input[name=username]', 'foo');
-    fillIn('input[name=password]', 'bar');
-    click('button.submit');
+    assert.equal(find('.account-form-heading').text().trim(), 'Log in to WNYC');
   });
+
+  fillIn('input[name=email]', 'foo@example.com');
+  fillIn('input[name=password]', 'password1');
+  click('button:contains(Log in)');
+
   andThen(() => {
-    assert.equal(find('[data-test-selector=logout]').text().trim(), 'Sign Out');
-    assert.equal(currentURL(), '/foo');
+    assert.equal(currentSession(this.application).get('isAuthenticated'), true);
+    assert.equal(currentURL(), '/');
   });
 });
 
-skip('Submitting invalid credentials shows error messages', function(assert) {
+test('Submitting invalid credentials shows error messages', function(assert) {
+  server.post(`${config.wnycAuthAPI}/v1/session`, () => {
+    return new Response(400, {}, {errors: {code: "UnauthorizedAccess"}});
+  });
+
   visit('/login');
-  fillIn('input[name=username]', 'bad');
-  fillIn('input[name=password]', 'password');
-  click('button.submit');
+
+  fillIn('input[name=email]', 'foo@example.com');
+  fillIn('input[name=password]', 'badpassword2');
+  click('button:contains(Log in)');
+
   andThen(() => {
-    assert.equal(find('ul.errorlist').length, 1);
+    assert.equal(currentSession(this.application).get('isAuthenticated'), false);
+    assert.equal(find('.account-form-heading').text().trim(), 'Log in to WNYC');
+    assert.equal(find('.nypr-input-error').length, 1);
   });
 });
 

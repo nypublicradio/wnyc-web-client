@@ -4,9 +4,9 @@
 
 // hide everything not ember so we can control the UI over the alien DOM
 body:not(.simplified_wrapper):not(.container_stripped) {
-   > :not(.ember-view):not(#qunit):not(#qunit-fixture):not(#ember-testing-container) {
+   > :not(.ember-view):not(#qunit):not(#qunit-fixture):not(#ember-testing-container):not(#modal-overlays) {
     display: none;
-  } 
+  }
 }
 
 // contain fixed layouts
@@ -14,8 +14,11 @@ body:not(.simplified_wrapper):not(.container_stripped) {
   transform: translateZ(0);
 }
 
+@import "nypr-ui";
+
 @import 'compass';
 @import 'normalize';
+
 @import 'mixins';
 @import 'vars';
 @import 'base';
@@ -23,7 +26,7 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 @import 'layout';
 @import 'utilities';
 
-@import "nypr-ui";
+@import 'nypr-account-settings';
 
 @import 'box';
 @import 'text';
@@ -48,6 +51,8 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 @import 'loading';
 @import 'print';
 @import 'usersettings';
+@import 'accounts';
+@import 'resend-button';
 
 @import 'progress';
 @import 'volume';
@@ -68,8 +73,10 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 @import 'sharebutton';
 @import 'streambanner';
 @import 'simple-callout';
+@import 'flash';
 
 @import 'site-chrome';
+@import 'user-navigation';
 @import 'discover';
 @import 'liquid-fire-icons';
 @import 'error';

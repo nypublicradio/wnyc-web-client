@@ -13,7 +13,8 @@ moduleFor('service:listen-queue', 'Unit | Service | listen queue', {
   beforeEach() {
     startMirage(this.container);
     const sessionStub = Ember.Service.extend({
-      data: {}
+      data: {},
+      authorize: function() {}
     });
 
     this.register('service:session', sessionStub);

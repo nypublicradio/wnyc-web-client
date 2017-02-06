@@ -8,8 +8,7 @@ const Router = Ember.Router.extend(AnalyticsMixin, {
   session: service(),
   willTransition(oldInfos, newInfos, transition) {
     this._super(...arguments);
-
-    if (transition.targetName !== 'login') {
+    if (!['login', 'signup', 'validate', 'forgot', 'reset'].includes(transition.targetName)) {
       this.get('session').set('attemptedTransition', transition);
     }
   },
@@ -40,9 +39,6 @@ Router.map(function() {
   this.route('topics');
   this.route('settings');
 
-  this.route('login');
-  this.route('forgot-password');
-
   this.route('discover', function() {
     this.route('start');
     this.route('topics', {path: 'start/topics'});
@@ -56,6 +52,14 @@ Router.map(function() {
     this.route('index', { path: 'playlist'});
     this.route('redirect', { path: '/'} );
   });
+
+  this.route('profile');
+
+  this.route('login');
+  this.route('signup');
+  this.route('validate');
+  this.route('forgot');
+  this.route('reset');
 
   // This is our catch all route that can render any existing page
   // from the django site. It will be used when there's nothing more

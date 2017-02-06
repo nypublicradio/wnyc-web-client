@@ -1,4 +1,10 @@
-{{#if miniChrome}}
+{{#if chromeDisabled}}
+  {{#unless error}}
+    {{outlet}}
+  {{else}}
+    {{error-page error=error}}
+  {{/unless}}
+{{else if miniChrome}}
   {{#nypr-mini-chrome}}
     {{#unless error}}
       {{outlet}}
@@ -15,17 +21,18 @@
     {{/unless}}
   {{/site-chrome}}
 {{/if}}
-  
 
 {{#liquid-unless showPlayer class="player-wrapper"}}
-  <div class="l-fixed l-lowright">
-  {{persistent-player.queue-button
-    isFloating=true
-    queueLength=audio.queue.items.length
-    showModal=(action 'showModal')
-    closeModal=(action 'closeModal')
-    isOpenModal=modal}}
-  </div>
+  {{#unless chromeDisabled}}
+    <div class="l-fixed l-lowright">
+    {{persistent-player.queue-button
+      isFloating=true
+      queueLength=audio.queue.items.length
+      showModal=(action 'showModal')
+      closeModal=(action 'closeModal')
+      isOpenModal=modal}}
+    </div>
+  {{/unless}}
 {{else}}
   {{persistent-player
     showModal=(action 'showModal')
@@ -33,10 +40,8 @@
     isOpenModal=modal}}
 {{/liquid-unless}}
 
-{{#liquid-bind modal class="modal-wrapper" as |thisModal|}}
-  {{#if thisModal}}
+{{#liquid-if modal class="modal-wrapper sliding-modal"}}
   {{#x-modal closeModal=(action 'closeModal')}}
-    {{component thisModal}}
+    {{component modal}}
   {{/x-modal}}
-  {{/if}}
-{{/liquid-bind}}
+{{/liquid-if}}

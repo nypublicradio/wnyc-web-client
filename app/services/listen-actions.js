@@ -6,7 +6,6 @@ export default Ember.Service.extend({
 
   init() {
     this.set('queue', []);
-    this.get('session').syncBrowserId(id => this.set('browserId', id));
   },
 
   sendPlay(pk, context) {
@@ -43,19 +42,16 @@ export default Ember.Service.extend({
       return;
     }
 
-    this.get('session').syncBrowserId(false).then(id => {
-      this.set('browserId', id);
 
-      if (queue.length === 1) {
-        let item = queue[0];
-        this._sendSingleListenAction(item.pk, item.action, item.context, item.value, item.ts);
-      }
-      else {
-        this._sendBulkListenActions(queue);
-      }
+    if (queue.length === 1) {
+      let item = queue[0];
+      this._sendSingleListenAction(item.pk, item.action, item.context, item.value, item.ts);
+    }
+    else {
+      this._sendBulkListenActions(queue);
+    }
 
-      this.set('queue', []);
-    });
+    this.set('queue', []);
   },
 
   _queueListenAction(pk, action, context, value) {
@@ -84,7 +80,7 @@ export default Ember.Service.extend({
     // ts:       Unixstyle epoch integer timestamp for when this event occured
 
     let baseUrl = [ENV.wnycAccountRoot, 'api/v1/listenaction/create', pk, action].join("/");
-    let url = `${baseUrl}/?browser_id=${this.get('browserId')}&context=${context}`;
+    let url = `${baseUrl}/?browser_id=${this.get('session.data.browserId')}&context=${context}`;
 
     return Ember.$.ajax({
       data: JSON.stringify({
@@ -114,7 +110,7 @@ export default Ember.Service.extend({
     let url = [ENV.wnycAccountRoot, 'api/v1/listenaction/create/'].join("/");
 
     let payload = {
-      browser_id: this.get('browserId'),
+      browser_id: this.get('session.data.browserId'),
       actions: data
     };
 

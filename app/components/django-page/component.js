@@ -11,7 +11,7 @@ import {
 } from '../../lib/alien-dom';
 
 const { get, computed } = Ember;
-let { wnycURL } = ENV;
+let { wnycURL, wnycAdminRoot } = ENV;
 wnycURL = canonicalize(wnycURL);
 
 export default Ember.Component.extend(LegacySupportMixin, BetaActionsMixin, {
@@ -71,7 +71,9 @@ export default Ember.Component.extend(LegacySupportMixin, BetaActionsMixin, {
         this.set('showingOverlay', true);
         this.get('googleAds').refresh();
 
-        this.revealStaffLinks(this.get('session'));
+        if (this.get('session.data.isStaff')) {
+          this.revealStaffLinks(this.$(), wnycAdminRoot);
+        }
         this.$().imagesLoaded().progress((i, image) => {
           Ember.run(() => {
             image.img.classList.add('is-loaded');

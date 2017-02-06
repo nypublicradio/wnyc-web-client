@@ -25,6 +25,8 @@
     "broccoli-stew": "^1.4.0",
     "ember-ajax": "^2.4.1",
     "ember-body-class": "0.4.0",
+    "ember-changeset": "1.2.0",
+    "ember-changeset-validations": "1.2.4",
     "ember-cli": "^2.9.1",
     "ember-cli-app-version": "^2.0.0",
     "ember-cli-autoprefixer": "^0.6.0",
@@ -46,6 +48,7 @@
     "ember-cli-document-title": "0.3.3",
     "ember-cli-dotenv": "1.2.0",
     "ember-cli-fastclick": "1.3.0",
+    "ember-cli-flash": "1.4.1",
     "ember-cli-htmlbars": "^1.0.10",
     "ember-cli-htmlbars-inline-precompile": "^0.3.3",
     "ember-cli-inject-live-reload": "^1.4.1",
@@ -70,6 +73,7 @@
     "ember-holygrail-layout": "^0.1.4",
     "ember-load-initializers": "^0.5.1",
     "ember-metrics": "0.7.0",
+    "ember-modal-dialog": "0.9.0",
     "ember-moment": "6.1.0",
     "ember-multiselect-checkboxes": "0.10.1",
     "ember-poll": "^1.0.1",
@@ -79,7 +83,7 @@
     "ember-responsive": "2.0.0",
     "ember-route-action-helper": "2.0.0",
     "ember-scroll-to": "0.5.4",
-    "ember-simple-auth": "1.1.0",
+    "ember-simple-auth": "1.2.0-beta.1",
     "ember-sinon": "0.5.1",
     "ember-sinon-qunit": "1.3.5",
     "ember-sortable": "1.9.0",
@@ -93,7 +97,8 @@
     "liquid-fire": "0.26.4",
     "loader.js": "^4.0.10",
     "morgan": "^1.6.1",
-    "nypr-ui": "github:nypublicradio/nypr-ui"
+    "nypr-ui": "github:nypublicradio/nypr-ui#c1f9412bede8a361a8ef4fc73fed778e3ace6698",
+    "nypr-account-settings": "github:nypublicradio/nypr-account-settings#ef30c48956c15e5649952d1eb534663303b980ef"
   },
   "ember-addon": {
     "paths": [

@@ -17,7 +17,7 @@
 .l-page-nav {
   position: relative;
 
-  @include mq($short-only) {
+  @include mq($h-short) {
     > .scrollable-body {
       max-height: calc(100% - 106px);
       overflow-y: auto;
@@ -188,7 +188,7 @@
     margin: auto;
   }
 
-  @include mq($short-only, $medium-and-up) {
+  @include mq($h-short, $medium-and-up) {
     padding-top: 50px;
   }
 

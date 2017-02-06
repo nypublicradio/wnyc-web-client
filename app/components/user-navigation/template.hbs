@@ -1,0 +1,46 @@
+  {{#if isLoggedIn}}
+    <div class="user-nav-logged-in">
+      {{#click-outside action=(action 'closePopup')}}
+        <button {{action 'togglePopup'}} class="user-nav-button">
+          <div class="user-nav-avatar">
+          {{#if user.picture}}
+            <img src={{user.picture}}>
+          {{else}}
+            {{nypr-svg icon="user"}}
+          {{/if}}
+          </div>
+          <span class="user-nav-greeting">{{or user.givenName 'You'}}</span>
+        </button>
+        {{#if isPopupOpen}}
+          <div class="user-nav-popup-caret">
+            <span class="user-nav-popup-caret-outer"></span>
+            <span class="user-nav-popup-caret-inner"></span>
+          </div>
+          <div class="user-nav-popup">
+            <ul class="user-nav-list">
+              <li class="user-nav-listitem">
+                <a href='/profile'
+                  title="Account"
+                  data-tracking-category="WNYC Menu"
+                  data-tracking-action="Clicked Account">Account</a>
+              </li>
+              <li class="user-nav-listitem"><a href="/" title="Log out" {{action 'logout'}}>Log out</a></li>
+            </ul>
+          </div>
+        {{/if}}
+      {{/click-outside}}
+    </div>
+  {{else}}
+    <div class="user-nav-signup user-nav-link">
+      <a href='/signup'
+        title="Sign up"
+        data-tracking-category="WNYC Menu"
+        data-tracking-action="Clicked Sign up">Sign up</a>
+    </div>
+    <div class="user-nav-login user-nav-link">
+      <a href='/login'
+        title="Log in"
+        data-tracking-category="WNYC Menu"
+        data-tracking-action="Clicked Log in">Log in</a>
+    </div>
+  {{/if}}

@@ -3,7 +3,7 @@
   {{#if model.story.commentsEnabled}}
     {{#ember-wormhole to="comments"}}
       {{story-comments story=model.story
-                       user=model.user
+                       isStaff=session.data.isStaff
                        getComments=model.getComments
                        browserId=model.browserId}}
     {{/ember-wormhole}}

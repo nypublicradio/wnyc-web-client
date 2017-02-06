@@ -82,7 +82,7 @@ export default BaseAdapter.extend({
       endpoint: d.endpoint
     };
 
-    get(this, 'session').syncBrowserId(false).then(id => this._sendNow(options, id));
+    this._sendNow(options, get(this, 'session.data.browserId'));
   },
 
   willDestroy: K,

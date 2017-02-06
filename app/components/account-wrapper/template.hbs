@@ -1,0 +1,27 @@
+<div class="account-main">
+  <div class="account-logo">
+    <a href="/">
+      {{nypr-svg icon='wnyc-logo'}}
+    </a>
+  </div>
+{{yield}}
+
+  <div class="account-footer">
+    <div class="account-footer-links">
+      {{link-to 'Terms' 'djangorendered' 'terms'}}
+      {{link-to 'Privacy' 'djangorendered' 'privacy'}}
+      {{link-to 'Help' 'djangorendered' 'contact' target='_blank'}}
+    </div>
+    <div>&copy; {{moment-format (now) 'YYYY'}} New York Public Radio</div>
+  </div>
+
+</div>
+<div class="account-promo">
+  <div class="account-promo-blurb">
+    <div class="account-promo-text">
+      <div class="account-promo-quote">"It makes me feel connected. I think WNYC is really one of the things that make New York City such an amazing place."</div>
+      <div class="account-promo-name">Marisa Wu</div>
+      <div class="account-promo-profession">Owner, The Salty Road</div>
+    </div>
+  </div>
+</div>

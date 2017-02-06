@@ -10,6 +10,7 @@ const { hash: waitFor } = Ember.RSVP;
 const inflector = new Inflector(Inflector.defaultRules);
 import { retryFromServer, beforeTeardown } from 'wnyc-web-client/lib/compat-hooks';
 import PlayParamMixin from 'wnyc-web-client/mixins/play-param';
+import config from 'wnyc-web-client/config/environment';
 
 export default Route.extend(PlayParamMixin, {
   session: service(),
@@ -33,7 +34,7 @@ export default Route.extend(PlayParamMixin, {
     const channelTitle = get(channel, 'title');
     const metrics = get(this, 'metrics');
     const nprVals = get(channel, 'nprAnalyticsDimensions');
-    
+
     if (channel.get('headerDonateChunk')) {
       transition.send('updateDonateChunk', channel.get('headerDonateChunk'));
     }
@@ -62,7 +63,9 @@ export default Route.extend(PlayParamMixin, {
       channelType: this.routeName,
       navRoot: get(this, 'listingSlug'),
       defaultSlug: navSlug,
-      model
+      model,
+      session: get(this, 'session'),
+      adminURL: `${config.wnycAdminRoot}/admin`
     });
   },
   
