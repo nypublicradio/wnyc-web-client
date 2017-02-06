@@ -13,10 +13,3 @@
     padding-top: 125px;
   }
 }
-
-.account-form .alert {
-  @include mq($medium-and-up) {
-    // don't cover promo
-    left: 318px;
-  }
-}

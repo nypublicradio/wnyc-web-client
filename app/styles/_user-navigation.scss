@@ -155,14 +155,6 @@
   font-size: 14px;
   color: white;
   border: none;
-
-  &:hover {
-    color: $blue;
-
-    @include mq($medium-only) {
-      color: rgba(255, 255, 255, .5);
-    }
-  }
 }
 @include mq($large-and-up) {
   .user-nav-link > a {
