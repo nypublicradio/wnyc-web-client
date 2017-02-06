@@ -6,23 +6,34 @@
   }
 }
 
+.user-nav-button {
+  @include flexbox((
+    display: flex,
+    align-items: center
+  ));
+}
+
 .user-nav-avatar {
   display: inline-block;
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   line-height: 100%;
-  background-color: $lightestgray;
-  vertical-align: middle;
+  background-color: $lightergray;
   margin: 0px 0px 0px 10px;
+  transition: background-color .2s;
+  @include flexbox((
+    display: flex,
+    justify-content: center,
+    align-items: center
+  ));
+
   @include mq($medium-and-up) {
-    margin: 0px 4px 0px 10px;
+    margin: 0px 10px;
   }
   svg {
-    height: 20px;
-    top: 4px;
+    height: 27px;
     position: relative;
-    left: 1px;
   }
   path {
     fill: white;
@@ -48,8 +59,8 @@
   position: absolute;
   overflow: hidden;
   float: left;
-  top: 33px;
-  left: 16px;
+  top: 40px;
+  left: 21px;
   width: 18px;
   height: 10px;
   z-index: ($zIndex--fix + 1);
@@ -84,7 +95,7 @@
 .user-nav-popup {
   z-index: $zIndex--fix;
   position: absolute;
-  top: 43px;
+  top: 50px;
   right: 0px;
   width: 117px;
   border-radius: 4px;
@@ -144,10 +155,6 @@
   font-size: 14px;
   color: white;
   border: none;
-
-  &:hover {
-    color: $blue;
-  }
 }
 @include mq($large-and-up) {
   .user-nav-link > a {
