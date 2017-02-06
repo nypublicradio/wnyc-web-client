@@ -19,6 +19,7 @@ export default Component.extend({
     set(this, 'changeset', new Changeset(get(this, 'newUser'), lookupValidator(SignupValidations), SignupValidations));
     get(this, 'changeset').validate();
   },
+
   actions: {
     onSubmit() {
       return this.signUp();
@@ -31,6 +32,11 @@ export default Component.extend({
   },
   signUp() {
     return get(this, 'newUser').save();
+  },
+  onEmailInput() {
+    if (get(this, 'changeset.emailConfirmation')) {
+      get(this, 'changeset').validate('emailConfirmation');
+    }
   },
   applyErrorToChangeset(error, changeset) {
     if (error) {
