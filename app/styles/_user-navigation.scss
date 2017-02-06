@@ -59,7 +59,7 @@
   position: absolute;
   overflow: hidden;
   float: left;
-  top: 40px;
+  top: 45px;
   left: 21px;
   width: 18px;
   height: 10px;
@@ -95,7 +95,7 @@
 .user-nav-popup {
   z-index: $zIndex--fix;
   position: absolute;
-  top: 50px;
+  top: 55px;
   right: 0px;
   width: 117px;
   border-radius: 4px;
@@ -142,7 +142,7 @@
   }
 }
 
-.user-nav-link {
+.user-nav-link{
   height: 100%;
   display: inline-block;
   margin: 0 7px;
