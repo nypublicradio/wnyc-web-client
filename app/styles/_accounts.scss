@@ -144,6 +144,7 @@
   position: absolute;
   top: 0;
   left: 0;
+  z-index: $zIndex-1;
   // align logo with form
   @include mq("(min-width: 460px) and (max-width: #{$medium - 1}px)") {
     left: calc(50% - 230px);
