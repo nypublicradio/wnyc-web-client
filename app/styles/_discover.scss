@@ -18,9 +18,9 @@ body.ember-application.discover {
     // TODO: Maybe, make sitechrome have no margin on the bottom and leave it
     // up to the feature to set a padding.
 
-    min-height: 100vh;    
+    min-height: 100vh;
   }
-  
+
   @include mq($medium-only) {
     .sitechrome-nav {
       // override position: sticky for platforms that support it
@@ -71,7 +71,7 @@ body.ember-application.discover {
         border-bottom: none;
       }
     }
-    
+
     /*
       liquid fire sets some transform properties on these elements
       and that messes up fixed positioning by making them fixed
@@ -95,7 +95,7 @@ body.ember-application.discover {
       }
     }
   }
-  
+
   .discover-fadeable-background {
     z-index: 0;
     opacity: 0; // this is handled by liquid fire
@@ -106,7 +106,7 @@ body.ember-application.discover {
     background-repeat: no-repeat;
     background-position: top left;
     background-size: cover;
-    
+
     @include mq($up-to-large) {
       opacity: .4;
     }
@@ -286,19 +286,19 @@ body.ember-application.discover {
   background-color: $nearwhite;
   font-size: 12px;
   font-weight: 600;
-  
+
   @include transition(background-color $transition-timing);
-  
+
   &:hover {
     background-color: $lightestgray;
   }
-  
+
   > span {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  
+
   > span > .animated-loading-icon {
     display: flex;
     margin-right: 8px;
@@ -314,7 +314,7 @@ body.ember-application.discover {
   margin-bottom:2rem;
   border-radius:5px;
   max-width:800px;
-  
+
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
@@ -435,14 +435,14 @@ body.ember-application.discover {
   right:2rem;
   top:2rem;
   border:0;
-  
+
   svg path {
     fill:$discopurple;
   }
-  
+
   &:hover {
     border:0;
-    
+
     svg path {
       fill:$blue;
     }
@@ -451,7 +451,7 @@ body.ember-application.discover {
   .animated-loading-icon {
     margin-right: 5px;
   }
-  
+
   svg {
     width: 18px;
     margin-right: 10px;

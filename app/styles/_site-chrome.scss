@@ -42,8 +42,15 @@
 .sitechrome-topright {
   @include flexbox((
     display: flex,
-    align-items: flex-end
+    align-items: flex-end,
+    justify-content: flex-end
   ));
+  @include mq($small-only) {
+    @include flexbox((
+      justify-content: space-between,
+      flex-wrap: wrap
+    ));
+  }
   > a,
   > div {
     @include flexbox((
@@ -53,10 +60,10 @@
     height: 100%;
     margin-right: 10px;
     white-space: nowrap;
-  }
 
-  a {
-    margin-left: auto;
+    @include mq($small-only) {
+      margin-right: 5px;
+    }
   }
 }
 
@@ -292,7 +299,6 @@
 
   @include mq($large-and-up) {
     margin-bottom: 0;
-    @include justify-content(flex-end);
   }
 
   @include mq($medium-and-up) {
@@ -313,7 +319,7 @@
   }
 
   .sitechrome-search {
-    max-width: 320px;
+    width: 320px;
   }
 }
 

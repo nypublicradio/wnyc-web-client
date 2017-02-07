@@ -59,7 +59,7 @@
   position: absolute;
   overflow: hidden;
   float: left;
-  top: 40px;
+  top: 45px;
   left: 21px;
   width: 18px;
   height: 10px;
@@ -95,7 +95,7 @@
 .user-nav-popup {
   z-index: $zIndex--fix;
   position: absolute;
-  top: 50px;
+  top: 55px;
   right: 0px;
   width: 117px;
   border-radius: 4px;
@@ -146,9 +146,14 @@
   height: 100%;
   display: inline-block;
   margin: 0 7px;
-}
-.user-nav-signup {
-  display: none;
+
+  @include mq($small-only) {
+    margin: 0 4px;
+
+    &:last-child {
+      margin: 0;
+    }
+  }
 }
 .user-nav-link > a {
   font-weight: 600;
@@ -160,10 +165,5 @@
   .user-nav-link > a {
     font-weight: 400;
     color: black;
-  }
-}
-@include mq($medium-and-up) {
-  .user-nav-signup {
-    display: inline-block;
   }
 }

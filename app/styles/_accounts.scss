@@ -144,6 +144,7 @@
   position: absolute;
   top: 0;
   left: 0;
+  z-index: $zIndex-1;
   // align logo with form
   @include mq("(min-width: 460px) and (max-width: #{$medium - 1}px)") {
     left: calc(50% - 230px);
@@ -194,7 +195,6 @@
     font-size: 14px;
   }
   &-btn {
-    margin-bottom: 15px;
     > .fa {
       margin-right: 6px;
       font-size: 24px;
