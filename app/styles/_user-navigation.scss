@@ -142,13 +142,18 @@
   }
 }
 
-.user-nav-link{
+.user-nav-link {
   height: 100%;
   display: inline-block;
   margin: 0 7px;
-}
-.user-nav-signup {
-  display: none;
+
+  @include mq($small-only) {
+    margin: 0 4px;
+
+    &:last-child {
+      margin: 0;
+    }
+  }
 }
 .user-nav-link > a {
   font-weight: 600;
@@ -160,10 +165,5 @@
   .user-nav-link > a {
     font-weight: 400;
     color: black;
-  }
-}
-@include mq($medium-and-up) {
-  .user-nav-signup {
-    display: inline-block;
   }
 }
