@@ -40,7 +40,11 @@
       helplinkText='Forgot Password?'
       submitted=form.status.tried
     }}
-
+    {{#if showLoginError}}
+      <div class='account-form-error'>
+        {{{messages.loginError}}}
+      </div>
+    {{/if}}
     <button type="submit" class="account-form-btn" disabled={{form.status.processing}}>Log in</button>
   {{/if}}
 {{/nypr-form}}

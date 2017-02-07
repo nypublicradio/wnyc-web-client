@@ -9,10 +9,12 @@ import service from 'ember-service/inject';
 import messages from 'wnyc-web-client/validations/custom-messages';
 
 export default Component.extend({
-  resendEndpoint: `${ENV.wnycAuthAPI}/v1/confirm/resend`,
   session: service(),
+  messages,
+  resendEndpoint: `${ENV.wnycAuthAPI}/v1/confirm/resend`,
   allowedKeys: ['email', 'password'],
   triedUnverifiedAccount: false,
+  showLoginError: false,
   init() {
     this._super(...arguments);
     set(this, 'fields', {
@@ -24,12 +26,15 @@ export default Component.extend({
   },
   actions: {
     onSubmit() {
+      set(this, 'showLoginError', false);
       return this.authenticate(get(this, 'fields.email'), get(this, 'fields.password'));
     },
     onFailure(e) {
       if (e) {
         if (get(e, 'errors.code') === 'AccountNotConfirmed') {
           set(this, 'triedUnconfirmedAccount', true);
+        } else if (get(e, 'errors.code') === 'UnauthorizedAccess') {
+          set(this, 'showLoginError', true);
         } else {
           this.applyErrorToChangeset(e.errors, get(this, 'changeset'));
         }
@@ -44,12 +49,9 @@ export default Component.extend({
       changeset.rollback(); // so errors don't stack up
       if (error.message === 'User is disabled') {
         changeset.pushErrors('email', messages.userDisabled);
-      } else if (error.code === "UnauthorizedAccess") {
-        changeset.validate('password');
-        changeset.pushErrors('password', `There was a problem with the email and/or password for ${changeset.get('email')}. <a href="/signup">Sign up?</a> <a href="/forgot">Forgot password?</a>`);
       } else if (error.code === "UserNotFoundException") {
         changeset.validate('email');
-        changeset.pushErrors('email', `We cannot find an account for the email ${changeset.get('email')}. <a href="/signup">Sign up?</a>`);
+        changeset.pushErrors('password', messages.emailNotFound( changeset.get('email') ));
       }
     }
   }

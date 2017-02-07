@@ -47,7 +47,7 @@
 @include mq($medium-and-up, $h-medium-and-up) {
   .login {
     .account-form {
-      height: 470px;
+      height: 495px;
     }
 
     .account-promo {
@@ -236,6 +236,12 @@
     a {
       @include link--gray;
     }
+  }
+  &-error {
+    color: $red;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 13px;
   }
 
   @include mq($middle-narrow-and-up) {
