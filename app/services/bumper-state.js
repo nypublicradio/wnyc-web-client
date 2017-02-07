@@ -13,7 +13,6 @@ export default Ember.Service.extend({
   session: service(),
   store: service(),
   audio: service(),
-  features: service(),
   autoplayPref: readOnly('session.data.user-prefs-active-autoplay'),
   autoplaySlug: readOnly('session.data.user-prefs-active-stream.slug'),
   durationLoaded: computed.gt('audio.duration', 0),
@@ -22,22 +21,8 @@ export default Ember.Service.extend({
   bumperPlaying: computed.and('bumperLoaded', 'bumperStarted'),
   bumperDidPlay: false,
   bumperStarted: false,
-  revealNotificationBar: computed('bumperPlaying', 'bumperDidPlay', function() {
-    // Google Experiment Continuous Play - START
-    if (!( this.get('features').isEnabled('autoplay-prefs') )) {
-      return false;
-    }
-    // Google Experiment Continuous Play - END
-
-    return this.get('bumperPlaying') || this.get('bumperDidPlay');
-  }),
+  revealNotificationBar: computed.or('bumperPlaying', 'bumperDidPlay'),
   autoplayEnabled: computed('autoplayPref', 'queue.items.length', function() {
-    // Google Experiment Continuous Play - START
-    if (!( this.get('features').isEnabled('autoplay-prefs') )){
-      return false;
-    }
-    // Google Experiment Continuous Play - END
-
     const { autoplayPref, queue } = getProperties(this, 'autoplayPref', 'queue');
     // if there is nothing left in the queue, then it is redundant/unecessary to
     // play the bumper file. The `play` function will still be called on the audio,
