@@ -242,6 +242,15 @@
     font-size: 12px;
     text-align: center;
     margin-bottom: 13px;
+    a {
+      color: $red;
+      border-bottom: 1px solid $red;
+    }
+    a:hover,
+    a:focus {
+      color: $rouge;
+      border-bottom: 1px solid $rouge;
+    }
   }
 
   @include mq($middle-narrow-and-up) {
