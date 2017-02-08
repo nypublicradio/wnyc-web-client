@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
-import computed, { reads, or, and, not } from 'ember-computed';
+import computed, { reads, or, and, not, equal } from 'ember-computed';
 import get from 'ember-metal/get';
 import { songMetadata } from 'wnyc-web-client/helpers/song-metadata';
 
@@ -40,6 +40,7 @@ export default Ember.Component.extend({
     }
   }),
 
+  isStream             : equal('currentAudio.audioType', 'stream'),
   streamName           : reads('currentAudio.name'),
   streamScheduleUrl    : reads('currentAudio.scheduleUrl'),
   streamPlaylistUrl    : computed('currentAudio.playlistUrl', function() {
