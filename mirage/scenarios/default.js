@@ -25,4 +25,9 @@ export default function(server) {
    server.create('user');
    server.createList('stream', 7);
 
+   server.createList('pledge', 11); // Active sustainer
+   // server.createList('pledge', 0); // non-member
+   // server.createList('pledge', 5, { isActive: 'false', orderType: 'sustainer' }); // Expired sustainer
+   // server.createList('pledge', 3, { isActive: 'true', orderType: 'onetime' }); // Expired
+
 }

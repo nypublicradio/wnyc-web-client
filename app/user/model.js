@@ -1,7 +1,8 @@
 import DS from 'ember-data';
 const {
   Model,
-  attr
+  attr,
+  hasMany
 } = DS;
 
 export default Model.extend({
@@ -11,4 +12,5 @@ export default Model.extend({
   preferredUsername:  attr('string'),
   picture:            attr('string'),
   facebookId:         attr('string')
+  orders:            hasMany('order'),
 });

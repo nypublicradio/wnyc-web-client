@@ -3,18 +3,24 @@
     <div class="account-avatar">
       {{nypr-svg icon="user"}}
     </div>
-    Hi {{model.givenName}}!
+    Hi {{model.user.givenName}}!
   </h2>
 
-  {{nypr-accounts/basic-card
-    user=model
-    emailUpdated=(action showFlash 'email')
-    authenticate=(action authenticate)}}
+  <div class="nypr-account-settings-and-member-center">
+    <div class="nypr-account-settings-body">
+      {{nypr-accounts/basic-card
+        user=model.user
+        emailUpdated=(action showFlash 'email')
+        authenticate=(action authenticate)}}
 
-  {{nypr-accounts/password-card
-    helplinkUrl='/forgot'
-    helplinkText='Forgot password?'
-    changePassword=(action changePassword)}}
+      {{nypr-accounts/password-card
+        helplinkUrl='/forgot'
+        helplinkText='Forgot password?'
+        changePassword=(action changePassword)}}
+
+    </div>
+    {{nypr-accounts/membership-card/index pledges=model.pledge class='nypr-membership-info-body'}}
+  </div>
 
   <div class="aligncenter text--small">
     <p>
