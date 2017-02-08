@@ -58,7 +58,7 @@
           {{#unless hifi.isLoading}} {{! only show the share button when the audio has loaded}}
             {{share-button
               story        = integration.currentAudio
-              type         = (if integration.isAudiostream 'stream' 'ondemand')
+              type         = (if integration.isStream 'stream' 'ondemand')
               region       = "Player"
               text         = "SHARE"}}
           {{/unless}}
