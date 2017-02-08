@@ -49,5 +49,9 @@ export default Controller.extend({
       this.set('modal', null);
       this._wasModal = true;
     },
+    
+    trackStreamData() {
+      this.get('audio').trackStreamData();
+    }
   }
 });
