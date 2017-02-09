@@ -1,0 +1,30 @@
+@import 'mixins/_lists';
+
+.social-icon-list {
+  padding: 0 18px 26px 24px;
+  text-align: right;
+}
+
+.social-icon-list__header {
+  margin: 0;
+  padding: 0 0 11px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.social-icon-list__list {
+  @include list-base;
+  @include display-flex;
+  @include justify-content(space-between);
+  margin: 0;
+}
+
+.social-icon-list__link {
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    border-bottom-color: none;
+    color: rgba(white, 0.05);
+  }
+}
