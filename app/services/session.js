@@ -9,6 +9,10 @@ export default SessionService.extend({
     let legacyId;
     try {
       legacyId = window.localStorage.getItem('browserId');
+      // some clients save their browserId with quotes
+      legacyId = legacyId.replace(/"/g, '');
+      // TODO: when other clients update to ESA, we can get rid of this key
+      window.localStorage.setItem('browserId', legacyId);
     } catch(e) {
       if (e.name === "SecurityError") {
         console.warn("Cookies are disabled. No local settings allowed.");
@@ -21,7 +25,8 @@ export default SessionService.extend({
       if (report) {
         reportBrowserId(legacyId || browserId);
       }
-      this.set('data.browserId', legacyId || browserId);
+      // some clients save their browserId with quotes
+      this.set('data.browserId', (legacyId || browserId).replace(/"/g, ''));
     } else {
       getBrowserId()
         .then( ({ browser_id }) => this.set('data.browserId', browser_id));
