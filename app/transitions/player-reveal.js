@@ -1,6 +1,4 @@
 import { animate, Promise } from 'liquid-fire';
-import Ember from 'ember';
-const { $ } = Ember;
 
 export default function() {
   this.newElement.css('visibility', '');
