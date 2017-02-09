@@ -5,16 +5,6 @@ moduleForComponent('nypr-player-integration/stream-info', 'Integration | Compone
   integration: true
 });
 
-test('it shows streamsIndexUrl if provided', function(assert) {
-  this.set('streamsIndexUrl', 'http://streamsindex/');
-  this.render(hbs`{{nypr-player-integration/stream-info streamsIndexUrl=streamsIndexUrl}}`);
-
-  assert.equal(this.$('a[title="All Live Streams"]')[0].href, "http://streamsindex/");
-
-  this.set('streamsIndexUrl', false);
-  assert.equal(this.$('a[title="All Live Streams"]').length, 0);
-});
-
 test('it shows streamPlaylistUrl if provided', function(assert) {
   this.set('streamPlaylistUrl', 'http://streamsplaylist/');
   this.render(hbs`{{nypr-player-integration/stream-info streamPlaylistUrl=streamPlaylistUrl}}`);
