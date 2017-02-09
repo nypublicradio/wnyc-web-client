@@ -33,7 +33,12 @@ export default SessionService.extend({
       credentials: 'include'
     })
     .then(checkStatus).then(r => r.json())
-    .then(({is_staff}) => this.set('data.isStaff', is_staff));
+    .then(({is_staff, name}) => {
+      this.setProperties({
+        'data.isStaff': is_staff,
+        'data.staffName': name
+      });
+    });
   },
   
   verify(email, password) {
