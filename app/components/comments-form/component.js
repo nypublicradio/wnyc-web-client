@@ -1,13 +1,13 @@
+import Component from 'ember-component';
 import computed, { reads } from 'ember-computed';
 import Ember from 'ember';
-import ENV from 'wnyc-web-client/config/environment';
+import config from 'wnyc-web-client/config/environment';
 import fetch from 'fetch';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: 'form',
   classNames: ['form'],
   classNameBindings: ['isSaved:is-fadeout'],
-
 
   name: reads('userName'),
   securityURL: computed('story', 'browserId', function() {
@@ -52,7 +52,7 @@ export default Ember.Component.extend({
       }
       let data = this.$().serialize();
       this.auth.then(({ security_hash, timestamp }) => {
-        let url = `${ENV.wnycAccountRoot}/comments/post/?bust_cache=${Math.random()}&id=${this.get('browserId')}`;
+        let url = `${config.wnycAccountRoot}/comments/post/?bust_cache=${Math.random()}&id=${this.get('browserId')}`;
         let story = this.get('story');
         let metaData = {
           content_type: 'cms.' + story.get('itemType'),
