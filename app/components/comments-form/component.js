@@ -1,15 +1,16 @@
+import computed, { reads } from 'ember-computed';
 import Ember from 'ember';
 import ENV from 'wnyc-web-client/config/environment';
 import fetch from 'fetch';
 
 export default Ember.Component.extend({
-  name: Ember.computed.reads('user.username'),
   tagName: 'form',
   classNames: ['form'],
   classNameBindings: ['isSaved:is-fadeout'],
 
 
-  securityURL: Ember.computed('story', 'browserId', function() {
+  name: reads('userName'),
+  securityURL: computed('story', 'browserId', function() {
     let story = this.get('story');
     let browserId = this.get('browserId');
     return story.commentSecurityURL(browserId);
