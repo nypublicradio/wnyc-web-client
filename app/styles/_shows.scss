@@ -15,7 +15,7 @@
     @include mq($small-only) {
         display: none;
     }
-} 
+}
 
 .marquee-gradient {
   display: block;
@@ -28,7 +28,9 @@
   background-position: center;
 }
 
-
+.channel-sidebar-chunk > .django-content > .l-constrained {
+  padding: 0;
+}
 
 .channel-logo-fixed {
     margin-top: 0px;
@@ -126,9 +128,9 @@
 
 /* shows A-Z page */
 .shows-list ul li {
-  
+
   .flag-image>img {
-    min-width: 90px; 
+    min-width: 90px;
     min-height: 90px;
     @include mq($small-only) {
       display: none;
