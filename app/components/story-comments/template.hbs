@@ -18,7 +18,7 @@
   <div class="text">
     <a href="/feeds/comments/{{story.itemTypeId}}/{{story.id}}" target="_blank">RSS Feed for Comments</a> | <a href="#commentsForm">Leave a Comment</a>
   </div>
-  {{comments-list comments=comments isStaff=isStaff browserId=browserId}}
+  {{comments-list adminURL=adminURL comments=comments isStaff=isStaff browserId=browserId}}
 {{/if}}
 
 {{#if isShowingForm}}

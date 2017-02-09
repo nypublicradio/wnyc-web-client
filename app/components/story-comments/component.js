@@ -1,8 +1,10 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
+import config from 'wnyc-web-client/config/environment';
 
 export default Ember.Component.extend({
   metrics: service(),
+  adminURL: `${config.wnycAdminRoot}/admin`,
   comments: Ember.computed('getComments', {
     get() {
       this.set('isLoading', true);

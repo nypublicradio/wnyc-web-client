@@ -17,7 +17,7 @@
       <div class="dimmed">{{moment-format comment.publishDate 'MMM D, YYYY, h:mm A'}}</div>
 
       {{#if isStaff}}
-        {{comments-admin id=comment.id browserId=browserId}}
+        <a href="{{adminURL}}/comments/wnyccomment/{{comment.id}}" target="_blank">Moderate</a>
       {{/if}}
 
     </div>
