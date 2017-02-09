@@ -48,7 +48,6 @@ export default Ember.Component.extend({
       return `/streams/${get(this, 'currentAudio.id')}`;
     }
   }),
-  streamIndexUrl       : '/streams',
 
   image                : reads('currentAudio.imageMain.url'),
   fallbackImage        : reads('currentAudio.headers.brand.logoImage.url'),

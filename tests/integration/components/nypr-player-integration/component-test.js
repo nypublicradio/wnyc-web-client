@@ -243,18 +243,6 @@ test('it yields stream playlist url', function(assert) {
   assert.equal(actual, "/streams/streamid");
 });
 
-test('it yields stream index url', function(assert) {
-  this.set('currentAudio', streamShow);
-
-  this.render(hbs`{{#nypr-player-integration currentAudio=currentAudio media=media as |integration|}}
-    {{integration.streamIndexUrl}}
-  {{/nypr-player-integration}}`);
-
-
-  const actual = this.$().text().trim().replace(/\s+/g,' ');
-  assert.equal(actual, "/streams");
-});
-
 test('backdropImageUrl first choice is image', function(assert) {
   this.set('defaultImageUrl', 'http://default');
   this.set('currentAudio', {
