@@ -4,6 +4,8 @@ $nypr-player-primary-color    : #FFF;
 $nypr-player-background-color : #333;
 $nypr-player-accent-color     : #128cf4;
 
+$wnyc-player-link-color       : #77A6DE;
+
 @import "nypr-player";
 @import "nypr-ui";
 
@@ -14,20 +16,20 @@ $nypr-player-accent-color     : #128cf4;
     margin-left: 8px;
 
     .popupmenu-button {
-      @include svg-color($nypr-player-accent-color);
+      @include svg-color($wnyc-player-link-color);
       height: 100%;
       width: 60px;
       text-align: right;
       vertical-align: middle;
       font-size: 12px;
       font-weight: 700;
-      color: rgba($nypr-player-accent-color, 0.9);
+      color: $wnyc-player-link-color;
 
       .icon {
         display: inline-block;
         width: 16px;
         height: 12.5px;
-        color: rgba($nypr-player-accent-color, 0.9);
+        color: $wnyc-player-link-color;
         position: relative;
         top: 2px;
       }
@@ -48,10 +50,10 @@ $nypr-player-accent-color     : #128cf4;
   a {
     font-weight: 700;
     margin-right: 5px;
-    color: rgba($nypr-player-accent-color, 0.9);
+    color: $wnyc-player-link-color;
 
     &:hover {
-      border-bottom-color: $nypr-player-accent-color;
+      border-bottom-color: $wnyc-player-link-color;
     }
   }
 }
@@ -59,11 +61,11 @@ $nypr-player-accent-color     : #128cf4;
 .nypr-player-stream-info-station-info {
   color: rgba($nypr-player-primary-color, 0.3);
   a {
-    color: $nypr-player-primary-color;
+    color: $wnyc-player-link-color;
     font-weight: 700;
 
     &:hover {
-      border-bottom-color: $nypr-player-primary-color;
+      border-bottom-color: $wnyc-player-link-color;
       @include mq($nypr-player-medium-and-up) {
         border-bottom-color: inherit;
       }
