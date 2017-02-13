@@ -16,8 +16,8 @@ const LISTEN_ACTIONS = {
 
 export default Ember.Service.extend({
   host:             config.wnycAPI,
-  itemViewPath:     'api/v1/itemview/',
-  listenActionPath: 'api/v1/listenaction/',
+  itemViewPath:     'analytics/v1/events/viewed',
+  listenActionPath: 'analytics/v1/events/listened',
   currentReferrer:  null,
   
   session:      service(),
