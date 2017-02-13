@@ -45,10 +45,10 @@ export default Ember.Service.extend({
     let data = this._generateData(incoming, LISTEN_ACTIONS[type.toUpperCase()]);
     this._send(data, this.listenActionPath);
     
-    if (/start|resume/.test(data.action)) {
+    if (/start|resume/.test(data.action) && data.cms_id) {
       this._legacySend(`api/most/listen/managed_item/${data.cms_id}/`);
       this._legacySend(`api/v1/listenaction/create/${data.cms_id}/play/`);
-    } else if (data.action === 'finish') {
+    } else if (data.action === 'finish' && data.cms_id) {
       this._legacySend(`api/v1/listenaction/create/${data.cms_id}/complete/`);
     }
   },
