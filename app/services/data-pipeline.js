@@ -37,7 +37,7 @@ export default Ember.Service.extend({
     
     this._send(data, this.itemViewPath);
     
-    this._legacySend(`/api/most/view/managed_item/${data.cms_id}/`);
+    this._legacySend(`api/most/view/managed_item/${data.cms_id}/`);
   },
   
   reportListenAction(type, incoming = {}) {
@@ -46,10 +46,10 @@ export default Ember.Service.extend({
     this._send(data, this.listenActionPath);
     
     if (/start|resume/.test(data.action)) {
-      this._legacySend(`/api/most/listen/managed_item/${data.cms_id}/`);
-      this._legacySend(`/api/v1/listenaction/create/${data.cms_id}/play/`);
+      this._legacySend(`api/most/listen/managed_item/${data.cms_id}/`);
+      this._legacySend(`api/v1/listenaction/create/${data.cms_id}/play/`);
     } else if (data.action === 'finish') {
-      this._legacySend(`/api/v1/listenaction/create/${data.cms_id}/complete/`);
+      this._legacySend(`api/v1/listenaction/create/${data.cms_id}/complete/`);
     }
   },
   
@@ -73,9 +73,9 @@ export default Ember.Service.extend({
     });
   },
   
-  _legacySend(url) {
+  _legacySend(path) {
     let browser_id = this.get('session.data.browserId');
-    fetch(url, {
+    fetch(`${config.wnycAPI}/${path}`, {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify({browser_id})

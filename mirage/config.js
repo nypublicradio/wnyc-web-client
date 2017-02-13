@@ -51,8 +51,10 @@ export default function() {
     };
   });
 
-  this.post(`${baseUrl}/api/v1/itemview`, {});
-  this.post(`${baseUrl}/api/v1/listenaction`, {});
+  this.post(`${config.wnycAPI}/api/v1/listenaction/create/:id/play/`, {});
+  this.post(`${config.wnycAPI}/api/v1/listenaction/create/:id/complete/`, {});
+  this.post(`${config.wnycAPI}/api/most/view/managed_item/:id/`, {});
+  this.post(`${config.wnycAPI}/api/most/listen/managed_item/:id/`, {});
 
   /*------------------------------------------------------------
     transitional (v2) endpoints
@@ -206,4 +208,10 @@ export default function() {
     }
   });
 
+  /*-------------------------------------------------------------
+  analytics microservice
+  ---------------------------------------------------------------*/
+  
+  this.post(`${config.wnycAPI}/analytics/v1/events/viewed`, {});
+  this.post(`${config.wnycAPI}/analytics/v1/events/listened`, {});
 }

@@ -39,7 +39,8 @@ test('it reports the proper data for an item view', function(assert) {
     browserId: 'secrets',
     _send(data) {
       assert.deepEqual(expected, data, 'passes in correct data to send');
-    }
+    },
+    _legacySend() {}
   });
   
   service.reportItemView(testData);
@@ -62,7 +63,8 @@ test('it reports the proper data for ondemand listen actions', function(assert) 
   let testData = {cms_id: 1, item_type: 'story', site_id: 1};
   
   let service = this.subject({
-    browserId: 'secrets'
+    browserId: 'secrets',
+    _legacySend() {}
   });
   
   service._send = function(data) {
@@ -128,7 +130,8 @@ test('data pipeline tracks delta properly', function(assert) {
       } else {
         assert.equal(delta, deltaShouldbe, 'delta should be updated as time ticks');
       }
-    }
+    },
+    _legacySend() {}
   });
   service.reportListenAction('start');
   
