@@ -36,12 +36,21 @@ export default Ember.Service.extend({
     }, incoming);
     
     this._send(data, this.itemViewPath);
+    
+    this._legacySend(`/api/most/view/managed_item/${data.cms_id}/`);
   },
   
   reportListenAction(type, incoming = {}) {
     incoming.delta = this.updateDelta(type);
     let data = this._generateData(incoming, LISTEN_ACTIONS[type.toUpperCase()]);
     this._send(data, this.listenActionPath);
+    
+    if (/start|resume/.test(data.action)) {
+      this._legacySend(`/api/most/listen/managed_item/${data.cms_id}/`);
+      this._legacySend(`/api/v1/listenaction/create/${data.cms_id}/play/`);
+    } else if (data.action === 'finish') {
+      this._legacySend(`/api/v1/listenaction/create/${data.cms_id}/complete/`);
+    }
   },
   
   updateDelta(type) {
@@ -61,6 +70,15 @@ export default Ember.Service.extend({
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
+    });
+  },
+  
+  _legacySend(url) {
+    let browser_id = this.get('session.data.browserId');
+    fetch(url, {
+      method: 'POST',
+      credentials: 'include',
+      body: JSON.stringify({browser_id})
     });
   },
   
