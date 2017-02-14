@@ -51,7 +51,10 @@ export default function() {
     };
   });
 
-  this.post(`${baseUrl}/api/v1/analytics/ga/`, {});
+  this.post(`${config.wnycAPI}/api/v1/listenaction/create/:id/play/`, {});
+  this.post(`${config.wnycAPI}/api/v1/listenaction/create/:id/complete/`, {});
+  this.post(`${config.wnycAPI}/api/most/view/managed_item/:id/`, {});
+  this.post(`${config.wnycAPI}/api/most/listen/managed_item/:id/`, {});
 
   /*------------------------------------------------------------
     transitional (v2) endpoints
@@ -62,12 +65,6 @@ export default function() {
   /*------------------------------------------------------------
     JSON:API (v3) endpoints
   --------------------------------------------------------------*/
-
-  this.post(`${baseUrl}/api/v3/listenactions`, function(schema, {requestBody}) {
-    let body = JSON.parse(requestBody);
-    body.data.id = (Math.random() * 100).toFixed();
-    return body;
-  });
 
   this.get(`/api/v3/shows`);
   this.get(`${baseUrl}/api/v3/shows`);
@@ -114,14 +111,6 @@ export default function() {
       return { errors };
     }
   });
-
-  this.post(`${config.wnycAccountRoot}/api/v1/listenaction/create/`, () => true);
-
-  this.post(`${config.wnycAccountRoot}/api/v1/listenaction/create/:pk/:action`, () => true);
-
-  this.post(`${config.wnycAccountRoot}/api/most/view/managed_item/:id`, () => true);
-
-  this.post(`${config.wnycAccountRoot}/api/v1/analytics/ga`, () => true);
 
   /*------------------------------------------------------------
     passthroughs
@@ -219,4 +208,10 @@ export default function() {
     }
   });
 
+  /*-------------------------------------------------------------
+  analytics microservice
+  ---------------------------------------------------------------*/
+  
+  this.post(`${config.wnycAPI}/analytics/v1/events/viewed`, {});
+  this.post(`${config.wnycAPI}/analytics/v1/events/listened`, {});
 }

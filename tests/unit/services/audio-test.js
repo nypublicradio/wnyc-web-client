@@ -17,20 +17,15 @@ moduleFor('service:audio', 'Unit | Service | audio', {
           'service:bumper-state',
           'service:poll',
           'service:metrics',
+          'service:data-pipeline',
           'service:listen-queue',
           'service:listen-history'],
 
   beforeEach() {
     const sessionStub = Ember.Service.extend({
       data: {}, // we only really need the data thing
-      authorize: function() {}
-    });
-    const listenActionsStub = Ember.Service.extend({
-      sendPause: function(){},
-      sendComplete: function(){},
-      sendPlay: function(){},
-      sendSkip: function(){},
-      sendDelete: function(){}
+      syncBrowserId(cb) { cb('secrets'); },
+      authorize: function() {},
     });
     const metricsStub = Ember.Service.extend({
       trackEvent() {}
@@ -42,9 +37,6 @@ moduleFor('service:audio', 'Unit | Service | audio', {
 
     this.register('service:session', sessionStub);
     this.inject.service('session');
-
-    this.register('service:listen-actions', listenActionsStub);
-    this.inject.service('listen-actions');
 
     this.register('service:metrics', metricsStub);
     this.inject.service('metrics');
@@ -368,24 +360,100 @@ test('can play a segmented story all the way through more than once', function(a
 });
 
 test('service records a listen when a story is played', function(assert) {
-  assert.expect(1);
 
-  let service = this.subject();
-  let story = server.create('story');
-  let listenStub = {
-    addListen({ id }) {
-      assert.equal(story.id, id, "service should have called addListen on listen object");
-    },
-    indexByStoryPk() {}
-  };
-
-  Ember.run(()=> {
-    service.set('listens', listenStub);
-    service.set('hifi', hifiStub);
-    service.play(story.id);
+  let done = assert.async();
+  let audio = DummyConnection.create({
+    url: '/audio.mp3',
+    duration: 30 * 60 * 1000
   });
+  let story = server.create('story', { audio: '/audio.mp3' });
+  let reportStub = sinon.stub();
+  let service = this.subject({
+      dataPipeline: {
+        reportListenAction: reportStub
+      }
+  });
+  service.get('hifi.soundCache').cache(audio);
+  let expected = {
+    audio_type: 'ondemand',
+    cms_id: story.id,
+    item_type: story.itemType,
+    site_id: story.siteId,
+    current_position: 0
+  };
+    
+  Ember.run(() => {
+    service.play(story.id).then(() => {
+      let forwardPosition = {current_position: service.get('position')};
+      service.fastForward();
+      let rewindPosition = {current_position: service.get('position')};
+      service.rewind();
+      let setPosition = {current_position: service.get('position')};
+      service.setPosition(0.5);
+      service.pause();
+      let pausePosition = {current_position: service.get('position')};
+      service.play(story.id).then(() => {
+        service.finishedTrack();
+        let finishedPosition = service.get('position');
+        wait().then(() => {
+          assert.equal(reportStub.callCount, 7);
+          assert.deepEqual(reportStub.getCall(0).args, ['start', expected], 'should have received proper attrs');
+          assert.deepEqual(reportStub.getCall(1).args, ['forward_15', Object.assign(expected, forwardPosition)], 'current_position should be time when action happened, not target time');
+          assert.deepEqual(reportStub.getCall(2).args, ['back_15', Object.assign(expected, rewindPosition)], 'current_position should be time when action happened, not target time');
+          assert.deepEqual(reportStub.getCall(4).args, ['pause', Object.assign(expected, pausePosition)], 'should have received proper attrs');
+          assert.deepEqual(reportStub.getCall(5).args, ['resume', Object.assign(expected, pausePosition)], 'should have received proper attrs');
+          assert.deepEqual(reportStub.getCall(6).args, ['finish', Object.assign(expected, finishedPosition)], 'should have received proper attrs');
+          
+          // set_position is special case
+          assert.deepEqual(reportStub.getCall(3).args, ['position', Object.assign(expected, setPosition)], 'current_position should be time when action happened, not target time');
+          done();
+        });
+      });
+    });
+  });
+});
 
-  return wait();
+test('service records a listen when a stream is played', function(assert) {
+
+  let done = assert.async();
+  let reportStub = sinon.stub();
+  let service = this.subject({
+      dataPipeline: {
+        reportListenAction: reportStub
+      }
+  });
+  let currentStory = server.create('story');
+  let stream = server.create('stream');
+  server.create('whats-on', {
+    current_show: { episode_pk: currentStory.id }
+  });
+  let audio = DummyConnection.create({ url: stream.attrs.urls.mp3[0] });
+  
+  let expected = {
+    audio_type: 'stream',
+    cms_id: currentStory.id,
+    item_type: currentStory.itemType,
+    site_id: currentStory.siteId,
+    stream_id: stream.slug,
+    current_position: 0
+  };
+    
+  service.get('hifi.soundCache').cache(audio);
+  
+  Ember.run(() => {
+    service.play(stream.slug).then(() => {
+      service.pause();
+      service.play(stream.slug).then(() => {
+        wait().then(() => {
+          assert.equal(reportStub.callCount, 3);
+          assert.deepEqual(reportStub.getCall(0).args, ['start', expected], 'should have received proper attrs');
+          assert.deepEqual(reportStub.getCall(1).args, ['pause', expected], 'should have received proper attrs');
+          assert.deepEqual(reportStub.getCall(2).args, ['resume', expected], 'should have received proper attrs');
+          done();
+        });
+      });
+    });
+  });
 });
 
 test('it only sets up the player ping once', function(assert) {
@@ -430,50 +498,6 @@ test('it calls the GoogleAnalytics ping event', function(assert) {
   Ember.run(() => service.play(story.id));
 });
 
-test('it sends a listen action on play and not resume', function(assert) {
-  assert.expect(1);
-
-  let service = this.subject();
-  let story = server.create('story');
-  let listenActionStub = {
-    sendPlay() {
-      assert.ok(true, 'sendPlay was called');
-    },
-    sendPause() {}
-  };
-  Ember.run(() => {
-    service.set('listenActions', listenActionStub);
-    service.set('hifi', hifiStub);
-    service.play(story.id);
-  });
-
-  Ember.run(() => service.pause());
-
-  Ember.run(() => service.play(story.id));
-
-  return wait();
-});
-
-test('it sends a listen action on pause', function(assert) {
-  let service = this.subject();
-  let story = server.create('story');
-  let listenActionStub = {
-    sendPause() {
-      assert.ok(true, 'sendPause was called');
-    },
-    sendPlay() {}
-  };
-  Ember.run(() => {
-    service.set('listenActions', listenActionStub);
-    service.set('hifi', hifiStub);
-    service.play(story.id).then(() => {
-      service.pause();
-    });
-  });
-
-  return wait();
-});
-
 test('with the bumper-state enabled, the bumper will act on a finished track event', function(assert) {
   let url = '/audio.mp3';
   let story = server.create('story', { audio: url });
@@ -505,7 +529,6 @@ test('with the bumper-state enabled, the bumper will act on a finished track eve
 //   // Specify the other units that are required for this test.
 //   needs: ['model:story','adapter:story','serializer:story',
 //           'model:discover/stories',
-//           'service:listen-actions',
 //           'service:poll',
 //           'service:metrics',
 //           'service:listen-history'],
@@ -525,10 +548,6 @@ test('with the bumper-state enabled, the bumper will act on a finished track eve
 //
 //     this.register('service:session', sessionStub);
 //     this.inject.service('session', { as: 'session' });
-//
-//     this.register('service:listen-actions', listenActionsStub);
-//     this.inject.service('listen-actions', { as: 'listen-actions' });
-//
 //   },
 //   afterEach() {
 //     server.shutdown();

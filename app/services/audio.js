@@ -4,14 +4,12 @@ import get from 'ember-metal/get';
 import set from 'ember-metal/set';
 import computed, { readOnly, alias, or } from 'ember-computed';
 import { bind } from 'ember-runloop';
-import { assign } from 'ember-platform';
 import RSVP from 'rsvp';
 import { classify as upperCamelize } from 'ember-string';
 import Ember from 'ember';
 
 const FIFTEEN_SECONDS = 1000 * 15;
 const TWO_MINUTES     = 1000 * 60 * 2;
-const PLATFORM        = 'NYPR_Web';
 
 export default Service.extend({
   poll:             service(),
@@ -22,7 +20,7 @@ export default Service.extend({
   bumperState:      service(),
   listens:          service('listen-history'),
   queue:            service('listen-queue'),
-  listenActions:    service(),
+  dataPipeline:      service(),
 
   hifi:             service(),
   isReady:          readOnly('hifi.isReady'),
@@ -61,7 +59,16 @@ export default Service.extend({
 
   init() {
     this.get('hifi').on('audio-ended', () => this.finishedTrack());
+    Ember.$(window).on('beforeunload', () => {
+      if (this.get('currentAudio')) {
+        this.sendListenAction(this.get('currentAudio'), 'close');
+      }
+    });
     this._super(...arguments);
+  },
+  
+  willDestroy() {
+    Ember.$(window).off('beforeunload');
   },
 
   play(pk, playContext) {
@@ -85,8 +92,8 @@ export default Service.extend({
 
   pause() {
     let context = get(this, 'currentContext') || '';
-    let currentAudio = get(this, 'currentAudio');
-    this._trackPause(currentAudio, context);
+    let storyOrStream = get(this, 'currentAudio');
+    this._trackPause(storyOrStream, context);
     this.get('hifi').pause();
   },
 
@@ -109,6 +116,8 @@ export default Service.extend({
     return this.get('hifi').play(urlPromise).then(({sound, failures}) => {
       if (newStoryPlaying) {
         this._trackOnDemandPlay(story, context);
+      } else {
+        this.sendListenAction(story, 'resume');
       }
 
       // independent of context, if this item is already the first item in your
@@ -161,6 +170,8 @@ export default Service.extend({
       if (newStreamPlaying) {
         let prevAudio = get(this, 'currentAudio');
         this._trackStreamPlay(stream, context, prevAudio);
+      } else {
+        this.sendListenAction(stream, 'resume');
       }
 
       this._setupAudio(stream, context);
@@ -206,7 +217,7 @@ export default Service.extend({
   },
 
   playNextSegment() {
-    let story = get(this, 'currentStory');
+    let story = get(this, 'currentAudio');
     let nextSegment = story.getNextSegment();
     if (nextSegment) {
       return this.get('hifi').play(nextSegment, {position: 0})
@@ -221,12 +232,19 @@ export default Service.extend({
   },
 
   setPosition(percentage) {
+    // send listenAction before setting position so we capture the timestamp where
+    // the action itself occurs
+    this.sendListenAction(this.get('currentAudio'), 'position');
+    
     let position = (percentage * get(this, 'duration')) || 0;
-
     set(this, 'position', position);
   },
 
   rewind() {
+    // send listenAction before setting position so we capture the timestamp where
+    // the action itself occurs
+    this.sendListenAction(this.get('currentAudio'), 'back_15');
+    
     let currentPosition = get(this, 'position');
     set(this, 'position', currentPosition - FIFTEEN_SECONDS);
 
@@ -237,6 +255,10 @@ export default Service.extend({
   },
 
   fastForward() {
+    // send listenAction before setting position so we capture the timestamp where
+    // the action itself occurs
+    this.sendListenAction(this.get('currentAudio'), 'forward_15');
+    
     let currentPosition = get(this, 'position');
     set(this, 'position', currentPosition + FIFTEEN_SECONDS);
 
@@ -330,6 +352,8 @@ export default Service.extend({
     }
     else if (this._didJustPlayFrom('Continuous Play')) {
       return this.playAutoplay();
+    } else {
+      this._trackFinished(currentAudio, currentContext);
     }
     return null;
   },
@@ -338,17 +362,14 @@ export default Service.extend({
   addToHistory(story) {
     this.get('listens').addListen(story);
   },
-
-  sendCompleteListenAction(pk) {
-    this.get('listenActions').sendComplete(pk, PLATFORM);
-  },
-
-  sendPlayListenAction(pk) {
-    this.get('listenActions').sendPlay(pk, PLATFORM);
-  },
-
-  sendPauseListenAction(pk) {
-    this.get('listenActions').sendPause(pk, PLATFORM, get(this, 'position'));
+  
+  sendListenAction(storyOrStream, type) {
+    let data = {
+      current_position: this.get('position')
+    };
+    storyOrStream.forListenAction(data).then(d => {
+      this.get('dataPipeline').reportListenAction(type, d);
+    });
   },
   
   _trackPlayerEvent(options) {
@@ -368,12 +389,12 @@ export default Service.extend({
     if (withRegion || withAnalytics) {
       label = `${region}${analyticsCode}`;
     }
-    metrics.trackEvent({category, action, label, model: story});
+    metrics.trackEvent('GoogleAnalytics', {category, action, label});
   },
 
   _trackPlayerEventForNpr(options) {
     let metrics = get(this, 'metrics');
-    metrics.trackEvent('NprAnalytics', assign(options, {isNpr: true}));
+    metrics.trackEvent('NprAnalytics', options);
   },
 
   _trackAllCodecFailures(failures, sound) {
@@ -421,7 +442,7 @@ export default Service.extend({
       action: 'On_demand_audio_play',
       label: get(story, 'audio')
     });
-    this.sendPlayListenAction(get(story, 'id'));
+    this.sendListenAction(story, 'start');
 
     if (context === 'queue' || context === 'history') {
       this._trackPlayerEvent({
@@ -445,6 +466,7 @@ export default Service.extend({
       action: 'Launched Stream',
       label,
     });
+    this.sendListenAction(stream, 'start');
 
     this._trackPlayerEventForNpr({
       category: 'Engagement',
@@ -472,7 +494,7 @@ export default Service.extend({
       label: 'Audio Bumper',
     });
   },
-
+  
   _trackAutoplayQueue() {
     this._trackPlayerEvent({
       action: 'Launched Queue',
@@ -480,8 +502,8 @@ export default Service.extend({
     });
   },
 
-  _trackPause(audio, context) {
-    let type = audio && get(audio, 'audioType');
+  _trackPause(storyOrStream, context) {
+    let type = storyOrStream && get(storyOrStream, 'audioType');
     if (type === 'bumper') {
       let bumperSetting = get(this, 'bumperState.autoplayChoice');
       this._trackPlayerEvent({
@@ -490,7 +512,7 @@ export default Service.extend({
       });
     } else {
       this._trackPlayerEvent({
-        story: audio,
+        story: storyOrStream,
         action: 'Pause',
         withRegion: true,
         region: this._formatContext(context),
@@ -501,19 +523,19 @@ export default Service.extend({
       this._trackPlayerEventForNpr({
         category: 'Engagement',
         action: 'Stream_Pause',
-        label: `Streaming_${get(audio, 'name')}`
+        label: `Streaming_${get(storyOrStream, 'name')}`
       });
     } else if (type === 'ondemand') {
       this._trackPlayerEventForNpr({
         category: 'Engagement',
         action: 'On_demand_audio_pause',
-        label: get(audio, 'audio')
+        label: get(storyOrStream, 'audio')
       });
     }
 
-    if (audio && get(audio, 'audioType') !== 'stream') {
+    if (storyOrStream) {
       // we're not set up to handle pause listen actions from streams atm
-      this.sendPauseListenAction(audio.id);
+      this.sendListenAction(storyOrStream, 'pause');
     }
   },
 
@@ -525,7 +547,7 @@ export default Service.extend({
       region: upperCamelize(context),
     });
 
-    this.sendCompleteListenAction(story.id);
+    this.sendListenAction(story, 'finish');
   },
   
   // TODO: would like to move this and the rest of the above

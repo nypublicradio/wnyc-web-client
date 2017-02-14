@@ -37,7 +37,7 @@ export default Ember.Component.extend({
       let title = get(show, 'title');
 
       if (action === 'added') {
-        get(this, 'metrics').trackEvent({
+        get(this, 'metrics').trackEvent('GoogleAnalytics', {
           category: 'Discover',
           action: 'Selected Show in Discover',
           label: title
@@ -47,7 +47,7 @@ export default Ember.Component.extend({
         excludedShowSlugs.removeObject(value);
       }
       else if (action === 'removed') {
-        get(this, 'metrics').trackEvent({
+        get(this, 'metrics').trackEvent('GoogleAnalytics', {
           category: 'Discover',
           action: 'Deselected Show in Discover',
           label: title

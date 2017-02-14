@@ -2,13 +2,15 @@ import Ember from 'ember';
 import service from 'ember-service/inject';
 import PlayParamMixin from 'wnyc-web-client/mixins/play-param';
 import { beforeTeardown } from 'wnyc-web-client/lib/compat-hooks';
+import config from 'wnyc-web-client/config/environment';
 const { get } = Ember;
 const { hash: waitFor } = Ember.RSVP;
 
 export default Ember.Route.extend(PlayParamMixin, {
-  metrics:    service(),
-  session:    service(),
-  googleAds:  service(),
+  metrics:      service(),
+  session:      service(),
+  googleAds:    service(),
+  dataPipeline: service(),
   
   titleToken(model) {
     return `${get(model, 'story.title')} - ${get(model, 'story.headers.brand.title')}`;
@@ -33,6 +35,7 @@ export default Ember.Route.extend(PlayParamMixin, {
   },
   afterModel(model, transition) {
     let metrics = get(this, 'metrics');
+    let dataPipeline = get(this, 'dataPipeline');
     let {containers:action, title:label} = get(model, 'story.analytics');
     let nprVals = get(model, 'story.nprAnalyticsDimensions');
     
@@ -42,20 +45,26 @@ export default Ember.Route.extend(PlayParamMixin, {
       transition.send('updateDonateChunk', get(model, 'story.extendedStory.headerDonateChunk'));
     }
 
-    metrics.trackEvent({
-      eventName: 'viewedStory',
+    // google analytics
+    metrics.trackEvent('GoogleAnalytics', {
       category: 'Viewed Story',
       action,
       label,
-      id: get(model, 'story.id'),
-      type: get(model, 'story.itemType')
     });
 
-    metrics.invoke('trackPage', 'NprAnalytics', {
+    // NPR
+    metrics.trackPage('NprAnalytics', {
       page: `/story/${get(model, 'story.slug')}`,
       title: label,
       nprVals,
-      isNpr: true
+    });
+    
+    // data pipeline
+    dataPipeline.reportItemView({
+      cms_id: get(model, 'story.id'),
+      item_type: get(model, 'story.itemType'),
+      site_id: get(model, 'story.siteId'),
+      client: config.clientSlug
     });
   },
   

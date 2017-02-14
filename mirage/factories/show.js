@@ -53,5 +53,6 @@ export default Factory.extend({
   },
   listingObjectType: 'show',
   socialLinks: [],
-  isFeatured: false
+  isFeatured: false,
+  siteId: 1
 });

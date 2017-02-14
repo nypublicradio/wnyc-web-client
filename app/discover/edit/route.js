@@ -5,7 +5,6 @@ export default Ember.Route.extend({
   session:       Ember.inject.service(),
   discoverPrefs: Ember.inject.service(),
   discoverQueue: Ember.inject.service(),
-  listenActions: Ember.inject.service(),
   metrics:       Ember.inject.service(),
 
   redirect(model, transition) {
@@ -48,7 +47,7 @@ export default Ember.Route.extend({
         return;
       }
 
-      get(this, 'metrics').trackEvent({
+      get(this, 'metrics').trackEvent('GoogleAnalytics', {
         category: 'Discover',
         action: 'Create Playlist in Discover',
         label: 'Refresh Playlist'
