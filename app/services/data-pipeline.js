@@ -64,22 +64,33 @@ export default Ember.Service.extend({
   },
   
   _send(data, path) {
-    fetch(`${config.wnycAPI}/${path}`, {
+    let fetchOptions = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
+    };
+    this.get('session').authorize('authorizer:nypr', (header, value) => {
+      fetchOptions.headers[header] = value;
     });
+    fetch(`${config.wnycAPI}/${path}`, fetchOptions);
   },
   
   _legacySend(path) {
     let browser_id = this.get('session.data.browserId');
-    fetch(`${config.wnycAPI}/${path}`, {
+    let fetchOptions = {
       method: 'POST',
       credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({browser_id})
+    };
+    this.get('session').authorize('authorizer:nypr', (header, value) => {
+      fetchOptions.headers[header] = value;
     });
+    fetch(`${config.wnycAPI}/${path}`, fetchOptions);
   },
   
   _generateData(incoming, action) {
