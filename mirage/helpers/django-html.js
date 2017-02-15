@@ -282,7 +282,6 @@ var HTML = `<html>
                   </li>
                   <li class="secondary"><a href="/support/">Support WNYC</a></li>
                   <li class="secondary"><a href="/about/">About Us</a></li>
-                  <li class="secondary"><a href="/feedback/">Feedback</a></li>
               </ul>
               <div id="navigation-photo-credit">
                   <p>Photo credit: @julesdwit.</p>
@@ -797,7 +796,6 @@ var HTML = `<html>
                       <ul class="menu_left">
                           <li class="logo"><a href="/"><h2>WNYC</h2></a></li>
                           <li><a href="/about/">About WNYC</a></li>
-                          <li><a href="https://nypublicradio.zendesk.com/hc/en-us">Contact Us</a></li>
                           <li><a href="http://www.nypublicradio.org/underwriting/wnyc">Become a Sponsor</a></li>
                           <li><a href="/press/">Press</a></li>
                           <li><a href="/careers">Jobs</a></li>
