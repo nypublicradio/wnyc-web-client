@@ -12,12 +12,6 @@
   {{/if}}
 
   {{#ember-wormhole to="related"}}
-    {{#unless isMobile}}
-        {{#simple-callout button-text="Try WNYC's Discover" button-url='/discover' class='discover-callout'}}
-          Like this story? Find more stories to listen to based on shows and topics you’re interested in.
-        {{/simple-callout}}
-    {{/unless}}
-
     {{related-stories getStories=model.getRelatedStories}}
   {{/ember-wormhole}}
 

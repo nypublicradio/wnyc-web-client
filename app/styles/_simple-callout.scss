@@ -1,3 +1,8 @@
+// Simple Callout
+// use the `simple-callout` component
+// in `button-text`, pass the name of your button
+// in `button-url` pass the link of your button
+
 .callout {
   &-container {
     @include display-flex;
