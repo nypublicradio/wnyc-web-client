@@ -52,7 +52,7 @@ export default Ember.Component.extend({
   removedItems: [],
   actions: {
     removeItem(item) {
-      get(this, 'metrics').trackEvent('GoogleAnalytics', {
+      get(this, 'metrics').trackEvent({
         category: 'Discover',
         action: 'Removed Story from Discover',
         value: Number(get(item, 'id'))
@@ -77,7 +77,7 @@ export default Ember.Component.extend({
     },
 
     reorderItems(itemModels, draggedModel) {
-      get(this, 'metrics').trackEvent('GoogleAnalytics', {
+      get(this, 'metrics').trackEvent({
         category: 'Discover',
         action: 'Moved Story',
         value: Number(get(draggedModel, 'id'))

@@ -117,29 +117,37 @@ test('metrics properly reports story attrs', function(assert) {
   let story = server.create('story');
   let id = `story/${story.slug}/`;
   
-  assert.expect(2);
+  assert.expect(4);
   server.create('django-page', {id, slug: story.slug});
 
-  server.post(`${config.wnycAPI}/analytics/v1/events/viewed`, (schema, {requestBody}) => {
-    let {
-      cms_id,
-      item_type,
-      browser_id,
-      client,
-      referrer,
-      url,
-      site_id
-    } = JSON.parse(requestBody);
+  server.post(`${config.wnycAccountRoot}/api/v1/analytics/ga`, (schema, {queryParams, requestBody}) => {
+    // skip trackPageView event
+    if (queryParams.category === '_trackPageView') {
+      return true;
+    }
+    let postParams = {};
+    requestBody.split('&').forEach(kv => {
+      let params = kv.split('=');
+      let k = params[0];
+      let v = decodeURIComponent(params[1]).replace(/\+/g, ' ');
+      if (['category', 'action', 'label', 'cms_id', 'cms_type'].includes(k)) {
+        postParams[k] = v;
+      }
+    });
+    let { category, action, label, cms_id, cms_type } = queryParams;
     let testObj = {
+      category: 'Viewed Story',
+      action: story.analytics.containers,
+      label: story.analytics.title,
       cms_id: story.id,
-      item_type: 'story',
-      browser_id: undefined,
-      client: 'wnyc_web',
-      referrer: location.toString(),
-      url: location.toString(),
-      site_id: story.siteId
+      cms_type: 'story'
     };
-    assert.deepEqual({cms_id, item_type, browser_id, client, referrer, url, site_id}, testObj, 'params match up');
+    assert.deepEqual({category, action, cms_id, cms_type, label}, testObj, 'GET params match up');
+    assert.deepEqual(postParams, testObj, 'POST params match up');
+  });
+  
+  server.post(`${config.wnycAccountRoot}/api/most/view/managed_item/:pk`, (schema, {params}) => {
+    assert.equal(params.pk, story.id, 'reports a managed item view');
   });
   
   window.ga = function(command) {

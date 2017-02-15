@@ -40,7 +40,7 @@ export default Service.extend({
     const destinationUrl = $target.attr('href') !== '#' ? $target.attr('href') : false;
     const metrics = get(this, 'metrics');
 
-    metrics.trackEvent('GoogleAnalytics', {
+    metrics.trackEvent({
       category: category,
       action: `Clicked "${title}"`,
       label: `${destinationUrl || 'no URL'}`
@@ -57,7 +57,7 @@ export default Service.extend({
     let title = $title.text().trim();
     let metrics = get(this, 'metrics');
 
-    metrics.trackEvent('GoogleAnalytics', {
+    metrics.trackEvent({
       category: 'Homepage Bucket',
       action : `Clicked story in bucket ${position} with title "${title}"`,
       label : `Headline clicked: "${$tgt.text()}", url: ${$tgt.attr('href')}`,
@@ -91,7 +91,7 @@ export default Service.extend({
         break;
     }
 
-    metrics.trackEvent('GoogleAnalytics', {
+    metrics.trackEvent({
       category: 'Share',
       action: `${containers} | Title: ${title}`,
       label: sharedVia,

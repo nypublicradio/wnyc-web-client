@@ -13,9 +13,8 @@ import PlayParamMixin from 'wnyc-web-client/mixins/play-param';
 import config from 'wnyc-web-client/config/environment';
 
 export default Route.extend(PlayParamMixin, {
-  session:      service(),
-  metrics:      service(),
-  dataPipeline: service(),
+  session: service(),
+  metrics: service(),
 
   model(params) {
     const channelType = this.routeName;
@@ -31,12 +30,10 @@ export default Route.extend(PlayParamMixin, {
     })
     .catch(e => retryFromServer(e, listingSlug.replace(/\/*$/, '/')));
   },
-
   afterModel({ channel }, transition) {
-    let channelTitle = get(channel, 'title');
-    let metrics = get(this, 'metrics');
-    let dataPipeline = get(this, 'dataPipeline');
-    let nprVals = get(channel, 'nprAnalyticsDimensions');
+    const channelTitle = get(channel, 'title');
+    const metrics = get(this, 'metrics');
+    const nprVals = get(channel, 'nprAnalyticsDimensions');
 
     if (channel.get('headerDonateChunk')) {
       transition.send('updateDonateChunk', channel.get('headerDonateChunk'));
@@ -45,28 +42,20 @@ export default Route.extend(PlayParamMixin, {
       transition.send('setMiniChrome', true);
     }
 
-    // google analytics
-    metrics.trackEvent('GoogleAnalytics', {
+    metrics.trackEvent({
       category: `Viewed ${get(channel, 'listingObjectType').capitalize()}`,
       action: channelTitle,
+      id: channel.get('cmsPK'),
+      type: channel.get('listingObjectType')
     });
 
-    // NPR
-    metrics.trackPage('NprAnalytics', {
+    metrics.invoke('trackPage', 'NprAnalytics', {
       page: `/${get(this, 'listingSlug')}`,
       title: channelTitle,
       nprVals,
-    });
-
-    // data pipeline
-    dataPipeline.reportItemView({
-      cms_id: channel.get('cmsPK'),
-      item_type: channel.get('listingObjectType'),
-      site_id: channel.get('siteId'),
-      client: config.clientSlug
+      isNpr: true
     });
   },
-
   setupController(controller, model) {
     let { page_params = '' } = this.paramsFor(`${this.routeName}.page`);
     let [navSlug] = page_params.split('/');
@@ -79,7 +68,7 @@ export default Route.extend(PlayParamMixin, {
       adminURL: `${config.wnycAdminRoot}/admin`
     });
   },
-
+  
   actions: {
     willTransition(transition) {
       let isExiting = !transition.targetName.match(this.routeName);

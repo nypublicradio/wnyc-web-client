@@ -13,7 +13,7 @@ export default Component.extend({
       this.sendAction('onNext');
     },
     back() {
-      get(this, 'metrics').trackEvent('GoogleAnalytics', {
+      get(this, 'metrics').trackEvent({
         category: 'Discover',
         action: 'Clicked Back in Discover'
       });

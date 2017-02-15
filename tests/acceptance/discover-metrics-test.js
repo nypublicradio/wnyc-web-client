@@ -10,10 +10,8 @@ const mockMetrics = Ember.Service.extend({
   init() {
     this.trackedEvents = [];
   },
-  trackEvent(service, event) {
-    let isGA = service && service === 'GoogleAnalytics';
-    let isDiscover = event && event.category === 'Discover';
-    if (isGA && isDiscover) {
+  trackEvent(event) {
+    if (event && event.category === 'Discover') {
       get(this, 'trackedEvents').pushObject(event);
     }
   },

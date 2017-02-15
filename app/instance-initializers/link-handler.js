@@ -40,7 +40,7 @@ function _trackEvent(data, instance) {
   if (model) {
     eventToTrack.model = model;
   }
-  metrics.trackEvent('GoogleAnalytics', eventToTrack);
+  metrics.trackEvent(eventToTrack);
 }
 
 function _trackLegacyEvent(event, instance) {

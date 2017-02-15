@@ -24,7 +24,7 @@ export default Controller.extend({
       this._wasModal = true;
 
       let metrics = get(this, 'metrics');
-      metrics.trackEvent('GoogleAnalytics', {
+      metrics.trackEvent({
         category: 'Persistent Player',
         action: 'Click',
         label: 'Open Queue'

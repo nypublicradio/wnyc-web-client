@@ -11,7 +11,7 @@ export default Component.extend({
   actions: {
     toggleSummary() {
       if (get(this, 'showSummary') === false) {
-        get(this, 'metrics').trackEvent('GoogleAnalytics', {
+        get(this, 'metrics').trackEvent({
           category: 'Discover',
           action: 'Expanded Summary',
           value: Number(get(this, 'story.id'))

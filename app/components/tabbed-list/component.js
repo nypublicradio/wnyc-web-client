@@ -28,10 +28,11 @@ export default  Component.extend({
         "My Listening History": "History"
       };
       let tabLabel = titleMap[tabTitle] || tabTitle;
-      get(this, 'metrics').trackEvent('GoogleAnalytics', {
+      get(this, 'metrics').trackEvent({
         category: 'Persistent Player',
         action: 'Click',
-        label: `Switch to ${tabLabel} Tab`
+        label: `Switch to ${tabLabel} Tab`,
+        model: {}
       });
     }
   }
