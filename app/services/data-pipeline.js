@@ -19,14 +19,14 @@ export default Ember.Service.extend({
   itemViewPath:     'analytics/v1/events/viewed',
   listenActionPath: 'analytics/v1/events/listened',
   currentReferrer:  null,
-  
+
   session:      service(),
   poll:         service(),
 
   init() {
     this.set('_delta', 0);
   },
-  
+
   reportItemView(incoming = {}) {
     let data = Object.assign({
       browser_id: this.get('session.data.browserId'),
@@ -34,17 +34,17 @@ export default Ember.Service.extend({
       referrer: this.get('currentReferrer'),
       url: location.toString()
     }, incoming);
-    
+
     this._send(data, this.itemViewPath);
-    
+
     this._legacySend(`api/most/view/managed_item/${data.cms_id}/`);
   },
-  
+
   reportListenAction(type, incoming = {}) {
     incoming.delta = this.updateDelta(type);
     let data = this._generateData(incoming, LISTEN_ACTIONS[type.toUpperCase()]);
     this._send(data, this.listenActionPath);
-    
+
     if (/start|resume/.test(data.action) && data.cms_id) {
       this._legacySend(`api/most/listen/managed_item/${data.cms_id}/`);
       this._legacySend(`api/v1/listenaction/create/${data.cms_id}/play/`);
@@ -52,7 +52,7 @@ export default Ember.Service.extend({
       this._legacySend(`api/v1/listenaction/create/${data.cms_id}/complete/`);
     }
   },
-  
+
   updateDelta(type) {
     if (/start|resume/.test(type)) {
       return this.set('_delta', 0);
@@ -62,7 +62,7 @@ export default Ember.Service.extend({
       return this.set('_delta', newDelta - oldDelta);
     }
   },
-  
+
   _send(data, path) {
     let fetchOptions = {
       method: 'POST',
@@ -76,12 +76,13 @@ export default Ember.Service.extend({
     });
     fetch(`${config.wnycAPI}/${path}`, fetchOptions);
   },
-  
+
   _legacySend(path) {
     let browser_id = this.get('session.data.browserId');
     let fetchOptions = {
       method: 'POST',
       credentials: 'include',
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -92,7 +93,7 @@ export default Ember.Service.extend({
     });
     fetch(`${config.wnycAPI}/${path}`, fetchOptions);
   },
-  
+
   _generateData(incoming, action) {
     return Object.assign({
       action,
