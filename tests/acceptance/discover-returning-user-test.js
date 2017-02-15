@@ -417,6 +417,26 @@ test('selected shows are not retained if you hit cancel', function(assert) {
   });
 });
 
+test('deleting an item sends a delete listen action', function(assert) {
+  let stories = server.db.discoverStories;
+  var story = stories[0];
+
+  let url = [ENV.wnycAccountRoot, 'api/v1/listenaction/create', story.id, 'delete'].join("/");
+  var listenActionSent = false;
+  server.post(url, function() {
+    listenActionSent = true;
+  });
+
+  visit('/discover/playlist');
+
+  andThen(() => {
+    click(`.discover-playlist-item-delete[data-story-id="${story.id}"]`);
+    andThen(() => {
+      assert.equal(listenActionSent, true, "action should have been called");
+    });
+  });
+});
+
 test('deleting an item removes the item from the list', function(assert) {
   let stories = server.db.discoverStories;
   var story = stories[0];

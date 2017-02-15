@@ -21,7 +21,7 @@ export default Component.extend({
       let {shareText, analyticsCode} = metadata;
       if (href) {
         let metrics = get(this, 'metrics');
-        metrics.trackEvent('GoogleAnalytics', {
+        metrics.trackEvent({
           category: 'Persistent Player',
           action: `Shared Story "${shareText}"`,
           label: `${region}|${analyticsCode}|${type}|${destination}`,

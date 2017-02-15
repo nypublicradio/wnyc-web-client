@@ -66,7 +66,7 @@ test('buttons send correct analytics values when clicked with a story', function
   let trackedEvents = [];
   let region = 'testZone';
   let mockMetrics = {
-    trackEvent(service, trackingObject) {
+    trackEvent(trackingObject) {
       trackedEvents.push(trackingObject);
     }
   };
@@ -103,7 +103,7 @@ test('buttons send correct analytics values when clicked with a stream', functio
   let region = 'testZone';
   let trackedEvents = [];
   let mockMetrics = {
-    trackEvent(service, trackingObject) {
+    trackEvent(trackingObject) {
       trackedEvents.push(trackingObject);
     }
   };

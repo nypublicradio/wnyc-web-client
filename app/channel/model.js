@@ -75,5 +75,4 @@ export default DS.Model.extend({
   hasSubscriptionLinks: computed.bool('podcastLinks.firstObject'),
   hasHeaderButtons: computed.or('donateChunk', 'hasSubscriptionLinks'),
   nprAnalyticsDimensions: DS.attr(),
-  siteId: DS.attr('number')
 });

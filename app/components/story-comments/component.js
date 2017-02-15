@@ -48,7 +48,7 @@ export default Ember.Component.extend({
         let metrics = this.get('metrics');
         let {containers:action, title:label} = this.get('story.analytics');
 
-        metrics.trackEvent('GoogleAnalytics', {
+        metrics.trackEvent({
           category: 'Displayed Comments',
           action,
           label

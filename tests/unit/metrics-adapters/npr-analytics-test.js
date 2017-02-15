@@ -29,7 +29,7 @@ test('it fires the correct pageview event', function(assert) {
       assert.equal(hitType, 'pageview', 'should send an npr pageview');
     }
   };
-  adapter.trackPage({ page: '/foo', title: 'foo' });
+  adapter.trackPage({ page: '/foo', title: 'foo', isNpr: true });
 });
 
 test('it fires the correct trackEvent event', function(assert) {
@@ -40,5 +40,5 @@ test('it fires the correct trackEvent event', function(assert) {
       assert.equal(hitType, 'event', 'should send an npr event');
     }
   };
-  adapter.trackEvent({ category: 'foo', action: 'bar', label: 'baz' });
+  adapter.trackEvent({ category: 'foo', action: 'bar', label: 'baz', isNpr: true });
 });

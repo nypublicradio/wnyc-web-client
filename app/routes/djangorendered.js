@@ -45,7 +45,8 @@ export default Route.extend(PlayParamMixin, {
     let metrics = get(this, 'metrics');
     let path = document.location.pathname; // e.g. '/shows/bl/'
     let title = (get(page, 'title') || '').trim();
-    metrics.trackPage('NprAnalytics', {
+    metrics.invoke('trackPage', 'NprAnalytics', {
+      isNpr: true,
       page: path,
       title
     });

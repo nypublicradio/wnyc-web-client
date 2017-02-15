@@ -13,7 +13,7 @@ moduleForComponent('discover-playlist', 'Unit | Component | discover playlist', 
       isPlaying: false
     });
     const metricsStub = Ember.Service.extend({
-      trackEvent(service, event) {
+      trackEvent(event) {
         set(this, 'lastTrackedEvent', event);
         set(this, 'trackedEventCount', get(this, 'trackedEventCount') + 1);
       },

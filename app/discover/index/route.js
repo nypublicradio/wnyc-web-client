@@ -6,6 +6,7 @@ const {
 export default Ember.Route.extend({
   session:          Ember.inject.service(),
   discoverQueue:    Ember.inject.service(),
+  listenActions:    Ember.inject.service(),
   discoverPrefs:    Ember.inject.service(),
   scroller:         Ember.inject.service(),
   metrics:          Ember.inject.service(),
@@ -85,7 +86,7 @@ export default Ember.Route.extend({
 
   actions: {
     findMore() {
-      get(this, 'metrics').trackEvent('GoogleAnalytics', {
+      get(this, 'metrics').trackEvent({
         category: 'Discover',
         action: 'Clicked Find More in Discover',
       });
@@ -112,9 +113,11 @@ export default Ember.Route.extend({
       });
     },
     removeItem(item) {
+      let listenActions = this.get('listenActions');
       let prefs         = this.get('discoverPrefs');
       let itemId        = get(item, 'id');
 
+      listenActions.sendDelete(itemId, 'NYPR_Web');
       this.get('discoverQueue').removeItem(item);
 
       // Make sure this doesn't show up again

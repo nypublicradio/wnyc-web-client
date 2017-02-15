@@ -16,7 +16,7 @@ export default Route.extend({
 
     if (!prefs.get('setupComplete')) {
       if (prefs.get('currentSetupStep') === 'start') {
-        get(this, 'metrics').trackEvent('GoogleAnalytics', {
+        get(this, 'metrics').trackEvent({
           category: 'Discover',
           action: 'Discover Entered'
         });
@@ -28,7 +28,7 @@ export default Route.extend({
       this.replaceWith('discover.index');
     }
     else {
-      get(this, 'metrics').trackEvent('GoogleAnalytics', {
+      get(this, 'metrics').trackEvent({
         category: 'Discover',
         action: 'Discover Entered'
       });
@@ -37,7 +37,7 @@ export default Route.extend({
   },
   actions: {
     next() {
-      get(this, 'metrics').trackEvent('GoogleAnalytics', {
+      get(this, 'metrics').trackEvent({
         category: 'Discover',
         action: 'Clicked Get Started'
       });

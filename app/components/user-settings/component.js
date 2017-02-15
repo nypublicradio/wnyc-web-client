@@ -32,7 +32,7 @@ export default Ember.Component.extend({
   actions: {
     toggleAutoplay(enableAutoplay) {
       let metrics = this.get('metrics');
-      metrics.trackEvent('GoogleAnalytics', {
+      metrics.trackEvent({
         category: "Settings",
         action:   "Continuous Play Toggle",
         label:    enableAutoplay ? "on" : "off"
@@ -45,7 +45,7 @@ export default Ember.Component.extend({
 
     selectStream(stream) {
       let metrics = this.get('metrics');
-      metrics.trackEvent('GoogleAnalytics', {
+      metrics.trackEvent({
         category: "Settings",
         action:   "Continuous Play Stream",
         label:    stream.get('name')
@@ -57,7 +57,7 @@ export default Ember.Component.extend({
 
     selectAutoPlayPref({ field }) {
       let metrics = this.get('metrics');
-      metrics.trackEvent('GoogleAnalytics', {
+      metrics.trackEvent({
         category: "Settings",
         action:   "Continuous Play Target",
         label:    field === 'default_stream' ? this.get('activeStream.name') : 'queue'

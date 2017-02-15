@@ -29,7 +29,7 @@ export default Ember.Component.extend({
 
   actions: {
     selectAll() {
-      get(this, 'metrics').trackEvent('GoogleAnalytics', {
+      get(this, 'metrics').trackEvent({
         category: 'Discover',
         action: 'Selected All Topics',
       });
@@ -37,7 +37,7 @@ export default Ember.Component.extend({
       this.updateTopics(this.get('topicTags'));
     },
     selectNone() {
-      get(this, 'metrics').trackEvent('GoogleAnalytics', {
+      get(this, 'metrics').trackEvent({
         category: 'Discover',
         action: 'Cleared All Topics',
       });
@@ -50,7 +50,7 @@ export default Ember.Component.extend({
       let title = get(topic, 'title');
 
       if (action === 'added') {
-        get(this, 'metrics').trackEvent('GoogleAnalytics', {
+        get(this, 'metrics').trackEvent({
           category: 'Discover',
           action: 'Selected Topic',
           label: title
@@ -59,7 +59,7 @@ export default Ember.Component.extend({
         topics.addObject(value);
       }
       else if (action === 'removed') {
-        get(this, 'metrics').trackEvent('GoogleAnalytics', {
+        get(this, 'metrics').trackEvent({
           category: 'Discover',
           action: 'Deselected Topic',
           label: title

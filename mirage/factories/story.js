@@ -24,6 +24,6 @@ export default Factory.extend({
       containers: "Show: The Brian Lehrer Show | Series: Everything You Need to Know About the 2016 Election",
       title: this.title
     };
-  },
-  siteId: 1
+  }
+  
 });
