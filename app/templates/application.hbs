@@ -45,6 +45,7 @@
     {{#nypr-player currentTitle=integration.currentTitle backdropImageUrl=integration.backdropImageUrl as |content|}}
         {{#content.for 'trackInfo'}}
           {{nypr-player-integration.track-info
+            currentAudio   = integration.currentAudio
             showTitle      = integration.showTitle
             showUrl        = integration.showUrl
             storyTitle     = integration.storyTitle

@@ -59,13 +59,13 @@ $wnyc-player-link-color       : #77A6DE;
 }
 
 .nypr-player-stream-info-station-info {
-  color: rgba($nypr-player-primary-color, 0.3);
+  color: rgba($nypr-player-primary-color, 0.8);
   a {
-    color: $wnyc-player-link-color;
+    color: $nypr-player-primary-color ;
     font-weight: 700;
 
     &:hover {
-      border-bottom-color: $wnyc-player-link-color;
+      border-bottom-color: $nypr-player-primary-color;
       @include mq($nypr-player-medium-and-up) {
         border-bottom-color: inherit;
       }
