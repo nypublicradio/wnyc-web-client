@@ -1,5 +1,5 @@
 import config from 'wnyc-web-client/config/environment';
-import { Response } from 'ember-cli-mirage';
+import { Response, faker } from 'ember-cli-mirage';
 
 // Mirage is diabled by default when using --proxy
 // In development (without --proxy) and test environments, these handlers will be used
@@ -151,17 +151,32 @@ export default function() {
 
   this.post('/v1/password', {});
 
-  this.get('/v1/session', (schema, request) => {
+  this.get('/v1/session', ({users}, request) => {
     if (!request.requestHeaders.Authorization) {
       return new Response(401);
     }
-    return schema.users.first();
+    return users.first();
   });
   this.post('/v1/session', {access_token: 'secret', expires_in: 3600, token_type: 'bearer'});
   this.put('/v1/session', {access_token: 'secret', expires_in: 3600, token_type: 'bearer'});
   this.delete('/v1/session', {});
 
-  this.post('/v1/user', {});
+  this.post('/v1/user', ({users}, request) => {
+    let body = JSON.parse(request.requestBody);
+    if (request.requestHeaders['X-Provider']) {
+      let u = users.create({
+        email: faker.internet.email(),
+        given_name: faker.name.firstName(),
+        family_name: faker.name.lastName(),
+        perferred_username: faker.name.firstName() + faker.name.firstName(),
+        facebook_id: body.facebook_id,
+        picture: body.picture
+      });
+        
+      return u;
+    }
+    return {};
+  });
   this.patch('/v1/user', (schema, request) => {
     if (!request.requestHeaders.Authorization) {
       return new Response(401);
