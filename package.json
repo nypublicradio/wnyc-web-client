@@ -97,7 +97,7 @@
     "liquid-fire": "0.26.4",
     "loader.js": "^4.0.10",
     "morgan": "^1.6.1",
-    "nypr-ui": "github:nypublicradio/nypr-ui#3d3f9aaf79bad8a030300dc9acd3dd1439ec791f",
+    "nypr-ui": "github:nypublicradio/nypr-ui#49300b524e0b6f6096dd91cccf1dcb3320122cb3",
     "nypr-account-settings": "github:nypublicradio/nypr-account-settings#ce38584",
     "torii": "0.8.1"
   },

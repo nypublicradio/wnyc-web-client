@@ -57,7 +57,7 @@
 
   .signup {
     .account-form {
-      height: 770px;
+      height: 825px;
     }
 
     .account-promo {
@@ -213,7 +213,7 @@
     background-color: $lightestgray;
     content: "";
     display: inline-block;
-    height: 0.5px;
+    height: 1px;
     position: relative;
     vertical-align: middle;
     width: 50%;
@@ -266,6 +266,12 @@
     }
   }
 }
+
+.account-form-btn--facebook {
+  @include btn--facebook;
+  margin-bottom: 14px;
+}
+
 
 .account-header {
   @include flexbox((

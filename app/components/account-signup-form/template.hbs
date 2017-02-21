@@ -10,7 +10,11 @@
     {{account-thanks email=changeset.email}}
   {{else}}
 
-    <h2 class="account-form-heading">Sign up for an account</h2>
+    <button class="account-form-btn account-form-btn--facebook" {{action 'signupWithFacebook'}}>
+      <i class="fa fa-facebook-square"></i>Sign Up With Facebook
+    </button>
+
+    <div class="account-form-separator">or</div>
 
     <div class="account-form-row">
       <div class="account-form-col2">
