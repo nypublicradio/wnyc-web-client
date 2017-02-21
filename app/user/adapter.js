@@ -33,4 +33,19 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
 
     return this.ajax(url, 'PATCH', { data: data });
   },
+  
+  createRecord(store, type, {record, adapterOptions}) {
+    // at this point we're still unauthenticated, so we need to manually add
+    // required X-Provider and Authorization headers for sign up via third-
+    // party providers e.g. facebook
+    if (adapterOptions && adapterOptions.provider) {
+      this.set('headers', {
+        'X-Provider': adapterOptions.provider,
+        'Authorization': `Bearer ${record.get('providerToken')}`
+      });
+    } else {
+      this.set('headers', undefined);
+    }
+    return this._super(...arguments);
+  }
 });
