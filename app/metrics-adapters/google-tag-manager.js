@@ -1,4 +1,4 @@
-import GoogleTagManagerAdapter from 'ember-metrics/metrics-adapters/google-tag-manager';
+import GoogleTagManager from 'ember-metrics/metrics-adapters/google-tag-manager';
 
-export default GoogleTagManagerAdapter.extend({
+export default GoogleTagManager.extend({
 });
