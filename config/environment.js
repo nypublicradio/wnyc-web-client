@@ -13,9 +13,6 @@ module.exports = function(environment) {
     environment: environment,
     rootURL: '/',
     locationType: 'auto',
-    'ember-metrics': {
-      includeAdapters: ['google-analytics', 'data-warehouse', 'google-tag-manager']
-    },
     emberHifi: {
       connections: [{
         name: 'NativeAudio'
