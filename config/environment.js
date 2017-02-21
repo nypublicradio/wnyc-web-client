@@ -139,6 +139,15 @@ module.exports = function(environment) {
       'object-src': "'self' *.wnyc.net:* *.wnyc.org *.moatads.com *.googlesyndication.com",
       'font-src': "'self' data: fonts.gstatic.com",
       'frame-src': "'self' *"
+    },
+    torii: {
+      providers: {
+        'facebook-connect': {
+          appId: process.env.FB_APP || '1399025636795196',
+          scope: 'user_friends,email',
+          version: 'v2.8'
+        }
+      }
     }
   };
 
