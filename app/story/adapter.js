@@ -1,6 +1,6 @@
 import ENV from '../config/environment';
 import DS from 'ember-data';
-import wrapAjax from 'wnyc-web-client/lib/wrap-ajax';
+import wrapAjax from 'wqxr-web-client/lib/wrap-ajax';
 // TODO: auth headers for native fetch
 // import fetch from 'fetch';
 import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';

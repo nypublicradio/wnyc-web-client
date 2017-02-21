@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { initialize } from 'wnyc-web-client/instance-initializers/google-ads';
+import { initialize } from 'wqxr-web-client/instance-initializers/google-ads';
 import { module, test } from 'qunit';
 import destroyApp from '../../helpers/destroy-app';
 
