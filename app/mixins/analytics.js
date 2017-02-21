@@ -6,10 +6,10 @@ import service from 'ember-service/inject';
 export default Mixin.create({
   metrics: service(),
   dataPipeline: service(),
-  
+
   willTransition() {
     this.set('dataPipeline.currentReferrer', window.location.toString());
-      
+
     let ret = this._super(...arguments);
     return ret === false ? ret : true;
   },
@@ -20,7 +20,7 @@ export default Mixin.create({
       this._trackPage();
     }
     controller._wasModal = false;
-      
+
     let ret = this._super(...arguments);
     return ret === false ? ret : true;
   },
@@ -32,6 +32,7 @@ export default Mixin.create({
       const title = document.title; // this should be something dynamic
 
       metrics.trackPage('GoogleAnalytics', { page, title });
+      metrics.trackPage('GoogleTagManager', { page, title });
     });
   },
 });

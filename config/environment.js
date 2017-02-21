@@ -32,6 +32,11 @@ module.exports = function(environment) {
       config: {
         id: 'UA-18188937-11'
       }
+    }, {
+      name: 'GoogleTagManager',
+      config: {
+        id: process.env.GOOGLE_TAG_MANAGER_ID || (environment === 'production' ? 'GTM-PM94N2' : 'GTM-KJZRH7H')
+      }
     }],
     EmberENV: {
       FEATURES: {
@@ -100,7 +105,6 @@ module.exports = function(environment) {
     googleAnalyticsKey: process.env.GOOGLE_ANALYTICS || 'UA-46158613-1',
     nprGoogleAnalyticsKey: 'UA-18188937-11',
     googleAPIv3Key: process.env.GOOGLE_API_V3_KEY,
-    googleTagManagerId: process.env.GOOGLE_TAG_MANAGER_ID || (environment === 'production' ? 'GTM-PM94N2' : 'GTM-KJZRH7H'),
     typekit: { kitId: 'ifl2zxi' },
     wnycAPI: process.env.WNYC_API,
     discoverStation: "wnyc-v2",
