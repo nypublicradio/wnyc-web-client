@@ -1,37 +1,36 @@
 <h1 class="h3">
-    <button class="btn btn--large btn--link btn--linkicon" {{action 'getComments'}} data-test-selector="story-comments">
-        <i class="fa fa-comment icon--prefix--large"></i>
-        <span class="btn--prefixbody">
-          {{#if (gt commentsCount 1)}}
-            {{commentsCount}} Comments
-          {{else if (gt commentsCount 0)}}
-            {{commentsCount}} Comment
-          {{else}}
-            Post a Comment
-          {{/if}}
-        </span>
-    </button>
-    <i class="fa fa-circle-o-notch fa-spin" data-state="{{if isLoading 'is-visible' 'is-fadeout'}}"></i>
+  <button class="btn btn--large btn--link btn--linkicon" {{action 'getComments'}} data-test-selector="story-comments">
+    <i class="fa fa-comment icon--prefix--large"></i>
+    <span class="btn--prefixbody">
+    {{#if (gt commentsCount 1)}}
+      {{commentsCount}} Comments
+    {{else if (gt commentsCount 0)}}
+      {{commentsCount}} Comment
+    {{else}}
+      Post a Comment
+    {{/if}}
+    </span>
+  </button>
+  <i class="fa fa-circle-o-notch fa-spin" data-state="{{if isLoading 'is-visible' 'is-fadeout'}}"></i>
 </h1>
 
 {{#if isShowingComments}}
-    <div class="text">
-        <a href="/feeds/comments/{{story.itemTypeId}}/{{story.id}}" target="_blank">RSS Feed for Comments</a> | <a href="#commentsForm">Leave a Comment</a>
-    </div>
-    {{comments-list comments=comments isStaff=isStaff browserId=browserId}}
+  <div class="text">
+    <a href="/feeds/comments/{{story.itemTypeId}}/{{story.id}}" target="_blank">RSS Feed for Comments</a> | <a href="#commentsForm">Leave a Comment</a>
+  </div>
+  {{comments-list adminURL=adminURL comments=comments isStaff=isStaff browserId=browserId}}
 {{/if}}
 
 {{#if isShowingForm}}
-    {{comments-form action='saveSuccess' isStaff=isStaff browserId=browserId story=story}}
+  {{comments-form action='saveSuccess' email=email userName=userName isStaff=isStaff browserId=browserId story=story}}
 
-    <div class="text">
-        <p>Please stay on topic, be civil, and be brief. By leaving a comment, you agree to our <a href="/privacy">Privacy Policy</a> and <a href="/terms/">Terms Of Use</a>.
-      </p>
-    </div>
+  <div class="text">
+    <p>Please stay on topic, be civil, and be brief. By leaving a comment, you agree to our <a href="/privacy">Privacy Policy</a> and <a href="/terms/">Terms Of Use</a>.</p>
+  </div>
 {{/if}}
 
 {{#if isSuccess}}
-    <p>
-        Thank you for your comment! If you'd like to stay engaged, visit our homepage and sign up for our email newsletter.
-    </p>
+  <p>
+    Thank you for your comment! If you'd like to stay engaged, visit our homepage and sign up for our email newsletter.
+  </p>
 {{/if}}

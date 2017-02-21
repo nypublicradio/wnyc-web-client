@@ -57,7 +57,7 @@ test('view comments as staff user', function(assert) {
     .bootstrap({id})
     .visit({id});
   storyPage.clickShowComments();
-  andThen(() => assert.ok(find('.js-feature-comment').length, 'feature controls are visible'));
+  andThen(() => assert.ok(find('[data-test-selector=moderate]').length, 'moderate control is visible'));
 });
 
 test('story pages with a play param', function(assert) {

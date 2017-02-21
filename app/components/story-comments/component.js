@@ -1,9 +1,13 @@
-import Ember from 'ember';
+import Component from 'ember-component';
+import computed from 'ember-computed';
 import service from 'ember-service/inject';
+import config from 'wnyc-web-client/config/environment';
 
-export default Ember.Component.extend({
+export default Component.extend({
   metrics: service(),
-  comments: Ember.computed('getComments', {
+  adminURL: `${config.wnycAdminRoot}/admin`,
+  
+  comments: computed('getComments', {
     get() {
       this.set('isLoading', true);
       this.get('getComments')().then(comments => {
@@ -19,7 +23,7 @@ export default Ember.Component.extend({
     }
   },
 
-  commentsCount: Ember.computed('comments.[]', 'story', function() {
+  commentsCount: computed('comments.[]', 'story', function() {
     if (this.get('comments')) {
       return this.get('comments.length');
     } else {
@@ -27,14 +31,14 @@ export default Ember.Component.extend({
     }
   }),
 
-  isShowingForm: Ember.computed({
+  isShowingForm: computed({
     get() {
       return this.get('isShowingComments');
     },
     set(k,v) { return v; }
   }),
 
-  isShowingComments: Ember.computed({
+  isShowingComments: computed({
     get() {
       var hash = window.location.hash.slice(1).split('&');
       return hash.indexOf('comments') !== -1 || hash.indexOf('commentlist') !== -1;

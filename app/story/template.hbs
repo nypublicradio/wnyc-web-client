@@ -4,6 +4,8 @@
     {{#ember-wormhole to="comments"}}
       {{story-comments story=model.story
                        isStaff=session.data.isStaff
+                       email=user.email
+                       userName=(or session.data.staffName user.preferredUsername)
                        getComments=model.getComments
                        browserId=model.browserId}}
     {{/ember-wormhole}}
