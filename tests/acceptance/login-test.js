@@ -5,9 +5,9 @@ import { Response } from 'ember-cli-mirage';
 import config from 'wqxr-web-client/config/environment';
 import { currentSession } from 'wqxr-web-client/tests/helpers/ember-simple-auth';
 import 'wnyc-web-client/tests/helpers/with-feature';
-import dummySuccessProviderFb from'wqxr-web-client/tests/helpers/torii-dummy-success-provider-fb';
-import dummyFailureProvider from'wqxr-web-client/tests/helpers/torii-dummy-failure-provider';
-import { registerMockOnInstance } from'wqxr-web-client/tests/helpers/register-mock';
+import dummySuccessProviderFb from 'wqxr-web-client/tests/helpers/torii-dummy-success-provider-fb';
+import dummyFailureProvider from 'wqxr-web-client/tests/helpers/torii-dummy-failure-provider';
+import { registerMockOnInstance } from 'wqxr-web-client/tests/helpers/register-mock';
 
 moduleForAcceptance('Acceptance | login', {
   beforeEach() {

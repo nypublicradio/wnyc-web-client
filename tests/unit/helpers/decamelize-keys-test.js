@@ -1,4 +1,4 @@
-import { decamelizeKeys } from'wqxr-web-client/helpers/decamelize-keys';
+import { decamelizeKeys } from 'wqxr-web-client/helpers/decamelize-keys';
 import { module, test } from 'qunit';
 
 module('Unit | Helper | decamelize-keys');

@@ -1,5 +1,5 @@
 import Route from 'ember-route';
-import config from'wqxr-web-client/config/environment';
+import config from 'wqxr-web-client/config/environment';
 
 export default Route.extend({
   config,

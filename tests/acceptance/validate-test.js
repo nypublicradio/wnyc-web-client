@@ -1,8 +1,8 @@
 import { test } from 'qunit';
-import moduleForAcceptance from'wqxr-web-client/tests/helpers/module-for-acceptance';
-import { currentSession } from'wqxr-web-client/tests/helpers/ember-simple-auth';
+import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
+import { currentSession } from 'wqxr-web-client/tests/helpers/ember-simple-auth';
 // import { Response } from 'ember-cli-mirage';
-// import config from'wqxr-web-client/config/environment';
+// import config from 'wqxr-web-client/config/environment';
 
 moduleForAcceptance('Acceptance | validate');
 

@@ -1,6 +1,6 @@
 import Controller from 'ember-controller';
 import service from 'ember-service/inject';
-import config from'wqxr-web-client/config/environment';
+import config from 'wqxr-web-client/config/environment';
 import fetch from 'fetch';
 import RSVP from 'rsvp';
 

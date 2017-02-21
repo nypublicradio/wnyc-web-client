@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { setBreakpointForIntegrationTest } from'wqxr-web-client/tests/helpers/responsive';
+import { setBreakpointForIntegrationTest } from 'wqxr-web-client/tests/helpers/responsive';
 
 moduleForComponent('nypr-player-integration/track-info', 'Integration | Component | nypr player integration/track info', {
   integration: true

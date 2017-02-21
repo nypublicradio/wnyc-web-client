@@ -1,7 +1,7 @@
 import Component from 'ember-component';
 import computed from 'ember-computed';
 import service from 'ember-service/inject';
-import config from'wqxr-web-client/config/environment';
+import config from 'wqxr-web-client/config/environment';
 
 export default Component.extend({
   metrics: service(),
