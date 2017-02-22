@@ -337,7 +337,7 @@ test('metrics properly reports channel attrs', function(assert) {
       cms_id: 123,
       item_type: 'show',
       browser_id: undefined,
-      client: 'wnyc_web',
+      client: 'wqxr_web',
       referrer: location.toString(),
       url: location.toString(),
       site_id: show.siteId

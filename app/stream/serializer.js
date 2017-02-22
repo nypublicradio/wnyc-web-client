@@ -76,7 +76,7 @@ export default DS.JSONAPISerializer.extend({
       }
       if (current_show.episode_pk) {
         relationships = relationships || {};
-        relationships.currentStory = {
+        relationships['current-story'] = {
           data: {
             type: 'story',
             id: current_show.episode_pk

@@ -16,7 +16,8 @@ moduleFor('service:bumper-state', 'Unit | Service | bumper state', {
     'adapter:stream',
     'serializer:stream',
     'model:story',
-    'adapter:story'
+    'adapter:story',
+    'serializer:story'
   ],
 
   beforeEach() {
@@ -33,7 +34,8 @@ moduleFor('service:bumper-state', 'Unit | Service | bumper state', {
         'queue': {
           'items': A(),
         }
-      }
+      },
+      authorize: function() {}
     });
 
     startMirage(this.container);

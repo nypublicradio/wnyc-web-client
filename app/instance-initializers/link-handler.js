@@ -43,7 +43,7 @@ function _trackEvent(data, instance) {
   if (model) {
     eventToTrack.model = model;
   }
-  metrics.trackEvent(eventToTrack);
+  metrics.trackEvent('GoogleAnalytics', eventToTrack);
 }
 
 function _trackLegacyEvent(event, instance) {
@@ -120,7 +120,7 @@ export default {
 
         let { routeName, params, queryParams } = router.recognize(href);
         router.transitionTo(routeName, params, queryParams);
-        preventDefault.bind(event);
+        preventDefault.bind(event)();
         return false;
       } else if (isExternal && !Ember.testing) {
         $target.attr('target', '_blank');

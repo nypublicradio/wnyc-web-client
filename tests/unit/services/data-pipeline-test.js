@@ -30,7 +30,7 @@ test('it reports the proper data for an item view', function(assert) {
   let testData = {cms_id: 1, item_type: 'story', site_id: 1};
   let expected = Object.assign({
     browser_id: 'secrets',
-    client: 'wnyc_web',
+    client: 'wqxr_web',
     referrer: null,
     url: location.toString()
   }, testData);
@@ -50,7 +50,7 @@ test('it reports the proper data for ondemand listen actions', function(assert) 
   let clock = sinon.useFakeTimers();
   let expected = {
     audio_type: 'ondemand',
-    client: 'wnyc_web',
+    client: 'wqxr_web',
     delta: 0,
     current_position: 0,
     browser_id: 'secrets',
