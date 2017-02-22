@@ -40,6 +40,7 @@ deployment:
             SENTRY_EMBER_SOURCEMAPS_KEY: $PROD_SENTRY_EMBER_SOURCEMAPS_KEY
             AUTH_SERVICE: $PROD_AUTH_SERVICE
             WNYC_ADMIN_ROOT: $PROD_ADMIN_ROOT
+            GOOGLE_TAG_MANAGER_ID: $PROD_GOOGLE_TAG_MANAGER_ID
   demo:
     branch: demo
     commands:
@@ -59,6 +60,7 @@ deployment:
             SENTRY_EMBER_SOURCEMAPS_KEY: $DEMO_SENTRY_EMBER_SOURCEMAPS_KEY
             AUTH_SERVICE: $DEMO_AUTH_SERVICE
             WNYC_ADMIN_ROOT: $DEMO_ADMIN_ROOT
+            GOOGLE_TAG_MANAGER_ID: $DEMO_GOOGLE_TAG_MANAGER_ID
   auth:
     branch: auth
     commands:

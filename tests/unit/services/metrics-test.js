@@ -8,6 +8,7 @@ moduleFor('service:metrics', 'Unit | Service | metrics', {
   needs: [
     'metrics-adapter:google-analytics',
     'metrics-adapter:npr-analytics',
+    'metrics-adapter:google-tag-manager',
   ]
 });
 
@@ -22,17 +23,17 @@ test('calling tracking events does not call npr tracking events', function(asser
 
   let nprTrackPageSpy = this.spy(service._adapters.NprAnalytics, 'trackPage');
   let nprTrackEventSpy = this.spy(service._adapters.NprAnalytics, 'trackEvent');
-  
+
   let gaTrackPageSpy = this.spy(service._adapters.GoogleAnalytics, 'trackPage');
   let gaTrackEventSpy = this.spy(service._adapters.GoogleAnalytics, 'trackEvent');
-  
+
   service.trackPage({ page: '/foo', title: 'foo' });
-  
+
   assert.notOk(nprTrackPageSpy.returnValue, 'npr trackPage should not be called');
   assert.equal(gaTrackPageSpy.callCount, 1, 'ga trackPage should be called');
-  
+
   service.trackEvent({ category: 'foo', action: 'bar', label: 'baz' });
-  
+
   assert.notOk(nprTrackEventSpy.returnValue, 'npr trackEvent should not be called');
   assert.equal(gaTrackEventSpy.callCount, 1, 'ga trackEvent should be called');
 });
