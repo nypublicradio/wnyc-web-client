@@ -10,11 +10,13 @@
     {{account-thanks email=changeset.email}}
   {{else}}
 
+  {{#if features.socialAuth}}
     <button class="account-form-btn account-form-btn--facebook" {{action 'signupWithFacebook'}}>
       <i class="fa fa-facebook-square"></i>Sign Up With Facebook
     </button>
 
     <div class="account-form-separator">or</div>
+  {{/if}}
 
     <div class="account-form-row">
       <div class="account-form-col2">
