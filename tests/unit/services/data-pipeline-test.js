@@ -27,7 +27,7 @@ test('it reports the proper data for an item view', function(assert) {
   let testData = {cms_id: 1, item_type: 'story'};
   let expected = Object.assign({
     browser_id: 'secrets',
-    client: 'wnyc_web',
+    client: 'wqxr_web',
     external_referrer: document.referrer,
     referrer: null,
     url: location.toString(),
@@ -49,7 +49,7 @@ test('it reports the proper data for on demand listen actions', function(assert)
   let expected = {
     audio_type: 'on_demand',
     browser_id: 'secrets',
-    client: 'wnyc_web',
+    client: 'wqxr_web',
     cms_id: 1,
     current_audio_position: 0,
     delta: 0,

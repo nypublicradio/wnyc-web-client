@@ -46,7 +46,7 @@ export default function() {
   );
   this.transition(
     this.includingInitialRender(),
-    this.toValue((newVal, oldVal) => newVal === 'queue-history' || oldVal === 'queue-history'),
+    this.hasClass('sliding-modal'),
     this.use('slidingModal')
   );
 

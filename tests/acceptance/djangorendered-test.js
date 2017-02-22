@@ -70,7 +70,7 @@ skip('it retries the server on a request error', function(assert) {
 });
 
 test('deferred scripts embedded within content do not run twice', function(assert) {
-  let page = server.create('djangoPage', {
+  let page = server.create('django-page', {
     id: 'story/foo/',
     slug: 'foo',
     body: `

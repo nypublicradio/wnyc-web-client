@@ -129,7 +129,7 @@ test('metrics properly reports story attrs', function(assert) {
       cms_id: story.id,
       item_type: 'story',
       browser_id: undefined,
-      client: 'wnyc_web',
+      client: 'wqxr_web',
       referrer: location.toString(),
       url: location.toString(),
       site_id: config.siteId
