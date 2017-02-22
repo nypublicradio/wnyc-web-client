@@ -10,7 +10,6 @@ export default AdaptiveStore.extend({
     this.on('sessionDataUpdated', (d) => {
       this._restoreQueue(d);
       this._restoreListens(d);
-      this._restoreDiscoverQueue(d);
     });
   },
 
@@ -18,26 +17,7 @@ export default AdaptiveStore.extend({
     let data = this._super(...arguments);
     return data
       .then(d => this._restoreQueue(d))
-      .then(d => this._restoreDiscoverQueue(d))
       .then(d => this._restoreListens(d));
-  },
-
-  _restoreDiscoverQueue(data) {
-    let store = this.get('store');
-    let queue = data["discover-queue"];
-
-    if (!queue) {
-      return data;
-    }
-
-    // convert serialized records to format the store expects
-    // from [{data: { .. }}, {data: { ... }}]
-    // to   {data: [ { ... }, { ... } ]}
-    let payload = {data: queue.mapBy('data')};
-    let stories = store.push(payload);
-
-    set(data, 'discover-queue', stories);
-    return data;
   },
 
   _restoreQueue(data) {

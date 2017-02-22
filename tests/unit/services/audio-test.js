@@ -527,7 +527,6 @@ test('with the bumper-state enabled, the bumper will act on a finished track eve
 // moduleFor('service:audio', 'Unit | Service | Audio Analytics', {
 //   // Specify the other units that are required for this test.
 //   needs: ['model:story','adapter:story','serializer:story',
-//           'model:discover/stories',
 //           'service:poll',
 //           'service:metrics',
 //           'service:listen-history'],

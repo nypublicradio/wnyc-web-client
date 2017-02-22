@@ -26,31 +26,6 @@ export default function() {
   this.get(`${baseUrl}/api/v1/list/streams/:slug`, 'stream');
   this.get('/api/v1/list/streams/:slug', 'stream');
 
-  this.get(`/api/v1/story/:slug`, function(schema, request) { // backbone makes this ajax request to the audio
-    let results = schema.discoverStories.all().models.filter(function(d) {
-      return d.id === request.params.slug;
-    });
-
-    return {
-      count: 1,
-      expires:  "2020-06-10T14:10:32",
-      results: results
-    };
-  });
-
-  this.get(`${baseUrl}/api/v1/discover/topics`, function(schema) {
-    let links = schema.discoverTopics.all().models.map(function(t) {
-      return {
-        url: t.url,
-        title: t.title
-      };
-    });
-
-    return {
-      links: links
-    };
-  });
-
   this.post(`${config.wnycAPI}/api/v1/listenaction/create/:id/play/`, {});
   this.post(`${config.wnycAPI}/api/v1/listenaction/create/:id/complete/`, {});
   this.post(`${config.wnycAPI}/api/most/view/managed_item/:id/`, {});
