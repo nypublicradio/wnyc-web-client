@@ -108,9 +108,6 @@ module.exports = function(environment) {
     nprGoogleAnalyticsKey: 'UA-18188937-11',
     googleAPIv3Key: process.env.GOOGLE_API_V3_KEY,
     wnycAPI: process.env.WQXR_API,
-    discoverStation: "wnyc-v2",
-    discoverAPIKey: "trident",
-    discoverTopicsKey: "wnyc",
     showsDiscoverStation: "active-shows",
     showsAPIKey: "hummingbird",
     moreShowsDiscoverStation: "archived-shows",
@@ -127,8 +124,6 @@ module.exports = function(environment) {
     wnycBetaURL: process.env.WNYC_BETA_URL,
     featureFlags: {
       'social-auth': process.env.SOCIAL_AUTH,
-      'discover': true,
-      'other-discover': process.env.OTHER_DISCOVER,
     },
     betaTrials: {
       betaInviteLanding: '#full-page-transforms-wrapper',

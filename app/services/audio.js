@@ -16,7 +16,6 @@ export default Service.extend({
   metrics:          service(),
   store:            service(),
   session:          service(),
-  discoverQueue:    service(),
   bumperState:      service(),
   listens:          service('listen-history'),
   queue:            service('listen-queue'),
@@ -322,22 +321,6 @@ export default Service.extend({
     }
   },
 
-  /* DISCOVER QUEUE -----------------------------------------------------------*/
-
-  discoverHasNext() {
-    return this.get('discoverQueue').nextItem(this.get('currentId'));
-  },
-
-  playDiscoverQueue() {
-    let nextTrack = this.get('discoverQueue').nextItem(this.get('currentId'));
-    if (nextTrack) {
-      this.play(get(nextTrack, 'id'), 'discover');
-      return true;
-    } else {
-      return this._flushContext();
-    }
-  },
-
   /* EVENTS -------------------------------------------------------*/
 
   finishedTrack() {
@@ -351,10 +334,6 @@ export default Service.extend({
     else if (this._didJustPlayFrom('queue') && this.queueHasNext()) {
       this._trackFinished(currentAudio, currentContext);
       return this.playNextInQueue();
-    }
-    else if (this._didJustPlayFrom('discover') && this.discoverHasNext()) {
-      this._trackFinished(currentAudio, currentContext);
-      return this.playDiscoverQueue();
     }
     else if (autoPlayEnabled && !this._didJustPlayFrom('Continuous Play')) {
       this._trackFinished(currentAudio, currentContext);
