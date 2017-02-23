@@ -1,0 +1,221 @@
+.home {
+  &__liveplayer {
+    background: $blue;
+    padding: 30px;
+    @include flexbox((
+      display: flex,
+      flex-direction: column,
+      justify-content: center,
+      align-items: center
+    ));
+
+    select {
+      background: transparent;
+      border: 0;
+    }
+  }
+
+  &__stories {
+    ul {
+      font-family: 'Lato';
+      list-style: none;
+      padding: 0;
+      @include flexbox((
+        display: flex,
+        flex-direction: row,
+        flex-wrap: wrap,
+        justify-content: space-between
+      ));
+
+      @include mq($small-only) {
+        @include flexbox((
+          flex-direction: column
+        ));
+        margin: 0; // TODO: may remove that before launch
+      }
+
+      li {
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center top;
+        @include flexbox((
+          display: flex,
+          flex-direction: column,
+          justify-content: space-between
+        ));
+
+        > div {
+          z-index: 1;
+        }
+
+        .story {
+          &__icons {
+            @include flexbox((
+              display: flex,
+              flex-direction: row,
+              align-items: center,
+              justify-content: space-between
+            ));
+
+            &__trending {
+              visibility: hidden;
+              color: $trending;
+            }
+
+            &__video {
+              visibility: hidden;
+            }
+          }
+          &__headline {
+            h2,
+            p {
+              margin: 0;
+            }
+
+            p {
+              margin-bottom: 5px;
+              font-weight: 700;
+              text-transform: uppercase;
+            }
+          }
+        }
+
+        &.story--trending {
+          .story__icons__trending {
+            visibility: visible;
+            @include fontsize(14);
+          }
+        }
+
+        &.story--video {
+          .story__icons__video {
+            visibility: visible;
+          }
+        }
+
+        &.story--1,
+        &.story--6 {
+          @include gradient-container;
+          color: white;
+          padding: 20px 30px 30px;
+          width: 66%;
+          height: 487px;
+
+          h2 {
+            @include text--largest;
+          }
+
+          &:before {
+            @include classic-gradient($filter);
+          }
+
+          @include mq($small-only) {
+            width: 100%;
+            height: 300px;
+            padding: 20px;
+
+            h2 {
+              @include fontsize(24);
+              line-height: 2rem;
+            }
+
+            p {
+              @include fontsize(14);
+            }
+          }
+        }
+
+        &.story--2,
+        &.story--3,
+        &.story--4,
+        &.story--5 {
+          @include gradient-container;
+          color: white;
+          width: 100%;
+          height: 237px;
+          padding: 20px 25px;
+
+          h2 {
+            @include fontsize(20);
+            line-height: 1.8rem;
+          }
+
+          p {
+            @include fontsize(14);
+          }
+
+          &:before {
+            @include classic-gradient($filter);
+          }
+
+          @include mq($small-only) {
+            height: auto;
+            padding: 25px 20px;
+            border-bottom: 1px solid $lightestgray;
+            background-image: none !important;
+            color: black;
+
+            h2 {
+              font-weight: normal;
+            }
+
+            .story__icons__video {
+              display: none;
+            }
+
+            &.story--video {
+              h2:before {
+                content: $video;
+                width: 36px;
+                display: inline-block;
+                top: 5px;
+                position: relative;
+              }
+            }
+
+            &.story--trending {
+              .story__icons {
+                position: absolute;
+                right: 25px;
+                top: 25px;
+
+                &__trending {
+                  color: $lightgray;
+
+                  svg {
+                    display: none;
+                  }
+                }
+              }
+            }
+
+            &:before {
+              background: none;
+            }
+          }
+        }
+      }
+    }
+
+    &--col {
+      width: 32%;
+
+      @include mq($small-only) {
+        width: 100%;
+      }
+
+      > ul {
+        height: 487px;
+        @include flexbox((
+          display: flex,
+          flex-direction: column,
+          justify-content: space-between
+        ));
+
+        @include mq($small-only) {
+          height: auto;
+        }
+      }
+    }
+  }
+}
