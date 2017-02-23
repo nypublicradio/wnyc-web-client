@@ -119,28 +119,52 @@ test('it reports the proper data for ondemand listen actions', function(assert) 
 });
 
 test('data pipeline tracks delta properly', function(assert) {
-  assert.expect(3);
+  assert.expect(5);
   
+  let currentCall = 0;
   let now = Date.now();
   let clock = sinon.useFakeTimers(now);
   let deltaShouldbe = 500;
   let service = this.subject({
     _send({action, delta}) {
-      if (/start|resume/.test(action)) {
-        assert.equal(delta, 0, 'delta should be 0 on start and resumes');
-      } else {
-        assert.equal(delta, deltaShouldbe, 'delta should be updated as time ticks');
+      switch(currentCall) {
+        case 1:
+          assert.equal(delta, 0, 'delta should be 0 on start and resumes');
+          break;
+        case 2:
+          assert.equal(delta, deltaShouldbe, 'delta should be updated as time ticks');
+          break;
+        case 3:
+          assert.equal(delta, 0, 'delta should be 0 if not playing');
+          break;
+        case 4:
+          assert.equal(delta, 0, 'delta should be 0 on start and resumes');
+          break;
+        case 5:
+          assert.equal(delta, deltaShouldbe, 'delta should be updated as time ticks');
+          break;
       }
     },
     _legacySend() {}
   });
+  currentCall++;
   service.reportListenAction('start');
   
   clock.tick(deltaShouldbe);
+  
+  currentCall++;
   service.reportListenAction('pause');
   
+  currentCall++;
+  service.reportListenAction('position');
+  
   clock.tick(1000);
+  currentCall++;
   service.reportListenAction('resume');
   
+  clock.tick(deltaShouldbe);
+  currentCall++;
+  service.reportListenAction('position');
+
   clock.restore();
 });
