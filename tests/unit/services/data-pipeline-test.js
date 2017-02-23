@@ -121,7 +121,8 @@ test('it reports the proper data for ondemand listen actions', function(assert) 
 test('data pipeline tracks delta properly', function(assert) {
   assert.expect(3);
   
-  let clock = sinon.useFakeTimers();
+  let now = Date.now();
+  let clock = sinon.useFakeTimers(now);
   let deltaShouldbe = 500;
   let service = this.subject({
     _send({action, delta}) {
