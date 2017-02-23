@@ -253,15 +253,11 @@
 // or better yet, let's not load this legacy CSS anymore?
 body.ember-application {
   background: white;
-  
-  &.home {
-    background: $nearwhite;
-  }
-  
+
   #wnyc_home h2 {
     font-weight: normal;
   }
-  
+
   .story-wrapper {
     border-radius: 3px;
 
@@ -270,18 +266,18 @@ body.ember-application {
       font-weight: normal;
       font-size: 12px;
     }
-        
+
     .media {
       border-radius: 3px 3px 0 0;
-    }     
+    }
   }
-  
-  @media screen and (min-width:800px) {    
+
+  @media screen and (min-width:800px) {
     #home-primary {
       h2 {
         font-size: 20px;
       }
-      
+
       .image {
         border-radius: 3px 0 0 3px;
       }

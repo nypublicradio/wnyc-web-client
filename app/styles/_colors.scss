@@ -1,0 +1,41 @@
+$trending: #FBE01A;
+
+$filter: rgba(0, 0, 0, .3);
+$gradient: linear-gradient(20deg ,rgba(0, 0, 0, .4), rgba(0, 0, 0, .4));
+
+@mixin gradient-container {
+    top: 0;
+    left: 0;
+    width: 100%;
+    position: relative;
+}
+
+@mixin classic-gradient($gradient-style) {
+    content: "classic gradient";
+    overflow: hidden;
+    position: absolute;
+    text-indent: -9999rem;
+    font-size: 0;
+    line-height: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: $gradient-style;
+}
+
+@mixin animate-gradient($gradient-style, $opacity) {
+    content: "animated gradient";
+    overflow: hidden;
+    position: absolute;
+    text-indent: -9999rem;
+    font-size: 0;
+    line-height: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: $gradient-style;
+    transition: opacity 0.45s;
+    opacity: $opacity;
+}
