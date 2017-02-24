@@ -60,6 +60,13 @@ test('Submitting the sign up form shows the thank you screen', function(assert) 
   });
 });
 
+test('Sign up with Facebook button is visible at load', function(assert) {
+  withFeature('socialAuth');
+  visit('/signup');
+
+  andThen(() => assert.equal(find('button:contains(Sign up with Facebook)').length, 1));
+});
+
 skip('Successful facebook redirects and shows correct alert', function(assert) {
   withFeature('socialAuth');
   visit('/signup');
