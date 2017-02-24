@@ -1,9 +1,5 @@
 import { test, skip } from 'qunit';
-import djangoPage from 'wnyc-web-client/tests/pages/django-page';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
-import { Response } from 'ember-cli-mirage';
-import config from 'wnyc-web-client/config/environment';
-import { currentSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
 import 'wnyc-web-client/tests/helpers/with-feature';
 
 const fbResponseUser = {
@@ -31,7 +27,7 @@ moduleForAcceptance('Acceptance | signup', {
           callback(fbResponseUser);
         }
       }
-    }
+    };
   }
 });
 
@@ -72,7 +68,7 @@ skip('Successful facebook redirects and shows correct alert', function(assert) {
 
   andThen(() => {
     assert.equal(currentURL(), '/');
-    assert.equal(find('.alert').text().trim(), "You’re now logged in via Facebook. You can update your information on your account page.")
+    assert.equal(find('.alert').text().trim(), "You’re now logged in via Facebook. You can update your information on your account page.");
   });
 });
 
