@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { test, skip } from 'qunit';
 import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
 import config from 'wqxr-web-client/config/environment';
 import sinon from 'sinon';
@@ -42,7 +42,7 @@ test('it does not log a pageview when opening and closing the queue', function(a
   });
 });
 
-test('it logs a homepage bucket event when you click a story on the home page', function(assert) {
+skip('it logs a homepage bucket event when you click a story on the home page', function(assert) {
   assert.expect(2);
   let done = assert.async();
   let homepageBucketEvent = sinon.spy();

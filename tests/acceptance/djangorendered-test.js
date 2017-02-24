@@ -25,7 +25,7 @@ moduleForAcceptance('Acceptance | Django Rendered | Proper Re-renders', {
   }
 });
 
-test('on the homepage', function(assert) {
+skip('on the homepage', function(assert) {
   let home = server.create('django-page', {id: '/'});
   djangoPage
     .bootstrap(home)
