@@ -143,14 +143,6 @@
     button:focus {
       color: $darkestgray;
     }
-
-    .new {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 1.7px;
-      color: $red;
-    }
-
   }
 
   .list-item:last-child {
@@ -192,10 +184,6 @@
       button:hover {
         color: white;
         font-weight: 600;
-      }
-
-      .new {
-        color: $gold;
       }
 
       ul.alignright {
