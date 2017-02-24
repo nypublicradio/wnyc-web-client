@@ -21,8 +21,10 @@ export default Ember.Component.extend({
         toScroll
           .velocity('stop').css('left', 0);
 
-        if (width > this.$().width()) {
-
+        // sometimes this.$().width will come out as a 591.65525 px and
+        // width will be 592. We don't need to scroll in that case.
+        
+        if (width > Math.ceil(this.$().width())) {
           this.set('isScrolling', true);
 
           toScroll
