@@ -164,7 +164,7 @@ export default function() {
   this.post('/v1/user', ({users}, request) => {
     let body = JSON.parse(request.requestBody);
     if (request.requestHeaders['X-Provider']) {
-      let u = users.create({
+      let fbUser = users.create({
         email: faker.internet.email(),
         given_name: faker.name.firstName(),
         family_name: faker.name.lastName(),
@@ -172,10 +172,10 @@ export default function() {
         facebook_id: body.facebook_id,
         picture: body.picture
       });
-        
-      return u;
+
+      return fbUser;
     }
-    return {};
+    return users.first();
   });
   this.patch('/v1/user', (schema, request) => {
     if (!request.requestHeaders.Authorization) {
@@ -226,7 +226,7 @@ export default function() {
   /*-------------------------------------------------------------
   analytics microservice
   ---------------------------------------------------------------*/
-  
+
   this.post(`${config.wnycAPI}/analytics/v1/events/viewed`, {});
   this.post(`${config.wnycAPI}/analytics/v1/events/listened`, {});
 }
