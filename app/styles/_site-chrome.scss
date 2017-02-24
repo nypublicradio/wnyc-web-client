@@ -12,13 +12,7 @@
   }
 
   .icon--wqxr-logo-nav #wnyc-logo{
-    fill: $blue;
-  }
-
-  .nav--homepage & {
-    .icon--wqxr-logo-nav #wnyc-logo{
-      fill: white;
-    }
+    fill: white;
   }
 }
 
@@ -71,7 +65,7 @@
 }
 
 .sitechrome-nav {
-  background-color: white;
+  background-color: $wqxrblue;
   @include transition(all 50ms ease);
   //for mobile header snap
   width: 100%;
@@ -79,6 +73,14 @@
   top: 0;
   z-index: $zIndex--fixedNav;
   margin-bottom: 24px;
+
+  .new {
+    color: $gold;
+  }
+
+  ul.alignright {
+    border-color: $wqxrblue;
+  }
 
   a,
   button {
@@ -230,7 +232,6 @@
       border-right: 3px solid $red;
 
       a {
-        color: $blue;
         border: none;
       }
     }
@@ -430,5 +431,11 @@
     font-weight: 600;
     color: white;
     line-height: 1.5;
+
+    &:hover,
+    &:focus {
+      color: rgba(white, 0.8);
+      text-decoration: none;
+    }
   }
 }
