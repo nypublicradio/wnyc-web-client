@@ -2,31 +2,45 @@
   Using <a> tags here instead of ember {{link-to}} helpers in order to run google analytics tracking events on the links. Global link handler catches clicks on links with data-tracking properties and runs an event tracking function before routing the link. More in /wqxr-web-client/app/instance-initializers/link-handler.js
 --}}
 
-<footer class="l-full flush" id="footer">
+<footer class="l-full flush sitechrome-footer" id="footer">
   <div class="for-screenreaders">
     <h1>Document Footer</h1>
   </div>
 
-  <div class="l-highlight--gray {{if media.isMiddleNarrowAndUp 'l-padtop--double'}}">
+  <div class="l-highlight--black {{if media.isMiddleNarrowAndUp 'l-padtop--double'}}">
     <div class="l-constrained">
       <div class="l-flexgrid">
-        <nav class="l-flex1of2">
+        <nav class="l-flex1of3">
           <div class="l-unconstrained {{if media.isMiddleNarrowAndUp 'flush'}}">
-            <div class="l-highlight--mq--graydark {{unless media.isMiddleNarrowAndUp 'l-padtop'}}">
+            <div class="l-highlight--black {{unless media.isMiddleNarrowAndUp 'l-padtop'}}">
               <div class="l-constrained">
                 <div class="align--mq-centertoleft">
-                  <h2 class="text--normal h2">
-                    {{wnyc-svg icon='logo-wnyc' className='icon--wnyc-logo-footer'}}
-                    <span class="middle-narrow-up">About WNYC</span>
+                  <h2 class="text--normal text--white h2">
+                    {{nypr-svg icon='wqxr-logo' className='icon--wqxr-logo-footer'}}
+                    <span class="middle-narrow-up">105.9fm wqxr.org</span>
                   </h2>
-                  <!-- .h2 -->
 
                   <div class="text text--medium">
                     <div class="text-body text-body--rightpad2x">
                       <p>Listener-supported WNYC is the home for independent journalism and courageous conversation on air and online. Broadcasting live from New York City on 93.9 FM and AM 820 and available online and on the go.</p>
                     </div>
                   </div>
-                  <!-- .text -->
+                 
+                  <div class="text text--medium">
+                    <div class="text-body text-body--rightpad2x text--lightgray">
+                      <p>WQXR is supported by <br/> <img class="icon--jlgreene--footer" src="http://www.wnyc.org/i/raw/1/wnyc-footer.png"></p>
+                    </div>
+                  </div>
+
+                  <ul class="list list--noborder list--flex flush">
+                    <li class="list-item list-item--tiny">
+                      <a href="/terms/" title="Terms of Use" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Terms of Use">Terms of Use</a>
+                    </li>
+                    <li class="list-item list-item--tiny">
+                      <a href="/privacy/" title="Privacy" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Privacy">Privacy</a>
+                    </li>
+                  </ul>
+
                 </div>
                 <!-- .align-mq -->
               </div>
@@ -36,254 +50,130 @@
           </div>
           <!-- .l-unconstrained -->
 
-          <div class="l-highlight--gray">
-            <div class="l-flexgrid">
-              <div class="l-flex1of2 l-flex1of2--fixed">
-                <ul class="list list--noborder align--mq-centertoleft">
-                  <li class="list-item list-item--tiny">
-                    <a href="/schedule"
-                      class="link--capbold"
-                      title="On Air Schedule"
-                      data-tracking-category="WNYC Menu"
-                      data-tracking-action="Clicked On Air Schedule">
-                      On Air Schedule
-                    </a>
-                  </li>
-                  <li class="list-item list-item--tiny">
-                    <a href="/newsletters"
-                      class="link--capbold"
-                      title="Daily Newsletter"
-                      data-tracking-category="WNYC Menu"
-                      data-tracking-action="Clicked Daily Newsletter">
-                      Daily Newsletter
-                    </a>
-                  </li>
-                  <li class="list-item list-item--tiny">
-                   <a href="/events"
-                      class="link--capbold"
-                      title="Events"
-                      data-tracking-category="WNYC Menu"
-                      data-tracking-action="Clicked Events">
-                      Events
-                    </a>
-                  </li>
-                  <li class="list-item list-item--tiny">
-                    <a href="/community"
-                      class="link--capbold"
-                      title="Community"
-                      data-tracking-category="WNYC Menu"
-                      data-tracking-action="Clicked Community">
-                      Community
-                    </a>
-                  </li>
-                  <li class="list-item list-item--tiny">
-                    <a href="/giveaways"
-                      class="link--capbold"
-                      title="Giveaways"
-                      data-tracking-category="WNYC Menu"
-                      data-tracking-action="Clicked Giveaways">
-                      Giveaways
-                    </a>
-                  </li>
-                  <li class="list-item list-item--tiny">
-                    <a href="/weather"
-                      class="link--capbold"
-                      title="Weather"
-                      data-tracking-category="WNYC Menu"
-                      data-tracking-action="Clicked Weather">
-                      Weather
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div class="l-flex1of2 l-flex1of2--fixed">
-                <ul class="list list--noborder align--mq-centertoleft">
-                   <li class="list-item list-item--tiny">
-                    <a href="/mobile"
-                      class="link--capbold"
-                      title="Download Our Apps"
-                      data-tracking-category="WNYC Menu"
-                      data-tracking-action="Clicked Download Our Apps">
-                      Download Our Apps
-                    </a>
-                  </li>
-                   <li class="list-item list-item--tiny">
-                    <a href="/audio/podcasts"
-                      class="link--capbold"
-                      title="Podcasts"
-                      data-tracking-category="WNYC Menu"
-                      data-tracking-action="Clicked Podcasts">
-                      Podcasts
-                    </a>
-                  </li>
-                   <li class="list-item list-item--tiny">
-                    <a href="/archived-shows"
-                      class="link--capbold"
-                      title="More Shows"
-                      data-tracking-category="WNYC Menu"
-                      data-tracking-action="Clicked More Shows">
-                      More Shows
-                    </a>
-                  </li>
-                  <li class="list-item list-item--tiny">
-                    <a href="/series/archives-preservation"
-                      class="link--capbold"
-                      title="Audio Archives"
-                      data-tracking-category="WNYC Menu"
-                      data-tracking-action="Clicked Audio Archives">
-                      Audio Archives
-                    </a>
-                  </li>
-                  <li class="list-item list-item--tiny">
-                    <a href="/audio/help"
-                      class="link--capbold"
-                      title="Audio Help"
-                      data-tracking-category="WNYC Menu"
-                      data-tracking-action="Clicked Audio Help">
-                      Audio Help
-                    </a>
-                  </li>
-                  <li class="list-item list-item--tiny">
-                    <a href="/support"
-                      class="link--capbold"
-                      title="Support WNYC"
-                      data-tracking-category="WNYC Menu"
-                      data-tracking-action="Clicked Support WNYC">
-                      Support WNYC
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-            </div>
-            <!-- .l-flexgrid -->
-          </div>
-          <!-- .l-highlight-dark -->
+          
         </nav>
         <!-- .l-flex1of2 About WNYC -->
 
-        <div class="l-flex1of2">
-          <nav class="l-col1of2">
+        <div class="l-flex2of3">
+          <nav class="l-col1of3">
             <div class="align--mq-centertoleft">
               <h2 class="{{if media.isMiddleNarrowAndUp 'h2 text--normal' 'text--red text--upper text--spacing h5 nudge'}}">
-                Inside WNYC
+                WQXR
               </h2>
-              <!-- .h2 -->
               <ul class="list list--noborder align--mq-centertoleft">
                 <li class="list-item list-item--tiny">
-                  <a href="/about"
-                    title="About Us"
-                    class="link--capbold"
-                    data-tracking-category="WNYC Menu"
-                    data-tracking-action="Clicked About Us">
-                    About Us
-                  </a>
+                  <a href="/playlist-daily" title="Playlists" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Playlists">Playlists</a>
                 </li>
                 <li class="list-item list-item--tiny">
-                  <a href="/contact"
-                    title="Contact Us"
-                    class="link--capbold"
-                    target="_blank"
-                    data-tracking-category="WNYC Menu"
-                    data-tracking-action="Clicked Contact Us">
-                    Contact Us / Feedback
-                  </a>
+                  <a href="/schedule/" title="Schedule" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Schedule">Schedule</a>
                 </li>
                 <li class="list-item list-item--tiny">
-                  <a href="http://www.nypublicradio.org/underwriting/wnyc"
-                    title="Become a Sponsor"
-                    class="link--capbold"
-                    data-tracking-category="WNYC Menu"
-                    data-tracking-action="Clicked Become a Sponsor">
-                    Become a Sponsor
-                  </a>
+                  <a href="/programs/" title="Programs" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Programs">Programs</a>
                 </li>
                 <li class="list-item list-item--tiny">
-                 <a href="/careers"
-                    title="Careers"
-                    class="link--capbold"
-                    data-tracking-category="WNYC Menu"
-                    data-tracking-action="Clicked Careers">
-                    Careers
-                  </a>
+                  <a href="/hosts/" title="Hosts" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Hosts">Hosts</a>
                 </li>
                 <li class="list-item list-item--tiny">
-                  <a href="/press"
-                    title="Press"
-                    class="link--capbold"
-                    data-tracking-category="WNYC Menu"
-                    data-tracking-action="Clicked Press">
-                    Press
-                  </a>
+                  <a href="/articles/wqxr-features/" title="Featured Articles" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Featured Articles">Featured Articles</a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/series/cafe-concerts/" title="Cafe Concerts" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Cafe Concerts">Cafe Concerts</a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/articles/conducting-business/" title="Conducting Business" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Conducting Business">Conducting Business</a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/blogs/wqxr-blog/" title="News Blog" data-tracking-category="WQXR Menu" data-tracking-action="Clicked News Blog">News Blog</a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/blogs/operavore/" title="Operavore" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Operavore">Operavore</a>
                 </li>
               </ul>
             </div>
           <!-- .align -->
           </nav>
-          <!-- .l-col1of2 -->
+          <!-- .l-col1of3 -->
 
-          {{#if media.isMiddleNarrowAndUp}}
-          <nav class="l-col1of2">
-            <h2 class="text--normal h2 medium-up">
-              Social
-            </h2>
-            <!-- .h2 -->
-            <ul class="list list--noborder align--mq-centertoleft">
-              <li class="list-item list-item--tiny">
-                <a href="http://www.facebook.com/wnyc" class="link--capbold" title="Facebook" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Facebook">
-                  <i class="fa fa-facebook"></i>
-                  <span>Facebook</span>
-                </a>
-              </li>
-              <li class="list-item list-item--tiny">
-                <a href="http://www.twitter.com/wnyc" class="link--capbold" title="Twitter" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Twitter">
-                  <i class="fa fa-twitter"></i>
-                  <span>Twitter</span>
-                </a>
-              </li>
-              {{#if media.isLargeAndUp}}
-              {{!-- These twitter links don't work on mobile, hide on tablets --}}
-              <li class="list-item list-item--tiny">
-                <a href="https://twitter.com/WNYC/lists/wnyc-shows/members" class="link--capbold" title="Twitter" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Our Shows">
-                  <i class="fa fa-twitter"></i>
-                  <span>Our Shows</span>
-                </a>
-              </li>
-              <li class="list-item list-item--tiny">
-                <a href="https://twitter.com/WNYC/lists/wnyc-people/members" class="link--capbold" title="Twitter" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Our People">
-                  <i class="fa fa-twitter"></i>
-                  <span>Our People</span>
-                </a>
-              </li>
-              {{/if}}
-              <li class="list-item list-item--tiny">
-                <a href="https://www.instagram.com/wnyc" class="link--capbold" title="Instagram" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Instagram">
-                  <i class="fa fa-instagram"></i>
-                  <span>Instagram</span>
-                </a>
-              </li>
-              <li class="list-item list-item--tiny">
-                <a href="https://www.snapchat.com/add/wnycradio" class="link--capbold" title="Snapchat" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Snapchat">
-                  <i class="fa fa-snapchat-ghost"></i>
-                  <span>Snapchat</span>
-                </a>
-              </li>
-              <li class="list-item list-item--tiny">
-                <a href="https://www.youtube.com/user/wnycradio" class="link--capbold" title="YouTube" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked YouTube">
-                  <i class="fa fa-youtube"></i>
-                  <span>YouTube</span>
-                </a>
-              </li>
-              <li class="list-item list-item--tiny">
-                <a href="http://wnyc.tumblr.com" class="link--capbold" title="Tumblr" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Tumblr">
-                  <i class="fa fa-tumblr"></i>
-                  <span>Tumblr</span>
-                </a>
-              </li>
-            </ul>
+         
+          <nav class="l-col1of3">
+            <div class="align--mq-centertoleft">
+              <h2 class="{{if media.isMiddleNarrowAndUp 'h2 text--normal' 'text--red text--upper text--spacing h5 nudge'}}">
+                Q2 Music
+              </h2>
+              <!-- .h2 -->
+              <ul class="list list--noborder align--mq-centertoleft">
+
+                <li class="list-item list-item--tiny">
+                  <a href="/series/q2/" title="Homepage" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Homepage">Homepage</a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/playlist-daily/?scheduleStation=q2" title="Schedule &amp; Playlists" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Schedule &amp; Playlists">Schedule &amp; Playlists</a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/programs/meet-composer/" title="Meet the Composer" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Meet the Composer">Meet the Composer</a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/programs/lprlive/" title="LPR Live" data-tracking-category="WQXR Menu" data-tracking-action="Clicked LPR Live">LPR Live</a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/programs/newyorknow/" title="On-Demand Concerts" data-tracking-category="WQXR Menu" data-tracking-action="Clicked On-Demand Concerts">On-Demand Concerts</a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/story/458-say-hello-q2/" title="About" data-tracking-category="WQXR Menu" data-tracking-action="Clicked About">About</a>
+                </li>
+
+              </ul>
+            </div>
+          <!-- .align -->
           </nav>
-          <!-- .l-col1of2 -->
-          {{/if}}
+          <!-- .l-col1of3 -->
+
+
+          <nav class="l-col1of3">
+            <div class="align--mq-centertoleft">
+              <h2 class="{{if media.isMiddleNarrowAndUp 'h2 text--normal' 'text--red text--upper text--spacing h5 nudge'}}">
+                About Us
+              </h2>
+              <!-- .h2 -->
+              <ul class="list list--noborder align--mq-centertoleft">
+
+                <li class="list-item list-item--tiny">
+                  <a href="/mobile/promotion/" title="Mobile Apps" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Mobile Apps">Mobile Apps</a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/support/" title="" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Support WQXR">Support WQXR</a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/about/" title="About WQXR" data-tracking-category="WQXR Menu" data-tracking-action="Clicked About WQXR">About WQXR</a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/contact/" title="Contact Us" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Contact Us">Contact Us</a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/press/" title="Press" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Press">Press</a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/careers/" title="Jobs" data-tracking-category="WQXR Menu" data-tracking-action="Clicked obs">Jobs</a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/underwriting/" title="Underwriting" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Underwriting">Underwriting</a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="http://www.wnyc.org/outreach/cab/" title="Community Advisory Board" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Community Advisory Board">Community Advisory Board</a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="http://nypublicradio.org/" title="NY Public Radio" data-tracking-category="WQXR Menu" data-tracking-action="Clicked NY Public Radio">NY Public Radio</a>
+                </li>
+                <li class="list-item list-item--tiny">
+                  <a href="/articles/wqxr-and-q2-music-contest-rules/" title="Contest Rules" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Contest Rules">Contest Rules</a>
+                </li>
+              </ul>
+            </div>
+          <!-- .align -->
+          </nav>
+          <!-- .l-col1of3 -->
+
+
         </div>
         <!-- .l-flex1of2 -->
         <!-- inside wnyc/social -->
@@ -294,121 +184,59 @@
   </div>
   <!-- .l-highlight -->
 
-  <div class="l-highlight--gray pad-persistent-player">
+  <div class="l-highlight--black pad-persistent-player">
+
     <div class="l-constrained l-constrained--shrink">
       <div class="box--topborder box--flexpadtop">
-
         <div class="l-full">
-          <nav class="l-col1of2 align--mq-centertoleft">
-            <ul class="list list--noborder flush {{if media.isMiddleNarrowAndUp 'list--flex' 'list--inline'}}">
-              <li class="list-item list-item--tiny">
-                <h1 class="h5 inline text--upper">Our Sites:</h1>
-              </li>
-              <li class="list-item list-item--tiny">
-                <a class="link--capbold" href="http://www.wqxr.org" title="WQXR" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked WQXR">WQXR</a>
-              </li>
-              <li class="list-item list-item--tiny">
-                <a class="link--capbold" href="http://www.njpublicradio.org/" title="NJPR" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked NJPR">NJPR</a>
-              </li>
-              <li class="list-item list-item--tiny">
-                <a class="link--capbold" href="http://www.thegreenespace.org" title="The Greene Space" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked The Greene Space">The Greene Space</a>
-              </li>
-              <li class="list-item list-item--tiny">
-                <a class="link--capbold" href="http://www.wnycstudios.org" title="WNYC Studios" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked WNYC Studios">WNYC Studios</a>
-              </li>
-            </ul>
-          </nav>
-          <!-- .l-col1of2 -->
-        </div>
-        <!-- .l-full -->
-
-      </div>
-      <!-- .box -->
-    </div>
-    <!-- .l-constrained -->
-
-    {{#unless media.isMiddleNarrowAndUp}}
-    <nav class="box--flexpadtop box--topborder">
-      <div class="l-constrained">
-        <h2 class="for-screenreaders">Social</h2>
         <ul class="list list--noborder list--flex aligncenter flush">
           <li class="list-item list-item--tiny">
-            <a href="http://www.facebook.com/wnyc" title="Facebook" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Facebook">
-                <i class="fa fa-facebook fa-2x"></i>
-            </a>
+            <h2 class="h2 inline">Connect</h2>
           </li>
           <li class="list-item list-item--tiny">
-            <a href="http://www.twitter.com/wnyc" title="Twitter" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Twitter">
-                <i class="fa fa-twitter fa-2x"></i>
-            </a>
-          </li>
-          <li class="list-item list-item--tiny">
-            <a href="https://www.instagram.com/wnyc" title="Instagram" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Instagram">
-                <i class="fa fa-instagram fa-2x"></i>
-            </a>
-          </li>
-          <li class="list-item list-item--tiny">
-            <a href="https://www.snapchat.com/add/wnycradio" title="Snapchat" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Snapchat">
-                <i class="fa fa-snapchat-ghost fa-2x"></i>
-            </a>
-          </li>
-          <li class="list-item list-item--tiny">
-            <a href="https://www.youtube.com/user/wnycradio" title="YouTube" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked YouTube">
-                <i class="fa fa-youtube fa-2x"></i>
-            </a>
-          </li>
-          <li class="list-item list-item--tiny">
-            <a href="http://wnyc.tumblr.com" title="Tumblr" target="_blank" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Tumblr">
-                <i class="fa fa-tumblr fa-2x"></i>
-            </a>
-          </li>
+              <a href="http://www.facebook.com/WQXRClassical" title="Facebook" target="_blank" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Facebook">
+                <i class="fa fa-facebook"></i>
+                <span>Facebook</span>
+              </a>
+            </li>
+            <li class="list-item list-item--tiny">
+              <a href="http://www.twitter.com/WQXR" title="Twitter" target="_blank" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Twitter">
+                <i class="fa fa-twitter"></i>
+                <span>Twitter</span>
+              </a>
+            </li>
+            <li class="list-item list-item--tiny">
+              <a href="https://www.instagram.com/wqxr_classical/" title="Instagram" target="_blank" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Instagram">
+                <i class="fa fa-instagram"></i> 
+                <span>Instagram</span>
+              </a>
+            </li>
+            <li class="list-item list-item--tiny">
+              <a href="http://www.youtube.com/user/WQXRClassical" title="YouTube" target="_blank" data-tracking-category="WQXR Menu" data-tracking-action="Clicked YouTube">
+                <i class="fa fa-youtube"></i>
+                <span>YouTube</span>
+              </a>
+            </li>
+            <li class="list-item list-item--tiny">
+              <a href="http://tunein.com/radio/stations/WNYC-Radio-Stations-a38278/" title="Tune In" target="_blank" data-tracking-category="WQXR Menu" data-tracking-action="Clicked Tune In">
+                <i class="fa fa-tunein"></i>
+                <span>Tune In</span>
+              </a>
+            </li>
+            <li class="list-item list-item--tiny">
+              <a href="/feeds/all/" title="RSS" target="_blank" data-tracking-category="WQXR Menu" data-tracking-action="Clicked RSS">
+                <i class="fa fa-rss"></i>
+                <span>Rss</span>
+              </a>
+            </li>
         </ul>
-      </div>
-      <!-- .l-constrained -->
-    </nav>
-    <!-- .box -->
-    {{/unless}}
-
-    <div class="l-constrained l-constrained--shrink">
-      <div class="box--topborder box--flexpadtop">
-        <div class="l-full">
-          <div class="l-col2of3">
-            <nav class="align--mq-centertoleft">
-              <div class="for-screenreaders">
-                <h2>Legal Nav</h2>
-              </div>
-              <ul class="list list--noborder flush {{if media.isMiddleNarrowAndUp 'list--flex'}}">
-                <li class="list-item list-item--tiny">
-                  <a href="http://www.newyorkpublicradio.org" class="link--capbold" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Copyright">&copy; {{moment-format (now) 'YYYY'}} New York Public Radio</a>
-                </li>
-                <li class="list-item list-item--tiny">
-                  <a href="/terms/" class="link--capbold" title="Terms of Use" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Terms of Use">Terms of Use</a>
-                </li>
-                <li class="list-item list-item--tiny">
-                  <a href="/privacy/" class="link--capbold" title="Privacy Policy" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Privacy Policy">Privacy Policy</a>
-                </li>
-                <li class="list-item list-item--tiny">
-                  <a href="/corrections/" class="link--capbold" title="Corrections" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Corrections">Corrections</a>
-                </li>
-                <li class="list-item list-item--tiny">
-                  <a href="/articles/wnyc-contest-rules" class="link--capbold" title="Contest Rules" data-tracking-category="WNYC Menu" data-tracking-action="Clicked Contest Rules">Contest Rules</a>
-                </li>
-              </ul>
-            </nav>
-            <!-- .align -->
-          </div>
-          <div class="l-col1of3 middle-narrow-up">
-            <div class="text--small {{if media.isMediumAndUp 'alignright' 'aligncenter'}}">
-              <span class="text--lightgray">WNYC is supported by <img class="icon--jlgreene--footer" src="http://www.wnyc.org/i/raw/1/wnyc-footer.png"></span>
-            </div>
-          </div>
-        </div>
-
-
+     </div>
+        <!-- .l-full -->
       </div>
       <!-- .box -->
     </div>
-    <!-- .l-constrained -->
+      <!-- .l-constrained -->
+
   </div>
   <!-- .l-highlight -->
 </footer>

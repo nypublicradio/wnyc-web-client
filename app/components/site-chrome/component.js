@@ -11,14 +11,14 @@ export default Component.extend(BetaActionsMixin, {
   router: service('wnyc-routing'),
   currentUser: service(),
   donateURL: config.wnycDonateURL,
-  defaultStream:  {slug: 'wnyc-fm939', name: 'WNYC 93.9 FM'},
+  defaultStream:  {slug: 'wqxr', name: 'WQXR New York'},
   preferredStream: or('session.data.user-prefs-active-stream', 'defaultStream'),
 
   click: function({target}){
     if (target.tagName === "A"){
       //send tracking
       this.get('metrics').trackEvent('GoogleAnalytics', {
-        category: 'WNYC Menu',
+        category: 'WQXR Menu',
         action: "Clicked " + target.text,
       });
     }

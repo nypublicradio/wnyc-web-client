@@ -19,18 +19,18 @@
       <div class="sitechrome-topbody-right">
           {{#if media.isLargeAndUp}}
           <div class="sitechrome-search">
-            {{search-box placeholder="I heard something... Help me find it" enter=(action "routeSearch") searchbox-class="searchbox--chrome"}}
+            {{search-box placeholder="Search" enter=(action "routeSearch") searchbox-class="searchbox--chrome"}}
           </div>
           {{else}}
           <div>
             <h1>
-              <span class="for-screenreaders">WNYC Navigation</span>
+              <span class="for-screenreaders">WQXR Navigation</span>
               <a href="/"
                 class="link--nodecor"
-                title="WNYC | New York Public Radio Home Page"
-                data-tracking-category="WNYC Menu"
-                data-tracking-action="Clicked WNYC Logo">
-                WQXR
+                title="WQXR | New York Public Radio Home Page"
+                data-tracking-category="WQXR Menu"
+                data-tracking-action="Clicked WQXR Logo">
+                {{nypr-svg icon='wqxr-logo' className='icon--wqxr-logo-nav'}}
               </a>
             </h1>
           </div>
@@ -60,17 +60,17 @@
   </div>
   <!-- .sitechrome-top -->
 
-  <nav class="l-page-nav sitechrome-nav {{if isHomepage 'nav--homepage'}} {{unless media.isLargeAndUp 'x-scrollable'}}" style="background: lightblue;">
+  <nav class="l-page-nav sitechrome-nav {{if isHomepage 'nav--homepage'}} {{unless media.isLargeAndUp 'x-scrollable'}}">
     {{#if media.isLargeAndUp}}
     <div class="sitechrome-corner">
       <h1>
-        <span class="for-screenreaders">WNYC Navigation</span>
+        <span class="for-screenreaders">WQXR Navigation</span>
         <a href="/"
           class="link--nodecor"
-          title="WNYC | New York Public Radio Home Page"
-          data-tracking-category="WNYC Menu"
-          data-tracking-action="Clicked WNYC Logo">
-          WQXR
+          title="WQXR | New York Public Radio Home Page"
+          data-tracking-category="WQXR Menu"
+          data-tracking-action="Clicked WQXR Logo">
+          {{nypr-svg icon='wqxr-logo' className='icon--wqxr-logo-nav'}}
         </a>
       </h1>
     </div>
@@ -83,7 +83,7 @@
         <li class="list-item list-item--nav">
           {{#if media.isLargeAndUp}}
             {{#listen-button
-              type=(if isHomepage 'white-hollow-small' 'red-hollow-small')
+              type='white-hollow-small'
               state=(if (eq preferredStream.slug audio.currentAudio.id) audio.playState)
               itemPK=preferredStream.slug
               itemTitle=preferredStream.name

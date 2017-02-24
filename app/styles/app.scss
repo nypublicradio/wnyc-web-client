@@ -1,6 +1,5 @@
 // must come first as per CSS spec
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,300,700);
-//
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,300,700|Lato:400,400i,700,700i');
 
 // hide everything not ember so we can control the UI over the alien DOM
 body:not(.simplified_wrapper):not(.container_stripped) {
