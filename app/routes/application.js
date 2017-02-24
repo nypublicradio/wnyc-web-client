@@ -18,7 +18,7 @@ export default Route.extend(ApplicationRouteMixin, {
       let lastToken = tokens.slice(-1);
       return `${lastToken} | WNYC`;
     } else {
-      return 'WNYC | New York Public Radio, Podcasts, Live Streaming Radio, News';
+      return 'WQXR | New York\'s Classical Music Radio Station';
     }
   },
 

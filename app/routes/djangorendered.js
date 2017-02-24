@@ -23,7 +23,7 @@ export default Route.extend(PlayParamMixin, {
     if (tokens && tokens.length > 0) {
       return tokens[0];
     } else {
-      return 'WNYC | New York Public Radio, Podcasts, Live Streaming Radio, News';
+      return 'WQXR | New York\'s Classical Music Radio Station';
     }
   },
 

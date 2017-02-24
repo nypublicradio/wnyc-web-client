@@ -11,12 +11,12 @@
     }
   }
 
-  .icon--wnyc-logo-nav #wnyc-logo{
-    fill: $red;
+  .icon--wqxr-logo-nav #wnyc-logo{
+    fill: $blue;
   }
 
   .nav--homepage & {
-    .icon--wnyc-logo-nav #wnyc-logo{
+    .icon--wqxr-logo-nav #wnyc-logo{
       fill: white;
     }
   }
@@ -25,7 +25,7 @@
 .sitechrome-top {
   padding-top: 20px;
   @extend %vertical-rhythm;
-  background: $red;
+  background: $wqxrblue;
 
   @include mq($up-to-large) {
     margin-bottom: 0;
@@ -34,7 +34,7 @@
   @include mq($large-and-up) {
     background: white;
     padding-top: 0;
-    height: 83px;
+    height: 115px;
   }
 
   .profile & {
@@ -83,8 +83,13 @@
   a,
   button {
     color: white;
-    font-family: 'Museo Sans Rounded', 'Open Sans', sans-serif;
-  }
+    font-family: 'Lato', 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.4;
+    }
 
   a {
     padding-bottom: 10px;
@@ -92,6 +97,8 @@
     @include mq($medium-only) {
       font-weight: 600;
     }
+
+
   }
 
   a:hover,
@@ -100,13 +107,23 @@
   button:focus {
     opacity: 0.8;
     color: white;
+    text-decoration: none;
+  }
+
+  &.x-scrollable {
+    a, button {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
   }
 
   h1 {
     a,
     a:hover {
       border: 1px dotted rgba(0, 0, 0, 0);
-      padding: 22px 10px 26px 28px;
+      padding: 45px 17px 26px 19px;
     }
 
     a:focus {
@@ -116,14 +133,14 @@
   }
 
   .list-item > a {
-    border-bottom-color: $red;
+    border-bottom-color: $blue;
   }
 
   .list-item.active a {
     opacity: 1;
 
     @include mq($medium-only) {
-      border-bottom: 4px solid $red;
+      border-bottom: 4px solid $blue;
     }
   }
 
@@ -176,7 +193,7 @@
   }
 
   &.nav--homepage {
-    background-color: $red;
+    background-color: $wqxrblue;
 
     @include mq($large-and-up) {
       a,
@@ -190,7 +207,7 @@
       }
 
       ul.alignright {
-        border-color: $red;
+        border-color: $wqxrblue;
       }
     }
   }
@@ -213,7 +230,7 @@
       border-right: 3px solid $red;
 
       a {
-        color: $red;
+        color: $blue;
         border: none;
       }
     }
@@ -340,32 +357,42 @@
 .sitechrome-btn {
   display: inline-block;
   border-radius: 25px;
-  color: white;
-  border: 2px solid white;
+  color: $wqxrblue;
   padding: 2px 18px 2px 18px;
-  background: $red;
+  background: white;
   white-space: nowrap;
+  font-family: 'Open Sans', sans-serif;
 
-  @include fontsize(14);
+  @include fontsize(12);
   font-weight: 600;
   line-height: 30px;
 
   cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background: rgba(white, 0.8);
+    text-decoration: none;
+  }
 
   @include transition(background-color $transition-timing, color $transition-timing);
 
   @include flex-shrink(0);
 
   @include mq($large-and-up) {
+    font-size: 16px;
+    background: $wqxrblue;
+    color: white;
     line-height: 36px;
-    border: 0;
+  
+
+    &:hover,
+    &:focus {
+      background: rgba($wqxrblue, 0.8);
+    }
   }
 
-  &:hover,
-  &:focus {
-    background: rgba($red, 0.8);
-    border-color: rgba(white, 0.5);
-  }
+
 }
 
 .sitechrome__nav-footer {
@@ -384,5 +411,24 @@
   .profile & {
     padding-top: 25px;
     background-color: $nearwhite;
+  }
+}
+
+.sitechrome-footer {
+  h2 {
+    color: white;
+    font-family: 'Lato', 'Open Sans', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.4;    
+  }
+  a {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px; 
+    font-weight: 600;
+    color: white;
+    line-height: 1.5;
   }
 }

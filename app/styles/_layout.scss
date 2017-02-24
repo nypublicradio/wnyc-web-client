@@ -27,7 +27,7 @@
 
   &.x-scrollable {
     > .scrollable-body {
-      background-color: $rouge;
+      background-color: $wqxrdarkblue;
       overflow-x: scroll;
       white-space: nowrap;
       padding: 5px 25px;
@@ -45,7 +45,7 @@
       top: 0;
       height: 100%;
       width: 35%;
-      @include background-image(linear-gradient(to right, rgba(141, 33, 48, 0.0), $rouge));
+      @include background-image(linear-gradient(to right, rgba(141, 33, 48, 0.0), $wqxrdarkblue));
     }
   }
 }
@@ -80,6 +80,11 @@
 
 .l-highlight--navy {
   background-color: $navy;
+  @extend %clearfix;
+}
+
+.l-highlight--black {
+  background-color: $black;
   @extend %clearfix;
 }
 
@@ -276,6 +281,33 @@
 
   @include mq($middle-narrow-and-up) {
     @include flex(1);
+  }
+}
+
+.l-flex1of3 {
+  @include flex-basis(100%);
+  @include flex-grow(1);
+  @include flex-shrink(1);
+
+  &[class$="--fixed"] {
+    @include flex(1);
+  }
+
+  @include mq($middle-narrow-and-up) {
+    @include flex(1);
+  }
+}
+.l-flex2of3 {
+  @include flex-basis(100%);
+  @include flex-grow(1);
+  @include flex-shrink(1);
+
+  &[class$="--fixed"] {
+    @include flex(2);
+  }
+
+  @include mq($middle-narrow-and-up) {
+    @include flex(2);
   }
 }
 

@@ -208,13 +208,20 @@
   }
 }
 .user-nav-link > a {
+  font-family: 'Lato','Open Sans', sans-serif;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 12px;
   color: white;
   border: none;
+
+  &:hover,
+  &:focus {
+     text-decoration: none;
+  }
 }
 @include mq($large-and-up) {
   .user-nav-link > a {
+    font-size: 16px;
     font-weight: 400;
     color: black;
   }

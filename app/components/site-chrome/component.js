@@ -12,7 +12,7 @@ export default Component.extend(BetaActionsMixin, {
   currentUser: service(),
   donateURL: config.wnycDonateURL,
   classNameBindings: ['showPlayer:sitechrome--player-open'],
-  defaultStream:  {slug: 'wnyc-fm939', name: 'WNYC 93.9 FM'},
+  defaultStream:  {slug: 'wqxr', name: 'WQXR New York'},
   preferredStream: or('session.data.user-prefs-active-stream', 'defaultStream'),
   socialIcons: [
     {url: 'http://www.twitter.com/wnyc', icon: 'twitter'},
@@ -25,7 +25,7 @@ export default Component.extend(BetaActionsMixin, {
     if (target.tagName === "A"){
       //send tracking
       this.get('metrics').trackEvent('GoogleAnalytics', {
-        category: 'WNYC Menu',
+        category: 'WQXR Menu',
         action: "Clicked " + target.text,
       });
     }
