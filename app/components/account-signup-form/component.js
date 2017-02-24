@@ -13,7 +13,9 @@ import messages from 'wnyc-web-client/validations/custom-messages';
 
 export default Component.extend({
   store: service(),
+  session: service(),
   allowedKeys: ['email','emailConfirmation','givenName','familyName','typedPassword'],
+
   init() {
     this._super(...arguments);
     set(this, 'newUser', this.get('store').createRecord('user'));
