@@ -216,22 +216,25 @@ i.fa-circle-o-notch.fa-spin {
   }
 }
 
-.icon--wnyc-logo-footer {
+.icon--wqxr-logo-footer {
   display: inline-block;
   vertical-align: top;
   fill: white;
-  width: 80px;
-  height: 30px;
+  width: 300px;
+  height: 42px;
   margin-right: 16px;
-  margin-top: -2px;
-
-  path {
-    fill: $darkestgray;
-  }
+  margin-left: -20px;
 }
 
-.icon--jlgreene--footer {
-  margin: 6px;
+.icon--jlgreene-logo-footer {
+  fill: white;
+  width: 100px;
+  height: 20px;
+  margin: 6px 0;
+
+  path, polygon {
+    fill: white;
+  }
 }
 
 
