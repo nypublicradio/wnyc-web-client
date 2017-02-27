@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import config from 'overhaul/config/environment';
 import service from 'ember-service/inject';
 import PlayParamMixin from 'wnyc-web-client/mixins/play-param';
 import { beforeTeardown } from 'wnyc-web-client/lib/compat-hooks';
@@ -30,9 +29,6 @@ export default Ember.Route.extend(PlayParamMixin, {
         story,
         getComments: () => comments,
         getRelatedStories: () => relatedStories,
-        user: get(this, 'currentUser.user'),
-        browserId: get(this, 'session.data.browserId'),
-        adminURL: config.wnycAdminURL
       });
     });
   },
