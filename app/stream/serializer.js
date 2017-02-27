@@ -108,7 +108,7 @@ export default DS.JSONAPISerializer.extend({
 
   // given an object with a urls key, return a sorted array with stream mounts 
   // in this order:
-  // mobile platforms: [hls, icecast aac, icecast mp3]
+  // mobile platforms: [icecast aac, icecast mp3]
   // non-mobile (desktop) platforms: [icecast mp3, icecast aac]
   _findPreferredStreams({ urls }) {
     if (!urls) {
@@ -122,11 +122,10 @@ export default DS.JSONAPISerializer.extend({
     };
     let {
       /*ipod:hls,*/ // no HLS until CDN servers are working correctly
-      aac, mp3, mobile_aac, mobile:mobile_mp3 } = urls;
+      aac, rtsp:mp3, mobile_aac, mobile:mobile_mp3 } = urls;
     
-    // why are these arrays?
+    // why is this an array?
     aac = aac[0];
-    mp3 = mp3[0];
     
     if (browser.mobile || browser.android || browser.ios) {
       // there are mobile-specific mount points for mp3 and aac

@@ -34,7 +34,7 @@ export default Factory.extend({
       ipod: faker.internet.url(),
       mobile_aac: faker.internet.url(),
       aac: [faker.internet.url()],
-      mp3: [faker.internet.url()]
+      rtsp: faker.internet.url()
     };
   }
 });
