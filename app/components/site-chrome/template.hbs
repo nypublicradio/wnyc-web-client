@@ -109,16 +109,24 @@
           {{link-to 'All Streams' 'stream' class="inherit" preventDefault=false}}
         {{/link-to}}
 
+        {{#link-to 'playlist' current-when="playlist" tagName='li' href=false class="list-item list-item--nav"}}
+          {{link-to 'Playlists' 'playlist' class="inherit" preventDefault=false}}
+        {{/link-to}}
+
         {{#link-to 'schedule' current-when="schedule.date" tagName='li' href=false class="list-item list-item--nav"}}
           {{link-to 'Schedule' 'schedule' class="inherit" preventDefault=false}}
         {{/link-to}}
 
         {{#link-to 'shows' current-when="shows show" tagName="li" href=false class="list-item list-item--nav"}}
-          {{link-to 'Shows' 'shows' class="inherit" preventDefault=false}}
+          {{link-to 'Programs' 'shows' class="inherit" preventDefault=false}}
         {{/link-to}}
 
-        {{#link-to 'topics' current-when='topics tag' tagName='li' href=false class="list-item list-item--nav"}}
-          {{link-to 'Topics' 'topics' class="inherit" preventDefault=false}}
+        {{#link-to 'djangorendered' 'series/q2/' tagName='li' href=false class="list-item list-item--nav"}}
+            {{link-to 'Q2 Music' 'djangorendered' 'series/q2/' class="inherit" preventDefault=false}}
+          {{/link-to}}
+
+        {{#link-to 'djangorendered' 'events/' tagName='li' href=false class="list-item list-item--nav"}}
+          {{link-to 'Events' 'djangorendered' 'events/' class="inherit" preventDefault=false}}
         {{/link-to}}
 
         {{#unless media.isLargeAndUp}}
