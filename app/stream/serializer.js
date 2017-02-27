@@ -124,9 +124,8 @@ export default DS.JSONAPISerializer.extend({
       /*ipod:hls,*/ // no HLS until CDN servers are working correctly
       aac, rtsp:mp3, mobile_aac, mobile:mobile_mp3 } = urls;
     
-    // why are these arrays?
+    // why is this an array?
     aac = aac[0];
-    mp3 = mp3[0];
     
     if (browser.mobile || browser.android || browser.ios) {
       // there are mobile-specific mount points for mp3 and aac
