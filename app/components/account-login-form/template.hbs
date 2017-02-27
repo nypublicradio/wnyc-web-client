@@ -19,7 +19,7 @@
 
     <h2 class="account-form-heading">Log in to WNYC</h2>
     {{#if features.socialAuth}}
-      <button class="account-form-btn account-form-btn--facebook">
+      <button type="button" class="account-form-btn account-form-btn--facebook"  {{action 'loginWithFacebook'}}>
         <i class="fa fa-facebook-square"></i>Log in with Facebook
       </button>
 

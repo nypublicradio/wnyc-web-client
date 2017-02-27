@@ -40,6 +40,10 @@ export default Component.extend({
         }
       }
     },
+    loginWithFacebook() {
+      get(this, 'session').authenticate('authenticator:torii', 'facebook-connect')
+      .catch((e) => {});
+    }
   },
   authenticate(email, password) {
     return get(this, 'session').authenticate('authenticator:nypr', email, password);
