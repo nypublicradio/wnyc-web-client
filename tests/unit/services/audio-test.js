@@ -80,7 +80,7 @@ test('can switch from on demand to stream and vice versa', function(assert) {
   const onDemandUrl = '/url.mp3';
   let story = server.create('story', { audio: onDemandUrl });
   let stream = server.create('stream');
-  let streamURL = stream.attrs.urls.mp3[0];
+  let streamURL = stream.attrs.urls.rtsp;
   let audio1 = DummyConnection.create({ url: onDemandUrl });
   let audio2 = DummyConnection.create({ url: streamURL  });
   let service = this.subject();
@@ -427,7 +427,7 @@ test('service records a listen when a stream is played', function(assert) {
   server.create('whats-on', {
     current_show: { episode_pk: currentStory.id }
   });
-  let audio = DummyConnection.create({ url: stream.attrs.urls.mp3[0] });
+  let audio = DummyConnection.create({ url: stream.attrs.urls.rtsp });
   
   let expected = {
     audio_type: 'stream',
