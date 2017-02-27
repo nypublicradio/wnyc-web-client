@@ -17,7 +17,7 @@
   
   {{#if session.data.isStaff}}
     {{#ember-wormhole to="edit-story"}}
-        <a href="{{model.adminURL}}/admin/{{model.story.editLink}}" class="btn btn--green" target="_blank" data-test-selector="admin-link">Edit this</a>
+        <a href="{{model.adminURL}}/{{model.story.editLink}}" class="btn btn--green" target="_blank" data-test-selector="admin-link">Edit this</a>
     {{/ember-wormhole}}
   {{/if}}
 
