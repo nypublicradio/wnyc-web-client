@@ -25,7 +25,7 @@ test('submitting the form passes the login values to the authenticator', functio
   this.$('label:contains(Email) + input').blur();
   this.$('label:contains(Password) + input').val(testPassword);
   this.$('label:contains(Password) + input').blur();
-  this.$('button:contains(Log in)').click();
+  this.$('button[type=submit]:contains(Log in)').click();
 
   return wait().then(() => {
     assert.equal(authenticate.callCount, 1);

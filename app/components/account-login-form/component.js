@@ -42,7 +42,7 @@ export default Component.extend({
     },
     loginWithFacebook() {
       get(this, 'session').authenticate('authenticator:torii', 'facebook-connect')
-      .catch((e) => {});
+      .catch(() => {});
     }
   },
   authenticate(email, password) {
