@@ -29,8 +29,7 @@ export default Ember.Route.extend(PlayParamMixin, {
         story,
         getComments: () => comments,
         getRelatedStories: () => relatedStories,
-        isStaff: get(this, 'session.data.isStaff'),
-        browserId: get(this, 'session.data.browserId')
+        adminURL: `${config.wnycAdminRoot}/admin`
       });
     });
   },

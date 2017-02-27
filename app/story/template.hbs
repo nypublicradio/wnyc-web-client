@@ -7,12 +7,18 @@
                        email=user.email
                        userName=(or session.data.staffName user.preferredUsername)
                        getComments=model.getComments
-                       browserId=model.browserId}}
+                       browserId=session.data.browserId}}
     {{/ember-wormhole}}
   {{/if}}
 
   {{#ember-wormhole to="related"}}
     {{related-stories getStories=model.getRelatedStories}}
   {{/ember-wormhole}}
+  
+  {{#if session.data.isStaff}}
+    {{#ember-wormhole to="edit-story"}}
+        <a href="{{model.adminURL}}/{{model.story.editLink}}" class="btn btn--green" target="_blank" data-test-selector="admin-link">Edit this</a>
+    {{/ember-wormhole}}
+  {{/if}}
 
 {{/django-page}}

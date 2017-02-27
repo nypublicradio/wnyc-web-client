@@ -40,6 +40,11 @@ export default Factory.extend({
           <div class="l-constrained">
             <main id="main">
               <article>
+                <header>
+                <div class="flag nudge">
+                <div id="edit-story"></div>
+                </div>
+                </header>
                 <section class="text">${body}</section>
               </article>
             </main>
