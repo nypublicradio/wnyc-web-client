@@ -279,6 +279,10 @@
     @include flex(1);
   }
 
+  &[class$="--50percent"] {
+    @include flex(1 1 50%);
+  }
+
   @include mq($middle-narrow-and-up) {
     @include flex(1);
   }
