@@ -54,13 +54,23 @@ export default Ember.Service.extend({
   },
 
   updateDelta(type) {
+    let delta;
     if (/start|resume/.test(type)) {
-      return this.set('_delta', 0);
+      this._lastMarker = Date.now();
+      this._didPause = false;
+      delta = 0;
+    } else if (this._didPause) {
+      delta = 0;
     } else {
-      let oldDelta = this.get('_delta');
-      let newDelta = Date.now();
-      return this.set('_delta', newDelta - oldDelta);
+      let oldMarker = this._lastMarker;
+      this._lastMarker = Date.now();
+      delta = Date.now() - oldMarker;
     }
+    
+    if (type === 'pause') {
+      this._didPause = true;
+    }
+    return delta;
   },
 
   _send(data, path) {

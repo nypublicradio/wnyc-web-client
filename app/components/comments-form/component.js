@@ -52,7 +52,7 @@ export default Component.extend({
       }
       let data = this.$().serialize();
       this.auth.then(({ security_hash, timestamp }) => {
-        let url = `${config.wnycAccountRoot}/comments/post/?bust_cache=${Math.random()}&id=${this.get('browserId')}`;
+        let url = `${config.wnycAdminRoot}/comments/post/?bust_cache=${Math.random()}&id=${this.get('browserId')}`;
         let story = this.get('story');
         let metaData = {
           content_type: 'cms.' + story.get('itemType'),
