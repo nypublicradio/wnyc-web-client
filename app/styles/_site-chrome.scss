@@ -416,21 +416,44 @@
 }
 
 .sitechrome-footer {
+  background-color: $black;
+
+  .text-body{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
   h2 {
     color: white;
     font-family: 'Lato', 'Open Sans', sans-serif;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bold;
     font-style: normal;
     font-stretch: normal;
-    line-height: 1.4;    
+    line-height: normal;
+
+    @include mq($middle-narrow-and-up) {
+      font-size: 24px;
+      line-height: 1.4;   
+    } 
+
+    &.inline {
+      padding-right: 25px;
+    }
   }
+
   a {
     font-family: 'Open Sans', sans-serif;
-    font-size: 14px; 
+    font-size: 12px; 
     font-weight: 600;
     color: white;
-    line-height: 1.5;
+    line-height: normal;
+
+    @include mq($middle-narrow-and-up) {
+      font-size: 14px; 
+      line-height: 1.5;   
+    } 
 
     &:hover,
     &:focus {
@@ -438,4 +461,5 @@
       text-decoration: none;
     }
   }
+
 }
