@@ -7,12 +7,12 @@
     <h1>Document Footer</h1>
   </div>
 
-  <div class="{{if media.isMiddleNarrowAndUp 'l-padtop--double' 'l-padtop'}}">
+  <div class="{{if media.isMediumAndUp 'l-padtop--double' 'l-padtop'}}">
     <div class="l-constrained">
-      <div class="l-flexgrid">
+      <div class="{{if media.isMediumAndUp 'l-flexgrid'}}">
 
 
-      {{#if media.isMiddleNarrowAndUp }}
+      {{#if media.isMediumAndUp }}
         <nav class="l-flex1of3">
           <div class="l-unconstrained flush">
             <div class="nudge-large">
@@ -60,10 +60,10 @@
         {{/if}}
 
 
-        <div class="{{if media.isMiddleNarrowAndUp 'l-flex2of3' 'l-flexgrid'}}">
-          <nav class="{{if media.isMiddleNarrowAndUp 'l-col1of3' 'l-flex1of2 l-flex1of2--50percent'}}">
-            <div class="{{unless media.isMiddleNarrowAndUp 'l-constrained nudge'}}">
-              <h2 class="{{if media.isMiddleNarrowAndUp 'h2 text--normal' 'text--spacing h5 nudge'}}">
+        <div class="{{if media.isMediumAndUp 'l-flex2of3' 'l-flexgrid'}}">
+          <nav class="{{if media.isMediumAndUp 'l-col1of3' 'l-flex1of2 l-flex1of2--50percent'}}">
+            <div class="{{unless media.isMediumAndUp 'l-constrained nudge'}}">
+              <h2 class="{{if media.isMediumAndUp 'h2 text--normal' 'text--spacing h5 nudge'}}">
                 WQXR
               </h2>
               <ul class="list list--noborder">
@@ -100,9 +100,9 @@
           <!-- .l-col1of3 -->
 
          
-          <nav class="{{if media.isMiddleNarrowAndUp 'l-col1of3' 'l-flex1of2 l-flex1of2--50percent'}}">
-            <div class="{{unless media.isMiddleNarrowAndUp 'l-constrained nudge'}}">
-              <h2 class="{{if media.isMiddleNarrowAndUp 'h2 text--normal' 'text--spacing h5 nudge'}}">
+          <nav class="{{if media.isMediumAndUp 'l-col1of3' 'l-flex1of2 l-flex1of2--50percent'}}">
+            <div class="{{unless media.isMediumAndUp 'l-constrained nudge'}}">
+              <h2 class="{{if media.isMediumAndUp 'h2 text--normal' 'text--spacing h5 nudge'}}">
                 Q2 Music
               </h2>
               <!-- .h2 -->
@@ -131,9 +131,9 @@
           <!-- .l-col1of3 -->
 
 
-          <nav class="{{if media.isMiddleNarrowAndUp 'l-col1of3' 'l-flex1of2 l-flex1of2--50percent'}}">
-            <div class="{{unless media.isMiddleNarrowAndUp 'l-constrained nudge'}}">
-              <h2 class="{{if media.isMiddleNarrowAndUp 'h2 text--normal' 'text--spacing h5 nudge'}}">
+          <nav class="{{if media.isMediumAndUp 'l-col1of3' 'l-flex1of2 l-flex1of2--50percent'}}">
+            <div class="{{unless media.isMediumAndUp 'l-constrained nudge'}}">
+              <h2 class="{{if media.isMediumAndUp 'h2 text--normal' 'text--spacing h5 nudge'}}">
                 About Us
               </h2>
               <!-- .h2 -->
@@ -174,7 +174,7 @@
           <!-- .l-col1of3 -->
 
           <!-- if smaller screens, inclue social links -->
-          {{#unless media.isMiddleNarrowAndUp }}
+          {{#unless media.isMediumAndUp }}
           <nav class="l-flex1of2 l-flex1of2--50percent">
             <div class="l-constrained nudge">
               <h2 class="text--spacing h5 nudge">
@@ -229,7 +229,7 @@
   </div>
   <!-- .l-highlight -->
 
-{{#if media.isMiddleNarrowAndUp }}
+{{#if media.isMediumAndUp }}
   <div class="l-highlight--black pad-persistent-player">
     <div class="l-constrained l-constrained--shrink">
       <div class="box--topborder box--topborder--light box--flexpadtop">
@@ -280,7 +280,7 @@
   <!-- .l-highlight -->
   {{/if}}
 
-  {{#unless media.isMiddleNarrowAndUp }}
+  {{#unless media.isMediumAndUp }}
   <div class="l-constrained">
       <div class="l-padtop nudge-large">
         <div class="l-constrained">
