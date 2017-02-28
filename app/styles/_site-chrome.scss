@@ -2,6 +2,7 @@
 
   > h1 {
     margin: 0;
+    padding: 0;
 
     > a:hover {
       opacity: 1;
@@ -121,13 +122,12 @@
   h1 {
     a,
     a:hover {
-      border: 1px dotted rgba(0, 0, 0, 0);
+      //border: 1px dotted rgba(0, 0, 0, 0);
       padding: 45px 17px 26px 19px;
     }
 
     a:focus {
       opacity: 1;
-      border: 1px dotted rgba(0, 0, 0, .2);
     }
   }
 
