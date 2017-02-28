@@ -436,6 +436,7 @@
     font-weight: 600;
     color: white;
     line-height: normal;
+    border-bottom: none;
 
     @include mq($middle-narrow-and-up) {
       font-size: 14px; 
@@ -446,6 +447,7 @@
     &:focus {
       color: rgba(white, 0.8);
       text-decoration: none;
+      border-bottom: none;
     }
   }
 
