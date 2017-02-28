@@ -35,7 +35,7 @@ export default Ember.Service.extend({
     }
   }),
   autoplayChoice: computed('autoplayPref', 'autoplaySlug', function() {
-    const autoplaySlug = get(this, 'autoplaySlug') || 'wnyc-fm939';
+    const autoplaySlug = get(this, 'autoplaySlug') || 'wqxr';
     const autoplayPref = get(this, 'autoplayPref') || 'default_stream';
     if (autoplayPref === 'default_stream') {
       let stream = get(this, 'store').peekRecord('stream', autoplaySlug);
@@ -46,7 +46,7 @@ export default Ember.Service.extend({
   }),
 
   getAutoplayAudioId() {
-    const autoplaySlug = get(this, 'autoplaySlug') || 'wnyc-fm939';
+    const autoplaySlug = get(this, 'autoplaySlug') || 'wqxr';
     const autoplayPref = get(this, 'autoplayPref') || 'default_stream';
 
     if (autoplayPref === 'default_stream') {
@@ -59,7 +59,7 @@ export default Ember.Service.extend({
   },
 
   getBumperUrl() {
-    const autoplaySlug = get(this, 'autoplaySlug') || 'wnyc-fm939';
+    const autoplaySlug = get(this, 'autoplaySlug') || 'wqxr';
     const autoplayPref = get(this, 'autoplayPref') || 'default_stream';
 
     let nextItem;
