@@ -420,7 +420,7 @@
     font-stretch: normal;
     line-height: normal;
 
-    @include mq($middle-narrow-and-up) {
+    @include mq($medium-and-up) {
       font-size: 24px;
       line-height: 1.4;   
     } 
@@ -438,7 +438,7 @@
     line-height: normal;
     border-bottom: none;
 
-    @include mq($middle-narrow-and-up) {
+    @include mq($medium-and-up) {
       font-size: 14px; 
       line-height: 1.5;   
     } 
