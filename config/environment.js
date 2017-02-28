@@ -124,7 +124,6 @@ module.exports = function(environment) {
     featureFlags: {
       'discover': true,
       'other-discover': process.env.OTHER_DISCOVER,
-      'autoplay-prefs': true
     },
     betaTrials: {
       betaInviteLanding: '#full-page-transforms-wrapper',
@@ -166,7 +165,6 @@ module.exports = function(environment) {
     // Testem prefers this...
     ENV.locationType = 'none';
 
-    ENV.featureFlags['autoplay-prefs'] = true;
     ENV.queueAudioBumperURL = 'http://audio-bumper.com/thucyides.mp3';
 
     // keep test console output quieter

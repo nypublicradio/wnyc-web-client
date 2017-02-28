@@ -133,39 +133,12 @@
             {{link-to 'Search' 'djangorendered' 'search/' class="inherit" preventDefault=false}}
           {{/link-to}}
 
-          {{#if features.autoplayPrefs}}
-            {{#link-to 'settings' tagName='li' href=false class="list-item list-item--nav"}}
-              {{link-to 'Settings' 'settings' class="inherit" preventDefault=false}}
-            {{/link-to}}
-          {{/if}}
-
         {{/unless}}
       </ul>
     </div>
     <!-- .box -->
     </div>
     <!-- .x-scrollable-body -->
-
-    {{#if media.isLargeAndUp}}
-    <div class="l-bottom">
-        <div class="box box--nopad">
-
-
-          <ul class="list list--noborder flush alignright">
-            {{!-- <div class="h5 text--heavy alignright"> --}}
-            {{#if features.autoplayPrefs}}
-              {{#link-to 'settings' tagName='li' href=false class="list-item list-item--nav"}}
-                {{link-to 'Settings' 'settings' class="inherit" preventDefault=false}}
-              {{/link-to}}
-            {{/if}}
-          </ul>
-            {{!-- </div>
-            <!-- .text --> --}}
-        </div>
-        <!-- .box -->
-    </div>
-    <!-- .l-bottom -->
-    {{/if}}
   </nav>
 
   <div class="l-full sitechrome-page-content-area">

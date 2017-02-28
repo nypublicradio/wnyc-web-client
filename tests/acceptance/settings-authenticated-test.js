@@ -10,7 +10,7 @@ moduleForAcceptance('Acceptance | settings', {
   beforeEach() {
     server.create('user');
     authenticateSession(this.application, {access_token: 'foo'});
-    
+
     let session = currentSession(this.application);
     session.set('data.user-prefs-active-stream', {slug: 'wqxr', name: 'WQXR New York'});
     session.set('data.user-prefs-active-autoplay', 'default_stream');
@@ -70,16 +70,6 @@ test('after visiting settings, user can toggle off autoplay settings', function(
     var actualElementCount = 1;
     assert.equal(expectedElementCount, actualElementCount);
   });
-});
-
-test('if feature flag for autoplay-autoprefs is present, then the link should be clickable and then take you to /settings', function(assert) {
-  withFeature('autoplay-prefs');
-  visit('/');
-  click('.l-bottom .list-item:contains("Settings")');
-  andThen(() => {
-    assert.equal(currentURL(), '/settings');
-  });
-
 });
 
 test('if feature flag for autoplay-autoprefs is absent, then the link should be not be present', function(assert) {
