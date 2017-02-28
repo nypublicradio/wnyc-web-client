@@ -13,7 +13,7 @@ export default Ember.Route.extend(PlayParamMixin, {
 
   model() {
     let page = this.store.findRecord('django-page', '/');
-    let featuredStream = this.store.findRecord('stream', 'wnyc-fm939');
+    let featuredStream = this.store.findRecord('stream', 'wqxr');
     return hash({page, featuredStream});
   },
   afterModel({ page }) {
