@@ -8,7 +8,7 @@ export default DS.JSONAPISerializer.extend({
 
     if (typedPassword) {
       json = Object.assign(json, { password: snapshot.record.get('typedPassword') });
-   }
+    }
     return json;
   },
   serializeIntoHash(hash, typeClass, snapshot, options) {

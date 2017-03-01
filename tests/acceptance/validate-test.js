@@ -27,7 +27,7 @@ test('visiting /validate and logging in', function(assert) {
 
   fillIn('input[name=email]', 'user@example.com');
   fillIn('input[name=password]', 'password1');
-  click('button:contains(Log in)');
+  click('button[type=submit]:contains(Log in)');
 
   return andThen(() => {
     assert.ok(currentSession(this.application).get('isAuthenticated'));

@@ -13,5 +13,5 @@ export default {
   passwordRules:         'must be at least 8 characters and 1 number',
   userDisabled:          'This email is associated with a disabled account. If you would like to re-enable it, please contact listener services at <a href="http://www.wnyc.org/feedback" target="_blank">http://www.wnyc.org/feedback</a>.',
   loginError:            "There's an error logging in.</br><a href='/forgot'>Forget your password</a>? Need to <a href='/signup'>create an account</a>?",
-  emailNotFound:         email => `We cannot find an account for the email ${email}. <a href="/signup">Sign up?</a>`
+  emailNotFound:         email => `we can't find an account for the email ${email}. <a href="/signup">Sign up?</a>`,
 };
