@@ -15,9 +15,9 @@
 </h1>
 
 {{#if isShowingComments}}
-  <div class="text">
-    <a href="/feeds/comments/{{story.itemTypeId}}/{{story.id}}" target="_blank">RSS Feed for Comments</a> | <a href="#commentsForm">Leave a Comment</a>
-  </div>
+{{!--     <div class="text">
+        <a href="/feeds/comments/{{story.itemTypeId}}/{{story.id}}" target="_blank">RSS Feed for Comments</a> | <a href="#commentsForm">Leave a Comment</a>
+    </div> --}}
   {{comments-list adminURL=adminURL comments=comments isStaff=isStaff browserId=browserId}}
 {{/if}}
 
