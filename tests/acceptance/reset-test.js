@@ -56,7 +56,7 @@ test('visiting /reset and resetting password and logging in', function(assert) {
   fillIn('input[name=email]', email);
   fillIn('input[name=password]', password);
 
-  click('button:contains(Log in)');
+  click('button[type=submit]:contains(Log in)');
 
   andThen(() => {
     assert.ok(currentSession(this.application).get('isAuthenticated'));
