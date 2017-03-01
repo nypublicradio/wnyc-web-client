@@ -16,7 +16,7 @@ module.exports = function(defaults) {
     autoprefixer: {
       browsers: ['last 3 versions']
     },
-    babel: { includePolyfill: true },
+    'ember-cli-babel': { includePolyfill: true },
     trees: {
       public: mergeTrees(pubTrees)
     },
