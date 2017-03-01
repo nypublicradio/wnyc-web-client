@@ -1,13 +1,13 @@
-# WNYC Web Client
-[![CircleCI](https://img.shields.io/circleci/project/github/nypublicradio/wnyc-web-client/master.svg?style=flat-square)](https://circleci.com/gh/nypublicradio/wnyc-web-client/tree/master) [![GitHub release](https://img.shields.io/github/release/nypublicradio/wnyc-web-client.svg?style=flat-square)](https://github.com/nypublicradio/wnyc-web-client/releases/latest) [![GitHub pull requests](https://img.shields.io/github/issues-pr/nypublicradio/wnyc-web-client.svg?style=flat-square)](https://github.com/nypublicradio/wnyc-web-client/pulls) [![GitHub contributors](https://img.shields.io/github/contributors/nypublicradio/wnyc-web-client.svg?style=flat-square)](https://github.com/nypublicradio/wnyc-web-client/graphs/contributors) 
+# WQXR Web Client
+[![CircleCI](https://img.shields.io/circleci/project/github/nypublicradio/wqxr-web-client/master.svg?style=flat-square)](https://circleci.com/gh/nypublicradio/wqxr-web-client/tree/master) [![GitHub release](https://img.shields.io/github/release/nypublicradio/wqxr-web-client.svg?style=flat-square)](https://github.com/nypublicradio/wqxr-web-client/releases/latest) [![GitHub pull requests](https://img.shields.io/github/issues-pr/nypublicradio/wqxr-web-client.svg?style=flat-square)](https://github.com/nypublicradio/wqxr-web-client/pulls) [![GitHub contributors](https://img.shields.io/github/contributors/nypublicradio/wqxr-web-client.svg?style=flat-square)](https://github.com/nypublicradio/wqxr-web-client/graphs/contributors) 
 
-This is a browser-based client for interfacing with the New York Public Radio digital infrastructure.  This Ember application renders all of www.wnyc.org using the preexisting Django server as a backend data source, consuming HTML documents and JSON payloads to present a dynamic interface. This gives us the benefits of a persistent in-browser application while still using the existing content and infrastructure.
+This is a browser-based client for interfacing with the New York Public Radio digital infrastructure.  This Ember application renders all of www.wqxr.org using the preexisting Django server as a backend data source, consuming HTML documents and JSON payloads to present a dynamic interface. This gives us the benefits of a persistent in-browser application while still using the existing content and infrastructure.
 
 ## Getting Started
 
 This ember app is a **client**, which means its primary purpose is to provide an interface to data source. On its own, this application will not do much without some kind of source from which it can retrieve content to display. To this end, you will need to run a checkout of [`publisher`](https://github.com/nypublicradio/publisher) as a **server**.
 
-`publisher` is a Django app with its own environment and dependencies, but is configured to work in concert with `wnyc-web-client`. In development mode, `publisher` will make requests to `http://localhost:4200/assets/` for Ember assets (see [`puppy/util/ember_config.py`](https://github.com/nypublicradio/publisher/blob/master/puppy/util/ember_config.py)). So you will need to set up a separate checkout of `publisher` to do any substantial development work on `wnyc-web-client`.
+`publisher` is a Django app with its own environment and dependencies, but is configured to work in concert with `wqxr-web-client`. In development mode, `publisher` will make requests to `http://localhost:4200/assets/` for Ember assets (see [`puppy/util/ember_config.py`](https://github.com/nypublicradio/publisher/blob/master/puppy/util/ember_config.py)). So you will need to set up a separate checkout of `publisher` to do any substantial development work on `wqxr-web-client`.
 
 Fortunately, `publisher` has its own set of easy-to-follow getting started instructions.
 
@@ -28,7 +28,7 @@ This value is controlled by a `.env` file you will create by following the direc
 
 We use [modernizr](https://modernizr.com/) to detect for certain browser features. Rather than include a full build in the app, there is a single Grunt task included in this project which scans all the `.js` and `.scss` files for mentions of the modernizr API. Step 9 below will generate a modernizr build; do not skip it or you may have mysterious errors.
 
-1. `$ git clone git@github.com:nypublicradio/wnyc-web-client.git && cd wnyc-web-client`
+1. `$ git clone git@github.com:nypublicradio/wqxr-web-client.git && cd wnyc-web-client`
 2. `$ git checkout <working branch>`
 3. `$ cp .env.sample .env`
 4. Edit `.env` with your `publisher` app location
@@ -62,7 +62,7 @@ this.logging = false;
 Set that to `true` and you'll see a line for all the requests that mirage handles, but be warned: there are many.
 
 ### `legacy-loader`
-`wnyc-web-client` parses `publisher`'s HTML output for `<script>` and `<link>` tags, which it then loads according to matching and ordering rules found in [`app/services/legacy-loader.js`](https://github.com/nypublicradio/wnyc-web-client/blob/master/app/services/legacy-loader.js). By default it will log when it has decided whether or not to load a legacy script. This setting can be turned off by commenting out the following line in [`config/environment.js`](https://github.com/nypublicradio/wnyc-web-client/blob/master/config/environment.js):
+`wqxr-web-client` parses `publisher`'s HTML output for `<script>` and `<link>` tags, which it then loads according to matching and ordering rules found in [`app/services/legacy-loader.js`](https://github.com/nypublicradio/wqxr-web-client/blob/master/app/services/legacy-loader.js). By default it will log when it has decided whether or not to load a legacy script. This setting can be turned off by commenting out the following line in [`config/environment.js`](https://github.com/nypublicradio/wqxr-web-client/blob/master/config/environment.js):
 ```
 ENV.LOG_LEGACY_LOADER = true;
 ```
