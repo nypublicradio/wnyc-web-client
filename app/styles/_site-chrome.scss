@@ -196,13 +196,17 @@
     .list-item {
       padding: 1px 18px 1px 0;
       margin: 13px 0;
+
+      a {
+        @include transition(none);
+      }
     }
     .list--noborder {
         > .list-heading {
             @extend %vertical-rhythm;
         }
     }
-    .list-item.active {
+    .list-item.active, .list-item.ember-transitioning-in {
       border-right: 3px solid $red;
 
       a {
@@ -210,6 +214,14 @@
         border: none;
       }
     }
+    .list-item.active.ember-transitioning-out {
+      border-right: 0;
+      a {
+        color :initial;
+        border: none;
+      }
+    }
+
   }
 }
 
