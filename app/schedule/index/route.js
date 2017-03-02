@@ -9,7 +9,7 @@ export default Route.extend({
       let day   = moment().format('DD');
       this.replaceWith('schedule.date', year, month, day, {
         queryParams: {
-          scheduleStation: queryParams.scheduleStation || 'wnyc-fm939'
+          scheduleStation: queryParams.scheduleStation || 'wqxr'
         }
       });
     }
