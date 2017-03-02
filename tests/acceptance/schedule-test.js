@@ -10,19 +10,19 @@ moduleForAcceptance('Acceptance | schedule', {
 
 test('visiting /schedule', function(assert) {
   let date = moment().format('YYYY/MMM/DD').toLowerCase();
-  server.create('django-page', {id: `schedule/${date}/?scheduleStation=wnyc-fm939`});
+  server.create('django-page', {id: `schedule/${date}/?scheduleStation=wqxr`});
   visit('/schedule');
 
   andThen(function() {
     // ember strips the trailing slash
-    assert.equal(currentURL(), `/schedule/${date}?scheduleStation=wnyc-fm939`);
+    assert.equal(currentURL(), `/schedule/${date}?scheduleStation=wqxr`);
   });
 });
 
 test('clicking on /schedule', function(assert) {
   let date = moment().format('YYYY/MMM/DD').toLowerCase();
   server.create('django-page', {id: '/'});
-  server.create('django-page', {id: `schedule/${date}/?scheduleStation=wnyc-fm939`});
+  server.create('django-page', {id: `schedule/${date}/?scheduleStation=wqxr`});
   
   visit('/');
   
@@ -31,7 +31,7 @@ test('clicking on /schedule', function(assert) {
   });
   
   andThen(function() {
-    assert.equal(currentURL(), `/schedule/${date}?scheduleStation=wnyc-fm939`);
+    assert.equal(currentURL(), `/schedule/${date}?scheduleStation=wqxr`);
   });
 });
 
