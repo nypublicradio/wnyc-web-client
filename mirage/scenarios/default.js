@@ -14,4 +14,5 @@ export default function(server) {
    server.create('user');
    server.createList('stream', 7);
 
+   server.create('bucket', {slug: 'wqxr-home'});
 }

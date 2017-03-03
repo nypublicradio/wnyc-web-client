@@ -13,108 +13,10 @@
     </div>
     <div>Maurice Ravel, Scenes historiques II, Op. 66 <a href="#" class="text--small text--white">Music playlist &raquo;</a></div>
     <div class="btn btn--large btn--white">Listen live</div>
-
   </section>
 
   <section class="home__stories">
-
-    <ul>
-      <li class="story--1 story--video story--trending" style="background-image: url('https://unsplash.it/650/488/?random')">
-        <div class="story__icons">
-          <div class="story__icons__trending icon--with-text icon--with-text--top">
-            {{nypr-svg className="icon" icon="trending"}} Trending
-          </div>
-          <div class="story__icons__video">
-            {{nypr-svg className="icon" icon="video"}}
-          </div>
-        </div>
-          <div class="story__headline">
-            <p>WQXR Blog</p>
-            <h2>7 Stories That Show Mozart's Weird Genius</h2>
-          </div>
-      </li>
-      <li class="home__stories--col">
-        <ul>
-          <li class="story--2 story--trending" style="background-image: url('https://unsplash.it/320/240/?random')">
-            <div class="story__icons">
-              <div class="story__icons__trending icon--with-text icon--with-text--top">
-                {{nypr-svg className="icon" icon="trending"}} Trending
-              </div>
-              <div class="story__icons__video">
-                {{nypr-svg className="icon" icon="video"}}
-              </div>
-            </div>
-            <div class="story__headline">
-              <p>WQXR Blog</p>
-              <h2>Unpacking the 2017 Oscar Nominees for Best Score</h2>
-            </div>
-          </li>
-          <li class="story--3 story--video" style="background-image: url('https://unsplash.it/320/240/?random&diff')">
-            <div class="story__icons">
-              <div class="story__icons__trending icon--with-text icon--with-text--top">
-                {{nypr-svg className="icon" icon="trending"}} Trending
-              </div>
-              <div class="story__icons__video">
-                {{nypr-svg className="icon" icon="video"}}
-              </div>
-            </div>
-            <div class="story__headline">
-              <p>HE SANG / SHE SANG</p>
-              <h2>He Sang/She Sang Podcast about Rossini’s ‘The Barber of Seville’</h2>
-            </div>
-          </li>
-        </ul>
-      </li>
-      <li class="home__stories--col">
-        <ul>
-          <li class="story--4 story--trending" style="background-image: url('https://unsplash.it/320/240/?random&diff2')">
-            <div class="story__icons">
-              <div class="story__icons__trending icon--with-text icon--with-text--top">
-                {{nypr-svg className="icon" icon="trending"}} Trending
-              </div>
-              <div class="story__icons__video">
-                {{nypr-svg className="icon" icon="video"}}
-              </div>
-            </div>
-            <div class="story__headline">
-              <p>WQXR Blog</p>
-              <h2>Unpacking the 2017 Oscar Nominees for Best Score</h2>
-            </div>
-          </li>
-          <li class="story--5 story--video" style="background-image: url('https://unsplash.it/320/240/?random&diff1')">
-            <div class="story__icons">
-              <div class="story__icons__trending icon--with-text icon--with-text--top">
-                {{nypr-svg className="icon" icon="trending"}} Trending
-              </div>
-              <div class="story__icons__video">
-                {{nypr-svg className="icon" icon="video"}}
-              </div>
-            </div>
-            <div class="story__headline">
-              <p>HE SANG / SHE SANG</p>
-              <h2>He Sang/She Sang Podcast about Rossini’s ‘The Barber of Seville’</h2>
-            </div>
-          </li>
-        </ul>
-      </li>
-      <li class="story--6 story--video story--trending" style="background-image: url('https://unsplash.it/650/488/?random&difas')">
-        <div class="story__icons">
-          <div class="story__icons__trending icon--with-text icon--with-text--top">
-            {{nypr-svg className="icon" icon="trending"}} Trending
-          </div>
-          <div class="story__icons__video">
-            {{nypr-svg className="icon" icon="video"}}
-          </div>
-        </div>
-          <div class="story__headline">
-            <p>WQXR Blog</p>
-            <h2>7 Stories That Show Mozart's Weird Genius</h2>
-          </div>
-      </li>
-    </ul>
-
+    {{brick-layout items=model.bucketItems}}
   </section>
-
-
 
 </main>
