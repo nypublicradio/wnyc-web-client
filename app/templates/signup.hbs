@@ -8,5 +8,7 @@
     </a>
   </span>
 
-  {{account-signup-form}}
+  {{nypr-account-forms/signup
+    showSocialSignup=features.socialAuth
+    authAPI=config.wnycAuthAPI}}
 {{/account-wrapper}}
