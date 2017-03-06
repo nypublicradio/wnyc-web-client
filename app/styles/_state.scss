@@ -260,7 +260,7 @@
 //    }
 //}
 //
-.persistent-queuebutton {
+.nypr-player-queue-button {
     > .icon {
       transition: fill 0.2s ease-in-out, opacity 0.3s ease-in-out;
     }
@@ -269,7 +269,7 @@
     }
 }
 
-.is-open-modal .persistent-queuebutton {
+.is-open-modal .nypr-player-queue-button {
     > .persistent-queueicon--openqueue {
       opacity: 0;
     }

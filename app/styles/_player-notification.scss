@@ -1,55 +1,46 @@
-.notification {
+.player-notification {
+  @include transform(none);
   @include fontsize(12);
   background-color: $blue;
   position: fixed;
-  bottom: 95px;
+  bottom: 80px;
   width: 100%;
   height: 58px;
   font-weight: 600;
   display: flex;
   align-content: center;
+  padding: 0 21px;
+  z-index: $nypr-player-zindex;
+}
 
-  .notification-link {
-    color: $gold;
-    border-bottom: 1px solid rgba($gold, .3);
-
-    &:hover {
-      border-bottom-color: rgba($gold, .8);
-    }
-  }
-
-  .player-notification {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 0 21px;
-  }
-
-
-  .dismiss-notification {
-    cursor: pointer;
-    align-self: center;
-    padding: 10px;
-
-    path {
-      fill: white;
-    }
-  }
-
-  .notification-change-settings {
-    align-self: center;
-    padding: 10px;
-    min-width: 70px;
-  }
-
-  .close-icon {
-    padding: 20px;
-    height: 100%;
-    width: 58px;
+.player-notification-link {
+  color: $gold;
+  border-bottom: 1px solid rgba($gold, .3);
+  align-self: center;
+  margin: 0 10px;
+  min-width: 70px;
+  &:hover {
+    border-bottom-color: rgba($gold, .8);
   }
 }
 
-.notification-action {
+.player-notification-dismiss {
+  cursor: pointer;
+  align-self: center;
+  padding: 10px;
+
+  path {
+    fill: white;
+  }
+}
+
+.player-notification-close-icon {
+  padding: 20px;
+  height: 100%;
+  width: 58px;
+}
+
+.player-notification-action {
   @include flex(1 1 60px);
   display: flex;
   flex-flow: row;
@@ -57,26 +48,29 @@
   max-width: 60px;
 }
 
-.notification-wrapper.liquid-container {
+.player-notification-wrapper.liquid-container {
   @include transform(none);
 }
 
-.notification-message {
+.player-notification-message {
   @include flex(1);
   margin: 0;
+  color: #FFF;
   padding: 10px;
   align-self: center;
 }
 
+
+
 // ipad messes with the alignment of the text a little bit
 @media only screen and (min-width: 600px) {
-  .notification {
+  .player-notification {
     @include fontsize(16);
   }
 }
 
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-  .notification {
+  .player-notification {
     bottom: 80px;
   }
 }

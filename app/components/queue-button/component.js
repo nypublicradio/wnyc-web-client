@@ -27,6 +27,7 @@ export default Component.extend({
   'data-state': computed('inQueue', function() {
     return get(this, 'inQueue') ? 'in-queue' : null;
   }),
+
   title: computed('inQueue', function() {
     if (get(this, 'inQueue')) {
       return `Remove ${get(this, 'itemTitle')} from Your Queue`;

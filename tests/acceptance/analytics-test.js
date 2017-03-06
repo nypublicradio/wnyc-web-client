@@ -26,14 +26,14 @@ test('it does not log a pageview when opening and closing the queue', function(a
 
   server.create('django-page', {id: '/'});
   visit('/');
-  click('.floating-queuebutton');
+  click('.nypr-player-queue-button.is-floating');
 
   andThen(() => {
     assert.equal(find('.l-sliding-modal').length, 1, 'modal is open');
     assert.ok(pageViewEvent.calledOnce, 'trackpageViewEvent was only called once after opening queue');
   });
 
-  click('.floating-queuebutton');
+  click('.nypr-player-queue-button.is-floating');
 
   andThen(() => {
     assert.equal(find('.l-sliding-modal').length, 0, 'modal is closed');

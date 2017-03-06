@@ -45,6 +45,7 @@ export default Service.extend({
     },
     set(k, v) { return v; }
   }),
+
   playState: computed('isPlaying', 'isLoading', function() {
     if (get(this, 'isLoading')) {
       return 'is-loading';
@@ -552,7 +553,8 @@ export default Service.extend({
   
   // TODO: would like to move this and the rest of the above
   // into an audio analytics service
-  trackStreamData(stream) {
+  trackStreamData() {
+    let stream = this.get('currentAudio');
     let showTitle = get(stream, 'currentShow.show_title') || get(stream, 'currentShow.title');
     let streamName = get(stream, 'name');
     

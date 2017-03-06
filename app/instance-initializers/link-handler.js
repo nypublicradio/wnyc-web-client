@@ -8,6 +8,9 @@ wnycURL = canonicalize(wnycURL);
 
 function _trackEvent(data, instance) {
   let metrics = instance.lookup('service:metrics');
+  // For future seekers looking for what handles these attributes, these are the strings you are looking for:
+  // data-tracking-category, data-tracking-action, data-tracking-region, data-tracking-label
+
   let category = data.trackingCategory;
   let action   = data.trackingAction;
   let analyticsCode  = '';

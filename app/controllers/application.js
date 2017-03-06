@@ -2,7 +2,7 @@ import Ember from 'ember';
 import Controller from 'ember-controller';
 import service from 'ember-service/inject';
 import get from 'ember-metal/get';
-import { and, not } from 'ember-computed';
+import { and, not, reads, equal } from 'ember-computed';
 
 export default Controller.extend({
   audio:        service(),
@@ -17,7 +17,18 @@ export default Controller.extend({
 
   isHomepage: Ember.computed.match('currentRouteName', /^index(_loading)?$/),
 
+
+  // Persistent Player Component Integration
+
+
+  currentAudio: reads('audio.currentAudio'),
+  isAudioStream: equal('currentAudio.audioType', 'stream'), // unused?
+
+
+
   actions: {
+
+
     showModal(which) {
       this._scrollY = window.scrollY;
       this.set('modal', which);
@@ -38,5 +49,9 @@ export default Controller.extend({
       this.set('modal', null);
       this._wasModal = true;
     },
+    
+    trackStreamData() {
+      this.get('audio').trackStreamData();
+    }
   }
 });

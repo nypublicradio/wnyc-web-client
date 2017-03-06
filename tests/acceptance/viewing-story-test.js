@@ -21,7 +21,7 @@ test('smoke test', function(assert) {
   djangoPage
     .bootstrap({id})
     .visit({id});
-    
+
   andThen(() => {
     assert.equal(currentURL(), `story/${story.slug}/`);
     assert.ok(find('.sitechrome-btn'), 'donate button should be the default');
@@ -36,7 +36,7 @@ test('view comments as regular user', function(assert) {
   djangoPage
     .bootstrap({id})
     .visit({id});
-    
+
   storyPage.clickShowComments();
 
   andThen(() => {
@@ -68,11 +68,11 @@ test('story pages with a play param', function(assert) {
   djangoPage
     .bootstrap({id})
     .visit({id: id + `?play=${story.id}`});
-    
+
   andThen(function() {
     assert.equal(currentURL(), `story/${story.slug}/?play=${story.id}`);
-    assert.ok(Ember.$('.persistent-player').length, 'persistent player should be visible');
-    assert.equal(Ember.$('[data-test-selector=persistent-player-story-title]').text(), story.title, `${story.title} should be loaded in player UI`);
+    assert.ok(Ember.$('.nypr-player').length, 'persistent player should be visible');
+    assert.equal(Ember.$('[data-test-selector=nypr-player-story-title]').text(), story.title, `${story.title} should be loaded in player UI`);
   });
 });
 
@@ -93,11 +93,11 @@ test('visiting a story with a different donate URL', function(assert) {
     id,
     slug: donateStory.slug
   });
-  
+
   djangoPage
     .bootstrap({id})
     .visit({id});
-    
+
   andThen(function() {
     assert.equal(find('.foo').text(), 'donate to foo', 'donate chunk should match');
   });
@@ -141,13 +141,13 @@ test('metrics properly reports story attrs', function(assert) {
     };
     assert.deepEqual({cms_id, item_type, browser_id, client, referrer, url, site_id}, testObj, 'params match up');
   });
-  
+
   window.ga = function(command) {
     if (command === 'npr.send') {
       assert.ok('called npr.send');
     }
   };
-  
+
   djangoPage
     .bootstrap({id})
     .visit({id});

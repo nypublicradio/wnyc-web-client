@@ -21,11 +21,11 @@ export default function() {
     })
   );
   this.transition(
-    this.hasClass('player-wrapper'),
+    this.hasClass('nypr-player-wrapper'),
     this.use('playerReveal')
   );
   this.transition(
-    this.hasClass('notification-wrapper'),
+    this.hasClass('player-notification-wrapper'),
     this.use('notificationReveal')
   );
   this.transition(
