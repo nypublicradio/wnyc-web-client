@@ -26,6 +26,7 @@ moduleForAcceptance('Acceptance | Django Rendered | Proper Re-renders', {
 });
 
 skip('on the homepage', function(assert) {
+  server.create('bucket');
   let home = server.create('django-page', {id: '/'});
   djangoPage
     .bootstrap(home)
@@ -54,6 +55,7 @@ test('on a search page with a query', function(assert) {
 skip('it properly routes to the search page', function(assert) {
   let home = server.create('django-page', {id: '/'});
   server.create('django-page', {id: 'search/?q=foo'});
+  server.create('bucket');
 
   djangoPage
     .bootstrap(home)
