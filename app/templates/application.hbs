@@ -27,11 +27,11 @@
   {{#unless chromeDisabled}}
     <div class="l-fixed l-lowright">
     {{nypr-player.queue-button
-        isFloating  = true
-        queueLength = audio.queue.items.length
-        showModal   = (action 'showModal' 'queue-history')
-        closeModal  = (action 'closeModal')
-        isOpenModal = modal}}
+      isFloating  = true
+      queueLength = audio.queue.items.length
+      showModal   = (action 'showModal' 'queue-history')
+      closeModal  = (action 'closeModal')
+      isOpenModal = modal}}
     </div>
   {{/unless}}
   {{else}}
@@ -45,43 +45,43 @@
     {{#nypr-player currentTitle=integration.currentTitle backdropImageUrl=integration.backdropImageUrl as |content|}}
         {{#content.for 'trackInfo'}}
           {{nypr-player-integration.track-info
-            currentAudio   = integration.currentAudio
-            showTitle      = integration.showTitle
-            showUrl        = integration.showUrl
-            storyTitle     = integration.storyTitle
-            storyUrl       = integration.storyUrl
-            audioId        = integration.audioId
-            songDetails    = integration.songDetails
-            isStream       = integration.isStream
+            currentAudio    = integration.currentAudio
+            showTitle       = integration.showTitle
+            showUrl         = integration.showUrl
+            storyTitle      = integration.storyTitle
+            storyUrl        = integration.storyUrl
+            audioId         = integration.audioId
+            songDetails     = integration.songDetails
+            isStream        = integration.isStream
             trackStreamData = (action 'trackStreamData')
           }}
 
           {{#unless hifi.isLoading}} {{! only show the share button when the audio has loaded}}
             {{#if integration.currentAudio.shareMetadata}}
               {{share-button
-                story         = integration.currentAudio
-                type          = (if integration.isStream 'stream' 'ondemand')
-                region        = "Player"
-                text          = "SHARE"}}
+                story  = integration.currentAudio
+                type   = (if integration.isStream 'stream' 'ondemand')
+                region = "Player"
+                text   = "SHARE"}}
             {{/if}}
           {{/unless}}
         {{/content.for}}
 
         {{#content.for 'streamInfo'}}
           {{nypr-player-integration.stream-info
-            streamScheduleUrl       = integration.streamScheduleUrl
-            streamPlaylistUrl       = integration.streamPlaylistUrl
-            streamUrl               = integration.streamUrl
-            streamName              = integration.streamName
+            streamScheduleUrl = integration.streamScheduleUrl
+            streamPlaylistUrl = integration.streamPlaylistUrl
+            streamUrl         = integration.streamUrl
+            streamName        = integration.streamName
           }}
         {{/content.for}}
 
         {{#content.for 'aux' as |args|}}
           {{args.queueButton
-              queueLength       = audio.queue.items.length
-              showModal         = (action 'showModal' 'queue-history')
-              closeModal        = (action 'closeModal')
-              isOpenModal       = modal}}
+            queueLength = audio.queue.items.length
+            showModal   = (action 'showModal' 'queue-history')
+            closeModal  = (action 'closeModal')
+            isOpenModal = modal}}
         {{/content.for}}
     {{/nypr-player}}
   {{/liquid-unless}}
