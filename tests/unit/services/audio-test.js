@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { moduleFor, test, skip } from 'ember-qunit';
+import { moduleFor, test } from 'ember-qunit';
 import startMirage from 'wqxr-web-client/tests/helpers/setup-mirage-for-integration';
 import wait from 'ember-test-helpers/wait';
 import hifiNeeds from 'wqxr-web-client/tests/helpers/hifi-needs';
@@ -73,7 +73,7 @@ test('passing a pk to play calls playFromPk', function(assert) {
   service.play(1);
 });
 
-skip('can switch from on demand to stream and vice versa', function(assert) {
+test('can switch from on demand to stream and vice versa', function(assert) {
   assert.expect(4);
 
   const onDemandUrl = '/url.mp3';
