@@ -10,6 +10,8 @@
     {{account-thanks email=changeset.email}}
   {{else}}
 
+  <h2 class="account-form-heading">Sign up for an account</h2>
+
   {{#if features.socialAuth}}
     <button type="button" class="account-form-btn account-form-btn--facebook" {{action 'signupWithFacebook'}}>
       <i class="fa fa-facebook-square"></i>Sign up with Facebook
