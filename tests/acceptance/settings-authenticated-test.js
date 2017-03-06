@@ -71,14 +71,3 @@ test('after visiting settings, user can toggle off autoplay settings', function(
     assert.equal(expectedElementCount, actualElementCount);
   });
 });
-
-test('if feature flag for autoplay-autoprefs is absent, then the link should be not be present', function(assert) {
-  visit('/');
-  const el = $('.l-bottom .list-item:contains("Settings")');
-  andThen(() => {
-    const expectedElementCount = 0;
-    const actualElementCount = el.length;
-    assert.equal(expectedElementCount, actualElementCount);
-  });
-
-});
