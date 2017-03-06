@@ -166,113 +166,6 @@
   }
 }
 
-.account-form {
-  max-width: 460px;
-  margin: 0 auto 75px;
-  padding: 100px 30px 0 30px;
-  @include flexbox((
-    display: flex,
-    flex-direction: column,
-    justify-content: center
-  ));
-
-  &-heading {
-    padding: 0;
-    color: #333333;
-    font-weight: 400;
-    font-size: 24px;
-    margin: 0 0 20px 0;
-    @include mq($medium-and-up) {
-      width: 400px;
-      font-size: 32px;
-      margin: 0 0 25px 0;
-    }
-  }
-  &-description {
-    margin: 0 0 28px 0;
-  }
-  &-link {
-    font-size: 14px;
-  }
-  &-btn {
-    > .fa {
-      margin-right: 6px;
-      font-size: 24px;
-      vertical-align: text-bottom;
-    }
-  }
-  &-separator {
-    font-size: 16px;
-    margin-bottom: 15px;
-    overflow: hidden;
-    text-align: center;
-    color: $lightgray;
-  }
-  &-separator:before,
-  &-separator:after {
-    background-color: $lightestgray;
-    content: "";
-    display: inline-block;
-    height: 1px;
-    position: relative;
-    vertical-align: middle;
-    width: 50%;
-  }
-  &-separator:before {
-      right: 0.5em;
-      margin-left: -50%;
-  }
-  &-separator:after {
-      left: 0.5em;
-      margin-right: -50%;
-  }
-  &-notice {
-    font-size: 12px;
-    line-height: 1.7;
-    text-align: center;
-    color: $lightgray;
-    margin-bottom: 23px;
-
-    a {
-      @include link--gray;
-    }
-  }
-  &-error {
-    color: $red;
-    font-size: 12px;
-    text-align: center;
-    margin-bottom: 13px;
-    a {
-      color: $red;
-      border-bottom: 1px solid $red;
-    }
-    a:hover,
-    a:focus {
-      color: $rouge;
-      border-bottom: 1px solid $rouge;
-    }
-  }
-
-  @include mq($middle-narrow-and-up) {
-    &-row {
-      @include flexbox((
-        display: flex,
-        justify-content: space-between
-      ));
-
-      .account-form-col2 {
-        width: 48%;
-      }
-    }
-  }
-}
-
-.account-form-btn--facebook {
-  @include btn--facebook;
-  margin-bottom: 14px;
-}
-
-
 .account-header {
   @include flexbox((
     display: flex,
@@ -321,7 +214,14 @@
     margin-bottom: 8px;
 
     >  a {
-      @include link--gray;
+      color: $lightgray;
+      border-bottom: 1px solid rgba($lightgray, 0.3);
+
+      &:hover,
+      &:focus {
+        border-color: $blue;
+        color: $blue;
+      }
     }
   }
 }
