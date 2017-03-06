@@ -2,7 +2,6 @@ import ApplicationAdapter from 'wqxr-web-client/adapters/application';
 import config from 'wqxr-web-client/config/environment';
 
 export default ApplicationAdapter.extend({
-  pathForType: 'bucket',
   buildURL(modelName, id, snapshot, requestType, query) {
     if (requestType !== 'findRecord') {
       return this._super(...arguments);
