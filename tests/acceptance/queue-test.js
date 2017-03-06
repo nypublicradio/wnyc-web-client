@@ -17,17 +17,17 @@ moduleForAcceptance('Acceptance | queue', {
 });
 
 test('visiting /?modal=queue-history', function(assert) {
-  server.create('djangoPage', {id:'/'});
+  server.create('djangoPage', {id:'fake/'});
 
   queuePage.visit();
 
   andThen(function() {
-    assert.equal(currentURL(), '/?modal=queue-history');
+    assert.equal(currentURL(), '/fake?modal=queue-history');
   });
 });
 
 test('Queue initial state should be open and empty', function(assert) {
-  server.create('djangoPage', {id:'/'});
+  server.create('djangoPage', {id:'fake/'});
 
   queuePage.visit();
 
@@ -40,7 +40,7 @@ test('Queue initial state should be open and empty', function(assert) {
 test('Queue should sort when you drag an item', function(assert) {
   let listenQueue = this.application.__container__.lookup('service:listen-queue');
   server.createList('story', 2);
-  server.create('djangoPage', {id:'/'});
+  server.create('djangoPage', {id:'fake/'});
 
   run(() => {
     listenQueue.addToQueueById(1);

@@ -28,7 +28,7 @@ skip('play param transitions', function(assert) {
   let audio = registerMockOnInstance(application, 'service:audio', mockAudio);
 
   server.create('django-page', {
-    id: '/',
+    id: 'fake/',
     testMarkup: `
       <a href="/foo?play=wnyc-fm939" id="foo">foo</a>
     `
@@ -36,10 +36,10 @@ skip('play param transitions', function(assert) {
   server.create('django-page', {
     id: 'foo/',
     testMarkup: `
-      <a href="/" id="home">home</a>
+      <a href="/fake" id="home">home</a>
     `
   });
-  visit('/');
+  visit('/fake');
   click('#foo');
 
   andThen(() => {

@@ -259,7 +259,7 @@ test('visiting a show with a different header donate chunk', function(assert) {
     apiResponse: server.create('api-response', { id: 'shows/foo/recent_stories/1' })
   });
   server.create('django-page', {id: show.id});
-  server.create('django-page', {id: '/'});
+  server.create('django-page', {id: 'fake/'});
 
   djangoPage
     .bootstrap(show)

@@ -31,7 +31,7 @@ test('Log in button is visible at load', function(assert) {
 
 test('Submitting valid credentials redirects to previous route', function(assert) {
   server.create('user');
-  let page = server.create('django-page', {id: '/'});
+  let page = server.create('django-page', {id: 'fake/'});
 
   andThen(() => {
     djangoPage
@@ -53,7 +53,7 @@ test('Submitting valid credentials redirects to previous route', function(assert
 
   andThen(() => {
     assert.equal(currentSession(this.application).get('isAuthenticated'), true);
-    assert.equal(currentURL(), '/');
+    assert.equal(currentURL(), '/fake/');
   });
 });
 
@@ -76,8 +76,8 @@ test('Submitting invalid credentials shows form level error message', function(a
 });
 
 skip('Clicking logout hides privileged links', function(assert) {
-  server.create('user');
-  server.create('django-page', {id: '/'});
+  server.create('django-page', {id: 'fake/'});
+  server.create('django-page', {id: 'fake/'});
   visit('/login');
   andThen(() => {
     fillIn('input[name=username]', 'foo');
