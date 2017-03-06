@@ -38,6 +38,15 @@ export default Model.extend({
   }),
 
 
+  source_tags:          attr('string'), 
+  isWQXR:               computed('source_tags', function(){
+    return this.get('source_tags') === 'wqxr_app';
+  }),
+  liveWQXR:             computed('source_tags', function(){
+    return this.get('isWQXR') && this.get('audioBumper') != null;
+  }),
+
+
   shareMetadata:        computed('currentShow', 'currentPlaylistItem', function() {
     return shareMetadata(this);
   }),
