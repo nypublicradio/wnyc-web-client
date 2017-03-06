@@ -26,5 +26,6 @@ function bucketItems() {
 }
 
 export default Factory.extend({
+  slug: () => faker.lorem.words().join('-'),
   bucketItems
 });
