@@ -21,10 +21,10 @@ test('visiting /schedule', function(assert) {
 
 test('clicking on /schedule', function(assert) {
   let date = moment().format('YYYY/MMM/DD').toLowerCase();
-  server.create('django-page', {id: '/'});
-  server.create('django-page', {id: `schedule/${date}/?scheduleStation=wqxr`});
+  server.create('django-page', {id: 'fake/'});
+  server.create('django-page', {id: `schedule/${date}/?scheduleStation=wnyc-fm939`});
 
-  visit('/');
+  visit('/fake');
 
   andThen(function() {
     click('a[href="/schedule"]');

@@ -24,9 +24,15 @@ test('it does not log a pageview when opening and closing the queue', function(a
     trackPage: pageViewEvent
   });
 
+<<<<<<< HEAD
   server.create('django-page', {id: '/'});
   visit('/');
   click('.nypr-player-queue-button.is-floating');
+=======
+  server.create('django-page', {id: 'fake/'});
+  visit('/fake');
+  click('.floating-queuebutton');
+>>>>>>> updates tests to make an explicitly fake django-page
 
   andThen(() => {
     assert.equal(find('.l-sliding-modal').length, 1, 'modal is open');
@@ -69,9 +75,9 @@ skip('it logs a homepage bucket event when you click a story on the home page', 
       </div>
     </div>`;
   server.create('django-page', {id});
-  server.create('django-page', {id: '/', testMarkup});
+  server.create('django-page', {id: 'fake/', testMarkup});
 
-  visit('/');
+  visit('/fake');
   click('#test-link');
 
   andThen(() => {
