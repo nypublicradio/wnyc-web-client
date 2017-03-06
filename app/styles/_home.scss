@@ -63,13 +63,25 @@
             }
 
             &__video {
-              visibility: hidden;
+              display: none;
             }
           }
           &__head {
             &__headline,
             &__brand {
               margin: 0;
+            }
+
+            &__headline {
+              svg {
+                display: none;
+                position: relative;
+                top: 3px;
+
+                path {
+                  fill: black;
+                }
+              }
             }
 
             &__brand {
@@ -89,7 +101,7 @@
 
         &.story_video {
           .story__icons__video {
-            visibility: visible;
+            display: block;
           }
         }
 
@@ -112,7 +124,7 @@
           }
 
           &:before {
-            @include classic-filter($filter);
+            @include classic-filter($filter--light);
           }
 
           @include mq($small-only) {
@@ -120,13 +132,15 @@
             height: 300px;
             padding: 20px;
 
-            .story__head__headline {
-              @include fontsize(24);
-              line-height: 2rem;
-            }
+            .story__head {
+              &__headline {
+                @include fontsize(24);
+                line-height: 2rem;
+              }
 
-            .story__head__brand {
-              @include fontsize(14);
+              &__brand {
+                @include fontsize(14);
+              }
             }
           }
         }
@@ -167,6 +181,10 @@
           .story__head__headline {
             @include fontsize(20);
             line-height: 1.8rem;
+
+            a {
+              @include icon--with-text;
+            }
           }
 
           .story__head__brand {
@@ -174,7 +192,7 @@
           }
 
           &:before {
-            @include classic-filter($filter);
+            @include classic-filter($filter--light);
           }
 
           @include mq($small-only) {
@@ -196,12 +214,8 @@
             }
 
             &.story_video {
-              h2:before {
-                content: $video;
-                width: 36px;
-                display: inline-block;
-                top: 5px;
-                position: relative;
+              .story__head__headline svg {
+                display: inline;
               }
             }
 
@@ -273,6 +287,10 @@
                 @include fontsize(24);
                 font-weight: normal;
                 line-height: 2rem;
+
+                a {
+                  @include icon--with-text;
+                }
               }
 
               &__brand {
@@ -283,7 +301,7 @@
 
           &.story_video {
             .story__icons__video {
-              visibility: visible;
+              display: block;
             }
           }
 
@@ -322,12 +340,8 @@
             }
 
             &.story_video {
-              h2:before {
-                content: $video;
-                width: 36px;
-                display: inline-block;
-                top: 5px;
-                position: relative;
+              .story__head__headline svg {
+                display: inline;
               }
             }
 
