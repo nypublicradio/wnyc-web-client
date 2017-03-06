@@ -13,11 +13,11 @@ function bucketItems() {
         headers: {
           brand: {
             title: faker.lorem.words().join(' '),
-            url: 'http://marineboudeau.com'
+            url: faker.internet.url()
           }
         },
         template: faker.random.arrayElement(['story_default', 'story_video']),
-        url: 'http://marineboudeau.com'
+        url: faker.internet.url()
       },
       type: faker.random.arrayElement(['event', 'story'])
     });
