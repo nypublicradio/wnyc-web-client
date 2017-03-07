@@ -7,6 +7,7 @@ export default Factory.extend({
   future: [],
   has_playlists: false,
   expires_ts: Date.now() + 10000000,
+  audio_bumper: faker.internet.url,
   slug: (i) => {
     switch (i) {
       case 0:
@@ -26,5 +27,6 @@ export default Factory.extend({
       default:
         return faker.lorem.words(2).join('-');
     }
-  }
+  },
+  source_tags: "wqxr_app",
 });
