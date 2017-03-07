@@ -29,26 +29,7 @@ export default Factory.extend({
   short_description: faker.lorem.sentence,
   playlist_url: faker.internet.url,
   whats_on: 100,
-  source_tags: (i) => {
-    switch (i) {
-      case 0:
-        return "";
-      case 1:
-        return "wqxr_app";
-      case 2:
-        return "wqxr_app";
-      case 3:
-        return "";
-      case 4:
-        return "";
-      case 5:
-        return "wqxr_app";
-      case 6:
-        return "wqxr_app";
-      default:
-        return "";
-    }
-  },
+  source_tags: "wqxr_app",
   urls: () => {
     return {
       ipod: faker.internet.url(),
