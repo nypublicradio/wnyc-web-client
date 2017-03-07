@@ -27,12 +27,13 @@ export default Model.extend({
 
   story:                readOnly('currentStory'),
   audioBumper:          attr('string'),
-
   source_tags:          attr('string'), 
+  
   isWQXR:               computed('source_tags', function(){
     return this.get('source_tags') === 'wqxr_app';
   }),
-  liveWQXR:             computed('source_tags', function(){
+
+  liveWQXR:             computed('isWQXR', 'audioBumper', function(){
     return this.get('isWQXR') && this.get('audioBumper') != null;
   }),
 
