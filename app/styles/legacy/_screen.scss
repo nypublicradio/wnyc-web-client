@@ -15,6 +15,10 @@
 
 .site-container {
   padding-top: 25px;
+    // legacy styles stay loaded and override a class this is set on
+    // this limits django pages to full width on mobile
+  width: 100% !important;
+  margin: 0 !important;
 }
 
 .masthead-container {
