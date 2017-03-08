@@ -1,6 +1,6 @@
 import { test, skip } from 'qunit';
-import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
-import 'wnyc-web-client/tests/helpers/with-feature';
+import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
+import 'wqxr-web-client/tests/helpers/with-feature';
 
 const fbResponseUser = {
   "first_name": "Jane",

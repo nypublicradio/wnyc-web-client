@@ -4,7 +4,7 @@ import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-accept
 import { Response } from 'ember-cli-mirage';
 import config from 'wqxr-web-client/config/environment';
 import { currentSession } from 'wqxr-web-client/tests/helpers/ember-simple-auth';
-import 'wnyc-web-client/tests/helpers/with-feature';
+import 'wqxr-web-client/tests/helpers/with-feature';
 
 moduleForAcceptance('Acceptance | login', {
   beforeEach() {
