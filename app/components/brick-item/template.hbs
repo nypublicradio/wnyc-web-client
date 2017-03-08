@@ -1,0 +1,23 @@
+<li class="{{item.attributes.template}} item--trending"
+    style="background-image: url({{item.attributes.imageMain.url}})">
+  <div class="item__icons">
+    <div class="item__icons__trending icon--with-text icon--with-text--top">
+      {{nypr-svg className="icon" icon="trending"}} Trending
+    </div>
+    <div class="item__icons__video">
+      {{nypr-svg className="icon" icon="video"}}
+    </div>
+  </div>
+  <div class="item__img"
+       style="background-image: url({{item.attributes.imageMain.url}})">
+  </div>
+  <div class="item__head">
+    <a class="item__head__brand" href="{{item.attributes.headers.brand.url}}">
+      {{item.attributes.headers.brand.title}}
+    </a>
+    <h2 class="item__head__headline"><a href="{{item.attributes.url}}">
+      {{nypr-svg className="icon" icon="video"}}
+      {{item.attributes.title}}
+    </a></h2>
+  </div>
+</li>
