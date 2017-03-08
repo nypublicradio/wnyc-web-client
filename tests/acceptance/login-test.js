@@ -4,7 +4,7 @@ import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-accept
 import { Response } from 'ember-cli-mirage';
 import config from 'wqxr-web-client/config/environment';
 import { currentSession } from 'wqxr-web-client/tests/helpers/ember-simple-auth';
-import 'wnyc-web-client/tests/helpers/with-feature';
+import 'wqxr-web-client/tests/helpers/with-feature';
 import dummySuccessProviderFb from 'wqxr-web-client/tests/helpers/torii-dummy-success-provider-fb';
 import dummyFailureProvider from 'wqxr-web-client/tests/helpers/torii-dummy-failure-provider';
 import { registerMockOnInstance } from 'wqxr-web-client/tests/helpers/register-mock';
@@ -44,7 +44,7 @@ test('Submitting valid credentials redirects to previous route', function(assert
   });
 
   andThen(() => {
-    assert.equal(find('.account-form-heading').text().trim(), 'Log in to WNYC');
+    assert.equal(find('.account-form-heading').text().trim(), 'Log in to WQXR');
   });
 
   fillIn('input[name=email]', 'foo@example.com');
@@ -70,7 +70,7 @@ test('Submitting invalid credentials shows form level error message', function(a
 
   andThen(() => {
     assert.equal(currentSession(this.application).get('isAuthenticated'), false);
-    assert.equal(find('.account-form-heading').text().trim(), 'Log in to WNYC');
+    assert.equal(find('.account-form-heading').text().trim(), 'Log in to WQXR');
     assert.equal(find('.account-form-error').length, 1);
   });
 });
