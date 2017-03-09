@@ -8,7 +8,7 @@ export default ApplicationAdapter.extend({
       return url;
     }
 
-    url += `?site=${config.siteSlug}`;
+    url += `/?site=${config.siteSlug}`;
     if (query && Object.keys(query).length) {
       let qp = Object.keys(query).map(k => `${k}=${query[k]}`);
       url += qp.join('&');
