@@ -11,6 +11,7 @@ export default Component.extend(BetaActionsMixin, {
   router: service('wnyc-routing'),
   currentUser: service(),
   donateURL: config.wnycDonateURL,
+  classNameBindings: ['showPlayer:sitechrome--player-open'],
   defaultStream:  {slug: 'wqxr', name: 'WQXR New York'},
   preferredStream: or('session.data.user-prefs-active-stream', 'defaultStream'),
 
