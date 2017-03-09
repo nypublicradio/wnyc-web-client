@@ -1,7 +1,0 @@
-{{#if ready}}
-  <button class='resend-button' {{action "resend" target email}}>{{yield}}</button>
-{{else if success}}
-  <span class='resend-success'>{{successMessage}}</span>
-{{else if error}}
-  <span class='resend-error'>{{errorMessage}}</span>
-{{/if}}

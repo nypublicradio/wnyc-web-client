@@ -430,16 +430,6 @@
 /***
  * Links:
  */
-@mixin link--gray {
-    color: $lightgray;
-    border-bottom: 1px solid rgba($lightgray, 0.3);
-    
-    &:hover,
-    &:focus {
-      border-color: $blue;
-      color: $blue;
-    }
-}
 
 .link--dark {
     color: $darkergray;
