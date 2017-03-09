@@ -33,16 +33,18 @@ export default Controller.extend({
         })
         .then(response => {
           if (response.ok) {
-            resolve();
+            resolve(response);
             this.showFlash('password');
+          } else if (response.json) {
+            response.json().then(reject);
           } else {
-            reject();
+            reject(response);
           }
         });
       });
     });
   },
-  
+
   showFlash(type) {
     this.get('flashMessages').add({
       message: FLASH_MESSAGES[type],
