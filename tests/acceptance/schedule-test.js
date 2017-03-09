@@ -22,7 +22,7 @@ test('visiting /schedule', function(assert) {
 test('clicking on /schedule', function(assert) {
   let date = moment().format('YYYY/MMM/DD').toLowerCase();
   server.create('django-page', {id: 'fake/'});
-  server.create('django-page', {id: `schedule/${date}/?scheduleStation=wnyc-fm939`});
+  server.create('django-page', {id: `schedule/${date}/?scheduleStation=wqxr`});
 
   visit('/fake');
 

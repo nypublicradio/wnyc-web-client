@@ -26,7 +26,7 @@ test('it does not log a pageview when opening and closing the queue', function(a
 
   server.create('django-page', {id: 'fake/'});
   visit('/fake');
-  click('.floating-queuebutton');
+  click('.nypr-player-queue-button.is-floating');
 
   andThen(() => {
     assert.equal(find('.l-sliding-modal').length, 1, 'modal is open');
