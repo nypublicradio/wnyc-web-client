@@ -1,7 +1,10 @@
 import Route from 'ember-route';
+import config from 'wnyc-web-client/config/environment';
 
 export default Route.extend({
-  setupController() {
+  config,
+  setupController(controller) {
+    controller.set('config', this.get('config'));
     return this._super(...arguments);
   },
   actions: {
