@@ -29,7 +29,7 @@
   @include mq($large-and-up) {
     background: white;
     padding-top: 0;
-    height: 115px;
+    height: 101px;
   }
 
   .profile & {
@@ -126,7 +126,7 @@
     a,
     a:hover {
       //border: 1px dotted rgba(0, 0, 0, 0);
-      padding: 45px 17px 26px 19px;
+      padding: 38px 17px 26px 19px;
     }
 
     a:focus {
@@ -209,7 +209,7 @@
   &:not(.x-scrollable) {
     .list-item {
       padding: 1px 18px 1px 0;
-      margin: 13px 0;
+      margin: 8px 0;
 
       a {
         @include transition(none);
@@ -409,6 +409,10 @@
 .sitechrome-footer {
   background-color: $black;
 
+  .footer-logo {
+    padding-bottom: 21px;
+  }
+
   .text-body{
     font-family: 'Open Sans', sans-serif;
     font-weight: 600;
@@ -423,6 +427,7 @@
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
+    margin-bottom: 24px;
 
     @include mq($medium-and-up) {
       font-size: 24px;
@@ -431,8 +436,26 @@
 
     &.inline {
       padding-right: 25px;
+      display: inline-block;
     }
   }
+
+  .list--inline {
+    line-height: 50px;
+    h2, li {
+      vertical-align: middle;
+    }
+    h2.inline {
+      padding-right: 25px;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+  }
+
+  .list-item--tiny {
+    padding: 6px 0;
+  }
+
 
   a {
     font-family: 'Open Sans', sans-serif;
