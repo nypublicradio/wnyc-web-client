@@ -28,13 +28,7 @@ export default Ember.Service.extend({
   },
 
   reportItemView(incoming = {}) {
-    let data = Object.assign({
-      browser_id: this.get('session.data.browserId'),
-      client: config.clientSlug,
-      referrer: this.get('currentReferrer'),
-      url: location.toString()
-    }, incoming);
-
+    let data = this._generateData(incoming);
     this._send(data, this.itemViewPath);
 
     this._legacySend(`api/most/view/managed_item/${data.cms_id}/`);
@@ -105,12 +99,16 @@ export default Ember.Service.extend({
   },
 
   _generateData(incoming, action) {
-    return Object.assign({
+    let data = Object.assign({
       action,
       browser_id: this.get('session.data.browserId'),
       client: config.clientSlug,
       referrer: this.get('currentReferrer'),
       url: location.toString(),
     }, incoming);
+    if (!action) {
+      delete data.action;
+    }
+    return data;
   },
 });
