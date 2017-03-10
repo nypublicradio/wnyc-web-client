@@ -104,6 +104,7 @@ export default Ember.Service.extend({
       browser_id: this.get('session.data.browserId'),
       client: config.clientSlug,
       referrer: this.get('currentReferrer'),
+      external_referrer: document.referrer,
       url: location.toString(),
     }, incoming);
     if (!action) {

@@ -128,7 +128,7 @@ export default Model.extend({
   
   forListenAction(data) {
     return Ember.RSVP.Promise.resolve(Object.assign({
-      audio_type: 'ondemand',
+      audio_type: 'on_demand',
       cms_id: this.get('id'),
       site_id: this.get('siteId'),
       item_type: this.get('itemType'),

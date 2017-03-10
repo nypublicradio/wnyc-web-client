@@ -381,11 +381,12 @@ test('service records a listen when a story is played', function(assert) {
   service.get('hifi.soundCache').cache(audio);
   service.get('hifi.soundCache').cache(audio2);
   let expected = {
-    audio_type: 'ondemand',
+    audio_type: 'on_demand',
+    browser_id: 'secrets',
     cms_id: story.id,
+    current_audio_position: 0,
     item_type: story.itemType,
     site_id: story.siteId,
-    current_position: 0
   };
     
   Ember.run(() => {
