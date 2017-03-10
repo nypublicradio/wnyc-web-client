@@ -9,10 +9,6 @@ moduleFor('service:data-pipeline', 'Unit | Service | data pipeline', {
       data: {
         browserId: 'secrets'
       },
-
-      syncBrowserId: function() {
-        return Ember.RSVP.Promise.resolve('secrets');
-      }
     });
 
     this.register('service:session', sessionStub);
@@ -36,7 +32,6 @@ test('it reports the proper data for an item view', function(assert) {
   }, testData);
   
   let service = this.subject({
-    browserId: 'secrets',
     _send(data) {
       assert.deepEqual(expected, data, 'passes in correct data to send');
     },
@@ -63,7 +58,6 @@ test('it reports the proper data for ondemand listen actions', function(assert) 
   let testData = {cms_id: 1, item_type: 'story', site_id: 1};
   
   let service = this.subject({
-    browserId: 'secrets',
     _legacySend() {}
   });
   
