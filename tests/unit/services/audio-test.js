@@ -105,6 +105,7 @@ test('can switch from on demand to stream and vice versa', function(assert) {
       });
     });
   });
+  return wait();
 });
 
 test('playing a story with a list of urls plays them in order', function(assert) {
