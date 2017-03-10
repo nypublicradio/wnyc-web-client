@@ -119,7 +119,7 @@ test('it reports the proper data for ondemand listen actions', function(assert) 
 });
 
 test('data pipeline tracks delta properly', function(assert) {
-  assert.expect(5);
+  assert.expect(6);
   
   let currentCall = 0;
   let now = Date.now();
@@ -129,18 +129,27 @@ test('data pipeline tracks delta properly', function(assert) {
     _send({action, delta}) {
       switch(currentCall) {
         case 1:
+          // start
           assert.equal(delta, 0, 'delta should be 0 on start and resumes');
           break;
         case 2:
+          // pause
           assert.equal(delta, deltaShouldbe, 'delta should be updated as time ticks');
           break;
         case 3:
+          // position
           assert.equal(delta, 0, 'delta should be 0 if not playing');
           break;
         case 4:
+          // resume
           assert.equal(delta, 0, 'delta should be 0 on start and resumes');
           break;
         case 5:
+          // postion
+          assert.equal(delta, deltaShouldbe, 'delta should be updated as time ticks');
+          break;
+        case 6:
+          // interrupt
           assert.equal(delta, deltaShouldbe, 'delta should be updated as time ticks');
           break;
       }
@@ -165,6 +174,11 @@ test('data pipeline tracks delta properly', function(assert) {
   clock.tick(deltaShouldbe);
   currentCall++;
   service.reportListenAction('position');
+  
+  deltaShouldbe *= 2;
+  clock.tick(deltaShouldbe);
+  currentCall++;
+  service.reportListenAction('interrupt');
 
   clock.restore();
 });
