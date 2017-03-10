@@ -222,7 +222,7 @@
     }
     .list-item.active, .list-item.ember-transitioning-in {
       border-right: 3px solid white;
-      background-color: rgba(0, 100, 180, .15);
+      background-color: rgba($wqxrdarkblue, .15);
       a {
         border: none;
       }
