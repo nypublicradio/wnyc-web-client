@@ -366,7 +366,12 @@ test('service records a listen when a story is played', function(assert) {
     url: '/audio.mp3',
     duration: 30 * 60 * 1000
   });
+  let audio2 = DummyConnection.create({
+    url: '/audio2.mp3',
+    duration: 30 * 60 * 1000
+  });
   let story = server.create('story', { audio: '/audio.mp3' });
+  let story2 = server.create('story', { audio: '/audio2.mp3' });
   let reportStub = sinon.stub();
   let service = this.subject({
       dataPipeline: {
@@ -374,6 +379,7 @@ test('service records a listen when a story is played', function(assert) {
       }
   });
   service.get('hifi.soundCache').cache(audio);
+  service.get('hifi.soundCache').cache(audio2);
   let expected = {
     audio_type: 'ondemand',
     cms_id: story.id,
@@ -393,20 +399,63 @@ test('service records a listen when a story is played', function(assert) {
       service.pause();
       let pausePosition = {current_position: service.get('position')};
       service.play(story.id).then(() => {
-        service.finishedTrack();
-        let finishedPosition = service.get('position');
-        wait().then(() => {
-          assert.equal(reportStub.callCount, 7);
-          assert.deepEqual(reportStub.getCall(0).args, ['start', expected], 'should have received proper attrs');
-          assert.deepEqual(reportStub.getCall(1).args, ['forward_15', Object.assign(expected, forwardPosition)], 'current_position should be time when action happened, not target time');
-          assert.deepEqual(reportStub.getCall(2).args, ['back_15', Object.assign(expected, rewindPosition)], 'current_position should be time when action happened, not target time');
-          assert.deepEqual(reportStub.getCall(4).args, ['pause', Object.assign(expected, pausePosition)], 'should have received proper attrs');
-          assert.deepEqual(reportStub.getCall(5).args, ['resume', Object.assign(expected, pausePosition)], 'should have received proper attrs');
-          assert.deepEqual(reportStub.getCall(6).args, ['finish', Object.assign(expected, finishedPosition)], 'should have received proper attrs');
-          
-          // set_position is special case
-          assert.deepEqual(reportStub.getCall(3).args, ['position', Object.assign(expected, setPosition)], 'current_position should be time when action happened, not target time');
-          done();
+        service.play(story2.id).then(() => {
+          service.setPosition(0.75);
+          service.finishedTrack();
+          let finishedPosition = service.get('position');
+          wait().then(() => {
+            assert.equal(reportStub.callCount, 7);
+
+            assert.deepEqual(
+              reportStub.getCall(0).args,
+              ['start', expected]
+            );
+
+            assert.deepEqual(
+              reportStub.getCall(1).args,
+              ['forward_15', Object.assign(expected, forwardPosition)],
+              'current_position should be time when action happened, not target time'
+            );
+
+            assert.deepEqual(
+              reportStub.getCall(2).args,
+              ['back_15', Object.assign(expected, rewindPosition)],
+              'current_position should be time when action happened, not target time'
+            );
+
+            assert.deepEqual(
+              reportStub.getCall(4).args,
+              ['pause', Object.assign(expected, pausePosition)]
+            );
+
+            assert.deepEqual(
+              reportStub.getCall(5).args,
+              ['resume', Object.assign(expected, pausePosition)]
+            );
+
+            assert.deepEqual(
+              reportStub.getCall(6).args,
+              ['interrupt', Object.assign(expected, pausePosition)]
+            );
+
+            assert.deepEqual(
+              reportStub.getCall(7).args,
+              ['start', Object.assign({}, expected, {cms_id: story2.id, current_position: 0})]
+            );
+
+            assert.deepEqual(
+              reportStub.getCall(8).args,
+              ['finish', Object.assign({}, expected, {cms_id: story2.id}, finishedPosition)]
+            );
+            
+            // set_position is special case
+            assert.deepEqual(
+              reportStub.getCall(3).args,
+              ['position', Object.assign(expected, setPosition)],
+              'current_position should be time when action happened, not target time'
+            );
+            done();
+          });
         });
       });
     });

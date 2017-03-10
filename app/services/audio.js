@@ -103,6 +103,10 @@ export default Service.extend({
 
     let prevContext = get(this, 'currentContext');
     let newStoryPlaying = get(this, 'currentId') !== id;
+    
+    if (newStoryPlaying && this.get('isPlaying')) {
+      this.sendListenAction(this.get('currentAudio'), 'interrupt');
+    }
 
     set(this, 'currentId', id);
 
@@ -157,6 +161,10 @@ export default Service.extend({
   playStream(slug, context = '') {
     this._firstTimePlay();
     let newStreamPlaying = get(this, 'currentId') !== slug;
+    
+    if (newStreamPlaying && this.get('isPlaying')) {
+      this.sendListenAction(this.get('currentAudio'), 'interrupt');
+    }
 
     // TODO: why setting currentId instead of relying on the computed?
     set(this, 'currentId', slug);
@@ -535,7 +543,6 @@ export default Service.extend({
     }
 
     if (storyOrStream) {
-      // we're not set up to handle pause listen actions from streams atm
       this.sendListenAction(storyOrStream, 'pause');
     }
   },
