@@ -500,6 +500,7 @@ test('service records a listen when a stream is played', function(assert) {
   
   Ember.run(() => {
     service.play(stream.slug).then(() => {
+      service.position = 500;
       service.pause();
       service.play(stream.slug).then(() => {
         wait().then(() => {
