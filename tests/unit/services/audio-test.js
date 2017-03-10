@@ -23,8 +23,7 @@ moduleFor('service:audio', 'Unit | Service | audio', {
 
   beforeEach() {
     const sessionStub = Ember.Service.extend({
-      data: {}, // we only really need the data thing
-      syncBrowserId(cb) { cb('secrets'); },
+      data: {browserId: 'secrets'}, // we only really need the data thing
       authorize: function() {},
     });
     const metricsStub = Ember.Service.extend({
@@ -382,7 +381,6 @@ test('service records a listen when a story is played', function(assert) {
   service.get('hifi.soundCache').cache(audio2);
   let expected = {
     audio_type: 'on_demand',
-    browser_id: 'secrets',
     cms_id: story.id,
     current_audio_position: 0,
     item_type: story.itemType,
