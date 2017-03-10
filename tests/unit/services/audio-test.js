@@ -391,20 +391,20 @@ test('service records a listen when a story is played', function(assert) {
     
   Ember.run(() => {
     service.play(story.id).then(() => {
-      let forwardPosition = {current_position: service.get('position')};
+      let forwardPosition = {current_audio_position: service.get('position')};
       service.fastForward();
-      let rewindPosition = {current_position: service.get('position')};
+      let rewindPosition = {current_audio_position: service.get('position')};
       service.rewind();
-      let setPosition = {current_position: service.get('position')};
+      let setPosition = {current_audio_position: service.get('position')};
       service.setPosition(0.5);
       service.pause();
-      let pausePosition = {current_position: service.get('position')};
+      let pausePosition = {current_audio_position: service.get('position')};
       service.play(story.id).then(() => {
         service.play(story2.id).then(() => {
-          let setPosition2 = {current_position: service.get('position')};
+          let setPosition2 = {current_audio_position: service.get('position')};
           service.setPosition(0.75);
           service.finishedTrack();
-          let finishedPosition = {current_position: service.get('position')};
+          let finishedPosition = {current_audio_position: service.get('position')};
           wait().then(() => {
             assert.equal(reportStub.callCount, 10);
 
@@ -416,19 +416,19 @@ test('service records a listen when a story is played', function(assert) {
             assert.deepEqual(
               reportStub.getCall(1).args,
               ['forward_15', Object.assign(expected, forwardPosition)],
-              'current_position should be time when action happened, not target time'
+              'current_audio_position should be time when action happened, not target time'
             );
 
             assert.deepEqual(
               reportStub.getCall(2).args,
               ['back_15', Object.assign(expected, rewindPosition)],
-              'current_position should be time when action happened, not target time'
+              'current_audio_position should be time when action happened, not target time'
             );
             
             assert.deepEqual(
               reportStub.getCall(3).args,
               ['position', Object.assign(expected, setPosition)],
-              'current_position should be time when action happened, not target time'
+              'current_audio_position should be time when action happened, not target time'
             );
 
             assert.deepEqual(
@@ -449,13 +449,13 @@ test('service records a listen when a story is played', function(assert) {
             // now we're dealing with story 2
             assert.deepEqual(
               reportStub.getCall(7).args,
-              ['start', Object.assign(expected, {cms_id: story2.id, current_position: 0})]
+              ['start', Object.assign(expected, {cms_id: story2.id, current_audio_position: 0})]
             );
             
             assert.deepEqual(
               reportStub.getCall(8).args,
               ['position', Object.assign(expected, setPosition2)],
-              'current_position should be time when action happened, not target time'
+              'current_audio_position should be time when action happened, not target time'
             );
 
             assert.deepEqual(
@@ -493,7 +493,7 @@ test('service records a listen when a stream is played', function(assert) {
     item_type: currentStory.itemType,
     site_id: currentStory.siteId,
     stream_id: stream.slug,
-    current_position: 0
+    current_audio_position: 0
   };
     
   service.get('hifi.soundCache').cache(audio);

@@ -374,7 +374,7 @@ export default Service.extend({
   
   sendListenAction(storyOrStream, type) {
     let data = {
-      current_position: type === 'start' ? 0 : this.get('position')
+      current_audio_position: type === 'start' ? 0 : this.get('position')
     };
     storyOrStream.forListenAction(data).then(d => {
       this.get('dataPipeline').reportListenAction(type, d);
