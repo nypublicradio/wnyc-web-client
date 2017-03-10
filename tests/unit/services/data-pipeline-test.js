@@ -1,5 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 import sinon from 'sinon';
+import config from 'wnyc-web-client/config/environment';
 
 moduleFor('service:data-pipeline', 'Unit | Service | data pipeline', {
   // Specify the other units that are required for this test.
@@ -23,7 +24,7 @@ test('it exists', function(assert) {
 });
 
 test('it reports the proper data for an item view', function(assert) {
-  let testData = {cms_id: 1, item_type: 'story', site_id: 1};
+  let testData = {cms_id: 1, item_type: 'story', site_id: config.siteId};
   let expected = Object.assign({
     browser_id: 'secrets',
     client: 'wnyc_web',
@@ -54,10 +55,10 @@ test('it reports the proper data for on demand listen actions', function(assert)
     external_referrer: document.referrer,
     item_type: 'story',
     referrer: null,
-    site_id: 1,
+    site_id: config.siteId,
     url: location.toString()
   };
-  let testData = {cms_id: 1, item_type: 'story', site_id: 1};
+  let testData = {cms_id: 1, item_type: 'story', site_id: config.siteId};
   
   let service = this.subject({
     _legacySend() {}
