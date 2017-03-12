@@ -1,6 +1,6 @@
 import config from 'wqxr-web-client/config/environment';
-import { moduleFor } from 'ember-qunit';
-import { test, skip } from 'ember-sinon-qunit/test-support/test';
+import { moduleFor, skip } from 'ember-qunit';
+import test from 'ember-sinon-qunit/test-support/test';
 
 moduleFor('service:metrics', 'Unit | Service | metrics', {
   // Specify the other units that are required for this test.
