@@ -4,7 +4,6 @@ import djangoPage from 'wnyc-web-client/tests/pages/django-page';
 import showPage from 'wnyc-web-client/tests/pages/show';
 import { resetHTML } from 'wnyc-web-client/tests/helpers/html';
 import config from 'wnyc-web-client/config/environment';
-import sinon from 'sinon';
 
 moduleForAcceptance('Acceptance | Django Page | Show Page', {
   beforeEach() {
@@ -299,15 +298,7 @@ test('show pages with a play param', function(assert) {
 
 });
 
-moduleForAcceptance('Acceptance | Django Page | Show Page Analytics', {
-  beforeEach() {
-    window.googletag = {cmd: [], apiReady: true};
-  },
-  afterEach() {
-    delete window.ga;
-    window.googletag = {cmd: [], apiReady: true};
-  }
-});
+moduleForAcceptance('Acceptance | Django Page | Show Page Analytics');
 
 test('metrics properly reports channel attrs', function(assert) {
   let show = server.create('show', {
@@ -354,39 +345,4 @@ test('metrics properly reports channel attrs', function(assert) {
   djangoPage
     .bootstrap(show)
     .visit(show);
-});
-
-test('show google ads test', function(assert) {
-  let show = server.create('show', {
-    id: 'shows/foo/',
-    cmsPK: 123,
-    linkroll: [
-      {navSlug: 'episodes', title: 'Episodes'}
-    ],
-    socialLinks: [{title: 'facebook', href: 'http://facebook.com'}],
-    apiResponse: server.create('api-response', { id: 'shows/foo/episodes/1' })
-  });
-  server.create('django-page', {id: show.id});
-  
-  let refreshSpy = sinon.spy();
-
-  window.googletag.cmd = {
-    push(fn) {
-      fn();
-    }
-  };
-  window.googletag.pubads = function() {
-    return {
-      refresh: refreshSpy,
-      addEventListener() {}
-    };
-  };
-  
-  djangoPage
-    .bootstrap(show)
-    .visit(show);
-    
-  andThen(function() {
-    assert.ok(refreshSpy.calledTwice, 'refresh was called twice');
-  });
 });
