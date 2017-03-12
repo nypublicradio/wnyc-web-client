@@ -39,7 +39,7 @@ export default Ember.Route.extend(PlayParamMixin, {
     let {containers:action, title:label} = get(model, 'story.analytics');
     let nprVals = get(model, 'story.nprAnalyticsDimensions');
     
-    get(this, 'googleAds').doTargeting(get(model, 'story'));
+    get(this, 'googleAds').doTargeting(get(model, 'story').forDfp());
 
     if (get(model, 'story.extendedStory.headerDonateChunk')) {
       transition.send('updateDonateChunk', get(model, 'story.extendedStory.headerDonateChunk'));

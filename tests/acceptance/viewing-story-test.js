@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import test from 'ember-sinon-qunit/test-support/test';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import djangoPage from 'wnyc-web-client/tests/pages/django-page';
 import storyPage from 'wnyc-web-client/tests/pages/story';
@@ -143,6 +143,23 @@ test('metrics properly reports story attrs', function(assert) {
     }
   };
 
+  djangoPage
+    .bootstrap({id})
+    .visit({id});
+});
+
+test('story routes do dfp targeting', function(/*assert*/) {
+  let forDfp = {tags: ['foo', 'bar'], show: 'foo show', channel: 'foo channel', series: 'foo series'};
+  let story = server.create('story', {extendedStory: forDfp});
+  let id = `story/${story.slug}/`;
+  
+  server.create('django-page', {id, slug: story.slug});
+
+  this.mock(this.application.__container__.lookup('route:story').get('googleAds'))
+    .expects('doTargeting')
+    .once()
+    .withArgs(forDfp);
+  
   djangoPage
     .bootstrap({id})
     .visit({id});
