@@ -3,22 +3,32 @@
 
   <div class="streambanner-card streambanner--light streambanner--desktop"
       style="background-image:url('https://images.unsplash.com/photo-1432163230927-a32e4fd5a326?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=')">
-    <h2 class="streambanner-title">
-        <span class="streambanner-station">WQXR New York</span>
-    </h2>
-    <div class="streambanner-details">
-      Maurice Ravel, Scenes historiques II, Op. 66
-      <a href="#" class="text--small text--white">Music playlist &raquo;</a>
-    </div>
-    <div class="streambanner-controls">
-      {{#listen-button
-        class='streambanner-listenbutton'
-        type='blue-minion'
-        state=(if (eq slug audio.currentAudio.id) audio.playState)
-        itemPK=slug
-        itemTitle=stream.name}}
-        Listen Live
-      {{/listen-button}}
+    <div>
+      <div class="streambanner-station nudge">
+          <span class="streambanner-on-air">On air now on </span>
+          <select>
+            <option value="wqxr">WQXR 105.9 FM</option>
+            <option value="q2">Q2 Music</option>
+            <option value="operavore">Operavore</option>
+            <option value="jonathan">The Jonathan Channel</option>
+          </select>
+          <div class="arrow--down"></div>
+      </div>
+      <div class="streambanner-details">
+        <h3 class="streambanner-title">Johannes Brahms
+        <br>Waltzes, Op. 39</h3>
+      </div>
+      <div class="streambanner-controls">
+        {{#listen-button
+          class='streambanner-listenbutton nudge'
+          type='blue-minion'
+          state=(if (eq slug audio.currentAudio.id) audio.playState)
+          itemPK=slug
+          itemTitle=stream.name}}
+          Listen Live
+        {{/listen-button}}
+        <a href="#" class="text--small text--white">Music playlist &raquo;</a>
+      </div>
     </div>
   </div>
 
@@ -27,7 +37,7 @@
     {{#swiper-container grabCursor=true pagination=true centered=true slidesPerView=auto spaceBetween=30}}
       {{#swiper-slide}}
         <h2 class="streambanner-station">
-            <div class="nudge-mini">WQXR New York</div>
+            <div class="nudge-mini">WQXR 105.9 FM</div>
             <div class="arrow--down"></div>
         </h2>
 
