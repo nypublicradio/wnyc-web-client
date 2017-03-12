@@ -29,12 +29,6 @@ module.exports = function(environment) {
       config: {
         id: 'UA-18188937-11'
       }
-    }, {
-      name: 'GoogleTagManager',
-      config: {
-        id: process.env.GOOGLE_TAG_MANAGER_ID || (environment === 'production' ? 'GTM-PM94N2' : 'GTM-KJZRH7H')
-      },
-      environments: ['production']
     }],
     EmberENV: {
       FEATURES: {
@@ -190,10 +184,21 @@ module.exports = function(environment) {
     ENV.wnycURL = '//example.com';
     ENV.wnycBetaURL = 'http://example.com';
     ENV.wnycAuthAPI = 'http://example.com';
+    ENV.metricsAdapters.push({
+      name: 'GoogleTagManager',
+      config: {
+        id: ''
+      }
+    });
   }
 
   if (environment === 'production') {
-
+    ENV.metricsAdapters.push({
+      name: 'GoogleTagManager',
+      config: {
+        id: process.env.GOOGLE_TAG_MANAGER_ID || (environment === 'production' ? 'GTM-PM94N2' : 'GTM-KJZRH7H')
+      }
+    });
   }
 
   return ENV;

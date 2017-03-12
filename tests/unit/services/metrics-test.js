@@ -1,6 +1,6 @@
 import config from 'wqxr-web-client/config/environment';
 import { moduleFor } from 'ember-qunit';
-import test from 'ember-sinon-qunit/test-support/test';
+import { test, skip } from 'ember-sinon-qunit/test-support/test';
 
 moduleFor('service:metrics', 'Unit | Service | metrics', {
   // Specify the other units that are required for this test.
@@ -18,7 +18,7 @@ test('it exists', function(assert) {
   assert.ok(service);
 });
 
-test('calling tracking events does not call npr tracking events', function(assert) {
+skip('calling tracking events does not call npr tracking events', function(assert) {
   let service = this.subject({options: config});
 
   let nprTrackPageSpy = this.spy(service._adapters.NprAnalytics, 'trackPage');
