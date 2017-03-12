@@ -35,7 +35,7 @@ test('segment management', function(assert) {
 
 test('forDfp returns properties for targeting', function(assert) {
   let forDfp = {tags: ['foo', 'bar'], show: 'foo show', channel: 'foo channel', series: 'foo series'};
-  let model = this.subect({ extendedStory: forDfp });
+  let model = this.subject({ extendedStory: forDfp });
   
   assert.deepEqual(model.forDfp(). forDfp);
 });
