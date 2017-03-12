@@ -197,7 +197,12 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    ENV.metricsAdapters.push({
+      name: 'GoogleTagManager',
+      config: {
+        id: process.env.GOOGLE_TAG_MANAGER_ID || (environment === 'production' ? 'GTM-PM94N2' : 'GTM-KJZRH7H')
+      }
+    });
   }
 
   return ENV;
