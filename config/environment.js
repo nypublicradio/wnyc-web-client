@@ -32,7 +32,7 @@ module.exports = function(environment) {
     }, {
       name: 'GoogleTagManager',
       config: {
-        id: process.env.GOOGLE_TAG_MANAGER_ID || (environment === 'production' ? 'GTM-PM94N2' : 'GTM-WNT72NG')
+        id: process.env.GOOGLE_TAG_MANAGER_ID || (environment === 'production' ? 'GTM-PM94N2' : 'GTM-KJZRH7H')
       },
       environments: ['production']
     }],
@@ -118,6 +118,7 @@ module.exports = function(environment) {
     wnycEtagAPI: process.env.WQXR_ETAG_API,
     wnycStaticURL: process.env.WQXR_STATIC_URL,
     wnycURL: process.env.WQXR_URL,
+    platformEventsAPI: process.env.PLATFORM_EVENTS_SERVICE,
     wnycDonateURL: 'https://pledge3.wqxr.org/donate/wqxr/main/onestep/?utm_source=wqxr&utm_medium=wqxr-support-300x75&utm_campaign=pledge&utm_content=pledge',
     wnycSvgURL: '/media/svg/',
     // put beta host at the root so it can be overridden by Django
@@ -197,12 +198,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.metricsAdapters.push({
-      name: 'GoogleTagManager',
-      config: {
-        id: process.env.GOOGLE_TAG_MANAGER_ID || (environment === 'production' ? 'GTM-PM94N2' : 'GTM-KJZRH7H')
-      }
-    });
+
   }
 
   return ENV;
