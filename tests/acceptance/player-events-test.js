@@ -8,6 +8,8 @@ moduleForAcceptance('Acceptance | player events');
 test('visiting /player-events', function(assert) {
   let story = server.create('story');
   let id = `story/${story.slug}/`;
+  let done = assert.async();
+
   server.create('django-page', {id, slug: story.slug});
   server.create('stream');
 
@@ -15,25 +17,31 @@ test('visiting /player-events', function(assert) {
     .bootstrap({id})
     .visit({id});
 
-  let expected = {
-    audio_type: 'on_demand',
-    browser_id: 'secrets',
-    client: 'wnyc_web',
-    cms_id: 1,
-    current_audio_position: 0,
-    delta: 0,
-    external_referrer: document.referrer,
-    item_type: 'story',
-    referrer: null,
-    site_id: config.siteId,
-    url: location.toString()
-  };
-  server.post(`${config.wnycAPI}/analytics/v1/listened`, (schema, {requestBody}) => {
-    
+  let calls = [];
+  server.post(`${config.wnycAPI}/analytics/v1/events/listened`, (schema, {requestBody}) => {
+    calls.push(JSON.parse(requestBody).action);
+    if (calls.length === 6) {
+      assert.ok('6 calls');
+      assert.deepEqual(calls.sort(), ['start', 'pause', 'resume', 'skip_15_forward', 'skip_15_back', 'set_position'].sort());
+      done();
+    }
   });
   
-  andThen(() => click('[data-test-selector="listen-button"]'));
+  // story header play button
   andThen(() => {
-    assert.ok(find('.nypr-player'));
+    click('main [data-test-selector="listen-button"]');
+    // pause
+    click('.nypr-player-button.mod-listen');
+    // play
+    click('.nypr-player-button.mod-listen');
+    // fast forward
+    click('.nypr-player-button.mod-fastforward');
+    // rewind
+    click('.nypr-player-button.mod-rewind');
+  });
+  
+  andThen(() => {
+    var e = $.Event('mousedown', {which: 1});
+    find('.nypr-player-progress').trigger(e);
   });
 });
