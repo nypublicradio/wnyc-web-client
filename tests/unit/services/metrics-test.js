@@ -8,7 +8,7 @@ moduleFor('service:metrics', 'Unit | Service | metrics', {
   needs: [
     'metrics-adapter:google-analytics',
     'metrics-adapter:npr-analytics',
-    // 'metrics-adapter:google-tag-manager',
+    'metrics-adapter:google-tag-manager',
   ]
 });
 
@@ -27,18 +27,18 @@ test('calling tracking events does not call npr tracking events', function(asser
   let gaTrackPageSpy = this.spy(service._adapters.GoogleAnalytics, 'trackPage');
   let gaTrackEventSpy = this.spy(service._adapters.GoogleAnalytics, 'trackEvent');
 
-  // let gtmTrackPageSpy = this.spy(service._adapters.GoogleTagManager, 'trackPage');
-  // let gtmTrackEventSpy = this.spy(service._adapters.GoogleTagManager, 'trackEvent');
+  let gtmTrackPageSpy = this.spy(service._adapters.GoogleTagManager, 'trackPage');
+  let gtmTrackEventSpy = this.spy(service._adapters.GoogleTagManager, 'trackEvent');
 
   service.trackPage({ page: '/foo', title: 'foo' });
 
   assert.notOk(nprTrackPageSpy.returnValue, 'npr trackPage should not be called');
   assert.equal(gaTrackPageSpy.callCount, 1, 'ga trackPage should be called');
-  // assert.equal(gtmTrackPageSpy.callCount, 1, 'gtm trackPage should be called');
+  assert.equal(gtmTrackPageSpy.callCount, 1, 'gtm trackPage should be called');
 
   service.trackEvent({ category: 'foo', action: 'bar', label: 'baz' });
 
   assert.notOk(nprTrackEventSpy.returnValue, 'npr trackEvent should not be called');
   assert.equal(gaTrackEventSpy.callCount, 1, 'ga trackEvent should be called');
-  // assert.equal(gtmTrackEventSpy.callCount, 1, 'gtm trackEvent should be called');
+  assert.equal(gtmTrackEventSpy.callCount, 1, 'gtm trackEvent should be called');
 });
