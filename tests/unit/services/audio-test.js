@@ -504,7 +504,7 @@ test('service passes correct attrs to data pipeline to report a livestream liste
           assert.equal(reportStub.callCount, 3);
           assert.deepEqual(reportStub.getCall(0).args, ['start', expected], 'should have received proper attrs');
           assert.deepEqual(reportStub.getCall(1).args, ['pause', expected], 'should have received proper attrs');
-          assert.deepEqual(reportStub.getCall(2).args, ['resume', expected], 'should have received proper attrs');
+          assert.deepEqual(reportStub.getCall(2).args, ['start', expected], 'should have received proper attrs');
           done();
         });
       });
