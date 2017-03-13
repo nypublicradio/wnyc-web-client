@@ -31,7 +31,6 @@ export default Model.extend({
 
   story:                readOnly('currentStory'),
   audioBumper:          attr('string'),
-  source_tags:          attr('string'), 
   
   isWQXR:               computed('slug', function(){
     return WQXR_slugs.indexOf(this.get('slug')) > -1;
