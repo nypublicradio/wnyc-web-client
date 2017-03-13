@@ -113,6 +113,10 @@
     &.list--spaced {
       > .list-item {
         margin-right: 25px;
+
+        @include mq($small-only) {
+          margin-right: 10px;
+        }
       }
     }
 }
