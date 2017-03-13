@@ -25,7 +25,7 @@ test('it renders into wormholes', function(assert) {
   this.render(hbs`{{beta-trial beta=beta betaInvite='bar' legacyNavLink='foo'}}`);
 
   assert.equal($('#bar [data-test-selector=beta-tease]').text().trim(), beta.tease);
-  assert.equal($('#foo').text().trim().toLowerCase(), "switch to wnyc beta");
+  assert.equal($('#foo').text().trim().toLowerCase(), "switch to wqxr beta");
 });
 
 test('if this is a preBeta app, it adds landing sites to the alien DOM', function(assert) {
