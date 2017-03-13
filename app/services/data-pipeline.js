@@ -11,7 +11,8 @@ const LISTEN_ACTIONS = {
   BACK_15: 'skip_15_back',
   CLOSE: 'window_close',
   FINISH: 'finish',
-  POSITION: 'set_position'
+  POSITION: 'set_position',
+  INTERRUPT: 'interrupt'
 };
 
 export default Ember.Service.extend({
