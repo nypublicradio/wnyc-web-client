@@ -7,6 +7,7 @@ import { and, not, reads, equal } from 'ember-computed';
 export default Controller.extend({
   audio:        service(),
   metrics:      service(),
+  session:      service(),
 
   queryParams:  ['modal', 'play'],
   modal:        null,
@@ -49,7 +50,7 @@ export default Controller.extend({
       this.set('modal', null);
       this._wasModal = true;
     },
-    
+
     trackStreamData() {
       this.get('audio').trackStreamData();
     }

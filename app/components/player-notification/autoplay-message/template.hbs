@@ -1,10 +1,19 @@
 {{notificationMessage}}
 
+{{#if isLoggedIn}}
 <a href="/settings"
     title="Change Settings"
     data-tracking-category="Persistent Player"
     data-tracking-action="Continuous Play Notification"
     data-tracking-label={{if preSwitch 'Click Through to Settings, Pre' 'Click Through to Settings, Post'}}
     class='player-notification-link'
-    >
-    Change Settings</a>
+    >Change Settings</a>
+{{else}}
+<a href="/settings"
+    title="Change Settings"
+    data-tracking-category="Persistent Player"
+    data-tracking-action="Continuous Play Notification"
+    data-tracking-label={{if preSwitch 'Click Through to Settings, Pre' 'Click Through to Settings, Post'}}
+    class='player-notification-link'
+    >Login</a> to change settings.
+{{/if}}

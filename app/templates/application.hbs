@@ -38,7 +38,12 @@
 
     {{#liquid-if integration.revealNotificationBar class='player-notification-wrapper'}}
       {{#player-notification onDismiss=integration.onDismissNotification}}
-        {{player-notification.autoplay-message duration=audio.duration position=audio.position audioType=currentAudio.audioType}}
+        {{player-notification.autoplay-message
+          duration   = audio.duration
+          position   = audio.position
+          audioType  = currentAudio.audioType
+          isLoggedIn = session.isAuthenticated
+        }}
       {{/player-notification}}
     {{/liquid-if}}
 
