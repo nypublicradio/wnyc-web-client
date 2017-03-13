@@ -1,7 +1,8 @@
-import Ember from 'ember';
+import Service from 'ember-service';
 import fetch from 'fetch';
 import service from 'ember-service/inject';
 import config from 'wnyc-web-client/config/environment';
+import { next } from 'ember-runloop';
 
 const LISTEN_ACTIONS = {
   START: 'start',
@@ -15,7 +16,7 @@ const LISTEN_ACTIONS = {
   INTERRUPT: 'interrupt'
 };
 
-export default Ember.Service.extend({
+export default Service.extend({
   host:             config.wnycAPI,
   itemViewPath:     'analytics/v1/events/viewed',
   listenActionPath: 'analytics/v1/events/listened',
@@ -29,10 +30,12 @@ export default Ember.Service.extend({
   },
 
   reportItemView(incoming = {}) {
-    let data = this._generateData(incoming);
-    this._send(data, this.itemViewPath);
+    next(() => {
+      let data = this._generateData(incoming);
+      this._send(data, this.itemViewPath);
 
-    this._legacySend(`api/most/view/managed_item/${data.cms_id}/`);
+      this._legacySend(`api/most/view/managed_item/${data.cms_id}/`);
+    });
   },
 
   reportListenAction(type, incoming = {}) {
