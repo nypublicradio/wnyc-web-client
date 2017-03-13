@@ -33,7 +33,7 @@ export default Model.extend({
   audioBumper:          attr('string'),
   
   isWQXR:               computed('slug', function(){
-    return WQXR_slugs.indexOf(this.get('slug')) > -1;
+    return WQXR_slugs.includes(this.get('slug'));
   }),
 
   liveWQXR:             computed('isWQXR', 'whatsOn', function(){
