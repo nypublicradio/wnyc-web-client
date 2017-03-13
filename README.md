@@ -28,7 +28,7 @@ This value is controlled by a `.env` file you will create by following the direc
 
 We use [modernizr](https://modernizr.com/) to detect for certain browser features. Rather than include a full build in the app, there is a single Grunt task included in this project which scans all the `.js` and `.scss` files for mentions of the modernizr API. Step 9 below will generate a modernizr build; do not skip it or you may have mysterious errors.
 
-1. `$ git clone git@github.com:nypublicradio/wqxr-web-client.git && cd wnyc-web-client`
+1. `$ git clone git@github.com:nypublicradio/wqxr-web-client.git && cd wqxr-web-client`
 2. `$ git checkout <working branch>`
 3. `$ cp .env.sample .env`
 4. Edit `.env` with your `publisher` app location
@@ -45,7 +45,7 @@ $ ember serve --proxy http://dev.wnyc.net:MY_PORT
 
 When we fetch pages from the Django app, we include the `X-WNYC-Ember` HTTP header. This allows Django to suppress certain things (like redundant Javascript libraries) that are unnecessary when the Ember app is managing the client side.
 
-[`module_wrapper.py`](https://github.com/nypublicradio/publisher/blob/master/puppy/util/module_wrapper.py) provides a very slim module system around all the legacy Javascript files. See [`app/services/legacy-loader.js`](https://github.com/nypublicradio/wnyc-web-client/blob/master/app/services/legacy-loader.js) for more detail.
+[`module_wrapper.py`](https://github.com/nypublicradio/publisher/blob/master/puppy/util/module_wrapper.py) provides a very slim module system around all the legacy Javascript files. See [`app/services/legacy-loader.js`](https://github.com/nypublicradio/wqxr-web-client/blob/master/app/services/legacy-loader.js) for more detail.
 
 ## Additional Documentation
 
@@ -55,7 +55,7 @@ See `docs/prototype-report.html` for the original writeup when this application 
 ### `ember-cli-mirage`
 We use [`ember-cli-mirage`](http://www.ember-cli-mirage.com/) to provide mock server output against which to develop. It's turned off by default in dev environments, controlled by the `USE_MIRAGE` envvar in your `.env` file. You can turn it on by setting `USE_MIRAGE` to `true`.
 
-Logging by `ember-cli-mirage` is turned off by default, due to how noisy the console becomes if it's turned on. This setting can be changed in [`mirage/config.js`](https://github.com/nypublicradio/wnyc-web-client/blob/master/mirage/config.js). Look for this line:
+Logging by `ember-cli-mirage` is turned off by default, due to how noisy the console becomes if it's turned on. This setting can be changed in [`mirage/config.js`](https://github.com/nypublicradio/wqxr-web-client/blob/master/mirage/config.js). Look for this line:
 ```
 this.logging = false;
 ```
