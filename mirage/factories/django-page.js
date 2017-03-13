@@ -30,7 +30,12 @@ export default Factory.extend({
     } else if (type === 'story') {
       slug = id.match(/^story\/([^\/]+)\//)[1];
 
-      let story = server.create('story', {slug});
+      let story = server.schema.stories.where({slug});
+      if (!story.models.length) {
+        story = server.create('story', {slug});
+      } else {
+        story = story.models[0];
+      }
       server.createList('comment', 5, {story});
       server.createList('story', 5, {related: story});
 
