@@ -47,7 +47,15 @@
       {{/player-notification}}
     {{/liquid-if}}
 
-    {{#nypr-player currentTitle=integration.currentTitle backdropImageUrl=integration.backdropImageUrl as |content|}}
+    {{#nypr-player
+      onPlay=integration.onPlay
+      onPause=integration.onPause
+      onFastForward=integration.onFastForward
+      onRewind=integration.onRewind
+      onSetPosition=integration.onSetPosition
+      currentTitle=integration.currentTitle
+      backdropImageUrl=integration.backdropImageUrl
+      as |content|}}
         {{#content.for 'trackInfo'}}
           {{nypr-player-integration.track-info
             currentAudio    = integration.currentAudio

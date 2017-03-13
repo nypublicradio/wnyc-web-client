@@ -68,10 +68,19 @@ export default Ember.Component.extend({
       });
     },
     onPlay() {
-
+      get(this, 'audio').sendListenAction(get(this, 'currentAudio'), 'resume');
     },
     onPause() {
-
+      get(this, 'audio').sendListenAction(get(this, 'currentAudio'), 'pause');
+    },
+    onFastForward() {
+      get(this, 'audio').sendListenAction(get(this, 'currentAudio'), 'forward_15');
+    },
+    onRewind() {
+      get(this, 'audio').sendListenAction(get(this, 'currentAudio'), 'back_15');
+    },
+    onSetPosition() {
+      get(this, 'audio').sendListenAction(get(this, 'currentAudio'), 'position');
     }
   }
 });
