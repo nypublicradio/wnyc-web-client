@@ -126,7 +126,7 @@
     @include flexbox((
       display: flex,
       flex-direction: column,
-      justify-content: space-between,
+      justify-content: center,
       align-items: center
     ));
     height: 280px;
@@ -143,6 +143,8 @@
   &-pagination-bullet {
     background-color: #00aeff;
     opacity: 0.5;
+    width: 13px;
+    height: 13px;
 
     &-active {
       opacity: 1;
