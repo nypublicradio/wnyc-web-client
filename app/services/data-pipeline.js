@@ -107,6 +107,7 @@ export default Ember.Service.extend({
       referrer: this.get('currentReferrer'),
       external_referrer: document.referrer,
       url: location.toString(),
+      site_id: config.siteId
     }, incoming);
     if (!action) {
       delete data.action;

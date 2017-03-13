@@ -24,13 +24,14 @@ test('it exists', function(assert) {
 });
 
 test('it reports the proper data for an item view', function(assert) {
-  let testData = {cms_id: 1, item_type: 'story', site_id: config.siteId};
+  let testData = {cms_id: 1, item_type: 'story'};
   let expected = Object.assign({
     browser_id: 'secrets',
     client: 'wnyc_web',
     external_referrer: document.referrer,
     referrer: null,
     url: location.toString(),
+    site_id: config.siteId
   }, testData);
   
   let service = this.subject({
@@ -58,7 +59,7 @@ test('it reports the proper data for on demand listen actions', function(assert)
     site_id: config.siteId,
     url: location.toString()
   };
-  let testData = {cms_id: 1, item_type: 'story', site_id: config.siteId};
+  let testData = {cms_id: 1, item_type: 'story'};
   
   let service = this.subject({
     _legacySend() {}

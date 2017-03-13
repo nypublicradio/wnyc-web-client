@@ -25,5 +25,4 @@ export default Factory.extend({
       title: this.title
     };
   },
-  siteId: 1
 });

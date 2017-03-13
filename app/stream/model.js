@@ -38,7 +38,6 @@ export default Model.extend({
       return Object.assign({
         audio_type: 'stream',
         cms_id: s && s.get('id'),
-        site_id: s && s.get('siteId'),
         item_type: s && s.get('itemType'),
         stream_id: this.get('id'),
       }, data);

@@ -29,7 +29,6 @@ export default Model.extend({
   itemTypeId: attr('number'),
   isLatest: attr('boolean'),
   largeTeaseLayout: attr('boolean'),
-  siteId: attr('number'),
   slug: attr('string'),
   tease: attr('string'),
   title: attr('string'),
@@ -130,7 +129,6 @@ export default Model.extend({
     return Ember.RSVP.Promise.resolve(Object.assign({
       audio_type: 'on_demand',
       cms_id: this.get('id'),
-      site_id: this.get('siteId'),
       item_type: this.get('itemType'),
     }, data));
   },
