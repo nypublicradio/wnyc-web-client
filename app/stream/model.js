@@ -4,7 +4,9 @@ import { belongsTo } from 'ember-data/relationships';
 import computed, { readOnly } from 'ember-computed';
 import { shareMetadata } from 'wqxr-web-client/helpers/share-metadata';
 
-const WQXR_slugs = ["wqxr","q2","wqxr-special","wqxr-special2","wqxr-special2-same-as-holiday","jonathan-channel"];
+const WQXR_slugs = ["wqxr","q2","jonathan-channel","wqxr-special","wqxr-special2"];
+// wqxr-special = Operavore, 
+// wqxr-special2 = Holiday Channel
 
 export default Model.extend({
   audioType:            'livestream',
