@@ -486,10 +486,10 @@ test('service passes correct attrs to data pipeline to report a livestream liste
   let audio = DummyConnection.create({ url: stream.attrs.urls.rtsp });
   
   let expected = {
-    audio_type: 'stream',
+    audio_type: 'livestream',
     cms_id: currentStory.id,
     item_type: currentStory.itemType,
-    stream_id: stream.slug,
+    stream_id: Number(stream.id),
     current_audio_position: 0
   };
     

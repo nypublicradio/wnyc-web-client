@@ -16,6 +16,7 @@ export default Model.extend({
   whatsOn:              attr('number'),
   position:             attr('number'),
   playlistUrl:          attr('string'),
+  cmsPK:                attr('number'),
 
   currentShow:          attr(),
   currentPlaylistItem:  attr(),
@@ -36,10 +37,10 @@ export default Model.extend({
     return this.get('currentStory').then(s => {
       data.current_audio_position = 0; // stream should always report 0
       return Object.assign({
-        audio_type: 'stream',
+        audio_type: 'livestream',
         cms_id: s && s.get('id'),
         item_type: s && s.get('itemType'),
-        stream_id: this.get('id'),
+        stream_id: this.get('cmsPK'),
       }, data);
     });
   }
