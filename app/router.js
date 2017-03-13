@@ -3,6 +3,8 @@ import config from './config/environment';
 import AnalyticsMixin from './mixins/analytics';
 import service from 'ember-service/inject';
 
+const DETAIL_ROUTES = new RegExp(/story|show|article|serie|tag|blog/);
+
 const Router = Ember.Router.extend(AnalyticsMixin, {
   session:      service(),
   dataPipeline: service(),
@@ -17,7 +19,7 @@ const Router = Ember.Router.extend(AnalyticsMixin, {
   },
   didTransition() {
     this._super(...arguments);
-    if (!['story', 'channel'].includes(this.currentRouteName) && !this.currentRouteName.match(/loading/)) {
+    if (!DETAIL_ROUTES.test(this.currentRouteName) && !this.currentRouteName.match(/loading/)) {
       this.get('dataPipeline').reportItemView();
     }
   },
