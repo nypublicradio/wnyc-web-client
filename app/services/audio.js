@@ -180,7 +180,7 @@ export default Service.extend({
         let prevAudio = get(this, 'currentAudio');
         this._trackStreamPlay(stream, context, prevAudio);
       } else {
-        this.sendListenAction(stream, 'resume');
+        this.sendListenAction(stream, 'start'); // livestreams always fire start
       }
 
       this._setupAudio(stream, context);
