@@ -178,12 +178,6 @@
     }
 }
 
-.l-unconstrained--sm {
-  @include mq($small-only) {
-    padding: 0;
-  }
-}
-
 .l-constrain--400 {
     max-width: 400px;
     width: 100%;
