@@ -96,6 +96,7 @@ module.exports = function(environment) {
     queueAudioBumperURL: 'http://audio.wnyc.org/streambumper/streambumper000008_audio_queue.mp3',
     siteSlug: 'wnyc',
     siteName: 'WNYC',
+    siteId: 1,
     clientSlug: 'wnyc_web',
     // these are provided via a .env file or else by Django's EmberAdapter
     // fall back to demo GA key
@@ -194,7 +195,6 @@ module.exports = function(environment) {
     ENV.wnycURL = '//example.com';
     ENV.wnycBetaURL = 'http://example.com';
     ENV.wnycAuthAPI = 'http://example.com';
-    ENV.siteId = 1;
   }
 
   if (environment === 'production') {
