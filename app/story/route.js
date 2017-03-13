@@ -34,38 +34,11 @@ export default Ember.Route.extend(PlayParamMixin, {
     });
   },
   afterModel(model, transition) {
-    let metrics = get(this, 'metrics');
-    let dataPipeline = get(this, 'dataPipeline');
-    let {containers:action, title:label} = get(model, 'story.analytics');
-    let nprVals = get(model, 'story.nprAnalyticsDimensions');
-    
     get(this, 'googleAds').doTargeting(get(model, 'story').forDfp());
 
     if (get(model, 'story.extendedStory.headerDonateChunk')) {
       transition.send('updateDonateChunk', get(model, 'story.extendedStory.headerDonateChunk'));
     }
-
-    // google analytics
-    metrics.trackEvent('GoogleAnalytics', {
-      category: 'Viewed Story',
-      action,
-      label,
-    });
-
-    // NPR
-    metrics.trackPage('NprAnalytics', {
-      page: `/story/${get(model, 'story.slug')}`,
-      title: label,
-      nprVals,
-    });
-    
-    // data pipeline
-    dataPipeline.reportItemView({
-      cms_id: get(model, 'story.id'),
-      item_type: get(model, 'story.itemType'),
-      site_id: get(model, 'story.siteId'),
-      client: config.clientSlug
-    });
   },
   
   setupController(controller) {
@@ -80,6 +53,36 @@ export default Ember.Route.extend(PlayParamMixin, {
       this._super(...arguments);
       beforeTeardown();
       return true;
+    },
+    
+    didTransition() {
+      let model = get(this, 'currentModel');
+      let metrics = get(this, 'metrics');
+      let dataPipeline = get(this, 'dataPipeline');
+      let {containers:action, title:label} = get(model, 'story.analytics');
+      let nprVals = get(model, 'story.nprAnalyticsDimensions');
+
+      // google analytics
+      metrics.trackEvent('GoogleAnalytics', {
+        category: 'Viewed Story',
+        action,
+        label,
+      });
+
+      // NPR
+      metrics.trackPage('NprAnalytics', {
+        page: `/story/${get(model, 'story.slug')}`,
+        title: label,
+        nprVals,
+      });
+      
+      // data pipeline
+      dataPipeline.reportItemView({
+        cms_id: get(model, 'story.id'),
+        item_type: get(model, 'story.itemType'),
+      });
+      
+        
     }
   }
 });
