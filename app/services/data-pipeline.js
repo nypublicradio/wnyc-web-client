@@ -34,7 +34,9 @@ export default Service.extend({
       let data = this._generateData(incoming);
       this._send(data, this.itemViewPath);
 
-      this._legacySend(`api/most/view/managed_item/${data.cms_id}/`);
+      if (data.cms_id) {
+        this._legacySend(`api/most/view/managed_item/${data.cms_id}/`);
+      }
     });
   },
 
