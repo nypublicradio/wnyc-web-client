@@ -100,7 +100,7 @@ export default Service.extend({
     this.get('session').authorize('authorizer:nypr', (header, value) => {
       fetchOptions.headers[header] = value;
     });
-    fetch(`${config.platformEventsAPI}/${path}`, fetchOptions);
+    fetch(`${config.wnycAPI}/${path}`, fetchOptions);
   },
 
   _generateData(incoming, action) {
