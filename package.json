@@ -67,7 +67,7 @@
     "ember-feature-flags": "3.0.0",
     "ember-fetch": "1.3.0",
     "ember-getowner-polyfill": "1.0.1",
-    "ember-hifi": "^1.7.3",
+    "ember-hifi": "nypublicradio/ember-hifi#wait-for-it",
     "ember-holygrail-layout": "^0.1.4",
     "ember-load-initializers": "^0.5.1",
     "ember-metrics": "0.7.0",
