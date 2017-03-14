@@ -469,6 +469,71 @@ test('service passes correct attrs to data pipeline to report an on_demand liste
   });
 });
 
+test('service reports a resume when returning to playing a story', function(assert) {
+  let done = assert.async();
+  let audio = DummyConnection.create({
+    url: '/audio.mp3',
+    duration: 30 * 60 * 1000
+  });
+  let audio2 = DummyConnection.create({
+    url: '/audio2.mp3',
+    duration: 30 * 60 * 1000
+  });
+  let story = server.create('story', { audio: '/audio.mp3' });
+  let story2 = server.create('story', { audio: '/audio2.mp3' });
+  let reportStub = sinon.stub();
+  let service = this.subject({
+      dataPipeline: {
+        reportListenAction: reportStub
+      }
+  });
+  service.get('hifi.soundCache').cache(audio);
+  service.get('hifi.soundCache').cache(audio2);
+  let expected = {
+    audio_type: 'on_demand',
+    cms_id: story.id,
+    current_audio_position: 0,
+    item_type: story.itemType,
+  };
+    
+  Ember.run(() => {
+    service.play(story.id).then(() => {
+      let setPosition = {current_audio_position: service.get('position')};
+      service.setPosition(0.5);
+      let story1Position = {current_audio_position: service.get('position')};
+      service.play(story2.id).then(() => {
+        service.play(story.id).then(() => {
+          wait().then(() => {
+            assert.deepEqual(reportStub.getCall(0).args, ['start', expected]);
+            assert.deepEqual(
+              reportStub.getCall(1).args,
+              ['position', Object.assign(expected, setPosition)]
+            );
+            assert.deepEqual(
+              reportStub.getCall(2).args,
+              ['interrupt', Object.assign(expected, story1Position)]
+            );
+            assert.deepEqual(
+              reportStub.getCall(3).args,
+              ['start', Object.assign(expected, {cms_id: story2.id, current_audio_position: 0})]
+            );
+            assert.deepEqual(
+              reportStub.getCall(4).args,
+              ['interrupt', expected]
+            );
+            assert.deepEqual(
+              reportStub.getCall(5).args,
+              ['resume', Object.assign(expected, story1Position, {cms_id: story.id})]
+            );
+            done();
+          });
+        });
+      });
+    });
+  });
+  
+});
+
 test('service passes correct attrs to data pipeline to report a livestream listen action', function(assert) {
 
   let done = assert.async();
