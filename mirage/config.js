@@ -232,6 +232,21 @@ export default function() {
   });
 
   /*-------------------------------------------------------------
+  membership microservice
+  ---------------------------------------------------------------*/
+
+  this.urlPrefix = config.wnycAuthAPI + '/membership';
+
+  this.patch('/email/:email_id/verify', (schema, request) => {
+    let params = JSON.parse(request.requestBody);
+    if (!params.verification_code || params.verification_code === "null") {
+      return new Response(400, {}, expiredCodeException);
+    } else {
+      return new Response(200);
+    }
+  });
+
+  /*-------------------------------------------------------------
   analytics microservice
   ---------------------------------------------------------------*/
 
