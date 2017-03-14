@@ -439,6 +439,8 @@ export default Service.extend({
   },
 
   _trackOnDemandPlay(story, context) {
+    let action = this.get('position') === 0 ? 'start' : 'resume';
+    this.sendListenAction(story, action);
     this._trackPlayerEvent({
       action: `Played Story "${story.get('title')}"`,
       withRegion: true,
@@ -451,7 +453,6 @@ export default Service.extend({
       action: 'On_demand_audio_play',
       label: get(story, 'audio')
     });
-    this.sendListenAction(story, 'start');
 
     if (context === 'queue' || context === 'history') {
       this._trackPlayerEvent({
