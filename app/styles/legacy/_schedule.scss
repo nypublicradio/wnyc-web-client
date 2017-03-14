@@ -158,7 +158,7 @@ ul.schedule-table {
     width: 100% !important;
     overflow: hidden;
   }
-  
+
   .main.schedule-playlists {
     margin: 0 0 100px 0;
   }
@@ -197,6 +197,15 @@ ul.schedule-table {
 }  
 
 @include mq($small-only) {
+  .schedule-table li.details .playlist-item h4,
+  .schedule-table li.details .playlist-item h3 {
+    width: auto !important;
+    float: none !important;
+  }
+  .schedule-table li.details .playlist-item div.playlist-info {
+    width: 400px !important;
+  }
+
   ul.schedule-dates {
     li.yesterday a span,
     li.tomorrow a span {
@@ -222,4 +231,12 @@ ul.schedule-table {
     }
   }
   
+}
+
+@include mq($middle-narrow-only) {
+  .schedule-table li.details .playlist-item div.playlist-info {
+    width: 300px !important;
+    float: left !important;
+    margin-left: 50px !important;
+  }
 }
