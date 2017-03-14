@@ -1,0 +1,17 @@
+{{#account-wrapper}}
+  {{#if session.isAuthenticated}}
+    {{nypr-account-forms/verify
+      authAPI=config.wnycAuthAPI
+      session=session
+      emailId=email_pk
+      verificationCode=verification_code
+      onSuccess=(action 'goToProfile')
+      onFailure=(action 'goToProfile')
+    }}
+  {{else}}
+    {{nypr-account-forms/login
+      showSocialLogin=features.socialAuth
+      authAPI=config.wnycAuthAPI
+      session=session}}
+  {{/if}}
+{{/account-wrapper}}
