@@ -68,7 +68,8 @@ export default Ember.Component.extend({
       });
     },
     onPlay() {
-      get(this, 'audio').sendListenAction(get(this, 'currentAudio'), 'resume');
+      let action = get(this, 'isStream') ? 'start' : 'resume';
+      get(this, 'audio').sendListenAction(get(this, 'currentAudio'), action);
     },
     onPause() {
       get(this, 'audio').sendListenAction(get(this, 'currentAudio'), 'pause');
