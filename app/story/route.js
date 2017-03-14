@@ -56,6 +56,8 @@ export default Ember.Route.extend(PlayParamMixin, {
     },
     
     didTransition() {
+      this._super(...arguments);
+      
       let model = get(this, 'currentModel');
       let metrics = get(this, 'metrics');
       let dataPipeline = get(this, 'dataPipeline');
@@ -82,7 +84,7 @@ export default Ember.Route.extend(PlayParamMixin, {
         item_type: get(model, 'story.itemType'),
       });
       
-        
+      return true;
     }
   }
 });
