@@ -115,7 +115,7 @@ test('metrics properly reports story attrs', function(assert) {
   assert.expect(2);
   server.create('django-page', {id, slug: story.slug});
 
-  server.post(`${config.wnycAPI}/analytics/v1/events/viewed`, (schema, {requestBody}) => {
+  server.post(`${config.platformEventsAPI}/v1/events/viewed`, (schema, {requestBody}) => {
     let {
       cms_id,
       item_type,

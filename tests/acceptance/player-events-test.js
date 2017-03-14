@@ -18,7 +18,7 @@ test('visiting /player-events', function(assert) {
     .visit({id});
 
   let calls = [];
-  server.post(`${config.wnycAPI}/analytics/v1/events/listened`, (schema, {requestBody}) => {
+  server.post(`${config.platformEventsAPI}/v1/events/listened`, (schema, {requestBody}) => {
     calls.push(JSON.parse(requestBody).action);
     if (calls.length === 6) {
       assert.ok('6 calls');
