@@ -73,7 +73,7 @@
             {{#if integration.currentAudio.shareMetadata}}
               {{share-button
                 story  = integration.currentAudio
-                type   = (if integration.isStream 'stream' 'ondemand')
+                type   = (if integration.isStream 'livestream' 'on_demand')
                 region = "Player"
                 text   = "SHARE"}}
             {{/if}}

@@ -5,7 +5,7 @@ import computed, { readOnly } from 'ember-computed';
 import { shareMetadata } from 'wnyc-web-client/helpers/share-metadata';
 
 export default Model.extend({
-  audioType:            'stream',
+  audioType:            'livestream',
 
   hasPlaylists:         attr('boolean'),
   imageLogo:            attr('string'),

@@ -8,7 +8,7 @@ export default Factory.extend({
     return faker.random.number(1000000);
   },
 
-  // this needs to be only numbers, or the audio service will think this it's a 'stream' instead of 'onDemand'.
+  // this needs to be only numbers, or the audio service will think this it's a 'livestream' instead of 'on_demand'.
 
   title() { return faker.lorem.sentence(); },
   tease() { return faker.lorem.sentence(); },

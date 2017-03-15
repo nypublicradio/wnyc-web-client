@@ -82,7 +82,7 @@ export default Service.extend({
       return;
     }
 
-    if (this._audioType(id) === 'ondemand') {
+    if (this._audioType(id) === 'on_demand') {
       return this.playFromPk(id, context);
     } else if (this._audioType(id) === 'bumper') {
       return this.playBumper(id, context);
@@ -217,7 +217,7 @@ export default Service.extend({
 
     set(bumperState, 'bumperDidPlay', true);
 
-    if (this._audioType(next) === 'ondemand') {
+    if (this._audioType(next) === 'on_demand') {
       this._trackAutoplayQueue();
       return this.play(next, 'queue');
     } else { //stream
@@ -464,7 +464,7 @@ export default Service.extend({
   },
 
   _trackStreamPlay(stream, context, prevAudio) {
-    let wasStream = prevAudio && get(prevAudio, 'audioType') === 'stream';
+    let wasStream = prevAudio && get(prevAudio, 'audioType') === 'livestream';
     let prevStreamName = prevAudio && get(prevAudio, 'name');
     let streamName = get(stream, 'name');
 
@@ -529,13 +529,13 @@ export default Service.extend({
       });
     }
 
-    if (type === 'stream') {
+    if (type === 'livestream') {
       this._trackPlayerEventForNpr({
         category: 'Engagement',
         action: 'Stream_Pause',
         label: `Streaming_${get(storyOrStream, 'name')}`
       });
-    } else if (type === 'ondemand') {
+    } else if (type === 'on_demand') {
       this._trackPlayerEventForNpr({
         category: 'Engagement',
         action: 'On_demand_audio_pause',
@@ -591,7 +591,7 @@ export default Service.extend({
     if (!prevStory) {
       return false;
     }
-    let isOnDemand = prevStory.get('audioType') !== 'stream';
+    let isOnDemand = prevStory.get('audioType') !== 'livestream';
     let isSegmented = get(prevStory, 'segmentedAudio');
     // put `getCurrentSegment` behind the and gates b/c sometimes prevStory is a stream model, which doesn't have `getCurrentSegment`
     if (isOnDemand && isSegmented && prevStory.getCurrentSegment() === sound.get('url')) {
@@ -633,11 +633,11 @@ export default Service.extend({
 
   _audioType(id) {
     if (/^\d*$/.test(id)) {
-      return 'ondemand';
+      return 'on_demand';
     } else if (/^http|^https/.test(id)) {
       return 'bumper';
     } else {
-      return 'stream';
+      return 'livestream';
     }
   },
 

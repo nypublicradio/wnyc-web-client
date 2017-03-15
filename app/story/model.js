@@ -10,7 +10,7 @@ const { attr, Model } = DS;
 export default Model.extend({
   analyticsCode: attr('string'),
   audio: attr(),
-  audioType: 'ondemand',
+  audioType: 'on_demand',
   audioAvailable: attr('boolean'),
   audioDurationReadable: attr('string'),
   audioEventually: attr('boolean'),

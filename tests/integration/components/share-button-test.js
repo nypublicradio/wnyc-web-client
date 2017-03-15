@@ -16,7 +16,7 @@ let exampleStory = {
 exampleStory.shareMetadata = shareMetadata(exampleStory);
 
 let exampleStream = {
-  audioType: 'stream',
+  audioType: 'livestream',
   currentShow: {
     title: 'Cool Show',
     url: 'http://wync.org/shows/cool-show'
@@ -62,7 +62,7 @@ test('email link has correct url when passed a stream object', function(assert) 
 
 test('buttons send correct analytics values when clicked with a story', function(assert) {
   let story = exampleStory;
-  let type = 'ondemand';
+  let type = 'on_demand';
   let trackedEvents = [];
   let region = 'testZone';
   let mockMetrics = {
@@ -99,7 +99,7 @@ test('buttons send correct analytics values when clicked with a story', function
 
 test('buttons send correct analytics values when clicked with a stream', function(assert) {
   let story = exampleStream;
-  let type = 'stream';
+  let type = 'livestream';
   let region = 'testZone';
   let trackedEvents = [];
   let mockMetrics = {

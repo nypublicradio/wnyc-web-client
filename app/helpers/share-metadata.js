@@ -7,7 +7,7 @@ export function shareMetadata(story) {
     let analyticsCode = '';
 
     if (story) {
-      if (get(story, 'audioType') === 'stream') {
+      if (get(story, 'audioType') === 'livestream') {
         let entry = get(story, 'currentPlaylistItem.catalogEntry');
         if (entry) {
           shareText = `${entry.title} - ${entry.composer.name}`;
@@ -29,4 +29,3 @@ export function shareMetadata(story) {
 }
 
 export default helper(shareMetadata);
-

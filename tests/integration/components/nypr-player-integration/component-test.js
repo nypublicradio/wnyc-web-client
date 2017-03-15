@@ -89,7 +89,7 @@ test('it yields song metadata from current audio correctly', function(assert) {
   assert.equal(actual, expected);
 });
 
-test('it yields ondemand story title', function(assert) {
+test('it yields on_demand story title', function(assert) {
   this.set('currentAudio', onDemandStory);
 
   this.render(hbs`{{#nypr-player-integration currentAudio=currentAudio media=media as |integration|}}
@@ -101,7 +101,7 @@ test('it yields ondemand story title', function(assert) {
   assert.equal(actual, "The Story");
 });
 
-test('it yields ondemand story url', function(assert) {
+test('it yields on_demand story url', function(assert) {
   this.set('currentAudio', onDemandStory);
 
   this.render(hbs`{{#nypr-player-integration currentAudio=currentAudio media=media as |integration|}}
@@ -113,7 +113,7 @@ test('it yields ondemand story url', function(assert) {
   assert.equal(actual, "http://ondemandstoryurl");
 });
 
-test('it yields ondemand show title', function(assert) {
+test('it yields on_demand show title', function(assert) {
   this.set('currentAudio', onDemandStory);
 
   this.render(hbs`{{#nypr-player-integration currentAudio=currentAudio media=media as |integration|}}
@@ -124,7 +124,7 @@ test('it yields ondemand show title', function(assert) {
   assert.equal(actual, "The Show");
 });
 
-test('it yields ondemand show url', function(assert) {
+test('it yields on_demand show url', function(assert) {
   this.set('currentAudio', onDemandStory);
 
   this.render(hbs`{{#nypr-player-integration currentAudio=currentAudio media=media as |integration|}}
@@ -183,7 +183,7 @@ test('it yields stream show url', function(assert) {
   assert.equal(actual, "http://showurl");
 });
 
-test('it yields ondemand currentTitle', function(assert) {
+test('it yields on_demand currentTitle', function(assert) {
   this.set('currentAudio', onDemandStory);
 
   this.render(hbs`{{#nypr-player-integration currentAudio=currentAudio media=media as |integration|}}

@@ -23,7 +23,7 @@ export default Controller.extend({
 
 
   currentAudio: reads('audio.currentAudio'),
-  isAudioStream: equal('currentAudio.audioType', 'stream'), // unused?
+  isAudioStream: equal('currentAudio.audioType', 'livestream'), // unused?
 
 
 
