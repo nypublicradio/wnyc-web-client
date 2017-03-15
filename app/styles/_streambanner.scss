@@ -10,6 +10,19 @@
     line-height: 24px;
     margin-bottom: 7px;
     position: relative;
+
+    @include mq($desktop) {
+      @include fontsize(24);
+      line-height: 2rem;
+      @include flexbox((
+        flex-direction: row,
+        align-items: baseline
+      ));
+
+      a {
+        margin-left: 10px;
+      }
+    }
   }
   &-station {
     @include fontsize(18);
@@ -23,6 +36,10 @@
   &-on-air {
     @include fontsize(12);
     text-transform: uppercase;
+
+    @include mq($desktop) {
+      @include fontsize(14);
+    }
   }
   &-details {
     @include fontsize(14);
@@ -37,7 +54,7 @@
     position: relative;
   }
   &-card {
-    margin-bottom: 25px;
+    margin-bottom: 35px;
     padding: 15px 10px;
     background-color: white;
     box-shadow: 0 1px 4px 0 rgba(black, 0.25);
@@ -65,7 +82,7 @@
         flex-direction: row,
         justify-content: center
       ));
-      @include fontsize(12);
+      @include fontsize(14);
       text-transform: uppercase;
     }
   }
