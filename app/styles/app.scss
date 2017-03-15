@@ -3,7 +3,7 @@
 
 // hide everything not ember so we can control the UI over the alien DOM
 body:not(.simplified_wrapper):not(.container_stripped) {
-   > :not(.ember-view):not(#qunit):not(#qunit-fixture):not(#ember-testing-container):not(#modal-overlays) {
+   > :not(.ember-view):not(#qunit):not(#qunit-fixture):not(#ember-testing-container):not(#modal-overlays):not(#ember-basic-dropdown-wormhole) {
     display: none;
   }
 }
