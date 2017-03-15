@@ -23,6 +23,7 @@
 
         <div class="streambanner-controls">
           {{#listen-button
+            audio=audio
             class='streambanner-listenbutton nudge'
             type='blue-boss'
             state=(if (eq slug audio.currentAudio.id) audio.playState)
