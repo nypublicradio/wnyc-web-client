@@ -68,7 +68,8 @@ export default Ember.Component.extend({
       });
     },
     onPlay() {
-      let action = get(this, 'isStream') ? 'start' : 'resume';
+      let startingOnDemand = this.get('currentAudio.position') === 0 && !this.get('isStream');
+      let action = startingOnDemand ? 'start' : 'resume';
       get(this, 'audio').sendListenAction(get(this, 'currentAudio'), action);
     },
     onPause() {
