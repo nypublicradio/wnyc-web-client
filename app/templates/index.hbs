@@ -1,37 +1,10 @@
 <main class="l-container l-container--touch-full">
   <!-- <section>here goes the technical chunk</section> -->
 
-  <div class="streambanner-card streambanner--light streambanner--desktop"
-      style="background-image:url('https://images.unsplash.com/photo-1432163230927-a32e4fd5a326?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=')">
-    <div>
-      <div class="streambanner-station nudge">
-          <span class="streambanner-on-air">On air now on </span>
-          <select>
-            <option value="wqxr">WQXR 105.9 FM</option>
-            <option value="q2">Q2 Music</option>
-            <option value="operavore">Operavore</option>
-            <option value="jonathan">The Jonathan Channel</option>
-          </select>
-          <div class="arrow--down"></div>
-      </div>
-      <div class="streambanner-details">
-        <h3 class="streambanner-title">
-          Johannes Brahms, Waltzes, Op. 39
-          <a href="#" class="text--small text--white">Music playlist &raquo;</a>
-        </h3>
-      </div>
-      <div class="streambanner-controls">
-        {{#listen-button
-          class='streambanner-listenbutton nudge'
-          type='blue-boss'
-          state=(if (eq slug audio.currentAudio.id) audio.playState)
-          itemPK=slug
-          itemTitle=stream.name}}
-          Listen Live
-        {{/listen-button}}
-      </div>
-    </div>
-  </div>
+  {{#stream-banner streams=streams as |currentStream|}}
+    {{link-to 'Music playlist' 'playlist' currentStream.slug class='text--small text--white'}}
+  {{/stream-banner}}
+
 
   <section class="streambanner--mobile streambanner--light"
            style="background-image:url('https://images.unsplash.com/photo-1481462585914-9f695507135e?dpr=2&auto=format&fit=crop&w=1500&h=1500&q=80&cs=tinysrgb')">
