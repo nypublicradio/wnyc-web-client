@@ -109,8 +109,8 @@
           {{link-to 'All Streams' 'stream' class="inherit" preventDefault=false}}
         {{/link-to}}
 
-        {{#link-to 'djangorendered' 'playlist-daily' tagName='li' href=false class="list-item list-item--nav"}}
-          {{link-to 'Playlists' 'djangorendered' 'playlist-daily' class="inherit" preventDefault=false}}
+        {{#link-to 'playlist-daily' current-when="playlist-daily" tagName='li' href=false class="list-item list-item--nav"}}
+          {{link-to 'Playlists' 'playlist-daily' class="inherit" preventDefault=false}}
         {{/link-to}}
 
         {{#link-to 'schedule' current-when="schedule.date" tagName='li' href=false class="list-item list-item--nav"}}
