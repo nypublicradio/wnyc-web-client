@@ -13,13 +13,18 @@
   }
 }
 
-.station-nav {
+
+#daily-schedule .station-nav {
   margin-top: 10px;
   height: auto !important;
   border: none !important;
   
-  ul.schedule-tabs li a {    
-    font-weight: 600;
+  ul.schedule-tabs {
+    width: 100%;
+
+    li a {    
+      font-weight: 600;
+    }
   }
   
   ul.schedule-tabs li:not(.ui-tabs-selected) a {
