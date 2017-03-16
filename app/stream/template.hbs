@@ -1,10 +1,14 @@
 <div id="leaderboard" class="aligncenter l-constrained is-collapsed"></div>
 
-<div class="l-constrained streams-page">
+<div class="l-constrained streams-page nudge-big">
   <main class="l-col2of3">
     {{streamlist-header}}
     {{stream-list
-      streams=model
+      streams=model.wqxrStreams
+      currentAudio=audio.currentId
+      playState=audio.playState}}
+    {{stream-list
+      streams=model.otherStreams
       currentAudio=audio.currentId
       playState=audio.playState}}
   </main>
