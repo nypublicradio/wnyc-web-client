@@ -22,7 +22,7 @@ test('visiting /validate and logging in', function(assert) {
   andThen(() => {
     assert.equal(currentURL(), '/validate?username=test&confirmation=123');
     assert.equal(find('.alert-success').text().trim(), 'Your email has been verified and your online account is now active.');
-    assert.equal(find('h2').text().trim(), 'Log in to WNYC');
+    assert.equal(find('h2').text().trim(), 'Log in to WQXR');
   });
 
   fillIn('input[name=email]', 'user@example.com');
