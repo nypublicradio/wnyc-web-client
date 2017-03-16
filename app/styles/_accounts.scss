@@ -86,7 +86,7 @@
     @include responsive-background-image('/assets/img/backgrounds/aram-photo.jpg', '/assets/img/backgrounds/aram-photo@2x.jpg');
     background-color: $gray;
     background-repeat: no-repeat;
-    background-position: -5px center;
+    background-position: left center;
     background-size: 100%;
     background-size: cover;
     transition: width .45s;
@@ -151,7 +151,7 @@
   }
   svg {
     height: 30px;
-    width: 142px;
+    width: 138px;
   }
   > a {
     display: block;
