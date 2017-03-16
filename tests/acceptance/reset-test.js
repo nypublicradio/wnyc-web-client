@@ -50,7 +50,7 @@ test('visiting /reset and resetting password and logging in', function(assert) {
   click('button:contains(Reset password)');
 
   andThen(() => {
-    assert.equal(find('.account-form-heading').text().trim(), 'Log in to WNYC', 'it should show a login form when you click reset password with a good email code and password');
+    assert.equal(find('.account-form-heading').text().trim(), 'Log in to WQXR', 'it should show a login form when you click reset password with a good email code and password');
   });
 
   fillIn('input[name=email]', email);
