@@ -1,6 +1,6 @@
 .account-togglelogin {
   position: relative;
-  top: 35px;
+  top: 31px;
   margin: 0 auto;
   padding: 0 30px;
   width: 100%;
@@ -15,7 +15,7 @@
 
   > span {
     display: none;
-    @include mq($medium-and-up) {
+    @include mq($large-and-up) {
       display: inline;
     }
   }
@@ -83,10 +83,10 @@
   .account-promo {
     width: 55%;
     height: 100vh;
-    @include responsive-background-image('/assets/img/backgrounds/marisa_bg@1x.jpg', '/assets/img/backgrounds/marisa_bg@2x.jpg');
+    @include responsive-background-image('/assets/img/backgrounds/aram-photo.jpg', '/assets/img/backgrounds/aram-photo@2x.jpg');
     background-color: $gray;
     background-repeat: no-repeat;
-    background-position: center left;
+    background-position: -5px center;
     background-size: 100%;
     background-size: cover;
     transition: width .45s;
@@ -98,7 +98,7 @@
       right: 0;
       width: 560px;
       color: white;
-      background: $red;
+      background: $wqxrblue;
       padding: 25px;
       margin-bottom: 30px;
 
@@ -150,11 +150,8 @@
     left: calc(50% - 230px);
   }
   svg {
-    height: 33px;
-    width: 79px;
-  }
-  svg path {
-    fill: $red;
+    height: 30px;
+    width: 142px;
   }
   > a {
     display: block;
