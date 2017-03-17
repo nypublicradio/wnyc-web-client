@@ -11,6 +11,6 @@ export default Model.extend({
   familyName:         attr('string'),
   preferredUsername:  attr('string'),
   picture:            attr('string'),
-  facebookId:         attr('string')
-  orders:            hasMany('order'),
+  facebookId:         attr('string'),
+  orders:             hasMany('order'),
 });
