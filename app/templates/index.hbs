@@ -1,7 +1,7 @@
 <main class="l-container l-container--touch-full">
   <!-- <section>here goes the technical chunk</section> -->
 
-  {{#stream-banner streams=streams as |currentStream|}}
+  {{#stream-banner audio=audio streams=streams as |currentStream|}}
     {{link-to 'Music playlist' 'playlist' currentStream.slug class='text--small text--white'}}
   {{/stream-banner}}
 
