@@ -7,6 +7,7 @@ import { shareMetadata } from 'wqxr-web-client/helpers/share-metadata';
 const WQXR_slugs = ["wqxr","q2","jonathan-channel","wqxr-special","wqxr-special2"];
 // wqxr-special = Operavore, 
 // wqxr-special2 = Holiday Channel
+const WNYC_slugs = ["wnyc-fm939", "wnyc-am820"];
 
 export default Model.extend({
   audioType:            'stream',
@@ -34,6 +35,10 @@ export default Model.extend({
   
   isWQXR:               computed('slug', function(){
     return WQXR_slugs.includes(this.get('slug'));
+  }),
+
+  isWNYC:               computed('slug', function(){
+    return WNYC_slugs.includes(this.get('slug'));
   }),
 
   liveWQXR:             computed('isWQXR', 'whatsOn', function(){

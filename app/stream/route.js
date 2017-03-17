@@ -10,7 +10,7 @@ export default Route.extend({
     return this.store.findAll('stream').then(streams => {
       return {
         wqxrStreams: streams.filterBy('isWQXR'),
-        otherStreams: streams.rejectBy('isWQXR')
+        wnycStreams: streams.filterBy('isWNYC')
       }; 
     });
   },
