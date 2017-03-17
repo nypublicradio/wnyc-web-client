@@ -9,7 +9,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
   model() {
     return RSVP.hash({
       user: this.get('currentUser.user'),
-      pledge: this.store.findAll('pledge')
+      order: this.store.findAll('order')
     });
   }
 });
