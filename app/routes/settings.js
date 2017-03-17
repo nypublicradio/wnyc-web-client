@@ -4,7 +4,7 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model() {
     return this.store.findAll('stream', { reload: true }).then(streams => {
-      return streams.filterBy('audioBumper');
+      return streams.filterBy('liveWQXR'); 
     });
   },
 

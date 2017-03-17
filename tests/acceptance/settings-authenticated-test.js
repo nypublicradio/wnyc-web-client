@@ -42,7 +42,7 @@ test('after visiting settings, user can select different stream', function(asser
   visit('/settings');
 
   click('.user-stream .ember-power-select-trigger').then(() => {
-    click('.user-stream .ember-power-select-option:eq(2)');
+    click('.user-stream .ember-power-select-option:eq(1)');
   });
 
   andThen(function() {

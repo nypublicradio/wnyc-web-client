@@ -18,17 +18,17 @@ export default function slideToggle() {
     this.newElement.find('.switch').css('order', '1');
     animateSetting.toggle = { translateX: ['-35px', 0] };
     animateSetting.text = { translateX: [0, '35px'] };
-    animateSetting.body = { backgroundColor: ['#BBB', '#DE1E3D'] };
+    animateSetting.body = { backgroundColor: ['#BBB', '#00aeff'] };
   } else {
     this.oldElement.find('.autoplay-toggle').css({
       backgroundColor: '#BBB'
     });
-    this.newElement.find('.autoplay-toggle').css('backgroundColor', '#DE1E3D');
+    this.newElement.find('.autoplay-toggle').css('backgroundColor', '#00aeff');
     oldText.css('order', '2');
     oldStick.css('order', '1');
     this.newElement.find('.label').css({order: '1'});
     this.newElement.find('.switch').css({order: '2'});
-    animateSetting.body = { backgroundColor: ['#DE1E3D', '#BBB'] };
+    animateSetting.body = { backgroundColor: ['#00aeff', '#BBB'] };
     animateSetting.toggle = { translateX: ['35px', 0] };
     animateSetting.text = { translateX: [0, '-35px'] };
   }
