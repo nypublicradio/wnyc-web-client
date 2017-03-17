@@ -32,3 +32,10 @@ test('segment management', function(assert) {
   model.resetSegments();
   assert.equal(model.getCurrentSegment(), 'foo', 'currentSegment should be foo');
 });
+
+test('forDfp returns properties for targeting', function(assert) {
+  let forDfp = {tags: ['foo', 'bar'], show: 'foo show', channel: 'foo channel', series: 'foo series'};
+  let model = this.subject({ extendedStory: forDfp });
+  
+  assert.deepEqual(model.forDfp(). forDfp);
+});

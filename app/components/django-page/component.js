@@ -18,7 +18,6 @@ export default Ember.Component.extend(LegacySupportMixin, BetaActionsMixin, {
   audio: service(),
   session: service(),
   legacyAnalytics: service(),
-  googleAds: service(),
   router: service('wnyc-routing'),
   loadingType: computed('page', function() {
     let id = get(this, 'page.id') || '';
@@ -69,7 +68,6 @@ export default Ember.Component.extend(LegacySupportMixin, BetaActionsMixin, {
         // re-enable any overlaid content so that it can wormhole
         // itself into the server-rendered DOM.
         this.set('showingOverlay', true);
-        this.get('googleAds').refresh();
 
         if (this.get('session.data.isStaff')) {
           this.revealStaffLinks(this.$(), wnycAdminRoot);

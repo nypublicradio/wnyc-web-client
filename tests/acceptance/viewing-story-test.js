@@ -1,10 +1,9 @@
-import { test } from 'qunit';
+import test from 'ember-sinon-qunit/test-support/test';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import djangoPage from 'wnyc-web-client/tests/pages/django-page';
 import storyPage from 'wnyc-web-client/tests/pages/story';
 import { resetHTML } from 'wnyc-web-client/tests/helpers/html';
 import config from 'wnyc-web-client/config/environment';
-import sinon from 'sinon';
 
 
 moduleForAcceptance('Acceptance | Django Page | Story Detail', {
@@ -104,12 +103,8 @@ test('visiting a story with a different donate URL', function(assert) {
 });
 
 moduleForAcceptance('Acceptance | Django Page | Story Detail Analytics', {
-  beforeEach() {
-    window.googletag = {cmd: [], apiReady: true};
-  },
   afterEach() {
     delete window.ga;
-    window.googletag = {cmd: [], apiReady: true};
   }
 });
 
@@ -153,48 +148,19 @@ test('metrics properly reports story attrs', function(assert) {
     .visit({id});
 });
 
-test('google ads test', function(assert) {
-  let story = server.create('story', {
-    extendedStory: {
-      tags: 'tags value',
-      series: 'series value',
-      channel: 'channel value',
-      show: 'show value'
-    }
-  });
+test('story routes do dfp targeting', function(/*assert*/) {
+  let forDfp = {tags: ['foo', 'bar'], show: 'foo show', channel: 'foo channel', series: 'foo series'};
+  let story = server.create('story', {extendedStory: forDfp});
   let id = `story/${story.slug}/`;
-  server.create('django-page', {id, slug: story.slug});
   
-  let setTargetingSpy = sinon.spy();
-  let refreshSpy      = sinon.spy();
+  server.create('django-page', {id, slug: story.slug});
 
-  window.googletag.cmd = {
-    push(fn) {
-      fn();
-    }
-  };
-  window.googletag.pubads = function() {
-    return {
-      refresh: refreshSpy,
-      setTargeting: setTargetingSpy,
-      addEventListener() {}
-    };
-  };
+  this.mock(this.application.__container__.lookup('route:story').get('googleAds'))
+    .expects('doTargeting')
+    .once()
+    .withArgs(forDfp);
   
   djangoPage
     .bootstrap({id})
     .visit({id});
-  
-  andThen(function() {
-    assert.equal(setTargetingSpy.callCount, 7, 'setTargeting called 7 times');
-    assert.ok(setTargetingSpy.calledWith('url'), 'called set target for url');
-    assert.ok(setTargetingSpy.calledWith('host'), 'called set target for host');
-    assert.ok(setTargetingSpy.calledWith('fullurl'), 'called set target for fullurl');
-    assert.ok(setTargetingSpy.calledWith('tag'), 'called set target for tag');
-    assert.ok(setTargetingSpy.calledWith('show'), 'called set target for show');
-    assert.ok(setTargetingSpy.calledWith('channel'), 'called set target for channel');
-    assert.ok(setTargetingSpy.calledWith('series'), 'called set target for series');
-    
-    assert.ok(refreshSpy.calledOnce, 'refresh was called');
-  });
 });
