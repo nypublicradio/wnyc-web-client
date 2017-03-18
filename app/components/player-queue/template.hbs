@@ -4,6 +4,7 @@
   <div class='list'>
     <div class='list-item' data-test-name="now-playing-item">
       {{queue-listitem
+        audio=audio
         dataId=props.currentAudio.id
         isCurrent=true
         story=props.currentAudio
@@ -19,6 +20,7 @@
   {{#sortable-item tagName='div' classNames='list-item' model=story group=group handle=sortHandle}}
     {{queue-listitem
       state=(if (eq story.id audio.currentId) audio.playState)
+      audio=audio
       dataId=story.id
       story=story
       playContext='queue'
