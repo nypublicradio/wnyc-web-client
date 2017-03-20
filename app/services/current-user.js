@@ -16,9 +16,8 @@ export default Service.extend({
         user = this.get('store').queryRecord('user', {me: true});
       }
 
-      return user.then((user) => {
-        this.set('user', user);
-      })
+      this.set('user', user);
+      return user
       .catch(() => {
         // this access token has since been revoked
         this.get('session').invalidate();
