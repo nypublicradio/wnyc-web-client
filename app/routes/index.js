@@ -1,6 +1,8 @@
 import Route from 'ember-route';
 import service from 'ember-service/inject';
 
+const carouselBg = 'https://images.unsplash.com/photo-1481462585914-9f695507135e?dpr=2&auto=format&fit=crop&w=1500&h=1500&q=80&cs=tinysrgb';
+
 export default Route.extend({
   audio:      service(),
   classNames: ['home'],
@@ -17,5 +19,6 @@ export default Route.extend({
     this._super(...arguments);
     controller.set('audio', this.get('audio'));
     controller.set('streams', this.store.findAll('stream'));
+    controller.set('carouselBg', carouselBg);
   }
 });
