@@ -1,10 +1,13 @@
 import SessionService from 'ember-simple-auth/services/session';
 import config from 'wnyc-web-client/config/environment';
 import RSVP from 'rsvp';
+import service from 'ember-service/inject';
 import fetch from 'fetch';
 import getOwner from 'ember-owner/get';
 
 export default SessionService.extend({
+  store: service(),
+
   syncBrowserId(report = true) {
     let legacyId;
     try {
@@ -47,10 +50,36 @@ export default SessionService.extend({
       });
     });
   },
-  
+
   verify(email, password) {
     let authenticator = getOwner(this).lookup('authenticator:nypr');
     return authenticator.authenticate(email, password);
+  },
+
+  createUserForAuthenticatedProvider() {
+    let provider = this.get('data.authenticated.provider');
+    let access_token = this.get('data.authenticated.access_token');
+    if (provider === 'facebook-connect') {
+      return new RSVP.Promise((resolve, reject) => {
+        window.FB.api('/me', {fields: 'first_name,last_name,email,picture.width(500)'}, response => {
+          if (!response || response.error) {
+            reject(response);
+          }
+          // collect user attrs from FB api and send to auth
+          let attrs = {
+            providerToken: access_token,
+            givenName: response.first_name,
+            familyName: response.last_name,
+            email: response.email,
+            picture: response.picture.data.url,
+            facebookId: response.id
+          };
+          let user = this.get('store').createRecord('user', attrs);
+          user.save({adapterOptions: {provider: 'facebook-connect'}});
+          resolve(user);
+        });
+      });
+    }
   }
 });
 
