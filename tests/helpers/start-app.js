@@ -1,9 +1,13 @@
 import Ember from 'ember';
 import Application from '../../app';
 import config from '../../config/environment';
+import registerPowerSelectHelpers from '../../tests/helpers/ember-power-select';
+
 import './alien-dom-click';
 import './ember-sortable/test-helpers';
 import './google-analytics-stub';
+
+registerPowerSelectHelpers();
 
 export default function startApp(attrs) {
   let application;
