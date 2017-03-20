@@ -1,20 +1,24 @@
 <div class="account-main">
-  <div class="account-logo">
-    <a href="/">
-      {{nypr-svg icon='wnyc-logo'}}
-    </a>
-  </div>
-{{yield}}
-
-  <div class="account-footer">
-    <div class="account-footer-links">
-      {{link-to 'Terms' 'djangorendered' 'terms' target='_blank'}}
-      {{link-to 'Privacy' 'djangorendered' 'privacy' target='_blank'}}
-      {{link-to 'Help' 'djangorendered' 'contact' target='_blank'}}
+  {{#each flashMessages.queue as |flash|}}
+    {{flash-message flash=flash}}
+  {{/each}}
+  <div class="account-wrapper">
+    <div class="account-logo">
+      <a href="/">
+        {{nypr-svg icon='wnyc-logo'}}
+      </a>
     </div>
-    <div>&copy; {{moment-format (now) 'YYYY'}} New York Public Radio</div>
-  </div>
+    {{yield}}
 
+    <div class="account-footer">
+      <div class="account-footer-links">
+        {{link-to 'Terms' 'djangorendered' 'terms' target='_blank'}}
+        {{link-to 'Privacy' 'djangorendered' 'privacy' target='_blank'}}
+        {{link-to 'Help' 'djangorendered' 'contact' target='_blank'}}
+      </div>
+      <div>&copy; {{moment-format (now) 'YYYY'}} New York Public Radio</div>
+    </div>
+  </div>
 </div>
 <div class="account-promo">
   <div class="account-promo-blurb">
