@@ -1,34 +1,29 @@
-import { test, skip } from 'qunit';
+import { test } from 'qunit';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import 'wnyc-web-client/tests/helpers/with-feature';
-
-const fbResponseUser = {
-  "first_name": "Jane",
-  "last_name": "Doe",
-  "email": "janedoe@example.com",
-  "picture": {
-    "data": {
-      "height": 320,
-      "is_silhouette": true,
-      "url": "https://example.com/avatar.jpg",
-      "width": 508
-    }
-  },
-  "id": "1234567890987654321"
-};
+import RSVP from 'rsvp';
+import { currentSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
+import dummySuccessProvider from 'wnyc-web-client/tests/helpers/torii-dummy-success-provider';
+import dummyFailureProvider from 'wnyc-web-client/tests/helpers/torii-dummy-failure-provider';
+import { registerMockOnInstance } from 'wnyc-web-client/tests/helpers/register-mock';
 
 moduleForAcceptance('Acceptance | signup', {
   beforeEach() {
     server.create('stream');
     server.create('user');
-    window.FB = {
-      api(route, options, callback) {
-        if (route === '/me') {
-          callback(fbResponseUser);
-        }
-      }
+    currentSession(this.application).createUserForAuthenticatedProvider = () => {
+      let attrs = {
+        providerToken: "abcdefg",
+        givenName: "Jane",
+        familyName: "Doe",
+        email: "janedoe@example.com",
+        picture: "https://example.com/avatar.jpg",
+        facebookId: "1234567890987654321"
+      };
+      let user = server.create('user', attrs);
+      return RSVP.Promise.resolve(user);
     };
-  }
+ }
 });
 
 test('visiting /signup', function(assert) {
@@ -67,7 +62,8 @@ test('Sign up with Facebook button is visible at load', function(assert) {
   andThen(() => assert.equal(find('button:contains(Sign up with Facebook)').length, 1));
 });
 
-skip('Successful facebook redirects and shows correct alert', function(assert) {
+test('Successful facebook login redirects and shows correct alert', function(assert) {
+  registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProvider);
   withFeature('socialAuth');
   visit('/signup');
 
@@ -75,17 +71,21 @@ skip('Successful facebook redirects and shows correct alert', function(assert) {
 
   andThen(() => {
     assert.equal(currentURL(), '/');
-    assert.equal(find('.alert').text().trim(), "You’re now logged in via Facebook. You can update your information on your account page.");
+    assert.equal(find('.alert-success').text().trim(), "You’re now logged in via Facebook. You can update your information on your account page.");
+    assert.ok(currentSession(this.application).get('isAuthenticated'), 'Session is authenticated');
   });
 });
 
-skip('Unsuccessful facebook login shows alert', function(assert) {
+test('Unsuccessful facebook login shows alert', function(assert) {
+  registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummyFailureProvider);
   withFeature('socialAuth');
   visit('/signup');
 
   click('button:contains(Sign up with Facebook)');
 
   andThen(() => {
-    assert.equal(find('.alert').text().trim(), 'Unfortunately, we weren’t able to authorize your account');
+    assert.equal(currentURL(), '/signup');
+    assert.equal(find('.alert-warning').text().trim(), "Unfortunately, we weren't able to authorize your account.");
+    assert.ok(!currentSession(this.application).get('isAuthenticated'), 'Session is not authenticated');
   });
 });
