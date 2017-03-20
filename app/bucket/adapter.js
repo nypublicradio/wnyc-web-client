@@ -2,7 +2,6 @@ import ApplicationAdapter from 'wnyc-web-client/adapters/application';
 import config from 'wnyc-web-client/config/environment';
 
 export default ApplicationAdapter.extend({
-  pathForType: 'bucket',
   buildURL(modelName, id, snapshot, requestType, query) {
     if (requestType !== 'findRecord') {
       return this._super(...arguments);
