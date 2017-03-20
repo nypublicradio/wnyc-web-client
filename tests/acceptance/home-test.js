@@ -1,55 +1,39 @@
-import test from 'ember-sinon-qunit/test-support/test';
+import { test } from 'qunit';
 import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
-import djangoPage from 'wqxr-web-client/tests/pages/django-page';
 
 moduleForAcceptance('Acceptance | home', {
   beforeEach() {
-    server.create('stream');
+    server.create('bucket', {slug: 'wqxr-home'});
+    server.createList('stream', 7);
+    server.createList('whats-on', 7);
   }
 });
 
 test('visiting /', function(assert) {
-  server.create('django-page', {id: '/'});
-  djangoPage
-    .bootstrap({id: '/'})
-    .visit({id: '/'});
+  setBreakpoint('mediumAndUp');
+  visit('/');
 
   andThen(function() {
-    assert.equal(currentURL(), '/');
-    let djangoContent = findWithAssert('.django-content');
-    assert.ok(djangoContent.contents().length);
+    assert.equal(find('.stream-banner').length, 1, 'stream banner should render at larger breakpoint');
+    assert.equal(find('.stream-carousel').length, 0, 'stream carousel should not render at larger breakpoint');
+    
+    setBreakpoint('smallAndUp');
   });
-});
-
-test('.l-constrained is added to the home page', function(assert) {
-  let home = server.create('django-page', {
-    id: '/',
-    text: `
-    <div>
-      <div>
-    this is a regular template
-      </div>
-    </div>
-    `
-  });
-
-  djangoPage
-    .bootstrap(home)
-    .visit(home);
-
-  andThen(function() {
-    assert.equal(find('.django-content').parent('.l-constrained').length, 1, 'should have an l-constrained class');
-  });
-});
-
-test('home page does dfp targeting', function(/*assert*/) {
-  server.create('django-page', {id: '/'});
-
-  this.mock(this.application.__container__.lookup('route:index').get('googleAds'))
-    .expects('doTargeting')
-    .once();
   
-  djangoPage
-    .bootstrap({id: '/'})
-    .visit({id: '/'});
+  andThen(function() {
+    assert.equal(find('.stream-banner').length, 0, 'stream banner should not render at smaller breakpoint');
+    assert.equal(find('.stream-carousel').length, 1, 'stream carousel should render at smaller breakpoint');
+  });
+});
+
+test('using stream banner', function(assert) {
+  setBreakpoint('mediumAndUp');
+  visit('/');
+  selectChoose('.stream-banner', '.ember-power-select-option:eq(3)');
+  
+  andThen(function() {
+    let whatsOn4 = server.schema.whatsOns.all().models[3];
+    let { title } = whatsOn4.attrs.current_playlist_item.catalog_entry;
+    assert.ok(find('.streambanner-title').text().match(title), 'show display current playlist item');
+  });
 });
