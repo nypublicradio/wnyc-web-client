@@ -93,6 +93,9 @@ module.exports = function(environment) {
         ]
       }
     },
+    flashMessageDefaults: {
+      preventDuplicates: true
+    },
     queueAudioBumperURL: 'http://audio.wnyc.org/streambumper/streambumper000008_audio_queue.mp3',
     siteSlug: 'wnyc',
     siteName: 'WNYC',
