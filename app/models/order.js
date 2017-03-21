@@ -14,6 +14,6 @@ export default Model.extend({
   creditCardLast4Digits: attr('string'),
   isActive: attr('boolean'),
   isSustainer: computed('orderType', function() {
-    return this.get('orderType') === 'sustainer';
+    return this.get('orderType') === 'recurring';
   }),
 });
