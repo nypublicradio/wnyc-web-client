@@ -16,6 +16,7 @@ test('visiting /validate with no params', function(assert) {
 });
 
 test('visiting /validate and logging in', function(assert) {
+  server.create('bucket', {slug: 'wqxr-home'}); // redirected to homepage
   server.create('user');
   visit('/validate?username=test&confirmation=123');
 
