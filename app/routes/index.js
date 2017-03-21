@@ -18,7 +18,7 @@ export default Route.extend({
   setupController(controller) {
     this._super(...arguments);
     controller.set('audio', this.get('audio'));
-    controller.set('streams', this.store.findAll('stream'));
+    controller.set('streams', this.store.findAll('stream', {reload: true}));
     controller.set('carouselBg', carouselBg);
   }
 });
