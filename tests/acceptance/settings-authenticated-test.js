@@ -38,7 +38,7 @@ test('visiting /settings and selecting my queue as an autoplay preference', func
 });
 
 test('after visiting settings, user can select different stream', function(assert) {
-  let stream = server.schema.streams.all().models[2];
+  let stream = server.schema.streams.all().models[1];
   visit('/settings');
 
   click('.user-stream .ember-power-select-trigger').then(() => {
