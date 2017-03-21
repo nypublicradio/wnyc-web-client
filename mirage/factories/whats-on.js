@@ -11,7 +11,8 @@ export default Factory.extend({
           slug: faker.lorem.words(2).join('-'),
           name: faker.name.findName()
         },
-        title: faker.lorem.words(3).join(' ')
+        title: faker.lorem.words(3).join(' '),
+        soloists: []
       },
     };
   },
