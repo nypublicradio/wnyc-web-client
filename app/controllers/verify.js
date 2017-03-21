@@ -1,7 +1,10 @@
 import Controller from 'ember-controller';
 import service from 'ember-service/inject';
+import config from 'wnyc-web-client/config/environment';
 
 export default Controller.extend({
+  config,
+  session: service(),
   flashMessages: service(),
   queryParams: ['email_pk', 'verification_code'],
   email_pk: null,
