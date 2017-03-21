@@ -8,11 +8,11 @@ test('it produces the correct metadata for stories', function(assert) {
     description: 'Basic onDemand Story',
     story: {
       title: 'Cool Story',
-      url: 'http://wync.org/story/cool-story'
+      url: 'http://wqxr.org/story/cool-story'
     },
     expectedMetadata: {
-      shareText: 'Cool Story',
-      shareUrl: 'http://wync.org/story/cool-story',
+      shareText: "I'm listening to Cool Story",
+      shareUrl: 'http://wqxr.org/story/cool-story',
       analyticsCode: ''
     }
   },{
@@ -20,12 +20,12 @@ test('it produces the correct metadata for stories', function(assert) {
     story: {
       title: 'Cool Story',
       headers: {brand: {title: 'Cool Show'}},
-      url: 'http://wync.org/story/cool-story',
+      url: 'http://wqxr.org/story/cool-story',
       analyticsCode: '123'
     },
     expectedMetadata: {
-      shareText: 'Cool Show - Cool Story',
-      shareUrl: 'http://wync.org/story/cool-story',
+      shareText: "I'm listening to Cool Show - Cool Story",
+      shareUrl: 'http://wqxr.org/story/cool-story',
       analyticsCode: '123'
     }
   },{
@@ -34,12 +34,12 @@ test('it produces the correct metadata for stories', function(assert) {
       audioType: 'livestream',
       currentShow: {
         title: 'Cool Show',
-        url: 'http://wync.org/shows/cool-show'
+        url: 'http://wqxr.org/shows/cool-show'
       }
     },
     expectedMetadata: {
-      shareText: 'Cool Show',
-      shareUrl: 'http://wync.org/shows/cool-show',
+      shareText: "I'm listening to Cool Show",
+      shareUrl: 'http://wqxr.org/shows/cool-show',
       analyticsCode: ''
     }
   },{
@@ -53,8 +53,8 @@ test('it produces the correct metadata for stories', function(assert) {
       }},
     },
     expectedMetadata: {
-      shareText: 'Masterpiece - Maestro',
-      shareUrl: 'http://www.wnyc.org/streams/test',
+      shareText: 'I\'m listening to Maestro - Masterpiece',
+      shareUrl: 'http://www.wqxr.org/streams/test',
       analyticsCode: ''
     }
   },{

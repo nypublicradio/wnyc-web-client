@@ -10,16 +10,16 @@ export function shareMetadata(story) {
       if (get(story, 'audioType') === 'livestream') {
         let entry = get(story, 'currentPlaylistItem.catalogEntry');
         if (entry) {
-          shareText = `${entry.title} - ${entry.composer.name}`;
-          shareUrl = 'http://www.wnyc.org/streams/' + get(story, 'slug');
+          shareText = 'I\'m listening to ' + entry.composer.name + ' - ' + entry.title;
+          shareUrl = 'http://www.wqxr.org/streams/' + get(story, 'slug');
         } else {
-          shareText = get(story, 'currentShow.title');
+          shareText = 'I\'m listening to ' + get(story, 'currentShow.title');
           shareUrl = get(story, 'currentShow.url');
         }
       } else {
         let title = get(story, 'title');
         let parentTitle = get(story, 'headers.brand.title');
-        shareText = [parentTitle, title].filter(t => t).join(' - ');
+        shareText = 'I\'m listening to ' + [parentTitle, title].filter(t => t).join(' - ');
         shareUrl = get(story, 'url');
         analyticsCode = get(story, 'analyticsCode') || '';
       }
