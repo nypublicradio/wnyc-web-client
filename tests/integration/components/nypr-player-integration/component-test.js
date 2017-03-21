@@ -83,7 +83,7 @@ test('it yields song metadata from current audio correctly', function(assert) {
     {{integration.songDetails}}
   {{/nypr-player-integration}}`);
 
-  const expected = 'title, composer, musician (instrument)';
+  const expected = 'composer, title, musician (instrument)';
   const actual = this.$().text().trim().replace(/\s+/g,' ');
 
   assert.equal(actual, expected);
