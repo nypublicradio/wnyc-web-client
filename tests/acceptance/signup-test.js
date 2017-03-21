@@ -73,6 +73,7 @@ test('Successful facebook login redirects and shows correct alert', function(ass
     assert.equal(currentURL(), '/');
     assert.equal(find('.alert-success').text().trim(), "You’re now logged in via Facebook. You can update your information on your account page.");
     assert.ok(currentSession(this.application).get('isAuthenticated'), 'Session is authenticated');
+    assert.equal(find('.user-nav-greeting').text().trim(), 'Jane');
   });
 });
 
