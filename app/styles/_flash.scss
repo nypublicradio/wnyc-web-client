@@ -18,7 +18,12 @@
   .sitechrome-page-content-area & {
     position: static;
     width: 100%;
-    margin: -24px 0 24px 0;
+    margin-top: -24px;
+    margin-bottom: 24px;
+  }
+
+  .index_loading .sitechrome-page-content-area & {
+    margin-top: 0px;
   }
 
   + .account-info {
