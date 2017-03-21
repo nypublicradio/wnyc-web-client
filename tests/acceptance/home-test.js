@@ -29,7 +29,7 @@ test('visiting /', function(assert) {
 test('using stream banner', function(assert) {
   setBreakpoint('mediumAndUp');
   visit('/');
-  selectChoose('.stream-banner', '.ember-power-select-option:eq(3)');
+  selectChoose('.stream-banner .ember-basic-dropdown', '.ember-power-select-option:eq(3)');
   
   andThen(function() {
     let whatsOn4 = server.schema.whatsOns.all().models[3];
