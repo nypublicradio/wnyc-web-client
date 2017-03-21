@@ -17,7 +17,9 @@ export default Service.extend({
       }
 
       this.set('user', user);
-      return user
+      return user.then((user) => {
+        this.set('user', user);
+      })
       .catch(() => {
         // this access token has since been revoked
         this.get('session').invalidate();
