@@ -18,7 +18,7 @@ test('it works', function(assert) {
     }]
   };
   let result = songMetadata([catalogEntry]);
-  const expected = 'title, composer, musician (instrument)';
+  const expected = 'composer, title, musician (instrument)';
   assert.strictEqual(result, expected, 'it should return correct song details');
 });
 
@@ -47,7 +47,7 @@ test('it works with multiple musicians', function(assert) {
     }]
   };
   let result = songMetadata([catalogEntry]);
-  const expected = 'title, composer, musician 1 (vocals), musician 2 (strings), musician 3 (percussion)';
+  const expected = 'composer, title, musician 1 (vocals), musician 2 (strings), musician 3 (percussion)';
   assert.strictEqual(result, expected, 'it should return correct song details');
 });
 
@@ -60,7 +60,7 @@ test('it works with no musicians', function(assert) {
     soloists: []
   };
   let result = songMetadata([catalogEntry]);
-  const expected = 'title, composer';
+  const expected = 'composer, title';
   assert.strictEqual(result, expected, 'it should return correct song details');
 });
 
@@ -78,7 +78,7 @@ test('it works with musicians with no instruments', function(assert) {
     }]
   };
   let result = songMetadata([catalogEntry]);
-  const expected = 'title, composer, musician';
+  const expected = 'composer, title, musician';
   assert.strictEqual(result, expected, 'it should return correct song details');
 });
 
