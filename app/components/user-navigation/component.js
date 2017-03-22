@@ -12,6 +12,15 @@ export default Component.extend({
         this.set('isPopupOpen', false);
       }
     },
+    closePopupAndTrack(title) {
+      this.get('metrics').trackEvent({
+        category: 'WNYC Menu',
+        label: `Clicked ${title}`,
+      });
+      if ( !(this.get('isDestroyed') || this.get('isDestroying')) ) {
+        this.set('isPopupOpen', false);
+      }
+    },
     togglePopup() {
       this.toggleProperty('isPopupOpen');
     },
