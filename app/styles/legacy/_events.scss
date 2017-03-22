@@ -151,6 +151,10 @@
     line-height: 1.5;
   }
 
+  p.image-caption {
+    font-size: 12px;
+  }
+
   /* links */
   p a {
     @extend .event-link;
