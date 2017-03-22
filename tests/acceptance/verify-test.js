@@ -37,7 +37,7 @@ test('visiting /verify with missing params takes you to profile with danger aler
   });
 });
 
-test('visiting /verify with correct params  and logging in takes you to profile with success alert', function(assert) {
+test('visiting /verify with correct params and logging in takes you to profile with success alert', function(assert) {
   server.create('user');
 
   visit('/verify?verification_code=abc&email_pk=def');
@@ -52,7 +52,7 @@ test('visiting /verify with correct params  and logging in takes you to profile 
   });
 });
 
-test('visiting /verify with missing params and logging in takes you to profile with danger alert', function(assert) {
+test('visiting /verify with missing params and logging in takes you to profile with warning alert', function(assert) {
   server.create('user');
 
   visit('/verify');
@@ -63,6 +63,6 @@ test('visiting /verify with missing params and logging in takes you to profile w
 
   return andThen(() => {
     assert.equal(currentURL(), '/profile');
-    assert.equal(find('.alert.alert-danger').length, 1);
+    assert.equal(find('.alert.alert-warning').length, 1);
   });
 });

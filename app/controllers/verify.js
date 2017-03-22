@@ -21,7 +21,7 @@ export default Controller.extend({
       } else {
         flashMessages.add({
           message: errorMessage,
-          type: 'danger',
+          type: 'warning',
           sticky: true
         });
       }
