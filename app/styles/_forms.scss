@@ -161,8 +161,9 @@
   padding: 10px 10px 10px 45px;
 
   .input-icon {
-    top: 11px;
+    top: 14px;
     left: 20px;
+    line-height: 0;
     
     .icon--search {
       width: 14px;
@@ -171,7 +172,9 @@
   }
 
   input[type="search"] {
-    font-size: 14px;
+    font-size: 16px;
+    font-family: "Lato", sans-serif;
+    line-height: 1;
   }
 }
 
