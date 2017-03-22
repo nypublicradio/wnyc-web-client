@@ -18,7 +18,7 @@
 
   .page-titlegroup {
     margin-top: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 
     h1 {
       font-family: "Open Sans", sans-serif !important;
@@ -58,6 +58,8 @@
 
   .primary_event, .event-tease, .blurb-tease {
 
+    padding: 30px 0 !important;
+
     h2, h3{
       color: $darkergray;
     }
@@ -73,9 +75,13 @@
       }
     }
 
+    h2.title {
+      font-size: 24px;
+      font-weight: normal;
+      line-height: 1.5;
+    }
     h2.title a {
       font-size: 24px;
-      line-height: 1.5;
       font-weight: normal;
       color: $darkergray !important;
     }
@@ -99,7 +105,10 @@
       line-height: 1.5;
     }
 
-    
+    .text {
+      margin-bottom: 10px;
+    }
+
 
     .vendor-link, p a.buy-button {
       margin-top: 18px;
@@ -136,8 +145,10 @@
 
   /* text */
   p {
+    margin-bottom: 10px;
     font-family: "Open Sans", sans-serif;
     font-size: 16px;
+    line-height: 1.5;
   }
 
   /* links */
