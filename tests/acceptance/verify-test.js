@@ -25,7 +25,7 @@ test('visiting /verify with correct params takes you to profile with success ale
   });
 });
 
-test('visiting /verify with missing params takes you to profile with danger alert', function(assert) {
+test('visiting /verify with missing params takes you to profile with warning alert', function(assert) {
   authenticateSession(this.application, {access_token: 'foo'});
   server.create('user');
 
@@ -33,7 +33,7 @@ test('visiting /verify with missing params takes you to profile with danger aler
 
   return andThen(() => {
     assert.equal(currentURL(), '/profile');
-    assert.equal(find('.alert.alert-danger').length, 1);
+    assert.equal(find('.alert.alert-warning').length, 1);
   });
 });
 
