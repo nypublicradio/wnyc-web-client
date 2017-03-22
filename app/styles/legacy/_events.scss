@@ -11,6 +11,7 @@
 
 #events-home, .event-detail {
    font-family: "Open Sans", sans-serif;
+   margin-bottom: 175px;
 
   h2, h3, h4 {
     font-family: "Lato", sans-serif;
@@ -44,7 +45,6 @@
     &:hover {
       text-decoration: none;
     }
-
   }
 
   .sold-out {
@@ -160,7 +160,7 @@
 
 /* SINGLE EVENT PAGE */
 .event-detail {
-  margin-bottom: 175px;
+
   .story-headergroup.event {
     background-color: $wqxrdarkblue;
     color: white;
@@ -205,7 +205,13 @@
       margin-top: 0;
       font-size: 14px;
       line-height: 1.5;
+      margin-bottom: 10px;
     }
+
+    p.imagecaption {
+      font-size: 12px;
+    }
+
 
     .mediumimage {
       float: left;
