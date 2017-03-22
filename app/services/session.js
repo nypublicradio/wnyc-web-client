@@ -73,9 +73,11 @@ export default SessionService.extend({
               givenName: response.first_name,
               familyName: response.last_name,
               email: response.email,
-              picture: response.picture.data.url,
               facebookId: response.id
             };
+            if (!response.picture.data.is_silhouette) {
+              attrs.picture = response.picture.data.url;
+            }
             let user = this.get('store').createRecord('user', attrs);
             user.save({adapterOptions: {provider: 'facebook-connect'}});
             resolve(user);
