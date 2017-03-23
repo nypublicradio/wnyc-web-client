@@ -32,10 +32,11 @@
   }
 
   a.buy-button, .sold-out {
+    font-size: 16px;
     display: inline-block;
     border-radius: 25px;
     color: white;
-    padding: 2px 18px 2px 18px;
+    padding: 4px 18px 5px 18px;
     background: $wqxrblue;
     white-space: nowrap;
     font-weight: 600;
@@ -55,10 +56,15 @@
 
 /* EVENTS MAIN PAGE */
 #events-home {
+  margin-right: 85px;
 
   .primary_event, .event-tease, .blurb-tease {
 
     padding: 30px 0 !important;
+
+    .mediumimage.imageleft {
+      margin-right: 30px;
+    }
 
     h2, h3{
       color: $darkergray;
@@ -71,6 +77,7 @@
         font-size: 14px;
         line-height: 1;
         font-weight: normal;
+        padding: 0;
         color: $darkergray;
       }
     }
@@ -102,7 +109,7 @@
     p {
       color: $darkergray;
       font-size: 16px;
-      line-height: 1.5;
+      line-height: 1.7;
     }
 
     .text {
@@ -138,26 +145,36 @@
 .event-detail-sidebar.sidebar {
   margin-top: 84px;
 
-  /* headings */
-  p.strong {
-    font-family: "Lato", sans-serif;
-  }
+  .sideblock:not(.ad_container) {
+    /* headings */
+    p strong {
+      font-family: "Lato", sans-serif;
+    }
 
-  /* text */
-  p {
-    margin-bottom: 10px;
-    font-family: "Open Sans", sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-  }
+    /* text */
+    p {
+      margin-bottom: 10px;
+      font-family: "Open Sans", sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+    }
 
-  p.image-caption {
-    font-size: 12px;
-  }
+    p.image-caption {
+      font-size: 12px;
+    }
 
-  /* links */
-  p a {
-    @extend .event-link;
+    /* links */
+    p a {
+      @extend .event-link;
+    }
+
+    p a.more:after {
+      content: none;
+    }
+
+    hr {
+      margin: 35px 0;
+    }
   }
 }
 
