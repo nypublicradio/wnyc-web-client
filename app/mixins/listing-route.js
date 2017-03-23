@@ -11,7 +11,10 @@ const {
 } = Ember;
 
 export default Mixin.create({
-  pageNumbers: service(),
+  pageNumbers:  service(),
+  metrics:      service(),
+  dataPipeline: service(),
+
   titleToken() {
     const channelType = get(this, 'channelType');
     const { channel } = this.modelFor(channelType);
@@ -24,16 +27,40 @@ export default Mixin.create({
   },
 
   afterModel(model) {
+    let channelType = get(this, 'channelType')
+    let { channel } = this.modelFor(channelType)
+    let channelTitle = get(channel, 'title');
+    let metrics = get(this, 'metrics');
+    let dataPipeline = get(this, 'dataPipeline');
+    let nprVals = get(channel, 'nprAnalyticsDimensions');
+
+    // google analytics
+    metrics.trackEvent('GoogleAnalytics', {
+      category: `Viewed ${get(channel, 'listingObjectType').capitalize()}`,
+      action: channelTitle,
+    });
+
+    // NPR
+    metrics.trackPage('NprAnalytics', {
+      page: `/${get(this, 'listingSlug')}`,
+      title: channelTitle,
+      nprVals,
+    });
+
+    // data pipeline
+    dataPipeline.reportItemView({
+      cms_id: channel.get('cmsPK'),
+      item_type: channel.get('listingObjectType'),
+    });
 
     $('main > section:last-of-type').css('opacity', 1)
     const teaseList = get(model, 'teaseList')
     if (isEmpty(teaseList)) {
       return
     }
-    const channelType = get(this, 'channelType')
-    const { channel } = this.modelFor(channelType)
 
     this._filterForFeatured(teaseList, channel)
+
   },
   setupController(controller) {
     this._super(...arguments);

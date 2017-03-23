@@ -314,13 +314,14 @@ test('metrics properly reports channel attrs', function(assert) {
   assert.expect(2);
   server.create('django-page', {id: show.id});
   
-  server.post(`${config.wnycAPI}/analytics/v1/events/viewed`, (schema, {requestBody}) => {
+  server.post(`${config.platformEventsAPI}/v1/events/viewed`, (schema, {requestBody}) => {
     let {
       cms_id,
       item_type,
       browser_id,
       client,
       referrer,
+      external_referrer,
       url,
       site_id
     } = JSON.parse(requestBody);
@@ -329,11 +330,12 @@ test('metrics properly reports channel attrs', function(assert) {
       item_type: 'show',
       browser_id: undefined,
       client: 'wnyc_web',
+      external_referrer: document.referrer,
       referrer: location.toString(),
       url: location.toString(),
-      site_id: show.siteId
+      site_id: config.siteId
     };
-    assert.deepEqual({cms_id, item_type, browser_id, client, referrer, url, site_id}, testObj, 'params match up');
+    assert.deepEqual({cms_id, item_type, browser_id, client, external_referrer, referrer, url, site_id}, testObj, 'params match up');
   });
 
   window.ga = function(command) {

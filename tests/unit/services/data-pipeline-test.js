@@ -1,5 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 import sinon from 'sinon';
+import config from 'wnyc-web-client/config/environment';
 
 moduleFor('service:data-pipeline', 'Unit | Service | data pipeline', {
   // Specify the other units that are required for this test.
@@ -9,10 +10,6 @@ moduleFor('service:data-pipeline', 'Unit | Service | data pipeline', {
       data: {
         browserId: 'secrets'
       },
-
-      syncBrowserId: function() {
-        return Ember.RSVP.Promise.resolve('secrets');
-      }
     });
 
     this.register('service:session', sessionStub);
@@ -27,16 +24,17 @@ test('it exists', function(assert) {
 });
 
 test('it reports the proper data for an item view', function(assert) {
-  let testData = {cms_id: 1, item_type: 'story', site_id: 1};
+  let testData = {cms_id: 1, item_type: 'story'};
   let expected = Object.assign({
     browser_id: 'secrets',
     client: 'wnyc_web',
+    external_referrer: document.referrer,
     referrer: null,
-    url: location.toString()
+    url: location.toString(),
+    site_id: config.siteId
   }, testData);
   
   let service = this.subject({
-    browserId: 'secrets',
     _send(data) {
       assert.deepEqual(expected, data, 'passes in correct data to send');
     },
@@ -46,24 +44,24 @@ test('it reports the proper data for an item view', function(assert) {
   service.reportItemView(testData);
 });
 
-test('it reports the proper data for ondemand listen actions', function(assert) {
+test('it reports the proper data for on demand listen actions', function(assert) {
   let clock = sinon.useFakeTimers();
   let expected = {
-    audio_type: 'ondemand',
-    client: 'wnyc_web',
-    delta: 0,
-    current_position: 0,
+    audio_type: 'on_demand',
     browser_id: 'secrets',
-    referrer: null,
-    url: location.toString(),
+    client: 'wnyc_web',
     cms_id: 1,
+    current_audio_position: 0,
+    delta: 0,
+    external_referrer: document.referrer,
     item_type: 'story',
-    site_id: 1
+    referrer: null,
+    site_id: config.siteId,
+    url: location.toString()
   };
-  let testData = {cms_id: 1, item_type: 'story', site_id: 1};
+  let testData = {cms_id: 1, item_type: 'story'};
   
   let service = this.subject({
-    browserId: 'secrets',
     _legacySend() {}
   });
   
@@ -71,55 +69,55 @@ test('it reports the proper data for ondemand listen actions', function(assert) 
     let thisData = Object.assign({action: 'start'}, expected);
     assert.deepEqual(thisData, data, 'sendStart passes in correct data');
   };
-  service.reportListenAction('start', Object.assign({audio_type: 'ondemand', current_position: 0}, testData));
+  service.reportListenAction('start', Object.assign({audio_type: 'on_demand', current_audio_position: 0}, testData));
   
   service._send = function(data) {
     let thisData = Object.assign({action: 'pause'}, expected);
     assert.deepEqual(thisData, data, 'sendPause passes in correct data');
   };
-  service.reportListenAction('pause', Object.assign({audio_type: 'ondemand', current_position: 0}, testData));
+  service.reportListenAction('pause', Object.assign({audio_type: 'on_demand', current_audio_position: 0}, testData));
   
   service._send = function(data) {
     let thisData = Object.assign({action: 'resume'}, expected);
     assert.deepEqual(thisData, data, 'sendResume passes in correct data');
   };
-  service.reportListenAction('resume', Object.assign({audio_type: 'ondemand', current_position: 0}, testData));
+  service.reportListenAction('resume', Object.assign({audio_type: 'on_demand', current_audio_position: 0}, testData));
   
   service._send = function(data) {
     let thisData = Object.assign({action: 'skip_15_forward'}, expected);
     assert.deepEqual(thisData, data, 'sendSkipForward passes in correct data');
   };
-  service.reportListenAction('forward_15', Object.assign({audio_type: 'ondemand', current_position: 0}, testData));
+  service.reportListenAction('forward_15', Object.assign({audio_type: 'on_demand', current_audio_position: 0}, testData));
   
   service._send = function(data) {
     let thisData = Object.assign({action: 'skip_15_back'}, expected);
     assert.deepEqual(thisData, data, 'sendSkipBackward passes in correct data');
   };
-  service.reportListenAction('back_15', Object.assign({audio_type: 'ondemand', current_position: 0}, testData));
+  service.reportListenAction('back_15', Object.assign({audio_type: 'on_demand', current_audio_position: 0}, testData));
   
   service._send = function(data) {
     let thisData = Object.assign({action: 'window_close'}, expected);
     assert.deepEqual(thisData, data, 'sendWindowClose passes in correct data');
   };
-  service.reportListenAction('close', Object.assign({audio_type: 'ondemand', current_position: 0}, testData));
+  service.reportListenAction('close', Object.assign({audio_type: 'on_demand', current_audio_position: 0}, testData));
   
   service._send = function(data) {
     let thisData = Object.assign({action: 'finish'}, expected);
     assert.deepEqual(thisData, data, 'sendFinish passes in correct data');
   };
-  service.reportListenAction('finish', Object.assign({audio_type: 'ondemand', current_position: 0}, testData));
+  service.reportListenAction('finish', Object.assign({audio_type: 'on_demand', current_audio_position: 0}, testData));
   
   service._send = function(data) {
     let thisData = Object.assign({action: 'set_position'}, expected);
     assert.deepEqual(thisData, data, 'sendSetPosition passes in correct data');
   };
-  service.reportListenAction('position', Object.assign({audio_type: 'ondemand', current_position: 0}, testData));
+  service.reportListenAction('position', Object.assign({audio_type: 'on_demand', current_audio_position: 0}, testData));
   
   clock.restore();
 });
 
 test('data pipeline tracks delta properly', function(assert) {
-  assert.expect(5);
+  assert.expect(6);
   
   let currentCall = 0;
   let now = Date.now();
@@ -129,18 +127,27 @@ test('data pipeline tracks delta properly', function(assert) {
     _send({action, delta}) {
       switch(currentCall) {
         case 1:
+          // start
           assert.equal(delta, 0, 'delta should be 0 on start and resumes');
           break;
         case 2:
+          // pause
           assert.equal(delta, deltaShouldbe, 'delta should be updated as time ticks');
           break;
         case 3:
+          // position
           assert.equal(delta, 0, 'delta should be 0 if not playing');
           break;
         case 4:
+          // resume
           assert.equal(delta, 0, 'delta should be 0 on start and resumes');
           break;
         case 5:
+          // postion
+          assert.equal(delta, deltaShouldbe, 'delta should be updated as time ticks');
+          break;
+        case 6:
+          // interrupt
           assert.equal(delta, deltaShouldbe, 'delta should be updated as time ticks');
           break;
       }
@@ -165,6 +172,11 @@ test('data pipeline tracks delta properly', function(assert) {
   clock.tick(deltaShouldbe);
   currentCall++;
   service.reportListenAction('position');
+  
+  deltaShouldbe *= 2;
+  clock.tick(deltaShouldbe);
+  currentCall++;
+  service.reportListenAction('interrupt');
 
   clock.restore();
 });

@@ -3,6 +3,8 @@ import { scheduleOnce } from 'ember-runloop';
 import get from 'ember-metal/get';
 import service from 'ember-service/inject';
 
+const DETAIL_ROUTES = new RegExp(/story|(show|article|serie|tag|blog)\./);
+
 export default Mixin.create({
   metrics: service(),
   dataPipeline: service(),
@@ -33,6 +35,10 @@ export default Mixin.create({
 
       metrics.trackPage('GoogleAnalytics', { page, title });
       metrics.trackPage('GoogleTagManager', { page, title });
+      
+      if (!DETAIL_ROUTES.test(this.currentRouteName) && !this.currentRouteName.match(/loading/)) {
+        this.get('dataPipeline').reportItemView();
+      }
     });
   },
 });

@@ -1,7 +1,7 @@
 import { Factory, faker } from 'ember-cli-mirage';
 
 export default Factory.extend({
-  audio_type: 'stream',
+  audio_type: 'livestream',
   image_logo: () => faker.image.imageUrl(75, 75),
   name: faker.name.firstName,
   audio_bumper: faker.internet.url,

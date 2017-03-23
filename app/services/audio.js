@@ -82,7 +82,7 @@ export default Service.extend({
       return;
     }
 
-    if (this._audioType(id) === 'ondemand') {
+    if (this._audioType(id) === 'on_demand') {
       return this.playFromPk(id, context);
     } else if (this._audioType(id) === 'bumper') {
       return this.playBumper(id, context);
@@ -103,6 +103,10 @@ export default Service.extend({
 
     let prevContext = get(this, 'currentContext');
     let newStoryPlaying = get(this, 'currentId') !== id;
+    
+    if (newStoryPlaying && this.get('isPlaying')) {
+      this.sendListenAction(this.get('currentAudio'), 'interrupt');
+    }
 
     set(this, 'currentId', id);
 
@@ -157,6 +161,10 @@ export default Service.extend({
   playStream(slug, context = '') {
     this._firstTimePlay();
     let newStreamPlaying = get(this, 'currentId') !== slug;
+    
+    if (newStreamPlaying && this.get('isPlaying')) {
+      this.sendListenAction(this.get('currentAudio'), 'interrupt');
+    }
 
     // TODO: why setting currentId instead of relying on the computed?
     set(this, 'currentId', slug);
@@ -209,7 +217,7 @@ export default Service.extend({
 
     set(bumperState, 'bumperDidPlay', true);
 
-    if (this._audioType(next) === 'ondemand') {
+    if (this._audioType(next) === 'on_demand') {
       this._trackAutoplayQueue();
       return this.play(next, 'queue');
     } else { //stream
@@ -366,7 +374,7 @@ export default Service.extend({
   
   sendListenAction(storyOrStream, type) {
     let data = {
-      current_position: this.get('position')
+      current_audio_position: this.get('position')
     };
     storyOrStream.forListenAction(data).then(d => {
       this.get('dataPipeline').reportListenAction(type, d);
@@ -431,6 +439,8 @@ export default Service.extend({
   },
 
   _trackOnDemandPlay(story, context) {
+    let action = this.get('position') === 0 ? 'start' : 'resume';
+    this.sendListenAction(story, action);
     this._trackPlayerEvent({
       action: `Played Story "${story.get('title')}"`,
       withRegion: true,
@@ -443,7 +453,6 @@ export default Service.extend({
       action: 'On_demand_audio_play',
       label: get(story, 'audio')
     });
-    this.sendListenAction(story, 'start');
 
     if (context === 'queue' || context === 'history') {
       this._trackPlayerEvent({
@@ -455,7 +464,7 @@ export default Service.extend({
   },
 
   _trackStreamPlay(stream, context, prevAudio) {
-    let wasStream = prevAudio && get(prevAudio, 'audioType') === 'stream';
+    let wasStream = prevAudio && get(prevAudio, 'audioType') === 'livestream';
     let prevStreamName = prevAudio && get(prevAudio, 'name');
     let streamName = get(stream, 'name');
 
@@ -520,13 +529,13 @@ export default Service.extend({
       });
     }
 
-    if (type === 'stream') {
+    if (type === 'livestream') {
       this._trackPlayerEventForNpr({
         category: 'Engagement',
         action: 'Stream_Pause',
         label: `Streaming_${get(storyOrStream, 'name')}`
       });
-    } else if (type === 'ondemand') {
+    } else if (type === 'on_demand') {
       this._trackPlayerEventForNpr({
         category: 'Engagement',
         action: 'On_demand_audio_pause',
@@ -535,7 +544,6 @@ export default Service.extend({
     }
 
     if (storyOrStream) {
-      // we're not set up to handle pause listen actions from streams atm
       this.sendListenAction(storyOrStream, 'pause');
     }
   },
@@ -583,7 +591,7 @@ export default Service.extend({
     if (!prevStory) {
       return false;
     }
-    let isOnDemand = prevStory.get('audioType') !== 'stream';
+    let isOnDemand = prevStory.get('audioType') !== 'livestream';
     let isSegmented = get(prevStory, 'segmentedAudio');
     // put `getCurrentSegment` behind the and gates b/c sometimes prevStory is a stream model, which doesn't have `getCurrentSegment`
     if (isOnDemand && isSegmented && prevStory.getCurrentSegment() === sound.get('url')) {
@@ -625,11 +633,11 @@ export default Service.extend({
 
   _audioType(id) {
     if (/^\d*$/.test(id)) {
-      return 'ondemand';
+      return 'on_demand';
     } else if (/^http|^https/.test(id)) {
       return 'bumper';
     } else {
-      return 'stream';
+      return 'livestream';
     }
   },
 

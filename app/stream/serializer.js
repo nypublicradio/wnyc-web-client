@@ -37,6 +37,7 @@ export default DS.JSONAPISerializer.extend({
     let attributes = {};
     keys.forEach(k => attributes[k] = data[k]);
     attributes.urls = this._findPreferredStreams(data);
+    attributes.cms_pk = data.id;
     return {
       id: data.slug,
       type: 'stream',

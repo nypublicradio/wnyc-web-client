@@ -96,6 +96,7 @@ module.exports = function(environment) {
     queueAudioBumperURL: 'http://audio.wnyc.org/streambumper/streambumper000008_audio_queue.mp3',
     siteSlug: 'wnyc',
     siteName: 'WNYC',
+    siteId: 1,
     clientSlug: 'wnyc_web',
     // these are provided via a .env file or else by Django's EmberAdapter
     // fall back to demo GA key
@@ -117,6 +118,7 @@ module.exports = function(environment) {
     wnycEtagAPI: process.env.WNYC_ETAG_API,
     wnycStaticURL: process.env.WNYC_STATIC_URL,
     wnycURL: process.env.WNYC_URL,
+    platformEventsAPI: process.env.PLATFORM_EVENTS_SERVICE,
     wnycDonateURL: 'https://pledge3.wnyc.org/donate/main/onestep/?utm_source=wnyc&utm_medium=wnyc-86x27&utm_content=wnyc-header-beta&utm_campaign=pledge',
     wnycSvgURL: '/media/svg/',
     // put beta host at the root so it can be overridden by Django
@@ -194,6 +196,7 @@ module.exports = function(environment) {
     ENV.wnycURL = '//example.com';
     ENV.wnycBetaURL = 'http://example.com';
     ENV.wnycAuthAPI = 'http://example.com';
+    ENV.platformEventsAPI = 'http://example.com';
   }
 
   if (environment === 'production') {

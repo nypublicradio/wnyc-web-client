@@ -23,8 +23,7 @@ moduleFor('service:audio', 'Unit | Service | audio', {
 
   beforeEach() {
     const sessionStub = Ember.Service.extend({
-      data: {}, // we only really need the data thing
-      syncBrowserId(cb) { cb('secrets'); },
+      data: {browserId: 'secrets'}, // we only really need the data thing
       authorize: function() {},
     });
     const metricsStub = Ember.Service.extend({
@@ -106,6 +105,7 @@ test('can switch from on demand to stream and vice versa', function(assert) {
       });
     });
   });
+  return wait();
 });
 
 test('playing a story with a list of urls plays them in order', function(assert) {
@@ -359,14 +359,19 @@ test('can play a segmented story all the way through more than once', function(a
   return wait();
 });
 
-test('service records a listen when a story is played', function(assert) {
+test('service passes correct attrs to data pipeline to report an on_demand listen action', function(assert) {
 
   let done = assert.async();
   let audio = DummyConnection.create({
     url: '/audio.mp3',
     duration: 30 * 60 * 1000
   });
+  let audio2 = DummyConnection.create({
+    url: '/audio2.mp3',
+    duration: 30 * 60 * 1000
+  });
   let story = server.create('story', { audio: '/audio.mp3' });
+  let story2 = server.create('story', { audio: '/audio2.mp3' });
   let reportStub = sinon.stub();
   let service = this.subject({
       dataPipeline: {
@@ -374,46 +379,162 @@ test('service records a listen when a story is played', function(assert) {
       }
   });
   service.get('hifi.soundCache').cache(audio);
+  service.get('hifi.soundCache').cache(audio2);
   let expected = {
-    audio_type: 'ondemand',
+    audio_type: 'on_demand',
     cms_id: story.id,
+    current_audio_position: 0,
     item_type: story.itemType,
-    site_id: story.siteId,
-    current_position: 0
   };
     
   Ember.run(() => {
     service.play(story.id).then(() => {
-      let forwardPosition = {current_position: service.get('position')};
+      let forwardPosition = {current_audio_position: service.get('position')};
       service.fastForward();
-      let rewindPosition = {current_position: service.get('position')};
+      let rewindPosition = {current_audio_position: service.get('position')};
       service.rewind();
-      let setPosition = {current_position: service.get('position')};
+      let setPosition = {current_audio_position: service.get('position')};
       service.setPosition(0.5);
       service.pause();
-      let pausePosition = {current_position: service.get('position')};
+      let pausePosition = {current_audio_position: service.get('position')};
       service.play(story.id).then(() => {
-        service.finishedTrack();
-        let finishedPosition = service.get('position');
-        wait().then(() => {
-          assert.equal(reportStub.callCount, 7);
-          assert.deepEqual(reportStub.getCall(0).args, ['start', expected], 'should have received proper attrs');
-          assert.deepEqual(reportStub.getCall(1).args, ['forward_15', Object.assign(expected, forwardPosition)], 'current_position should be time when action happened, not target time');
-          assert.deepEqual(reportStub.getCall(2).args, ['back_15', Object.assign(expected, rewindPosition)], 'current_position should be time when action happened, not target time');
-          assert.deepEqual(reportStub.getCall(4).args, ['pause', Object.assign(expected, pausePosition)], 'should have received proper attrs');
-          assert.deepEqual(reportStub.getCall(5).args, ['resume', Object.assign(expected, pausePosition)], 'should have received proper attrs');
-          assert.deepEqual(reportStub.getCall(6).args, ['finish', Object.assign(expected, finishedPosition)], 'should have received proper attrs');
-          
-          // set_position is special case
-          assert.deepEqual(reportStub.getCall(3).args, ['position', Object.assign(expected, setPosition)], 'current_position should be time when action happened, not target time');
-          done();
+        service.play(story2.id).then(() => {
+          let setPosition2 = {current_audio_position: service.get('position')};
+          service.setPosition(0.75);
+          service.finishedTrack();
+          let finishedPosition = {current_audio_position: service.get('position')};
+          wait().then(() => {
+            assert.equal(reportStub.callCount, 10);
+
+            assert.deepEqual(
+              reportStub.getCall(0).args,
+              ['start', expected]
+            );
+
+            assert.deepEqual(
+              reportStub.getCall(1).args,
+              ['forward_15', Object.assign(expected, forwardPosition)],
+              'current_audio_position should be time when action happened, not target time'
+            );
+
+            assert.deepEqual(
+              reportStub.getCall(2).args,
+              ['back_15', Object.assign(expected, rewindPosition)],
+              'current_audio_position should be time when action happened, not target time'
+            );
+            
+            assert.deepEqual(
+              reportStub.getCall(3).args,
+              ['position', Object.assign(expected, setPosition)],
+              'current_audio_position should be time when action happened, not target time'
+            );
+
+            assert.deepEqual(
+              reportStub.getCall(4).args,
+              ['pause', Object.assign(expected, pausePosition)]
+            );
+
+            assert.deepEqual(
+              reportStub.getCall(5).args,
+              ['resume', Object.assign(expected, pausePosition)]
+            );
+
+            assert.deepEqual(
+              reportStub.getCall(6).args,
+              ['interrupt', Object.assign(expected, pausePosition)]
+            );
+
+            // now we're dealing with story 2
+            assert.deepEqual(
+              reportStub.getCall(7).args,
+              ['start', Object.assign(expected, {cms_id: story2.id, current_audio_position: 0})]
+            );
+            
+            assert.deepEqual(
+              reportStub.getCall(8).args,
+              ['position', Object.assign(expected, setPosition2)],
+              'current_audio_position should be time when action happened, not target time'
+            );
+
+            assert.deepEqual(
+              reportStub.getCall(9).args,
+              ['finish', Object.assign(expected, finishedPosition)]
+            );
+            
+            done();
+          });
         });
       });
     });
   });
 });
 
-test('service records a listen when a stream is played', function(assert) {
+test('service reports a resume when returning to playing a story', function(assert) {
+  let done = assert.async();
+  let audio = DummyConnection.create({
+    url: '/audio.mp3',
+    duration: 30 * 60 * 1000
+  });
+  let audio2 = DummyConnection.create({
+    url: '/audio2.mp3',
+    duration: 30 * 60 * 1000
+  });
+  let story = server.create('story', { audio: '/audio.mp3' });
+  let story2 = server.create('story', { audio: '/audio2.mp3' });
+  let reportStub = sinon.stub();
+  let service = this.subject({
+      dataPipeline: {
+        reportListenAction: reportStub
+      }
+  });
+  service.get('hifi.soundCache').cache(audio);
+  service.get('hifi.soundCache').cache(audio2);
+  let expected = {
+    audio_type: 'on_demand',
+    cms_id: story.id,
+    current_audio_position: 0,
+    item_type: story.itemType,
+  };
+    
+  Ember.run(() => {
+    service.play(story.id).then(() => {
+      let setPosition = {current_audio_position: service.get('position')};
+      service.setPosition(0.5);
+      let story1Position = {current_audio_position: service.get('position')};
+      service.play(story2.id).then(() => {
+        service.play(story.id).then(() => {
+          wait().then(() => {
+            assert.deepEqual(reportStub.getCall(0).args, ['start', expected]);
+            assert.deepEqual(
+              reportStub.getCall(1).args,
+              ['position', Object.assign(expected, setPosition)]
+            );
+            assert.deepEqual(
+              reportStub.getCall(2).args,
+              ['interrupt', Object.assign(expected, story1Position)]
+            );
+            assert.deepEqual(
+              reportStub.getCall(3).args,
+              ['start', Object.assign(expected, {cms_id: story2.id, current_audio_position: 0})]
+            );
+            assert.deepEqual(
+              reportStub.getCall(4).args,
+              ['interrupt', expected]
+            );
+            assert.deepEqual(
+              reportStub.getCall(5).args,
+              ['resume', Object.assign(expected, story1Position, {cms_id: story.id})]
+            );
+            done();
+          });
+        });
+      });
+    });
+  });
+  
+});
+
+test('service passes correct attrs to data pipeline to report a livestream listen action', function(assert) {
 
   let done = assert.async();
   let reportStub = sinon.stub();
@@ -430,18 +551,18 @@ test('service records a listen when a stream is played', function(assert) {
   let audio = DummyConnection.create({ url: stream.attrs.urls.rtsp });
   
   let expected = {
-    audio_type: 'stream',
+    audio_type: 'livestream',
     cms_id: currentStory.id,
     item_type: currentStory.itemType,
-    site_id: currentStory.siteId,
-    stream_id: stream.slug,
-    current_position: 0
+    stream_id: Number(stream.id),
+    current_audio_position: 0
   };
     
   service.get('hifi.soundCache').cache(audio);
   
   Ember.run(() => {
     service.play(stream.slug).then(() => {
+      service.position = 500;
       service.pause();
       service.play(stream.slug).then(() => {
         wait().then(() => {

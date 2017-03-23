@@ -1,7 +1,8 @@
-import Ember from 'ember';
+import Service from 'ember-service';
 import fetch from 'fetch';
 import service from 'ember-service/inject';
 import config from 'wnyc-web-client/config/environment';
+import { next } from 'ember-runloop';
 
 const LISTEN_ACTIONS = {
   START: 'start',
@@ -11,13 +12,13 @@ const LISTEN_ACTIONS = {
   BACK_15: 'skip_15_back',
   CLOSE: 'window_close',
   FINISH: 'finish',
-  POSITION: 'set_position'
+  POSITION: 'set_position',
+  INTERRUPT: 'interrupt'
 };
 
-export default Ember.Service.extend({
-  host:             config.wnycAPI,
-  itemViewPath:     'analytics/v1/events/viewed',
-  listenActionPath: 'analytics/v1/events/listened',
+export default Service.extend({
+  itemViewPath:     'v1/events/viewed',
+  listenActionPath: 'v1/events/listened',
   currentReferrer:  null,
 
   session:      service(),
@@ -28,16 +29,14 @@ export default Ember.Service.extend({
   },
 
   reportItemView(incoming = {}) {
-    let data = Object.assign({
-      browser_id: this.get('session.data.browserId'),
-      client: config.clientSlug,
-      referrer: this.get('currentReferrer'),
-      url: location.toString()
-    }, incoming);
+    next(() => {
+      let data = this._generateData(incoming);
+      this._send(data, this.itemViewPath);
 
-    this._send(data, this.itemViewPath);
-
-    this._legacySend(`api/most/view/managed_item/${data.cms_id}/`);
+      if (data.cms_id) {
+        this._legacySend(`api/most/view/managed_item/${data.cms_id}/`);
+      }
+    });
   },
 
   reportListenAction(type, incoming = {}) {
@@ -84,7 +83,7 @@ export default Ember.Service.extend({
     this.get('session').authorize('authorizer:nypr', (header, value) => {
       fetchOptions.headers[header] = value;
     });
-    fetch(`${config.wnycAPI}/${path}`, fetchOptions);
+    fetch(`${config.platformEventsAPI}/${path}`, fetchOptions);
   },
 
   _legacySend(path) {
@@ -105,12 +104,18 @@ export default Ember.Service.extend({
   },
 
   _generateData(incoming, action) {
-    return Object.assign({
+    let data = Object.assign({
       action,
       browser_id: this.get('session.data.browserId'),
       client: config.clientSlug,
       referrer: this.get('currentReferrer'),
+      external_referrer: document.referrer,
       url: location.toString(),
+      site_id: config.siteId
     }, incoming);
+    if (!action) {
+      delete data.action;
+    }
+    return data;
   },
 });

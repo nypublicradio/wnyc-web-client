@@ -115,7 +115,7 @@ test('metrics properly reports story attrs', function(assert) {
   assert.expect(2);
   server.create('django-page', {id, slug: story.slug});
 
-  server.post(`${config.wnycAPI}/analytics/v1/events/viewed`, (schema, {requestBody}) => {
+  server.post(`${config.platformEventsAPI}/v1/events/viewed`, (schema, {requestBody}) => {
     let {
       cms_id,
       item_type,
@@ -132,7 +132,7 @@ test('metrics properly reports story attrs', function(assert) {
       client: 'wnyc_web',
       referrer: location.toString(),
       url: location.toString(),
-      site_id: story.siteId
+      site_id: config.siteId
     };
     assert.deepEqual({cms_id, item_type, browser_id, client, referrer, url, site_id}, testObj, 'params match up');
   });

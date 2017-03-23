@@ -9,10 +9,12 @@ export default SessionService.extend({
     let legacyId;
     try {
       legacyId = window.localStorage.getItem('browserId');
-      // some clients save their browserId with quotes
-      legacyId = legacyId.replace(/"/g, '');
-      // TODO: when other clients update to ESA, we can get rid of this key
-      window.localStorage.setItem('browserId', legacyId);
+      if (legacyId) {
+        // some clients save their browserId with quotes
+        legacyId = legacyId.replace(/"/g, '');
+        // TODO: when other clients update to ESA, we can get rid of this key
+        window.localStorage.setItem('browserId', legacyId);
+      }
     } catch(e) {
       if (e.name === "SecurityError") {
         console.warn("Cookies are disabled. No local settings allowed.");
