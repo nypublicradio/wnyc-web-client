@@ -25,7 +25,7 @@ export default Ember.Component.extend({
   }),
 
   preferredStream: computed('session.data.user-prefs-active-stream.slug', function(){
-    const slug = get(this, 'session.data.user-prefs-active-stream.slug') || 'wnyc-fm939';
+    const slug = get(this, 'session.data.user-prefs-active-stream.slug') || 'wqxr';
     return get(this, 'store').peekRecord('stream', slug);
   }),
 
