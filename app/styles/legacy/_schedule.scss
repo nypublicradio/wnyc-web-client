@@ -26,12 +26,15 @@
       font-weight: 600;
     }
   }
-  
+  ul.schedule-tabs li.ui-tabs-selected a {
+    background-color: $wqxrblue;
+  }
+
   ul.schedule-tabs li:not(.ui-tabs-selected) a {
     color: $lightgray !important;
     
     &:hover {
-      color: $red !important;
+      color: $wqxrblue !important;
     }
   }
 }
