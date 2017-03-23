@@ -48,13 +48,17 @@ export default DS.Model.extend({
       }
     }
   }),
+  tease: DS.attr('string'),
+  teaseForDjangoPage: computed('tease', function() {
+    let text = this.getWithDefault('tease', '').replace(/\\x3C\/script>/g, '</script>');
+    return this.store.createRecord('django-page', { text });
+  }),
   donateChunk: DS.attr(),
   headerDonateChunk: DS.attr('string'),
 
   linkroll: DS.attr(),
   bgColor: DS.attr('string'),
   description: DS.attr('string'),
-  tease: DS.attr('string'),
   marqueeImage: DS.attr(),
   podcastLinks: DS.attr(),
   rssFeed: DS.attr('string'),
