@@ -35,11 +35,15 @@ $wnyc-player-link-color       : #77A6DE;
     }
   }
 }
+.nypr-player-track-info {
+  line-height: 1.5;
+}
 
 .nypr-player-stream-info {
   display: block;
   font-size: 12px;
   font-weight: 600;
+  line-height: 1.5;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -48,7 +52,7 @@ $wnyc-player-link-color       : #77A6DE;
 
   a {
     font-weight: 700;
-    margin-right: 5px;
+    margin-right: 10px;
     color: $wnyc-player-link-color;
 
     &:hover {
