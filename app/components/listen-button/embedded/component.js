@@ -20,6 +20,7 @@ export default ListenButton.extend({
   duration:     wnycEmbeddedAttr(),
   playContext:  wnycEmbeddedAttr(),
   type:         wnycEmbeddedAttr(),
+  content:      wnycEmbeddedAttr(),
 
   state: computed('currentAudio', 'playState', 'itemPK', function() {
     if (this.get('currentAudio') === this.get('itemPK')) {
@@ -29,5 +30,9 @@ export default ListenButton.extend({
 
   layout: hbs`
     {{listen-button.ui type=type}}
-    {{#if (eq type 'blue-boss')}}Listen{{if duration}} <span class="text--small dimmed">{{duration}}</span>{{/if}}{{/if}}`
+    {{#unless content}}
+    {{#if (eq type 'blue-boss')}}Listen{{#if duration}} <span class="text--small dimmed">{{duration}}</span>{{/if}}{{/if}}
+    {{else}}
+    {{content}}
+    {{/unless}}`
 });
