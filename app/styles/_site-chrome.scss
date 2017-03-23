@@ -29,7 +29,7 @@
   @include mq($large-and-up) {
     background: white;
     padding-top: 0;
-    height: 101px;
+    height: 83px;
   }
 
   .profile & {
@@ -125,8 +125,7 @@
   h1 {
     a,
     a:hover {
-      //border: 1px dotted rgba(0, 0, 0, 0);
-      padding: 38px 17px 36px 19px;
+      padding: 29px 17px 29px 19px;
     }
 
     a:focus {
