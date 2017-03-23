@@ -1,0 +1,130 @@
+@mixin wqxr-title {
+  font-family: 'Lato', 'Open Sans', sans-serif;
+  font-weight: 700;
+  text-transform: none;
+}
+
+.django-content {
+
+  // headers
+  .page-titlegroup {
+    border: 0;
+    h2 {
+      @include wqxr-title;
+      font-size: 32px;
+    }
+  }
+
+  // articles
+  .article-description {
+    h1 {
+      @include wqxr-title;
+      font-size: 32px;
+      margin-bottom: 40px;
+    }
+
+    line-height: 1.7;
+    p {
+      margin-bottom: 1.5rem;
+    }
+
+    // sub headers
+    p > strong, h3 {
+      @include wqxr-title;
+      font-size: 24px;
+    }
+  }
+
+  // links
+  a {
+    text-decoration: none;
+    border-bottom: 1px solid rgba(#128cf4, 0);
+    transition: border-color 250ms, color 250ms;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      border-bottom-color: #128cf4;
+    }
+  }
+
+  // image zoom links
+  .enlarge_div a {
+    &:hover,
+    &:focus {
+      border-bottom: 1px solid rgba(#128cf4, 0);
+    }
+  }
+
+  // story pages
+
+
+
+  // playlists
+  .schedule-playlists {
+    .page-titlegroup h2 {
+      @include wqxr-title;
+      font-size: 32px;
+      color: #333;
+
+      .playlists {
+        color: #333;
+      }
+    }
+  }
+
+  // hosts page
+  .wqxr_hosts {
+    .page-titlegroup h2 {
+      @include wqxr-title;
+      font-size: 32px;
+    }
+
+    .host-show-description {
+      margin-bottom: 80px;
+
+      line-height: 1.7;
+
+      h3 {
+        @include wqxr-title;
+        font-size: 24px;
+        a {
+          border-bottom: 1px solid rgba(#128cf4, 0);
+          transition: border-color 250ms, color 250ms;
+
+          &:hover,
+          &:focus {
+            border-bottom: 1px solid rgba(#128cf4, 0);
+            color: #128cf4;
+          }
+        }
+      }
+    }
+  }
+
+  // host page
+  .person_detail {
+    // twitter button
+    iframe {
+      margin-bottom: 15px;
+    }
+    .page-titlegroup {
+      border: 0;
+    }
+    .image-caption {
+      font-size: 12px;
+    }
+    .appearances h2.title a {
+      @include wqxr-title;
+      font-size: 24px;
+    }
+    .article-head, .tease {
+      line-height: 1.7;
+    }
+  }
+
+  // sideblock
+  .bigbox_ad {
+    margin-bottom: 40px;
+  }
+}
