@@ -128,6 +128,27 @@ test('.l-constrained is not added to responsive pages', function(assert) {
   });
 });
 
+test('.l-constrained is added to the home page', function(assert) {
+  let home = server.create('django-page', {
+    id: '/',
+    text: `
+    <div>
+      <div>
+    this is a regular template
+      </div>
+    </div>
+    `
+  });
+
+  djangoPage
+    .bootstrap(home)
+    .visit(home);
+
+  andThen(function() {
+    assert.equal(find('.django-content').parent('.l-constrained').length, 1, 'should have an l-constrained class');
+  });
+});
+
 test('.l-constrained is added to regular pages', function(assert) {
   let regularPage = server.create('django-page', {
     id: 'fake/',
