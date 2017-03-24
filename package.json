@@ -101,6 +101,7 @@
     "nypr-ads": "nypublicradio/nypr-ads",
     "nypr-player": "nypublicradio/nypr-player",
     "nypr-stream-carousel": "nypublicradio/nypr-stream-carousel",
+    "nypr-ads": "github:nypublicradio/nypr-ads",
     "nypr-ui": "nypublicradio/nypr-ui#marine/wqxr",
     "torii": "0.8.1"
   },
