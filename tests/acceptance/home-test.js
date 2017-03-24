@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { test, skip } from 'qunit';
 import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
 
 moduleForAcceptance('Acceptance | home', {
@@ -26,7 +26,7 @@ test('visiting /', function(assert) {
   });
 });
 
-test('using stream banner', function(assert) {
+skip('using stream banner', function(assert) {
   setBreakpoint('mediumAndUp');
   visit('/');
   selectChoose('.stream-banner .ember-basic-dropdown', '.ember-power-select-option:eq(3)');
