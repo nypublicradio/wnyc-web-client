@@ -15,10 +15,10 @@ export default Component.extend(BetaActionsMixin, {
   defaultStream:  {slug: 'wqxr', name: 'WQXR New York'},
   preferredStream: or('session.data.user-prefs-active-stream', 'defaultStream'),
   socialIcons: [
-    {url: 'http://www.twitter.com/wnyc', icon: 'twitter'},
-    {url: 'http://www.facebook.com/wnyc', icon: 'facebook'},
-    {url: 'https://www.instagram.com/wnyc', icon: 'instagram'},
-    {url: 'http://wnyc.tumblr.com/', icon: 'tumblr'},
+    {url: 'http://www.twitter.com/WQXR', icon: 'twitter'},
+    {url: 'http://www.facebook.com/WQXRClassical', icon: 'facebook'},
+    {url: 'https://www.instagram.com/wqxr_classical/', icon: 'instagram'},
+    {url: 'http://www.youtube.com/user/WQXRClassical', icon: 'youtube'},
   ],
 
   click: function({target}){
