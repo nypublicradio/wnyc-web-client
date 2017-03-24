@@ -438,7 +438,7 @@
 
 	&:hover,
   &:focus {
-	    border-bottom-color: white;
+	    border-bottom-color: white !important;
 	}
     }
 }

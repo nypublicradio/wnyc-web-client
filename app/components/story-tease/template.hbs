@@ -29,7 +29,7 @@
 
   <div class="flag-body {{if isSmallAndUp 'flag-body--rightpad'}}">
     {{#if (and item.headers.links showParent)}}
-      <div class="text text--small nudge-mini">
+      <div class="story-parent text text--small nudge-mini">
         <span class="text-divide">
           {{#each item.headers.links as |link|}}
             <a class="{{if isFancyFeatured 'link--white' 'link--dark'}}" href="{{link.url}}">{{{link.title}}}</a>

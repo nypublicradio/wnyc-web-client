@@ -39,8 +39,8 @@
     }
   }
 
-  // links
-  a:not(.btn) {
+  // links get dynamic underline, except where they don't
+  a:not(.btn):not(.flag-image):not(.panel-link):not(.fa-hover-link) {
     text-decoration: none;
     border-bottom: 1px solid rgba(#128cf4, 0);
     transition: border-color 250ms, color 250ms;
