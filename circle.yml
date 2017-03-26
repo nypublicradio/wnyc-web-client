@@ -19,6 +19,7 @@ dependencies:
     - npm i nypr-ui
     - npm i nypr-player
     - npm i nypr-account-settings
+    - npm i nypr-ads
   cache_directories:
     - /opt/circleci/nodejs/v6.9.2/bin/
     - /opt/circleci/nodejs/v6.9.2/lib/node_modules
