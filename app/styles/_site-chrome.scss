@@ -47,7 +47,7 @@
   ));
   @include mq($small-only) {
     @include flexbox((
-      justify-content: space-between,
+      justify-content: flex-end,
       flex-wrap: wrap
     ));
   }
