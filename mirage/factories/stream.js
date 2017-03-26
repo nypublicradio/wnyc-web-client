@@ -8,7 +8,7 @@ export default Factory.extend({
   slug: (i) => {
     switch (i) {
       case 0:
-        return "wnyc-fm939";
+        return "wqxr";
       case 1:
         return "q2";
       case 2:
@@ -18,7 +18,7 @@ export default Factory.extend({
       case 4:
         return "wnyc-am820";
       case 5:
-        return "wqxr";
+        return "wnyc-fm939";
       case 6:
         return "wqxr-special";
       default:
