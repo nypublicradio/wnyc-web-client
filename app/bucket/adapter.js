@@ -2,12 +2,13 @@ import ApplicationAdapter from 'wqxr-web-client/adapters/application';
 import config from 'wqxr-web-client/config/environment';
 
 export default ApplicationAdapter.extend({
-  pathForType: 'bucket',
   buildURL(modelName, id, snapshot, requestType, query) {
+    let url = this._super(...arguments);
     if (requestType !== 'findRecord') {
-      return this._super(...arguments);
+      return url;
     }
-    let url = `${this.host}/${this.namespace}/${modelName}/${id}/?site=${config.siteSlug}`;
+
+    url += `/?site=${config.siteSlug}`;
     if (query && Object.keys(query).length) {
       let qp = Object.keys(query).map(k => `${k}=${query[k]}`);
       url += qp.join('&');

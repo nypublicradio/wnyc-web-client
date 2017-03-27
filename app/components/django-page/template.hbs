@@ -10,7 +10,7 @@
         classNames=ec.componentName
         currentAudio=(if (eq ec.componentName 'listen-button.embedded') audio.currentId)
         playState=(if (eq ec.componentName 'listen-button.embedded') audio.playState)
-        search=(if (eq ec.componentName 'embedded.header-search-field') (action goToSearch))
+        audio=(if (eq ec.componentName 'listen-button.embedded') audio)
         embeddedAttrs=ec.args}}
     {{/ember-wormhole}}
   {{/each}}
