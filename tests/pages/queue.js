@@ -8,7 +8,7 @@ let {
 } = PageObject;
 
 export default PageObject.create({
-  visit: visitable('/?modal=queue-history'),
+  visit: visitable('/fake?modal=queue-history'),
   queueIsVisible: isVisible('.player-queue'),
   stories: collection({
     itemScope: '.sortable-item',

@@ -49,6 +49,13 @@ export default Model.extend({
     return shareMetadata(this);
   }),
   
+  currentComposer:      computed('currentPlaylistItem', function() {
+    return this.get('currentPlaylistItem.catalogEntry.composer');
+  }),
+  currentPiece:         computed('currentPlaylistItem', function() {
+    return this.get('currentPlaylistItem.catalogEntry.title');
+  }),
+  
 
   forListenAction(data) {
     return this.get('currentStory').then(s => {

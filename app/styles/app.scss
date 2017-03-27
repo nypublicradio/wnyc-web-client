@@ -3,7 +3,7 @@
 
 // hide everything not ember so we can control the UI over the alien DOM
 body:not(.simplified_wrapper):not(.container_stripped) {
-   > :not(.ember-view):not(#qunit):not(#qunit-fixture):not(#ember-testing-container):not(#modal-overlays) {
+   > :not(.ember-view):not(#qunit):not(#qunit-fixture):not(#ember-testing-container):not(#modal-overlays):not(#ember-basic-dropdown-wormhole) {
     display: none;
   }
 }
@@ -26,6 +26,7 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 @import 'utilities';
 
 @import 'nypr-account-settings';
+@import 'nypr-stream-carousel';
 
 @import 'box';
 @import 'text';
@@ -67,7 +68,6 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 @import 'clearhistory';
 @import 'popupmenu';
 @import 'sharebutton';
-@import 'streambanner';
 @import 'simple-callout';
 @import 'flash';
 
@@ -80,8 +80,6 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 @import 'alt-channel';
 
 // LEGACY CODE
-@import 'legacy/home-compat';
-@import 'legacy/stream-widget';
 @import 'legacy/weather';
 @import 'legacy/search';
 @import 'legacy/screen';
