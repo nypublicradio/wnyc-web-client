@@ -1,7 +1,9 @@
 .l-flexcontext {
-  @include display-flex;
+  @include flexbox((
+    display: flex,
+    flex-direction: column
+  ));
   height: 100%;
-  @include flex-direction(column);
 }
 
 .l-modal--shadow {
@@ -742,13 +744,6 @@
         padding-right: 0;
         padding-left: 40px;
     }
-
-    // .flag--luxe & {
-    //     padding-right: 40px;
-    //     @include mq($small-only) {
-    //       padding-right: 0;
-    //     }
-    // }
 
     .flag--med & {
       padding-right: 35px;
