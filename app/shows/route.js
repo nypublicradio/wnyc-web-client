@@ -1,7 +1,7 @@
 import Route from 'ember-route';
+import service from 'ember-service/inject';
 import RSVP from 'rsvp';
 import ENV from 'wqxr-web-client/config/environment';
-import service from 'ember-service/inject';
 
 export default Route.extend({
   titleToken: 'All Shows, Podcasts and Programs',

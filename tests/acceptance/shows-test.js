@@ -4,7 +4,7 @@ import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-accept
 moduleForAcceptance('Acceptance | shows', {
   beforeEach() {
     server.create('stream');
-  },
+  }
 });
 
 

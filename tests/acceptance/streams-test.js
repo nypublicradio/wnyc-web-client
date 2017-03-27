@@ -11,7 +11,7 @@ test('visiting /streams', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/streams');
-    assert.equal(find('.stream-list li').length, 7, 'should display a list of streams');
+    assert.equal(find('.stream-list li').length, 6, 'should display a list of streams');
   });
 });
 
