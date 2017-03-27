@@ -75,7 +75,7 @@
 
     border-top: 1px solid #eaeaea;
 
-    .streamitem-imagewrap {
+    .streamitem-imagelink {
       display: none;
       @include mq($medium-and-up) {
         display: inline-block;
