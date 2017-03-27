@@ -169,6 +169,7 @@
     /* links */
     p a {
       @extend .event-link;
+      color: $blue;
     }
 
     p a.more:after {
