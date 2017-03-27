@@ -4,10 +4,12 @@
   <main class="l-col2of3">
     {{streamlist-header}}
     {{stream-list
+      audio=audio
       streams=model.wqxrStreams
       currentAudio=audio.currentId
       playState=audio.playState}}
     {{stream-list
+      audio=audio
       streams=model.wnycStreams
       currentAudio=audio.currentId
       playState=audio.playState}}

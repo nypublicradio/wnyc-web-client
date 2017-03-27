@@ -17,6 +17,7 @@ test('visiting /events', function(assert) {
 });
 
 test('clicking on /events', function(assert) {
+  server.create('bucket', {slug: 'wqxr-home'});
   server.create('django-page', {id: '/'});
   server.create('django-page', {id: `events`});
   
@@ -33,14 +34,15 @@ test('clicking on /events', function(assert) {
 
 test('transitioning to a specific event', function(assert) {
   server.create('django-page', {
-    id: '/',
+    id: 'fake/',
     testMarkup: `
     <a href="/events/wqxr-media-sponsorship/2016/jan/29/ecstatic-music-festival-2016/" id="foo">foo</a>
     `
   });
   server.create('django-page', {id: `events/wqxr-media-sponsorship/2016/jan/29/ecstatic-music-festival-2016/`});
+  server.create('bucket', {slug: 'wqxr-home'});
   
-  visit('/');
+  visit('/fake');
   click('#foo');
   
   andThen(function() {

@@ -9,7 +9,7 @@ let {
 } = PageObject;
 
 export default PageObject.create({
-  visit:             visitable('/?modal=queue-history'),
+  visit:             visitable('/fake?modal=queue-history'),
   clickHistoryTab:   clickable('.tabbedlist-button:contains(History)'),
   clickClearHistory: clickable('.clearhistory-button:contains(Clear)'),
   clickYes:          clickable('.clearhistory-button:contains(Yes)'),

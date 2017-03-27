@@ -1,9 +1,30 @@
-{{#django-page page=model.page}}
+<main class="l-container l-container--touch-full">
+  <!-- <section>here goes the technical chunk</section> -->
 
-  {{#if media.isSmallOnly}}
-    {{#ember-wormhole to='stream-banner'}}
-      {{stream-banner stream=model.featuredStream}}
-    {{/ember-wormhole}}
+  {{#if media.isMediumAndUp}}
+    {{#stream-banner audio=audio streams=streams as |currentStream|}}
+      <h3>{{currentStream.currentPiece}}</h3>
+      {{link-to 'Music playlist' 'playlist' currentStream.slug class='text--small text--white'}}
+    {{/stream-banner}}
+  {{else}}
+    {{#stream-carousel streams=streams background=carouselBg as |stream|}}
+      {{#listen-button
+        audio=audio
+        type='blue-boss'
+        state=(if (eq stream.slug audio.currentAudio.id) audio.playState)
+        itemPK=stream.slug
+        itemTitle=stream.name}}
+        Listen Live
+      {{/listen-button}}
+      {{#link-to 'playlist' stream.slug (query-params scheduleStation=stream.slug) class="text--small text--white"}}
+        Music playlist &raquo;
+      {{/link-to}}
+    {{/stream-carousel}}
   {{/if}}
 
-{{/django-page}}
+  <section class="home__stories">
+    {{nypr-brick-layout audio=audio items=model.featuredItems}}
+    {{nypr-brick-grid audio=audio items=model.otherItems}}
+  </section>
+
+</main>
