@@ -13,20 +13,13 @@
 </section>
 {{/if}}
 
-{{#if media.isSmallOnly}}
-  {{dfp-ad
-    slotClassNames="is-collapsed l-constrained aligncenter leaderboard"
-    slot="/6483581/leaderboard/wnyc_leaderboard"
-    target="leaderboard"
-    sizes=(array (array 300 50))}}
-{{else}}
-  {{dfp-ad
-    slotClassNames="is-collapsed l-constrained aligncenter leaderboard"
-    slot="/6483581/leaderboard/wnyc_leaderboard"
-    target="leaderboard"
-    mapping=(array (array 758 (array 728 90)) (array 1203 (array 970 415)))
-    sizes=(array (array 970 415) (array 728 90))}}
-{{/if}}
+
+{{dfp-ad
+  slotClassNames="is-collapsed l-constrained aligncenter"
+  slot="/6483581/leaderboard/wnyc_leaderboard"
+  target="leaderboard"
+  mapping=(array (array 0 (array 300 50)) (array 758 (array 728 90)) (array 1203 (array 970 415)))
+  sizes=(array (array 728 90) (array 970 415) (array 300 50))}}
 
 <div class="l-constrained l-constrained--mq-med">
 
