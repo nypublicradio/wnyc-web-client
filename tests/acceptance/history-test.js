@@ -14,13 +14,13 @@ test('visiting /?modal=queue-history', function(assert) {
   assert.expect(2);
   velocity.mock = true; //skip animations
 
-  server.create('djangoPage', {id:'/'});
+  server.create('djangoPage', {id:'fake/'});
 
   historyPage.visit();
   historyPage.clickHistoryTab();
 
   andThen(function() {
-    assert.equal(currentURL(), '/?modal=queue-history');
+    assert.equal(currentURL(), '/fake?modal=queue-history');
     assert.ok(historyPage.historyIsVisible, 'History should exist');
   });
 });
@@ -29,7 +29,7 @@ test('History initial state should be empty', function(assert) {
   assert.expect(3);
   velocity.mock = true;
 
-  server.create('djangoPage', {id:'/'});
+  server.create('djangoPage', {id:'fake/'});
 
   historyPage.visit();
   historyPage.clickHistoryTab();
@@ -54,7 +54,7 @@ test('History should show items', function(assert) {
   });
 
   andThen(function() {
-    server.create('djangoPage', {id:'/'});
+    server.create('djangoPage', {id:'fake/'});
     historyPage.visit();
     historyPage.clickHistoryTab();
   });
@@ -81,7 +81,7 @@ test('History clear all widget', function(assert) {
   });
 
   andThen(function() {
-    server.create('djangoPage', {id:'/'});
+    server.create('djangoPage', {id:'fake/'});
     historyPage.visit();
     historyPage.clickHistoryTab();
     historyPage.clickClearHistory();
@@ -119,7 +119,7 @@ test('History delete button', function(assert) {
   });
 
   andThen(function() {
-    server.create('djangoPage', {id:'/'});
+    server.create('djangoPage', {id:'fake/'});
     historyPage.visit();
     historyPage.clickHistoryTab();
   });

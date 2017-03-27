@@ -2,7 +2,20 @@ import { Factory, faker } from 'ember-cli-mirage';
 
 export default Factory.extend({
   name: faker.name.firstName,
-  current_playlist_item: null,
+  current_playlist_item: function() {
+    return {
+      catalog_entry: {
+        composer: {
+          url: faker.internet.url(),
+          pk: faker.random.number(),
+          slug: faker.lorem.words(2).join('-'),
+          name: faker.name.findName()
+        },
+        title: faker.lorem.words(3).join(' '),
+        soloists: []
+      },
+    };
+  },
   current_show: null,
   future: [],
   has_playlists: false,

@@ -1,36 +1,24 @@
-import Ember from 'ember';
+import Route from 'ember-route';
 import service from 'ember-service/inject';
-import PlayParamMixin from 'wqxr-web-client/mixins/play-param';
-import { beforeTeardown } from 'wqxr-web-client/lib/compat-hooks';
-import rsvp from 'rsvp';
-const { hash } = rsvp;
-const { get } = Ember;
 
-export default Ember.Route.extend(PlayParamMixin, {
+const carouselBg = 'https://images.unsplash.com/photo-1481462585914-9f695507135e?dpr=2&auto=format&fit=crop&w=1500&h=1500&q=80&cs=tinysrgb';
+
+export default Route.extend({
+  audio:      service(),
   classNames: ['home'],
-  metrics: service(),
-  title: 'WQXR | New York\'s Classical Music Radio Station',
 
   model() {
-    let page = this.store.findRecord('django-page', '/');
-    let featuredStream = this.store.findRecord('stream', 'wqxr');
-    return hash({page, featuredStream});
-  },
-  afterModel({ page }) {
-    let metrics = get(this, 'metrics');
-    let path = document.location.pathname; // e.g. '/shows/bl/'
-    let title = (get(page, 'title') || '').trim();
-    metrics.trackPage('NprAnalytics', {
-      page: path,
-      title
+    return this.get('store').findRecord('bucket', 'wqxr-home').then(bucket => {
+      return {
+        featuredItems: bucket.get('bucketItems').slice(0, 8),
+        otherItems: bucket.get('bucketItems').slice(8)
+      };
     });
   },
-
-  actions: {
-    willTransition() {
-      this._super(...arguments);
-      beforeTeardown();
-      return true;
-    }
+  setupController(controller) {
+    this._super(...arguments);
+    controller.set('audio', this.get('audio'));
+    controller.set('streams', this.store.findAll('stream', {reload: true}));
+    controller.set('carouselBg', carouselBg);
   }
 });

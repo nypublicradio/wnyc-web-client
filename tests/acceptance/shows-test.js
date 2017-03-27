@@ -51,7 +51,6 @@ test('visiting /shows', function(assert) {
 
 test('searching /shows', function(assert) {
   server.createList('show', 10);
-  server.create('bucket', {slug: 'wnyc-shows-featured'});
   visit('/shows');
 
   andThen(function() {
@@ -63,6 +62,7 @@ test('searching /shows', function(assert) {
     });
   });
 
+  server.create('bucket', {slug: 'wqxr-home'});
   server.create('djangoPage', {id:'/'});
   visit('/');
   visit('/shows');

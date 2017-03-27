@@ -33,6 +33,7 @@
   {{#g.right}}
     {{#if media.isMediumAndUp}}
       {{#listen-button
+        audio=audio
         type='gray-minion'
         state=(if (eq stream.slug currentAudio) playState)
         itemPK=stream.slug
@@ -41,6 +42,7 @@
       {{/listen-button}}
     {{else}}
       {{listen-button
+        audio=audio
         type='blue-hollow'
         state=(if (eq stream.slug currentAudio) playState)
         itemPK=stream.slug

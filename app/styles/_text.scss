@@ -32,10 +32,14 @@
 .h1--extrabold {
   font-weight: 800;
 }
+
+@mixin h2 {
+  @include fontsize($base-font*1.5); /* 24px */
+  font-weight: 600;
+  line-height: 2.125rem;
+}
 .h2 {
-    @include fontsize($base-font*1.5); /* 24px */
-    font-weight: 600;
-    line-height: 2.125rem;
+  @include h2;
 }
 .h2--mq-small {
     @include transition(font-size $transition-timing ease, line-height $transition-timing ease);
@@ -258,41 +262,16 @@
     }
 }
 
-/**
- * Normal Weight Text:
- * `.text--normal`
- * A modifer to make normal weight text
- *
- *      @example
- *      .text.text--normal.h2
- *        p Sized h2 but weighted normal
- */
+/* Weights */
+
 .text--normal {
   font-weight: 400;
 }
 
-/**
- * Semi-Heavy Text:
- * `.text--semi`
- * A modifier to make semi-bold text
- *
- *      @example
- *      .text.text--semi
- *          p Again, with emphasis.
- */
 .text--semi {
     font-weight: 600;
 }
 
-/**
- * Heavy Text:
- * `.text--heavy`
- * A modifier to make bold text
- *
- *      @example
- *      .text.text--heavy
- *          p Again, with a heavy emphasis.
- */
 .text--heavy {
     font-weight: 700;
 }
@@ -301,43 +280,23 @@
   font-weight: 200;
 }
 
-/**
- * Medium Text:
- * `.text--medium`
- * A modifier to make text 14px
- *
- *      @example
- *      .text.text--medium
- *          p This is not so important.
- */
+/* Sizes */
+
+@mixin text--largest {
+  @include fontsize(50);
+  line-height: 3.5rem;
+}
+
 .text--medium {
     @include fontsize(14);
     line-height: 1.5rem;
 }
 
-/**
- * Small Text:
- * `.text--small`
- * A modifier to make text 12px
- *
- *      @example
- *      .text.text--small
- *          p This is less important.
- */
 .text--small {
     @include fontsize(12);
     line-height: 1.2rem;
 }
 
-/**
- * Smaller Text:
- * `.text--smaller`
- * A modifier to make text 10px
- *
- *      @example
- *      .text.text--smaller
- *          p This is even less important.
- */
 .text--smaller {
     @include fontsize(10);
     line-height: 0.8rem;
@@ -348,62 +307,22 @@
  * Colors are great. Here's how you change text color.
  */
 
-/**
- * Black:
- * `.text--black`
- *
- *    @example
- *    .text.text--black
- *    p Some black text
- */
 .text--black {
   color: black;
 }
 
-/**
- * Gray:
- * `.text--gray`
- *
- *      @example
- *      .text.text--gray
- *          P Probably not important text
- */
 .text--gray {
     color: $gray;
 }
 
-/**
- * Lightgray:
- * `.text--lightgray`
- *
- *      @example
- *      .text.text--lightgray
- *          P Probably not important text
- */
 .text--lightgray {
     color: $lightgray;
 }
 
-/**
- * Lightestgray:
- * `.text--lightergray`
- *
- *      @example
- *      .text.text--lightergray
- *          P Probably not important text
- */
 .text--lightergray {
     color: $lightergray;
 }
 
-/**
- * Lightestgray:
- * `.text--lightestgray`
- *
- *      @example
- *      .text.text--lightestgray
- *          P Probably not important text
- */
 .text--lightestgray {
     color: $lightestgray;
 }
