@@ -1,81 +1,63 @@
 <div class="l-full" style="padding-top: 24px;">
 
   <div class="l-constrained" style="margin-bottom: 34px;">
-    <div class="bg-gray4 loading-gradient" style="height: 50px;"></div>
+    <div class="bg-gray4 loading-gradient" style="height: 60px;"></div>
   </div>
 
   <div class="l-constrained">
     <div class="l-col2of3">
-      <div class="bg-gray1 loading-gradient" style="height:352px; margin-bottom: 44px;">
-        <div class="white-box" style="width: 50%; height: 100%; float: right;">
-          <div class="thin-line" style="height: 24px;"></div>
-          <div class="thin-line" style="height: 24px; margin-bottom: 22px;"></div>
-
-          <div class="thin-line"></div>
-          <div class="thin-line"></div>
-          <div class="thin-line" style="width: 75%;"></div>
-
-          <div class="bottom">
-            <button class="btn btn--circle bg-gray1" style="width: 36px; height: 36px; margin-right: 10px;"></button>
-            <button class="btn btn--circle bg-gray1" style="width: 36px; height: 36px;"></button>
-          </div>
+      <div class="bg-gray2 loading-gradient"
+           style="height:486px; margin-bottom: 35px; display: flex; align-items: flex-end;">
+        <div style="width:100%; padding: 15px 25px;">
+          <div class="thin-line" style="height: 50px;"></div>
+          <div class="thin-line" style="height: 50px;"></div>
         </div>
-      </div>
-
-      <div class="l-full" style="margin-bottom: 63px;">
-
-        {{#each-in (hash one='foo' two='foo') as |block|}}
-        <div class="l-col1of2">
-          <div class="vertical-card loading-gradient" style="height: 513px;">
-            <div class="bottom">
-              <div class="white-box" style="height: 244px;">
-                <div class="thin-line" style="height: 18px;"></div>
-                <div class="thin-line" style="height: 18px; margin-bottom: 19px;"></div>
-
-                <div class="thin-line"></div>
-                <div class="thin-line" style="width: 75%;"></div>
-
-                <div class="bottom">
-                  <button class="btn btn--circle bg-gray1" style="width: 36px; height: 36px; margin-right: 10px;"></button>
-                  <button class="btn btn--circle bg-gray1" style="width: 36px; height: 36px;"></button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {{/each-in}}
-
       </div>
     </div>
 
-    <div class="l-col1of3">
-      <div class="bg-gray1" style="height:600px"></div>
+    <div class="l-col1of3"
+        style="height:502px; display: flex; flex-direction: column; justify-content: space-between;">
+      <div class="bg-gray2 loading-gradient" style="height:235px; display: flex; align-items: flex-end;">
+        <div style="width:100%; padding: 10px 20px;">
+          <div class="thin-line" style="height: 25px;"></div>
+          <div class="thin-line" style="height: 25px;"></div>
+        </div>
+      </div>
+      <div class="bg-gray2 loading-gradient" style="height:235px; display: flex; align-items: flex-end;">
+        <div style="width:100%; padding: 10px 20px;">
+          <div class="thin-line" style="height: 25px;"></div>
+          <div class="thin-line" style="height: 25px;"></div>
+        </div>
+      </div>
     </div>
-
-
   </div>
 
   <div class="l-constrained">
 
-    <div class="thin-line" style="margin-bottom: 20px; width: 150px;"></div>
+    <div class="l-full" style="margin-bottom: 100px;">
 
-    {{#each-in (hash one='foo' two='foo' three='foo' four='foo' five='foo') as |block|}}
-    <div class="l-col1of5">
-      <div class="vertical-card loading-gradient" style="height: 287px;">
-        <div class="bottom">
-          <div class="white-box" style="height: 137px;">
-            <div class="thin-line" style="10px;"></div>
-            <div class="thin-line" style="height: 10px;"></div>
+      {{#each-in (hash one='foo' two='foo' three='foo') as |block|}}
+      <div class="l-col1of3">
+        <div class="vertical-card loading-gradient" style="height: 513px;">
+          <div class="bottom">
+            <div class="white-box" style="height: 244px;">
+              <div class="thin-line" style="height: 18px;"></div>
+              <div class="thin-line" style="height: 18px; margin-bottom: 19px;"></div>
 
-            <div class="bottom">
-              <button class="btn btn--circle bg-gray1" style="width: 20px; height: 20px; margin-right: 10px;"></button>
-              <button class="btn btn--circle bg-gray1" style="width: 20px; height: 20px;"></button>
+              <div class="thin-line"></div>
+              <div class="thin-line" style="width: 75%;"></div>
+
+              <div class="bottom">
+                <button class="btn btn--circle bg-gray1" style="width: 36px; height: 36px; margin-right: 10px;"></button>
+                <button class="btn btn--circle bg-gray1" style="width: 36px; height: 36px;"></button>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      {{/each-in}}
+
     </div>
-    {{/each-in}}
 
   </div>
 </div>
