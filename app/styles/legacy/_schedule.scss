@@ -159,6 +159,10 @@ ul.schedule-table {
   }
 }
 
+.schedule-table li.head div.playlist-social {
+  display: none;
+}
+
 @include mq($medium-only) {
   .schedule-playlists,
   ul.schedule-dates, 
