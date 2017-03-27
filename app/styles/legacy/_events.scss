@@ -4,9 +4,6 @@
   color: $wqxrdarkblue;
   font-weight: normal;
   font-size: 16px;
-  &:hover {
-    text-decoration: underline;
-  }
 }
 
 #events-home, .event-detail {
@@ -66,6 +63,12 @@
       margin-right: 30px;
     }
 
+    .mediumimage, .smallimage, h2 {
+      a, a:hover {
+        border-bottom: none;
+      }
+    }
+
     h2, h3{
       color: $darkergray;
     }
@@ -78,7 +81,7 @@
         line-height: 1;
         font-weight: normal;
         padding: 0;
-        color: $darkergray;
+        color: $darkergray; 
       }
     }
 
