@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 import ENV from '../config/environment';
-import get from 'ember-metal/get';
+import get, { getProperties } from 'ember-metal/get';
 import computed from 'ember-computed';
 import parseAnalyticsCode from '../utils/analytics-code-parser';
 import { shareMetadata } from 'wqxr-web-client/helpers/share-metadata';
@@ -133,5 +133,9 @@ export default Model.extend({
       site_id: this.get('siteId'),
       item_type: this.get('itemType'),
     }, data));
+  },
+  
+  forDfp() {
+    return getProperties(this.get('extendedStory'), 'tags', 'show', 'channel', 'series');
   }
 });

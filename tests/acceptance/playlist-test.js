@@ -1,23 +1,15 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
-import sinon from 'sinon';
 
-moduleForAcceptance('Acceptance | playlist', {
-  beforeEach() {
-    window.googletag = {cmd: [], apiReady: true};
-  },
-  afterEach() {
-    window.googletag = {cmd: [], apiReady: true};
-  }
-});
+moduleForAcceptance('Acceptance | playlist');
 
-test('visiting /streams/wnyc-fm939', function(assert) {
+test('visiting /streams/wqxr', function(assert) {
   server.create('stream', {
-    slug: 'wnyc-fm939', 
-    name: 'WNYC FM',
+    slug: 'wqxr', 
+    name: 'WQXR FM',
   });
   server.create('whats-on', {
-    slug: 'wnyc-fm939',
+    slug: 'wqxr',
     current_show: {
       show_title: 'Foo Show',
       title: 'Episode Foo',
@@ -26,24 +18,10 @@ test('visiting /streams/wnyc-fm939', function(assert) {
     }
   });
   
-  let refreshSpy = sinon.spy();
-
-  window.googletag.cmd = {
-    push(fn) {
-      fn();
-    }
-  };
-  window.googletag.pubads = function() {
-    return {
-      refresh: refreshSpy,
-      addEventListener() {}
-    };
-  };
-  visit('/streams/wnyc-fm939');
+  visit('/streams/wqxr');
 
   andThen(function() {
-    assert.equal(currentURL(), '/streams/wnyc-fm939');
+    assert.equal(currentURL(), '/streams/wqxr');
     assert.equal(find('a[href="http://fooshow.com"]').text().trim(), 'Episode Foo');
-    assert.ok(refreshSpy.calledOnce, 'refresh was called');
   });
 });
