@@ -42,11 +42,24 @@
 ul.schedule-dates {
   border-top: 1px solid $nearwhite;
   border-bottom: 1px solid $nearwhite;
-  padding: 10px 0 5px 0 !important;
-    
+  padding: 10px 0 10px 0 !important;
+  
+  @include flexbox((
+    display: flex,
+    flex-wrap: wrap,
+    justify-content: space-between,
+    align-items: center
+  ));  
+
+  > li {
+    @include flex((1 1 auto));
+  }
+
   li.yesterday,
   li.tomorrow {
     width: auto !important;
+    padding-left: 0;
+    padding-right: 0;
     
     a {
       font-size: 12px !important;
@@ -79,7 +92,7 @@ ul.schedule-dates {
 } 
    
 ul.schedule-table {
-  margin: 5px 0 0 0;
+  margin: 5px 0 30px 0;
   
   .event {
     border-bottom: 1px solid $nearwhite;
@@ -138,6 +151,10 @@ ul.schedule-table {
       }
     }
     
+    .event {
+      border: none;
+    }
+
     .program {
       border: none;
       padding: 0;
@@ -157,11 +174,14 @@ ul.schedule-table {
   ul.hosts {
     display: none;
   }
+
 }
 
 .schedule-table li.head div.playlist-social {
   display: none;
 }
+
+
 
 @include mq($medium-only) {
   .schedule-playlists,
