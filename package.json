@@ -71,7 +71,6 @@
     "ember-holygrail-layout": "^0.1.4",
     "ember-load-initializers": "^0.5.1",
     "ember-metrics": "0.7.0",
-    "ember-modal-dialog": "0.9.0",
     "ember-moment": "6.1.0",
     "ember-multiselect-checkboxes": "0.10.1",
     "ember-poll": "^1.0.1",
@@ -95,10 +94,10 @@
     "liquid-fire": "0.26.4",
     "loader.js": "^4.0.10",
     "morgan": "^1.6.1",
-    "nypr-player": "nypublicradio/nypr-player",
-    "nypr-ui": "nypublicradio/nypr-ui",
     "nypr-account-settings": "nypublicradio/nypr-account-settings",
     "nypr-ads": "nypublicradio/nypr-ads",
+    "nypr-player": "nypublicradio/nypr-player",
+    "nypr-ui": "nypublicradio/nypr-ui",
     "torii": "0.8.1"
   },
   "ember-addon": {
