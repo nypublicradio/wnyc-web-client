@@ -18,6 +18,7 @@
  */
 .h1 {
     @include fontsize($base-font*2); /* 32px */
+    font-family: "Lato", sans-serif;
     font-weight: 600;
     line-height: 2.6rem;
 }
