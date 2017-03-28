@@ -126,13 +126,20 @@ ul.schedule-table {
       }
     }
     
-    div.time {
+    div.time, 
+    div.time-playlist {
+      width: auto;
       color: $lightergray;
       font-weight: 600;
       letter-spacing: 1px;
+      font-size: 16px;
     }
     
     .arrow {
+      display: none;
+    }
+
+    .options {
       display: none;
     }
     
@@ -153,6 +160,10 @@ ul.schedule-table {
     
     .event {
       border: none;
+
+      .played-list .playlist-item:last-child {
+        border-bottom: none;
+      }
     }
 
     .program {

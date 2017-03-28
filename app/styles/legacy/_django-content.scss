@@ -12,6 +12,10 @@
     h2 {
       @include wqxr-title;
       font-size: 32px;
+
+      @include mq($small-only) {
+        font-size: 24px;
+      }
     }
   }
 
@@ -67,6 +71,11 @@
       font-size: 32px;
       color: #333;
 
+      @include mq($small-only) {
+        font-size: 24px;
+      }
+
+
       .playlists {
         color: #333;
       }
@@ -78,6 +87,10 @@
     .page-titlegroup h2 {
       @include wqxr-title;
       font-size: 32px;
+
+      @include mq($small-only) {
+        font-size: 24px;
+      }
     }
 
     .host-show-description {
