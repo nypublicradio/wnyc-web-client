@@ -95,10 +95,6 @@ ol.decimal {
   margin-bottom: 10px;
 }
 
-.sidebar {
-
-}
-
 .horizontal_linkroll li {
   float: left;
   margin: 0 20px 0 0;
@@ -824,6 +820,10 @@ table#show-number-archive {
 
   #home-secondary li {
     margin-right: 20px;
+  }
+
+  .sidebar {
+    float: right !important;
   }
 
 }
