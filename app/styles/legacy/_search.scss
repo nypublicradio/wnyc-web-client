@@ -20,7 +20,6 @@
     a {
       border: none;
       font-size: 12px;
-      line-height: 18px;
       padding: 2px 0;
 
       &:hover {
@@ -137,22 +136,6 @@
       text-decoration: none;
       font-size: 20px;
       color: $wqxrlink;
-      line-height: 1.5;
-    }
-    a.gs-title {
-      border-bottom: 1px solid rgba(18,140,244,0);
-      transition: border-color 250ms,color 250ms;
-      &:hover {
-        border-bottom-color: $blue;
-      }
-    }
-
-    .gs-snippet {
-      font-size: 13px;
-      line-height: 20px;
-    }
-    .gsc-url-bottom {
-      line-height: 1.5;
     }
   }
 
