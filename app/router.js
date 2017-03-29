@@ -45,6 +45,7 @@ Router.map(function() {
     this.route('event', {path: '*url_path'});
   });
   
+  this.route('videos');
   this.route('topics');
   this.route('settings');
 
