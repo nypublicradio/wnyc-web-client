@@ -4,7 +4,7 @@
 }
 
 .print-schedule a {
-	margin: -78px 5px 0 0 !important;
+	margin: -96px 5px 0 0 !important;
   color: $gray;
   font-size: 12px;
   
@@ -164,6 +164,10 @@ ul.schedule-table {
       .played-list .playlist-item:last-child {
         border-bottom: none;
       }
+
+      .played-list .playlist-item ul.playlist-actions {
+        padding-left: 0;
+      }
     }
 
     .program {
@@ -245,8 +249,11 @@ ul.schedule-table {
     width: auto !important;
     float: none !important;
   }
+
   .schedule-table li.details .playlist-item div.playlist-info {
-    width: 400px !important;
+    width: 300px !important;
+    float: left !important;
+    margin-left: 50px !important;
   }
 
   ul.schedule-dates {
@@ -274,12 +281,4 @@ ul.schedule-table {
     }
   }
   
-}
-
-@include mq($middle-narrow-only) {
-  .schedule-table li.details .playlist-item div.playlist-info {
-    width: 300px !important;
-    float: left !important;
-    margin-left: 50px !important;
-  }
 }
