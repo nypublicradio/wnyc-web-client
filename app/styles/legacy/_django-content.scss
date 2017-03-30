@@ -82,60 +82,6 @@
     }
   }
 
-  // hosts page
-  .wqxr_hosts {
-    .page-titlegroup h2 {
-      @include wqxr-title;
-      font-size: 32px;
-
-      @include mq($small-only) {
-        font-size: 24px;
-      }
-    }
-
-    .host-show-description {
-      margin-bottom: 80px;
-
-      line-height: 1.7;
-
-      h3 {
-        @include wqxr-title;
-        font-size: 24px;
-        a {
-          border-bottom: 1px solid rgba(#128cf4, 0);
-          transition: border-color 250ms, color 250ms;
-
-          &:hover,
-          &:focus {
-            border-bottom: 1px solid rgba(#128cf4, 0);
-            color: #128cf4;
-          }
-        }
-      }
-    }
-  }
-
-  // host page
-  .person_detail {
-    // twitter button
-    iframe {
-      margin-bottom: 15px;
-    }
-    .page-titlegroup {
-      border: 0;
-    }
-    .image-caption {
-      font-size: 12px;
-    }
-    .appearances h2.title a {
-      @include wqxr-title;
-      font-size: 24px;
-    }
-    .article-head, .tease {
-      line-height: 1.7;
-    }
-  }
-
   // sideblock
   .bigbox_ad {
     margin-bottom: 40px;

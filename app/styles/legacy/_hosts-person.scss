@@ -1,12 +1,26 @@
 
-/* individual host page */
+// host/person page
 .person_detail {
-  
+  // twitter button
+  iframe {
+    margin-bottom: 15px;
+  }
   .page-titlegroup {
     padding-bottom: 20px;
+    border: 0;
+  }
+  .image-caption {
+    font-size: 12px;
+  }
+  .appearances h2.title a {
+    @include wqxr-title;
+    font-size: 24px;
+  }
+  .article-head, .tease {
+    line-height: 1.7;
   }
 
- .story-sidebar {
+   .story-sidebar {
     margin-bottom: 10px;
   }
 
@@ -16,3 +30,47 @@
     }
   }
 }
+
+// hosts page
+.wqxr_hosts {
+  .page-titlegroup {
+    padding-bottom: 10px;
+  }
+
+  .host-show-image {
+    padding-bottom: 10px;
+  }
+
+  .host-show-description {
+    margin-bottom: 80px;
+
+    line-height: 1.7;
+
+    h3 {
+      @include wqxr-title;
+      font-size: 24px;
+      margin-bottom: 13px;
+      a {
+        border-bottom: 1px solid rgba(#128cf4, 0);
+        transition: border-color 250ms, color 250ms;
+
+        &:hover,
+        &:focus {
+          border-bottom: 1px solid rgba(#128cf4, 0);
+          color: #128cf4;
+        }
+      }
+    }
+
+    p:last-of-type{
+      margin-bottom: 13px;
+    }
+
+    ul.feature {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 10px;
+    }
+  }
+}
+
