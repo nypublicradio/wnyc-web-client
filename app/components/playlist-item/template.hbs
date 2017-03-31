@@ -16,21 +16,26 @@
 
   <div class="playlistitem-info">
   {{#if entry.ensemble}}
-    {{entry.ensemble.name}}
+    <a href="{{entry.ensemble.url}}">
+      {{entry.ensemble.name}}
+    </a>
   {{/if}}
   </div>
   <div class="playlistitem-info">
   {{#if entry.conductor}}
-    {{entry.conductor.name}}, conductor
+    <a href="{{entry.conductor.url}}">{{entry.conductor.name}}</a>, conductor
   {{/if}}
   </div>
   {{#each entry.soloists as |soloist|}}
     <div class="playlistitem-info">
-      {{soloist.musician.name}}{{#each soloist.instruments as |instrument|}}, {{instrument}}{{/each}}
+      <a href="{{soloist.musician.url}}">{{soloist.musician.name}}</a>{{#each soloist.instruments as |instrument|}}, {{instrument}}{{/each}}
     </div>
   {{/each}}
+  <div class="playlistitem-info">
+    {{entry.reclabel.name}}
+  </div>
   <div class="playlistitem-duration">
-    {{humanize-duration entry.length}}
+    {{numeric-duration entryLengthMilliseconds}}
   </div>
   <div class="playlistitem-buylink">
     <a href="{{entry.arkiv_link}}">Buy</a>
