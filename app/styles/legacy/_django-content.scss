@@ -40,7 +40,7 @@
   }
 
   // links
-  a {
+  a:not(.btn) {
     text-decoration: none;
     border-bottom: 1px solid rgba(#128cf4, 0);
     transition: border-color 250ms, color 250ms;
