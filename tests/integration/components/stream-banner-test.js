@@ -102,8 +102,5 @@ test('it displays the episode title for streams with episodes', function(assert)
 test('it displays the song details for streams with music', function(assert) {
   this.set('stream', dummyStreamShowWithMusic);
   this.render(hbs`{{stream-banner stream=stream}}`);
-  assert.equal(this.$(streamDetailsSelector).text().trim(), 'Song Title, Composer Name, Musician Name (Instrument)', 'it should display the song details');
+  assert.equal(this.$(streamDetailsSelector).text().trim(), 'Composer Name, Song Title, Musician Name (Instrument)', 'it should display the song details');
 });
-
-
-
