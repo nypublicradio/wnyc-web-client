@@ -329,8 +329,8 @@
  *      button.btn.btn--blue Click
  */
 @mixin btn--blue {
-  background-color: $blue;
-  border-color: $blue;
+  background-color: $wqxrblue;
+  border-color: $wqxrblue;
   color: white;
 
   &:not([disabled]) {
@@ -754,7 +754,7 @@
 @mixin blue-btn-jshover {
   @include js-hover(
     $props:  (background-color, border-color),
-    $base:   ($blue, $blue),
+    $base:   ($wqxrblue, $wqxrblue),
     $hover:  ($darkblue, $darkblue)
   );
 }
