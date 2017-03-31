@@ -1,8 +1,9 @@
 <div class="l-constrained">
   <div class="l-flexrow--mqmd">
     <div class="l-col2of3">
+
+      {{#if model.logoImage}}
       <div class="flag">
-        {{#if model.logoImage}}
         <div class="flag-image channel-logo {{if model.hasMarquee 'flag-image--squeeze'}}">
           <img class="badge squarebadge badge--mq-tomed badge--shadow" alt={{model.logoImage.caption}}
               src={{image-template model.logoImage.template 129 129 model.logoImage.crop}}
@@ -11,7 +12,6 @@
               width="129">
         </div>
         <!-- .flag-image -->
-        {{/if}}
 
         <div class="flag-body">
          <div class="{{unless model.logoImage 'text--extrapadding'}}"> 
@@ -26,6 +26,21 @@
         </div>
         <!-- .flag-body -->
       </div>
+
+      {{else}}
+      
+      <div class="header-no-logo">
+       <h1 id="channelTitle" class="h1 h1--mq-small channel-title">{{model.title}}</h1>
+        <div class="text-body text--medium text-body--forceline text-body--nopad">
+            {{#if model.producingOrganizations}}    
+                Produced by {{producing-orgs model.producingOrganizations}}.
+            {{/if}}    
+            {{airings}}
+        </div>
+      </div>
+
+      {{/if}}
+
     </div>
     <!-- .l-col2of3 -->
 
