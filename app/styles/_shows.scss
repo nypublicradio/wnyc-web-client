@@ -65,7 +65,7 @@
     margin-bottom: 50px;
 
     @include mq($small-only) {
-      margin: 30px 0 1.25rem 0;
+      margin: 30px 0 0 0;
     }
 }
 .channel-info {
