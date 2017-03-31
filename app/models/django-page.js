@@ -76,7 +76,7 @@ export default DS.Model.extend({
         // Since we know that only itemTitle is encoded server-side, we can just
         // target it here.
         args.itemTitle = args.itemTitle ? decodeURIComponent(args.itemTitle) : '';
-        args.content = el.textContent.trim();
+        args.content = el.getAttribute('data-text-content');
       } catch(e) {
         if (!Ember.testing) {
           console.warn('could not parse', el.getAttribute('data-ember-args'));
