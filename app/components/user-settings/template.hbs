@@ -11,6 +11,7 @@
     options=streams
     renderInPlace=true
     searchEnabled=false
+    dropdownClass='stream-dropdown'
     loadingMessage='Retrieving Stream List...'
     onchange=(action 'selectStream') as |stream|}}
     {{stream.name}}
@@ -47,6 +48,7 @@
       options=autoPlayPrefs
       renderInPlace=true
       searchEnabled=false
+      dropdownClass='autoplay-dropdown'
       disabled=enableAutoplay
       onchange=(action 'selectAutoPlayPref') as |pref|}}
       {{pref.name}}
