@@ -58,6 +58,8 @@ export function embeddedComponentSetup(root = document) {
     // embedded ember components require an ID that is in sync with the
     // django-page document
     el.id = el.id || `ember-component-${i}`;
+    el.setAttribute('data-text-content', el.textContent.trim());
+    el.textContent = '';
   });
 }
 
