@@ -3,8 +3,10 @@
 
   {{#if media.isMediumAndUp}}
     {{#stream-banner audio=audio streams=streams as |currentStream|}}
-      <h3>{{currentStream.currentPiece}}</h3>
-      {{link-to 'Music playlist' 'playlist' currentStream.slug class='text--small text--white'}}
+      <h3>{{currentStream.currentComposer.name}} {{currentStream.currentPiece}}</h3>
+      {{#link-to 'playlist' currentStream.slug class='text--small text--white'}}
+        Music Playlist &raquo;
+      {{/link-to}}
     {{/stream-banner}}
   {{else}}
     {{#stream-carousel streams=streams background=carouselBg as |stream|}}
