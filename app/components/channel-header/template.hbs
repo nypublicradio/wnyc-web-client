@@ -14,14 +14,14 @@
         {{/if}}
 
         <div class="flag-body">
-         <div class="text text--heading {{unless model.logoImage 'text--extrapadding'}}"> 
-            <h1 id="channelTitle" class="channel-title">{{model.title}}</h1>
-            <p class="text-body text--medium text-body--forceline text-body--nopad">
+         <div class="{{unless model.logoImage 'text--extrapadding'}}"> 
+            <h1 id="channelTitle" class="h1 h1--mq-small channel-title">{{model.title}}</h1>
+            <div class="text-body text--medium text-body--forceline text-body--nopad">
                 {{#if model.producingOrganizations}}    
                     Produced by {{producing-orgs model.producingOrganizations}}.
                 {{/if}}    
                 {{airings}}
-            </p>
+            </div>
           </div>
         </div>
         <!-- .flag-body -->
