@@ -8,6 +8,7 @@
         isCurrent=true
         story=props.currentAudio
         playState=audio.playState
+        state=(if (eq props.currentAudio.id audio.currentId) audio.playState)
         playContext='queue'}}
     </div>
   </div>
@@ -17,6 +18,7 @@
 {{#each props.queue as |story index|}}
   {{#sortable-item tagName='div' classNames='list-item' model=story group=group handle=sortHandle}}
     {{queue-listitem
+      state=(if (eq story.id audio.currentId) audio.playState)
       dataId=story.id
       story=story
       playContext='queue'

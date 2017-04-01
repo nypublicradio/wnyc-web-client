@@ -92,7 +92,7 @@ export default Component.extend({
   actions: {
     listen: function listen(model, streamSlug) {
       let audio = get(this, 'audio');
-      let currentAudio = get(this, 'audio.currentAudio.id');
+      let currentAudio = get(this, 'audio.currentId');
       if (currentAudio === streamSlug && get(this, 'audio.isPlaying')) {
         audio.pause();
       } else {

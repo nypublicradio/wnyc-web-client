@@ -84,7 +84,7 @@
           {{#if media.isLargeAndUp}}
             {{#listen-button
               type=(if isHomepage 'white-hollow-small' 'red-hollow-small')
-              state=(if (eq preferredStream.slug audio.currentAudio.id) audio.playState)
+              state=(if (eq preferredStream.slug audio.currentId) audio.playState)
               itemPK=preferredStream.slug
               itemTitle=preferredStream.name
               playContext='nav'

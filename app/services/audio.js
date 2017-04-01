@@ -75,7 +75,7 @@ export default Service.extend({
   play(pk, playContext) {
     // TODO: might be better to switch the arg order for better api design
     // i.e. there will always be a context, but there might not always be a pk
-    let id = pk || get(this, 'currentAudio.id');
+    let id = pk || get(this, 'currentId');
     let context = playContext || '';
 
     if (!id) {
@@ -108,6 +108,7 @@ export default Service.extend({
       this.sendListenAction(this.get('currentAudio'), 'interrupt');
     }
 
+    // set here so UI can update before play resolves
     set(this, 'currentId', id);
 
     let story;
@@ -166,7 +167,7 @@ export default Service.extend({
       this.sendListenAction(this.get('currentAudio'), 'interrupt');
     }
 
-    // TODO: why setting currentId instead of relying on the computed?
+    // set here so UI can update before play resolves
     set(this, 'currentId', slug);
 
     let stream;
