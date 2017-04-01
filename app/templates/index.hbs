@@ -11,7 +11,7 @@
       {{#listen-button
         audio=audio
         type='blue-boss'
-        state=(if (eq stream.slug audio.currentAudio.id) audio.playState)
+        state=(if (eq stream.slug audio.currentId) audio.playState)
         itemPK=stream.slug
         itemTitle=stream.name}}
         Listen Live
