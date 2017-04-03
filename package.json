@@ -95,10 +95,10 @@
     "morgan": "^1.6.1",
     "nypr-player": "nypublicradio/nypr-player",
     "nypr-ui": "nypublicradio/nypr-ui#demo",
-    "nypr-account-settings": "nypublicradio/nypr-account-settings#demo",
+    "nypr-account-settings": "nypublicradio/nypr-account-settings#mhearn/member-center-frontend",
     "nypr-ads": "nypublicradio/nypr-ads",
     "nypr-player": "nypublicradio/nypr-player",
-    "nypr-ui": "nypublicradio/nypr-ui",
+    "nypr-ui": "nypublicradio/nypr-ui#mhearn/ui-updates-for-member-center",
     "torii": "0.8.1"
   },
   "ember-addon": {
