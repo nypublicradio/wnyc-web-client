@@ -121,11 +121,6 @@
     > .text-body > p:last-child {
         margin-bottom: 0;
     }
-
-    @include mq($medium-only) {
-      @include fontsize(14);
-      line-height: 1.5rem;
-    }
 }
 
 .text--350 {
