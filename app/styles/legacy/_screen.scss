@@ -42,7 +42,7 @@
 }
 
 a {
-  color: #0073d5;
+  color: $wqxrlink;
   text-decoration: none;
   word-wrap: break-word;
 
@@ -56,7 +56,7 @@ a {
 }
 
 .text-link {
-  color: #0073d5;
+  color: $wqxrlink;
   text-decoration: none;
   word-wrap: break-word;
   cursor: pointer;
@@ -295,7 +295,7 @@ h1 a, h2.title a { /* ie doppelganger bug in touts */
 }
 
 .page-titlegroup {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid $line--light;
   margin-bottom: 10px;
 }
 
@@ -449,7 +449,7 @@ h3.subtitle {
 
 .article-wide table th,
 .article-description table th {
-  border: 1px solid #ddd;
+  border: 1px solid $line--light;
   border-bottom-width: 2px;
   font-weight: bold;
   padding: 5px;
@@ -457,7 +457,7 @@ h3.subtitle {
 
 .article-wide table td,
 .article-description table td {
-  border: 1px solid #ddd;
+  border: 1px solid $line--light;
   padding: 5px 7px 6px;
 }
 
@@ -552,7 +552,7 @@ table#show-number-archive {
   display: block;
   float: left;
   width: 63%;
-  border: 1px solid #ddd;
+  border: 1px solid $line--light;
   -moz-border-radius: 1px;
   border-radius: 1px;
   padding: 10px;
@@ -562,7 +562,7 @@ table#show-number-archive {
 }
 
 .newsletter-signup .button {
-  background: #0073d5;
+  background: $wqxrlink;
   margin-top: 1px;
   padding: 10px;
   font-size: 13px;
@@ -646,7 +646,7 @@ table#show-number-archive {
 
 .inline_audioplayer_wrapper {
   display: block;
-  border: 1px solid #eee;
+  border: 1px solid $line--light;
   padding: 5px 10px 0;
   clear: both;
 }
@@ -940,7 +940,7 @@ h4.label {
 
 .sideblock .latest-podcast {
   padding-bottom: 10px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid $line--light;
 }
 
 .sideblock .feeds {
@@ -965,7 +965,7 @@ h4.label {
 }
 
 .flatpage-nav ul li {
-  border-top: 1px solid #eee;
+  border-top: 1px solid $line--light;
   padding: 5px 0 4px;
   font-size: 9px;
   font-weight: bold;
@@ -986,7 +986,7 @@ ul.sidetouts {
 
 ul.sidetouts li {
   overflow: hidden;
-  border-bottom:1px solid #e6e6e6;
+  border-bottom: 1px solid $line--light;
   list-style-image:none;
   list-style-position:outside;
   list-style-type:none;
@@ -1060,7 +1060,7 @@ li.featuredcomment .comment-object {
   font-weight: normal;
   margin-top: 2px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid $line--light;
 }
 
 li.featuredcomment:last-child .comment-object {
@@ -1166,7 +1166,7 @@ ul.sidetouts li p.date {
 
 #comments-carousel .discuss-link a {
   display: block;
-  background-color: #0073d5;
+  background-color: $wqxrlink;
   -moz-border-radius: 3px;
   border-radius: 3px;
   text-align: center;
@@ -1280,8 +1280,8 @@ ul.sidetouts li p.date {
 }
 
 .social-network {
-        border-top: 1px solid #dedede;
-        border-bottom: 1px solid #dedede;
+        border-top: 1px solid $line--light;
+        border-bottom: 1px solid $line--light;
         padding: 0 0 7px;
 }
 
@@ -1375,8 +1375,8 @@ ul.sidetouts li p.date {
 .article-tools {
   margin: 10px 0;
   padding: 7px 0;
-  border-bottom: 1px solid #eee;
-  border-top: 1px solid #eee;
+  border-bottom: 1px solid $line--light;
+  border-top: 1px solid $line--light;
 }
 
 ul.top-sharelinks {
@@ -1447,7 +1447,7 @@ ul.sharelinks {
 .appearance-lead {
   margin: 10px 0;
   padding: 10px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid $line--light;
 }
 
 .story-sidebar {
@@ -1458,7 +1458,7 @@ ul.sharelinks {
 }
 
 ul.story-sidebar li {
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom: 1px solid $line--light;
   padding: 10px 0;
 }
 
@@ -1602,7 +1602,7 @@ ul.series-navlinks li {
 }
 
 .about-bottom-appearances h2 {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid $line--light;
   margin: 15px 0;
   padding: 10px 0;
   font-size: 18px;
@@ -1628,7 +1628,7 @@ ul.series-navlinks li {
 }
 
 .story-bottom {
-  border-top: 1px solid #dd0000;
+  border-top: 1px solid $line--light;
   padding-top: 10px;
 }
 
@@ -1792,11 +1792,11 @@ ul.article-playlist {
   margin: 20px 0 0 -25px;
   text-transform: uppercase;
   font-size: 0.85em;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid $line--light;
 }
 
 .article-playlist li {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid $line--light;
   padding: 17px 0;
   line-height: 21px;
 }
@@ -1853,7 +1853,7 @@ ul.article-playlist {
 
 .comment {
   padding: 10px 0;
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom: 1px solid $line--light;
   margin-bottom: 10px;
 }
 
@@ -1998,7 +1998,7 @@ ul.article-playlist {
 .playlist-tease,
 .tiny-tease,
 .blurb-tease {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid $line--light;
   overflow:hidden;
   padding: 30px 0;
   clear: both;
@@ -2009,7 +2009,7 @@ ul.article-playlist {
 }
 
 .show-tease {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid $line--light;
 }
 
 .profile-tease {
@@ -2035,7 +2035,7 @@ ul.article-playlist {
 
     &:hover,
     &:focus {
-      color: $blue;
+      color: $wqxrlink;
     }
   }
 }
@@ -2166,7 +2166,7 @@ ul.series-index li {
 }
 
 .about-series {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid $line--light;
   margin: 10px 0;
   padding: 0 0 3px;
 }
@@ -2180,7 +2180,7 @@ ul.series-index li {
 }
 
 #series-main .blurb-tease {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid $line--light;
 }
 
 #series-main .blurb-tease .videoplayer {
@@ -2193,7 +2193,7 @@ ul.img-headlines {
   clear: both;
   margin: 10px 0;
   padding: 10px 0 20px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid $line--light;
 }
 
 ul.img-headlines li {
@@ -2915,7 +2915,7 @@ h4.schedule-link {
 }
 
 #login-register form .submit:hover {
-  background: #0073d5;
+  background: $wqxrlink;
 }
 
 #login-register form#login .submit,
@@ -3508,13 +3508,13 @@ form.filters #decimal label {
 .show-feed-archive .message {
   margin: 0 0 10px;
   padding-bottom: 15px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid $line--light;
 }
 
 .show-feed-archive .feed-tease {
   padding: 5px 0 0;
   margin: 0 0 10px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid $line--light;
 }
 
 .show-feed-archive h2 {
@@ -3536,7 +3536,7 @@ form.filters #decimal label {
 /* Mobile Commons  */
 
 #mobilecommons .story-headergroup {
-  border-bottom: 2px solid #ccc;
+  border-bottom: 2px solid $line--light;
   padding: 10px 0;
 }
 
@@ -3546,7 +3546,7 @@ form.filters #decimal label {
 }
 
 .mobile_message {
-  border-bottom: 1px dotted #c6c6c6;
+  border-bottom: 1px dotted $line--light;
   padding: 10px 2px;
 }
 
@@ -3579,7 +3579,7 @@ form.filters #decimal label {
 
 .primary_event {
   padding: 15px 0 !important;
-  border-bottom: 1px solid $lightestgray;
+  border-bottom: 1px solid $line--light;
 }
 
 #event-calendar {
@@ -4115,7 +4115,7 @@ a.stf[href] {
 #morelikethis h3.brand {
   color: #333;
   border-top: 0 none;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid $line--light;
   padding: 10px 0 8px;
   margin: 0;
 }

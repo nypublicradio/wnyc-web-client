@@ -7,9 +7,9 @@
 	margin: -96px 5px 0 0 !important;
   color: $gray;
   font-size: 12px;
-  
+
   &:hover {
-    color: $blue;
+    color: $wqxrlink;
   }
 }
 
@@ -18,11 +18,11 @@
   margin-top: 10px;
   height: auto !important;
   border: none !important;
-  
+
   ul.schedule-tabs {
     width: 100%;
 
-    li a {    
+    li a {
       font-weight: 600;
     }
   }
@@ -32,7 +32,7 @@
 
   ul.schedule-tabs li:not(.ui-tabs-selected) a {
     color: $lightgray !important;
-    
+
     &:hover {
       color: $wqxrblue !important;
     }
@@ -43,13 +43,13 @@ ul.schedule-dates {
   border-top: 1px solid $nearwhite;
   border-bottom: 1px solid $nearwhite;
   padding: 10px 0 10px 0 !important;
-  
+
   @include flexbox((
     display: flex,
     flex-wrap: wrap,
     justify-content: space-between,
     align-items: center
-  ));  
+  ));
 
   > li {
     @include flex((1 1 auto));
@@ -60,22 +60,22 @@ ul.schedule-dates {
     width: auto !important;
     padding-left: 0;
     padding-right: 0;
-    
+
     a {
       font-size: 12px !important;
       letter-spacing: 2px;
       text-transform: uppercase;
-      font-weight: 700 !important;       
+      font-weight: 700 !important;
     }
-    
+
     a:hover,
     a:hover path {
-      color: $blue;
-      fill: $blue;
+      color: $wqxrlink;
+      fill: $wqxrlink;
       border-color: white;
-    }    
+    }
   }
-  
+
   .action-button-icon {
     display: inline;
     position: relative;
@@ -89,16 +89,16 @@ ul.schedule-dates {
       }
     }
   }
-} 
-   
+}
+
 ul.schedule-table {
   margin: 5px 0 30px 0;
-  
+
   .event {
     border-bottom: 1px solid $nearwhite;
     padding: 20px 0;
   }
-  
+
   li.head {
     font-size: 16px;
     font-weight: normal;
@@ -109,24 +109,24 @@ ul.schedule-table {
     height: auto;
     padding: 0;
     line-height: 27px;
-    
+
     div.program {
       height: auto;
-      
+
       a {
         font-size: 12px;
         letter-spacing: 2px;
         text-transform: uppercase;
         color: #333;
         font-weight: 700;
-        
+
         &:hover {
-          color: $blue;
-        }  
+          color: $wqxrlink;
+        }
       }
     }
-    
-    div.time, 
+
+    div.time,
     div.time-playlist {
       width: auto;
       color: $lightergray;
@@ -134,7 +134,7 @@ ul.schedule-table {
       letter-spacing: 1px;
       font-size: 16px;
     }
-    
+
     .arrow {
       display: none;
     }
@@ -142,13 +142,13 @@ ul.schedule-table {
     .options {
       display: none;
     }
-    
-  }
-  
 
-  li.details { 
+  }
+
+
+  li.details {
     display: list-item !important;
-    
+
     .text {
       font-size: 16px;
       margin-bottom: (1.25 / 2) * 1rem;
@@ -157,7 +157,7 @@ ul.schedule-table {
         margin-bottom: (1.25 / 2) * 1rem;
       }
     }
-    
+
     .event {
       border: none;
 
@@ -173,11 +173,11 @@ ul.schedule-table {
     .program {
       border: none;
       padding: 0;
-      
+
       .image {
         display: none;
       }
-      
+
       .text {
         float: left;
         margin: 0 0 0 105px;
@@ -200,7 +200,7 @@ ul.schedule-table {
 
 @include mq($medium-only) {
   .schedule-playlists,
-  ul.schedule-dates, 
+  ul.schedule-dates,
   #site {
     width: 100% !important;
     overflow: hidden;
@@ -209,39 +209,39 @@ ul.schedule-table {
   .main.schedule-playlists {
     margin: 0 0 100px 0;
   }
-  
+
   .grid_8 {
     width: 100% !important;
     margin: 0 !important;
   }
-  
+
   .print-schedule {
     display: none;
   }
-  
+
   ul.schedule-table li.details .program .text {
       margin: 0;
   }
-  
+
   .site-container .grid_4 {
     display: none;
   }
-  
+
   ul.schedule-dates {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between; 
+    justify-content: space-between;
     padding: 10px 0;
-    
+
     li.yesterday,
     li.tomorrow,
     li.today {
       width: auto !important;
       padding-left: 0;
       padding-right: 0;
-    }  
+    }
   }
-}  
+}
 
 @include mq($small-only) {
   .schedule-table li.details .playlist-item h4,
@@ -261,15 +261,15 @@ ul.schedule-table {
     li.tomorrow a span {
       display: none;
     }
-    
+
     li.today {
       text-transform: none !important;
       letter-spacing: 0 !important;
     }
-    
+
     .action-button-icon {
       top: 0;
-      
+
       svg {
         width: 26px;
         height: 26px;
@@ -280,5 +280,5 @@ ul.schedule-table {
       }
     }
   }
-  
+
 }

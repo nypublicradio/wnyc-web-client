@@ -25,7 +25,6 @@
 
     h1 {
       font-family: "Open Sans", sans-serif !important;
-      padding-bottom: 32px;
 
       a {
         color: $wqxrdarkblue;
@@ -43,10 +42,11 @@
     white-space: nowrap;
     font-weight: 600;
     line-height: 2;
-    
+    @include transition(background $transition-timing);
 
     &:hover {
       text-decoration: none;
+      background: $wqxrdarkblue;
     }
   }
 
@@ -58,6 +58,10 @@
 
 /* EVENTS MAIN PAGE */
 #events-home {
+
+  .primary_event {
+    border-top: 1px solid $line--light;
+  }
 
   .primary_event, .event-tease, .blurb-tease {
 
@@ -78,14 +82,15 @@
     }
 
     h2.event-channel {
-      margin-bottom: 13px;
+      margin-bottom: 5px;
+
       a {
         display: block;
-        font-size: 14px;
+        font-size: 12px;
+        font-weight: bold;
         line-height: 1;
-        font-weight: normal;
         padding: 0;
-        color: $darkergray; 
+        color: $darkergray;
       }
     }
 
@@ -96,6 +101,7 @@
     }
     h2.title a {
       font-size: 24px;
+      line-height: 34px;
       font-weight: normal;
       color: $darkergray !important;
     }
@@ -109,7 +115,7 @@
       margin-bottom: 17px;
     }
     h3.date {
-      font-size: 14px; 
+      font-size: 14px;
       line-height: 1.5;
     }
 
@@ -117,6 +123,7 @@
       color: $darkergray;
       font-size: 16px;
       line-height: 1.7;
+      margin-bottom: 0;
     }
 
     .text {
@@ -173,7 +180,11 @@
     /* links */
     p a {
       @extend .event-link;
-      color: $blue;
+      color: $wqxrlink;
+
+      &:hover {
+        text-decoration: none;
+      }
     }
 
     p a.more:after {
@@ -211,6 +222,7 @@
       position: absolute;
       top: 26px;
       right: 16px;
+
       .buy-button:hover {
         background: $wqxrblue;
       }
@@ -267,6 +279,3 @@
     }
   }
 }
-
-
-

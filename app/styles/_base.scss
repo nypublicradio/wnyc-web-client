@@ -59,14 +59,14 @@ body {
 
 a {
     //display: inline-block; // this causes line breaking issues
-    color: $blue;
+    color: $wqxrlink;
     text-decoration: none;
-    border-bottom: 1px solid rgba($blue, 0);
+    border-bottom: 1px solid rgba($wqxrlink, 0);
     @include transition(border-color $transition-timing, color $transition-timing);
 
     &:hover,
     &:focus {
-        border-bottom-color: rgba($blue, 1);
+        border-bottom-color: rgba($wqxrlink, 1);
     }
 
 }
