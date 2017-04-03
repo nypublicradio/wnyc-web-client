@@ -24,7 +24,7 @@
     margin-bottom: 10px;
   }
 
-  .article-head { 
+  .article-head {
     h4{
       padding-top: 20px;
     }
@@ -32,6 +32,21 @@
 }
 
 // hosts page
+.host-show {
+  border-top: 1px solid $line--light;
+  padding: 40px 0;
+
+  ul {
+    margin: 0;
+  }
+
+  .host-show-image {
+    float: right;
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+}
+
 .wqxr_hosts {
   .page-titlegroup {
     padding-bottom: 10px;
@@ -50,14 +65,14 @@
       @include wqxr-title;
       font-size: 24px;
       margin-bottom: 13px;
+
       a {
-        border-bottom: 1px solid rgba(#128cf4, 0);
         transition: border-color 250ms, color 250ms;
 
         &:hover,
         &:focus {
-          border-bottom: 1px solid rgba(#128cf4, 0);
-          color: #128cf4;
+          border: 0;
+          color: $wqxrlink;
         }
       }
     }
@@ -73,4 +88,3 @@
     }
   }
 }
-
