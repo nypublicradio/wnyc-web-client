@@ -4240,16 +4240,18 @@ a.stf[href] {
 }
 .sharelinks .fa-hover a {
   width: 35px;
-  line-height: 35px;
+  height: 35px;
   border-radius: 50%;
-  display: inline-block;
+  @include flexbox((
+    display: flex,
+    align-items: center,
+    justify-content: center
+  ));
 }
 .sharelinks .fa-hover a .fa {
   width: 100%;
   font-size: 21px;
   text-align: center;
-  margin-right: 10px;
-  display: inline-block;
 }
 .sharelinks .fa-hover a:hover,
 .sharelinks .fa-hover a {
