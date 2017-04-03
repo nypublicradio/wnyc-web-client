@@ -64,8 +64,8 @@
 #channel-header {
     margin-bottom: 50px;
 
-    @include mq($small-only) {
-      margin: 30px 0 0 0;
+    &.flush {
+      margin-bottom: 0;
     }
 
     .header-no-logo {
