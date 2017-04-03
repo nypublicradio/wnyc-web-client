@@ -41,7 +41,7 @@ a {
   color: #0073d5;
   text-decoration: none;
   word-wrap: break-word;
-  
+
   &:hover {
     text-decoration: none;
   }
@@ -783,7 +783,7 @@ table#show-number-archive {
   #home-secondary li {
     width: 48%;
   }
-  .bucket li, 
+  .bucket li,
   #damost ol li {
     width: 30%;
   }
@@ -803,7 +803,7 @@ table#show-number-archive {
   #site {
     width: 100%;
   }
-  
+
   #home-primary h2 {
     font-size: 24px;
     line-height: 31px;
@@ -2023,12 +2023,12 @@ ul.article-playlist {
   clear: none;
   margin-bottom: 5px;
   line-height: 2.125rem;
-  
+
   > a {
     color: #333;
     font-weight: 600;
     border: none;
-    
+
     &:hover,
     &:focus {
       color: $blue;
@@ -2060,7 +2060,7 @@ ul.article-playlist {
 
 h2.event-channel {
   margin: 0;
-  
+
   > a {
     color: #999;
     text-transform: uppercase;
@@ -3561,11 +3561,11 @@ form.filters #decimal label {
 /* Calendar */
 
 @media screen and (max-width: 800px) {
-  .primary_event {    
+  .primary_event {
     .mediumimage {
       display: none;
     }
-    
+
     .text-right {
       width: 100% !important;
       float: left !important;
@@ -4236,16 +4236,18 @@ a.stf[href] {
 }
 .sharelinks .fa-hover a {
   width: 35px;
-  line-height: 35px;
+  height: 35px;
   border-radius: 50%;
-  display: inline-block;
+  @include flexbox((
+    display: flex,
+    justify-content: center,
+    align-items: center
+  ));
 }
 .sharelinks .fa-hover a .fa {
   width: 100%;
   font-size: 21px;
   text-align: center;
-  margin-right: 10px;
-  display: inline-block;
 }
 .sharelinks .fa-hover a:hover,
 .sharelinks .fa-hover a {
