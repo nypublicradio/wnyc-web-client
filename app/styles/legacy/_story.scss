@@ -9,8 +9,18 @@ article header#storyHeader {
 }
 
 article section {
+  &.text {
+    max-width: 630px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   a {
-    border-bottom: .08em solid rgba(black, .1);
+    border-bottom: .08em solid rgba(black, .1) !important; // Need !important because of a django override
+
+    &:hover {
+      border-color: $wqxrlink !important;
+    }
   }
 
   h2 {
