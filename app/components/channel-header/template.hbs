@@ -14,7 +14,7 @@
         {{/if}}
 
         <div class="flag-body">
-         <div class="{{unless model.logoImage 'header-no-logo' 'text--extrapadding' }}"> 
+         <div class="text {{unless model.logoImage 'text--extrapadding header-no-logo'}}"> 
             <h1 id="channelTitle" class="h1 h1--mq-small channel-title">{{model.title}}</h1>
             <div class="text-body text--medium text-body--forceline text-body--nopad">
                 {{#if model.producingOrganizations}}    
