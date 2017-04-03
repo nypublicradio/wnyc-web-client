@@ -5,11 +5,13 @@ import { Response } from 'ember-cli-mirage';
 import config from 'wnyc-web-client/config/environment';
 import { currentSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
 import 'wnyc-web-client/tests/helpers/with-feature';
+import dummySuccessProviderFb from 'wnyc-web-client/tests/helpers/torii-dummy-success-provider-fb';
+import dummyFailureProvider from 'wnyc-web-client/tests/helpers/torii-dummy-failure-provider';
+import { registerMockOnInstance } from 'wnyc-web-client/tests/helpers/register-mock';
 
 moduleForAcceptance('Acceptance | login', {
   beforeEach() {
     server.create('stream');
-    server.create('user');
   }
 });
 
@@ -28,6 +30,7 @@ test('Log in button is visible at load', function(assert) {
 });
 
 test('Submitting valid credentials redirects to previous route', function(assert) {
+  server.create('user');
   let page = server.create('django-page', {id: '/'});
 
   andThen(() => {
@@ -55,6 +58,7 @@ test('Submitting valid credentials redirects to previous route', function(assert
 });
 
 test('Submitting invalid credentials shows form level error message', function(assert) {
+  server.create('user');
   server.post(`${config.wnycAuthAPI}/v1/session`, () => {
     return new Response(400, {}, {errors: {code: "UnauthorizedAccess"}});
   });
@@ -73,6 +77,7 @@ test('Submitting invalid credentials shows form level error message', function(a
 });
 
 skip('Clicking logout hides privileged links', function(assert) {
+  server.create('user');
   server.create('django-page', {id: '/'});
   visit('/login');
   andThen(() => {
@@ -95,4 +100,50 @@ test('Log in with Facebook button is visible at load', function(assert) {
   visit('/login');
 
   andThen(() => assert.equal(find('button:contains(Log in with Facebook)').length, 1));
+});
+
+test('Successful facebook login redirects and shows correct alert', function(assert) {
+  registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
+  withFeature('socialAuth');
+  visit('/login');
+
+  click('button:contains(Log in with Facebook)');
+
+  andThen(() => {
+    assert.equal(currentURL(), '/');
+    assert.equal(find('.alert-success').text().trim(), "You’re now logged in via Facebook. You can update your information on your account page.");
+    assert.ok(currentSession(this.application).get('isAuthenticated'), 'Session is authenticated');
+    assert.equal(find('.user-nav-greeting').text().trim(), 'Jane');
+    assert.equal(find('.user-nav-avatar > img').attr('src'), 'https://example.com/avatar.jpg');
+  });
+});
+
+test('Unsuccessful facebook login shows alert', function(assert) {
+  registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummyFailureProvider);
+  withFeature('socialAuth');
+  visit('/login');
+
+  click('button:contains(Log in with Facebook)');
+
+  andThen(() => {
+    assert.equal(currentURL(), '/login');
+    assert.equal(find('.alert-warning').text().trim(), "Unfortunately, we weren't able to authorize your account.");
+    assert.ok(!currentSession(this.application).get('isAuthenticated'), 'Session is not authenticated');
+  });
+});
+
+test('Unsuccessful fb login shows alert', function(assert) {
+  server.get('/v1/session', {}, 401);
+  server.post('/v1/user', {}, 500);
+  registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
+  withFeature('socialAuth');
+  visit('/login');
+
+  click('button:contains(Log in with Facebook)');
+
+  andThen(() => {
+    assert.equal(currentURL(), '/login');
+    assert.equal(find('.alert-warning').text().trim(), "Unfortunately, we weren't able to authorize your account.");
+    assert.notOk(currentSession(this.application).get('isAuthenticated'), 'Session is not authenticated');
+  });
 });

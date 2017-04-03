@@ -1,29 +1,15 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import 'wnyc-web-client/tests/helpers/with-feature';
-import RSVP from 'rsvp';
 import { currentSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
-import dummySuccessProvider from 'wnyc-web-client/tests/helpers/torii-dummy-success-provider';
+import dummySuccessProviderFb from 'wnyc-web-client/tests/helpers/torii-dummy-success-provider-fb';
 import dummyFailureProvider from 'wnyc-web-client/tests/helpers/torii-dummy-failure-provider';
 import { registerMockOnInstance } from 'wnyc-web-client/tests/helpers/register-mock';
 
 moduleForAcceptance('Acceptance | signup', {
   beforeEach() {
     server.create('stream');
-    server.create('user');
-    currentSession(this.application).createUserForAuthenticatedProvider = () => {
-      let attrs = {
-        providerToken: "abcdefg",
-        givenName: "Jane",
-        familyName: "Doe",
-        email: "janedoe@example.com",
-        picture: "https://example.com/avatar.jpg",
-        facebookId: "1234567890987654321"
-      };
-      let user = server.create('user', attrs);
-      return RSVP.Promise.resolve(user);
-    };
- }
+  }
 });
 
 test('visiting /signup', function(assert) {
@@ -41,6 +27,8 @@ test('Sign up button is visible at load', function(assert) {
 });
 
 test('Submitting the sign up form shows the thank you screen', function(assert) {
+  server.create('user');
+
   visit('/signup');
 
   fillIn('input[name=given_name]', 'jane');
@@ -63,7 +51,7 @@ test('Sign up with Facebook button is visible at load', function(assert) {
 });
 
 test('Successful facebook login redirects and shows correct alert', function(assert) {
-  registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProvider);
+  registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
   withFeature('socialAuth');
   visit('/signup');
 
@@ -89,5 +77,21 @@ test('Unsuccessful facebook login shows alert', function(assert) {
     assert.equal(currentURL(), '/signup');
     assert.equal(find('.alert-warning').text().trim(), "Unfortunately, we weren't able to authorize your account.");
     assert.ok(!currentSession(this.application).get('isAuthenticated'), 'Session is not authenticated');
+  });
+});
+
+test('Unsuccessful fb signup shows alert', function(assert) {
+  server.get('/v1/session', {}, 401);
+  server.post('/v1/user', {}, 500);
+  registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
+  withFeature('socialAuth');
+  visit('/signup');
+
+  click('button:contains(Sign up with Facebook)');
+
+  andThen(() => {
+    assert.equal(currentURL(), '/signup');
+    assert.equal(find('.alert-warning').text().trim(), "Unfortunately, we weren't able to authorize your account.");
+    assert.notOk(currentSession(this.application).get('isAuthenticated'), 'Session is not authenticated');
   });
 });

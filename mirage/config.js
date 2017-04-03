@@ -165,10 +165,10 @@ export default function() {
     let body = JSON.parse(request.requestBody);
     if (request.requestHeaders['X-Provider']) {
       let fbUser = users.create({
-        email: faker.internet.email(),
-        given_name: faker.name.firstName(),
-        family_name: faker.name.lastName(),
-        perferred_username: faker.name.firstName() + faker.name.firstName(),
+        email: body.email || faker.internet.email(),
+        given_name: body.given_name || faker.name.firstName(),
+        family_name: body.family_name || faker.name.lastName(),
+        preferred_username: body.preferred_username || faker.name.firstName() + faker.name.firstName(),
         facebook_id: body.facebook_id,
         picture: body.picture
       });
