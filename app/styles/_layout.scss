@@ -47,7 +47,7 @@
       top: 0;
       height: 100%;
       width: 35%;
-      @include background-image(linear-gradient(to right, rgba(141, 33, 48, 0.0), $wqxrdarkblue));
+      @include background-image(linear-gradient(to right, rgba(0, 100, 180, 0.0), $wqxrdarkblue));
     }
   }
 }
