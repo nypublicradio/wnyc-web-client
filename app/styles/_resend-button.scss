@@ -1,5 +1,5 @@
 .resend-button {
-  color: $blue;
+  color: $wqxrlink;
   border-color: transparent;
   background-color: transparent;
   border-width: 0 0 1px 0;
@@ -8,20 +8,19 @@
 
   &:hover,
   &:focus {
-    border-color: $blue;
+    border-color: $wqxrlink;
   }
 
   &:active {
-    color: $darkblue;
-    border-color: $darkblue;
+    color: $wqxrdarkblue;
+    border-color: $wqxrdarkblue;
   }
 }
 
 .resend-success {
-  color: $lightgray
+  color: $lightgray;
 }
 
 .resend-error {
-  color: $red
+  color: $red;
 }
-

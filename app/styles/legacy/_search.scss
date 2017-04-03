@@ -7,23 +7,23 @@
     width: 100%;
     margin: 0;
   }
-  
+
   .grid_9 {
     width: calc(100% - 250px);
   }
-  
+
   #filters ul {
     list-style: none;
     margin: 5px 0 30px 0;
     padding: 0;
-    
+
     a {
       border: none;
       font-size: 12px;
       padding: 2px 0;
-      
+
       &:hover {
-        color: $blue;
+        color: $wqxrlink;
         background: none;
       }
     }
@@ -34,14 +34,14 @@
       font-size: 12px;
       margin: 15px 0;
       border: none;
-      
+
       &:hover {
-        color: $blue;
+        color: $wqxrlink;
       }
     }
-    
+
     form {
-      width: 100%;      
+      width: 100%;
       margin: 0;
       padding: 0;
       @include display-flex;
@@ -55,90 +55,90 @@
         border:none;
         background: $graywhite;
       }
-      
+
       .submit {
         background-color: white;
-        
+
         &:hover {
           background-color: $graywhite;
         }
       }
-      
+
       .search-audio {
         @include flex-basis(100%);
-      }    
+      }
     }
   }
-  
+
   #sort {
     width: 100%;
     margin: 0;
     font-size: 12px;
-    
+
     ul {
       margin: 0;
       padding: 0;
-      list-style: none;      
+      list-style: none;
     }
-    
+
     a {
       font-size: 12px;
       width: auto;
       border: none;
-      
+
       &:hover {
         background: none;
-        color: $blue;
+        color: $wqxrlink;
       }
     }
-    
+
     label {
       padding: 6px 0 0 0;
       color: $lightgray;
     }
   }
-  
+
   .gsc-above-wrapper-area-container {
     display: table;
   }
-  
+
   .gsc-thumbnail,
   .gsc-above-wrapper-area-container {
     display: none;
   }
-  
+
   .gs-spelling {
     text-decoration: none;
   }
-  
+
   .gsc-results {
     .gsc-cursor-box {
       .gsc-cursor-page {
-        color: $blue;
+        color: $wqxrlink;
         font-size: 20px;
         margin-right: 15px;
         text-decoration: none;
-        
+
         &:hover {
-          border-bottom: 1px solid $blue;
-        }                
+          border-bottom: 1px solid $wqxrlink;
+        }
       }
 
       .gsc-cursor-current-page {
         color: $lightgray;
         border: none;
-        font-weight: normal;       
+        font-weight: normal;
       }
     }
-    
+
     .gs-title *,
     .gs-title {
       text-decoration: none;
       font-size: 20px;
-      color: $blue;
-    }    
+      color: $wqxrlink;
+    }
   }
-  
+
   .gcsc-branding-text {
     color: $lightgray;
   }
@@ -147,25 +147,25 @@
 @include mq($medium-only) {
   #main {
     min-height: 400px;
-    
-    #search { 
+
+    #search {
       &.grid_9 {
       width: 100%;
       margin: 0;
       }
-      
+
       form {
       }
-      
+
       .search-audio {
         display: none;
       }
-    } 
-       
+    }
+
     #filters {
       display: none;
     }
-    
+
     .search-page,
     .search-page .search-results {
       width: 100%;
@@ -173,14 +173,14 @@
       padding: 0;
       float: none;
     }
-    
+
     .gsc-control-cse,
     .gsc-control-cse .gsc-table-result {
       font-family: "Open Sans", sans-serif !important;
     }
-    
+
     .gsc-above-wrapper-area {
       border: none;
     }
-  } 
+  }
 }

@@ -337,8 +337,8 @@
     &:hover,
     &:focus {
       outline: none;
-      background-color: $darkblue;
-      border-color: $darkblue;
+      background-color: $wqxrdarkblue;
+      border-color: $wqxrdarkblue;
       color: white;
       opacity: 1;
     }
@@ -358,7 +358,7 @@
 *      button.btn.btn--bluetext Click Here
 */
 .btn--bluetext {
-  color: $blue;
+  color: $wqxrlink;
 }
 
 /**
@@ -512,9 +512,9 @@
 
   &:hover,
   &:focus {
-    color: $blue;
+    color: $wqxrlink;
     background-color: transparent;
-    border-color: $blue;
+    border-color: $wqxrlink;
   }
 }
 
@@ -755,7 +755,7 @@
   @include js-hover(
     $props:  (background-color, border-color),
     $base:   ($wqxrblue, $wqxrblue),
-    $hover:  ($darkblue, $darkblue)
+    $hover:  ($wqxrdarkblue, $wqxrdarkblue)
   );
 }
 
