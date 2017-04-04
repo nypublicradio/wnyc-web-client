@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export function removeLeadingSlash([ string ] /*, hash */) {
-  if (string.startsWith('/music')){
+  if (string.startsWith('/')){
     string = string.slice(1);
   }
   return string;
