@@ -8,13 +8,7 @@ export default Service.extend({
 
   load() {
     if (this.get('session.isAuthenticated')) {
-      let user;
-      if (this.get('session.data.isSigningUpWithThirdParty') === true) {
-        this.get('session').set('data.isSigningUpWithThirdParty', false);
-        user = this.get('session').createUserForAuthenticatedProvider();
-      } else {
-        user = this.get('store').queryRecord('user', {me: true});
-      }
+      let user = this.get('store').queryRecord('user', {me: true});
 
       this.set('user', user);
       return user.then((user) => {
