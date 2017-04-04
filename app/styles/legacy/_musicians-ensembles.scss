@@ -1,0 +1,26 @@
+.musician-detail {
+  .playlist-tease {
+    border-bottom: none;
+
+    .playlist-entry {
+      /* "last played", record label and length */
+      h5,
+      .catalog_entry-catno {
+        font-size: 12px;
+        font-weight: 600;
+      }
+      /* piece title */
+      h2 {
+        font-family: "Lato", sans-serif;
+      }
+
+      .piece-info ul, 
+      ul.playlist-actions {
+        list-style: none;
+        padding-left: 0;
+      }
+
+    }
+  }
+
+}
