@@ -16,19 +16,19 @@
 
   <div class="playlistitem-info">
   {{#if entry.ensemble}}
-    <a href="{{entry.ensemble.url}}">
+    {{#link-to "djangorendered" (remove-leading-slash entry.ensemble.url)}}
       {{entry.ensemble.name}}
-    </a>
+    {{/link-to}}
   {{/if}}
   </div>
   <div class="playlistitem-info">
   {{#if entry.conductor}}
-    <a href="{{entry.conductor.url}}">{{entry.conductor.name}}</a>, conductor
+    {{#link-to "djangorendered" (remove-leading-slash entry.conductor.url)}}{{entry.conductor.name}}{{/link-to}}, conductor
   {{/if}}
   </div>
   {{#each entry.soloists as |soloist|}}
     <div class="playlistitem-info">
-      <a href="{{soloist.musician.url}}">{{soloist.musician.name}}</a>{{#each soloist.instruments as |instrument|}}, {{instrument}}{{/each}}
+     {{#link-to "djangorendered" (remove-leading-slash soloist.musician.url)}}{{soloist.musician.name}}{{/link-to}}{{#each soloist.instruments as |instrument|}}, {{instrument}}{{/each}}
     </div>
   {{/each}}
   <div class="playlistitem-info">
