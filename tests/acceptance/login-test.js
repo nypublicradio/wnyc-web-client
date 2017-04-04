@@ -133,8 +133,8 @@ test('Unsuccessful facebook login shows alert', function(assert) {
 });
 
 test('Unsuccessful fb login shows alert', function(assert) {
-  server.get('/v1/session', {}, 401);
-  server.post('/v1/user', {}, 500);
+  server.get(`${config.wnycAuthAPI}/v1/session`, {}, 401);
+  server.post(`${config.wnycAuthAPI}/v1/user`, {}, 500);
   registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
   withFeature('socialAuth');
   visit('/login');

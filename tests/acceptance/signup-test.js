@@ -5,6 +5,7 @@ import { currentSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth'
 import dummySuccessProviderFb from 'wnyc-web-client/tests/helpers/torii-dummy-success-provider-fb';
 import dummyFailureProvider from 'wnyc-web-client/tests/helpers/torii-dummy-failure-provider';
 import { registerMockOnInstance } from 'wnyc-web-client/tests/helpers/register-mock';
+import config from 'wnyc-web-client/config/environment';
 
 moduleForAcceptance('Acceptance | signup', {
   beforeEach() {
@@ -81,8 +82,8 @@ test('Unsuccessful facebook login shows alert', function(assert) {
 });
 
 test('Unsuccessful fb signup shows alert', function(assert) {
-  server.get('/v1/session', {}, 401);
-  server.post('/v1/user', {}, 500);
+  server.get(`${config.wnycAuthAPI}/v1/session`, {}, 401);
+  server.post(`${config.wnycAuthAPI}/v1/user`, {}, 500);
   registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
   withFeature('socialAuth');
   visit('/signup');
