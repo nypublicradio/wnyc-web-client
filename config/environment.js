@@ -117,6 +117,7 @@ module.exports = function(environment) {
     moreShowsAPIKey: "mammoth",
     wnycAdminRoot: process.env.WNYC_ADMIN_ROOT,
     wnycAuthAPI: process.env.AUTH_SERVICE,
+    wnycAPIGateway: process.env.API_GATEWAY,
     wnycAccountRoot: process.env.WNYC_ACCOUNT_ROOT,
     wnycEtagAPI: process.env.WNYC_ETAG_API,
     wnycStaticURL: process.env.WNYC_STATIC_URL,
