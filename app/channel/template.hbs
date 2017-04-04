@@ -78,7 +78,7 @@
           </div>
           <div class="text text--medium">
             <div class="text-body text-body--nopad text-body--forceinline">
-              {{{model.channel.tease}}}
+              {{django-page page=model.channel.teaseForDjangoPage loadingType='channel-page'}}
               {{#if model.channel.producingOrganizations}}
                 Produced by {{producing-orgs model.channel.producingOrganizations}}.
               {{/if}}
