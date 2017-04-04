@@ -419,6 +419,10 @@
   background-color: $black;
   margin-top: 2.4rem;
 
+  .profile & {
+    margin-top: 0;
+  }
+
   .footer-logo {
     padding-bottom: 9px;
   }
