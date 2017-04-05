@@ -127,7 +127,7 @@ module.exports = function(environment) {
       'frame-src': "'self' *"
     },
     moment: {
-      includeTimezone: '2010-2020'
+      includeTimezone: 'subset'
     }
   };
 
