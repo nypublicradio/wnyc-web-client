@@ -9,7 +9,7 @@
   <div class="nypr-account-settings-and-member-center">
     <div class="nypr-account-settings-body">
       {{nypr-accounts/basic-card
-        user=model.user
+        user=model
         emailUpdated=(action showFlash 'email')
         authenticate=(action authenticate)}}
 
@@ -19,7 +19,7 @@
         changePassword=(action changePassword)}}
 
     </div>
-    {{nypr-accounts/membership-card/index pledges=model.order class='nypr-membership-info-body'}}
+    {{nypr-accounts/membership-card/index pledges=orders class='nypr-membership-info-body'}}
   </div>
 
   <div class="aligncenter text--small">
