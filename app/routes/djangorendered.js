@@ -50,6 +50,19 @@ export default Route.extend(PlayParamMixin, {
       title
     });
   },
+  
+  setupController(controller, model) {
+    this._super(...arguments);
+    let doc = model.get('document');
+    let classNamesForRoute = [];
+    if (!doc.querySelector('.graphic-responsive')) {
+      classNamesForRoute.push('l-constrained');
+    }
+    if (model.get('id') === 'search/') {
+      classNamesForRoute.push('search');
+    }
+    controller.set('classNamesForRoute', classNamesForRoute);
+  },
 
   actions: {
     willTransition() {

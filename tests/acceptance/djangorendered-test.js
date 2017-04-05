@@ -107,6 +107,81 @@ test('deferred scripts embedded within content do not run twice', function(asser
   });
 });
 
+test('.l-constrained is not added to responsive pages', function(assert) {
+  let responsivePage = server.create('django-page', {
+    id: 'fake/',
+    text: `
+    <div>
+      <div class="graphic-responsive">
+      this is a responsive template
+      </div>
+    </div>
+    `
+  });
+
+  djangoPage
+    .bootstrap(responsivePage)
+    .visit(responsivePage);
+
+  andThen(function() {
+    assert.equal(find('.django-content').parent('.l-constrained').length, 0, 'should not have an l-constrained class');
+  });
+});
+
+test('.l-constrained is added to the home page', function(assert) {
+  let home = server.create('django-page', {
+    id: '/',
+    text: `
+    <div>
+      <div>
+    this is a regular template
+      </div>
+    </div>
+    `
+  });
+
+  djangoPage
+    .bootstrap(home)
+    .visit(home);
+
+  andThen(function() {
+    assert.equal(find('.django-content').parent('.l-constrained').length, 1, 'should have an l-constrained class');
+  });
+});
+
+test('.l-constrained is added to regular pages', function(assert) {
+  let regularPage = server.create('django-page', {
+    id: 'fake/',
+    text: `
+    <div>
+      <div>
+    this is a regular template
+      </div>
+    </div>
+    `
+  });
+
+  djangoPage
+    .bootstrap(regularPage)
+    .visit(regularPage);
+
+  andThen(function() {
+    assert.equal(find('.django-content').parent('.l-constrained').length, 1, 'should have an l-constrained class');
+  });
+});
+
+test('.search is added to search pages', function(assert) {
+  let searchPage = server.create('django-page', { id: 'search/' });
+
+  djangoPage
+    .bootstrap(searchPage)
+    .visit(searchPage);
+
+  andThen(function() {
+    assert.equal(find('.django-content').parent('.search').length, 1, 'should have an l-constrained class');
+  });
+});
+
 moduleForAcceptance('Acceptance | Django Rendered | Beta Trial', {
   beforeEach() {
     server.create('stream');
