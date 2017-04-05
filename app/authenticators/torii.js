@@ -7,6 +7,7 @@ import config from 'wnyc-web-client/config/environment';
 export default Torii.extend({
   torii: service(),
   store: service(),
+  session: service(),
 
   authenticate() {
     // Providers should return the normal data object, as well as
@@ -34,6 +35,9 @@ export default Torii.extend({
             resolve(authData);
           // if we get a 401 Unauthorized, create a user
           } else if (response && response.status === 401 && userAttrs) {
+            // flag to trigger a notification for new users
+            // not set on session.data because we don't want to persist it
+            this.get('session').set('isNewSocialUser', true);
             let user = this.get('store').createRecord('user', userAttrs);
             user.save({adapterOptions: {provider: data.provider}})
             .then(() => resolve(authData))
