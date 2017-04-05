@@ -114,7 +114,7 @@ test('scripts in well route content will execute', function(assert) {
 
   var p = document.createElement("p");
   p.innerHTML = "Added this paragraph!";
-  document.querySelector("[data-test-selector=story-detail] .l-constrained").appendChild(p);
+  document.querySelector("[data-test-selector=story-detail] .django-content").appendChild(p);
 
 })();
 \\x3C/script>
@@ -143,7 +143,7 @@ test('scripts in well route content will execute', function(assert) {
 
   andThen(function() {
     assert.equal(find('[data-test-selector=story-detail] p').length, 1, 'should only be one p tag');
-    let text = find('[data-test-selector=story-detail] .l-constrained').text().split('\n').filter(s => s).join(' ');
+    let text = find('[data-test-selector=story-detail] .django-content').find('p, div').text().split('\n').filter(s => s).join(' ');
     assert.equal(text, 'test body. Added this paragraph!');
   });
 });
