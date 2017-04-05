@@ -15,11 +15,12 @@
 
 .player-notification-link {
   color: $gold;
-  border-bottom: 1px solid rgba($gold, .3);
+  border-bottom: 1px solid rgba($gold, 0);
   align-self: center;
   margin: 0 0 0 10px;
   min-width: 70px;
-  &:hover {
+  &:hover,
+  &:focus {
     border-bottom-color: rgba($gold, .8);
   }
 }
