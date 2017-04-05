@@ -31,14 +31,18 @@
 }
 
 .user-settings .ember-power-select-trigger,
+.user-settings .ember-power-select-trigger:focus,
 .user-settings .stream-dropdown,
 .user-settings .autoplay-dropdown {
-  border-color: $lightestgray;
-  border-radius: 1px;
+  border: 1px $lightestgray solid;
 }
 
 .user-settings .ember-power-select-trigger[aria-disabled=true] {
   background-color: white;
+}
+
+.user-settings .stream-dropdown {
+  background: white;
 }
 
 .user-stream {
@@ -118,18 +122,19 @@
   }
 }
 
-.ember-power-select-trigger {
+.user-settings .ember-power-select-trigger {
   min-width: 250px;
   height: 48px;
+  cursor: pointer;
 }
 
-.ember-power-select-selected-item {
+.user-settings .ember-power-select-selected-item {
   position: absolute;
   top: 10px;
   left: 10px;
 }
 
-.ember-power-select-status-icon {
+.user-settings .ember-power-select-status-icon {
   right: 15.5px;
   border-width: 6px 6px 0 6px;
   border-color: #333 transparent transparent transparent;
@@ -147,8 +152,9 @@
   flex-grow: 1;
 }
 
-.ember-power-select-trigger[aria-disabled=true] {
+.user-settings .ember-power-select-trigger[aria-disabled=true] {
   border: solid 1px $nearwhite;
+  color: $lightestgray;
 }
 
 @media only screen and (min-width: 800px) {
