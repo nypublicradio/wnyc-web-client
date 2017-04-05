@@ -200,6 +200,7 @@ module.exports = function(environment) {
     ENV.wnycURL = '//example.com';
     ENV.wnycBetaURL = 'http://example.com';
     ENV.wnycAuthAPI = 'http://example.com';
+    ENV.wnycAPIGateway = 'http://example.com';
     ENV.platformEventsAPI = 'http://example.com';
   }
 
