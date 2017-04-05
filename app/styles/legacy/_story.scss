@@ -9,37 +9,12 @@ article header#storyHeader {
 }
 
 article section {
-  &.text {
-    max-width: 630px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   a {
-    border-bottom: .08em solid rgba(black, .1) !important; // Need !important because of a django override
+    // Need those extra `a` styles and !important because of a django override
+    border-bottom: .08em solid rgba(black, .1) !important;
 
     &:hover {
       border-color: $wqxrlink !important;
     }
-  }
-
-  h2 {
-    margin-bottom: 1rem;
-  }
-
-  h3, h4 {
-    margin-bottom: 0;
-  }
-
-  blockquote {
-    border-left: 4px solid $nearwhite;
-    padding-left: 20px;
-    font-size: 18px;
-    line-height: 1.6em;
-    font-weight: bold;
-  }
-
-  .storify, p > iframe, .embedded-image {
-    margin: 30px 0;
   }
 }
