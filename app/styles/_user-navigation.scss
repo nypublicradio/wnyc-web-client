@@ -215,7 +215,11 @@
 }
 @include mq($large-and-up) {
   .user-nav-link > a {
-    font-weight: 400;
+    font-weight: 600;
     color: black;
+
+    &:hover {
+      color: $wqxrlink;
+    }
   }
 }
