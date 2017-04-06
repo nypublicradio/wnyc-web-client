@@ -2,3 +2,9 @@
   max-width: ($middle-middle+px);
   margin: 0 auto;
 }
+
+.graphic-default {
+  > div {
+    margin: 0;
+  }
+}
