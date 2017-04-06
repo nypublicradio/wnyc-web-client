@@ -30,7 +30,7 @@
     {{#if model.channel.hasMarquee}}
         {{x-marquee model=model.channel isStaff=session.data.isStaff adminURL=adminURL}}
     {{else}}
-      {{channel-header model=model.channel isStaff=session.data.isStaff adminURL=adminURL classNames=(unless model.channel.featured 'flush')}}
+      {{channel-header model=model.channel isStaff=session.data.isStaff adminURL=adminURL}}
     {{/if}}
 
   <div class="l-constrained">
