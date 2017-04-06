@@ -64,6 +64,10 @@
       font-size: 24px;
       margin-bottom: 13px;
 
+      @include mq($mobile) {
+        font-size: 20px;
+      }
+
       a {
         transition: border-color 250ms, color 250ms;
 
