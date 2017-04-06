@@ -1,7 +1,11 @@
 import Route from 'ember-route';
 import service from 'ember-service/inject';
+<<<<<<< HEAD
 import PlayParamMixin from 'wqxr-web-client/mixins/play-param';
 import DS from 'ember-data';
+=======
+import RSVP from 'rsvp';
+>>>>>>> membership chunk rendering
 
 const carouselBg = 'https://images.unsplash.com/photo-1481462585914-9f695507135e?dpr=2&auto=format&fit=crop&w=1500&h=1500&q=80&cs=tinysrgb';
 
@@ -10,14 +14,15 @@ export default Route.extend(PlayParamMixin, {
   classNames: ['home'],
 
   model() {
-    return this.get('store').findRecord('bucket', 'wqxr-home').then(bucket => {
-      return {
-        featuredItems: bucket.get('bucketItems').slice(0, 8),
-        otherItems: bucket.get('bucketItems').slice(8)
-      };
+    return RSVP.hash({
+      membershipChunk: this.store.findRecord('chunk', 'wqxr-membership-home').catch(() => ''),
+      gridItems: this.store.findRecord('bucket', 'wqxr-home').then(b => b.get('bucketItems'))
     });
+
   },
-  setupController(controller) {
+
+
+  setupController(controller, model) {
     this._super(...arguments);
     
     let streams = DS.PromiseArray.create({
