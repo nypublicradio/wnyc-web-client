@@ -26,7 +26,7 @@
     }
 
     // sub headers
-    p > strong, h3 {
+    h3 {
       @include wqxr-title;
       font-size: 24px;
     }
