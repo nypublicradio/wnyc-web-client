@@ -13,7 +13,7 @@ export default FacebookConnectProvider.extend({
             }
             // collect user attrs from FB api and send to auth
             let userAttrs = {
-              providerToken: response.accessToken,
+              providerToken: data.accessToken,
               givenName: response.first_name,
               familyName: response.last_name,
               email: response.email,
