@@ -333,7 +333,7 @@
 
     &:hover,
     &:focus {
-        border-bottom-color: white !important;
+        border-bottom-color: white;
     }
 }
 
@@ -365,7 +365,7 @@
     color: white;
     &:hover,
     &:focus {
-        border-bottom-color: white;
+        border-bottom-color: white !important;
     }
 }
 
