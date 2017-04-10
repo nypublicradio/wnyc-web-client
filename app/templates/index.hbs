@@ -1,5 +1,4 @@
 <main class="l-container l-container--touch-full">
-  <!-- <section>here goes the technical chunk</section> -->
     {{#if model.wartopChunk}}
       {{django-page page=model.wartopChunk.pagecontent}}
     {{/if}}
@@ -54,7 +53,6 @@
   {{/if}}
 
   <section class="home__stories">
-
     {{#nypr-brick-layout as |layout|}}
 
       {{layout.blowout audio=audio items=(slice model.featuredItems 0 3)}}
