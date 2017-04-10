@@ -46,13 +46,12 @@
   font-size: 14px;
   color: white;
   margin-right: 2px;
+  font-weight: 600;
   @include mq($medium-and-up) {
     display: inline-block;
-    font-weight: 600;
   }
   @include mq($large-and-up) {
     color: black;
-    font-weight: 400;
   }
 }
 
