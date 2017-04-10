@@ -93,7 +93,6 @@
     "liquid-fire": "0.26.4",
     "loader.js": "^4.0.10",
     "morgan": "^1.6.1",
-    "nypr-ui": "nypublicradio/nypr-ui#c5c16aa",
     "nypr-account-settings": "nypublicradio/nypr-account-settings",
     "nypr-ads": "nypublicradio/nypr-ads",
     "nypr-player": "nypublicradio/nypr-player",
