@@ -15,6 +15,7 @@ export default Route.extend(PlayParamMixin, {
 
   model() {
     return RSVP.hash({
+      wartopChunk: this.store.findRecord('chunk', 'wqxr-wartop-home').catch(()=>''),
       membershipChunk: this.store.findRecord('chunk', 'wqxr-membership-home').catch(() => ''),
       gridItems: this.store.findRecord('bucket', 'wqxr-home').then(b => b.get('bucketItems'))
     });

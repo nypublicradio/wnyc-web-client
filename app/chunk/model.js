@@ -6,8 +6,7 @@ export default Model.extend({
   slug: attr(),
   content: attr(),
   pagecontent: Ember.computed('content', function() {   
-    let text = this.get('content');
-    console.log(text);      
+    let text = this.get('content');   
     return this.store.createRecord('django-page', { text });
   })
 });
