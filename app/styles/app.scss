@@ -79,6 +79,8 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 @import 'alt-channel';
 @import 'chunk';
 
+@import 'home';
+
 // LEGACY CODE
 @import 'legacy/weather';
 @import 'legacy/videos';
