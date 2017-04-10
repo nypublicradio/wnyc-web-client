@@ -39,7 +39,16 @@
 
       {{/layout.blowout}}
 
-      {{layout.cards audio=audio items=(slice model.wqxrHome.featuredItems 3 5)}}
+      {{#layout.cards as |row|}}
+        {{row.brick item=model.featuredItems.[3]}}
+        {{row.brick item=model.featuredItems.[4]}}
+        {{#row.brick}}
+          {{dfp-ad
+            slot="/6483581/rectangle/wqxr_rectangle"
+            sizes=(array (array 300 250))
+            target="wqxr_bigbox_ad"}}
+        {{/row.brick}}
+      {{/layout.cards}}
 
       {{layout.blowout audio=audio flip=true items=(slice model.wqxrHome.featuredItems 5)}}
 
