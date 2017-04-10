@@ -9,10 +9,10 @@ test('it shows streamPlaylistUrl if provided', function(assert) {
   this.set('streamPlaylistUrl', 'http://streamsplaylist/');
   this.render(hbs`{{nypr-player-integration/stream-info streamPlaylistUrl=streamPlaylistUrl}}`);
 
-  assert.equal(this.$('a[title="Music Playlist"]')[0].href, "http://streamsplaylist/");
+  assert.equal(this.$('a[title="Recently Played"]')[0].href, "http://streamsplaylist/");
 
   this.set('streamPlaylistUrl', false);
-  assert.equal(this.$('a[title="Music Playlist"]').length, 0);
+  assert.equal(this.$('a[title="Recently Played"]').length, 0);
 });
 
 test('it shows streamScheduleUrl', function(assert) {
