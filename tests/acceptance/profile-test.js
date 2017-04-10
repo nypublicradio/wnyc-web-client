@@ -78,7 +78,7 @@ test('can view & update attrs', function(assert) {
   });
   
   andThen(function() {
-    click('.nypr-basic-info [data-test-selector="edit-button"]');
+    click('.nypr-basic-info [data-test-selector="nypr-card-button"]');
   });
   
   andThen(function() {
@@ -125,7 +125,7 @@ skip('using bad password to update email shows error', function(assert) {
   visit('/profile');
   
   andThen(function() {
-    click('.nypr-basic-info [data-test-selector="edit-button"]');
+    click('.nypr-basic-info [data-test-selector="nypr-card-button"]');
   });
   
   andThen(function() {
@@ -165,7 +165,7 @@ test('can update password', function(assert) {
   authenticateSession(this.application, {access_token: 'foo'});
   visit('/profile');
   
-  click('.nypr-password-card [data-test-selector="edit-button"]');
+  click('.nypr-password-card [data-test-selector="nypr-card-button"]');
   
   andThen(function() {
     fillIn('input[name=currentPassword]', OLD);
@@ -195,7 +195,7 @@ test('trying to update with incorrect password shows error', function(assert) {
   authenticateSession(this.application, {access_token: 'foo'});
   visit('/profile');
   
-  click('.nypr-password-card [data-test-selector="edit-button"]');
+  click('.nypr-password-card [data-test-selector="nypr-card-button"]');
   
   andThen(function() {
     fillIn('input[name=currentPassword]', OLD);
