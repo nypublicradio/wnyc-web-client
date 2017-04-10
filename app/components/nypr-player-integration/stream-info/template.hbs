@@ -14,10 +14,10 @@
      data-tracking-label='{{streamName}}'>SCHEDULE</a>
   {{#if streamPlaylistUrl}}
   <a href={{streamPlaylistUrl}}
-     title='Music Playlist'
+     title='Recently Played'
      data-tracking-category='Persistent Player'
      data-tracking-action='Click Through to Music Playlist'
-     data-tracking-label='{{stream.name}}'>MUSIC PLAYLIST</a>
+     data-tracking-label='{{stream.name}}'>RECENTLY PLAYED</a>
   {{/if}}
   {{#link-to 'stream' (query-params modal='null') title='All Streams'}}ALL STREAMS{{/link-to}}
 </span>
