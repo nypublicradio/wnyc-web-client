@@ -58,7 +58,6 @@ test('Submitting valid credentials redirects to previous route', function(assert
 });
 
 test('Submitting invalid credentials shows form level error message', function(assert) {
-  server.create('user');
   server.post(`${config.wnycAuthAPI}/v1/session`, () => {
     return new Response(400, {}, {errors: {code: "UnauthorizedAccess"}});
   });
@@ -103,6 +102,8 @@ test('Log in with Facebook button is visible at load', function(assert) {
 });
 
 test('Successful facebook login redirects', function(assert) {
+  let user = server.create('user');
+  console.log('USER', user);
   registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
   withFeature('socialAuth');
   visit('/login');
@@ -112,8 +113,8 @@ test('Successful facebook login redirects', function(assert) {
   andThen(() => {
     assert.equal(currentURL(), '/');
     assert.ok(currentSession(this.application).get('isAuthenticated'), 'Session is authenticated');
-    assert.equal(find('.user-nav-greeting').text().trim(), 'Jane');
-    assert.equal(find('.user-nav-avatar > img').attr('src'), 'https://example.com/avatar.jpg');
+    assert.equal(find('.user-nav-greeting').text().trim(), user.given_name);
+    assert.equal(find('.user-nav-avatar > img').attr('src'), user.picture);
   });
 });
 

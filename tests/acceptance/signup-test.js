@@ -28,7 +28,6 @@ test('Sign up button is visible at load', function(assert) {
 
 test('Submitting the sign up form shows the thank you screen', function(assert) {
   server.create('user');
-
   visit('/signup');
 
   fillIn('input[name=given_name]', 'jane');
@@ -51,6 +50,7 @@ test('Sign up with Facebook button is visible at load', function(assert) {
 });
 
 test('Successful facebook login redirects', function(assert) {
+  let user = server.create('user');
   registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
   withFeature('socialAuth');
   visit('/signup');
@@ -60,8 +60,8 @@ test('Successful facebook login redirects', function(assert) {
   andThen(() => {
     assert.equal(currentURL(), '/');
     assert.ok(currentSession(this.application).get('isAuthenticated'), 'Session is authenticated');
-    assert.equal(find('.user-nav-greeting').text().trim(), 'Jane');
-    assert.equal(find('.user-nav-avatar > img').attr('src'), 'https://example.com/avatar.jpg');
+    assert.equal(find('.user-nav-greeting').text().trim(), user.given_name);
+    assert.equal(find('.user-nav-avatar > img').attr('src'), user.picture);
   });
 });
 

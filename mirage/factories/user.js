@@ -5,5 +5,6 @@ export default Factory.extend({
   adminURL: "/admin",
   email: faker.internet.email,
   given_name: faker.name.firstName,
-  family_name: faker.name.lastName
+  family_name: faker.name.lastName,
+  picture: faker.internet.avatar
 });
