@@ -1,4 +1,4 @@
-import ApplicationAdapter from './application';
+import ApplicationAdapter from 'wqxr-web-client/adapters/application';
 
 export default ApplicationAdapter.extend({
   buildURL() {
