@@ -3,24 +3,46 @@
 
   {{#if media.isMediumAndUp}}
     {{#stream-banner audio=audio streams=streams as |currentStream|}}
-      <h3>{{currentStream.currentComposer.name}}, {{currentStream.currentPiece}}</h3>
-      {{#link-to 'playlist' currentStream.slug class='text--small text--white'}}
-        Recently played &raquo;
-      {{/link-to}}
+      {{#if (and currentStream.currentComposer.name currentStream.currentPiece)}}
+        <h3>{{currentStream.currentComposer.name}}, {{currentStream.currentPiece}}</h3>
+        {{#link-to 'playlist' currentStream.slug class='text--small text--white'}}
+          Recently played &raquo;
+        {{/link-to}}
+      {{else if currentStream.isWNYC}}
+        <h3>{{currentStream.currentShow.showTitle}}{{#if currentStream.currentShow.episodeTitle}} - {{currentStream.currentShow.episodeTitle}}{{/if}}</h3>
+      {{/if}}
     {{/stream-banner}}
   {{else}}
-    {{#stream-carousel streams=streams background=carouselBg as |stream|}}
-      {{#listen-button
-        audio=audio
-        type='blue-boss'
-        state=(if (eq stream.slug audio.currentId) audio.playState)
-        itemPK=stream.slug
-        itemTitle=stream.name}}
-        Listen Live
-      {{/listen-button}}
-      {{#link-to 'playlist' stream.slug (query-params scheduleStation=stream.slug) class="text--small text--white"}}
-        Recently played &raquo;
-      {{/link-to}}
+    {{#stream-carousel streams=streams background=carouselBg as |stream slide|}}
+      {{#slide.header}}{{stream.name}}{{/slide.header}}
+      
+      {{#if (and stream.currentComposer.name stream.currentPiece)}}
+        {{#slide.body}}
+          {{stream.currentComposer.name}}
+          {{#if stream.currentComposer}}<br />{{/if}}
+          {{stream.currentPiece}}
+        {{/slide.body}}
+      {{else}}
+        {{slide.body}}
+      {{/if}}
+      
+      {{#slide.footer}}
+        {{#listen-button
+          audio=audio
+          type='blue-boss'
+          state=(if (eq stream.slug audio.currentId) audio.playState)
+          itemPK=stream.slug
+          itemTitle=stream.name}}
+          Listen Live
+        {{/listen-button}}
+        
+        {{#if (and stream.currentComposer.name stream.currentPiece)}}
+          {{#link-to 'playlist' stream.slug (query-params scheduleStation=stream.slug) class="text--small text--white"}}
+            Recently played &raquo;
+          {{/link-to}}
+        {{/if}}
+      {{/slide.footer}}
+      
     {{/stream-carousel}}
   {{/if}}
 
