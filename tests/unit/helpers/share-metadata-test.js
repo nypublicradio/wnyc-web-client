@@ -13,7 +13,8 @@ test('it produces the correct metadata for stories', function(assert) {
     expectedMetadata: {
       shareText: "I'm listening to Cool Story",
       shareUrl: 'http://wqxr.org/story/cool-story',
-      analyticsCode: ''
+      analyticsCode: '',
+      via: 'WQXR'
     }
   },{
     description: 'onDemand Story with Show and analytics code',
@@ -21,12 +22,14 @@ test('it produces the correct metadata for stories', function(assert) {
       title: 'Cool Story',
       headers: {brand: {title: 'Cool Show'}},
       url: 'http://wqxr.org/story/cool-story',
-      analyticsCode: '123'
+      analyticsCode: '123',
+      via: 'WQXR'
     },
     expectedMetadata: {
       shareText: "I'm listening to Cool Show - Cool Story",
       shareUrl: 'http://wqxr.org/story/cool-story',
-      analyticsCode: '123'
+      analyticsCode: '123',
+      via: 'WQXR'
     }
   },{
     description: 'Stream Show',
@@ -40,7 +43,8 @@ test('it produces the correct metadata for stories', function(assert) {
     expectedMetadata: {
       shareText: "I'm listening to Cool Show",
       shareUrl: 'http://wqxr.org/shows/cool-show',
-      analyticsCode: ''
+      analyticsCode: '',
+      via: 'WQXR'
     }
   },{
     description: 'Stream Song',
@@ -55,7 +59,8 @@ test('it produces the correct metadata for stories', function(assert) {
     expectedMetadata: {
       shareText: 'I\'m listening to Maestro - Masterpiece',
       shareUrl: 'http://www.wqxr.org/streams/test',
-      analyticsCode: ''
+      analyticsCode: '',
+      via: 'WQXR'
     }
   },{
     description: 'Null Story',
