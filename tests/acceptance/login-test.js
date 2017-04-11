@@ -102,7 +102,7 @@ test('Log in with Facebook button is visible at load', function(assert) {
   andThen(() => assert.equal(find('button:contains(Log in with Facebook)').length, 1));
 });
 
-test('Successful facebook login redirects and shows correct alert', function(assert) {
+test('Successful facebook login redirects', function(assert) {
   registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
   withFeature('socialAuth');
   visit('/login');
@@ -111,7 +111,6 @@ test('Successful facebook login redirects and shows correct alert', function(ass
 
   andThen(() => {
     assert.equal(currentURL(), '/');
-    assert.equal(find('.alert-success').text().trim(), "You’re now logged in via Facebook. You can update your information on your account page.");
     assert.ok(currentSession(this.application).get('isAuthenticated'), 'Session is authenticated');
     assert.equal(find('.user-nav-greeting').text().trim(), 'Jane');
     assert.equal(find('.user-nav-avatar > img').attr('src'), 'https://example.com/avatar.jpg');
@@ -129,21 +128,5 @@ test('Unsuccessful facebook login shows alert', function(assert) {
     assert.equal(currentURL(), '/login');
     assert.equal(find('.alert-warning').text().trim(), "Unfortunately, we weren't able to authorize your account.");
     assert.ok(!currentSession(this.application).get('isAuthenticated'), 'Session is not authenticated');
-  });
-});
-
-test('Unsuccessful fb login shows alert', function(assert) {
-  server.get(`${config.wnycAuthAPI}/v1/session`, {}, 401);
-  server.post(`${config.wnycAuthAPI}/v1/user`, {}, 500);
-  registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
-  withFeature('socialAuth');
-  visit('/login');
-
-  click('button:contains(Log in with Facebook)');
-
-  andThen(() => {
-    assert.equal(currentURL(), '/login');
-    assert.equal(find('.alert-warning').text().trim(), "Unfortunately, we weren't able to authorize your account.");
-    assert.notOk(currentSession(this.application).get('isAuthenticated'), 'Session is not authenticated');
   });
 });
