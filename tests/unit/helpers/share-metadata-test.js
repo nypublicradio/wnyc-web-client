@@ -68,7 +68,8 @@ test('it produces the correct metadata for stories', function(assert) {
     expectedMetadata: {
       shareText: '',
       shareUrl: '',
-      analyticsCode: ''
+      analyticsCode: '',
+      via: ''
     }
   }];
 
