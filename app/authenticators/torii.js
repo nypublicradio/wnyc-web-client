@@ -14,7 +14,7 @@ export default Torii.extend({
     // an optional userAttrs object that can be provided to
     // createRecord to create a new user
     return new RSVP.Promise((resolve, reject) => {
-      this._super(...arguments).then(({data, userAttrs}) => {
+      this._super(...arguments).then((data) => {
         let authData = {
           access_token: data.accessToken,
           provider: data.provider,
@@ -33,15 +33,6 @@ export default Torii.extend({
           // if we can log in, resolve
           if (response && response.ok) {
             resolve(authData);
-          // if we get a 401 Unauthorized, create a user
-          } else if (response && response.status === 401 && userAttrs) {
-            // flag to trigger a notification for new users
-            // not set on session.data because we don't want to persist it
-            this.get('session').set('isNewSocialUser', true);
-            let user = this.get('store').createRecord('user', userAttrs);
-            user.save({adapterOptions: {provider: data.provider}})
-            .then(() => resolve(authData))
-            .catch(reject);
           // Otherwise, reject
           } else {
             reject(response);
