@@ -25,7 +25,15 @@
   {{/if}}
 
   <section class="home__stories">
-    {{nypr-brick-layout audio=audio items=model.featuredItems}}
+    {{#nypr-brick-layout as |layout|}}
+
+      {{layout.blowout audio=audio items=(slice model.featuredItems 0 3)}}
+      
+      {{layout.blowout audio=audio items=(slice model.featuredItems 3 6)}}
+      
+      {{layout.cards audio=audio items=(slice model.featuredItems 6)}}
+      
+    {{/nypr-brick-layout}}
     {{nypr-brick-grid audio=audio items=model.otherItems}}
   </section>
 
