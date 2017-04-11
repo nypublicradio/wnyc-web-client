@@ -25,7 +25,8 @@ export function shareMetadata(story) {
       }
     }
 
-    return({shareText, shareUrl, analyticsCode});
+    let via = get(story, 'twitterHandle') || 'WQXR';
+    return {shareText, shareUrl, analyticsCode, via};
 }
 
 export default helper(shareMetadata);
