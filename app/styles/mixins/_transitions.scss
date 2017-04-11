@@ -1,0 +1,14 @@
+@mixin player-reveal-transition {
+  transition-delay: 0s;
+  transition-duration: 350ms;
+  transition-timing-function: cubic-bezier(0.17, 0.89, 0.39, 1.25);
+  transition-property: transform;
+}
+
+@mixin player-reveal-transition--closed {
+  transform: translateY(0);
+}
+
+@mixin player-reveal-transition--open {
+  transform: translateY(-80px);
+}

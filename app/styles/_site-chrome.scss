@@ -1,3 +1,6 @@
+@import 'mixins/_layout';
+@import 'mixins/_transitions';
+
 .sitechrome-corner {
 
   > h1 {
@@ -363,6 +366,16 @@
     background: rgba($red, 0.8);
     border-color: rgba(white, 0.5);
   }
+}
+
+.sitechrome__nav-footer {
+  @include l-bottom;
+  @include player-reveal-transition;
+  @include player-reveal-transition--closed;
+}
+
+.sitechrome--player-open .sitechrome__nav-footer {
+  @include player-reveal-transition--open;
 }
 
 .sitechrome-page-content-area {

@@ -139,6 +139,12 @@
     <!-- .box -->
     </div>
     <!-- .x-scrollable-body -->
+
+    {{#if media.isLargeAndUp}}
+    <div class="sitechrome__nav-footer">
+      {{nypr-social-icons title="Follow WNYC" items=socialIcons}}
+    </div>
+    {{/if}}
   </nav>
 
   <div class="l-full sitechrome-page-content-area">
