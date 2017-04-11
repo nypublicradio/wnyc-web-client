@@ -21,6 +21,7 @@ export default Model.extend({
   whatsOn:              attr('number'),
   position:             attr('number'),
   playlistUrl:          attr('string'),
+  twitterHandle:        attr('string'),
 
   currentShow:          attr(),
   currentPlaylistItem:  attr(),
