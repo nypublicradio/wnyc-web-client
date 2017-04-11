@@ -18,19 +18,11 @@
           </div>
           <div class="user-nav-popup">
             <ul class="user-nav-list">
-              <li class="user-nav-listitem">
-                <a href='/settings'
-                  title="Settings"
-                  data-tracking-category="WNYC Menu"
-                  data-tracking-action="Clicked Settings"
-                  onclick={{action 'closePopup'}}>Settings</a>
+              <li class="user-nav-listitem" {{action 'closePopupAndTrack' 'Settings'}}>
+                {{link-to 'Settings' 'settings'}}
               </li>
-              <li class="user-nav-listitem">
-                <a href='/profile'
-                  title="Account"
-                  data-tracking-category="WNYC Menu"
-                  data-tracking-action="Clicked Account"
-                  onclick={{action 'closePopup'}}>Account</a>
+              <li class="user-nav-listitem" {{action 'closePopupAndTrack' 'Account'}}>
+                {{link-to 'Account' 'profile'}}
               </li>
               <li class="user-nav-listitem"><a href="/" title="Log out" {{action 'logout'}}>Log out</a></li>
             </ul>
