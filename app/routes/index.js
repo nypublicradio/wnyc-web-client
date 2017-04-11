@@ -14,13 +14,13 @@ export default Route.extend(PlayParamMixin, {
     return RSVP.hash({
       wartopChunk: this.store.findRecord('chunk', 'wqxr-wartop-home').catch(()=>''),
       membershipChunk: this.store.findRecord('chunk', 'wqxr-membership-home').catch(() => ''),
-      gridItems: this.store.findRecord('bucket', 'wqxr-home').then(b => b.get('bucketItems'))
+      featuredItems: this.store.findRecord('bucket', 'wqxr-home').then(b => b.get('bucketItems').slice(0, 8)),
+      otherItems: this.store.findRecord('bucket', 'wqxr-home').then(b => b.get('bucketItems').slice(8))
     });
   },
 
   setupController(controller, model) {
     this._super(...arguments);
-    
     let streams = DS.PromiseArray.create({
       promise: this.store.findAll('stream', {reload: true}).then(s => {
         return s.filterBy('liveWQXR').concat(s.filterBy('isWNYC'));
