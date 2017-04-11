@@ -55,12 +55,27 @@
   <section class="home__stories">
     {{#nypr-brick-layout as |layout|}}
 
-      {{layout.blowout audio=audio items=(slice model.featuredItems 0 3)}}
+      {{#layout.blowout as |blowout|}}
+      
+        {{blowout.main item=model.featuredItems.[0]}}
+        
+        {{#if model.membershipChunk}}
+          {{#blowout.column}}
+            {{django-page page=model.membershipChunk.pagecontent}}
+          {{/blowout.column}}
+        {{else}}
+          {{#blowout.column as |column|}}
+            {{column.brick item=model.featuredItems.[1]}}
+            {{column.brick item=model.featuredItems.[2]}}
+          {{/blowout.column}}
+        {{/if}}
+        
+      {{/layout.blowout}}
 
       {{layout.cards audio=audio items=(slice model.featuredItems 3 5)}}
 
-      {{layout.blowout audio=audio items=(slice model.featuredItems 5 8)}}
-
+      {{layout.blowout audio=audio items=(slice model.featuredItems 5)}}
+      
     {{/nypr-brick-layout}}
     {{nypr-brick-grid audio=audio items=model.otherItems}}
 
