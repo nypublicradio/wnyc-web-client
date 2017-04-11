@@ -20,9 +20,9 @@
     {{/alt-channel-layout}}
   {{else}}
     {{#if model.channel.hasMarquee}}
-        {{x-marquee model=model.channel isStaff=session.data.isStaff adminURL=adminURL}}
+        {{x-marquee listenLive=model.listenLive model=model.channel isStaff=session.data.isStaff adminURL=adminURL}}
     {{else}}
-      {{channel-header model=model.channel isStaff=session.data.isStaff adminURL=adminURL}}
+      {{channel-header listenLive=model.listenLive model=model.channel isStaff=session.data.isStaff adminURL=adminURL}}
     {{/if}}
 
   <div class="l-constrained">
