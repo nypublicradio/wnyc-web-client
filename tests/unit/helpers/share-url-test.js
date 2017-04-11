@@ -5,7 +5,7 @@ module('Unit | Helper | share url');
 
 // Replace this with your real tests.
 test('it generates the correct share urls', function(assert) {
-  let metadata = {shareText: 'Cool Story', shareUrl: 'http://wnyc.org'};
+  let metadata = {shareText: 'Cool Story', shareUrl: 'http://wnyc.org', via: 'WNYC'};
   let testCases = [{
     description: 'facebook',
     service: 'Facebook',

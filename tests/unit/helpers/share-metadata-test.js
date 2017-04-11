@@ -13,7 +13,8 @@ test('it produces the correct metadata for stories', function(assert) {
     expectedMetadata: {
       shareText: 'Cool Story',
       shareUrl: 'http://wync.org/story/cool-story',
-      analyticsCode: ''
+      analyticsCode: '',
+      via: 'WNYC'
     }
   },{
     description: 'onDemand Story with Show and analytics code',
@@ -21,12 +22,14 @@ test('it produces the correct metadata for stories', function(assert) {
       title: 'Cool Story',
       headers: {brand: {title: 'Cool Show'}},
       url: 'http://wync.org/story/cool-story',
-      analyticsCode: '123'
+      analyticsCode: '123',
+      via: 'WNYC'
     },
     expectedMetadata: {
       shareText: 'Cool Show - Cool Story',
       shareUrl: 'http://wync.org/story/cool-story',
-      analyticsCode: '123'
+      analyticsCode: '123',
+      via: 'WNYC'
     }
   },{
     description: 'Stream Show',
@@ -40,7 +43,8 @@ test('it produces the correct metadata for stories', function(assert) {
     expectedMetadata: {
       shareText: 'Cool Show',
       shareUrl: 'http://wync.org/shows/cool-show',
-      analyticsCode: ''
+      analyticsCode: '',
+      via: 'WNYC'
     }
   },{
     description: 'Stream Song',
@@ -55,7 +59,8 @@ test('it produces the correct metadata for stories', function(assert) {
     expectedMetadata: {
       shareText: 'Masterpiece - Maestro',
       shareUrl: 'http://www.wnyc.org/streams/test',
-      analyticsCode: ''
+      analyticsCode: '',
+      via: 'WNYC'
     }
   },{
     description: 'Null Story',
