@@ -37,6 +37,14 @@ module.exports = function(deployTarget) {
       sentryApiKey: process.env.SENTRY_EMBER_SOURCEMAPS_KEY,
       enableRevisionTagging: false,
       replaceFiles: true
+    },
+
+    'json-config': {
+      jsonBlueprint(context, pluginHelper) {
+        var jsonBlueprint = pluginHelper.readConfigDefault('jsonBlueprint');
+        jsonBlueprint.script.includeContent = true;
+        return jsonBlueprint;
+      }
     }
   };
 
