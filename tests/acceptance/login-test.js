@@ -103,7 +103,6 @@ test('Log in with Facebook button is visible at load', function(assert) {
 
 test('Successful facebook login redirects', function(assert) {
   let user = server.create('user');
-  console.log('USER', user);
   registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
   withFeature('socialAuth');
   visit('/login');
