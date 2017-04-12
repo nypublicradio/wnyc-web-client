@@ -38,7 +38,7 @@ module.exports = function(deployTarget) {
       enableRevisionTagging: false,
       replaceFiles: true
     },
-    
+
     'json-config': {
       jsonBlueprint(context, pluginHelper) {
         var jsonBlueprint = pluginHelper.readConfigDefault('jsonBlueprint');
