@@ -1,6 +1,8 @@
 <main class="l-container l-container--touch-full">
     {{#if model.wartopChunk}}
-      {{django-page page=model.wartopChunk.pagecontent}}
+      <section class="wartop-chunk">
+        {{django-page page=model.wartopChunk.pagecontent}}
+      </section>
     {{/if}}
 
   {{#if media.isMediumAndUp}}
@@ -61,7 +63,9 @@
         
         {{#if model.membershipChunk}}
           {{#blowout.column}}
-            {{django-page page=model.membershipChunk.pagecontent}}
+            <div class="chunk__item">
+              {{django-page page=model.membershipChunk.pagecontent}}
+            </div>
           {{/blowout.column}}
         {{else}}
           {{#blowout.column as |column|}}
