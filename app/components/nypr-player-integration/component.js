@@ -51,7 +51,7 @@ export default Ember.Component.extend({
 
   image                : reads('currentAudio.imageMain.url'),
   fallbackImage        : reads('currentAudio.headers.brand.logoImage.url'),
-  defaultImageUrl      : '/assets/img/bg/player-background.png',
+  defaultImageUrl      : '/assets/img/backgrounds/player-background.jpg',
   backdropImageUrl     : or('image', 'fallbackImage', 'defaultImageUrl'),
 
   playingAudioType     : 'ondemand', //bumper, stream, ondemand
