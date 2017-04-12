@@ -1032,12 +1032,12 @@
   &.blue-hollow {
     @include btn-size(44px);
 
-    @include gray-hollow-svg($blue);
+    @include gray-hollow-svg($wqxrblue);
     @include blue-listen-spinner;
 
     &:hover .listen-ui,
     &:focus .listen-ui {
-      @include gray-hollow-svg-hover($blue);
+      @include gray-hollow-svg-hover($wqxrblue);
     }
     &:active .listen-ui {
       @include gray-hollow-svg($gray);
