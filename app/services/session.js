@@ -1,13 +1,10 @@
 import SessionService from 'ember-simple-auth/services/session';
 import config from 'wnyc-web-client/config/environment';
 import RSVP from 'rsvp';
-import service from 'ember-service/inject';
 import fetch from 'fetch';
 import getOwner from 'ember-owner/get';
 
 export default SessionService.extend({
-  store: service(),
-
   syncBrowserId(report = true) {
     let legacyId;
     try {
