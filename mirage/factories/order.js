@@ -9,7 +9,7 @@ export default Factory.extend({
   premium: () => faker.random.arrayElement(['Brian Lehrer Animated Series', 'BL Mug', 'WNYC Hoodie', '']),
   creditCardType: () => faker.random.arrayElement(['Visa', 'Mastercard', 'Amex', 'Discover']),
   creditCardLast4Digits: '0302',
-  isActive: faker.random.boolean,
+  isActiveMember: faker.random.boolean,
   isSustainer() {
     return this.orderType === 'sustainer' ? true : false;
   },

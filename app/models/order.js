@@ -12,7 +12,7 @@ export default Model.extend({
   premium: attr('string'),
   creditCardType: attr('string'),
   creditCardLast4Digits: attr('string'),
-  isActive: attr('boolean'),
+  isActiveMember: attr('boolean'),
   isSustainer: computed('orderType', function() {
     return this.get('orderType') === 'recurring';
   }),
