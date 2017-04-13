@@ -17,7 +17,6 @@
       {{/if}}
     {{/stream-banner}}
 
-  <section class="home__stories">
     {{#nypr-brick-layout as |layout|}}
 
       {{#layout.blowout as |blowout|}}
@@ -26,7 +25,7 @@
 
         {{#if model.membershipChunk}}
           {{#blowout.column}}
-            <div class="chunk__item">
+''            <div class="chunk__item">
               {{django-page page=model.membershipChunk.pagecontent}}
             </div>
           {{/blowout.column}}
@@ -44,7 +43,13 @@
       {{layout.blowout audio=audio flip=true items=(slice model.wqxrHome.featuredItems 5)}}
 
     {{/nypr-brick-layout}}
-    {{nypr-brick-grid audio=audio items=model.wqxrHome.otherItems}}
   </section>
+
+  {{ newsletter-signup }}
+
+  <section class="l-container l-container--touch-full">
+    {{nypr-brick-grid audio=audio items=model.otherItems}}
+  </section>
+
 
 </main>
