@@ -1,3 +1,4 @@
+import { equal, not } from 'ember-computed';
 import DS from 'ember-data';
 const {
   Model,
@@ -10,5 +11,9 @@ export default Model.extend({
   familyName:         attr('string'),
   preferredUsername:  attr('string'),
   picture:            attr('string'),
-  facebookId:         attr('string')
+  facebookId:         attr('string'),
+  status:             attr('string'),
+
+  socialOnly:         equal('status', 'FORCE_CHANGE_PASSWORD'),
+  hasPassword:        not('socialOnly')
 });
