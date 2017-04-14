@@ -54,10 +54,10 @@ export function removeAlienListeners() {
 // destination. This runs in the django-page model's separateScripts method as well
 // as in the django-page component's didReceiveAttrs hook if an Alien DOM is present.
 export function embeddedComponentSetup(root = document) {
-  Array.from(root.querySelectorAll('[data-ember-component]')).forEach(function (el, i) {
+  Array.from(root.querySelectorAll('[data-ember-component]')).forEach(function (el) {
     // embedded ember components require an ID that is in sync with the
     // django-page document
-    el.id = el.id || `ember-component-${i}`;
+    el.id = el.id || Ember.guidFor(el);
     el.setAttribute('data-text-content', el.textContent.trim());
     el.textContent = '';
   });
