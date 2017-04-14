@@ -10,9 +10,6 @@ export default Torii.extend({
   session: service(),
 
   authenticate() {
-    // Providers should return the normal data object, as well as
-    // an optional userAttrs object that can be provided to
-    // createRecord to create a new user
     return new RSVP.Promise((resolve, reject) => {
       this._super(...arguments).then((data) => {
         let authData = {
