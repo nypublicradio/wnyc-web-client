@@ -1,9 +1,10 @@
 import Component from 'ember-component';
 import computed, { readOnly } from 'ember-computed';
 import { htmlSafe } from 'ember-string';
+import config from 'wqxr-web-client/config/environment';
 
 const ASSET_MAP = {
-  '404': '/assets/img/error/violinist.jpg'
+  '404': `${config.staticHost}/assets/img/error/violinist.jpg`
 };
 
 const TEXT_MAP = {
