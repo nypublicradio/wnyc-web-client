@@ -103,7 +103,6 @@ module.exports = function(environment) {
     googleAnalyticsKey: process.env.GOOGLE_ANALYTICS || 'UA-46158613-1',
     nprGoogleAnalyticsKey: 'UA-18188937-11',
     googleAPIv3Key: process.env.GOOGLE_API_V3_KEY,
-    typekit: { kitId: 'ifl2zxi' },
     wnycAPI: process.env.WNYC_API,
     discoverStation: "wnyc-v2",
     discoverAPIKey: "trident",
