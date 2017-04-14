@@ -1,13 +1,42 @@
-img.error-img {
-    margin-right: 25px;
-    max-width: 340px;
-    @include mq($small-only) {
-        margin-right: 17px;
-        max-width: 135px;
-    }
+.error-page {
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: 0% 20%;
+  background-size: cover;
+  min-height: 100vh;
+  
+  @include mq($mobile) {
+    background-position: 40% 0%;
+  }
 }
 
-.error-text-block {
-    margin-right: 25px;
+.error-text {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  
+  @include mq($mobile) {
+    position: static;
+    max-width: 65%;
+    padding: 25px;
+  }
+}
+.error-title {
+  @include text--largest;
+  color: white;
+  
+  @include mq($mobile) {
+    @include h2;
+    line-height: 1.33;
+  }
 }
 
+.error-subtitle {
+  @include h2;
+  color: white;
+  
+  @include mq($mobile) {
+    @include fontsize($base-font); /* 16px */
+    line-height: 1.63;
+  }
+}
