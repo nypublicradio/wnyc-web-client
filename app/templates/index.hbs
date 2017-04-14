@@ -18,9 +18,13 @@
 
       {{#if (and stream.currentComposer.name stream.currentPiece)}}
         {{#slide.body}}
-          {{stream.currentComposer.name}}
-          {{#if stream.currentComposer}}<br />{{/if}}
-          {{stream.currentPiece}}
+          {{#if (and stream.currentComposer.name stream.currentPiece)}}
+            {{stream.currentComposer.name}}<br />
+            {{stream.currentPiece}}
+          {{else if stream.isWNYC}}
+            {{stream.currentShow.showTitle}}{{#if stream.currentShow.episodeTitle}}<br />{{/if}}
+            {{stream.currentShow.episodeTitle}}
+          {{/if}}
         {{/slide.body}}
       {{else}}
         {{slide.body}}
