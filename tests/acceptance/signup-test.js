@@ -74,7 +74,7 @@ test('Unsuccessful facebook login shows alert', function(assert) {
 
   andThen(() => {
     assert.equal(currentURL(), '/signup');
-    assert.equal(find('.alert-warning').text().trim(), "Unfortunately, we weren't able to authorize your account.");
+    assert.equal(find('.alert-warning').text().trim(), "We're sorry, but we weren't able to log you in through Facebook.");
     assert.ok(!currentSession(this.application).get('isAuthenticated'), 'Session is not authenticated');
   });
 });
