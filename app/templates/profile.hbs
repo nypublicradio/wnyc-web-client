@@ -36,6 +36,23 @@
     {{/if}}
   </div>
 
+  {{#if features.socialAuth}}
+  {{#if model.hasPassword}}
+    {{#nypr-accounts/social-card as |card|}}
+
+      {{card.connect-button
+        connected=model.facebookId
+        providerName='Facebook'
+        providerIcon='facebook-official'
+        buttonClass='nypr-social-connect__button--facebook'
+        buttonAction=(action 'linkFacebookAccount')
+        manageUrl='https://www.facebook.com/settings?tab=applications'
+        }}
+
+    {{/nypr-accounts/social-card}}
+  {{/if}}
+  {{/if}}
+
   <div class="aligncenter text--small">
     <p>
       Need help? Contact us using our <a href="https://nypublicradio.zendesk.com/hc/en-us/categories/202751107/" target="_blank">contact form</a> or call us at <a href="tel:646-829-4000">646-829-4000</a>.<br />

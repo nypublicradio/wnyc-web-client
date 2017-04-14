@@ -8,7 +8,9 @@ import RSVP from 'rsvp';
 
 const FLASH_MESSAGES = {
   email: 'Your email has been updated. Remember to use this new email the next time you log on.',
-  password: 'Your password has been updated.'
+  password: 'Your password has been updated.',
+  connected: "Success! You can now log in with your Facebook account.",
+  connectError: "We're sorry, but we weren't able to connect your Facebook account."
 };
 
 export default Controller.extend({
@@ -49,10 +51,10 @@ export default Controller.extend({
     });
   },
 
-  showFlash(type) {
+  showFlash(messageId, type='success') {
     this.get('flashMessages').add({
-      message: FLASH_MESSAGES[type],
-      type: 'success',
+      message: FLASH_MESSAGES[messageId],
+      type: type,
       sticky: true
     });
   },
