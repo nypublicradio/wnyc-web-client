@@ -38,6 +38,7 @@ test('visiting /reset with a bad code', function(assert) {
 });
 
 test('visiting /reset and resetting password and logging in', function(assert) {
+  server.create('bucket', {slug: 'wqxr-home'}); // redirected to homepage
   server.create('user');
   visit(resetUrlWithEmailAndConfirmation);
 

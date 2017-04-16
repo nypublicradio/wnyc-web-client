@@ -260,6 +260,7 @@ test('visiting a show with a different header donate chunk', function(assert) {
   });
   server.create('django-page', {id: show.id});
   server.create('django-page', {id: 'fake/'});
+  server.create('bucket', {slug: 'wqxr-home'}); // redirected to homepage
 
   djangoPage
     .bootstrap(show)
