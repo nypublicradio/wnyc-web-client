@@ -30,5 +30,5 @@ test('it renders 404 page', function(assert) {
 
   this.render(hbs`{{error-page error=testError}}`);
 
-  assert.ok(this.$('[data-test-selector=404]').length);)
+  assert.ok(this.$('[data-test-selector=404]').length);
 });
