@@ -7,8 +7,6 @@ import { decamelizeKeys } from 'wnyc-web-client/helpers/decamelize-keys';
 
 export default Torii.extend({
   torii: service(),
-  store: service(),
-  session: service(),
 
   authenticate() {
     return this._super(...arguments)
