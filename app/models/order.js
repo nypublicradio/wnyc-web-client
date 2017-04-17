@@ -7,6 +7,7 @@ export default Model.extend({
   fund: attr('string'),
   orderPrice: attr('number'),
   orderDate: attr('string'),
+  orderCode: attr('string'),
   orderType: attr('string'),
   orderKey: attr('string'),
   premium: attr('string'),
