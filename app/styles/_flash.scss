@@ -1,5 +1,5 @@
-.alert-success {
-  background-color: #0eb8ba;
+.alert-success,
+.alert-warning {
   padding: 18px 28px;
   color: white;
   font-weight: 600;
@@ -10,7 +10,31 @@
   left: 0;
   right: 0;
 
+  .account-main & {
+    position: static;
+    width: 100%;
+  }
+
+  .sitechrome-page-content-area & {
+    position: static;
+    width: 100%;
+    margin-top: -24px;
+    margin-bottom: 24px;
+  }
+
+  .index_loading .sitechrome-page-content-area & {
+    margin-top: 0px;
+  }
+
   + .account-info {
     padding-top: 125px;
   }
+}
+
+.alert-success {
+  background-color: $lightgreen;
+}
+
+.alert-warning {
+  background-color: #ff0033;
 }

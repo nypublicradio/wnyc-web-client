@@ -152,9 +152,10 @@ export default function() {
   this.post('/v1/password', {});
 
   this.get('/v1/session', ({users}, request) => {
-    if (!request.requestHeaders.Authorization) {
+    if (!request.requestHeaders.Authorization && !request.requestHeaders.authorization) {
       return new Response(401);
     }
+
     return users.first();
   });
   this.post('/v1/session', {access_token: 'secret', expires_in: 3600, token_type: 'bearer'});
@@ -165,10 +166,10 @@ export default function() {
     let body = JSON.parse(request.requestBody);
     if (request.requestHeaders['X-Provider']) {
       let fbUser = users.create({
-        email: faker.internet.email(),
-        given_name: faker.name.firstName(),
-        family_name: faker.name.lastName(),
-        perferred_username: faker.name.firstName() + faker.name.firstName(),
+        email: body.email || faker.internet.email(),
+        given_name: body.given_name || faker.name.firstName(),
+        family_name: body.family_name || faker.name.lastName(),
+        preferred_username: body.preferred_username || faker.name.firstName() + faker.name.firstName(),
         facebook_id: body.facebook_id,
         picture: body.picture
       });
@@ -178,7 +179,7 @@ export default function() {
     return users.first();
   });
   this.patch('/v1/user', (schema, request) => {
-    if (!request.requestHeaders.Authorization) {
+    if (!request.requestHeaders.Authorization && !request.requestHeaders.authorization) {
       return new Response(401);
     }
     let user = schema.users.first();

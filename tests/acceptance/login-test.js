@@ -5,11 +5,13 @@ import { Response } from 'ember-cli-mirage';
 import config from 'wnyc-web-client/config/environment';
 import { currentSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
 import 'wnyc-web-client/tests/helpers/with-feature';
+import dummySuccessProviderFb from 'wnyc-web-client/tests/helpers/torii-dummy-success-provider-fb';
+import dummyFailureProvider from 'wnyc-web-client/tests/helpers/torii-dummy-failure-provider';
+import { registerMockOnInstance } from 'wnyc-web-client/tests/helpers/register-mock';
 
 moduleForAcceptance('Acceptance | login', {
   beforeEach() {
     server.create('stream');
-    server.create('user');
   }
 });
 
@@ -28,6 +30,7 @@ test('Log in button is visible at load', function(assert) {
 });
 
 test('Submitting valid credentials redirects to previous route', function(assert) {
+  server.create('user');
   let page = server.create('django-page', {id: '/'});
 
   andThen(() => {
@@ -73,6 +76,7 @@ test('Submitting invalid credentials shows form level error message', function(a
 });
 
 skip('Clicking logout hides privileged links', function(assert) {
+  server.create('user');
   server.create('django-page', {id: '/'});
   visit('/login');
   andThen(() => {
@@ -95,4 +99,34 @@ test('Log in with Facebook button is visible at load', function(assert) {
   visit('/login');
 
   andThen(() => assert.equal(find('button:contains(Log in with Facebook)').length, 1));
+});
+
+test('Successful facebook login redirects', function(assert) {
+  let user = server.create('user');
+  registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
+  withFeature('socialAuth');
+  visit('/login');
+
+  click('button:contains(Log in with Facebook)');
+
+  andThen(() => {
+    assert.equal(currentURL(), '/');
+    assert.ok(currentSession(this.application).get('isAuthenticated'), 'Session is authenticated');
+    assert.equal(find('.user-nav-greeting').text().trim(), user.given_name);
+    assert.equal(find('.user-nav-avatar > img').attr('src'), user.picture);
+  });
+});
+
+test('Unsuccessful facebook login shows alert', function(assert) {
+  registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummyFailureProvider);
+  withFeature('socialAuth');
+  visit('/login');
+
+  click('button:contains(Log in with Facebook)');
+
+  andThen(() => {
+    assert.equal(currentURL(), '/login');
+    assert.equal(find('.alert-warning').text().trim(), "We're sorry, but we weren't able to log you in through Facebook.");
+    assert.ok(!currentSession(this.application).get('isAuthenticated'), 'Session is not authenticated');
+  });
 });
