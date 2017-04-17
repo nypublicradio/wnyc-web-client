@@ -163,9 +163,6 @@ module.exports = function(environment) {
       // passed in --proxy to the command line
       enabled: mirageEnabled
     };
-    
-    ENV.staticHost = 'http://localhost:4200';
-
   }
 
   if (environment === 'test') {
@@ -191,15 +188,10 @@ module.exports = function(environment) {
     ENV.wnycURL = '//example.com';
     ENV.wnycBetaURL = 'http://example.com';
     ENV.wnycAuthAPI = 'http://example.com';
-    ENV.staticHost = '';
   }
 
   if (environment === 'production') {
 
-  }
-  
-  if (['production', 'demo'].includes(process.env.DEPLOY_TARGET)) {
-    ENV.staticHost = process.env.FINGERPRINT_PREPEND_URL;
   }
 
   return ENV;
