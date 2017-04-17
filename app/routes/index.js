@@ -16,7 +16,7 @@ export default Route.extend(PlayParamMixin, {
         return {
           featuredItems: b.get('bucketItems').slice(0, 8),
           otherItems: b.get('bucketItems').slice(8)
-        }
+        };
       }),
       wartopChunk: this.store.findRecord('chunk', 'wqxr-wartop-home').catch(()=>''),
       membershipChunk: this.store.findRecord('chunk', 'wqxr-membership-home').catch(() => ''),
