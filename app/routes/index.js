@@ -12,10 +12,14 @@ export default Route.extend(PlayParamMixin, {
 
   model() {
     return RSVP.hash({
+      wqxrHome: this.store.findRecord('bucket', 'wqxr-home').then(b => {
+        return {
+          featuredItems: b.get('bucketItems').slice(0, 8),
+          otherItems: b.get('bucketItems').slice(8)
+        }
+      }),
       wartopChunk: this.store.findRecord('chunk', 'wqxr-wartop-home').catch(()=>''),
       membershipChunk: this.store.findRecord('chunk', 'wqxr-membership-home').catch(() => ''),
-      featuredItems: this.store.findRecord('bucket', 'wqxr-home').then(b => b.get('bucketItems').slice(0, 8)),
-      otherItems: this.store.findRecord('bucket', 'wqxr-home').then(b => b.get('bucketItems').slice(8))
     });
   },
 
