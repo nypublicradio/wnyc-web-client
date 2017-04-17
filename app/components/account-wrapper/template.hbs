@@ -4,9 +4,9 @@
   {{/each}}
   <div class="account-wrapper">
     <div class="account-logo">
-      <a href="/">
+      {{#link-to 'index'}}
         {{nypr-svg icon='wqxr-logo-blue'}}
-      </a>
+      {{/link-to}}
     </div>
     {{yield}}
 
