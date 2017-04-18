@@ -1,29 +1,22 @@
 machine:
   node:
-    version: 6.9.2
+    version: 6.10.2
 
 test:
   override:
-    - ./node_modules/ember-cli/bin/ember test
+    - yarn test
 
 dependencies:
   override:
     - sudo apt-get update && sudo apt-get install ruby-sass
     - gem update --system
     - gem install compass --no-ri --no-rdoc
-    - npm set progress=false
-    - npm install -g bower grunt-cli
-    - npm i
+    - yarn global add bower grunt-cli
     - grunt modernizr:dist
     - bower i
-    - npm i nypr-ui
-    - npm i nypr-player
-    - npm i nypr-account-settings
-    - npm i nypr-ads
-    - npm i nypr-stream-carousel
+    - yarn
   cache_directories:
-    - /opt/circleci/nodejs/v6.9.2/bin/
-    - /opt/circleci/nodejs/v6.9.2/lib/node_modules
+    - ~/.cache/yarn
 
 deployment:
   prod:
