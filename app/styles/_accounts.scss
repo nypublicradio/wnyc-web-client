@@ -224,6 +224,18 @@
 }
 
 .account-main {
+  @include mq($medium-and-up) {
+    width: 45%;
+    height: 100vh;
+  }
+
+  @include mq($h-medium) {
+    height: initial;
+  }
+}
+
+.account-wrapper {
+  position: relative;
   @include flexbox((
     display: flex,
     flex-direction: column,
@@ -231,17 +243,12 @@
   ));
 
   @include mq($medium-and-up) {
-    width: 45%;
-
     @include flexbox((
       justify-content: space-between
     ));
-    height: 100vh;
   }
 
   @include mq($h-medium) {
-    height: initial;
-
     @include flexbox((
       justify-content: flex-start
     ));
