@@ -28,6 +28,7 @@ test('visiting /validate deauthenticates but remains on page', function(assert) 
 
 test('visiting /validate and logging in', function(assert) {
   server.create('bucket', {slug: 'wqxr-home'}); // redirected to homepage
+  server.create('stream');
   server.create('user');
   visit('/validate?username=test&confirmation=123');
 
@@ -47,6 +48,7 @@ test('visiting /validate and logging in', function(assert) {
 });
 
 test('visiting /validate and logging in even when starting logged in', function(assert) {
+  server.create('stream');
   server.create('user');
   authenticateSession(this.application, {access_token: 'foo'});
 

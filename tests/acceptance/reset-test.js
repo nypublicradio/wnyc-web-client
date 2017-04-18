@@ -51,6 +51,7 @@ test('visiting /reset with a bad code', function(assert) {
 
 test('visiting /reset and resetting password and logging in', function(assert) {
   server.create('bucket', {slug: 'wqxr-home'}); // redirected to homepage
+  server.create('stream');
   server.create('user');
   visit(resetUrlWithEmailAndConfirmation);
 
@@ -77,6 +78,7 @@ test('visiting /reset and resetting password and logging in', function(assert) {
 });
 
 test('visiting /reset and resetting password and logging in still works when starting logged in', function(assert) {
+  server.create('stream');
   server.create('user');
   authenticateSession(this.application, {access_token: 'foo'});
 
