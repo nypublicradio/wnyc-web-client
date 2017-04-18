@@ -75,4 +75,12 @@ export default Route.extend(ApplicationRouteMixin, {
     get(this, 'metrics').identify('GoogleAnalytics', {isAuthenticated: true});
     get(this, 'currentUser').load();
   },
+
+  sessionInvalidated() {
+    if (this.get('session.noRefresh') === true) {
+      this.set('session.noRefresh', false);
+    } else {
+      this._super(...arguments);
+    }
+  }
 });
