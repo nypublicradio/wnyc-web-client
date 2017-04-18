@@ -3,7 +3,7 @@ import djangoPage from 'wqxr-web-client/tests/pages/django-page';
 import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
 import { Response } from 'ember-cli-mirage';
 import config from 'wqxr-web-client/config/environment';
-import { currentSession } from 'wqxr-web-client/tests/helpers/ember-simple-auth';
+import { authenticateSession, currentSession } from 'wqxr-web-client/tests/helpers/ember-simple-auth';
 import 'wqxr-web-client/tests/helpers/with-feature';
 import dummySuccessProviderFb from 'wqxr-web-client/tests/helpers/torii-dummy-success-provider-fb';
 import dummyFailureProvider from 'wqxr-web-client/tests/helpers/torii-dummy-failure-provider';
@@ -20,6 +20,17 @@ test('visiting /login', function(assert) {
 
   andThen(() => {
     assert.equal(currentURL(), '/login');
+  });
+});
+
+test("can't visit /login when authenticated", function(assert) {
+  server.create('user');
+  authenticateSession(this.application, {access_token: 'foo'});
+
+  visit('/login');
+
+  andThen(() => {
+    assert.equal(currentURL(), '/');
   });
 });
 

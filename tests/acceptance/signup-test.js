@@ -1,7 +1,7 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
 import 'wqxr-web-client/tests/helpers/with-feature';
-import { currentSession } from 'wqxr-web-client/tests/helpers/ember-simple-auth';
+import { authenticateSession, currentSession } from 'wqxr-web-client/tests/helpers/ember-simple-auth';
 import dummySuccessProviderFb from 'wqxr-web-client/tests/helpers/torii-dummy-success-provider-fb';
 import dummyFailureProvider from 'wqxr-web-client/tests/helpers/torii-dummy-failure-provider';
 import { registerMockOnInstance } from 'wqxr-web-client/tests/helpers/register-mock';
@@ -17,6 +17,17 @@ test('visiting /signup', function(assert) {
 
   andThen(() => {
     assert.equal(currentURL(), '/signup');
+  });
+});
+
+test("can't visit /signup when authenticated", function(assert) {
+  server.create('user');
+  authenticateSession(this.application, {access_token: 'foo'});
+
+  visit('/signup');
+
+  andThen(() => {
+    assert.equal(currentURL(), '/');
   });
 });
 
