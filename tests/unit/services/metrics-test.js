@@ -27,9 +27,6 @@ skip('calling tracking events does not call npr tracking events', function(asser
   let gaTrackPageSpy = this.spy(service._adapters.GoogleAnalytics, 'trackPage');
   let gaTrackEventSpy = this.spy(service._adapters.GoogleAnalytics, 'trackEvent');
 
-  // let gtmTrackPageSpy = this.spy(service._adapters.GoogleTagManager, 'trackPage');
-  // let gtmTrackEventSpy = this.spy(service._adapters.GoogleTagManager, 'trackEvent');
-
   service.trackPage({ page: '/foo', title: 'foo' });
 
   assert.notOk(nprTrackPageSpy.returnValue, 'npr trackPage should not be called');
@@ -40,5 +37,4 @@ skip('calling tracking events does not call npr tracking events', function(asser
 
   assert.notOk(nprTrackEventSpy.returnValue, 'npr trackEvent should not be called');
   assert.equal(gaTrackEventSpy.callCount, 1, 'ga trackEvent should be called');
-  // assert.equal(gtmTrackEventSpy.callCount, 1, 'gtm trackEvent should be called');
 });
