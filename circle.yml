@@ -21,6 +21,12 @@ dependencies:
     - grunt modernizr:dist
   cache_directories:
     - ~/.cache/yarn
+    - /usr/lib/ruby/vendor_ruby
+    - /usr/bin/scss      
+    - /usr/bin/scss-convert
+    - /usr/share/rubygems-integration
+    - /usr/share/doc/ruby-sass
+    - /opt/circleci/.rvm/gems/ruby-2.2.6/gems
 
 deployment:
   prod:
