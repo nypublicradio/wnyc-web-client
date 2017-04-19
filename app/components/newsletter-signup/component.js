@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import Component from 'ember-component';
 import { htmlSafe } from 'ember-string';
 
@@ -40,7 +41,7 @@ export default Component.extend({
           data: this.$('form').serialize(),
         };
         Ember.$.ajax(options).always(function(response) {
-          if ( response.result == "error" ) {
+          if ( response.result === "error" ) {
             this.set('formLoading', false);
             this.set('errorMsg', htmlSafe(response.msg));
           } else {
