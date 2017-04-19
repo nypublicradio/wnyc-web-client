@@ -14,7 +14,6 @@ dependencies:
     - echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
     - sudo apt-get update && sudo apt-get install ruby-sass yarn
   override:
-    - sudo apt-get update && sudo apt-get install ruby-sass
     - gem update --system
     - gem install compass --no-ri --no-rdoc
     - yarn global add bower grunt-cli:
