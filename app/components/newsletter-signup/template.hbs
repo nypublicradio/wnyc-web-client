@@ -13,15 +13,22 @@
         your love of classical music today.
       </div>
       <div>
-        <form id="mc-embedded-subscribe-form"
-              class="validate" novalidate="" target="_blank" action="//wqxr.us5.list-manage.com/subscribe/post?u=4109fdd323aaac7078eadaa8f&amp;id=aa1c2a6097" method="post" name="mc-embedded-subscribe-form">
-          <div id="mc_embed_signup_scroll" class="mailchimp-form">
-            <input id="mce-EMAIL" class="email" name="EMAIL" required="" type="email"
-                   value="" placeholder="Enter your email address">
-            <input id="mc-embedded-subscribe" class="btn btn--blue btn--large" name="subscribe"
-                   type="submit" value="Sign up">
-          </div>
-        </form>
+        {{#if formLoading}}
+          <div class="loading-spinner"></div>
+        {{else if successMsg}}
+          <p class="text--lightgray text--italic">{{successMsg}}</p>
+        {{else}}
+          <form id="mc-embedded-subscribe-form"
+                class="validate" novalidate="" {{action "submitForm" on="submit"}} name="mc-embedded-subscribe-form">
+            <div id="mc_embed_signup_scroll" class="mailchimp-form">
+              {{input id="mce-EMAIL" value=email class=(if errorMsg 'error' '') type="email" name="EMAIL" placeholder="Enter your email address" key-press="releaseErrorState" }}
+              {{#if errorMsg}}<p class="error-msg text--small text--red">{{errorMsg}}</p>{{/if}}
+              <input id="mc-embedded-subscribe" class="btn btn--blue btn--large" name="subscribe"
+                     type="submit" value="Sign up">
+            </div>
+          </form>
+        {{/if}}
+
       </div>
     </div>
   </div>
