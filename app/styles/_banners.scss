@@ -29,9 +29,24 @@
 
       &[type='email'] {
         padding: 10px 15px;
-        border: 0;
+        border: 1px solid white;
         margin-bottom: 15px;
       }
+
+      &.error {
+        border-color: $red;
+        margin-bottom: 5px;
+      }
+    }
+
+  }
+
+  p.error-msg a {
+    color: $red;
+    border-bottom: .08em solid rgba(0,0,0,.1);
+
+    &:hover, &:focus {
+      border-bottom: 1px solid $red;
     }
   }
 
