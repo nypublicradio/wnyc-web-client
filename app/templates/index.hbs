@@ -5,62 +5,27 @@
       </section>
     {{/if}}
 
-  {{#if media.isMediumAndUp}}
     {{#stream-banner audio=audio streams=streams as |currentStream|}}
+      <h2 class="h2">Johann Sebastian Bach</h2>
+      <h3 class="h3">Keyboard Concerto No. 4 in A Major, BWV 1055</h3>
       {{#if (and currentStream.currentComposer.name currentStream.currentPiece)}}
-        <h3>{{currentStream.currentComposer.name}}, {{currentStream.currentPiece}}</h3>
-        {{#link-to 'playlist' currentStream.slug class='text--small text--white'}}
-          Recently played &raquo;
-        {{/link-to}}
+        <h2 class="h2">{{currentStream.currentComposer.name}}</h2>
+        <h3 class="h3">{{currentStream.currentPiece}}</h3>
       {{else if currentStream.isWNYC}}
-        <h3>{{currentStream.currentShow.showTitle}}{{#if currentStream.currentShow.episodeTitle}} - {{currentStream.currentShow.episodeTitle}}{{/if}}</h3>
+        <h2 class="h2">{{currentStream.currentShow.showTitle}}</h2>
+          {{#if currentStream.currentShow.episodeTitle}}
+            <h3 class="h3">{{currentStream.currentShow.episodeTitle}}</h3>
+          {{/if}}
       {{/if}}
     {{/stream-banner}}
-  {{else}}
-    {{#stream-carousel streams=streams background=carouselBg as |stream slide|}}
-      {{#slide.header}}{{stream.name}}{{/slide.header}}
-
-      {{#if (and stream.currentComposer.name stream.currentPiece)}}
-        {{#slide.body}}
-          {{#if (and stream.currentComposer.name stream.currentPiece)}}
-            {{stream.currentComposer.name}}<br />
-            {{stream.currentPiece}}
-          {{else if stream.isWNYC}}
-            {{stream.currentShow.showTitle}}{{#if stream.currentShow.episodeTitle}}<br />{{/if}}
-            {{stream.currentShow.episodeTitle}}
-          {{/if}}
-        {{/slide.body}}
-      {{else}}
-        {{slide.body}}
-      {{/if}}
-
-      {{#slide.footer}}
-        {{#listen-button
-          audio=audio
-          type='blue-boss'
-          state=(if (eq stream.slug audio.currentId) audio.playState)
-          itemPK=stream.slug
-          itemTitle=stream.name}}
-          Listen Live
-        {{/listen-button}}
-
-        {{#if (and stream.currentComposer.name stream.currentPiece)}}
-          {{#link-to 'playlist' stream.slug (query-params scheduleStation=stream.slug) class="text--small text--white"}}
-            Recently played &raquo;
-          {{/link-to}}
-        {{/if}}
-      {{/slide.footer}}
-
-    {{/stream-carousel}}
-  {{/if}}
 
   <section class="home__stories">
     {{#nypr-brick-layout as |layout|}}
 
       {{#layout.blowout as |blowout|}}
-      
+
         {{blowout.main item=model.wqxrHome.featuredItems.[0]}}
-        
+
         {{#if model.membershipChunk}}
           {{#blowout.column}}
             <div class="chunk__item">
@@ -73,13 +38,13 @@
             {{column.brick item=model.wqxrHome.featuredItems.[2]}}
           {{/blowout.column}}
         {{/if}}
-        
+
       {{/layout.blowout}}
 
       {{layout.cards audio=audio items=(slice model.wqxrHome.featuredItems 3 5)}}
 
       {{layout.blowout audio=audio items=(slice model.wqxrHome.featuredItems 5)}}
-      
+
     {{/nypr-brick-layout}}
     {{nypr-brick-grid audio=audio items=model.wqxrHome.otherItems}}
   </section>
