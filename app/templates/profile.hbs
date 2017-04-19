@@ -6,7 +6,7 @@
     Hi {{model.user.givenName}}!
   </h2>
 
-  <div class="nypr-account-settings-and-member-center">
+  <div class={{if features.memberCenter "nypr-account-settings-and-member-center" "l-constrained account-info"}}>
     <div class="nypr-account-settings-body">
       {{nypr-accounts/basic-card
         user=model.user
@@ -19,11 +19,13 @@
         changePassword=(action changePassword)}}
 
     </div>
-    {{nypr-accounts/membership-card
-      pledges=orders
-      siteName=siteName
-      siteDomain=siteDomain
-      class='nypr-membership-info-body'}}
+    {{#if features.memberCenter}}
+      {{nypr-accounts/membership-card
+        pledges=orders
+        siteName=siteName
+        siteDomain=siteDomain
+        class='nypr-membership-info-body'}}
+    {{/if}}
   </div>
 
   <div class="aligncenter text--small">
