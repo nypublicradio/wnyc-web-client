@@ -2968,9 +2968,9 @@ ember-hash-helper-polyfill@^0.1.2:
     ember-cli-babel "^5.1.7"
     ember-cli-version-checker "^1.2.0"
 
-ember-hifi@1.7.4:
-  version "1.7.4"
-  resolved "https://registry.yarnpkg.com/ember-hifi/-/ember-hifi-1.7.4.tgz#a76cdd2fc1a1fc0ec828132023bbdf027b4636cd"
+ember-hifi@1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/ember-hifi/-/ember-hifi-1.8.0.tgz#dca9a25d9b22cdcca60887f6e0cb17f117a74d74"
   dependencies:
     ember-cli-babel "^5.1.7"
     ember-getowner-polyfill "1.0.1"
