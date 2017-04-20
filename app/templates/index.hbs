@@ -1,10 +1,11 @@
-<main class="l-container l-container--touch-full">
+<main>
     {{#if model.wartopChunk}}
       <section class="wartop-chunk">
         {{django-page page=model.wartopChunk.pagecontent}}
       </section>
     {{/if}}
 
+  <section class="l-container l-container--touch-full">
     {{#stream-banner audio=audio streams=streams as |currentStream|}}
       {{#if (and currentStream.currentComposer.name currentStream.currentPiece)}}
         <h2 class="h2">{{currentStream.currentComposer.name}}</h2>
@@ -16,7 +17,9 @@
           {{/if}}
       {{/if}}
     {{/stream-banner}}
+  </section>
 
+  {{#if media.isSmallOnly}}
     <section class="home__leaderboard">
       {{dfp-ad
         slot="/6483581/leaderboard/wqxr_leaderboard"
@@ -24,8 +27,9 @@
         target="leaderboard"
         slotClassNames="home__leaderboard__slot"}}
     </section>
+  {{/if}}
 
-  <section class="home__stories">
+  <section class="l-container l-container--touch-full">
     {{#nypr-brick-layout as |layout|}}
 
       {{#layout.blowout as |blowout|}}
@@ -34,7 +38,7 @@
 
         {{#if model.membershipChunk}}
           {{#blowout.column}}
-''            <div class="chunk__item">
+            <div class="chunk__item">
               {{django-page page=model.membershipChunk.pagecontent}}
             </div>
           {{/blowout.column}}
@@ -48,9 +52,9 @@
       {{/layout.blowout}}
 
       {{#layout.cards as |row|}}
-        {{row.brick item=model.featuredItems.[3]}}
-        {{row.brick item=model.featuredItems.[4]}}
-        {{#row.brick}}
+        {{row.brick audio=audio item=model.wqxrHome.featuredItems.[3]}}
+        {{row.brick audio=audio item=model.wqxrHome.featuredItems.[4]}}
+        {{#row.brick class='brick__item--sponsored'}}
           {{dfp-ad
             slot="/6483581/rectangle/wqxr_rectangle"
             sizes=(array (array 300 250))
@@ -58,7 +62,7 @@
         {{/row.brick}}
       {{/layout.cards}}
 
-      {{layout.blowout audio=audio flip=true items=(slice model.wqxrHome.featuredItems 5)}}
+      {{layout.blowout audio=audio flip=true items=(slice model.wqxrHome.featuredItems 5 8)}}
 
     {{/nypr-brick-layout}}
   </section>
