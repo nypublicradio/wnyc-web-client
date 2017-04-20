@@ -22,11 +22,15 @@ export default Route.extend(PlayParamMixin, {
     const listingSlug = `${inflector.pluralize(channelType)}/${params.slug}`;
     set(this, 'listingSlug', listingSlug);
 
+    let listenLive = this.store.findRecord('chunk', `shows-${params.slug}-listenlive`)
+      .catch(() => '');
+
     return this.store.find('django-page', listingSlug.replace(/\/*$/, '/')).then(page => {
       return waitFor({
         page,
         channel: page.get('wnycChannel'),
-        user: this.get('session.data.authenticated')
+        user: this.get('session.data.authenticated'),
+        listenLive
       });
     })
     .catch(e => retryFromServer(e, listingSlug.replace(/\/*$/, '/')));
