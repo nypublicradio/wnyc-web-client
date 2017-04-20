@@ -11,7 +11,9 @@ export default Route.extend(AuthenticatedRouteMixin, {
     });
   },
   setupController(controller, model) {
-    controller.set('orders', this.store.findAll('order'));
+    if (this.features.isEnabled('member-center')) {
+      controller.set('orders', this.store.findAll('order'));
+    }
     return this._super(controller, model);
   }
 });
