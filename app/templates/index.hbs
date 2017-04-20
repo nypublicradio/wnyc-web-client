@@ -1,3 +1,18 @@
+{{#if media.isSmallOnly}}
+  {{dfp-ad
+    slotClassNames="is-collapsed l-constrained aligncenter leaderboard"
+    slot="/6483581/leaderboard/wnyc_leaderboard"
+    target="leaderboard"
+    sizes=(array (array 300 50))}}
+{{else}}
+  {{dfp-ad
+    slotClassNames="is-collapsed l-constrained aligncenter leaderboard"
+    slot="/6483581/leaderboard/wnyc_leaderboard"
+    target="leaderboard"
+    mapping=(array (array 758 (array 728 90)) (array 1203 (array 970 415)))
+    sizes=(array (array 970 415) (array 728 90))}}
+{{/if}}
+
 {{#django-page page=model.page class='l-constrained'}}
 
   {{#if media.isSmallOnly}}
