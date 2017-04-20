@@ -299,6 +299,26 @@ test('show pages with a play param', function(assert) {
 
 });
 
+test('show pages with a listen live chunk', function(assert) {
+  let show = server.create('show', {
+    id: 'shows/foo/'
+  });
+  server.create('api-response', { id: 'shows/foo/recent_stories/1' });
+
+  server.create('chunk', {
+    id: 'shows-foo-listenlive',
+    content: 'foo bar text'
+  });
+  server.create('django-page', {id: show.id});
+  djangoPage
+    .bootstrap(show)
+    .visit(show);
+  
+  andThen(() => {
+    assert.equal(find('.channel-header .django-content').text().trim(), 'foo bar text');
+  });
+});
+
 test('channel routes do dfp targeting', function(/*assert*/) {
   let show = server.create('show', {
     id: 'shows/foo/'
