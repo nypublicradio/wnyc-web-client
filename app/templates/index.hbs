@@ -6,8 +6,6 @@
     {{/if}}
 
     {{#stream-banner audio=audio streams=streams as |currentStream|}}
-      <h2 class="h2">Johann Sebastian Bach</h2>
-      <h3 class="h3">Keyboard Concerto No. 4 in A Major, BWV 1055</h3>
       {{#if (and currentStream.currentComposer.name currentStream.currentPiece)}}
         <h2 class="h2">{{currentStream.currentComposer.name}}</h2>
         <h3 class="h3">{{currentStream.currentPiece}}</h3>
