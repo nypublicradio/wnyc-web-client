@@ -23,8 +23,7 @@ export default Route.extend(PlayParamMixin, {
     set(this, 'listingSlug', listingSlug);
 
     let listenLive = this.store.findRecord('chunk', `shows-${params.slug}-listenlive`)
-      .then(c => this.store.createRecord('django-page', {text: c.get('content')}))
-      .catch(() => {});
+      .catch(() => '');
 
     return this.store.find('django-page', listingSlug.replace(/\/*$/, '/')).then(page => {
       return waitFor({
