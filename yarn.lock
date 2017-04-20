@@ -3006,6 +3006,12 @@ ember-inflector@^1.9.2, ember-inflector@^1.9.4:
   dependencies:
     ember-cli-babel "^5.1.7"
 
+ember-keyboard@2.1.9:
+  version "2.1.9"
+  resolved "https://registry.yarnpkg.com/ember-keyboard/-/ember-keyboard-2.1.9.tgz#52a810b749d23ca5bafd4484fd101bf0b73811ab"
+  dependencies:
+    ember-cli-babel "^5.1.6"
+
 ember-load-initializers@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/ember-load-initializers/-/ember-load-initializers-0.5.1.tgz#76e3db23c111dbdcd3ae6f687036bf0b56be0cbe"
