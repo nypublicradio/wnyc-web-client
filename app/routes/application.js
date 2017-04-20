@@ -46,6 +46,7 @@ export default Route.extend(ApplicationRouteMixin, {
       if (error) {
         // sometimes this.controller is undefined
         this.controllerFor('application').set('error', error);
+        return error;
       }
     },
     didTransition() {
