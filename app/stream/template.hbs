@@ -1,10 +1,17 @@
-{{dfp-ad
-  slotClassNames="is-collapsed l-constrained aligncenter leaderboard"
-  slot="/6483581/leaderboard/wqxr_leaderboard"
-  target="leaderboard"
-  mapping=(array (array 1203 (array 970 415)) (array 758 (array 728 90)) (array 0 (array 300 50)))
-  sizes=(array (array 970 415) (array 728 90) (array 300 50))}}
-
+{{#if media.isSmallOnly}}
+  {{dfp-ad
+    slotClassNames="is-collapsed l-constrained aligncenter leaderboard"
+    slot="/6483581/leaderboard/wqxr_leaderboard"
+    target="leaderboard"
+    sizes=(array (array 300 50))}}
+{{else}}
+  {{dfp-ad
+    slotClassNames="is-collapsed l-constrained aligncenter leaderboard"
+    slot="/6483581/leaderboard/wqxr_leaderboard"
+    target="leaderboard"
+    mapping=(array (array 758 (array 728 90)) (array 1203 (array 970 415)))
+    sizes=(array (array 970 415) (array 728 90))}}
+{{/if}}
 
 <div class="l-constrained streams-page nudge-big">
   <main class="l-col2of3">
