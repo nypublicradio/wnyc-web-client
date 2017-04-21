@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import test from 'ember-sinon-qunit/test-support/test';
 import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
 
 moduleForAcceptance('Acceptance | streams');
@@ -26,4 +26,15 @@ test('playing a stream', function(assert) {
   andThen(function() {
     assert.ok(findWithAssert('.nypr-player'), 'persistent player should be visible');
   });
+});
+
+test('stream routes do dfp targeting', function(/*assert*/) {
+  server.createList('stream', 7);
+  server.createList('whats-on', 7);
+  
+  this.mock(this.application.__container__.lookup('route:stream').get('googleAds'))
+    .expects('doTargeting')
+    .once();
+
+  visit('/streams');
 });
