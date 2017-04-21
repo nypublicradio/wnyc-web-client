@@ -34,7 +34,7 @@
 
       {{#layout.blowout as |blowout|}}
 
-        {{blowout.main item=model.wqxrHome.featuredItems.[0]}}
+        {{blowout.main audio=audio item=model.wqxrHome.featuredItems.[0]}}
 
         {{#if model.membershipChunk}}
           {{#blowout.column}}
@@ -44,8 +44,8 @@
           {{/blowout.column}}
         {{else}}
           {{#blowout.column as |column|}}
-            {{column.brick item=model.wqxrHome.featuredItems.[1]}}
-            {{column.brick item=model.wqxrHome.featuredItems.[2]}}
+            {{column.brick audio=audio item=model.wqxrHome.featuredItems.[1]}}
+            {{column.brick audio=audio item=model.wqxrHome.featuredItems.[2]}}
           {{/blowout.column}}
         {{/if}}
 
