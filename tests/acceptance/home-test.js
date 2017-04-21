@@ -1,4 +1,5 @@
-import { test, skip } from 'qunit';
+import { skip } from 'qunit';
+import test from 'ember-sinon-qunit/test-support/test';
 import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
 
 moduleForAcceptance('Acceptance | home', {
@@ -27,4 +28,12 @@ skip('using stream banner', function(assert) {
     let { title } = whatsOn4.attrs.current_playlist_item.catalog_entry;
     assert.ok(find('.streambanner-title').text().match(title), 'show display current playlist item');
   });
+});
+
+test('home page does dfp targeting', function(/*assert*/) {
+  this.mock(this.application.__container__.lookup('route:index').get('googleAds'))
+    .expects('doTargeting')
+    .once();
+  
+  visit('/');
 });
