@@ -26,19 +26,6 @@ moduleForAcceptance('Acceptance | Django Rendered | Proper Re-renders', {
   }
 });
 
-test('on the homepage', function(assert) {
-  let home = server.create('django-page', {id: '/'});
-  djangoPage
-    .bootstrap(home)
-    .visit(home);
-
-  andThen(function() {
-    assert.equal(currentURL(), '/');
-    let djangoContent = findWithAssert('.django-content');
-    assert.ok(djangoContent.contents().length);
-  });
-});
-
 test('on a search page with a query', function(assert) {
   let search = server.create('django-page', {id: 'search/?q=foo'});
   djangoPage
@@ -126,27 +113,6 @@ test('.l-constrained is not added to responsive pages', function(assert) {
 
   andThen(function() {
     assert.equal(find('.django-content').parent('.l-constrained').length, 0, 'should not have an l-constrained class');
-  });
-});
-
-test('.l-constrained is added to the home page', function(assert) {
-  let home = server.create('django-page', {
-    id: '/',
-    text: `
-    <div>
-      <div>
-    this is a regular template
-      </div>
-    </div>
-    `
-  });
-
-  djangoPage
-    .bootstrap(home)
-    .visit(home);
-
-  andThen(function() {
-    assert.equal(find('.django-content').parent('.l-constrained').length, 1, 'should have an l-constrained class');
   });
 });
 
