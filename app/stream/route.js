@@ -2,7 +2,8 @@ import Route from 'ember-route';
 import service from 'ember-service/inject';
 
 export default Route.extend({
-  audio: service(),
+  audio:      service(),
+  googleAds:  service(),
   titleToken: 'Listen Live to WQXR, Q2, Operavore, and the Jonathan Channel',
 
   model() {
