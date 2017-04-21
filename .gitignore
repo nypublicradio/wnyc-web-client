@@ -27,4 +27,5 @@ vendor/modernizr/modernizr-build.js
 
 # editor cruft
 .*~
-.DS_Store 
+.DS_Store
+yarn-error.log
