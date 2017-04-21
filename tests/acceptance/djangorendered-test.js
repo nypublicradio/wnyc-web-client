@@ -1,5 +1,6 @@
 import config from 'wnyc-web-client/config/environment';
-import { skip, test } from 'qunit';
+import { skip } from 'qunit';
+import test from 'ember-sinon-qunit/test-support/test';
 import { plantBetaTrial } from 'wnyc-web-client/tests/helpers/beta';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import djangoPage from 'wnyc-web-client/tests/pages/django-page';
@@ -180,6 +181,19 @@ test('.search is added to search pages', function(assert) {
   andThen(function() {
     assert.equal(find('.django-content').parent('.search').length, 1, 'should have an l-constrained class');
   });
+});
+
+
+test('arbitrary django routes do dfp targeting', function(/*assert*/) {
+  server.create('django-page', {id: 'fake/'});
+
+  this.mock(this.application.__container__.lookup('route:djangorendered').get('googleAds'))
+    .expects('doTargeting')
+    .once();
+  
+  djangoPage
+    .bootstrap({id: 'fake/'})
+    .visit({id: 'fake/'});
 });
 
 moduleForAcceptance('Acceptance | Django Rendered | Beta Trial', {
