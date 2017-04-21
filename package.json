@@ -10,7 +10,8 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
-    "test": "ember test"
+    "test": "ember test",
+    "upgrade-nypr": "yarn upgrade nypublicradio/nypr-ui nypublicradio/nypr-ads nypublicradio/nypr-account-settings nypublicradio/nypr-player"
   },
   "repository": "",
   "engines": {
