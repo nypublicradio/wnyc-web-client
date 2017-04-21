@@ -45,7 +45,7 @@ export default Ember.Component.extend({
   streamScheduleUrl    : reads('currentAudio.scheduleUrl'),
   streamPlaylistUrl    : computed('currentAudio.playlistUrl', function() {
     if (get(this,'currentAudio.playlistUrl')) {
-      return `/streams/${get(this, 'currentAudio.id')}`;
+      return `/playlist-daily/?scheduleStation=${get(this, 'currentAudio.id')}`;
     }
   }),
 
