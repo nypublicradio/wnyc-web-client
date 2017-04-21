@@ -47,7 +47,9 @@
   color: white;
   margin-right: 2px;
   font-weight: 600;
-  align-self: center;
+  @include flexbox((
+    align-self: center
+  ));
   @include mq($medium-and-up) {
     display: inline-block;
   }
