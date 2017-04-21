@@ -1,9 +1,9 @@
 <main>
-    {{#if model.wartopChunk}}
-      <section class="wartop-chunk">
-        {{django-page page=model.wartopChunk.pagecontent}}
-      </section>
-    {{/if}}
+  {{#if model.wartopChunk}}
+    <section class="wartop-chunk">
+      {{django-page page=model.wartopChunk.pagecontent}}
+    </section>
+  {{/if}}
 
   <section class="l-container l-container--touch-full">
     {{#stream-banner audio=audio streams=streams as |currentStream|}}
