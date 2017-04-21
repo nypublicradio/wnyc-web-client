@@ -10,7 +10,7 @@
       {{#if (and currentStream.currentComposer.name currentStream.currentPiece)}}
         <h2 class="h2">{{currentStream.currentComposer.name}}</h2>
         <h3 class="h3">{{currentStream.currentPiece}}</h3>
-      {{else if currentStream.isWNYC}}
+      {{else}}
         <h2 class="h2">{{currentStream.currentShow.showTitle}}</h2>
           {{#if currentStream.currentShow.episodeTitle}}
             <h3 class="h3">{{currentStream.currentShow.episodeTitle}}</h3>
