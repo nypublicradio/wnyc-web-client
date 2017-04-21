@@ -58,7 +58,7 @@ test('it produces the correct metadata for stories', function(assert) {
     },
     expectedMetadata: {
       shareText: 'I\'m listening to Maestro - Masterpiece',
-      shareUrl: 'http://www.wqxr.org/streams/test',
+      shareUrl: 'http://www.wqxr.org/streams/?stream=test',
       analyticsCode: '',
       via: 'WQXR'
     }
