@@ -5741,7 +5741,6 @@ nypr-player@nypublicradio/nypr-player:
   dependencies:
     ember-cli-babel "^5.1.7"
     ember-cli-htmlbars "^1.0.10"
-    ember-keyboard "2.1.9"
 
 nypr-ui@nypublicradio/nypr-ui:
   version "0.0.0"
