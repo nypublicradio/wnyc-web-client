@@ -26,20 +26,6 @@ moduleForAcceptance('Acceptance | Django Rendered | Proper Re-renders', {
   }
 });
 
-skip('on the homepage', function(assert) {
-  server.create('bucket');
-  let home = server.create('django-page', {id: '/'});
-  djangoPage
-    .bootstrap(home)
-    .visit(home);
-
-  andThen(function() {
-    assert.equal(currentURL(), '/');
-    let djangoContent = findWithAssert('.django-content');
-    assert.ok(djangoContent.contents().length);
-  });
-});
-
 test('on a search page with a query', function(assert) {
   let search = server.create('django-page', {id: 'search/?q=foo'});
   djangoPage
