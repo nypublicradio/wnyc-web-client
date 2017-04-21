@@ -9,6 +9,7 @@ const { get } = Ember;
 export default Ember.Route.extend(PlayParamMixin, {
   classNames: ['home'],
   metrics: service(),
+  googleAds: service(),
   title: 'WNYC | New York Public Radio, Podcasts, Live Streaming Radio, News',
 
   model() {
@@ -24,6 +25,7 @@ export default Ember.Route.extend(PlayParamMixin, {
       page: path,
       title
     });
+    get(this, 'googleAds').doTargeting();
   },
 
   actions: {
