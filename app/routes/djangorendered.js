@@ -14,6 +14,7 @@ export default Route.extend(PlayParamMixin, {
   },
 
   metrics: service(),
+  googleAds: service(),
 
   titleToken(model) {
     return get(model, 'title');
@@ -49,6 +50,7 @@ export default Route.extend(PlayParamMixin, {
       page: path,
       title
     });
+    get(this, 'googleAds').doTargeting();
   },
   
   setupController(controller, model) {

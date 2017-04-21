@@ -16,6 +16,7 @@ export default Route.extend(PlayParamMixin, {
   session:      service(),
   metrics:      service(),
   dataPipeline: service(),
+  googleAds:    service(),
 
   model(params) {
     const channelType = this.routeName;
@@ -42,6 +43,8 @@ export default Route.extend(PlayParamMixin, {
     let dataPipeline = get(this, 'dataPipeline');
     let nprVals = get(channel, 'nprAnalyticsDimensions');
 
+    get(this, 'googleAds').doTargeting();
+    
     if (channel.get('headerDonateChunk')) {
       transition.send('updateDonateChunk', channel.get('headerDonateChunk'));
     }
