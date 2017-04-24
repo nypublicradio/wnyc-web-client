@@ -6,8 +6,7 @@ export default Route.extend({
   googleAds: service(),
   
   titleToken(model) {
-    let streamTitle = get(model, 'streaminfo.name');
-    return `Playlist for ${streamTitle}`;
+    return `Playlist for ${get(model, 'name')}`;
   },
   model({ slug }) {
     return this.store.findRecord('stream', slug);
