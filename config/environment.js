@@ -151,7 +151,7 @@ module.exports = function(environment) {
       }
     },
     hotjar: {
-      id: '467005',
+      id: 467005,
       enabled: environment === 'production',
       forceSSL: true
     }
