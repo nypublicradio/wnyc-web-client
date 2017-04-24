@@ -23,6 +23,8 @@ test('visiting /streams/wqxr', function(assert) {
   andThen(function() {
     assert.equal(currentURL(), '/streams/wqxr');
     assert.equal(find('a[href="http://fooshow.com"]').text().trim(), 'Episode Foo');
+    assert.equal(find('#leaderboard').length, 1, 'leaderboard is present');
+    assert.equal(find('#rightRail').length, 1, 'sidebar ad is present');
   });
 });
 
