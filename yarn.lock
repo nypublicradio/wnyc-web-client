@@ -3006,6 +3006,12 @@ ember-holygrail-layout@^0.1.4:
     ember-cli-babel "^5.1.6"
     ember-cli-htmlbars "^1.0.3"
 
+ember-hotjar@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/ember-hotjar/-/ember-hotjar-0.0.2.tgz#fc93dfccc07f4787438c6c8fea39dee97b414446"
+  dependencies:
+    ember-cli-babel "^5.1.7"
+
 ember-inflector@^1.9.2, ember-inflector@^1.9.4:
   version "1.12.1"
   resolved "https://registry.yarnpkg.com/ember-inflector/-/ember-inflector-1.12.1.tgz#d8bd2ca2f327b439720f89923fe614d46b5da1ca"
