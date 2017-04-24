@@ -54,15 +54,19 @@
     }
 }
 
-.h3 {
-    font-family: "Lato", sans-serif;
-    @include fontsize($base-font*1.25); /* 20px */
-    font-weight: 600;
+@mixin h3 {
+  font-family: "Lato", sans-serif;
+  @include fontsize($base-font*1.25); /* 20px */
+  font-weight: 600;
 
-    @include mq($small-only) {
-        @include fontsize($base-font*1.125); /* 18px */
-        line-height: 1.5rem;
-    }
+  @include mq($small-only) {
+      @include fontsize($base-font*1.125); /* 18px */
+      line-height: 1.5rem;
+  }
+}
+
+.h3 {
+  @include h3;
 }
 
 .h4 {
@@ -365,14 +369,18 @@
  * Links:
  */
 
-.link--dark {
-    color: $darkergray;
-    border: none;
+ @mixin link--dark {
+   color: $darkergray;
+   border: none;
 
-    &:hover,
-    &:focus {
-        color: $wqxrlink;
-    }
+   &:hover,
+   &:focus {
+       color: $wqxrlink;
+   }
+ }
+
+.link--dark {
+  @include link--dark;
 }
 
 .link--white {

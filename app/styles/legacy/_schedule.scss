@@ -140,6 +140,11 @@ ul.schedule-table {
     height: auto;
     padding: 0;
     line-height: 27px;
+    @include flexbox((
+      display: flex,
+      flex-direction: column,
+      align-items: flex-start
+    ));
 
     div.program {
       height: auto;
@@ -160,10 +165,14 @@ ul.schedule-table {
     div.time,
     div.time-playlist {
       width: auto;
-      color: $lightergray;
+      color: $lightgray;
       font-weight: 600;
-      letter-spacing: 1px;
-      font-size: 16px;
+      @include fontsize(14);
+    }
+
+    div.scheduled-item-shortlink a {
+      @include h3;
+      @include link--dark;
     }
 
     .arrow {
