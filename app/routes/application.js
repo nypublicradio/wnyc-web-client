@@ -16,7 +16,7 @@ export default Route.extend(ApplicationRouteMixin, {
   title(tokens) {
     if (tokens && tokens.length > 0) {
       let lastToken = tokens.slice(-1);
-      return `${lastToken} | WNYC`;
+      return `${lastToken} | WQXR`;
     } else {
       return 'WQXR | New York\'s Classical Music Radio Station';
     }
