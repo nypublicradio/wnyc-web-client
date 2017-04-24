@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import test from 'ember-sinon-qunit/test-support/test';
 import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
 import djangoPage from 'wqxr-web-client/tests/pages/django-page';
 import showPage from 'wqxr-web-client/tests/pages/show';
@@ -317,6 +317,22 @@ test('show pages with a listen live chunk', function(assert) {
   andThen(() => {
     assert.equal(find('.channel-header .django-content').text().trim(), 'foo bar text');
   });
+});
+
+test('channel routes do dfp targeting', function(/*assert*/) {
+  let show = server.create('show', {
+    id: 'shows/foo/'
+  });
+  server.create('api-response', { id: 'shows/foo/recent_stories/1' });
+  server.create('django-page', {id: show.id});
+
+  this.mock(this.application.__container__.lookup('route:show').get('googleAds'))
+    .expects('doTargeting')
+    .once();
+  
+  djangoPage
+    .bootstrap({id: show.id})
+    .visit({id: show.id});
 });
 
 moduleForAcceptance('Acceptance | Django Page | Show Page Analytics');

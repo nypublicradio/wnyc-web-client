@@ -1,5 +1,6 @@
 import config from 'wqxr-web-client/config/environment';
-import { skip, test } from 'qunit';
+import test from 'ember-sinon-qunit/test-support/test';
+import { skip } from 'qunit';
 import { plantBetaTrial } from 'wqxr-web-client/tests/helpers/beta';
 import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
 import djangoPage from 'wqxr-web-client/tests/pages/django-page';
@@ -23,20 +24,6 @@ moduleForAcceptance('Acceptance | Django Rendered | Proper Re-renders', {
     window.onbeforeunload = undefined;
     resetHTML();
   }
-});
-
-skip('on the homepage', function(assert) {
-  server.create('bucket');
-  let home = server.create('django-page', {id: '/'});
-  djangoPage
-    .bootstrap(home)
-    .visit(home);
-
-  andThen(function() {
-    assert.equal(currentURL(), '/');
-    let djangoContent = findWithAssert('.django-content');
-    assert.ok(djangoContent.contents().length);
-  });
 });
 
 test('on a search page with a query', function(assert) {
@@ -161,6 +148,19 @@ test('.search is added to search pages', function(assert) {
   andThen(function() {
     assert.equal(find('.django-content').parent('.search').length, 1, 'should have an l-constrained class');
   });
+});
+
+
+test('arbitrary django routes do dfp targeting', function(/*assert*/) {
+  server.create('django-page', {id: 'fake/'});
+
+  this.mock(this.application.__container__.lookup('route:djangorendered').get('googleAds'))
+    .expects('doTargeting')
+    .once();
+  
+  djangoPage
+    .bootstrap({id: 'fake/'})
+    .visit({id: 'fake/'});
 });
 
 moduleForAcceptance('Acceptance | Django Rendered | Beta Trial', {
