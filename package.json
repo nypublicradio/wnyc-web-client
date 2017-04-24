@@ -59,6 +59,8 @@
     "ember-export-application-global": "^2.0.0",
     "ember-feature-flags": "3.0.0",
     "ember-fetch": "3.2.9",
+    "ember-get-config": "0.2.1",
+    "ember-getowner-polyfill": "1.0.1",
     "ember-hifi": "^1.8.0",
     "ember-holygrail-layout": "^0.1.4",
     "ember-hotjar": "^0.0.2",
@@ -91,7 +93,8 @@
     "nypr-account-settings": "nypublicradio/nypr-account-settings",
     "nypr-ads": "nypublicradio/nypr-ads",
     "nypr-player": "nypublicradio/nypr-player",
-    "nypr-ui": "nypublicradio/nypr-ui",
+    "nypr-ui": "nypublicradio/nypr-ui#emberize-story-WE-7420",
+    "nypr-audio-services": "nypublicradio/nypr-audio-services",
     "torii": "0.9.5"
   },
   "ember-addon": {
