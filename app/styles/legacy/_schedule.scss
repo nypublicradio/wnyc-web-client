@@ -21,20 +21,38 @@
 
   ul.schedule-tabs {
     width: 100%;
+    overflow-x: scroll;
+    white-space: nowrap;
+    @include flexbox((
+      display: flex
+    ));
 
     li a {
       font-weight: 600;
+      @include fontsize(16);
+      padding: 0 0 30px 0;
+      margin: 0 20px 0 0;
+
+      @include mq($mobile) {
+        padding-bottom: 40px;
+      }
+    }
+
+    li:last-child a {
+      margin: 0;
     }
   }
   ul.schedule-tabs li.ui-tabs-selected a {
-    background-color: $wqxrblue;
+    color: $wqxrlink;
+    border-bottom: 3px solid $wqxrlink;
+    background: white;
   }
 
   ul.schedule-tabs li:not(.ui-tabs-selected) a {
     color: $lightgray !important;
 
     &:hover {
-      color: $wqxrblue !important;
+      color: $wqxrlink !important;
     }
   }
 }
@@ -43,6 +61,21 @@ ul.schedule-dates {
   border-top: 1px solid $nearwhite;
   border-bottom: 1px solid $nearwhite;
   padding: 10px 0 10px 0 !important;
+  width: auto !important;
+
+  li.today {
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    font-weight: 600 !important;
+
+    .h2 {
+      margin: 0;
+    }
+
+    > div {
+      color: $lightgray;
+    }
+  }
 
   @include flexbox((
     display: flex,
@@ -62,10 +95,8 @@ ul.schedule-dates {
     padding-right: 0;
 
     a {
-      font-size: 12px !important;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-weight: 700 !important;
+      @include fontsize(14);
+      font-weight: 600 !important;
     }
 
     a:hover,
