@@ -50,14 +50,13 @@ export default Model.extend({
   shareMetadata:        computed('currentShow', 'currentPlaylistItem', function() {
     return shareMetadata(this);
   }),
-  
+
   currentComposer:      computed('currentPlaylistItem', function() {
     return this.get('currentPlaylistItem.catalogEntry.composer');
   }),
   currentPiece:         computed('currentPlaylistItem', function() {
     return this.get('currentPlaylistItem.catalogEntry.title');
   }),
-  
 
   forListenAction(data) {
     return this.get('currentStory').then(s => {
@@ -65,7 +64,7 @@ export default Model.extend({
       return Object.assign({
         audio_type: 'livestream',
         cms_id: s && s.get('cmsPK'),
-        item_type: s && s.get('itemType'),
+        item_type: s && s.get('itemType'), // episode, article, segment
         stream_id: this.get('cmsPK'),
       }, data);
     });
