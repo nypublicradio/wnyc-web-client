@@ -58,7 +58,7 @@ test('schedule routes do dfp targeting', function(/*assert*/) {
     .expects('doTargeting')
     .once();
   let date = moment().format('YYYY/MMM/DD').toLowerCase();
-  server.create('django-page', {id: `schedule/${date}/?scheduleStation=wnyc-fm939`});
+  server.create('django-page', {id: `schedule/${date}/?scheduleStation=wqxr`});
 
   visit('/schedule');
 });
