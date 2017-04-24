@@ -6,7 +6,6 @@ export default Route.extend({
     return this.store.findRecord('stream', slug);
   },
   titleToken(model) {
-    let streamTitle = get(model, 'streaminfo.name');
-    return `Playlist for ${streamTitle}`;
+    return `Playlist for ${get(model, 'name')}`;
   },
 });
