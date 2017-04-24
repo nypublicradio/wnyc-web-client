@@ -1,4 +1,4 @@
-import { test, skip } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
 import config from 'wqxr-web-client/config/environment';
 import sinon from 'sinon';
@@ -15,7 +15,7 @@ moduleForAcceptance('Acceptance | Analytics', {
   }
 });
 
-test('it does not log a pageview when opening and closing the queue', function(assert) {
+skip('it does not log a pageview when opening and closing the queue', function(assert) {
   assert.expect(4);
   let done = assert.async();
   var pageViewEvent = sinon.spy();

@@ -23,19 +23,7 @@
 {{/if}}
 
 {{#nypr-player-integration as |integration|}}
-  {{#liquid-unless showPlayer class="nypr-player-wrapper"}}
-  {{#unless chromeDisabled}}
-    <div class="l-fixed l-lowright">
-    {{nypr-player.queue-button
-      isFloating  = true
-      queueLength = audio.queue.items.length
-      showModal   = (action 'showModal' 'queue-history')
-      closeModal  = (action 'closeModal')
-      isOpenModal = modal}}
-    </div>
-  {{/unless}}
-  {{else}}
-
+  {{#liquid-if showPlayer class="nypr-player-wrapper"}}
     {{#liquid-if integration.revealNotificationBar class='player-notification-wrapper'}}
       {{#player-notification onDismiss=integration.onDismissNotification}}
         {{player-notification.autoplay-message
@@ -89,7 +77,7 @@
             isOpenModal = modal}}
         {{/content.for}}
     {{/nypr-player}}
-  {{/liquid-unless}}
+  {{/liquid-if}}
 {{/nypr-player-integration}}
 {{#liquid-if modal class="modal-wrapper sliding-modal"}}
   {{#x-modal closeModal=(action 'closeModal')}}
