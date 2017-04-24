@@ -17,7 +17,7 @@ export default Ember.Route.extend(PlayParamMixin, {
     return `${get(model, 'story.title')} - ${get(model, 'story.headers.brand.title')}`;
   },
   title(tokens) {
-    return `${tokens[0]} - WNYC`;
+    return `${tokens[0]} - WQXR`;
   },
   model({ slug }) {
     return this.store.findRecord('django-page', `story/${slug}`.replace(/\/*$/, '/')).then(page => {
