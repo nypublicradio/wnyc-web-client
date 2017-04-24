@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import test from 'ember-sinon-qunit/test-support/test';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 
 moduleForAcceptance('Acceptance | shows', {
@@ -65,4 +65,12 @@ test('searching with no results /shows', function(assert) {
     assert.equal(find(".shows-list").text().trim(), "Sorry, but no matching shows were found. Try a different spelling or other words in the title of the show you're looking for. If you're looking for something other than a show name, try searching the rest of the website.", "No results message displays");
   });
 
+});
+
+test('show routes do dfp targeting', function(/*assert*/) {
+  this.mock(this.application.__container__.lookup('route:shows').get('googleAds'))
+    .expects('doTargeting')
+    .once();
+
+  visit('/shows');
 });

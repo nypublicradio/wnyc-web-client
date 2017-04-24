@@ -1,9 +1,12 @@
 import Route from 'ember-route';
 import RSVP from 'rsvp';
+import service from 'ember-service/inject';
 import ENV from 'wnyc-web-client/config/environment';
 
 export default Route.extend({
   titleToken: 'All Shows, Podcasts and Programs',
+  
+  googleAds: service(),
 
   model() {
     return RSVP.hash({
@@ -12,6 +15,10 @@ export default Route.extend({
       // item for now. We want users to access their favorite shows quickly.
       //featured: this.store.findRecord('bucket', 'wnyc-shows-featured').then(b => b.get('bucketItems.firstObject'))
     });
+  },
+  
+  afterModel() {
+    this.get('googleAds').doTargeting();
   },
 
   actions: {

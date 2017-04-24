@@ -1,5 +1,6 @@
 import config from 'wnyc-web-client/config/environment';
-import { skip, test } from 'qunit';
+import { skip } from 'qunit';
+import test from 'ember-sinon-qunit/test-support/test';
 import { plantBetaTrial } from 'wnyc-web-client/tests/helpers/beta';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import djangoPage from 'wnyc-web-client/tests/pages/django-page';
@@ -23,19 +24,6 @@ moduleForAcceptance('Acceptance | Django Rendered | Proper Re-renders', {
     window.onbeforeunload = undefined;
     resetHTML();
   }
-});
-
-test('on the homepage', function(assert) {
-  let home = server.create('django-page', {id: '/'});
-  djangoPage
-    .bootstrap(home)
-    .visit(home);
-
-  andThen(function() {
-    assert.equal(currentURL(), '/');
-    let djangoContent = findWithAssert('.django-content');
-    assert.ok(djangoContent.contents().length);
-  });
 });
 
 test('on a search page with a query', function(assert) {
@@ -128,27 +116,6 @@ test('.l-constrained is not added to responsive pages', function(assert) {
   });
 });
 
-test('.l-constrained is added to the home page', function(assert) {
-  let home = server.create('django-page', {
-    id: '/',
-    text: `
-    <div>
-      <div>
-    this is a regular template
-      </div>
-    </div>
-    `
-  });
-
-  djangoPage
-    .bootstrap(home)
-    .visit(home);
-
-  andThen(function() {
-    assert.equal(find('.django-content').parent('.l-constrained').length, 1, 'should have an l-constrained class');
-  });
-});
-
 test('.l-constrained is added to regular pages', function(assert) {
   let regularPage = server.create('django-page', {
     id: 'fake/',
@@ -180,6 +147,19 @@ test('.search is added to search pages', function(assert) {
   andThen(function() {
     assert.equal(find('.django-content').parent('.search').length, 1, 'should have an l-constrained class');
   });
+});
+
+
+test('arbitrary django routes do dfp targeting', function(/*assert*/) {
+  server.create('django-page', {id: 'fake/'});
+
+  this.mock(this.application.__container__.lookup('route:djangorendered').get('googleAds'))
+    .expects('doTargeting')
+    .once();
+  
+  djangoPage
+    .bootstrap({id: 'fake/'})
+    .visit({id: 'fake/'});
 });
 
 moduleForAcceptance('Acceptance | Django Rendered | Beta Trial', {

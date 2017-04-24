@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import test from 'ember-sinon-qunit/test-support/test';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import djangoPage from 'wnyc-web-client/tests/pages/django-page';
 import showPage from 'wnyc-web-client/tests/pages/show';
@@ -296,6 +296,22 @@ test('show pages with a play param', function(assert) {
     assert.equal(Ember.$('[data-test-selector=nypr-player-story-title]').text(), story.title, `${story.title} should be loaded in player UI`);
   });
 
+});
+
+test('channel routes do dfp targeting', function(/*assert*/) {
+  let show = server.create('show', {
+    id: 'shows/foo/'
+  });
+  server.create('api-response', { id: 'shows/foo/recent_stories/1' });
+  server.create('django-page', {id: show.id});
+
+  this.mock(this.application.__container__.lookup('route:show').get('googleAds'))
+    .expects('doTargeting')
+    .once();
+  
+  djangoPage
+    .bootstrap({id: show.id})
+    .visit({id: show.id});
 });
 
 moduleForAcceptance('Acceptance | Django Page | Show Page Analytics');
