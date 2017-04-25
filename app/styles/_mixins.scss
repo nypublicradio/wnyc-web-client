@@ -26,7 +26,6 @@ $bottom: 0px
     border-radius: 50%;
     border-left-color: $accent;
     border-top-color: $accent;
-    top: -200px;
 
     animation: bigSpin .8s linear infinite;
     animation-origin: 50% 50%;
@@ -43,7 +42,6 @@ $bottom: 0px
     border-radius: 50%;
     border-left-color: $accent;
     border-top-color: $accent;
-    top: -200px;
 
     text-align: center;
     animation: bigSpin 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
