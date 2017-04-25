@@ -372,7 +372,6 @@
   @include flex-shrink(0);
 
   @include mq($large-and-up) {
-    font-size: 16px;
     background: $wqxrdarkblue;
     color: white;
     line-height: 36px;
@@ -405,7 +404,7 @@
     padding-top: 25px;
     background-color: $nearwhite;
   }
-  
+
   &.is-error {
     margin-bottom:  0;
   }
