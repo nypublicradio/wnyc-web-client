@@ -14,7 +14,7 @@ export default Component.extend({
     },
     closePopupAndTrack(title) {
       this.get('metrics').trackEvent({
-        category: 'WNYC Menu',
+        category: 'WQXR Menu',
         label: `Clicked ${title}`,
       });
       if ( !(this.get('isDestroyed') || this.get('isDestroying')) ) {
@@ -26,7 +26,7 @@ export default Component.extend({
     },
     logout() {
       this.get('metrics').trackEvent({
-        category: 'WNYC Menu',
+        category: 'WQXR Menu',
         label: 'Clicked Logout',
       });
       this.get('session').invalidate();
