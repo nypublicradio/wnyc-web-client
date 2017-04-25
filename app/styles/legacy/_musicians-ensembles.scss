@@ -31,15 +31,31 @@
     display: flex,
     flex-direction: column
   ));
+  border-bottom: 0 !important;
+  padding-bottom: 0 !important;
 
   &:first-child {
     border-top: 1px dotted $line--light;
   }
 
-  &__composer {
+  .playlist-info {
+      width: auto !important;
+  }
+
+  &__composer,
+  &__special-programming {
     @include link--dark;
     @include fontsize(18);
     font-weight: 600;
+  }
+
+  &__title {
+    @include fontsize(16);
+  }
+
+  &__musicians {
+    @include fontsize(14);
+    color: $lightgray;
   }
 
   .time {
@@ -70,6 +86,6 @@
   }
 
   .album-info .playlist-actions {
-    margin: 5px 0 0 0;
+    margin: 3px 0 0 0;
   }
 }
