@@ -5730,7 +5730,7 @@ nypr-account-settings@nypublicradio/nypr-account-settings:
 
 nypr-ads@nypublicradio/nypr-ads:
   version "0.0.0"
-  resolved "https://codeload.github.com/nypublicradio/nypr-ads/tar.gz/59c711cac238c36665be16beefc69cfbb6bd5f06"
+  resolved "https://codeload.github.com/nypublicradio/nypr-ads/tar.gz/2aa1b730373ab4266da7f2ef1311675e609840ee"
   dependencies:
     ember-cli-babel "^5.1.7"
     ember-cli-htmlbars "^1.1.1"
