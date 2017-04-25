@@ -12,7 +12,7 @@ export function shareMetadata(story) {
         let entry = get(story, 'currentPlaylistItem.catalogEntry');
         if (entry) {
           shareText = 'I\'m listening to ' + entry.composer.name + ' - ' + entry.title;
-          shareUrl = 'http://www.wqxr.org/streams/' + get(story, 'slug');
+          shareUrl = 'http://www.wqxr.org/streams/?stream=' + get(story, 'slug');
         } else {
           shareText = 'I\'m listening to ' + get(story, 'currentShow.title');
           shareUrl = get(story, 'currentShow.url');

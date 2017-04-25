@@ -240,7 +240,7 @@ test('it yields stream playlist url', function(assert) {
 
 
   const actual = this.$().text().trim().replace(/\s+/g,' ');
-  assert.equal(actual, "/streams/streamid");
+  assert.equal(actual, "/playlist-daily/?scheduleStation=streamid");
 });
 
 test('backdropImageUrl first choice is image', function(assert) {
