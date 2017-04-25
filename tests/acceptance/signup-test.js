@@ -50,6 +50,7 @@ test('Sign up with Facebook button is visible at load', function(assert) {
 });
 
 test('Successful facebook login redirects', function(assert) {
+  server.create('bucket', {slug: 'wqxr-home'});
   let user = server.create('user');
   registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
   withFeature('socialAuth');
