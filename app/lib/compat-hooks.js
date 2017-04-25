@@ -100,6 +100,8 @@ export function beforeAppend(element, page) {
 export function mangleJavascript(scriptTag, sourceCode) {
   if (Object.keys(runOnce).any(k => scriptTag.src.match(k))) {
     return false;
+  } else if (sourceCode === 'bad url') {
+    return false;
   }
   return sourceCode;
 }
