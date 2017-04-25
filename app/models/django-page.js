@@ -86,7 +86,7 @@ export default DS.Model.extend({
       return {
         id,
         componentName: el.getAttribute('data-ember-component'),
-        args,
+        args
       };
     });
   }),
