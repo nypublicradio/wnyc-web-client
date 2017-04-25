@@ -149,6 +149,11 @@ module.exports = function(environment) {
           version: 'v2.8'
         }
       }
+    },
+    hotjar: {
+      id: 467005,
+      enabled: environment === 'production',
+      forceSSL: true
     }
   };
 
