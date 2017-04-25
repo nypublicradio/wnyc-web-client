@@ -1678,8 +1678,11 @@ p.byline {
   left: 25px;
 }
 
-.article-description h3, .article-description h4 {
-  padding-top: 25px;
+.article-description h3 {
+  margin-bottom: 20px;
+}
+
+.article-description h4 {
   margin-bottom: 10px;
 }
 
@@ -1720,14 +1723,12 @@ p.byline {
 
 
 .article-description ul li {
-  list-style: circle outside;
-  margin-left: 45px;
+  list-style: disc outside;
   padding: 1px 0;
 }
 
 .article-description ol li {
   list-style: decimal outside;
-  margin-left: 45px;
   padding: 1px 0;
 }
 
@@ -1805,6 +1806,12 @@ ul.article-playlist {
 
 
 /* COMMENTS */
+
+#comments {
+  max-width: 630px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .comment-thread {
   padding-bottom: 20px;
