@@ -10,7 +10,8 @@ moduleForAcceptance('Acceptance | schedule', {
 });
 
 test('visiting /schedule', function(assert) {
-  let date = moment().format('YYYY/MMM/DD').toLowerCase();  server.create('django-page', {id: `schedule/${date}/?scheduleStation=wqxr`});
+  let date = moment().format('YYYY/MMM/DD').toLowerCase();
+  server.create('django-page', {id: `schedule/${date}/?scheduleStation=wqxr`});
   visit('/schedule');
 
   andThen(function() {

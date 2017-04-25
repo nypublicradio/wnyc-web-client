@@ -396,16 +396,6 @@
   @include player-reveal-transition--open;
 }
 
-.sitechrome__nav-footer {
-  @include l-bottom;
-  @include player-reveal-transition;
-  @include player-reveal-transition--closed;
-}
-
-.sitechrome--player-open .sitechrome__nav-footer {
-  @include player-reveal-transition--open;
-}
-
 .sitechrome-page-content-area {
   position: relative;
   margin-bottom: 2.4rem;
