@@ -54,7 +54,6 @@
   }
 
   &__musicians {
-    @include fontsize(14);
     color: $lightgray;
   }
 
@@ -78,10 +77,6 @@
 
     li {
       list-style: none;
-
-      a {
-        @include link--dark;
-      }
     }
   }
 
