@@ -14,7 +14,7 @@
         font-family: "Lato", sans-serif;
       }
 
-      .piece-info ul, 
+      .piece-info ul,
       ul.playlist-actions {
         list-style: none;
         padding-left: 0;
@@ -23,4 +23,64 @@
     }
   }
 
+}
+
+.playlist-item {
+  padding-left: 50px !important;
+  @include flexbox((
+    display: flex,
+    flex-direction: column
+  ));
+  border-bottom: 0 !important;
+  padding-bottom: 0 !important;
+
+  &:first-child {
+    border-top: 1px dotted $line--light;
+  }
+
+  .playlist-info {
+      width: auto !important;
+  }
+
+  &__composer,
+  &__special-programming {
+    @include link--dark;
+    @include fontsize(18);
+    font-weight: 600;
+  }
+
+  &__title {
+    @include fontsize(16);
+  }
+
+  &__musicians {
+    color: $lightgray;
+  }
+
+  .time {
+    font-size: 14px !important;
+    color: $lightgray !important;
+    font-weight: 600 !important;
+    margin: 0 !important;
+    text-align: left !important;
+  }
+
+  .piece-info {
+    @include fontsize(16);
+    line-height: 27px;
+    color: $darkergray !important;
+
+    ul {
+      padding: 0;
+      margin: 0 !important;
+    }
+
+    li {
+      list-style: none;
+    }
+  }
+
+  .album-info .playlist-actions {
+    margin: 3px 0 0 0;
+  }
 }
