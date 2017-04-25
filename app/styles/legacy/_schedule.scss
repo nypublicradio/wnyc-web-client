@@ -148,18 +148,15 @@ ul.schedule-table {
 
     div.program {
       height: auto;
+      @include h3;
 
       a {
-        font-size: 12px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: #333;
-        font-weight: 700;
-
-        &:hover {
-          color: $wqxrlink;
-        }
+        @include link--dark;
       }
+    }
+
+    div.expand {
+      display: none;
     }
 
     div.time,
