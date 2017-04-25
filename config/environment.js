@@ -163,7 +163,6 @@ module.exports = function(environment) {
       // passed in --proxy to the command line
       enabled: mirageEnabled
     };
-
   }
 
   if (environment === 'test') {

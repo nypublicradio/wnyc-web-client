@@ -1,43 +1,8 @@
-<div class="doubledown">
-  <div class="flag">
-
-    <div class="flag-image">
-    {{!-- These image sources are written out as a static string so that the ember-cli will detect them and replace with fingerprinted versions --}}
-      {{#if pageNotFound}}
-        {{#if media.isSmallOnly}}
-          <img alt="Page Not Found" src="/assets/img/error/404_tote_small.png" class="error-img" />
-        {{else}}
-          <img alt="Page Not Found" src="/assets/img/error/404_tote.png" class="error-img" />
-        {{/if}}
-      {{/if}}
-
-      {{#if serverError}}
-        {{#if media.isSmallOnly}}
-          <img alt="Server Error" src="/assets/img/error/500_tote_small.png" class="error-img" />
-        {{else}}
-          <img alt="Server Error" src="/assets/img/error/500_tote.png" class="error-img" />
-        {{/if}}
-      {{/if}}
-    </div>
-
-    <div class="flag-body">
-      <div class="error-text-block">
-        <h1 class="h2">
-          {{#if pageNotFound}}Sorry, this page can’t be found.{{/if}}
-          {{#if serverError}}Oops, something went wrong...{{/if}}
-        </h1>
-
-        <div class="text text--350">
-          {{#if pageNotFound}}
-          <p>You may have typed the address incorrectly or you may have used an outdated link. Try <a href="/search/" title="Search" data-tracking-category="Error Page"  data-tracking-action="Clicked Search">searching</a> for it, or browse our site for more stories.</p>
-          {{/if}}
-
-          {{#if serverError}}
-          <p>We're experiencing an internal server error. Please try again later. </p>
-          {{/if}}
-        </div>
-      </div>
-    </div>
-
-  </div>
+<div class="error-text" data-test-selector={{errorCode}}>
+  <h2 class="error-title">
+    {{headline}}
+  </h2>
+  <p class="error-subtitle">
+    {{sub}}
+  </p>
 </div>

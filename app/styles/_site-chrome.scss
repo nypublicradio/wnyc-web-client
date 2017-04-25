@@ -405,6 +405,10 @@
     padding-top: 25px;
     background-color: $nearwhite;
   }
+  
+  &.is-error {
+    margin-bottom:  0;
+  }
 }
 
 .sitechrome-footer {
