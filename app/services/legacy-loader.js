@@ -60,7 +60,8 @@ export const runOnce = Object.freeze({
   'www.google-analytics.com/analytics.js': true,
   'pixel.quantserve.com/aquant.js': true,
   'www.googletagservices.com/tag/js/gpt.js': true,
-  'www.googletagmanager.com': true
+  'www.googletagmanager.com': true,
+  'static.hotjar.com': true
 });
 
 import Ember from 'ember';
