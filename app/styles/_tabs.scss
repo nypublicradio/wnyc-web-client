@@ -11,10 +11,10 @@
  *
  * One tab can be associated with one chunk of content. Each content chunk
  * must be wrapped in a `.tab-toggleitem` with a `data-state` attribute set to
- * one of the available states in the states partial. `is-fadeout` is a good 
+ * one of the available states in the states partial. `is-fadeout` is a good
  * default.
  *
- * All Your `.tab-toggleitem` elements must be siblings beneath a single 
+ * All Your `.tab-toggleitem` elements must be siblings beneath a single
  * a `.tab-wrapper` parent, which can be anywhere on the page.
  *
  * Associate `.js-tabClickable` elements with a `.tab-toggleitem` via href/id
@@ -104,7 +104,7 @@
 }
 
 .tab-line--blue {
-  background-color: $wqxrblue;
+  background-color: $wqxrlink;
 }
 
 .tab-wrapper {
@@ -124,9 +124,9 @@
 .tab-link {
   font-weight: 600;
 
-  &.active,
+  &.is-active,
   &.ember-transitioning-in {
-    color: $red;
+    color: $wqxrlink;
   }
 
   &.active.ember-transitioning-out {
