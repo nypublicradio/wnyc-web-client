@@ -39,6 +39,11 @@
   @include fontsize($base-font*1.5); /* 24px */
   font-weight: 600;
   line-height: 2.125rem;
+
+  @include mq($small-only) {
+    @include fontsize($base-font*1.25); /* 20px */
+    line-height: 1.5;
+  }
 }
 
 .h2 {
@@ -49,8 +54,8 @@
     @include transition(font-size $transition-timing ease, line-height $transition-timing ease);
 
     @include mq($small-only) {
-        @include fontsize($base-font*1.25); /* 20px */
-        line-height: 1.5;
+      @include fontsize($base-font*1.25); /* 20px */
+      line-height: 1.5;
     }
 }
 
@@ -369,15 +374,15 @@
  * Links:
  */
 
- @mixin link--dark {
-   color: $darkergray;
-   border: none;
+@mixin link--dark {
+  color: $darkergray;
+  border: none;
 
-   &:hover,
-   &:focus {
-       color: $wqxrlink;
-   }
- }
+  &:hover,
+  &:focus {
+      color: $wqxrlink;
+  }
+}
 
 .link--dark {
   @include link--dark;

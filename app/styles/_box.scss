@@ -5,6 +5,7 @@
 .box {
   padding: 30px;
   position: relative;
+  margin-bottom: 2rem;
 
   @include mq($medium-only) {
     padding: 30px 15px;
