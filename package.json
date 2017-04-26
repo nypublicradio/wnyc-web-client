@@ -99,7 +99,9 @@
     "nypr-ads": "nypublicradio/nypr-ads",
     "nypr-player": "nypublicradio/nypr-player",
     "nypr-audio-services": "nypublicradio/nypr-audio-services",
-    "nypr-ui": "nypublicradio/nypr-ui",
+    "nypr-player": "nypublicradio/nypr-player",
+    "nypr-ui": "nypublicradio/nypr-ui#feature/nypr-audio-services",
+    "nypr-account-settings": "nypublicradio/nypr-account-settings",
     "torii": "0.8.1"
   },
   "ember-addon": {
