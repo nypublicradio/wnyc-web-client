@@ -117,6 +117,7 @@ module.exports = function(environment) {
     moreShowsAPIKey: "mammoth",
     wnycAdminRoot: process.env.WNYC_ADMIN_ROOT,
     wnycAuthAPI: process.env.AUTH_SERVICE,
+    wnycMembershipAPI: process.env.MEMBERSHIP_SERVICE,
     wnycAPIGateway: process.env.API_GATEWAY,
     wnycAccountRoot: process.env.WNYC_ACCOUNT_ROOT,
     wnycEtagAPI: process.env.WNYC_ETAG_API,
@@ -200,6 +201,7 @@ module.exports = function(environment) {
     ENV.wnycURL = '//example.com';
     ENV.wnycBetaURL = 'http://example.com';
     ENV.wnycAuthAPI = 'http://example.com';
+    ENV.wnycMembershipAPI = 'http://www.example.com';
     ENV.wnycAPIGateway = 'http://example.com';
     ENV.platformEventsAPI = 'http://example.com';
   }
