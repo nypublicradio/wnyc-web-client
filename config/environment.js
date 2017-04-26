@@ -32,7 +32,7 @@ module.exports = function(environment) {
     }, {
       name: 'GoogleTagManager',
       config: {
-        id: process.env.GOOGLE_TAG_MANAGER
+        id: process.env.GOOGLE_TAG_MANAGER_ID
       },
       environments: [process.env.DEV_GTM ? 'development' : 'production']
     }],
