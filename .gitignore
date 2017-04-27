@@ -21,6 +21,7 @@ testem.log
 .env.*
 .env.deploy.*
 !.env.sample
+!.env.deploy.sample
 
 # temporary modernizr location until we can make it an add on
 vendor/modernizr/modernizr-build.js
