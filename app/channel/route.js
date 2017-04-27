@@ -32,7 +32,7 @@ export default Route.extend(PlayParamMixin, {
   },
 
   afterModel({ channel }, transition) {
-    get(this, 'googleAds').doTargeting();
+    get(this, 'googleAds').doTargeting({show: channel.get('slug')});
     if (channel.get('headerDonateChunk')) {
       transition.send('updateDonateChunk', channel.get('headerDonateChunk'));
     }
@@ -61,6 +61,9 @@ export default Route.extend(PlayParamMixin, {
       beforeTeardown();
       if (get(this, 'currentModel.channel.altLayout') && isExiting) {
         transition.send('setMiniChrome', false);
+      }
+      if (isExiting) {
+        get(this, 'googleAds').clearTarget('show');
       }
       return true;
     }
