@@ -2,6 +2,7 @@ import Route from 'ember-route';
 import get from 'ember-metal/get';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 import service from 'ember-service/inject';
+import RSVP from 'rsvp';
 
 export default Route.extend(ApplicationRouteMixin, {
   metrics: service(),
@@ -39,6 +40,12 @@ export default Route.extend(ApplicationRouteMixin, {
 
     let pollFunction = () => get(this, 'store').findAll('stream');
     get(this, 'poll').addPoll({interval: 60 * 1000, callback: pollFunction});
+  },
+
+  model() {
+    return RSVP.hash({
+      splashPage: this.store.findRecord('chunk', 'wqxr-splash-page').catch(()=>'')
+    });
   },
 
   actions: {
