@@ -22,7 +22,7 @@ module.exports = function(environment) {
     metricsAdapters: [{
       name: 'GoogleAnalytics',
       config: {
-        id: process.env.GOOGLE_ANALYTICS || 'UA-46158613-1'
+        id: process.env.GOOGLE_ANALYTICS || 'UA-46158613-2'
       },
     }, {
       name: 'NprAnalytics',
