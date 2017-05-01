@@ -44,7 +44,7 @@ export default Route.extend(ApplicationRouteMixin, {
 
   model() {
     return RSVP.hash({
-      splashPage: this.store.findRecord('chunk', 'wqxr-splash-page').catch(()=>'')
+      splashPage: this.store.findRecord('chunk', 'wqxr-global').catch(()=>'')
     });
   },
 
