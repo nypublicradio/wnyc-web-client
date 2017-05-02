@@ -37,10 +37,11 @@
         {{blowout.main audio=audio item=model.wqxrHome.featuredItems.[0]}}
 
         {{#if model.membershipChunk}}
-          {{#blowout.column}}
+          {{#blowout.column as |column|}}
             <div class="chunk__item">
               {{django-page page=model.membershipChunk.pagecontent}}
             </div>
+            {{column.brick audio=audio item=model.wqxrHome.featuredItems.[1]}}
           {{/blowout.column}}
         {{else}}
           {{#blowout.column as |column|}}
