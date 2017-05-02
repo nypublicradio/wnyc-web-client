@@ -2,7 +2,7 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
 import Test from 'ember-test';
 
-moduleForAcceptance('Acceptance | analytics');
+moduleForAcceptance('Acceptance | Selectors for GTM Analytics');
 
 function waitForStreams() {
   return find('.stream-banner-station').length;
