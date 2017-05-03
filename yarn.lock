@@ -3101,6 +3101,12 @@ ember-poll@^1.0.1:
   dependencies:
     ember-cli-babel "^5.1.6"
 
+ember-poll@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/ember-poll/-/ember-poll-1.2.0.tgz#c0db78d272f88b3cddaeb1c290725cc4ea295f20"
+  dependencies:
+    ember-cli-babel "^5.1.6"
+
 ember-power-select@1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/ember-power-select/-/ember-power-select-1.6.0.tgz#8533037b10a39f95732d8e138b038970a78b451a"
