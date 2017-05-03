@@ -17,7 +17,7 @@ export default DS.Model.extend({
   document: Ember.computed('inlineDocument', 'text', function(){
     let inlineDoc = this.get('inlineDocument');
     let text = this.get('text');
-    if (inlineDoc) {
+    if (inlineDoc && !text) {
       return inlineDoc;
     } else {
       return this.get('htmlParser').parse(text);
