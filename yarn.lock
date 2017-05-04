@@ -5707,7 +5707,7 @@ nypr-account-settings@nypublicradio/nypr-account-settings:
 
 nypr-ads@nypublicradio/nypr-ads:
   version "0.0.0"
-  resolved "https://codeload.github.com/nypublicradio/nypr-ads/tar.gz/d6248651e1db1a77cd3f8459c4147323cc67bf69"
+  resolved "https://codeload.github.com/nypublicradio/nypr-ads/tar.gz/828876e2939345895098d56a4c2b42345591f6a1"
   dependencies:
     ember-cli-babel "^5.1.7"
     ember-cli-htmlbars "^1.1.1"
@@ -5721,7 +5721,7 @@ nypr-player@nypublicradio/nypr-player:
 
 nypr-ui@nypublicradio/nypr-ui:
   version "0.0.0"
-  resolved "https://codeload.github.com/nypublicradio/nypr-ui/tar.gz/a4cfccfd48ab6ab8de3d702eab85db2854ceeea0"
+  resolved "https://codeload.github.com/nypublicradio/nypr-ui/tar.gz/43e5b5fc00e34a40a90e90866a672d6d986d144a"
   dependencies:
     ember-cli-babel "^5.1.7"
     ember-cli-compass-compiler "^0.5.0"
