@@ -1,5 +1,4 @@
 import DS from 'ember-data';
-import computed from 'ember-computed';
 
 const { Model, attr } = DS;
 
