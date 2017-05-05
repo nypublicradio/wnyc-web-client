@@ -106,6 +106,10 @@
 .channel-title {
     padding-top: 0px !important;
     margin-bottom: 10px !important;
+
+    .marquee & {
+      margin-top: 10px;
+    }
 }
 
 .channel-logo {
