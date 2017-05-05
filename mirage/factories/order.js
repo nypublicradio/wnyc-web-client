@@ -10,7 +10,5 @@ export default Factory.extend({
   creditCardType: () => faker.random.arrayElement(['Visa', 'Mastercard', 'Amex', 'Discover']),
   creditCardLast4Digits: '0302',
   isActiveMember: faker.random.boolean,
-  isSustainer() {
-    return this.orderType === 'sustainer' ? true : false;
-  },
+  isSustainer: faker.random.boolean,
 });
