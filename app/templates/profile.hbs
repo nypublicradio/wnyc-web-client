@@ -15,7 +15,8 @@
       {{nypr-accounts/basic-card
         user=model
         emailUpdated=(action showFlash 'email')
-        authenticate=(action authenticate)}}
+        authenticate=(action authenticate)
+        emailPendingVerification=emailPendingVerification}}
 
       {{nypr-accounts/password-card
         helplinkUrl='/forgot'
