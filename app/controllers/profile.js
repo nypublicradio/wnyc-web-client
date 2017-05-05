@@ -1,6 +1,7 @@
 import Controller from 'ember-controller';
 import service from 'ember-service/inject';
 import config from 'wnyc-web-client/config/environment';
+import { task } from 'ember-concurrency';
 import fetch from 'fetch';
 import RSVP from 'rsvp';
 
@@ -14,6 +15,12 @@ export default Controller.extend({
   flashMessages: service(),
   siteName: config.siteName,
   siteDomain: config.siteSlug,
+  emailPendingVerification: false,
+
+  init() {
+    this._super(...arguments);
+    this.get('checkVerificationStatus').perform();
+  },
 
   authenticate(password) {
     let email = this.get('model.email');
@@ -54,6 +61,33 @@ export default Controller.extend({
       sticky: true
     });
   },
+
+  checkVerificationStatus: task(function * () {
+    yield this.get('session').authorize('authorizer:nypr', () => this.get('setVerificationStatus').perform());
+  }),
+
+  setVerificationStatus: task(function * (_, authorization) {
+    let email = this.get('model');
+    let url = `${config.wnycMembershipAPI}/v1/emails/is-verified/?email=${email}`;
+    try {
+      let response = yield fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: authorization
+        }
+      });
+      if (response && response.ok) {
+        let json = yield response.json();
+        // if it's not verified, it's pending
+        let pendingVerification = !json.data.is_verified;
+        this.set('emailPendingVerification', pendingVerification);
+      }
+    } catch(e) {
+      // if there's a problem with the request, we don't change the status
+      // because we don't want to show the pending message and confuse users.
+    }
+  }),
 
   actions: {
     disableAccount() {

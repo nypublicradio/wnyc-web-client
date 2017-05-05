@@ -235,4 +235,5 @@ export default function() {
   membership microservice
   ---------------------------------------------------------------*/
   this.get(`${config.wnycMembershipAPI}/v1/orders/`, 'orders');
+  this.get(`${config.wnycMembershipAPI}/v1/emails/is-verified/`, {data: {is_verified: true}});
 }
