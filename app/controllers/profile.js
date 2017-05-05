@@ -12,6 +12,8 @@ const FLASH_MESSAGES = {
 export default Controller.extend({
   session: service(),
   flashMessages: service(),
+  siteName: config.siteName,
+  siteDomain: config.siteSlug,
 
   authenticate(password) {
     let email = this.get('model.user.email');
