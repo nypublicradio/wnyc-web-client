@@ -72,9 +72,7 @@
         <li class="list-item list-item--nav">
           {{#if media.isLargeAndUp}}
             {{#listen-button
-              audio=audio
               type='white-hollow-small'
-              state=(if (eq preferredStream.slug audio.currentId) audio.playState)
               itemPK=preferredStream.slug
               itemTitle=preferredStream.name
               playContext='nav'

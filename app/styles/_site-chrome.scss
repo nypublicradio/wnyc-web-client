@@ -146,6 +146,17 @@
     }
   }
 
+  .listen-button {
+    .listen-ui {
+      width: auto;
+
+      @include mq($large-and-up) {
+        width: 100%;
+      }
+
+    }
+  }
+
   @include mq($large-and-up) {
     position: fixed;
     width: 150px;
