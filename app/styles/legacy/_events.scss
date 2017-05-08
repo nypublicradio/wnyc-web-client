@@ -53,6 +53,10 @@
   .sold-out {
     font-size: 16px;
     background-color: $lightgray;
+
+    &:hover {
+      background-color: $lightgray;
+    }
   }
 }
 
