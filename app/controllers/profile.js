@@ -59,7 +59,7 @@ export default Controller.extend({
 
   checkVerificationStatus: task(function * () {
     yield this.get('session').authorize('authorizer:nypr', () => this.get('setVerificationStatus').perform());
-  }),
+  }).on('init'),
 
   setVerificationStatus: task(function * (_, authorization) {
     let email = this.get('model');
@@ -82,7 +82,7 @@ export default Controller.extend({
       // if there's a problem with the request, don't change the status
       // because we don't want to show the pending message and confuse users.
     }
-  }).on('init'),
+  }),
 
   actions: {
     disableAccount() {
