@@ -33,7 +33,7 @@ export default Model.extend({
     return shareMetadata(this);
   }),
 
-  forListenAction(data) {
+  forListenAction(data = {}) {
     return this.get('currentStory').then(s => {
       data.current_audio_position = 0; // stream should always report 0
       return Object.assign({
