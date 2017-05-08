@@ -17,11 +17,6 @@ export default Controller.extend({
   siteDomain: config.siteSlug,
   emailPendingVerification: false,
 
-  init() {
-    this._super(...arguments);
-    this.get('checkVerificationStatus').perform();
-  },
-
   authenticate(password) {
     let email = this.get('model.email');
     return this.get('session').verify(email, password);
@@ -84,10 +79,10 @@ export default Controller.extend({
         this.set('emailPendingVerification', pendingVerification);
       }
     } catch(e) {
-      // if there's a problem with the request, we don't change the status
+      // if there's a problem with the request, don't change the status
       // because we don't want to show the pending message and confuse users.
     }
-  }),
+  }).on('init'),
 
   actions: {
     disableAccount() {
