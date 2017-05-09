@@ -1,7 +1,6 @@
 {{#account-wrapper}}
   {{#if session.isAuthenticated}}
     {{nypr-account-forms/verify
-      authAPI=config.wnycAuthAPI
       membershipAPI=config.wnycMembershipAPI
       session=session
       emailId=email_id
