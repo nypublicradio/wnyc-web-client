@@ -8,7 +8,7 @@ import get from 'ember-metal/get';
 // Note for future people: schema.modelName.create() doesn't generate attributes in mirage factories. Create the objects using server.create in default.js (for local dev), or in the test
 
 export default function() {
-  this.logging = true;
+  this.logging = false;
   let baseUrl = config.wnycURL;
 
   /*------------------------------------------------------------
