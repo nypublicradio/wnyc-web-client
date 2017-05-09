@@ -184,12 +184,18 @@ export default function() {
   });
 
   /*-------------------------------------------------------------
-  membership microservice
+  analytics microservice
   ---------------------------------------------------------------*/
 
-  this.urlPrefix = config.wnycAuthAPI + '/membership';
+  this.post(`${config.platformEventsAPI}/v1/events/viewed`, {});
+  this.post(`${config.platformEventsAPI}/v1/events/listened`, {});
 
-  this.patch('/email/:email_id/verify', (schema, request) => {
+  /*-------------------------------------------------------------
+  membership microservice
+  ---------------------------------------------------------------*/
+  this.get(`${config.wnycMembershipAPI}/v1/orders/`, 'orders');
+  this.get(`${config.wnycMembershipAPI}/v1/emails/is-verified/`, {data: {is_verified: true}});
+  this.patch(`${config.wnycMembershipAPI}/v1/email/:email_id/verify`, (schema, request) => {
     let params = JSON.parse(request.requestBody);
     if (!params.verification_code || params.verification_code === "null") {
       return new Response(400, {}, expiredCodeException);
@@ -197,11 +203,4 @@ export default function() {
       return new Response(200);
     }
   });
-
-  /*-------------------------------------------------------------
-  analytics microservice
-  ---------------------------------------------------------------*/
-
-  this.post(`${config.platformEventsAPI}/v1/events/viewed`, {});
-  this.post(`${config.platformEventsAPI}/v1/events/listened`, {});
 }
