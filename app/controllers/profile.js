@@ -1,6 +1,7 @@
 import Controller from 'ember-controller';
 import service from 'ember-service/inject';
 import config from 'wnyc-web-client/config/environment';
+import { task } from 'ember-concurrency';
 import fetch from 'fetch';
 import RSVP from 'rsvp';
 
@@ -12,9 +13,11 @@ const FLASH_MESSAGES = {
 export default Controller.extend({
   session: service(),
   flashMessages: service(),
+  torii: service(),
+  currentUser: service(),
+  emailIsPendingVerification: false,
   siteName: config.siteName,
   siteDomain: config.siteSlug,
-  emailPendingVerification: false,
 
   authenticate(password) {
     let email = this.get('model.email');
@@ -56,6 +59,28 @@ export default Controller.extend({
     });
   },
 
+  updateEmailStatus: task(function * (authorization, email) {
+    let url = `${config.wnycMembershipAPI}/v1/emails/is-verified/?email=${email}`;
+    try {
+      let response = yield fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: authorization
+        }
+      });
+      if (response && response.ok) {
+        let json = yield response.json();
+        // if it's not verified, it's pending
+        let pendingVerification = !json.data.is_verified;
+        this.set('emailIsPendingVerification', pendingVerification);
+      }
+    } catch(e) {
+      // if there's a problem with the request, don't change the status
+      // because we don't want to show the pending message and confuse users.
+    }
+  }),
+
   actions: {
     disableAccount() {
       this.get('model').destroyRecord().then(() => {
@@ -69,6 +94,30 @@ export default Controller.extend({
     confirmDisable() {
       this.get('session').invalidate().then(() => {
         this.transitionToRoute('index');
+      });
+    },
+
+    checkEmailStatus(email) {
+      this.get('session').authorize('authorizer:nypr', (_, authorization) => {
+        this.get('updateEmailStatus').perform(authorization, email);
+      });
+    },
+
+    linkFacebookAccount() {
+      this.get('torii').open('facebook-connect').then((data) => {
+        let facebookId = data.userId;
+        let user = this.get('currentUser.user');
+        user.set('facebookId', facebookId);
+        user.save().then(() => {
+          this.showFlash('connected');
+        })
+        .catch(() => {
+          user.rollbackAttributes();
+          this.showFlash('connectError', 'warning');
+        });
+      })
+      .catch(() => {
+        this.showFlash('connectError', 'warning');
       });
     }
   }
