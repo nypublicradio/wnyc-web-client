@@ -20,7 +20,7 @@ export default Route.extend({
   actions: {
     didTransition() {
       this.get('poll').addPoll({
-        interval: 60 * 1000,
+        interval: 60 * 1000 * 5,
         callback: () => this.refresh(),
         label: 'refresh'
       });
