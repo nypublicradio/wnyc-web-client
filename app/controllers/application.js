@@ -2,10 +2,11 @@ import Ember from 'ember';
 import Controller from 'ember-controller';
 import service from 'ember-service/inject';
 import get from 'ember-metal/get';
-import { and, not, reads, equal } from 'ember-computed';
+import { reads, equal } from 'ember-computed';
 
 export default Controller.extend({
   audio:        service(),
+  dj:           service(),
   metrics:      service(),
   session:      service(),
 
@@ -13,8 +14,7 @@ export default Controller.extend({
   modal:        null,
   play:         null,
 
-  noErrors:     not('audio.hasErrors'),
-  showPlayer:   and('noErrors', 'audio.playedOnce'),
+  showPlayer: reads('dj.showPlayer'),
 
   isHomepage: Ember.computed.match('currentRouteName', /^index(_loading)?$/),
 
@@ -23,12 +23,8 @@ export default Controller.extend({
 
 
   currentAudio: reads('audio.currentAudio'),
-  isAudioStream: equal('currentAudio.audioType', 'livestream'), // unused?
-
-
 
   actions: {
-
 
     showModal(which) {
       this._scrollY = window.scrollY;
