@@ -56,25 +56,25 @@ export default Controller.extend({
     });
   },
 
-  updateEmailStatus: task(function * (authorization, email) {
+  isEmailPending: task(function * (email) {
     let url = `${config.wnycMembershipAPI}/v1/emails/is-verified/?email=${email}`;
+    let headers = {'Content-Type': 'application/json'};
+    this.get('session').authorize('authorizer:nypr', (header, value) => {
+      headers[header] = value;
+    });
     try {
-      let response = yield fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: authorization
-        }
-      });
+      let response = yield fetch(url, {headers, method: 'GET'});
       if (response && response.ok) {
         let json = yield response.json();
         // if it's not verified, it's pending
-        let pendingVerification = !json.data.is_verified;
-        this.set('emailIsPendingVerification', pendingVerification);
+        return !json.data.is_verified;
+      } else {
+        return false;
       }
     } catch(e) {
-      // if there's a problem with the request, don't change the status
+      // if there's a problem with the request, return false for pending
       // because we don't want to show the pending message and confuse users.
+      return false;
     }
   }),
 
@@ -94,10 +94,8 @@ export default Controller.extend({
       });
     },
 
-    checkEmailStatus(email) {
-      this.get('session').authorize('authorizer:nypr', (_, authorization) => {
-        this.get('updateEmailStatus').perform(authorization, email);
-      });
+    updateEmailStatus(email) {
+      this.set('emailIsPendingVerification', this.get('isEmailPending').perform(email));
     },
 
     linkFacebookAccount() {
