@@ -6,8 +6,8 @@ export default Controller.extend({
   config,
   session: service(),
   flashMessages: service(),
-  queryParams: ['email_pk', 'verification_code'],
-  email_pk: null,
+  queryParams: ['email_id', 'verification_code'],
+  email_id: null,
   verification_code: null,
   actions: {
     goToProfile(errorMessage) {
