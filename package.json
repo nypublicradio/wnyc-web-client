@@ -94,9 +94,9 @@
     "loader.js": "^4.0.10",
     "morgan": "^1.6.1",
     "nypr-player": "nypublicradio/nypr-player",
-    "nypr-account-settings": "nypublicradio/nypr-account-settings#mhearn/member-center-frontend",
+    "nypr-account-settings": "nypublicradio/nypr-account-settings",
     "nypr-ads": "nypublicradio/nypr-ads",
-    "nypr-ui": "nypublicradio/nypr-ui#mhearn/ui-updates-for-member-center",
+    "nypr-ui": "nypublicradio/nypr-ui",
     "torii": "0.8.1"
   },
   "ember-addon": {
