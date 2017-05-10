@@ -230,4 +230,9 @@ export default function() {
 
   this.post(`${config.platformEventsAPI}/v1/events/viewed`, {});
   this.post(`${config.platformEventsAPI}/v1/events/listened`, {});
+
+  /*-------------------------------------------------------------
+  membership microservice
+  ---------------------------------------------------------------*/
+  this.get(`${config.wnycMembershipAPI}/v1/orders/`, 'orders');
 }

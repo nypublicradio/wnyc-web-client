@@ -4595,6 +4595,13 @@ istextorbinary@2.1.0:
     editions "^1.1.1"
     textextensions "1 || 2"
 
+ivy-tabs@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/ivy-tabs/-/ivy-tabs-3.1.0.tgz#07eae83bf46c974bf7de2f4d9404a7abaebe39fe"
+  dependencies:
+    ember-cli-babel "^5.1.7"
+    ember-cli-htmlbars "^1.0.10"
+
 jju@^1.1.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/jju/-/jju-1.3.0.tgz#dadd9ef01924bc728b03f2f7979bdbd62f7a2aaa"
@@ -5696,7 +5703,7 @@ number-is-nan@^1.0.0:
 
 nypr-account-settings@nypublicradio/nypr-account-settings:
   version "0.0.0"
-  resolved "https://codeload.github.com/nypublicradio/nypr-account-settings/tar.gz/ecffda1714729e6f9475e514bca7768f926d2b26"
+  resolved "https://codeload.github.com/nypublicradio/nypr-account-settings/tar.gz/8f4a7fe4efbfbde76cd3cd19d709e4e1e1fa2fa0"
   dependencies:
     ember-changeset "1.2.0"
     ember-changeset-validations "1.2.4"
@@ -5714,14 +5721,14 @@ nypr-ads@nypublicradio/nypr-ads:
 
 nypr-player@nypublicradio/nypr-player:
   version "0.0.2"
-  resolved "https://codeload.github.com/nypublicradio/nypr-player/tar.gz/67f010d4ff0ebce1dbbdc16e8368fcb42546105f"
+  resolved "https://codeload.github.com/nypublicradio/nypr-player/tar.gz/5547a3e0d4535bd8b767b7aafa68ad46202a9dd0"
   dependencies:
     ember-cli-babel "^5.1.7"
     ember-cli-htmlbars "^1.0.10"
 
 nypr-ui@nypublicradio/nypr-ui:
   version "0.0.0"
-  resolved "https://codeload.github.com/nypublicradio/nypr-ui/tar.gz/43e5b5fc00e34a40a90e90866a672d6d986d144a"
+  resolved "https://codeload.github.com/nypublicradio/nypr-ui/tar.gz/955e0123e59721b300797c48bc6233db68943ee8"
   dependencies:
     ember-cli-babel "^5.1.7"
     ember-cli-compass-compiler "^0.5.0"
@@ -5729,6 +5736,7 @@ nypr-ui@nypublicradio/nypr-ui:
     ember-cli-htmlbars-inline-precompile "^0.3.6"
     ember-holygrail-layout "^0.1.4"
     ember-power-select "1.6.0"
+    ivy-tabs "3.1.0"
 
 oauth-sign@~0.8.1:
   version "0.8.2"

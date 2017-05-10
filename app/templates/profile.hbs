@@ -6,15 +6,27 @@
     Hi {{model.givenName}}!
   </h2>
 
-  {{nypr-accounts/basic-card
-    user=model
-    emailUpdated=(action showFlash 'email')
-    authenticate=(action authenticate)}}
+  <div class={{if features.memberCenter "nypr-account-settings-and-member-center" "l-constrained account-info"}}>
+    <div class="nypr-account-settings-body">
+      {{nypr-accounts/basic-card
+        user=model
+        emailUpdated=(action showFlash 'email')
+        authenticate=(action authenticate)}}
 
-  {{nypr-accounts/password-card
-    helplinkUrl='/forgot'
-    helplinkText='Forgot password?'
-    changePassword=(action changePassword)}}
+      {{nypr-accounts/password-card
+        helplinkUrl='/forgot'
+        helplinkText='Forgot password?'
+        changePassword=(action changePassword)}}
+
+    </div>
+    {{#if features.memberCenter}}
+      {{nypr-accounts/membership-card
+        pledges=orders
+        siteName=siteName
+        siteDomain=siteDomain
+        class='nypr-membership-info-body'}}
+    {{/if}}
+  </div>
 
   <div class="aligncenter text--small">
     <p>

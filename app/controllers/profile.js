@@ -12,12 +12,14 @@ const FLASH_MESSAGES = {
 export default Controller.extend({
   session: service(),
   flashMessages: service(),
-  
+  siteName: config.siteName,
+  siteDomain: config.siteSlug,
+
   authenticate(password) {
     let email = this.get('model.email');
     return this.get('session').verify(email, password);
   },
-  
+
   changePassword(changeset) {
     let old_password = changeset.get('currentPassword');
     let new_password = changeset.get('newPassword');
@@ -52,7 +54,7 @@ export default Controller.extend({
       sticky: true
     });
   },
-  
+
   actions: {
     disableAccount() {
       this.get('model').destroyRecord().then(() => {
@@ -62,7 +64,7 @@ export default Controller.extend({
         });
       });
     },
-    
+
     confirmDisable() {
       this.get('session').invalidate().then(() => {
         this.transitionToRoute('index');
