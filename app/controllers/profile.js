@@ -16,7 +16,7 @@ export default Controller.extend({
   siteDomain: config.siteSlug,
 
   authenticate(password) {
-    let email = this.get('model.user.email');
+    let email = this.get('model.email');
     return this.get('session').verify(email, password);
   },
 
@@ -54,7 +54,7 @@ export default Controller.extend({
 
   actions: {
     disableAccount() {
-      this.get('model.user').destroyRecord().then(() => {
+      this.get('model').destroyRecord().then(() => {
         this.setProperties({
           disableModal: false,
           confirmDisableModal: true
