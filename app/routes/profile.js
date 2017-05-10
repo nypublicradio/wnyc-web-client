@@ -13,7 +13,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
   setupController(controller, model) {
     if (this.features.isEnabled('member-center')) {
       controller.set('orders', this.store.findAll('order'));
-      controller.send('updateEmailStatus', get(model, 'user.email'));
+      controller.send('updateEmailStatus', get(model, 'email'));
     }
     return this._super(controller, model);
   },
