@@ -238,6 +238,7 @@ skip('can disable account', function(assert) {
 });
 
 test('shows pending email', function(assert) {
+  withFeature('member-center');
   server.create('user');
   authenticateSession(this.application, {access_token: 'foo'});
 
