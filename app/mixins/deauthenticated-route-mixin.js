@@ -22,5 +22,6 @@ export default Ember.Mixin.create({
       set(this, 'session.noRefresh', true);
       get(this, 'session').invalidate();
     }
+    this._super(...arguments);
   }
 });
