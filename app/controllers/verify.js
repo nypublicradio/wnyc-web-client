@@ -6,9 +6,9 @@ export default Controller.extend({
   config,
   session: service(),
   flashMessages: service(),
-  queryParams: ['email_id', 'verification_code'],
+  queryParams: ['email_id', 'verification_token'],
   email_id: null,
-  verification_code: null,
+  verification_token: null,
   actions: {
     goToProfile(errorMessage) {
       let flashMessages = this.get('flashMessages');
