@@ -105,14 +105,64 @@
             color: black !important;
         }
     }
+  
+  .sitechrome-nav,
+  .sitechrome-top {
+    display: none;
+  }
+  
+  .ad {
+    display: none;
+  }
+  
+  .admessage {
+    display: none;
+  }
+  
 
     .text {
         color: black;
     }
+  /* Schedules */
 
     #brand-logo {
         // since the wnyc logo in the header is a background image, we need this
         // to override default browser settings re: background-images
         -webkit-print-color-adjust: exact;
     }
+  .program-details, .show-details, #daily-schedule-sidebar, .print-schedule, ul.schedule-dates li.yesterday, ul.schedule-dates li.tomorrow {
+    display: none;
+  }
+
+  .schedule-table {
+    border-top: 0px solid #555;
+  }
+
+  ul.schedule-dates li.today {
+    padding-top: 10px;
+    background: none;
+    text-align: left;
+  }
+
+  .schedule-tabs li {
+    visibility: hidden;
+  }
+
+  .schedule-tabs li.ui-state-active {
+    visibility: visible;
+  }
+
+  ul.schedule-tabs li.wqxr a {
+    background-image: none;
+  }
+
+  ul.schedule-tabs li.q2 a {
+    background-image: none;
+  }
+
+  .schedule-tabs li.ui-state-active a {
+    text-indent: 0px;
+    font-size: 14px;
+    color: #000;
+  }
 }
