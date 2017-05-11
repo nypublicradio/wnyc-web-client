@@ -1,110 +1,110 @@
 .for-print {
-    display: none;
-    font-weight: 600;
-    @extend %vertical-rhythm;
+  display: none;
+  font-weight: 600;
+  @extend %vertical-rhythm;
 }
 
 @media print {
-    body {
-        color: #000;
-        background: #fff;
-        overflow: visible;
-    }
+  body {
+    color: #000;
+    background: #fff;
+    overflow: visible;
+  }
 
-    #full-page-viewport-wrapper {
-        overflow: visible;
-    }
+  body,
+  article {
+    width: 100%;
+  }
 
-    body,
-    article {
-        width: 100%;
-    }
+  ul,
+  img {
+    page-break-inside: avoid;
+  }
 
-    ul,
-    img {
-        page-break-inside: avoid;
-    }
+  main a {
+    font-weight: bolder;
+  }
 
-    main a {
-        font-weight: bolder;
-    }
+  main > article > section a[href^=http]:after {
+    content: " <" attr(href) "> ";
+  }
 
-    main > article > section a[href^=http]:after {
-        content: " <" attr(href) "> ";
-    }
+  main > article > section a[href^="#"]:after {
+    content: '';
+  }
 
-    main > article > section a[href^="#"]:after {
-        content: '';
-    }
+  #menu-button,
+  #search-wrapper,
+  #support-links,
+  #leaderboard,
+  #rightRail, 
+  #stream_launch_widget,
+  #comments,
+  #related,
+  #navigation-menu,
+  #series,
+  #story-chunk,
+  #footer_container,
+  #footer,
+  #segments,
+  .survey,
+  .crowd-results form,
+  iframe[src*=youtube],
+  iframe[src*=vimeo],
+  .user-embedded-video,
+  .figure-caption-button,
+  [id*=share],
+  .stf,
+  .js-listen,
+  .js-queue,
+  .js-dropdownClickable,
+  .videoplayer,
+  .user-embedded-video,
+  .tabs-header {
+    display: none !important;
+  }
 
-    #menu-button,
-    #search-wrapper,
-    #support-links,
-    #leaderboard,
-    #rightRail, 
-    #stream_launch_widget,
-    #comments,
-    #related,
-    #navigation-menu,
-    #series,
-    #story-chunk,
-    #footer_container,
-    #footer,
-    #segments,
-    .survey,
-    .crowd-results form,
-    iframe[src*=youtube],
-    iframe[src*=vimeo],
-    .user-embedded-video,
-    .figure-caption-button,
-    [id*=share],
-    .stf,
-    .js-listen,
-    .js-queue,
-    .js-dropdownClickable,
-    .videoplayer,
-    .user-embedded-video,
-    .tabs-header {
-        display: none !important;
-    }
+  article.doubledown {
+    margin-bottom: 0;
+  }
 
-    article.doubledown {
-        margin-bottom: 0;
-    }
+  .tab-wrapper {
+    overflow: visible !important;
+    height: auto !important;
+  }
 
-    .tab-wrapper {
-        overflow: visible !important;
-        height: auto !important;
-    }
+  .tab-toggleitem {
+    opacity: 1 !important;
+    position: static;
+    transition: none;
+  }
 
-    .tab-toggleitem {
-        opacity: 1 !important;
-        position: static;
-        transition: none;
-    }
+  .for-print {
+    display: block;
+  }
 
-    .for-print {
-        display: block;
-    }
+  .figure-caption {
+    position: static;
+  }
 
-    .figure-caption {
-        position: static;
-    }
+  .figure-caption-body {
+    position: static;
+    padding: 0;
+    background: #fff;
+    -webkit-clip-path: none;
+    clip-path: none;
+    opacity: 1;
+    transition: none;
+    transform: none;
 
-    .figure-caption-body {
-        position: static;
-        padding: 0;
-        background: #fff;
-        -webkit-clip-path: none;
-        clip-path: none;
-        opacity: 1;
-        transition: none;
-        transform: none;
-
-        * {
-            color: black !important;
-        }
+    * {
+      color: black !important;
     }
+  }
+
+  .text {
+    color: black;
+  }
   
   .sitechrome-nav,
   .sitechrome-top {
@@ -120,16 +120,8 @@
   }
   
 
-    .text {
-        color: black;
-    }
   /* Schedules */
 
-    #brand-logo {
-        // since the wnyc logo in the header is a background image, we need this
-        // to override default browser settings re: background-images
-        -webkit-print-color-adjust: exact;
-    }
   .program-details, .show-details, #daily-schedule-sidebar, .print-schedule, ul.schedule-dates li.yesterday, ul.schedule-dates li.tomorrow {
     display: none;
   }
