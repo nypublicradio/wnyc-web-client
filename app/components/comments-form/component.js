@@ -59,7 +59,7 @@ export default Component.extend({
           object_pk: story.get('id'),
           timestamp,
           security_hash,
-          site: 1,
+          site: config.siteId,
           honeypot: 'Dave'
         };
         let options = {
