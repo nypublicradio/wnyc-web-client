@@ -17,7 +17,6 @@ module.exports = function(environment) {
       connections: [{
         name: 'NativeAudio'
       }],
-      alwaysUseSingleAudioElement: true
     },
     metricsAdapters: [{
       name: 'GoogleAnalytics',
