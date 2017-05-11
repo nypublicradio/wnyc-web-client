@@ -5,6 +5,6 @@ export default Route.extend({
     return model.get('title');
   },
   model() {
-    return this.store.findRecord('django-page', `events`);
+    return this.store.findRecord('django-page', 'events/');
   }
 });
