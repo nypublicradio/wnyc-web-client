@@ -197,10 +197,13 @@ export default function() {
   this.get(`${config.wnycMembershipAPI}/v1/emails/is-verified/`, {data: {is_verified: true}});
   this.patch(`${config.wnycMembershipAPI}/v1/emails/:email_id/verify`, (schema, request) => {
     let params = JSON.parse(request.requestBody);
-    if (!params.verification_token || params.verification_token === "null") {
-      return new Response(400, {}, expiredCodeException);
+    if (params.data &&
+        params.data.attributes &&
+        params.data.attributes.verification_token &&
+        params.data.attributes.verification_token !== "null") {
+      return new Response(200, {}, {success: true});
     } else {
-      return new Response(200);
+      return new Response(200, {}, {success: false});
     }
   });
 }
