@@ -2,6 +2,7 @@ import Controller from 'ember-controller';
 import service from 'ember-service/inject';
 import config from 'wnyc-web-client/config/environment';
 import { task } from 'ember-concurrency';
+import get from 'ember-metal/get';
 import fetch from 'fetch';
 import RSVP from 'rsvp';
 
@@ -59,7 +60,7 @@ export default Controller.extend({
     });
   },
 
-  isEmailPending: task(function * (email) {
+  setEmailPendingStatus: task(function * (email) {
     let url = `${config.wnycMembershipAPI}/v1/emails/is-verified/?email=${email}`;
     let headers = {'Content-Type': 'application/json'};
     this.get('session').authorize('authorizer:nypr', (header, value) => {
@@ -70,14 +71,14 @@ export default Controller.extend({
       if (response && response.ok) {
         let json = yield response.json();
         // if it's not verified, it's pending
-        return !json.data.is_verified;
+        this.set('emailIsPendingVerification', !get(json, 'data.is_verified'));
       } else {
-        return false;
+        this.set('emailIsPendingVerification', false);
       }
     } catch(e) {
       // if there's a problem with the request, return false for pending
       // because we don't want to show the pending message and confuse users.
-      return false;
+      this.set('emailIsPendingVerification', false);
     }
   }),
 
@@ -98,7 +99,7 @@ export default Controller.extend({
     },
 
     updateEmailStatus(email) {
-      this.set('emailIsPendingVerification', this.get('isEmailPending').perform(email));
+      this.get('setEmailPendingStatus').perform(email);
     },
 
     linkFacebookAccount() {
