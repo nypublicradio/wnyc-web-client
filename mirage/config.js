@@ -201,9 +201,9 @@ export default function() {
         params.data.attributes &&
         params.data.attributes.verification_token &&
         params.data.attributes.verification_token !== "null") {
-      return new Response(200, {}, {success: true});
+      return new Response(200, {}, {data: {success: true}});
     } else {
-      return new Response(200, {}, {success: false});
+      return new Response(200, {}, {data: {success: false}});
     }
   });
 }
