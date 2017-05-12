@@ -107,6 +107,7 @@
     padding-top: 0px !important;
     margin-bottom: 10px !important;
 
+    /* this adds extra space at the top to allow for titles that go on two lines */
     .marquee & {
       margin-top: 10px;
     }
