@@ -8,7 +8,7 @@ moduleForAcceptance('Acceptance | events', {
 });
 
 test('visiting /events', function(assert) {
-  server.create('django-page', {id: `events`});
+  server.create('django-page', {id: 'events/'});
   visit('/events');
 
   andThen(function() {
@@ -19,7 +19,7 @@ test('visiting /events', function(assert) {
 test('clicking on /events', function(assert) {
   server.create('bucket', {slug: 'wqxr-home'});
   server.create('django-page', {id: '/'});
-  server.create('django-page', {id: `events`});
+  server.create('django-page', {id: 'events/'});
   
   visit('/');
   
