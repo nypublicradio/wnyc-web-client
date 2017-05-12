@@ -1,7 +1,11 @@
 <div class="l-constrained account-info">
   <h2 class="account-header">
     <div class="account-avatar">
-      {{nypr-svg icon="user"}}
+      {{#if model.picture}}
+        <img src={{model.picture}}>
+      {{else}}
+        {{nypr-svg icon="user"}}
+      {{/if}}
     </div>
     Hi {{model.givenName}}!
   </h2>
