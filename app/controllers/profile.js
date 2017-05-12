@@ -79,6 +79,11 @@ export default Controller.extend({
     }
   }),
 
+  emailUpdated() {
+    this.get('showFlash')('email');
+    this.set('emailIsPendingVerification', true);
+  },
+
   actions: {
     disableAccount() {
       this.get('model').destroyRecord().then(() => {
