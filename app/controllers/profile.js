@@ -83,7 +83,7 @@ export default Controller.extend({
   }),
 
   emailUpdated() {
-    this.get('showFlash')('email');
+    this.showFlash('email');
     this.set('emailIsPendingVerification', true);
   },
 
