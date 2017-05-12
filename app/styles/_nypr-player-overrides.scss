@@ -8,13 +8,13 @@ $wnyc-player-link-color       : #77A6DE;
 
 @import "nypr-player";
 
-.nypr-player .sharebutton {
+.nypr-player .nypr-sharebutton {
   display: none;
   @include mq($nypr-player-medium-and-up) {
     display: inline-block;
     margin-left: 8px;
 
-    .popupmenu-button {
+    .nypr-popupmenu-button {
       @include svg-color($wnyc-player-link-color);
       height: 100%;
       width: 60px;
