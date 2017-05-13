@@ -2,7 +2,7 @@ import Ember from 'ember';
 import Controller from 'ember-controller';
 import service from 'ember-service/inject';
 import get from 'ember-metal/get';
-import { reads, equal } from 'ember-computed';
+import { reads } from 'ember-computed';
 
 export default Controller.extend({
   audio:        service(),
@@ -49,6 +49,18 @@ export default Controller.extend({
 
     trackStreamData() {
       this.get('audio').trackStreamData();
+    },
+
+    trackShare(data, sharedFrom) {
+      let metrics = this.get('metrics');
+
+      let {region, analyticsCode, type, shareText} = data;
+
+      metrics.trackEvent('GoogleAnalytics', {
+        category: 'Persistent Player',
+        action: `Shared Story "${shareText}"`,
+        label: `${region}|${analyticsCode}|${type}|${sharedFrom}`,
+      });
     }
   }
 });
