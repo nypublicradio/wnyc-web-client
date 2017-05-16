@@ -210,10 +210,15 @@
   }
 }
 .user-nav-link > a {
+  font-family: "Open Sans", sans-serif;
   font-weight: 600;
   font-size: 14px;
   color: white;
   border: none;
+
+  &:hover, &:focus {
+    text-decoration: none;
+  }
 }
 @include mq($large-and-up) {
   .user-nav-link > a {

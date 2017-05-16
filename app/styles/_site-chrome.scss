@@ -314,8 +314,7 @@
   @include flex-basis(100%);
 
   margin-bottom: 15px;
-  padding: 0 15px 0 24px 0;
-  padding: 0 rems(15);
+  padding: 0 15px 0 24px;
 
   @include mq($large-and-up) {
     margin-bottom: 0;
@@ -362,8 +361,8 @@
   padding: 2px 18px 2px 18px;
   background: white;
   white-space: nowrap;
-
-  @include fontsize(14);
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
   font-weight: 600;
   line-height: 30px;
 
@@ -372,6 +371,7 @@
   &:hover,
   &:focus {
     background: rgba(white, 0.8);
+    text-decoration: none;
   }
 
   @include transition(background-color $transition-timing, color $transition-timing);
@@ -385,6 +385,7 @@
 
     &:hover,
     &:focus {
+      color: white;
       background: rgba($wqxrdarkblue, 0.8);
     }
   }
