@@ -84,6 +84,26 @@ export default Controller.extend({
     this.set('emailIsPendingVerification', true);
   },
 
+  resendVerificationEmail() {
+    let url = `${config.wnycAuthAPI}/v1/confirm/resend-attr/`;
+    let headers = {'Content-Type': 'application/json'};
+    this.get('session').authorize('authorizer:nypr', (header, value) => {
+      headers[header] = value;
+    });
+    return new RSVP.Promise((resolve,reject) => {
+      fetch(url, {headers, method: 'GET'}).then(response => {
+        if (response && response.ok) {
+          resolve();
+        } else {
+          reject();
+        }
+      })
+      .catch( () => {
+        reject();
+      });
+    });
+  },
+
   actions: {
     disableAccount() {
       this.get('model').destroyRecord().then(() => {
