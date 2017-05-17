@@ -17,4 +17,8 @@ article section {
       border-color: $wqxrlink !important;
     }
   }
+
+  p > iframe {
+    max-width: 100%;
+  }
 }
