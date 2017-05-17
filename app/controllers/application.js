@@ -7,8 +7,10 @@ import { reads } from 'ember-computed';
 export default Controller.extend({
   audio:        service(),
   dj:           service(),
+  hifi:         service(),
   metrics:      service(),
   session:      service(),
+  listenAnalytics: service(),
 
   queryParams:  ['modal', 'play'],
   modal:        null,
@@ -48,7 +50,12 @@ export default Controller.extend({
     },
 
     trackStreamData() {
-      this.get('audio').trackStreamData();
+      /* TODO: This still feels weird to have this action called by
+        the component's didUpdateAttrs hook. Seems like we could
+        watch, nay, *observe* the showTitle and call this on change
+      */
+
+      this.get('listenAnalytics').trackStreamData(this.get('hifi.currentSound'));
     },
 
     trackShare(data, sharedFrom) {
