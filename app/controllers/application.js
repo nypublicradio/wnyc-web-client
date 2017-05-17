@@ -5,12 +5,13 @@ import get from 'ember-metal/get';
 import { reads } from 'ember-computed';
 
 export default Controller.extend({
-  audio:        service(),
-  dj:           service(),
-  hifi:         service(),
-  metrics:      service(),
-  session:      service(),
+  audio          : service(),
+  dj             : service(),
+  hifi           : service(),
+  metrics        : service(),
+  session        : service(),
   listenAnalytics: service(),
+  queue          : service('listen-queue'),
 
   queryParams:  ['modal', 'play'],
   modal:        null,
