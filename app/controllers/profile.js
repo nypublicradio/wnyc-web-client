@@ -88,7 +88,7 @@ export default Controller.extend({
   },
 
   resendVerificationEmail() {
-    let url = `${config.wnycAuthAPI}/v1/confirm/resend-attr/`;
+    let url = `${config.wnycAuthAPI}/v1/confirm/resend-attr`;
     let headers = {'Content-Type': 'application/json'};
     this.get('session').authorize('authorizer:nypr', (header, value) => {
       headers[header] = value;
