@@ -5,17 +5,17 @@ import service from 'ember-service/inject';
 export default Ember.Component.extend({
   session:  service(),
   scroller: service(),
-  audio:    service(),
+  dj:       service(),
   metrics:  service(),
 
   classNames:        ['discover-playlist-container'],
   classNameBindings: ['isDraggingItem:is-dragging-item'],
 
   // Computed properties from a service. These are a little hinky
-  audioReady:     Ember.computed.alias('audio.isReady'),
-  currentAudioId: Ember.computed.alias('audio.currentAudio.id'),
+  audioReady:     Ember.computed.alias('dj.isReady'),
+  currentAudioId: Ember.computed.alias('dj.currentContentId'),
 
-  isPlaying:      Ember.computed.and('audioReady', 'currentTrackIsInPlaylist', 'audio.isPlaying'),
+  isPlaying:      Ember.computed.and('audioReady', 'currentTrackIsInPlaylist', 'dj.isPlaying'),
 
   isPaused:      Ember.computed('currentTrackIsInPlaylist', 'isPlaying', function() {
     return this.get('currentTrackIsInPlaylist') && !this.get('isPlaying');
@@ -118,7 +118,7 @@ export default Ember.Component.extend({
     },
 
     playTrack(pk) {
-      this.get('audio').play(pk, 'discover');
+      this.get('dj').play(pk, {playContext: 'discover'});
     },
 
     findMore() {
