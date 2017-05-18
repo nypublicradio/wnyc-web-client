@@ -29,8 +29,10 @@
   <section class="shows-search">
     {{search-box placeholder="Search for a program" key-up=(action "filterShows") searchbox-class="searchbox--shows"}}
   </section>
+</div>
 
-  <section class="shows-list">
+<div class="l-constrained shows-list">
+  <section>
     {{#if noResults}}
       <div class="doubledown box box--luxe">
         <p class="text aligncenter">Sorry, but no matching shows were found. Try a different spelling or other words in the title of the show you're looking for. If you're looking for something other than a show name, try searching <a href="/search/">the rest of the website</a>.</p>
@@ -45,5 +47,4 @@
     </ul>
     {{/if}}
   </section>
-
 </div>

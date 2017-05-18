@@ -183,6 +183,10 @@
 .searchbox--shows {
   @include searchbox;
   @include searchbox--gray;
+  padding: 15px 20px 15px 60px; 
+  .input-icon {
+    top: 16px;
+  }
 }
 
 .searchbox--chrome {

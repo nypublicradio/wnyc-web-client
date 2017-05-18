@@ -126,18 +126,31 @@
 }
 
 /* shows A-Z page */
-.shows-list ul li {
+.shows-list {
 
-  .flag-image>img {
-    min-width: 90px;
-    min-height: 90px;
-    @include mq($small-only) {
-      display: none;
-    }
+  @include mq($small-only) {
+    padding: 0;
   }
 
-  .text-body--nopad > p {
-    margin: 0;
+   ul li {
+
+    .flag-image>img {
+      min-width: 90px;
+      min-height: 90px;
+    }
+
+    .flag-image {
+      @include mq($small-only) {
+        padding-right: 1.5625rem;
+        img {
+          display: none;
+        }
+      }
+    }
+
+    .text-body--nopad > p {
+      margin: 0;
+    }
   }
 }
 
