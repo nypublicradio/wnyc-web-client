@@ -379,6 +379,15 @@
   @include l-bottom;
   @include player-reveal-transition;
   @include player-reveal-transition--closed;
+
+  .nypr-social-icons__header{
+    color: $darkestgray;
+  }
+  .nav--homepage & {
+    .nypr-social-icons__header {
+      color: white;
+    }
+  }
 }
 
 .sitechrome--player-open .sitechrome__nav-footer {
