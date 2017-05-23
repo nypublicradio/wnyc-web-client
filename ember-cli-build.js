@@ -52,7 +52,7 @@ module.exports = function(defaults) {
 
   // This is here so that legacy JS within our content pages can share
   // our version of jQuery without dying.
-  app.import('bower_components/jquery-migrate/index.js');
+  app.import('bower_components/jquery-migrate/jquery-migrate.js');
 
   // All legacy JS modules that are directly called from this ember
   // app should be imported into the app's own build here. Notice that
