@@ -22,7 +22,7 @@ test('it renders', function(assert) {
     {{/popup-menu}}
   `);
   assert.equal(this.$('.popupmenu-button').text().trim(), 'Text', 'button text should render');
-  assert.equal(this.$('.find-me').size(), 1, 'block contents should render');
+  assert.equal(this.$('.find-me').length, 1, 'block contents should render');
 });
 
 test('it toggles the popup when you click the button', function(assert) {
