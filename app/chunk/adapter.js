@@ -1,4 +1,4 @@
-import ApplicationAdapter from './application';
+import ApplicationAdapter from 'wnyc-web-client/adapters/application';
 
 export default ApplicationAdapter.extend({
   buildURL() {
