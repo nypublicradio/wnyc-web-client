@@ -182,6 +182,9 @@
   margin-right: 25px;
   height: 120px;
   width: 120px;
+  min-height: 120px;
+  min-width: 120px;
+  overflow: hidden;
 
   @include flexbox((
     display: flex,
