@@ -1,0 +1,19 @@
+{{#account-wrapper}}
+  {{#if session.isAuthenticated}}
+    {{nypr-account-forms/verify
+      membershipAPI=config.wnycMembershipAPI
+      session=session
+      emailId=email_id
+      verificationToken=verification_token
+      onSuccess=(action 'goToProfile')
+      onFailure=(action 'goToProfile')
+    }}
+  {{else}}
+    <div class="alert alert-success">Please log in to verify your email.</div>
+    {{nypr-account-forms/login
+      siteName='WNYC'
+      showSocialLogin=features.socialAuth
+      authAPI=config.wnycAuthAPI
+      session=session}}
+  {{/if}}
+{{/account-wrapper}}
