@@ -102,7 +102,6 @@
   },
   "ember-addon": {
     "paths": [
-      "lib/unobtrusive-loader",
       "lib/google-apis"
     ]
   }
