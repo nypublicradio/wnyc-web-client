@@ -21,12 +21,6 @@ export default Controller.extend({
 
   isHomepage: Ember.computed.match('currentRouteName', /^index(_loading)?$/),
 
-
-  // Persistent Player Component Integration
-
-
-  currentAudio: reads('audio.currentAudio'),
-
   actions: {
 
     showModal(which) {

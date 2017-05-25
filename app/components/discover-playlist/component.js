@@ -25,6 +25,10 @@ export default Ember.Component.extend({
     return !this.get('isPlaying') && !this.get('isPaused');
   }),
 
+  storyIds: Ember.computed('stories', function() {
+    return this.get('stories').mapBy('id');
+  }),
+
   currentTrackIsInPlaylist: Ember.computed('stories', 'currentAudioId', function() {
     return !!this.get('stories').findBy('id', this.get('currentAudioId'));
   }),
@@ -114,7 +118,7 @@ export default Ember.Component.extend({
     },
 
     pauseTrack(/* storyId */) {
-      this.get('audio').pause();
+      this.get('dj').pause();
     },
 
     playTrack(pk) {
