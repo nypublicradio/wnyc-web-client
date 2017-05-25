@@ -2,30 +2,273 @@
   slotClassNames="is-collapsed l-constrained aligncenter leaderboard"
   slot="/6483581/leaderboard/wqxr_leaderboard"
   target="leaderboard"
-  mapping=(array (array 0 (array 300 50)) (array 758 (array 728 90)) (array 1203 (array 970 415)))
-  sizes=(array (array 970 415) (array 728 90) (array 300 50))}}
-  
-{{#django-page page=model.page}}
+  mapping=(array (array 0 (array 350 50)) (array 758 (array 728 90)) (array 1203 (array 970 415)))
+  sizes=(array (array 970 415) (array 728 90) (array 350 50))}}
 
-  {{#if model.story.commentsEnabled}}
-    {{#ember-wormhole to="comments"}}
-      {{story-comments story=model.story
-                       isStaff=session.data.isStaff
-                       email=user.email
-                       userName=(or session.data.staffName user.preferredUsername)
-                       getComments=model.getComments
-                       browserId=session.data.browserId}}
-    {{/ember-wormhole}}
-  {{/if}}
+<div class="l-full">
+  <div class="l-constrained">
+    
+    <main class="l-col2of3" id="main" role="main">
+      <article class="doubledown" data-status="{{model.story.extendedStory.publishStatus}}" data-date="{{moment-format model.story.extendedStory.publishAt '%b %-d, %Y'}}">
 
-  {{#ember-wormhole to="related"}}
-    {{related-stories getStories=model.getRelatedStories}}
-  {{/ember-wormhole}}
-  
-  {{#if session.data.isStaff}}
-    {{#ember-wormhole to="edit-story"}}
+        <p>{{model.story.template}}</p>
+
+      
+        {{!-- {{> overhaul/partials/header/with-image.hbs size=800}} --}}
+        <header class="l-bgimg flush" id="storyHeader">
+          <!-- flush class when 1. image, 2. no image but segments -->
+
+          {{#if model.story.imageMain.isDisplay}}
+          <style>
+              .l-bgimg:after {
+                  background-image: url({{image-template model.story.imageMain.template 800 0 model.story.imageMain.crop}});
+              }
+              .no-filter .l-bgimg:after {
+                  background-image: none;
+              }
+          </style>
+          {{/if}}
+
+          {{!-- {{> overhaul/partials/header/content.hbs}} --}}
+          {{nypr-story/header-content story=model.story}}
+
+      </header>
+      <!-- .l-bgimg -->
+
+
+      {{!
+        the segments accordion has a margin when there is 
+        no body image, but that can be affected by the template choice
+        or if the image is not display size.
+        both are calculated at runtime. it's easier to split out
+        this bit of markup across all the places segments are called
+      }}
+      {{#if model.story.extendedStory.segments}}
+        <div class="accordion flush" data-category="segments" data-state="is-expanded" id="segments">
+            {{!-- {{> overhaul/partials/segments.hbs }} --}}
+        </div>                                              
+        <!-- .accordion -->
+      {{/if}}
+
+      {{#if model.story.imageMain.isDisplay}} {{!-- && width 800 or more --}}
+        {{nypr-story/main-image story=model.story}} 
+      {{/if}}
+
+
+      
+        {{nypr-story/byline story=model.story}}
+
+        {{!-- {{> overhaul/partials/body.hbs}} --}}
+        {{#if model.story.extendedStory.transcript}}
+        <div class="tabs-header" role="tablist">
+            <div class="tab-line"></div>
+            <a href="#content" aria-controls="content" aria-selected="true" class="btn btn--blank btn--blacktext btn--heavy js-tabClickable active" data-category="OpenSummary" id="summaryTab" role="tab">Summary</a>
+            <a href="#transcriptContent" aria-controls="transcriptContent" aria-selected="false" class="btn btn--blank btn--blacktext btn--heavy js-tabClickable" data-category="OpenTranscript" id="transcriptTab" role="tab">Transcript</a>
+        </div>
+
+        <section class="tab-wrapper">
+        <div class="tab-toggleitem" aria-hidden="true" aria-labelledby="summaryTab" data-state="is-fadeout" id="content" role="tabpanel">
+            <div class="for-print" aria-hidden="true">Summary</div>
+          </div>
+        </section>
+        {{/if}}
+
+        <section class="text">
+          {{django-page page=model.story.body}}
+        </section>
+
+        {{#if model.story.extendedStory.playlist}}
+        <section class="list">
+            <div class="list-heading">
+                <h3 class="h5">Music Playlist</h3>
+            </div>
+            <ol>
+                {{#each model.story.extendedStory.playlist as |song|}}
+                <li class="list-item">
+                    <h4 class="h3 flush">{{{song.title}}}</h4>
+                    {{#if song.artists}}
+                    <div class="text flush">Artist: {{song.artists}}</div>
+                    {{/if}}
+                    {{#if song.album}}
+                    <div class="text flush">Album: {{song.album}}</div>
+                    {{/if}}
+                    {{#if song.label}}
+                    <div class="text flush">Label: {{song.label}}</div>
+                    {{/if}}
+                    {{#if song.asin}}
+                    <div class="text flush"><a href="http://www.amazon.com/exec/obidos/ASIN/{{song.asin}}/wnycorg-20" target="_blank">Buy on Amazon</a></div>
+                    {{/if}}
+                </li>
+                {{/each}}
+            </ol>
+        </section>
+        {{/if}}
+
+        {{#if model.story.extendedStory.slideshow}}
+          <section id="slideshow" class="slideshow" role="listbox" aria-activedescendant="listbox1-1">
+          {{#each story.extendedStory.slideshow key="index" as |slide|}}
+          <figure role="option" id="listbox1-{{index}}">
+              <div class="slideshow-image">
+                {{!--   <img alt="{{slide.caption}}"
+                      src="{{image slide.template 0 350 slide.crop 99}}" 
+                      srcset="{{image slide.template 0 700 slide.crop 99}} 2x,
+                          {{image slide.template 0 1050 slide.crop 99}} 3x"
+                      title="{{slide.caption}}"> --}}
+              </div>
+              <figcaption class="slideshow-caption">
+              {{{slide.caption}}}
+              {{{slide.long_caption}}}
+              {{#if slide.creditsName}} 
+                  {{#if slide.creditsUrl}}
+                    (<a href="{{slide.creditsUrl}}" target="_blank">{{slide.creditsName}}</a>)
+                  {{else}}
+                    ({{slide.creditsName}})
+                  {{/if}}
+              {{/if}}
+              </figcaption>
+          </figure>
+          {{/each}}
+          <div class="slideshow-controls" id="slideshowButtons">
+              <button aria-controls="slideshow" id="previous" class="btn btn--small btn--strictsquare btn--blue"><i class="icon icon-arrow icon-arrow--left"></i></button>
+              <span id="slideshowCurrent"></span> of <span id="slideshowTotal"></span>
+              <button aria-controls="slideshow" id="next" class="btn btn--small btn--strictsquare btn--blue"><i class="icon icon-arrow icon-arrow--right"></i></button>
+          </div>
+          </section>
+      {{/if}}
+
+      {{#if model.story.extendedStory.transcript}}
+        {{!-- </div> --}}
+        <!-- #story.tab-toggleitem -->
+
+      {{!--   <div id="transcriptContent" class="tab-toggleitem" aria-hidden="true" aria-labelledby="transcriptTab" data-state="is-fadeout" role="tabpanel">
+            <div class="for-print" aria-hidden="true">Transcript</div>
+            <div class="text">
+                {{{ model.story.extendedStory.transcript }}}
+            </div>
+        </div> --}}
+        <!-- #transcriptContent.tab-toggleitem -->
+
+       {{!--  </section> --}}
+        <!-- .tab-wrapper -->
+        {{/if}}
+
+
+        {{#if model.story.extendedStory.correctionText}}
+          <em>{{{model.story.extendedStory.correctionText}}}</em>
+        {{/if}}
+
+       {{!--  {{> overhaul/partials/markup/comments.hbs}} --}}
+        {{#if model.story.commentsEnabled}}
+            {{story-comments story=model.story
+                             isStaff=session.data.isStaff
+                             email=user.email
+                             userName=(or session.data.staffName user.preferredUsername)
+                             getComments=model.getComments
+                             browserId=session.data.browserId}}
+        {{/if}}
+      </article>
+    </main>
+    <!-- .l-col2of3 -->
+
+    {{!-- {{> overhaul/partials/chunks.hbs}} --}}
+    <aside class="l-col1of3" id="chunks">
+    <div class="l-skinny">
+        {{#if model.story.pageChunks.siteSidebarTop}}
+          {{django-page page=model.story.pageChunks.siteSidebarTop}}
+        {{/if}}
+
+        {{#if model.story.pageChunks.showSidebarTop}}
+          {{django-page page=model.story.pageChunks.showSidebarTop}}
+        {{/if}}
+
+        {{#if model.story.pageChunks.channelSidebarTop}}
+          {{django-page page=model.story.pageChunks.channelSidebarTop}}
+        {{/if}}
+
+        {{dfp-ad
+          slotClassNames="align--mq-centertoright right-rail"
+          slot="/6483581/rectangle/wqxr_rectangle"
+          target="rightRail"
+          sizes=(array (array 300 250) (array 300 600))}}
+
+
+        {{#if model.story.pageChunks.siteSidebarBottom}}
+          {{django-page page=model.story.pageChunks.siteSidebarBottom}}
+        {{/if}}
+
+        {{#if model.story.pageChunks.showSidebarBottom}}
+          {{django-page page=model.story.pageChunks.showSidebarBottom}}
+        {{/if}}
+
+        {{#if model.story.pageChunks.channelSidebarBottom}}
+          {{django-page page=model.story.pageChunks.channelSidebarBottom}}
+        {{/if}}
+    </div>
+</aside>
+
+   
+  </div>
+  <!-- .l-constrained -->
+
+  <div class="l-constrained">
+    <div class="l-col2of3">
+
+      {{!-- {{> overhaul/partials/series.hbs}} --}}
+      {{#if model.story.extendedStory.series}}
+        <aside id="series" data-category="series">
+            <h1 class="h4 h--flush outlineonly">Also Seen In...</h1>
+            <div class="list">
+                {{#each model.story.extendedStory.series as |item|}}
+                <article class="list-item">
+                    <div class="flag flush">
+                        {{#if item.logoImage}}
+                        <div class="flag-image">
+                           {{!--  <img alt="{{item.title}}" class="squarebadge badge--large" 
+                                src="{{image item.logoImage.template 100 100 item.logoImage.crop 99}}"
+                                srcset="{{image item.logoImage.template 200 200 item.logoImage.crop 99}} 2x,
+                                    {{image item.logoImage.template 300 300 item.logoImage.crop 99}} 3x"
+                                width="100" height="100"> --}}
+                        </div>
+                        {{/if}}
+                        <div class="flag-body">
+                            <div class="l-split flush">
+                                <div class="text text--medium text--gray flush--medium">
+                                    <div class="text-body--rightpad text-body--forceinline">
+                                        Part of <a href="{{item.url}}">{{{item.title}}}</a>. <span class="medium-up">{{{item.tease}}}</span>
+                                    </div>
+                                </div>
+                                <a href="{{item.url}}" class="btn">More in this Series</a>
+                            </div>
+                            <!-- .l-split -->
+                        </div>
+                    </div>
+                    <!-- .flag -->
+                </article>
+                <!-- .list-item -->
+                {{/each}}
+            </div>
+            <!-- .list -->
+        </aside>
+        {{/if}}
+
+      {{!-- {{> overhaul/partials/markup/story-chunk.hbs}} --}}
+      {{#if model.story.pageChunks.story}}
+        <div id="story-chunk">
+          {{django-page page=model.story.pageChunks.story}}
+        </div>
+      {{/if}}
+
+      {{!-- {{> overhaul/partials/markup/related.hbs}} --}}
+      {{related-stories getStories=model.getRelatedStories}}
+
+    </div>
+    <!-- .l-col2of3 -->
+  </div>
+  <!-- .l-constrained -->
+</div>
+<!-- .l-full -->
+{{#if session.data.isStaff}}
         <a href="{{model.adminURL}}/{{model.story.editLink}}" class="btn btn--green" target="_blank" data-test-selector="admin-link">Edit this</a>
-    {{/ember-wormhole}}
+  
   {{/if}}
 
-{{/django-page}}
