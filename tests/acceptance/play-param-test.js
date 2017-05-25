@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import { test, skip } from 'qunit';
 import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
 import { registerMockOnInstance } from 'wqxr-web-client/tests/helpers/register-mock';

@@ -25,7 +25,6 @@ export default Route.extend(ApplicationRouteMixin, {
   },
 
   beforeModel() {
-
     let metrics = get(this, 'metrics');
 
     get(this, 'session').syncBrowserId();

@@ -19,24 +19,24 @@
     {{#liquid-if integration.revealNotificationBar class='player-notification-wrapper'}}
       {{#player-notification onDismiss=integration.onDismissNotification}}
         {{player-notification/autoplay-message
-          duration   = audio.duration
-          position   = audio.position
-          audioType  = currentAudio.audioType
+          duration   = integration.currentSound.duration
+          position   = integration.currentSound.position
+          audioType  = integration.currentAudioType
           isLoggedIn = session.isAuthenticated
         }}
       {{/player-notification}}
     {{/liquid-if}}
 
     {{#nypr-player
-      onPlay=integration.onPlay
-      onPause=integration.onPause
-      onFastForward=integration.onFastForward
-      onRewind=integration.onRewind
-      onSetPosition=integration.onSetPosition
-      currentTitle=integration.currentTitle
-      backdropImageUrl=integration.backdropImageUrl
-      storyTitle=integration.storyTitle
-      showTitle=integration.showTitle
+      onPlay           = integration.onPlay
+      onPause          = integration.onPause
+      onFastForward    = integration.onFastForward
+      onRewind         = integration.onRewind
+      onSetPosition    = integration.onSetPosition
+      currentTitle     = integration.currentTitle
+      backdropImageUrl = integration.backdropImageUrl
+      storyTitle       = integration.storyTitle
+      showTitle        = integration.showTitle
       as |content|}}
         {{#content.for 'trackInfo'}}
           {{nypr-player-integration/track-info
@@ -45,7 +45,7 @@
             showUrl         = integration.showUrl
             storyTitle      = integration.storyTitle
             storyUrl        = integration.storyUrl
-            audioId         = integration.audioId
+            audioId         = integration.currentAudioId
             songDetails     = integration.songDetails
             isStream        = integration.isStream
             trackStreamData = (action 'trackStreamData')
@@ -82,7 +82,7 @@
 
         {{#content.for 'aux' as |args|}}
           {{args.queueButton
-            queueLength = audio.queue.items.length
+            queueLength = queue.items.length
             showModal   = (action 'showModal' 'queue-history')
             closeModal  = (action 'closeModal')
             isOpenModal = modal}}
