@@ -19,6 +19,7 @@ export default Model.extend({
   audioShowOptions: attr('boolean'),
   body: attr('string'),
   channel: attr('string'),
+  chunks: attr(),
   commentsCount: attr('number'),
   commentsEnabled: attr('boolean'),
   cmsPK: attr('string'),
@@ -42,6 +43,7 @@ export default Model.extend({
   slug: attr('string'),
   tags: attr(),
   tease: attr('string'),
+  template: computed.alias('extendedStory.template'),
   title: attr('string'),
   url: attr('string'),
   escapedBody: computed('body', {
@@ -52,6 +54,19 @@ export default Model.extend({
       }
       return body.replace(/\\x3C\/script>/g, '</script>');
     }
+  }),
+  pageChunks: computed('chunks', function(){
+    //process the raw chunks into django-page records, if they are present
+    let processedChunks = {};
+    let chunksObj = get(this, 'chunks');
+    for (var key in chunksObj){
+      let text = chunksObj[key];
+      if (text){
+        let content = this.store.createRecord('django-page', { text });
+        processedChunks[key] = content;
+      }
+    }
+    return processedChunks;
   }),
   segmentedAudio: computed('audio', function() {
     return Array.isArray(this.get('audio'));
