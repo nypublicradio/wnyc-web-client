@@ -15,7 +15,6 @@ let { wnycURL, wnycAdminRoot } = ENV;
 wnycURL = canonicalize(wnycURL);
 
 export default Ember.Component.extend(LegacySupportMixin, BetaActionsMixin, {
-  audio: service(),
   session: service(),
   legacyAnalytics: service(),
   router: service('wnyc-routing'),
