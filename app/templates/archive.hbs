@@ -1,0 +1,26 @@
+<h1>Last page: {{ model.meta.pagination.last.number }}!</h1>
+
+<ul>
+{{#each model as |story|}}
+  <li>
+    <h2>{{story.title}}</h2>
+    <p>
+      {{story.dateLine}}
+    </p>
+    <p>
+      {{story.itemType}}
+    </p>
+  </li>
+{{/each}}
+</ul>
+{{#each-in model.meta.pagination as |key value|}}
+  {{link-to key "archive" (query-params page=value.number)}}
+{{/each-in}}
+
+{{#each count as |number|}}
+  {{#if (eq number model.meta.pagination.self.number) }}
+    {{number}}
+  {{else}}
+    {{link-to number "archive" (query-params page=number)}}
+  {{/if}}
+{{/each}}
