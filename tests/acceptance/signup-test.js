@@ -21,6 +21,7 @@ test('visiting /signup', function(assert) {
 });
 
 test("can't visit /signup when authenticated", function(assert) {
+  server.create('bucket', {slug: 'wqxr-home'});
   server.create('user');
   authenticateSession(this.application, {access_token: 'foo'});
 
