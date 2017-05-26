@@ -33,6 +33,9 @@ Router.map(function() {
   this.route('serie', {path: 'series/:slug'}, subpageRoutes);
   this.route('tag', {path: 'tags/:slug'}, subpageRoutes);
   this.route('blog', {path: 'blogs/:slug'}, subpageRoutes);
+
+  this.route('archive', {path: 'shows/:uslug/archive'});
+
   this.route('stream', {path: 'streams'});
   this.route('playlist', {path: 'streams/:slug'});
   this.route('schedule', function() {
