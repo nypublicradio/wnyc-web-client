@@ -33,6 +33,8 @@ Router.map(function() {
   this.route('series-detail', {path: 'series/:slug'}, subpageRoutes);
   this.route('tag-detail', {path: 'tags/:slug'}, subpageRoutes);
   this.route('blog-detail', {path: 'blogs/:slug'}, subpageRoutes);
+  
+  this.route('archive', {path: 'shows/:uslug/archive'});
 
   this.route('stream', {path: 'streams'});
   this.route('playlist', {path: 'streams/:slug'});
