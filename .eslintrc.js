@@ -5,6 +5,9 @@ module.exports = {
     sourceType: 'module'
   },
   extends: 'eslint:recommended',
+  rules: {
+    "no-extra-boolean-cast": ["warn"]
+  },
   env: {
     browser: true
   },
