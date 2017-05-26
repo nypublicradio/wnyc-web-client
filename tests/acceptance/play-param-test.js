@@ -5,6 +5,8 @@ import { registerMockOnInstance } from 'wnyc-web-client/tests/helpers/register-m
 import Service from 'ember-service';
 import { resetHTML } from 'wnyc-web-client/tests/helpers/html';
 import velocity from 'velocity';
+import { dummyHifi } from 'wnyc-web-client/tests/helpers/hifi-integration-helpers';
+
 
 velocity.mock = true;
 
@@ -18,6 +20,8 @@ const mockAudio = Service.extend({
 moduleForAcceptance('Acceptance | play param', {
   beforeEach() {
     server.create('stream');
+    registerMockOnInstance(this.application, 'service:hifi', dummyHifi);
+
   },
   afterEach() {
     resetHTML();
@@ -26,7 +30,7 @@ moduleForAcceptance('Acceptance | play param', {
 
 test('play param transitions', function(assert) {
   let application = this.application;
-  let audio = registerMockOnInstance(application, 'service:audio', mockAudio);
+  let audio = registerMockOnInstance(application, 'service:dj', mockAudio);
 
   server.create('django-page', {
     id: '/',
@@ -58,7 +62,7 @@ test('play param transitions', function(assert) {
 test('loading a page with the ?play param', function(assert) {
   let slug = 'foo';
 
-  server.create('story', {slug, title: 'Foo'});
+  server.create('story', {id, title: 'Foo', audio: '/good/15000/1'});
   server.create('django-page', {id: `bar/`});
 
   visit(`bar?play=${slug}`);

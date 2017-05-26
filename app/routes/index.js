@@ -8,6 +8,7 @@ const { get } = Ember;
 
 export default Ember.Route.extend(PlayParamMixin, {
   classNames: ['home'],
+  dj: service(),
   metrics: service(),
   googleAds: service(),
   title: 'WNYC | New York Public Radio, Podcasts, Live Streaming Radio, News',
