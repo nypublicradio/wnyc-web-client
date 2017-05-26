@@ -6,7 +6,7 @@ import $ from 'jquery';
 moduleForAcceptance('Acceptance | player events');
 
 test('visiting /player-events', function(assert) {
-  let story = server.create('story');
+  let story = server.create('story', {title: "Test audio", audio: '/good/150000/test'});
   let done = assert.async();
   server.create('stream');
 

@@ -11,10 +11,11 @@ export default Route.extend(PlayParamMixin, {
   googleAds:  service(),
   audio:      service(),
   classNames: ['home'],
+  dj: service(),
 
   model() {
     get(this, 'googleAds').doTargeting();
-    
+
     return RSVP.hash({
       wqxrHome: this.store.findRecord('bucket', 'wqxr-home').then(b => {
         return {

@@ -4,6 +4,8 @@ import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-accept
 import { registerMockOnInstance } from 'wqxr-web-client/tests/helpers/register-mock';
 import Service from 'ember-service';
 import velocity from 'velocity';
+import { dummyHifi } from 'wnyc-web-client/tests/helpers/hifi-integration-helpers';
+
 
 velocity.mock = true;
 
@@ -17,12 +19,13 @@ const mockAudio = Service.extend({
 moduleForAcceptance('Acceptance | play param', {
   beforeEach() {
     server.create('stream');
+    registerMockOnInstance(this.application, 'service:hifi', dummyHifi);
   }
 });
 
 skip('play param transitions', function(assert) {
   let application = this.application;
-  let audio = registerMockOnInstance(application, 'service:audio', mockAudio);
+  let audio = registerMockOnInstance(application, 'service:dj', mockAudio);
 
   server.create('django-page', {
     id: 'fake/',
@@ -54,7 +57,7 @@ skip('play param transitions', function(assert) {
 test('loading a page with the ?play param', function(assert) {
   let slug = 'foo';
 
-  server.create('story', {slug, title: 'Foo'});
+  server.create('story', {slug, title: 'Foo', audio: '/good/15000/1'});
   server.create('django-page', {id: `bar/`});
 
   visit(`bar?play=${slug}`);
