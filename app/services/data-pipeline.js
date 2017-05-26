@@ -65,7 +65,7 @@ export default Service.extend({
       this._lastMarker = Date.now();
       delta = Date.now() - oldMarker;
     }
-    
+
     if (type === 'pause') {
       this._didPause = true;
     }

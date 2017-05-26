@@ -12,7 +12,6 @@ const { get, computed } = Ember;
 let { wnycAdminRoot } = ENV;
 
 export default Ember.Component.extend(LegacySupportMixin, {
-  audio: service(),
   session: service(),
   legacyAnalytics: service(),
   router: service('wnyc-routing'),

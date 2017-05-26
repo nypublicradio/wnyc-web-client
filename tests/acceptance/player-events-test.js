@@ -21,7 +21,7 @@ test('visiting /player-events', function(assert) {
       done();
     }
   });
-  
+
   // story header play button
   andThen(() => {
     click('main [data-test-selector="listen-button"]');
