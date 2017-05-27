@@ -3,13 +3,18 @@ import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 import startMirage from 'wnyc-web-client/tests/helpers/setup-mirage-for-integration';
 import wait from 'ember-test-helpers/wait';
+import { dummyHifi } from 'wnyc-web-client/tests/helpers/hifi-integration-helpers';
+import sinon from 'sinon';
 
 moduleForComponent('discover-playlist', 'Integration | Component | discover playlist', {
   integration: true,
   beforeEach() {
     startMirage(this.container);
-    this.register('service:audio', audioStub);
-    this.inject.service('audio', { as: 'audio' });
+    this.register('service:dj', djStub);
+    this.inject.service('dj', { as: 'dj' });
+
+    this.register('service:hifi', dummyHifi);
+    this.inject.service('hifi', { as: 'hifi' });
 
     this.register('service:discover-queue', queueStub);
     this.inject.service('discover-queue', { as: 'queue' });
@@ -19,12 +24,12 @@ moduleForComponent('discover-playlist', 'Integration | Component | discover play
   }
 });
 
-const audioStub = Ember.Service.extend({
+const djStub = Ember.Service.extend({
   isReady: true,
-  currentAudio: {id: 'audioPK'},
   isPlaying: false,
   pause: () => {},
-  play: () => {}
+  play: () => {},
+  currentlyLoadingIds: []
 });
 
 const queueStub = Ember.Service.extend({
@@ -36,21 +41,26 @@ const queueStub = Ember.Service.extend({
 test('it renders playlist items', function(assert) {
   const stories = server.createList('discover-story', 12);
   this.set('stories', stories);
-  this.render(hbs`{{discover-playlist stories=stories}}`);
+  this.set('dj', djStub);
+
+  this.render(hbs`{{discover-playlist stories=stories dj=dj currentlyLoadingIds=[]}}`);
   assert.equal(this.$('.discover-playlist-story').length, 12);
 });
 
-test('clicking play on a track sends a play action to the audio service', function(assert) {
+test('clicking play on a track sends a play action to the dj service', function(assert) {
   assert.expect(1);
 
   this.set('stories', server.createList('discover-story', 5));
-  this.set('audio.isPlaying', false);
-  this.set('audio.play', (storyId) => {
+
+  sinon.stub(djStub, 'play').callsFake((storyId) => {
     let firstStory = server.db.discoverStories[0];
     assert.equal(firstStory.id, storyId);
+    return Ember.RSVP.Promise.resolve();
   });
 
-  this.render(hbs`{{discover-playlist audioReady=true stories=stories}}`);
+  this.set('dj', djStub);
+
+  this.render(hbs`{{discover-playlist stories=stories dj=dj}}`);
   this.$('.playlist-play-indicator-button:first').click();
 });
 
@@ -59,25 +69,25 @@ test('play button should be playing when track is playing', function(assert) {
   let playingStory = stories[0];
 
   this.set('stories', stories);
-  this.set('audio.currentAudio.id', playingStory.id);
-  this.set('audio.isReady', true);
-  this.set('audio.isPlaying', true);
+  this.set('currentAudioId', playingStory.id);
+  this.set('dj.isReady', true);
+  this.set('dj.isPlaying', true);
 
   this.render(hbs`{{discover-playlist stories=stories}}`);
   assert.equal(this.$('.playlist-play-indicator-button:first').text().trim(), "Pause");
 });
 
-test('clicking pause on a track sends a pause action to the audio service', function(assert) {
+test('clicking pause on a track sends a pause action to the dj service', function(assert) {
   let stories = server.createList('discover-story', 5);
   let playingStory = stories[0];
 
   this.set('stories', stories);
-  this.set('audio.currentAudio.id', playingStory.id);
-  this.set('audio.isReady', true);
-  this.set('audio.isPlaying', true);
+  this.set('currentAudioId', playingStory.id);
+  this.set('dj.isReady', true);
+  this.set('dj.isPlaying', true);
 
   var pauseActionTriggered = false;
-  this.set('audio.pause', () => {
+  this.set('dj.pause', () => {
     pauseActionTriggered = true;
   });
 

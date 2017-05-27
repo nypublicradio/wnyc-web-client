@@ -11,9 +11,9 @@ export default Ember.Component.extend({
   classNames:        ['discover-playlist-container'],
   classNameBindings: ['isDraggingItem:is-dragging-item'],
 
-  // Computed properties from a service. These are a little hinky
-  audioReady:     Ember.computed.alias('dj.isReady'),
-  currentAudioId: Ember.computed.alias('dj.currentContentId'),
+  audioReady: Ember.computed.reads('dj.isReady'),
+  currentAudioId: Ember.computed.reads('dj.currentContentId'),
+  currentlyLoadingIds: Ember.computed.reads('dj.currentlyLoadingIds'),
 
   isPlaying:      Ember.computed.and('audioReady', 'currentTrackIsInPlaylist', 'dj.isPlaying'),
 
