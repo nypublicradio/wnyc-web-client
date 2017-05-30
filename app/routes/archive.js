@@ -33,6 +33,7 @@ export default Route.extend({
       year,
       month,
       day,
+      meta: 'dates',
       page_size: pageSize,
       'fields[story]': fields
     });
