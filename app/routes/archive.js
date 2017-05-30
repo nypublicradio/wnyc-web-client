@@ -4,6 +4,12 @@ export default Route.extend({
   queryParams: {
     page: {
       refreshModel: true
+    },
+    ordering: {
+      refreshModel: true
+    },
+    pageSize: {
+      refreshModel: true
     }
   },
   
@@ -18,5 +24,9 @@ export default Route.extend({
       page_size: pageSize,
       'fields[story]': fields
     });
+  },
+  setupController(controller) {
+    this._super(...arguments);
+    controller.set('uslug', this.paramsFor('archive').uslug);
   }
 });

@@ -1,20 +1,56 @@
+<div class="l-constrained">
+  <h1>{{uslug}} archive</h1>
 
-<ul>
-{{#each model as |story|}}
-  <li>
-    <h2>{{story.title}}</h2>
-    <p>
-      {{story.dateLine}}
-    </p>
-    <p>
-      {{story.itemType}}
-    </p>
-  </li>
-{{/each}}
-</ul>
+  <p>
+    sort order:
+    <select onchange={{action 'updateOrder'}}>
+      {{#each sortOptions as |opt|}}
+      <option selected={{eq opt.value ordering}} value={{opt.value}}>
+        {{opt.label}}
+      </option>
+      {{/each}}
+    </select>
+    
+    page size:
+    <select onchange={{action 'updatePageSize'}}>
+      {{#each pageOptions as |count|}}
+      <option selected={{eq count pageSize}} value={{count}}>
+        {{count}}
+      </option>
+      {{/each}}
+    </select>
+  </p>
 
+  <ul>
+  {{#each model as |story|}}
+    <li>
+      <h2>{{link-to story.title 'story' story.slug class='link--underline'}} <small>{{moment-format story.newsdate 'LL'}}</small></h2>
+      
+      <p>
+        {{story.tease}} <small>({{story.itemType}})</small>
+      </p>
+      
+      {{#if story.segments}}
+      <h3>segments</h3>
+      <ul>
+        {{#each story.segments as |segment|}}
+        <li>
+          <h4>{{link-to segment.title 'story' segment.slug class='link--underline'}} <small>{{moment-format segment.newsdate 'LL'}}</small></h4>
+          
+          <p>
+            {{segment.tease}}
+          </p>
+        </li>
+        {{/each}}
+      </ul>
+      {{/if}}
+    
+    </li>
+  {{/each}}
+  </ul>
 
   {{page-numbers
     currentPage=model.meta.pagination.page
     totalPages=model.meta.pagination.pages
     action=(action (mut page))}}
+</div>
