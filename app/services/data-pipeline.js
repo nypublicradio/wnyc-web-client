@@ -40,6 +40,7 @@ export default Service.extend({
   },
 
   reportListenAction(type, incoming = {}) {
+     console.log(`type: ${type}`)
     incoming.delta = this.updateDelta(type);
     let data = this._generateData(incoming, LISTEN_ACTIONS[type.toUpperCase()]);
     this._send(data, this.listenActionPath);

@@ -34,14 +34,14 @@ test('it reports the proper data for an item view', function(assert) {
     url: location.toString(),
     site_id: config.siteId
   }, testData);
-  
+
   let service = this.subject({
     _send(data) {
       assert.deepEqual(expected, data, 'passes in correct data to send');
     },
     _legacySend() {}
   });
-  
+
   service.reportItemView(testData);
 });
 
@@ -61,65 +61,65 @@ test('it reports the proper data for on demand listen actions', function(assert)
     url: location.toString()
   };
   let testData = {cms_id: 1, item_type: 'story'};
-  
+
   let service = this.subject({
     _legacySend() {}
   });
-  
+
   service._send = function(data) {
     let thisData = Object.assign({action: 'start'}, expected);
     assert.deepEqual(thisData, data, 'sendStart passes in correct data');
   };
   service.reportListenAction('start', Object.assign({audio_type: 'on_demand', current_audio_position: 0}, testData));
-  
+
   service._send = function(data) {
     let thisData = Object.assign({action: 'pause'}, expected);
     assert.deepEqual(thisData, data, 'sendPause passes in correct data');
   };
   service.reportListenAction('pause', Object.assign({audio_type: 'on_demand', current_audio_position: 0}, testData));
-  
+
   service._send = function(data) {
     let thisData = Object.assign({action: 'resume'}, expected);
     assert.deepEqual(thisData, data, 'sendResume passes in correct data');
   };
   service.reportListenAction('resume', Object.assign({audio_type: 'on_demand', current_audio_position: 0}, testData));
-  
+
   service._send = function(data) {
     let thisData = Object.assign({action: 'skip_15_forward'}, expected);
     assert.deepEqual(thisData, data, 'sendSkipForward passes in correct data');
   };
   service.reportListenAction('forward_15', Object.assign({audio_type: 'on_demand', current_audio_position: 0}, testData));
-  
+
   service._send = function(data) {
     let thisData = Object.assign({action: 'skip_15_back'}, expected);
     assert.deepEqual(thisData, data, 'sendSkipBackward passes in correct data');
   };
   service.reportListenAction('back_15', Object.assign({audio_type: 'on_demand', current_audio_position: 0}, testData));
-  
+
   service._send = function(data) {
     let thisData = Object.assign({action: 'window_close'}, expected);
     assert.deepEqual(thisData, data, 'sendWindowClose passes in correct data');
   };
   service.reportListenAction('close', Object.assign({audio_type: 'on_demand', current_audio_position: 0}, testData));
-  
+
   service._send = function(data) {
     let thisData = Object.assign({action: 'finish'}, expected);
     assert.deepEqual(thisData, data, 'sendFinish passes in correct data');
   };
   service.reportListenAction('finish', Object.assign({audio_type: 'on_demand', current_audio_position: 0}, testData));
-  
+
   service._send = function(data) {
     let thisData = Object.assign({action: 'set_position'}, expected);
     assert.deepEqual(thisData, data, 'sendSetPosition passes in correct data');
   };
   service.reportListenAction('position', Object.assign({audio_type: 'on_demand', current_audio_position: 0}, testData));
-  
+
   clock.restore();
 });
 
 test('data pipeline tracks delta properly', function(assert) {
   assert.expect(6);
-  
+
   let currentCall = 0;
   let now = Date.now();
   let clock = sinon.useFakeTimers(now);
@@ -157,23 +157,23 @@ test('data pipeline tracks delta properly', function(assert) {
   });
   currentCall++;
   service.reportListenAction('start');
-  
+
   clock.tick(deltaShouldbe);
-  
+
   currentCall++;
   service.reportListenAction('pause');
-  
+
   currentCall++;
   service.reportListenAction('position');
-  
+
   clock.tick(1000);
   currentCall++;
   service.reportListenAction('resume');
-  
+
   clock.tick(deltaShouldbe);
   currentCall++;
   service.reportListenAction('position');
-  
+
   deltaShouldbe *= 2;
   clock.tick(deltaShouldbe);
   currentCall++;

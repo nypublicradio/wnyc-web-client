@@ -6,14 +6,15 @@ module.exports = {
   },
   extends: 'eslint:recommended',
   rules: {
-    "no-extra-boolean-cast": ["warn"]
+    "no-extra-boolean-cast": ["warn"],
+    "no-empty": 0,
+    "no-console": 0
   },
   env: {
     browser: true
   },
-  rules: {
-  },
   globals: {
-    server: true
+    server: true,
+    imagesLoaded: true
   }
 };
