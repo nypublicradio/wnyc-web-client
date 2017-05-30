@@ -30,14 +30,26 @@ export default Ember.Controller.extend({
   years: computed('model.meta.dates', function() {
     return Object.keys(this.get('model.meta.dates')).reverse();
   }),
+  showYears: computed('year', 'month', 'day', function() {
+    let { year, month, day } = this.getProperties('year', 'month', 'day');
+    return !year && !month && !day;
+  }),
   
   months: computed('year', 'model.meta.dates', function() {
     return Object.keys(this.get('model.meta.dates')[this.get('year')]);
+  }),
+  showMonths: computed('year', 'month', 'day', function() {
+    let { year, month, day } = this.getProperties('year', 'month', 'day');
+    return year && !month && !day;
   }),
   
   days: computed('year', 'month', 'model.meta.dates', function() {
     let { year, month } = this.getProperties('year', 'month');
     return this.get('model.meta.dates')[year][month].map(Number).sort((a, b) => a - b);
+  }),
+  showDays: computed('year', 'month', 'day', function() {
+    let { year, month, day } = this.getProperties('year', 'month', 'day');
+    return year && month && !day;
   }),
   
   actions: {
