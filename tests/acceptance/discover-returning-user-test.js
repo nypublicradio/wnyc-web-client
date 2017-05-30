@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import { test } from 'qunit';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import { currentSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
@@ -21,7 +22,7 @@ moduleForAcceptance('Acceptance | discover returning user', {
     session.set('data.discover-topics', ['music']); // set some saved topics
     session.set('data.discover-excluded-story-ids', []);
     session.set('data.discover-queue', server.serializerOrRegistry.serialize(server.schema.discoverStories.all())); // set some saved stories
-    
+
     server.create('stream');
   },
   afterEach() {
@@ -33,7 +34,7 @@ test('users who finished setup are redirected /discover -> /discover/playlist', 
   let session = currentSession(this.application);
   session.set('data.discover-setup-complete', true);
   visit('/discover');
-  
+
   andThen(function() {
     assert.equal(currentURL(), '/discover/playlist', 'should be on the playlist page');
   });
@@ -43,8 +44,8 @@ test('users who finished step 1 are redirected to finish the flow', function(ass
   let session = currentSession(this.application);
   session.set('data.discover-current-setup-step', 'topics');
   visit('/discover');
-  
-  
+
+
   andThen(function() {
     assert.equal(currentURL(), '/discover/start/topics', 'should be on the choose topics page');
   });
@@ -54,7 +55,7 @@ test('users who finished step 2 are redirected to finish the flow', function(ass
   let session = currentSession(this.application);
   session.set('data.discover-current-setup-step', 'shows');
   visit('/discover');
-  
+
   andThen(function() {
     assert.equal(currentURL(), '/discover/start/shows', 'should be on the choose shows page');
   });
@@ -287,8 +288,7 @@ test('if find more returns new items, the new items are displayed', function(ass
     });
 
     andThen(function() {
-      stories = server.createList('discover-story', 5);
-      
+      stories = server.createList('discover-story', 5);      
       server.get(url, function(schema) {
         thirdRequestCalled = true;
         let json = this.serialize(schema.discoverStories.all());

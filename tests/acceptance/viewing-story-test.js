@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import test from 'ember-sinon-qunit/test-support/test';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import storyPage from 'wnyc-web-client/tests/pages/story';
@@ -30,7 +31,7 @@ test('view comments as regular user', function(assert) {
 test('view comments as staff user', function(assert) {
   server.get(`${config.wnycAdminRoot}/api/v1/is_logged_in/`, {is_staff: true});
   server.create('user');
-  
+
   let story = server.create('story', {enableComments: true});
   server.createList('comment', 5, {story});
   visit(`story/${story.slug}`);
@@ -74,6 +75,7 @@ moduleForAcceptance('Acceptance |  Story Detail Analytics', {
 
 test('metrics properly reports story attrs', function(assert) {
   let story = server.create('story');
+  let id = `story/${story.slug}/`;
 
   assert.expect(2);
 
@@ -117,19 +119,19 @@ test('story routes do dfp targeting', function(/*assert*/) {
     .expects('doTargeting')
     .once()
     .withArgs(forDfp);
-  
+
   visit(`story/${story.slug}`);
 });
 
 test('api request includes draft params', function(assert) {
   assert.expect(4);
-  
+
   let story = server.create('story');
   let token = 'token';
   let content_type_id = 'type';
   let object_id = 'object';
   let stamp = 'timestamp';
-  
+
   server.get(`${config.wnycAPI}/api/v3/story/${story.slug}`, (schema, { queryParams }) => {
     assert.equal(queryParams.token, token);
     assert.equal(queryParams.content_type_id, content_type_id);
@@ -137,7 +139,7 @@ test('api request includes draft params', function(assert) {
     assert.equal(queryParams['_'], stamp);
     return story;
   });
-  
+
   visit(`story/${story.slug}?token=${token}&content_type_id=${content_type_id}&object_id=${object_id}&_=${stamp}`);
-  
+
 });

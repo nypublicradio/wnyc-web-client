@@ -14,7 +14,7 @@ export default Route.extend({
     this.get('googleAds').doTargeting();
   },
 
-  setupController(controller/*, model*/) {
+  setupController(/*controller, model*/) {
     this._super(...arguments);
   },
 });

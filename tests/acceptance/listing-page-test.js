@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import test from 'ember-sinon-qunit/test-support/test';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import djangoPage from 'wnyc-web-client/tests/pages/django-page';
@@ -119,7 +120,7 @@ test('scripts in well route content will execute', function(assert) {
 \\x3C/script>
 `
   });
-  
+
   let apiResponse = server.create('api-response', {
     id: 'shows/foo/story/1',
     type: 'story',
@@ -310,7 +311,7 @@ test('show pages with a listen live chunk', function(assert) {
   djangoPage
     .bootstrap(listingPage)
     .visit(listingPage);
-  
+
   andThen(() => {
     assert.equal(find('.channel-header .django-content').text().trim(), 'foo bar text');
   });
@@ -326,7 +327,7 @@ test('channel routes do dfp targeting', function(/*assert*/) {
   this.mock(this.application.__container__.lookup('route:show').get('googleAds'))
     .expects('doTargeting')
     .once();
-  
+
   djangoPage
     .bootstrap({id: listingPage.id})
     .visit({id: listingPage.id});
@@ -383,10 +384,10 @@ test('metrics properly reports channel attrs', function(assert) {
     socialLinks: [{title: 'facebook', href: 'http://facebook.com'}],
     apiResponse: server.create('api-response', { id: 'shows/foo/episodes/1' })
   });
-  
+
   assert.expect(2);
   server.create('django-page', {id: listingPage.id});
-  
+
   server.post(`${config.platformEventsAPI}/v1/events/viewed`, (schema, {requestBody}) => {
     let {
       cms_id,

@@ -14,6 +14,7 @@ test('visiting /player-events', function(assert) {
 
   let calls = [];
   server.post(`${config.platformEventsAPI}/v1/events/listened`, (schema, {requestBody}) => {
+    console.log(`action: ${JSON.parse(requestBody).action}`);
     calls.push(JSON.parse(requestBody).action);
     if (calls.length === 6) {
       assert.ok('6 calls');
@@ -36,7 +37,7 @@ test('visiting /player-events', function(assert) {
   });
 
   andThen(() => {
-    var e = $.Event('mousedown', {which: 1});
+    var e = window.$.Event('mousedown', {which: 1});
     find('.nypr-player-progress').trigger(e);
   });
 });

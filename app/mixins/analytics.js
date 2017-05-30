@@ -30,12 +30,12 @@ export default Mixin.create({
   _trackPage() {
     scheduleOnce('afterRender', this, () => {
       const metrics = get(this, 'metrics');
-      const page = document.location.pathname + document.location.search; // e.g. '/shows/bl/'
+      const page = document.location.pathname + document.location.search; // e.g. '/shows/bl/'
       const title = document.title; // this should be something dynamic
 
       metrics.trackPage('GoogleAnalytics', { page, title });
       metrics.trackPage('GoogleTagManager', { page, title });
-      
+
       if (!DETAIL_ROUTES.test(this.currentRouteName) && !this.currentRouteName.match(/loading/)) {
         this.get('dataPipeline').reportItemView();
       }

@@ -116,7 +116,7 @@ test('clicking delete on a track sends a delete action', function(assert) {
 
 test('clicking the refresh bar sends a findMore action', function(assert) {
   this.set('findMore', () => assert.ok('findMore was called'));
-  
+
   this.render(hbs`{{discover-playlist findMore=findMore}}`);
   this.$('.discover-refresh-bar').click();
 });
