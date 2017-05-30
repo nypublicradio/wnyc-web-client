@@ -32,7 +32,7 @@ export default Model.extend({
   itemTypeId: attr('number'),
   isLatest: attr('boolean'),
   largeTeaseLayout: attr('boolean'),
-  newsdate: attr('date'),
+  newsdate: attr('string'),
   segments: attr(),
   slug: attr('string'),
   tease: attr('string'),
