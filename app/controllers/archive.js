@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import Controller from 'ember-controller';
 import computed from 'ember-computed';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   queryParams: [
     'page',
     'pageSize',
@@ -21,7 +21,7 @@ export default Ember.Controller.extend({
     label: 'Newest to Oldest',
     value: '-newsdate'
   }, {
-    label: 'Oldest to Newst',
+    label: 'Oldest to Newest',
     value: 'newsdate'
   }],
   
