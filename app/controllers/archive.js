@@ -4,11 +4,17 @@ export default Ember.Controller.extend({
   queryParams: [
     'page',
     'pageSize',
+    'year',
+    'month',
+    'day',
     {ordering: 'sort'},
   ],
   page: 1,
   ordering: '-newsdate',
   pageSize: 10,
+  year: null,
+  month: null,
+  day: null,
   
   sortOptions: [{
     label: 'Newest to Oldest',
