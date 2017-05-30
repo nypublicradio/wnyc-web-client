@@ -8,8 +8,8 @@ import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
   authorizer: 'authorizer:nypr',
   host: ENV.wnycAPI,
-  pathForType: () => 'story/',
   namespace: 'api/v3',
+  pathForType: () => 'story/',
   query(store, type, {itemId, limit}) {
     if (itemId) {
       let url = `${this.host}/api/v2/related/${itemId}/?limit=${limit}`;
