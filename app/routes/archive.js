@@ -7,7 +7,16 @@ export default Route.extend({
     }
   },
   
-  model({ uslug, page }) {
-    return this.store.query('story', {page, uslug, ordering: '-newsdate'});
+  model({ uslug, page, pageSize, ordering }) {
+    let fields = 'item_type,slug,newsdate,segments,title,tease';
+    let item_type = 'episode,article';
+    return this.store.query('story', {
+      page,
+      uslug,
+      ordering,
+      item_type,
+      page_size: pageSize,
+      'fields[story]': fields
+    });
   }
 });
