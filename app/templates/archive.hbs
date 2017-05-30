@@ -20,6 +20,39 @@
       {{/each}}
     </select>
   </p>
+  
+  <p>
+    {{#if showYears}}
+      {{#each years as |year|}}
+        {{link-to year 'archive' (query-params year=year page=1)}}
+      {{/each}}
+    {{else if showMonths}}
+      <small>
+        {{link-to '< Back' 'archive' (query-params year=null month=null day=null page=1)}}
+      </small>
+      <h3>{{year}}</h3>
+      {{#each months as |month|}}
+        {{link-to (moment-format month 'MMMM' 'M') 'archive'  (query-params month=month page=1)}}
+      {{/each}}
+    {{else if showDays}}
+      <small>
+        {{#link-to 'archive' (query-params year=year month=null day=null page=1)}}
+          &lt; {{year}}
+        {{/link-to}}
+      </small>
+      <h3>{{moment-format month 'MMMM' 'M'}} {{year}}</h3>
+      {{#each days as |day|}}
+        {{link-to day 'archive' (query-params day=day page=1)}}
+      {{/each}}
+    {{else if (and year month day)}}
+      <small>
+        {{#link-to 'archive' (query-params year=year month=month day=null page=1)}}
+          &lt; {{moment-format month 'MMMM' 'M'}} {{year}}
+        {{/link-to}}
+      </small>
+      <h3>{{moment-format (concat year '-' month '-' day) 'dddd, MMMM D YYYY' 'YYYY-M-D'}}</h3>
+    {{/if}}
+  </p>
 
   <ul>
   {{#each model as |story|}}
