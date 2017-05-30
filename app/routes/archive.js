@@ -10,10 +10,19 @@ export default Route.extend({
     },
     pageSize: {
       refreshModel: true
+    },
+    year: {
+      refreshModel: true
+    },
+    month: {
+      refreshModel: true
+    },
+    day: {
+      refreshModel: true
     }
   },
   
-  model({ uslug, page, pageSize, ordering }) {
+  model({ uslug, page, pageSize, ordering, year, month, day }) {
     let fields = 'item_type,slug,newsdate,segments,title,tease';
     let item_type = 'episode,article';
     return this.store.query('story', {
@@ -21,6 +30,9 @@ export default Route.extend({
       uslug,
       ordering,
       item_type,
+      year,
+      month,
+      day,
       page_size: pageSize,
       'fields[story]': fields
     });
