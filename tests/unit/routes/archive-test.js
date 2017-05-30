@@ -2,7 +2,7 @@ import { moduleFor, test } from 'ember-qunit';
 
 moduleFor('route:archive', 'Unit | Route | archive', {
   // Specify the other units that are required for this test.
-  // needs: ['controller:foo']
+  needs: ['service:metrics', 'service:data-pipeline', 'service:session']
 });
 
 test('it exists', function(assert) {
