@@ -26,12 +26,18 @@ test('visiting /player-events', function(assert) {
   // story header play button
   andThen(() => {
     click('main [data-test-selector="listen-button"]');
+  });
+
+  andThen(() => {
     // pause
     click('.nypr-player-button.mod-listen');
+
     // play
     click('.nypr-player-button.mod-listen');
+
     // fast forward
     click('.nypr-player-button.mod-fastforward');
+
     // rewind
     click('.nypr-player-button.mod-rewind');
   });
