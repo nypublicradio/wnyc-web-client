@@ -504,7 +504,7 @@ test('the list can be reordered by dragging', function(assert) {
         assert.deepEqual(newOrder, expectedOrder, "second item should be in first position");
       });
     });
-  });
+  })
 });
 
 test('reording the list after deleting does not bring back the deleted item', function(assert) {

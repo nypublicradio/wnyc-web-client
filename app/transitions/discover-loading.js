@@ -10,7 +10,7 @@ export default function loadingTransition(opts={}) {
 
   let loadingScreen;
 
-  if (this.oldElement.find('.discover-loading').length > 0) {
+  if (this.oldElement && this.oldElement.find('.discover-loading').length > 0) {
     // fade in loading screen, slide in other view
     loadingScreen = this.oldElement;
     // otherScreen = this.newElement;
