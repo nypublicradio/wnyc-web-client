@@ -30,7 +30,7 @@
           {{/if}}
 
           {{!-- {{> overhaul/partials/header/content.hbs}} --}}
-          {{nypr-story/header-content story=model.story}}
+          {{nypr-story/header-content story=model.story audio=audio}}
 
       </header>
       <!-- .l-bgimg -->
@@ -45,7 +45,7 @@
       }}
       {{#if model.story.extendedStory.segments}}
         <div class="accordion flush" data-category="segments" data-state="is-expanded" id="segments">
-            {{!-- {{> overhaul/partials/segments.hbs }} --}}
+            {{nypr-story/segments story=model.story audio=audio}}
         </div>                                              
         <!-- .accordion -->
       {{/if}}
