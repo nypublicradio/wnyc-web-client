@@ -40,3 +40,18 @@ test('forDfp returns properties for targeting', function(assert) {
   
   assert.deepEqual(model.forDfp(), forDfp);
 });
+
+test('it has the required information for sending a listen action', function(assert) {
+  assert.expect(2);
+  let model = this.subject({ audio: 'foo.mp3', itemType: 'episode', cmsPK: 123 });
+  assert.ok(model.forListenAction, "should have forListenAction method");
+
+  model.forListenAction({custom: 5}).then(d => {
+    assert.deepEqual(d, {
+      custom: 5,
+      audio_type: 'on_demand',
+      cms_id: model.id,
+      item_type: 'episode', // episode, article, segment
+    });
+  });
+});
