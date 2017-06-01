@@ -184,6 +184,16 @@ export default function() {
     }
   });
 
+  this.post('/v1/password/change-temp', (schema, request) => {
+    let params = JSON.parse(request.requestBody);
+    if (!params.temp || params.temp === "expired") {
+      return new Response(400, {}, expiredCodeException);
+    } else {
+      return new Response(200);
+    }
+  });
+
+
   this.get('/v1/confirm/resend-attr', (schema, request) => {
     if (!request.requestHeaders.Authorization && !request.requestHeaders.authorization) {
       return new Response(401);

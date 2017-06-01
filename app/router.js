@@ -6,7 +6,7 @@ import service from 'ember-service/inject';
 const Router = Ember.Router.extend(AnalyticsMixin, {
   location: config.locationType,
   session:  service(),
-  
+
   willTransition(oldInfos, newInfos, transition) {
     this._super(...arguments);
     if (!['login', 'signup', 'validate', 'forgot', 'reset'].includes(transition.targetName)) {
@@ -62,6 +62,7 @@ Router.map(function() {
   // specific.
   this.route('djangorendered', { path: '*upstream_url' });
   this.route('missing');
+  this.route('set-password');
 });
 
 export default Router;
