@@ -19,6 +19,7 @@
           <!-- flush class when 1. image, 2. no image but segments -->
 
           {{#if model.story.imageMain.isDisplay}}
+          {{!-- check that image is at least 800px --}}
           <style>
               .l-bgimg:after {
                   background-image: url({{image-template model.story.imageMain.template 800 0 model.story.imageMain.crop}});
@@ -44,22 +45,18 @@
         this bit of markup across all the places segments are called
       }}
       {{#if model.story.extendedStory.segments}}
-        <div class="accordion flush" data-category="segments" data-state="is-expanded" id="segments">
             {{nypr-story/segments story=model.story audio=audio}}
-        </div>                                              
-        <!-- .accordion -->
       {{/if}}
 
       {{#if model.story.imageMain.isDisplay}} {{!-- && width 800 or more --}}
         {{nypr-story/main-image story=model.story}} 
       {{/if}}
 
-
-      
-        {{nypr-story/byline story=model.story}}
+      {{nypr-story/byline story=model.story}}
 
         {{!-- {{> overhaul/partials/body.hbs}} --}}
-        {{#if model.story.extendedStory.transcript}}
+
+      {{#if model.story.extendedStory.transcript}}
         <div class="tabs-header" role="tablist">
             <div class="tab-line"></div>
             <a href="#content" aria-controls="content" aria-selected="true" class="btn btn--blank btn--blacktext btn--heavy js-tabClickable active" data-category="OpenSummary" id="summaryTab" role="tab">Summary</a>
@@ -78,65 +75,44 @@
         </section>
 
         {{#if model.story.extendedStory.playlist}}
-        <section class="list">
-            <div class="list-heading">
-                <h3 class="h5">Music Playlist</h3>
-            </div>
-            <ol>
-                {{#each model.story.extendedStory.playlist as |song|}}
-                <li class="list-item">
-                    <h4 class="h3 flush">{{{song.title}}}</h4>
-                    {{#if song.artists}}
-                    <div class="text flush">Artist: {{song.artists}}</div>
-                    {{/if}}
-                    {{#if song.album}}
-                    <div class="text flush">Album: {{song.album}}</div>
-                    {{/if}}
-                    {{#if song.label}}
-                    <div class="text flush">Label: {{song.label}}</div>
-                    {{/if}}
-                    {{#if song.asin}}
-                    <div class="text flush"><a href="http://www.amazon.com/exec/obidos/ASIN/{{song.asin}}/wnycorg-20" target="_blank">Buy on Amazon</a></div>
-                    {{/if}}
-                </li>
-                {{/each}}
-            </ol>
-        </section>
+          {{nypr-story/playlist playlist=model.story.extendedStory.playlist}}
         {{/if}}
 
         {{#if model.story.extendedStory.slideshow}}
+          {{!-- {{nypr-story/slideshow slideshow=model.story.extendedStory.slideshow}} --}}
           <section id="slideshow" class="slideshow" role="listbox" aria-activedescendant="listbox1-1">
-          {{#each story.extendedStory.slideshow key="index" as |slide|}}
-          <figure role="option" id="listbox1-{{index}}">
-              <div class="slideshow-image">
-                {{!--   <img alt="{{slide.caption}}"
-                      src="{{image slide.template 0 350 slide.crop 99}}" 
-                      srcset="{{image slide.template 0 700 slide.crop 99}} 2x,
-                          {{image slide.template 0 1050 slide.crop 99}} 3x"
-                      title="{{slide.caption}}"> --}}
-              </div>
-              <figcaption class="slideshow-caption">
-              {{{slide.caption}}}
-              {{{slide.long_caption}}}
-              {{#if slide.creditsName}} 
-                  {{#if slide.creditsUrl}}
-                    (<a href="{{slide.creditsUrl}}" target="_blank">{{slide.creditsName}}</a>)
-                  {{else}}
-                    ({{slide.creditsName}})
-                  {{/if}}
-              {{/if}}
-              </figcaption>
-          </figure>
-          {{/each}}
-          <div class="slideshow-controls" id="slideshowButtons">
-              <button aria-controls="slideshow" id="previous" class="btn btn--small btn--strictsquare btn--blue"><i class="icon icon-arrow icon-arrow--left"></i></button>
-              <span id="slideshowCurrent"></span> of <span id="slideshowTotal"></span>
-              <button aria-controls="slideshow" id="next" class="btn btn--small btn--strictsquare btn--blue"><i class="icon icon-arrow icon-arrow--right"></i></button>
-          </div>
-          </section>
+  {{#each slideshow key="index" as |slide|}}
+  <figure role="option" id="listbox1-{{index}}">
+{{!--       <div class="slideshow-image">
+        <img alt="{{slide.caption}}"
+              src="{{image-template slide.template 0 350 slide.crop 99}}" 
+              srcset="{{image-template slide.template 0 700 slide.crop 99}} 2x,
+                  {{image-template slide.template 0 1050 slide.crop 99}} 3x"
+              title="{{slide.caption}}">
+      </div> --}}
+      <figcaption class="slideshow-caption">
+      {{{slide.caption}}}
+      {{{slide.long_caption}}}
+      {{#if slide.creditsName}} 
+          {{#if slide.creditsUrl}}
+            (<a href="{{slide.creditsUrl}}" target="_blank">{{slide.creditsName}}</a>)
+          {{else}}
+            ({{slide.creditsName}})
+          {{/if}}
       {{/if}}
+      </figcaption>
+  </figure>
+  {{/each}}
+  <div class="slideshow-controls" id="slideshowButtons">
+      <button aria-controls="slideshow" id="previous" class="btn btn--small btn--strictsquare btn--blue"><i class="icon icon-arrow icon-arrow--left"></i></button>
+      <span id="slideshowCurrent"></span> of <span id="slideshowTotal"></span>
+      <button aria-controls="slideshow" id="next" class="btn btn--small btn--strictsquare btn--blue"><i class="icon icon-arrow icon-arrow--right"></i></button>
+  </div>
+</section>
+        {{/if}}
 
       {{#if model.story.extendedStory.transcript}}
+      {{!-- transcript bottom --}}
         {{!-- </div> --}}
         <!-- #story.tab-toggleitem -->
 
@@ -170,7 +146,6 @@
     </main>
     <!-- .l-col2of3 -->
 
-    {{!-- {{> overhaul/partials/chunks.hbs}} --}}
     <aside class="l-col1of3" id="chunks">
     <div class="l-skinny">
         {{#if model.story.pageChunks.siteSidebarTop}}
