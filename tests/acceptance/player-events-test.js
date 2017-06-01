@@ -14,7 +14,6 @@ test('visiting /player-events', function(assert) {
 
   let calls = [];
   server.post(`${config.platformEventsAPI}/v1/events/listened`, (schema, {requestBody}) => {
-    console.log(`action: ${JSON.parse(requestBody).action}`);
     calls.push(JSON.parse(requestBody).action);
     if (calls.length === 6) {
       assert.ok('6 calls');

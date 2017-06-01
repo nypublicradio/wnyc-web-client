@@ -27,7 +27,7 @@
 
   {{#unless chromeDisabled}}
     <div class="l-fixed l-lowright">
-    {{nypr-player.queue-button
+    {{nypr-player/queue-button
       isFloating  = true
       queueLength = queue.items.length
       showModal   = (action 'showModal' 'queue-history')
@@ -58,7 +58,7 @@
       backdropImageUrl = integration.backdropImageUrl
       as |content|}}
         {{#content.for 'trackInfo'}}
-          {{nypr-player-integration.track-info
+          {{nypr-player-integration/track-info
             currentAudio    = integration.currentAudio
             showTitle       = integration.showTitle
             showUrl         = integration.showUrl
@@ -91,7 +91,7 @@
         {{/content.for}}
 
         {{#content.for 'streamInfo'}}
-          {{nypr-player-integration.stream-info
+          {{nypr-player-integration/stream-info
             streamScheduleUrl = integration.streamScheduleUrl
             streamPlaylistUrl = integration.streamPlaylistUrl
             streamUrl         = integration.streamUrl
