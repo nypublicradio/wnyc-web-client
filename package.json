@@ -13,7 +13,7 @@
     "build": "ember build",
     "start": "ember server",
     "test": "ember test",
-    "upgrade-nypr": "yarn upgrade nypr-ads nypr-ui nypr-player nypr-account-settings"
+    "upgrade-nypr": "yarn upgrade nypr-ads nypr-ui nypr-player nypr-account-settings nypr-audio-services"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
@@ -61,7 +61,7 @@
     "ember-feature-flags": "3.0.0",
     "ember-fetch": "3.2.9",
     "ember-get-config": "0.2.1",
-    "ember-hifi": "^1.9.0",
+    "ember-hifi": "^1.10.0",
     "ember-holygrail-layout": "^0.1.4",
     "ember-hotjar": "^0.0.2",
     "ember-imagesloaded-shim": "^0.0.6",
