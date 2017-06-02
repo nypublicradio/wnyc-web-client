@@ -7,6 +7,6 @@ export default Ember.Test.onInjectHelpers(function() {
     trackPage() {},
     trackEvent() {},
     identify() {},
-    nprDimensions() {},
+    nprDimensions () {}
   });
 });
