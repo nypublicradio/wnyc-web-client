@@ -25,8 +25,8 @@ moduleForComponent('discover-playlist', 'Integration | Component | discover play
 const djStub = Ember.Service.extend({
   isReady: true,
   isPlaying: false,
-  pause: () => {},
-  play: () => {},
+  pause() {},
+  play() {},
   currentlyLoadingIds: []
 });
 
