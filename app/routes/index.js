@@ -9,7 +9,6 @@ const STREAM_BG = '/assets/img/backgrounds/streambanner.jpg';
 
 export default Route.extend(PlayParamMixin, {
   googleAds:  service(),
-  audio:      service(),
   classNames: ['home'],
   dj: service(),
 
@@ -37,6 +36,5 @@ export default Route.extend(PlayParamMixin, {
     });
     controller.set('streams', streams);
     controller.set('background', STREAM_BG);
-    controller.set('audio', this.get('audio'));
   }
 });
