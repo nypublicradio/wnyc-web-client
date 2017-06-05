@@ -38,8 +38,7 @@ test('test for analytics selectors', function(assert) {
   andThen(function() {
     // UA, User Launches Stream from Stream Banner
     findWithAssert('.stream-banner__active-stream');
-    pauseTest();
-    click(findWithAssert('.stream-banner-listenbutton.is-paused'));
+    click(findWithAssert('.stream-banner-listenbutton'));
   });
 
   andThen(function() {
@@ -62,12 +61,11 @@ test('test for analytics selectors', function(assert) {
     let playButton = findWithAssert('.nypr-player-button.mod-listen.is-paused');
     assert.ok(playButton.attr('title'));
   });
-
-  click('.sharebutton button');
+  click('.nypr-sharebutton button');
 
   andThen(function() {
     // UA, User shares stream from persistent player
-    findWithAssert('.sharebutton-listitem > button');
+    findWithAssert('.nypr-sharebutton-listitem > button');
     // findWithAssert('.nypr-player-stream-info-station-info > a');
   });
 
