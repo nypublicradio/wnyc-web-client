@@ -43,6 +43,19 @@ export default Model.extend({
     let text = get(this, 'extendedStory.body');
     return this.store.createRecord('django-page', { text });
   }),
+  mainImageEligible: computed('template', 'imageMain', function(){
+    let template = get(this, 'template');
+    let imageWidth = get(this, 'imageMain.w');
+    let imageDisplayFlag = get(this, 'imageMain.isDisplay');
+    if (["story_video", "story_interactive", "story_noimage"].includes(template)) {
+      return false;
+    } else if (imageWidth >= 800 && imageDisplayFlag === true){
+      return true;
+    }
+  }),
+  videoTemplate: computed.equal('template', 'story_video'),
+  interactiveTemplate: computed.equal('template', 'story_interactive'),
+  flushHeader: computed.or('mainImageEligible', 'videoTemplate', 'extendedStory.segments'),
   escapedBody: computed('extendedStory.body', {
     get() {
       let body = get(this, 'extendedStory.body');

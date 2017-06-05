@@ -5,19 +5,15 @@
   mapping=(array (array 0 (array 350 50)) (array 758 (array 728 90)) (array 1203 (array 970 415)))
   sizes=(array (array 970 415) (array 728 90) (array 350 50))}}
 
-<div class="l-full">
+<div class="l-full {{if model.story.interactiveTemplate 'story--interactive'}}">
   <div class="l-constrained">
     
-    <main class="l-col2of3" id="main" role="main">
+    <main class="{{unless model.story.interactiveTemplate 'l-col2of3'}}" id="main" role="main">
       <article class="doubledown" data-status="{{model.story.extendedStory.publishStatus}}" data-date="{{moment-format model.story.extendedStory.publishAt '%b %-d, %Y'}}">
 
-        <p>{{model.story.template}}</p>
+        <header class="l-bgimg {{if model.story.flushHeader 'flush'}}" id="storyHeader">
 
-        <header class="l-bgimg flush" id="storyHeader">
-          <!-- flush class when 1. image, 2. no image but segments -->
-
-          {{#if model.story.imageMain.isDisplay}}
-          {{!-- check that image is at least 800px --}}
+          {{#if model.story.mainImageEligible}}
           <style>
               .l-bgimg:after {
                   background-image: url({{image-template model.story.imageMain.template 800 0 model.story.imageMain.crop}});
@@ -30,45 +26,46 @@
 
           {{nypr-story/header-content story=model.story audio=audio isStaff=session.data.isStaff adminUrl=model.adminURL}}
 
-      </header>
-      <!-- .l-bgimg -->
+        </header>
+        <!-- .l-bgimg -->
 
-
-      {{!
-        the segments accordion has a margin when there is 
-        no body image, but that can be affected by the template choice
-        or if the image is not display size.
-        both are calculated at runtime. it's easier to split out
-        this bit of markup across all the places segments are called
-      }}
-      {{#if model.story.extendedStory.segments}}
-            {{nypr-story/segments segments=model.story.extendedStory.segments segmentCount=model.story.extendedStory.segmentCount audio=audio}}
-      {{/if}}
-
-      {{#if model.story.imageMain.isDisplay}} {{!-- && width 800 or more --}}
-        {{nypr-story/main-image image=model.story.imageMain}} 
-      {{/if}}
-
-      {{nypr-story/byline 
-        dateLineDatetime=model.story.dateLineDatetime 
-        authors=model.story.extendedStory.appearances.authors 
-        producingOrganizations=model.story.extendedStory.producingOrganizations
-        sourceUrl=model.story.extendedStory.sourceUrl}}
- 
-      {{!-- body components are yielded with or without tabs depending if transcript exists --}}
-      {{#nypr-story/body-transcript transcript=model.story.extendedStory.transcript as |body|}}
-        <section class="text">
-          {{django-page page=model.story.body}}
-        </section>
-
-        {{#if model.story.extendedStory.playlist}}
-          {{nypr-story/playlist playlist=model.story.extendedStory.playlist}}
+        {{#if model.story.extendedStory.segments}}
+          {{nypr-story/segments segments=model.story.extendedStory.segments segmentCount=model.story.extendedStory.segmentCount audio=audio flush=model.story.mainImageEligible}}
         {{/if}}
 
-        {{#if model.story.extendedStory.slideshow}}
-          {{nypr-story/slideshow slideshow=model.story.extendedStory.slideshow}}
+        {{#if model.story.videoTemplate}}
+          {{{model.story.extendedStory.video}}}
         {{/if}}
-      {{/nypr-story/body-transcript}} 
+
+        {{#if model.story.mainImageEligible}}
+          {{nypr-story/main-image image=model.story.imageMain}} 
+        {{/if}}
+
+        {{nypr-story/byline 
+          dateLineDatetime=model.story.dateLineDatetime 
+          authors=model.story.extendedStory.appearances.authors 
+          producingOrganizations=model.story.extendedStory.producingOrganizations
+          sourceUrl=model.story.extendedStory.sourceUrl}}
+   
+        {{!-- body components are yielded with or without tabs depending if transcript exists --}}
+        {{#nypr-story/body-transcript transcript=model.story.extendedStory.transcript as |body|}}
+          <section class="text">
+            {{django-page page=model.story.body}}
+          </section>
+
+          {{#if model.story.extendedStory.playlist}}
+            {{nypr-story/playlist playlist=model.story.extendedStory.playlist}}
+          {{/if}}
+
+          {{#if model.story.extendedStory.slideshow}}
+            {{nypr-story/slideshow slideshow=model.story.extendedStory.slideshow}}
+          {{/if}}
+
+          {{#unless model.storyVideoTemplate}}
+            {{{story.extendedStory.video}}}
+          {{/unless}}
+
+        {{/nypr-story/body-transcript}} 
 
 
         {{#if model.story.extendedStory.correctionText}}
@@ -81,14 +78,17 @@
                              email=user.email
                              userName=(or session.data.staffName user.preferredUsername)
                              getComments=model.getComments
-                             browserId=session.data.browserId}}
+                             browserId=session.data.browserId
+                             class=(if model.story.interactiveTemplate 'l-medium')
+                           }}
         {{/if}}
       </article>
     </main>
     <!-- .l-col2of3 -->
 
+  {{#unless model.story.interactiveTemplate}}
     <aside class="l-col1of3" id="chunks">
-    <div class="l-skinny">
+      <div class="l-skinny">
         {{#if model.story.pageChunks.siteSidebarTop}}
           {{django-page page=model.story.pageChunks.siteSidebarTop}}
         {{/if}}
@@ -119,53 +119,20 @@
         {{#if model.story.pageChunks.channelSidebarBottom}}
           {{django-page page=model.story.pageChunks.channelSidebarBottom}}
         {{/if}}
-    </div>
-</aside>
+      </div>
+    </aside>
+  {{/unless}}
 
    
   </div>
   <!-- .l-constrained -->
 
-  <div class="l-constrained">
-    <div class="l-col2of3">
+  <div class="{{if model.story.interactiveTemplate 'l-medium' 'l-constrained'}}">
+    <div class="{{unless model.story.interactiveTemplate 'l-col2of3'}}">
 
-      {{!-- {{> overhaul/partials/series.hbs}} --}}
       {{#if model.story.extendedStory.series}}
-        <aside id="series" data-category="series">
-            <h1 class="h4 h--flush outlineonly">Also Seen In...</h1>
-            <div class="list">
-                {{#each model.story.extendedStory.series as |item|}}
-                <article class="list-item">
-                    <div class="flag flush">
-                        {{#if item.logoImage}}
-                        <div class="flag-image">
-                           {{!--  <img alt="{{item.title}}" class="squarebadge badge--large" 
-                                src="{{image item.logoImage.template 100 100 item.logoImage.crop 99}}"
-                                srcset="{{image item.logoImage.template 200 200 item.logoImage.crop 99}} 2x,
-                                    {{image item.logoImage.template 300 300 item.logoImage.crop 99}} 3x"
-                                width="100" height="100"> --}}
-                        </div>
-                        {{/if}}
-                        <div class="flag-body">
-                            <div class="l-split flush">
-                                <div class="text text--medium text--gray flush--medium">
-                                    <div class="text-body--rightpad text-body--forceinline">
-                                        Part of <a href="{{item.url}}">{{{item.title}}}</a>. <span class="medium-up">{{{item.tease}}}</span>
-                                    </div>
-                                </div>
-                                <a href="{{item.url}}" class="btn">More in this Series</a>
-                            </div>
-                            <!-- .l-split -->
-                        </div>
-                    </div>
-                    <!-- .flag -->
-                </article>
-                <!-- .list-item -->
-                {{/each}}
-            </div>
-            <!-- .list -->
-        </aside>
-        {{/if}}
+        {{nypr-story/series series=model.story.extendedStory.series}}
+      {{/if}}
 
       {{#if model.story.pageChunks.story}}
         <div id="story-chunk">
