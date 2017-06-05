@@ -17,7 +17,6 @@ export default Model.extend({
   audioMayDownload: attr('boolean'),
   audioMayEmbed: attr('boolean'),
   audioShowOptions: attr('boolean'),
-  body: attr('string'),
   channel: attr('string'),
   chunks: attr(),
   commentsCount: attr('number'),
@@ -46,7 +45,25 @@ export default Model.extend({
   template: computed.alias('extendedStory.template'),
   title: attr('string'),
   url: attr('string'),
-  escapedBody: computed('body', {
+  extendedStory: attr(),
+  body: computed ('extendedStory.body', function() {
+    let text = get(this, 'extendedStory.body');
+    return this.store.createRecord('django-page', { text });
+  }),
+  mainImageEligible: computed('template', 'imageMain', function(){
+    let template = get(this, 'template');
+    let imageWidth = get(this, 'imageMain.w');
+    let imageDisplayFlag = get(this, 'imageMain.isDisplay');
+    if (["story_video", "story_interactive", "story_noimage"].includes(template)) {
+      return false;
+    } else if (imageWidth >= 800 && imageDisplayFlag === true){
+      return true;
+    }
+  }),
+  videoTemplate: computed.equal('template', 'story_video'),
+  interactiveTemplate: computed.equal('template', 'story_interactive'),
+  flushHeader: computed.or('mainImageEligible', 'videoTemplate', 'extendedStory.segments'),
+  escapedBody: computed('extendedStory.body', {
     get() {
       let body = get(this, 'body');
       if (!body) {
