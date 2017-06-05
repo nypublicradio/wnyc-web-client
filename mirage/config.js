@@ -72,6 +72,7 @@ export default function() {
   this.get(`${baseUrl}/api/v3/buckets/:slug`, 'bucket');
   this.get(`${baseUrl}/api/v3/story/detail/:id`, 'story');
   this.get(`${baseUrl}/api/v3/channel/\*id`, 'api-response');
+  this.get(`${baseUrl}/api/v3/chunks/:id/`, 'chunk');
 
   let discoverPath = config.featureFlags['other-discover'] ? 'reco_proxy' : 'make_playlist';
   this.get(`${config.wnycAPI}/api/v3/${discoverPath}`, function(schema) {

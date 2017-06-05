@@ -21,6 +21,9 @@
                     Produced by {{producing-orgs model.producingOrganizations}}.
                 {{/if}}    
                 {{airings}}
+                {{#if listenLive}}
+                  {{django-page page=listenLive}}
+                {{/if}}
             </p>
           </div>
         </div>
