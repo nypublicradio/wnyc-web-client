@@ -1,5 +1,6 @@
 import config from 'wqxr-web-client/config/environment';
 import { Response, faker } from 'ember-cli-mirage';
+import get from 'ember-metal/get';
 
 // Mirage is diabled by default when using --proxy
 // In development (without --proxy) and test environments, these handlers will be used
@@ -189,4 +190,20 @@ export default function() {
 
   this.post(`${config.platformEventsAPI}/v1/events/viewed`, {});
   this.post(`${config.platformEventsAPI}/v1/events/listened`, {});
+
+  /*-------------------------------------------------------------
+  membership microservice
+  ---------------------------------------------------------------*/
+  this.get(`${config.wnycMembershipAPI}/v1/orders/`, 'orders');
+  this.get(`${config.wnycMembershipAPI}/v1/emails/is-verified/`, {data: {is_verified: true}});
+  this.patch(`${config.wnycMembershipAPI}/v1/emails/:email_id/verify/`, (schema, request) => {
+    let params = JSON.parse(request.requestBody);
+    if (params &&
+        get(params, 'data.attributes.verification_token') &&
+        get(params, 'data.attributes.verification_token') !== "null") {
+      return new Response(200, {}, {data: {success: true}});
+    } else {
+      return new Response(200, {}, {data: {success: false}});
+    }
+  });
 }

@@ -22,25 +22,22 @@ export default Controller.extend({
     let old_password = changeset.get('currentPassword');
     let new_password = changeset.get('newPassword');
     return new RSVP.Promise((resolve, reject) => {
+      let headers = {'Content-Type': 'application/json'};
       this.get('session').authorize('authorizer:nypr', (header, value) => {
-        fetch(`${config.wnycAuthAPI}/v1/password`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: value
-          },
-          body: JSON.stringify({old_password, new_password})
-        })
-        .then(response => {
-          if (response.ok) {
-            resolve(response);
-            this.showFlash('password');
-          } else if (response.json) {
-            response.json().then(reject);
-          } else {
-            reject(response);
-          }
-        });
+        headers[header] = value;
+      });
+      fetch(`${config.wnycAuthAPI}/v1/password`, {
+        headers,
+        method: 'POST',
+        body: JSON.stringify({old_password, new_password})
+      })
+      .then(response => {
+        if (response.ok) {
+          resolve();
+          this.showFlash('password');
+        } else {
+          reject();
+        }
       });
     });
   },
