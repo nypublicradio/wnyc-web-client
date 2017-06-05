@@ -184,6 +184,13 @@ export default function() {
     }
   });
 
+  this.get('/v1/confirm/resend-attr', (schema, request) => {
+    if (!request.requestHeaders.Authorization && !request.requestHeaders.authorization) {
+      return new Response(401);
+    }
+    return new Response(200);
+  });
+
   /*-------------------------------------------------------------
   analytics microservice
   ---------------------------------------------------------------*/

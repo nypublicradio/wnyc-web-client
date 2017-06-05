@@ -164,9 +164,9 @@ test('can update password', function(assert) {
 
   authenticateSession(this.application, {access_token: 'foo'});
   visit('/profile');
-  
+
   click('.nypr-password-card [data-test-selector="nypr-card-button"]');
-  
+
   andThen(function() {
     fillIn('input[name=currentPassword]', OLD);
     fillIn('input[name=newPassword]', NEW);
@@ -194,9 +194,9 @@ test('trying to update with incorrect password shows error', function(assert) {
 
   authenticateSession(this.application, {access_token: 'foo'});
   visit('/profile');
-  
+
   click('.nypr-password-card [data-test-selector="nypr-card-button"]');
-  
+
   andThen(function() {
     fillIn('input[name=currentPassword]', OLD);
     find('input[name=currentPassword]').focusout();
@@ -234,5 +234,20 @@ skip('can disable account', function(assert) {
 
   andThen(function() {
     click('[data-test-selector="confirm-disable"]');
+  });
+});
+
+test('shows pending email', function(assert) {
+  withFeature('member-center');
+  server.create('user');
+  authenticateSession(this.application, {access_token: 'foo'});
+
+  server.get(`${config.wnycMembershipAPI}/v1/emails/is-verified/`, () => {
+    return new Response(200, {}, {data: {is_verified: false}});
+  });
+  visit('/profile');
+
+  andThen(function() {
+    assert.ok(findWithAssert('.nypr-account-pending'), 'pending message shows');
   });
 });

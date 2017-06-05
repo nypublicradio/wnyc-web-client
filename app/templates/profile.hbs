@@ -14,8 +14,9 @@
     <div class="nypr-account-settings-body">
       {{nypr-accounts/basic-card
         user=model
-        emailUpdated=(action showFlash 'email')
-        authenticate=(action authenticate)}}
+        emailUpdated=(action emailUpdated)
+        authenticate=(action authenticate)
+        emailIsPendingVerification=emailIsPendingVerification}}
 
       {{nypr-accounts/password-card
         helplinkUrl='/forgot'
@@ -28,6 +29,9 @@
         pledges=orders
         siteName=siteName
         siteDomain=siteDomain
+        user=model
+        emailIsPendingVerification=emailIsPendingVerification
+        resendVerificationEmail=(action resendVerificationEmail)
         class='nypr-membership-info-body'}}
     {{/if}}
   </div>
