@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
 import config from 'wnyc-web-client/config/environment';
+import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-route-mixin';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(UnauthenticatedRouteMixin, {
   config,
   session: service(),
   titleToken: 'Log in',

@@ -51,8 +51,7 @@ export default SessionService.extend({
   verify(email, password) {
     let authenticator = getOwner(this).lookup('authenticator:nypr');
     return authenticator.authenticate(email, password);
-  }
-
+  },
 });
 
 function reportBrowserId(knownId) {

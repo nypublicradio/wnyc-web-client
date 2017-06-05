@@ -1,15 +1,7 @@
 import Route from 'ember-route';
-import service from 'ember-service/inject';
-import config from 'wnyc-web-client/config/environment';
+import DeauthenticatedRouteMixin from 'wnyc-web-client/mixins/deauthenticated-route-mixin';
 
-export default Route.extend({
-  config,
-  session: service(),
-  setupController(controller) {
-    controller.set('config', this.get('config'));
-    controller.set('session', this.get('session'));
-    return this._super(...arguments);
-  },
+export default Route.extend(DeauthenticatedRouteMixin, {
   actions: {
     didTransition() {
       this.send('disableChrome');
