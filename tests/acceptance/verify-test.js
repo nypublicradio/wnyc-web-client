@@ -2,7 +2,11 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'wqxr-web-client/tests/helpers/ember-simple-auth';
 
-moduleForAcceptance('Acceptance | verify');
+moduleForAcceptance('Acceptance | verify', {
+  beforeEach() {
+    server.create('stream');
+  }
+});
 
 test('visiting /verify unauthenticated shows a login form', function(assert) {
   visit('/verify');
