@@ -1,8 +1,9 @@
 import Route from 'ember-route';
 import service from 'ember-service/inject';
 import config from 'wqxr-web-client/config/environment';
+import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-route-mixin';
 
-export default Route.extend({
+export default Route.extend(UnauthenticatedRouteMixin, {
   config,
   session: service(),
   setupController(controller) {
