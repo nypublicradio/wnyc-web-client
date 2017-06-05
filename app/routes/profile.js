@@ -4,8 +4,13 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Route.extend(AuthenticatedRouteMixin, {
   currentUser: service(),
-
   model() {
     return this.get('currentUser.user');
+  },
+  setupController(controller, model) {
+    if (this.features.isEnabled('member-center')) {
+      controller.set('orders', this.store.findAll('order'));
+    }
+    return this._super(controller, model);
   }
 });
