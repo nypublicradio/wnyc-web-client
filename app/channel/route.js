@@ -17,8 +17,8 @@ export default Route.extend(PlayParamMixin, {
   googleAds:    service(),
 
   model(params) {
-    const channelType = this.routeName;
-    const listingSlug = `${inflector.pluralize(channelType)}/${params.slug}`;
+    const channelPathName = inflector.pluralize(this.routeName.split('-')[0]);
+    const listingSlug = `${channelPathName}/${params.slug}`;
     set(this, 'listingSlug', listingSlug);
 
     let listenLive = this.store.findRecord('chunk', `shows-${params.slug}-listenlive`)

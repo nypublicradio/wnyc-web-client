@@ -1,19 +1,18 @@
-import Ember from 'ember';
 import Route from 'ember-route';
-import get from 'ember-metal/get';
+import get, { getProperties } from 'ember-metal/get';
 import set from 'ember-metal/set';
 import ListingRouteMixin from 'wnyc-web-client/mixins/listing-route';
-const { Inflector } = Ember;
-
-const inflect = new Inflector(Inflector.defaultRules);
 
 export default Route.extend(ListingRouteMixin, {
   model() {
-    let channelType = get(this, 'channelType');
+    let {
+      channelType,
+      channelPathName 
+    } = getProperties(this, 'channelType', 'channelPathName');
     let { slug } = this.paramsFor(channelType);
     let navSlug = this._getNavSlug(channelType);
     
-    let id = `${inflect.pluralize(channelType)}/${slug}/${navSlug || 'recent_stories'}/${1}`;
+    let id = `${channelPathName}/${slug}/${navSlug || 'recent_stories'}/${1}`;
 
     set(this, 'pageNumbers.totalPages', 0);
 

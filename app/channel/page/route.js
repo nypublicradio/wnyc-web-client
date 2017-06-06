@@ -1,15 +1,14 @@
 import Route from 'ember-route';
-import Ember from 'ember';
-import get from 'ember-metal/get';
+import get, { getProperties } from 'ember-metal/get';
 import set from 'ember-metal/set';
-const { Inflector } = Ember;
-
-const inflect = new Inflector(Inflector.defaultRules);
 import ListingRouteMixin from 'wnyc-web-client/mixins/listing-route';
 
 export default Route.extend(ListingRouteMixin, {
   model({ page_params }) {
-    let channelType = get(this, 'channelType');
+    let {
+      channelType,
+      channelPathName
+    } = getProperties(this, 'channelType', 'channelPathName');
     let { slug } = this.paramsFor(channelType);
     let [navSlug, page] = page_params.split('/');
     if (!page && /^\d+$/.test(navSlug)) {
@@ -18,7 +17,8 @@ export default Route.extend(ListingRouteMixin, {
       page = navSlug;
       navSlug = 'recent_stories';
     }
-    let id = `${inflect.pluralize(channelType)}/${slug}/${navSlug}/${page || 1}`;
+
+    let id = `${channelPathName}/${slug}/${navSlug}/${page || 1}`;
     set(this, 'pageNumbers.totalPages', 0);
 
     return this.store.findRecord('api-response', id)
