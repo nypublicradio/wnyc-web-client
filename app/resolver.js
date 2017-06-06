@@ -1,6 +1,6 @@
 import Resolver from 'ember-resolver';
 
-const RE = /^(?:route|template|controller):(show|serie|article|tag|blog)(?:$|[\/-].*)/;
+const RE = /^(?:route|template|controller):((show|series|article|tag|blog)-detail)(?:$|[\/-].*)/;
 
 export default Resolver.extend({
   parseName(fullName) {
@@ -11,4 +11,3 @@ export default Resolver.extend({
     return this._super(fullName);
   }
 });
-
