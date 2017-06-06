@@ -1,6 +1,6 @@
 <div class="flag flush {{if featuredSpot 'flag--luxe' 'flag--med'}}">
 
-  {{#if show.logoImage.crop}}
+  {{#if show.image.crop}}
 
       {{#if featuredSpot}}
       <a href="{{showUrl}}"
@@ -9,7 +9,7 @@
               data-tracking-category='{{trackingCategory}}'
               data-tracking-action='Clicked Show "{{show.title}}"'
               data-tracking-label='clicked featured show'>
-        <img src={{image-template show.logoImage.template 150 150 show.logoImage.crop}} class="squarebadge--lg" >
+        <img src={{image-template show.image.template 150 150 show.image.crop}} class="squarebadge--lg" >
       </a>
       {{else}}
       <a href="{{showUrl}}"
@@ -17,7 +17,7 @@
               title="{{show.title}}"
               data-tracking-category='{{trackingCategory}}'
               data-tracking-action='Clicked Show "{{show.title}}"'>
-        <img src={{image-template show.logoImage.template 90 90 show.logoImage.crop}} class="squarebadge">
+        <img src={{image-template show.image.template 90 90 show.image.crop}} class="squarebadge">
       </a>
       {{/if}}
 
