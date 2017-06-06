@@ -4,4 +4,3 @@ export default DS.JSONAPISerializer.extend({
   keyForRelationship(key) { return key; },
   keyForAttribute(key) { return key; }
 });
-

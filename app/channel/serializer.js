@@ -40,4 +40,3 @@ export default DS.JSONAPISerializer.extend({
     return payload;
   }
 });
-
