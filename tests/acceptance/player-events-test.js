@@ -1,6 +1,5 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
-import djangoPage from 'wqxr-web-client/tests/pages/django-page';
 import config from 'wqxr-web-client/config/environment';
 import $ from 'jquery';
 
@@ -8,15 +7,10 @@ moduleForAcceptance('Acceptance | player events');
 
 test('visiting /player-events', function(assert) {
   let story = server.create('story');
-  let id = `story/${story.slug}/`;
   let done = assert.async();
-
-  server.create('django-page', {id, slug: story.slug});
   server.create('stream');
 
-  djangoPage
-    .bootstrap({id})
-    .visit({id});
+  visit(`/story/${story.id}/`);
 
   let calls = [];
   server.post(`${config.platformEventsAPI}/v1/events/listened`, (schema, {requestBody}) => {
