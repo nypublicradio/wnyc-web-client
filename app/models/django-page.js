@@ -59,7 +59,7 @@ export default DS.Model.extend({
         json = JSON.parse(channel.textContent);
       } catch(err) {}
       if (json) {
-        return this.store.push(channelSerializer.normalizeResponse(this.store, channelModel, json, id));
+        return this.store.push(channelSerializer.normalizeResponse(this.store, channelModel, json, id, 'findRecord'));
       }
     }
   }),
