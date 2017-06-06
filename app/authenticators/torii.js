@@ -7,30 +7,34 @@ import { decamelizeKeys } from 'wqxr-web-client/helpers/decamelize-keys';
 
 export default Torii.extend({
   torii: service(),
-
   authenticate() {
     return this._super(...arguments)
     .then((data) => {
+      return RSVP.all([
+        data,
+        this.fbAPI(`/${data.userId}/permissions`)
+      ]);
+    })
+    .then(([data, permissions]) => {
+      if (permissions) {
+        data.permissions = permissions.data.reduce((result, p) => {
+          if (p && p.permission) {
+            result[p.permission] = p.status;
+          }
+          return result;
+        }, {});
+      }
       return RSVP.all([
         data,
         this.getSession(data.provider, data.accessToken)
       ]);
     })
     .then(([data, response]) => {
-      return RSVP.all([
-        data,
-        response,
-        this.fbAPI(`/${data.userId}/permissions`)
-      ]);
-    })
-    .then(([data, response, permissions]) => {
+      data = decamelizeKeys([data]);
       if (response && response.ok) {
-        data.permissions = permissions.data.reduce((result, p) => {
-          result[p.permission] = p.status; return result
-        }, {});
-        return decamelizeKeys([data]);
+        return data;
       } else {
-        return RSVP.reject(response);
+        return RSVP.reject(response, data);
       }
     });
   },
