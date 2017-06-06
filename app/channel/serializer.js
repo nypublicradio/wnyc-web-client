@@ -1,6 +1,8 @@
 import DS from 'ember-data';
 
 export default DS.JSONAPISerializer.extend({
+  keyForAttribute: key => key,
+  keyForRelationship: key => key,
   normalizeResponse(store, typeClass, payload, id) {
     let featuredStory = payload.data.attributes.featured;
     delete payload.data.attributes.featured;
