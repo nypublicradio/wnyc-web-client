@@ -17,11 +17,27 @@ export default Torii.extend({
       ]);
     })
     .then(([data, response]) => {
+      return RSVP.all([
+        data,
+        response,
+        this.fbAPI(`/${data.userId}/permissions`)
+      ]);
+    })
+    .then(([data, response, permissions]) => {
       if (response && response.ok) {
+        data.permissions = permissions.data.reduce((result, p) => {
+          result[p.permission] = p.status; return result
+        }, {});
         return decamelizeKeys([data]);
       } else {
         return RSVP.reject(response);
       }
+    });
+  },
+
+  fbAPI(url) {
+    return new RSVP.Promise(function(resolve, reject) {
+      FB.api(url, response => resolve(response));
     });
   },
 
