@@ -42,7 +42,9 @@ export default DS.Model.extend({
     if (json) {
       let storySerializer = this.store.serializerFor('story');
       let storyModel = this.store.modelFor('story');
-      let { id } = json.data;
+      let { id, attributes } = json.data;
+      json.data.attributes = {};
+      Object.keys(attributes).forEach(k => json.data.attributes[k.dasherize()] = attributes[k]);
       return this.store.push(storySerializer.normalizeSingleResponse(this.store, storyModel, json, id));
     }
   }),
