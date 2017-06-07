@@ -18,10 +18,26 @@
         authenticate=(action authenticate)
         emailIsPendingVerification=emailIsPendingVerification}}
 
-      {{nypr-accounts/password-card
-        helplinkUrl='/forgot'
-        helplinkText='Forgot password?'
-        changePassword=(action changePassword)}}
+      {{#if model.hasPassword}}
+        {{nypr-accounts/password-card
+          helplinkUrl='/forgot'
+          helplinkText='Forgot password?'
+          changePassword=(action changePassword)}}
+      {{/if}}
+
+      {{#if features.socialAuth}}
+        {{#nypr-accounts/social-card as |card|}}
+          {{card.connect-button
+            connected=model.facebookId
+            providerName='Facebook'
+            providerIcon='facebook-official'
+            buttonClass='nypr-social-connect__button--facebook'
+            buttonAction=(action 'linkFacebookAccount')
+            manageUrl='https://www.facebook.com/settings?tab=applications'
+            }}
+        {{/nypr-accounts/social-card}}
+      {{/if}}
+
 
     </div>
     {{#if features.memberCenter}}
@@ -35,23 +51,6 @@
         class='nypr-membership-info-body'}}
     {{/if}}
   </div>
-
-  {{#if features.socialAuth}}
-  {{#if model.hasPassword}}
-    {{#nypr-accounts/social-card as |card|}}
-
-      {{card.connect-button
-        connected=model.facebookId
-        providerName='Facebook'
-        providerIcon='facebook-official'
-        buttonClass='nypr-social-connect__button--facebook'
-        buttonAction=(action 'linkFacebookAccount')
-        manageUrl='https://www.facebook.com/settings?tab=applications'
-        }}
-
-    {{/nypr-accounts/social-card}}
-  {{/if}}
-  {{/if}}
 
   <div class="aligncenter text--small">
     <p>
