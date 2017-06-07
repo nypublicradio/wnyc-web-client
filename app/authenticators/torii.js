@@ -1,4 +1,3 @@
-/* global FB */
 import Torii from 'ember-simple-auth/authenticators/torii';
 import service from 'ember-service/inject';
 import fetch from 'fetch';
@@ -12,44 +11,26 @@ export default Torii.extend({
 
   authenticate() {
     return this._super(...arguments)
-    .then((data) => {
-      return this.get('authTask').perform(data);
+    .then(providerData => {
+      return new RSVP.Promise(resolve => {
+        let user = this.get('authenticateSession').perform(providerData);
+        resolve(user);
+      });
     });
   },
 
-  authTask: task(function * (data) {
-    try {
-      let permissions = yield this.fbAPI(`/${data.userId}/permissions`);
-      data = this.attachPermissions(data, permissions);
-      let response = yield this.getSession(data.provider, data.accessToken);
-      if (response && response.ok) {
-        data = decamelizeKeys([data]);
-        return data;
+  authenticateSession: task(function * (data) {
+    let response = yield this.getSession(data.provider, data.accessToken);
+    if (response) {
+      if (response.ok) {
+        return decamelizeKeys([data]);
+      } else if (response.status < 500) {
+        return RSVP.reject(response.json());
       } else {
-        throw { error: 'Unauthorized', data: data};
+        return RSVP.reject({ "errors": {"code": "serverError"} });
       }
-    } catch(e) {
-      throw {error: 'Unauthorized', data: data};
     }
   }),
-
-  fbAPI(url) {
-    return new RSVP.Promise(function(resolve/*, reject*/) {
-      FB.api(url, response => resolve(response));
-    });
-  },
-
-  attachPermissions(data, permissions) { // modifies data
-    if (permissions) {
-      data.permissions = permissions.data.reduce((result, p) => {
-        if (p && p.permission) {
-          result[p.permission] = p.status;
-        }
-        return result;
-      }, {});
-    }
-    return data;
-  },
 
   getSession(provider, accessToken) {
     return fetch(`${config.wnycAuthAPI}/v1/session`, {
