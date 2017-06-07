@@ -3,7 +3,7 @@ import { scheduleOnce } from 'ember-runloop';
 import get from 'ember-metal/get';
 import service from 'ember-service/inject';
 
-const DETAIL_ROUTES = new RegExp(/story|(show|article|serie|tag|blog)\./);
+const DETAIL_ROUTES = new RegExp(/story|(show|article|series|tag|blog)-detail\./);
 
 export default Mixin.create({
   metrics: service(),
