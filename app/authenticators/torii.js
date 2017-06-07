@@ -21,9 +21,9 @@ export default Torii.extend({
     try {
       let permissions = yield this.fbAPI(`/${data.userId}/permissions`);
       data = this.attachPermissions(data, permissions);
-      data = decamelizeKeys([data]);
-      let response = this.getSession(data.provider, data.accessToken);
+      let response = yield this.getSession(data.provider, data.accessToken);
       if (response && response.ok) {
+        data = decamelizeKeys([data]);
         return data;
       } else {
         throw { error: 'Unauthorized', data: data};
