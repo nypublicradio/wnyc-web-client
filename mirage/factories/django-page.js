@@ -25,7 +25,7 @@ export default Factory.extend({
     }
 
     if (type === 'channel') {
-      json = serialize(server.schema.shows.find(id));
+      json = serialize(server.schema.listingPages.find(id));
       wormholes = '<div id="js-listings"></div>';
     } else if (type === 'story') {
       slug = id.match(/^story\/([^\/]+)\//)[1];
