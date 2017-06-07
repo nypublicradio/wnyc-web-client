@@ -12,7 +12,7 @@ export default DS.JSONAPISerializer.extend({
       type: 'api-response',
       id: `${id}about/1`,
       relationships: {
-        aboutPage: {
+        'about-page': {
           data: {
             type: 'about-page', id: `${id}about`
           }
@@ -26,7 +26,13 @@ export default DS.JSONAPISerializer.extend({
     });
 
     if (featuredStory) {
-      this.store.push({data: {attributes: featuredStory, type: 'story', id: featuredStory.id}});
+      let story = {
+        type: 'story',
+        id: featuredStory.id,
+        attributes: featuredStory
+      };
+      
+      payload.included.push(story);
 
       payload.data.relationships = {
         featured: {
