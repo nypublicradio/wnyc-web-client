@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 
 export default DS.JSONAPISerializer.extend({
-  normalizeResponse(store, typeClass, payload, id) {
+  normalizeResponse(store, typeClass, payload, id, requestType) {
     let featuredStory = payload.data.attributes.featured;
     delete payload.data.attributes.featured;
     payload.included = payload.included || [];
@@ -37,6 +37,6 @@ export default DS.JSONAPISerializer.extend({
         }
       };
     }
-    return payload;
+    return this._super(store, typeClass, payload, id, requestType);
   }
 });
