@@ -2,7 +2,7 @@ import service from 'ember-service/inject';
 import moment from 'moment';
 import Component from 'ember-component';
 import computed, { and, equal, readOnly, or } from 'ember-computed';
-import get from 'ember-metal/get';
+import get, { getProperties } from 'ember-metal/get';
 import set from 'ember-metal/set';
 import { imageTemplate } from 'wnyc-web-client/helpers/image-template';
 import { htmlSafe } from 'ember-string';
@@ -77,10 +77,11 @@ export default Component.extend({
     }
   }),
   fancyFeaturedBackground: computed('item.imageMain', function() {
+    let image = get(this, 'item.imageMain');
     let {
       template,
       crop
-    } = this.get('item.imageMain');
+    } = getProperties(image, 'template', 'crop');
     return htmlSafe(`background-image: url(${imageTemplate([template, 0, 400, crop])});`);
   }),
 
