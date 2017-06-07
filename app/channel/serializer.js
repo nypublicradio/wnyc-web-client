@@ -24,6 +24,20 @@ export default DS.JSONAPISerializer.extend({
       id: `${id}about`,
       attributes: payload.data.attributes.about
     });
+    
+    payload.included = payload.included.map(r => {
+      let { attributes, type } = r;
+      if (type === 'api-response') {
+        return r;
+      }
+
+      // story serializer expects keys dasherized
+      if (attributes) {
+        r.attributes = {};
+        Object.keys(attributes).forEach(k => r.attributes[k.dasherize()] = attributes[k]);
+      }
+      return r;
+    });
 
     if (featuredStory) {
       let story = {
