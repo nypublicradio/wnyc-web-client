@@ -24,7 +24,10 @@ export default Model.extend({
   dateLineDatetime: attr('string'),
   editLink: attr('string'),
   headers: attr(),
-  imageMain: attr(),
+  // TODO: make this a relationship when stories come in only over /api/v3
+  // right now they're still consumed from HTML and as part of listing pages
+  // imageMain: DS.belongsTo('image'),
+  imageMain: DS.attr(),
   itemType: attr('string'),
   itemTypeId: attr('number'),
   isLatest: attr('boolean'),
