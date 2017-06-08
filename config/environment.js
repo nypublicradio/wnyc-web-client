@@ -152,6 +152,7 @@ module.exports = function(environment) {
       providers: {
         'facebook-connect': {
           appId: process.env.FB_APP || '151261804904925',
+          pageId: process.env.FB_PAGE || '38723076079',
           scope: 'user_friends,email',
           version: 'v2.8'
         }
