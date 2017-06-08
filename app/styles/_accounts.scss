@@ -265,17 +265,15 @@
   }
 }
 
-@include mq($medium-and-up) {
-  .account-screen--player-open {
-    .account-main,
-    .account-promo {
-      height: calc(100vh - 80px);
-    }
-    .account-promo-blurb {
-      bottom: 115px;
-    }
-    .account-footer {
-      margin-bottom: 50px;
-    }
+.account-screen--player-open {
+  .account-main,
+  .account-promo {
+    height: calc(100vh - 80px);
+  }
+  .account-promo-blurb {
+    bottom: 115px;
+  }
+  .account-footer {
+    margin-bottom: 50px;
   }
 }
