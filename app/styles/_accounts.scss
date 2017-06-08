@@ -266,9 +266,11 @@
 }
 
 .account-screen--player-open {
-  .account-main,
-  .account-promo {
-    height: calc(100vh - 80px);
+  @include mq($medium-and-up, $h-medium) {
+    .account-main,
+    .account-promo {
+      height: calc(100vh - 80px);
+    }
   }
   .account-promo-blurb {
     bottom: 115px;
