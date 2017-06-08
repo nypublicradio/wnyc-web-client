@@ -32,12 +32,14 @@
 
 @include mq($medium-and-up, $h-medium) {
   .login {
+    .account-main,
     .account-promo {
       min-height: 630px;
     }
   }
 
   .signup {
+    .account-main,
     .account-promo {
       min-height: 860px;
     }
@@ -50,6 +52,7 @@
       height: 560px;
     }
 
+    .account-main,
     .account-promo {
       min-height: 750px;
     }
@@ -60,6 +63,7 @@
       height: 825px;
     }
 
+    .account-main,
     .account-promo {
       min-height: 950px;
     }
@@ -269,6 +273,9 @@
     }
     .account-promo-blurb {
       bottom: 115px;
+    }
+    .account-footer {
+      margin-bottom: 50px;
     }
   }
 }
