@@ -87,6 +87,25 @@ test('Submitting invalid credentials shows form level error message', function(a
   });
 });
 
+
+test('Signing in with social only account shows form level error message', function(assert) {
+  server.post(`${config.wnycAuthAPI}/v1/session`, () => {
+    return new Response(400, {}, {errors: {code: "UserNoPassword"}});
+  });
+
+  visit('/login');
+
+  fillIn('input[name=email]', 'isignedupwithfacebook@example.com');
+  fillIn('input[name=password]', 'imaginedpassword123');
+  click('button[type=submit]:contains(Log in)');
+
+  andThen(() => {
+    assert.equal(currentSession(this.application).get('isAuthenticated'), false);
+    assert.equal(find('.account-form-heading').text().trim(), 'Log in to WNYC');
+    assert.equal(find('.account-form-error').length, 1);
+  });
+});
+
 skip('Clicking logout hides privileged links', function(assert) {
   server.create('django-page', {id: 'fake/'});
   server.create('django-page', {id: 'fake/'});
