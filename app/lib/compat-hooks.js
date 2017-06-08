@@ -8,7 +8,7 @@
 */
 import Ember from 'ember';
 import config from 'wnyc-web-client/config/environment';
-import { removeAlienListeners, assign } from 'wnyc-web-client/lib/alien-dom';
+import { assign } from 'wnyc-web-client/lib/alien-dom';
 import { runOnce } from 'wnyc-web-client/services/legacy-loader';
 import { canonicalize } from 'wnyc-web-client/services/script-loader';
 const { $, get } = Ember;
@@ -52,7 +52,7 @@ export function beforeTeardown(/* element, page */) {
 
   // story bootstraps adds a bunch of click handlers at run time that need to be
   // removed otherwise they will pile up
-  removeAlienListeners();
+  //removeAlienListeners();
 }
 
 // This gets run by the django-page model when it's figuring out how
@@ -66,24 +66,17 @@ export function beforeAppend(element, page) {
   }
 
   let container = document.createElement('div');
-  if (get(page, 'wnycContent')) {
-    Array.from(element.querySelectorAll('.l-full, .l-full + .l-constrained'))
-      .forEach(n => container.appendChild(n));
-  } else if ( page.get('id') && page.get('id').match(/^streams\//i) ) {
-    // TODO: is there a better way to detect this?
-    return container;
-  } else {
-    let legacyContent = element.querySelector('#site') || element.querySelector('#flatpage');
-    if (!legacyContent) {
-      // maybe it's a flat page
-      legacyContent = element;
-    }
-    let newContent = document.createElement('div');
-    while (legacyContent.firstChild) {
-      newContent.appendChild(legacyContent.firstChild);
-    }
-    container.appendChild(newContent);
+  let legacyContent = element.querySelector('#site') || element.querySelector('#flatpage');
+  if (!legacyContent) {
+    // maybe it's a flat page
+    legacyContent = element;
   }
+  let newContent = document.createElement('div');
+  while (legacyContent.firstChild) {
+    newContent.appendChild(legacyContent.firstChild);
+  }
+  container.appendChild(newContent);
+
 
   // is there a sitewide chunk? save it from demolition
   let sitewideChunk = element.querySelector('#wnyc-sitewide');

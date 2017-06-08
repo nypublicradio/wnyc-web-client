@@ -26,29 +26,11 @@ export function clearAlienDom() {
   Array.from(notEmber).forEach((n) => {
     n.parentNode.removeChild(n);
   });
-
-  removeAlienListeners();
 }
 
 export function unbindAlienListener() {
   document.removeEventListener('click', alienClickListener);
 }
-
-export function removeAlienListeners() {
-  Ember.$(document)
-    .off('click',  '.js-accordionButton')
-    .off('click',  '.js-dropdownClickable')
-    .off('click',  '.js-captionBtn')
-    .off('click',  '.js-listen')
-    .off('click',  '.js-queue')
-    .off('click',  '.js-share')
-    .off('submit', '#morningBriefSignup')
-    .off('keyup',  '#morningBriefEmailInput')
-    .off('click', '.js-toggleButton');
-
-  Ember.$('.js-embedText').off('click');
-}
-
 
 // Embedded Ember components require an ID for ember-wormwhole to use them as a
 // destination. This runs in the django-page model's separateScripts method as well
