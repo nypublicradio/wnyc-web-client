@@ -1,0 +1,213 @@
+.article-description .survey,
+.article-wide .survey {
+  clear: both;
+  padding: 5px 15px;
+  border: 1px solid #e9e9e9;
+}
+
+form.survey {
+  padding: 0 !important;
+  border: 0 !important;
+  max-width: 400px;
+  width: 100%;
+}
+
+form.survey > ul {
+  margin: 0;
+  padding: 0;
+}
+
+.required {
+  color: #dd0000;
+  margin: 0 5px;
+}
+
+input.required {
+  color: #000;
+}
+
+.survey h3.message,
+#crowd-detail h3.message {
+  margin: 15px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: #f6f6f6;
+  text-align: center;
+  font-weight: normal;
+  color: #333;
+}
+
+form.survey h2 {
+  font-size: 9px;
+  margin: 10px 0 4px;
+}
+
+form.survey label.help_text {
+  display: block;
+  font-size: 8px;
+  line-height: 1.3em;
+  margin: 5px 0;
+}
+
+form.survey .results { /* link to results */
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+form.survey .results a:after {
+  content: " \0BB";
+}
+
+.crowd-results {
+  clear: both;
+}
+
+.crowd-results h2 {
+  font-size: 18px;
+  font-weight: normal;
+  padding-bottom: 5px;
+  line-height: 1.2em;
+}
+
+.crowd-results form.filters h2 {
+  font-weight: bold;
+  font-size: 11px;
+}
+
+.crowd-results h2.chart_title {
+  display: block;
+  background-color: #f6f6f6;
+  border-top: 1px solid #ddd;
+  margin: 20px 0 0;
+  padding: 5px 10px;
+}
+
+.crowd-results h2.archive {
+  margin-top: 20px;
+  border-bottom: 2px dotted #ccc;
+  padding: 15px 0;
+  font-weight: bold;
+}
+
+.crowd-results .submission {
+  border-bottom: 2px dotted #ccc;
+  padding: 15px 0;
+}
+
+.crowd-results .date {
+  color: #999;
+  padding-bottom: 5px;
+}
+
+.crowd-results .field {
+  padding: 3px 0;
+  font-size: 10px;
+}
+
+.crowd-results .field label {
+  padding-right: 2px;
+}
+
+.crowd-results .field img,
+.crowd-results .field .videoplayer {
+  display: block;
+  margin: 4px 0;
+}
+
+.crowd-results ul.map_key {
+  margin: 5px 0;
+}
+
+.crowd-results ul.map_key li {
+  display: inline;
+  margin: 0 5px;
+}
+
+form.survey ul li,
+#crowd-detail form ul li {
+  list-style-type: none;
+  margin: 0;
+  padding-bottom: 15px;
+}
+
+form.survey .help-text,
+#crowd-detail .help-text {
+  margin: 2px 0;
+  color: #777;
+}
+
+form.survey input,
+form.survey select,
+form.survey textarea,
+#crowd-detail input,
+#crowd-detail select,
+#crowd-detail textarea {
+  display: block;
+  width: 100%;
+  border: 1px solid #eaeaea;
+  padding: 6px;
+}
+
+form.survey ul li ul li input,
+#crowd-detail ul li ul li input {
+  display: inline;
+}
+
+form.survey ul li ul li,
+#crowd-detail ul li ul li {
+  list-style-type: none;
+  margin: 5px 0 0;
+  padding: 0;
+}
+
+form.survey input.submit,
+#crowd-detail input.submit {
+  margin: 20px 0;
+  background: white;
+  border: 1px solid #eaeaea;
+  border-radius: 25px;
+  padding: 10px;
+  transition: background-color 125ms ease;
+}
+
+form.survey input.submit:hover,
+#crowd-detail input.submit:hover {
+  background-color: #eaeaea;
+}
+
+form.survey input.submit:active,
+#crowd-detail input.submit:active {
+  background-color: #eaeaea;
+}
+
+form.survey input.submit:focus,
+#crowd-detail input.submit:focus {
+  outline: 1px dotted #333;
+}
+
+form.filters {
+  margin: 20px 0 30px;
+  padding: 10px 12px;
+  background-color: #f6f6f6;
+  border: 1px solid #ddd;
+}
+
+form.filters ul {
+  margin: 10px 1px 15px;
+}
+
+form.filters ul li {
+  list-style-type: none;
+  margin: 5px 0;
+}
+
+form.filters label {
+  margin-right: 10px;
+}
+
+form.filters #location label,
+form.filters #number label,
+form.filters #decimal label {
+  color: #666;
+  margin: 0 0 0 5px;
+}
