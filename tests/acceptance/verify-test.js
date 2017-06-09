@@ -13,7 +13,7 @@ test('visiting /verify unauthenticated shows a login form', function(assert) {
 
   return andThen(() => {
     assert.equal(currentURL(), '/verify');
-    assert.equal(find('.account-form-heading').text().trim(), 'Log in to WNYC');
+    assert.equal(find('.account-form-heading').text().trim(), 'Log in to WQXR');
   });
 });
 
