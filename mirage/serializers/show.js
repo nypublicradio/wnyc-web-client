@@ -3,6 +3,7 @@ import { dasherize } from 'ember-string';
 
 export default ApplicationSerializer.extend({
   include: ['apiResponse'],
+  keyForAttribute: key => key,
   keyForRelationship: key => dasherize(key),
   typeKeyForModel(model) {
     // This is a Mirage serialization bug, the wrong serializer
@@ -10,7 +11,7 @@ export default ApplicationSerializer.extend({
     if (model.modelName === 'show') {
       return 'channel';
     } else {
-      return ApplicationSerializer.prototype.typeKeyForModel(model);
+      return model.modelName.dasherize();
     }
   },
 });

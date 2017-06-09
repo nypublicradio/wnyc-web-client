@@ -1,7 +1,9 @@
 import DS from 'ember-data';
 
 export default DS.JSONAPISerializer.extend({
-  normalizeResponse(store, typeClass, payload, id) {
+  keyForAttribute: key => key,
+  keyForRelationship: key => key,
+  normalizeResponse(store, typeClass, payload, id, requestType) {
     let featuredStory = payload.data.attributes.featured;
     delete payload.data.attributes.featured;
     payload.included = payload.included || [];
@@ -12,7 +14,7 @@ export default DS.JSONAPISerializer.extend({
       type: 'api-response',
       id: `${id}about/1`,
       relationships: {
-        aboutPage: {
+        'about-page': {
           data: {
             type: 'about-page', id: `${id}about`
           }
@@ -24,9 +26,30 @@ export default DS.JSONAPISerializer.extend({
       id: `${id}about`,
       attributes: payload.data.attributes.about
     });
+    
+    payload.included = payload.included.map(r => {
+      let { attributes, type } = r;
+      if (type === 'api-response') {
+        return r;
+      }
+
+      // story serializer expects keys dasherized
+      if (attributes) {
+        r.attributes = {};
+        Object.keys(attributes).forEach(k => r.attributes[k.dasherize()] = attributes[k]);
+      }
+      return r;
+    });
 
     if (featuredStory) {
-      this.store.push({data: {attributes: featuredStory, type: 'story', id: featuredStory.id}});
+      let story = {
+        type: 'story',
+        id: featuredStory.id,
+        attributes: {}
+      };
+      Object.keys(featuredStory).forEach(k => story.attributes[k.dasherize()] = featuredStory[k]);
+      
+      payload.included.push(story);
 
       payload.data.relationships = {
         featured: {
@@ -37,7 +60,6 @@ export default DS.JSONAPISerializer.extend({
         }
       };
     }
-    return payload;
+    return this._super(store, typeClass, payload, id, requestType);
   }
 });
-

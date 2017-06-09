@@ -1,6 +1,6 @@
-import ApplicationSerializer from './application';
+import { JSONAPISerializer } from 'ember-cli-mirage';
 
-export default ApplicationSerializer.extend({
+export default JSONAPISerializer.extend({
+  typeKeyForModel: ({ modelName }) => modelName.dasherize(),
   include: ['teaseList', 'story']
 });
-

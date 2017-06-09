@@ -42,7 +42,9 @@ export default DS.Model.extend({
     if (json) {
       let storySerializer = this.store.serializerFor('story');
       let storyModel = this.store.modelFor('story');
-      let { id } = json.data;
+      let { id, attributes } = json.data;
+      json.data.attributes = {};
+      Object.keys(attributes).forEach(k => json.data.attributes[k.dasherize()] = attributes[k]);
       return this.store.push(storySerializer.normalizeSingleResponse(this.store, storyModel, json, id));
     }
   }),
@@ -59,7 +61,7 @@ export default DS.Model.extend({
         json = JSON.parse(channel.textContent);
       } catch(err) {}
       if (json) {
-        return this.store.push(channelSerializer.normalizeResponse(this.store, channelModel, json, id));
+        return this.store.push(channelSerializer.normalizeResponse(this.store, channelModel, json, id, 'findRecord'));
       }
     }
   }),
