@@ -13,7 +13,6 @@
     "waypoints": "~4.0.0",
     "hls.js": "^0.6.1",
     "howler.js": "^2.0.0",
-    "jquery-migrate": "https://code.jquery.com/jquery-migrate-1.4.1.js",
     "imagesloaded": "^4.1.1"
   }
 }

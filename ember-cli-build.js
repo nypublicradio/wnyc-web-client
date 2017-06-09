@@ -40,11 +40,6 @@ module.exports = function(defaults) {
   
   app.import('vendor/polyfills/url.js');
   app.import('bower_components/normalize.css/normalize.css');
-
-  // This is here so that legacy JS within our content pages can share
-  // our version of jQuery without dying.
-  app.import('bower_components/jquery-migrate/index.js');
-
   // All legacy JS modules that are directly called from this ember
   // app should be imported into the app's own build here. Notice that
   // these are symlinked to their original locations in the puppy
