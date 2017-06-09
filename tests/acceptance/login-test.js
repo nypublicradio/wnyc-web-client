@@ -101,7 +101,7 @@ test('Signing in with social only account shows form level error message', funct
 
   andThen(() => {
     assert.equal(currentSession(this.application).get('isAuthenticated'), false);
-    assert.equal(find('.account-form-heading').text().trim(), 'Log in to WNYC');
+    assert.equal(find('.account-form-heading').text().trim(), 'Log in to WQXR');
     assert.equal(find('.account-form-error').length, 1);
   });
 });
