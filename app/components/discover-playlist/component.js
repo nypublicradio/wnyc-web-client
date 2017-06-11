@@ -25,9 +25,7 @@ export default Ember.Component.extend({
     return !this.get('isPlaying') && !this.get('isPaused');
   }),
 
-  storyIds: Ember.computed('stories', function() {
-    return this.get('stories').mapBy('id');
-  }),
+  storyIds: Ember.computed.mapBy('stories', 'id'),
 
   currentTrackIsInPlaylist: Ember.computed('stories', 'currentAudioId', function() {
     return !!this.get('stories').findBy('id', this.get('currentAudioId'));

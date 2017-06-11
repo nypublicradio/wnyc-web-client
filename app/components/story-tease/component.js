@@ -15,7 +15,6 @@ const STATUSES = {
 
 export default Component.extend({
   whatsOn:            service(),
-  audio:              service(),
 
   status:             null,
   streamSlug:         null,

@@ -69,9 +69,6 @@ export default Ember.Service.extend({
 });
 
 export function canonicalize(url) {
-  // let a = document.createElement('a');
-  // a.href = ENV.wnycURL;
-
   return new URL(url, location.href).toString();
 }
 
