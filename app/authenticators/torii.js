@@ -27,7 +27,7 @@ export default Torii.extend({
             reject({ "errors": {"code": "serverError"} });
           }
         }
-      });
+      }).catch(reject);
     });
   },
 
