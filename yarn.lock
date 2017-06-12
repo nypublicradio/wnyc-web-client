@@ -3117,6 +3117,12 @@ ember-require-module@0.1.1:
   dependencies:
     ember-cli-babel "^5.1.7"
 
+ember-require-module@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/ember-require-module/-/ember-require-module-0.1.2.tgz#fdffdcf86745d601009211c1b41907395a4d081e"
+  dependencies:
+    ember-cli-babel "^5.1.7"
+
 ember-resolver@^2.0.3:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ember-resolver/-/ember-resolver-2.1.1.tgz#5e4c1fffe9f5f48fc2194ad7592274ed0cd74f72"

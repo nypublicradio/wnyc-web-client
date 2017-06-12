@@ -105,5 +105,8 @@
       "lib/google-apis",
       "lib/unobtrusive-loader"
     ]
+  },
+  "dependencies": {
+    "ember-require-module": "^0.1.2"
   }
 }
