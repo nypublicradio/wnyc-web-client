@@ -93,8 +93,15 @@
           {{django-page page=model.story.pageChunks.siteSidebarTop}}
         {{/if}}
 
-        {{#if model.story.pageChunks.showSidebarTop}}
-          {{django-page page=model.story.pageChunks.showSidebarTop}}
+        {{#if model.story.extendedStory.podcastLinks}}
+          {{#nypr-story/showSidebarTop
+            podcasts=model.story.extendedStory.podcastLinks
+            showProducingOrgs=model.story.extendedStory.showProducingOrgs
+            showTease=model.story.extendedStory.showTease
+            showName=model.story.headers.brand.title }}
+            {{!-- donate button is in the chunk beacuse urls vary --}}
+            {{django-page page=model.story.pageChunks.showSidebarTop}}
+          {{/nypr-story/showSidebarTop}}
         {{/if}}
 
         {{#if model.story.pageChunks.channelSidebarTop}}
