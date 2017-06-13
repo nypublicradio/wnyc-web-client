@@ -19,11 +19,12 @@ export default Model.extend({
   audioShowOptions: attr('boolean'),
   chunks: attr(),
   commentsCount: attr('number'),
-  commentsEnabled: attr('boolean'),
   cmsPK: attr('string'),
+  correctionText: attr('string'),
   dateLine: attr('string'),
-  dateLineDatetime: attr('string'),
+  newsdate: attr('string'),
   editLink: attr('string'),
+  enableComments: attr('boolean'),
   headers: attr(),
   // TODO: make this a relationship when stories come in only over /api/v3
   // right now they're still consumed from HTML and as part of listing pages
@@ -34,13 +35,16 @@ export default Model.extend({
   isLatest: attr('boolean'),
   largeTeaseLayout: attr('boolean'),
   slug: attr('string'),
+  segments: attr(),
   tease: attr('string'),
-  template: computed.alias('extendedStory.template'),
+  template: attr('string'),
   title: attr('string'),
+  transcript: attr('string'),
   url: attr('string'),
   extendedStory: attr(),
-  body: computed ('extendedStory.body', function() {
-    let text = get(this, 'extendedStory.body');
+  body: attr('string'),
+  bodyDjango: computed ('body', function() {
+    let text = get(this, 'body');
     return this.store.createRecord('django-page', { text });
   }),
   mainImageEligible: computed('template', 'imageMain', function(){
@@ -55,10 +59,10 @@ export default Model.extend({
   }),
   videoTemplate: computed.equal('template', 'story_video'),
   interactiveTemplate: computed.equal('template', 'story_interactive'),
-  flushHeader: computed.or('mainImageEligible', 'videoTemplate', 'extendedStory.segments'),
-  escapedBody: computed('extendedStory.body', {
+  flushHeader: computed.or('mainImageEligible', 'videoTemplate', 'segments'),
+  escapedBody: computed('body', {
     get() {
-      let body = get(this, 'extendedStory.body');
+      let body = get(this, 'body');
       if (!body) {
         return '';
       }

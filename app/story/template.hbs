@@ -5,11 +5,17 @@
   mapping=(array (array 0 (array 350 50)) (array 758 (array 728 90)) (array 1203 (array 970 415)))
   sizes=(array (array 970 415) (array 728 90) (array 350 50))}}
 
-<div class="l-full {{if model.story.interactiveTemplate 'story--interactive'}}">
+  {{#if model.story.title}}
+    {{model.story.title}}
+  {{else}}
+    no title
+  {{/if}}
+
+{{!-- <div class="l-full {{if model.story.interactiveTemplate 'story--interactive'}}">
   <div class="l-constrained">
     
     <main class="{{unless model.story.interactiveTemplate 'l-col2of3'}}" id="main" role="main">
-      <article class="doubledown" data-status="{{model.story.extendedStory.publishStatus}}" data-date="{{moment-format model.story.extendedStory.publishAt '%b %-d, %Y'}}">
+      <article class="doubledown" data-status="{{model.story.publishStatus}}" data-date="{{moment-format model.story.publishAt '%b %-d, %Y'}}">
 
         <header class="l-bgimg {{if model.story.flushHeader 'flush'}}" id="storyHeader">
 
@@ -29,12 +35,12 @@
         </header>
         <!-- .l-bgimg -->
 
-        {{#if model.story.extendedStory.segments}}
-          {{nypr-story/segments segments=model.story.extendedStory.segments segmentCount=model.story.extendedStory.segmentCount audio=audio flush=model.story.mainImageEligible}}
+        {{#if model.story.segments}}
+          {{nypr-story/segments segments=model.story.segments segmentCount=model.story.segmentCount audio=audio flush=model.story.mainImageEligible}}
         {{/if}}
 
         {{#if model.story.videoTemplate}}
-          {{{model.story.extendedStory.video}}}
+          {{{model.story.video}}}
         {{/if}}
 
         {{#if model.story.mainImageEligible}}
@@ -42,23 +48,22 @@
         {{/if}}
 
         {{nypr-story/byline 
-          dateLineDatetime=model.story.dateLineDatetime 
-          authors=model.story.extendedStory.appearances.authors 
-          producingOrganizations=model.story.extendedStory.producingOrganizations
-          sourceUrl=model.story.extendedStory.sourceUrl}}
+          dateLineDatetime=model.story.newsdate 
+          authors=model.story.appearances.authors 
+          producingOrganizations=model.story.producingOrganizations
+          sourceUrl=model.story.sourceUrl}}
    
-        {{!-- body components are yielded with or without tabs depending if transcript exists --}}
-        {{#nypr-story/body-transcript transcript=model.story.extendedStory.transcript as |body|}}
+        {{#nypr-story/body-transcript transcript=model.story.transcript }}
           <section class="text">
-            {{django-page page=model.story.body}}
+            {{django-page page=model.story.bodyDjango}}
           </section>
 
-          {{#if model.story.extendedStory.playlist}}
-            {{nypr-story/playlist playlist=model.story.extendedStory.playlist}}
+          {{#if model.story.playlist}}
+            {{nypr-story/playlist playlist=model.story.playlist}}
           {{/if}}
 
-          {{#if model.story.extendedStory.slideshow}}
-            {{nypr-story/slideshow slideshow=model.story.extendedStory.slideshow}}
+          {{#if model.story.slideshow}}
+            {{nypr-story/slideshow slideshow=model.story.slideshow}}
           {{/if}}
 
           {{#unless model.storyVideoTemplate}}
@@ -68,11 +73,11 @@
         {{/nypr-story/body-transcript}} 
 
 
-        {{#if model.story.extendedStory.correctionText}}
-          <em>{{{model.story.extendedStory.correctionText}}}</em>
+        {{#if model.story.correctionText}}
+          <em>{{{model.story.correctionText}}}</em>
         {{/if}}
 
-        {{#if model.story.commentsEnabled}}
+        {{#if model.story.enableComments}}
             {{story-comments story=model.story
                              isStaff=session.data.isStaff
                              email=user.email
@@ -93,13 +98,12 @@
           {{django-page page=model.story.pageChunks.siteSidebarTop}}
         {{/if}}
 
-        {{#if model.story.extendedStory.podcastLinks}}
+        {{#if model.story.podcastLinks}}
           {{#nypr-story/showSidebarTop
-            podcasts=model.story.extendedStory.podcastLinks
-            showProducingOrgs=model.story.extendedStory.showProducingOrgs
-            showTease=model.story.extendedStory.showTease
+            podcasts=model.story.podcastLinks
+            showProducingOrgs=model.story.showProducingOrgs
+            showTease=model.story.showTease
             showName=model.story.headers.brand.title }}
-            {{!-- donate button is in the chunk beacuse urls vary --}}
             {{django-page page=model.story.pageChunks.showSidebarTop}}
           {{/nypr-story/showSidebarTop}}
         {{/if}}
@@ -137,8 +141,8 @@
   <div class="{{if model.story.interactiveTemplate 'l-medium' 'l-constrained'}}">
     <div class="{{unless model.story.interactiveTemplate 'l-col2of3'}}">
 
-      {{#if model.story.extendedStory.series}}
-        {{nypr-story/series series=model.story.extendedStory.series}}
+      {{#if model.story.series}}
+        {{nypr-story/series series=model.story.series}}
       {{/if}}
 
       {{#if model.story.pageChunks.story}}
@@ -154,6 +158,6 @@
   </div>
   <!-- .l-constrained -->
 </div>
-<!-- .l-full -->
+<!-- .l-full --> --}}
 
 
