@@ -1,5 +1,4 @@
 import Component from 'ember-component';
-import service from 'ember-service/inject';
 import { readOnly } from 'ember-computed';
 
 export default Component.extend({

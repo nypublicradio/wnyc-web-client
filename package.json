@@ -94,6 +94,7 @@
     "liquid-fire": "0.27.2",
     "loader.js": "^4.0.10",
     "morgan": "^1.6.1",
+    "nypr-metrics": "git+ssh://git@github.com/nypublicradio/nypr-metrics.git",
     "nypr-account-settings": "git+ssh://git@github.com/nypublicradio/nypr-account-settings.git",
     "nypr-ads": "git+ssh://git@github.com/nypublicradio/nypr-ads.git",
     "nypr-audio-services": "git+ssh://git@github.com/nypublicradio/nypr-audio-services.git",
