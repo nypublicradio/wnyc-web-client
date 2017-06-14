@@ -22,8 +22,8 @@ export default Ember.Route.extend(PlayParamMixin, {
   },
   model({ slug }) {
     return this.store.findRecord('story', slug).then(story => {
-      let comments = this.store.query('comment', { itemTypeId: story.get('itemTypeId'), itemId: story.get('id') });
-      let relatedStories = this.store.query('story', { itemId: story.get('id'), limit: 5});
+      let comments = this.store.query('comment', { itemTypeId: story.get('itemTypeId'), itemId: story.get('cmsPK') });
+      let relatedStories = this.store.query('story', {related: { itemId: story.get('cmsPK'), limit: 5 }});
       return waitFor({
         story,
         getComments: () => comments,
@@ -82,7 +82,7 @@ export default Ember.Route.extend(PlayParamMixin, {
       
       // data pipeline
       dataPipeline.reportItemView({
-        cms_id: get(model, 'story.id'),
+        cms_id: get(model, 'story.cmsPK'),
         item_type: get(model, 'story.itemType'),
       });
       
