@@ -35,8 +35,8 @@ export default Ember.Route.extend(PlayParamMixin, {
   afterModel(model, transition) {
     get(this, 'googleAds').doTargeting(get(model, 'story').forDfp());
 
-    if (get(model, 'story.extendedStory.headerDonateChunk')) {
-      transition.send('updateDonateChunk', get(model, 'story.extendedStory.headerDonateChunk'));
+    if (get(model, 'story.headerDonateChunk')) {
+      transition.send('updateDonateChunk', get(model, 'story.headerDonateChunk'));
     }
   },
   

@@ -173,6 +173,6 @@ export default Model.extend({
   },
   
   forDfp() {
-    return getProperties(this.get('extendedStory'), 'tags', 'show', 'channel', 'series');
+    return getProperties(this, 'tags', 'show', 'channel', 'series');
   }
 });
