@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import { dasherizeKeys } from 'wqxr-web-client/story/serializer';
 
 export default DS.JSONAPISerializer.extend({
   normalizeResponse(store, typeClass, {included = [], data}, id, requestType) {
@@ -31,9 +32,8 @@ export default DS.JSONAPISerializer.extend({
       }
 
       // story serializer expects keys dasherized
-      if (attributes) {
-        r.attributes = {};
-        Object.keys(attributes).forEach(k => r.attributes[k.dasherize()] = attributes[k]);
+      if (type === 'story') {
+        r.attributes = dasherizeKeys(r.attributes);
       }
       return r;
     });
