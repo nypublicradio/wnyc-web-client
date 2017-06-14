@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import { serializeApiResponseRelationships } from 'wqxr-web-client/api-response/serializer';
 import { dasherizeKeys } from 'wqxr-web-client/story/serializer';
 
 export default DS.JSONAPISerializer.extend({
@@ -28,12 +29,14 @@ export default DS.JSONAPISerializer.extend({
     included = included.map(r => {
       let { attributes, type } = r;
       if (type === 'api-response') {
+        r.relationships = serializeApiResponseRelationships(r.relationships, included);
         return r;
       }
 
       // story serializer expects keys dasherized
       if (type === 'story') {
         r.attributes = dasherizeKeys(r.attributes);
+        r.id = attributes.slug;
       }
       return r;
     });
@@ -41,8 +44,8 @@ export default DS.JSONAPISerializer.extend({
     if (featuredStory) {
       let story = {
         type: 'story',
-        id: featuredStory.id,
-        attributes: featuredStory
+        id: featuredStory.slug,
+        attributes: dasherizeKeys(featuredStory)
       };
       
       included.push(story);
@@ -51,7 +54,7 @@ export default DS.JSONAPISerializer.extend({
         featured: {
           data: {
             type: 'story',
-            id: featuredStory.id
+            id: featuredStory.slug
           }
         }
       };
