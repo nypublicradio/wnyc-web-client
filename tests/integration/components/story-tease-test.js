@@ -18,7 +18,7 @@ const item = {
   url: 'story/foo',
   tease: 'foo tease',
   audioDurationReadable: '1 min',
-  dateLineDatetime: new Date(),
+  newsdate: Date(),
   imageMain: {template: faker.internet.avatar()},
   headers: {
     links: [{url: 'foo-link', title: 'foo link'}, {url: 'bar-link', title: 'bar link'}],

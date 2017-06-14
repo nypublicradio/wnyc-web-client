@@ -41,7 +41,6 @@ export default Model.extend({
   title: attr('string'),
   transcript: attr('string'),
   url: attr('string'),
-  extendedStory: attr(),
   body: attr('string'),
   bodyDjango: computed ('body', function() {
     let text = get(this, 'body');

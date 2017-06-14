@@ -10,7 +10,7 @@ test('visiting /player-events', function(assert) {
   let done = assert.async();
   server.create('stream');
 
-  visit(`/story/${story.id}/`);
+  visit(`/story/${story.slug}/`);
 
   let calls = [];
   server.post(`${config.platformEventsAPI}/v1/events/listened`, (schema, {requestBody}) => {

@@ -101,10 +101,8 @@ test('visiting a listing page - story page smoke test', function(assert) {
 
 test('scripts in well route content will execute', function(assert) {
   let story = server.create('story', {
-    id: 'story/foo/',
     slug: 'foo',
-    extendedStory: {
-      body: `test body.
+    body: `test body.
 <script type="text/deferred-javascript">
 (function(){
 
@@ -115,7 +113,6 @@ test('scripts in well route content will execute', function(assert) {
 })();
 \\x3C/script>
 `
-  }
   });
   
   let apiResponse = server.create('api-response', {

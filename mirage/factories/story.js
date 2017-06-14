@@ -12,11 +12,9 @@ export default Factory.extend({
   title(id) {
     return `Story ${id}`;
   },
-  extendedStory: {
-    body: 'Story body.'
-  },
+  body: 'Story body.',
   commentsEnabled: true,
-  dateLineDatetime: faker.date.recent,
+  newsdate: faker.date.recent,
   audio: () => faker.internet.url() + '.mp3',
   audioEventually: true,
   audioAvailable: true,
