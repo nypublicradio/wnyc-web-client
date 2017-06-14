@@ -126,17 +126,24 @@ export default Controller.extend({
       this.get('setEmailPendingStatus').perform(email);
     },
 
-    linkFacebookAccount() {
-      this.get('torii').open('facebook-connect').then((data) => {
-        let facebookId = data.userId;
-        let user = this.get('currentUser.user');
-        user.set('facebookId', facebookId);
-        user.save().then(() => {
-          this.showFlash('connected');
-        })
-        .catch(() => {
-          user.rollbackAttributes();
-          this.showFlash('connectError', 'warning');
+    linkProviderAccount(provider) {
+      this.get('torii').open(provider).then((data) => {
+        let url = `${config.wnycAuthAPI}/v1/connect`;
+        let method = 'POST';
+        let headers = {'Content-Type': 'application/json'};
+        this.get('session').authorize('authorizer:nypr', (header, value) => {
+          headers[header] = value;
+        });
+        let body = JSON.stringify({
+          "provider": data.provider,
+          "token": data.accessToken
+        });
+        return fetch(url, {headers, method, body}).then(response => {
+          if (response.ok) {
+            return get(this, 'currentUser').load();
+          } else {
+            throw new Error(response.statusText);
+          }
         });
       })
       .catch(() => {

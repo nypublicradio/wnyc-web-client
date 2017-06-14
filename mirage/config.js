@@ -160,6 +160,20 @@ export default function() {
 
     return users.first();
   });
+
+  this.post('/v1/connect', ({users}, request) => {
+    if (!request.requestHeaders.Authorization && !request.requestHeaders.authorization) {
+      return new Response(401);
+    }
+    // create a test user with the connectWith flag to make sure the connect endpoint uses it.
+    let user = users.first();
+    user.update({
+      "custom:facebook_id": "123456",
+      "picture": "facebook_avatar.jpg"
+    });
+    return user;
+  });
+
   this.post('/v1/session', {access_token: 'secret', expires_in: 3600, token_type: 'bearer'});
   this.put('/v1/session', {access_token: 'secret', expires_in: 3600, token_type: 'bearer'});
   this.delete('/v1/session', {});

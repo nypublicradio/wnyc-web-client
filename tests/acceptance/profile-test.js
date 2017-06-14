@@ -3,6 +3,8 @@ import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-accept
 import { authenticateSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
 import config from 'wnyc-web-client/config/environment';
 import { Response } from 'ember-cli-mirage';
+import dummySuccessProviderFb from 'wnyc-web-client/tests/helpers/torii-dummy-success-provider-fb';
+import { registerMockOnInstance } from 'wnyc-web-client/tests/helpers/register-mock';
 
 moduleForAcceptance('Acceptance | profile', {
   beforeEach() {
@@ -251,3 +253,22 @@ test('shows pending email', function(assert) {
     assert.ok(findWithAssert('.nypr-account-pending'), 'pending message shows');
   });
 });
+
+test('connecting to facebook updates account', function(assert) {
+  //ASSEMBLE
+  server.create('user');
+  authenticateSession(this.application, {access_token: 'foo'});
+  withFeature('social-auth');
+  registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
+
+  //ACT
+  visit('/profile');
+  click('[data-test-selector="social-connect-Facebook"]');
+
+  //ASSERT
+  andThen(() => {
+    assert.equal(find('[data-test-selector="social-connect-Facebook"]').length, 1, 'connect button should be gone');
+    assert.equal(find('.user-nav-avatar > img').attr('src'), "facebook_avatar.jpg");
+  });
+});
+
