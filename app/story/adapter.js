@@ -26,9 +26,4 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
       return this._super(...arguments);
     }
   },
-  findRecord(store, type, id/*, snapshot*/) {
-    var url = [this.host, 'api/v3', 'story', id].join('/') + '/';
-    let options = this.ajaxOptions(url, 'GET', {});
-    return wrapAjax(options);
-  }
 });
