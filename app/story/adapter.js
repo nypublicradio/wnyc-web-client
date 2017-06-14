@@ -8,7 +8,8 @@ import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
   authorizer: 'authorizer:nypr',
   host: ENV.wnycAPI,
-  namespace: 'api/v2',
+  namespace: 'api/v3',
+  pathForType: () => 'story',
   query(store, type, query) {
     let url = [this.host, this.namespace, 'related', query.itemId, `?limit=${query.limit}`].join('/');
     let options = this.ajaxOptions(url, 'GET', {});
@@ -21,9 +22,4 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
     } 
     return wrapAjax(options);
   },
-  findRecord(store, type, id/*, snapshot*/) {
-    var url = [this.host, 'api/v3', 'story', id].join('/') + '/';
-    let options = this.ajaxOptions(url, 'GET', {});
-    return wrapAjax(options);
-  }
 });
