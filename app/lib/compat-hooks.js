@@ -49,10 +49,6 @@ export function beforeTeardown(/* element, page */) {
   // Most pages don't actually overwrite this if it exists, so it can
   // end up accumulating unexpected cruft.
   window.wnyc = undefined;
-
-  // story bootstraps adds a bunch of click handlers at run time that need to be
-  // removed otherwise they will pile up
-  //removeAlienListeners();
 }
 
 // This gets run by the django-page model when it's figuring out how
@@ -76,7 +72,6 @@ export function beforeAppend(element, page) {
     newContent.appendChild(legacyContent.firstChild);
   }
   container.appendChild(newContent);
-
 
   // is there a sitewide chunk? save it from demolition
   let sitewideChunk = element.querySelector('#wnyc-sitewide');
