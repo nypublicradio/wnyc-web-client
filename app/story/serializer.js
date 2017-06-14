@@ -19,4 +19,5 @@ export default DS.JSONAPISerializer.extend({
     };
     return this._super(store, primaryModelClass, transformed, id, requestType);
   }
+  extractId: (modelClass, {attributes}) => attributes.slug,
 });
