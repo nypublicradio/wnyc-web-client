@@ -105,7 +105,6 @@ test('visiting a listing page - story page smoke test', function(assert) {
 
 test('scripts in well route content will execute', function(assert) {
   let story = server.create('story', {
-    id: 'story/foo/',
     slug: 'foo',
     body: `test body.
 <script type="text/deferred-javascript">

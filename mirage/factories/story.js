@@ -14,7 +14,6 @@ export default Factory.extend({
   },
   body: 'Story body.',
   commentsEnabled: true,
-  dateLineDatetime: faker.date.recent,
   newsdate: faker.date.recent,
   audio: () => faker.internet.url() + '.mp3',
   audioEventually: true,

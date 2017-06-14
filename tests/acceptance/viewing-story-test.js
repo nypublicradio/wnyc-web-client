@@ -120,10 +120,7 @@ test('metrics properly reports story attrs', function(assert) {
 
 test('story routes do dfp targeting', function(/*assert*/) {
   let forDfp = {tags: ['foo', 'bar'], show: 'foo show', channel: 'foo channel', series: 'foo series'};
-  let story = server.create('story', forDfp);
-  let id = `story/${story.slug}/`;
-  
-  server.create('django-page', {id, slug: story.slug});
+  let story = server.create('story', {forDfp});
 
   this.mock(this.application.__container__.lookup('route:story').get('googleAds'))
     .expects('doTargeting')
