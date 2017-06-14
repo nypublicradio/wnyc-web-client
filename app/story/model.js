@@ -25,6 +25,7 @@ export default Model.extend({
   dateLine: attr('string'),
   newsdate: attr('string'),
   editLink: attr('string'),
+  embedCode: attr('string'),
   enableComments: attr('boolean'),
   headers: attr(),
   headerDonateChunk: attr('string'),
