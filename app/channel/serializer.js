@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import { serializeApiResponseRelationships } from 'wqxr-web-client/api-response/serializer';
 
 export default DS.JSONAPISerializer.extend({
   normalizeResponse(store, typeClass, {included = [], data}, id, requestType) {
@@ -23,6 +24,14 @@ export default DS.JSONAPISerializer.extend({
       id: `${id}about`,
       attributes: data.attributes.about
     });
+    
+    included = included.map(r => {
+      if (r.type === 'api-response') {
+        r.relationships = serializeApiResponseRelationships(r.relationships, included);
+        return r;
+      }
+      return r;
+    });
 
     if (featuredStory) {
       let story = {
@@ -37,7 +46,7 @@ export default DS.JSONAPISerializer.extend({
         featured: {
           data: {
             type: 'story',
-            id: featuredStory.id
+            id: featuredStory.slug
           }
         }
       };
