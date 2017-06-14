@@ -1,9 +1,8 @@
 import DS from 'ember-data';
 
 export default DS.JSONAPISerializer.extend({
-  normalizeResponse(store, typeClass, payload, id, requestType) {
-    payload.included = payload.included || [];
-    payload.included = payload.included.map(r => {
+  normalizeResponse(store, typeClass, {included = [], data}, id, requestType) {
+    included = included.map(r => {
       let { attributes, type, id, relationships } = r;
       // story serializer expects keys dasherized
       let attrs = {};
@@ -12,6 +11,6 @@ export default DS.JSONAPISerializer.extend({
       }
       return {type, id, attributes: attrs, relationships};
     });
-    return this._super(store, typeClass, payload, id, requestType);
+    return this._super(store, typeClass, {included, data}, id, requestType);
   }
 });

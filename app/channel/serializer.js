@@ -1,14 +1,13 @@
 import DS from 'ember-data';
 
 export default DS.JSONAPISerializer.extend({
-  normalizeResponse(store, typeClass, payload, id, requestType) {
-    let featuredStory = payload.data.attributes.featured;
-    delete payload.data.attributes.featured;
-    payload.included = payload.included || [];
+  normalizeResponse(store, typeClass, {included = [], data}, id, requestType) {
+    let featuredStory = data.attributes.featured;
+    delete data.attributes.featured;
 
     // id will have a trailing slash because it is derived from the URL and we
     // reliably append a trailing slash via Django
-    payload.included.push({
+    included.push({
       type: 'api-response',
       id: `${id}about/1`,
       relationships: {
@@ -22,10 +21,10 @@ export default DS.JSONAPISerializer.extend({
     {
       type: 'about-page',
       id: `${id}about`,
-      attributes: payload.data.attributes.about
+      attributes: data.attributes.about
     });
     
-    payload.included = payload.included.map(r => {
+    included = included.map(r => {
       let { attributes, type } = r;
       if (type === 'api-response') {
         return r;
@@ -46,9 +45,9 @@ export default DS.JSONAPISerializer.extend({
         attributes: featuredStory
       };
       
-      payload.included.push(story);
+      included.push(story);
 
-      payload.data.relationships = {
+      data.relationships = {
         featured: {
           data: {
             type: 'story',
@@ -57,6 +56,6 @@ export default DS.JSONAPISerializer.extend({
         }
       };
     }
-    return this._super(store, typeClass, payload, id, requestType);
+    return this._super(store, typeClass, {data, included}, id, requestType);
   }
 });
