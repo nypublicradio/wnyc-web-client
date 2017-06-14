@@ -10,16 +10,13 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
   host: ENV.wnycAPI,
   namespace: 'api/v3',
   pathForType: () => 'story',
-  query(store, type, query) {
-    let url = [this.host, this.namespace, 'related', query.itemId, `?limit=${query.limit}`].join('/');
-    let options = this.ajaxOptions(url, 'GET', {});
-    // Django isn't setup to honor XHR requests at the related stories endpoint,
-    // so just use the jQuery JSONp for now
-    if (ENV.environment === 'production') {
-      options.dataType = 'jsonp';
-      options.jsonpCallback = 'RELATED';
-      options.cache = true;
-    } 
-    return wrapAjax(options);
+  query(store, type, {related}) {
+    if (related) {
+      let url = `${this.host}/${this.namespace}/story/related/?limit=${related.limit}&related=${related.itemId}`;
+      let options = this.ajaxOptions(url, 'GET', {});
+      return wrapAjax(options);
+    } else {
+      return this._super(...arguments);
+    }
   },
 });
