@@ -46,9 +46,11 @@ test('visiting /verify with correct params and logging in takes you to profile w
 
   visit('/verify?verification_token=abc&email_id=def');
 
-  fillIn('input[name=email]', 'foo@example.com');
-  fillIn('input[name=password]', 'password1');
-  click('button[type=submit]:contains(Log in)');
+  andThen(() => {
+    fillIn('input[name=email]', 'foo@example.com');
+    fillIn('input[name=password]', 'password1');
+    click('button[type=submit]:contains(Log in)');
+  });
 
   return andThen(() => {
     assert.equal(currentURL(), '/profile');
@@ -61,9 +63,11 @@ test('visiting /verify with missing params and logging in takes you to profile w
 
   visit('/verify');
 
-  fillIn('input[name=email]', 'foo@example.com');
-  fillIn('input[name=password]', 'password1');
-  click('button[type=submit]:contains(Log in)');
+  andThen(() => {
+    fillIn('input[name=email]', 'foo@example.com');
+    fillIn('input[name=password]', 'password1');
+    click('button[type=submit]:contains(Log in)');
+  });
 
   return andThen(() => {
     assert.equal(currentURL(), '/profile');
