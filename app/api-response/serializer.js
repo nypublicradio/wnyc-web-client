@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 import { dasherizeKeys } from 'wqxr-web-client/story/serializer';
 
-export function serializeApiResponseRelationships(relationships, included) {
+export function serializeApiResponseRelationships(relationships = {}, included = []) {
   if (relationships['tease-list'] && relationships['tease-list'].data.length) {
     relationships['tease-list'].data.forEach(story => {
       let { attributes } = included.findBy('attributes.cms-pk', Number(story.id));
