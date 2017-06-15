@@ -62,7 +62,10 @@ export default function() {
   this.get(`/api/v3/shows`);
   this.get(`${baseUrl}/api/v3/shows`);
   this.get(`${baseUrl}/api/v3/buckets/:slug/`, 'bucket');
-  this.get(`${baseUrl}/api/v3/story/:id`, 'story');
+  this.get(`${baseUrl}/api/v3/story/:slug/`, ({ stories }, { params }) => {
+    let { slug } = params;
+    return stories.where({ slug }).models[0];
+  });
   this.get(`${baseUrl}/api/v3/channel/\*id`, 'api-response');
   this.get(`${baseUrl}/api/v3/chunks/:id/`, 'chunk');
 
