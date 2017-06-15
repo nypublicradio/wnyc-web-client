@@ -51,12 +51,12 @@ skip('play param transitions', function(assert) {
 });
 
 test('loading a page with the ?play param', function(assert) {
-  let id = '123';
+  let slug = 'foo';
 
-  server.create('story', {id, title: 'Foo'});
+  server.create('story', {slug, title: 'Foo'});
   server.create('django-page', {id: `bar/`});
 
-  visit(`bar?play=${id}`);
+  visit(`bar?play=${slug}`);
 
   andThen(() => {
     assert.ok(find('.nypr-player').length, 'persistent player should be visible');
