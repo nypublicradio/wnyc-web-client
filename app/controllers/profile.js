@@ -49,6 +49,28 @@ export default Controller.extend({
     });
   },
 
+  requestTempPassword(email) {
+    console.log('email', email);
+    return new RSVP.Promise((resolve, reject) => {
+      let headers = {'Content-Type': 'application/json'};
+      this.get('session').authorize('authorizer:nypr', (header, value) => {
+        headers[header] = value;
+      });
+      fetch(`${config.wnycAuthAPI}/v1/password/send-temp`, {
+        headers,
+        method: 'POST',
+        body: JSON.stringify({email})
+      })
+      .then(response => {
+        if (response.ok) {
+          resolve(response);
+        } else {
+          reject(response);
+        }
+      });
+    });
+  },
+
   showFlash(type) {
     this.get('flashMessages').add({
       message: FLASH_MESSAGES[type],

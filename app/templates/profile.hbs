@@ -14,8 +14,10 @@
     <div class="nypr-account-settings-body">
       {{nypr-accounts/basic-card
         user=model
+        siteName=siteName
         emailUpdated=(action emailUpdated)
         authenticate=(action authenticate)
+        requestTempPassword=(action requestTempPassword)
         emailIsPendingVerification=emailIsPendingVerification}}
 
       {{nypr-accounts/password-card
