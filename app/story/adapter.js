@@ -10,6 +10,9 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
   host: ENV.wnycAPI,
   namespace: 'api/v3',
   pathForType: () => 'story',
+  buildURL() {
+    return this._super(...arguments) + '/';
+  },
   query(store, type, {related}) {
     if (related) {
       let url = `${this.host}/${this.namespace}/story/related/?limit=${related.limit}&related=${related.itemId}`;
