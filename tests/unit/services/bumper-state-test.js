@@ -137,8 +137,8 @@ test('if the queue has items, and the preference is set to queue, the bumper ser
   set(bumper, 'session.data.user-prefs-active-autoplay', 'queue');
 
   Ember.run(() => {
-    queue.addToQueueById(first.id);
-    queue.addToQueueById(second.id);
+    queue.addToQueueById(first.slug);
+    queue.addToQueueById(second.slug);
   });
 
   return wait().then(() => {
