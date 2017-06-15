@@ -13,6 +13,13 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
   buildURL() {
     return this._super(...arguments) + '/';
   },
+  urlForFindRecord(id) {
+    if (/^\d+$/.test(id)) {
+      return `${this.host}/${this.namespace}/story-pk/${id}`;
+    } else {
+      return this._super(...arguments);
+    }
+  },
   query(store, type, {related}) {
     if (related) {
       let url = `${this.host}/${this.namespace}/story/related/?limit=${related.limit}&related=${related.itemId}`;
