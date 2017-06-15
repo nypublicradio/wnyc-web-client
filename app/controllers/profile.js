@@ -135,7 +135,7 @@ export default Controller.extend({
           headers[header] = value;
         });
         let body = JSON.stringify({
-          "provider": data.provider,
+          "provider": provider,
           "token": data.accessToken
         });
         return fetch(url, {headers, method, body}).then(response => {
