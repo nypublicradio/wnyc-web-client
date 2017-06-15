@@ -15,6 +15,7 @@ export default Factory.extend({
   body: 'Story body.',
   commentsEnabled: true,
   newsdate: faker.date.recent,
+  publishAt: faker.date.recent,
   audio: () => faker.internet.url() + '.mp3',
   audioEventually: true,
   audioAvailable: true,
