@@ -41,6 +41,8 @@ export default Model.extend({
   template: attr('string'),
   title: attr('string'),
   transcript: attr('string'),
+  twitterHeadline: attr('string'),
+  twitterHandle: attr('string'),
   url: attr('string'),
   body: attr('string'),
   bodyDjango: computed ('body', function() {
