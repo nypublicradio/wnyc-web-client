@@ -64,7 +64,7 @@ export default Model.extend({
       data.current_audio_position = 0; // stream should always report 0
       return Object.assign({
         audio_type: 'livestream',
-        cms_id: s && s.get('id'),
+        cms_id: s && s.get('cmsPK'),
         item_type: s && s.get('itemType'),
         stream_id: this.get('cmsPK'),
       }, data);

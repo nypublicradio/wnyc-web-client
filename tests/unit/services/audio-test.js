@@ -88,7 +88,7 @@ test('can switch from on demand to stream and vice versa', function(assert) {
   service.get('hifi.soundCache').cache(audio2);
 
   Ember.run(() => {
-    service.play(story.id).then(({sound}) => {
+    service.play(story.slug).then(({sound}) => {
       assert.equal(sound.get('url'), onDemandUrl, 'story played OK');
     }).then(() => {
       service.play(stream.slug).then(({sound}) => {
@@ -96,9 +96,9 @@ test('can switch from on demand to stream and vice versa', function(assert) {
         service.play(stream.slug).then(({sound}) => {
           assert.equal(sound.get('url'), streamURL, 'stream played OK');
         }).then(() => {
-          service.play(story.id).then(({sound}) => {
+          service.play(story.slug).then(({sound}) => {
             assert.equal(sound.get('url'), onDemandUrl, 'switched to on demand OK');
-            done();
+            Ember.run.next(done);
           });
         });
       });
@@ -122,7 +122,7 @@ test('playing a story with a list of urls plays them in order', function(assert)
   service.get('hifi.soundCache').cache(audio2);
 
   Ember.run(() => {
-    service.play(episode.id).then(() => {
+    service.play(episode.slug).then(() => {
       assert.equal(service.get('hifi.currentSound.url'), url1, 'first audio should be playing');
       audio1.trigger('audio-ended');
     });
@@ -149,11 +149,11 @@ test('playing a segment directly starts from 0', function(assert) {
 
   service.get('hifi.soundCache').cache(audio);
   Ember.run(() => {
-    service.play(episode.id).then(() => {
+    service.play(episode.slug).then(() => {
       service.setPosition(0.5);
       assert.equal(service.get('position'), (30 * ONE_MINUTE) / 2, 'position on episode audio successfully set');
 
-      service.play(segment.id).then(() => {
+      service.play(segment.slug).then(() => {
         assert.equal(service.get('position'), 0, 'audio position should be reset to 0');
         assert.equal(service.get('hifi.currentSound.url'), url, 'url should be segment url');
         done();
@@ -174,11 +174,11 @@ test('pausing audio picks up from where it left off', function(assert) {
 
   service.get('hifi.soundCache').cache(audio);
   Ember.run(() => {
-    service.play(story.id).then(() => {
+    service.play(story.slug).then(() => {
       service.setPosition(0.5);
       assert.equal(service.get('position'), (30 * ONE_MINUTE) / 2, 'position on episode audio successfully set');
       service.pause();
-      service.play(story.id).then(() => {
+      service.play(story.slug).then(() => {
         assert.equal(service.get('position'), (30 * ONE_MINUTE) / 2, 'audio picks up where it left off');
       });
     });
@@ -199,11 +199,11 @@ test('pausing segemented audio picks up from where it left off', function(assert
 
   service.get('hifi.soundCache').cache(audio);
   Ember.run(() => {
-    service.play(episode.id).then(() => {
+    service.play(episode.slug).then(() => {
       service.setPosition(0.5);
       assert.equal(service.get('position'), (30 * ONE_MINUTE) / 2, 'position on episode audio successfully set');
       service.pause();
-      service.play(episode.id).then(() => {
+      service.play(episode.slug).then(() => {
         assert.equal(service.get('position'), (30 * ONE_MINUTE) / 2, 'audio picks up where it left off');
       });
     });
@@ -248,11 +248,11 @@ test('segmented audio management', function(assert) {
   service.get('hifi.soundCache').cache(audio2);
   service.get('hifi.soundCache').cache(audio3);
   Ember.run(() => {
-    service.play(segment.id).then(() => {
+    service.play(segment.slug).then(() => {
       Ember.run(() => service.setPosition(0.5));
       assert.equal(service.get('position'), audio2.get('duration') / 2, 'position on segment audio successfully set');
 
-      service.play(episode.id).then(() => {
+      service.play(episode.slug).then(() => {
         audio1.trigger('audio-ended');
       });
 
@@ -260,8 +260,8 @@ test('segmented audio management', function(assert) {
         assert.equal(service.get('position'), 0, 'second audio should start from 0');
         Ember.run(() => service.setPosition(0.5));
 
-        service.play(story.id).then(() => {
-          service.play(episode.id).then(() => {
+        service.play(story.slug).then(() => {
+          service.play(episode.slug).then(() => {
             assert.equal(service.get('hifi.currentSound.url'), url1, 'first segment should be playing');
             assert.equal(service.get('position'), 0, 'should start from 0');
             done();
@@ -296,10 +296,10 @@ test('episodes played from the queue do not continue to the next item until the 
   let audio3Spy = sinon.spy(audio3, 'play');
 
   Ember.run(() => {
-    service.addToQueue(episodeToQueue.id);
-    service.addToQueue(nextStory.id);
+    service.addToQueue(episodeToQueue.slug);
+    service.addToQueue(nextStory.slug);
 
-    service.play(episodeToQueue.id, 'queue').then(() => {
+    service.play(episodeToQueue.slug, 'queue').then(() => {
       assert.equal(service.get('hifi.currentSound.url'), url1, 'first audio file should be playing');
       audio1.trigger('audio-ended');
     });
@@ -345,13 +345,13 @@ test('can play a segmented story all the way through more than once', function(a
   service.get('hifi.soundCache').cache(audio2);
 
   Ember.run(() => {
-    service.play(episode.id).then(() => audio1.trigger('audio-ended'));
+    service.play(episode.slug).then(() => audio1.trigger('audio-ended'));
   });
 
   audio2.one('audio-played', function() {
     audio2.trigger('audio-ended');
     Ember.run.next(() => {
-      service.play(episode.id).then(() => assert.ok('can play twice'));
+      service.play(episode.slug).then(() => assert.ok('can play twice'));
     });
   });
 
@@ -387,7 +387,7 @@ test('service passes correct attrs to data pipeline to report an on_demand liste
   };
     
   Ember.run(() => {
-    service.play(story.id).then(() => {
+    service.play(story.slug).then(() => {
       let forwardPosition = {current_audio_position: service.get('position')};
       service.fastForward();
       let rewindPosition = {current_audio_position: service.get('position')};
@@ -396,8 +396,8 @@ test('service passes correct attrs to data pipeline to report an on_demand liste
       service.setPosition(0.5);
       service.pause();
       let pausePosition = {current_audio_position: service.get('position')};
-      service.play(story.id).then(() => {
-        service.play(story2.id).then(() => {
+      service.play(story.slug).then(() => {
+        service.play(story2.slug).then(() => {
           let setPosition2 = {current_audio_position: service.get('position')};
           service.setPosition(0.75);
           service.finishedTrack();
@@ -496,12 +496,12 @@ test('service reports a resume when returning to playing a story', function(asse
   };
     
   Ember.run(() => {
-    service.play(story.id).then(() => {
+    service.play(story.slug).then(() => {
       let setPosition = {current_audio_position: service.get('position')};
       service.setPosition(0.5);
       let story1Position = {current_audio_position: service.get('position')};
-      service.play(story2.id).then(() => {
-        service.play(story.id).then(() => {
+      service.play(story2.slug).then(() => {
+        service.play(story.slug).then(() => {
           wait().then(() => {
             assert.deepEqual(reportStub.getCall(0).args, ['start', expected]);
             assert.deepEqual(
@@ -592,7 +592,7 @@ test('it only sets up the player ping once', function(assert) {
   Ember.run(() => {
     service.set('poll', pollStub);
     service.set('hifi', hifiStub);
-    service.play(story.id);
+    service.play(story.slug);
   });
 
   return wait().then(() => {
@@ -615,7 +615,7 @@ test('it calls the GoogleAnalytics ping event', function(assert) {
   service.set('metrics', metricsStub);
   service.set('sessionPing', 500);
   service.set('hifi', hifiStub);
-  Ember.run(() => service.play(story.id));
+  Ember.run(() => service.play(story.slug));
 });
 
 test('with the bumper-state enabled, the bumper will act on a finished track event', function(assert) {
@@ -636,7 +636,7 @@ test('with the bumper-state enabled, the bumper will act on a finished track eve
   service.set('bumperState.autoplayEnabled', true);
 
   Ember.run(() => {
-    service.play(story.id).then(() => {
+    service.play(story.slug).then(() => {
       audio.trigger('audio-ended');
     });
   });
