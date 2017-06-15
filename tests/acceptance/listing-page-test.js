@@ -285,10 +285,10 @@ test('show pages with a play param', function(assert) {
 
   djangoPage
     .bootstrap(listingPage)
-    .visit({id: listingPage.id + `?play=${story.id}`});
+    .visit({id: listingPage.id + `?play=${story.slug}`});
 
   andThen(function() {
-    assert.equal(currentURL(), `${listingPage.id}?play=${story.id}`);
+    assert.equal(currentURL(), `${listingPage.id}?play=${story.slug}`);
     assert.ok(Ember.$('.nypr-player').length, 'persistent player should be visible');
     assert.equal(Ember.$('[data-test-selector=nypr-player-story-title]').text(), story.title, `${story.title} should be loaded in player UI`);
   });
