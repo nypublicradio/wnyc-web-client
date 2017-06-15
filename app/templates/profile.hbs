@@ -20,10 +20,12 @@
         requestTempPassword=(action requestTempPassword)
         emailIsPendingVerification=emailIsPendingVerification}}
 
-      {{nypr-accounts/password-card
-        helplinkUrl='/forgot'
-        helplinkText='Forgot password?'
-        changePassword=(action changePassword)}}
+      {{#if model.hasPassword}}
+        {{nypr-accounts/password-card
+          helplinkUrl='/forgot'
+          helplinkText='Forgot password?'
+          changePassword=(action changePassword)}}
+      {{/if}}
 
     </div>
     {{#if features.memberCenter}}
