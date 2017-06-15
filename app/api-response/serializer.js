@@ -1,6 +1,6 @@
 import DS from 'ember-data';
 
-export function serializeApiResponseRelationships(relationships, included) {
+export function serializeApiResponseRelationships(relationships = {}, included = []) {
   if (relationships['tease-list'] && relationships['tease-list'].data.length) {
     relationships['tease-list'].data.forEach(story => {
       let { attributes } = included.findBy('attributes.cms-pk', Number(story.id));
