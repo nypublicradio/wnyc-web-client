@@ -66,6 +66,7 @@ export default function() {
     let { slug } = params;
     return stories.where({ slug }).models[0];
   });
+  this.get(`${baseUrl}/api/v3/story/related/`, 'story');
   this.get(`${baseUrl}/api/v3/channel/\*id`, 'api-response');
   this.get(`${baseUrl}/api/v3/chunks/:id/`, 'chunk');
 
