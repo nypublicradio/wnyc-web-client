@@ -53,6 +53,7 @@ deployment:
             GOOGLE_ANALYTICS: $PROD_GOOGLE_ANALYTICS
             PLATFORM_EVENTS_SERVICE: $PROD_PLATFORM_EVENTS_SERVICE
             MEMBER_CENTER: true
+            FB_APP: $PROD_FB_APP
   demo:
     branch: demo
     commands:
@@ -78,3 +79,4 @@ deployment:
             GOOGLE_ANALYTICS: $DEMO_GOOGLE_ANALYTICS
             PLATFORM_EVENTS_SERVICE: $DEMO_PLATFORM_EVENTS_SERVICE
             MEMBER_CENTER: true
+            FB_APP: $DEMO_FB_APP

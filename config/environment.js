@@ -145,9 +145,9 @@ module.exports = function(environment) {
     torii: {
       providers: {
         'facebook-connect': {
-          appId: process.env.FB_APP || '151261804904925',
+          appId: process.env.FB_APP || '1583385451706458',
           scope: 'user_friends,email',
-          version: 'v2.8'
+          version: 'v2.9'
         }
       }
     },
