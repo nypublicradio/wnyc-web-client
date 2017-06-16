@@ -3,26 +3,14 @@
 {{/if}}
 
 {{#if chromeDisabled}}
-  {{#unless error}}
-    {{outlet}}
-  {{else}}
-    {{error-page error=error}}
-  {{/unless}}
+  {{outlet}}
 {{else if miniChrome}}
   {{#nypr-mini-chrome promo='Tune in Monday−Thursday at 8 p.m. ET'}}
-    {{#unless error}}
-      {{outlet}}
-    {{else}}
-      {{error-page error=error}}
-    {{/unless}}
+    {{outlet}}
   {{/nypr-mini-chrome}}
 {{else}}
-  {{#site-chrome error=error headerDonateChunk=headerDonateChunk beta=beta isHomepage=isHomepage currentPath=currentPath showPlayer=showPlayer}}
-    {{#unless error}}
-      {{outlet}}
-    {{else}}
-      {{error-page error=error}}
-    {{/unless}}
+  {{#site-chrome headerDonateChunk=headerDonateChunk beta=beta isHomepage=isHomepage currentPath=currentPath showPlayer=showPlayer}}
+    {{outlet}}
   {{/site-chrome}}
 {{/if}}
 
