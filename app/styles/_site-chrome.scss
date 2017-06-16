@@ -32,6 +32,7 @@
     height: 83px;
   }
 
+  .missing &,
   .profile & {
     margin-bottom: 0;
   }
@@ -413,7 +414,7 @@
     background-color: $nearwhite;
   }
 
-  &.is-error {
+  .missing & {
     margin-bottom:  0;
   }
 }
