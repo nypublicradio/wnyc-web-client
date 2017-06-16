@@ -43,7 +43,7 @@ Router.map(function() {
   this.route('events', function() {
     this.route('event', {path: '*url_path'});
   });
-  
+
   this.route('videos');
   this.route('topics');
   this.route('settings');
@@ -61,6 +61,7 @@ Router.map(function() {
   // from the django site. It will be used when there's nothing more
   // specific.
   this.route('djangorendered', { path: '*upstream_url' });
+  this.route('missing');
 });
 
 export default Router;
