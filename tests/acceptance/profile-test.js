@@ -251,3 +251,26 @@ test('shows pending email', function(assert) {
     assert.ok(findWithAssert('.nypr-account-pending'), 'pending message shows');
   });
 });
+
+test('creating email from fb account', function(assert) {
+  withFeature('social-auth');
+  const EMAIL = 'foo@bar.baz'
+  server.create('user', 'facebook');
+  authenticateSession(this.application, {access_token: 'foo'});
+
+  visit('/profile');
+  click('span:contains(My Online Account) + button:contains(Edit)');
+
+  andThen(function() {
+    assert.equal(find('.nypr-account-modal-title').text().trim(), 'Enter Your Email');
+  });
+
+  fillIn('input[name=connectEmail]', EMAIL);
+  fillIn('input[name=connectEmailConfirmation]', EMAIL);
+  click('[data-test-selector="enter-email"]')
+
+  andThen(function() {
+    assert.equal(find('.nypr-account-modal-title').text().trim(), 'Check Your Email');
+  });
+});
+
