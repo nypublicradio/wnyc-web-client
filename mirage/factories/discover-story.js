@@ -30,7 +30,7 @@ export default Factory.extend({
   estimatedDuration(i) {
     return Math.floor(faker.random.number.range(60, 3000)(i)); },
   headers() { // this is where the show info is
-    let show_slug = faker.lorem.words(1);
+    let show_slug = [faker.lorem.words(1)];
     return {
       brand: {
         url: `show/${show_slug}`,
