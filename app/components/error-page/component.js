@@ -1,5 +1,5 @@
 import Component from 'ember-component';
-import computed, { readOnly } from 'ember-computed';
+import computed from 'ember-computed';
 import { htmlSafe } from 'ember-string';
 
 const ASSET_MAP = {
@@ -33,5 +33,4 @@ export default Component.extend({
       return text.sub;
     }
   }),
-  errorCode: readOnly('error.response.status'),
 });
