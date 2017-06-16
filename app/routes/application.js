@@ -50,14 +50,14 @@ export default Route.extend(ApplicationRouteMixin, {
 
   actions: {
     error(error/*, transition*/) {
-      if (error) {
-        // sometimes this.controller is undefined
-        this.controllerFor('application').set('error', error);
-        return error;
+      if (error && error.response) {
+        if (error.response.status === 404) {
+          this.transitionTo('missing');
+        } else if (error.response.status >= 500) {
+          // this.transitionTo('error');
+          console.error(error);
+        }
       }
-    },
-    didTransition() {
-      this.controllerFor('application').set('error', null);
     },
     willTransition() {
       //close queue/history modal when we open a new page
