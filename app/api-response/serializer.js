@@ -8,7 +8,7 @@ export function serializeApiResponseRelationships(relationships = {}, included =
       story.id = attributes.slug;
     });
   }
-  if (relationships.story) {
+  if (relationships.story && relationships.story.data) {
     let { attributes } = included.findBy('attributes.cms-pk', Number(relationships.story.data.id));
     relationships.story.data.id = attributes.slug;
   }
