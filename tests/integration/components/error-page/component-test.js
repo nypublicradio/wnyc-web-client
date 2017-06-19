@@ -23,14 +23,7 @@ moduleForComponent('error-page', 'Integration | Component | error page', {
 // });
 
 test('it renders 404 page', function(assert) {
-  let testError = {
-    'response': {
-      'status': 404
-    }
-  };
-  this.set("testError", testError);
-
-  this.render(hbs`{{error-page error=testError}}`);
+  this.render(hbs`{{error-page errorCode='404'}}`);
 
   assert.ok(this.$('[data-test-selector=404]').length);
 });
