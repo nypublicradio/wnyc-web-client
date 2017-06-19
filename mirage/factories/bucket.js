@@ -4,7 +4,7 @@ function bucketItems() {
   var res = [];
   for (let i = 0; i < 5; i++) {
     res.push({
-      slug: faker.lorem.words().replace(/\W/g,'-'),
+      slug: faker.lorem.words().dasherize(),
       producingOrganizations: []
     });
   }
