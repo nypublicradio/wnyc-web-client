@@ -26,6 +26,8 @@ test('visiting /login', function(assert) {
 test("can't visit /login when authenticated", function(assert) {
   server.create('user');
   authenticateSession(this.application, {access_token: 'foo'});
+  let page = server.create('django-page', {id: '/'});
+  djangoPage.bootstrap(page);
 
   visit('/login');
 
@@ -135,6 +137,12 @@ test('Successful facebook login redirects', function(assert) {
   let user = server.create('user', 'facebook');
   registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
   withFeature('socialAuth');
+<<<<<<< HEAD
+=======
+  let page = server.create('django-page', {id: '/'});
+  djangoPage.bootstrap(page);
+
+>>>>>>> Add semicolons
   visit('/login');
 
   click('button:contains(Log in with Facebook)');
