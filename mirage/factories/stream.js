@@ -22,7 +22,7 @@ export default Factory.extend({
       case 6:
         return "wqxr-special";
       default:
-        return faker.lorem.words(2).join('-');
+        return faker.lorem.words(2).dasherize();
     }
   },
   schedule_url: faker.internet.url,

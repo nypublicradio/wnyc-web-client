@@ -20,7 +20,7 @@ test('visiting /set-password with expired code', function(assert) {
   andThen(() => {
     assert.equal(currentURL(), setPasswordUrlWithExpiredCode);
     assert.equal(find('.account-form-heading').text().trim(), 'Create a password', 'it should show the create password form header');
-    assert.equal(find('.account-form-description').text().trim(), `Create a WXQR password for ${email}.`, 'it should show the create password form desc');
+    assert.equal(find('.account-form-description').text().trim(), `Create a WQXR password for ${email}.`, 'it should show the create password form desc');
   });
 
   fillIn('input[name=password]', password);

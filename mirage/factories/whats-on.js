@@ -8,10 +8,10 @@ export default Factory.extend({
         composer: {
           url: faker.internet.url(),
           pk: faker.random.number(),
-          slug: faker.lorem.words(2).join('-'),
+          slug: faker.lorem.words(2).dasherize(),
           name: faker.name.findName()
         },
-        title: faker.lorem.words(3).join(' '),
+        title: faker.lorem.words(3),
         soloists: []
       },
     };
@@ -37,7 +37,7 @@ export default Factory.extend({
       case 6:
         return "wqxr-special";
       default:
-        return faker.lorem.words(2).join('-');
+        return faker.lorem.words(2).dasherize();
     }
   }
 });

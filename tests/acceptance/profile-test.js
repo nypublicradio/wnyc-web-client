@@ -254,7 +254,7 @@ test('shows pending email', function(assert) {
 
 test('creating email from fb account', function(assert) {
   withFeature('social-auth');
-  const EMAIL = 'foo@bar.baz'
+  const EMAIL = 'foo@bar.baz';
   server.create('user', 'facebook');
   authenticateSession(this.application, {access_token: 'foo'});
 
@@ -267,7 +267,7 @@ test('creating email from fb account', function(assert) {
 
   fillIn('input[name=connectEmail]', EMAIL);
   fillIn('input[name=connectEmailConfirmation]', EMAIL);
-  click('[data-test-selector="enter-email"]')
+  click('[data-test-selector="enter-email"]');
 
   andThen(function() {
     assert.equal(find('.nypr-account-modal-title').text().trim(), 'Check Your Email');

@@ -56,13 +56,13 @@ Router.map(function() {
   this.route('forgot');
   this.route('reset');
   this.route('verify');
+  this.route('set-password');
 
   // This is our catch all route that can render any existing page
   // from the django site. It will be used when there's nothing more
   // specific.
   this.route('djangorendered', { path: '*upstream_url' });
   this.route('missing');
-  this.route('set-password');
 });
 
 export default Router;
