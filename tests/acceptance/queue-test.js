@@ -40,7 +40,7 @@ test('Queue initial state should be open and empty', function(assert) {
 test('Queue should sort when you drag an item', function(assert) {
   let listenQueue = this.application.__container__.lookup('service:listen-queue');
   let [{slug:slug1}, {slug:slug2}] = server.createList('story', 2);
-  server.create('djangoPage', {id:'fake/'});
+  server.create('djangoPage', {id:'/'});
 
   run(() => {
     listenQueue.addToQueueById(slug1);
