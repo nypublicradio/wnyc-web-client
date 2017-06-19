@@ -54,8 +54,8 @@ export default Ember.Service.extend({
       }
       let script = document.createElement('script');
       script.type = 'text/javascript';
-      if (script.hasAttribute('src')) {
-        script.src = tag.src;
+      if (tag.hasAttribute('src')) {
+        script.src = tag.getAttribute('src');
       } else {
         script.textContent = tag.textContent;
       }
