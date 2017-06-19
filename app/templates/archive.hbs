@@ -23,16 +23,18 @@
   
   <p>
     {{#if showYears}}
+      <strong>Year: </strong>
       {{#each years as |year|}}
-        {{link-to year 'archive' (query-params year=year page=1)}}
+        {{link-to year 'archive' (query-params year=year page=1)}}{{unless (eq years.lastObject year) ' | '}}
       {{/each}}
     {{else if showMonths}}
       <small>
         {{link-to '< Back' 'archive' (query-params year=null month=null day=null page=1)}}
       </small>
       <h3>{{year}}</h3>
+      <strong>Month: </strong>
       {{#each months as |month|}}
-        {{link-to (moment-format month 'MMMM' 'M') 'archive'  (query-params month=month page=1)}}
+        {{link-to (moment-format month 'MMMM' 'M') 'archive'  (query-params month=month page=1)}}{{unless (eq months.lastObject month) ' | '}}
       {{/each}}
     {{else if showDays}}
       <small>
@@ -41,8 +43,9 @@
         {{/link-to}}
       </small>
       <h3>{{moment-format month 'MMMM' 'M'}} {{year}}</h3>
+      <strong>Day: </strong>
       {{#each days as |day|}}
-        {{link-to day 'archive' (query-params day=day page=1)}}
+        {{link-to day 'archive' (query-params day=day page=1)}}{{unless (eq days.lastObject day) ' | '}}
       {{/each}}
     {{else if (and year month day)}}
       <small>
