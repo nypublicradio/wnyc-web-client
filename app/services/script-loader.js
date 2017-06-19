@@ -8,7 +8,7 @@
 
 import fetch from 'fetch';
 import Ember from 'ember';
-import { mangleJavascript } from '../lib/compat-hooks';
+import { runOnce } from 'wnyc-web-client/services/legacy-loader';
 const { Promise } = Ember.RSVP;
 import ENV from '../config/environment';
 
@@ -21,13 +21,14 @@ export default Ember.Service.extend({
 
   load(scriptTags, containerElement) {
     let sources = Array.from(scriptTags).map(
-      tag => loadSource(tag).then(src => ({
-        src,
-        tag
-      }))
+      // tag => loadSource(tag).then(src => ({
+      //   src,
+      //   tag
+      // }))
+      tag => Promise.resolve(tag)
     );
 
-    this.stack.unshift({ sources,containerElement });
+    this.stack.unshift({ sources, containerElement });
     if (this.stack.length === 1) {
       this._evalNext();
     }
@@ -47,22 +48,30 @@ export default Ember.Service.extend({
 
     let asyncWriter = this.get('asyncWriter');
 
-    return sources.shift().then(({src, tag}) => {
-      let postMangled = mangleJavascript(tag, src);
-      if (postMangled) {
-        let script = document.createElement('script');
-        script.textContent = postMangled;
-        script.type = 'text/javascript';
-        asyncWriter.cursorTo(placeholderFor(tag));
-
+    return sources.shift().then(tag => {
+      if (Object.keys(runOnce).any(k => tag.src.match(k))) {
+        return false;
+      }
+      let script = document.createElement('script');
+      script.type = 'text/javascript';
+      if (script.hasAttribute('src')) {
+        script.src = tag.src;
+      } else {
+        script.textContent = tag.textContent;
+      }
+      let placeholder = placeholderFor(tag);
+      if (placeholder) {
+        asyncWriter.cursorTo(placeholder);
         // Since we have already preloaded and inlined the source,
         // this will run it synchronously.
+        asyncWriter.cursor.parentNode.insertBefore(script, asyncWriter.cursor);
+      } else {
         containerElement.appendChild(script);
-
-        // Make sure any document.writes get their place at the head
-        // of the stack before we move on
-        asyncWriter.flush();
       }
+
+      // Make sure any document.writes get their place at the head
+      // of the stack before we move on
+      asyncWriter.flush();
     }).finally(() => this._evalNext());
   }
 
