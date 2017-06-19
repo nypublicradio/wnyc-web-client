@@ -14,12 +14,12 @@ moduleForComponent('error-page', 'Integration | Component | error page', {
 //     }
 //   };
 //   this.set("testError", testError);
-// 
+//
 //   this.render(hbs`{{error-page error=testError}}`);
-// 
+//
 //   assert.equal(this.$('.error-text-block h1').text().trim(), "Oops, something went wrong...");
 //   assert.equal(this.$('.error-text-block p').text().trim(), "We're experiencing an internal server error. Please try again later.");
-// 
+//
 // });
 
 test('it renders 404 page', function(assert) {
