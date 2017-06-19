@@ -1,5 +1,5 @@
 import DS from 'ember-data';
-import { dasherizeKeys } from 'wqxr-web-client/story/serializer';
+import { dasherizeKeys } from 'wnyc-web-client/story/serializer';
 
 export function serializeApiResponseRelationships(relationships = {}, included = []) {
   if (relationships['tease-list'] && relationships['tease-list'].data.length) {

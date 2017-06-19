@@ -1,6 +1,6 @@
 import DS from 'ember-data';
-import { serializeApiResponseRelationships } from 'wqxr-web-client/api-response/serializer';
-import { dasherizeKeys } from 'wqxr-web-client/story/serializer';
+import { serializeApiResponseRelationships } from 'wnyc-web-client/api-response/serializer';
+import { dasherizeKeys } from 'wnyc-web-client/story/serializer';
 
 export default DS.JSONAPISerializer.extend({
   normalizeResponse(store, typeClass, {included = [], data}, id, requestType) {
