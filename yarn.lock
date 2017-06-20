@@ -2307,7 +2307,7 @@ ember-body-class@0.4.0:
   dependencies:
     ember-cli-babel "^5.0.0"
 
-ember-changeset-validations@^1.2.6, ember-changeset-validations@^1.2.7:
+ember-changeset-validations@^1.2.7:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/ember-changeset-validations/-/ember-changeset-validations-1.2.7.tgz#5791fef334b2693165017d82c091f3a6c6a6f184"
   dependencies:
@@ -5738,7 +5738,7 @@ number-is-nan@^1.0.0:
 
 nypr-account-settings@nypublicradio/nypr-account-settings:
   version "0.0.0"
-  resolved "https://codeload.github.com/nypublicradio/nypr-account-settings/tar.gz/531ea42b9183e05a02d98bae5ecc85af8b03f8dd"
+  resolved "https://codeload.github.com/nypublicradio/nypr-account-settings/tar.gz/d0272bd2166b84aabc44b2232c611b08b0209377"
   dependencies:
     ember-changeset "^1.2.3"
     ember-changeset-validations "^1.2.7"
