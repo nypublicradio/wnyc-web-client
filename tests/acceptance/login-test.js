@@ -128,6 +128,29 @@ test('Successful facebook login redirects', function(assert) {
   });
 });
 
+test('Facebook login with no email shows alert', function(assert) {
+  server.create('user');
+  registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
+  server.get('/v1/session', () => {
+    return new Response(400, {}, { "errors": {
+      "code": "MissingAttributeException",
+      "message": "A provider account could not be created because one or more attributes were not available from the provider. Permissions may have been declined.",
+      "values": ["email"] }
+    });
+  });
+
+  withFeature('socialAuth');
+  visit('/login');
+
+  click('button:contains(Log in with Facebook)');
+
+  andThen(() => {
+    assert.equal(currentURL(), '/login');
+    assert.equal(find('.alert-warning').text().trim(), "Unfortunately, we can't authorize your account without permission to view your email address.");
+    assert.ok(!currentSession(this.application).get('isAuthenticated'), 'Session is not authenticated');
+  });
+});
+
 test('Unsuccessful facebook login shows alert', function(assert) {
   registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummyFailureProvider);
   withFeature('socialAuth');

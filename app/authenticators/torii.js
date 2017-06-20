@@ -9,19 +9,25 @@ export default Torii.extend({
   torii: service(),
 
   authenticate() {
-    return this._super(...arguments)
-    .then((data) => {
-      return RSVP.all([
-        data,
-        this.getSession(data.provider, data.accessToken)
-      ]);
-    })
-    .then(([data, response]) => {
-      if (response && response.ok) {
-        return decamelizeKeys([data]);
-      } else {
-        return RSVP.reject(response);
-      }
+    return new RSVP.Promise((resolve, reject) => {
+      return this._super(...arguments)
+      .then((data) => {
+        return RSVP.all([
+          data,
+          this.getSession(data.provider, data.accessToken)
+        ]);
+      })
+      .then(([data, response]) => {
+        if (response) {
+          if (response.ok) {
+            resolve(decamelizeKeys([data]));
+          } else if (response.status < 500) {
+            response.json().then(reject);
+          } else {
+            reject({ "errors": {"code": "serverError"} });
+          }
+        }
+      }).catch(reject);
     });
   },
 
