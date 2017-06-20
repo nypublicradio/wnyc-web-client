@@ -546,6 +546,11 @@ table#show-number-archive {
   font-size: 11px;
 }
 
+/* embedded iframes in articles should be limited to 100% width */
+article section p > iframe {
+    max-width: 100%;
+}
+
 /* newsletter signup widgets */
 
 .newsletter-signup .email {
