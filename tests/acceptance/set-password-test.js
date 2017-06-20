@@ -2,7 +2,7 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import { Response } from 'ember-cli-mirage';
 import config from 'wnyc-web-client/config/environment';
-import { currentSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
+import { authenticateSession, currentSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
 
 moduleForAcceptance('Acceptance | set password');
 
@@ -75,5 +75,26 @@ test('visiting /set-password and getting a server error when submitting the form
 
   andThen(() => {
     assert.equal(find('.account-form-heading').text().trim(), 'Create a password', 'it should remain on the form when the reset url returns other errors.');
+  });
+});
+
+test('setting password while already logged in redirects to profile', function(assert) {
+  server.create('user', 'facebook');
+  authenticateSession(this.application, {access_token: 'foo'});
+
+  visit(setPasswordUrlWithParameters);
+
+  andThen(() => {
+    assert.equal(currentURL(), setPasswordUrlWithParameters);
+    assert.equal(find('.account-form-heading').text().trim(), 'Create a password', 'it should show the create password form');
+  });
+
+  andThen(() => {
+    fillIn('input[name=password]', password);
+    click('button:contains(Create password)');
+  });
+
+  andThen(() => {
+    assert.equal(currentURL(), '/profile', 'it should redirect to the profile page');
   });
 });
