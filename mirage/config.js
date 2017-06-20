@@ -169,9 +169,8 @@ export default function() {
 
   let expiredCodeException = {
     "errors": {
-      "code": "ExpiredCodeException",
-      "message": "Invalid code provided, please request a code again.",
-      "values": ["email"]
+      "code": "UnauthorizedAccess",
+      "message": "User account has expired, it must be reset by an administrator."
     }
   };
 
