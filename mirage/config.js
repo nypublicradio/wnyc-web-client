@@ -211,8 +211,9 @@ export default function() {
 
   let expiredCodeException = {
     "errors": {
-      "code": "UnauthorizedAccess",
-      "message": "User account has expired, it must be reset by an administrator."
+      "code": "ExpiredCodeException",
+      "message": "Invalid code provided, please request a code again.",
+      "values": ["email"]
     }
   };
 
@@ -225,10 +226,17 @@ export default function() {
     }
   });
 
+  let UnauthorizedAccessException = {
+    "errors": {
+      "code": "UnauthorizedAccess",
+      "message": "User account has expired, it must be reset by an administrator."
+    }
+  };
+
   this.post('/v1/password/change-temp', (schema, request) => {
     let params = JSON.parse(request.requestBody);
     if (!params.temp || params.temp === "expired") {
-      return new Response(400, {}, expiredCodeException);
+      return new Response(401, {}, UnauthorizedAccessException);
     } else {
       return new Response(200);
     }
