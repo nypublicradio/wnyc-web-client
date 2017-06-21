@@ -5,12 +5,12 @@ import service from 'ember-service/inject';
 
 const Router = Ember.Router.extend(AnalyticsMixin, {
   session:      service(),
-  
+
   location: config.locationType,
-  
+
   willTransition(oldInfos, newInfos, transition) {
     this._super(...arguments);
-    if (!['login', 'signup', 'validate', 'forgot', 'reset'].includes(transition.targetName)) {
+    if (!['login', 'signup', 'validate', 'forgot', 'reset', 'set-password'].includes(transition.targetName)) {
       this.get('session').set('attemptedTransition', transition);
     }
   },
