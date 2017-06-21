@@ -120,7 +120,7 @@ test('Signing in with non-existing email shows form level error message', functi
 
   andThen(() => {
     assert.equal(currentSession(this.application).get('isAuthenticated'), false);
-    assert.equal(find('.account-form-heading').text().trim(), 'Log in to WNYC');
+    assert.equal(find('.account-form-heading').text().trim(), 'Log in to WQXR');
     assert.equal(find('.account-form-error').length, 1);
     assert.ok(find('.account-form-error').text().indexOf(EMAIL) > 0, 'error message contains email address');
   });
