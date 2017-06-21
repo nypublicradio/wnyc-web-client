@@ -106,6 +106,26 @@ test('Signing in with social only account shows form level error message', funct
   });
 });
 
+test('Signing in with non-existing email shows form level error message', function(assert) {
+  const EMAIL = 'doesnotexist@example.com';
+  server.post(`${config.wnycAuthAPI}/v1/session`, () => {
+    return new Response(400, {}, {errors: {code: "UserNotFoundException"}});
+  });
+
+  visit('/login');
+
+  fillIn('input[name=email]', EMAIL);
+  fillIn('input[name=password]', 'password123');
+  click('button[type=submit]:contains(Log in)');
+
+  andThen(() => {
+    assert.equal(currentSession(this.application).get('isAuthenticated'), false);
+    assert.equal(find('.account-form-heading').text().trim(), 'Log in to WNYC');
+    assert.equal(find('.account-form-error').length, 1);
+    assert.ok(find('.account-form-error').text().indexOf(EMAIL) > 0, 'error message contains email address');
+  });
+});
+
 skip('Clicking logout hides privileged links', function(assert) {
   server.create('django-page', {id: 'fake/'});
   server.create('django-page', {id: 'fake/'});
