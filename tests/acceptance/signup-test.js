@@ -1,4 +1,5 @@
 import { test } from 'qunit';
+import djangoPage from 'wnyc-web-client/tests/pages/django-page';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import { Response } from 'ember-cli-mirage';
 import 'wnyc-web-client/tests/helpers/with-feature';
