@@ -1,4 +1,5 @@
 import { test } from 'qunit';
+import djangoPage from 'wnyc-web-client/tests/pages/django-page';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import { Response } from 'ember-cli-mirage';
 import 'wnyc-web-client/tests/helpers/with-feature';
@@ -24,6 +25,8 @@ test('visiting /signup', function(assert) {
 test("can't visit /signup when authenticated", function(assert) {
   server.create('user');
   authenticateSession(this.application, {access_token: 'foo'});
+  let page = server.create('django-page', {id: '/'});
+  djangoPage.bootstrap(page);
 
   visit('/signup');
 
@@ -62,7 +65,8 @@ test('Sign up with Facebook button is visible at load', function(assert) {
 });
 
 test('Successful facebook login redirects', function(assert) {
-  let user = server.create('user');
+  server.create('django-page', {id: '/'});
+  let user = server.create('user', 'facebook');
   registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
   withFeature('socialAuth');
   visit('/signup');
@@ -70,7 +74,7 @@ test('Successful facebook login redirects', function(assert) {
   click('button:contains(Sign up with Facebook)');
 
   andThen(() => {
-    assert.equal(currentURL(), '/');
+    assert.ok(/^index(_loading)?$/.test(currentRouteName()));
     assert.ok(currentSession(this.application).get('isAuthenticated'), 'Session is authenticated');
     assert.equal(find('.user-nav-greeting').text().trim(), user.given_name);
     assert.equal(find('.user-nav-avatar > img').attr('src'), user.picture);

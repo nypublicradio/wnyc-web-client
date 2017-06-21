@@ -63,7 +63,7 @@ test('it logs a homepage bucket event when you click a story on the home page', 
         <h4 class="bucket-title">Top Stories</h4>
         <ul id="home-primary">
           <li class="first last">
-            <a href="http:${config.wnycURL}/${id}" id="test-link">story link</a>
+            <a href="${config.wnycURL}/${id}" id="test-link">story link</a>
           </li>
         </ul>
       </div>

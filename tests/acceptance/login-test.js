@@ -26,6 +26,8 @@ test('visiting /login', function(assert) {
 test("can't visit /login when authenticated", function(assert) {
   server.create('user');
   authenticateSession(this.application, {access_token: 'foo'});
+  let page = server.create('django-page', {id: '/'});
+  djangoPage.bootstrap(page);
 
   visit('/login');
 
@@ -132,12 +134,17 @@ test('Log in with Facebook button is visible at load', function(assert) {
 });
 
 test('Successful facebook login redirects', function(assert) {
-  let user = server.create('user');
+  let user = server.create('user', 'facebook');
   registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
   withFeature('socialAuth');
+  let page = server.create('django-page', {id: '/'});
+  djangoPage.bootstrap(page);
+
   visit('/login');
 
-  click('button:contains(Log in with Facebook)');
+  andThen(() => {
+    click('button:contains(Log in with Facebook)');
+  });
 
   andThen(() => {
     assert.equal(currentURL(), '/');

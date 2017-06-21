@@ -226,6 +226,29 @@ export default function() {
     }
   });
 
+  let unauthorizedAccessException = {
+    "errors": {
+      "code": "UnauthorizedAccess",
+      "message": "User account has expired, it must be reset by an administrator."
+    }
+  };
+
+  this.post('/v1/password/change-temp', (schema, request) => {
+    let params = JSON.parse(request.requestBody);
+    if (!params.temp || params.temp === "expired") {
+      return new Response(401, {}, unauthorizedAccessException);
+    } else {
+      return new Response(200);
+    }
+  });
+
+  this.post('/v1/password/send-temp', (schema, request) => {
+    if (!request.requestHeaders.Authorization && !request.requestHeaders.authorization) {
+      return new Response(401);
+    }
+    return new Response(200);
+  });
+
   this.get('/v1/confirm/resend-attr', (schema, request) => {
     if (!request.requestHeaders.Authorization && !request.requestHeaders.authorization) {
       return new Response(401);
