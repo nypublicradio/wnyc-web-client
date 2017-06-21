@@ -50,7 +50,6 @@ export default Controller.extend({
   },
 
   requestTempPassword(email) {
-    console.log('email', email);
     return new RSVP.Promise((resolve, reject) => {
       let headers = {'Content-Type': 'application/json'};
       this.get('session').authorize('authorizer:nypr', (header, value) => {

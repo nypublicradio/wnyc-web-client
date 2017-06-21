@@ -142,10 +142,12 @@ test('Successful facebook login redirects', function(assert) {
 
   visit('/login');
 
-  click('button:contains(Log in with Facebook)');
+  andThen(() => {
+    click('button:contains(Log in with Facebook)');
+  });
 
   andThen(() => {
-    assert.ok(/^index(_loading)?$/.test(currentRouteName()));
+    assert.equal(currentURL(), '/');
     assert.ok(currentSession(this.application).get('isAuthenticated'), 'Session is authenticated');
     assert.equal(find('.user-nav-greeting').text().trim(), user.given_name);
     assert.equal(find('.user-nav-avatar > img').attr('src'), user.picture);
