@@ -2348,7 +2348,7 @@ ember-body-class@0.4.0:
   dependencies:
     ember-cli-babel "^5.0.0"
 
-ember-changeset-validations@^1.2.7:
+ember-changeset-validations@^1.2.6, ember-changeset-validations@^1.2.7:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/ember-changeset-validations/-/ember-changeset-validations-1.2.7.tgz#5791fef334b2693165017d82c091f3a6c6a6f184"
   dependencies:
@@ -3079,6 +3079,12 @@ ember-inflector@^1.9.2, ember-inflector@^1.9.4:
   resolved "https://registry.yarnpkg.com/ember-inflector/-/ember-inflector-1.12.1.tgz#d8bd2ca2f327b439720f89923fe614d46b5da1ca"
   dependencies:
     ember-cli-babel "^5.1.7"
+
+ember-keyboard@2.1.9:
+  version "2.1.9"
+  resolved "https://registry.yarnpkg.com/ember-keyboard/-/ember-keyboard-2.1.9.tgz#52a810b749d23ca5bafd4484fd101bf0b73811ab"
+  dependencies:
+    ember-cli-babel "^5.1.6"
 
 ember-load-initializers@^0.5.1:
   version "0.5.1"
@@ -5829,10 +5835,10 @@ number-is-nan@^1.0.0:
 
 nypr-account-settings@nypublicradio/nypr-account-settings:
   version "0.0.0"
-  resolved "https://codeload.github.com/nypublicradio/nypr-account-settings/tar.gz/ab2642b0348530cbd65eb7ccd68e72a3018ad800"
+  resolved "https://codeload.github.com/nypublicradio/nypr-account-settings/tar.gz/dcaf43565a7a03954720f7aba18cc6e66b2ed1fa"
   dependencies:
     ember-changeset "^1.2.3"
-    ember-changeset-validations "^1.2.6"
+    ember-changeset-validations "^1.2.7"
     ember-cli-babel "^5.1.7"
     ember-cli-compass-compiler "^0.5.0"
     ember-cli-htmlbars "^1.1.1"
@@ -5852,7 +5858,6 @@ nypr-player@nypublicradio/nypr-player:
   dependencies:
     ember-cli-babel "^5.1.7"
     ember-cli-htmlbars "^1.0.10"
-    ember-keyboard "2.1.9"
 
 nypr-ui@nypublicradio/nypr-ui:
   version "0.0.0"
