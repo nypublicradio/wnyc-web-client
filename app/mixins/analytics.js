@@ -29,9 +29,15 @@ export default Mixin.create({
 
   _trackPage() {
     scheduleOnce('afterRender', this, () => {
+      let page;
+      let is404 = this.currentRouteName === 'missing';
+      let title = document.title;
       const metrics = get(this, 'metrics');
-      const page = document.location.pathname + document.location.search; // e.g. '/shows/bl/?q=foo'
-      const title = document.title; // this should be something dynamic
+      if (is404) {
+        page = this.get('dataPipeline.currentReferrer').replace(/http:\/\/[^/]+/, '');
+      } else {
+        page = document.location.pathname + document.location.search; // e.g. '/shows/bl/?q=foo'
+      }
 
       metrics.trackPage('GoogleAnalytics', { page, title });
       metrics.trackPage('GoogleTagManager', { page, title });
