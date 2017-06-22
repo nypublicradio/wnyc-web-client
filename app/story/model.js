@@ -31,16 +31,20 @@ export default Model.extend({
   // TODO: make this a relationship when stories come in only over /api/v3
   // right now they're still consumed from HTML and as part of listing pages
   // imageMain: DS.belongsTo('image'),
-  imageMain: DS.attr(),
+  imageMain: attr(),
   itemType: attr('string'),
   itemTypeId: attr('number'),
   isLatest: attr('boolean'),
   largeTeaseLayout: attr('boolean'),
+  playlist: attr(),
+  podcastLinks: attr(),
+  producingOrganizations: attr(),
   publishAt: attr('string'),
+  segments: attr(),
   series: attr(),
   show: attr('string'),
   slug: attr('string'),
-  segments: attr(),
+  slideshow: attr(),
   tease: attr('string'),
   template: attr('string'),
   tags: attr(),
@@ -49,6 +53,7 @@ export default Model.extend({
   twitterHeadline: attr('string'),
   twitterHandle: attr('string'),
   url: attr('string'),
+  video: attr('string'),
   body: attr('string'),
   bodyDjango: computed ('body', function() {
     let text = get(this, 'body');
