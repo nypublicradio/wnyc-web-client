@@ -1,8 +1,10 @@
+import Ember from 'ember';
 import Controller from 'ember-controller';
 import service from 'ember-service/inject';
 import config from 'wqxr-web-client/config/environment';
-import { task } from 'ember-concurrency';
+import { task, waitForEvent } from 'ember-concurrency';
 import get from 'ember-metal/get';
+import set from 'ember-metal/set';
 import fetch from 'fetch';
 import RSVP from 'rsvp';
 
@@ -11,7 +13,7 @@ const FLASH_MESSAGES = {
   password: 'Your password has been updated.'
 };
 
-export default Controller.extend({
+export default Controller.extend(Ember.Evented, {
   session: service(),
   flashMessages: service(),
   torii: service(),
@@ -105,6 +107,14 @@ export default Controller.extend({
   },
 
   resendVerificationEmail() {
+    return get(this, 'resendVerificationTask').perform();
+  },
+
+  resendVerificationTask: task(function * () {
+    let provider = get(this, 'session.data.authenticated.provider');
+    if (provider) {
+      yield get(this, 'promptForPassword').perform();
+    }
     let url = `${config.wnycAuthAPI}/v1/confirm/resend-attr`;
     let headers = {'Content-Type': 'application/json'};
     this.get('session').authorize('authorizer:nypr', (header, value) => {
@@ -122,7 +132,38 @@ export default Controller.extend({
         reject();
       });
     });
-  },
+  }),
+
+  promptForPassword: task(function * () {
+    Ember.$('body').addClass('has-nypr-account-modal-open');
+    try {
+      yield waitForEvent(this, 'passwordVerified');
+    } finally {
+      Ember.$('body').removeClass('has-nypr-account-modal-open');
+      set(this, 'password', null);
+    }
+  }).drop(),
+
+  verifyPassword: task(function * () {
+    let password = get(this, 'password');
+    if (!password) {
+      set(this, 'passwordError', ["Password can't be blank."]);
+    } else {
+      try {
+        // attempt to authenticate with cognito
+        yield get(this, 'session').authenticate('authenticator:nypr', get(this, 'model.email'), password);
+        this.trigger('passwordVerified');
+      } catch(e) {
+        if (e && get(e, 'error.message')) {
+          set(this, 'passwordError', [get(e, 'error.message')]);
+        } else {
+          //temp
+          let messages = {passwordIncorrect: 'incorrect password'};
+          set(this, 'passwordError', [messages.passwordIncorrect]);
+        }
+      }
+    }
+  }),
 
   actions: {
     disableAccount() {
@@ -142,6 +183,10 @@ export default Controller.extend({
 
     updateEmailStatus(email) {
       this.get('setEmailPendingStatus').perform(email);
+    },
+
+    endTask(taskName) {
+      get(this, taskName).cancelAll();
     },
 
     linkFacebookAccount() {

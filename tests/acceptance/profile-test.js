@@ -274,3 +274,95 @@ test('creating email from fb account', function(assert) {
   });
 });
 
+test('resend verification email when authenticated via username/password', function(assert) {
+  withFeature('member-center');
+  // Logged in username/password user
+  server.create('user');
+  authenticateSession(this.application, {access_token: 'secret'});
+  // Account is pending verification
+  server.get(`${config.wnycMembershipAPI}/v1/emails/is-verified/`, () => {
+    return new Response(200, {}, {data: {is_verified: false}});
+  });
+
+  let requests = [];
+  server.get(`${config.wnycAuthAPI}/v1/confirm/resend-attr`, (schema, request) => {
+    requests.push(request);
+    return new Response(200);
+  });
+
+  visit('/profile');
+
+  andThen(() => {
+    click('.resend-button');
+  });
+
+  andThen(() => {
+    assert.equal(requests.length, 1, 'it should call resend api url once');
+    assert.equal(requests[0].requestHeaders["authorization"], "Bearer secret", 'it should send an auth token');
+    assert.strictEqual(requests[0].requestHeaders["x-provider"], undefined, 'it should not send a provider header');
+  });
+});
+
+test('resend verification email when authenticated via facebook', function(assert) {
+  const PW = 'abcdef123456';
+  withFeature('member-center');
+  // Logged in facebook user
+  server.create('user', 'facebook');
+  authenticateSession(this.application, {access_token: 'secret', provider: 'facebook-connect'});
+  // Account is pending verification
+  server.get(`${config.wnycMembershipAPI}/v1/emails/is-verified/`, () => {
+    return new Response(200, {}, {data: {is_verified: false}});
+  });
+
+  let requests = [];
+  server.get(`${config.wnycAuthAPI}/v1/confirm/resend-attr`, (schema, request) => {
+    requests.push(request);
+    return new Response(200);
+  });
+
+  visit('/profile');
+
+  andThen(() => {
+    click('.resend-button');
+    fillIn('[name=passwordForVerifyEmail]', PW);
+    click('[data-test-selector=check-pw-verify]');
+  });
+
+  andThen(() => {
+    assert.equal(requests.length, 1, 'it should call resend api url once');
+    assert.equal(requests[0].requestHeaders["authorization"], "Bearer secret", 'it should send an auth token');
+    assert.strictEqual(requests[0].requestHeaders["x-provider"], undefined, 'it should not send a provider header');
+  });
+});
+
+test('resend verification email when authenticated via facebook fails on bad password', function(assert) {
+  const PW = 'abcdef123456';
+  withFeature('member-center');
+  // Logged in facebook user
+  server.create('user', 'facebook');
+  authenticateSession(this.application, {access_token: '123456', provider: 'facebook-connect'});
+  // Account is pending verification
+  server.get(`${config.wnycMembershipAPI}/v1/emails/is-verified/`, () => {
+    return new Response(200, {}, {data: {is_verified: false}});
+  });
+  // Unauthorized / Bad password
+  server.post('/v1/session', {}, 401);
+
+  let requests = [];
+  server.get(`${config.wnycAuthAPI}/v1/confirm/resend-attr`, (schema, request) => {
+    requests.push(request);
+    return new Response(200);
+  });
+
+  visit('/profile');
+
+  andThen(() => {
+    click('.resend-button');
+    fillIn('[name=passwordForVerifyEmail]', PW);
+    click('[data-test-selector=check-pw-verify]');
+  });
+
+  andThen(() => {
+    assert.equal(requests.length, 0, 'it should not call resend api url');
+  });
+});

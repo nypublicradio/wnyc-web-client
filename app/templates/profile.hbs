@@ -74,7 +74,7 @@
   {{#nypr-account-modal as |m|}}
     {{#m.body}}
     <p>
-      Your online WQXR account has been deactivated.
+      Your online {{siteName}} account has been deactivated.
     </p>
     {{/m.body}}
 
@@ -86,3 +86,34 @@
     {{/m.footer}}
   {{/nypr-account-modal}}
 {{/if}}
+
+{{#if promptForPassword.isRunning}}
+  {{#nypr-account-modal title="Enter your Password" closeAction=(action 'endTask' 'promptForPassword') as |m|}}
+    <form {{action (perform verifyPassword) on='submit'}}>
+    {{#m.body}}
+      <p>
+        You must re-enter your password to verify your account.
+      </p>
+      {{nypr-input
+        label='Password'
+        type='password'
+        fieldname='passwordForVerifyEmail'
+        placeholder='Enter your password'
+        value=password
+        helplinkUrl="/forgot"
+        helplinkText="Forgot Password?"
+        errors=passwordError
+        showError=true
+      }}
+    {{/m.body}}
+
+    {{#m.footer}}
+      <button
+        class="nypr-account-confirm"
+        data-test-selector="check-pw-verify"
+        >Submit</button>
+    {{/m.footer}}
+  </form>
+  {{/nypr-account-modal}}
+{{/if}}
+
