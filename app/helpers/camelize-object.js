@@ -12,7 +12,7 @@ export function camelizeObj(source) {
     for (var prop in source){
       let newKey = prop.camelize();
       dest[newKey] = camelizeObj(source[prop]);
-    } 
+    }
   } else {
     dest = source;
   }

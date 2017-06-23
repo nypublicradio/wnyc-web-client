@@ -29,7 +29,6 @@ export default DS.JSONAPISerializer.extend({
       if (payload.data.attributes && payload.data.attributes.hasOwnProperty(prop)){
         payload.data.attributes[prop] = camelizeObj(payload.data.attributes[prop]);
       }
-      
     }
 
     return this._super(store, primaryModelClass, payload, id, requestType);
