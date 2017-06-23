@@ -505,6 +505,10 @@
     word-break: break-word;
 }
 
+.text--nowrap {
+  white-space: nowrap;
+}
+
 .text--upper {
   text-transform: uppercase;
 }
