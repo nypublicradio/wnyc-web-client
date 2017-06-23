@@ -11,6 +11,7 @@ export function dasherizeKeys(attributes) {
 
 //dasherized versions of names in model bc they haven't been processsed yet
 const propertiesWithChildren = [
+'appearances',
 'chunks',
 'headers',
 'image-main',
