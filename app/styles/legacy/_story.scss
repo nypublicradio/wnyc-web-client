@@ -14,7 +14,6 @@ article section {
     font-size: 18px;
     line-height: 1.875rem;
   }
-  
   a {
     // Need those extra `a` styles and !important because of a django override
     border-bottom: .08em solid rgba(black, .1) !important;
