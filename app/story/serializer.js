@@ -3,6 +3,7 @@ import { camelizeObj } from 'wqxr-web-client/helpers/camelize-object';
 
 //dasherized versions of names in model bc they haven't been processsed yet
 const propertiesWithChildren = [
+  'appearances',
   'chunks',
   'headers',
   'image-main',
