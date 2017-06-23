@@ -95,7 +95,8 @@ module.exports = function(environment) {
       }
     },
     flashMessageDefaults: {
-      preventDuplicates: true
+      preventDuplicates: true,
+      timeout: 10000
     },
     queueAudioBumperURL: 'http://audio.wnyc.org/streambumper/streambumper000008_audio_queue.mp3',
     siteSlug: 'wnyc',
