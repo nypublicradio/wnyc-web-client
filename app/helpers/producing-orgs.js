@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import get from 'ember-metal/get';
 const {
   Helper
 } = Ember;
@@ -10,14 +11,14 @@ export function producingOrgs([ orgsList ]/*, hash*/, {unlinked=false}={}) {
     let line = '';
     
     if (unlinked){
-      line = org.name;
+      line = get(org,'name');
     } else {
-      line = `<a href="${org.url}" target="_blank" class="link link--dark">${org.name}</a>`;
+      line = `<a href="${get(org, 'url')}" target="_blank" class="link link--dark">${get(org, 'name')}</a>`;
     }
 
-    if (idx === orgsList.length - 2){
+    if (idx === get(orgsList, 'length') - 2){
       line += ' and ';
-    } else if (idx < orgsList.length - 1){
+    } else if (idx < get(orgsList, 'length') - 1){
       line += ', ';
     }
 

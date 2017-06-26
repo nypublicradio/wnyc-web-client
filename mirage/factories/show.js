@@ -11,18 +11,7 @@ function generateProducingOrg() {
   };
 }
 
-function generateLogo() {
-  return {
-    creditsUrl: '',
-    template: faker.image.image(135, 135),
-    crop: 'c'
-  };
-}
-
 export default Factory.extend({
-  id(id) {
-    return `shows/${this.firstPage}-${id}/`;
-  },
   slug: () => slugify(faker.name.findName()),
   about: {
     body: '<h1>About</h1>'
@@ -39,19 +28,6 @@ export default Factory.extend({
 
     return org;
   },
-  logoImage: generateLogo,
   tease: faker.lorem.sentences,
-  firstPage: 'list',
-
-  sidebarChunks() {
-    return [
-      {
-        "content": "I'm a top chunk",
-        "position": "top"
-      }
-    ];
-  },
-  listingObjectType: 'show',
-  socialLinks: [],
   isFeatured: false,
 });

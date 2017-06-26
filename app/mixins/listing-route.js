@@ -2,13 +2,16 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
 
+
 const {
   Mixin,
   get,
-  set,
+  setProperties,
   isEmpty,
   $,
+  Inflector
 } = Ember;
+const inflect = new Inflector(Inflector.defaultRules);
 
 export default Mixin.create({
   pageNumbers:  service(),
@@ -23,7 +26,8 @@ export default Mixin.create({
 
   beforeModel() {
     let channelType = this.routeName.split('.')[0]
-    set(this, 'channelType', channelType)
+    let channelPathName = inflect.pluralize(channelType.split('-')[0]);
+    setProperties(this, {channelType, channelPathName});
   },
 
   afterModel(model) {

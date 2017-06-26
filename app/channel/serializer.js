@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 
 export default DS.JSONAPISerializer.extend({
-  normalizeResponse(store, typeClass, payload, id) {
+  normalizeResponse(store, typeClass, payload, id, requestType) {
     let featuredStory = payload.data.attributes.featured;
     delete payload.data.attributes.featured;
     payload.included = payload.included || [];
@@ -12,7 +12,7 @@ export default DS.JSONAPISerializer.extend({
       type: 'api-response',
       id: `${id}about/1`,
       relationships: {
-        aboutPage: {
+        'about-page': {
           data: {
             type: 'about-page', id: `${id}about`
           }
@@ -26,7 +26,13 @@ export default DS.JSONAPISerializer.extend({
     });
 
     if (featuredStory) {
-      this.store.push({data: {attributes: featuredStory, type: 'story', id: featuredStory.id}});
+      let story = {
+        type: 'story',
+        id: featuredStory.id,
+        attributes: featuredStory
+      };
+      
+      payload.included.push(story);
 
       payload.data.relationships = {
         featured: {
@@ -37,7 +43,6 @@ export default DS.JSONAPISerializer.extend({
         }
       };
     }
-    return payload;
+    return this._super(store, typeClass, payload, id, requestType);
   }
 });
-

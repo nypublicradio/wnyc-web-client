@@ -68,7 +68,7 @@ test('searching with no results /shows', function(assert) {
 });
 
 test('show routes do dfp targeting', function(/*assert*/) {
-  this.mock(this.application.__container__.lookup('route:shows').get('googleAds'))
+  this.mock(this.application.__container__.lookup('route:show').get('googleAds'))
     .expects('doTargeting')
     .once();
 
