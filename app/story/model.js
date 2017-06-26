@@ -104,7 +104,7 @@ export default Model.extend({
   commentSecurityURL(browserId) {
     let data = {
       content_type: 'cms.' + this.get('itemType'),
-      object_pk: this.get('id'),
+      object_pk: this.get('cmsPK'),
       bust_cache: Math.random()
     };
     if (browserId) {
