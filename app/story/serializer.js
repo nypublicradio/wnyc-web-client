@@ -18,6 +18,7 @@ const propertiesWithChildren = [
 'playlist',
 'producing-organizations',
 'segments',
+'series',
 ];
 
 export default DS.JSONAPISerializer.extend({

@@ -98,7 +98,9 @@
             showProducingOrgs=model.story.showProducingOrgs
             showTease=model.story.showTease
             showName=model.story.headers.brand.title }}
-            {{django-page page=model.story.pageChunks.showSidebarTop}}
+            {{#if model.story.pageChunks.showSidebarTop}}
+              {{django-page page=model.story.pageChunks.showSidebarTop}}
+            {{/if}}
           {{/nypr-story/showSidebarTop}}
         {{/if}}
 
