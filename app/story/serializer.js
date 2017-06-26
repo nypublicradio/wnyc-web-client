@@ -6,10 +6,14 @@ export default DS.JSONAPISerializer.extend({
       data: payload.results.map(result => {
         let id = result.id;
         delete result.id;
+        
+        let attributes = {};
+        Object.keys(result).forEach(key => attributes[key.dasherize()] = result[key]);
+        
         return {
           id,
           type: 'story',
-          attributes: result
+          attributes
         };
       })
     };
