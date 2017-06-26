@@ -11,7 +11,7 @@ export default Ember.Route.extend({
   model() {
     let prefs = this.get('discoverPrefs');
 
-    return this.store.query('shows', {
+    return this.store.query('show', {
       discover_station: ENV.discoverStation,
       api_key: ENV.discoverAPIKey
     }).then((shows) => {
