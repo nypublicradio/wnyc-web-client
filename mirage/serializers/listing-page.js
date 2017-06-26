@@ -1,8 +1,6 @@
 import ApplicationSerializer from './application';
 
 export default ApplicationSerializer.extend({
-  keyForAttribute: key => key,
-  keyForRelationship: key => key.dasherize(),
   include: ['apiResponse'],
   typeKeyForModel(model) {
     // This is a Mirage serialization bug, the wrong serializer
