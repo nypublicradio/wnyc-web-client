@@ -92,15 +92,13 @@
           {{django-page page=model.story.pageChunks.siteSidebarTop}}
         {{/if}}
 
-        {{#if model.story.podcastLinks}}
+        {{#if (and model.story.podcastLinks model.story.pageChunks.showSidebarTop)}}
           {{#nypr-story/showSidebarTop
             podcasts=model.story.podcastLinks
             showProducingOrgs=model.story.showProducingOrgs
             showTease=model.story.showTease
             showName=model.story.headers.brand.title }}
-            {{#if model.story.pageChunks.showSidebarTop}}
               {{django-page page=model.story.pageChunks.showSidebarTop}}
-            {{/if}}
           {{/nypr-story/showSidebarTop}}
         {{/if}}
 
