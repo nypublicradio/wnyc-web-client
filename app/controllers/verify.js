@@ -15,14 +15,12 @@ export default Controller.extend({
       if (!errorMessage) {
         flashMessages.add({
           message: 'Your email address has been successfully verified',
-          type: 'success',
-          sticky: true
+          type: 'success'
         });
       } else {
         flashMessages.add({
           message: errorMessage,
-          type: 'warning',
-          sticky: true
+          type: 'warning'
         });
       }
       this.transitionToRoute('profile');
