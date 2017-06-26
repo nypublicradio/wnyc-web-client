@@ -1,6 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('controller:shows', 'Unit | Controller | shows', {
+moduleFor('controller:show', 'Unit | Controller | show', {
   // Specify the other units that are required for this test.
   needs: ['service:metrics', 'service:session', 'service:data-pipeline']
 });

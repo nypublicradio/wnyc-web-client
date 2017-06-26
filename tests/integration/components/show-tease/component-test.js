@@ -10,7 +10,7 @@ test('it renders', function(assert) {
   const testShow = {
     'title': 'All Things Considered',
     'tease': "A wrap-up of the day's news, with features and interviews.",
-    "logoImage": {
+    "image": {
       "creditsUrl": "",
       "name": "1/2DQ_1400X1400_NoWNYCSTUDIOS_2.png",
       "source": null,
