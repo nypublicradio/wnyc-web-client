@@ -1,9 +1,9 @@
 <div class="l-constrained">
-  <h1>{{uslug}} archive</h1>
+  <h1 data-test-selector="title">{{uslug}} archive</h1>
 
   <p>
     sort order:
-    <select onchange={{action 'updateOrder'}}>
+    <select data-test-selector="sort" onchange={{action 'updateOrder'}}>
       {{#each sortOptions as |opt|}}
       <option selected={{eq opt.value ordering}} value={{opt.value}}>
         {{opt.label}}
@@ -12,7 +12,7 @@
     </select>
     
     page size:
-    <select onchange={{action 'updatePageSize'}}>
+    <select data-test-selector="page-size" onchange={{action 'updatePageSize'}}>
       {{#each pageOptions as |count|}}
       <option selected={{eq count pageSize}} value={{count}}>
         {{count}}
@@ -21,7 +21,7 @@
     </select>
   </p>
   
-  <p>
+  <p data-test-selector="dates">
     {{#if showYears}}
       <strong>Year: </strong>
       {{#each years as |year|}}
@@ -57,7 +57,7 @@
     {{/if}}
   </p>
 
-  <ul>
+  <ul data-test-selector="story-list">
   {{#each model as |story|}}
     <li>
       <h2>{{link-to story.title 'story' story.slug class='link--underline'}} <small>{{moment-format story.newsdate 'LL'}}</small></h2>
