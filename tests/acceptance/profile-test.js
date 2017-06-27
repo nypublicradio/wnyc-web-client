@@ -408,7 +408,7 @@ test('logged in with fb account shows manage link', function(assert) {
   visit('/profile');
 
   andThen(function() {
-    assert.ok(find('a:contains(Manage Facebook connection)'));
+    assert.equal(find('.nypr-social-connect__link').length, 1);
   });
 });
 
@@ -419,6 +419,6 @@ test('logged in without fb account does not show manage link', function(assert) 
   visit('/profile');
 
   andThen(function() {
-    assert.notOk(find('a:contains(Manage Facebook connection)'));
+    assert.equal(find('.nypr-social-connect__link').length, 0);
   });
 });
