@@ -400,3 +400,25 @@ test('resend set password email when have not set a password yet', function(asse
     assert.equal(JSON.parse(setTempPasswordRequests[0].requestBody).email, user.email, 'it should call the send-temp api url with the users email address');
   });
 });
+
+test('logged in with fb account shows manage link', function(assert) {
+  server.create('user', 'facebook');
+  authenticateSession(this.application, {access_token: 'foo'});
+
+  visit('/profile');
+
+  andThen(function() {
+    assert.ok(find('a:contains(Manage Facebook connection)'));
+  });
+});
+
+test('logged in without fb account does not show manage link', function(assert) {
+  server.create('user');
+  authenticateSession(this.application, {access_token: 'foo'});
+
+  visit('/profile');
+
+  andThen(function() {
+    assert.notOk(find('a:contains(Manage Facebook connection)'));
+  });
+});
