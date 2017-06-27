@@ -157,9 +157,7 @@ export default Controller.extend(Ember.Evented, {
         if (e && get(e, 'error.message')) {
           set(this, 'passwordError', [get(e, 'error.message')]);
         } else {
-          //temp
-          let messages = {passwordIncorrect: 'incorrect password'};
-          set(this, 'passwordError', [messages.passwordIncorrect]);
+          set(this, 'passwordError', ["This password is incorrect."]);
         }
       }
     }
