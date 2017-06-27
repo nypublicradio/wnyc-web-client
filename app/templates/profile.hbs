@@ -35,7 +35,10 @@
         siteDomain=siteDomain
         user=model
         emailIsPendingVerification=emailIsPendingVerification
-        resendVerificationEmail=(action resendVerificationEmail)
+        resendVerificationEmail=(if model.hasPassword
+          (action resendVerificationEmail)
+          (action requestTempPassword model.email)
+        )
         class='nypr-membership-info-body'}}
     {{/if}}
   </div>
