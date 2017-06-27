@@ -12,5 +12,11 @@ export default Factory.extend({
     picture: faker.internet.avatar,
     "custom:facebook_id": 1234,
     status: 'FORCE_CHANGE_PASSWORD'
+  }),
+
+  connected: trait({
+    picture: faker.internet.avatar,
+    "custom:facebook_id": 1234,
+    status: 'CONFIRMED'
   })
 });
