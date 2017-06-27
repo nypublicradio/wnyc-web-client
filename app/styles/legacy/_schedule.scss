@@ -1,64 +1,126 @@
+
 .scheduled-item-link,
 .program .tease {
   display: none;
 }
 
 .print-schedule a {
-	margin: -78px 5px 0 0 !important;
-  color: $gray;
-  font-size: 12px;
-  
+	margin: -96px 5px 0 0 !important;
+  color: $lightgray;
+  font-weight: 600;
+  border: 0;
+
   &:hover {
     color: $blue;
   }
 }
 
-.station-nav {
+
+#daily-schedule .station-nav {
   margin-top: 10px;
   height: auto !important;
   border: none !important;
-  
-  ul.schedule-tabs li a {    
-    font-weight: 600;
+  margin-bottom: 20px;
+
+  ul.schedule-tabs {
+    width: 100%;
+    overflow-x: scroll;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    border-bottom: 1px solid $line--light;
+    @include flexbox((
+      display: flex
+    ));
+
+    li a {
+      font-weight: 600;
+      @include fontsize(16);
+      padding: 0 0 30px 0;
+      margin: 0 25px 0 0;
+
+      @include mq($mobile) {
+        padding-bottom: 40px;
+        margin: 0 15px 0 0;
+      }
+    }
+
+    li:last-child a {
+      margin: 0;
+    }
+    /* hide the scrollbar, but keep it scrollable */
+    &::-webkit-scrollbar { 
+      display: none; 
+    }
   }
-  
+  ul.schedule-tabs li.ui-tabs-selected a {
+    color: $blue;
+    border-bottom: 3px solid $blue;
+    background: white;
+  }
+
   ul.schedule-tabs li:not(.ui-tabs-selected) a {
     color: $lightgray !important;
-    
+
     &:hover {
-      color: $red !important;
+      color: $blue !important;
     }
   }
 }
 
 ul.schedule-dates {
-  border-top: 1px solid $nearwhite;
-  border-bottom: 1px solid $nearwhite;
-  padding: 10px 0 5px 0 !important;
-    
+  padding: 10px 0 10px 0 !important;
+  width: auto !important;
+  background-color: $graywhite;
+
+  li.today {
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    font-weight: 600 !important;
+    flex: 2;
+
+    .h2 {
+      margin: 0;
+    }
+
+    > div {
+      color: $lightgray;
+    }
+  }
+
+  @include flexbox((
+    display: flex,
+    flex-wrap: wrap,
+    justify-content: space-between,
+    align-items: center
+  ));
+
   li.yesterday,
   li.tomorrow {
-    width: auto !important;
-    
+    flex: 1;
+
     a {
-      font-size: 12px !important;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-weight: 700 !important;       
+      font-size: 16px !important;
+      font-weight: 600 !important;
+      color: $lightgray;
+
+      &:hover {
+        color: $blue;
+      }
     }
-    
+
     a:hover,
     a:hover path {
       color: $blue;
       fill: $blue;
       border-color: white;
-    }    
+    }
   }
-  
+
   .action-button-icon {
     display: inline;
     position: relative;
     top: 2px;
+    padding: 0;
 
     svg {
       width: 20px;
@@ -68,16 +130,16 @@ ul.schedule-dates {
       }
     }
   }
-} 
-   
+}
+
 ul.schedule-table {
-  margin: 5px 0 0 0;
-  
+  margin: 5px 0 30px 0;
+
   .event {
     border-bottom: 1px solid $nearwhite;
     padding: 20px 0;
   }
-  
+
   li.head {
     font-size: 16px;
     font-weight: normal;
@@ -88,39 +150,54 @@ ul.schedule-table {
     height: auto;
     padding: 0;
     line-height: 27px;
-    
+    @include flexbox((
+      display: flex,
+      flex-direction: column,
+      align-items: flex-start
+    ));
+
     div.program {
       height: auto;
-      
+      @include h3;
+      font-family: "Open Sans";
+
       a {
-        font-size: 12px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: #333;
-        font-weight: 700;
-        
-        &:hover {
-          color: $blue;
-        }  
+        @include link--dark;
       }
     }
-    
-    div.time {
-      color: $lightergray;
-      font-weight: 600;
-      letter-spacing: 1px;
+
+    div.expand {
+      display: none;
     }
-    
+
+    div.time,
+    div.time-playlist {
+      width: auto;
+      color: $lightgray;
+      font-weight: 600;
+      @include fontsize(14);
+    }
+
+    div.scheduled-item-shortlink a {
+      @include h3;
+      font-family: "Open Sans";
+      @include link--dark;
+    }
+
     .arrow {
       display: none;
     }
-    
-  }
-  
 
-  li.details { 
+    .options {
+      display: none;
+    }
+
+  }
+
+
+  li.details {
     display: list-item !important;
-    
+
     .text {
       font-size: 16px;
       margin-bottom: (1.25 / 2) * 1rem;
@@ -129,15 +206,27 @@ ul.schedule-table {
         margin-bottom: (1.25 / 2) * 1rem;
       }
     }
-    
+
+    .event {
+      border: none;
+
+      .played-list .playlist-item:last-child {
+        border-bottom: none;
+      }
+
+      .played-list .playlist-item ul.playlist-actions {
+        padding-left: 0;
+      }
+    }
+
     .program {
       border: none;
       padding: 0;
-      
+
       .image {
         display: none;
       }
-      
+
       .text {
         float: left;
         margin: 0 0 0 105px;
@@ -149,68 +238,73 @@ ul.schedule-table {
   ul.hosts {
     display: none;
   }
+
 }
+
+.schedule-table li.head div.playlist-social {
+  display: none;
+}
+
+
 
 @include mq($medium-only) {
   .schedule-playlists,
-  ul.schedule-dates, 
+  ul.schedule-dates,
   #site {
     width: 100% !important;
     overflow: hidden;
   }
-  
+
   .main.schedule-playlists {
     margin: 0 0 100px 0;
   }
-  
+
   .grid_8 {
     width: 100% !important;
     margin: 0 !important;
   }
-  
+
   .print-schedule {
     display: none;
   }
-  
+
   ul.schedule-table li.details .program .text {
       margin: 0;
   }
-  
+
   .site-container .grid_4 {
     display: none;
   }
-  
+
   ul.schedule-dates {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between; 
+    justify-content: space-between;
     padding: 10px 0;
-    
-    li.yesterday,
-    li.tomorrow,
-    li.today {
-      width: auto !important;
-      padding-left: 0;
-      padding-right: 0;
-    }  
   }
-}  
+}
 
 @include mq($small-only) {
+  .schedule-table li.details .playlist-item h4,
+  .schedule-table li.details .playlist-item h3 {
+    width: auto !important;
+    float: none !important;
+  }
+
   ul.schedule-dates {
     li.yesterday a span,
     li.tomorrow a span {
       display: none;
     }
-    
+
     li.today {
       text-transform: none !important;
       letter-spacing: 0 !important;
     }
-    
+
     .action-button-icon {
       top: 0;
-      
+
       svg {
         width: 26px;
         height: 26px;
@@ -221,5 +315,5 @@ ul.schedule-table {
       }
     }
   }
-  
+
 }
