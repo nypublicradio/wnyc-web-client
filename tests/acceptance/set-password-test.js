@@ -11,8 +11,8 @@ const username = 'user1';
 const password = 'password1';
 const code = 'a1b2c3';
 const setPasswordUrl = '/set-password';
-const setPasswordUrlWithParameters = `${setPasswordUrl}?username=${username}&email=${email}&code=${code}`;
-const setPasswordUrlWithExpiredCode = `${setPasswordUrl}?username=${username}&email=${email}&code=expired`;
+const setPasswordUrlWithParameters = `${setPasswordUrl}?username=${username}&email=${email}&code=${code}&verification_token=token&email_id=email123`;
+const setPasswordUrlWithExpiredCode = `${setPasswordUrl}?username=${username}&email=${email}&code=expired&verification_token=token&email_id=email123`;
 
 test('visiting /set-password with expired code', function(assert) {
   visit(setPasswordUrlWithExpiredCode);

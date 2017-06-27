@@ -11,10 +11,12 @@ const FLASH_MESSAGES = {
 export default Controller.extend({
   session: service(),
   config: config,
-  queryParams: ['username', 'code', 'email'],
+  queryParams: ['username', 'code', 'email', 'verification_token', 'email_id'],
   username: null,
   code: null,
   email: null,
+  verification_token: null,
+  email_id: null,
   showFlash(type) {
     this.get('flashMessages').add({
       message: FLASH_MESSAGES[type],
