@@ -32,6 +32,10 @@
   @include mq($medium-and-up) {
     margin: 0px 10px;
   }
+  > img {
+    min-width: 40px;
+    min-height: 40px;
+  }
   svg {
     height: 27px;
     position: relative;

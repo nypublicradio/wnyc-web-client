@@ -189,6 +189,11 @@
     justify-content: center
   ));
 
+  > img {
+    min-width: 120px;
+    min-height: 120px;
+  }
+
   > svg {
     fill: white;
     width: 62px;
