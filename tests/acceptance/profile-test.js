@@ -275,7 +275,7 @@ test('creating email from fb account', function(assert) {
 });
 
 test('logged in with fb account shows manage link', function(assert) {
-  server.create('user', 'facebook');
+  server.create('user', 'facebook', {facebookId: '1234'});
   authenticateSession(this.application, {access_token: 'foo'});
 
   visit('/profile');
