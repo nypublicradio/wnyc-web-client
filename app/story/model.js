@@ -44,6 +44,8 @@ export default Model.extend({
   segments: attr(),
   series: attr(),
   show: attr('string'),
+  showTease: attr('string'),
+  showProducingOrgs: attr(),
   slug: attr('string'),
   slideshow: attr(),
   tease: attr('string'),
@@ -113,7 +115,7 @@ export default Model.extend({
     return `${ENV.wnycAccountRoot}/comments/security_info/?${Ember.$.param(data)}`;
   },
   nprAnalyticsDimensions: attr(),
-  analytics: computed('analyticsCode', {
+  analytics: computed('series', 'show', {
     get() {
       let analyticsCode = get(this, 'analyticsCode');
       let {channeltitle, showtitle, seriestitles, isblog, modelchar} = parseAnalyticsCode(analyticsCode);
