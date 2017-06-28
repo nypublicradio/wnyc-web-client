@@ -19,7 +19,8 @@ const propertiesWithChildren = [
 'producing-organizations',
 'segments',
 'series',
-'show-producing-orgs'
+'show-producing-orgs',
+'slideshow'
 ];
 
 export default DS.JSONAPISerializer.extend({
