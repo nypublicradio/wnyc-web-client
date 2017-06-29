@@ -7,7 +7,12 @@ export default Factory.extend({
   itemTypeId: 24,
   itemType: 'story',
   headers() {
-    return {};
+    return {
+      brand: {
+        url: faker.internet.url(),
+        title: 'The Brian Lehrer Show',
+      }
+    };
   },
   title(id) {
     return `Story ${id}`;
