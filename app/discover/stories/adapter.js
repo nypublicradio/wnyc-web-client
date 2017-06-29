@@ -9,7 +9,7 @@ const path = featureFlags['other-discover'] ? 'reco_proxy' : 'make_playlist';
 export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
   authorizer: 'authorizer:nypr',
   host: ENV.wnycAPI,
-  namespace: `api/v3/${path}/`,
+  namespace: `api/v4/${path}/`,
   session: service(),
 
   buildURL() {
