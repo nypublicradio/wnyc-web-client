@@ -1,5 +1,5 @@
 import DS from 'ember-data';
-import { camelizeObj } from 'wqxr-web-client/helpers/camelize-object';
+import { camelizeObj } from 'wnyc-web-client/helpers/camelize-object';
 
 export function dasherizeKeys(attributes) {
   let attrs = {};
