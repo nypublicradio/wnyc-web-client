@@ -3,7 +3,6 @@ import DS from 'ember-data';
 import ENV from '../config/environment';
 import get, { getProperties } from 'ember-metal/get';
 import computed from 'ember-computed';
-import parseAnalyticsCode from '../utils/analytics-code-parser';
 import { shareMetadata } from 'wqxr-web-client/helpers/share-metadata';
 const { attr, Model } = DS;
 
@@ -115,12 +114,32 @@ export default Model.extend({
     return `${ENV.wnycAccountRoot}/comments/security_info/?${Ember.$.param(data)}`;
   },
   nprAnalyticsDimensions: attr(),
-  analytics: computed('series', 'show', {
+  analytics: computed('series', 'show', 'channel', 'headers', {
     get() {
-      let analyticsCode = get(this, 'analyticsCode');
-      let {channeltitle, showtitle, seriestitles, isblog, modelchar} = parseAnalyticsCode(analyticsCode);
-      // compact first to guard against returned undefineds
-      let containers = [channeltitle, showtitle, seriestitles].compact().map((c, i) => {
+      let brandtitle = get(this, 'headers.brand.title');
+      let brandurl = get(this, 'headers.brand.url');
+      let channeltitle = null,
+          showtitle = null,
+          isblog = false,
+          seriestitles = [];
+
+      if (get(this, 'channel')){
+        channeltitle = brandtitle;
+      }
+      if (get(this, 'show')){
+        showtitle = brandtitle;
+      }
+      if (get(this, 'series')){
+        seriestitles = get(this, 'series').map((s) => {
+          return s.title;
+        });
+      }
+
+      if (brandurl && brandurl.indexOf('/blogs/') > 0 ){
+        isblog = true;
+      }
+
+      let containers = [channeltitle, showtitle, seriestitles].map((c, i) => {
         if (i === 0 && c) {
           return `${isblog ? 'Blog' : 'Article Channel'}: ${c}`;
         } else if (i === 1 && c) {
@@ -129,9 +148,7 @@ export default Model.extend({
           return `Series: ${c.join('+')}`;
         }
       }).compact().join(' | ');
-      if (modelchar === 'n' && !containers) {
-        containers = 'NPR';
-      }
+
       return {
         containers,
         title: get(this, 'title')
