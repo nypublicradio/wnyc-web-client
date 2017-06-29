@@ -22,18 +22,18 @@
 
 <div class="l-constrained l-constrained--mq-med">
 
-  <section class="aligncenter nudge-large">
-    <div class="l-skinnier--mq-med">
+  <section class="nudge-large">
       <h1 class="h1 h1--extrabold h1--mq-small nudge">All Shows</h1>
       <p class="text">Your destination for all things public radio. WNYC produces content and presents content from NPR and across the public radio ecosystem.</p>
-    </div>
   </section>
 
   <section class="shows-search">
     {{search-box placeholder="Search for a show" key-up=(action "filterShows") searchbox-class="searchbox--shows"}}
   </section>
+</div>
 
-  <section class="shows-list">
+<div class="l-constrained shows-list">
+  <section>
     {{#if noResults}}
       <div class="doubledown box box--luxe">
         <p class="text aligncenter">Sorry, but no matching shows were found. Try a different spelling or other words in the title of the show you're looking for. If you're looking for something other than a show name, try searching <a href="http://www.wnyc.org/search/">the rest of the website</a>.</p>
