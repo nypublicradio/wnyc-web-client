@@ -18,25 +18,6 @@ moduleForAcceptance('Acceptance | settings', {
   }
 });
 
-test('visiting /settings and selecting my queue as an autoplay preference', function(assert) {
-  let wqxrStream = server.schema.streams.where({slug: 'wqxr'}).models[0];
-  visit('/settings');
-
-  click('.autoplay-options .ember-power-select-trigger');
-  click('.autoplay-options .ember-power-select-option:last');
-
-  andThen(function() {
-    assert.equal(currentURL(), '/settings');
-
-    var actualStream = $('.user-stream .ember-power-select-selected-item').text().trim();
-    assert.equal(actualStream, wqxrStream.name);
-
-    var actualPref = $('.autoplay-options .ember-power-select-selected-item').text().trim();
-    var expectedPref = 'My Queue';
-    assert.equal(actualPref, expectedPref);
-  });
-});
-
 test('after visiting settings, user can select different stream', function(assert) {
   let stream = server.schema.streams.all().models[1];
   visit('/settings');
@@ -66,7 +47,7 @@ test('after visiting settings, user can toggle off autoplay settings', function(
 
   click('.toggle');
   andThen(function() {
-    var expectedElementCount = $('.autoplay-inactive').length;
+    var expectedElementCount = $('.inactive-toggle').length;
     var actualElementCount = 1;
     assert.equal(expectedElementCount, actualElementCount);
   });

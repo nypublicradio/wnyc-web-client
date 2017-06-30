@@ -27,7 +27,4 @@ test('it renders with being already authenticated', function(assert) {
   this.render(hbs`{{user-settings streams=streams}}`);
   let activeStream = this.$('.user-stream .ember-power-select-selected-item').text().trim();
   assert.equal(activeStream, 'WNYC 93.9FM');
-
-  let activePref = this.$('.autoplay-options .ember-power-select-selected-item').text().trim();
-  assert.equal(activePref, 'My Default Stream');
 });
