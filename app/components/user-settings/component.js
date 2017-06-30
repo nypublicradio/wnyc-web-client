@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   session: service(),
   autoPlayPrefs: [
     { name: 'My Default Stream', field: 'default_stream' },
-    { name: 'My Queue', field: 'queue' }
+    //{ name: 'My Queue', field: 'queue' }
   ],
 
   enableAutoplay: computed.equal('session.data.user-prefs-active-autoplay', 'no_autoplay'),
