@@ -31,5 +31,6 @@ export default Factory.extend({
       title: this.title
     };
   },
-  cmsPK: id => id + 1
+  cmsPK: id => id + 1,
+  producingOrganizations: "",
 });
