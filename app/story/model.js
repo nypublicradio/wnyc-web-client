@@ -4,6 +4,7 @@ import ENV from '../config/environment';
 import get, { getProperties } from 'ember-metal/get';
 import computed from 'ember-computed';
 import { shareMetadata } from 'wqxr-web-client/helpers/share-metadata';
+import { producingOrgs } from 'wqxr-web-client/helpers/producing-orgs';
 const { attr, Model } = DS;
 
 export default Model.extend({
@@ -114,10 +115,11 @@ export default Model.extend({
     return `${ENV.wnycAccountRoot}/comments/security_info/?${Ember.$.param(data)}`;
   },
   nprAnalyticsDimensions: attr(),
-  analytics: computed('series', 'show', 'channel', 'headers', {
+  analytics: computed('series', 'show', 'channel', 'headers', 'producingOrganizations', {
     get() {
       let brandtitle = get(this, 'headers.brand.title');
       let brandurl = get(this, 'headers.brand.url');
+      let prodOrgs = get(this, 'producingOrganizations');
       let channeltitle = null,
           showtitle = null,
           isblog = false,
@@ -139,13 +141,15 @@ export default Model.extend({
         isblog = true;
       }
 
-      let containers = [channeltitle, showtitle, seriestitles].map((c, i) => {
+      let containers = [channeltitle, showtitle, seriestitles, prodOrgs].map((c, i) => {
         if (i === 0 && c) {
           return `${isblog ? 'Blog' : 'Article Channel'}: ${c}`;
         } else if (i === 1 && c) {
           return `Show: ${c}`;
         } else if (i === 2 && c.length) {
           return `Series: ${c.join('+')}`;
+        } else if (i === 3 && Array.isArray(c) && c.length) {
+          return `Produced by ${producingOrgs([c], {unlinked:true})}`;
         }
       }).compact().join(' | ');
 
