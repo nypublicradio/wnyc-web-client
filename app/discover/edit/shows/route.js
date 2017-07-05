@@ -10,7 +10,8 @@ export default Ember.Route.extend({
 
     return this.store.query('show', {
       discover_station: ENV.discoverStation,
-      api_key: ENV.discoverAPIKey
+      api_key: ENV.discoverAPIKey,
+      'fields[show]': 'slug,title,image'
     }).then((shows) => {
       return Ember.RSVP.hash({
         shows: shows,
