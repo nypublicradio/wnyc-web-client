@@ -153,6 +153,13 @@
       margin: 0;
     }
   }
+
+  /* topics follows same style as shows, but no image */
+  ul.topics--list li.list-item--medium {
+    @include mq($small-only) {
+      padding-left: 1.5625rem;
+    }
+  }
 }
 
 .featured-show {
