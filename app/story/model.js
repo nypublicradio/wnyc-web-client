@@ -115,11 +115,37 @@ export default Model.extend({
     return `${ENV.wnycAccountRoot}/comments/security_info/?${Ember.$.param(data)}`;
   },
   nprAnalyticsDimensions: attr(),
-  analytics: computed('series', 'show', 'channel', 'headers', 'producingOrganizations', {
+  allProducingOrgs: computed('producingOrganizations', 'showProducingOrgs', function(){
+      let prodOrgs = get(this, 'producingOrganizations');
+      let showProdOrgs = get(this, 'showProducingOrgs');
+      let allProdOrgs = [];
+
+      //combine show and story prod orgs into one array without dupes
+      if (showProdOrgs.length){
+        for(var i in showProdOrgs){
+           var shared = false;
+           for (var j in prodOrgs) {
+               if (prodOrgs[j].name === showProdOrgs[i].name) {
+                   shared = true;
+                   break;
+               }
+             }
+           if(!shared) {
+            allProdOrgs.push(showProdOrgs[i]);
+          }
+        }
+        allProdOrgs = allProdOrgs.concat(prodOrgs);
+      } else {
+        allProdOrgs = prodOrgs;
+      }
+
+      return allProdOrgs;
+  }),
+  analytics: computed('series', 'show', 'channel', 'headers', 'allProducingOrgs', {
     get() {
       let brandtitle = get(this, 'headers.brand.title');
       let brandurl = get(this, 'headers.brand.url');
-      let prodOrgs = get(this, 'producingOrganizations');
+      let allProdOrgs = get(this, 'allProducingOrgs');
       let channeltitle = null,
           showtitle = null,
           isblog = false,
@@ -141,7 +167,7 @@ export default Model.extend({
         isblog = true;
       }
 
-      let containers = [channeltitle, showtitle, seriestitles, prodOrgs].map((c, i) => {
+      let containers = [channeltitle, showtitle, seriestitles, allProdOrgs].map((c, i) => {
         if (i === 0 && c) {
           return `${isblog ? 'Blog' : 'Article Channel'}: ${c}`;
         } else if (i === 1 && c) {
