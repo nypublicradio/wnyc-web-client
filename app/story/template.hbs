@@ -24,7 +24,30 @@
           </style>
           {{/if}}
 
-          {{nypr-story/header-content story=model.story audio=audio isStaff=session.data.isStaff adminURL=model.adminURL}}
+          {{#nypr-story/header-content story=model.story isStaff=session.data.isStaff adminURL=model.adminURL as |header|}}
+            {{#if model.story.audioEventually}}
+              {{#if model.story.audioAvailable}}
+                {{#header.buttons}}
+                  {{#listen-button
+                    audio=audio
+                    type='blue-boss'
+                    playConext="story-header"
+                    state=(if (eq model.story.slug audio.currentId) audio.playState)
+                    itemPK=model.story.slug
+                    itemTitle=model.story.title}}
+                    Listen <span class="text--small dimmed">{{model.story.audioDurationReadable}}</span>
+                  {{/listen-button}}
+
+                  {{#if (or model.story.audioMayDownload model.story.audioMayEmbed)}}
+                    {{nypr-story/audio-options story=model.story}}
+                  {{/if}}
+                {{/header.buttons}}
+              {{else}}
+                {{header.message}}
+              {{/if}}
+            {{/if}}
+
+          {{/nypr-story/header-content}}
 
         </header>
         <!-- .l-bgimg -->
