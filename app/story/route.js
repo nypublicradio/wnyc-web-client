@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
 import PlayParamMixin from 'wqxr-web-client/mixins/play-param';
-import { beforeTeardown } from 'wqxr-web-client/lib/compat-hooks';
 import config from 'wqxr-web-client/config/environment';
 const { get } = Ember;
 const { hash: waitFor } = Ember.RSVP;
@@ -49,12 +48,6 @@ export default Ember.Route.extend(PlayParamMixin, {
   },
   
   actions: {
-    willTransition() {
-      this._super(...arguments);
-      beforeTeardown();
-      return true;
-    },
-    
     didTransition() {
       this._super(...arguments);
       
