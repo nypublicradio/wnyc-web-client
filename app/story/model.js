@@ -116,30 +116,30 @@ export default Model.extend({
   },
   nprAnalyticsDimensions: attr(),
   allProducingOrgs: computed('producingOrganizations', 'showProducingOrgs', function(){
-      let prodOrgs = get(this, 'producingOrganizations');
-      let showProdOrgs = get(this, 'showProducingOrgs');
-      let allProdOrgs = [];
+    let prodOrgs = get(this, 'producingOrganizations');
+    let showProdOrgs = get(this, 'showProducingOrgs');
+    let allProdOrgs = [];
 
-      //combine show and story prod orgs into one array without dupes
-      if (showProdOrgs.length){
-        for(var i in showProdOrgs){
-           var shared = false;
-           for (var j in prodOrgs) {
-               if (prodOrgs[j].name === showProdOrgs[i].name) {
-                   shared = true;
-                   break;
-               }
+    //combine show and story prod orgs into one array without dupes
+    if (showProdOrgs.length){
+      for(var i in showProdOrgs){
+         var shared = false;
+         for (var j in prodOrgs) {
+             if (prodOrgs[j].name === showProdOrgs[i].name) {
+                 shared = true;
+                 break;
              }
-           if(!shared) {
-            allProdOrgs.push(showProdOrgs[i]);
-          }
+           }
+         if(!shared) {
+          allProdOrgs.push(showProdOrgs[i]);
         }
-        allProdOrgs = allProdOrgs.concat(prodOrgs);
-      } else {
-        allProdOrgs = prodOrgs;
       }
+      allProdOrgs = allProdOrgs.concat(prodOrgs);
+    } else {
+      allProdOrgs = prodOrgs;
+    }
 
-      return allProdOrgs;
+    return allProdOrgs;
   }),
   analytics: computed('series', 'show', 'channel', 'headers', 'allProducingOrgs', {
     get() {
