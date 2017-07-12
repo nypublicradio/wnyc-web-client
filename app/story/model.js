@@ -116,8 +116,8 @@ export default Model.extend({
   },
   nprAnalyticsDimensions: attr(),
   allProducingOrgs: computed('producingOrganizations', 'showProducingOrgs', function(){
-    let prodOrgs = get(this, 'producingOrganizations');
-    let showProdOrgs = get(this, 'showProducingOrgs');
+    let prodOrgs = get(this, 'producingOrganizations') || [];
+    let showProdOrgs = get(this, 'showProducingOrgs') || [];
     let allProdOrgs = [];
 
     //combine show and story prod orgs into one array without dupes
