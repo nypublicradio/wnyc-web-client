@@ -13,21 +13,6 @@ import { runOnce } from 'wnyc-web-client/services/legacy-loader';
 import { canonicalize } from 'wnyc-web-client/services/script-loader';
 const { $, get } = Ember;
 
-export function homepageCleanup(element = document.body) {
-  // remove these if they're empty, otherwise they cause layout issues
-  Array.from(element.querySelectorAll('#twitterbox, #technical-message'))
-    .forEach(n => !n.children.length && n.parentElement.removeChild(n));
-
-  // these media buttons are added to the DOM by legacy JS, so we don't want
-  // to save them to the ember data model
-  Array.from(element.querySelectorAll('.media_buttons'))
-    .forEach(n => {
-      while(n.hasChildNodes()) { n.removeChild(n.firstChild); }
-    });
-
-  return element;
-}
-
 // This gets run by the django-page component right before tearing
 // down the content.
 export function beforeTeardown(/* element, page */) {
@@ -56,11 +41,8 @@ export function beforeTeardown(/* element, page */) {
 // the content that's about to be appended) and the page model. The
 // Element is not yet inserted into any document, and you can modify
 // it here as needed.
-export function beforeAppend(element, page) {
-  if (page.get('id') === '/') {
-    element = homepageCleanup(element);
-  }
 
+export function beforeAppend(element) {
   let container = document.createElement('div');
   let legacyContent = element.querySelector('#site') || element.querySelector('#flatpage');
   if (!legacyContent) {
