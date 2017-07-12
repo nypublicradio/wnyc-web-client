@@ -145,12 +145,15 @@ export default Model.extend({
     get() {
       let brandtitle = get(this, 'headers.brand.title');
       let brandurl = get(this, 'headers.brand.url');
-      let allProdOrgs = get(this, 'allProducingOrgs');
       let channeltitle = null,
           showtitle = null,
           isblog = false,
-          seriestitles = [];
+          seriestitles = [], 
+          allProdOrgs = [];
 
+      if (get(this, 'allProducingOrgs')){
+        allProdOrgs = get(this, 'allProducingOrgs');
+      }
       if (get(this, 'channel')){
         channeltitle = brandtitle;
       }

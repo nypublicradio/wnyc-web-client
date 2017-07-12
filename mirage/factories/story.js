@@ -32,5 +32,7 @@ export default Factory.extend({
     };
   },
   cmsPK: id => id + 1,
-  producingOrganizations: "",
+  producingOrganizations: [],
+  showProducingOrgs: [],
+  allProducingOrgs: [],
 });
