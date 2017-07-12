@@ -1,0 +1,92 @@
+<div class="l-constrained">
+  <h1 data-test-selector="title">{{uslug}} archive</h1>
+
+  <p>
+    sort order:
+    <select data-test-selector="sort" onchange={{action 'updateOrder'}}>
+      {{#each sortOptions as |opt|}}
+      <option selected={{eq opt.value ordering}} value={{opt.value}}>
+        {{opt.label}}
+      </option>
+      {{/each}}
+    </select>
+    
+    page size:
+    <select data-test-selector="page-size" onchange={{action 'updatePageSize'}}>
+      {{#each pageOptions as |count|}}
+      <option selected={{eq count pageSize}} value={{count}}>
+        {{count}}
+      </option>
+      {{/each}}
+    </select>
+  </p>
+  
+  <p data-test-selector="dates">
+    {{#if showYears}}
+      <strong>Year: </strong>
+      {{#each years as |year|}}
+        {{link-to year 'archive' (query-params year=year page=1)}}{{unless (eq years.lastObject year) ' | '}}
+      {{/each}}
+    {{else if showMonths}}
+      <small>
+        {{link-to '< Back' 'archive' (query-params year=null month=null day=null page=1)}}
+      </small>
+      <h3>{{year}}</h3>
+      <strong>Month: </strong>
+      {{#each months as |month|}}
+        {{link-to (moment-format month 'MMMM' 'M') 'archive'  (query-params month=month page=1)}}{{unless (eq months.lastObject month) ' | '}}
+      {{/each}}
+    {{else if showDays}}
+      <small>
+        {{#link-to 'archive' (query-params year=year month=null day=null page=1)}}
+          &lt; {{year}}
+        {{/link-to}}
+      </small>
+      <h3>{{moment-format month 'MMMM' 'M'}} {{year}}</h3>
+      <strong>Day: </strong>
+      {{#each days as |day|}}
+        {{link-to day 'archive' (query-params day=day page=1)}}{{unless (eq days.lastObject day) ' | '}}
+      {{/each}}
+    {{else if (and year month day)}}
+      <small>
+        {{#link-to 'archive' (query-params year=year month=month day=null page=1)}}
+          &lt; {{moment-format month 'MMMM' 'M'}} {{year}}
+        {{/link-to}}
+      </small>
+      <h3>{{moment-format (concat year '-' month '-' day) 'dddd, MMMM D YYYY' 'YYYY-M-D'}}</h3>
+    {{/if}}
+  </p>
+
+  <ul data-test-selector="story-list">
+  {{#each model as |story|}}
+    <li>
+      <h2>{{link-to story.title 'story' story.slug class='link--underline'}} <small>{{moment-format story.newsdate 'LL'}}</small></h2>
+      
+      <p>
+        {{story.tease}} <small>({{story.itemType}})</small>
+      </p>
+      
+      {{#if story.segments}}
+      <h3>segments</h3>
+      <ul>
+        {{#each story.segments as |segment|}}
+        <li>
+          <h4>{{link-to segment.title 'story' segment.slug class='link--underline'}} <small>{{moment-format segment.newsdate 'LL'}}</small></h4>
+          
+          <p>
+            {{segment.tease}}
+          </p>
+        </li>
+        {{/each}}
+      </ul>
+      {{/if}}
+    
+    </li>
+  {{/each}}
+  </ul>
+
+  {{page-numbers
+    currentPage=model.meta.pagination.page
+    totalPages=model.meta.pagination.pages
+    action=(action (mut page))}}
+</div>
