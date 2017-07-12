@@ -31,24 +31,6 @@ export default DS.Model.extend({
     }
   }),
 
-  wnycContent: Ember.computed('document', function() {
-    let story = this.get('document').querySelector('#wnyc-story-jsonapi');
-    let json;
-    if (story) {
-      try {
-        json = JSON.parse(story.textContent);
-      } catch(err) {}
-    }
-    if (json) {
-      let storySerializer = this.store.serializerFor('story');
-      let storyModel = this.store.modelFor('story');
-      let { id, attributes } = json.data;
-      json.data.attributes = {};
-      Object.keys(attributes).forEach(k => json.data.attributes[k.dasherize()] = attributes[k]);
-      return this.store.push(storySerializer.normalizeSingleResponse(this.store, storyModel, json, id));
-    }
-  }),
-
   wnycChannel: Ember.computed('document', function() {
     let channel = this.get('document').querySelector('#wnyc-channel-jsonapi');
     let channelSerializer = this.store.serializerFor('channel');
