@@ -49,12 +49,6 @@ export default Ember.Route.extend(PlayParamMixin, {
   },
   
   actions: {
-    willTransition() {
-      this._super(...arguments);
-      beforeTeardown();
-      return true;
-    },
-    
     didTransition() {
       this._super(...arguments);
       
