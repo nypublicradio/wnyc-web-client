@@ -100,9 +100,6 @@ export default Model.extend({
   segmentedAudio: computed('audio', function() {
     return Array.isArray(this.get('audio'));
   }),
-  segmentCount: computed('segments', function(){
-    return this.get("segments").length;
-  }),
   commentSecurityURL(browserId) {
     let data = {
       content_type: 'cms.' + this.get('itemType'),
