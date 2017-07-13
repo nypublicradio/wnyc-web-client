@@ -53,7 +53,8 @@ export default Ember.Route.extend({
       shows:            excludedShowSlugs.join(","),
       tags:             topicTags.join(","),
       duration:         10800,
-      _nocache:         Date.now()
+      _nocache:         Date.now(),
+      'fields[story]': 'title,headers,estimated_duration,audio_duration_readable,newsdate,tease,audio,cms_pk,slug'
     }).then(stories => {
       return stories.reject(s => excludedIds.includes(s.id));
     });
