@@ -22,21 +22,21 @@ test('it displays duration in the correct format', function(assert) {
 });
 
 test('it displays the date in the correct format', function(assert) {
-  this.set('story', server.create('discover-story', {dateLineDatetime: "2016-01-01T12:00:00-04:00"}));
+  this.set('story', server.create('discover-story', {newsdate: "2016-01-01T12:00:00-04:00"}));
 
   this.render(hbs`{{discover-playlist-story-info story=story}}`);
   assert.equal(this.$('.discover-playlist-story-date').text().trim(), 'Jan 1, 2016');
 });
 
 test('it displays the date in the correct format for yesterday', function(assert) {
-  this.set('story', server.create('discover-story', {dateLineDatetime: moment().subtract(1, 'days').format()}));
+  this.set('story', server.create('discover-story', {newsdate: moment().subtract(1, 'days').format()}));
 
   this.render(hbs`{{discover-playlist-story-info story=story}}`);
   assert.equal(this.$('.discover-playlist-story-date').text().trim(), 'Yesterday');
 });
 
 test('it displays the date in the correct format for today', function(assert) {
-  this.set('story', server.create('discover-story', {dateLineDatetime: moment().format()}));
+  this.set('story', server.create('discover-story', {newsdate: moment().format()}));
 
   this.render(hbs`{{discover-playlist-story-info story=story}}`);
   assert.equal(this.$('.discover-playlist-story-date').text().trim(), 'Today');

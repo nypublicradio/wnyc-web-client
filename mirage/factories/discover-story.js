@@ -20,8 +20,7 @@ export default Factory.extend({
 
   type(i) { return faker.list.random('nprarticle', 'article')(i); },
 
-  dateLine() { return faker.date.recent(); },
-  dateLineDatetime() { return moment(faker.date.recent()).format(); },
+  newsdate() { return moment(faker.date.recent()).format(); },
 
   audioDurationReadable(i) {
     let length = Math.floor(faker.random.number.range(2, 59)(i));
