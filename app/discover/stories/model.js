@@ -1,11 +1,14 @@
 import Model from 'ember-data/model';
 import attr from  'ember-data/attr';
+import { reads } from 'ember-computed';
 
 export default Model.extend({
   title:                  attr('string'),
-  showTitle:              attr('string'),
-  showUrl:                attr('string'),
-  summary:                attr('string'),
+  headers:                attr(),
+  tease:                  attr('string'),
+  showTitle:              reads('headers.brand.title'),
+  showUrl:                reads('headers.brand.url'),
+  summary:                reads('tease'),
   newsdate:               attr('string'),
   estimatedDuration:      attr('number'),
   audioDurationReadable:  attr('string'),
