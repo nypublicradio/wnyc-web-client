@@ -365,7 +365,7 @@ test('if a show is airing, the featured story listen button says "Listen Live"',
   djangoPage
     .bootstrap(listingPage)
     .visit(listingPage);
-    
+
   andThen(() => {
     let button = find('[data-test-selector=listen-button]');
     assert.ok(button.text().match('Listen Live'));
@@ -391,8 +391,14 @@ test('metrics properly reports channel attrs', function(assert) {
   });
 
   assert.expect(2);
-  server.create('django-page', {id: listingPage.id});
 
+  server.create('django-page', {id: listingPage.id});
+<<<<<<< HEAD
+
+||||||| merged common ancestors
+
+=======
+>>>>>>> Update yarn.lock, remove unnecessary files, and fix listing test
   server.post(`${config.platformEventsAPI}/v1/events/viewed`, (schema, {requestBody}) => {
     let {
       cms_id,
@@ -447,7 +453,7 @@ test('listen buttons in story teases include data-story and data-show values', f
   djangoPage
     .bootstrap(listingPage)
     .visit(listingPage);
-    
+
   andThen(() => {
     let listenButtons = findWithAssert('.story-tease [data-test-selector=listen-button]');
     listenButtons.each((i, el) => {
