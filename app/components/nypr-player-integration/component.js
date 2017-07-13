@@ -49,6 +49,8 @@ export default Ember.Component.extend({
     }
   }),
 
+  autofocus            : true,
+
   image                : reads('currentAudio.imageMain.url'),
   fallbackImage        : reads('currentAudio.headers.brand.logoImage.url'),
   defaultImageUrl      : '/assets/img/bg/player-background.png',
