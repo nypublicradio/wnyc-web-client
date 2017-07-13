@@ -390,6 +390,7 @@ test('metrics properly reports channel attrs', function(assert) {
   });
 
   assert.expect(2);
+
   server.create('django-page', {id: listingPage.id});
   
   server.post(`${config.platformEventsAPI}/v1/events/viewed`, (schema, {requestBody}) => {
