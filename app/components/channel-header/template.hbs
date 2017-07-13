@@ -42,10 +42,15 @@
         {{{model.donateChunk}}}
 
         {{#if model.hasSubscriptionLinks}}
-          {{#dropdown-panel
-            text="Subscribe to the podcast ▾" 
-            items=model.podcastLinks as |podcast|}}
-            <i class="fa {{if (eq podcast.title 'via RSS') 'fa-rss' 'fa-mobile'}}"></i> {{podcast.title}}
+          {{#dropdown-panel direction="br" as |panel|}}
+            {{#panel.button}}Subscribe to the podcast ▾{{/panel.button}}
+            {{#panel.body}}
+              {{#each model.podcastLinks as |podcast|}}
+                <a class="panel-link text--medium link--dark" href={{podcast.href}} target="_blank">
+                  <i class="fa {{if (eq podcast.title 'via RSS') 'fa-rss' 'fa-mobile'}}"></i> {{podcast.title}}
+                </a>
+              {{/each}}
+            {{/panel.body}}
           {{/dropdown-panel}}
         {{/if}}
       </div>
