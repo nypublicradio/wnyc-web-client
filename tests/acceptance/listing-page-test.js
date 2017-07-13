@@ -150,12 +150,15 @@ test('scripts in well route content will execute', function(assert) {
 test('using a nav-link', function(assert) {
   let apiResponse = server.create('api-response', {
     id: 'shows/foo/episodes/1',
-    teaseList: server.createList('story', 10)
+    teaseList: server.createList('story', 10, {title: 'Story Title'})
   });
-  server.create('api-response', {
-    id: 'shows/foo/next-link/1',
-    teaseList: server.createList('story', 1, {title: 'Story Title'})
+
+  let teaseList = server.createList('story', 1, {title: 'Story Title'});
+  let nextLink = server.create('api-response', {
+    id: 'shows/foo/next-link/1'
   });
+
+  nextLink.teaseList = teaseList;
 
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
