@@ -53,7 +53,28 @@
         <!-- .l-bgimg -->
 
         {{#if model.story.segments}}
-          {{nypr-story/segments segments=model.story.segments segmentCount=model.story.segments.length audio=audio flush=model.story.mainImageEligible}}
+          {{#nypr-story/segments
+            segments=model.story.segments
+            segmentCount=model.story.segments.length
+            flush=model.story.mainImageEligible as |row|}}
+            {{#if row.segment.audioEventually}}
+              {{#if row.segment.audioAvailable}}
+                {{#row.buttons}}
+                  <div class="btn-group">
+                  {{listen-button  
+                    audio=audio 
+                    playContext="story-list" 
+                    itemPK=row.segment.slug
+                    itemTitle=row.segment.title
+                    state=(if (eq row.segment.slug audio.currentId) audio.playState)
+                    type="blue-circle"}}
+                  </div>
+                {{/row.buttons}}
+              {{else}}
+                {{row.message}}
+              {{/if}}
+            {{/if}}
+          {{/nypr-story/segments}}
         {{/if}}
 
         {{#if model.story.videoTemplate}}
