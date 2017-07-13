@@ -10,11 +10,8 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
   authorizer: 'authorizer:nypr',
   host: ENV.wnycAPI,
   namespace: `api/v3/${path}/`,
+  pathForType: () => '',
   session: service(),
-
-  buildURL() {
-    return [this.host, this.namespace].join('/');
-  },
 
   ajaxOptions(url, type, options) {
     options.data.discover_station = ENV.discoverStation;
