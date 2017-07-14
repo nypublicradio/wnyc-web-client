@@ -76,21 +76,7 @@ export default function() {
   this.get(`${baseUrl}/api/v3/chunks/:id/`, 'chunk');
 
   let discoverPath = config.featureFlags['other-discover'] ? 'reco_proxy' : 'make_playlist';
-  this.get(`${config.wnycAPI}/api/v3/${discoverPath}`, function(schema) {
-    let stories = schema.discoverStories.all().models;
-
-    let data = stories.map(s => {
-      return {
-        type: "Story",
-        id: s.id,
-        attributes: s
-      };
-    });
-
-    return {
-      data: data
-    };
-  });
+  this.get(`${config.wnycAPI}/api/v3/${discoverPath}`, 'discover-story');
 
   /*------------------------------------------------------------
     identity management (account) endpoints

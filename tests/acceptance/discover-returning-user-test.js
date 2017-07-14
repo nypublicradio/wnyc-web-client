@@ -176,16 +176,9 @@ test('if find more returns no more items, the old queue is present and an error 
 
     andThen(function() {
       let url = [ENV.wnycAPI, 'api/v3', discoverPath].join("/");
-      server.get(url, function() {
+      server.get(url, function(schema) {
         secondRequestCalled = true;
-        let data = server.db.discoverStories.map(s => {
-          return {
-            type: "Story",
-            id: s.id,
-            attributes: s
-          };
-        });
-        return {data: data};
+        return this.serialize(schema.discoverStories.all());
       });
 
       click(".discover-playlist-find-more");
@@ -269,16 +262,11 @@ test('if find more returns new items, the new items are displayed', function(ass
 
     let stories = server.createList('discover-story', 5);
 
-    server.get(url, function() {
+    server.get(url, function(schema) {
       secondRequestCalled = true;
-      let data = stories.map(s => {
-        return {
-          type: "Story",
-          id: s.id,
-          attributes: s
-        };
-      });
-      return {data: data};
+      let json = this.serialize(schema.discoverStories.all());
+      json.data = json.data.slice(-5);
+      return json;
     });
 
     andThen(function() {
@@ -301,16 +289,11 @@ test('if find more returns new items, the new items are displayed', function(ass
     andThen(function() {
       stories = server.createList('discover-story', 5);
       
-      server.get(url, function() {
+      server.get(url, function(schema) {
         thirdRequestCalled = true;
-        let data = stories.map(s => {
-          return {
-            type: "Story",
-            id: s.id,
-            attributes: s
-          };
-        });
-        return {data: data};
+        let json = this.serialize(schema.discoverStories.all());
+        json.data = json.data.slice(-5);
+        return json;
       });
     });
 
