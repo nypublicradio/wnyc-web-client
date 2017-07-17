@@ -2386,11 +2386,29 @@ ember-basic-dropdown@^0.32.5:
     ember-native-dom-helpers "^0.4.0"
     ember-wormhole "^0.5.1"
 
+ember-basic-dropdown@^0.33.1:
+  version "0.33.1"
+  resolved "https://registry.yarnpkg.com/ember-basic-dropdown/-/ember-basic-dropdown-0.33.1.tgz#8eab4181618d32edd88e1c90835d2a8791f09064"
+  dependencies:
+    ember-cli-babel "^6.6.0"
+    ember-cli-htmlbars "^1.1.1"
+    ember-native-dom-helpers "^0.5.0"
+    ember-wormhole "^0.5.1"
+
 ember-body-class@0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/ember-body-class/-/ember-body-class-0.4.0.tgz#0994243f9d4978ccaec287cfdbedcb78b46e28c5"
   dependencies:
     ember-cli-babel "^5.0.0"
+
+ember-changeset-validations@^1.2.6:
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/ember-changeset-validations/-/ember-changeset-validations-1.2.8.tgz#80c14fac5ee35dfff3538e6e9bc905c0686e193c"
+  dependencies:
+    ember-changeset "1.3.0"
+    ember-cli-babel "^6.0.0"
+    ember-cli-htmlbars "^1.1.1"
+    ember-validators "^1.0.0"
 
 ember-changeset-validations@^1.2.7:
   version "1.2.7"
@@ -2407,7 +2425,7 @@ ember-changeset@1.2.3:
   dependencies:
     ember-cli-babel "^5.1.6"
 
-ember-changeset@^1.2.3:
+ember-changeset@1.3.0, ember-changeset@^1.2.3:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/ember-changeset/-/ember-changeset-1.3.0.tgz#ae4cb06ae8add4550a46363263cd5958b522b9a6"
   dependencies:
@@ -2453,7 +2471,7 @@ ember-cli-babel@^5.0.0, ember-cli-babel@^5.1.10, ember-cli-babel@^5.1.3, ember-c
     ember-cli-version-checker "^1.0.2"
     resolve "^1.1.2"
 
-ember-cli-babel@^6.6.0:
+ember-cli-babel@^6.3.0, ember-cli-babel@^6.6.0:
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-6.6.0.tgz#a8362bc44841bfdf89b389f3197f104d7ba526da"
   dependencies:
@@ -2719,6 +2737,15 @@ ember-cli-htmlbars@^1.0.0, ember-cli-htmlbars@^1.0.10, ember-cli-htmlbars@^1.0.3
     hash-for-dep "^1.0.2"
     json-stable-stringify "^1.0.0"
     strip-bom "^2.0.0"
+
+ember-cli-htmlbars@^2.0.1:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/ember-cli-htmlbars/-/ember-cli-htmlbars-2.0.2.tgz#230a9ace7c3454b3acff2768a50f963813a90c38"
+  dependencies:
+    broccoli-persistent-filter "^1.0.3"
+    hash-for-dep "^1.0.2"
+    json-stable-stringify "^1.0.0"
+    strip-bom "^3.0.0"
 
 ember-cli-inject-live-reload@^1.4.1:
   version "1.6.1"
@@ -3190,6 +3217,13 @@ ember-native-dom-helpers@^0.4.0:
     broccoli-funnel "^1.1.0"
     ember-cli-babel "^6.1.0"
 
+ember-native-dom-helpers@^0.5.0:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/ember-native-dom-helpers/-/ember-native-dom-helpers-0.5.2.tgz#ba6123230fc32c3350f90a8f9183584a022215fa"
+  dependencies:
+    broccoli-funnel "^1.1.0"
+    ember-cli-babel "^6.1.0"
+
 ember-network@^0.3.0:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/ember-network/-/ember-network-0.3.1.tgz#4187988fc817d194a722039806518409d2dd72ab"
@@ -3221,6 +3255,17 @@ ember-power-select@^1.8.2:
     ember-basic-dropdown "^0.32.5"
     ember-cli-babel "^6.1.0"
     ember-cli-htmlbars "^1.1.1"
+    ember-concurrency "^0.8.1"
+    ember-text-measurer "^0.3.3"
+    ember-truth-helpers "^1.3.0"
+
+ember-power-select@^1.9.2:
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/ember-power-select/-/ember-power-select-1.9.2.tgz#abe044f4a1b578689fd45fe71f5764a1cad3eca3"
+  dependencies:
+    ember-basic-dropdown "^0.33.1"
+    ember-cli-babel "^6.6.0"
+    ember-cli-htmlbars "^2.0.1"
     ember-concurrency "^0.8.1"
     ember-text-measurer "^0.3.3"
     ember-truth-helpers "^1.3.0"
@@ -3386,6 +3431,13 @@ ember-validators@1.0.0:
   dependencies:
     ember-cli-babel "^5.1.6"
     ember-require-module "0.1.1"
+
+ember-validators@^1.0.0:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/ember-validators/-/ember-validators-1.0.3.tgz#cef76b6526d12011ab685238762e3256dad812b4"
+  dependencies:
+    ember-cli-babel "^5.1.6"
+    ember-require-module "^0.1.2"
 
 ember-waypoints@nypublicradio/ember-waypoints:
   version "0.1.0"
@@ -5887,14 +5939,15 @@ number-is-nan@^1.0.0:
 
 nypr-account-settings@nypublicradio/nypr-account-settings:
   version "0.0.0"
-  resolved "https://codeload.github.com/nypublicradio/nypr-account-settings/tar.gz/6608327cd07b92dbf70044376db14479003419fe"
+  resolved "https://codeload.github.com/nypublicradio/nypr-account-settings/tar.gz/79f1009cdd784def5bb84065ad2d90dc14477967"
   dependencies:
     ember-changeset "^1.2.3"
-    ember-changeset-validations "^1.2.6"
+    ember-changeset-validations "^1.2.7"
     ember-cli-babel "^5.1.7"
     ember-cli-compass-compiler "^0.5.0"
     ember-cli-htmlbars "^1.1.1"
     ember-concurrency "^0.8.1"
+    ember-cookies "0.0.13"
     ember-modal-dialog "0.9.1"
 
 nypr-ads@nypublicradio/nypr-ads:
@@ -5913,14 +5966,14 @@ nypr-player@nypublicradio/nypr-player:
 
 nypr-ui@nypublicradio/nypr-ui:
   version "0.0.0"
-  resolved "https://codeload.github.com/nypublicradio/nypr-ui/tar.gz/1f5ca26fb7da44445e33279f6c3a5ab19a07e7c6"
+  resolved "https://codeload.github.com/nypublicradio/nypr-ui/tar.gz/089526cdf63e41ed4fe962bc3cbfbbb972a9159d"
   dependencies:
-    ember-cli-babel "^5.1.7"
+    ember-cli-babel "^6.3.0"
     ember-cli-compass-compiler "^0.5.0"
-    ember-cli-htmlbars "^1.1.1"
-    ember-cli-htmlbars-inline-precompile "^0.3.6"
+    ember-cli-htmlbars "^2.0.1"
+    ember-cli-htmlbars-inline-precompile "^0.4.3"
     ember-holygrail-layout "^0.1.4"
-    ember-power-select "^1.8.2"
+    ember-power-select "^1.9.2"
     ivy-tabs "3.1.0"
 
 oauth-sign@~0.8.1:
@@ -7234,6 +7287,10 @@ strip-bom@^2.0.0:
   resolved "https://registry.yarnpkg.com/strip-bom/-/strip-bom-2.0.0.tgz#6219a85616520491f35788bdbf1447a99c7e6b0e"
   dependencies:
     is-utf8 "^0.2.0"
+
+strip-bom@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/strip-bom/-/strip-bom-3.0.0.tgz#2334c18e9c759f7bdd56fdef7e9ae3d588e68ed3"
 
 strip-eof@^1.0.0:
   version "1.0.0"
