@@ -27,6 +27,18 @@
           changePassword=(action changePassword)}}
       {{/if}}
 
+      {{#if model.facebookId}}
+        {{#nypr-accounts/social-card as |card|}}
+          {{card.connect-button
+            connected=true
+            providerName='Facebook'
+            providerIcon='facebook-official'
+            buttonClass='nypr-social-connect__button--facebook'
+            manageUrl='https://www.facebook.com/settings?tab=applications'
+            }}
+        {{/nypr-accounts/social-card}}
+      {{/if}}
+
     </div>
     {{#if features.memberCenter}}
       {{nypr-accounts/membership-card
