@@ -29,10 +29,8 @@
               {{#if model.story.audioAvailable}}
                 {{#header.buttons}}
                   {{#listen-button
-                    audio=audio
                     type='blue-boss'
                     playContext="story-header"
-                    state=(if (eq model.story.slug audio.currentId) audio.playState)
                     itemPK=model.story.slug
                     itemTitle=model.story.title}}
                     Listen <span class="text--small dimmed">{{model.story.audioDurationReadable}}</span>
@@ -64,11 +62,9 @@
                 {{#row.buttons}}
                   <div class="btn-group">
                   {{listen-button  
-                    audio=audio 
                     playContext="story-list" 
                     itemPK=row.segment.slug
                     itemTitle=row.segment.title
-                    state=(if (eq row.segment.slug audio.currentId) audio.playState)
                     type="blue-circle"}}
                   </div>
                 {{/row.buttons}}

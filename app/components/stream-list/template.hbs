@@ -33,7 +33,6 @@
   {{#g.right}}
     {{#if media.isMediumAndUp}}
       {{#listen-button
-        audio=audio
         type='gray-minion'
         itemPK=stream.slug
         itemTitle=stream.name}}
@@ -41,7 +40,6 @@
       {{/listen-button}}
     {{else}}
       {{listen-button
-        audio=audio
         type='blue-hollow'
         itemPK=stream.slug
         itemTitle=stream.name}}
