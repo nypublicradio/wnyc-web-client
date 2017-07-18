@@ -146,13 +146,17 @@ test('.search is added to search pages', function(assert) {
   });
 });
 
-
 test('arbitrary django routes do dfp targeting', function(/*assert*/) {
+  // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
   server.create('django-page', {id: 'fake/'});
 
-  this.mock(this.application.__container__.lookup('route:djangorendered').get('googleAds'))
-    .expects('doTargeting')
-    .once();
+  visit('/');
+  
+  andThen(() => {
+    this.mock(this.application.__container__.lookup('route:djangorendered').get('googleAds'))
+      .expects('doTargeting')
+      .once();
+  });
   
   djangoPage
     .bootstrap({id: 'fake/'})

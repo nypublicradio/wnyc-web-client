@@ -31,9 +31,15 @@ skip('using stream banner', function(assert) {
 });
 
 test('home page does dfp targeting', function(/*assert*/) {
-  this.mock(this.application.__container__.lookup('route:index').get('googleAds'))
-    .expects('doTargeting')
-    .once();
+  // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
+  visit('/foo');
+  
+  andThen(() => {
+    this.mock(this.application.__container__.lookup('route:index').get('googleAds'))
+      .expects('doTargeting')
+      .once();
+  });
   
   visit('/');
+  
 });

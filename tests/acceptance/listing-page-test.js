@@ -321,10 +321,15 @@ test('channel routes do dfp targeting', function(/*assert*/) {
   });
   server.create('api-response', { id: 'shows/foo/recent_stories/1' });
   server.create('django-page', {id: listingPage.id});
+  
+  // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
+  visit('/');
 
-  this.mock(this.application.__container__.lookup('route:show').get('googleAds'))
-    .expects('doTargeting')
-    .once();
+  andThen(() => {
+    this.mock(this.application.__container__.lookup('route:show').get('googleAds'))
+      .expects('doTargeting')
+      .once();
+  });
   
   djangoPage
     .bootstrap({id: listingPage.id})

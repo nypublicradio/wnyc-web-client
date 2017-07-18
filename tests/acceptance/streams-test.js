@@ -32,9 +32,14 @@ test('stream routes do dfp targeting', function(/*assert*/) {
   server.createList('stream', 7);
   server.createList('whats-on', 7);
   
-  this.mock(this.application.__container__.lookup('route:stream').get('googleAds'))
-    .expects('doTargeting')
-    .once();
+  // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
+  visit('/');
+
+  andThen(() => {
+    this.mock(this.application.__container__.lookup('route:stream').get('googleAds'))
+      .expects('doTargeting')
+      .once();
+  });
 
   visit('/streams');
 });

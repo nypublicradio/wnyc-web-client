@@ -56,9 +56,13 @@ skip('transitioning to a specific schedule', function(assert) {
 });
 
 test('schedule routes do dfp targeting', function(/*assert*/) {
-  this.mock(this.application.__container__.lookup('route:schedule.date').get('googleAds'))
-    .expects('doTargeting')
-    .once();
+  // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
+  visit('/');
+  andThen(() => {
+    this.mock(this.application.__container__.lookup('route:schedule.date').get('googleAds'))
+      .expects('doTargeting')
+      .once();
+  });
   let date = moment().format('YYYY/MMM/DD').toLowerCase();
   server.create('django-page', {id: `schedule/${date}/?scheduleStation=wqxr`});
 

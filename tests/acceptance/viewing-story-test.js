@@ -146,10 +146,16 @@ test('story routes do dfp targeting', function(/*assert*/) {
   
   server.create('django-page', {id, slug: story.slug});
 
-  this.mock(this.application.__container__.lookup('route:story').get('googleAds'))
-    .expects('doTargeting')
-    .once()
-    .withArgs(forDfp);
+  
+  // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
+  visit('/');
+
+  andThen(() => {
+    this.mock(this.application.__container__.lookup('route:story').get('googleAds'))
+      .expects('doTargeting')
+      .once()
+      .withArgs(forDfp);
+  });
   
   djangoPage
     .bootstrap({id})

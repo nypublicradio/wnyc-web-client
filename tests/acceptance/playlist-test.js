@@ -29,9 +29,6 @@ test('visiting /streams/wqxr', function(assert) {
 });
 
 test('playlist routes do dfp targeting', function(/*assert*/) {
-  this.mock(this.application.__container__.lookup('route:playlist').get('googleAds'))
-    .expects('doTargeting')
-    .once();
   server.create('stream', {
     slug: 'wnyc-fm939', 
     name: 'WNYC FM',
@@ -44,6 +41,14 @@ test('playlist routes do dfp targeting', function(/*assert*/) {
       url: 'http://fooshow.com',
       end: "2016-09-15T13:00:15.542Z" // 9 am
     }
+  });
+  
+  // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
+  visit('/');
+  andThen(() => {
+    this.mock(this.application.__container__.lookup('route:playlist').get('googleAds'))
+      .expects('doTargeting')
+      .once();
   });
 
   visit('/streams/wnyc-fm939');

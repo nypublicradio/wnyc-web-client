@@ -68,9 +68,14 @@ test('searching with no results /shows', function(assert) {
 });
 
 test('show routes do dfp targeting', function(/*assert*/) {
-  this.mock(this.application.__container__.lookup('route:show').get('googleAds'))
-    .expects('doTargeting')
-    .once();
+  // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
+  visit('/');
+
+  andThen(() => {
+    this.mock(this.application.__container__.lookup('route:show').get('googleAds'))
+      .expects('doTargeting')
+      .once();
+  });
 
   visit('/shows');
 });
