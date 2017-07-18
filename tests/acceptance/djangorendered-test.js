@@ -1,7 +1,6 @@
 import config from 'wqxr-web-client/config/environment';
 import { skip } from 'qunit';
 import test from 'ember-sinon-qunit/test-support/test';
-import { plantBetaTrial } from 'wqxr-web-client/tests/helpers/beta';
 import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
 import djangoPage from 'wqxr-web-client/tests/pages/django-page';
 import 'wqxr-web-client/tests/helpers/hifi-acceptance-helper';
@@ -159,37 +158,4 @@ test('arbitrary django routes do dfp targeting', function(/*assert*/) {
   djangoPage
     .bootstrap({id: 'fake/'})
     .visit({id: 'fake/'});
-});
-
-moduleForAcceptance('Acceptance | Django Rendered | Beta Trial', {
-  beforeEach() {
-    server.create('stream');
-    window.onbeforeunload = escapeNavigation;
-    config.betaTrials.active = true;
-    config.betaTrials.preBeta = true;
-  },
-  afterEach() {
-    window.onbeforeunload = undefined;
-    resetHTML();
-  }
-});
-
-skip('alien doms with beta trials keep the beta bar if it has not been dismissed', function(assert) {
-  plantBetaTrial();
-
-  let djangoHTML = `<a href="${wnycURL}/foo" id="link">click me</a>`;
-  let page = server.create('django-page', {testMarkup: djangoHTML});
-  server.create('django-page', {id: 'foo/'});
-
-  djangoPage
-    .bootstrap(page)
-    .visit(page)
-    .alienClick('#link');
-
-  andThen(() => {
-    assert.equal(currentURL(), '/foo');
-  });
-  andThen(() => {
-    assert.ok(Ember.$('[data-test-selector=beta-tease]').length, 'beta trial tease is visible afer transition');
-  });
 });

@@ -2,7 +2,6 @@ import Ember from 'ember';
 import service from 'ember-service/inject';
 import ENV from '../../config/environment';
 import LegacySupportMixin from 'wqxr-web-client/mixins/legacy-support';
-import BetaActionsMixin from 'wqxr-web-client/mixins/beta-actions';
 import {
   isInDom,
   embeddedComponentSetup,
@@ -12,7 +11,7 @@ import {
 const { get, computed } = Ember;
 let { wnycAdminRoot } = ENV;
 
-export default Ember.Component.extend(LegacySupportMixin, BetaActionsMixin, {
+export default Ember.Component.extend(LegacySupportMixin, {
   audio: service(),
   session: service(),
   legacyAnalytics: service(),

@@ -125,16 +125,9 @@ module.exports = function(environment) {
     wnycDonateURL: 'http://www.wqxr.org/epledge/main?utm_source=wqxr&utm_medium=wqxr-85x39&utm_campaign=pledge&utm_content=donate',
     wnycSvgURL: '/media/svg/',
     // put beta host at the root so it can be overridden by Django
-    wnycBetaURL: process.env.WNYC_BETA_URL,
     featureFlags: {
       'social-auth': process.env.SOCIAL_AUTH,
       'member-center': process.env.MEMBER_CENTER,
-    },
-    betaTrials: {
-      betaInviteLanding: '#full-page-transforms-wrapper',
-      legacyNavLinkLanding: '#navigation-items > li:nth-child(2)',
-      isBetaSite: false,
-      preBeta: false,
     },
     contentSecurityPolicy: {
       'connect-src': "'self' *.wnyc.net:* ws://*.wnyc.net:*",
@@ -191,16 +184,12 @@ module.exports = function(environment) {
 
     ENV.APP.rootElement = '#ember-testing';
 
-    ENV.betaTrials.legacyNavLinkLanding = '#ember-testing';
-    ENV.betaTrials.betaInviteLanding = '#ember-testing';
-
     ENV.wnycAPI = 'http://example.com';
     ENV.wnycAccountRoot = 'http://example.com/account';
     ENV.wnycAdminRoot = 'http://admin.example.com';
     ENV.wnycEtagAPI = 'http://example.com/api/v1/browser_id/';
     ENV.wnycStaticURL = 'http://example.com/static';
     ENV.wnycURL = 'http://example.com';
-    ENV.wnycBetaURL = 'http://example.com';
     ENV.wnycAuthAPI = 'http://example.com';
     ENV.wnycMembershipAPI = 'http://example.com';
     ENV.platformEventsAPI = 'http://example.com';

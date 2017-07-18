@@ -1,11 +1,3 @@
-{{#if beta}}
-  {{beta-trial
-    enterBeta=(action 'enterBeta')
-    onDismiss=(action 'dismissBeta')
-    exitBeta=(action 'exitBeta')
-    beta=beta}}
-{{/if}}
-
 {{!--
   Using double link-to in order to get an active class on the li tag
 --}}
@@ -13,9 +5,6 @@
 <div class="l-page" id='site-chrome'>
   <div class="sitechrome-top">
     <div class="sitechrome-topbody">
-      {{#if beta.isBetaSite}}
-        <div class="sitechrome-topbody-left" id="beta-nav" data-test-selector="beta-nav"></div>
-      {{/if}}
       <div class="sitechrome-topbody-right">
           {{#if media.isLargeAndUp}}
           <div class="sitechrome-search">

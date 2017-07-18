@@ -1,10 +1,9 @@
 import Component from 'ember-component';
 import service from 'ember-service/inject';
-import BetaActionsMixin from 'wqxr-web-client/mixins/beta-actions';
 import config from 'wqxr-web-client/config/environment';
 import { or } from 'ember-computed';
 
-export default Component.extend(BetaActionsMixin, {
+export default Component.extend({
   audio: service(),
   session: service(),
   metrics: service(),
