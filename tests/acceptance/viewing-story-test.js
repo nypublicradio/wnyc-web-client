@@ -46,7 +46,7 @@ test('story pages with a play param', function(assert) {
   visit(`story/${story.slug}/?play=${story.slug}`);
 
   andThen(function() {
-    assert.equal(currentURL(), `story/${story.slug}/?play=${story.id}`);
+    assert.equal(currentURL(), `story/${story.slug}/?play=${story.slug}`);
     assert.ok(find('.nypr-player').length, 'persistent player should be visible');
     assert.equal(find('[data-test-selector=nypr-player-story-title]').text(), story.title, `${story.title} should be loaded in player UI`);
   });
