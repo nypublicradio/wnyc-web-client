@@ -38,10 +38,9 @@ export default Model.extend({
   tease: attr('string'),
   title: attr('string'),
   url: attr('string'),
-  extendedStory: attr(),
-  escapedBody: computed('extendedStory.body', {
+  escapedBody: computed('body', {
     get() {
-      let body = get(this, 'extendedStory.body');
+      let body = get(this, 'body');
       if (!body) {
         return '';
       }
@@ -139,6 +138,6 @@ export default Model.extend({
   },
   
   forDfp() {
-    return getProperties(this.get('extendedStory'), 'tags', 'show', 'channel', 'series');
+    return getProperties(this, 'tags', 'show', 'channel', 'series');
   }
 });
