@@ -50,7 +50,7 @@ test('it has the required information for sending a listen action', function(ass
     assert.deepEqual(d, {
       custom: 5,
       audio_type: 'on_demand',
-      cms_id: model.id,
+      cms_id: model.get('cmsPK'),
       item_type: 'episode', // episode, article, segment
     });
   });
