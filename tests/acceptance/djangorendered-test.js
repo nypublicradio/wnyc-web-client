@@ -4,8 +4,6 @@ import test from 'ember-sinon-qunit/test-support/test';
 import { plantBetaTrial } from 'wqxr-web-client/tests/helpers/beta';
 import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
 import djangoPage from 'wqxr-web-client/tests/pages/django-page';
-import Ember from 'ember';
-const { wnycURL } = config;
 import 'wqxr-web-client/tests/helpers/hifi-acceptance-helper';
 
 function escapeNavigation() {

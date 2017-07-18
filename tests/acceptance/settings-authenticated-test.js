@@ -27,7 +27,7 @@ test('after visiting settings, user can select different stream', function(asser
   });
 
   andThen(function() {
-    var actualStream = $('.user-stream .ember-power-select-selected-item').text().trim();
+    var actualStream = find('.user-stream .ember-power-select-selected-item').text().trim();
     assert.equal(actualStream, stream.name);
   });
 });
@@ -36,7 +36,7 @@ test('the stream button in the nav should match the default stream', function(as
   visit('/settings');
 
   andThen(function() {
-    const actualLabel = $('.stream-launcher').attr('aria-label');
+    const actualLabel = find('.stream-launcher').attr('aria-label');
     const expectedLabel = 'Listen to WQXR New York';
     assert.equal(actualLabel, expectedLabel);
   });
@@ -47,7 +47,7 @@ test('after visiting settings, user can toggle off autoplay settings', function(
 
   click('.toggle');
   andThen(function() {
-    var expectedElementCount = $('.inactive-toggle').length;
+    var expectedElementCount = find('.inactive-toggle').length;
     var actualElementCount = 1;
     assert.equal(expectedElementCount, actualElementCount);
   });

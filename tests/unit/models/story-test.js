@@ -1,4 +1,5 @@
 import { moduleForModel, test } from 'ember-qunit';
+import run from 'ember-runloop';
 
 moduleForModel('story', 'Unit | Model | story', {
   // Specify the other units that are required for this test.
@@ -16,7 +17,7 @@ test('segment management', function(assert) {
   assert.equal(model.getNextSegment(), null, 'getNextSegment returns null if there are no segments');
   assert.equal(model.getCurrentSegment(), model.get('audio'), 'getCurrentSegment returns the audio field if there are no segments');
   
-  Ember.run(() => {
+  run(() => {
     model.set('audio', ['foo', 'bar']);
   });
   

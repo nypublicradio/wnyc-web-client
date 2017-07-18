@@ -142,11 +142,11 @@ test('it closes the popup when you click a share button', function(assert) {
     this.$('.popupmenu-button')[0].click();
 
     wait().then(() => {
-      assert.ok($('.popupmenu').hasClass('is-open'), 'popup menu should open after you click the share button');
+      assert.ok(this.$('.popupmenu').hasClass('is-open'), 'popup menu should open after you click the share button');
       this.$('button:contains(Facebook)')[0].click();
     });
 
     return wait().then(() => {
-      assert.notOk($('.popupmenu').hasClass('is-open'), 'popup menu should close after you click the Facebook button');
+      assert.notOk(this.$('.popupmenu').hasClass('is-open'), 'popup menu should close after you click the Facebook button');
     });
 });

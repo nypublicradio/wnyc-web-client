@@ -583,7 +583,7 @@ test('it only sets up the player ping once', function(assert) {
   let service = this.subject();
   let story = server.create('story');
   let pollStub = {
-    addPoll({interval, callback, label}) {
+    addPoll({/*interval, callback, */label}) {
       counter++;
       assert.equal(label, 'playerPing', 'the correct poll was added');
     }

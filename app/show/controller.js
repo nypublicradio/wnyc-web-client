@@ -10,7 +10,7 @@ export default Controller.extend({
     let shows = get(this, 'model.allShows');
     let result = shows.toArray();
     if (searchText.length > 0){
-      let query = searchText.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'); //remove any regex characters
+      let query = searchText.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'); //remove any regex characters
       let regex = new RegExp(query, 'i'); //case insensitive
       result = shows.filter(function(show) {
         return regex.test(show.get('title'));

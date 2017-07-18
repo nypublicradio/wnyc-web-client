@@ -1,12 +1,13 @@
 import { moduleFor, test } from 'ember-qunit';
 import sinon from 'sinon';
 import config from 'wqxr-web-client/config/environment';
+import Service from 'ember-service';
 
 moduleFor('service:data-pipeline', 'Unit | Service | data pipeline', {
   // Specify the other units that are required for this test.
   needs: ['service:session', 'service:poll'],
   beforeEach() {
-    const sessionStub = Ember.Service.extend({
+    const sessionStub = Service.extend({
       data: {
         browserId: 'secrets'
       },
@@ -124,7 +125,7 @@ test('data pipeline tracks delta properly', function(assert) {
   let clock = sinon.useFakeTimers(now);
   let deltaShouldbe = 500;
   let service = this.subject({
-    _send({action, delta}) {
+    _send({/*action,*/ delta}) {
       switch(currentCall) {
         case 1:
           // start

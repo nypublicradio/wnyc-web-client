@@ -1,5 +1,6 @@
 import { producingOrgs } from 'wqxr-web-client/helpers/producing-orgs';
 import { module, test } from 'qunit';
+import $ from 'jquery';
 
 module('Unit | Helper | producing orgs');
 

@@ -53,10 +53,11 @@ export default Route.extend(ApplicationRouteMixin, {
       if (error && error.response) {
         if (error.response.status === 404) {
           this.transitionTo('missing');
-        } else if (error.response.status >= 500) {
-          // this.transitionTo('error');
-          console.error(error);
         }
+      } else {
+        /* eslint-disable */
+        console.error(error);
+        /* eslint-enable */
       }
     },
     willTransition() {

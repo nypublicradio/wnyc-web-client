@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 export function appendHTML(string) {
   $(string.trim()).appendTo('#ember-testing');
 }

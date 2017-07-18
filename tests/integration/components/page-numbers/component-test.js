@@ -6,7 +6,7 @@ moduleForComponent('page-numbers', 'Integration | Component | page numbers', {
 });
 
 function retrieveNumbers() {
-  return $('[data-test-selector=page]').text().split("\n").map(s => s.trim()).reject(s => s === '').map(Number);
+  return find('[data-test-selector=page]').text().split("\n").map(s => s.trim()).reject(s => s === '').map(Number);
 }
 
 test('it renders', function(assert) {

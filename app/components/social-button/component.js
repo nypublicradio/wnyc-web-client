@@ -18,9 +18,9 @@ export default Component.extend({
 
     switch(svc) {
       case 'facebook':
-        return `http:\/\/facebook.com/${user}`;
+        return `http://facebook.com/${user}`;
       case 'instagram':
-        return `http:\/\/instagram.com/${user}`;
+        return `http://instagram.com/${user}`;
       case 'email':
         return `mailto:${user}`;
       default:

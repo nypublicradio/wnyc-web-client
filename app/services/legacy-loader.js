@@ -100,12 +100,16 @@ export default Ember.Service.extend({
   _evaluate(name, fn) {
     if (this.modules[name] && runOnce[name]) {
       if (ENV.LOG_LEGACY_LOADER) {
+        /* eslint-disable */
         console.log("Not rerunning " + name);
+        /* eslint-enable */
       }
       return;
     }
     if (ENV.LOG_LEGACY_LOADER) {
+      /* eslint-disable */
       console.log("Running " + name);
+      /* eslint-enable */
     }
     this.modules[name] = fn;
     fn();

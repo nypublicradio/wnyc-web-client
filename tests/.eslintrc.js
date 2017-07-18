@@ -3,6 +3,11 @@ module.exports = {
     embertest: true
   },
   globals: {
-    server: true
+    server: true,
+    setBreakpoint: true,
+    selectChoose: true,
+    withFeature: true,
+    drag: true,
+    alienDomClick: true
   }
 };

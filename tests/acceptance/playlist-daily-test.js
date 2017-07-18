@@ -1,5 +1,6 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
+import moment from 'moment';
 
 moduleForAcceptance('Acceptance | playlist daily', {
   beforeEach() {

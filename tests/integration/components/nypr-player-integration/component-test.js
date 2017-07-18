@@ -1,13 +1,14 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import Service from 'ember-service';
 
-const sessionStub = Ember.Service.extend({
+const sessionStub = Service.extend({
   data: {
     'user-prefs-active-stream': {slug: 'wnyc-fm939', name: 'WNYC 93.9 FM'},
     'user-prefs-active-autoplay': 'default_stream'
   }
 });
-const bumperStub = Ember.Service.extend({
+const bumperStub = Service.extend({
   revealNotificationBar: false
 });
 
