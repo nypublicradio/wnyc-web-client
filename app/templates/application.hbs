@@ -18,7 +18,7 @@
   {{#liquid-if showPlayer class="nypr-player-wrapper"}}
     {{#liquid-if integration.revealNotificationBar class='player-notification-wrapper'}}
       {{#player-notification onDismiss=integration.onDismissNotification}}
-        {{player-notification.autoplay-message
+        {{player-notification/autoplay-message
           duration   = audio.duration
           position   = audio.position
           audioType  = currentAudio.audioType
@@ -37,7 +37,7 @@
       backdropImageUrl=integration.backdropImageUrl
       as |content|}}
         {{#content.for 'trackInfo'}}
-          {{nypr-player-integration.track-info
+          {{nypr-player-integration/track-info
             currentAudio    = integration.currentAudio
             showTitle       = integration.showTitle
             showUrl         = integration.showUrl
@@ -61,7 +61,7 @@
         {{/content.for}}
 
         {{#content.for 'streamInfo'}}
-          {{nypr-player-integration.stream-info
+          {{nypr-player-integration/stream-info
             streamScheduleUrl = integration.streamScheduleUrl
             streamPlaylistUrl = integration.streamPlaylistUrl
             streamUrl         = integration.streamUrl
