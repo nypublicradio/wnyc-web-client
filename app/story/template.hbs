@@ -37,6 +37,12 @@
                     itemTitle=model.story.title}}
                     Listen <span class="text--small dimmed">{{model.story.audioDurationReadable}}</span>
                   {{/listen-button}}
+                  {{queue-button
+                    audio=audio
+                    itemPK=model.story.slug
+                    itemTitle=model.story.title
+                    type="queue-button--storyheader"
+                    region="StoryHeader"}}
 
                   {{#if (or model.story.audioMayDownload model.story.audioMayEmbed)}}
                     {{nypr-story/audio-options story=model.story}}
@@ -68,6 +74,12 @@
                     itemTitle=row.segment.title
                     state=(if (eq row.segment.slug audio.currentId) audio.playState)
                     type="blue-circle"}}
+                  {{queue-button
+                    audio=audio
+                    itemPK=row.segment.slug
+                    itemTitle=row.segment.title
+                    type="small-blue"
+                    region="StoryList"}}
                   </div>
                 {{/row.buttons}}
               {{else}}
