@@ -5,8 +5,8 @@ export function shareUrl([destination, metadata]) {
   metadata = metadata || {};
   let { shareText, shareUrl } = metadata;
   let urls = {
-    'Facebook': `https:\/\/www.facebook.com/sharer/sharer.php?u=${urlEncode(shareUrl)}`,
-    'Twitter':  `https:\/\/twitter.com/intent/tweet?url=${urlEncode(shareUrl)}&text=${urlEncode(shareText)}&via=WNYC`,
+    'Facebook': `https://www.facebook.com/sharer/sharer.php?u=${urlEncode(shareUrl)}`,
+    'Twitter':  `https://twitter.com/intent/tweet?url=${urlEncode(shareUrl)}&text=${urlEncode(shareText)}&via=WNYC`,
     'Email':    `mailto:?subject=${urlEncode(shareText)}&body=${urlEncode(shareUrl)}`
   };
   return urls[destination] || '';

@@ -56,7 +56,7 @@ export function installAlienListeners(component) {
 
   document.addEventListener('click', alienClickListener, false);
 
-  imagesLoaded(document.body).on('progress', (i, image) => {
+  Ember.$(document.body).imagesLoaded().on('progress', (i, image) => {
     Ember.run(() => {
       image.img.classList.add('is-loaded');
     });

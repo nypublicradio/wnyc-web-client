@@ -1,13 +1,13 @@
-import Ember from 'ember';
 import { moduleFor, test } from 'ember-qunit';
 import sinon from 'sinon';
 import config from 'wnyc-web-client/config/environment';
+import Service from 'ember-service';
 
 moduleFor('service:data-pipeline', 'Unit | Service | data pipeline', {
   // Specify the other units that are required for this test.
   needs: ['service:session', 'service:poll'],
   beforeEach() {
-    const sessionStub = Ember.Service.extend({
+    const sessionStub = Service.extend({
       data: {
         browserId: 'secrets'
       },

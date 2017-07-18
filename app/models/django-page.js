@@ -41,7 +41,9 @@ export default DS.Model.extend({
     if (channel) {
       try {
         json = JSON.parse(channel.textContent);
+      /* eslint-disable */
       } catch(err) {}
+      /* eslint-enable */
       if (json) {
         return this.store.push(channelSerializer.normalizeResponse(this.store, channelModel, json, id, 'findRecord'));
       }
@@ -63,7 +65,9 @@ export default DS.Model.extend({
         args.content = el.getAttribute('data-text-content');
       } catch(e) {
         if (!Ember.testing) {
+          /* eslint-disable */
           console.warn('could not parse', el.getAttribute('data-ember-args'));
+          /* eslint-enable */
         }
         args = { error: e };
       }

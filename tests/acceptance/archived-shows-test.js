@@ -11,7 +11,7 @@ test('visiting /archived-shows', function(assert) {
     assert.equal(currentURL(), '/archived-shows');
 
     //all 25 shows are listed, per test data
-    assert.equal( $('.shows-list ul li').length, 25, "twenty five shows are listed" );
+    assert.equal( find('.shows-list ul li').length, 25, "twenty five shows are listed" );
 
   });
 });

@@ -1,6 +1,8 @@
 export default function(code) {
   if (!code) {
+    /* eslint-disable */
     console.warn('no analytics string supplied');
+    /* eslint-enable */
     return {};
   }
   // see puppy/cms/models/content.py#analytics_code_string for fields
@@ -8,7 +10,9 @@ export default function(code) {
   const REGEX = /(?:.*:)?(.*)\W+\$A(\d)\$AD(\d+)\$V(\d)\$M(\w)\$D(\d+)\$HS(\d)\$HC(\d)\$B(\d)\$SS([^$]+)\$C([^$]*)\$S([^$]*)\$T([^$]+)\$AP([^$]+)\$$/;
   let match = code.match(REGEX);
   if (!match) {
+    /* eslint-disable */
     console.warn('failure processing analytics code');
+    /* eslint-enable */
     return {};
   } else {
     match = match.slice(1);

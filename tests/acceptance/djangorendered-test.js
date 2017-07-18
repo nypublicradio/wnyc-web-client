@@ -1,11 +1,8 @@
 import config from 'wnyc-web-client/config/environment';
 import { skip } from 'qunit';
 import test from 'ember-sinon-qunit/test-support/test';
-import { plantBetaTrial } from 'wnyc-web-client/tests/helpers/beta';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import djangoPage from 'wnyc-web-client/tests/pages/django-page';
-import Ember from 'ember';
-const { wnycURL } = config;
 import 'wnyc-web-client/tests/helpers/hifi-acceptance-helper';
 
 function escapeNavigation() {
@@ -174,24 +171,4 @@ moduleForAcceptance('Acceptance | Django Rendered | Beta Trial', {
   afterEach() {
     window.onbeforeunload = undefined;
   }
-});
-
-skip('alien doms with beta trials keep the beta bar if it has not been dismissed', function(assert) {
-  plantBetaTrial();
-
-  let djangoHTML = `<a href="${wnycURL}/foo" id="link">click me</a>`;
-  let page = server.create('django-page', {testMarkup: djangoHTML});
-  server.create('django-page', {id: 'foo/'});
-
-  djangoPage
-    .bootstrap(page)
-    .visit(page)
-    .alienClick('#link');
-
-  andThen(() => {
-    assert.equal(currentURL(), '/foo');
-  });
-  andThen(() => {
-    assert.ok(Ember.$('[data-test-selector=beta-tease]').length, 'beta trial tease is visible afer transition');
-  });
 });

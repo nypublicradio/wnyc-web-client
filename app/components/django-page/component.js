@@ -10,7 +10,7 @@ import {
 } from '../../lib/alien-dom';
 
 const { get, computed } = Ember;
-let {  wnycAdminRoot } = ENV;
+let { wnycAdminRoot } = ENV;
 
 export default Ember.Component.extend(LegacySupportMixin, BetaActionsMixin, {
   session: service(),
