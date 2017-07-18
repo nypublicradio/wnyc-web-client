@@ -11,6 +11,5 @@
     "waypoints": "~4.0.0",
     "hls.js": "^0.6.1",
     "howler.js": "^2.0.0",
-    "imagesloaded": "^4.1.1"
   }
 }

@@ -43,7 +43,6 @@ module.exports = function(defaults) {
   // app should be imported into the app's own build here. Notice that
   // these are symlinked to their original locations in the puppy
   // source.
-  app.import('bower_components/imagesloaded/imagesloaded.pkgd.js');
 
   return app.toTree();
 };
