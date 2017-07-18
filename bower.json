@@ -10,6 +10,6 @@
     "raven-js": "~2.1",
     "waypoints": "~4.0.0",
     "hls.js": "^0.6.1",
-    "howler.js": "^2.0.0",
+    "howler.js": "^2.0.0"
   }
 }
