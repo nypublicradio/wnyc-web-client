@@ -45,7 +45,7 @@ export default Route.extend(ApplicationRouteMixin, {
     error(error/*, transition*/) {
       if (error) {
         this.controllerFor('application').set('error', error);
-        return error;
+        console.error(error);
       }
     },
     didTransition() {
