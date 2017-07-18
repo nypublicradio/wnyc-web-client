@@ -1,4 +1,5 @@
-/* jshint node: true */
+/* eslint-env node */
+'use strict';
 
 module.exports = function(environment) {
 
@@ -8,9 +9,9 @@ module.exports = function(environment) {
     }).length;
   }
 
-  var ENV = {
+  let ENV = {
     modulePrefix: 'wqxr-web-client',
-    environment: environment,
+    environment,
     rootURL: '/',
     locationType: 'auto',
     emberHifi: {
@@ -41,6 +42,7 @@ module.exports = function(environment) {
         // e.g. 'with-controller': true
       },
       EXTEND_PROTOTYPES: {
+        // Prevent Ember Data from overriding Date.parse.
         Date: false
       }
     },
@@ -209,4 +211,4 @@ module.exports = function(environment) {
   }
 
   return ENV;
-}
+};
