@@ -12,10 +12,14 @@ export default Ember.Component.extend({
   audioId       : null,
   songDetails   : null,
   
-  didReceiveAttrs({oldAttrs, newAttrs}) {
+  didReceiveAttrs() {
     this._super(...arguments);
     if (!this.get('isStream')) { return; }
-    if (oldAttrs && oldAttrs.showTitle.value === newAttrs.showTitle.value) { return; }
+    
+    let oldShowTitle = this.get('_showTitle');
+    let showTitle = this.get('showTitle');
+    if (oldShowTitle === showTitle) { return; }
+    this.set('_showTitle', showTitle);
     
     if (this.attrs.trackStreamData) {
       this.attrs.trackStreamData();
