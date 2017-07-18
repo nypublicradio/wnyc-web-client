@@ -3,7 +3,7 @@ import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-accept
 import { registerMockOnInstance } from 'wqxr-web-client/tests/helpers/register-mock';
 import Service from 'ember-service';
 import velocity from 'velocity';
-import { dummyHifi } from 'wnyc-web-client/tests/helpers/hifi-integration-helpers';
+import { dummyHifi } from 'wqxr-web-client/tests/helpers/hifi-integration-helpers';
 
 
 velocity.mock = true;
