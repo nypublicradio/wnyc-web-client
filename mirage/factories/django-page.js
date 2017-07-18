@@ -69,8 +69,6 @@ export default Factory.extend({
       wormholes = `
         <div id="stream-banner" class="clearfix"></div>
       `;
-    } else if (type === 'legacy') {
-
     }
 
     return `

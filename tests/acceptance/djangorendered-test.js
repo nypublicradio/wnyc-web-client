@@ -6,9 +6,6 @@ import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-accept
 import djangoPage from 'wqxr-web-client/tests/pages/django-page';
 import Ember from 'ember';
 const { wnycURL } = config;
-import {
-  resetHTML
-} from 'wqxr-web-client/tests/helpers/html';
 import 'wqxr-web-client/tests/helpers/hifi-acceptance-helper';
 
 function escapeNavigation() {
@@ -22,7 +19,6 @@ moduleForAcceptance('Acceptance | Django Rendered | Proper Re-renders', {
   },
   afterEach() {
     window.onbeforeunload = undefined;
-    resetHTML();
   }
 });
 

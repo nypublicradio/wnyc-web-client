@@ -2,13 +2,8 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
 import djangoPage from 'wqxr-web-client/tests/pages/django-page';
 import showPage from 'wqxr-web-client/tests/pages/show';
-import { resetHTML } from 'wqxr-web-client/tests/helpers/html';
 
-moduleForAcceptance('Acceptance | Listing Page | paginating', {
-  afterEach() {
-    resetHTML();
-  }
-});
+moduleForAcceptance('Acceptance | Listing Page | paginating');
 
 test('showing pagination for a list of episodes', function(assert) {
   let apiResponse = server.create('api-response', {

@@ -2,7 +2,6 @@ import { test, skip } from 'qunit';
 import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
 import { registerMockOnInstance } from 'wqxr-web-client/tests/helpers/register-mock';
 import Service from 'ember-service';
-import { resetHTML } from 'wqxr-web-client/tests/helpers/html';
 import velocity from 'velocity';
 
 velocity.mock = true;
@@ -17,9 +16,6 @@ const mockAudio = Service.extend({
 moduleForAcceptance('Acceptance | play param', {
   beforeEach() {
     server.create('stream');
-  },
-  afterEach() {
-    resetHTML();
   }
 });
 

@@ -2,15 +2,10 @@ import test from 'ember-sinon-qunit/test-support/test';
 import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
 import djangoPage from 'wqxr-web-client/tests/pages/django-page';
 import storyPage from 'wqxr-web-client/tests/pages/story';
-import { resetHTML } from 'wqxr-web-client/tests/helpers/html';
 import config from 'wqxr-web-client/config/environment';
 
 
-moduleForAcceptance('Acceptance | Django Page | Story Detail', {
-  afterEach() {
-    resetHTML();
-  }
-});
+moduleForAcceptance('Acceptance | Django Page | Story Detail');
 
 test('smoke test', function(assert) {
   let story = server.create('story');
@@ -75,11 +70,7 @@ test('story pages with a play param', function(assert) {
   });
 });
 
-moduleForAcceptance('Acceptance | Django Page | Story Donate URLs', {
-  afterEach() {
-    resetHTML();
-  }
-});
+moduleForAcceptance('Acceptance | Django Page | Story Donate URLs');
 
 test('visiting a story with a different donate URL', function(assert) {
   let donateStory = server.create('story', {
