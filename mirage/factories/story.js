@@ -12,7 +12,7 @@ export default Factory.extend({
   title(id) {
     return `Story ${id}`;
   },
-  body: 'Story body.'
+  body: 'Story body.',
   commentsEnabled: true,
   dateLineDatetime: faker.date.recent,
   newsdate: faker.date.recent,
