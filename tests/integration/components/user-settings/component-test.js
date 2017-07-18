@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import startMirage from 'wqxr-web-client/tests/helpers/setup-mirage-for-integration';
 import hbs from 'htmlbars-inline-precompile';
