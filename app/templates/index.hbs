@@ -6,7 +6,7 @@
   {{/if}}
 
   <section class="l-container l-container--touch-full">
-    {{#stream-banner audio=audio streams=streams as |currentStream banner|}}
+    {{#stream-banner background=background audio=audio streams=streams as |currentStream banner|}}
       {{#banner.header as |header|}}
         {{component header.stationTitle}}
         {{component header.dropdown}}
