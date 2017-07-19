@@ -19,8 +19,9 @@ export default Ember.Route.extend(PlayParamMixin, {
   title(tokens) {
     return `${tokens[0]} - WQXR`;
   },
-  model({ slug }) {
-    return this.store.findRecord('story', slug).then(story => {
+  model({ slug }, { queryParams }) {
+    
+    return this.store.findRecord('story', slug, {adapterOptions: {queryParams}}).then(story => {
       let comments = this.store.query('comment', { itemTypeId: story.get('itemTypeId'), itemId: story.get('cmsPK') });
       let relatedStories = this.store.query('story', {related: { itemId: story.get('cmsPK'), limit: 5 }});
       return waitFor({

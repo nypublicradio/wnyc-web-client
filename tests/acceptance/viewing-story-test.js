@@ -126,3 +126,24 @@ test('story routes do dfp targeting', function(/*assert*/) {
   
   visit(`story/${story.slug}`);
 });
+
+test('api request includes draft params', function(assert) {
+  assert.expect(4);
+  
+  let story = server.create('story');
+  let token = 'token';
+  let content_type_id = 'type';
+  let object_id = 'object';
+  let stamp = 'timestamp';
+  
+  server.get(`${config.wnycAPI}/api/v3/story/${story.slug}`, (schema, { queryParams }) => {
+    assert.equal(queryParams.token, token);
+    assert.equal(queryParams.content_type_id, content_type_id);
+    assert.equal(queryParams.object_id, object_id);
+    assert.equal(queryParams['_'], stamp);
+    return story;
+  });
+  
+  visit(`story/${story.slug}?token=${token}&content_type_id=${content_type_id}&object_id=${object_id}&_=${stamp}`);
+  
+});
