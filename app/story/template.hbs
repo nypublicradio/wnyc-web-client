@@ -25,7 +25,7 @@
           {{/if}}
 
           {{#nypr-story/header-content story=model.story isStaff=session.data.isStaff adminURL=model.adminURL as |header|}}
-            {{#if model.story.audioEventually}}
+            {{#if (and model.story.audioMayStream model.story.audioEventually)}}
               {{#if model.story.audioAvailable}}
                 {{#header.buttons}}
                   {{#listen-button
@@ -57,7 +57,7 @@
             segments=model.story.segments
             segmentCount=model.story.segments.length
             flush=model.story.mainImageEligible as |row|}}
-            {{#if row.segment.audioEventually}}
+            {{#if (and row.segment.audioMayStream row.segment.audioEventually)}}
               {{#if row.segment.audioAvailable}}
                 {{#row.buttons}}
                   <div class="btn-group">
