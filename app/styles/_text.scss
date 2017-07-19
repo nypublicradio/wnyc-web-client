@@ -443,7 +443,7 @@
 
 .link--dark--underline {
     color: $darkergray;
-    border: rgba($darkergray, 0.8);
+    border-color: rgba(#ccc, 0.8);
 
     &:hover,
     &:focus {
