@@ -6,6 +6,23 @@ import get from 'ember-metal/get';
 // In development (without --proxy) and test environments, these handlers will be used
 
 // Note for future people: schema.modelName.create() doesn't generate attributes in mirage factories. Create the objects using server.create in default.js (for local dev), or in the test
+const getPropertyCaseInsensitive = function(obj, prop) {
+  prop = prop.toLowerCase();
+  for (let p in obj) {
+    if (obj.hasOwnProperty(p) && prop === p.toLowerCase()) {
+      return obj[p];
+    }
+  }
+  return undefined;
+};
+const hasAuthToken = function(request) {
+  let authToken = getPropertyCaseInsensitive(request.requestHeaders, 'Authorization');
+  return /bearer \w+/i.test(authToken);
+};
+const hasProvider = function(request) {
+  let providerHeader = getPropertyCaseInsensitive(request.requestHeaders, 'X-Provider');
+  return (providerHeader !== undefined);
+};
 
 export default function() {
   this.logging = false;
@@ -208,10 +225,11 @@ export default function() {
   });
 
   this.get('/v1/confirm/resend-attr', (schema, request) => {
-    if (!request.requestHeaders.Authorization && !request.requestHeaders.authorization) {
+    if (hasAuthToken(request) && !hasProvider(request)) {
+      return new Response(200);
+    } else {
       return new Response(401);
     }
-    return new Response(200);
   });
 
   /*-------------------------------------------------------------

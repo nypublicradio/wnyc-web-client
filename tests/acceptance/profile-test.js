@@ -274,3 +274,129 @@ test('creating email from fb account', function(assert) {
   });
 });
 
+test('resend verification email when authenticated via username/password', function(assert) {
+  withFeature('member-center');
+  // Logged in username/password user
+  server.create('user');
+  authenticateSession(this.application, {access_token: 'secret'});
+  // Account is pending verification
+  server.get(`${config.wnycMembershipAPI}/v1/emails/is-verified/`, () => {
+    return new Response(200, {}, {data: {is_verified: false}});
+  });
+
+  let requests = [];
+  server.get(`${config.wnycAuthAPI}/v1/confirm/resend-attr`, (schema, request) => {
+    requests.push(request);
+    return new Response(200);
+  });
+
+  visit('/profile');
+
+  andThen(() => {
+    click('.resend-button');
+  });
+
+  andThen(() => {
+    assert.equal(requests.length, 1, 'it should call resend api url once');
+    assert.equal(requests[0].requestHeaders["authorization"], "Bearer secret", 'it should send an auth token');
+    assert.strictEqual(requests[0].requestHeaders["x-provider"], undefined, 'it should not send a provider header');
+  });
+});
+
+test('resend verification email when authenticated via facebook', function(assert) {
+  const PW = 'abcdef123456';
+  withFeature('member-center');
+  // Logged in facebook user with connected email account
+  server.create('user', 'connected');
+  authenticateSession(this.application, {access_token: 'secret', provider: 'facebook-connect'});
+  // Account is pending verification because they changed their email address
+  server.get(`${config.wnycMembershipAPI}/v1/emails/is-verified/`, () => {
+    return new Response(200, {}, {data: {is_verified: false}});
+  });
+
+  let requests = [];
+  server.get(`${config.wnycAuthAPI}/v1/confirm/resend-attr`, (schema, request) => {
+    requests.push(request);
+    return new Response(200);
+  });
+
+  visit('/profile');
+
+  andThen(() => {
+    click('.resend-button');
+    fillIn('[name=passwordForVerifyEmail]', PW);
+    click('[data-test-selector=check-pw-verify]');
+  });
+
+  andThen(() => {
+    assert.equal(requests.length, 1, 'it should call resend api url once');
+    assert.equal(requests[0].requestHeaders["authorization"], "Bearer secret", 'it should send an auth token');
+    assert.strictEqual(requests[0].requestHeaders["x-provider"], undefined, 'it should not send a provider header');
+  });
+});
+
+test('resend verification email when authenticated via facebook fails on bad password', function(assert) {
+  const PW = 'abcdef123456';
+  withFeature('member-center');
+  // Logged in facebook user with connected email account
+  server.create('user', 'connected');
+  authenticateSession(this.application, {access_token: '123456', provider: 'facebook-connect'});
+  // Account is pending verification because they changed their email address
+  server.get(`${config.wnycMembershipAPI}/v1/emails/is-verified/`, () => {
+    return new Response(200, {}, {data: {is_verified: false}});
+  });
+  // Unauthorized / Bad password
+  server.post('/v1/session', {}, 401);
+
+  let requests = [];
+  server.get(`${config.wnycAuthAPI}/v1/confirm/resend-attr`, (schema, request) => {
+    requests.push(request);
+    return new Response(200);
+  });
+
+  visit('/profile');
+
+  andThen(() => {
+    click('.resend-button');
+    fillIn('[name=passwordForVerifyEmail]', PW);
+    click('[data-test-selector=check-pw-verify]');
+  });
+
+  andThen(() => {
+    assert.equal(requests.length, 0, 'it should not call resend api url');
+  });
+});
+
+test('resend set password email when have not set a password yet', function(assert) {
+  withFeature('member-center');
+  // Logged in facebook user
+  let user = server.create('user', 'facebook');
+  authenticateSession(this.application, {access_token: '123456', provider: 'facebook-connect'});
+  // Account is pending verification because they just created an email account and hasn't set a password yet
+  server.get(`${config.wnycMembershipAPI}/v1/emails/is-verified/`, () => {
+    return new Response(200, {}, {data: {is_verified: false}});
+  });
+
+  let resendRequests = [];
+  server.get(`${config.wnycAuthAPI}/v1/confirm/resend-attr`, (schema, request) => {
+    resendRequests.push(request);
+    return new Response(200);
+  });
+  let setTempPasswordRequests = [];
+  server.post(`${config.wnycAuthAPI}/v1/password/send-temp`, (schema, request) => {
+    setTempPasswordRequests.push(request);
+    return new Response(200);
+  });
+
+  visit('/profile');
+
+  andThen(() => {
+    click('.resend-button');
+  });
+
+  andThen(() => {
+    assert.equal(resendRequests.length, 0, 'it should not call resend api url');
+    assert.equal(setTempPasswordRequests.length, 1, 'it should call the send-temp api url once');
+    assert.equal(JSON.parse(setTempPasswordRequests[0].requestBody).email, user.email, 'it should call the send-temp api url with the users email address');
+  });
+});
