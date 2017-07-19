@@ -17,6 +17,7 @@ export default Model.extend({
   audioEventually: attr('boolean'),
   audioMayDownload: attr('boolean'),
   audioMayEmbed: attr('boolean'),
+  audioMayStream: attr('boolean'),
   audioShowOptions: attr('boolean'),
   channel: attr('string'),
   chunks: attr(),
