@@ -10,6 +10,7 @@ import Ember from 'ember';
 
 const FIFTEEN_SECONDS = 1000 * 15;
 const TWO_MINUTES     = 1000 * 60 * 2;
+const STREAMS = ['wqxr', 'q2', 'wqxr-special', 'wnyc-fm939', 'wnyc-am820', 'njpr', 'jonathan-channel'];
 
 export default Service.extend({
   poll:             service(),
@@ -612,12 +613,12 @@ export default Service.extend({
   },
 
   _audioType(id) {
-    if (/^\d*$/.test(id)) {
-      return 'on_demand';
+    if (STREAMS.includes(id)) {
+      return 'livestream';
     } else if (/^http|^https/.test(id)) {
       return 'bumper';
     } else {
-      return 'livestream';
+      return 'on_demand';
     }
   },
 

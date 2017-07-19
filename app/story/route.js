@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
 import PlayParamMixin from 'wqxr-web-client/mixins/play-param';
-import { beforeTeardown } from 'wqxr-web-client/lib/compat-hooks';
 import config from 'wqxr-web-client/config/environment';
 const { get } = Ember;
 const { hash: waitFor } = Ember.RSVP;
@@ -12,6 +11,7 @@ export default Ember.Route.extend(PlayParamMixin, {
   googleAds:    service(),
   dataPipeline: service(),
   currentUser:  service(),
+  audio:        service(),
   
   titleToken(model) {
     return `${get(model, 'story.title')} - ${get(model, 'story.headers.brand.title')}`;
@@ -19,13 +19,12 @@ export default Ember.Route.extend(PlayParamMixin, {
   title(tokens) {
     return `${tokens[0]} - WQXR`;
   },
-  model({ slug }) {
-    return this.store.findRecord('django-page', `story/${slug}`.replace(/\/*$/, '/')).then(page => {
-      let story = page.get('wnycContent');
-      let comments = this.store.query('comment', { itemTypeId: story.get('itemTypeId'), itemId: story.get('id') });
-      let relatedStories = this.store.query('story', { itemId: story.get('id'), limit: 5});
+  model({ slug }, { queryParams }) {
+    
+    return this.store.findRecord('story', slug, {adapterOptions: {queryParams}}).then(story => {
+      let comments = this.store.query('comment', { itemTypeId: story.get('itemTypeId'), itemId: story.get('cmsPK') });
+      let relatedStories = this.store.query('story', {related: { itemId: story.get('cmsPK'), limit: 5 }});
       return waitFor({
-        page,
         story,
         getComments: () => comments,
         getRelatedStories: () => relatedStories,
@@ -36,8 +35,8 @@ export default Ember.Route.extend(PlayParamMixin, {
   afterModel(model, transition) {
     get(this, 'googleAds').doTargeting(get(model, 'story').forDfp());
 
-    if (get(model, 'story.extendedStory.headerDonateChunk')) {
-      transition.send('updateDonateChunk', get(model, 'story.extendedStory.headerDonateChunk'));
+    if (get(model, 'story.headerDonateChunk')) {
+      transition.send('updateDonateChunk', get(model, 'story.headerDonateChunk'));
     }
   },
   
@@ -45,16 +44,11 @@ export default Ember.Route.extend(PlayParamMixin, {
     controller.set('isMobile', window.Modernizr.touchevents);
     controller.set('session', get(this, 'session'));
     controller.set('user', get(this, 'currentUser.user'));
+    controller.set('audio', get(this, 'audio'));
     return this._super(...arguments);
   },
   
   actions: {
-    willTransition() {
-      this._super(...arguments);
-      beforeTeardown();
-      return true;
-    },
-    
     didTransition() {
       this._super(...arguments);
       
@@ -71,6 +65,8 @@ export default Ember.Route.extend(PlayParamMixin, {
         label,
       });
 
+
+
       // NPR
       metrics.trackPage('NprAnalytics', {
         page: `/story/${get(model, 'story.slug')}`,
@@ -80,7 +76,7 @@ export default Ember.Route.extend(PlayParamMixin, {
       
       // data pipeline
       dataPipeline.reportItemView({
-        cms_id: get(model, 'story.id'),
+        cms_id: get(model, 'story.cmsPK'),
         item_type: get(model, 'story.itemType'),
       });
       

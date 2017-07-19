@@ -56,7 +56,7 @@ export default Component.extend({
         let story = this.get('story');
         let metaData = {
           content_type: 'cms.' + story.get('itemType'),
-          object_pk: story.get('id'),
+          object_pk: story.get('cmsPK'),
           timestamp,
           security_hash,
           site: config.siteId,

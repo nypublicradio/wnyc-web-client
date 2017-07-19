@@ -1,22 +1,33 @@
 import DS from 'ember-data';
+import { camelizeObj } from 'wqxr-web-client/helpers/camelize-object';
+
+//dasherized versions of names in model bc they haven't been processsed yet
+const propertiesWithChildren = [
+  'appearances',
+  'chunks',
+  'headers',
+  'image-main',
+  'playlist',
+  'producing-organizations',
+  'segments',
+  'series',
+  'show-producing-orgs',
+  'slideshow'
+];
 
 export default DS.JSONAPISerializer.extend({
-  normalizeQueryResponse(store, primaryModelClass, payload, id, requestType) {
-    let transformed = {
-      data: payload.results.map(result => {
-        let id = result.id;
-        delete result.id;
-        
-        let attributes = {};
-        Object.keys(result).forEach(key => attributes[key.dasherize()] = result[key]);
-        
-        return {
-          id,
-          type: 'story',
-          attributes
-        };
-      })
-    };
-    return this._super(store, primaryModelClass, transformed, id, requestType);
-  }
+  extractId: (modelClass, {attributes}) => attributes.slug,
+
+  normalizeResponse(store, primaryModelClass, payload, id, requestType) {
+
+    for (var prop of propertiesWithChildren) {
+      //if we have the property, process it
+      if (payload.data.attributes && payload.data.attributes.hasOwnProperty(prop)){
+        payload.data.attributes[prop] = camelizeObj(payload.data.attributes[prop]);
+      }
+    }
+
+    return this._super(store, primaryModelClass, payload, id, requestType);
+  },
+
 });

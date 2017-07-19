@@ -5,25 +5,46 @@ import wrapAjax from 'wqxr-web-client/lib/wrap-ajax';
 // import fetch from 'fetch';
 import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 
+
+const DRAFT_TOKENS = ['content_type_id', 'object_id', 'token', '_']
+
 export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
   authorizer: 'authorizer:nypr',
   host: ENV.wnycAPI,
-  namespace: 'api/v2',
-  query(store, type, query) {
-    let url = [this.host, this.namespace, 'related', query.itemId, `?limit=${query.limit}`].join('/');
-    let options = this.ajaxOptions(url, 'GET', {});
-    // Django isn't setup to honor XHR requests at the related stories endpoint,
-    // so just use the jQuery JSONp for now
-    if (ENV.environment === 'production') {
-      options.dataType = 'jsonp';
-      options.jsonpCallback = 'RELATED';
-      options.cache = true;
-    } 
-    return wrapAjax(options);
+  namespace: 'api/v3',
+  pathForType: () => 'story',
+  buildURL() {
+    return this._super(...arguments) + '/';
   },
-  findRecord(store, type, id/*, snapshot*/) {
-    var url = [this.host, 'api/v3', 'story', 'detail', id].join('/') + '/';
-    let options = this.ajaxOptions(url, 'GET', {});
-    return wrapAjax(options);
+  buildQuery({ adapterOptions: { queryParams } = {}}) {
+    let query = this._super(...arguments);
+    if (queryParams && Object.keys(queryParams).includes(...DRAFT_TOKENS)) {
+      Object.keys(queryParams).forEach(k => query[k] = queryParams[k]);
+    }
+    return query;
+  },
+  urlForFindRecord(id) {
+    if (/^\d+$/.test(id)) {
+      return `${this.host}/${this.namespace}/story-pk/${id}`;
+    } else {
+      return this._super(...arguments);
+    }
+  },
+  query(store, type, {related}) {
+    if (related) {
+      let url = `${this.host}/${this.namespace}/story/related/?limit=${related.limit}&related=${related.itemId}`;
+      let options = this.ajaxOptions(url, 'GET', {});
+      return wrapAjax(options);
+    } else {
+      return this._super(...arguments);
+    }
+  },
+  ajaxOptions(url, method, hash) {
+    hash = hash || {};
+    hash.crossDomain = true;
+    hash.xhrFields = {
+      withCredentials: true
+    };
+    return this._super(url, method, hash);
   }
 });

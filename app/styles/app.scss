@@ -44,7 +44,6 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 @import 'state';
 @import 'animation';
 @import 'animations';
-@import 'dropdown';
 @import 'panel';
 @import 'slideshow';
 @import 'videoplayer';
@@ -77,6 +76,7 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 @import 'user-navigation';
 @import 'liquid-fire-icons';
 @import 'error';
+@import 'story';
 @import 'story-tease';
 @import 'alt-channel';
 @import 'chunk';
@@ -91,7 +91,6 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 @import 'legacy/schedule';
 @import 'legacy/nav-menu';
 @import 'legacy/user-profile';
-@import 'legacy/story';
 @import 'legacy/events';
 @import 'legacy/flatpages';
 @import 'legacy/footer';

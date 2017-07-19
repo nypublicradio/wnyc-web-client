@@ -8,7 +8,7 @@ export default ApplicationSerializer.extend({
     if (model.modelName === 'listing-page') {
       return 'channel';
     } else {
-      return ApplicationSerializer.prototype.typeKeyForModel(model);
+      return model.modelName.dasherize();
     }
   },
 });
