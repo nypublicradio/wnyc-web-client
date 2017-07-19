@@ -31,7 +31,7 @@
                   {{#listen-button
                     audio=audio
                     type='blue-boss'
-                    playConext="story-header"
+                    playContext="story-header"
                     state=(if (eq model.story.slug audio.currentId) audio.playState)
                     itemPK=model.story.slug
                     itemTitle=model.story.title}}
@@ -46,6 +46,8 @@
                 {{header.message}}
               {{/if}}
             {{/if}}
+            
+            {{header.share story=story via='WQXR'}}
 
           {{/nypr-story/header-content}}
 
