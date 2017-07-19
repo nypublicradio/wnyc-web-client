@@ -25,7 +25,7 @@
           {{/if}}
 
           {{#nypr-story/header-content story=model.story isStaff=session.data.isStaff adminURL=model.adminURL as |header|}}
-            {{#if (and model.story.audioMayEmbed model.story.audioEventually)}}
+            {{#if model.story.audioEventually}}
               {{#if model.story.audioAvailable}}
                 {{#header.buttons}}
                   {{#listen-button
