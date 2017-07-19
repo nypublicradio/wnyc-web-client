@@ -17,6 +17,8 @@ export default Model.extend({
   audioMayDownload: attr('boolean'),
   audioMayEmbed: attr('boolean'),
   audioShowOptions: attr('boolean'),
+  body: attr('string'),
+  channel: attr('string'),
   commentsCount: attr('number'),
   commentsEnabled: attr('boolean'),
   cmsPK: attr('string'),
@@ -24,6 +26,7 @@ export default Model.extend({
   dateLineDatetime: attr('string'),
   editLink: attr('string'),
   headers: attr(),
+  headerDonateChunk: attr('string'),
   // TODO: make this a relationship when stories come in only over /api/v3
   // right now they're still consumed from HTML and as part of listing pages
   // imageMain: DS.belongsTo('image'),
@@ -34,14 +37,16 @@ export default Model.extend({
   largeTeaseLayout: attr('boolean'),
   newsdate: attr('string'),
   segments: attr(),
+  series: attr(),
+  show: attr('string'),
   slug: attr('string'),
+  tags: attr(),
   tease: attr('string'),
   title: attr('string'),
   url: attr('string'),
-  extendedStory: attr(),
-  escapedBody: computed('extendedStory.body', {
+  escapedBody: computed('body', {
     get() {
-      let body = get(this, 'extendedStory.body');
+      let body = get(this, 'body');
       if (!body) {
         return '';
       }
@@ -139,6 +144,6 @@ export default Model.extend({
   },
   
   forDfp() {
-    return getProperties(this.get('extendedStory'), 'tags', 'show', 'channel', 'series');
+    return getProperties(this, 'tags', 'show', 'channel', 'series');
   }
 });
