@@ -2399,7 +2399,7 @@ ember-body-class@0.4.0:
   dependencies:
     ember-cli-babel "^5.0.0"
 
-ember-changeset-validations@^1.2.6, ember-changeset-validations@^1.2.7:
+ember-changeset-validations@^1.2.7:
   version "1.2.8"
   resolved "https://registry.yarnpkg.com/ember-changeset-validations/-/ember-changeset-validations-1.2.8.tgz#80c14fac5ee35dfff3538e6e9bc905c0686e193c"
   dependencies:
