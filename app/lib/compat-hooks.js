@@ -8,25 +8,10 @@
 */
 import Ember from 'ember';
 import config from 'wnyc-web-client/config/environment';
-import { removeAlienListeners, assign } from 'wnyc-web-client/lib/alien-dom';
+import { assign } from 'wnyc-web-client/lib/alien-dom';
 import { runOnce } from 'wnyc-web-client/services/legacy-loader';
 import { canonicalize } from 'wnyc-web-client/services/script-loader';
 const { $, get } = Ember;
-
-export function homepageCleanup(element = document.body) {
-  // remove these if they're empty, otherwise they cause layout issues
-  Array.from(element.querySelectorAll('#twitterbox, #technical-message'))
-    .forEach(n => !n.children.length && n.parentElement.removeChild(n));
-
-  // these media buttons are added to the DOM by legacy JS, so we don't want
-  // to save them to the ember data model
-  Array.from(element.querySelectorAll('.media_buttons'))
-    .forEach(n => {
-      while(n.hasChildNodes()) { n.removeChild(n.firstChild); }
-    });
-
-  return element;
-}
 
 // This gets run by the django-page component right before tearing
 // down the content.
@@ -49,10 +34,6 @@ export function beforeTeardown(/* element, page */) {
   // Most pages don't actually overwrite this if it exists, so it can
   // end up accumulating unexpected cruft.
   window.wnyc = undefined;
-
-  // story bootstraps adds a bunch of click handlers at run time that need to be
-  // removed otherwise they will pile up
-  removeAlienListeners();
 }
 
 // This gets run by the django-page model when it's figuring out how
@@ -60,30 +41,19 @@ export function beforeTeardown(/* element, page */) {
 // the content that's about to be appended) and the page model. The
 // Element is not yet inserted into any document, and you can modify
 // it here as needed.
-export function beforeAppend(element, page) {
-  if (page.get('id') === '/') {
-    element = homepageCleanup(element);
-  }
 
+export function beforeAppend(element) {
   let container = document.createElement('div');
-  if (get(page, 'wnycContent')) {
-    Array.from(element.querySelectorAll('.l-full, .l-full + .l-constrained'))
-      .forEach(n => container.appendChild(n));
-  } else if ( page.get('id') && page.get('id').match(/^streams\//i) ) {
-    // TODO: is there a better way to detect this?
-    return container;
-  } else {
-    let legacyContent = element.querySelector('#site') || element.querySelector('#flatpage');
-    if (!legacyContent) {
-      // maybe it's a flat page
-      legacyContent = element;
-    }
-    let newContent = document.createElement('div');
-    while (legacyContent.firstChild) {
-      newContent.appendChild(legacyContent.firstChild);
-    }
-    container.appendChild(newContent);
+  let legacyContent = element.querySelector('#site') || element.querySelector('#flatpage');
+  if (!legacyContent) {
+    // maybe it's a flat page
+    legacyContent = element;
   }
+  let newContent = document.createElement('div');
+  while (legacyContent.firstChild) {
+    newContent.appendChild(legacyContent.firstChild);
+  }
+  container.appendChild(newContent);
 
   // is there a sitewide chunk? save it from demolition
   let sitewideChunk = element.querySelector('#wnyc-sitewide');

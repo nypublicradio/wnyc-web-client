@@ -1,26 +1,33 @@
 import DS from 'ember-data';
+import { camelizeObj } from 'wnyc-web-client/helpers/camelize-object';
+
+//dasherized versions of names in model bc they haven't been processsed yet
+const propertiesWithChildren = [
+  'appearances',
+  'chunks',
+  'headers',
+  'image-main',
+  'playlist',
+  'producing-organizations',
+  'segments',
+  'series',
+  'show-producing-orgs',
+  'slideshow'
+];
 
 export default DS.JSONAPISerializer.extend({
-  normalizeQueryResponse(store, primaryModelClass, {results}, id, requestType) {
-    if (results) {
-      let transformed = {
-        data: results.map(result => {
-          let id = result.id;
-          delete result.id;
+  extractId: (modelClass, {attributes}) => attributes.slug,
 
-          let attributes = {};
-          Object.keys(result).forEach(key => attributes[key.dasherize()] = result[key]);
+  normalizeResponse(store, primaryModelClass, payload, id, requestType) {
 
-          return {
-            id,
-            type: 'story',
-            attributes
-          };
-        })
-      };
-      return this._super(store, primaryModelClass, transformed, id, requestType);
-    } else {
-      return this._super(...arguments);
+    for (var prop of propertiesWithChildren) {
+      //if we have the property, process it
+      if (payload.data.attributes && payload.data.attributes.hasOwnProperty(prop)){
+        payload.data.attributes[prop] = camelizeObj(payload.data.attributes[prop]);
+      }
     }
-  }
+
+    return this._super(store, primaryModelClass, payload, id, requestType);
+  },
+
 });

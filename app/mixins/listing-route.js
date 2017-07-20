@@ -93,7 +93,7 @@ export default Mixin.create({
     const { channel } = this.modelFor(channelType);
     const { page_params } = this.paramsFor(`${channelType}.page`);
     let [ navSlug ] = page_params ? page_params.split('/') : [];
-    const linkRollSlug = get(channel, 'linkroll.firstObject.navSlug');
+    const linkRollSlug = get(channel, 'linkroll.firstObject.nav-slug');
     const hasLinkRoll = get(channel, 'hasLinkroll');
 
     if (hasLinkRoll && navSlug && !/^\d+$/.test(navSlug)) {

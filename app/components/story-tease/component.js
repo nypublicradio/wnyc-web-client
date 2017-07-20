@@ -129,7 +129,7 @@ export default Component.extend({
   },
 
   _isUpcoming() {
-    const datetime = get(this, 'item.dateLineDatetime');
+    const datetime = get(this, 'item.newsdate');
     const itemdate = new Date(datetime);
     const itemdateEpoch = itemdate.getTime();
     const now = new Date();

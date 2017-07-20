@@ -1,21 +1,15 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
-import djangoPage from 'wnyc-web-client/tests/pages/django-page';
 import config from 'wnyc-web-client/config/environment';
 
 moduleForAcceptance('Acceptance | player events');
 
 test('visiting /player-events', function(assert) {
   let story = server.create('story');
-  let id = `story/${story.slug}/`;
   let done = assert.async();
-
-  server.create('django-page', {id, slug: story.slug});
   server.create('stream');
 
-  djangoPage
-    .bootstrap({id})
-    .visit({id});
+  visit(`/story/${story.slug}/`);
 
   let calls = [];
   server.post(`${config.platformEventsAPI}/v1/events/listened`, (schema, {requestBody}) => {
@@ -29,7 +23,7 @@ test('visiting /player-events', function(assert) {
   
   // story header play button
   andThen(() => {
-    click('main [data-test-selector="listen-button"]');
+    click('article [data-test-selector="listen-button"]');
     // pause
     click('.nypr-player-button.mod-listen');
     // play

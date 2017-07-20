@@ -3,12 +3,13 @@ import DS from 'ember-data';
 import ENV from '../config/environment';
 import get, { getProperties } from 'ember-metal/get';
 import computed from 'ember-computed';
-import parseAnalyticsCode from '../utils/analytics-code-parser';
 import { shareMetadata } from 'wnyc-web-client/helpers/share-metadata';
+import { producingOrgs } from 'wnyc-web-client/helpers/producing-orgs';
 const { attr, Model } = DS;
 
 export default Model.extend({
   analyticsCode: attr('string'),
+  appearances: attr(),
   audio: attr(),
   audioType: 'on_demand',
   audioAvailable: attr('boolean'),
@@ -16,34 +17,65 @@ export default Model.extend({
   audioEventually: attr('boolean'),
   audioMayDownload: attr('boolean'),
   audioMayEmbed: attr('boolean'),
+  audioMayStream: attr('boolean'),
   audioShowOptions: attr('boolean'),
-  body: attr('string'),
   channel: attr('string'),
+  chunks: attr(),
   commentsCount: attr('number'),
-  commentsEnabled: attr('boolean'),
   cmsPK: attr('string'),
-  dateLine: attr('string'),
-  dateLineDatetime: attr('string'),
+  correctionText: attr('string'),
+  newsdate: attr('string'),
   editLink: attr('string'),
+  embedCode: attr('string'),
+  enableComments: attr('boolean'),
   headers: attr(),
   headerDonateChunk: attr('string'),
   // TODO: make this a relationship when stories come in only over /api/v3
   // right now they're still consumed from HTML and as part of listing pages
   // imageMain: DS.belongsTo('image'),
-  imageMain: DS.attr(),
+  imageMain: attr(),
   itemType: attr('string'),
   itemTypeId: attr('number'),
   isLatest: attr('boolean'),
   largeTeaseLayout: attr('boolean'),
-  newsdate: attr('string'),
+  playlist: attr(),
+  podcastLinks: attr(),
+  producingOrganizations: attr(),
+  publishAt: attr('string'),
   segments: attr(),
   series: attr(),
   show: attr('string'),
+  showTease: attr('string'),
+  showProducingOrgs: attr(),
   slug: attr('string'),
+  slideshow: attr(),
   tags: attr(),
   tease: attr('string'),
+  template: attr('string'),
   title: attr('string'),
+  transcript: attr('string'),
+  twitterHeadline: attr('string'),
+  twitterHandle: attr('string'),
   url: attr('string'),
+  video: attr('string'),
+  body: attr('string'),
+  bodyDjango: computed ('body', function() {
+    let text = get(this, 'body');
+    return this.store.createRecord('django-page', { text });
+  }),
+  mainImageEligible: computed('template', 'imageMain', function(){
+    let template = get(this, 'template');
+    let imageWidth = get(this, 'imageMain.w');
+    let imageDisplayFlag = get(this, 'imageMain.isDisplay');
+    if (["story_video", "story_interactive", "story_noimage"].includes(template)) {
+      return false;
+    } else if (imageWidth >= 800 && imageDisplayFlag === true){
+      return true;
+    }
+  }),
+  videoTemplate: computed.equal('template', 'story_video'),
+  interactiveTemplate: computed.equal('template', 'story_interactive'),
+  flushHeader: computed.or('mainImageEligible', 'videoTemplate', 'segments'),
   escapedBody: computed('body', {
     get() {
       let body = get(this, 'body');
@@ -53,13 +85,26 @@ export default Model.extend({
       return body.replace(/\\x3C\/script>/g, '</script>');
     }
   }),
+  pageChunks: computed('chunks', function(){
+    //process the raw chunks into django-page records, if they are present
+    let processedChunks = {};
+    let chunksObj = get(this, 'chunks');
+    for (var key in chunksObj){
+      let text = chunksObj[key];
+      if (text){
+        let content = this.store.createRecord('django-page', { text });
+        processedChunks[key] = content;
+      }
+    }
+    return processedChunks;
+  }),
   segmentedAudio: computed('audio', function() {
     return Array.isArray(this.get('audio'));
   }),
   commentSecurityURL(browserId) {
     let data = {
       content_type: 'cms.' + this.get('itemType'),
-      object_pk: this.get('id'),
+      object_pk: this.get('cmsPK'),
       bust_cache: Math.random()
     };
     if (browserId) {
@@ -68,23 +113,73 @@ export default Model.extend({
     return `${ENV.wnycAccountRoot}/comments/security_info/?${Ember.$.param(data)}`;
   },
   nprAnalyticsDimensions: attr(),
-  analytics: computed('analyticsCode', {
+  allProducingOrgs: computed('producingOrganizations', 'showProducingOrgs', function(){
+    let prodOrgs = get(this, 'producingOrganizations') || [];
+    let showProdOrgs = get(this, 'showProducingOrgs') || [];
+    let allProdOrgs = [];
+
+    //combine show and story prod orgs into one array without dupes
+    if (showProdOrgs.length){
+      for(var i in showProdOrgs){
+         var shared = false;
+         for (var j in prodOrgs) {
+             if (prodOrgs[j].name === showProdOrgs[i].name) {
+                 shared = true;
+                 break;
+             }
+           }
+         if(!shared) {
+          allProdOrgs.push(showProdOrgs[i]);
+        }
+      }
+      allProdOrgs = allProdOrgs.concat(prodOrgs);
+    } else {
+      allProdOrgs = prodOrgs;
+    }
+
+    return allProdOrgs;
+  }),
+  analytics: computed('series', 'show', 'channel', 'headers', 'allProducingOrgs', {
     get() {
-      let analyticsCode = get(this, 'analyticsCode');
-      let {channeltitle, showtitle, seriestitles, isblog, modelchar} = parseAnalyticsCode(analyticsCode);
-      // compact first to guard against returned undefineds
-      let containers = [channeltitle, showtitle, seriestitles].compact().map((c, i) => {
+      let brandtitle = get(this, 'headers.brand.title');
+      let brandurl = get(this, 'headers.brand.url');
+      let channeltitle = null,
+          showtitle = null,
+          isblog = false,
+          seriestitles = [], 
+          allProdOrgs = [];
+
+      if (get(this, 'allProducingOrgs')){
+        allProdOrgs = get(this, 'allProducingOrgs');
+      }
+      if (get(this, 'channel')){
+        channeltitle = brandtitle;
+      }
+      if (get(this, 'show')){
+        showtitle = brandtitle;
+      }
+      if (get(this, 'series')){
+        seriestitles = get(this, 'series').map((s) => {
+          return s.title;
+        });
+      }
+
+      if (brandurl && brandurl.indexOf('/blogs/') > 0 ){
+        isblog = true;
+      }
+
+      let containers = [channeltitle, showtitle, seriestitles, allProdOrgs].map((c, i) => {
         if (i === 0 && c) {
           return `${isblog ? 'Blog' : 'Article Channel'}: ${c}`;
         } else if (i === 1 && c) {
           return `Show: ${c}`;
         } else if (i === 2 && c.length) {
           return `Series: ${c.join('+')}`;
+        } else if (i === 3 && Array.isArray(c) && c.length) {
+          return `Produced by ${producingOrgs([c], {unlinked:true})}`;
         }
       }).compact().join(' | ');
-      if (modelchar === 'n' && !containers) {
-        containers = 'NPR';
-      }
+
       return {
         containers,
         title: get(this, 'title')
@@ -138,7 +233,7 @@ export default Model.extend({
   forListenAction(data) {
     return Ember.RSVP.Promise.resolve(Object.assign({
       audio_type: 'on_demand',
-      cms_id: this.get('id'),
+      cms_id: this.get('cmsPK'),
       item_type: this.get('itemType'),
     }, data));
   },

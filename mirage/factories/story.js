@@ -7,16 +7,25 @@ export default Factory.extend({
   itemTypeId: 24,
   itemType: 'story',
   headers() {
-    return {};
+    return {
+      brand: {
+        url: faker.internet.url(),
+        title: 'The Brian Lehrer Show',
+      }
+    };
   },
   title(id) {
     return `Story ${id}`;
   },
   body: 'Story body.',
   commentsEnabled: true,
-  dateLineDatetime: faker.date.recent,
   newsdate: faker.date.recent,
+  publishAt: faker.date.recent,
   audio: () => faker.internet.url() + '.mp3',
+  audioEventually: true,
+  audioAvailable: true,
+  audioMayEmbed: true,
+  audioMayStream: true,
   analyticsCode: 'ExperimentalStory:trump-rubio-super-tuesday-morning-politics $A1$AD771$V0$Ms$D1$HS1$HC0$B0$SS+Everything You Need to Know About the 2016 Election+$C$SThe Brian Lehrer Show$T!news!politics!2016_election!super_tuesday!$AP/bl/bl022916apod.mp3$',
   analytics() {
     return {
@@ -24,4 +33,8 @@ export default Factory.extend({
       title: this.title
     };
   },
+  cmsPK: id => id + 1,
+  producingOrganizations: [],
+  showProducingOrgs: [],
+  allProducingOrgs: [],
 });

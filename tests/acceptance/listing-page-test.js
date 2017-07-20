@@ -18,7 +18,7 @@ test('smoke test', function(assert) {
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
     linkroll: [
-      {navSlug: 'episodes', title: 'Episodes'}
+      {'nav-slug': 'episodes', title: 'Episodes'}
     ],
     socialLinks: [{title: 'facebook', href: 'http://facebook.com'}],
     apiResponse: server.create('api-response', { id: 'shows/foo/episodes/1' })
@@ -43,7 +43,7 @@ test('authenticated smoke test', function(assert) {
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
     linkroll: [
-      {navSlug: 'episodes', title: 'Episodes'}
+      {'nav-slug': 'episodes', title: 'Episodes'}
     ],
     socialLinks: [{title: 'facebook', href: 'http://facebook.com'}],
     apiResponse: server.create('api-response', { id: 'shows/foo/episodes/1' })
@@ -63,7 +63,7 @@ test('about smoke test', function(assert) {
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
     linkroll: [
-      {navSlug: 'about', title: 'About'},
+      {'nav-slug': 'about', title: 'About'},
     ],
     apiResponse: server.create('api-response', { id: 'shows/foo/about' })
   });
@@ -88,7 +88,7 @@ test('visiting a listing page - story page smoke test', function(assert) {
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
     linkroll: [
-      {navSlug: 'story', title: 'Story'}
+      {'nav-slug': 'story', title: 'Story'}
     ],
     apiResponse
   });
@@ -105,7 +105,6 @@ test('visiting a listing page - story page smoke test', function(assert) {
 
 test('scripts in well route content will execute', function(assert) {
   let story = server.create('story', {
-    id: 'story/foo/',
     slug: 'foo',
     body: `test body.
 <script type="text/deferred-javascript">
@@ -129,7 +128,7 @@ test('scripts in well route content will execute', function(assert) {
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
     linkroll: [
-      {navSlug: 'story', title: 'Story'}
+      {'nav-slug': 'story', title: 'Story'}
     ],
     apiResponse
   });
@@ -159,8 +158,8 @@ test('using a nav-link', function(assert) {
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
     linkroll: [
-      {navSlug: 'episodes', title: 'Episodes'},
-      {navSlug: 'next-link', title: 'Next Link'}
+      {'nav-slug': 'episodes', title: 'Episodes'},
+      {'nav-slug': 'next-link', title: 'Next Link'}
     ],
     apiResponse
   });
@@ -191,8 +190,8 @@ test('visiting directly to a nav link url', function(assert) {
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
     linkroll: [
-      {navSlug: 'episodes', title: 'Episodes'},
-      {navSlug: 'next-link', title: 'Next Link'}
+      {'nav-slug': 'episodes', title: 'Episodes'},
+      {'nav-slug': 'next-link', title: 'Next Link'}
     ],
     apiResponse
   });
@@ -286,12 +285,12 @@ test('show pages with a play param', function(assert) {
 
   djangoPage
     .bootstrap(listingPage)
-    .visit({id: listingPage.id + `?play=${story.id}`});
+    .visit({id: listingPage.id + `?play=${story.slug}`});
 
   andThen(function() {
-    assert.equal(currentURL(), `${listingPage.id}?play=${story.id}`);
-    assert.ok(Ember.$('.nypr-player').length, 'persistent player should be visible');
-    assert.equal(Ember.$('[data-test-selector=nypr-player-story-title]').text(), story.title, `${story.title} should be loaded in player UI`);
+    assert.equal(currentURL(), `${listingPage.id}?play=${story.slug}`);
+    assert.ok(find('.nypr-player').length, 'persistent player should be visible');
+    assert.equal(find('[data-test-selector=nypr-player-story-title]').text(), story.title, `${story.title} should be loaded in player UI`);
   });
 
 });
@@ -339,7 +338,7 @@ test('metrics properly reports channel attrs', function(assert) {
     id: 'shows/foo/',
     cmsPK: 123,
     linkroll: [
-      {navSlug: 'episodes', title: 'Episodes'}
+      {'nav-slug': 'episodes', title: 'Episodes'}
     ],
     socialLinks: [{title: 'facebook', href: 'http://facebook.com'}],
     apiResponse: server.create('api-response', { id: 'shows/foo/episodes/1' })
