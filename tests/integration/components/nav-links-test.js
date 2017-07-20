@@ -21,7 +21,7 @@ test('it renders', function(assert) {
 test('it properly sets the activeTab if defaultTab is undefined', function(assert) {
   this.set('defaultTab', undefined);
   this.set('links', [
-    {href: null, navSlug: 'foo', title: 'Foo'},
+    {href: null, 'nav-slug': 'foo', title: 'Foo'},
     {href: 'http://example.com', title: 'Example'}
   ]);
   this.set('navRoot', 'baz/bar');

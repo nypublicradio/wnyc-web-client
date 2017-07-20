@@ -30,7 +30,7 @@ export default Component.extend({
     let links = get(this, 'links');
     let navRoot = get(this, 'navRoot');
     return links.map(i => {
-      let { href, navSlug } = i;
+      let { href, 'nav-slug':navSlug } = i;
       if (!href) {
         i.href = `/${navRoot}/${navSlug}`;
         return i;
@@ -49,7 +49,7 @@ export default Component.extend({
     // a navSlug key will match on `undefined` in `findBy` below
     let defaultSlug = get(this, 'defaultSlug') || null;
     let links = get(this, 'links');
-    let defaultIndex = links.indexOf(links.findBy('navSlug', defaultSlug));
+    let defaultIndex = links.indexOf(links.findBy('nav-slug', defaultSlug));
     set(this, 'activeTabIndex', defaultIndex === -1 ? 0 : defaultIndex);
   },
 

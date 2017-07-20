@@ -14,7 +14,7 @@ test('smoke test', function(assert) {
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
     linkroll: [
-      {navSlug: 'episodes', title: 'Episodes'}
+      {'nav-slug': 'episodes', title: 'Episodes'}
     ],
     socialLinks: [{title: 'facebook', href: 'http://facebook.com'}],
     apiResponse: server.create('api-response', { id: 'shows/foo/episodes/1' })
@@ -39,7 +39,7 @@ test('authenticated smoke test', function(assert) {
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
     linkroll: [
-      {navSlug: 'episodes', title: 'Episodes'}
+      {'nav-slug': 'episodes', title: 'Episodes'}
     ],
     socialLinks: [{title: 'facebook', href: 'http://facebook.com'}],
     apiResponse: server.create('api-response', { id: 'shows/foo/episodes/1' })
@@ -59,7 +59,7 @@ test('about smoke test', function(assert) {
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
     linkroll: [
-      {navSlug: 'about', title: 'About'},
+      {'nav-slug': 'about', title: 'About'},
     ],
     apiResponse: server.create('api-response', { id: 'shows/foo/about' })
   });
@@ -84,47 +84,7 @@ test('visiting a listing page - story page smoke test', function(assert) {
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
     linkroll: [
-      {navSlug: 'story', title: 'Story'}
-    ],
-    apiResponse
-  });
-  server.create('django-page', {id: listingPage.id});
-
-  djangoPage
-    .bootstrap(listingPage)
-    .visit(listingPage);
-
-  andThen(() => {
-    assert.equal(showPage.storyText(), 'Story body.');
-  });
-});
-
-test('scripts in well route content will execute', function(assert) {
-  let story = server.create('story', {
-    slug: 'foo',
-    body: `test body.
-<script type="text/deferred-javascript">
-(function(){
-
-  var p = document.createElement("p");
-  p.innerHTML = "Added this paragraph!";
-  document.querySelector("[data-test-selector=story-detail] .django-content").appendChild(p);
-
-})();
-\\x3C/script>
-`
-  });
-  
-  let apiResponse = server.create('api-response', {
-    id: 'shows/foo/story/1',
-    type: 'story',
-    story
-  });
-
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
-    linkroll: [
-      {navSlug: 'story', title: 'Story'}
+      {'nav-slug': 'story', title: 'Story'}
     ],
     apiResponse
   });
@@ -154,8 +114,8 @@ test('using a nav-link', function(assert) {
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
     linkroll: [
-      {navSlug: 'episodes', title: 'Episodes'},
-      {navSlug: 'next-link', title: 'Next Link'}
+      {'nav-slug': 'episodes', title: 'Episodes'},
+      {'nav-slug': 'next-link', title: 'Next Link'}
     ],
     apiResponse
   });
@@ -186,8 +146,8 @@ test('visiting directly to a nav link url', function(assert) {
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
     linkroll: [
-      {navSlug: 'episodes', title: 'Episodes'},
-      {navSlug: 'next-link', title: 'Next Link'}
+      {'nav-slug': 'episodes', title: 'Episodes'},
+      {'nav-slug': 'next-link', title: 'Next Link'}
     ],
     apiResponse
   });
@@ -340,7 +300,7 @@ test('metrics properly reports channel attrs', function(assert) {
     id: 'shows/foo/',
     cmsPK: 123,
     linkroll: [
-      {navSlug: 'episodes', title: 'Episodes'}
+      {'nav-slug': 'episodes', title: 'Episodes'}
     ],
     socialLinks: [{title: 'facebook', href: 'http://facebook.com'}],
     apiResponse: server.create('api-response', { id: 'shows/foo/episodes/1' })

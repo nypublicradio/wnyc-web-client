@@ -15,7 +15,7 @@ test('showing pagination for a list of episodes', function(assert) {
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
     linkroll: [
-      {navSlug: 'episodes', title: 'Episodes'}
+      {'nav-slug': 'episodes', title: 'Episodes'}
     ],
     apiResponse
   });
@@ -35,7 +35,7 @@ test('showing no pagination on about pages', function(assert) {
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
     linkroll: [
-      {navSlug: 'about', title: 'About'},
+      {'nav-slug': 'about', title: 'About'},
     ],
     apiResponse: server.create('api-response', { id: 'shows/foo/about' })
   });
@@ -59,7 +59,7 @@ test('showing no pagination on story detail listing pages', function(assert) {
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
     linkroll: [
-      {navSlug: 'story', title: 'Story'}
+      {'nav-slug': 'story', title: 'Story'}
     ],
     apiResponse
   });
@@ -92,7 +92,7 @@ test('can go back and forward', function(assert) {
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
     linkroll: [
-      {navSlug: 'episodes', title: 'Episodes'},
+      {'nav-slug': 'episodes', title: 'Episodes'},
     ],
     apiResponse
   });
@@ -177,7 +177,7 @@ test('can navigate to a specified page of results', function(assert) {
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
     linkroll: [
-      {navSlug: 'episodes', title: 'Episodes'},
+      {'nav-slug': 'episodes', title: 'Episodes'},
     ],
     apiResponse
   });
@@ -217,7 +217,7 @@ test('can land on a page number', function(assert) {
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
     linkroll: [
-      {navSlug: 'episodes', title: 'Episodes'},
+      {'nav-slug': 'episodes', title: 'Episodes'},
     ],
     apiResponse
   });
@@ -244,7 +244,7 @@ test('it only shows ten pages at a time', function(assert) {
   
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
-    linkroll: [{navSlug: 'episodes', title: 'Episodes'}],
+    linkroll: [{'nav-slug': 'episodes', title: 'Episodes'}],
     apiResponse
   });
   
@@ -287,8 +287,8 @@ test('clicking on a page number takes to the page of the correct tab', function(
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
     linkroll: [
-      {navSlug: 'episodes', title: 'Episodes'},
-      {navSlug: 'segments', title: 'Segments'}
+      {'nav-slug': 'episodes', title: 'Episodes'},
+      {'nav-slug': 'segments', title: 'Segments'}
     ],
     apiResponse
   });

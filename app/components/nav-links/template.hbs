@@ -3,8 +3,8 @@
 <ul class="list list--inline flush">
   {{#each parsedLinks as |link index|}}
     <li class="{{if (eq index currentIndex) 'is-active '}}list-item list-item--nav">
-      {{#if link.navSlug}}
-        <a href={{link.href}} {{action 'transition' link.navSlug index bubbles=false}} class="link link--dark link--nodecor tab-link">{{link.title}}</a>
+      {{#if link.nav-slug}}
+        <a href={{link.href}} {{action 'transition' link.nav-slug index bubbles=false}} class="link link--dark link--nodecor tab-link">{{link.title}}</a>
       {{else}}
         <a href={{link.href}} class="link link--dark link--nodecor tab-link">{{link.title}}</a>
       {{/if}}
