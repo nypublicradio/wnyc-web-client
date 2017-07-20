@@ -6,7 +6,7 @@ import wrapAjax from 'wnyc-web-client/lib/wrap-ajax';
 import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 
 
-const DRAFT_TOKENS = ['content_type_id', 'object_id', 'token', '_']
+const DRAFT_TOKENS = ['content_type_id', 'object_id', 'token', '_'];
 
 export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
   authorizer: 'authorizer:nypr',
