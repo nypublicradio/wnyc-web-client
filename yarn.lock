@@ -2373,7 +2373,7 @@ ember-ajax@^2.4.1:
   dependencies:
     ember-cli-babel "^5.1.5"
 
-ember-basic-dropdown@^0.33.1:
+ember-basic-dropdown@0.33.1, ember-basic-dropdown@^0.33.1:
   version "0.33.1"
   resolved "https://registry.yarnpkg.com/ember-basic-dropdown/-/ember-basic-dropdown-0.33.1.tgz#8eab4181618d32edd88e1c90835d2a8791f09064"
   dependencies:
@@ -5903,16 +5903,17 @@ nypr-ads@nypublicradio/nypr-ads:
 
 nypr-player@nypublicradio/nypr-player:
   version "0.0.2"
-  resolved "https://codeload.github.com/nypublicradio/nypr-player/tar.gz/5547a3e0d4535bd8b767b7aafa68ad46202a9dd0"
+  resolved "https://codeload.github.com/nypublicradio/nypr-player/tar.gz/0e9d7b257b754f1dd025976a4e4d8177d3fc9488"
   dependencies:
     ember-cli-babel "^5.1.7"
     ember-cli-htmlbars "^1.0.10"
 
 nypr-ui@nypublicradio/nypr-ui:
   version "0.0.0"
-  resolved "https://codeload.github.com/nypublicradio/nypr-ui/tar.gz/792379db5b0cf5bc89c8341416e54ff239961036"
+  resolved "https://codeload.github.com/nypublicradio/nypr-ui/tar.gz/07e0c409ddc13f3c2196368c9e12f8d7ef0e83c0"
   dependencies:
-    ember-cli-babel "^6.3.0"
+    ember-basic-dropdown "0.33.1"
+    ember-cli-babel "^6.6.0"
     ember-cli-compass-compiler "^0.5.0"
     ember-cli-htmlbars "^2.0.1"
     ember-cli-htmlbars-inline-precompile "^0.4.3"
