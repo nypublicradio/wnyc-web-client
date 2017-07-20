@@ -94,6 +94,46 @@ test('visiting a listing page - story page smoke test', function(assert) {
     .bootstrap(listingPage)
     .visit(listingPage);
 
+  andThen(() => {
+    assert.equal(showPage.storyText(), 'Story body.');
+  });
+});
+
+test('scripts in well route content will execute', function(assert) {
+  let story = server.create('story', {
+    slug: 'foo',
+    body: `test body.
+<script type="text/deferred-javascript">
+(function(){
+
+  var p = document.createElement("p");
+  p.innerHTML = "Added this paragraph!";
+  document.querySelector("[data-test-selector=story-detail] .django-content").appendChild(p);
+
+})();
+\\x3C/script>
+`
+  });
+  
+  let apiResponse = server.create('api-response', {
+    id: 'shows/foo/story/1',
+    type: 'story',
+    story
+  });
+
+  let listingPage = server.create('listing-page', {
+    id: 'shows/foo/',
+    linkroll: [
+      {'nav-slug': 'story', title: 'Story'}
+    ],
+    apiResponse
+  });
+  server.create('django-page', {id: listingPage.id});
+
+  djangoPage
+    .bootstrap(listingPage)
+    .visit(listingPage);
+
   andThen(function() {
     assert.equal(find('[data-test-selector=story-detail] p').length, 1, 'should only be one p tag');
     let text = find('[data-test-selector=story-detail] .django-content').find('p, div').text().split('\n').filter(s => s).join(' ');
