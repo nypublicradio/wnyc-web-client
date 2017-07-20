@@ -950,6 +950,7 @@
   @include btn--strongtext;
   @include btn--smalltext;
   @include thickbtn;
+  line-height: 34px;
 
   &.queue-button--fancyfeature {
     @include white-btn-jshover;
@@ -957,7 +958,6 @@
 
   &.queue-button--storyheader {
     @include gray-btn-jshover;
-    line-height: 34px;
 
     @include mq($medium-and-up) {
       @include white-btn-jshover;
