@@ -1,26 +1,18 @@
 import DS from 'ember-data';
 import { camelizeObj } from 'wnyc-web-client/helpers/camelize-object';
 
-export function dasherizeKeys(attributes) {
-  let attrs = {};
-  if (attributes) {
-    Object.keys(attributes).forEach(k => attrs[k.dasherize()] = attributes[k]);
-  }
-  return attrs;
-}
-
 //dasherized versions of names in model bc they haven't been processsed yet
 const propertiesWithChildren = [
-'appearances',
-'chunks',
-'headers',
-'image-main',
-'playlist',
-'producing-organizations',
-'segments',
-'series',
-'show-producing-orgs',
-'slideshow'
+  'appearances',
+  'chunks',
+  'headers',
+  'image-main',
+  'playlist',
+  'producing-organizations',
+  'segments',
+  'series',
+  'show-producing-orgs',
+  'slideshow'
 ];
 
 export default DS.JSONAPISerializer.extend({

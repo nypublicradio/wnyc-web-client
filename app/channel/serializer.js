@@ -1,6 +1,5 @@
 import DS from 'ember-data';
 import { serializeApiResponseRelationships } from 'wnyc-web-client/api-response/serializer';
-import { dasherizeKeys } from 'wnyc-web-client/story/serializer';
 
 export default DS.JSONAPISerializer.extend({
   normalizeResponse(store, typeClass, {included = [], data}, id, requestType) {
@@ -27,16 +26,9 @@ export default DS.JSONAPISerializer.extend({
     });
     
     included = included.map(r => {
-      let { attributes, type } = r;
-      if (type === 'api-response') {
+      if (r.type === 'api-response') {
         r.relationships = serializeApiResponseRelationships(r.relationships, included);
         return r;
-      }
-
-      // story serializer expects keys dasherized
-      if (type === 'story') {
-        r.attributes = dasherizeKeys(r.attributes);
-        r.id = attributes.slug;
       }
       return r;
     });
@@ -44,8 +36,8 @@ export default DS.JSONAPISerializer.extend({
     if (featuredStory) {
       let story = {
         type: 'story',
-        id: featuredStory.slug,
-        attributes: dasherizeKeys(featuredStory)
+        id: featuredStory.id,
+        attributes: featuredStory
       };
       
       included.push(story);

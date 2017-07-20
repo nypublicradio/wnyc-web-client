@@ -1,5 +1,4 @@
 import DS from 'ember-data';
-import { dasherizeKeys } from 'wnyc-web-client/story/serializer';
 
 export function serializeApiResponseRelationships(relationships = {}, included = []) {
   if (relationships['tease-list'] && relationships['tease-list'].data.length) {
@@ -17,13 +16,6 @@ export function serializeApiResponseRelationships(relationships = {}, included =
 
 export default DS.JSONAPISerializer.extend({
   normalizeResponse(store, typeClass, {included = [], data}, id, requestType) {
-    included = included.map(r => {
-      let { attributes } = r;
-      r.attributes = dasherizeKeys(attributes);
-      r.id = attributes.slug;
-      return r;
-    });
-    
     data.relationships = serializeApiResponseRelationships(data.relationships, included);
     return this._super(store, typeClass, {included, data}, id, requestType);
   }
