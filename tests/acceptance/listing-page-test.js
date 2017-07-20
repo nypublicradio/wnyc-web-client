@@ -289,13 +289,8 @@ test('show pages with a play param', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), `${listingPage.id}?play=${story.slug}`);
-<<<<<<< HEAD
-    assert.ok(Ember.$('.nypr-player').length, 'persistent player should be visible');
-    assert.equal(Ember.$('[data-test-selector=nypr-player-story-title]').text(), story.title, `${story.title} should be loaded in player UI`);
-=======
     assert.ok(find('.nypr-player').length, 'persistent player should be visible');
     assert.equal(find('[data-test-selector=nypr-player-story-title]').text(), story.title, `${story.title} should be loaded in player UI`);
->>>>>>> 9cf9112... test fixes
   });
 
 });
