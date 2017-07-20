@@ -957,6 +957,7 @@
 
   &.queue-button--storyheader {
     @include gray-btn-jshover;
+    line-height: 34px;
 
     @include mq($medium-and-up) {
       @include white-btn-jshover;
