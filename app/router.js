@@ -25,6 +25,7 @@ Router.map(function() {
   // default behavior in the `djangorendered` route.
   this.route('story', { path: 'story/:slug' });
 
+
   this.route('show', {path: 'shows'});
   this.route('archived-shows');
   this.route('show-detail', {path: 'shows/:slug'}, subpageRoutes);
