@@ -42,6 +42,7 @@ export default Model.extend({
   podcastLinks: attr(),
   producingOrganizations: attr(),
   publishAt: attr('string'),
+  publishStatus: attr('string'),
   segments: attr(),
   series: attr(),
   show: attr('string'),
