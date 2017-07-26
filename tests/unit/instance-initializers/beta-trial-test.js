@@ -16,6 +16,7 @@ module('Unit | Instance Initializer | beta trial | active trial', {
   afterEach: function() {
     Ember.run(this.appInstance, 'destroy');
     destroyApp(this.application);
+    Ember.$('#ember-testing').empty();
   }
 });
 
