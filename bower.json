@@ -1,11 +1,6 @@
 {
   "name": "wnyc-web-client",
   "dependencies": {
-    "moment": ">= 2.8.0",
-    "moment-timezone": ">= 0.1.0",
-    "fastclick": "~1.0.6",
-    "pretender": "^1.0.0",
-    "Faker": "~3.0.0",
     "normalize.css": "3.0.3",
     "raven-js": "~2.1",
     "waypoints": "~4.0.0",
