@@ -39,7 +39,7 @@
 
     {{#liquid-if integration.revealNotificationBar class='player-notification-wrapper'}}
       {{#player-notification onDismiss=integration.onDismissNotification}}
-        {{player-notification.autoplay-message
+        {{player-notification/autoplay-message
           duration   = integration.currentSound.duration
           position   = integration.currentSound.position
           audioType  = integration.currentAudioType
