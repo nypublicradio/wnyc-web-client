@@ -115,10 +115,14 @@ test('story routes do dfp targeting', function(/*assert*/) {
   let forDfp = {tags: ['foo', 'bar'], show: 'foo show', channel: 'foo channel', series: 'foo series'};
   let story = server.create('story', forDfp);
 
-  this.mock(this.application.__container__.lookup('route:story').get('googleAds'))
-    .expects('doTargeting')
-    .once()
-    .withArgs(forDfp);
+  // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
+  visit('/');
+  andThen(() => {
+    this.mock(this.application.__container__.lookup('route:story').get('googleAds'))
+      .expects('doTargeting')
+      .once()
+      .withArgs(forDfp);
+  });
 
   visit(`story/${story.slug}`);
 });
