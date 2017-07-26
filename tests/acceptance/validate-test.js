@@ -4,7 +4,11 @@ import { authenticateSession, currentSession } from 'wnyc-web-client/tests/helpe
 // import { Response } from 'ember-cli-mirage';
 // import config from 'wnyc-web-client/config/environment';
 
-moduleForAcceptance('Acceptance | validate');
+moduleForAcceptance('Acceptance | validate', {
+  beforeEach() {
+    server.create('django-page', {id: '/'});
+  }
+});
 
 test('visiting /validate with no params', function(assert) {
   visit('/validate');
@@ -67,4 +71,3 @@ test('visiting /validate and logging in even when starting logged in', function(
     assert.ok(currentSession(this.application).get('isAuthenticated'));
   });
 });
-
