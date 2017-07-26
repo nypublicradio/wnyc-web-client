@@ -22,6 +22,7 @@ test('it has the required information for sending a listen action', function(ass
 
   let storyPromise = Ember.RSVP.Promise.resolve(Ember.Object.create({
     id: 5,
+    cmsPK: 5,
     itemType: 'episode'
   }));
 

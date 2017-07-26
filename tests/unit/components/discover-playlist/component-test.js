@@ -5,7 +5,7 @@ import { dummyHifi, hifiNeeds } from 'wnyc-web-client/tests/helpers/hifi-integra
 import Ember from 'ember';
 
 moduleForComponent('discover-playlist', 'Unit | Component | discover playlist', {
-  needs: ['component:discover-playlist', 'component:discover-playlist-story', 'component:playlist-play-indicator', ...hifiNeeds, 'service:dj'],
+  needs: ['component:discover-playlist', 'component:discover-playlist-story', 'component:playlist-play-indicator', ...hifiNeeds, 'service:dj', 'service:session', 'service:scroller'],
   unit: true,
   beforeEach() {
     const metricsStub = Ember.Service.extend({
