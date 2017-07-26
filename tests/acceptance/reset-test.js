@@ -4,7 +4,11 @@ import { Response } from 'ember-cli-mirage';
 import config from 'wnyc-web-client/config/environment';
 import { authenticateSession, currentSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
 
-moduleForAcceptance('Acceptance | reset');
+moduleForAcceptance('Acceptance | reset', {
+  beforeEach() {
+    server.create('django-page', {id: '/'});
+  }
+});
 
 const email = 'test@example.com';
 const password = 'password1';
