@@ -9,7 +9,7 @@
   <div class="l-constrained">
     
     <main class="{{unless model.story.interactiveTemplate 'l-col2of3'}}" id="main" role="main">
-      <article class="doubledown" data-status="{{model.story.publishStatus}}" data-date="{{moment-format model.story.publishAt 'MMM D, Y'}}">
+      <article class="doubledown" data-status="{{if model.story.futureArticle model.story.publishStatus}}" data-date="{{moment-format model.story.publishAt 'MMM D, Y'}}">
 
         <header class="l-bgimg {{if model.story.flushHeader 'flush'}}" id="storyHeader">
 
