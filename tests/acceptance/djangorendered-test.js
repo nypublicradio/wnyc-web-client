@@ -6,9 +6,6 @@ import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-accept
 import djangoPage from 'wnyc-web-client/tests/pages/django-page';
 import Ember from 'ember';
 const { wnycURL } = config;
-import {
-  resetHTML
-} from 'wnyc-web-client/tests/helpers/html';
 import 'wnyc-web-client/tests/helpers/hifi-acceptance-helper';
 
 function escapeNavigation() {
@@ -22,7 +19,6 @@ moduleForAcceptance('Acceptance | Django Rendered | Proper Re-renders', {
   },
   afterEach() {
     window.onbeforeunload = undefined;
-    resetHTML();
   }
 });
 
@@ -172,7 +168,6 @@ moduleForAcceptance('Acceptance | Django Rendered | Beta Trial', {
   },
   afterEach() {
     window.onbeforeunload = undefined;
-    resetHTML();
   }
 });
 

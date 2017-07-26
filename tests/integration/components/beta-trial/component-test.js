@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import { generateBetaTrial } from 'wnyc-web-client/tests/helpers/beta';
 import { moduleForComponent, test } from 'ember-qunit';
-import { resetHTML, appendIfNot } from 'wnyc-web-client/tests/helpers/html';
+import { appendIfNot } from 'wnyc-web-client/tests/helpers/html';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('beta-trial', 'Integration | Component | beta trial', {
@@ -9,9 +9,6 @@ moduleForComponent('beta-trial', 'Integration | Component | beta trial', {
   beforeEach() {
     appendIfNot('modal-wormhole-testing');
     appendIfNot('beta-wormhole-testing');
-  },
-  afterEach() {
-    resetHTML();
   }
 });
 
@@ -77,7 +74,6 @@ test('beta invite can be entered', function(assert) {
 // moduleForComponent('beta-trial', 'Integration | Component | beta trial | on beta state', {
 //   integration: true,
 //   afterEach() {
-//     resetHTML();
 //     appendIfNot('beta-wormhole-testing');
 //   }
 // });
@@ -149,7 +145,6 @@ test('it can exit the beta', function(assert) {
 // moduleForComponent('beta-trial', 'Integration | Component | beta trial | retired beta state', {
 //   integration: true,
 //   afterEach() {
-//     resetHTML();
 //     appendIfNot('beta-wormhole-testing');
 //   }
 // });

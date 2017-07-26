@@ -1,9 +1,7 @@
-import Ember from 'ember';
 import test from 'ember-sinon-qunit/test-support/test';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import djangoPage from 'wnyc-web-client/tests/pages/django-page';
 import showPage from 'wnyc-web-client/tests/pages/show';
-import { resetHTML } from 'wnyc-web-client/tests/helpers/html';
 import config from 'wnyc-web-client/config/environment';
 import moment from 'moment';
 
@@ -11,9 +9,6 @@ moduleForAcceptance('Acceptance | Listing Page | viewing', {
   beforeEach() {
     server.create('stream');
   },
-  afterEach() {
-    resetHTML();
-  }
 });
 
 test('smoke test', function(assert) {

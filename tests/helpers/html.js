@@ -2,11 +2,6 @@ export function appendHTML(string) {
   $(string.trim()).appendTo('#ember-testing');
 }
 
-export function resetHTML() {
-  $('#ember-testing').empty();
-  $('#ember-testing-container > :not(#ember-testing)').remove();
-}
-
 export function appendIfNot(id) {
   let node = document.getElementById(id);
 

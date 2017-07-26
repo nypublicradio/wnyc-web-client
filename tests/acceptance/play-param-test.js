@@ -3,7 +3,6 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import { registerMockOnInstance } from 'wnyc-web-client/tests/helpers/register-mock';
 import Service from 'ember-service';
-import { resetHTML } from 'wnyc-web-client/tests/helpers/html';
 import velocity from 'velocity';
 import { dummyHifi } from 'wnyc-web-client/tests/helpers/hifi-integration-helpers';
 
@@ -21,10 +20,6 @@ moduleForAcceptance('Acceptance | play param', {
   beforeEach() {
     server.create('stream');
     registerMockOnInstance(this.application, 'service:hifi', dummyHifi);
-
-  },
-  afterEach() {
-    resetHTML();
   }
 });
 

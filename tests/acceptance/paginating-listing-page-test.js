@@ -2,13 +2,8 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import djangoPage from 'wnyc-web-client/tests/pages/django-page';
 import showPage from 'wnyc-web-client/tests/pages/show';
-import { resetHTML } from 'wnyc-web-client/tests/helpers/html';
 
-moduleForAcceptance('Acceptance | Listing Page | paginating', {
-  afterEach() {
-    resetHTML();
-  }
-});
+moduleForAcceptance('Acceptance | Listing Page | paginating');
 
 test('showing pagination for a list of episodes', function(assert) {
   let apiResponse = server.create('api-response', {

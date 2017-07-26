@@ -1,7 +1,7 @@
 import config from 'wnyc-web-client/config/environment';
 import BetaActionsMixin from 'wnyc-web-client/mixins/beta-actions';
 import { plantBetaTrial, clearBetaCookies } from 'wnyc-web-client/tests/helpers/beta';
-import { resetHTML, appendIfNot } from 'wnyc-web-client/tests/helpers/html';
+import { appendIfNot } from 'wnyc-web-client/tests/helpers/html';
 import { test } from 'qunit';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import $ from 'jquery';
@@ -33,7 +33,6 @@ moduleForAcceptance('Acceptance | active beta trial', {
   },
   afterEach() {
     clearBetaCookies();
-    resetHTML();
   }
 });
 
@@ -89,9 +88,6 @@ moduleForAcceptance('Acceptance | on the beta site', {
     config.betaTrials.isBetaSite = true;
     config.betaTrials.preBeta = false;
     server.create('stream');
-  },
-  afterEach() {
-    resetHTML();
   }
 });
 
@@ -131,9 +127,6 @@ moduleForAcceptance('Acceptance | retired beta trial', {
     config.betaTrials.isBetaSite = false;
     config.betaTrials.preBeta = false;
     server.create('stream');
-  },
-  afterEach() {
-    resetHTML();
   }
 });
 
