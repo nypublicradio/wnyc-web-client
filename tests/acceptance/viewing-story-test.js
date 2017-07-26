@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import test from 'ember-sinon-qunit/test-support/test';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import storyPage from 'wnyc-web-client/tests/pages/story';
@@ -75,7 +74,6 @@ moduleForAcceptance('Acceptance |  Story Detail Analytics', {
 
 test('metrics properly reports story attrs', function(assert) {
   let story = server.create('story');
-  let id = `story/${story.slug}/`;
 
   assert.expect(2);
 

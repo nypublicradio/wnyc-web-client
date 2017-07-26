@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import { test } from 'qunit';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import { registerMockOnInstance } from 'wnyc-web-client/tests/helpers/register-mock';
@@ -57,7 +56,7 @@ test('play param transitions', function(assert) {
 test('loading a page with the ?play param', function(assert) {
   let slug = 'foo';
 
-  server.create('story', {id, title: 'Foo', audio: '/good/15000/1'});
+  server.create('story', {slug, title: 'Foo'});
   server.create('django-page', {id: `bar/`});
 
   visit(`bar?play=${slug}`);
