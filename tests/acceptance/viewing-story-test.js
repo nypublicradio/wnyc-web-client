@@ -110,7 +110,7 @@ test('metrics properly reports story attrs', function(assert) {
 });
 
 test('story routes do dfp targeting', function(/*assert*/) {
-  let forDfp = {tags: ['foo', 'bar'], show: 'foo show', channel: 'foo channel', series: 'foo series'};
+  let forDfp = {tags: ['foo', 'bar'], show: 'foo show', channel: 'foo channel', series: ['foo series']};
   let story = server.create('story', forDfp);
 
   // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
