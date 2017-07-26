@@ -1,6 +1,6 @@
-/*jshint node:true*/
-/* global require, module */
-var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+/* eslint-env node */
+'use strict';
+const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var mergeTrees = require('broccoli-merge-trees');
 var mv = require('broccoli-stew').mv;
 var fs = require('fs');
@@ -12,7 +12,7 @@ module.exports = function(defaults) {
   if (env === 'development') {
     pubTrees.push(mv('docs', 'docs'));
   }
-  var app = new EmberApp(defaults, {
+  let app = new EmberApp(defaults, {
     autoprefixer: {
       browsers: ['last 3 versions']
     },
