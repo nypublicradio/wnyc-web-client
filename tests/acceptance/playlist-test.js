@@ -29,7 +29,7 @@ test('visiting /streams/wnyc-fm939', function(assert) {
 test('playlist routes do dfp targeting', function(/*assert*/) {
   // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
   
-  visit('/');
+  visit('/foo');
   
   server.create('stream', {
     slug: 'wnyc-fm939', 

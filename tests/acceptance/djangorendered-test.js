@@ -148,7 +148,7 @@ test('arbitrary django routes do dfp targeting', function(/*assert*/) {
   // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
   server.create('django-page', {id: 'fake/'});
   
-  visit('/');
+  visit('/foo');
 
   andThen(() => {
     this.mock(this.application.__container__.lookup('route:djangorendered').get('googleAds'))

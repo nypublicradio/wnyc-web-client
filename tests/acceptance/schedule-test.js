@@ -55,7 +55,7 @@ test('transitioning to a specific schedule', function(assert) {
 
 test('schedule routes do dfp targeting', function(/*assert*/) {
   // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
-  visit('/');
+  visit('/foo');
   andThen(() => {
     this.mock(this.application.__container__.lookup('route:schedule.date').get('googleAds'))
       .expects('doTargeting')

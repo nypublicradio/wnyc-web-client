@@ -114,7 +114,7 @@ test('story routes do dfp targeting', function(/*assert*/) {
   let story = server.create('story', forDfp);
 
   // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
-  visit('/');
+  visit('/foo');
   andThen(() => {
     this.mock(this.application.__container__.lookup('route:story').get('googleAds'))
       .expects('doTargeting')
