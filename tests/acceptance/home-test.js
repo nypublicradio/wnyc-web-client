@@ -44,8 +44,9 @@ test('.l-constrained is added to the home page', function(assert) {
 
 test('home page does dfp targeting', function(/*assert*/) {
   server.create('django-page', {id: '/'});
-  // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
   
+  // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
+  server.create('django-page', {id: 'foo/'});
   visit('/foo');
   
   andThen(() => {

@@ -69,6 +69,7 @@ test('searching with no results /shows', function(assert) {
 
 test('show routes do dfp targeting', function(/*assert*/) {
   // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
+  server.create('django-page', {id: 'foo/'});
   visit('/foo')
   andThen(() => {
     this.mock(this.application.__container__.lookup('route:show').get('googleAds'))
