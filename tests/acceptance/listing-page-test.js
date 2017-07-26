@@ -303,6 +303,7 @@ test('show pages with a listen live chunk', function(assert) {
 
   server.create('chunk', {
     id: 'shows-foo-listenlive',
+    slug: 'shows-foo-listenlive',
     content: 'foo bar text'
   });
   server.create('django-page', {id: listingPage.id});
