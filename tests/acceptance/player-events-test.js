@@ -1,10 +1,11 @@
-import { skip } from 'qunit';
+import { test } from 'qunit';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import config from 'wnyc-web-client/config/environment';
+import { next } from 'ember-runloop';
 
 moduleForAcceptance('Acceptance | player events');
 
-skip('visiting /player-events', function(assert) {
+test('visiting /player-events', function(assert) {
   let story = server.create('story', {title: "Test audio", audio: '/good/150000/test'});
   let done = assert.async();
   server.create('stream');
@@ -22,25 +23,27 @@ skip('visiting /player-events', function(assert) {
   });
 
   // story header play button
-  andThen(() => {
-    click('main [data-test-selector="listen-button"]');
-  });
+  click('main [data-test-selector="listen-button"]');
   
   andThen(() => {
-    // pause
-    click('.nypr-player-button.mod-listen');
+    // let hifi go a tick, otherwise we report the second play as a start, not a resume
+    next(() => {
+      // pause
+      click('.nypr-player-button.mod-listen');
 
-    // play
-    click('.nypr-player-button.mod-listen');
+      // play
+      click('.nypr-player-button.mod-listen');
+    });
+  });
 
+  andThen(() => {
     // fast forward
     click('.nypr-player-button.mod-fastforward');
 
     // rewind
     click('.nypr-player-button.mod-rewind');
-  });
 
-  andThen(() => {
+    // set position
     var e = window.$.Event('mousedown', {which: 1});
     find('.nypr-player-progress').trigger(e);
   });
