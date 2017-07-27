@@ -71,6 +71,8 @@ export default Model.extend({
     let imageDisplayFlag = get(this, 'imageMain.isDisplay');
     if (["story_video", "story_interactive", "story_noimage"].includes(template)) {
       return false;
+    } else if (template === 'story_archives'){
+      return true;
     } else if (imageWidth >= 800 && imageDisplayFlag === true){
       return true;
     }
