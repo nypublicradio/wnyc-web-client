@@ -16,7 +16,7 @@ export default Controller.extend({
   code: null,
   email: null,
   verification_token: null,
-  email_id: null
+  email_id: null,
   showFlash(type) {
     this.get('flashMessages').add({
       message: FLASH_MESSAGES[type],
