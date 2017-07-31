@@ -29,18 +29,7 @@ export default Ember.Route.extend(PlayParamMixin, {
         getRelatedStories: () => relatedStories,
         adminURL: `${config.wnycAdminRoot}/admin`
       });
-    }).catch(function(data){
-      console.log("there is an error on the api call", data.errors[0]);
-      let errorstatus = data.errors[0].status;
-      console.log("status", data.errors[0].status, typeof(data.errors[0].status));
-      if (errorstatus === '404'){
-        console.log("404 error");
-        var error = new Error(data.errors[0]);
-        error.response = data.errors[0];
-        throw error;
-      }
-
-    });
+   });
   },
   afterModel(model, transition) {
     get(this, 'googleAds').doTargeting(get(model, 'story').forDfp());
@@ -58,6 +47,15 @@ export default Ember.Route.extend(PlayParamMixin, {
   },
   
   actions: {
+    error(error){
+      //detect 404 error on api
+      if (error.errors && error.errors[0].status === '404'){
+        this.transitionTo('missing');
+      } else {
+        this._super(...arguments);
+      }
+    },
+
     didTransition() {
       this._super(...arguments);
       
