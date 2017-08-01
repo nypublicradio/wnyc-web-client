@@ -155,7 +155,7 @@ module.exports = function(environment) {
       forceSSL: true
     },
     alienDom: {
-      keepInDom: `${ALIEN_DOM_ROOT} > :not(.ember-view, #fb-root), ${ALIEN_DOM_ROOT} > head > link[rel=stylesheet]:not([href*=assets])`
+      keepInDom: `${ALIEN_DOM_ROOT} > :not(.ember-view):not(#fb-root), ${ALIEN_DOM_ROOT} > head > link[rel=stylesheet]:not([href*=assets])`
     }
   };
 
