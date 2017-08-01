@@ -51,9 +51,7 @@ export default Ember.Route.extend(PlayParamMixin, {
       //detect 404 error on api
       if (error.errors && error.errors[0].status === '404'){
         this.transitionTo('missing');
-      } else {
-        console.log(error);
-      }
+      } 
     },
 
     didTransition() {
