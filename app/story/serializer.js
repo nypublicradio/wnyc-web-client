@@ -17,6 +17,7 @@ const propertiesWithChildren = [
 
 export default DS.JSONAPISerializer.extend({
   extractId: (modelClass, {attributes}) => attributes.slug,
+  payloadKeyFromModelName: () => 'story',
 
   normalizeResponse(store, primaryModelClass, payload, id, requestType) {
 
