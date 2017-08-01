@@ -8,6 +8,8 @@ module.exports = function(environment) {
       return arg.indexOf('--proxy') === 0;
     }).length;
   }
+  
+  const ALIEN_DOM_ROOT = environment === 'test' ? '#ember-testing' : 'body';
 
   let ENV = {
     modulePrefix: 'wqxr-web-client',
@@ -151,6 +153,9 @@ module.exports = function(environment) {
       id: 467005,
       enabled: environment === 'production',
       forceSSL: true
+    },
+    alienDom: {
+      keepInDom: `${ALIEN_DOM_ROOT} > :not(.ember-view, #fb-root), ${ALIEN_DOM_ROOT} > head > link[rel=stylesheet]:not([href*=assets])`
     }
   };
 
