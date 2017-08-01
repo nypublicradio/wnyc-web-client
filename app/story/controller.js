@@ -4,10 +4,14 @@ export default Ember.Controller.extend({
   queryParams:  ['tab'],
   tab: 'summary',
 
-  // init(){
-  //   this._super(...arguments);
-  //   if (location.hash.substr(1) === "transcript"){
-  //     this.set("tab", 'transcript');
-  //   }
-  // }
+  setTab(){
+    if (location.hash.substr(1) === "transcript"){
+        this.set("tab", 'transcript');
+      }
+  },
+
+  init(){
+    this._super(...arguments);
+    Ember.run.scheduleOnce("afterRender", this, this.setTab);
+  }
 });
