@@ -15,10 +15,8 @@
             <h1>
               <span class="for-screenreaders">WQXR Navigation</span>
               <a href="/"
-                class="link--nodecor"
-                title="WQXR | New York Public Radio Home Page"
-                data-tracking-category="WQXR Menu"
-                data-tracking-action="Clicked WQXR Logo">
+                class="link--nodecor wqxr-logo-nav"
+                title="WQXR | New York Public Radio Home Page">
                 {{nypr-svg icon='wqxr-logo' className='icon--wqxr-logo-nav'}}
               </a>
             </h1>
@@ -33,8 +31,6 @@
               <a class="sitechrome-btn"
               href={{donateURL}}
               title="Donate"
-              data-tracking-category="WQXR Menu"
-              data-tracking-action="Clicked Donate Button"
               target="_blank">Donate</a>
             {{/if}}
 
@@ -55,10 +51,8 @@
       <h1>
         <span class="for-screenreaders">WQXR Navigation</span>
         <a href="/"
-          class="link--nodecor"
-          title="WQXR | New York Public Radio Home Page"
-          data-tracking-category="WQXR Menu"
-          data-tracking-action="Clicked WQXR Logo">
+          class="link--nodecor wqxr-logo-nav"
+          title="WQXR | New York Public Radio Home Page">
           {{nypr-svg icon='wqxr-logo' className='icon--wqxr-logo-nav'}}
         </a>
       </h1>
@@ -95,37 +89,37 @@
         </li>
 
         {{#link-to 'stream' tagName='li' href=false class="list-item list-item--nav"}}
-          {{link-to 'All Streams' 'stream' class="inherit" preventDefault=false}}
+          {{link-to 'All Streams' 'stream' class="inherit"}}
         {{/link-to}}
 
         {{#link-to 'playlist-daily' current-when="playlist-daily" tagName='li' href=false class="list-item list-item--nav"}}
-          {{link-to 'Playlists' 'playlist-daily' class="inherit" preventDefault=false}}
+          {{link-to 'Playlists' 'playlist-daily' class="inherit"}}
         {{/link-to}}
 
         {{#link-to 'schedule' current-when="schedule.date" tagName='li' href=false class="list-item list-item--nav"}}
-          {{link-to 'Schedule' 'schedule' class="inherit" preventDefault=false}}
+          {{link-to 'Schedule' 'schedule' class="inherit"}}
         {{/link-to}}
 
         {{#link-to 'show' current-when="show show-detail" tagName="li" href=false class="list-item list-item--nav"}}
-          {{link-to 'Programs' 'show' class="inherit" preventDefault=false}}
+          {{link-to 'Programs' 'show' class="inherit"}}
         {{/link-to}}
 
         {{#link-to 'series-detail' 'q2' tagName='li' href=false class="list-item list-item--nav"}}
-            {{link-to 'Q2 Music' 'series-detail' 'q2' class="inherit" preventDefault=false}}
+            {{link-to 'Q2 Music' 'series-detail' 'q2' class="inherit"}}
           {{/link-to}}
 
         {{#link-to 'events'  tagName='li' href=false class="list-item list-item--nav"}}
-          {{link-to 'Events' 'events' class="inherit" preventDefault=false}}
+          {{link-to 'Events' 'events' class="inherit"}}
         {{/link-to}}
 
         {{#link-to 'videos' tagName='li' href=false class="list-item list-item--nav"}}
-          {{link-to 'Videos' 'videos' class="inherit" preventDefault=false}}
+          {{link-to 'Videos' 'videos' class="inherit"}}
         {{/link-to}}
 
         {{#unless media.isLargeAndUp}}
 
           {{#link-to 'djangorendered' 'search/' tagName='li' href=false class="list-item list-item--nav"}}
-            {{link-to 'Search' 'djangorendered' 'search/' class="inherit" preventDefault=false}}
+            {{link-to 'Search' 'djangorendered' 'search/' class="inherit"}}
           {{/link-to}}
 
         {{/unless}}
