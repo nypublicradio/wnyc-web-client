@@ -3,6 +3,7 @@ import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-accept
 import djangoPage from 'wqxr-web-client/tests/pages/django-page';
 import showPage from 'wqxr-web-client/tests/pages/show';
 import config from 'wqxr-web-client/config/environment';
+import moment from 'moment';
 
 moduleForAcceptance('Acceptance | Listing Page | viewing', {
   beforeEach() {
@@ -331,6 +332,45 @@ test('channel routes do dfp targeting', function(/*assert*/) {
   djangoPage
     .bootstrap({id: listingPage.id})
     .visit({id: listingPage.id});
+});
+
+test('if a show is airing, the featured story listen button says "Listen Live"', function(assert) {
+  let now = moment();
+  let later = now.add(1, 'hour');
+  let featuredStory = server.create('story', {
+    isLatest: true,
+    newsdate: now.toDate()
+  });
+  let featured = {};
+  Object.keys(featuredStory.attrs).forEach(k => featured[k.dasherize()] = featuredStory.attrs[k]);
+  let listingPage = server.create('listing-page', {
+    id: 'shows/foo/',
+    featured,
+    apiResponse: server.create('api-response', { id: 'shows/foo/recent_stories/1' })
+  });
+  server.get(`${config.wnycAPI}/api/v1/whats_on/`, {
+    'wnyc-fm939': {
+      current_show: {
+        end: later,
+        episode_pk: featuredStory.cmsPK,
+      }
+    }
+  });
+  server.create('django-page', {id: listingPage.id});
+
+  djangoPage
+    .bootstrap(listingPage)
+    .visit(listingPage);
+    
+  andThen(() => {
+    let button = find('[data-test-selector=listen-button]');
+    assert.ok(button.text().match('Listen Live'));
+    if (later.minutes() === 0) {
+      assert.ok(button.text().match(later.format('h A')));
+    } else {
+      assert.ok(button.text().match(later.format('h:mm A')));
+    }
+  });
 });
 
 moduleForAcceptance('Acceptance | Listing Page | Analytics');
