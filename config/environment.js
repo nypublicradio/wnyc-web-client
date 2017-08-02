@@ -119,9 +119,7 @@ module.exports = function(environment) {
     wnycAdminRoot: process.env.WQXR_ADMIN_ROOT,
     wnycAuthAPI: process.env.AUTH_SERVICE,
     wnycMembershipAPI: process.env.MEMBERSHIP_SERVICE,
-    wnycAccountRoot: process.env.WQXR_ACCOUNT_ROOT,
     wnycEtagAPI: process.env.WQXR_ETAG_API,
-    wnycStaticURL: process.env.WQXR_STATIC_URL,
     wnycURL: process.env.WQXR_URL,
     platformEventsAPI: process.env.PLATFORM_EVENTS_SERVICE,
     wnycDonateURL: 'https://pledge3.wqxr.org/epledge/main?ref=button-donate-header',
@@ -190,10 +188,8 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
 
     ENV.wnycAPI = 'http://example.com';
-    ENV.wnycAccountRoot = 'http://example.com/account';
     ENV.wnycAdminRoot = 'http://admin.example.com';
     ENV.wnycEtagAPI = 'http://example.com/api/v1/browser_id/';
-    ENV.wnycStaticURL = 'http://example.com/static';
     ENV.wnycURL = 'http://example.com';
     ENV.wnycAuthAPI = 'http://example.com';
     ENV.wnycMembershipAPI = 'http://example.com';

@@ -75,7 +75,7 @@ export default function() {
     identity management (account) endpoints
   --------------------------------------------------------------*/
   this.get(`${config.wnycAdminRoot}/api/v1/is_logged_in/`, {});
-  this.get(`${config.wnycAccountRoot}/comments/security_info/`, {security_hash: 'foo', timestamp: Date.now()});
+  this.get(`${config.wnycAdminRoot}/comments/security_info/`, {security_hash: 'foo', timestamp: Date.now()});
 
   this.post(`${config.wnycAdminRoot}/api/v1/accounts/logout/`, {successful_logout: true});
   this.post(`${config.wnycAdminRoot}/api/v1/accounts/login/`, function(schema, request) {
