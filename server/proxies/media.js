@@ -1,4 +1,4 @@
-/*jshint node:true*/
+/* eslint-env node */
 var proxyPath = '/media';
 
 module.exports = function(app) {

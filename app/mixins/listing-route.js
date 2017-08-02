@@ -1,4 +1,3 @@
-/* jshint asi: true*/
 import Ember from 'ember';
 import service from 'ember-service/inject';
 
