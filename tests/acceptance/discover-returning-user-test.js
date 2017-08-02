@@ -493,7 +493,7 @@ test('the list can be reordered by dragging', function(assert) {
       };
     };
 
-    return drag('mouse', `#${second} .discover-playlist-item-handle`, offsetFunction).then(() => { // jshint ignore:line
+    return drag('mouse', `#${second} .discover-playlist-item-handle`, offsetFunction).then(() => {
       return new RSVP.Promise(function(resolve) {
         // pause while making the test wait
         Ember.run.later(null, resolve, 1000);
@@ -533,7 +533,7 @@ test('reording the list after deleting does not bring back the deleted item', fu
       };
     };
 
-      return drag('mouse', `#${second} .discover-playlist-item-handle`, offsetFunction).then(() => { // jshint ignore:line
+      return drag('mouse', `#${second} .discover-playlist-item-handle`, offsetFunction).then(() => {
         return new RSVP.Promise(function(resolve) {
           // pause while making the test wait
           Ember.run.later(null, resolve, 1000);
