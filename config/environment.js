@@ -123,9 +123,7 @@ module.exports = function(environment) {
     wnycAdminRoot: process.env.WNYC_ADMIN_ROOT,
     wnycAuthAPI: process.env.AUTH_SERVICE,
     wnycMembershipAPI: process.env.MEMBERSHIP_SERVICE,
-    wnycAccountRoot: process.env.WNYC_ACCOUNT_ROOT,
     wnycEtagAPI: process.env.WNYC_ETAG_API,
-    wnycStaticURL: process.env.WNYC_STATIC_URL,
     wnycURL: process.env.WNYC_URL,
     platformEventsAPI: process.env.PLATFORM_EVENTS_SERVICE,
     wnycDonateURL: 'https://pledge3.wnyc.org/epledge/main?ref=button-donate-header',
@@ -202,10 +200,8 @@ module.exports = function(environment) {
     ENV.betaTrials.betaInviteLanding = '#ember-testing';
 
     ENV.wnycAPI = 'http://example.com';
-    ENV.wnycAccountRoot = 'http://example.com/account';
     ENV.wnycAdminRoot = 'http://admin.example.com';
     ENV.wnycEtagAPI = 'http://example.com/api/v1/browser_id/';
-    ENV.wnycStaticURL = 'http://example.com/static';
     ENV.wnycURL = 'http://example.com';
     ENV.wnycBetaURL = 'http://example.com';
     ENV.wnycAuthAPI = 'http://example.com';
