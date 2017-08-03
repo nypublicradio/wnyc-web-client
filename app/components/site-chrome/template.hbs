@@ -26,10 +26,8 @@
             <h1>
               <span class="for-screenreaders">WNYC Navigation</span>
               <a href="/"
-                class="link--nodecor"
-                title="WNYC | New York Public Radio Home Page"
-                data-tracking-category="WNYC Menu"
-                data-tracking-action="Clicked WNYC Logo">
+                class="link--nodecor wnyc-logo-nav"
+                title="WNYC | New York Public Radio Home Page">
                 {{wnyc-svg icon='logo-wnyc' className='icon--wnyc-logo-nav'}}
               </a>
             </h1>
@@ -44,8 +42,6 @@
               <a class="sitechrome-btn"
               href={{donateURL}}
               title="Donate"
-              data-tracking-category="WNYC Menu"
-              data-tracking-action="Clicked Donate Button"
               target="_blank">Donate</a>
             {{/if}}
 
@@ -66,10 +62,8 @@
       <h1>
         <span class="for-screenreaders">WNYC Navigation</span>
         <a href="/"
-          class="link--nodecor"
-          title="WNYC | New York Public Radio Home Page"
-          data-tracking-category="WNYC Menu"
-          data-tracking-action="Clicked WNYC Logo">
+          class="link--nodecor wnyc-logo-nav"
+          title="WNYC | New York Public Radio Home Page">
           {{wnyc-svg icon='logo-wnyc' className='icon--wnyc-logo-nav'}}
         </a>
       </h1>
@@ -106,23 +100,23 @@
         </li>
 
         {{#link-to 'stream' tagName='li' href=false class="list-item list-item--nav"}}
-          {{link-to 'All Streams' 'stream' class="inherit" preventDefault=false}}
+          {{link-to 'All Streams' 'stream' class="inherit"}}
         {{/link-to}}
 
         {{#link-to 'schedule' current-when="schedule.date" tagName='li' href=false class="list-item list-item--nav"}}
-          {{link-to 'Schedule' 'schedule' class="inherit" preventDefault=false}}
+          {{link-to 'Schedule' 'schedule' class="inherit"}}
         {{/link-to}}
 
         {{#link-to 'show' current-when="show show-detail" tagName="li" href=false class="list-item list-item--nav"}}
-          {{link-to 'Shows' 'show' class="inherit" preventDefault=false}}
+          {{link-to 'Shows' 'show' class="inherit"}}
         {{/link-to}}
 
         {{#link-to 'topics' current-when='topics tag-detail' tagName='li' href=false class="list-item list-item--nav"}}
-          {{link-to 'Topics' 'topics' class="inherit" preventDefault=false}}
+          {{link-to 'Topics' 'topics' class="inherit"}}
         {{/link-to}}
 
         {{#link-to 'discover.start' current-when="discover" tagName='li' href=false class="list-item list-item--nav"}}
-          {{#link-to 'discover.start' class="inherit" preventDefault=false}}
+          {{#link-to 'discover.start' class="inherit"}}
             Discover
           {{/link-to}}
         {{/link-to}}
@@ -130,7 +124,7 @@
         {{#unless media.isLargeAndUp}}
 
           {{#link-to 'djangorendered' 'search/' tagName='li' href=false class="list-item list-item--nav"}}
-            {{link-to 'Search' 'djangorendered' 'search/' class="inherit" preventDefault=false}}
+            {{link-to 'Search' 'djangorendered' 'search/' class="inherit"}}
           {{/link-to}}
 
         {{/unless}}
