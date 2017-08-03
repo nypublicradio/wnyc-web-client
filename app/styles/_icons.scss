@@ -204,6 +204,7 @@ i.fa-circle-o-notch.fa-spin {
   display: block;
   width: 75px;
   height: 30px;
+  pointer-events: none;
 
   path {
     fill: white;
