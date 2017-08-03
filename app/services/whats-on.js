@@ -1,17 +1,13 @@
-import ENV from 'wqxr-web-client/config/environment';
+import config from 'wqxr-web-client/config/environment';
 import wrapAjax from 'wqxr-web-client/lib/wrap-ajax';
 import Service from 'ember-service';
 import get from 'ember-metal/get';
-import { canonicalize } from 'wqxr-web-client/services/script-loader';
-
-let { wnycAPI } = ENV;
-wnycAPI = canonicalize(wnycAPI);
 
 export default Service.extend({
   endPoint: 'v1/whats_on/',
   isLive(pk) {
     let endPoint = get(this, 'endPoint');
-    let url = `${wnycAPI}${endPoint}`;
+    let url = `${config.wnycAPI}/${endPoint}`;
 
     return wrapAjax(url).then(d => this._extractStatus(d, pk));
   },
