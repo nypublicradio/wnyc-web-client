@@ -30,7 +30,9 @@ export default AdaptiveStore.extend({
     // from [{data: { .. }}, {data: { ... }}]
     // to   {data: [ { ... }, { ... } ]}
     let payload = {data: queue.mapBy('data')};
-    let stories = store.push(payload);
+    store.pushPayload(payload);
+
+    let stories = queue.mapBy('data.id').map(id => store.peekRecord('story', id));
     set(data, 'queue', stories);
     return data;
   },
@@ -45,7 +47,8 @@ export default AdaptiveStore.extend({
     // from [{ id, story: { data: { ... } } }, { id, story: { data: { ... } } }]
     // to: {data: [ { ... }, { ... } ]}
     let payload = {data: listens.mapBy('story.data')};
-    let stories = store.push(payload);
+    store.pushPayload(payload);
+    let stories = listens.mapBy('story.data.id').map(id => store.peekRecord('story', id));
     set(data, 'listens', listens.map((l, i) => ({id: l.id, story: stories[i]})));
     return data;
   }
