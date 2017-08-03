@@ -56,7 +56,6 @@ deployment:
             GOOGLE_ANALYTICS: $PROD_GOOGLE_ANALYTICS
             GOOGLE_API_V3_KEY: $PROD_GOOGLE_API_V3_KEY
             FB_APP: $PROD_FB_APP
-            MEMBER_CENTER: true
   demo:
     branch: demo
     commands:
