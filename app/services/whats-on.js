@@ -8,7 +8,7 @@ let { wnycAPI } = ENV;
 wnycAPI = canonicalize(wnycAPI);
 
 export default Service.extend({
-  endPoint: 'api/v1/whats_on/',
+  endPoint: 'v1/whats_on/',
   isLive(pk) {
     let endPoint = get(this, 'endPoint');
     let url = `${wnycAPI}${endPoint}`;

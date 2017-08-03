@@ -44,10 +44,10 @@ export default function() {
   this.get(`${baseUrl}/api/v1/list/streams/:slug`, 'stream');
   this.get('/api/v1/list/streams/:slug', 'stream');
 
-  this.post(`${config.wnycAPI}/api/v1/listenaction/create/:id/play/`, {});
-  this.post(`${config.wnycAPI}/api/v1/listenaction/create/:id/complete/`, {});
-  this.post(`${config.wnycAPI}/api/most/view/managed_item/:id/`, {});
-  this.post(`${config.wnycAPI}/api/most/listen/managed_item/:id/`, {});
+  this.post(`${config.wnycAPI}/v1/listenaction/create/:id/play/`, {});
+  this.post(`${config.wnycAPI}/v1/listenaction/create/:id/complete/`, {});
+  this.post(`${config.wnycAPI}/most/view/managed_item/:id/`, {});
+  this.post(`${config.wnycAPI}/most/listen/managed_item/:id/`, {});
 
   /*------------------------------------------------------------
     transitional (v2) endpoints

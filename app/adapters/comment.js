@@ -8,7 +8,7 @@ import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
   authorizer: 'authorizer:nypr',
   host: ENV.wnycAPI,
-  namespace: `api/v1/list/comments`,
+  namespace: `v1/list/comments`,
   
   query(store, type, query) {
     let url = [this.host, this.namespace, query.itemTypeId, query.itemId, ''].join('/');

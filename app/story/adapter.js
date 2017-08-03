@@ -11,7 +11,7 @@ const DRAFT_TOKENS = ['content_type_id', 'object_id', 'token', '_']
 export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
   authorizer: 'authorizer:nypr',
   host: ENV.wnycAPI,
-  namespace: 'api/v3',
+  namespace: 'v3',
   pathForType: () => 'story',
   buildURL() {
     return this._super(...arguments) + '/';
