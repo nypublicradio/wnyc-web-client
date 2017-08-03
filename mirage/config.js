@@ -35,8 +35,7 @@ export default function() {
   this.get(`${baseUrl}/api/v1/story/:id`);
   this.get(`${baseUrl}/api/v1/browser_id/`, {success: true});
   this.get(`${baseUrl}/api/v1/list/comments/24/:storyId/`, 'comment');
-  this.get(`${baseUrl}/api/v1/whats_on/`);
-  this.get('/api/v1/whats_on/');
+  this.get(`${config.wnycAPI}/v1/whats_on/`);
   this.get(`${baseUrl}/api/v1/whats_on/:slug`, 'whats-on');
   this.get('/api/v1/whats_on/:slug', 'whats-on');
   this.get(`${baseUrl}/api/v1/list/streams/`);
