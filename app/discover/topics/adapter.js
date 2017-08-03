@@ -5,7 +5,7 @@ import DS from 'ember-data';
 export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
   authorizer: 'authorizer:nypr',
   host: ENV.wnycAPI,
-  namespace: `api/v1/discover/topics/`,
+  namespace: `v1/discover/topics/`,
   buildURL() {
     return [this.host, this.namespace].join('/');
   }

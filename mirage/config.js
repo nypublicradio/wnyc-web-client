@@ -69,10 +69,10 @@ export default function() {
     };
   });
 
-  this.post(`${config.wnycAPI}/api/v1/listenaction/create/:id/play/`, {});
-  this.post(`${config.wnycAPI}/api/v1/listenaction/create/:id/complete/`, {});
-  this.post(`${config.wnycAPI}/api/most/view/managed_item/:id/`, {});
-  this.post(`${config.wnycAPI}/api/most/listen/managed_item/:id/`, {});
+  this.post(`${config.wnycAPI}/v1/listenaction/create/:id/play/`, {});
+  this.post(`${config.wnycAPI}/v1/listenaction/create/:id/complete/`, {});
+  this.post(`${config.wnycAPI}/most/view/managed_item/:id/`, {});
+  this.post(`${config.wnycAPI}/most/listen/managed_item/:id/`, {});
 
   /*------------------------------------------------------------
     transitional (v2) endpoints
@@ -97,7 +97,7 @@ export default function() {
   this.get(`${baseUrl}/api/v3/chunks/:id/`, 'chunk');
 
   let discoverPath = config.featureFlags['other-discover'] ? 'reco_proxy' : 'make_playlist';
-  this.get(`${config.wnycAPI}/api/v3/${discoverPath}`, 'discover-story');
+  this.get(`${config.wnycAPI}/v3/${discoverPath}`, 'discover-story');
 
   /*------------------------------------------------------------
     identity management (account) endpoints

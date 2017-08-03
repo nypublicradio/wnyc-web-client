@@ -4,7 +4,7 @@ import Ember from 'ember';
 
 export default DS.JSONAPIAdapter.extend({
   host: ENV.wnycAPI,
-  namespace: 'api/v1',
+  namespace: 'v1',
   findRecord(store, type, id) {
     let playlist;
     if (ENV.environment === 'development') {

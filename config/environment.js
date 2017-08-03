@@ -199,7 +199,7 @@ module.exports = function(environment) {
     ENV.betaTrials.legacyNavLinkLanding = '#ember-testing';
     ENV.betaTrials.betaInviteLanding = '#ember-testing';
 
-    ENV.wnycAPI = 'http://example.com';
+    ENV.wnycAPI = 'http://example.com/api';
     ENV.wnycAdminRoot = 'http://admin.example.com';
     ENV.wnycEtagAPI = 'http://example.com/api/v1/browser_id/';
     ENV.wnycURL = 'http://example.com';
