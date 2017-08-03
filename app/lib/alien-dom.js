@@ -20,7 +20,7 @@ export function isInDom(id) {
 // of an Alien DOM. This will run on every django-page render, but should be a simple
 // no-op after one run.
 export function clearAlienDom() {
-  let nodesToRemove = document.querySelectorAll(config.alienDom.keepInDom);
+  let nodesToRemove = document.querySelectorAll(config.alienDom.toRemove);
   
   Array.from(nodesToRemove).forEach((n) => {
     n.parentNode.removeChild(n);
