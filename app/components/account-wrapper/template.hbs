@@ -1,8 +1,8 @@
 <div class="account-main">
-  {{#each flashMessages.queue as |flash|}}
-    {{flash-message flash=flash}}
-  {{/each}}
   <div class="account-wrapper">
+    {{#each flashMessages.queue as |flash|}}
+      {{flash-message flash=flash}}
+    {{/each}}
     <div class="account-logo">
       <a href="/">
         {{nypr-svg icon='wnyc-logo'}}
