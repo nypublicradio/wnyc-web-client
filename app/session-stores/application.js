@@ -34,9 +34,9 @@ export default AdaptiveStore.extend({
     // from [{data: { .. }}, {data: { ... }}]
     // to   {data: [ { ... }, { ... } ]}
     let payload = {data: queue.mapBy('data')};
-    store.pushPayload(payload);
+    store.pushPayload('discover/stories', payload);
 
-    let stories = queue.mapBy('data.id').map(id => store.peekRecord('story', id));
+    let stories = queue.mapBy('data.id').map(id => store.peekRecord('discover/stories', id));
     set(data, 'discover-queue', stories);
     return data;
   },
