@@ -405,13 +405,13 @@ test('deleting an item removes the item from the list', function(assert) {
   var story = stories[0];
   visit('/discover/playlist');
   andThen(() => {
-    click(`.discover-playlist-item-delete[data-story-id="${story.id}"]`);
+    click(`.discover-playlist-item-delete[data-story-id="${story.slug}"]`);
     andThen(() => {
       return new RSVP.Promise(function(resolve) {
         // pause while making the test wait
         Ember.run.later(null, resolve, 1000);
       }).then(function() {
-        assert.equal($(`[data-story-id="${story.id}"]`).parent('.is-deleted').length, 1, "item should be marked as deleted");
+        assert.equal($(`[data-story-id="${story.slug}"]`).parent('.is-deleted').length, 1, "item should be marked as deleted");
       });
     });
   });
@@ -439,7 +439,7 @@ test('playlist does not show excluded item when loaded from the queue', function
   let session = currentSession(this.application);
 
   let exclude = stories[0];
-  session.set('data.discover-excluded-story-ids',  [exclude.id]);
+  session.set('data.discover-excluded-story-ids',  [exclude.slug]);
 
   visit('/discover/playlist');
   andThen(() => {
@@ -453,7 +453,7 @@ test('playlist does not show excluded item when loaded from the store', function
   let session = currentSession(this.application);
   let exclude = stories[0];
   session.set('data.discover-queue',  []);
-  session.set('data.discover-excluded-story-ids', [exclude.id]);
+  session.set('data.discover-excluded-story-ids', [exclude.slug]);
   visit('/discover/playlist');
   andThen(() => {
     assert.equal($(`.discover-playlist-story-title a:contains(${exclude.title})`).length, 0, "excluded story should not be there when loaded from the store");
@@ -519,8 +519,8 @@ test('reording the list after deleting does not bring back the deleted item', fu
   let test1 = stories[4];
   let test2 = stories[2];
 
-  click(`.discover-playlist-item-delete[data-story-id="${test1.id}"]`);
-  click(`.discover-playlist-item-delete[data-story-id="${test2.id}"]`);
+  click(`.discover-playlist-item-delete[data-story-id="${test1.slug}"]`);
+  click(`.discover-playlist-item-delete[data-story-id="${test2.slug}"]`);
 
   andThen(() => {
     let originalOrder = currentVisiblePlaylistOrder();
