@@ -9,6 +9,7 @@ export default Model.extend({
   showTitle:              reads('headers.brand.title'),
   showUrl:                reads('headers.brand.url'),
   summary:                reads('tease'),
+  slug:                   attr('string'),
   newsdate:               attr('string'),
   estimatedDuration:      attr('number'),
   audioDurationReadable:  attr('string'),
