@@ -76,6 +76,7 @@
                 {{nypr-share-button
                   shareText = integration.currentAudio.shareMetadata.shareText
                   shareUrl  = integration.currentAudio.shareMetadata.shareUrl
+                  via       = 'WNYC'
                   onShare   = (action 'trackShare' (hash
                                 story = integration.currentAudio
                                 type   = (if integration.isStream 'livestream' 'on_demand')
