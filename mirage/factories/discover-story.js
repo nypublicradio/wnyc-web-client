@@ -14,6 +14,7 @@ export default Factory.extend({
   tease() { return faker.lorem.sentence(); },
   url()   { return `/story/${this.pk}`; },
   audio() { return `assets/test-audio.mp3?${this.pk}`; },
+  slug()  { return faker.lorem.words(2).dasherize(); },
   // The audio URL is tightly coupled, assumed to be unique, and somewhere
   // down deep in an okra bridge there's some logic that updates the current
   // audio. If this isn't unique, play status gets totally borked
