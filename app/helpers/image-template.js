@@ -5,7 +5,7 @@ export function imageTemplate([template, x, y, crop]) {
     return `${base}/${x}/${y}/${crop}/99/${path}`;
   }
 
-  return template.replace(/(.*\/i)\/%s\/%s\/%s\/%s\/(.*)/, replaceFn);
+  return template && template.replace(/(.*\/i)\/%s\/%s\/%s\/%s\/(.*)/, replaceFn);
 }
 
 export default helper(imageTemplate);
