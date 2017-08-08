@@ -20,7 +20,7 @@ moduleForAcceptance('Acceptance | discover returning user', {
     session.set('data.discover-excluded-shows',  [shows[0].slug]); // set some excluded shows
     session.set('data.discover-topics', ['music']); // set some saved topics
     session.set('data.discover-excluded-story-ids', []);
-    session.set('data.discover-queue',  server.db.discoverStories); // set some saved stories
+    session.set('data.discover-queue', server.serializerOrRegistry.serialize(server.schema.discoverStories.all())); // set some saved stories
     
     server.create('stream');
   },
