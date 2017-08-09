@@ -47,6 +47,7 @@ export default Model.extend({
   segments: attr(),
   series: attr(),
   show: attr('string'),
+  showTitle: attr('string'),
   showTease: attr('string'),
   showProducingOrgs: attr(),
   slug: attr('string'),
