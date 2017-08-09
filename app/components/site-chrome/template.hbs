@@ -83,12 +83,11 @@
         <li class="list-item list-item--nav">
           {{#if media.isLargeAndUp}}
             {{#listen-button
-              class='listen-button--stream'
               type=(if isHomepage 'white-hollow-small' 'red-hollow-small')
               itemPK=preferredStream.slug
               itemTitle=preferredStream.name
               playContext='nav'
-              class=(if media.isLargeAndUp 'stream-launcher')}}
+              class='stream-launcher listen-button--stream'}}
               <span>Listen Live</span>
             {{/listen-button}}
           {{else}}
