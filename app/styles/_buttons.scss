@@ -86,7 +86,7 @@
 .btn {
   @include btn;
   
-  > i {
+  > * {
     pointer-events: none;
   }
 }
