@@ -68,3 +68,40 @@ test('Queue should sort when you drag an item', function(assert) {
     assert.equal(queuePage.stories(2).title(), 'Story 0', 'story 0 should be second after dragging');
   });
 });
+
+test('queue and listening history listen buttons should have data-show and data-story attributes', function(assert) {
+  let listenQueue = this.application.__container__.lookup('service:listen-queue');
+  let listenHistory = this.application.__container__.lookup('service:listen-history');
+  
+  let stories = server.createList('story', 4, {showTitle: 'foo show'});
+  server.create('djangoPage', {id:'/'});
+
+  run(() => {
+    listenQueue.addToQueueById(stories[0].slug);
+    listenQueue.addToQueueById(stories[1].slug);
+    
+    listenHistory.addListen(stories[2]);
+    listenHistory.addListen(stories[3]);
+  });
+
+  queuePage.visit();
+
+  andThen(() => {
+    let listenButtons = findWithAssert('.player-queue [data-test-selector=listen-button]');
+    listenButtons.each((i, el) => {
+      assert.equal($(el).attr('data-show'), 'foo show');
+      assert.equal($(el).attr('data-story'), stories[i].title);
+    });
+    
+    click('button:contains(My Listening History)');
+  });
+  
+  andThen(() => {
+    let listenButtons = findWithAssert('.player-history [data-test-selector=listen-button]');
+    listenButtons.get().reverse().forEach((el, i) => {
+      assert.equal($(el).attr('data-show'), 'foo show');
+      assert.equal($(el).attr('data-story'), stories[i + 2].title);
+    });
+  });
+  
+});
