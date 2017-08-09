@@ -423,3 +423,32 @@ test('metrics properly reports channel attrs', function(assert) {
     .bootstrap(listingPage)
     .visit(listingPage);
 });
+
+test('listen buttons in story teases include data-story and data-show values', function(assert) {
+  let teaseList = server.createList('story', 5, {audioAvailable: true, showTitle: 'foo show'});
+  let listingPage = server.create('listing-page', {
+    id: 'shows/foo/',
+    cmsPK: 123,
+    linkroll: [
+      {'nav-slug': 'episodes', title: 'Episodes'}
+    ],
+    apiResponse: server.create('api-response', {
+      id: 'shows/foo/episodes/1',
+      teaseList
+    })
+  });
+  server.create('django-page', {id: listingPage.id});
+
+
+  djangoPage
+    .bootstrap(listingPage)
+    .visit(listingPage);
+    
+  andThen(() => {
+    let listenButtons = findWithAssert('.story-tease [data-test-selector=listen-button]');
+    listenButtons.each((i, el) => {
+      assert.equal($(el).attr('data-show'), 'foo show');
+      assert.equal($(el).attr('data-story'), teaseList[i].title);
+    })
+  });
+})
