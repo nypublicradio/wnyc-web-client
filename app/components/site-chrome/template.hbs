@@ -83,6 +83,7 @@
         <li class="list-item list-item--nav">
           {{#if media.isLargeAndUp}}
             {{#listen-button
+              class='listen-button--stream'
               type=(if isHomepage 'white-hollow-small' 'red-hollow-small')
               itemPK=preferredStream.slug
               itemTitle=preferredStream.name
@@ -94,6 +95,7 @@
             {{!-- This 'button' is a top nav item that looks like a link. it doesn't show an icon to reflect state --}}
             {{!-- So clicking will always trigger a play action (and not a pause), state is locked to 'is-paused'  --}}
             {{#listen-button
+              class='listen-button--stream'
               type='vanilla'
               state='is-paused'
               itemPK=preferredStream.slug
