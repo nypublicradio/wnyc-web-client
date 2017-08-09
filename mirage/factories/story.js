@@ -52,6 +52,7 @@ export default Factory.extend({
   producingOrganizations: [],
   showProducingOrgs: [],
   allProducingOrgs: [],
+  showTitle: faker.lorem.words(3),
   
   withSegments: trait({
     segments: Array.from(Array(3), makeSegment)
