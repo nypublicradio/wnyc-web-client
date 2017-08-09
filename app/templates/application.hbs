@@ -57,6 +57,7 @@
                 {{nypr-share-button
                   shareText = integration.currentAudio.shareMetadata.shareText
                   shareUrl  = integration.currentAudio.shareMetadata.shareUrl
+                  via       = 'WQXR'
                   onShare   = (action 'trackShare' (hash
                                 story = integration.currentAudio
                                 type   = (if integration.isStream 'livestream' 'on_demand')
