@@ -33,6 +33,7 @@
   {{#g.right}}
     {{#if media.isMediumAndUp}}
       {{#listen-button
+        class='listen-button--stream'
         type='gray-minion'
         itemPK=stream.slug
         itemTitle=stream.name}}
@@ -40,6 +41,7 @@
       {{/listen-button}}
     {{else}}
       {{listen-button
+        class='listen-button--stream'
         type='blue-hollow'
         itemPK=stream.slug
         itemTitle=stream.name}}
