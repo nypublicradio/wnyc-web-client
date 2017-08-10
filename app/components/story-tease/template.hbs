@@ -61,7 +61,7 @@
         {{#listen-button
           isLive=isLive
           type=playButton
-          playContext=playContext
+          playContext=(or playContext region)
           itemPK=itemId
           itemTitle=item.title
           itemShow=item.showTitle}}
@@ -78,7 +78,7 @@
             itemTitle=item.title
             duration=item.audioDurationReadable
             data-test-selector="queue-button"
-            region=region}}
+            playContext=(or playContext region)}}
         {{/if}}
 
       {{else if isListenableEventually}}
