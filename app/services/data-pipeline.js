@@ -9,5 +9,6 @@ export default DataPipeline.extend({
     this.get('session').authorize('authorizer:nypr', (header, value) => {
       fetchOptions.headers[header] = value;
     });
+    return fetchOptions;
   }
 })
