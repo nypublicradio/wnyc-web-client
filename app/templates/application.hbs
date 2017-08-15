@@ -82,7 +82,7 @@
                   onShare   = (action 'trackShare' (hash
                                 story = integration.currentAudio
                                 type   = (if integration.isStream 'livestream' 'on_demand')
-                                region = "Player"
+                                playContext = "Player"
                                 shareText = integration.currentAudio.shareMetadata.shareText
                                 shareUrl = integration.currentAudio.shareMetadata.shareUrl
                                 analyticsCode = integration.currentAudio.shareMetadata.analyticsCode
