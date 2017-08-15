@@ -5937,7 +5937,7 @@ nypr-ads@nypublicradio/nypr-ads:
 
 nypr-audio-services@nypublicradio/nypr-audio-services:
   version "0.0.0"
-  resolved "https://codeload.github.com/nypublicradio/nypr-audio-services/tar.gz/6cb833fe0200975f9c2dbe927fd0d1d83bbb88b9"
+  resolved "https://codeload.github.com/nypublicradio/nypr-audio-services/tar.gz/cf706bb6fe2a2735798b7d6b2a4c3c27fd03e2a9"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-compass-compiler "^0.5.0"
@@ -5951,7 +5951,7 @@ nypr-audio-services@nypublicradio/nypr-audio-services:
 
 nypr-metrics@nypublicradio/nypr-metrics:
   version "0.0.0"
-  resolved "https://codeload.github.com/nypublicradio/nypr-metrics/tar.gz/2e932757c5faff12b2e5bd2b54f7770729b0869b"
+  resolved "https://codeload.github.com/nypublicradio/nypr-metrics/tar.gz/2458d398747694435030780ac6facc8cdbb9e778"
   dependencies:
     ember-cli-babel "^6.0.0"
     ember-cli-htmlbars "^1.1.1"
