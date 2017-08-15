@@ -3249,9 +3249,21 @@ ember-hash-helper-polyfill@^0.1.2:
     ember-cli-babel "^5.1.7"
     ember-cli-version-checker "^1.2.0"
 
-ember-hifi@^1.11.1, ember-hifi@^1.11.2:
+ember-hifi@^1.11.1:
   version "1.11.2"
   resolved "https://registry.yarnpkg.com/ember-hifi/-/ember-hifi-1.11.2.tgz#5dd9b1b7425c40d777c8f2c8b0e0fc1bcf1ae9c6"
+  dependencies:
+    broccoli-funnel "^1.2.0"
+    broccoli-merge-trees "^1.2.0"
+    ember-cli-babel "^5.1.7"
+    ember-getowner-polyfill "^1.0.1"
+    ember-poll "^1.0.1"
+    hls.js "^0.7.9"
+    howler "^2.0.4"
+
+ember-hifi@^1.11.3:
+  version "1.11.3"
+  resolved "https://registry.yarnpkg.com/ember-hifi/-/ember-hifi-1.11.3.tgz#6c1edd842b70a4e2f2eba20e1839709e9835c087"
   dependencies:
     broccoli-funnel "^1.2.0"
     broccoli-merge-trees "^1.2.0"
