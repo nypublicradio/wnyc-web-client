@@ -6079,7 +6079,7 @@ nypr-audio-services@nypublicradio/nypr-audio-services:
 
 nypr-metrics@nypublicradio/nypr-metrics:
   version "0.0.0"
-  resolved "https://codeload.github.com/nypublicradio/nypr-metrics/tar.gz/8599db798c812bd9fceeb83f91abcc24c9d9b53b"
+  resolved "https://codeload.github.com/nypublicradio/nypr-metrics/tar.gz/2e932757c5faff12b2e5bd2b54f7770729b0869b"
   dependencies:
     ember-cli-babel "^6.0.0"
     ember-cli-htmlbars "^1.1.1"
@@ -6091,7 +6091,6 @@ nypr-player@nypublicradio/nypr-player:
   dependencies:
     ember-cli-babel "^6.3.0"
     ember-cli-htmlbars "^2.0.1"
-    ember-keyboard "2.1.9"
 
 nypr-ui@nypublicradio/nypr-ui#feature/nypr-audio-services:
   version "0.0.0"
