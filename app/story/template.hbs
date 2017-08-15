@@ -40,7 +40,7 @@
                     itemPK=model.story.slug
                     itemTitle=model.story.title
                     type="queue-button--storyheader"
-                    region="StoryHeader"}}
+                    playContext="StoryHeader"}}
 
                   {{#if (or model.story.audioMayDownload model.story.audioMayEmbed)}}
                     {{nypr-story/audio-options story=model.story}}
@@ -77,7 +77,7 @@
                     itemPK=row.segment.slug
                     itemTitle=row.segment.title
                     type="small-blue"
-                    region="StoryList"}}
+                    playContext="StoryList"}}
                   </div>
                 {{/row.buttons}}
               {{else}}
