@@ -44,7 +44,9 @@ test('visiting /player-events', function(assert) {
     click('.nypr-player-button.mod-rewind');
 
     // set position
-    var e = window.$.Event('mousedown', {which: 1});
-    find('.nypr-player-progress').trigger(e);
+    let progressMeter = find('.nypr-player-progress');
+    let leftEdge = progressMeter.offset().left;
+    var e = window.$.Event('mousedown', {which: 1, pageX: leftEdge + 200});
+    progressMeter.trigger(e);
   });
 });
