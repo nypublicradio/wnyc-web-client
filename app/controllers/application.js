@@ -55,12 +55,12 @@ export default Controller.extend({
     trackShare(data, sharedFrom) {
       let metrics = this.get('metrics');
 
-      let {region, analyticsCode, type, shareText} = data;
+      let {playContext, analyticsCode, type, shareText} = data;
 
       metrics.trackEvent('GoogleAnalytics', {
         category: 'Persistent Player',
         action: `Shared Story "${shareText}"`,
-        label: `${region}|${analyticsCode}|${type}|${sharedFrom}`,
+        label: `${playContext}|${analyticsCode}|${type}|${sharedFrom}`,
       });
     }
   }
