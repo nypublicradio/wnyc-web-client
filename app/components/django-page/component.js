@@ -87,8 +87,4 @@ export default Ember.Component.extend(LegacySupportMixin, {
       return this.fireLegacyEvent(event.target);
     }
   },
-
-  goToSearch(q) {
-    this.get('router').transitionTo('djangorendered', ['search/'], {q});
-  }
 });
