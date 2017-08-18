@@ -671,6 +671,7 @@
 
 @mixin btn--smalltext {
   @include fontsize(12);
+  line-height: 1.8;
 }
 
 .btn--smalltext {
