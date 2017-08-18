@@ -8,12 +8,12 @@ export default function loadingTransition(opts={}) {
     direction = -1;
   }
 
-  let loadingScreen, otherScreen;
+  let loadingScreen;
 
-  if (this.oldElement.find('.discover-loading').length > 0) {
+  if (this.oldElement && this.oldElement.find('.discover-loading').length > 0) {
     // fade in loading screen, slide in other view
     loadingScreen = this.oldElement;
-    otherScreen = this.newElement;
+    // otherScreen = this.newElement;
 
     return animate(loadingScreen, {opacity: 0, duration: 0.5}, opts).then(() => {
       return moveOver.call(this, 'x', (-1 * direction)).then(() => {
@@ -24,7 +24,7 @@ export default function loadingTransition(opts={}) {
   else {
     // slide out other view, fade in loading screen
     loadingScreen = this.newElement;
-    otherScreen = this.oldElement;
+    // otherScreen = this.oldElement;
 
     loadingScreen.css('opacity', 0);
     return moveOver.call(this, 'x', (1 * direction)).then(() => {

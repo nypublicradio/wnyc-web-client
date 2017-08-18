@@ -47,6 +47,7 @@ export default Model.extend({
   segments: attr(),
   series: attr(),
   show: attr('string'),
+  showTitle: attr('string'),
   showTease: attr('string'),
   showProducingOrgs: attr(),
   slug: attr('string'),
@@ -159,7 +160,7 @@ export default Model.extend({
       let channeltitle = null,
           showtitle = null,
           isblog = false,
-          seriestitles = [], 
+          seriestitles = [],
           allProdOrgs = [];
 
       if (get(this, 'allProducingOrgs')){
@@ -202,7 +203,7 @@ export default Model.extend({
   shareMetadata: computed(function() {
     return shareMetadata(this);
   }),
-  
+
   // so Ember Simple Auth inludes a records ID when it saves
   toJSON() {
     var serializer = this.store.serializerFor('story');
@@ -242,15 +243,15 @@ export default Model.extend({
       return this.getCurrentSegment();
     }
   },
-  
-  forListenAction(data) {
+
+  forListenAction(data = {}) {
     return Ember.RSVP.Promise.resolve(Object.assign({
       audio_type: 'on_demand',
       cms_id: this.get('cmsPK'),
       item_type: this.get('itemType'),
     }, data));
   },
-  
+
   forDfp() {
     return getProperties(this, 'tags', 'show', 'channel', 'series');
   }

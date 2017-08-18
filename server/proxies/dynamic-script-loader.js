@@ -1,4 +1,4 @@
-/*jshint node:true*/
+/* eslint-env node */
 var url = require('url');
 
 module.exports = function(app) {

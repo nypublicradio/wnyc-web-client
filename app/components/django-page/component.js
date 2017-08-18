@@ -3,7 +3,6 @@ import service from 'ember-service/inject';
 import ENV from '../../config/environment';
 import LegacySupportMixin from 'wnyc-web-client/mixins/legacy-support';
 import BetaActionsMixin from 'wnyc-web-client/mixins/beta-actions';
-import { canonicalize } from 'wnyc-web-client/services/script-loader';
 import {
   isInDom,
   embeddedComponentSetup,
@@ -11,11 +10,9 @@ import {
 } from '../../lib/alien-dom';
 
 const { get, computed } = Ember;
-let { wnycURL, wnycAdminRoot } = ENV;
-wnycURL = canonicalize(wnycURL);
+let { wnycAdminRoot } = ENV;
 
 export default Ember.Component.extend(LegacySupportMixin, BetaActionsMixin, {
-  audio: service(),
   session: service(),
   legacyAnalytics: service(),
   router: service('wnyc-routing'),
@@ -90,8 +87,4 @@ export default Ember.Component.extend(LegacySupportMixin, BetaActionsMixin, {
       return this.fireLegacyEvent(event.target);
     }
   },
-
-  goToSearch(q) {
-    this.get('router').transitionTo('djangorendered', ['search/'], {q});
-  }
 });

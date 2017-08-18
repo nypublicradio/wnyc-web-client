@@ -1,9 +1,10 @@
 import Ember from 'ember';
 import { moduleFor, test } from 'ember-qunit';
+import hifiNeeds from 'wnyc-web-client/tests/helpers/hifi-needs';
 
 moduleFor('service:discover-queue', 'Unit | Service | discover-queue', {
   // Specify the other units that are required for this test.
-  needs: ['service:listen-history'],
+  needs: ['service:listen-history', 'service:action-queue', 'service:dj', ...hifiNeeds],
 
   beforeEach() {
     const sessionStub = Ember.Service.extend({

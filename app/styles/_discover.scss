@@ -712,6 +712,12 @@ body.ember-application.discover {
     /* CSS counter so we can hide and show it and style it easier than the li counter */
     pointer-events: none; // Don't want this sucker interfering with clicks
   }
+
+  // override button default in buttons.scss
+  .listen-button.red-hollow {
+    @include btn-size(40px);
+  }
+
 }
 
 .discover-playlist-item:not(.is-deleted) .discover-playlist-story-play-button {
@@ -787,14 +793,18 @@ body.ember-application.discover {
   }
 }
 
-.discover-playlist-story.is-playing {
-  .playlist-play-indicator-speaker {
-    display:block;
+.discover-playlist-story.is-loading {
+  .playlist-play-indicator-button {
+    /* Show the button */
+    opacity:1;
   }
-  .playlist-play-indicator-pause {
-    display:none;
+  .discover-playlist-story-play-button:before {
+    /* Hide the number */
+    opacity:0;
   }
+}
 
+.discover-playlist-story.is-playing {
   .playlist-play-indicator-button {
     /* Show the button */
     opacity:1;

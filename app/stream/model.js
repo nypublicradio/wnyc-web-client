@@ -32,14 +32,14 @@ export default Model.extend({
   shareMetadata:        computed('currentShow', 'currentPlaylistItem', function() {
     return shareMetadata(this);
   }),
-  
-  forListenAction(data) {
+
+  forListenAction(data = {}) {
     return this.get('currentStory').then(s => {
       data.current_audio_position = 0; // stream should always report 0
       return Object.assign({
         audio_type: 'livestream',
         cms_id: s && s.get('cmsPK'),
-        item_type: s && s.get('itemType'),
+        item_type: s && s.get('itemType'),  // episode, article, segment
         stream_id: this.get('cmsPK'),
       }, data);
     });

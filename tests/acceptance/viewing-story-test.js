@@ -30,7 +30,7 @@ test('view comments as regular user', function(assert) {
 test('view comments as staff user', function(assert) {
   server.get(`${config.wnycAdminRoot}/api/v1/is_logged_in/`, {is_staff: true});
   server.create('user');
-  
+
   let story = server.create('story', {enableComments: true});
   server.createList('comment', 5, {story});
   visit(`story/${story.slug}`);
@@ -110,26 +110,55 @@ test('metrics properly reports story attrs', function(assert) {
 });
 
 test('story routes do dfp targeting', function(/*assert*/) {
-  let forDfp = {tags: ['foo', 'bar'], show: 'foo show', channel: 'foo channel', series: 'foo series'};
+  let forDfp = {tags: ['foo', 'bar'], show: 'foo show', channel: 'foo channel', series: ['foo series']};
   let story = server.create('story', forDfp);
 
-  this.mock(this.application.__container__.lookup('route:story').get('googleAds'))
-    .expects('doTargeting')
-    .once()
-    .withArgs(forDfp);
+  // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
+  server.create('django-page', {id: 'foo/'});
+  visit('/foo');
+  andThen(() => {
+    this.mock(this.application.__container__.lookup('route:story').get('googleAds'))
+      .expects('doTargeting')
+      .once()
+      .withArgs(forDfp);
+  });
+
+  visit(`story/${story.slug}`);
+});
+
+test('listen button on story page includes data-story and data-show values', function(assert) {
+  let story = server.create('story', {showTitle: 'foo show'});
+  let segmentStory = server.create('story', 'withSegments', {showTitle: 'foo show'});
   
   visit(`story/${story.slug}`);
+  
+  andThen(() => {
+    let listenButton = findWithAssert('#storyHeader [data-test-selector=listen-button]');
+    assert.equal(listenButton.attr('data-show'), 'foo show');
+    assert.equal(listenButton.attr('data-story'), story.title);
+    
+    visit(`story/${segmentStory.slug}`);
+  });
+  
+  andThen(() => {
+    let segmentButtons = findWithAssert('#segmentsList [data-test-selector=listen-button]');
+    segmentButtons.each((i, el) => {
+      assert.equal($(el).attr('data-show'), 'foo show');
+      assert.equal($(el).attr('data-story'), segmentStory.segments[i].title);
+    });
+    
+  });
 });
 
 test('api request includes draft params', function(assert) {
   assert.expect(4);
-  
+
   let story = server.create('story');
   let token = 'token';
   let content_type_id = 'type';
   let object_id = 'object';
   let stamp = 'timestamp';
-  
+
   server.get(`${config.wnycAPI}/api/v3/story/${story.slug}`, (schema, { queryParams }) => {
     assert.equal(queryParams.token, token);
     assert.equal(queryParams.content_type_id, content_type_id);
@@ -137,7 +166,7 @@ test('api request includes draft params', function(assert) {
     assert.equal(queryParams['_'], stamp);
     return story;
   });
-  
+
   visit(`story/${story.slug}?token=${token}&content_type_id=${content_type_id}&object_id=${object_id}&_=${stamp}`);
-  
+
 });

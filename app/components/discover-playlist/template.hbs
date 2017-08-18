@@ -48,16 +48,28 @@
         {{wnyc-svg icon="reorder"}}
       </span>
 
-      {{#discover-playlist-story isCurrentTrack=(eq story.id currentPlaylistStoryPk) isPlaying=(and isPlaying (eq story.id currentPlaylistStoryPk))}}
-        {{playlist-play-indicator
-            title=story.title
-            itemPK=story.id
-            class="discover-playlist-story-play-button"
-            isReady=audioReady
-            isPlaying=(and (eq story.id currentPlaylistStoryPk) isPlaying)
-            onPause=(action 'pauseTrack' story.id)
-            onPlay=(action 'playTrack' story.id)
-          }}
+      {{#discover-playlist-story
+        isCurrentTrack=(eq story.id currentPlaylistStoryPk)
+        isPlaying=(and isPlaying (eq story.id currentPlaylistStoryPk))
+        isLoading=(array-contains dj.currentlyLoadingIds story.id)
+      as |options|}}
+
+        <div class="discover-playlist-story-play-button">
+          {{#if (and (not options.isHovering) isPlaying)}}
+          <button disabled={{disabled}} class="playlist-play-indicator-button">
+              {{wnyc-svg className="icon playlist-play-indicator-speaker" icon="speaker"}}
+          </button>
+          {{else}}
+            {{listen-button
+              type='red-hollow'
+              isCurrentSound=(and (eq story.id currentPlaylistStoryPk) isPlaying)
+              playContext="discover"
+              class="playlist-play-indicator-button"
+              itemPK=story.id
+              itemTitle=story.title
+              itemShow=story.showTitle}}
+          {{/if}}
+        </div>
 
         {{discover-playlist-story-info story=story}}
       {{/discover-playlist-story}}

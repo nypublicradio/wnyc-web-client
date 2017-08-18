@@ -16,9 +16,8 @@
   </div>
   <div class="streambanner-controls">
     {{#listen-button
-      class='streambanner-listenbutton'
+      class='streambanner-listenbutton listen-button--stream'
       type='red-minion'
-      state=(if (eq slug audio.currentAudio.id) audio.playState)
       itemPK=slug
       itemTitle=stream.name}}
       Listen Live

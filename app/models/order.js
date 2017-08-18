@@ -17,7 +17,7 @@ export default Model.extend({
   isSustainer: attr('boolean'),
   updateLink: computed('fund', function() {
     let pledgeDomain = this.get('fund') === 'WQXR' ? 'wqxr' : 'wnyc';
-    let fundSlug = this.get('fund').toLowerCase().replace(/[\.\ ]/g, '');
+    let fundSlug = this.get('fund').toLowerCase().replace(/[. ]/g, '');
     return `https://pledge3.${pledgeDomain}.org/donate/mc-${fundSlug}`;
   })
 });

@@ -2,7 +2,6 @@ import test from 'ember-sinon-qunit/test-support/test';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import djangoPage from 'wnyc-web-client/tests/pages/django-page';
 import showPage from 'wnyc-web-client/tests/pages/show';
-import { resetHTML } from 'wnyc-web-client/tests/helpers/html';
 import config from 'wnyc-web-client/config/environment';
 import moment from 'moment';
 
@@ -10,9 +9,6 @@ moduleForAcceptance('Acceptance | Listing Page | viewing', {
   beforeEach() {
     server.create('stream');
   },
-  afterEach() {
-    resetHTML();
-  }
 });
 
 test('smoke test', function(assert) {
@@ -119,7 +115,7 @@ test('scripts in well route content will execute', function(assert) {
 \\x3C/script>
 `
   });
-  
+
   let apiResponse = server.create('api-response', {
     id: 'shows/foo/story/1',
     type: 'story',
@@ -149,12 +145,15 @@ test('scripts in well route content will execute', function(assert) {
 test('using a nav-link', function(assert) {
   let apiResponse = server.create('api-response', {
     id: 'shows/foo/episodes/1',
-    teaseList: server.createList('story', 10)
+    teaseList: server.createList('story', 10, {title: 'Story Title'})
   });
-  server.create('api-response', {
-    id: 'shows/foo/next-link/1',
-    teaseList: server.createList('story', 1, {title: 'Story Title'})
+
+  let teaseList = server.createList('story', 1, {title: 'Story Title'});
+  let nextLink = server.create('api-response', {
+    id: 'shows/foo/next-link/1'
   });
+
+  nextLink.teaseList = teaseList;
 
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
@@ -304,13 +303,14 @@ test('show pages with a listen live chunk', function(assert) {
 
   server.create('chunk', {
     id: 'shows-foo-listenlive',
+    slug: 'shows-foo-listenlive',
     content: 'foo bar text'
   });
   server.create('django-page', {id: listingPage.id});
   djangoPage
     .bootstrap(listingPage)
     .visit(listingPage);
-  
+
   andThen(() => {
     assert.equal(find('.channel-header .django-content').text().trim(), 'foo bar text');
   });
@@ -323,10 +323,16 @@ test('channel routes do dfp targeting', function(/*assert*/) {
   server.create('api-response', { id: 'shows/foo/recent_stories/1' });
   server.create('django-page', {id: listingPage.id});
 
-  this.mock(this.application.__container__.lookup('route:show').get('googleAds'))
-    .expects('doTargeting')
-    .once();
-  
+  // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
+  server.create('django-page', {id: 'foo/'});
+  visit('/foo');
+
+  andThen(() => {
+    this.mock(this.application.__container__.lookup('route:show').get('googleAds'))
+      .expects('doTargeting')
+      .once();
+  });
+
   djangoPage
     .bootstrap({id: listingPage.id})
     .visit({id: listingPage.id});
@@ -383,10 +389,10 @@ test('metrics properly reports channel attrs', function(assert) {
     socialLinks: [{title: 'facebook', href: 'http://facebook.com'}],
     apiResponse: server.create('api-response', { id: 'shows/foo/episodes/1' })
   });
-  
+
   assert.expect(2);
   server.create('django-page', {id: listingPage.id});
-  
+
   server.post(`${config.platformEventsAPI}/v1/events/viewed`, (schema, {requestBody}) => {
     let {
       cms_id,
@@ -421,3 +427,32 @@ test('metrics properly reports channel attrs', function(assert) {
     .bootstrap(listingPage)
     .visit(listingPage);
 });
+
+test('listen buttons in story teases include data-story and data-show values', function(assert) {
+  let teaseList = server.createList('story', 5, {audioAvailable: true, showTitle: 'foo show'});
+  let listingPage = server.create('listing-page', {
+    id: 'shows/foo/',
+    cmsPK: 123,
+    linkroll: [
+      {'nav-slug': 'episodes', title: 'Episodes'}
+    ],
+    apiResponse: server.create('api-response', {
+      id: 'shows/foo/episodes/1',
+      teaseList
+    })
+  });
+  server.create('django-page', {id: listingPage.id});
+
+
+  djangoPage
+    .bootstrap(listingPage)
+    .visit(listingPage);
+    
+  andThen(() => {
+    let listenButtons = findWithAssert('.story-tease [data-test-selector=listen-button]');
+    listenButtons.each((i, el) => {
+      assert.equal($(el).attr('data-show'), 'foo show');
+      assert.equal($(el).attr('data-story'), teaseList[i].title);
+    })
+  });
+})

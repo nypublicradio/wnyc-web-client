@@ -5,8 +5,8 @@ moduleForComponent('page-numbers', 'Integration | Component | page numbers', {
   integration: true
 });
 
-function retrieveNumbers() {
-  return $('[data-test-selector=page]').text().split("\n").map(s => s.trim()).reject(s => s === '').map(Number);
+function retrieveNumbers(context) {
+  return context.$('[data-test-selector=page]').text().split("\n").map(s => s.trim()).reject(s => s === '').map(Number);
 }
 
 test('it renders', function(assert) {
@@ -25,7 +25,7 @@ test('it renders dots correctly', function(assert) {
       totalPages=50}}
   `);
   assert.equal(this.$('.dots').length, 1, 'one set of dots');
-  assert.deepEqual(retrieveNumbers(), [1,2,3,4,5,6,7,8,9,10,50], 'correct numbers');
+  assert.deepEqual(retrieveNumbers(this), [1,2,3,4,5,6,7,8,9,10,50], 'correct numbers');
   
   this.render(hbs`
     {{page-numbers
@@ -33,7 +33,7 @@ test('it renders dots correctly', function(assert) {
       totalPages=50}}
   `);
   assert.equal(this.$('.dots').length, 2, 'two sets of dots');
-  assert.deepEqual(retrieveNumbers(), [1,3,4,5,6,7,8,9,10,11,12,50], 'correct numbers');
+  assert.deepEqual(retrieveNumbers(this), [1,3,4,5,6,7,8,9,10,11,12,50], 'correct numbers');
   
   this.render(hbs`
     {{page-numbers
@@ -41,7 +41,7 @@ test('it renders dots correctly', function(assert) {
       totalPages=50}}
   `);
   assert.equal(this.$('.dots').length, 2, 'two sets of dots');
-  assert.deepEqual(retrieveNumbers(), [1,39,40,41,42,43,44,45,46,47,48,50], 'correct numbers');
+  assert.deepEqual(retrieveNumbers(this), [1,39,40,41,42,43,44,45,46,47,48,50], 'correct numbers');
   
   this.render(hbs`
     {{page-numbers
@@ -50,5 +50,5 @@ test('it renders dots correctly', function(assert) {
   `);
   
   assert.equal(this.$('.dots').length, 1, 'one set of dots');
-  assert.deepEqual(retrieveNumbers(), [1,45,46,47,48,49,50], 'correct numbers');
+  assert.deepEqual(retrieveNumbers(this), [1,45,46,47,48,49,50], 'correct numbers');
 });

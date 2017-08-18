@@ -3,7 +3,7 @@ import run from 'ember-runloop';
 
 moduleFor('controller:profile', 'Unit | Controller | profile', {
   // Specify the other units that are required for this test.
-  needs: ['service:metrics', 'service:session', 'service:data-pipeline']
+  needs: ['service:metrics', 'service:session', 'service:data-pipeline', 'service:flash-messages', 'service:torii', 'service:current-user']
 });
 
 // Replace this with your real tests.

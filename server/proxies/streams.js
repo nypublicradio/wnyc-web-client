@@ -1,8 +1,9 @@
-/*jshint node:true*/
-var streamPath = '/api/v1/list/streams/(.*/)?';
-var whatsOnPath = '/api/v1/whats_on/(.*/)?';
+/* eslint-env node */
 
-module.exports = function(app) {
+// var streamPath = '/api/v1/list/streams/(.*/)?';
+// var whatsOnPath = '/api/v1/whats_on/(.*/)?';
+
+module.exports = function(/*app*/) {
   // For options, see:
   // https://github.com/nodejitsu/node-http-proxy
   var proxy = require('http-proxy').createProxyServer({});

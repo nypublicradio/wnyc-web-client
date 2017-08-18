@@ -5,17 +5,17 @@ import service from 'ember-service/inject';
 export default Ember.Component.extend({
   session:  service(),
   scroller: service(),
-  audio:    service(),
+  dj:       service(),
   metrics:  service(),
 
   classNames:        ['discover-playlist-container'],
   classNameBindings: ['isDraggingItem:is-dragging-item'],
 
-  // Computed properties from a service. These are a little hinky
-  audioReady:     Ember.computed.alias('audio.isReady'),
-  currentAudioId: Ember.computed.alias('audio.currentAudio.id'),
+  audioReady: Ember.computed.reads('dj.isReady'),
+  currentAudioId: Ember.computed.reads('dj.currentContentId'),
+  currentlyLoadingIds: Ember.computed.reads('dj.currentlyLoadingIds'),
 
-  isPlaying:      Ember.computed.and('audioReady', 'currentTrackIsInPlaylist', 'audio.isPlaying'),
+  isPlaying:      Ember.computed.and('audioReady', 'currentTrackIsInPlaylist', 'dj.isPlaying'),
 
   isPaused:      Ember.computed('currentTrackIsInPlaylist', 'isPlaying', function() {
     return this.get('currentTrackIsInPlaylist') && !this.get('isPlaying');
@@ -24,6 +24,8 @@ export default Ember.Component.extend({
   isNotStarted:  Ember.computed('isPlaying', 'isPaused', function() {
     return !this.get('isPlaying') && !this.get('isPaused');
   }),
+
+  storyIds: Ember.computed.mapBy('stories', 'id'),
 
   currentTrackIsInPlaylist: Ember.computed('stories', 'currentAudioId', function() {
     return !!this.get('stories').findBy('id', this.get('currentAudioId'));
@@ -114,11 +116,11 @@ export default Ember.Component.extend({
     },
 
     pauseTrack(/* storyId */) {
-      this.get('audio').pause();
+      this.get('dj').pause();
     },
 
     playTrack(pk) {
-      this.get('audio').play(pk, 'discover');
+      this.get('dj').play(pk, {playContext: 'discover'});
     },
 
     findMore() {

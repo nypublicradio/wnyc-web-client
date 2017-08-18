@@ -12,7 +12,8 @@ export default Route.extend(ApplicationRouteMixin, {
   session: service(),
   poll: service(),
   store: service(),
-  audio: service(),
+  dj: service(),
+
   title(tokens) {
     if (tokens && tokens.length > 0) {
       let lastToken = tokens.slice(-1);
@@ -23,7 +24,6 @@ export default Route.extend(ApplicationRouteMixin, {
   },
 
   beforeModel() {
-
     let metrics = get(this, 'metrics');
 
     get(this, 'session').syncBrowserId();
@@ -45,7 +45,9 @@ export default Route.extend(ApplicationRouteMixin, {
     error(error/*, transition*/) {
       if (error) {
         this.controllerFor('application').set('error', error);
+        /* eslint-disable */
         console.error(error);
+        /* eslint-enable */
       }
     },
     didTransition() {

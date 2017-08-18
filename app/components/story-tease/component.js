@@ -15,7 +15,6 @@ const STATUSES = {
 
 export default Component.extend({
   whatsOn:            service(),
-  audio:              service(),
 
   status:             null,
   streamSlug:         null,
@@ -32,12 +31,6 @@ export default Component.extend({
 
   itemId: computed('isLive', 'streamSlug', 'item.id', function() {
     return get(this, 'isLive') ? get(this, 'streamSlug') : get(this, 'item.id');
-  }),
-  isCurrentAudio: computed('audio.currentId', 'itemId', function() {
-    return get(this, 'audio.currentId') === get(this, 'itemId');
-  }),
-  listenState: computed('isCurrentAudio', 'audio.playState', function() {
-    return get(this, 'isCurrentAudio') ? get(this, 'audio.playState') : 'is-paused';
   }),
   isListenableEventually: computed('status', function() {
     const status = get(this, 'status');
@@ -88,18 +81,6 @@ export default Component.extend({
   didRender() {
     this._super(...arguments);
     this._checkWhatsOn();
-  },
-
-  actions: {
-    listen: function listen(model, streamSlug) {
-      let audio = get(this, 'audio');
-      let currentAudio = get(this, 'audio.currentId');
-      if (currentAudio === streamSlug && get(this, 'audio.isPlaying')) {
-        audio.pause();
-      } else {
-        audio.playStream(streamSlug);
-      }
-    }
   },
 
   _checkWhatsOn() {

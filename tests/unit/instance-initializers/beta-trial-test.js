@@ -3,7 +3,6 @@ import config from 'wnyc-web-client/config/environment';
 import { initialize } from 'wnyc-web-client/instance-initializers/beta-trial';
 import { module, test } from 'qunit';
 import destroyApp from '../../helpers/destroy-app';
-import { resetHTML } from 'wnyc-web-client/tests/helpers/html';
 import { plantBetaTrial } from 'wnyc-web-client/tests/helpers/beta';
 
 module('Unit | Instance Initializer | beta trial | active trial', {
@@ -17,7 +16,7 @@ module('Unit | Instance Initializer | beta trial | active trial', {
   afterEach: function() {
     Ember.run(this.appInstance, 'destroy');
     destroyApp(this.application);
-    resetHTML();
+    Ember.$('#ember-testing').empty();
   }
 });
 
@@ -39,7 +38,6 @@ module('Unit | Instance Initializer | beta trial | no trial', {
   afterEach: function() {
     Ember.run(this.appInstance, 'destroy');
     destroyApp(this.application);
-    resetHTML();
   }
 });
 

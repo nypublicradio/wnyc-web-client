@@ -32,7 +32,9 @@ test('visiting /set-password with expired code', function(assert) {
 });
 
 test('visiting /set-password and creating a password and logging in', function(assert) {
+  server.create('django-page', {id: '/'});
   server.create('user');
+  server.create('stream');
   visit(setPasswordUrlWithParameters);
 
   andThen(() => {

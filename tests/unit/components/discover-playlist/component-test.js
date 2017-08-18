@@ -1,17 +1,13 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import get from 'ember-metal/get';
 import set from 'ember-metal/set';
+import { dummyHifi, hifiNeeds } from 'wnyc-web-client/tests/helpers/hifi-integration-helpers';
 import Ember from 'ember';
 
 moduleForComponent('discover-playlist', 'Unit | Component | discover playlist', {
-  needs: ['component:discover-playlist', 'component:discover-playlist-story', 'component:playlist-play-indicator'],
+  needs: ['component:discover-playlist', 'component:discover-playlist-story', 'component:playlist-play-indicator', ...hifiNeeds, 'service:dj', 'service:session', 'service:scroller'],
   unit: true,
   beforeEach() {
-    const audioStub = Ember.Service.extend({
-      isReady: true,
-      currentAudio: {id: 'audioPK'},
-      isPlaying: false
-    });
     const metricsStub = Ember.Service.extend({
       trackEvent(service, event) {
         set(this, 'lastTrackedEvent', event);
@@ -21,10 +17,21 @@ moduleForComponent('discover-playlist', 'Unit | Component | discover playlist', 
       trackedEventCount: 0,
     });
 
-    this.register('service:audio', audioStub);
-    this.inject.service('audio', { as: 'audio' });
+    const dummyDj = Ember.Service.extend({
+      currentlyLoadingIds: [],
+      isReady: true,
+      play() {},
+      pause() {}
+    })
+
+    this.register('service:hifi', dummyHifi);
+    this.inject.service('hifi', { as: 'hifi' });
+
     this.register('service:metrics', metricsStub);
     this.inject.service('metrics', { as: 'metrics' });
+
+    this.register('service:dj', dummyDj);
+    this.inject.service('dj', { as: 'dj' });
   }
 });
 
@@ -32,19 +39,12 @@ const stories = [
   {id: 1},{id: 2}
 ];
 
-test('currentAudioId changes when service audio id changes', function(assert) {
-  var component = this.subject();
-  assert.equal(component.get('currentAudioId'), 'audioPK');
-  component.set('audio.currentAudio.id', 'blah');
-  assert.equal(component.get('currentAudioId'), 'blah');
-});
-
 test('currentPlaylistStoryPk equals audioId when audio is within playlist', function(assert) {
   var component = this.subject();
   component.set('stories', stories);
-  component.set('audio.currentAudio.id', 'not-in-dere');
+  component.set('currentAudioId', 'not-in-dere');
   assert.equal(component.get('currentPlaylistStoryPk'), undefined);
-  component.set('audio.currentAudio.id', stories[0].id);
+  component.set('currentAudioId', stories[0].id);
   assert.equal(component.get('currentPlaylistStoryPk'), stories[0].id, 'ooooh fer sure it should be in dere');
 });
 
@@ -53,13 +53,13 @@ test('isPlaying is set when the current audio matches a story in the playlist', 
   component.set('stories', stories);
   assert.equal(component.get('isPlaying'), false, "should be not playing by default");
 
-  component.set('audio.currentAudio.id', 'not-matching');
-  component.set('audio.isPlaying', true);
+  component.set('currentAudioId', 'not-matching');
+  component.set('dj.isPlaying', true);
   assert.equal(component.get('isPlaying'), false, "should not be playing with non-matching id");
 
   assert.equal(component.get('isPlaying'), false);
-  component.set('audio.currentAudio.id', 1);
-  component.set('audio.isPlaying', true);
+  component.set('currentAudioId', 1);
+  component.set('dj.isPlaying', true);
   assert.equal(component.get('isPlaying'), true, "should be playing with matching id and audio service playing");
 });
 
@@ -68,12 +68,12 @@ test('isPaused is set when the current audio matches a story in the playlist and
   component.set('stories', stories);
   assert.equal(component.get('isPaused'), false, "should be not playing by default");
 
-  component.set('audio.currentAudio.id', 'not-matching');
-  component.set('audio.isPlaying', false);
+  component.set('currentAudioId', 'not-matching');
+  component.set('dj.isPlaying', false);
   assert.equal(component.get('isPaused'), false, "playlist isn't paused if track isn't in it");
 
-  component.set('audio.currentAudio.id', 1);
-  component.set('audio.isPlaying', false);
+  component.set('currentAudioId', 1);
+  component.set('dj.isPlaying', false);
   assert.equal(component.get('isPaused'), true, "playlist is paused if track is within it and audio is paused");
 });
 
@@ -83,12 +83,12 @@ test("isNotStarted is set when the playlist isn't playing and isn't paused", fun
   assert.equal(component.get('isNotStarted'), true, "should be not started by default");
 
   assert.equal(component.get('isPlaying'), false);
-  component.set('audio.currentAudio.id', 1);
-  component.set('audio.isPlaying', true);
+  component.set('currentAudioId', 1);
+  component.set('dj.isPlaying', true);
 
   assert.equal(component.get('isNotStarted'), false, "has not started is false after audio is playing");
 
-  component.set('audio.isPlaying', false);
+  component.set('dj.isPlaying', false);
   assert.equal(component.get('isNotStarted'), false, "has not started is false after audio is paused");
 });
 
@@ -98,7 +98,7 @@ test('currentPlaylistStoryPk is set when the current audio matches a story in th
 
   assert.equal(component.get('currentPlaylistStoryPk'), undefined, "not matching story should have undefined story id");
 
-  component.set('audio.currentAudio.id', 1);
+  component.set('currentAudioId', 1);
 
   assert.equal(component.get('currentPlaylistStoryPk'), 1, "matching story should return story pk");
 });

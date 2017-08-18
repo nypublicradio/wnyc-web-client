@@ -5,7 +5,6 @@ import config from 'wnyc-web-client/config/environment';
 import { or } from 'ember-computed';
 
 export default Component.extend(BetaActionsMixin, {
-  audio: service(),
   session: service(),
   metrics: service(),
   router: service('wnyc-routing'),

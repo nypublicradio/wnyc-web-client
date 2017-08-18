@@ -1,4 +1,19 @@
-import { Factory, faker } from 'ember-cli-mirage';
+import { Factory, faker, trait } from 'ember-cli-mirage';
+
+function makeSegment(_, index) {
+  let title = faker.lorem.words(3).capitalize();
+  return {
+    'audio-available': true,
+    'audio-duration-reaable': `${faker.random.number(50)} min`,
+    'audio-eventually': true,
+    'audio-may-stream': true,
+    'episode-id': faker.random.number({min: 10000, max: 50000}),
+    newsdate: faker.date.recent(),
+    'segment-number': index,
+    slug: title.dasherize(),
+    title
+  };
+}
 
 export default Factory.extend({
   slug(id) {
@@ -37,4 +52,9 @@ export default Factory.extend({
   producingOrganizations: [],
   showProducingOrgs: [],
   allProducingOrgs: [],
+  showTitle: faker.lorem.words(3),
+  
+  withSegments: trait({
+    segments: Array.from(Array(3), makeSegment)
+  })
 });

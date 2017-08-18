@@ -29,20 +29,18 @@
               {{#if model.story.audioAvailable}}
                 {{#header.buttons}}
                   {{#listen-button
-                    audio=audio
                     type='blue-boss'
                     playContext="story-header"
-                    state=(if (eq model.story.slug audio.currentId) audio.playState)
                     itemPK=model.story.slug
-                    itemTitle=model.story.title}}
+                    itemTitle=model.story.title
+                    itemShow=model.story.showTitle}}
                     Listen <span class="text--small dimmed">{{model.story.audioDurationReadable}}</span>
                   {{/listen-button}}
                   {{queue-button
-                    audio=audio
                     itemPK=model.story.slug
                     itemTitle=model.story.title
                     type="queue-button--storyheader"
-                    region="StoryHeader"}}
+                    playContext="StoryHeader"}}
 
                   {{#if (or model.story.audioMayDownload model.story.audioMayEmbed)}}
                     {{nypr-story/audio-options story=model.story}}
@@ -70,18 +68,16 @@
                 {{#row.buttons}}
                   <div class="btn-group">
                   {{listen-button  
-                    audio=audio 
                     playContext="story-list" 
                     itemPK=row.segment.slug
                     itemTitle=row.segment.title
-                    state=(if (eq row.segment.slug audio.currentId) audio.playState)
+                    itemShow=model.story.showTitle
                     type="blue-circle"}}
                   {{queue-button
-                    audio=audio
                     itemPK=row.segment.slug
                     itemTitle=row.segment.title
                     type="small-blue"
-                    region="StoryList"}}
+                    playContext="StoryList"}}
                   </div>
                 {{/row.buttons}}
               {{else}}

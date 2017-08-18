@@ -7,6 +7,7 @@ import { Response } from 'ember-cli-mirage';
 moduleForAcceptance('Acceptance | profile', {
   beforeEach() {
     server.create('stream');
+    server.create('django-page', {id: '/'});
   }
 });
 

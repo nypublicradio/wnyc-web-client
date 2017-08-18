@@ -15,8 +15,7 @@ export default function initialTransition(opts={}) {
 
     return animate(this.newElement, {opacity: 1, duration: 0});
   }
-
-  else if (this.oldElement.find('.discover-welcome-screen').length > 0) {
+  else if (this.oldElement && this.oldElement.find('.discover-welcome-screen').length > 0) {
     return velocity(
       el, 'scroll', {offset: 0, duration: 100}
     ).then(() => {

@@ -1,11 +1,12 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import config from 'wnyc-web-client/config/environment';
+import { next } from 'ember-runloop';
 
 moduleForAcceptance('Acceptance | player events');
 
 test('visiting /player-events', function(assert) {
-  let story = server.create('story');
+  let story = server.create('story', {title: "Test audio", audio: '/good/150000/test'});
   let done = assert.async();
   server.create('stream');
 
@@ -20,22 +21,32 @@ test('visiting /player-events', function(assert) {
       done();
     }
   });
-  
+
   // story header play button
+  click('main [data-test-selector="listen-button"]');
+  
   andThen(() => {
-    click('article [data-test-selector="listen-button"]');
-    // pause
-    click('.nypr-player-button.mod-listen');
-    // play
-    click('.nypr-player-button.mod-listen');
+    // let hifi go a tick, otherwise we report the second play as a start, not a resume
+    next(() => {
+      // pause
+      click('.nypr-player-button.mod-listen');
+
+      // play
+      click('.nypr-player-button.mod-listen');
+    });
+  });
+
+  andThen(() => {
     // fast forward
     click('.nypr-player-button.mod-fastforward');
+
     // rewind
     click('.nypr-player-button.mod-rewind');
-  });
-  
-  andThen(() => {
-    var e = $.Event('mousedown', {which: 1});
-    find('.nypr-player-progress').trigger(e);
+
+    // set position
+    let progressMeter = find('.nypr-player-progress');
+    let leftEdge = progressMeter.offset().left;
+    var e = window.$.Event('mousedown', {which: 1, pageX: leftEdge + 200});
+    progressMeter.trigger(e);
   });
 });

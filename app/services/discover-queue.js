@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
+import get from 'ember-metal/get';
 const {
   A:emberArray,
   computed
@@ -7,9 +8,32 @@ const {
 
 export default Ember.Service.extend({
   session: service(),
-  items:   computed.alias('session.data.discover-queue'),
+  items  : computed.alias('session.data.discover-queue'),
   history: service('listen-history'),
-  count:   computed.alias('session.data.discover-queue.length'),
+  count  : computed.alias('session.data.discover-queue.length'),
+  hifi   : service(),
+  dj     : service(),
+  actionQueue: service(),
+
+  init() {
+    let hifi        = get(this, 'hifi');
+    let actionQueue = get(this, 'actionQueue');
+
+    actionQueue.addAction(hifi, 'audio-ended', {priority: 2, name: 'discover-queue'}, Ember.run.bind(this, this.onTrackFinished));
+  },
+
+  /* DISCOVER QUEUE -----------------------------------------------------------*/
+
+  onTrackFinished(sound) {
+    if (get(sound, 'metadata.playContext') === 'discover') {
+      let nextTrack = this.nextItem(get(this, 'dj.currentContentId'));
+      if (nextTrack) {
+        let dj = this.get('dj');
+        dj.play(get(nextTrack, 'id'), {playContext: 'discover'});
+        return true;
+      }
+    }
+  },
 
   addItem(item) {
     let session       = this.get('session');
