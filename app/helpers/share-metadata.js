@@ -5,6 +5,7 @@ export function shareMetadata(story) {
     let shareText = '';
     let shareUrl = '';
     let analyticsCode = '';
+    let via = '';
 
     if (story) {
       if (get(story, 'audioType') === 'livestream') {
@@ -23,9 +24,10 @@ export function shareMetadata(story) {
         shareUrl = get(story, 'url');
         analyticsCode = get(story, 'analyticsCode') || '';
       }
+      via = get(story, 'twitterHandle') || 'WQXR';
     }
 
-    return({shareText, shareUrl, analyticsCode});
+    return {shareText, shareUrl, analyticsCode, via};
 }
 
 export default helper(shareMetadata);

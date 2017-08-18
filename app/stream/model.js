@@ -17,6 +17,7 @@ export default Model.extend({
   position:             attr('number'),
   playlistUrl:          attr('string'),
   cmsPK:                attr('number'),
+  twitterHandle:        attr('string'),
 
   currentShow:          attr(),
   currentPlaylistItem:  attr(),
