@@ -37,10 +37,12 @@ test('visiting /validate and logging in', function(assert) {
     assert.equal(find('.alert-success').text().trim(), 'Your email has been verified and your online account is now active.');
     assert.equal(find('h2').text().trim(), 'Log in to WQXR');
   });
-
-  fillIn('input[name=email]', 'user@example.com');
-  fillIn('input[name=password]', 'password1');
-  click('button[type=submit]:contains(Log in)');
+  
+  andThen(() => {
+    fillIn('input[name=email]', 'user@example.com');
+    fillIn('input[name=password]', 'password1');
+    click('button[type=submit]:contains(Log in)');
+  });
 
   return andThen(() => {
     assert.ok(currentSession(this.application).get('isAuthenticated'));
@@ -60,12 +62,13 @@ test('visiting /validate and logging in even when starting logged in', function(
     assert.equal(find('h2').text().trim(), 'Log in to WQXR');
   });
 
-  fillIn('input[name=email]', 'user@example.com');
-  fillIn('input[name=password]', 'password1');
-  click('button[type=submit]:contains(Log in)');
+  andThen(() => {
+    fillIn('input[name=email]', 'user@example.com');
+    fillIn('input[name=password]', 'password1');
+    click('button[type=submit]:contains(Log in)');
+  });
 
   return andThen(() => {
     assert.ok(currentSession(this.application).get('isAuthenticated'));
   });
 });
-

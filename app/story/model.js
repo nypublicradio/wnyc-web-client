@@ -47,6 +47,7 @@ export default Model.extend({
   segments: attr(),
   series: attr(),
   show: attr('string'),
+  showTitle: attr('string'),
   showTease: attr('string'),
   showProducingOrgs: attr(),
   slug: attr('string'),
@@ -242,15 +243,15 @@ export default Model.extend({
       return this.getCurrentSegment();
     }
   },
-  
-  forListenAction(data) {
+
+  forListenAction(data = {}) {
     return Ember.RSVP.Promise.resolve(Object.assign({
       audio_type: 'on_demand',
       cms_id: this.get('cmsPK'),
-      item_type: this.get('itemType'),
+      item_type: this.get('itemType') // episode, article, segment
     }, data));
   },
-  
+
   forDfp() {
     return getProperties(this, 'tags', 'show', 'channel', 'series');
   }

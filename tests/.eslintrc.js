@@ -8,6 +8,7 @@ module.exports = {
     selectChoose: true,
     withFeature: true,
     drag: true,
-    alienDomClick: true
+    alienDomClick: true,
+    '$': true
   }
 };

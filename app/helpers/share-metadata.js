@@ -18,7 +18,7 @@ export function shareMetadata(story) {
           shareUrl = get(story, 'currentShow.url');
         }
       } else {
-        let title = get(story, 'title');
+        let title = get(story, 'twitterHeadline') || get(story, 'title');
         let parentTitle = get(story, 'headers.brand.title');
         shareText = 'I\'m listening to ' + [parentTitle, title].filter(t => t).join(' - ');
         shareUrl = get(story, 'url');

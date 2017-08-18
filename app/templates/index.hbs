@@ -6,7 +6,7 @@
   {{/if}}
 
   <section class="l-container l-container--touch-full">
-    {{#stream-banner background=background audio=audio streams=streams as |currentStream banner|}}
+    {{#stream-banner background=background streams=streams as |currentStream banner|}}
       {{#banner.header as |header|}}
         {{component header.stationTitle}}
         {{component header.dropdown}}
@@ -40,27 +40,27 @@
 
       {{#layout.blowout as |blowout|}}
 
-        {{blowout.main audio=audio item=model.wqxrHome.featuredItems.[0]}}
+        {{blowout.main item=model.wqxrHome.featuredItems.[0]}}
 
         {{#if model.membershipChunk}}
           {{#blowout.column as |column|}}
             <div class="chunk__item">
               {{django-page page=model.membershipChunk.pagecontent}}
             </div>
-            {{column.brick audio=audio item=model.wqxrHome.featuredItems.[1]}}
+            {{column.brick item=model.wqxrHome.featuredItems.[1]}}
           {{/blowout.column}}
         {{else}}
           {{#blowout.column as |column|}}
-            {{column.brick audio=audio item=model.wqxrHome.featuredItems.[1]}}
-            {{column.brick audio=audio item=model.wqxrHome.featuredItems.[2]}}
+            {{column.brick item=model.wqxrHome.featuredItems.[1]}}
+            {{column.brick item=model.wqxrHome.featuredItems.[2]}}
           {{/blowout.column}}
         {{/if}}
 
       {{/layout.blowout}}
 
       {{#layout.cards as |row|}}
-        {{row.brick audio=audio item=model.wqxrHome.featuredItems.[3]}}
-        {{row.brick audio=audio item=model.wqxrHome.featuredItems.[4]}}
+        {{row.brick item=model.wqxrHome.featuredItems.[3]}}
+        {{row.brick item=model.wqxrHome.featuredItems.[4]}}
         {{#row.brick class='brick__item--sponsored'}}
           {{dfp-ad
             slot="/6483581/rectangle/wqxr_rectangle"
@@ -69,7 +69,7 @@
         {{/row.brick}}
       {{/layout.cards}}
 
-      {{layout.blowout audio=audio flip=true items=(slice model.wqxrHome.featuredItems 5 8)}}
+      {{layout.blowout flip=true items=(slice model.wqxrHome.featuredItems 5 8)}}
 
     {{/nypr-brick-layout}}
   </section>
@@ -77,7 +77,7 @@
   {{ newsletter-signup }}
 
   <section class="l-container l-container--touch-full">
-    {{nypr-brick-grid audio=audio items=model.wqxrHome.otherItems}}
+    {{nypr-brick-grid items=model.wqxrHome.otherItems}}
   </section>
 
 </main>

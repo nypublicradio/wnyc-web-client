@@ -29,22 +29,20 @@
       {{/if}}
     </div>
   {{/g.center}}
-  
+
   {{#g.right}}
     {{#if media.isMediumAndUp}}
       {{#listen-button
-        audio=audio
+        class='listen-button--stream'
         type='gray-minion'
-        state=(if (eq stream.slug currentAudio) playState)
         itemPK=stream.slug
         itemTitle=stream.name}}
         Listen Live
       {{/listen-button}}
     {{else}}
       {{listen-button
-        audio=audio
+        class='listen-button--stream'
         type='blue-hollow'
-        state=(if (eq stream.slug currentAudio) playState)
         itemPK=stream.slug
         itemTitle=stream.name}}
     {{/if}}

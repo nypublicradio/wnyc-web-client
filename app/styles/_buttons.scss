@@ -86,7 +86,7 @@
 .btn {
   @include btn;
   
-  > i {
+  > * {
     pointer-events: none;
   }
 }
@@ -1063,6 +1063,31 @@
     }
     &:active .listen-ui {
       @include blue-svg;
+    }
+  }
+
+  &.red-hollow {
+    @include btn-size(44px);
+
+    @include gray-hollow-svg($red);
+    @include red-listen-spinner;
+
+    &:hover .listen-ui,
+    &:focus .listen-ui {
+      svg .outer {
+        fill: $red;
+      }
+      svg .inner {
+        fill: $red;
+      }
+    }
+    &:active .listen-ui {
+      svg .outer {
+        fill: $red;
+      }
+      svg .inner {
+        fill: $red;
+      }
     }
   }
 

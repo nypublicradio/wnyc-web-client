@@ -5,12 +5,16 @@ module.exports = {
     sourceType: 'module'
   },
   extends: 'eslint:recommended',
+  rules: {
+    "no-extra-boolean-cast": ["warn"],
+    "no-empty": 0,
+    "no-console": 0
+  },
   env: {
     browser: true
   },
-  rules: {
-  },
   globals: {
-    server: true
+    server: true,
+    imagesLoaded: true
   }
 };

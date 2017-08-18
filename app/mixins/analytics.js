@@ -41,7 +41,7 @@ export default Mixin.create({
 
       metrics.trackPage('GoogleAnalytics', { page, title });
       metrics.trackPage('GoogleTagManager', { page, title });
-      
+
       if (!DETAIL_ROUTES.test(this.currentRouteName) && !this.currentRouteName.match(/loading/)) {
         this.get('dataPipeline').reportItemView();
       }

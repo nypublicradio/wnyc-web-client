@@ -127,6 +127,30 @@ test('story routes do dfp targeting', function(/*assert*/) {
   visit(`story/${story.slug}`);
 });
 
+test('listen button on story page includes data-story and data-show values', function(assert) {
+  let story = server.create('story', {showTitle: 'foo show'});
+  let segmentStory = server.create('story', 'withSegments', {showTitle: 'foo show'});
+  
+  visit(`story/${story.slug}`);
+  
+  andThen(() => {
+    let listenButton = findWithAssert('#storyHeader [data-test-selector=listen-button]');
+    assert.equal(listenButton.attr('data-show'), 'foo show');
+    assert.equal(listenButton.attr('data-story'), story.title);
+    
+    visit(`story/${segmentStory.slug}`);
+  });
+  
+  andThen(() => {
+    let segmentButtons = findWithAssert('#segmentsList [data-test-selector=listen-button]');
+    segmentButtons.each((i, el) => {
+      assert.equal($(el).attr('data-show'), 'foo show');
+      assert.equal($(el).attr('data-story'), segmentStory.segments[i].title);
+    });
+    
+  });
+});
+
 test('api request includes draft params', function(assert) {
   assert.expect(4);
   

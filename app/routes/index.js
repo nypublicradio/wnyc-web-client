@@ -9,12 +9,12 @@ const STREAM_BG = '/assets/img/backgrounds/streambanner.jpg';
 
 export default Route.extend(PlayParamMixin, {
   googleAds:  service(),
-  audio:      service(),
   classNames: ['home'],
+  dj: service(),
 
   model() {
     get(this, 'googleAds').doTargeting();
-    
+
     return RSVP.hash({
       wqxrHome: this.store.findRecord('bucket', 'wqxr-home').then(b => {
         return {
@@ -36,6 +36,5 @@ export default Route.extend(PlayParamMixin, {
     });
     controller.set('streams', streams);
     controller.set('background', STREAM_BG);
-    controller.set('audio', this.get('audio'));
   }
 });

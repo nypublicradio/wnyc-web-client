@@ -8,9 +8,6 @@
       {{component
         ec.componentName
         classNames=ec.componentName
-        currentAudio=(if (eq ec.componentName 'listen-button.embedded') audio.currentId)
-        playState=(if (eq ec.componentName 'listen-button.embedded') audio.playState)
-        audio=audio
         embeddedAttrs=ec.args}}
     {{/ember-wormhole}}
   {{/each}}
