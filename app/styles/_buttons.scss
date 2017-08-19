@@ -1,3 +1,5 @@
+@import "nypr-ui/buttons";
+
 /**
 * stacked button group
 * the idea is to create a module that wraps buttons and botton like objects
@@ -49,46 +51,8 @@
  *      @example
  *      button.btn Click Me
  */
-@mixin btn {
-  position: relative; // for transition icons
-  display: inline-block;
-  border-radius: 25px;
-  border: 2px solid;
-  border-color: rgba($lightgray, 0.2);
-
-  padding: 0px 13px;
-  color: $lightgray;
-  background: transparent;
-  @include fontsize(14);
-  line-height: 34px;
-
-  cursor: pointer;
-
-  @include transition(
-  opacity $transition-timing,
-  background-color $transition-timing,
-  border-color $transition-timing,
-  color $transition-timing);
-
-  &:hover,
-  &:focus {
-    border-color: rgba($darkgray, 0.2);
-    color: $gray;
-    opacity: 1;
-  }
-
-  &[disabled] {
-    opacity: 0.15;
-    cursor: not-allowed;
-  }
-}
-
 .btn {
   @include btn;
-  
-  > * {
-    pointer-events: none;
-  }
 }
 
 /**
@@ -117,23 +81,7 @@
 *      button.btn.btn--blank I'm a button but I look like nothing special
 */
 .btn--blank {
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  color: #333;
-  // IE doesn't support initial
-  color: initial;
-  text-align: left;
-  background-color: transparent;
-
-  &:not([disabled]) {
-    &:hover,
-    &:focus {
-      background: none;
-      border: none;
-      color: inherit;
-    }
-  }
+  @include blank-button;
 }
 
 /**
@@ -144,12 +92,6 @@
  *      @example
  *      button.btn.btn--large Click Me, I'm Bigger!
  */
-@mixin btn--large {
-  padding: 3px 18px;
-  line-height: 36px;
-  @include fontsize(16);
-}
-
 .btn--large {
   @include btn--large;
 }
@@ -190,14 +132,6 @@
  *      button.btn.btn--circle
  *          i.fa.fa-twitter
  */
-@mixin btn--circle {
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  text-align: center;
-}
-
 .btn--circle {
   @include btn--circle;
 }
@@ -211,15 +145,6 @@
  *      button.btn.btn--circle.btn--fat
  *          i.fa.fa-twitter
  */
-@mixin btn--fat {
-  width: 40px;
-  height: 40px;
-
-  .fa {
-    font-size: 18px;
-  }
-}
-
 .btn--fat {
   @include btn--fat;
 }
@@ -262,29 +187,8 @@
   height: 45px;
 }
 
-/**
-* White Button:
-* `.btn--white`
-*
-*      @example
-*      .l-full(style="background-color: rgba(0,0,0,0.15)")
-*          button.btn.btn--white Useful on a dark background
-*/
-@mixin btn--white {
-  border-color: rgba(white, 0.2);
-  color: white;
-
-  &:not([disabled]) {
-    &:hover,
-    &:focus {
-      color: white;
-      border-color: rgba(white,.7);
-    }
-  }
-}
-
 .btn--white {
-  @include btn--white
+  @include btn--white;
 }
 
 .btn--whitetext {
@@ -332,25 +236,11 @@
  *      @example
  *      button.btn.btn--blue Click
  */
-@mixin btn--blue {
-  background-color: $wqxrblue;
-  border-color: $wqxrblue;
-  color: white;
-
-  &:not([disabled]) {
-    &:hover,
-    &:focus {
-      outline: none;
-      background-color: $wqxrdarkblue;
-      border-color: $wqxrdarkblue;
-      color: white;
-      opacity: 1;
-    }
-  }
-}
-
 .btn--blue {
-  @include btn--blue;
+  @include btn--solid-color(
+    $background-color: $wqxrblue,
+    $hover-color: $wqxrdarkblue
+  )
 }
 
 /**
@@ -669,10 +559,6 @@
   width: 100%;
 }
 
-@mixin btn--smalltext {
-  @include fontsize(12);
-}
-
 .btn--smalltext {
   @include btn--smalltext;
 }
@@ -685,75 +571,14 @@
   text-transform: uppercase;
 }
 
-@mixin btn--strongtext {
-  font-weight: 600;
-}
-
 .btn--strongtext {
   @include btn--strongtext;
-}
-
-@mixin thickbtn {
-  border-width: 2px;
-
-  &.btn--white {
-    border-color: white;
-    background-color: rgba(white, 0);
-
-    &:hover,
-    &:focus {
-      border-color: white;
-      background-color: rgba(white, 0.15);
-    }
-
-    &:active {
-      opacity: 0.60;
-    }
-  }
 }
 
 .thickbtn {
   @include thickbtn;
 }
 
-// sometimes you need to manually control an element's
-// hover state with javascript because of weird
-// animaton/ember/liquid-fire stuff
-@mixin js-hover($props: (), $base: (), $hover: ()) {
-  @each $prop, $value in zip($props, $base) {
-    #{$prop}: #{$value};
-  }
-  // override the :hover pseudo-class to match the base state
-  &:hover {
-     @each $prop, $value in zip($props, $base) {
-      #{$prop}: #{$value};
-    }
-  }
-  // hover state will be controlled manually in javascript with .is-hovering class
-  // focus state for these buttons should match hover state
-  &.is-hovering,
-  &:focus {
-    @each $prop, $value in zip($props, $hover) {
-      #{$prop}: #{$value};
-    }
-  }
-}
-
-@mixin gray-btn-jshover {
-  @include js-hover(
-    $props:  (color,       border-color),
-    $base:   ($darkergray, rgba($lightgray, 0.2)),
-    $hover:  ($darkergray, rgba($darkgray, 0.3))
-  );
-}
-
-@mixin white-btn-jshover {
-  @include js-hover(
-    $props:  (color, border-color),
-    $base:   (white, rgba($lightgray, 0.6)),
-    $hover:  (white, white)
-  );
-}
 
 @mixin blue-btn-jshover {
   @include js-hover(
@@ -762,36 +587,6 @@
     $hover:  ($wqxrdarkblue, $wqxrdarkblue)
   );
 }
-
-@mixin red-btn-jshover {
-  @include js-hover(
-    $props:  (background-color, border-color),
-    $base:   ($red, $red),
-    $hover:  ($darkred, $darkred)
-  );
-}
-
-@mixin listen-btn-transitions {
-  white-space: nowrap; // helps transitions
-
-  @include transition(
-    width 200ms cubic-bezier(0.17, 0.89, 0.39, 1.25),
-    opacity $transition-timing,
-    background-color $transition-timing,
-    border-color $transition-timing,
-    color $transition-timing);
-
-  &.is-loading,
-  &.is-playing {
-    @include transition(
-      width 200ms cubic-bezier(1, 0, 0, 1),
-      opacity $transition-timing,
-      background-color $transition-timing,
-      border-color $transition-timing,
-      color $transition-timing);
-  }
-}
-
 
 .callout-button {
   @include btn;
@@ -803,236 +598,7 @@
   height: 46px;
 }
 
-@mixin svg-color($color) {
-  polygon, rect, circle, path {
-    color: $color;
-    fill: currentColor;
-  }
-}
-
-@mixin gray-hollow-svg($color) {
-  svg .outer {
-    fill: rgba($lightgray, 0.2);
-  }
-  svg .inner {
-    fill: $color;
-  }
-}
-
-@mixin gray-hollow-svg-hover($color) {
-  svg .outer {
-    fill: rgba($darkgray, 0.2);
-  }
-  svg .inner {
-    fill: rgba($color, 1);
-  }
-}
-
-@mixin gray-svg {
-  @include svg-color($lightgray);
-}
-
-@mixin darkergray-svg {
-  @include svg-color($darkergray);
-}
-
-@mixin white-svg {
-  @include svg-color(white);
-}
-
-@mixin blue-svg {
-  @include svg-color($blue);
-}
-
-@mixin btn-wide {
-  @include btn;
-  @include btn--strongtext;
-  @include listen-btn-transitions;
-
-  overflow: hidden;
-
-  &.is-loading,
-  &.is-playing {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .listen-ui {
-    width: 18px;
-    margin-right: 2px;
-
-    > svg {
-      width: 13px;
-    }
-  }
-}
-
-@mixin btn-boss {
-  @include btn-wide;
-  @include btn--large;
-
-  padding-left: 13px;
-}
-
-@mixin btn-minion {
-  @include btn-wide;
-
-  .listen-ui {
-    @include scale(0.8, 0.8);
-
-    margin-right: 0px;
-  }
-}
-
-@mixin btn-minion-hollow {
-  @include btn-wide;
-  @include btn--large;
-  @include thickbtn;
-
-  .listen-ui {
-    > svg {
-      width: 13px;
-    }
-  }
-}
-
-@mixin btn-size($size) {
-  width: $size;
-  height: $size;
-
-  .listen-ui {
-    width: $size;
-    height: $size;
-
-    > svg {
-      width: $size;
-      height: $size;
-    }
-  }
-}
-
-@mixin white-listen-spinner {
-  .listen-spinner {
-    @include spinner(
-      $primary: rgba(white, 0),
-      $accent: white
-    );
-  }
-}
-
-@mixin transparent-listen-spinner {
-  .listen-spinner {
-    @include spinner(
-      $primary: rgba(white, 0),
-      $accent: rgba(white, 0.2)
-    );
-  }
-}
-
-@mixin blue-listen-spinner {
-  .listen-spinner {
-    @include spinner(
-      $primary: rgba(white, 0),
-      $accent: $blue
-    );
-  }
-}
-
-@mixin red-listen-spinner {
-  .listen-spinner {
-    @include spinner(
-      $primary: rgba(white, 0),
-      $accent: $red
-    );
-  }
-}
-
-// Queue Buttons
-
-.queue-button {
-  @include btn;
-  @include btn--strongtext;
-  @include btn--smalltext;
-  @include thickbtn;
-
-  &.queue-button--fancyfeature {
-    @include white-btn-jshover;
-  }
-
-  &.queue-button--storyheader {
-    @include gray-btn-jshover;
-
-    @include mq($medium-and-up) {
-      @include white-btn-jshover;
-    }
-  }
-
-  &.just-gray {
-    @include gray-btn-jshover;
-  }
-
-  &.small-blue {
-    @include btn-size(44px);
-
-    &:focus,
-    &:hover {
-      border-color: rgba($darkgray, 0.2);
-      color: $lightgray;
-      opacity: 1;
-    }
-
-    &.is-hovering {
-      border-color: rgba($darkgray, 0.2);
-      color: $lightgray;
-      opacity: 1;
-    }
-  }
-}
-
-// Listen Buttons
-
 .listen-button {
-  position: relative;
-
-  .ember-holygrail-right > & {
-    @include align-self(center);
-  }
-
-  &.blue-boss {
-    @include btn-boss;
-
-    @include btn--blue;
-    @include blue-btn-jshover;
-    @include white-listen-spinner;
-    @include white-svg;
-  }
-
-  &.blue-minion {
-    @include btn-minion;
-
-    @include btn--blue;
-    @include blue-btn-jshover;
-    @include white-listen-spinner;
-    @include white-svg;
-  }
-
-  &.red-minion {
-    @include btn-minion;
-
-    @include btn--red;
-    @include red-btn-jshover;
-    @include white-listen-spinner;
-    @include white-svg;
-  }
-
-  &.gray-minion {
-    @include btn-minion-hollow;
-
-    @include gray-btn-jshover;
-    @include blue-listen-spinner;
-    @include darkergray-svg;
-  }
-
   &.blue-hollow {
     @include btn-size(44px);
 
@@ -1046,159 +612,5 @@
     &:active .listen-ui {
       @include gray-hollow-svg($gray);
     }
-  }
-
-  &.white-hollow {
-    @include btn-size(48px);
-    @include mq($medium-and-up) {
-      @include btn-size(55px);
-    }
-
-    @include white-svg;
-    @include transparent-listen-spinner;
-
-    &:hover .listen-ui,
-    &:focus .listen-ui {
-      @include svg-color(#ccc);
-    }
-    &:active .listen-ui {
-      @include blue-svg;
-    }
-  }
-
-  &.red-hollow {
-    @include btn-size(44px);
-
-    @include gray-hollow-svg($red);
-    @include red-listen-spinner;
-
-    &:hover .listen-ui,
-    &:focus .listen-ui {
-      svg .outer {
-        fill: $red;
-      }
-      svg .inner {
-        fill: $red;
-      }
-    }
-    &:active .listen-ui {
-      svg .outer {
-        fill: $red;
-      }
-      svg .inner {
-        fill: $red;
-      }
-    }
-  }
-
-  &.white-hollow-small {
-    @include btn-size(24px);
-
-    @include white-svg;
-    @include transparent-listen-spinner;
-
-    &:hover .listen-ui,
-    &:focus .listen-ui,
-    &:active .listen-ui {
-      opacity: 0.8;
-    }
-  }
-
-  &.red-hollow-small {
-    @include btn-size(24px);
-
-    @include gray-hollow-svg($red);
-    @include red-listen-spinner;
-
-    &:hover .listen-ui,
-    &:focus .listen-ui,
-    &:active .listen-ui {
-      @include gray-hollow-svg-hover($red);
-    }
-  }
-
-  &.blue-circle {
-    @include btn;
-    @include btn--circle;
-    @include btn--fat;
-    @include listen-btn-transitions;
-
-    .listen-ui {
-      width: 18px;
-      @include scale(0.8, 0.8);
-
-      > svg {
-        width: 18px;
-      }
-    }
-
-    .icon--play {
-      left: 2px; //center play button in small circles
-    }
-
-    @include btn--blue;
-    @include white-svg;
-    @include white-listen-spinner;
-  }
-
-
-  .listen-ui {
-    display: inline-block;
-    position: relative;
-    pointer-events: none;
-
-    > svg {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      margin: auto;
-      @include transition(opacity 0.3s ease-in-out, fill 0.2s ease-in-out);
-    }
-
-    .icon--pause,
-    .listen-spinner,
-    .listen-spinner:after,
-    .listen-spinner:before {
-      opacity: 0;
-    }
-  }
-
-  &.is-loading .listen-ui {
-    width: 100%;
-
-    .listen-spinner,
-    .listen-spinner:after,
-    .listen-spinner:before {
-      opacity: 1;
-    }
-
-    .icon--pause,
-    .icon--play {
-      opacity: 0;
-    }
-  }
-
-  &.is-playing .listen-ui {
-    width: 100%;
-
-    .icon--pause {
-      opacity: 1;
-    }
-
-    .icon--play,
-    .listen-spinner,
-    .listen-spinner:after,
-    .listen-spinner:before {
-      opacity: 0;
-    }
-  }
-
-  .listen-spinner,
-  .listen-spinner:after,
-  .listen-spinner:before {
-    display: inline-block;
-    @include transition(opacity 150ms ease);
   }
 }
