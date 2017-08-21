@@ -20,16 +20,6 @@ export default Component.extend(BetaActionsMixin, {
     {url: 'http://wnyc.tumblr.com/', icon: 'tumblr'},
   ],
 
-  click: function({target}){
-    if (target.tagName === "A"){
-      //send tracking
-      this.get('metrics').trackEvent('GoogleAnalytics', {
-        category: 'WNYC Menu',
-        action: "Clicked " + target.text,
-      });
-    }
-  },
-
   actions: {
     routeSearch(val) {
       this.get('router').transitionTo('djangorendered', ['search/'], {"q": val});
