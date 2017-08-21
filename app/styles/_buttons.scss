@@ -598,19 +598,21 @@
   height: 46px;
 }
 
-.listen-button {
-  &.blue-hollow {
-    @include btn-size(44px);
+.listen-button.blue-hollow {
+  @include gray-hollow-svg($wqxrblue);
 
-    @include gray-hollow-svg($wqxrblue);
-    @include blue-listen-spinner;
-
-    &:hover .listen-ui,
-    &:focus .listen-ui {
-      @include gray-hollow-svg-hover($wqxrblue);
-    }
-    &:active .listen-ui {
-      @include gray-hollow-svg($gray);
-    }
+  &:hover .listen-ui,
+  &:focus .listen-ui {
+    @include gray-hollow-svg-hover($wqxrblue);
   }
+}
+
+.listen-button.blue-boss,
+.listen-button.blue-minion {
+  @include btn--blue;
+  @include blue-btn-jshover;
+}
+
+.listen-button.blue-circle {
+  @include btn--blue;
 }
