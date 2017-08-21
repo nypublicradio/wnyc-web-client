@@ -29,7 +29,7 @@ export default Ember.Route.extend(PlayParamMixin, {
         getRelatedStories: () => relatedStories,
         adminURL: `${config.wnycAdminRoot}/admin`
       });
-    });
+   });
   },
   afterModel(model, transition) {
     get(this, 'googleAds').doTargeting(get(model, 'story').forDfp());
@@ -47,6 +47,13 @@ export default Ember.Route.extend(PlayParamMixin, {
   },
   
   actions: {
+    error(error){
+      //detect 404 error on api
+      if (error.errors && error.errors[0].status === '404'){
+        this.transitionTo('missing');
+      } 
+    },
+
     didTransition() {
       this._super(...arguments);
       
