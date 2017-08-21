@@ -1,3 +1,5 @@
+@import "nypr-ui/utils";
+
 @mixin absolute-fill($top:0, $right:0, $bottom:0, $left:0) {
   position:absolute;
   top: $top;
@@ -776,6 +778,10 @@ body.ember-application.discover {
     .svg-path-pause-icon, .svg-path-play-icon, .svg-path-circle-icon {
       fill: $red;
     }
+  }
+  
+  > .visuallyhidden {
+    @include visuallyhidden;
   }
 }
 
