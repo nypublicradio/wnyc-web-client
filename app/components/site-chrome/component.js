@@ -19,16 +19,6 @@ export default Component.extend({
     {url: 'http://www.youtube.com/user/WQXRClassical', icon: 'youtube'},
   ],
 
-  click: function({target}){
-    if (target.tagName === "A"){
-      //send tracking
-      this.get('metrics').trackEvent('GoogleAnalytics', {
-        category: 'WQXR Menu',
-        action: "Clicked " + target.text,
-      });
-    }
-  },
-
   actions: {
     routeSearch(val) {
       this.get('router').transitionTo('djangorendered', ['search/'], {"q": val});
