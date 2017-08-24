@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { addAlienLanding } from 'wnyc-web-client/lib/alien-dom';
+import { addAlienLanding } from 'nypr-django-for-ember/utils/alien-dom';
 import config from 'wnyc-web-client/config/environment';
 
 const { betaTrials: { betaInviteLanding, legacyNavLinkLanding } } = config;
