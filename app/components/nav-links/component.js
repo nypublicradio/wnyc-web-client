@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import config from 'wqxr-web-client/config/environment';
-import { canonicalize } from 'wqxr-web-client/services/script-loader';
+import { canonicalize } from 'nypr-django-for-ember/services/script-loader';
 
 const {
   get,
