@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import config from 'wnyc-web-client/config/environment';
-import { canonicalize } from 'wnyc-web-client/services/script-loader';
+import { canonicalize } from 'nypr-django-for-ember/services/script-loader';
 
 const {
   get,
@@ -21,7 +21,7 @@ export default Component.extend({
     if (config.environment === 'development') {
       // in development, we're usually running a copy of the prod DB which will
       // point to prod
-      // in prod builds on demo or production, these values will point to our 
+      // in prod builds on demo or production, these values will point to our
       // configured wnycURL
       origin = 'http://www.wnyc.org';
     } else {

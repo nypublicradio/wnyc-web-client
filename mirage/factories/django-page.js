@@ -49,8 +49,8 @@ export default Factory.extend({
                 <div class="flag nudge">
                 <div id="edit-story"></div>
                 </div>
-                <button class="btn btn--blue btn--large js-listen" 
-                  data-id="${story.id}" data-category="Listen" 
+                <button class="btn btn--blue btn--large js-listen"
+                  data-id="${story.id}" data-category="Listen"
                   data-ember-component="listen-button.embedded"
                   data-ember-args='{ "itemPK": "${story.id}", "itemTitle": "${story.title}", "duration": "${story.audioDurationReadable}", "playContext": "story-header", "type": "blue-boss" }'>
                     <i class="fa fa-play icon--prefix--large"></i>Listen <span class="text--small dimmed">${story.audioDurationReadable}</span>

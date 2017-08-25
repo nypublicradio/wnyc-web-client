@@ -2,7 +2,7 @@ import ENV from 'wnyc-web-client/config/environment';
 import wrapAjax from 'wnyc-web-client/lib/wrap-ajax';
 import Service from 'ember-service';
 import get from 'ember-metal/get';
-import { canonicalize } from 'wnyc-web-client/services/script-loader';
+import { canonicalize } from 'nypr-django-for-ember/services/script-loader';
 
 let { wnycAPI } = ENV;
 wnycAPI = canonicalize(wnycAPI);
