@@ -1,5 +1,5 @@
 import config from 'wqxr-web-client/config/environment';
-import wrapAjax from 'wqxr-web-client/lib/wrap-ajax';
+import wrapAjax from 'nypr-django-for-ember/utils/wrap-ajax'
 import Service from 'ember-service';
 import get from 'ember-metal/get';
 
