@@ -1,18 +1,6 @@
-import Ember from 'ember';
-import ApplicationAdapter from '../adapters/application';
+import ChannelAdapter from 'nypr-publisher-lib/adapters/channel';
+import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 
-export default ApplicationAdapter.extend({
-  pathForType() {
-    return 'channel';
-  },
-  ajaxOptions(urlToDecode, type, options = {}) {
-    options = this._super(...arguments);
-    const url = decodeURIComponent(urlToDecode);
-
-    return Ember.assign(options, {
-      url: url.slice(-1) === '/' ? `${url}/` : url,
-      dataType: 'jsonp',
-      jsonpCallback: 'WNYC'
-    });
-  }
+export default ChannelAdapter.extend(DataAdapterMixin, {
+  authorizer: 'authorizer:nypr'
 });

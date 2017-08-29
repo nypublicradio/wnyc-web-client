@@ -9,9 +9,7 @@ moduleForAcceptance('Acceptance | Listing Page | viewing', {
   beforeEach() {
     server.create('stream');
 
-      window.assign = function() {
-        assert.ok(true, 'location.assign was called');
-      };
+    window.assign = function() {}
   },
 });
 
