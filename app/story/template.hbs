@@ -7,7 +7,7 @@
 
 <div class="l-full {{if model.story.interactiveTemplate 'story--interactive'}}">
   <div class="l-constrained">
-    
+
     <main class="{{unless model.story.interactiveTemplate 'l-col2of3'}}" id="main" role="main">
       <article class="doubledown" data-status="{{if model.story.futureArticle model.story.publishStatus}}" data-date="{{moment-format model.story.publishAt 'MMM D, Y'}}">
 
@@ -45,7 +45,7 @@
                 {{header.message}}
               {{/if}}
             {{/if}}
-            
+
             {{header.share story=model.story via='WQXR' classNames='story-share-buttons'}}
 
           {{/nypr-story/header-content}}
@@ -62,8 +62,8 @@
               {{#if row.segment.audioAvailable}}
                 {{#row.buttons}}
                   <div class="btn-group">
-                  {{listen-button  
-                    playContext="story-list" 
+                  {{listen-button
+                    playContext="story-list"
                     itemPK=row.segment.slug
                     itemTitle=row.segment.title
                     itemShow=model.story.showTitle
@@ -82,15 +82,15 @@
         {{/if}}
 
         {{#if model.story.mainImageEligible}}
-          {{nypr-story/main-image image=model.story.imageMain}} 
+          {{nypr-story/main-image image=model.story.imageMain}}
         {{/if}}
 
-        {{nypr-story/byline 
-          newsdate=model.story.newsdate 
-          authors=model.story.appearances.authors 
+        {{nypr-story/byline
+          newsdate=model.story.newsdate
+          authors=model.story.appearances.authors
           producingOrganizations=model.story.producingOrganizations
           sourceUrl=model.story.sourceUrl}}
-   
+
         {{#nypr-story/body-transcript transcript=model.story.transcript selection=tab}}
           <section class="text">
             {{django-page page=model.story.bodyDjango}}
@@ -108,7 +108,7 @@
             {{{model.story.video}}}
           {{/unless}}
 
-        {{/nypr-story/body-transcript}} 
+        {{/nypr-story/body-transcript}}
 
 
         {{#if model.story.correctionText}}
@@ -123,6 +123,7 @@
                              getComments=model.getComments
                              browserId=session.data.browserId
                              class=(if model.story.interactiveTemplate 'l-medium')
+                             onShowComments=(action 'onShowComments')
                            }}
         {{/if}}
       </article>
@@ -175,7 +176,7 @@
     </aside>
   {{/unless}}
 
-   
+
   </div>
   <!-- .l-constrained -->
 
