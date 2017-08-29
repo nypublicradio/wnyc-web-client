@@ -7,25 +7,16 @@ export default StreamModel.extend({
     let shareText = '';
     let shareUrl = '';
     let analyticsCode = '';
-    let via = '';
+    let via = get(this, 'twitterHandle') || 'WQXR';
 
-    if (get(this, 'audioType') === 'livestream') {
-      let entry = get(this, 'currentPlaylistItem.catalogEntry');
-      if (entry) {
-        shareText = 'I\'m listening to ' + entry.composer.name + ' - ' + entry.title;
-        shareUrl = 'http://www.wqxr.org/streams/?stream=' + get(this, 'slug');
-      } else {
-        shareText = 'I\'m listening to ' + get(this, 'currentShow.title');
-        shareUrl = get(this, 'currentShow.url');
-      }
+    let entry = get(this, 'currentPlaylistItem.catalogEntry');
+    if (entry) {
+      shareText = `I'm listening to ${entry.composer.name}  - ${entry.title}`;
+      shareUrl = `http://www.wqxr.org/streams/?stream=${get(this, 'slug')}`;
     } else {
-      let title = get(this, 'twitterHeadline') || get(this, 'title');
-      let parentTitle = get(this, 'headers.brand.title');
-      shareText = 'I\'m listening to ' + [parentTitle, title].filter(t => t).join(' - ');
-      shareUrl = get(this, 'url');
-      analyticsCode = get(this, 'analyticsCode') || '';
+      shareText = `I'm listening to ${get(this, 'currentShow.title')}`;
+      shareUrl = get(this, 'currentShow.url');
     }
-    via = get(this, 'twitterHandle') || 'WQXR';
 
     return {shareText, shareUrl, analyticsCode, via};
   })
