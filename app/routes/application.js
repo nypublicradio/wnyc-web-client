@@ -43,8 +43,11 @@ export default Route.extend(ApplicationRouteMixin, {
 
   actions: {
     error(error/*, transition*/) {
-      if (error) {
-        this.controllerFor('application').set('error', error);
+      if (error && error.response) {
+        if (error.response.status === 404) {
+          this.transitionTo('missing');
+        }
+      } else {
         /* eslint-disable */
         console.error(error);
         /* eslint-enable */
