@@ -13,7 +13,7 @@
     "build": "ember build",
     "start": "ember server",
     "test": "ember test",
-    "upgrade-nypr": "yarn upgrade nypr-ads nypr-ui nypr-player nypr-account-settings nypr-audio-services nypr-metrics"
+    "upgrade-nypr": "yarn upgrade nypr-ads nypr-ui nypr-player nypr-account-settings nypr-audio-services nypr-metrics nypr-django-for-ember"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
@@ -96,8 +96,8 @@
     "nypr-django-for-ember": "nypublicradio/nypr-django-for-ember",
     "nypr-metrics": "nypublicradio/nypr-metrics",
     "nypr-player": "nypublicradio/nypr-player",
-    "nypr-ui": "nypublicradio/nypr-ui",
     "nypr-publisher-lib": "nypublicradio/nypr-publisher-lib.git",
+    "nypr-ui": "nypublicradio/nypr-ui",
     "torii": "0.9.5"
   },
   "ember-addon": {
