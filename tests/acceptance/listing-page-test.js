@@ -8,6 +8,10 @@ import moment from 'moment';
 moduleForAcceptance('Acceptance | Listing Page | viewing', {
   beforeEach() {
     server.create('stream');
+
+      window.assign = function() {
+        assert.ok(true, 'location.assign was called');
+      };
   },
 });
 
@@ -365,7 +369,7 @@ test('if a show is airing, the featured story listen button says "Listen Live"',
   djangoPage
     .bootstrap(listingPage)
     .visit(listingPage);
-    
+
   andThen(() => {
     let button = find('[data-test-selector=listen-button]');
     assert.ok(button.text().match('Listen Live'));
@@ -447,7 +451,7 @@ test('listen buttons in story teases include data-story and data-show values', f
   djangoPage
     .bootstrap(listingPage)
     .visit(listingPage);
-    
+
   andThen(() => {
     let listenButtons = findWithAssert('.story-tease [data-test-selector=listen-button]');
     listenButtons.each((i, el) => {
