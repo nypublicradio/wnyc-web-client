@@ -28,6 +28,7 @@ testem.log
 vendor/modernizr/modernizr-build.js
 
 # editor cruft
+.*swp
 .*~
 .DS_Store
 
