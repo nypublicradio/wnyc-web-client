@@ -58,7 +58,7 @@
         -moz-transform: scale(1.01,1.01);
 
         opacity: 1;
-        @include transition(opacity $transition-timing);
+        transition: opacity $transition-timing;
     }
 
     [data-state="is-collapsed"] &:after {
@@ -69,8 +69,8 @@
 .accordion-collapsable {
     // do not set overflow hidden because
     // we might need things like dropdowns to overflow!
-    @include transition(max-height $transition-timing, opacity $transition-timing);
-    @include translate3d(0,0,0);
+    transition: max-height $transition-timing, opacity $transition-timing;
+    transform: translate3d(0,0,0);
 
     [data-state="is-expanded"] & {
         max-height: 1500px;

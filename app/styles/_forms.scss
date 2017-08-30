@@ -20,7 +20,7 @@
     width: 100%;
     display: block;
     @extend %vertical-rhythm;
-    @include transition(background-color $transition-timing ease);
+    transition: background-color $transition-timing ease;
 
     &:focus {
         outline: 1px dotted $darkergray;
@@ -44,7 +44,7 @@
     height: 25px;
     opacity: 0;
 
-    @include transition(opacity $transition-timing ease);
+    transition: opacity $transition-timing ease;
 
     .input-state--right & {
         right: 15px;

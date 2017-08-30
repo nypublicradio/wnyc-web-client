@@ -81,5 +81,5 @@ $wnyc-player-link-color       : #77A6DE;
 
 // liquid-fire compat
 .nypr-player-wrapper.liquid-container {
-  @include transform(none);
+  transform: none;
 }

@@ -4,12 +4,10 @@
   padding: 150px 0 90px;
   height: 490px;
 
-  @include flexbox((
-    display: flex,
-    flex-direction: column,
-    justify-content: flex-end,
-    align-items: center
-  ));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
 
   @include mq($medium-only) {
     height: 100%;
@@ -31,11 +29,9 @@
     width: 90%;
 
     .flag {
-      @include flexbox((
-        display: flex,
-        align-items: center,
-        justify-content: center
-      ));
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       &-body {
         width: auto;

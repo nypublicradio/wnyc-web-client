@@ -1,11 +1,11 @@
 .l-flexcontext {
-  @include display-flex;
+  display: flex;
   height: 100%;
-  @include flex-direction(column);
+  flex-direction: column;
 }
 
 .l-modal--shadow {
-  @include box-shadow(0px 2px 4px 0px rgba(black, 0.5));
+  box-shadow: 0px 2px 4px 0px rgba(black, 0.5);
 }
 
 .l-page {
@@ -45,7 +45,7 @@
       top: 0;
       height: 100%;
       width: 35%;
-      @include background-image(linear-gradient(to right, rgba(141, 33, 48, 0.0), $rouge));
+      background-image: linear-gradient(to right, rgba(141, 33, 48, 0.0), $rouge);
     }
   }
 }
@@ -220,15 +220,15 @@
 
 // Flex Styles
 .l-flexrow {
-    @include display-flex;
+    display: flex;
 }
 
 .l-flexrow--sb {
-  @include justify-content(space-between);
+  justify-content: space-between;
 }
 
 .l-flex-noshrink {
-  @include flex-shrink(0);
+  flex-shrink: 0;
 }
 
 .l-flexrow--mqmd {
@@ -248,7 +248,7 @@
   }
 
   @include mq($medium-and-up) {
-      @include display-flex;
+      display: flex;
   }
 
   > [class*='l-col'].nudge:first-child {
@@ -257,25 +257,25 @@
 }
 
 .l-flexcol--center {
-    @include align-self(center);
+    align-self: center;
 }
 
 .l-flexgrid {
-  @include display-flex;
-  @include flex-wrap(wrap);
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .l-flex1of2 {
-  @include flex-basis(100%);
-  @include flex-grow(1);
-  @include flex-shrink(1);
+  flex-basis: 100%;
+  flex-grow: 1;
+  flex-shrink: 1;
 
   &[class$="--fixed"] {
-    @include flex(1);
+    flex: 1;
   }
 
   @include mq($middle-narrow-and-up) {
-    @include flex(1);
+    flex: 1;
   }
 }
 
@@ -310,14 +310,14 @@
 }
 
 .l-col--flex {
-  @include display-flex;
+  display: flex;
 
   &.l-col--cv {
-    @include align-items(center);
+    align-items: center;
   }
 
   &.l-col--right {
-    @include justify-content(flex-end);
+    justify-content: flex-end;
   }
 }
 
@@ -426,9 +426,9 @@
     }
 
     @include mq($medium-and-up) {
-        @include display-flex;
-        @include justify-content(space-between);
-        @include align-items(center);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
       > :first-child {
           padding-right: 15px;
@@ -436,15 +436,15 @@
     }
 
     > :last-child {
-        @include flex(0 0 auto);
+        flex: 0 0 auto;
     }
 
     > :first-child {
-        @include flex(1 1 auto);
+        flex: 1 1 auto;
     }
 
     > .l-split-child128 {
-        @include flex-basis(128px);
+        flex-basis: 128px;
     }
 
     .no-flexbox & {
@@ -532,12 +532,12 @@
             overflow: hidden;
             background-size: cover;
             background-repeat: no-repeat;
-            @include filter(blur(4px));
-            @include rotateX(180deg);
+            filter: blur(4px);
+            transform: rotateX(180deg);
             @include edgeOnly {
               // Don't blur image on Edge because of this issue:
               // http://stackoverflow.com/questions/35727233/filter-blur-not-working-on-ms-edge
-              @include filter(none);
+              filter: none;
             }
         }
     }

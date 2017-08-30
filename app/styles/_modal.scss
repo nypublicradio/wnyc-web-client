@@ -37,7 +37,7 @@
   right: 0;
   bottom: 0;
 
-  @include display-flex;
+  display: flex;
 }
 
 .l-modal--dark {
@@ -45,7 +45,7 @@
 }
 
 .l-modal-body {
-  @include flex(0);
+  flex: 0;
   margin: auto;
   position: relative;
   min-width: 80%;
@@ -58,7 +58,7 @@
 // required to override some unused liquid-fire styles
 // e.g. allows sliding-modal to slide into place
 .modal-wrapper.liquid-container {
-  @include transform(none);
+  transform: none;
 }
 
 .modal-wrapper > .liquid-child {
