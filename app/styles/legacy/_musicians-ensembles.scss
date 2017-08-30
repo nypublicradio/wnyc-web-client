@@ -27,10 +27,8 @@
 
 .playlist-item {
   padding-left: 50px !important;
-  @include flexbox((
-    display: flex,
-    flex-direction: column
-  ));
+  display: flex;
+  flex-direction: column;
   border-bottom: 0 !important;
   padding-bottom: 0 !important;
 

@@ -27,9 +27,7 @@
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
     border-bottom: 1px solid $line--light;
-    @include flexbox((
-      display: flex
-    ));
+    display: flex;
 
     li a {
       font-weight: 600;
@@ -86,12 +84,10 @@ ul.schedule-dates {
     }
   }
 
-  @include flexbox((
-    display: flex,
-    flex-wrap: wrap,
-    justify-content: space-between,
-    align-items: center
-  ));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
 
   li.yesterday,
   li.tomorrow {
@@ -149,11 +145,9 @@ ul.schedule-table {
     height: auto;
     padding: 0;
     line-height: 27px;
-    @include flexbox((
-      display: flex,
-      flex-direction: column,
-      align-items: flex-start
-    ));
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 
     div.program {
       height: auto;

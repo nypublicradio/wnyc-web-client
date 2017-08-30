@@ -66,7 +66,7 @@
 }
 
 .tab-link {
-  @include transition(font-size 125ms ease);
+  transition: font-size 125ms ease;
 
   @include fontsize(14);
 
@@ -93,8 +93,8 @@
     left: 0;
     bottom: 0;
 
-    @include translateX(0);
-    @include transition(transform $transition-timing 0s, width $transition-timing 150ms, background-color $transition-timing 0s);
+    transform: translateX(0);
+    transition: transform $transition-timing 0s, width $transition-timing 150ms, background-color $transition-timing 0s;
 }
 
 .tab-line--liquid {
@@ -118,7 +118,7 @@
     left: 0;
     width: 100%;
 
-    @include transition(all $transition-timing);
+    transition: all $transition-timing;
 }
 
 .tab-link {

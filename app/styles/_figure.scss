@@ -32,8 +32,8 @@
     max-height: 100%;
     overflow-y: auto;
 
-    @include transition(-webkit-clip-path $transition-timing, clip-path $transition-timing, opacity $transition-timing);
-    @include translate3d(0,0,0);
+    transition: -webkit-clip-path $transition-timing, clip-path $transition-timing, opacity $transition-timing;
+    transform: translate3d(0,0,0);
 }
 
 
