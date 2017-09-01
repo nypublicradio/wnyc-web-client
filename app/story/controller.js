@@ -19,7 +19,7 @@ export default Ember.Controller.extend({
   actions: {
     onShowComments(story) {
       let metrics = this.get('metrics');
-      let {containers:action, title:label} = story.get('story.analytics');
+      let {containers:action, title:label} = story.get('analytics');
 
       metrics.trackEvent('GoogleAnalytics', {
         category: 'Displayed Comments',

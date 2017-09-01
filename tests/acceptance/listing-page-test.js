@@ -201,6 +201,8 @@ test('visiting directly to a nav link url', function(assert) {
     .visit({id: 'shows/foo/next-link/'});
 
   andThen(() => {
+    assert.equal(currentURL(), `shows/foo/next-link/`);
+
     assert.equal(findWithAssert('nav li.is-active > a').text(), 'Next Link');
   });
 });
