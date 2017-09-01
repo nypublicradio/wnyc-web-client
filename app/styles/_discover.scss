@@ -717,7 +717,18 @@ body.ember-application.discover {
 
   // override button default in buttons.scss
   .listen-button.red-hollow {
-    @include btn-size(40px);
+    width: 40px;
+    height: 40px;
+
+    .listen-ui {
+      width: 40px;
+      height: 40px;
+
+      > svg {
+        width: 40px;
+        height: 40px;
+      }
+    }
   }
 
 }
@@ -779,7 +790,7 @@ body.ember-application.discover {
       fill: $red;
     }
   }
-  
+
   > .visuallyhidden {
     @include visuallyhidden;
   }
