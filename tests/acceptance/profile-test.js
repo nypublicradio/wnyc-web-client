@@ -461,6 +461,7 @@ test('pledges show up if a user has pledged', function(assert) {
   visit('/profile');
   
   andThen(() => {
+    findWithAssert('.pledge-donate-link > a');
     assert.ok(findWithAssert('.pledge-order-info').length);
   });
 })
