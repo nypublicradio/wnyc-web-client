@@ -21,6 +21,8 @@ test('visiting /reset with no params', function(assert) {
   visit(resetUrl);
 
   andThen(() => {
+    // GTM test
+    findWithAssert('.resend-button');
     assert.equal(currentURL(), '/forgot', 'it should redirect to forgot password page if you go to /reset with no params');
   });
 });
@@ -32,6 +34,8 @@ test('visiting /reset deauthenticates but remains on page', function(assert) {
   visit(resetUrlWithEmailAndConfirmation);
 
   return andThen(() => {
+    // GTM test
+    findWithAssert('.account-form-btn');
     assert.notOk(currentSession(this.application).get('isAuthenticated'));
     assert.equal(currentURL(), resetUrlWithEmailAndConfirmation);
   });

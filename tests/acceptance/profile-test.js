@@ -30,6 +30,19 @@ test('authenticated visiting /profile', function(assert) {
   });
 });
 
+test('/profile analytics selectors', function(assert) {
+  authenticateSession(this.application, {access_token: 'foo'});
+  server.create('user');
+
+  visit('/profile');
+
+  andThen(function() {
+    assert.equal(currentURL(), '/profile');
+    findWithAssert('[data-test-selector="do-disable"]');
+    findWithAssert('.pledge-update-link > a');
+  });
+});
+
 test('can view & update attrs', function(assert) {
   const FIRST = 'zzzzz';
   const LAST = 'xxxxx';
@@ -76,6 +89,10 @@ test('can view & update attrs', function(assert) {
     assert.equal(findWithAssert('input[name=preferredUsername]').val(), preferred_username, 'displays old username');
     assert.equal(findWithAssert('input[name=email]').val(), email, 'displays old email');
     assert.equal(findWithAssert('input[name=password]').val(), '********', 'displays password asterisks');
+    
+    // GTM test
+    let el = findWithAssert('.nypr-basic-info .nypr-card-edit-btn');
+    assert.equal(el.text(), 'Edit');
   });
 
   andThen(function() {
@@ -90,6 +107,9 @@ test('can view & update attrs', function(assert) {
 
     find('input[name=email]').click();
     fillIn('input[name=confirmEmail]', EMAIL);
+    
+    // GTM test
+    findWithAssert('.nypr-basic-info .nypr-account-confirm');
   });
 
   click('.nypr-basic-info [data-test-selector="save"]');
@@ -165,12 +185,21 @@ test('can update password', function(assert) {
 
   authenticateSession(this.application, {access_token: 'foo'});
   visit('/profile');
+  
+  andThen(() => {
+    // GTM test
+    let el = findWithAssert('.nypr-password-card .nypr-card-edit-btn');
+    assert.equal(el.text(), 'Edit');
+  });
 
   click('.nypr-password-card [data-test-selector="nypr-card-button"]');
 
   andThen(function() {
     fillIn('input[name=currentPassword]', OLD);
     fillIn('input[name=newPassword]', NEW);
+    
+    // GTM test
+    findWithAssert('.nypr-password-card .nypr-account-confirm');
   });
 
   click('.nypr-password-card [data-test-selector="save"]');
@@ -423,3 +452,15 @@ test('resend set password email when have not set a password yet', function(asse
     assert.equal(JSON.parse(setTempPasswordRequests[0].requestBody).email, user.email, 'it should call the send-temp api url with the users email address');
   });
 });
+
+test('pledges show up if a user has pledged', function(assert) {
+  withFeature('member-center');
+  let user = server.create('user');
+  authenticateSession(this.application, {access_token: '123456'});
+  
+  visit('/profile');
+  
+  andThen(() => {
+    assert.ok(findWithAssert('.pledge-order-info').length);
+  });
+})
