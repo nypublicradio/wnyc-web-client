@@ -1,7 +1,7 @@
-import ChannelAdapter from 'nypr-publisher-lib/adapters/api-response';
+import ApiResponseAdapter from 'nypr-publisher-lib/adapters/api-response';
 import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 
-export default ChannelAdapter.extend(DataAdapterMixin, {
+export default ApiResponseAdapter.extend(DataAdapterMixin, {
   authorizer: 'authorizer:nypr',
     // ember 2.0 deprecation
   shouldBackgroundReloadRecord() {
