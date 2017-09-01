@@ -5881,9 +5881,9 @@ loud-rejection@^1.0.0:
     currently-unhandled "^0.4.1"
     signal-exit "^3.0.0"
 
-lru-cache@2:
-  version "2.7.3"
-  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-2.7.3.tgz#6d4524e8b955f95d4f5b58851ce21dd72fb4e952"
+lru-cache@2, lru-cache@~2.6.5:
+  version "2.6.5"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-2.6.5.tgz#e56d6354148ede8d7707b58d143220fd08df0fd5"
 
 lru-cache@^4.0.1:
   version "4.0.2"
@@ -5891,10 +5891,6 @@ lru-cache@^4.0.1:
   dependencies:
     pseudomap "^1.0.1"
     yallist "^2.0.0"
-
-lru-cache@~2.6.5:
-  version "2.6.5"
-  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-2.6.5.tgz#e56d6354148ede8d7707b58d143220fd08df0fd5"
 
 make-dir@^1.0.0:
   version "1.0.0"
@@ -6445,10 +6441,6 @@ nypr-publisher-lib@nypublicradio/nypr-publisher-lib.git:
     ember-cli-htmlbars "^2.0.1"
     ember-cli-htmlbars-inline-precompile "^0.4.3"
     ember-get-config "^0.2.2"
-    liquid-fire "0.27.2"
-    nypr-audio-services nypublicradio/nypr-audio-services
-    nypr-django-for-ember nypublicradio/nypr-django-for-ember
-    nypr-ui nypublicradio/nypr-ui
 
 nypr-ui@nypublicradio/nypr-ui:
   version "0.0.0"
