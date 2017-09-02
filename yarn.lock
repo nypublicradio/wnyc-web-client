@@ -5877,9 +5877,9 @@ loud-rejection@^1.0.0:
     currently-unhandled "^0.4.1"
     signal-exit "^3.0.0"
 
-lru-cache@2:
-  version "2.7.3"
-  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-2.7.3.tgz#6d4524e8b955f95d4f5b58851ce21dd72fb4e952"
+lru-cache@2, lru-cache@~2.6.5:
+  version "2.6.5"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-2.6.5.tgz#e56d6354148ede8d7707b58d143220fd08df0fd5"
 
 lru-cache@^4.0.1:
   version "4.0.2"
@@ -5887,10 +5887,6 @@ lru-cache@^4.0.1:
   dependencies:
     pseudomap "^1.0.1"
     yallist "^2.0.0"
-
-lru-cache@~2.6.5:
-  version "2.6.5"
-  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-2.6.5.tgz#e56d6354148ede8d7707b58d143220fd08df0fd5"
 
 make-dir@^1.0.0:
   version "1.0.0"
@@ -6435,7 +6431,7 @@ nypr-player@nypublicradio/nypr-player:
 
 nypr-publisher-lib@nypublicradio/nypr-publisher-lib.git:
   version "0.0.0"
-  resolved "https://codeload.github.com/nypublicradio/nypr-publisher-lib/tar.gz/bae081f24b01dc1fdb71c10703de1c6ab8e32d27"
+  resolved "https://codeload.github.com/nypublicradio/nypr-publisher-lib/tar.gz/97245a3033ec3fd2a6923e22db118f9683c153fd"
   dependencies:
     ember-cli-babel "^6.3.0"
     ember-cli-htmlbars "^2.0.1"
