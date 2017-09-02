@@ -13,7 +13,7 @@
     "build": "ember build",
     "start": "ember server",
     "test": "ember test",
-    "upgrade-nypr": "yarn upgrade nypr-ads nypr-ui nypr-player nypr-account-settings nypr-audio-services nypr-metrics nypr-django-for-ember"
+    "upgrade-nypr": "yarn upgrade nypr-ads nypr-ui nypr-player nypr-account-settings nypr-audio-services nypr-metrics nypr-django-for-ember nypr-publisher-lib"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
