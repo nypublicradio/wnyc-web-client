@@ -457,6 +457,7 @@
 .l-split {
     @extend %vertical-rhythm;
 
+    display: flex!important;
     > * {
         display: block;
     }
