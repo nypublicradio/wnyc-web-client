@@ -8,7 +8,7 @@ module.exports = function(environment) {
       return arg.indexOf('--proxy') === 0;
     }).length;
   }
-  
+
   const ALIEN_DOM_ROOT = environment === 'test' ? '#ember-testing' : 'body';
 
   let ENV = {
@@ -124,7 +124,7 @@ module.exports = function(environment) {
     wnycStaticURL: process.env.WQXR_STATIC_URL,
     wnycURL: process.env.WQXR_URL,
     platformEventsAPI: process.env.PLATFORM_EVENTS_SERVICE,
-    wnycDonateURL: 'http://www.wqxr.org/epledge/main?utm_source=wqxr&utm_medium=wqxr-85x39&utm_campaign=pledge&utm_content=donate',
+    wnycDonateURL: 'https://pledge3.wqxr.org/epledge/main?ref=button-donate-header',
     wnycSvgURL: '/media/svg/',
     // put beta host at the root so it can be overridden by Django
     featureFlags: {
