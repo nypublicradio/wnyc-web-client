@@ -8,7 +8,7 @@ module.exports = function(environment) {
       return arg.indexOf('--proxy') === 0;
     }).length;
   }
-  
+
   const ALIEN_DOM_ROOT = environment === 'test' ? '#ember-testing' : 'body';
 
   let ENV = {
@@ -128,7 +128,7 @@ module.exports = function(environment) {
     wnycStaticURL: process.env.WNYC_STATIC_URL,
     wnycURL: process.env.WNYC_URL,
     platformEventsAPI: process.env.PLATFORM_EVENTS_SERVICE,
-    wnycDonateURL: 'https://pledge3.wnyc.org/donate/main/onestep/?utm_source=wnyc&utm_medium=wnyc-86x27&utm_content=wnyc-header-beta&utm_campaign=pledge',
+    wnycDonateURL: 'https://pledge3.wnyc.org/epledge/main?ref=button-donate-header',
     wnycSvgURL: '/media/svg/',
     // put beta host at the root so it can be overridden by Django
     wnycBetaURL: process.env.WNYC_BETA_URL,
