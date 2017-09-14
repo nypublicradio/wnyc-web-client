@@ -1,0 +1,58 @@
+/* shows A-Z page */
+.shows-list {
+
+  @include mq($small-only) {
+    padding: 0;
+  }
+
+   ul li {
+
+    .flag-image>img {
+      min-width: 90px;
+      min-height: 90px;
+    }
+
+    .flag-image {
+      @include mq($small-only) {
+        padding-right: 1.5625rem;
+        img {
+          display: none;
+        }
+      }
+    }
+
+    .text-body--nopad > p {
+      margin: 0;
+    }
+  }
+
+  /* topics follows same style as shows, but no image */
+  ul.topics--list li.list-item--medium {
+    @include mq($small-only) {
+      padding-left: 1.5625rem;
+    }
+  }
+}
+
+.featured-show {
+  @include mq($small-only) {
+    display: none;
+  }
+}
+
+.marquee-footer:before {
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: #e7e7e7;
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.channel-header {
+  @include mq($small-only) {
+    margin: 30px 0 1.25rem 0;
+  }
+}
