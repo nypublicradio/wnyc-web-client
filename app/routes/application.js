@@ -1,6 +1,6 @@
 import Route from 'ember-route';
 import get from 'ember-metal/get';
-import ApplicationRouteMixin from 'nypr-auth/mixins/application-route-mixin';
+import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 import service from 'ember-service/inject';
 import RSVP from 'rsvp';
 
@@ -10,7 +10,7 @@ export default Route.extend(ApplicationRouteMixin, {
   legacyLoader: service(),
   leaderboard: service(),
   currentUser: service(),
-  session: service('nypr-session'),
+  session: service(),
   poll: service(),
   store: service(),
   dj: service(),
