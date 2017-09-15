@@ -4,7 +4,7 @@ import AnalyticsMixin from './mixins/analytics';
 import service from 'ember-service/inject';
 
 const Router = Ember.Router.extend(AnalyticsMixin, {
-  session:      service(),
+  session:      service('nypr-session'),
 
   location: config.locationType,
 
