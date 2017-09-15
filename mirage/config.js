@@ -33,7 +33,7 @@ export default function() {
   --------------------------------------------------------------*/
 
   this.get(`${baseUrl}/api/v1/story/:id`);
-  this.get(`${baseUrl}/api/v1/browser_id/`, {success: true, browser_id: 'foo'});
+  this.get(`${baseUrl}/api/v1/browser_id/`, {success: true});
   this.get(`${baseUrl}/api/v1/list/comments/24/:storyId/`, 'comment');
   this.get(`${config.publisherAPI}/v1/whats_on/`);
   this.get(`${baseUrl}/api/v1/whats_on/:slug`, 'whats-on');
