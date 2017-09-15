@@ -138,7 +138,7 @@ test('scripts in well route content will execute', function(assert) {
 
   andThen(function() {
     assert.equal(find('[data-test-selector=story-detail] p').length, 1, 'should only be one p tag');
-    let text = find('[data-test-selector=story-detail] .django-content').find('p, div').text().split('\n').filter(s => s).join(' ');
+    let text = find('[data-test-selector=story-detail] .django-content').find('p, div').map((_, e) => e.innerText).get().join(' ');
     assert.equal(text, 'test body. Added this paragraph!');
   });
 });
