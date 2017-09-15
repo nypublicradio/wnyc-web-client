@@ -397,12 +397,7 @@ test('metrics properly reports channel attrs', function(assert) {
   assert.expect(2);
 
   server.create('django-page', {id: listingPage.id});
-<<<<<<< HEAD
 
-||||||| merged common ancestors
-
-=======
->>>>>>> Update yarn.lock, remove unnecessary files, and fix listing test
   server.post(`${config.platformEventsAPI}/v1/events/viewed`, (schema, {requestBody}) => {
     let {
       cms_id,
