@@ -75,6 +75,7 @@
     "ember-responsive": "2.0.4",
     "ember-route-action-helper": "2.0.3",
     "ember-scroll-to": "0.6.4",
+    "ember-simple-auth": "^1.4.0",
     "ember-sinon": "0.7.0",
     "ember-sinon-qunit": "^1.6.0",
     "ember-sortable": "1.9.4",
