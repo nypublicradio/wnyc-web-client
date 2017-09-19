@@ -2,7 +2,6 @@
   {{#if session.isAuthenticated}}
     {{nypr-account-forms/verify
       membershipAPI=config.membershipAPI
-      session=session
       emailId=email_id
       verificationToken=verification_token
       onSuccess=(action 'goToProfile')
@@ -13,7 +12,6 @@
     {{nypr-account-forms/login
       siteName='WQXR'
       showSocialLogin=features.socialAuth
-      authAPI=config.authAPI
-      session=session}}
+      authAPI=config.authAPI}}
   {{/if}}
 {{/account-wrapper}}
