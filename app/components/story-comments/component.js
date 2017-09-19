@@ -5,7 +5,7 @@ import config from 'wqxr-web-client/config/environment';
 
 export default Component.extend({
   metrics: service(),
-  adminURL: `${config.wnycAdminRoot}/admin`,
+  adminURL: `${config.adminRoot}/admin`,
   
   comments: computed('getComments', {
     get() {

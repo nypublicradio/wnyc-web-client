@@ -28,7 +28,7 @@ test('view comments as regular user', function(assert) {
 });
 
 test('view comments as staff user', function(assert) {
-  server.get(`${config.wnycAdminRoot}/api/v1/is_logged_in/`, {is_staff: true});
+  server.get(`${config.adminRoot}/api/v1/is_logged_in/`, {is_staff: true});
   server.create('user');
   
   let story = server.create('story', {enableComments: true});
@@ -160,7 +160,7 @@ test('api request includes draft params', function(assert) {
   let object_id = 'object';
   let stamp = 'timestamp';
   
-  server.get(`${config.wnycAPI}/v3/story/${story.slug}`, (schema, { queryParams }) => {
+  server.get(`${config.publisherAPI}/v3/story/${story.slug}`, (schema, { queryParams }) => {
     assert.equal(queryParams.token, token);
     assert.equal(queryParams.content_type_id, content_type_id);
     assert.equal(queryParams.object_id, object_id);

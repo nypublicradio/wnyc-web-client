@@ -5,5 +5,5 @@ import config from 'wqxr-web-client/config/environment';
 export default Component.extend({
   session: service(),
   tagName: 'section',
-  adminURL: `${config.wnycAdminRoot}/admin`
+  adminURL: `${config.adminRoot}/admin`
 });

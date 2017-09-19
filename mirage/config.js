@@ -26,7 +26,7 @@ const hasProvider = function(request) {
 
 export default function() {
   this.logging = false;
-  let baseUrl = config.wnycURL;
+  let baseUrl = config.webRoot;
 
   /*------------------------------------------------------------
     legacy (v1) endpoints
@@ -35,7 +35,7 @@ export default function() {
   this.get(`${baseUrl}/api/v1/story/:id`);
   this.get(`${baseUrl}/api/v1/browser_id/`, {success: true});
   this.get(`${baseUrl}/api/v1/list/comments/24/:storyId/`, 'comment');
-  this.get(`${config.wnycAPI}/v1/whats_on/`);
+  this.get(`${config.publisherAPI}/v1/whats_on/`);
   this.get(`${baseUrl}/api/v1/whats_on/:slug`, 'whats-on');
   this.get('/api/v1/whats_on/:slug', 'whats-on');
   this.get(`${baseUrl}/api/v1/list/streams/`);
@@ -43,10 +43,10 @@ export default function() {
   this.get(`${baseUrl}/api/v1/list/streams/:slug`, 'stream');
   this.get('/api/v1/list/streams/:slug', 'stream');
 
-  this.post(`${config.wnycAPI}/v1/listenaction/create/:id/play/`, {});
-  this.post(`${config.wnycAPI}/v1/listenaction/create/:id/complete/`, {});
-  this.post(`${config.wnycAPI}/most/view/managed_item/:id/`, {});
-  this.post(`${config.wnycAPI}/most/listen/managed_item/:id/`, {});
+  this.post(`${config.publisherAPI}/v1/listenaction/create/:id/play/`, {});
+  this.post(`${config.publisherAPI}/v1/listenaction/create/:id/complete/`, {});
+  this.post(`${config.publisherAPI}/most/view/managed_item/:id/`, {});
+  this.post(`${config.publisherAPI}/most/listen/managed_item/:id/`, {});
 
   /*------------------------------------------------------------
     transitional (v2) endpoints
@@ -73,11 +73,11 @@ export default function() {
   /*------------------------------------------------------------
     identity management (account) endpoints
   --------------------------------------------------------------*/
-  this.get(`${config.wnycAdminRoot}/api/v1/is_logged_in/`, {});
-  this.get(`${config.wnycAdminRoot}/comments/security_info/`, {security_hash: 'foo', timestamp: Date.now()});
+  this.get(`${config.adminRoot}/api/v1/is_logged_in/`, {});
+  this.get(`${config.adminRoot}/comments/security_info/`, {security_hash: 'foo', timestamp: Date.now()});
 
-  this.post(`${config.wnycAdminRoot}/api/v1/accounts/logout/`, {successful_logout: true});
-  this.post(`${config.wnycAdminRoot}/api/v1/accounts/login/`, function(schema, request) {
+  this.post(`${config.adminRoot}/api/v1/accounts/logout/`, {successful_logout: true});
+  this.post(`${config.adminRoot}/api/v1/accounts/login/`, function(schema, request) {
     let params = {};
     request.requestBody.split('&').forEach(p => {
       params[p.split('=')[0]] = p.split('=')[1];
@@ -104,7 +104,7 @@ export default function() {
   this.passthrough('/datanewswidget/**');
 
   /*------------------------------------------------------------
-  ${wnycURL}/* requests. Oddballs without the api namespace
+  ${webRoot}/* requests. Oddballs without the api namespace
   --------------------------------------------------------------*/
 
   this.get(`${baseUrl}`, function(schema) {
@@ -128,7 +128,7 @@ export default function() {
   auth microservice
   ---------------------------------------------------------------*/
 
-  this.urlPrefix = config.wnycAuthAPI;
+  this.urlPrefix = config.authAPI;
 
   this.post('/v1/password', {});
 
@@ -246,9 +246,9 @@ export default function() {
   /*-------------------------------------------------------------
   membership microservice
   ---------------------------------------------------------------*/
-  this.get(`${config.wnycMembershipAPI}/v1/orders/`, 'orders');
-  this.get(`${config.wnycMembershipAPI}/v1/emails/is-verified/`, {data: {is_verified: true}});
-  this.patch(`${config.wnycMembershipAPI}/v1/emails/:email_id/verify/`, (schema, request) => {
+  this.get(`${config.membershipAPI}/v1/orders/`, 'orders');
+  this.get(`${config.membershipAPI}/v1/emails/is-verified/`, {data: {is_verified: true}});
+  this.patch(`${config.membershipAPI}/v1/emails/:email_id/verify/`, (schema, request) => {
     let params = JSON.parse(request.requestBody);
     if (params &&
         get(params, 'data.attributes.verification_token') &&

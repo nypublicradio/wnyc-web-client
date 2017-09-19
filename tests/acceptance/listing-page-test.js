@@ -35,7 +35,7 @@ test('smoke test', function(assert) {
 });
 
 test('authenticated smoke test', function(assert) {
-  server.get(`${config.wnycAdminRoot}/api/v1/is_logged_in/`, {is_staff: true});
+  server.get(`${config.adminRoot}/api/v1/is_logged_in/`, {is_staff: true});
   server.create('user');
   let listingPage = server.create('listing-page', {
     id: 'shows/foo/',
@@ -348,7 +348,7 @@ test('if a show is airing, the featured story listen button says "Listen Live"',
     featured,
     apiResponse: server.create('api-response', { id: 'shows/foo/recent_stories/1' })
   });
-  server.get(`${config.wnycAPI}/v1/whats_on/`, {
+  server.get(`${config.publisherAPI}/v1/whats_on/`, {
     'wnyc-fm939': {
       current_show: {
         end: later,

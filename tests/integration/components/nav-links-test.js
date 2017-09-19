@@ -2,8 +2,8 @@ import config from 'wqxr-web-client/config/environment';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { canonicalize  } from 'wqxr-web-client/services/script-loader';
-let { wnycURL } = config;
-wnycURL = canonicalize(wnycURL);
+let { webRoot } = config;
+webRoot = canonicalize(webRoot);
 
 moduleForComponent('nav-links', 'Integration | Component | nav links', {
   integration: true
@@ -33,7 +33,7 @@ test('it properly sets the activeTab if defaultTab is undefined', function(asser
 test('it properly parses incoming linkroll links', function(assert) {
 
   this.set('links', [
-    {href: `${wnycURL}foo/bar/`, title: 'Example'}
+    {href: `${webRoot}foo/bar/`, title: 'Example'}
   ]);
   this.render(hbs`{{nav-links links=links}}`);
   assert.equal(this.$('.is-active a').attr('href'), '/foo/bar/', 'links with matching origins have a leading slash');

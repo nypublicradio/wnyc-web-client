@@ -7,7 +7,7 @@ export default Service.extend({
   endPoint: 'v1/whats_on/',
   isLive(pk) {
     let endPoint = get(this, 'endPoint');
-    let url = `${config.wnycAPI}/${endPoint}`;
+    let url = `${config.publisherAPI}/${endPoint}`;
 
     return wrapAjax(url).then(d => this._extractStatus(d, pk));
   },

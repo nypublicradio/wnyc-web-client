@@ -3,7 +3,7 @@ import ENV from '../config/environment';
 import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 
 export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
-  host: ENV.wnycMembershipAPI,
+  host: ENV.membershipAPI,
   namespace: 'v1',
   authorizer: 'authorizer:nypr',
   buildURL(...args) {

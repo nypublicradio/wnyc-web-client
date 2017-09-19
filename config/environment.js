@@ -111,16 +111,16 @@ module.exports = function(environment) {
     googleAnalyticsKey: process.env.GOOGLE_ANALYTICS || 'UA-46158613-1',
     nprGoogleAnalyticsKey: 'UA-18188937-11',
     googleAPIv3Key: process.env.GOOGLE_API_V3_KEY,
-    wnycAPI: process.env.WQXR_API,
     showsDiscoverStation: "wqxr",
     showsAPIKey: "symphony",
     moreShowsDiscoverStation: "archived-shows",
     moreShowsAPIKey: "mammoth",
-    wnycAdminRoot: process.env.WQXR_ADMIN_ROOT,
-    wnycAuthAPI: process.env.AUTH_SERVICE,
-    wnycMembershipAPI: process.env.MEMBERSHIP_SERVICE,
-    wnycEtagAPI: process.env.WQXR_ETAG_API,
-    wnycURL: process.env.WQXR_URL,
+    webRoot: process.env.WQXR_URL,
+    adminRoot: process.env.ADMIN_ROOT,
+    authAPI: process.env.AUTH_SERVICE,
+    membershipAPI: process.env.MEMBERSHIP_SERVICE,
+    etagAPI: process.env.ETAG_API,
+    publisherAPI: process.env.PUBLISHER_API,
     platformEventsAPI: process.env.PLATFORM_EVENTS_SERVICE,
     wnycDonateURL: 'https://pledge3.wqxr.org/epledge/main?ref=button-donate-header',
     wnycSvgURL: '/media/svg/',
@@ -187,12 +187,12 @@ module.exports = function(environment) {
 
     ENV.APP.rootElement = '#ember-testing';
 
-    ENV.wnycAPI = 'http://example.com/api';
-    ENV.wnycAdminRoot = 'http://admin.example.com';
-    ENV.wnycEtagAPI = 'http://example.com/api/v1/browser_id/';
-    ENV.wnycURL = 'http://example.com';
-    ENV.wnycAuthAPI = 'http://example.com';
-    ENV.wnycMembershipAPI = 'http://example.com';
+    ENV.publisherAPI = 'http://example.com/api';
+    ENV.adminRoot = 'http://admin.example.com';
+    ENV.etagAPI = 'http://example.com/api/v1/browser_id/';
+    ENV.webRoot = 'http://example.com';
+    ENV.authAPI = 'http://example.com';
+    ENV.membershipAPI = 'http://example.com';
     ENV.platformEventsAPI = 'http://example.com';
   }
 

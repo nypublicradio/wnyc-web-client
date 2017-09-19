@@ -6,7 +6,7 @@ const { hash } = Ember.RSVP;
 
 export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
   authorizer: 'authorizer:nypr',
-  host: config.wnycAPI,
+  host: config.publisherAPI,
   namespace: 'v1',
   findAll() {
     let streams, whatsOn;

@@ -1,4 +1,4 @@
-import ENV from '../config/environment';
+import config from '../config/environment';
 import DS from 'ember-data';
 import wrapAjax from 'wqxr-web-client/lib/wrap-ajax';
 // TODO: auth headers for native fetch
@@ -10,7 +10,7 @@ const DRAFT_TOKENS = ['content_type_id', 'object_id', 'token', '_']
 
 export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
   authorizer: 'authorizer:nypr',
-  host: ENV.wnycAPI,
+  host: config.publisherAPI,
   namespace: 'v3',
   pathForType: () => 'story',
   buildURL() {

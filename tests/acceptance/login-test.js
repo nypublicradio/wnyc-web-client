@@ -70,7 +70,7 @@ test('Submitting valid credentials redirects to previous route', function(assert
 });
 
 test('Submitting invalid credentials shows form level error message', function(assert) {
-  server.post(`${config.wnycAuthAPI}/v1/session`, () => {
+  server.post(`${config.authAPI}/v1/session`, () => {
     return new Response(400, {}, {errors: {code: "UnauthorizedAccess"}});
   });
 
@@ -89,7 +89,7 @@ test('Submitting invalid credentials shows form level error message', function(a
 
 
 test('Signing in with social only account shows form level error message', function(assert) {
-  server.post(`${config.wnycAuthAPI}/v1/session`, () => {
+  server.post(`${config.authAPI}/v1/session`, () => {
     return new Response(400, {}, {errors: {code: "UserNoPassword"}});
   });
 
@@ -108,7 +108,7 @@ test('Signing in with social only account shows form level error message', funct
 
 test('Signing in with non-existing email shows form level error message', function(assert) {
   const EMAIL = 'doesnotexist@example.com';
-  server.post(`${config.wnycAuthAPI}/v1/session`, () => {
+  server.post(`${config.authAPI}/v1/session`, () => {
     return new Response(400, {}, {errors: {code: "UserNotFoundException"}});
   });
 
