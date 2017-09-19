@@ -9,7 +9,7 @@ let collapse = text => text.split('\n').reject(s => isBlank(s)).map(s => s.trim(
 
 test('visiting /shows/foo/archive', function(assert) {
   server.createList('story', 50);
-  server.get(`${config.wnycAPI}/v3/story`, function({stories}, {queryParams}) {
+  server.get(`${config.publisherAPI}/v3/story`, function({stories}, {queryParams}) {
     assert.deepEqual(Object.keys(queryParams).sort(), [
       'page',
       'uslug',

@@ -32,7 +32,7 @@ export default Torii.extend({
   },
 
   getSession(provider, accessToken) {
-    return fetch(`${config.wnycAuthAPI}/v1/session`, {
+    return fetch(`${config.authAPI}/v1/session`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${accessToken}`,

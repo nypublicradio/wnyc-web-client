@@ -35,7 +35,7 @@ export default Controller.extend(Ember.Evented, {
       this.get('session').authorize('authorizer:nypr', (header, value) => {
         headers[header] = value;
       });
-      fetch(`${config.wnycAuthAPI}/v1/password`, {
+      fetch(`${config.authAPI}/v1/password`, {
         headers,
         method: 'POST',
         body: JSON.stringify({old_password, new_password})
@@ -57,7 +57,7 @@ export default Controller.extend(Ember.Evented, {
       this.get('session').authorize('authorizer:nypr', (header, value) => {
         headers[header] = value;
       });
-      fetch(`${config.wnycAuthAPI}/v1/password/send-temp`, {
+      fetch(`${config.authAPI}/v1/password/send-temp`, {
         headers,
         method: 'POST',
         body: JSON.stringify({email})
@@ -80,7 +80,7 @@ export default Controller.extend(Ember.Evented, {
   },
 
   setEmailPendingStatus: task(function * (email) {
-    let url = `${config.wnycMembershipAPI}/v1/emails/is-verified/?email=${email}`;
+    let url = `${config.membershipAPI}/v1/emails/is-verified/?email=${email}`;
     let headers = {'Content-Type': 'application/json'};
     this.get('session').authorize('authorizer:nypr', (header, value) => {
       headers[header] = value;
@@ -115,7 +115,7 @@ export default Controller.extend(Ember.Evented, {
     if (provider) {
       yield get(this, 'promptForPassword').perform();
     }
-    let url = `${config.wnycAuthAPI}/v1/confirm/resend-attr`;
+    let url = `${config.authAPI}/v1/confirm/resend-attr`;
     let headers = {'Content-Type': 'application/json'};
     this.get('session').authorize('authorizer:nypr', (header, value) => {
       headers[header] = value;

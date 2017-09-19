@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import service from 'ember-service/inject';
-import ENV from '../../config/environment';
+import config from '../../config/environment';
 import LegacySupportMixin from 'wnyc-web-client/mixins/legacy-support';
 import BetaActionsMixin from 'wnyc-web-client/mixins/beta-actions';
 import {
@@ -10,7 +10,6 @@ import {
 } from '../../lib/alien-dom';
 
 const { get, computed } = Ember;
-let { wnycAdminRoot } = ENV;
 
 export default Ember.Component.extend(LegacySupportMixin, BetaActionsMixin, {
   session: service(),
@@ -67,7 +66,7 @@ export default Ember.Component.extend(LegacySupportMixin, BetaActionsMixin, {
         this.set('showingOverlay', true);
 
         if (this.get('session.data.isStaff')) {
-          this.revealStaffLinks(this.$(), wnycAdminRoot);
+          this.revealStaffLinks(this.$(), config.adminRoot);
         }
         this.$().imagesLoaded().progress((i, image) => {
           Ember.run(() => {
