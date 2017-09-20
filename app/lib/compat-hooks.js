@@ -107,5 +107,5 @@ export function retryFromServer(error, destinationPath) {
   if (response && (response.status === 404 || response.status === 500)) {
     throw error;
   }
-  assign(`${canonicalize(config.wnycURL)}/${destinationPath}`);
+  assign(`${canonicalize(config.webRoot)}/${destinationPath}`);
 }

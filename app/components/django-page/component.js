@@ -9,7 +9,7 @@ import {
 } from '../../lib/alien-dom';
 
 const { get, computed } = Ember;
-let { wnycAdminRoot } = ENV;
+let { adminRoot } = ENV;
 
 export default Ember.Component.extend(LegacySupportMixin, {
   session: service(),
@@ -66,7 +66,7 @@ export default Ember.Component.extend(LegacySupportMixin, {
         this.set('showingOverlay', true);
 
         if (this.get('session.data.isStaff')) {
-          this.revealStaffLinks(this.$(), wnycAdminRoot);
+          this.revealStaffLinks(this.$(), adminRoot);
         }
 
         this.$().imagesLoaded().progress((i, image) => {

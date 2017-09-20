@@ -42,14 +42,14 @@ test('can view & update attrs', function(assert) {
     email
   } = server.create('user');
 
-  server.post(`${config.wnycAuthAPI}/v1/session`, (schema, {requestBody}) => {
+  server.post(`${config.authAPI}/v1/session`, (schema, {requestBody}) => {
     let body = requestBody.split('&').map(s => ({[s.split('=')[0]]: s.split('=')[1]}));
     assert.equal(decodeURIComponent(body.findBy('username').username), email);
     assert.equal(body.findBy('password').password, PW);
     return {access_token: 'secret', expires_in: 3600, token_type: 'bearer'};
   });
 
-  server.patch(`${config.wnycAuthAPI}/v1/user`, (schema, request) => {
+  server.patch(`${config.authAPI}/v1/user`, (schema, request) => {
     assert.equal(request.requestHeaders.Authorization, 'Bearer secret');
     assert.deepEqual(JSON.parse(request.requestBody), {
       given_name: FIRST,
@@ -112,7 +112,7 @@ skip('using bad password to update email shows error', function(assert) {
   const PW = '1234567890';
 
   server.create('user');
-  server.post(`${config.wnycAuthAPI}/v1/session`, () => {
+  server.post(`${config.authAPI}/v1/session`, () => {
     return new Response(401, {}, {
       "error": {
         "code": "UnauthorizedAccess",
@@ -155,7 +155,7 @@ test('can update password', function(assert) {
   const OLD = '1234567890';
   const NEW = '0987654321';
   server.create('user');
-  server.post(`${config.wnycAuthAPI}/v1/password`, (schema, request) => {
+  server.post(`${config.authAPI}/v1/password`, (schema, request) => {
     let body = JSON.parse(request.requestBody);
     assert.equal(request.requestHeaders.authorization, 'Bearer foo');
     assert.equal(request.requestHeaders['content-type'], 'application/json');
@@ -183,7 +183,7 @@ test('trying to update with incorrect password shows error', function(assert) {
   const OLD = '1234567890';
   const NEW = '0987654321';
   server.create('user');
-  server.post(`${config.wnycAuthAPI}/v1/password`, () => {
+  server.post(`${config.authAPI}/v1/password`, () => {
     return new Response(401, {}, {
       "error": {
         "code": "UnauthorizedAccess",
@@ -219,7 +219,7 @@ skip('can disable account', function(assert) {
   assert.expect(1);
 
   server.create('user');
-  server.delete(`${config.wnycAuthAPI}/v1/user`, (schema, {requestHeaders}) => {
+  server.delete(`${config.authAPI}/v1/user`, (schema, {requestHeaders}) => {
     assert.equal(requestHeaders.Authorization, 'Bearer foo');
   });
 
@@ -242,7 +242,7 @@ test('shows pending email', function(assert) {
   server.create('user');
   authenticateSession(this.application, {access_token: 'foo'});
 
-  server.get(`${config.wnycMembershipAPI}/v1/emails/is-verified/`, () => {
+  server.get(`${config.membershipAPI}/v1/emails/is-verified/`, () => {
     return new Response(200, {}, {data: {is_verified: false}});
   });
   visit('/profile');
@@ -280,12 +280,12 @@ test('resend verification email when authenticated via username/password', funct
   server.create('user');
   authenticateSession(this.application, {access_token: 'secret'});
   // Account is pending verification
-  server.get(`${config.wnycMembershipAPI}/v1/emails/is-verified/`, () => {
+  server.get(`${config.membershipAPI}/v1/emails/is-verified/`, () => {
     return new Response(200, {}, {data: {is_verified: false}});
   });
 
   let requests = [];
-  server.get(`${config.wnycAuthAPI}/v1/confirm/resend-attr`, (schema, request) => {
+  server.get(`${config.authAPI}/v1/confirm/resend-attr`, (schema, request) => {
     requests.push(request);
     return new Response(200);
   });
@@ -310,12 +310,12 @@ test('resend verification email when authenticated via facebook', function(asser
   server.create('user', 'connected');
   authenticateSession(this.application, {access_token: 'secret', provider: 'facebook-connect'});
   // Account is pending verification because they changed their email address
-  server.get(`${config.wnycMembershipAPI}/v1/emails/is-verified/`, () => {
+  server.get(`${config.membershipAPI}/v1/emails/is-verified/`, () => {
     return new Response(200, {}, {data: {is_verified: false}});
   });
 
   let requests = [];
-  server.get(`${config.wnycAuthAPI}/v1/confirm/resend-attr`, (schema, request) => {
+  server.get(`${config.authAPI}/v1/confirm/resend-attr`, (schema, request) => {
     requests.push(request);
     return new Response(200);
   });
@@ -342,14 +342,14 @@ test('resend verification email when authenticated via facebook fails on bad pas
   server.create('user', 'connected');
   authenticateSession(this.application, {access_token: '123456', provider: 'facebook-connect'});
   // Account is pending verification because they changed their email address
-  server.get(`${config.wnycMembershipAPI}/v1/emails/is-verified/`, () => {
+  server.get(`${config.membershipAPI}/v1/emails/is-verified/`, () => {
     return new Response(200, {}, {data: {is_verified: false}});
   });
   // Unauthorized / Bad password
   server.post('/v1/session', {}, 401);
 
   let requests = [];
-  server.get(`${config.wnycAuthAPI}/v1/confirm/resend-attr`, (schema, request) => {
+  server.get(`${config.authAPI}/v1/confirm/resend-attr`, (schema, request) => {
     requests.push(request);
     return new Response(200);
   });
@@ -373,17 +373,17 @@ test('resend set password email when have not set a password yet', function(asse
   let user = server.create('user', 'facebook');
   authenticateSession(this.application, {access_token: '123456', provider: 'facebook-connect'});
   // Account is pending verification because they just created an email account and hasn't set a password yet
-  server.get(`${config.wnycMembershipAPI}/v1/emails/is-verified/`, () => {
+  server.get(`${config.membershipAPI}/v1/emails/is-verified/`, () => {
     return new Response(200, {}, {data: {is_verified: false}});
   });
 
   let resendRequests = [];
-  server.get(`${config.wnycAuthAPI}/v1/confirm/resend-attr`, (schema, request) => {
+  server.get(`${config.authAPI}/v1/confirm/resend-attr`, (schema, request) => {
     resendRequests.push(request);
     return new Response(200);
   });
   let setTempPasswordRequests = [];
-  server.post(`${config.wnycAuthAPI}/v1/password/send-temp`, (schema, request) => {
+  server.post(`${config.authAPI}/v1/password/send-temp`, (schema, request) => {
     setTempPasswordRequests.push(request);
     return new Response(200);
   });

@@ -1,5 +1,4 @@
 /* eslint-env node */
-var proxyPath = '/media';
 
 module.exports = function(app) {
   // For options, see:
@@ -9,8 +8,7 @@ module.exports = function(app) {
     console.error(err, req.url);
   });
 
-  app.use(proxyPath, function(req, res/*, next*/){
-    req.url = proxyPath + '/' + req.url;
-    proxy.web(req, res, { target: `${process.env.PUBLISHER_API}` });
+  app.use('/analytics', function(req, res, next){
+    res.send('OK');
   });
 };

@@ -59,7 +59,7 @@ test('visiting /set-password and creating a password and logging in', function(a
 
 
 test('visiting /set-password and getting a server error when submitting the form', function(assert) {
-  server.post(`${config.wnycAuthAPI}/v1/password/change-temp`, () => {
+  server.post(`${config.authAPI}/v1/password/change-temp`, () => {
     return new Response(500);
   });
 

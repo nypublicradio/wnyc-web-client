@@ -53,7 +53,7 @@ skip('it retries the server on a request error', function(assert) {
   assert.expect(1);
   // we do this in order to simulate the unrecoverable errors generated when
   // Ember tries to AJAX load a url from another domain.
-  server.get(`${config.wnycURL}/unknown-url/`, () => {throw 'simulating a CORS error';});
+  server.get(`${config.webRoot}/unknown-url/`, () => {throw 'simulating a CORS error';});
 
   window.assign = function() {
     assert.ok(true, 'location.assign was called');

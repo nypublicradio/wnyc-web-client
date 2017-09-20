@@ -1,6 +1,6 @@
 import DS from 'ember-data';
 import fetch from 'fetch';
-import ENV from '../config/environment';
+import config from '../config/environment';
 import { isInDom } from '../lib/alien-dom';
 import { canonicalize } from 'wqxr-web-client/services/script-loader';
 
@@ -16,13 +16,13 @@ export default DS.Adapter.extend({
     // we want.
     let url = '/';
     if (id === '/') {
-      if (ENV.betaTrials.isBetaSite) {
-        url = ENV.wnycBetaURL;
+      if (config.betaTrials.isBetaSite) {
+        url = config.wnycBetaURL;
       } else {
-        url = ENV.wnycURL;
+        url = config.webRoot;
       }
-    } else if (ENV.environment === 'test') {
-      url = ENV.wnycURL;
+    } else if (config.environment === 'test') {
+      url = config.webRoot;
     }
 
     return fetch(`${canonicalize(url)}${id === '/' ? '' : id}`, { headers: {'X-WNYC-EMBER':1}})

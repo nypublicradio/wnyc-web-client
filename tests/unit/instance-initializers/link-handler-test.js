@@ -1,9 +1,9 @@
 import { module, test } from 'qunit';
 import { shouldHandleLink, normalizeHref } from 'wqxr-web-client/instance-initializers/link-handler';
-import ENV from 'wqxr-web-client/config/environment';
+import config from 'wqxr-web-client/config/environment';
 import { canonicalize } from 'wqxr-web-client/services/script-loader';
-let { wnycURL } = ENV;
-wnycURL = canonicalize(wnycURL);
+let { webRoot } = config;
+webRoot = canonicalize(webRoot);
 
 // don't actually need to initialize the app, since we're just testing how the 
 // link handler deals with incoming href values
@@ -34,7 +34,7 @@ test('shouldHandleLink for invalid links', function(assert) {
 
 test('shouldHandleLink for valid links', function(assert) {
   let a = document.createElement('a');
-  a.href = `${wnycURL}foo`;
+  a.href = `${webRoot}foo`;
   assert.ok(shouldHandleLink(a), 'should handle urls on this domain');
   a.href = '/foo';
   assert.ok(shouldHandleLink(a), 'should handle root-relative URLs');
@@ -45,27 +45,27 @@ test('normalizeHref should return expected values', function(assert) {
   a.href = '#foo';
   let ops = normalizeHref(a);
   assert.equal(ops.href, '#foo', 'return a hash for a hash');
-  ops = normalizeHref(a, wnycURL);
-  assert.equal(ops.href, '#foo', 'return a hash for a hash on wnycURL');
-  const oldUrl = wnycURL;
-  wnycURL += '?foo=bar';
-  ops = normalizeHref(a, wnycURL);
-  assert.equal(ops.href, '#foo', 'return a hash for a hash on wnycURL with a query string');
-  wnycURL = oldUrl;
+  ops = normalizeHref(a, webRoot);
+  assert.equal(ops.href, '#foo', 'return a hash for a hash on webRoot');
+  const oldUrl = webRoot;
+  webRoot += '?foo=bar';
+  ops = normalizeHref(a, webRoot);
+  assert.equal(ops.href, '#foo', 'return a hash for a hash on webRoot with a query string');
+  webRoot = oldUrl;
 
   a.href = `/foo/bar`;
-  ops = normalizeHref(a, wnycURL);
-  assert.deepEqual(ops, {url: `${wnycURL}foo/bar`, href: 'foo/bar', isExternal: false }, 'root-relative hrefs');
+  ops = normalizeHref(a, webRoot);
+  assert.deepEqual(ops, {url: `${webRoot}foo/bar`, href: 'foo/bar', isExternal: false }, 'root-relative hrefs');
 
-  a.href = `${wnycURL}foo/bar`;
-  ops = normalizeHref(a, wnycURL);
-  assert.deepEqual(ops, {url: `${wnycURL}foo/bar`, href: 'foo/bar', isExternal: false }, 'absolute urls');
+  a.href = `${webRoot}foo/bar`;
+  ops = normalizeHref(a, webRoot);
+  assert.deepEqual(ops, {url: `${webRoot}foo/bar`, href: 'foo/bar', isExternal: false }, 'absolute urls');
 
   a.href = `mailto:`;
-  ops = normalizeHref(a, wnycURL);
+  ops = normalizeHref(a, webRoot);
   assert.deepEqual(ops, {url: `mailto:`, href: 'mailto:', isExternal: false }, 'mailto:');
 
   a.href = `?foo=bar`;
-  ops = normalizeHref(a, wnycURL);
-  assert.deepEqual(ops, {url: `${wnycURL}?foo=bar`, href: '?foo=bar', isExternal: false }, '?foo=bar');
+  ops = normalizeHref(a, webRoot);
+  assert.deepEqual(ops, {url: `${webRoot}?foo=bar`, href: '?foo=bar', isExternal: false }, '?foo=bar');
 });

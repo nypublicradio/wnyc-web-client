@@ -107,7 +107,7 @@ test('visiting /reset and resetting password and logging in still works when sta
 });
 
 test('visiting /reset and getting a server error when submitting the form', function(assert) {
-  server.post(`${config.wnycAuthAPI}/v1/confirm/password-reset`, () => {
+  server.post(`${config.authAPI}/v1/confirm/password-reset`, () => {
     return new Response(500);
   });
 
