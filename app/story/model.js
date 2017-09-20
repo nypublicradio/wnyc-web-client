@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import DS from 'ember-data';
-import ENV from '../config/environment';
+import config from '../config/environment';
 import get, { getProperties } from 'ember-metal/get';
 import computed from 'ember-computed';
 import { shareMetadata } from 'wnyc-web-client/helpers/share-metadata';
@@ -124,7 +124,7 @@ export default Model.extend({
     if (browserId) {
       data.id = browserId;
     }
-    return `${ENV.wnycAccountRoot}/comments/security_info/?${Ember.$.param(data)}`;
+    return `${config.adminRoot}/comments/security_info/?${Ember.$.param(data)}`;
   },
   nprAnalyticsDimensions: attr(),
   allProducingOrgs: computed('producingOrganizations', 'showProducingOrgs', function(){

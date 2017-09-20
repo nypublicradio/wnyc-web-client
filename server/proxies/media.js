@@ -11,7 +11,7 @@ module.exports = function(app) {
     res.end(err.Error.message);
   });
 
-  app.use(proxyPath, function(req, res, next){
+  app.use(proxyPath, function(req, res/*, next*/){
     req.url = proxyPath + '/' + req.url;
     proxy.web(req, res, { target: `${process.env.WNYC_URL}` });
   });

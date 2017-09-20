@@ -54,7 +54,7 @@ export default Route.extend(PlayParamMixin, {
       defaultSlug: navSlug,
       model,
       session: get(this, 'session'),
-      adminURL: `${config.wnycAdminRoot}/admin`
+      adminURL: `${config.adminRoot}/admin`
     });
   },
 

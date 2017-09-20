@@ -38,7 +38,7 @@ export default SessionService.extend({
   },
 
   staffAuth() {
-    fetch(`${config.wnycAdminRoot}/api/v1/is_logged_in/?bust_cache=${Math.random()}`, {
+    fetch(`${config.adminRoot}/api/v1/is_logged_in/?bust_cache=${Math.random()}`, {
       credentials: 'include'
     })
     .then(checkStatus).then(r => r.json())
@@ -57,13 +57,13 @@ export default SessionService.extend({
 });
 
 function reportBrowserId(knownId) {
-  fetch(config.wnycEtagAPI, {
+  fetch(config.etagAPI, {
     headers: { 'X-WNYC-BrowserId': knownId }
   });
 }
 
 function getBrowserId() {
-  return fetch(config.wnycEtagAPI)
+  return fetch(config.etagAPI)
     .then(checkStatus)
     .then(response => response.json());
 }
