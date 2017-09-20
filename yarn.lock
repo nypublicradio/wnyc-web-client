@@ -6223,9 +6223,9 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
-nypr-account-settings@nypublicradio/nypr-account-settings#migrate-envvars:
+nypr-account-settings@nypublicradio/nypr-account-settings:
   version "0.0.0"
-  resolved "https://codeload.github.com/nypublicradio/nypr-account-settings/tar.gz/e1c41309e3be38db0dda123551d4b977600e51d1"
+  resolved "https://codeload.github.com/nypublicradio/nypr-account-settings/tar.gz/cf82f8e8be4e4126ae4cad9e9785f61f0bbd1a25"
   dependencies:
     ember-changeset "^1.2.3"
     ember-changeset-validations "^1.2.8"
@@ -6236,7 +6236,7 @@ nypr-account-settings@nypublicradio/nypr-account-settings#migrate-envvars:
     ember-cookies "0.0.13"
     ember-data "2.14.10"
     ember-modal-dialog "0.9.1"
-    nypr-auth nypublicradio/nypr-auth#migrate-envvars
+    nypr-auth "github:nypublicradio/nypr-auth"
 
 nypr-ads@nypublicradio/nypr-ads:
   version "0.0.0"
@@ -6245,9 +6245,9 @@ nypr-ads@nypublicradio/nypr-ads:
     ember-cli-babel "^5.1.7"
     ember-cli-htmlbars "^1.1.1"
 
-nypr-audio-services@nypublicradio/nypr-audio-services#migrate-envvars:
+nypr-audio-services@nypublicradio/nypr-audio-services:
   version "0.0.0"
-  resolved "https://codeload.github.com/nypublicradio/nypr-audio-services/tar.gz/02ae008783b6c632285830a8526c9d5e3c2bf30f"
+  resolved "https://codeload.github.com/nypublicradio/nypr-audio-services/tar.gz/178bebdf6c114ef0746f6e92268a743d2794d734"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-compass-compiler "^0.5.0"
@@ -6259,20 +6259,20 @@ nypr-audio-services@nypublicradio/nypr-audio-services#migrate-envvars:
     ember-hifi "^1.11.1"
     ember-simple-auth "^1.3.0"
     liquid-fire "0.27.2"
-    nypr-metrics nypublicradio/nypr-metrics#migrate-envvars
+    nypr-metrics nypublicradio/nypr-metrics
     nypr-ui nypublicradio/nypr-ui
 
-nypr-auth@nypublicradio/nypr-auth#migrate-envvars:
+"nypr-auth@github:nypublicradio/nypr-auth":
   version "0.0.0"
-  resolved "https://codeload.github.com/nypublicradio/nypr-auth/tar.gz/539157065fe051c4be7b5833d1ba81753bc9b090"
+  resolved "https://codeload.github.com/nypublicradio/nypr-auth/tar.gz/00b5bfa719b2c2d850db0e1f6bb2b5518efeba4c"
   dependencies:
     ember-cli-babel "^6.3.0"
     ember-get-config "^0.2.2"
     ember-simple-auth "^1.4.0"
 
-nypr-metrics@nypublicradio/nypr-metrics#migrate-envvars:
+nypr-metrics@nypublicradio/nypr-metrics:
   version "0.0.0"
-  resolved "https://codeload.github.com/nypublicradio/nypr-metrics/tar.gz/65578238f923a795ea7610d382f489452958683f"
+  resolved "https://codeload.github.com/nypublicradio/nypr-metrics/tar.gz/86377b5feb6bf75b14ef4ac30401f718c0b3fecb"
   dependencies:
     ember-cli-babel "^6.0.0"
     ember-cli-htmlbars "^1.1.1"
