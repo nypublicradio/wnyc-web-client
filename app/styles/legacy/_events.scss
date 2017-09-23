@@ -42,7 +42,7 @@
     white-space: nowrap;
     font-weight: 600;
     line-height: 2;
-    @include transition(background $transition-timing);
+    transition: background $transition-timing;
 
     &:hover {
       text-decoration: none;

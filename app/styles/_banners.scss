@@ -9,16 +9,12 @@
   &__inner {
     max-width: 760px;
     margin: 0 auto;
-    @include flexbox((
-      display: flex,
-      justify-content: space-between,
-      align-items: center
-    ));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     @include mq($mobile) {
-      @include flexbox((
-        justify-content: center
-      ));
+      justify-content: center;
     }
   }
 

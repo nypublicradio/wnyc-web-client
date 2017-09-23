@@ -1,8 +1,6 @@
 .home__leaderboard {
   background: $lightestgray;
-  @include flexbox((
-    display: flex,
-  ));
+  display: flex;
   margin-bottom: 0;
   
   > div {

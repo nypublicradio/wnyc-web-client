@@ -280,21 +280,21 @@
   }
 
   &[class$="--50percent"] {
-    @include flex(1 1 50%);
+    flex: 1 1 50%;
   }
 
   @include mq($middle-narrow-and-up) {
-    @include flex(1);
+    flex: 1;
   }
 }
 
 .l-flex1of3 {
-  @include flex-basis(100%);
-  @include flex-grow(1);
-  @include flex-shrink(1);
+  flex-basis: 100%;
+  flex-grow: 1;
+  flex-shrink: 1;
 
   &[class$="--fixed"] {
-    @include flex(1);
+    flex: 1;
   }
 
   @include mq($middle-narrow-and-up) {
@@ -302,16 +302,16 @@
   }
 }
 .l-flex2of3 {
-  @include flex-basis(100%);
-  @include flex-grow(1);
-  @include flex-shrink(1);
+  flex-basis: 100%;
+  flex-grow: 1;
+  flex-shrink: 1;
 
   &[class$="--fixed"] {
-    @include flex(2);
+    flex: 2;
   }
 
   @include mq($middle-narrow-and-up) {
-    @include flex(2);
+    flex: 2;
   }
 }
 
