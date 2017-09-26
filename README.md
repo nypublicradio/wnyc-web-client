@@ -17,7 +17,6 @@ You will need the following software properly installed on your computer. Please
 
 * [Git](http://git-scm.com/downloads)
 * [Ember CLI](https://ember-cli.com/user-guide/#getting-started) (>= 2.6.0)
-* [Compass](http://compass-style.org/install)
 * [Grunt](http://gruntjs.com/getting-started)
 
 ## Development
