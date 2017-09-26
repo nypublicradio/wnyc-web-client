@@ -8,7 +8,7 @@ module.exports = function(app) {
   proxy.on('error', function(err, req, res) {
     console.error(err, req.url);
     res.writeHead(500, {'Content-Type': 'text/plain'});
-    res.end(err.Error.message);
+    res.end(err.Error);
   });
 
   app.use(proxyPath, function(req, res/*, next*/){
