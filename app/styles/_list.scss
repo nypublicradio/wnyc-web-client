@@ -43,11 +43,11 @@
 
 .list--mq-flextoblock {
     @include mq($small-only) {
-        @include display-flex;
-        @include justify-content(space-between);
+        display: flex;
+        justify-content: space-between;
 
         > .list-item {
-            @include flex-grow(1);
+            flex-grow: 1;
         }
 
         .no-flexbox & {
@@ -62,11 +62,11 @@
 
 .list--mq-blocktoflex {
     @include mq($medium-and-up) {
-        @include display-flex;
-        @include justify-content(space-between);
+        display: flex;
+        justify-content: space-between;
 
         > .list-item {
-            @include flex-grow(1);
+            flex-grow: 1;
         }
 
         .no-flexbox & {
@@ -80,12 +80,12 @@
 }
 
 .list--flex {
-    @include display-flex;
-    @include justify-content(space-between);
-    @include flex-wrap(wrap);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 
     > .list-item {
-        @include flex-grow(1);
+        flex-grow: 1;
     }
 }
 

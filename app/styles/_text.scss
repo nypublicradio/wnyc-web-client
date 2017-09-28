@@ -23,7 +23,7 @@
     line-height: 2.6rem;
 }
 .h1--mq-small {
-    @include transition(font-size $transition-timing ease, line-height $transition-timing ease);
+    transition: font-size $transition-timing ease, line-height $transition-timing ease;
 
     @include mq($small-only) {
         @include fontsize($base-font*1.5);
@@ -39,7 +39,7 @@
     line-height: 2.125rem;
 }
 .h2--mq-small {
-    @include transition(font-size $transition-timing ease, line-height $transition-timing ease);
+    transition: font-size $transition-timing ease, line-height $transition-timing ease;
 
     @include mq($small-only) {
         @include fontsize($base-font*1.25); /* 20px */
@@ -72,7 +72,7 @@
   font-weight: 600;
   line-height: 2.688rem;
 
-  @include transition(font-size $transition-timing ease, line-height $transition-timing ease);
+  transition: font-size $transition-timing ease, line-height $transition-timing ease;
 
   @include mq($small-only) {
       @include fontsize(24);
@@ -129,7 +129,7 @@
 }
 
 .text--darkshadow {
-  @include text-shadow(0 2px 4px 0px rgba(black, 0.5));
+  text-shadow: 0 2px 4px 0px rgba(black, 0.5);
 }
 
 .text--heading {

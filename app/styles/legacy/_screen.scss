@@ -4243,11 +4243,9 @@ a.stf[href] {
   width: 35px;
   height: 35px;
   border-radius: 50%;
-  @include flexbox((
-    display: flex,
-    justify-content: center,
-    align-items: center
-  ));
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .sharelinks .fa-hover a .fa {
   width: 100%;
