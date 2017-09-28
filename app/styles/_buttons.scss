@@ -9,8 +9,8 @@
 * to work when the .btn-group--stacked is a flex-child itself.
 */
 .btn-group--stacked {
-  @include display-flex;
-  @include flex-direction(column);
+  display: flex;
+  flex-direction: column;
 
   > .btn {
     margin-right: 0;
@@ -451,7 +451,7 @@
       opacity: 0.60;
     }
 
-    @include transition(opacity 125ms ease, border-color 125ms ease);
+    transition: opacity 125ms ease, border-color 125ms ease;
   }
 }
 
@@ -541,7 +541,7 @@
 }
 
 .btn-togglecontent {
-  @include transition(all 150ms ease);
+  transition: all 150ms ease;
 
   &:first-child {
     position: absolute;

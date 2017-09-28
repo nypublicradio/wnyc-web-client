@@ -42,7 +42,7 @@
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      @include translateX(-100px);
+      transform: translateX(-100px);
     }
 
     .clearhistory-confirmation {

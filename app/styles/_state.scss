@@ -100,11 +100,11 @@
     + .dropdown-body {
         opacity: 1;
         pointer-events: all;
-        @include box-shadow(0px 0px 20px -5px rgba(0,0,0,0.15));
+        box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.15);
         z-index: $zIndex--dropdownBody;
         // for accessibility
         visibility: visible;
-        @include transition(opacity $transition-timing ease, box-shadow $transition-timing ease ($transition-timing * 1.05));
+        transition: opacity $transition-timing ease, box-shadow $transition-timing ease ($transition-timing * 1.05);
     }
 }
 
@@ -125,17 +125,17 @@
 }
 
 [data-state="is-right"] {
-    @include translateX(100%);
+    transform: translateX(100%);
     z-index: $zIndex--isRight;
 }
 
 [data-state="is-up"] {
-    @include translateY(-100%);
+    transform: translateY(-100%);
     z-index: $zIndex--isUp;
 }
 
 [data-state="is-shrunk"] {
-    @include scale(0);
+    transform: scale(0);
     z-index: $zIndex--isShrunk;
 }
 
@@ -144,8 +144,8 @@
 }
 
 [data-state="is-visible"] {
-    @include translateX(0);
-    @include scale(1);
+    transform: translateX(0);
+    transform: scale(1);
     opacity: 1;
     z-index: $zIndex--isVisible;
 }
@@ -197,7 +197,7 @@
 #related {
     img {
         opacity: 0;
-        @include transition(opacity $transition-timing ease);
+        transition: opacity $transition-timing ease;
 
         &.is-loaded {
             opacity: 1;

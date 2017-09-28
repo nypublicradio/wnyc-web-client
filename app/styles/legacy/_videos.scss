@@ -4,10 +4,8 @@
 
 .videolist-header {
   margin: 35px 0;
-  @include flexbox((
-    display: flex,
-    align-items: baseline
-  ));
+  display: flex;
+  align-items: baseline;
 }
 
 .videolist {
@@ -49,10 +47,8 @@
 }
 
 .videoitem-inner {
-  @include flexbox((
-    display: flex,
-    align-items: center
-  ));
+  display: flex;
+  align-items: center;
 }
 
 .videoitem-image {

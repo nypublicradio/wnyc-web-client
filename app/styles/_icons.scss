@@ -93,7 +93,7 @@ i.fa-circle-o-notch.fa-spin {
     font-size: 1.5rem;
     padding: 1px; // fixes an edge from getting cut off
 
-    @include transition(opacity $transition-timing ease);
+    transition: opacity $transition-timing ease;
 }
 
 .icon {

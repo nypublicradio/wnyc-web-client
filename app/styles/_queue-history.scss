@@ -22,7 +22,7 @@
   }
 
   .sortable-item {
-    @include transition(all 0.125s);
+    transition: all 0.125s;
     position: relative;
   }
 

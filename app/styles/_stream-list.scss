@@ -12,7 +12,7 @@
   margin: 0 22px;
   @include mq($medium-and-up) {
     margin: 35px 0 0;
-    @include display-flex;
+    display: flex;
     align-items: baseline;
   }
 
@@ -23,7 +23,7 @@
     @include mq($medium-and-up) {
       font-size: 32px;
       display: inline-block;
-      @include flex(1 0 auto);
+      flex: 1 0 auto;
     }
   }
   nav {
@@ -32,7 +32,7 @@
     @include mq($medium-and-up) {
       display: inline-block;
       margin-bottom: 30px;
-      @include flex(1 0 auto);
+      flex: 1 0 auto;
       text-align: right;
     }
   }
@@ -97,12 +97,12 @@
     }
     .ember-holygrail-right {
       min-width: 67px;
-      @include flex(0 0 67px);
+      flex: 0 0 67px;
       @include mq($medium-and-up) {
         min-width: 170px;
-        @include flex(0 0 170px);
+        flex: 0 0 170px;
       }
-      @include justify-content(flex-end);
+      justify-content: flex-end;
     }
     a {
       text-decoration: none;

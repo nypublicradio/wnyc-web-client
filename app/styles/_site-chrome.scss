@@ -39,23 +39,17 @@
 }
 
 .sitechrome-topright {
-  @include flexbox((
-    display: flex,
-    align-items: flex-end,
-    justify-content: flex-end
-  ));
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
   @include mq($small-only) {
-    @include flexbox((
-      justify-content: flex-end,
-      flex-wrap: wrap
-    ));
+    justify-content: flex-end;
+    flex-wrap: wrap;
   }
   > a,
   > div {
-    @include flexbox((
-      justify-content: center,
-      align-self: center
-    ));
+    justify-content: center;
+    align-self: center;
     height: 100%;
     margin-right: 10px;
     white-space: nowrap;
@@ -68,7 +62,7 @@
 
 .sitechrome-nav {
   background-color: $wqxrblue;
-  @include transition(all 50ms ease);
+  transition: all 50ms ease;
   //for mobile header snap
   width: 100%;
   position: sticky;
@@ -225,7 +219,7 @@
       margin: 3px 0;
 
       a {
-        @include transition(none);
+        transition: none;
       }
     }
     .list--noborder {
@@ -257,24 +251,24 @@
 }
 
 .sitechrome-topbody {
-  @include display-flex;
-  @include flex-wrap(wrap);
+  display: flex;
+  flex-wrap: wrap;
 
   @include mq($large-and-up) {
     height: 100%;
   }
 
   @include mq($medium-and-up) {
-    @include flex-wrap(nowrap);
+    flex-wrap: nowrap;
   }
 }
 
 .sitechrome-topbody-left {
-  @include flex-basis(100%);
-  @include order(2);
-  @include display-flex;
-  @include justify-content(space-between);
-  @include align-items(center);
+  flex-basis: 100%;
+  order: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   padding: 5px 15px;
   padding: 5px rems(15);
@@ -286,9 +280,9 @@
   }
 
   @include mq($medium-and-up) {
-    @include flex(1 0 300px);
-    @include justify-content(space-around);
-    @include order(0);
+    flex: 1 0 300px;
+    justify-content: space-around;
+    order: 0;
     padding: 0;
     margin-left: 15px;
   }
@@ -313,12 +307,12 @@
 }
 
 .sitechrome-topbody-right {
-  @include display-flex;
-  @include justify-content(space-between);
-  @include align-items(center);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-  @include order(1);
-  @include flex-basis(100%);
+  order: 1;
+  flex-basis: 100%;
 
   margin-bottom: 15px;
   padding: 0 15px 0 24px;
@@ -328,8 +322,8 @@
   }
 
   @include mq($medium-and-up) {
-    @include flex(1 1 auto);
-    @include order(0);
+    flex: 1 1 auto;
+    order: 0;
 
     .cta-text {
       padding: 0 15px;
@@ -381,9 +375,9 @@
     text-decoration: none;
   }
 
-  @include transition(background-color $transition-timing, color $transition-timing);
+  transition: background-color $transition-timing, color $transition-timing;
 
-  @include flex-shrink(0);
+  flex-shrink: 0;
 
   @include mq($large-and-up) {
     background: $wqxrdarkblue;

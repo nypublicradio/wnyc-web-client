@@ -1,5 +1,5 @@
 .player-notification {
-  @include transform(none);
+  transform: none;
   @include fontsize(12);
   background-color: $wqxrblue;
   position: fixed;
@@ -42,7 +42,7 @@
 }
 
 .player-notification-action {
-  @include flex(1 1 60px);
+  flex: 1 1 60px;
   display: flex;
   flex-flow: row;
   min-width: 60px;
@@ -50,11 +50,11 @@
 }
 
 .player-notification-wrapper.liquid-container {
-  @include transform(none);
+  transform: none;
 }
 
 .player-notification-message {
-  @include flex(1);
+  flex: 1;
   margin: 0;
   color: #FFF;
   padding: 10px;

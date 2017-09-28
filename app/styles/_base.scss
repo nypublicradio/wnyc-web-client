@@ -10,7 +10,7 @@
 *,
 *:after,
 *:before {
-    @include box-sizing(border-box);
+    box-sizing: border-box;
 }
 
 /**
@@ -62,7 +62,7 @@ a {
     color: $wqxrlink;
     text-decoration: none;
     border-bottom: 1px solid rgba($wqxrlink, 0);
-    @include transition(border-color $transition-timing, color $transition-timing);
+    transition: border-color $transition-timing, color $transition-timing;
 
     &:hover,
     &:focus {
@@ -117,7 +117,7 @@ figure {
  *      button Submit
  */
 button {
-  @include appearance(none);
+  appearance: none;
   border: 0;
   padding: 0;
   outline: none;
