@@ -44,12 +44,12 @@
  *      h4.h4.dimmed A subtitle
  */
 .flush {
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
 }
 
 .flush--medium {
     @include mq($medium-and-up) {
-        margin-bottom: 0;
+        margin-bottom: 0 !important;
     }
 }
 
