@@ -6594,7 +6594,7 @@ nypr-player@nypublicradio/nypr-player:
 
 nypr-publisher-lib@nypublicradio/nypr-publisher-lib:
   version "0.0.0"
-  resolved "https://codeload.github.com/nypublicradio/nypr-publisher-lib/tar.gz/e5809566834c60243c6b20a89ad67d73c5652e00"
+  resolved "https://codeload.github.com/nypublicradio/nypr-publisher-lib/tar.gz/62f3fc030948002ff7185f2835f0d9fc7599126d"
   dependencies:
     ember-cli-babel "^6.3.0"
     ember-cli-htmlbars "^2.0.1"
