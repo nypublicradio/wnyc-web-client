@@ -1,4 +1,4 @@
-import StoryModel from 'nypr-publiser-lib/models/story';
+import StoryModel from 'nypr-publisher-lib/models/story';
 import computed from 'ember-computed';
 import get from 'ember-metal/get';
 
