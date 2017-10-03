@@ -8,7 +8,8 @@ import moment from 'moment';
 moduleForAcceptance('Acceptance | Listing Page | viewing', {
   beforeEach() {
     server.create('stream');
-  }
+    window.assign = function() {};
+  },
 });
 
 test('smoke test', function(assert) {
@@ -137,7 +138,7 @@ test('scripts in well route content will execute', function(assert) {
 
   andThen(function() {
     assert.equal(find('[data-test-selector=story-detail] p').length, 1, 'should only be one p tag');
-    let text = find('[data-test-selector=story-detail] .django-content').find('p, div').text().split('\n').filter(s => s).join(' ');
+    let text = find('[data-test-selector=story-detail] .django-content').find('p, div').map((_, e) => e.innerText).get().join(' ');
     assert.equal(text, 'test body. Added this paragraph!');
   });
 });
@@ -200,6 +201,8 @@ test('visiting directly to a nav link url', function(assert) {
     .visit({id: 'shows/foo/next-link/'});
 
   andThen(() => {
+    assert.equal(currentURL(), `shows/foo/next-link/`);
+
     assert.equal(findWithAssert('nav li.is-active > a').text(), 'Next Link');
   });
 });
@@ -361,7 +364,7 @@ test('if a show is airing, the featured story listen button says "Listen Live"',
   djangoPage
     .bootstrap(listingPage)
     .visit(listingPage);
-    
+
   andThen(() => {
     let button = find('[data-test-selector=listen-button]');
     assert.ok(button.text().match('Listen Live'));
@@ -387,6 +390,7 @@ test('metrics properly reports channel attrs', function(assert) {
   });
 
   assert.expect(2);
+
   server.create('django-page', {id: listingPage.id});
   
   server.post(`${config.platformEventsAPI}/v1/events/viewed`, (schema, {requestBody}) => {
@@ -443,7 +447,7 @@ test('listen buttons in story teases include data-story and data-show values', f
   djangoPage
     .bootstrap(listingPage)
     .visit(listingPage);
-    
+
   andThen(() => {
     let listenButtons = findWithAssert('.story-tease [data-test-selector=listen-button]');
     listenButtons.each((i, el) => {

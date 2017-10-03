@@ -1,18 +1,6 @@
-import config from '../config/environment';
-import DS from 'ember-data';
-import wrapAjax from 'wqxr-web-client/lib/wrap-ajax';
-// TODO: auth headers for native fetch
-// import fetch from 'fetch';
+import CommentAdapter from 'nypr-publisher-lib/adapters/comment';
 import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 
-export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
-  authorizer: 'authorizer:nypr',
-  host: config.publisherAPI,
-  namespace: `v1/list/comments`,
-  
-  query(store, type, query) {
-    let url = [this.host, this.namespace, query.itemTypeId, query.itemId, ''].join('/');
-    let options = this.ajaxOptions(url, 'GET', {});
-    return wrapAjax(options);
-  }
+export default CommentAdapter.extend(DataAdapterMixin, {
+  authorizer: 'authorizer:nypr'
 });

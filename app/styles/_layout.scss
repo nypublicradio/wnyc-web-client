@@ -455,8 +455,9 @@
  *          button.btn.btn--gray Queue
  */
 .l-split {
-    @extend %vertical-rhythm;
+    @include vertical-rhythm;
 
+    display: flex!important;
     > * {
         display: block;
     }

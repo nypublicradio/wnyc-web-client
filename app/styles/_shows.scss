@@ -1,130 +1,3 @@
-#header.has-marquee {
-  @include mq($medium-and-up) {
-    margin-bottom: 0;
-  }
-}
-
-.marquee {
-    position: relative;
-}
-
-.marquee-image {
-    height: 200px;
-    position: relative;
-
-    @include mq($small-only) {
-        display: none;
-    }
-}
-
-.marquee-gradient {
-  display: block;
-  position: absolute;
-  width: 100%;
-  left: 0;
-  top: 0;
-  height: 100%;
-  background-size: 120% 300%;
-  background-position: center;
-}
-
-.channel-sidebar-chunk > .django-content > .l-constrained {
-  padding: 0;
-}
-
-.channel-logo-fixed {
-    margin-top: 0px;
-}
-
-.marquee-footer {
-    position: relative;
-
-    @include mq($medium-and-up) {
-      // set children to relative position so they respect z-index
-      > * {
-        position: relative;
-      }
-    }
-}
-
-.channel-header {
-    @extend %vertical-rhythm;
-}
-
-#channel-header {
-    margin-bottom: 50px;
-
-    &.flush {
-      margin-bottom: 0;
-    }
-
-    .header-no-logo {
-      padding-bottom: 0;
-    }
-}
-.channel-info {
-    //display: inline-block;
-    margin-top: 12px;
-    margin-left: 145px;
-
-    @include mq($small-only) {
-        font-size: 1.2em;
-        //display: block;
-    }
-
-    p {
-        margin-bottom: 0.3rem;
-    }
-
-    .blurb {
-        font-weight: normal;
-        margin-left: 0.2rem;
-    }
-
-    .title {
-        @include mq($small-only) {
-            font-size: 1rem;
-            font-weight: bold;
-        }
-    }
-}
-
-.marquee-buttons {
-    margin-top: 25px;
-    margin-left: 50px;
-
-    @include mq($small-only) {
-        margin-top: 20px;
-        margin-left: 0px;
-    }
-}
-
-.social-group {
-    margin-bottom: 1rem;
-}
-
-.channel-title {
-    padding-top: 0px !important;
-    margin-bottom: 10px !important;
-
-    /* this adds extra space at the top to allow for titles that go on two lines */
-    .marquee & {
-      margin-top: 10px;
-    }
-}
-
-.channel-logo {
-    padding-right: 20px;
-}
-
-.channel-ad {
-    margin-bottom: 50px;
-}
-
-.about-person, .about-show {
-    margin-bottom: 3.75rem;
-}
-
 /* shows A-Z page */
 .shows-list {
 
@@ -152,10 +25,34 @@
       margin: 0;
     }
   }
+
+  /* topics follows same style as shows, but no image */
+  ul.topics--list li.list-item--medium {
+    @include mq($small-only) {
+      padding-left: 1.5625rem;
+    }
+  }
 }
 
 .featured-show {
   @include mq($small-only) {
     display: none;
+  }
+}
+
+.marquee-footer:before {
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: #e7e7e7;
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.channel-header {
+  @include mq($small-only) {
+    margin: 30px 0 1.25rem 0;
   }
 }

@@ -2,8 +2,7 @@ import ENV from 'wqxr-web-client/config/environment';
 import Route from 'ember-route';
 import get from 'ember-metal/get';
 import service from 'ember-service/inject';
-import { retryFromServer } from 'wqxr-web-client/lib/compat-hooks';
-import { beforeTeardown } from 'wqxr-web-client/lib/compat-hooks';
+import { retryFromServer, beforeTeardown } from 'nypr-django-for-ember/utils/compat-hooks';
 import PlayParamMixin from 'wqxr-web-client/mixins/play-param';
 
 export default Route.extend(PlayParamMixin, {
@@ -52,7 +51,7 @@ export default Route.extend(PlayParamMixin, {
     });
     get(this, 'googleAds').doTargeting();
   },
-  
+
   setupController(controller, model) {
     this._super(...arguments);
     let doc = model.get('document');

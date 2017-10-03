@@ -1,6 +1,5 @@
 import PageObject from 'wqxr-web-client/tests/page-object';
 import { appendHTML } from 'wqxr-web-client/tests/helpers/html';
-
 let {
   visitable,
   //clickOnText,
@@ -11,12 +10,11 @@ let {
 
 export default PageObject.create({
   visit: visitable(':id'),
-  alienClick(selector) {
-    return alienDomClick(selector);
-  },
 
   bootstrap({id}) {
+    /* eslint-disable */
     let djangoPage = server.schema.djangoPages.find(id);
+    /* eslint-enable */
     appendHTML(djangoPage.attrs.text);
     return this;
   }
