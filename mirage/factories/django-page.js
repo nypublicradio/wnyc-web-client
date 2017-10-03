@@ -28,7 +28,7 @@ export default Factory.extend({
       json = serialize(server.schema.listingPages.find(id));
       wormholes = '<div id="js-listings"></div>';
     } else if (type === 'story') {
-      slug = id.match(/^story\/([^\/]+)\//)[1];
+      slug = id.match(/^story\/([^/]+)\//)[1];
 
       let story = server.schema.stories.where({slug});
       if (!story.models.length) {
