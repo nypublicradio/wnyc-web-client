@@ -31,7 +31,7 @@ We use [modernizr](https://modernizr.com/) to detect for certain browser feature
 2. `$ git checkout <working branch>`
 3. `$ cp .env.sample .env`
 4. Edit `.env` with your `publisher` app location
-7. `$ npm install`
+7. `$ yarn`
 8. `$ bower install`
 9. `$ grunt modernizr:dist`
 
