@@ -30,7 +30,7 @@ export default function() {
   );
   this.transition(
     this.includingInitialRender(),
-    this.childOf('.tabs-header'),
+    this.childOf('.nav-links'),
     this.use('navigationBar')
   );
   this.transition(

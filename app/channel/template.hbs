@@ -45,9 +45,8 @@
       {{#if model.channel.linkroll}}
         {{nav-links
           defaultSlug=defaultSlug
-          navRoot=navRoot
-          links=model.channel.linkroll
-          transition=(action 'navSlugTransition')}}
+          navRoot=channelType
+          links=model.channel.linkroll}}
       {{/if}}
 
       {{outlet}}
