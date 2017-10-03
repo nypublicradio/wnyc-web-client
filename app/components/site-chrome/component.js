@@ -7,7 +7,7 @@ import { or } from 'ember-computed';
 export default Component.extend(BetaActionsMixin, {
   session: service(),
   metrics: service(),
-  router: service('wnyc-routing'),
+  router: service(),
   currentUser: service(),
   donateURL: config.wnycDonateURL,
   classNameBindings: ['showPlayer:sitechrome--player-open'],
