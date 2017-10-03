@@ -67,7 +67,7 @@ export default function() {
     return stories.where({ slug }).models[0];
   });
   this.get(`${baseUrl}/api/v3/story/related/`, 'story');
-  this.get(`${baseUrl}/api/v3/channel/\*id`, 'api-response');
+  this.get(`${baseUrl}/api/v3/channel/*id`, 'api-response');
   this.get(`${baseUrl}/api/v3/chunks/:id/`, 'chunk');
 
   /*------------------------------------------------------------
@@ -100,7 +100,7 @@ export default function() {
   // Let this one slip by, we've got a http-proxy for it
   this.passthrough(`/api/v1/dynamic-script-loader`);
   this.passthrough(`${baseUrl}/api/v1/dynamic-script-loader`);
-  this.passthrough(`${baseUrl}/api/v1/schedule/whats_on_today/\*`);
+  this.passthrough(`${baseUrl}/api/v1/schedule/whats_on_today/*`);
   this.passthrough('/datanewswidget/**');
 
   /*------------------------------------------------------------
@@ -112,7 +112,7 @@ export default function() {
     return home ? home.attrs.text : '';
   });
 
-  this.get(`${baseUrl}/\*id`, function(schema, {queryParams, params}) {
+  this.get(`${baseUrl}/*id`, function(schema, {queryParams, params}) {
     let { id } = params;
     let page = schema.djangoPages.find(id);
     if (!page) {

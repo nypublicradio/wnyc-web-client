@@ -1,4 +1,4 @@
-/* eslint no-irregular-whitespace: 0 */
+/* eslint no-irregular-whitespace: 0, no-useless-escape: 0 */
 var HTML = `<html>
   <head>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
