@@ -43,6 +43,7 @@ export default Route.extend(PlayParamMixin, {
     if (channel.get('altLayout')) {
       transition.send('setMiniChrome', true);
     }
+    window.dataLayer.push({showTitle: model.channel.title});
   },
 
   setupController(controller, model) {
@@ -68,6 +69,10 @@ export default Route.extend(PlayParamMixin, {
       if (isExiting) {
         get(this, 'googleAds').clearTarget('show');
       }
+      return true;
+    },
+    didTransition() {
+      window.dataLayer.push({showTitle: undefined});
       return true;
     }
   }
