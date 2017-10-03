@@ -6582,11 +6582,11 @@ nypr-player@nypublicradio/nypr-player:
 
 nypr-publisher-lib@nypublicradio/nypr-publisher-lib:
   version "0.0.0"
-  resolved "https://codeload.github.com/nypublicradio/nypr-publisher-lib/tar.gz/6d460431128d7ab499cde03ac1f47224fd1be65b"
+  resolved "https://codeload.github.com/nypublicradio/nypr-publisher-lib/tar.gz/1ccb63bb83781b39b2cfef554831fe2a73939e6e"
   dependencies:
     ember-cli-babel "^6.3.0"
     ember-cli-htmlbars "^2.0.1"
-    ember-cli-htmlbars-inline-precompile "^0.4.3"
+    ember-cli-htmlbars-inline-precompile "^1.0.0"
     ember-cli-sass "^7.0.0"
     ember-code-snippet "^2.0.0"
     ember-font-awesome "^4.0.0-alpha.10"

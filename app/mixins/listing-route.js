@@ -117,7 +117,7 @@ export default Mixin.create({
   _scrollToOffset(channelType) {
     const { channel } = this.modelFor(channelType)
     const hasLinkroll = get(channel, 'hasLinkroll')
-    const scrollTarget = hasLinkroll ? $('nav.tabs-header').get(0) : $('.channel-title').get(0)
+    const scrollTarget = hasLinkroll ? $('nav.nav-links').get(0) : $('.channel-title').get(0)
     if (scrollTarget.scrollIntoView) {
       scrollTarget.scrollIntoView()
     } else {
