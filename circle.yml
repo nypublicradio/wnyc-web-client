@@ -1,6 +1,8 @@
 machine:
   node:
-    version: 6.11.3
+    version: 8.6.0
+  environment:
+    JOBS: 2
 
 test:
   override:
