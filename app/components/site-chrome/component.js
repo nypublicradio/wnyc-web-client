@@ -21,7 +21,7 @@ export default Component.extend({
 
   actions: {
     routeSearch(val) {
-      this.get('router').transitionTo('djangorendered', ['search/'], {"q": val});
+      this.get('router').transitionTo('djangorendered', 'search/', {queryParams: {q: val}});
     },
   }
 });
