@@ -50,7 +50,6 @@ export default Route.extend(PlayParamMixin, {
     let [navSlug] = page_params.split('/');
     controller.setProperties({
       channelType: this.routeName,
-      navRoot: get(this, 'listingSlug'),
       defaultSlug: navSlug,
       model,
       session: get(this, 'session'),
