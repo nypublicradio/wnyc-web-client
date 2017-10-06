@@ -43,8 +43,9 @@ export default Route.extend(PlayParamMixin, {
     if (channel.get('altLayout')) {
       transition.send('setMiniChrome', true);
     }
+    // debugger;
     if (window.dataLayer) {
-      window.dataLayer.push({showTitle: channel.title});
+      window.dataLayer.push({showTitle: channel.get('title')});
     }
   },
 

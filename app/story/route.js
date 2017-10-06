@@ -38,7 +38,7 @@ export default Ember.Route.extend(PlayParamMixin, {
       transition.send('updateDonateChunk', get(model, 'story.headerDonateChunk'));
     }
     if (window.dataLayer) {
-      window.dataLayer.push({'showTitle': model.story.showTitle || model.story.headers.brand.title });
+      window.dataLayer.push({showTitle: model.story.get("showTitle") || model.story.headers.brand.title });
     }
   },
   
@@ -85,7 +85,6 @@ export default Ember.Route.extend(PlayParamMixin, {
         cms_id: get(model, 'story.cmsPK'),
         item_type: get(model, 'story.itemType'),
       });
-      window.dataLayer.push({showTitle: undefined});
       return true;
     },
 
