@@ -25,3 +25,23 @@ test('confirming data layer showTitle is present on show page', function(assert)
     assert.deepEqual(window.dataLayer.slice(-1)[0], {showTitle: listingPage.title});
   });
 });
+
+test('confirming data layer showTitle is present on story page', function(assert) {
+  window.dataLayer = [];
+  let story = server.create('story');
+  visit(`story/${story.slug}`);
+
+  andThen(function() {
+    assert.deepEqual(window.dataLayer.slice(-1)[0], {showTitle: story.showTitle});
+  });
+});
+
+test('confirming undefined showTitle on story page does not break page', function(assert) {
+  window.dataLayer = [];
+  let story = server.create('story', {showTitle: undefined});
+  visit(`story/${story.slug}`);
+
+  andThen(function() {
+    assert.deepEqual(window.dataLayer.slice(-1)[0], {showTitle: "The Brian Lehrer Show"});
+  });
+});
