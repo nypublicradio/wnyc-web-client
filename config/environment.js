@@ -35,9 +35,9 @@ module.exports = function(environment) {
     }, {
       name: 'GoogleTagManager',
       config: {
-        id: process.env.GOOGLE_TAG_MANAGER_ID || (environment === 'production' ? 'GTM-PM94N2' : 'GTM-WNT72NG')
+        id: process.env.GOOGLE_TAG_MANAGER_ID || 'GTM-PM94N2'
       },
-      environments: ['production']
+      environments: ['production', 'development']
     }],
     EmberENV: {
       FEATURES: {

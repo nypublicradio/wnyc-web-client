@@ -37,6 +37,9 @@ export default Ember.Route.extend(PlayParamMixin, {
     if (get(model, 'story.headerDonateChunk')) {
       transition.send('updateDonateChunk', get(model, 'story.headerDonateChunk'));
     }
+    if (window.dataLayer) {
+      window.dataLayer.push({showTitle: model.story.get("showTitle") || model.story.headers.brand.title });
+    }
   },
   
   setupController(controller) {
@@ -82,8 +85,13 @@ export default Ember.Route.extend(PlayParamMixin, {
         cms_id: get(model, 'story.cmsPK'),
         item_type: get(model, 'story.itemType'),
       });
-      
       return true;
+    },
+
+    willTransition() {
+      if (window.dataLayer) {
+        window.dataLayer.push({showTitle: undefined});
+      }
     }
   }
 });
