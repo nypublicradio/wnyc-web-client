@@ -21,8 +21,6 @@ test('confirming data layer showTitle is present on show page', function(assert)
     .bootstrap(listingPage)
     .visit(listingPage);
 
-  // visit(`/shows/${show.slug}`);
-
   andThen(function() {
     assert.deepEqual(window.dataLayer.slice(-1)[0], {showTitle: listingPage.title});
   });
