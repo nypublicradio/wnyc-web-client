@@ -38,7 +38,7 @@ export default Ember.Route.extend(PlayParamMixin, {
       transition.send('updateDonateChunk', get(model, 'story.headerDonateChunk'));
     }
     if (window.dataLayer) {
-      window.dataLayer.push({showTitle: get(model, 'story.get.showTitle') || get(model, 'story.headers.brand.title') });
+      window.dataLayer.push({showTitle: get(model, "story.showTitle") || get(model, 'story.headers.brand.title') });
     }
   },
   
