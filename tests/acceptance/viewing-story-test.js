@@ -11,6 +11,18 @@ test('smoke test', function(assert) {
 
   andThen(() => {
     assert.equal(currentURL(), `story/${story.slug}`);
+    assert.ok(find('#storyHeader'), 'story header should load');
+    assert.ok(find('.sitechrome-btn'), 'donate button should be the default');
+  });
+});
+
+test('smoke test news story without show title', function(assert) {
+  let story = server.create('story', {showTitle: undefined});
+  visit(`story/${story.slug}`);
+
+  andThen(() => {
+    assert.equal(currentURL(), `story/${story.slug}`);
+    assert.ok(find('#storyHeader'), 'story header should load');
     assert.ok(find('.sitechrome-btn'), 'donate button should be the default');
   });
 });
