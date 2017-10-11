@@ -42,6 +42,6 @@ test('confirming undefined showTitle on story page does not break page', functio
   visit(`story/${story.slug}`);
 
   andThen(function() {
-    assert.deepEqual(window.dataLayer.slice(-1)[0], {showTitle: "The Brian Lehrer Show"});
+    assert.deepEqual(window.dataLayer.slice(-1)[0], {showTitle: "The Brian Lehrer Show"}, 'it should push the brand title to the dataLayer');
   });
 });
