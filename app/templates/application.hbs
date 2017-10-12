@@ -48,7 +48,7 @@
             audioId         = integration.currentAudioId
             songDetails     = integration.songDetails
             isStream        = integration.isStream
-            trackStreamData = (action 'trackStreamData')
+            titleDidChange  = (action 'soundTitleDidChange')
           }}
 
           {{#unless hifi.isLoading}} {{! only show the share button when the audio has loaded}}
