@@ -1,84 +1,151 @@
-machine:
-  node:
-    version: 8.6.0
-  environment:
-    JOBS: 2
+version: 2
 
-test:
-  override:
-    - yarn test:
-        environment:
-          PATH: "/usr/bin:${PATH}"
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.6.0
 
-dependencies:
-  pre:
-    - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-    - echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-    - sudo apt-get update && sudo apt-get install yarn
-  override:
-    - yarn global add bower grunt-cli:
-        environment:
-          PATH: "/usr/bin:${PATH}"
-    - yarn:
-        environment:
-          PATH: "/usr/bin:${PATH}"
-    - bower i
-    - grunt modernizr:dist
+    steps:
+      - checkout
 
-deployment:
-  prod:
-    tag: /v[0-9]+\.[0-9]+\.[0-9]+/
-    commands:
-      - ./node_modules/ember-cli/bin/ember deploy production --verbose --activate:
-          environment:
-            AWS_ACCESS_KEY_ID: $DEPLOY_AWS_ACCESS_KEY_ID
-            AWS_SECRET_ACCESS_KEY: $DEPLOY_AWS_SECRET_ACCESS_KEY
-            AWS_BUCKET: $PROD_AWS_BUCKET
-            AWS_REGION: $PROD_AWS_REGION
-            SSH_TUNNEL_USERNAME: $DEPLOY_SSH_TUNNEL_USERNAME
-            SSH_TUNNEL_HOST: $DEPLOY_SSH_TUNNEL_HOST
-            SSH_TUNNEL_DESTINATION_HOST: $PROD_REDIS_HOST
-            SSH_TUNNEL_DESTINATION_PORT: $PROD_REDIS_PORT
-            FINGERPRINT_PREPEND_URL: $PROD_FINGERPRINT_PREPEND_URL
-            SENTRY_DSN: $PROD_SENTRY_EMBER_DSN
-            SENTRY_PROJECT: $PROD_SENTRY_PROJECT
-            SENTRY_EMBER_SOURCEMAPS_KEY: $PROD_SENTRY_EMBER_SOURCEMAPS_KEY
-            WQXR_URL: $PROD_WQXR_URL
-            PUBLISHER_API: $PROD_PUBLISHER_API
-            ADMIN_ROOT: $PROD_ADMIN_ROOT
-            ETAG_API: $PROD_ETAG_API
-            AUTH_SERVICE: $PROD_AUTH_SERVICE
-            MEMBERSHIP_SERVICE: $PROD_MEMBERSHIP_SERVICE
-            PLATFORM_EVENTS_SERVICE: $PROD_PLATFORM_EVENTS_SERVICE
-            GOOGLE_TAG_MANAGER_ID: $PROD_GOOGLE_TAG_MANAGER_ID
-            GOOGLE_ANALYTICS: $PROD_GOOGLE_ANALYTICS
-            GOOGLE_API_V3_KEY: $PROD_GOOGLE_API_V3_KEY
-            FB_APP: $PROD_FB_APP
-  demo:
-    branch: demo
-    commands:
-      - ./node_modules/ember-cli/bin/ember deploy demo --verbose:
-          environment:
-            AWS_ACCESS_KEY_ID: $DEPLOY_AWS_ACCESS_KEY_ID
-            AWS_SECRET_ACCESS_KEY: $DEPLOY_AWS_SECRET_ACCESS_KEY
-            AWS_BUCKET: $DEMO_AWS_BUCKET
-            AWS_REGION: $DEMO_AWS_REGION
-            SSH_TUNNEL_USERNAME: $DEPLOY_SSH_TUNNEL_USERNAME
-            SSH_TUNNEL_HOST: $DEPLOY_SSH_TUNNEL_HOST
-            SSH_TUNNEL_DESTINATION_HOST: $DEMO_REDIS_HOST
-            SSH_TUNNEL_DESTINATION_PORT: $DEMO_REDIS_PORT
-            FINGERPRINT_PREPEND_URL: $DEMO_FINGERPRINT_PREPEND_URL
-            SENTRY_DSN: $DEMO_SENTRY_EMBER_DSN
-            SENTRY_PROJECT: $DEMO_SENTRY_PROJECT
-            SENTRY_EMBER_SOURCEMAPS_KEY: $DEMO_SENTRY_EMBER_SOURCEMAPS_KEY
-            WQXR_URL: $DEMO_WQXR_URL
-            PUBLISHER_API: $DEMO_PUBLISHER_API
-            ADMIN_ROOT: $DEMO_ADMIN_ROOT
-            ETAG_API: $DEMO_ETAG_API
-            AUTH_SERVICE: $DEMO_AUTH_SERVICE
-            MEMBERSHIP_SERVICE: $DEMO_MEMBERSHIP_SERVICE
-            PLATFORM_EVENTS_SERVICE: $DEMO_PLATFORM_EVENTS_SERVICE
-            GOOGLE_TAG_MANAGER_ID: $DEMO_GOOGLE_TAG_MANAGER_ID
-            GOOGLE_ANALYTICS: $DEMO_GOOGLE_ANALYTICS
-            GOOGLE_API_V3_KEY: $DEMO_GOOGLE_API_V3_KEY
-            FB_APP: $DEMO_FB_APP
+      - restore_cache:
+          key: grunt-and-bower
+      - run:
+          name: Install grunt and bower
+          command: yarn global add bower grunt-cli
+      - save_cache:
+          key: grunt-and-bower
+          paths:
+            - ~/.config/yarn/global
+      
+      - restore_cache:
+          key: bower-deps-{{ checksum "bower.json" }}
+      - run:
+          name: Install bower deps
+          command: ~/.config/yarn/global/node_modules/.bin/bower i
+      - save_cache:
+          key: bower-deps-{{ checksum "bower.json" }}
+          paths:
+            - bower_components
+
+      - restore_cache:
+          key: node-deps-{{ checksum "yarn.lock" }}
+      - run:
+          name: Node dependencies
+          command: yarn
+      - save_cache:
+          key: node-deps-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+
+      - run:
+          name: Build modernizr
+          command: ~/.config/yarn/global/node_modules/.bin/grunt modernizr:dist
+      - save_cache:
+          key: modernizr-{{ .Revision }}
+          paths:
+            - vendor/modernizr/modernizr-build.js
+
+  test:
+    docker:
+      - image: circleci/node:8.6.0-browsers
+        environment:
+          JOBS: 2
+
+    steps:
+      - checkout
+      - restore_cache:
+          key: bower-deps-{{ checksum "bower.json" }}
+      - restore_cache:
+          key: node-deps-{{ checksum "yarn.lock" }}
+      - restore_cache:
+          key: modernizr-{{ .Revision }}
+      - run:
+          name: Test
+          command: ./node_modules/ember-cli/bin/ember test
+
+  deploy:
+    docker:
+      - image: circleci/node:8.6.0
+        environment:
+          JOBS: 2
+    steps:
+      - checkout
+      - restore_cache:
+          key: bower-deps-{{ checksum "bower.json" }}
+      - restore_cache:
+          key: node-deps-{{ checksum "yarn.lock" }}
+      - restore_cache:
+          key: modernizr-$CIRCLE_SHA1
+      - run:
+          name: Deploy to S3 and Redis
+          command: |
+            export AWS_ACCESS_KEY_ID=$DEPLOY_AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$DEPLOY_AWS_SECRET_ACCESS_KEY
+            export SSH_TUNNEL_USERNAME=$DEPLOY_SSH_TUNNEL_USERNAME
+            export SSH_TUNNEL_HOST=$DEPLOY_SSH_TUNNEL_HOST
+            if [[ "${CIRCLE_BRANCH}" == "demo" ]]; then
+              export AWS_BUCKET=$PROD_AWS_BUCKET
+              export AWS_REGION=$PROD_AWS_REGION
+              export SSH_TUNNEL_DESTINATION_HOST=$PROD_REDIS_HOST
+              export SSH_TUNNEL_DESTINATION_PORT=$PROD_REDIS_PORT
+              export FINGERPRINT_PREPEND_URL=$PROD_FINGERPRINT_PREPEND_URL
+              export SENTRY_DSN=$PROD_SENTRY_EMBER_DSN
+              export SENTRY_PROJECT=$PROD_SENTRY_PROJECT
+              export SENTRY_EMBER_SOURCEMAPS_KEY=$PROD_SENTRY_EMBER_SOURCEMAPS_KEY
+              export WQXR_URL=$PROD_WQXR_URL
+              export ADMIN_ROOT=$PROD_ADMIN_ROOT
+              export ETAG_API=$PROD_ETAG_API
+              export PUBLISHER_API=$PROD_PUBLISHER_API
+              export AUTH_SERVICE=$PROD_AUTH_SERVICE
+              export MEMBERSHIP_SERVICE=$PROD_MEMBERSHIP_SERVICE
+              export PLATFORM_EVENTS_SERVICE=$PROD_PLATFORM_EVENTS_SERVICE
+              export GOOGLE_TAG_MANAGER_ID=$PROD_GOOGLE_TAG_MANAGER_ID
+              export GOOGLE_ANALYTICS=$PROD_GOOGLE_ANALYTICS
+              export GOOGLE_API_V3_KEY=$PROD_GOOGLE_API_V3_KEY
+              export FB_APP=$PROD_FB_APP
+            elif grep -q "v[0-9]\+\.[0-9]\+\.[0-9]\+" <<< "$CIRCLE_TAG"; then
+              export AWS_BUCKET=$DEMO_AWS_BUCKET
+              export AWS_REGION=$DEMO_AWS_REGION
+              export SSH_TUNNEL_DESTINATION_HOST=$DEMO_REDIS_HOST
+              export SSH_TUNNEL_DESTINATION_PORT=$DEMO_REDIS_PORT
+              export FINGERPRINT_PREPEND_URL=$DEMO_FINGERPRINT_PREPEND_URL
+              export SENTRY_DSN=$DEMO_SENTRY_EMBER_DSN
+              export SENTRY_PROJECT=$DEMO_SENTRY_PROJECT
+              export SENTRY_EMBER_SOURCEMAPS_KEY=$DEMO_SENTRY_EMBER_SOURCEMAPS_KEY
+              export WQXR_URL=$DEMO_WQXR_URL
+              export ADMIN_ROOT=$DEMO_ADMIN_ROOT
+              export ETAG_API=$DEMO_ETAG_API
+              export PUBLISHER_API=$DEMO_PUBLISHER_API
+              export AUTH_SERVICE=$DEMO_AUTH_SERVICE
+              export MEMBERSHIP_SERVICE=$DEMO_MEMBERSHIP_SERVICE
+              export PLATFORM_EVENTS_SERVICE=$DEMO_PLATFORM_EVENTS_SERVICE
+              export GOOGLE_TAG_MANAGER_ID=$DEMO_GOOGLE_TAG_MANAGER_ID
+              export GOOGLE_ANALYTICS=$DEMO_GOOGLE_ANALYTICS
+              export GOOGLE_API_V3_KEY=$DEMO_GOOGLE_API_V3_KEY
+              export FB_APP=$DEMO_FB_APP
+            fi
+            ./node_modules/ember-cli/bin/ember deploy production --verbose --activate
+
+workflows:
+  version: 2
+  buld-test-deploy:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
+      - test:
+          filters:
+            tags:
+              only: /.*/
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test
+          filters:
+            tags:
+              only: /^v[0-9]\.[0-9]\.[0-9]+/
+            branches:
+              only: demo
