@@ -45,6 +45,8 @@ jobs:
           command: ~/.config/yarn/global/node_modules/.bin/grunt modernizr:dist
       - save_cache:
           key: modernizr-$CIRCLE_SHA1
+          paths:
+            - vendor/modernizr/modernizr-build.js
 
   test:
     docker:
