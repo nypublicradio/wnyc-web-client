@@ -45,7 +45,7 @@ jobs:
           key: node-deps-{{ checksum "package.json" }}
       - run:
           name: Node dependencies
-          commnd: yarn
+          command: yarn
       - save_cache:
           key: node-deps-{{ checksum "package.json" }}
           paths:
