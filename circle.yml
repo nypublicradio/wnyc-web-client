@@ -76,7 +76,7 @@ jobs:
       - restore_cache:
           key: node-deps-{{ checksum "yarn.lock" }}
       - restore_cache:
-          key: modernizr-$CIRCLE_SHA1
+          key: modernizr-{{ .Revision }}
       - run:
           name: Deploy to S3 and Redis
           command: |
