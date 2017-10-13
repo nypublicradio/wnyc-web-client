@@ -12,7 +12,7 @@ moduleForAcceptance('Acceptance | settings', {
     authenticateSession(this.application, {access_token: 'foo'});
 
     let session = currentSession(this.application);
-    session.set('data.user-prefs-active-stream', {slug: 'wqxr', name: 'WQXR New York'});
+    session.set('data.user-prefs-active-stream', {slug: 'wqxr', name: 'WQXR 105.9 FM'});
     session.set('data.user-prefs-active-autoplay', 'default_stream');
     server.createList('stream', 7);
   }
@@ -37,7 +37,7 @@ test('the stream button in the nav should match the default stream', function(as
 
   andThen(function() {
     const actualLabel = find('.stream-launcher').attr('aria-label');
-    const expectedLabel = 'Listen to WQXR New York';
+    const expectedLabel = 'Listen to WQXR 105.9 FM';
     assert.equal(actualLabel, expectedLabel);
   });
 });
