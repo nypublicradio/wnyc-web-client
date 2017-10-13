@@ -43,12 +43,20 @@ jobs:
       - run:
           name: Build modernizr
           command: ~/.config/yarn/global/node_modules/.bin/grunt modernizr:dist
+      - save_cache:
+          key: modernizr-$CIRCLE_SHA1
 
   test:
     docker:
       - image: circleci/node:8.6.0
     steps:
       - checkout
+      - restore_cache:
+          key: bower-deps-{{ checksum "bower.json" }}
+      - restore_cache:
+          key: node-deps-{{ checksum "yarn.lock" }}
+      - restore_cache:
+          key: modernizr-$CIRCLE_SHA1
       - run:
           name: Test
           command: ./node_modules/ember-cli/bin/ember test
@@ -58,6 +66,12 @@ jobs:
       - image: circleci/node:8.6.0
     steps:
       - checkout
+      - restore_cache:
+          key: bower-deps-{{ checksum "bower.json" }}
+      - restore_cache:
+          key: node-deps-{{ checksum "yarn.lock" }}
+      - restore_cache:
+          key: modernizr-$CIRCLE_SHA1
       - run:
           name: Deploy to S3 and Redis
           command: |
