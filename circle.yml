@@ -111,17 +111,23 @@ jobs:
 
 workflows:
   version: 2
-  test-deploy:
+  buld-test-deploy:
     jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
       - test:
-        filters:
-          tags:
-            only: /.*/
+          filters:
+            tags:
+              only: /.*/
+          requires:
+            - build
       - deploy:
-        requires:
-          - test
-        filters:
-          tags:
-            only: /^v[0-9]\.[0-9]\.[0-9]+/
-          branches:
-            only: demo
+          requires:
+            - test
+          filters:
+            tags:
+              only: /^v[0-9]\.[0-9]\.[0-9]+/
+            branches:
+              only: demo
