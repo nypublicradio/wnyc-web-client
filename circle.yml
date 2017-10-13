@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - checkout
-      - run: export PATH="$PATH:~/.config/yarn/global/node_modules/.bin/" >> $BASH_ENV
+      - run: export PATH="$PATH:~/.config/yarn/global/node_modules/.bin/"
       - restore_cache:
           key: grunt-and-bower
       - run:
