@@ -9,11 +9,6 @@ jobs:
 
     steps:
       - checkout
-      - run:
-          name: add yarn global path to path
-          command: |
-            export PATH="$PATH:~/.config/yarn/global/node_modules/.bin/" >> $BASH_ENV
-            source $BASH_ENV
       - restore_cache:
           key: grunt-and-bower
       - run:
@@ -29,6 +24,8 @@ jobs:
       - run:
           name: Install bower deps
           command: bower i
+          environment:
+            PATH: $PATH:~/.config/yarn/global/node_modules/.bin/ 
       - save_cache:
           key: bower-deps-{{ checksum "bower.json" }}
           paths:
