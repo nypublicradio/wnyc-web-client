@@ -9,6 +9,7 @@ jobs:
 
     steps:
       - checkout
+
       - restore_cache:
           key: grunt-and-bower
       - run:
@@ -29,10 +30,6 @@ jobs:
           paths:
             - bower_components
 
-      - run:
-          name: Build modernizr
-          command: ~/.config/yarn/global/node_modules/.bin/grunt modernizr:dist
-
       - restore_cache:
           key: node-deps-{{ checksum "package.json" }}
       - run:
@@ -42,6 +39,10 @@ jobs:
           key: node-deps-{{ checksum "package.json" }}
           paths:
             - node_modules
+
+      - run:
+          name: Build modernizr
+          command: ~/.config/yarn/global/node_modules/.bin/grunt modernizr:dist
 
     test:
       docker:
