@@ -51,7 +51,7 @@ jobs:
       - checkout
       - run:
           name: Test
-          command: yarn test
+          command: ./node_modules/ember-cli/bin/ember test
 
   deploy:
     docker:
