@@ -31,12 +31,12 @@ jobs:
             - bower_components
 
       - restore_cache:
-          key: node-deps-{{ checksum "package.json" }}
+          key: node-deps-{{ checksum "yarn.lock" }}
       - run:
           name: Node dependencies
           command: yarn
       - save_cache:
-          key: node-deps-{{ checksum "package.json" }}
+          key: node-deps-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
 
