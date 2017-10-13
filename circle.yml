@@ -23,9 +23,7 @@ jobs:
           key: bower-deps-{{ checksum "bower.json" }}
       - run:
           name: Install bower deps
-          command: bower i
-          environment:
-            PATH: $PATH:~/.config/yarn/global/node_modules/.bin/ 
+          command: ~/.config/yarn/global/node_modules/.bin/bower i
       - save_cache:
           key: bower-deps-{{ checksum "bower.json" }}
           paths:
@@ -33,7 +31,7 @@ jobs:
 
       - run:
           name: Build modernizr
-          command: grunt modernizr:dist
+          command: ~/.config/yarn/global/node_modules/.bin/grunt modernizr:dist
 
       - restore_cache:
           key: node-deps-{{ checksum "package.json" }}
