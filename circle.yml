@@ -9,7 +9,11 @@ jobs:
 
     steps:
       - checkout
-      - run: export PATH="$PATH:~/.config/yarn/global/node_modules/.bin/"
+      - run
+          name: add yarn global path to path
+          command: |
+            export PATH="$PATH:~/.config/yarn/global/node_modules/.bin/" >> ~/.bashrc
+            source .bashrc
       - restore_cache:
           key: grunt-and-bower
       - run:
