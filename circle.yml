@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - checkout
-      - run
+      - run:
           name: add yarn global path to path
           command: |
             export PATH="$PATH:~/.config/yarn/global/node_modules/.bin/" >> ~/.bashrc
