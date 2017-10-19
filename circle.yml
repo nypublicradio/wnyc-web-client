@@ -80,12 +80,12 @@ jobs:
       - run:
           name: Deploy to S3 and Redis
           command: |
-            env | grep ^DEPLOY_ | sed 's/DEPLOY_//g' > .env
+            env | sed -n 's/^DEPLOY_//p' > .env
             if [[ "${CIRCLE_BRANCH}" == "demo" ]]; then
-              env | grep ^DEMO_ | sed 's/DEMO_//g' >> .env
+              env | sed -n 's/^DEMO_//p' >> .env
               ./node_modules/ember-cli/bin/ember deploy demo --verbose --activate
             elif grep -q "v[0-9]\+\.[0-9]\+\.[0-9]\+" <<< "$CIRCLE_TAG"; then
-              env | grep ^PROD_ | sed 's/PROD_//g' >> .env
+              env | sed -n 's/^PROD_//p' >> .env
               ./node_modules/ember-cli/bin/ember deploy production --verbose --activate
             fi
 
