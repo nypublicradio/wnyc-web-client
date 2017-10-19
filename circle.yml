@@ -85,26 +85,6 @@ jobs:
             export SSH_TUNNEL_USERNAME=$DEPLOY_SSH_TUNNEL_USERNAME
             export SSH_TUNNEL_HOST=$DEPLOY_SSH_TUNNEL_HOST
             if [[ "${CIRCLE_BRANCH}" == "demo" ]]; then
-              export AWS_BUCKET=$PROD_AWS_BUCKET
-              export AWS_REGION=$PROD_AWS_REGION
-              export SSH_TUNNEL_DESTINATION_HOST=$PROD_REDIS_HOST
-              export SSH_TUNNEL_DESTINATION_PORT=$PROD_REDIS_PORT
-              export FINGERPRINT_PREPEND_URL=$PROD_FINGERPRINT_PREPEND_URL
-              export SENTRY_DSN=$PROD_SENTRY_EMBER_DSN
-              export SENTRY_PROJECT=$PROD_SENTRY_PROJECT
-              export SENTRY_EMBER_SOURCEMAPS_KEY=$PROD_SENTRY_EMBER_SOURCEMAPS_KEY
-              export WQXR_URL=$PROD_WQXR_URL
-              export ADMIN_ROOT=$PROD_ADMIN_ROOT
-              export ETAG_API=$PROD_ETAG_API
-              export PUBLISHER_API=$PROD_PUBLISHER_API
-              export AUTH_SERVICE=$PROD_AUTH_SERVICE
-              export MEMBERSHIP_SERVICE=$PROD_MEMBERSHIP_SERVICE
-              export PLATFORM_EVENTS_SERVICE=$PROD_PLATFORM_EVENTS_SERVICE
-              export GOOGLE_TAG_MANAGER_ID=$PROD_GOOGLE_TAG_MANAGER_ID
-              export GOOGLE_ANALYTICS=$PROD_GOOGLE_ANALYTICS
-              export GOOGLE_API_V3_KEY=$PROD_GOOGLE_API_V3_KEY
-              export FB_APP=$PROD_FB_APP
-            elif grep -q "v[0-9]\+\.[0-9]\+\.[0-9]\+" <<< "$CIRCLE_TAG"; then
               export AWS_BUCKET=$DEMO_AWS_BUCKET
               export AWS_REGION=$DEMO_AWS_REGION
               export SSH_TUNNEL_DESTINATION_HOST=$DEMO_REDIS_HOST
@@ -124,8 +104,29 @@ jobs:
               export GOOGLE_ANALYTICS=$DEMO_GOOGLE_ANALYTICS
               export GOOGLE_API_V3_KEY=$DEMO_GOOGLE_API_V3_KEY
               export FB_APP=$DEMO_FB_APP
+              ./node_modules/ember-cli/bin/ember deploy production --verbose --activate
+            elif grep -q "v[0-9]\+\.[0-9]\+\.[0-9]\+" <<< "$CIRCLE_TAG"; then
+              export AWS_BUCKET=$PROD_AWS_BUCKET
+              export AWS_REGION=$PROD_AWS_REGION
+              export SSH_TUNNEL_DESTINATION_HOST=$PROD_REDIS_HOST
+              export SSH_TUNNEL_DESTINATION_PORT=$PROD_REDIS_PORT
+              export FINGERPRINT_PREPEND_URL=$PROD_FINGERPRINT_PREPEND_URL
+              export SENTRY_DSN=$PROD_SENTRY_EMBER_DSN
+              export SENTRY_PROJECT=$PROD_SENTRY_PROJECT
+              export SENTRY_EMBER_SOURCEMAPS_KEY=$PROD_SENTRY_EMBER_SOURCEMAPS_KEY
+              export WQXR_URL=$PROD_WQXR_URL
+              export ADMIN_ROOT=$PROD_ADMIN_ROOT
+              export ETAG_API=$PROD_ETAG_API
+              export PUBLISHER_API=$PROD_PUBLISHER_API
+              export AUTH_SERVICE=$PROD_AUTH_SERVICE
+              export MEMBERSHIP_SERVICE=$PROD_MEMBERSHIP_SERVICE
+              export PLATFORM_EVENTS_SERVICE=$PROD_PLATFORM_EVENTS_SERVICE
+              export GOOGLE_TAG_MANAGER_ID=$PROD_GOOGLE_TAG_MANAGER_ID
+              export GOOGLE_ANALYTICS=$PROD_GOOGLE_ANALYTICS
+              export GOOGLE_API_V3_KEY=$PROD_GOOGLE_API_V3_KEY
+              export FB_APP=$PROD_FB_APP
+              ./node_modules/ember-cli/bin/ember deploy production --verbose --activate
             fi
-            ./node_modules/ember-cli/bin/ember deploy production --verbose --activate
 
 workflows:
   version: 2
