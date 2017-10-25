@@ -43,13 +43,11 @@ export default Controller.extend({
       this._wasModal = true;
     },
 
-    trackStreamData() {
-      /* TODO: This still feels weird to have this action called by
-        the component's didUpdateAttrs hook. Seems like we could
-        watch, nay, *observe* the showTitle and call this on change
-      */
 
-      this.get('listenAnalytics').trackStreamData(this.get('hifi.currentSound'));
+    soundTitleDidChange() {
+      if (this.get('hifi.currentSound.isStream')) {
+        this.get('listenAnalytics').trackStreamData(this.get('hifi.currentSound'));
+      }
     },
 
     trackShare(data, sharedFrom) {

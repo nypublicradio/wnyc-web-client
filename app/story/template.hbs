@@ -33,7 +33,7 @@
                     playContext="story-header"
                     itemPK=model.story.slug
                     itemTitle=model.story.title
-                    itemShow=model.story.showTitle}}
+                    itemShow=(or model.story.showTitle model.story.headers.brand.title)}}
                     Listen <span class="text--small dimmed">{{model.story.audioDurationReadable}}</span>
                   {{/listen-button}}
 
@@ -66,7 +66,7 @@
                     playContext="story-list"
                     itemPK=row.segment.slug
                     itemTitle=row.segment.title
-                    itemShow=model.story.showTitle
+                    itemShow=(or model.story.showTitle model.story.headers.brand.title)
                     type="blue-circle"}}
                   </div>
                 {{/row.buttons}}

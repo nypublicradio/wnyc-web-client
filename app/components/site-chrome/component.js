@@ -10,7 +10,7 @@ export default Component.extend({
   currentUser: service(),
   donateURL: config.wnycDonateURL,
   classNameBindings: ['showPlayer:sitechrome--player-open'],
-  defaultStream:  {slug: 'wqxr', name: 'WQXR New York'},
+  defaultStream:  {slug: 'wqxr', name: 'WQXR 105.9 FM'},
   preferredStream: or('session.data.user-prefs-active-stream', 'defaultStream'),
   socialIcons: [
     {url: 'http://www.twitter.com/WQXR', icon: 'twitter'},
