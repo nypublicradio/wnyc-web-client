@@ -829,7 +829,7 @@ var HTML = `<html>
                           </div>
                           <!-- .nypr_lockup -->
                           <div class="sponsor">
-                              WNYC is supported by <img src="http://www.wnyc.org/i/raw/1/wnyc-footer.png">
+                              WNYC is supported by <img src="//www.wnyc.org/i/raw/1/wnyc-footer.png">
                           </div>
                           <ul class="nypr_copyright">
                               <li class="norule">&copy; 2016

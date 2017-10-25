@@ -73,6 +73,7 @@ test('after visiting settings, user can toggle off autoplay settings', function(
 });
 
 test('if feature flag for autoplay-autoprefs is absent, then the link should be not be present', function(assert) {
+  server.create('django-page', {id: '/'});
   visit('/');
   const el = $('.l-bottom .list-item:contains("Settings")');
   andThen(() => {
