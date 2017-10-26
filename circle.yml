@@ -32,7 +32,7 @@ jobs:
           key: node-deps-{{ checksum "yarn.lock" }}
       - run:
           name: Node dependencies
-          command: yarn
+          command: yarn --pure-lockfile
       - save_cache:
           key: node-deps-{{ checksum "yarn.lock" }}
           paths:
