@@ -94,7 +94,7 @@
     "nypr-audio-services": "nypublicradio/nypr-audio-services",
     "nypr-auth": "nypublicradio/nypr-auth",
     "nypr-django-for-ember": "nypublicradio/nypr-django-for-ember",
-    "nypr-metrics": "0.0.1",
+    "nypr-metrics": "~0.0.1",
     "nypr-player": "nypublicradio/nypr-player",
     "nypr-publisher-lib": "nypublicradio/nypr-publisher-lib",
     "nypr-ui": "nypublicradio/nypr-ui",
