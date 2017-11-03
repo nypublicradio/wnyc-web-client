@@ -6522,6 +6522,16 @@ nypr-metrics@nypublicradio/nypr-metrics:
     ember-get-config "^0.2.2"
     ember-metrics "^0.12.1"
 
+nypr-metrics@~0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/nypr-metrics/-/nypr-metrics-0.0.1.tgz#5954087401a04f3cf19c878191d6b638cbbd1b20"
+  dependencies:
+    ember-cli-babel "^6.0.0"
+    ember-cli-htmlbars "^1.1.1"
+    ember-cli-htmlbars-inline-precompile "^0.4.0"
+    ember-get-config "^0.2.2"
+    ember-metrics "^0.12.1"
+
 nypr-player@nypublicradio/nypr-player:
   version "0.0.3"
   resolved "https://codeload.github.com/nypublicradio/nypr-player/tar.gz/fa78eeada422603f11eccb14daa25f216b72c6d9"
