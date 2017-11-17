@@ -91,7 +91,7 @@
     "morgan": "^1.6.1",
     "nypr-account-settings": "nypublicradio/nypr-account-settings",
     "nypr-ads": "nypublicradio/nypr-ads",
-    "nypr-audio-services": "nypublicradio/nypr-audio-services",
+    "nypr-audio-services": "~0.0.1",
     "nypr-auth": "nypublicradio/nypr-auth",
     "nypr-django-for-ember": "nypublicradio/nypr-django-for-ember",
     "nypr-metrics": "~0.0.1",
