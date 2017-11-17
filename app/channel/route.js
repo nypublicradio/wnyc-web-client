@@ -1,7 +1,6 @@
 import Route from 'ember-route';
 import service from 'ember-service/inject';
 import Ember from 'ember';
-import run from 'ember-runloop';
 const {
   Inflector,
   get,
@@ -41,7 +40,7 @@ export default Route.extend(PlayParamMixin, {
       let canonicalUrl = get(channel, 'url');
       let canonicalHost = canonicalUrl && canonicalUrl.match(/\/\/([\w.]+)\//).pop();
       if  (canonicalHost && canonicalHost !== document.location.host) {
-        run(window.location.replace(canonicalUrl));
+        window.location.href = canonicalUrl;
         return;
       }
     }
