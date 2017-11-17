@@ -1,6 +1,7 @@
 import Route from 'ember-route';
 import service from 'ember-service/inject';
 import Ember from 'ember';
+import run from 'ember-runloop';
 const {
   Inflector,
   get,
@@ -36,10 +37,13 @@ export default Route.extend(PlayParamMixin, {
   },
 
   afterModel({ channel }, transition) {
-    let canonicalUrl = get(channel, 'url');
-    let canonicalHost = canonicalUrl && canonicalUrl.match(/\/\/([\w.]+)\//);
-    if  (canonicalHost && canonicalHost !== document.location.host) {
-      this.transitionTo(canonicalUrl);
+    if (channel) {
+      let canonicalUrl = get(channel, 'url');
+      let canonicalHost = canonicalUrl && canonicalUrl.match(/\/\/([\w.]+)\//);
+      if  (canonicalHost && canonicalHost !== document.location.host) {
+        run(window.location.replace(canonicalUrl));
+        return;
+      }
     }
     get(this, 'googleAds').doTargeting({show: channel.get('slug')});
     if (channel.get('headerDonateChunk')) {
