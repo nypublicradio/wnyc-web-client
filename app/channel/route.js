@@ -40,6 +40,7 @@ export default Route.extend(PlayParamMixin, {
       let canonicalUrl = get(channel, 'url');
       let canonicalHost = canonicalUrl && canonicalUrl.match(/\/\/([\w.]+)\//).pop();
       if  (canonicalHost && canonicalHost !== document.location.host) {
+        transition.abort();
         window.location.href = canonicalUrl;
         return;
       }
