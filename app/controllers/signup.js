@@ -6,5 +6,3 @@ export default Controller.extend({
   first: null,
   last: null
 });
-
-
