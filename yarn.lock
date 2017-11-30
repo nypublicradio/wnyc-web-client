@@ -6588,7 +6588,7 @@ nypr-audio-services@~0.0.0:
     ember-get-config "^0.2.2"
     ember-simple-auth "^1.4.0"
 
-nypr-django-for-ember@nypublicradio/nypr-django-for-ember:
+"nypr-django-for-ember@github:nypublicradio/nypr-django-for-ember", nypr-django-for-ember@nypublicradio/nypr-django-for-ember:
   version "0.0.0"
   resolved "https://codeload.github.com/nypublicradio/nypr-django-for-ember/tar.gz/e99534f68deb8cf9f1921bab4bd194aa16391749"
   dependencies:
@@ -6615,12 +6615,13 @@ nypr-player@nypublicradio/nypr-player:
     ember-cli-moment-shim "^3.4.0"
     ember-cli-sass "^7.0.0"
     ember-hifi "^1.11.1"
+    ember-keyboard "2.1.9"
     ember-moment "^7.4.1"
-    nypr-ui nypublicradio/nypr-ui
+    nypr-ui nypublicradio/nypr-ui#demo
 
 nypr-publisher-lib@~0.0.0:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.0.2.tgz#d939bf692659dc4edb1b32d932ba8d9459975180"
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.0.3.tgz#d142ebc25f194c1a3866c151ba92bb5f44486070"
   dependencies:
     ember-cli-babel "^6.3.0"
     ember-cli-htmlbars "^2.0.1"
@@ -6632,6 +6633,21 @@ nypr-publisher-lib@~0.0.0:
     nypr-audio-services "~0.0.0"
     nypr-django-for-ember nypublicradio/nypr-django-for-ember
     nypr-ui nypublicradio/nypr-ui
+
+"nypr-ui@github:nypublicradio/nypr-ui":
+  version "0.0.0"
+  resolved "https://codeload.github.com/nypublicradio/nypr-ui/tar.gz/46e17b02970ccf770a8f2102b57802eaf2ed5e72"
+  dependencies:
+    ember-basic-dropdown "0.33.1"
+    ember-cli-babel "^6.6.0"
+    ember-cli-htmlbars "^2.0.1"
+    ember-cli-htmlbars-inline-precompile "^0.4.3"
+    ember-cli-sass "^7.0.0"
+    ember-click-outside "0.1.9"
+    ember-composable-helpers "2.0.1"
+    ember-holygrail-layout "^0.1.4"
+    ember-power-select "^1.9.2"
+    ivy-tabs "3.1.0"
 
 nypr-ui@nypublicradio/nypr-ui:
   version "0.0.0"
