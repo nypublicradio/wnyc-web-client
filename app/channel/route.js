@@ -38,8 +38,8 @@ export default Route.extend(PlayParamMixin, {
   afterModel({ channel }, transition) {
     if (channel) {
       let canonicalUrl = get(channel, 'url');
-      let canonicalHost = canonicalUrl && canonicalUrl.match(/\/\/([\w.]+)\//).pop();
-      if  (canonicalHost && canonicalHost !== document.location.host) {
+      let canonicalHostMatch = canonicalUrl && canonicalUrl.match(/\/\/([\w.]+)\//);
+      if  (canonicalHostMatch && canonicalHostMatch.pop() !== document.location.host) {
         transition.abort();
         window.location.href = canonicalUrl;
         return;
