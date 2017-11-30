@@ -10,6 +10,7 @@ div#stream_launch_widget {
     & > button#popup-btn {
         flex: 0 0 121px;
         width: 121px;
+        border-radius: 0;
     }
     & > div#stations_wrapper {
         flex: 0 0 115px;
@@ -91,4 +92,3 @@ body.home div#stream_launch_widget {
   text-decoration: none !important;
   border-bottom-color: white;
 }
-
