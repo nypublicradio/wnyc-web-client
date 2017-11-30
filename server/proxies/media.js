@@ -13,6 +13,6 @@ module.exports = function(app) {
 
   app.use(proxyPath, function(req, res/*, next*/){
     req.url = proxyPath + '/' + req.url;
-    proxy.web(req, res, { target: `${process.env.PUBLISHER_API}` });
+    proxy.web(req, res, { target: `${process.env.WQXR_URL}` });
   });
 };
