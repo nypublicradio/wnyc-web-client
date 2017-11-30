@@ -36,6 +36,15 @@ export default Route.extend(PlayParamMixin, {
   },
 
   afterModel({ channel }, transition) {
+    if (channel) {
+      let canonicalUrl = get(channel, 'url');
+      let canonicalHost = canonicalUrl && canonicalUrl.match(/\/\/([\w.]+)\//).pop();
+      if  (canonicalHost && canonicalHost !== document.location.host) {
+        transition.abort();
+        window.location.href = canonicalUrl;
+        return;
+      }
+    }
     get(this, 'googleAds').doTargeting({show: channel.get('slug')});
     if (channel.get('headerDonateChunk')) {
       transition.send('updateDonateChunk', channel.get('headerDonateChunk'));
