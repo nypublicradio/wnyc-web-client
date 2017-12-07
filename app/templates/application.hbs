@@ -81,14 +81,6 @@
             streamName        = integration.streamName
           }}
         {{/content.for}}
-
-        {{#content.for 'aux' as |args|}}
-          {{args.queueButton
-            queueLength = queue.items.length
-            showModal   = (action 'showModal' 'queue-history')
-            closeModal  = (action 'closeModal')
-            isOpenModal = modal}}
-        {{/content.for}}
     {{/nypr-player}}
   {{/liquid-if}}
 {{/nypr-player-integration}}
