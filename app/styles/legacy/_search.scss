@@ -43,21 +43,42 @@
       display: flex;
       flex-flow: row wrap;
 
-      .searchbox {
+      td.gsc-input {
+        width: 99%;
+      }
+      
+      input.gsc-input {
         flex: 1;
         height: 42px;
         font-size: 16px;
         border-radius: 0;
         border:none;
-        background: $graywhite;
+        background: $graywhite !important;
+        padding: 0 10px;
+        color: #333;
+        box-sizing: border-box;
+        text-indent: 0 !important;
+        display: block;
+        width: 100%;
       }
       
-      .submit {
-        background-color: white;
+      input.gsc-search-button {
+        background: white url(/media/img/icons/search-glass.png) no-repeat 18px 12px;
+        border: 1px solid #ddd;
+        width: 50px;
+        height: 42px;
+        margin: 0 5px;
+        cursor: pointer;
+        text-indent: 10000px;
+        overflow: hidden;
         
         &:hover {
           background-color: $graywhite;
         }
+      }
+      
+      .gsc-clear-button {
+        display: none;
       }
       
       .search-audio {
@@ -137,6 +158,11 @@
   
   .gcsc-branding-text {
     color: $lightgray;
+  }
+    
+  .gsc-control-cse {
+    border: none !important;
+    overflow: hidden;
   }
 }
 
