@@ -26,6 +26,9 @@
   }
 
   #search {
+    .loading-spinner {
+      height: 70vh;
+    }
     a.search-audio {
       font-size: 12px;
       margin: 15px 0;
