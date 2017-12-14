@@ -26,7 +26,7 @@ export default Factory.extend({
     }
   },
   schedule_url: faker.internet.url,
-  short_description: faker.lorem.sentence,
+  short_description: () => faker.lorem.sentence(1),
   playlist_url: faker.internet.url,
   whats_on: 100,
   urls: () => {
