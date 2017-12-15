@@ -9,8 +9,8 @@ test('visiting /streams', function(assert) {
 
   let wqxrStreams = streams.filter(stream => stream.attrs.source_tags.includes('wqxr_site'));
   let wnycStreams = streams.filter(stream => stream.attrs.source_tags.includes('wnyc_site'));
-  let allStreams = wqxrStreams.sort((a, b) => a.site_priority - b.site_priority)
-    .concat(wnycStreams.sort((a, b) => a.site_priority - b.site_priority)).uniq();
+  let allStreams = wnycStreams.sort((a, b) => a.site_priority - b.site_priority)
+    .concat(wqxrStreams.sort((a, b) => a.site_priority - b.site_priority)).uniq();
   
   visit('/streams');
 
