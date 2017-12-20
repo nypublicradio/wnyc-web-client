@@ -6776,8 +6776,8 @@ nypr-auth@~0.0.0:
     ember-simple-auth "^1.4.0"
 
 nypr-django-for-ember@~0.0.0:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/nypr-django-for-ember/-/nypr-django-for-ember-0.0.1.tgz#b749ba6a3ed92ab09acafe8a2cded03d41de93cf"
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/nypr-django-for-ember/-/nypr-django-for-ember-0.0.2.tgz#618ee86af318c86beb64a7341a740307e4c7047d"
   dependencies:
     ember-cli-babel "^6.3.0"
     ember-cli-htmlbars "^2.0.1"
