@@ -49,6 +49,14 @@ export default Ember.Route.extend(PlayParamMixin, {
     return this._super(...arguments);
   },
   
+  renderTemplate(controller, model) {
+    if (get(model, 'story.template') === 'story_full-bleed') {
+      this.render('full-bleed');
+    } else {
+      this._super(...arguments);
+    }
+  },
+  
   actions: {
     error(error){
       //detect 404 error on api
