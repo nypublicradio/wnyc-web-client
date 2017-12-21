@@ -2874,7 +2874,7 @@ ember-cli-get-dependency-depth@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ember-cli-get-dependency-depth/-/ember-cli-get-dependency-depth-1.0.0.tgz#e0afecf82a2d52f00f28ab468295281aec368d11"
 
-ember-cli-htmlbars-inline-precompile@^0.4.0, ember-cli-htmlbars-inline-precompile@^0.4.3:
+ember-cli-htmlbars-inline-precompile@^0.4.0:
   version "0.4.4"
   resolved "https://registry.yarnpkg.com/ember-cli-htmlbars-inline-precompile/-/ember-cli-htmlbars-inline-precompile-0.4.4.tgz#24a7617152630d64a047e553b72e00963a4f8d73"
   dependencies:
@@ -3200,12 +3200,12 @@ ember-click-outside@0.1.10:
     ember-cli-babel "^6.3.0"
     ember-cli-htmlbars "^2.0.1"
 
-ember-click-outside@0.1.9:
-  version "0.1.9"
-  resolved "https://registry.yarnpkg.com/ember-click-outside/-/ember-click-outside-0.1.9.tgz#a8bf22739814ae44785919faa62102cf7d70a123"
+ember-click-outside@0.1.11:
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/ember-click-outside/-/ember-click-outside-0.1.11.tgz#f76034e37513a9b140221d3103cd755ae5023a0b"
   dependencies:
-    ember-cli-babel "^6.0.0"
-    ember-cli-htmlbars "^1.1.1"
+    ember-cli-babel "^6.3.0"
+    ember-cli-htmlbars "^2.0.1"
 
 ember-compatibility-helpers@^0.1.1:
   version "0.1.3"
@@ -3215,12 +3215,12 @@ ember-compatibility-helpers@^0.1.1:
     ember-cli-version-checker "^2.0.0"
     semver "^5.4.1"
 
-ember-composable-helpers@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/ember-composable-helpers/-/ember-composable-helpers-2.0.1.tgz#1568849ee176927fb73b0ed0a16e20b0ac90d774"
+ember-composable-helpers@2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/ember-composable-helpers/-/ember-composable-helpers-2.0.3.tgz#9b5e595bf5a45bc4431adfe27821f23b1d534be0"
   dependencies:
     broccoli-funnel "^1.0.1"
-    ember-cli-babel "^5.1.7"
+    ember-cli-babel "^6.1.0"
 
 ember-concurrency@^0.8.1, ember-concurrency@^0.8.12:
   version "0.8.12"
@@ -6784,9 +6784,9 @@ nypr-ads@~0.0.0:
     ember-cli-babel "^5.1.7"
     ember-cli-htmlbars "^1.1.1"
 
-nypr-audio-services@~0.0.0:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.0.7.tgz#8ac58dcb9bdf8a9050627e7054be922cf8c0c6f3"
+nypr-audio-services@nypublicradio/nypr-audio-services#demo-0.0.x, nypr-audio-services@~0.0.0:
+  version "0.0.6"
+  resolved "https://codeload.github.com/nypublicradio/nypr-audio-services/tar.gz/a406853763fa6955e3065a2f7e165d2b3cd6efd0"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
@@ -6854,20 +6854,21 @@ nypr-publisher-lib@~0.0.0:
     nypr-django-for-ember "~0.0.0"
     nypr-ui "~0.0.0"
 
-nypr-ui@~0.0.0:
+nypr-ui@nypublicradio/nypr-ui#deep-dive, nypr-ui@~0.0.0:
   version "0.0.1"
-  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.0.1.tgz#d1a8a72745ea2e45331edfaf6a7855231877f28f"
+  resolved "https://codeload.github.com/nypublicradio/nypr-ui/tar.gz/799059fa26074d673ab67dcc52300ec0a7788238"
   dependencies:
     ember-basic-dropdown "0.33.1"
-    ember-cli-babel "^6.6.0"
+    ember-cli-babel "^6.8.0"
     ember-cli-htmlbars "^2.0.1"
-    ember-cli-htmlbars-inline-precompile "^0.4.3"
+    ember-cli-htmlbars-inline-precompile "^1.0.0"
     ember-cli-sass "^7.0.0"
-    ember-click-outside "0.1.9"
-    ember-composable-helpers "2.0.1"
+    ember-click-outside "0.1.11"
+    ember-composable-helpers "2.0.3"
     ember-holygrail-layout "^0.1.4"
     ember-power-select "^1.9.2"
     ivy-tabs "3.1.0"
+    waypoints "^4.0.1"
 
 oauth-sign@~0.8.1, oauth-sign@~0.8.2:
   version "0.8.2"
