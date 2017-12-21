@@ -9,14 +9,14 @@
     {{/with}}
     {{#hero.top as |top|}}
       {{#top.left}}
-        {{#link-to 'index' class="hero-link"}}
+        {{#link-to 'index' class="hero__logo-link"}}
           {{nypr-svg icon="left-arrow" className="hero-back"}}
           {{nypr-svg icon="wnyc-logo" className="hero-logo"}}
         {{/link-to}}
       {{/top.left}}
       
       {{#top.right}}
-        {{#nypr-ui/buttons/red tagName="a" href="http://www.wnyc.org" tall=true}}
+        {{#nypr-ui/buttons/red tagName="a" href="http://www.wnyc.org" tall=true class="hero__donate"}}
           Donate
         {{/nypr-ui/buttons/red}}
       {{/top.right}}
@@ -44,7 +44,7 @@
     {{/hero.blurb}}
     
     {{#hero.lockup}}
-      social buttons
+      <span class="hero-lockup__label">Share</span> {{nypr-story/share-buttons story=s via='WNYC'}}
     {{/hero.lockup}}
   {{/nypr-ui/hero}}
 {{/with}}
