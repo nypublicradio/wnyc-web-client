@@ -1,3 +1,35 @@
-.hero-link {
+@import "nypr-ui/mixins/text";
+
+.hero__logo-link {
   border: none;
+}
+
+.hero__donate {
+  @include hero-emphasis;
+  text-transform: uppercase;
+}
+
+.nypr-ui__hero .hero-headline {
+  @include hero-emphasis;
+}
+
+.nypr-ui__hero .hero-blurb {
+  font-weight: 600;
+  
+  > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+.hero-lockup {
+  display: flex;
+  align-items: center;
+}
+
+.hero-lockup__label {
+  margin-right: 15px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  font-style: oblique;
 }
