@@ -1,3 +1,5 @@
+@import "nypr-ui/vars";
+@import "nypr-ui/colors";
 @import "nypr-ui/mixins/text";
 
 .hero__logo-link {
@@ -32,4 +34,94 @@
   font-size: 12px;
   font-weight: 600;
   font-style: oblique;
+}
+
+.full-bleed__body {
+  font-size: 18px;
+  
+  > .django-content > div > p:first-of-type::first-letter {
+    @include hero-emphasis;
+    font-size: 93px;
+    line-height: 81px;
+    float: left;
+  }
+  
+  .embedded-image {
+    display: block;
+    position: relative;
+    margin: 0 -25px;
+    
+    @include mq($medium-and-up) {
+      margin: 0 -50%;
+    }
+    
+    > img {
+      width: 100%;
+      margin-bottom: 33px;
+    }
+    
+    > .image-metadata  {
+      display: block;
+      padding-top: 0;
+      margin: 0 25px;
+    }
+    
+    .image-caption {
+      position: relative;
+      display: block;
+      @include hero-emphasis;
+      font-size: 20px;
+      line-height: 1.35;
+      
+      @include mq($medium-and-up) {
+        font-size: 40px;
+        line-height: 1.25;
+        color: white;
+        max-width: 865px;
+        
+        position: absolute;
+        bottom: 65px;
+        left: 65px;
+      }
+      
+      &:before {
+        content: '';
+        display: block;
+        max-width: 100px;
+        
+        border-top: 5px solid $brightred;
+        border-right: 5px solid transparent;
+        margin-left: 5px;
+        margin-bottom: 15px;
+      }
+      
+      &:after {
+        content: '';
+        display: block;
+        height: 0;
+        width: 0;
+        border-left: 5px solid transparent;
+        border-top: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid $brightred;
+        
+        position: absolute;
+        bottom: 0;
+        top: -5px;
+      }
+    }
+    
+    .image-credit {
+      display: block;
+      font-size: 12px;
+      line-height: 2.25;
+      color: $lightgray;
+      
+      @include mq($medium-and-up) {
+        position: absolute;
+        bottom: 0;
+        right: 50%;
+      }
+    }
+  }
 }
