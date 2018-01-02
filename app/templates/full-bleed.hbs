@@ -31,6 +31,9 @@
         {{{s.tease}}}
       </p>
       
+    {{/hero.blurb}}
+    
+    {{#hero.footer as |footer|}}
       {{#if (and s.audioMayStream s.audio)}}
         {{#listen-button
           type='white-hollow-block'
@@ -41,11 +44,10 @@
         {{/listen-button}}
       {{/if}}
       
-    {{/hero.blurb}}
-    
-    {{#hero.lockup}}
-      <span class="hero-lockup__label">Share</span> {{nypr-story/share-buttons story=s via='WNYC'}}
-    {{/hero.lockup}}
+      {{#footer.lockup}}
+        <span class="hero-lockup__label">Share</span> {{nypr-story/share-buttons story=s via='WNYC'}}
+      {{/footer.lockup}}
+    {{/hero.footer}}
   {{/nypr-ui/hero}}
   
   {{#with s.appearances.authors as |authors|}}
