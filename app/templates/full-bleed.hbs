@@ -48,40 +48,36 @@
     {{/hero.lockup}}
   {{/nypr-ui/hero}}
   
-  <div class="l-centered">
-    {{#with s.appearances.authors as |authors|}}
-    <footer class="full-bleed__byline">
-      <p>
-        By
-        {{#each authors as |author i|}}
-          {{list-separator authors i}}
-          {{link-to author.name 'djangorendered' (concat 'people/' author.slug) class="full-bleed__author"}}
-        {{/each}}
-      </p>
-      <p class="full-bleed__date">
-        {{moment-format s.newsdate 'MMMM D, YYYY'}}
-      </p>
-    </footer>
-    {{/with}}
-    
-    {{django-page page=s.bodyDjango class="full-bleed__body"}}
-  </div>
+  {{#with s.appearances.authors as |authors|}}
+  <footer class="full-bleed__byline">
+    <p>
+      By
+      {{#each authors as |author i|}}
+        {{list-separator authors i}}
+        {{link-to author.name 'djangorendered' (concat 'people/' author.slug) class="full-bleed__author"}}
+      {{/each}}
+    </p>
+    <p class="full-bleed__date">
+      {{moment-format s.newsdate 'MMMM D, YYYY'}}
+    </p>
+  </footer>
+  {{/with}}
+  
+  {{django-page page=s.bodyDjango class="full-bleed__body"}}
   
   {{#if s.producingOrganizations}}
   <div class="producing-org-banner">
-    <div class="l-centered">
-      <div class="producing-org-banner__body">
-        <span>
-          Produced by {{producing-orgs s.producingOrganizations unlinked=true}}
-        </span>
-        
-        <div class="producing-org-banner__logos">
-          {{#each s.producingOrganizations as |org|}}
-            {{#if org.logo}}
-              <img src={{image-template org.logo.template 80 0 org.logo.crop}} >
-            {{/if}}
-          {{/each}}
-        </div>
+    <div class="producing-org-banner__body">
+      <span>
+        Produced by {{producing-orgs s.producingOrganizations unlinked=true}}
+      </span>
+      
+      <div class="producing-org-banner__logos">
+        {{#each s.producingOrganizations as |org|}}
+          {{#if org.logo}}
+            <img src={{image-template org.logo.template 80 0 org.logo.crop}} >
+          {{/if}}
+        {{/each}}
       </div>
     </div>
   </div>

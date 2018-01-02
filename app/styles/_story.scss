@@ -2,6 +2,16 @@
 @import "nypr-ui/colors";
 @import "nypr-ui/mixins/text";
 
+@mixin layout {
+  max-width: 700px;
+  padding: 0 25px;
+  margin: 0 auto;
+  
+  @include mq($medium-and-up) {
+    padding: 0 50px;
+  }
+}
+
 .hero__logo-link {
   border: none;
 }
@@ -47,6 +57,14 @@
 .full-bleed__body {
   font-size: 18px;
   
+  > .django-content p {
+    @include layout;
+    margin-bottom: 35px;
+    
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
   > .django-content > div > p:first-of-type::first-letter {
     @include hero-emphasis;
     font-size: 93px;
@@ -58,21 +76,27 @@
   .embedded-image {
     display: block;
     position: relative;
-    margin: 0 -25px;
-    
-    @include mq($medium-and-up) {
-      margin: 0 -50%;
-    }
+
+    max-width: 1400px;
+    margin: 0 auto;
     
     > img {
       width: 100%;
       margin-bottom: 33px;
+      
+      @include mq($medium-and-up) {
+        margin-bottom: 55px;
+      }
     }
     
     > .image-metadata  {
       display: block;
       padding-top: 0;
-      margin: 0 25px;
+      margin: 0 25px 45px;
+      
+      @include mq($medium-and-up) {
+        margin-bottom: 0;
+      }
     }
     
     .image-caption {
@@ -128,16 +152,19 @@
       
       @include mq($medium-and-up) {
         position: absolute;
-        bottom: 0;
-        right: 50%;
+        bottom: -35px;
+        right: 25px;
       }
     }
   }
 }
 
 .full-bleed__byline {
+  @include layout;
+  
   font-size: 16px;
   margin-bottom: 40px;
+  
   
   > p {
     margin: 0;
@@ -166,6 +193,8 @@
 }
 
 .producing-org-banner__body {
+  @include layout;
+  
   display: flex;
   justify-content: space-between;
   align-items: center;
