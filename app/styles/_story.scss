@@ -44,6 +44,10 @@
 .hero-lockup {
   display: flex;
   align-items: center;
+  
+  .btn {
+    color: white;
+  }
 }
 
 .hero-lockup__label {
