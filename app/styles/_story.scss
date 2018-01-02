@@ -11,6 +11,14 @@
   text-transform: uppercase;
 }
 
+.nypr-ui__hero {
+  margin-bottom: 25px;
+  
+  &.stuck {
+    margin-bottom: 0;
+  }
+}
+
 .nypr-ui__hero .hero-headline {
   @include hero-emphasis;
 }
