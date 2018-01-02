@@ -133,3 +133,20 @@
     }
   }
 }
+
+.producing-org-banner {
+  background-color: black;
+  padding: 42px 0;
+}
+
+.producing-org-banner__body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  color: white;
+  
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.33;
+}
