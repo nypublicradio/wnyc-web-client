@@ -6700,7 +6700,7 @@ nypr-publisher-lib@~0.0.0:
 
 nypr-ui@nypublicradio/nypr-ui#deep-dive, nypr-ui@~0.0.0:
   version "0.0.1"
-  resolved "https://codeload.github.com/nypublicradio/nypr-ui/tar.gz/dae30969ffa193156661a74916ad9163bc379249"
+  resolved "https://codeload.github.com/nypublicradio/nypr-ui/tar.gz/bd2766ac706b76128e28ccf5e48bf12a102c0567"
   dependencies:
     ember-basic-dropdown "0.33.1"
     ember-cli-babel "^6.8.0"
