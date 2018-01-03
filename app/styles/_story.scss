@@ -3,11 +3,12 @@
 @import "nypr-ui/mixins/text";
 
 @mixin layout {
-  max-width: 700px;
+  max-width: 750px;
   padding: 0 25px;
   margin: 0 auto;
   
   @include mq($medium-and-up) {
+    max-width: 800px;
     padding: 0 50px;
   }
 }
@@ -59,7 +60,6 @@
 }
 
 .full-bleed__body {
-  font-size: 18px;
   
   > .django-content p {
     @include layout;
@@ -67,6 +67,10 @@
     
     font-size: 16px;
     line-height: 1.5;
+    
+    @include mq($medium-and-up) {
+      font-size: 18px;
+    }
   }
 
   > .django-content > div > p:first-of-type::first-letter {
