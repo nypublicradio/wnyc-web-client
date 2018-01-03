@@ -42,6 +42,15 @@
   }
 }
 
+.hero-footer > .listen-button {
+  align-self: center;
+  
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  font-style: oblique;
+}
+
 .hero-lockup {
   display: flex;
   align-items: center;
@@ -52,11 +61,16 @@
 }
 
 .hero-lockup__label {
-  margin-right: 15px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  font-style: oblique;
+  display: none;
+  
+  @include mq($medium-and-up) {
+    display: inline;
+    margin-right: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    font-style: oblique;
+  }
 }
 
 .full-bleed__body {
