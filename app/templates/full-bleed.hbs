@@ -1,5 +1,5 @@
 {{#with model.story as |s|}}
-  {{#nypr-ui/hero gradient=true as |hero|}}
+  {{#nypr-ui/hero gradient=true class="full-bleed__hero" as |hero|}}
     {{#with s.imageMain as |img|}}
       {{hero.image
         src=(image-template img.template 1280 0 img.crop)
@@ -10,31 +10,30 @@
     {{/with}}
     {{#hero.top as |top|}}
       {{#top.left}}
-        {{#link-to 'index' class="hero__logo-link"}}
-          {{nypr-svg icon="left-arrow" className="hero-back"}}
-          {{nypr-svg icon="wnyc-logo" className="hero-logo"}}
+        {{#link-to 'index' class="full-bleed__logo-link"}}
+          {{nypr-svg icon="left-arrow" className="full-bleed__back"}}
+          {{nypr-svg icon="wnyc-logo" className="full-bleed__logo"}}
         {{/link-to}}
       {{/top.left}}
       
       {{#top.right}}
-        {{#nypr-ui/buttons/red tagName="a" href="http://www.wnyc.org" tall=true class="hero__donate"}}
+        {{#nypr-ui/buttons/red tagName="a" href="http://www.wnyc.org" tall=true class="full-bleed__donate"}}
           Donate
         {{/nypr-ui/buttons/red}}
       {{/top.right}}
     {{/hero.top}}
     
-    {{#hero.headline}}
+    {{#hero.headline class="full-bleed__headline" tagName="h2"}}
       {{s.title}}
     {{/hero.headline}}
     
-    {{#hero.blurb}}
+    {{#hero.blurb class="full-bleed__blurb"}}
       <p>
         {{{s.tease}}}
       </p>
-      
     {{/hero.blurb}}
     
-    {{#hero.footer as |footer|}}
+    {{#hero.footer class="full-bleed__footer" as |footer|}}
       {{#if (and s.audioMayStream s.audio)}}
         {{#listen-button
           type='white-hollow-block'
@@ -45,8 +44,8 @@
         {{/listen-button}}
       {{/if}}
       
-      {{#footer.lockup}}
-        <span class="hero-lockup__label">Share</span> {{nypr-story/share-buttons story=s via='WNYC'}}
+      {{#footer.lockup class="full-bleed__share"}}
+        <span class="full-bleed__share-label">Share</span> {{nypr-story/share-buttons story=s via='WNYC'}}
       {{/footer.lockup}}
     {{/hero.footer}}
   {{/nypr-ui/hero}}

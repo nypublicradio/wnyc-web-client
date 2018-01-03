@@ -13,16 +13,7 @@
   }
 }
 
-.hero__logo-link {
-  border: none;
-}
-
-.hero__donate {
-  @include hero-emphasis;
-  text-transform: uppercase;
-}
-
-.nypr-ui__hero {
+.full-bleed__hero {
   margin-bottom: 35px;
   
   &.stuck {
@@ -30,11 +21,33 @@
   }
 }
 
-.nypr-ui__hero .hero-headline {
+.full-bleed__logo-link {
+  border: none;
+}
+
+.full-bleed__logo {
+  width: 56px;
+  margin-left: 8px;
+  
+  path {
+    fill: white;
+  }
+  
+  @include mq($medium-and-up) {
+    width: 80px;
+  }
+}
+
+.full-bleed__donate {
+  @include hero-emphasis;
+  text-transform: uppercase;
+}
+
+.full-bleed__headline {
   @include hero-emphasis;
 }
 
-.nypr-ui__hero .hero-blurb {
+.full-bleed__blurb {
   font-weight: 600;
   
   > :last-child {
@@ -42,7 +55,7 @@
   }
 }
 
-.hero-footer > .listen-button {
+.full-bleed__footer > .listen-button {
   align-self: center;
   
   font-family: 'Montserrat', sans-serif;
@@ -51,7 +64,7 @@
   font-style: oblique;
 }
 
-.hero-lockup {
+.full-bleed__share {
   display: flex;
   align-items: center;
   
@@ -60,7 +73,7 @@
   }
 }
 
-.hero-lockup__label {
+.full-bleed__share-label {
   display: none;
   
   @include mq($medium-and-up) {
