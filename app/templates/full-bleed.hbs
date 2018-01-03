@@ -70,17 +70,7 @@
   {{#if s.producingOrganizations}}
   <div class="producing-org-banner">
     <div class="producing-org-banner__body">
-      <span>
-        Produced by {{producing-orgs s.producingOrganizations unlinked=true}}
-      </span>
-      
-      <div class="producing-org-banner__logos">
-        {{#each s.producingOrganizations as |org|}}
-          {{#if org.logo}}
-            <img src={{image-template org.logo.template 80 0 org.logo.crop}} >
-          {{/if}}
-        {{/each}}
-      </div>
+      Produced by {{producing-orgs s.producingOrganizations}}
     </div>
   </div>
   {{/if}}
