@@ -1,13 +1,5 @@
 {{#with model.story as |s|}}
   {{#nypr-ui/hero gradient=true class="full-bleed__hero" as |hero|}}
-    {{#with s.imageMain as |img|}}
-      {{hero.image
-        src=(image-template img.template 1280 0 img.crop)
-        source=img.source
-        caption=img.caption
-        credit=img.creditsName
-      }}
-    {{/with}}
     {{#hero.top as |top|}}
       {{#top.left}}
         {{#link-to 'index' class="full-bleed__logo-link"}}
@@ -22,6 +14,15 @@
         {{/nypr-ui/buttons/red}}
       {{/top.right}}
     {{/hero.top}}
+    
+    {{#with s.imageMain as |img|}}
+      {{hero.image
+        src=(image-template img.template 1280 0 img.crop)
+        source=img.source
+        caption=img.caption
+        credit=img.creditsName
+      }}
+    {{/with}}
     
     {{#hero.headline class="full-bleed__headline" tagName="h2"}}
       {{s.title}}
