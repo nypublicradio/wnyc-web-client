@@ -23,6 +23,10 @@
 
 .full-bleed__logo-link {
   border: none;
+  
+  > * {
+    pointer-events: none;
+  }
 }
 
 .full-bleed__logo {
