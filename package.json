@@ -64,6 +64,7 @@
     "ember-get-config": "^0.2.2",
     "ember-hifi": "^1.11.3",
     "ember-holygrail-layout": "^0.1.4",
+    "ember-hotjar": "^0.0.2",
     "ember-load-initializers": "^1.0.0",
     "ember-metrics": "^0.12.0",
     "ember-moment": "7.4.1",
