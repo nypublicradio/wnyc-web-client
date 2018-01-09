@@ -162,6 +162,11 @@ module.exports = function(environment) {
     },
     alienDom: {
       toRemove: `${ALIEN_DOM_ROOT} > :not(.ember-view):not(#fb-root), ${ALIEN_DOM_ROOT} > head > link[rel=stylesheet]:not([href*=assets])`
+    },
+    hotjar: {
+      id: 491820,
+      enabled: environment === 'production',
+      forceSSL: true
     }
   };
 
