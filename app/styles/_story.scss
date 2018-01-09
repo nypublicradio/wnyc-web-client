@@ -105,7 +105,8 @@
   }
 
   > .django-content > div > p:first-of-type::first-letter {
-    @include hero-emphasis;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
     font-size: 93px;
     line-height: 81px;
     float: left;
