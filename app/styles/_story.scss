@@ -61,6 +61,8 @@
 
 .full-bleed__footer > .listen-button {
   align-self: center;
+  margin-right: 5px;
+  flex-shrink: 0;
   
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
