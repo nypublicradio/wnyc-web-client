@@ -1,0 +1,249 @@
+@import "nypr-ui/vars";
+@import "nypr-ui/colors";
+@import "nypr-ui/mixins/text";
+
+@mixin layout {
+  max-width: 750px;
+  padding: 0 25px;
+  margin: 0 auto;
+  
+  @include mq($medium-and-up) {
+    max-width: 800px;
+    padding: 0 50px;
+  }
+}
+
+.full-bleed__hero {
+  margin-bottom: 35px;
+  
+  &.stuck {
+    margin-bottom: 0;
+  }
+}
+
+.full-bleed__logo-link {
+  border: none;
+  
+  > * {
+    pointer-events: none;
+  }
+}
+
+.full-bleed__logo {
+  width: 56px;
+  margin-left: 8px;
+  
+  path {
+    fill: white;
+  }
+  
+  @include mq($medium-and-up) {
+    width: 80px;
+  }
+}
+
+.full-bleed__donate {
+  @include hero-emphasis;
+  text-transform: uppercase;
+}
+
+.full-bleed__headline {
+  @include hero-emphasis;
+}
+
+.full-bleed__blurb {
+  font-weight: 600;
+  
+  > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+.full-bleed__footer > .listen-button {
+  align-self: center;
+  margin-right: 5px;
+  flex-shrink: 0;
+  
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  font-style: oblique;
+}
+
+.full-bleed__share {
+  display: flex;
+  align-items: center;
+  
+  .btn {
+    color: white;
+  }
+}
+
+.full-bleed__share-label {
+  display: none;
+  
+  @include mq($medium-and-up) {
+    display: inline;
+    margin-right: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    font-style: oblique;
+  }
+}
+
+.full-bleed__body {
+  
+  > .django-content p {
+    @include layout;
+    margin-bottom: 35px;
+    
+    font-size: 16px;
+    line-height: 1.5;
+    
+    @include mq($medium-and-up) {
+      font-size: 18px;
+    }
+  }
+
+  > .django-content > div > p:first-of-type::first-letter {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 93px;
+    line-height: 81px;
+    float: left;
+    margin-right: 7px;
+  }
+  
+  .embedded-image {
+    display: block;
+    position: relative;
+
+    max-width: 1440px;
+    margin: 0 auto;
+    
+    > img {
+      width: 100%;
+      margin-bottom: 33px;
+      
+      @include mq($medium-and-up) {
+        margin-bottom: 55px;
+      }
+    }
+    
+    > .image-metadata  {
+      display: block;
+      padding-top: 0;
+      margin: 0 25px 45px;
+      
+      @include mq($medium-and-up) {
+        margin-bottom: 0;
+      }
+    }
+    
+    .image-caption {
+      position: relative;
+      display: block;
+      @include hero-emphasis;
+      font-size: 20px;
+      line-height: 1.35;
+      
+      @include mq($medium-and-up) {
+        font-size: 40px;
+        line-height: 1.25;
+        color: white;
+        max-width: 865px;
+        
+        position: absolute;
+        bottom: 65px;
+        left: 65px;
+      }
+      
+      &:before {
+        content: '';
+        display: block;
+        max-width: 100px;
+        
+        border-top: 5px solid $brightred;
+        border-right: 5px solid transparent;
+        margin-left: 5px;
+        margin-bottom: 15px;
+      }
+      
+      &:after {
+        content: '';
+        display: block;
+        height: 0;
+        width: 0;
+        border-left: 5px solid transparent;
+        border-top: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid $brightred;
+        
+        position: absolute;
+        bottom: 0;
+        top: -5px;
+      }
+    }
+    
+    .image-credit {
+      display: block;
+      font-size: 12px;
+      line-height: 2.25;
+      color: $lightgray;
+      
+      @include mq($medium-and-up) {
+        position: absolute;
+        bottom: -35px;
+        right: 25px;
+      }
+    }
+  }
+}
+
+.full-bleed__byline {
+  @include layout;
+  
+  font-size: 16px;
+  margin-bottom: 40px;
+  
+  
+  > p {
+    margin: 0;
+  }
+}
+
+.full-bleed__author {
+  color: black;
+  text-decoration: none;
+  border: none;
+  font-weight: 600;
+  
+  &:hover {
+    color: $blue;
+  }
+}
+
+.full-bleed__date {
+  font-size: 12px;
+  line-height: 2;
+}
+
+.producing-org-banner {
+  background-color: black;
+  padding: 42px 0;
+}
+
+.producing-org-banner__body {
+  @include layout;
+  
+  color: white;
+  
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.33;
+  
+  > a {
+    color: white;
+  }
+}

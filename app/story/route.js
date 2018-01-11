@@ -49,6 +49,15 @@ export default Ember.Route.extend(PlayParamMixin, {
     return this._super(...arguments);
   },
   
+  renderTemplate(controller, model) {
+    if (get(model, 'story.template') === 'story_full-bleed') {
+      this.send('disableChrome');
+      this.render('full-bleed');
+    } else {
+      this._super(...arguments);
+    }
+  },
+  
   actions: {
     error(error){
       //detect 404 error on api
@@ -89,6 +98,7 @@ export default Ember.Route.extend(PlayParamMixin, {
     },
 
     willTransition() {
+      this.send('enableChrome');
       if (window.dataLayer) {
         window.dataLayer.push({showTitle: undefined});
       }

@@ -75,7 +75,7 @@
     "ember-responsive": "^2.0.4",
     "ember-route-action-helper": "2.0.6",
     "ember-scroll-to": "0.6.4",
-    "ember-simple-auth": "^1.4.0",
+    "ember-simple-auth": "^1.4.2",
     "ember-sinon": "^1.0.1",
     "ember-sinon-qunit": "^2.0.0",
     "ember-sortable": "1.9.4",
@@ -98,7 +98,7 @@
     "nypr-metrics": "~0.0.0",
     "nypr-player": "~0.0.0",
     "nypr-publisher-lib": "~0.0.0",
-    "nypr-ui": "~0.0.0",
+    "nypr-ui": "~0.1.0",
     "torii": "0.9.5"
   },
   "ember-addon": {
@@ -109,5 +109,8 @@
   },
   "engines": {
     "node": "^4.5 || 6.* || >= 7.*"
+  },
+  "resolutions": {
+    "nypr-ui": "~0.1.0"
   }
 }

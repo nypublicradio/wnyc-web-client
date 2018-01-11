@@ -34,7 +34,8 @@ module.exports = function(defaults) {
     // we're using Mirage to develop our addon tests using /tests/dummy/mirage as our
     // mirage folder. This config overrides the mirage folder to use the correct location
     // for developing an Ember application.
-    'ember-cli-mirage': { directory: defaults.project.root + '/mirage' }
+    'ember-cli-mirage': { directory: defaults.project.root + '/mirage' },
+    useWaypoints: true
   });
 
   try {
