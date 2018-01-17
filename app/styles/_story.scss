@@ -254,3 +254,7 @@
     color: white;
   }
 }
+
+.nypr-pull-quote {
+  @include pull-quote;
+}
