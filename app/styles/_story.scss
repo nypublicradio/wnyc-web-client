@@ -6,7 +6,7 @@
   max-width: 750px;
   padding: 0 25px;
   margin: 0 auto;
-  
+
   @include mq($medium-and-up) {
     max-width: 800px;
     padding: 0 50px;
@@ -15,7 +15,7 @@
 
 .full-bleed__hero {
   margin-bottom: 35px;
-  
+
   &.stuck {
     margin-bottom: 0;
   }
@@ -23,7 +23,7 @@
 
 .full-bleed__logo-link {
   border: none;
-  
+
   > * {
     pointer-events: none;
   }
@@ -32,11 +32,11 @@
 .full-bleed__logo {
   width: 56px;
   margin-left: 8px;
-  
+
   path {
     fill: white;
   }
-  
+
   @include mq($medium-and-up) {
     width: 80px;
   }
@@ -53,7 +53,7 @@
 
 .full-bleed__blurb {
   font-weight: 600;
-  
+
   > :last-child {
     margin-bottom: 0;
   }
@@ -63,7 +63,7 @@
   align-self: center;
   margin-right: 5px;
   flex-shrink: 0;
-  
+
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   font-weight: 600;
@@ -73,7 +73,7 @@
 .full-bleed__share {
   display: flex;
   align-items: center;
-  
+
   .btn {
     color: white;
   }
@@ -81,7 +81,7 @@
 
 .full-bleed__share-label {
   display: none;
-  
+
   @include mq($medium-and-up) {
     display: inline;
     margin-right: 15px;
@@ -93,14 +93,14 @@
 }
 
 .full-bleed__body {
-  
+
   > .django-content p {
     @include layout;
     margin-bottom: 35px;
-    
+
     font-size: 16px;
     line-height: 1.5;
-    
+
     @include mq($medium-and-up) {
       font-size: 18px;
     }
@@ -114,62 +114,62 @@
     float: left;
     margin-right: 7px;
   }
-  
+
   .embedded-image {
     display: block;
     position: relative;
 
     max-width: 1440px;
     margin: 0 auto;
-    
+
     > img {
       width: 100%;
       margin-bottom: 33px;
-      
+
       @include mq($medium-and-up) {
         margin-bottom: 55px;
       }
     }
-    
+
     > .image-metadata  {
       display: block;
       padding-top: 0;
       margin: 0 25px 45px;
-      
+
       @include mq($medium-and-up) {
         margin-bottom: 0;
       }
     }
-    
+
     .image-caption {
       position: relative;
       display: block;
       @include hero-emphasis;
       font-size: 20px;
       line-height: 1.35;
-      
+
       @include mq($medium-and-up) {
         font-size: 40px;
         line-height: 1.25;
         color: white;
         max-width: 865px;
-        
+
         position: absolute;
         bottom: 65px;
         left: 65px;
       }
-      
+
       &:before {
         content: '';
         display: block;
         max-width: 100px;
-        
+
         border-top: 5px solid $brightred;
         border-right: 5px solid transparent;
         margin-left: 5px;
         margin-bottom: 15px;
       }
-      
+
       &:after {
         content: '';
         display: block;
@@ -179,19 +179,26 @@
         border-top: 5px solid transparent;
         border-right: 5px solid transparent;
         border-bottom: 5px solid $brightred;
-        
+
         position: absolute;
         bottom: 0;
         top: -5px;
       }
+
+      &:empty {
+        &:after,
+        &:before {
+          display: none;
+        }
+      }
     }
-    
+
     .image-credit {
       display: block;
       font-size: 12px;
       line-height: 2.25;
       color: $lightgray;
-      
+
       @include mq($medium-and-up) {
         position: absolute;
         bottom: -35px;
@@ -203,11 +210,11 @@
 
 .full-bleed__byline {
   @include layout;
-  
+
   font-size: 16px;
   margin-bottom: 40px;
-  
-  
+
+
   > p {
     margin: 0;
   }
@@ -218,7 +225,7 @@
   text-decoration: none;
   border: none;
   font-weight: 600;
-  
+
   &:hover {
     color: $blue;
   }
@@ -236,13 +243,13 @@
 
 .producing-org-banner__body {
   @include layout;
-  
+
   color: white;
-  
+
   font-size: 18px;
   font-weight: 600;
   line-height: 1.33;
-  
+
   > a {
     color: white;
   }
