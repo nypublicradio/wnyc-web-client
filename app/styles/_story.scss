@@ -21,11 +21,6 @@
   }
 }
 
-.full-bleed__hero-invert {
-  color: black;
-  min-height: auto;
-}
-
 .full-bleed__logo-link {
   border: none;
 
@@ -40,10 +35,6 @@
 
   path {
     fill: white;
-    
-    .full-bleed__hero-invert & {
-      fill: black;
-    }
   }
 
   @include mq($medium-and-up) {
@@ -51,10 +42,8 @@
   }
 }
 
-.full-bleed__hero-invert .full-bleed__back {
-  path {
-    fill: black;
-  }
+.no-image path {
+  fill: black;
 }
 
 .full-bleed__donate {
@@ -91,8 +80,8 @@
 
   .btn {
     color: white;
-    
-    .full-bleed__hero-invert & {
+
+    .no-image & {
       color: black;
       border-color: rgba(0, 0, 0, 0.7);
     }

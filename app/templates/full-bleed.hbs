@@ -1,5 +1,5 @@
 {{#with model.story as |s|}}
-  {{#nypr-ui/hero gradient=(gte s.imageMain.w 1440) sticky=true class=(concat "full-bleed__hero" (if (lt s.imageMain.w 1440) ' full-bleed__hero-invert')) as |hero|}}
+  {{#nypr-ui/hero gradient=(gte s.imageMain.w 1440) sticky=true class="full-bleed__hero" as |hero|}}
     {{#hero.top as |top|}}
       {{#top.left}}
         {{#link-to 'index' class="full-bleed__logo-link gtm__click-tracking" data-action='Full Bleed WNYC logo' data-label=s.title}}
