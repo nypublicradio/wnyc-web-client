@@ -184,6 +184,13 @@
         bottom: 0;
         top: -5px;
       }
+
+      &:empty {
+        &:after,
+        &:before {
+          display: none;
+        }
+      }
     }
 
     .image-credit {
