@@ -255,6 +255,10 @@
   }
 }
 
+.nypr-pull-quote__wrapper {
+  @include layout;
+}
+
 .nypr-pull-quote {
   @include pull-quote;
 }
