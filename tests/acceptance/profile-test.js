@@ -369,7 +369,7 @@ test('resend verification email when authenticated via facebook fails on bad pas
     return new Response(200, {}, {data: {is_verified: false}});
   });
   // Unauthorized / Bad password
-  server.post('/v1/session', {}, 401);
+  server.post(`${config.authAPI}/v1/session`, {}, 401);
 
   let requests = [];
   server.get(`${config.authAPI}/v1/confirm/resend-attr`, (schema, request) => {
