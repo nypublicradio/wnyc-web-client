@@ -30,10 +30,6 @@ export default function() {
   /*------------------------------------------------------------
     legacy (v1) endpoints
   --------------------------------------------------------------*/
-  this.get('/api/v1/list/streams/');
-  this.get('/api/v1/list/streams/:slug', 'stream');
-  this.get('/api/v1/whats_on/:slug', 'whats-on');
-  this.get('/api/v1/whats_on/');
   this.get(config.etagAPI, {success: true});
 
   this.urlPrefix = config.publisherAPI;
