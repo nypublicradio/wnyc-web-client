@@ -33,13 +33,14 @@ export default function() {
   this.get(config.etagAPI, {success: true});
 
   this.urlPrefix = config.publisherAPI;
-  this.get('/api/v1/story/:id');
-  this.get('/api/v1/list/comments/24/:storyId/', 'comment');
-  this.get('/api/v1/whats_on/:slug', 'whats-on');
-  this.get('/api/v1/list/streams/');
-  this.get('/api/v1/list/streams/:slug', 'stream');
+  this.get('/v1/story/:id');
+  this.get('/v1/list/comments/24/:storyId/', 'comment');
+  this.get('/v1/whats_on/');
+  this.get('/v1/whats_on/:slug', 'whats-on');
+  this.get('/v1/list/streams/');
+  this.get('/v1/list/streams/:slug', 'stream');
 
-  this.get('/api/v1/story/:slug', function(schema, request) { // backbone makes this ajax request to the audio
+  this.get('/v1/story/:slug', function(schema, request) { // backbone makes this ajax request to the audio
     let results = schema.discoverStories.all().models.filter(function(d) {
       return d.id === request.params.slug;
     });
@@ -51,7 +52,7 @@ export default function() {
     };
   });
 
-  this.get('/api/v1/discover/topics', function(schema) {
+  this.get('/v1/discover/topics', function(schema) {
     let links = schema.discoverTopics.all().models.map(function(t) {
       return {
         url: t.url,
@@ -64,35 +65,34 @@ export default function() {
     };
   });
 
-  this.post('/api/v1/listenaction/create/:id/play/', {});
-  this.post('/api/v1/listenaction/create/:id/complete/', {});
-  this.post('/api/most/view/managed_item/:id/', {});
-  this.post('/api/most/listen/managed_item/:id/', {});
+  this.post('/v1/listenaction/create/:id/play/', {});
+  this.post('/v1/listenaction/create/:id/complete/', {});
+  this.post('/most/view/managed_item/:id/', {});
+  this.post('/most/listen/managed_item/:id/', {});
 
   /*------------------------------------------------------------
     transitional (v2) endpoints
   --------------------------------------------------------------*/
 
-  this.get('/api/v2/related/:storyId/', 'story');
+  this.get('/v2/related/:storyId/', 'story');
 
   /*------------------------------------------------------------
     JSON:API (v3) endpoints
   --------------------------------------------------------------*/
 
-  // this.get(`/api/v3/shows`);
-  this.get('/api/v3/shows');
-  this.get('/api/v3/buckets/:slug/', 'bucket');
-  this.get('/api/v3/story-pk/:id/', 'story');
-  this.get('/api/v3/story/:slug/', ({ stories }, { params }) => {
+  this.get('/v3/shows');
+  this.get('/v3/buckets/:slug/', 'bucket');
+  this.get('/v3/story-pk/:id/', 'story');
+  this.get('/v3/story/:slug/', ({ stories }, { params }) => {
     let { slug } = params;
     return stories.where({ slug }).models[0];
   });
-  this.get('/api/v3/story/related/', 'story');
-  this.get('/api/v3/channel/\*id', 'api-response');
-  this.get('/api/v3/chunks/:id/', 'chunk');
+  this.get('/v3/story/related/', 'story');
+  this.get('/v3/channel/*id', 'api-response');
+  this.get('/v3/chunks/:id/', 'chunk');
 
   let discoverPath = config.featureFlags['other-discover'] ? 'reco_proxy' : 'make_playlist';
-  this.get(`/api/v3/${discoverPath}`, 'discover-story');
+  this.get(`/v3/${discoverPath}`, 'discover-story');
 
   /*------------------------------------------------------------
     identity management (account) endpoints
