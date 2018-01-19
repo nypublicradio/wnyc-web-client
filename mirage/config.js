@@ -127,19 +127,19 @@ export default function() {
   // Let this one slip by, we've got a http-proxy for it
   this.passthrough('/api/v1/dynamic-script-loader');
   this.passthrough(`${config.publisherAPI}/api/v1/dynamic-script-loader`);
-  this.passthrough(`${config.publisherAPI}/api/v1/schedule/whats_on_today/\*`);
+  this.passthrough(`${config.publisherAPI}/api/v1/schedule/whats_on_today/*`);
   this.passthrough('/datanewswidget/**');
 
   /*------------------------------------------------------------
-  ${wnycURL}/* requests. Oddballs without the api namespace
+  ${webRoot}/* requests. Oddballs without the api namespace
   --------------------------------------------------------------*/
 
-  this.get(`${config.wnycURL}`, function(schema) {
+  this.get(`${config.webRoot}`, function(schema) {
     let home = schema.djangoPages.find('/');
     return home ? home.attrs.text : '';
   });
 
-  this.get(`${config.wnycURL}/\*id`, function(schema, {queryParams, params}) {
+  this.get(`${config.webRoot}/*id`, function(schema, {queryParams, params}) {
     let { id } = params;
     let page = schema.djangoPages.find(id);
     if (!page) {
