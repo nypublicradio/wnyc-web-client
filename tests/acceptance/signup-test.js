@@ -7,6 +7,7 @@ import { authenticateSession, currentSession } from 'wnyc-web-client/tests/helpe
 import dummySuccessProviderFb from 'wnyc-web-client/tests/helpers/torii-dummy-success-provider-fb';
 import dummyFailureProvider from 'wnyc-web-client/tests/helpers/torii-dummy-failure-provider';
 import { registerMockOnInstance } from 'wnyc-web-client/tests/helpers/register-mock';
+import config from 'wnyc-web-client/config/environment';
 
 moduleForAcceptance('Acceptance | signup', {
   beforeEach() {
@@ -102,7 +103,7 @@ test('Successful facebook login redirects', function(assert) {
 test('Facebook login with no email shows alert', function(assert) {
   server.create('user');
   registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
-  server.get('/v1/session', () => {
+  server.get(`${config.authAPI}/v1/session`, () => {
     return new Response(400, {}, { "errors": {
       "code": "MissingAttributeException",
       "message": "A provider account could not be created because one or more attributes were not available from the provider. Permissions may have been declined.",

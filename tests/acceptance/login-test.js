@@ -177,7 +177,7 @@ test('Successful facebook login redirects', function(assert) {
 test('Facebook login with no email shows alert', function(assert) {
   server.create('user');
   registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
-  server.get('/v1/session', () => {
+  server.get(`${config.authAPI}/v1/session`, () => {
     return new Response(400, {}, { "errors": {
       "code": "MissingAttributeException",
       "message": "A provider account could not be created because one or more attributes were not available from the provider. Permissions may have been declined.",
