@@ -34,10 +34,10 @@ export default function() {
   this.get('/api/v1/list/streams/:slug', 'stream');
   this.get('/api/v1/whats_on/:slug', 'whats-on');
   this.get('/api/v1/whats_on/');
+  this.get(config.etagAPI, {success: true});
 
   this.urlPrefix = config.publisherAPI;
   this.get('/api/v1/story/:id');
-  this.get('/api/v1/browser_id/', {success: true});
   this.get('/api/v1/list/comments/24/:storyId/', 'comment');
   this.get('/api/v1/whats_on/:slug', 'whats-on');
   this.get('/api/v1/list/streams/');
