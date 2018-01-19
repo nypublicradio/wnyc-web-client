@@ -94,7 +94,7 @@
 
 .full-bleed__body {
 
-  > .django-content p {
+  > .django-content > div > p {
     @include layout;
     margin-bottom: 35px;
 
