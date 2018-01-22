@@ -112,6 +112,6 @@
   },
   "resolutions": {
     "nypr-ui": "~0.1.0",
-    "nypr-account-settings": "nypublicradio/nypr-account-settings#signup_prefill"
+    "nypr-account-settings": "~0.0.0"
   }
 }
