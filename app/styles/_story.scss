@@ -94,7 +94,7 @@
 
 .full-bleed__body {
 
-  > .django-content p {
+  > .django-content > div > p {
     @include layout;
     margin-bottom: 35px;
 
@@ -253,4 +253,12 @@
   > a {
     color: white;
   }
+}
+
+.full-bleed__body .nypr-pull-quote__wrapper {
+  @include layout;
+}
+
+.nypr-pull-quote {
+  @include pull-quote;
 }
