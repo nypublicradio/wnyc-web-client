@@ -6634,8 +6634,8 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
 nypr-account-settings@~0.0.0:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/nypr-account-settings/-/nypr-account-settings-0.0.3.tgz#aa684c5cfd15b9c87acb6f5692a5f4a1ed976025"
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/nypr-account-settings/-/nypr-account-settings-0.0.5.tgz#41d226ec6c4604416fcf7252375289239d9a6de5"
   dependencies:
     ember-changeset "^1.2.3"
     ember-changeset-validations "^1.2.8"
