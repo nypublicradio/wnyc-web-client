@@ -6793,8 +6793,8 @@ nypr-publisher-lib@~0.0.0:
     nypr-ui "~0.0.0"
 
 nypr-ui@~0.0.0:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.0.1.tgz#d1a8a72745ea2e45331edfaf6a7855231877f28f"
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.0.2.tgz#54e15db7c6ae36e237e813de80aedf178506d15e"
   dependencies:
     ember-basic-dropdown "0.33.1"
     ember-cli-babel "^6.6.0"
