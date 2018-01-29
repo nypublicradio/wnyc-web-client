@@ -57,8 +57,8 @@
     {{/hero.footer}}
   {{/nypr-ui/hero}}
   
-  {{#with s.appearances.authors as |authors|}}
   <footer class="full-bleed__byline">
+    {{#with s.appearances.authors as |authors|}}
     <p>
       By
       {{#each authors as |author i|}}
@@ -66,11 +66,11 @@
         {{link-to author.name 'djangorendered' (concat 'people/' author.slug) class="full-bleed__author"}}
       {{/each}}
     </p>
+    {{/with}}
     <p class="full-bleed__date">
       {{moment-format s.newsdate 'MMMM D, YYYY'}}
     </p>
   </footer>
-  {{/with}}
   
   {{django-page page=s.bodyDjango class="full-bleed__body"}}
   
