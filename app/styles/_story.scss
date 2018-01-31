@@ -102,13 +102,14 @@
 
   > .django-content > div > p {
     @include layout;
-    margin-bottom: 35px;
+    margin-bottom: 20px;
 
     font-size: 16px;
     line-height: 1.5;
 
     @include mq($medium-and-up) {
       font-size: 18px;
+      margin-bottom: 35px;
     }
   }
 
@@ -130,7 +131,6 @@
 
     > img {
       width: 100%;
-      margin-bottom: 33px;
 
       @include mq($medium-and-up) {
         margin-bottom: 55px;
@@ -140,7 +140,7 @@
     > .image-metadata  {
       display: block;
       padding-top: 0;
-      margin: 0 25px 45px;
+      margin: 0 25px 15px;
 
       @include mq($medium-and-up) {
         margin-bottom: 0;
@@ -154,17 +154,6 @@
       font-size: 20px;
       line-height: 1.35;
 
-      @include mq($medium-and-up) {
-        font-size: 40px;
-        line-height: 1.25;
-        color: white;
-        max-width: 865px;
-
-        position: absolute;
-        bottom: 65px;
-        left: 65px;
-      }
-
       &:before {
         content: '';
         display: block;
@@ -172,8 +161,7 @@
 
         border-top: 5px solid $brightred;
         border-right: 5px solid transparent;
-        margin-left: 5px;
-        margin-bottom: 15px;
+        margin: 15px 0 15px 5px;
       }
 
       &:after {
@@ -195,6 +183,21 @@
         &:after,
         &:before {
           display: none;
+        }
+      }
+
+      @include mq($medium-and-up) {
+        font-size: 40px;
+        line-height: 1.25;
+        color: white;
+        max-width: 865px;
+
+        position: absolute;
+        bottom: 65px;
+        left: 65px;
+
+        &:before {
+          margin-top: 0;
         }
       }
     }
