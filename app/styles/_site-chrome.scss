@@ -409,3 +409,15 @@
     background-color: $nearwhite;
   }
 }
+
+.footer-legal {
+  display: flex;
+
+  > .l-col2of3 {
+    flex: 1;
+  }
+
+  > .l-col1of3 {
+    width: auto;
+  }
+}
