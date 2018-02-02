@@ -7,14 +7,14 @@
           {{nypr-svg icon="wnyc-logo" className="full-bleed__logo"}}
         {{/link-to}}
       {{/top.left}}
-      
+
       {{#top.right}}
         {{#nypr-ui/buttons/red tagName="a" href="https://pledge3.wnyc.org/donate/main/onestep/?ref=button-donate-header" tall=true class="full-bleed__donate"}}
           Donate
         {{/nypr-ui/buttons/red}}
       {{/top.right}}
     {{/hero.top}}
-    
+
     {{#with s.imageMain as |img|}}
       {{hero.image
         src=(image-template img.template 1440 0 img.crop)
@@ -22,7 +22,7 @@
           (array 320 0)
           (array 480 0)
           (array 800 0))
-        sizes=(image-sizes 
+        sizes=(image-sizes
           (array 'max-width: 320px' 320)
           (array 'max-width: 480px' 480)
           (array 'max-width: 800px' 800))
@@ -31,17 +31,17 @@
         credit=img.creditsName
       }}
     {{/with}}
-    
+
     {{#hero.headline class="full-bleed__headline" tagName="h2"}}
       {{s.title}}
     {{/hero.headline}}
-    
+
     {{#hero.blurb class="full-bleed__blurb"}}
       <p>
         {{{s.tease}}}
       </p>
     {{/hero.blurb}}
-    
+
     {{#hero.footer class="full-bleed__footer" as |footer|}}
       {{#if (and s.audioMayStream s.audio)}}
         {{#listen-button
@@ -50,15 +50,15 @@
           itemTitle=s.title
           itemShow=(or s.showTitle s.headers.brand.title)}}Listen to the story&nbsp;{{/listen-button}}
       {{/if}}
-      
+
       {{#footer.lockup class="full-bleed__share"}}
         <span class="full-bleed__share-label">Share</span> {{nypr-story/share-buttons story=s via='WNYC' classNames='story-share-buttons'}}
       {{/footer.lockup}}
     {{/hero.footer}}
   {{/nypr-ui/hero}}
-  
-  {{#with s.appearances.authors as |authors|}}
+
   <footer class="full-bleed__byline">
+    {{#with s.appearances.authors as |authors|}}
     <p>
       By
       {{#each authors as |author i|}}
@@ -66,14 +66,14 @@
         {{link-to author.name 'djangorendered' (concat 'people/' author.slug) class="full-bleed__author"}}
       {{/each}}
     </p>
+    {{/with}}
     <p class="full-bleed__date">
       {{moment-format s.newsdate 'MMMM D, YYYY'}}
     </p>
   </footer>
-  {{/with}}
-  
+
   {{django-page page=s.bodyDjango class="full-bleed__body"}}
-  
+
   {{#if s.producingOrganizations}}
   <div class="producing-org-banner">
     <div class="producing-org-banner__body">
@@ -81,7 +81,7 @@
     </div>
   </div>
   {{/if}}
-  
+
 {{/with}}
 
 {{site-chrome/site-footer}}
