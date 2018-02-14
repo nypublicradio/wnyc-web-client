@@ -11,7 +11,7 @@ export default Ember.Route.extend(PlayParamMixin, {
   googleAds:    service(),
   dataPipeline: service(),
   currentUser:  service(),
-  
+
   titleToken(model) {
     return `${get(model, 'story.title')} - ${get(model, 'story.headers.brand.title')}`;
   },
@@ -19,7 +19,7 @@ export default Ember.Route.extend(PlayParamMixin, {
     return `${tokens[0]} - WNYC`;
   },
   model({ slug }, { queryParams }) {
-    
+
     return this.store.findRecord('story', slug, {adapterOptions: {queryParams}}).then(story => {
       let comments = this.store.query('comment', { itemTypeId: story.get('itemTypeId'), itemId: story.get('cmsPK') });
       let relatedStories = this.store.query('story', {related: { itemId: story.get('cmsPK'), limit: 5 }});
@@ -42,14 +42,14 @@ export default Ember.Route.extend(PlayParamMixin, {
       window.dataLayer.push({storyTemplate: get(model, 'story.template')});
     }
   },
-  
+
   setupController(controller) {
     controller.set('isMobile', window.Modernizr.touchevents);
     controller.set('session', get(this, 'session'));
     controller.set('user', get(this, 'currentUser.user'));
     return this._super(...arguments);
   },
-  
+
   renderTemplate(controller, model) {
     if (get(model, 'story.template') === 'story_full-bleed') {
       this.send('disableChrome');
@@ -58,7 +58,7 @@ export default Ember.Route.extend(PlayParamMixin, {
       this._super(...arguments);
     }
   },
-  
+
   actions: {
     error(error){
       //detect 404 error on api
@@ -69,7 +69,7 @@ export default Ember.Route.extend(PlayParamMixin, {
 
     didTransition() {
       this._super(...arguments);
-      
+
       let model = get(this, 'currentModel');
       let metrics = get(this, 'metrics');
       let dataPipeline = get(this, 'dataPipeline');
@@ -89,7 +89,7 @@ export default Ember.Route.extend(PlayParamMixin, {
         title: label,
         nprVals,
       });
-      
+
       // data pipeline
       dataPipeline.reportItemView({
         cms_id: get(model, 'story.cmsPK'),
