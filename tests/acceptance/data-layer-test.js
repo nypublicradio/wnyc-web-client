@@ -45,6 +45,7 @@ test('confirming undefined showTitle on story page does not break page', functio
     assert.ok(window.dataLayer.find(d => d.showTitle === "The Brian Lehrer Show"), 'it should push the brand title to the dataLayer');
   });
 });
+
 test('confirming story pages add storyTemplate dataLayer value', function(assert) {
   window.dataLayer = [];
   let story = server.create('story', {template: 'story_default'});
