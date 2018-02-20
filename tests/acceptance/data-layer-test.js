@@ -22,7 +22,7 @@ test('confirming data layer showTitle is present on show page', function(assert)
     .visit(listingPage);
 
   andThen(function() {
-    assert.deepEqual(window.dataLayer.slice(-1)[0], {showTitle: listingPage.title});
+		assert.ok(window.dataLayer.find(d => d.showTitle === listingPage.title), 'it should pushed the listingPage title into the dataLayer');
   });
 });
 
@@ -32,7 +32,7 @@ test('confirming data layer showTitle is present on story page', function(assert
   visit(`story/${story.slug}`);
 
   andThen(function() {
-    assert.deepEqual(window.dataLayer.slice(-1)[0], {showTitle: story.showTitle});
+    assert.ok(window.dataLayer.find(d => d.showTitle === story.showTitle), 'object is pushed into dataLayer with correct showTitle value');
   });
 });
 
@@ -42,6 +42,16 @@ test('confirming undefined showTitle on story page does not break page', functio
   visit(`story/${story.slug}`);
 
   andThen(function() {
-    assert.deepEqual(window.dataLayer.slice(-1)[0], {showTitle: "The Brian Lehrer Show"}, 'it should push the brand title to the dataLayer');
+    assert.ok(window.dataLayer.find(d => d.showTitle === "The Brian Lehrer Show"), 'it should push the brand title to the dataLayer');
+  });
+});
+
+test('confirming story pages add storyTemplate dataLayer value', function(assert) {
+  window.dataLayer = [];
+  let story = server.create('story', {template: 'story_default'});
+  visit(`story/${story.slug}`);
+
+  andThen(function() {
+    assert.ok(window.dataLayer.find(d => d.storyTemplate === story.template), 'object is pushed into dataLayer with correct storyTemplate value');
   });
 });
