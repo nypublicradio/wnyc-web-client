@@ -49,19 +49,20 @@
           itemPK=s.slug
           itemTitle=s.title
           itemShow=(or s.showTitle s.headers.brand.title)}}Listen {{s.audioDurationReadable}}&nbsp;{{/listen-button}}
+          
           {{#unless deviceIsIos}}
             <a href={{s.audio}} download={{s.title}} class="story__download-link" title='Download "{{s.title}}"'>{{nypr-svg icon="download"}} Download</a>
+            <div class="story-embed__wrapper">
+            <button class="story__embed-button" {{action (mut showEmbed) true}}>{{nypr-svg icon="embed"}} Embed</button>
+            {{#if showEmbed}}
+              {{#click-outside class="story__embed-popup" action=(action (mut showEmbed) false)}}
+                <h2 class="story__embed-header">Want to embed this player?</h2>
+                <p class="story__embed-instructions">Use the code below.</p>
+                <div class="story__embed-code">{{s.embedCode}}</div>
+              {{/click-outside}}
+            {{/if}}
+            </div>
           {{/unless}}
-          <div class="story-embed__wrapper">
-          <button class="story__embed-button" {{action (mut showEmbed) true}}>{{nypr-svg icon="embed"}} Embed</button>
-          {{#if showEmbed}}
-            {{#click-outside class="story__embed-popup" action=(action (mut showEmbed) false)}}
-              <h2 class="story__embed-header">Want to embed this player?</h2>
-              <p class="story__embed-instructions">Use the code below.</p>
-              <div class="story__embed-code">{{s.embedCode}}</div>
-            {{/click-outside}}
-          {{/if}}
-          </div>
       {{/if}}
 
       {{#footer.lockup class="full-bleed__share"}}
