@@ -125,6 +125,10 @@
           <em>{{{model.story.correctionText}}}</em>
         {{/if}}
 
+        {{#if model.storyChunk}}
+          {{django-page page=model.storyChunk.pagecontent}}
+        {{/if}}
+
         {{#if model.story.enableComments}}
             {{story-comments story=model.story
                              isStaff=session.data.isStaff

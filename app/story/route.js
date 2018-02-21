@@ -23,8 +23,10 @@ export default Ember.Route.extend(PlayParamMixin, {
     return this.store.findRecord('story', slug, {adapterOptions: {queryParams}}).then(story => {
       let comments = this.store.query('comment', { itemTypeId: story.get('itemTypeId'), itemId: story.get('cmsPK') });
       let relatedStories = this.store.query('story', {related: { itemId: story.get('cmsPK'), limit: 5 }});
+      let storyChunk = this.store.findRecord('chunk', 'wnyc-story-chunk').catch(() => '');
       return waitFor({
         story,
+        storyChunk,
         getComments: () => comments,
         getRelatedStories: () => relatedStories,
         adminURL: `${config.adminRoot}/admin`
