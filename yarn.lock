@@ -6760,6 +6760,22 @@ nypr-ui@~0.0.0, nypr-ui@~0.1.0:
     ivy-tabs "3.1.0"
     waypoints "^4.0.1"
 
+nypr-ui@~0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.1.7.tgz#0efbc5be3fd81b6d473042f9bd37aa18e84bed1b"
+  dependencies:
+    ember-basic-dropdown "0.33.1"
+    ember-cli-babel "^6.8.0"
+    ember-cli-htmlbars "^2.0.1"
+    ember-cli-htmlbars-inline-precompile "^1.0.0"
+    ember-cli-sass "^7.0.0"
+    ember-click-outside "0.1.11"
+    ember-composable-helpers "2.0.3"
+    ember-holygrail-layout "^0.1.4"
+    ember-power-select "^1.9.2"
+    ivy-tabs "3.1.0"
+    waypoints "^4.0.1"
+
 oauth-sign@~0.8.1, oauth-sign@~0.8.2:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"

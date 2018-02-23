@@ -421,3 +421,17 @@
     width: auto;
   }
 }
+
+.network-stripe {
+  svg {
+    fill: #bbb;
+  }
+
+  > .greene > svg {
+    fill: #ddd;
+
+    .bump {
+      fill: #bbb;
+    }
+  }
+}
