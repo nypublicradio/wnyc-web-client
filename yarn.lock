@@ -3194,6 +3194,13 @@ ember-click-outside@0.1.10:
     ember-cli-babel "^6.3.0"
     ember-cli-htmlbars "^2.0.1"
 
+ember-click-outside@0.1.11:
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/ember-click-outside/-/ember-click-outside-0.1.11.tgz#f76034e37513a9b140221d3103cd755ae5023a0b"
+  dependencies:
+    ember-cli-babel "^6.3.0"
+    ember-cli-htmlbars "^2.0.1"
+
 ember-click-outside@0.1.9:
   version "0.1.9"
   resolved "https://registry.yarnpkg.com/ember-click-outside/-/ember-click-outside-0.1.9.tgz#a8bf22739814ae44785919faa62102cf7d70a123"
@@ -3215,6 +3222,13 @@ ember-composable-helpers@2.0.1:
   dependencies:
     broccoli-funnel "^1.0.1"
     ember-cli-babel "^5.1.7"
+
+ember-composable-helpers@2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/ember-composable-helpers/-/ember-composable-helpers-2.0.3.tgz#9b5e595bf5a45bc4431adfe27821f23b1d534be0"
+  dependencies:
+    broccoli-funnel "^1.0.1"
+    ember-cli-babel "^6.1.0"
 
 ember-concurrency@^0.8.1, ember-concurrency@^0.8.12:
   version "0.8.12"
@@ -6807,6 +6821,22 @@ nypr-ui@~0.0.0:
     ember-power-select "^1.9.2"
     ivy-tabs "3.1.0"
 
+nypr-ui@~0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.1.7.tgz#0efbc5be3fd81b6d473042f9bd37aa18e84bed1b"
+  dependencies:
+    ember-basic-dropdown "0.33.1"
+    ember-cli-babel "^6.8.0"
+    ember-cli-htmlbars "^2.0.1"
+    ember-cli-htmlbars-inline-precompile "^1.0.0"
+    ember-cli-sass "^7.0.0"
+    ember-click-outside "0.1.11"
+    ember-composable-helpers "2.0.3"
+    ember-holygrail-layout "^0.1.4"
+    ember-power-select "^1.9.2"
+    ivy-tabs "3.1.0"
+    waypoints "^4.0.1"
+
 oauth-sign@~0.8.1, oauth-sign@~0.8.2:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"
@@ -8696,6 +8726,10 @@ walker@1.x, walker@~1.0.5:
 watch@~0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/watch/-/watch-0.10.0.tgz#77798b2da0f9910d595f1ace5b0c2258521f21dc"
+
+waypoints@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/waypoints/-/waypoints-4.0.1.tgz#09979a0573810b29627cba4366a284a062ec69c8"
 
 websocket-driver@>=0.5.1:
   version "0.7.0"

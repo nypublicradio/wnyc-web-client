@@ -206,9 +206,7 @@ i.fa-circle-o-notch.fa-spin {
   height: 30px;
   pointer-events: none;
 
-  path {
-    fill: white;
-  }
+  fill: white;
 
   @include mq($middle-narrow-and-up) {
     width: 114px;

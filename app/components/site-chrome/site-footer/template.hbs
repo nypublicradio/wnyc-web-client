@@ -280,6 +280,9 @@
         <!-- .l-full -->
       </div>
       <!-- .box -->
+
+      {{network-stripe}}
+
     </div>
       <!-- .l-constrained -->
   </div>
@@ -289,7 +292,7 @@
   {{#unless media.isMediumAndUp }}
   <div class="l-constrained pad-persistent-player">
       <div class="l-padtop nudge-large">
-        <div class="l-constrained">
+        <div class="l-constrained nudge-large">
             <div class="text text--medium alignleft">
               <div class="text-body text-body--rightpad2x text--lightgray">
                 <p>&copy; {{moment-format (now) 'YYYY'}} New York Public Radio<br>
@@ -317,6 +320,9 @@
             </ul>
         </div>
         <!-- .l-constrained -->
+
+        {{network-stripe}}
+
       </div>
       <!-- .l-padtop -->
     </div>

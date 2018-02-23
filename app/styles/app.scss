@@ -14,6 +14,7 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 }
 
 @import "nypr-ui";
+@import "nypr-ui/network-stripe";
 
 @import 'normalize';
 

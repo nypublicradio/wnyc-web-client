@@ -11,10 +11,6 @@
       opacity: 1;
     }
   }
-
-  .icon--wqxr-logo-nav #wnyc-logo{
-    fill: white;
-  }
 }
 
 .sitechrome-top {
@@ -491,4 +487,19 @@
     }
   }
 
+}
+
+.network-stripe {
+  svg {
+    fill: white;
+  }
+
+  > .greene > svg {
+    .bump {
+      fill: white;
+    }
+    .bars {
+      fill: #C0C0C0;
+    }
+  }
 }
