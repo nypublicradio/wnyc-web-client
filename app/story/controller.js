@@ -5,6 +5,7 @@ export default Ember.Controller.extend({
   queryParams:  ['tab'],
   tab: 'summary',
   metrics: Ember.inject.service(),
+  deviceIsIos: !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform),
   setTab(){
     if (location.hash.substr(1) === "transcript"){
         this.set("tab", 'transcript');

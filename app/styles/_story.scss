@@ -124,26 +124,28 @@
 
   .embedded-image {
     display: block;
-    position: relative;
 
     max-width: 1440px;
     margin: 0 auto;
 
     > img {
       width: 100%;
+      margin-bottom: 15px;
 
       @include mq($medium-and-up) {
-        margin-bottom: 55px;
+        margin-bottom: 20px;
       }
     }
 
     > .image-metadata  {
       display: block;
+      position: relative;
       padding-top: 0;
-      margin: 0 25px 15px;
+      @include layout;
+      margin-bottom: 30px;
 
       @include mq($medium-and-up) {
-        margin-bottom: 0;
+        margin-bottom: 40px;
       }
     }
 
@@ -151,68 +153,19 @@
       position: relative;
       display: block;
       @include hero-emphasis;
-      font-size: 20px;
+      font-size: 14px;
       line-height: 1.35;
 
-      &:before {
-        content: '';
-        display: block;
-        max-width: 100px;
-
-        border-top: 5px solid $brightred;
-        border-right: 5px solid transparent;
-        margin: 15px 0 15px 5px;
-      }
-
-      &:after {
-        content: '';
-        display: block;
-        height: 0;
-        width: 0;
-        border-left: 5px solid transparent;
-        border-top: 5px solid transparent;
-        border-right: 5px solid transparent;
-        border-bottom: 5px solid $brightred;
-
-        position: absolute;
-        bottom: 0;
-        top: -5px;
-      }
-
-      &:empty {
-        &:after,
-        &:before {
-          display: none;
-        }
-      }
-
       @include mq($medium-and-up) {
-        font-size: 40px;
+        font-size: 18px;
         line-height: 1.25;
-        color: white;
-        max-width: 865px;
-
-        position: absolute;
-        bottom: 65px;
-        left: 65px;
-
-        &:before {
-          margin-top: 0;
-        }
       }
     }
 
     .image-credit {
       display: block;
       font-size: 12px;
-      line-height: 2.25;
       color: $lightgray;
-
-      @include mq($medium-and-up) {
-        position: absolute;
-        bottom: -35px;
-        right: 25px;
-      }
     }
   }
 }
@@ -270,4 +223,133 @@
 
 .nypr-pull-quote {
   @include pull-quote;
+}
+
+.story__download-link {
+  text-decoration: none;
+  margin-right: 13px;
+  svg {
+    margin-right: 4px;
+    height: 14px;
+  }
+  @include mq($medium-and-up) {
+    margin: 0 8px 0 15px;
+    svg {
+      height: 17px;
+    }
+  }
+}
+
+.story-embed__wrapper {
+  position: relative;
+}
+
+.story__embed-button {
+  @include btn;
+  color: white;
+  padding: 0px;
+  svg {
+    margin-right: 0px;
+    height: 12px;
+  }
+  @include mq($medium-and-up) {
+    margin: 0 0 0 15px;
+    svg {
+      margin-right: 7px;
+      height: 15px;
+    }
+  }
+}
+
+.story__download-link,
+.story__embed-button {
+  border: none;
+  font-size: 14px;
+  color: white;
+  display: flex;
+  align-items: center;
+
+  svg {
+    fill: white;
+    stroke: white;
+  }
+
+  &:focus, &:hover {
+    cursor: pointer;
+    color: rgba(white, 0.75);
+  }
+  @include mq($medium-and-up) {
+    line-height: 35px;
+  }
+}
+
+.story__embed-popup {
+  position: absolute;
+  width: 238px;
+  height: 217px;
+  top: 72px;
+  left: calc(-238px / 2 +  10px);
+
+  @include mq($medium-and-up) {
+    top: 42px;
+  }
+
+  background: white;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
+
+  /* embed popup arrow (two rotated squares) */
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 145px;
+    @include mq($medium-and-up) {
+      left: 136px;
+    }
+    width: 20px;
+    height: 20px;
+    transform: translateX(-50%) translateY(-50%) rotate(45deg);
+    background: white;
+  }
+  &:before {
+    z-index: -1;
+    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.5);
+  }
+  &:after {
+    z-index: 1;
+  }
+}
+
+.story__embed-header {
+  margin: 19px auto 0;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.43;
+  color: black;
+}
+
+.story__embed-instructions {
+  margin: 0 auto 10px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.67;
+  color: $darkgray;
+  a {
+  }
+}
+
+.story__embed-code {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.67;
+  color: $darkgray;
+  padding: 5px 23px 0 15px;
+  margin: 0 15px;
+  height: 127px;
+  word-wrap: break-word;
+  overflow-y: scroll;
+  border: solid 1px rgba(136, 136, 136, 0.3);
 }

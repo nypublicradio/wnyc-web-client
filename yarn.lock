@@ -3,8 +3,8 @@
 
 
 "@ember-decorators/argument@ember-decorators/argument":
-  version "0.8.4"
-  resolved "https://codeload.github.com/ember-decorators/argument/tar.gz/d089e6b93326bd9c3cced51d0fc8c9c55e33511a"
+  version "0.8.12"
+  resolved "https://codeload.github.com/ember-decorators/argument/tar.gz/94a58fe8d33baea093e940102d0d06efbef0b9ad"
   dependencies:
     babel-plugin-filter-imports "^1.1.1"
     broccoli-funnel "^2.0.1"
@@ -13,7 +13,7 @@
     ember-compatibility-helpers "^0.1.1"
     ember-get-config "^0.2.3"
 
-"@ember-decorators/babel-transforms@^0.1.0":
+"@ember-decorators/babel-transforms@^0.1.1":
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@ember-decorators/babel-transforms/-/babel-transforms-0.1.1.tgz#c2be1677192e55ccfeb806002d57e314a0e728bc"
   dependencies:
@@ -196,7 +196,7 @@ ansi-styles@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-2.2.1.tgz#b432dd3358b634cf75e1e4664368240533c1ddbe"
 
-ansi-styles@^3.0.0, ansi-styles@^3.1.0:
+ansi-styles@^3.0.0, ansi-styles@^3.1.0, ansi-styles@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-3.2.0.tgz#c159b8d5be0f9e5a6f346dab94f16ce022161b88"
   dependencies:
@@ -1885,13 +1885,21 @@ chalk@^1.0.0, chalk@^1.1.0, chalk@^1.1.1, chalk@^1.1.3, chalk@~1.1.1:
     strip-ansi "^3.0.0"
     supports-color "^2.0.0"
 
-chalk@^2.0.0, chalk@^2.1.0, chalk@^2.3.0:
+chalk@^2.0.0, chalk@^2.1.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.3.0.tgz#b5ea48efc9c1793dccc9b4767c93914d3f2d52ba"
   dependencies:
     ansi-styles "^3.1.0"
     escape-string-regexp "^1.0.5"
     supports-color "^4.0.0"
+
+chalk@^2.3.0, chalk@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.3.1.tgz#523fe2678aec7b04e8041909292fe8b17059b796"
+  dependencies:
+    ansi-styles "^3.2.0"
+    escape-string-regexp "^1.0.5"
+    supports-color "^5.2.0"
 
 chardet@^0.4.0:
   version "0.4.2"
@@ -2583,9 +2591,9 @@ ember-ajax@^3.0.0:
   dependencies:
     ember-cli-babel "^6.0.0"
 
-ember-ast-helpers@0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/ember-ast-helpers/-/ember-ast-helpers-0.3.1.tgz#7740080aea8c29356ff88311fae04b3bc7498aeb"
+ember-ast-helpers@0.3.5:
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/ember-ast-helpers/-/ember-ast-helpers-0.3.5.tgz#db72afd9bc3de03759720ff7b03d4e3b2c7f2351"
   dependencies:
     "@glimmer/compiler" "^0.27.0"
     "@glimmer/syntax" "^0.27.0"
@@ -2654,7 +2662,7 @@ ember-cli-babel@^5.0.0, ember-cli-babel@^5.1.3, ember-cli-babel@^5.1.5, ember-cl
     ember-cli-version-checker "^1.0.2"
     resolve "^1.1.2"
 
-ember-cli-babel@^6.0.0, ember-cli-babel@^6.0.0-beta.4, ember-cli-babel@^6.0.0-beta.7, ember-cli-babel@^6.1.0, ember-cli-babel@^6.10.0, ember-cli-babel@^6.3.0, ember-cli-babel@^6.4.1, ember-cli-babel@^6.6.0, ember-cli-babel@^6.7.2, ember-cli-babel@^6.8.0, ember-cli-babel@^6.8.1, ember-cli-babel@^6.8.2, ember-cli-babel@^6.9.0, ember-cli-babel@^6.9.2:
+ember-cli-babel@^6.0.0, ember-cli-babel@^6.0.0-beta.4, ember-cli-babel@^6.0.0-beta.7, ember-cli-babel@^6.1.0, ember-cli-babel@^6.10.0, ember-cli-babel@^6.11.0, ember-cli-babel@^6.3.0, ember-cli-babel@^6.4.1, ember-cli-babel@^6.6.0, ember-cli-babel@^6.7.2, ember-cli-babel@^6.8.0, ember-cli-babel@^6.8.1, ember-cli-babel@^6.8.2, ember-cli-babel@^6.9.0, ember-cli-babel@^6.9.2:
   version "6.11.0"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-6.11.0.tgz#79cb184bac3c05bfe181ddc306bac100ab1f9493"
   dependencies:
@@ -3364,20 +3372,20 @@ ember-feature-flags@3.0.0:
     whatwg-fetch "^2.0.3"
 
 ember-font-awesome@^4.0.0-alpha.10:
-  version "4.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/ember-font-awesome/-/ember-font-awesome-4.0.0-rc.1.tgz#18b4f383cc76ab5120db842689b0e66398a87e8e"
+  version "4.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/ember-font-awesome/-/ember-font-awesome-4.0.0-rc.2.tgz#27735f57eb56509b51f2b5000da85e7fd84791df"
   dependencies:
     "@ember-decorators/argument" ember-decorators/argument
-    "@ember-decorators/babel-transforms" "^0.1.0"
+    "@ember-decorators/babel-transforms" "^0.1.1"
     broccoli-filter "^1.2.4"
-    broccoli-funnel "^1.2.0"
-    chalk "^1.1.3"
-    ember-ast-helpers "0.3.1"
-    ember-cli-babel "^6.3.0"
+    broccoli-funnel "^2.0.1"
+    chalk "^2.3.0"
+    ember-ast-helpers "0.3.5"
+    ember-cli-babel "^6.11.0"
     ember-cli-htmlbars "^2.0.2"
     font-awesome "^4.7.0"
-    fs-readdir-recursive "^1.0.0"
-    postcss "^6.0.9"
+    fs-readdir-recursive "^1.1.0"
+    postcss "^6.0.14"
     sync-disk-cache "^1.3.2"
 
 ember-get-config@^0.2.2, ember-get-config@^0.2.3:
@@ -4512,7 +4520,7 @@ fs-readdir-recursive@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/fs-readdir-recursive/-/fs-readdir-recursive-0.1.2.tgz#315b4fb8c1ca5b8c47defef319d073dad3568059"
 
-fs-readdir-recursive@^1.0.0:
+fs-readdir-recursive@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/fs-readdir-recursive/-/fs-readdir-recursive-1.1.0.tgz#e32fc030a2ccee44a6b5371308da54be0b397d27"
 
@@ -4932,6 +4940,10 @@ has-flag@^1.0.0:
 has-flag@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/has-flag/-/has-flag-2.0.0.tgz#e8207af1cc7b30d446cc70b734b5e8be18f88d51"
+
+has-flag@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/has-flag/-/has-flag-3.0.0.tgz#b5d454dc2199ae225699f3467e5a07f3b955bafd"
 
 has-unicode@^2.0.0:
   version "2.0.1"
@@ -6730,8 +6742,8 @@ nypr-player@~0.0.0:
     nypr-ui "~0.0.0"
 
 nypr-publisher-lib@~0.0.0:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.0.8.tgz#b46b2f5c6f93634c5b1a32032ac162da6c7b63ce"
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.0.9.tgz#436b6590dc2497b896cc55dcd3bbbd09cd6d2d2e"
   dependencies:
     ember-cli-babel "^6.3.0"
     ember-cli-htmlbars "^2.0.1"
@@ -6742,7 +6754,7 @@ nypr-publisher-lib@~0.0.0:
     liquid-fire "^0.29.1"
     nypr-audio-services "~0.0.0"
     nypr-django-for-ember "~0.0.0"
-    nypr-ui "~0.0.0"
+    nypr-ui "~0.1.0"
 
 nypr-ui@~0.0.0, nypr-ui@~0.1.0:
   version "0.1.6"
@@ -7074,13 +7086,13 @@ postcss@^5.0.4, postcss@^5.2.16:
     source-map "^0.5.6"
     supports-color "^3.2.3"
 
-postcss@^6.0.9:
-  version "6.0.14"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.14.tgz#5534c72114739e75d0afcf017db853099f562885"
+postcss@^6.0.14:
+  version "6.0.19"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.19.tgz#76a78386f670b9d9494a655bf23ac012effd1555"
   dependencies:
-    chalk "^2.3.0"
+    chalk "^2.3.1"
     source-map "^0.6.1"
-    supports-color "^4.4.0"
+    supports-color "^5.2.0"
 
 prelude-ls@~1.1.2:
   version "1.1.2"
@@ -8186,11 +8198,17 @@ supports-color@^3.2.3:
   dependencies:
     has-flag "^1.0.0"
 
-supports-color@^4.0.0, supports-color@^4.4.0:
+supports-color@^4.0.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-4.5.0.tgz#be7a0de484dec5c5cddf8b3d59125044912f635b"
   dependencies:
     has-flag "^2.0.0"
+
+supports-color@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-5.2.0.tgz#b0d5333b1184dd3666cbe5aa0b45c5ac7ac17a4a"
+  dependencies:
+    has-flag "^3.0.0"
 
 symlink-or-copy@^1.0.0, symlink-or-copy@^1.0.1, symlink-or-copy@^1.1.8:
   version "1.2.0"
