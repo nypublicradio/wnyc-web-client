@@ -108,6 +108,6 @@ workflows:
             - test
           filters:
             tags:
-              only: /^v[0-9]\.[0-9]\.[0-9]+/
+              only: /^v[0-9]+\.[0-9]+\.[0-9]+/
             branches:
               only: demo
