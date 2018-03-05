@@ -35,6 +35,9 @@ module.exports = function(defaults) {
     // mirage folder. This config overrides the mirage folder to use the correct location
     // for developing an Ember application.
     'ember-cli-mirage': { directory: defaults.project.root + '/mirage' },
+    'mirage-support': {
+      includeAll: true
+    },
     useWaypoints: true
   });
 
@@ -44,7 +47,7 @@ module.exports = function(defaults) {
   } catch(e) {
     console.log('there was a problem importing the modernizr build. please run grunt modernizr:dist first.');
   }
-  
+
   app.import('vendor/polyfills/url.js');
   app.import('bower_components/normalize.css/normalize.css');
 
