@@ -3,7 +3,7 @@ import service from 'ember-service/inject';
 
 export default Route.extend({
   googleAds:  service(),
-  titleToken: 'Listen Live to WQXR, Q2, Operavore, and the Jonathan Channel',
+  titleToken: 'Listen Live to WQXR, New Sounds, Operavore, and WQXR\'s American Standards',
 
   model() {
     return this.store.findAll('stream').then(streams => {
