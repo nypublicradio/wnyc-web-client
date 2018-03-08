@@ -24,7 +24,10 @@ module.exports = function(defaults) {
     // we're using Mirage to develop our addon tests using /tests/dummy/mirage as our
     // mirage folder. This config overrides the mirage folder to use the correct location
     // for developing an Ember application.
-    'ember-cli-mirage': { directory: defaults.project.root + '/mirage' }
+    'ember-cli-mirage': { directory: defaults.project.root + '/mirage' },
+    'mirage-support': {
+      includeAll: true
+    }
   });
 
   try {
@@ -33,7 +36,7 @@ module.exports = function(defaults) {
   } catch(e) {
     console.log('there was a problem importing the modernizr build. please run grunt modernizr:dist first.');
   }
-  
+
   app.import('vendor/polyfills/url.js');
   app.import('bower_components/normalize.css/normalize.css');
   // All legacy JS modules that are directly called from this ember

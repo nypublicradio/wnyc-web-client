@@ -44,7 +44,7 @@
     "ember-cli-htmlbars": "^2.0.1",
     "ember-cli-htmlbars-inline-precompile": "^1.0.0",
     "ember-cli-inject-live-reload": "^1.4.1",
-    "ember-cli-mirage": "0.2.9",
+    "ember-cli-mirage": "^0.3.4",
     "ember-cli-moment-shim": "3.5.0",
     "ember-cli-page-object": "0.11.1",
     "ember-cli-qunit": "^4.0.0",
@@ -96,7 +96,7 @@
     "nypr-django-for-ember": "~0.0.0",
     "nypr-metrics": "~0.0.0",
     "nypr-player": "~0.0.0",
-    "nypr-publisher-lib": "~0.0.0",
+    "nypr-publisher-lib": "^0.2.15",
     "nypr-ui": "~0.1.7",
     "torii": "0.9.5"
   },
@@ -104,6 +104,9 @@
     "paths": [
       "lib/google-apis"
     ]
+  },
+  "resolutions": {
+    "nypr-metrics": "<0.1.0"
   },
   "engines": {
     "node": "^4.5 || 6.* || >= 7.*"
