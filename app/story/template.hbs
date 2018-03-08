@@ -187,14 +187,13 @@
         {{nypr-story/series series=model.story.series}}
       {{/if}}
 
+      {{related-stories getStories=model.getRelatedStories}}
+
       {{#if model.story.pageChunks.story}}
         <div id="story-chunk">
           {{django-page page=model.story.pageChunks.story}}
         </div>
       {{/if}}
-
-      {{related-stories getStories=model.getRelatedStories}}
-
     </div>
     <!-- .l-col2of3 -->
   </div>
