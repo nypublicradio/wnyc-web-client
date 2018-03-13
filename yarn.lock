@@ -6686,9 +6686,9 @@ nypr-ads@~0.0.0:
     ember-cli-babel "^5.1.7"
     ember-cli-htmlbars "^1.1.1"
 
-nypr-audio-services@~0.0.0:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.0.8.tgz#1b3b1e2d65ffb544fd6790e7b045e93444743f40"
+nypr-audio-services@~0.0.0, nypr-audio-services@~0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.0.10.tgz#d7c070e6fc06d8c65b8c4181f7c3f7db7648527d"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
@@ -6701,7 +6701,7 @@ nypr-audio-services@~0.0.0:
     ember-simple-auth "^1.3.0"
     liquid-fire "^0.29.1"
     nypr-metrics "~0.0.0"
-    nypr-ui "~0.0.0"
+    nypr-ui "~0.1.0"
 
 nypr-auth@~0.0.0:
   version "0.0.1"
