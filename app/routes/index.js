@@ -2,6 +2,7 @@ import Ember from 'ember';
 import service from 'ember-service/inject';
 import PlayParamMixin from 'wnyc-web-client/mixins/play-param';
 import rsvp from 'rsvp';
+import config from 'wnyc-web-client/config/environment';
 import { beforeTeardown } from 'nypr-django-for-ember/utils/compat-hooks';
 const { hash } = rsvp;
 const { get } = Ember;
@@ -16,7 +17,8 @@ export default Ember.Route.extend(PlayParamMixin, {
   model() {
     let page = this.store.findRecord('django-page', '/');
     let featuredStream = this.store.findRecord('stream', 'wnyc-fm939');
-    return hash({page, featuredStream});
+    let gothamist = fetch(config.gothamistStories).then(r => r.json());
+    return hash({page, featuredStream, gothamist});
   },
   afterModel({ page }) {
     let metrics = get(this, 'metrics');
