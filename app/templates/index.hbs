@@ -5,7 +5,6 @@
   mapping=(array (array 0 (array 300 50)) (array 758 (array 728 90)) (array 1203 (array 970 415)))
   sizes=(array (array 970 415) (array 728 90) (array 300 50))}}
 
-
 {{#django-page page=model.page class='l-constrained'}}
 
   {{#if media.isSmallOnly}}
@@ -13,5 +12,21 @@
       {{stream-banner stream=model.featuredStream}}
     {{/ember-wormhole}}
   {{/if}}
+
+  {{#ember-wormhole to='gothamist-row'}}
+    {{#story-row as |row|}}
+      {{#row.label}}From <a href="https://www.gothamist.com">gothamist.com</a>{{/row.label}}
+
+      {{#row.items items=model.gothamist.entries as |story|}}
+        {{#story-card href=story.permalink as |card|}}
+          {{card.image width=300 src=story.thumbnail_300}}
+          {{#card.body}}
+            {{story.title}}
+            {{nypr-svg icon="popout-icon" className="popout-icon"}}
+          {{/card.body}}
+        {{/story-card}}
+      {{/row.items}}
+    {{/story-row}}
+  {{/ember-wormhole}}
 
 {{/django-page}}
