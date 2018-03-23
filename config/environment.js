@@ -212,6 +212,7 @@ module.exports = function(environment) {
     ENV.authAPI = 'http://example.com';
     ENV.membershipAPI = 'http://www.example.com';
     ENV.platformEventsAPI = 'http://example.com';
+    ENV.gothamistStories = 'http://gothamist.com';
   }
 
   if (environment === 'production') {
