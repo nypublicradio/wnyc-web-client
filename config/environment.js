@@ -129,6 +129,7 @@ module.exports = function(environment) {
     etagAPI: process.env.ETAG_API,
     publisherAPI: process.env.PUBLISHER_API,
     platformEventsAPI: process.env.PLATFORM_EVENTS_SERVICE,
+    gothamistStories: process.env.GOTHAMIST_STORIES,
     wnycDonateURL: 'https://pledge3.wnyc.org/epledge/main?ref=button-donate-header',
     featureFlags: {
       'social-auth': process.env.SOCIAL_AUTH,
