@@ -16,6 +16,6 @@ test('it renders', function(assert) {
     {{/story-row}}
   `);
 
-  assert.ok(this.$('.story-row__items').text().match(/foo.bar/g), 'should render all items');
+  assert.ok(this.$('.story-row__items').text().match(/.*foo.*bar.*/g), 'should render all items');
   assert.equal(this.$('.story-row__label').text().trim(), 'label');
 });
