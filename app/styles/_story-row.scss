@@ -1,0 +1,20 @@
+.story-row__label {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #444;
+  margin-bottom: 20px;
+
+  > a {
+    color: inherit;
+    border-bottom: 1px solid currentColor;
+  }
+}
+.story-row__items {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: minmax(300px, auto);
+  grid-column-gap: 10px;
+  align-items: stretch;
+}
