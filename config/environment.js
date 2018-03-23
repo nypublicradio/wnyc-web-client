@@ -127,9 +127,6 @@ module.exports = function(environment) {
     publisherAPI: process.env.PUBLISHER_API,
     platformEventsAPI: process.env.PLATFORM_EVENTS_SERVICE,
     wnycDonateURL: 'https://pledge3.wnyc.org/epledge/main?ref=button-donate-header',
-    wnycSvgURL: '/media/svg/',
-    // put beta host at the root so it can be overridden by Django
-    wnycBetaURL: process.env.WNYC_BETA_URL,
     featureFlags: {
       'social-auth': process.env.SOCIAL_AUTH,
       'member-center': process.env.MEMBER_CENTER,
@@ -208,7 +205,6 @@ module.exports = function(environment) {
     ENV.adminRoot = 'http://admin.example.com';
     ENV.etagAPI = 'http://example.com/api/v1/browser_id/';
     ENV.webRoot = 'http://example.com';
-    ENV.wnycBetaURL = 'http://example.com';
     ENV.authAPI = 'http://example.com';
     ENV.membershipAPI = 'http://www.example.com';
     ENV.platformEventsAPI = 'http://example.com';
