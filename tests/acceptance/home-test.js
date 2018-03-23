@@ -29,6 +29,7 @@ test('.l-constrained is added to the home page', function(assert) {
       <div>
     this is a regular template
       </div>
+      <div id="gothamist-row"></div>
     </div>
     `
   });
