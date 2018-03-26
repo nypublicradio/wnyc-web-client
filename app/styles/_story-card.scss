@@ -14,6 +14,11 @@
   background-position: center;
   background-size: cover;
   flex: 1;
+  flex-basis: 225px;
+
+  @include mq($medium-and-up) {
+    flex-basis: auto;
+  }
 }
 
 .story-card__body {
@@ -21,17 +26,29 @@
   position: relative;
   flex: 1;
   background: white;
-  padding: 15px;
+  padding: 15px 15px 22px;
 
   font-size: 14px;
   line-height: 1.43;
   color: black;
 
   > .popout-icon {
+    width: 11.5px;
+    height: 11.5px;
+
     fill: #ddd;
 
     position: absolute;
-    bottom: 15px;
-    right: 15px;
+    bottom: 11px;
+    right: 11px;
+  }
+
+  @include mq($medium-and-up) {
+    padding: 15px 15px 28px;
+
+    > .popout-icon {
+      bottom: 15px;
+      right: 15px;;
+    }
   }
 }

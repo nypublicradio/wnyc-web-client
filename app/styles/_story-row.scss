@@ -1,3 +1,11 @@
+.story-row {
+  padding: 0 15px;
+
+  @include mq($medium-and-up) {
+    padding: 0;
+  }
+}
+
 .story-row__label {
   text-transform: uppercase;
   font-size: 12px;
@@ -13,8 +21,11 @@
 }
 .story-row__items {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-auto-rows: minmax(300px, auto);
-  grid-column-gap: 10px;
+  grid-column-gap: 16px;
   align-items: stretch;
+
+  @include mq($medium-and-up) {
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: minmax(300px, auto);
+  }
 }
