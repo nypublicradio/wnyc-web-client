@@ -8,11 +8,13 @@ moduleForComponent('story-row', 'Integration | Component | story row', {
 test('it renders', function(assert) {
   this.set('items', ['foo', 'bar']);
   this.render(hbs`
-    {{#story-row items=items as |row|}}
+    {{#story-row as |row|}}
       {{#row.label}}label{{/row.label}}
-      {{#row.items as |item|}}
+
+      {{#row.items items=items as |item|}}
         {{item}}
       {{/row.items}}
+
     {{/story-row}}
   `);
 
