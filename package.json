@@ -62,6 +62,7 @@
     "ember-feature-flags": "3.0.0",
     "ember-fetch": "^3.2.9",
     "ember-get-config": "^0.2.2",
+    "ember-gsap": "^1.0.1",
     "ember-hifi": "^1.11.3",
     "ember-holygrail-layout": "^0.1.4",
     "ember-hotjar": "^0.0.2",
@@ -75,6 +76,7 @@
     "ember-responsive": "^2.0.4",
     "ember-route-action-helper": "2.0.6",
     "ember-scroll-to": "0.6.4",
+    "ember-scrollmagic": "^1.0.0-beta3",
     "ember-simple-auth": "^1.4.2",
     "ember-sinon": "^1.0.1",
     "ember-sinon-qunit": "^2.0.0",
@@ -98,7 +100,7 @@
     "nypr-metrics": "~0.0.0",
     "nypr-player": "~0.0.0",
     "nypr-publisher-lib": "^0.3.0",
-    "nypr-ui": "~0.1.7",
+    "nypr-ui": "http://github.com/nypublicradio/nypr-ui#feature/network-brand-header",
     "torii": "0.9.5"
   },
   "ember-addon": {

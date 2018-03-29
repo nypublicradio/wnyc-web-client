@@ -53,6 +53,8 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+
+      /* Isn't this where all our app config variables should go? - JK */
     },
     // required for what's on widget compat
     exportApplicationGlobal: true,
@@ -109,6 +111,8 @@ module.exports = function(environment) {
     clientSlug: 'wnyc_web',
     // these are provided via a .env file or else by Django's EmberAdapter
     // fall back to demo GA key
+
+    donationUrl: "https://pledge3.wnyc.org/donate/main/onestep/",
     googleAnalyticsKey: process.env.GOOGLE_ANALYTICS || 'UA-46158613-1',
     nprGoogleAnalyticsKey: 'UA-18188937-11',
     googleAPIv3Key: process.env.GOOGLE_API_V3_KEY,
