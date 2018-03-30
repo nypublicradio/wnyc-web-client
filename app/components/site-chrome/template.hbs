@@ -2,6 +2,8 @@
   Using double link-to in order to get an active class on the li tag
 --}}
 
+{{#way-point on-up=(action (mut sticky) value="true") on-down=(action (mut sticky) value="")}}
+{{/way-point}}
 <div class="l-page" id='site-chrome'>
   <div class="sitechrome-top">
     <div class="sitechrome-topbody">
@@ -45,7 +47,7 @@
   </div>
   <!-- .sitechrome-top -->
 
-  <nav class="l-page-nav sitechrome-nav {{if isHomepage 'nav--homepage'}} {{unless media.isLargeAndUp 'x-scrollable'}}">
+  <nav class="l-page-nav sitechrome-nav {{if sticky 'mod-sticky'}} {{if isHomepage 'nav--homepage'}} {{unless media.isLargeAndUp 'x-scrollable'}}">
     {{#if media.isLargeAndUp}}
     <div class="sitechrome-corner">
       <h1>

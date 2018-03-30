@@ -101,6 +101,7 @@ module.exports = function(environment) {
       preventDuplicates: true,
       timeout: 10000
     },
+    donationUrl: "https://pledge3.wqxr.org/donate/main/onestep",
     queueAudioBumperURL: 'http://audio.wnyc.org/streambumper/streambumper000008_audio_queue.mp3',
     siteSlug: 'wqxr',
     siteName: 'WQXR',
