@@ -1,4 +1,4 @@
-{{nypr-ui/brand-header donationUrl=defaultDonationUrl}}
+{{nypr-ui/brand-header donationUrl=(or customDonationUrl defaultDonationUrl)}}
 {{#if chromeDisabled}}
   {{#unless error}}
     {{outlet}}
