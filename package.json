@@ -100,7 +100,7 @@
     "nypr-metrics": "~0.0.0",
     "nypr-player": "~0.0.0",
     "nypr-publisher-lib": "^0.3.0",
-    "nypr-ui": "http://github.com/nypublicradio/nypr-ui#feature/network-brand-header",
+    "nypr-ui": "~0.2.3",
     "torii": "0.9.5"
   },
   "ember-addon": {

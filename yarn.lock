@@ -2726,7 +2726,7 @@ ember-basic-dropdown@0.33.1:
     ember-native-dom-helpers "^0.5.0"
     ember-wormhole "^0.5.1"
 
-ember-basic-dropdown@^0.34.0:
+ember-basic-dropdown@0.34.0, ember-basic-dropdown@^0.34.0:
   version "0.34.0"
   resolved "https://registry.yarnpkg.com/ember-basic-dropdown/-/ember-basic-dropdown-0.34.0.tgz#a0371b7c06756cdd3170e7d4a9ed4f4890bc2d59"
   dependencies:
@@ -3591,6 +3591,14 @@ ember-holygrail-layout@^0.1.4:
   dependencies:
     ember-cli-babel "^5.1.6"
     ember-cli-htmlbars "^1.0.3"
+
+ember-holygrail-layout@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/ember-holygrail-layout/-/ember-holygrail-layout-0.3.0.tgz#6244f5696495fcb8530bacba633d27cf10cbd6e5"
+  dependencies:
+    ember-cli-babel "^6.6.0"
+    ember-cli-htmlbars "^2.0.1"
+    ember-cli-htmlbars-inline-precompile "^1.0.0"
 
 ember-hotjar@^0.0.2:
   version "0.0.2"
@@ -5926,6 +5934,13 @@ ivy-tabs@3.1.0:
     ember-cli-babel "^5.1.7"
     ember-cli-htmlbars "^1.0.10"
 
+ivy-tabs@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/ivy-tabs/-/ivy-tabs-3.3.0.tgz#e29efcba1aaed855e97f5fa4789b1ac7387a32ac"
+  dependencies:
+    ember-cli-babel "^6.10.0"
+    ember-cli-htmlbars "^2.0.3"
+
 jmespath@0.15.0:
   version "0.15.0"
   resolved "https://registry.yarnpkg.com/jmespath/-/jmespath-0.15.0.tgz#a3f222a9aae9f966f5d27c796510e28091764217"
@@ -7419,11 +7434,11 @@ nypr-ui@>=0.2.4, nypr-ui@~0.1.0:
     ivy-tabs "3.1.0"
     waypoints "^4.0.1"
 
-"nypr-ui@http://github.com/nypublicradio/nypr-ui#feature/network-brand-header":
-  version "0.2.2"
-  resolved "http://github.com/nypublicradio/nypr-ui#65bb06fe772038ee6c850397dd5ab01cb26851b8"
+nypr-ui@~0.2.3:
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.2.7.tgz#1f8d48daefb4e233042165a424619447ece3c4c9"
   dependencies:
-    ember-basic-dropdown "0.33.1"
+    ember-basic-dropdown "0.34.0"
     ember-burger-menu "^3.1.0"
     ember-cli-babel "^6.8.0"
     ember-cli-htmlbars "^2.0.1"
@@ -7431,9 +7446,9 @@ nypr-ui@>=0.2.4, nypr-ui@~0.1.0:
     ember-cli-sass "^7.1.7"
     ember-click-outside "0.1.11"
     ember-composable-helpers "2.0.3"
-    ember-holygrail-layout "^0.1.4"
+    ember-holygrail-layout "^0.3.0"
     ember-power-select "^1.9.2"
-    ivy-tabs "3.1.0"
+    ivy-tabs "^3.3.0"
     waypoints "^4.0.1"
 
 oauth-sign@~0.8.1, oauth-sign@~0.8.2:
