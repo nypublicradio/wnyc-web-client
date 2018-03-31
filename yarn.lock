@@ -3491,6 +3491,13 @@ ember-diff-attrs@^0.1.2:
     ember-cli-babel "^5.1.7"
     ember-weakmap "2.0.0"
 
+ember-diff-attrs@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/ember-diff-attrs/-/ember-diff-attrs-0.2.1.tgz#ad9592ab8ba63d796bb9b1633801fe27ca43fc74"
+  dependencies:
+    ember-cli-babel "^6.6.0"
+    ember-weakmap "^3.0.0"
+
 ember-export-application-global@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ember-export-application-global/-/ember-export-application-global-2.0.0.tgz#8d6d7619ac8a1a3f8c43003549eb21ebed685bd2"
@@ -7326,22 +7333,22 @@ nypr-audio-services@0.2.7, nypr-audio-services@>=0.3.0:
     nypr-metrics "~0.2.5"
     nypr-ui "~0.1.0"
 
-nypr-audio-services@~0.0.10:
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.0.10.tgz#d7c070e6fc06d8c65b8c4181f7c3f7db7648527d"
+nypr-audio-services@~0.3.0:
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.3.5.tgz#dfabdd04288d709632d13ef8c16238947ba7359c"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
     ember-cli-htmlbars-inline-precompile "^1.0.0"
     ember-cli-sass "^7.0.0"
-    ember-diff-attrs "^0.1.2"
+    ember-diff-attrs "^0.2.1"
     ember-fetch "^3.3.0"
     ember-get-config "^0.2.2"
     ember-hifi "^1.11.1"
     ember-simple-auth "^1.3.0"
     liquid-fire "^0.29.1"
-    nypr-metrics "~0.0.0"
-    nypr-ui "~0.1.0"
+    nypr-metrics ">=0.3.0"
+    nypr-ui ">=0.2.0"
 
 nypr-auth@~0.0.0:
   version "0.0.2"
@@ -7367,7 +7374,7 @@ nypr-django-for-ember@~0.0.0:
     ember-cli-htmlbars "^2.0.1"
     ember-wormhole "^0.5.2"
 
-nypr-metrics@<0.1.0, nypr-metrics@~0.0.0, nypr-metrics@~0.2.5:
+nypr-metrics@<0.1.0, nypr-metrics@>=0.3.0, nypr-metrics@~0.0.0, nypr-metrics@~0.2.5:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/nypr-metrics/-/nypr-metrics-0.0.1.tgz#5954087401a04f3cf19c878191d6b638cbbd1b20"
   dependencies:
@@ -7408,7 +7415,7 @@ nypr-publisher-lib@^0.3.0:
     nypr-django-for-ember ">=0.1.0"
     nypr-ui ">=0.2.4"
 
-nypr-ui@>=0.2.4, nypr-ui@~0.1.0:
+nypr-ui@>=0.2.0, nypr-ui@>=0.2.4, nypr-ui@~0.1.0:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.1.8.tgz#2b71a6f5564aa1335efb55811047df9317c2f480"
   dependencies:
