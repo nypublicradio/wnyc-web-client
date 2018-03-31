@@ -112,6 +112,6 @@
   },
   "resolutions": {
     "nypr-ui": "~0.1.0",
-    "nypr-audio-services": "~0.0.10"
+    "nypr-metrics": "<0.1.0"
   }
 }
