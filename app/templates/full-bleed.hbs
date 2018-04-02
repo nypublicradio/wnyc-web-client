@@ -1,0 +1,109 @@
+{{#with model.story as |s|}}
+  {{#nypr-ui/hero gradient=true sticky=true noHeaderImage=showShareLinks class="full-bleed__hero" as |hero|}}
+    {{#hero.top as |top|}}
+      {{#top.left}}
+        {{#link-to 'index' class="full-bleed__logo-link gtm__click-tracking" data-action='Full Bleed WNYC logo' data-label=s.title}}
+          {{nypr-svg icon="left-arrow" className="full-bleed__back"}}
+          {{nypr-svg icon="wqxr-logo" className="full-bleed__logo"}}
+        {{/link-to}}
+      {{/top.left}}
+
+      {{#top.right}}
+        {{#nypr-ui/buttons/red tagName="a" href="http://www.wqxr.org" tall=true class="full-bleed__donate btn--blue"}}
+          Donate
+        {{/nypr-ui/buttons/red}}
+      {{/top.right}}
+    {{/hero.top}}
+
+    {{#with s.imageMain as |img|}}
+      {{hero.image
+        src=(image-template img.template 1440 0 img.crop)
+        srcset=(image-srcset img
+          (array 320 0)
+          (array 480 0)
+          (array 800 0))
+        sizes=(image-sizes
+          (array 'max-width: 320px' 320)
+          (array 'max-width: 480px' 480)
+          (array 'max-width: 800px' 800))
+        source=img.source
+        caption=img.caption
+        credit=img.creditsName
+      }}
+    {{/with}}
+
+    {{#hero.headline class="full-bleed__headline" tagName="h2"}}
+      {{s.title}}
+    {{/hero.headline}}
+
+    {{#hero.blurb class="full-bleed__blurb"}}
+      <p>
+        {{{s.tease}}}
+      </p>
+    {{/hero.blurb}}
+
+    {{#hero.footer class="full-bleed__footer" as |footer|}}
+      {{#if (and s.audioMayStream s.audio)}}
+        {{#listen-button
+          type='blue-minion'
+          itemPK=s.slug
+          itemTitle=s.title
+          itemShow=(or s.showTitle s.headers.brand.title)}}Listen&nbsp;
+          {{/listen-button}}
+        <span class="text--small dimmed audio-duration">{{model.story.audioDurationReadable}}</span>
+      {{/if}}
+
+      {{#footer.lockup class="full-bleed__share"}}
+        {{#if (not showShareLinks)}}
+          <span class="full-bleed__share-label">Share</span> {{nypr-story/share-buttons story=s via='WNYC' classNames='story-share-buttons'}}
+        {{/if}}
+      {{/footer.lockup}}
+    {{/hero.footer}}
+  {{/nypr-ui/hero}}
+
+  {{#with s.appearances.authors as |authors|}}
+  <footer class={{concat 'full-bleed__byline' (if showShareLinks ' no-image')}}>
+    <div class="full-bleed__byline-content">
+    <div class="full-bleed__byline-left">
+    <p class="full-bleed__date">
+      {{moment-format s.newsdate 'MMMM D, YYYY'}}
+    </p>
+    <p>
+      By
+      {{#each authors as |author i|}}
+        {{list-separator authors i}}
+        {{link-to author.name 'djangorendered' (concat 'people/' author.slug) class="full-bleed__author"}}
+      {{/each}}
+    </p>
+    </div>
+    {{#if showShareLinks}}
+      <div class="full-bleed__byline-right">
+        <span class="full-bleed__share-label">Share</span> {{nypr-story/share-buttons story=s via='WNYC' classNames='story-share-buttons'}}
+      </div>
+    {{/if}}
+  </div>
+  </footer>
+  {{/with}}
+
+  {{#if showSmallLead}}
+    <div class="full-bleed__small-lead">
+      <div class="embedded-image">
+        <img src={{s.imageMain.url}} source={{img.source}}
+        caption={{s.imageMain.caption}}
+        credit={{s.imageMain.creditsName}} />
+        <div class="image-metadata">{{s.imageMain.source}}</div>
+        <div class="image-caption">{{s.imageMain.caption}}</div>
+        <div class="image-credit">{{s.imageMain.credit}}</div>
+        </div>
+    </div>
+  {{/if}}
+
+  {{django-page page=s.bodyDjango class='full-bleed__body'}}
+
+  {{story-credits story=s class="full-bleed__story-credits"}}
+
+  {{related-stories getStories=model.getRelatedStories class="full-bleed__related-stories"}}
+
+{{/with}}
+
+{{site-chrome/site-footer}}
