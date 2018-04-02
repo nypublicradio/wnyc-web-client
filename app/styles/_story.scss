@@ -181,6 +181,29 @@ article > section a:hover {
   }
 }
 
+.no-image .full-bleed__share-label {
+  display: none;
+}
+.no-image .story-share-buttons {
+  display: none;
+}
+
+.stuck .no-image .full-bleed__share {
+  .btn {
+    color: $wqxrblue;
+    border-color: rgba(136, 136, 136, 0.2);
+  }
+  @include mq($medium-and-up) {
+    .full-bleed__share-label {
+      display: inline;
+    }
+  }
+  .story-share-buttons {
+    display: inline;
+  }
+
+}
+
 .full-bleed__share-label {
   display: none;
 
@@ -340,9 +363,7 @@ article > section a:hover {
   content: '';
   display: block;
   border-top: 1px solid $lightestgray;
-    @include mq($medium-and-up) {
-      margin-bottom: 20px;
-    }
+  margin-bottom: 20px;
   }
 }
 
@@ -359,6 +380,17 @@ article > section a:hover {
   .btn {
     color: black;
     border-color: rgba(136, 136, 136, 0.2);
+  }
+  .byline__share-label {
+    display: none;
+    @include mq($medium-and-up) {
+      display: inline;
+      margin-right: 15px;
+      font-family: 'Lato', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      font-style: oblique;
+    }
   }
 }
 
