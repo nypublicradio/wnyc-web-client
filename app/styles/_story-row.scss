@@ -30,6 +30,7 @@
   grid-column-gap: 16px;
   grid-row-gap: 25px;
   align-items: stretch;
+  grid-auto-rows: minmax(600px, auto);
 
   @include mq($medium-and-up) {
     grid-template-columns: repeat(5, 1fr);
