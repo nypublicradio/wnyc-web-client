@@ -1,7 +1,14 @@
-import { test } from 'qunit';
-import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import {
+  click,
+  findAll,
+  currentURL,
+  find,
+  visit
+} from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
 import { registerMockOnInstance } from 'wnyc-web-client/tests/helpers/register-mock';
-import Service from 'ember-service';
+import Service from '@ember/service';
 import velocity from 'velocity';
 import { dummyHifi } from 'wnyc-web-client/tests/helpers/hifi-integration-helpers';
 
@@ -15,64 +22,57 @@ const mockAudio = Service.extend({
   }
 });
 
-moduleForAcceptance('Acceptance | play param', {
-  beforeEach() {
+module('Acceptance | play param', function(hooks) {
+  setupApplicationTest(hooks);
+
+  hooks.beforeEach(function() {
     server.create('stream');
     registerMockOnInstance(this.application, 'service:hifi', dummyHifi);
-  }
-});
-
-test('play param transitions', function(assert) {
-  let application = this.application;
-  let audio = registerMockOnInstance(application, 'service:dj', mockAudio);
-
-  server.create('django-page', {
-    id: '/',
-    testMarkup: `
-      <a href="/foo?play=wnyc-fm939" id="foo">foo</a>
-    `
   });
-  server.create('django-page', {
-    id: 'foo/',
-    testMarkup: `
-      <a href="/" id="home">home</a>
-    `
-  });
-  visit('/');
-  click('#foo');
 
-  andThen(() => {
+  test('play param transitions', async function(assert) {
+    let application = this.application;
+    let audio = registerMockOnInstance(application, 'service:dj', mockAudio);
+
+    server.create('django-page', {
+      id: '/',
+      testMarkup: `
+        <a href="/foo?play=wnyc-fm939" id="foo">foo</a>
+      `
+    });
+    server.create('django-page', {
+      id: 'foo/',
+      testMarkup: `
+        <a href="/" id="home">home</a>
+      `
+    });
+    await visit('/');
+    await click('#foo');
+
     assert.equal(currentURL(), '/foo?play=wnyc-fm939', 'url should have ?play');
     assert.equal(audio.get('playParam'), 'wnyc-fm939', 'play should be called');
-    click('#home');
-  });
-
-  andThen(() => {
+    await click('#home');
     assert.equal(currentURL(), '/', 'homepage should not have a query param');
     assert.equal(audio.get('playParam'), 'wnyc-fm939', 'play should not be called again');
   });
-});
 
-test('loading a page with the ?play param', function(assert) {
-  let slug = 'foo';
+  test('loading a page with the ?play param', async function(assert) {
+    let slug = 'foo';
 
-  server.create('story', {slug, title: 'Foo'});
-  server.create('django-page', {id: `bar/`});
+    server.create('story', {slug, title: 'Foo'});
+    server.create('django-page', {id: `bar/`});
 
-  visit(`bar?play=${slug}`);
+    await visit(`bar?play=${slug}`);
 
-  andThen(() => {
-    assert.ok(find('.nypr-player').length, 'persistent player should be visible');
-    assert.equal(find('[data-test-selector=nypr-player-story-title]').text(), 'Foo', 'Foo story should be loaded in player UI');
+    assert.ok(findAll('.nypr-player').length, 'persistent player should be visible');
+    assert.equal(find('[data-test-selector=nypr-player-story-title]').textContent, 'Foo', 'Foo story should be loaded in player UI');
   });
-});
 
-test('loading a page with a bad ?play param', function(assert) {
-  let id = '1';
-  server.create('django-page', {id: `/bar?play=${id}`});
+  test('loading a page with a bad ?play param', async function(assert) {
+    let id = '1';
+    server.create('django-page', {id: `/bar?play=${id}`});
 
-  visit(`bar?play=${id}`);
-  andThen(() => {
-    assert.notOk(find('.nypr-player').length, 'persistent player should not be visible');
+    await visit(`bar?play=${id}`);
+    assert.notOk(findAll('.nypr-player').length, 'persistent player should not be visible');
   });
 });

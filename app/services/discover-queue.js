@@ -1,16 +1,15 @@
-import Ember from 'ember';
+import { alias } from '@ember/object/computed';
+import { bind } from '@ember/runloop';
+import Service from '@ember/service';
+import { A as emberArray } from '@ember/array';
 import service from 'ember-service/inject';
 import get from 'ember-metal/get';
-const {
-  A:emberArray,
-  computed
-} = Ember;
 
-export default Ember.Service.extend({
+export default Service.extend({
   session: service(),
-  items  : computed.alias('session.data.discover-queue'),
+  items  : alias('session.data.discover-queue'),
   history: service('listen-history'),
-  count  : computed.alias('session.data.discover-queue.length'),
+  count  : alias('session.data.discover-queue.length'),
   hifi   : service(),
   dj     : service(),
   actionQueue: service(),
@@ -19,7 +18,7 @@ export default Ember.Service.extend({
     let hifi        = get(this, 'hifi');
     let actionQueue = get(this, 'actionQueue');
 
-    actionQueue.addAction(hifi, 'audio-ended', {priority: 2, name: 'discover-queue'}, Ember.run.bind(this, this.onTrackFinished));
+    actionQueue.addAction(hifi, 'audio-ended', {priority: 2, name: 'discover-queue'}, bind(this, this.onTrackFinished));
   },
 
   /* DISCOVER QUEUE -----------------------------------------------------------*/

@@ -1,13 +1,22 @@
-import { test } from 'qunit';
-import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import {
+  find,
+  click,
+  findAll,
+  currentURL,
+  visit
+} from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
 import {
   authenticateSession,
   currentSession
 } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
 import 'wnyc-web-client/tests/helpers/with-feature';
 
-moduleForAcceptance('Acceptance | settings', {
-  beforeEach() {
+module('Acceptance | settings', function(hooks) {
+  setupApplicationTest(hooks);
+
+  hooks.beforeEach(function() {
     server.create('user');
     authenticateSession(this.application, {access_token: 'foo'});
 
@@ -15,17 +24,15 @@ moduleForAcceptance('Acceptance | settings', {
     session.set('data.user-prefs-active-stream', {slug: 'wqxr', name: 'WQXR New York'});
     session.set('data.user-prefs-active-autoplay', 'default_stream');
     server.createList('stream', 7);
-  }
-});
+  });
 
-test('visiting /settings and selecting my queue as an autoplay preference', function(assert) {
-  let wqxrStream = server.schema.streams.where({slug: 'wqxr'}).models[0];
-  visit('/settings');
+  test('visiting /settings and selecting my queue as an autoplay preference', async function(assert) {
+    let wqxrStream = server.schema.streams.where({slug: 'wqxr'}).models[0];
+    await visit('/settings');
 
-  click('.autoplay-options .ember-power-select-trigger');
-  click('.autoplay-options .ember-power-select-option:last');
+    await click('.autoplay-options .ember-power-select-trigger');
+    await click('.autoplay-options .ember-power-select-option:last');
 
-  andThen(function() {
     assert.equal(currentURL(), '/settings');
 
     var actualStream = $('.user-stream .ember-power-select-selected-item').text().trim();
@@ -35,50 +42,41 @@ test('visiting /settings and selecting my queue as an autoplay preference', func
     var expectedPref = 'My Queue';
     assert.equal(actualPref, expectedPref);
   });
-});
 
-test('after visiting settings, user can select different stream', function(assert) {
-  let stream = server.schema.streams.all().models[2];
-  visit('/settings');
+  test('after visiting settings, user can select different stream', async function(assert) {
+    let stream = server.schema.streams.all().models[2];
+    await visit('/settings');
 
-  click('.user-stream .ember-power-select-trigger').then(() => {
-    click('.user-stream .ember-power-select-option:eq(2)');
-  });
+    await await await click('.user-stream .ember-power-select-trigger').then(async () => {
+      await click(findAll('.user-stream .ember-power-select-option')[2]);
+    });
 
-  andThen(function() {
-    var actualStream = find('.user-stream .ember-power-select-selected-item').text().trim();
+    var actualStream = find('.user-stream .ember-power-select-selected-item').textContent.trim();
     assert.equal(actualStream, stream.name);
   });
-});
 
-test('the stream button in the nav should match the default stream', function(assert) {
-  visit('/settings');
+  test('the stream button in the nav should match the default stream', async function(assert) {
+    await visit('/settings');
 
-  andThen(function() {
-    const actualLabel = find('.stream-launcher').attr('aria-label');
+    const actualLabel = find('.stream-launcher').getAttribute('aria-label');
     const expectedLabel = 'Listen to WQXR New York';
     assert.equal(actualLabel, expectedLabel);
   });
-});
 
-test('after visiting settings, user can toggle off autoplay settings', function(assert) {
-  visit('/settings');
+  test('after visiting settings, user can toggle off autoplay settings', async function(assert) {
+    await visit('/settings');
 
-  click('.toggle');
-  andThen(function() {
-    var expectedElementCount = find('.autoplay-inactive').length;
+    await click('.toggle');
+    var expectedElementCount = findAll('.autoplay-inactive').length;
     var actualElementCount = 1;
     assert.equal(expectedElementCount, actualElementCount);
   });
-});
 
-test('if feature flag for autoplay-autoprefs is absent, then the link should be not be present', function(assert) {
-  visit('/');
-  const el = $('.l-bottom .list-item:contains("Settings")');
-  andThen(() => {
+  test('if feature flag for autoplay-autoprefs is absent, then the link should be not be present', async function(assert) {
+    await visit('/');
+    const el = $('.l-bottom .list-item:contains("Settings")');
     const expectedElementCount = 0;
     const actualElementCount = el.length;
     assert.equal(expectedElementCount, actualElementCount);
   });
-
 });

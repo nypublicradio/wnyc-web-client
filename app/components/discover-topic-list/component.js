@@ -1,24 +1,28 @@
-import Ember from 'ember';
+import { once } from '@ember/runloop';
+import { on } from '@ember/object/evented';
+import { computed } from '@ember/object';
+import { mapBy } from '@ember/object/computed';
+import Component from '@ember/component';
 import service from 'ember-service/inject';
 import get from 'ember-metal/get';
 
-export default Ember.Component.extend({
+export default Component.extend({
   metrics: service(),
   classNames:['discover-topic-list'],
   topics: [],
-  topicTags:  Ember.computed.mapBy('topics', 'url'),
+  topicTags:  mapBy('topics', 'url'),
   selectedTopicTags: [],
 
-  allSelected: Ember.computed('selectedTopicTags.length', 'topicTags.length', function() {
+  allSelected: computed('selectedTopicTags.length', 'topicTags.length', function() {
     return this.get('topics').slice().length === this.get('selectedTopicTags').length;
   }),
 
-  initializeTopics: Ember.on('init', function() {
+  initializeTopics: on('init', function() {
     this.updateTopics((this.get('selectedTopicTags') || []));
   }),
 
   updateTopics(topics) {
-    Ember.run.once(() => {
+    once(() => {
       this.set('selectedTopicTags', topics.slice());
       // don't want this bound to the session stuff passed in or saving gets hinky
 

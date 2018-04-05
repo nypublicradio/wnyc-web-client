@@ -1,8 +1,18 @@
-import Ember from 'ember';
+import $ from 'jquery';
+import { computed, observer } from '@ember/object';
+import {
+  reads,
+  and,
+  mapBy,
+  setDiff,
+  alias,
+  map
+} from '@ember/object/computed';
+import Component from '@ember/component';
 import get from 'ember-metal/get';
 import service from 'ember-service/inject';
 
-export default Ember.Component.extend({
+export default Component.extend({
   session:  service(),
   scroller: service(),
   dj:       service(),
@@ -11,41 +21,41 @@ export default Ember.Component.extend({
   classNames:        ['discover-playlist-container'],
   classNameBindings: ['isDraggingItem:is-dragging-item'],
 
-  audioReady: Ember.computed.reads('dj.isReady'),
-  currentAudioId: Ember.computed.reads('dj.currentContentId'),
-  currentlyLoadingIds: Ember.computed.reads('dj.currentlyLoadingIds'),
+  audioReady: reads('dj.isReady'),
+  currentAudioId: reads('dj.currentContentId'),
+  currentlyLoadingIds: reads('dj.currentlyLoadingIds'),
 
-  isPlaying:      Ember.computed.and('audioReady', 'currentTrackIsInPlaylist', 'dj.isPlaying'),
+  isPlaying:      and('audioReady', 'currentTrackIsInPlaylist', 'dj.isPlaying'),
 
-  isPaused:      Ember.computed('currentTrackIsInPlaylist', 'isPlaying', function() {
+  isPaused:      computed('currentTrackIsInPlaylist', 'isPlaying', function() {
     return this.get('currentTrackIsInPlaylist') && !this.get('isPlaying');
   }),
 
-  isNotStarted:  Ember.computed('isPlaying', 'isPaused', function() {
+  isNotStarted:  computed('isPlaying', 'isPaused', function() {
     return !this.get('isPlaying') && !this.get('isPaused');
   }),
 
-  storyIds: Ember.computed.mapBy('stories', 'id'),
+  storyIds: mapBy('stories', 'id'),
 
-  currentTrackIsInPlaylist: Ember.computed('stories', 'currentAudioId', function() {
+  currentTrackIsInPlaylist: computed('stories', 'currentAudioId', function() {
     return !!this.get('stories').findBy('id', this.get('currentAudioId'));
   }),
 
-  currentPlaylistStoryPk:   Ember.computed('currentTrackIsInPlaylist', function() {
+  currentPlaylistStoryPk:   computed('currentTrackIsInPlaylist', function() {
     if (this.get('currentTrackIsInPlaylist')) {
       return this.get('currentAudioId');
     }
   }),
 
-  stillVisibleStories: Ember.computed.setDiff('stories', 'removedItems'),
-  visibleCount: Ember.computed.alias('stillVisibleStories.length'),
-  refreshAutomaticallyIfZero: Ember.observer('visibleCount', function() {
+  stillVisibleStories: setDiff('stories', 'removedItems'),
+  visibleCount: alias('stillVisibleStories.length'),
+  refreshAutomaticallyIfZero: observer('visibleCount', function() {
     if (this.get('itemCount') === 0) {
       this.findMore();
     }
   }),
 
-  removedItemIds: Ember.computed.map('removedItems', (i) => i.id),
+  removedItemIds: map('removedItems', (i) => i.id),
 
   // This is for the delete effects, and this might be a weird way to do it
   // but by not actually deleting the item from the list we can avoid having to
@@ -111,7 +121,7 @@ export default Ember.Component.extend({
       else {
         let story = this.get('stories').get('firstObject');
         this.send('playTrack', story.id);
-        this.get('scroller').scrollVertical(Ember.$(`span[data-story-id="${story.id}"]`), {offset: -100, duration: 500});
+        this.get('scroller').scrollVertical($(`span[data-story-id="${story.id}"]`), {offset: -100, duration: 500});
       }
     },
 

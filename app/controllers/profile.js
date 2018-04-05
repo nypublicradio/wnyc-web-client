@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import $ from 'jquery';
+import Evented from '@ember/object/evented';
 import Controller from 'ember-controller';
 import service from 'ember-service/inject';
 import config from 'wnyc-web-client/config/environment';
@@ -13,7 +14,7 @@ const FLASH_MESSAGES = {
   password: 'Your password has been updated.'
 };
 
-export default Controller.extend(Ember.Evented, {
+export default Controller.extend(Evented, {
   session: service(),
   flashMessages: service(),
   torii: service(),
@@ -135,11 +136,11 @@ export default Controller.extend(Ember.Evented, {
   }),
 
   promptForPassword: task(function * () {
-    Ember.$('body').addClass('has-nypr-account-modal-open');
+    $('body').addClass('has-nypr-account-modal-open');
     try {
       yield waitForEvent(this, 'passwordVerified');
     } finally {
-      Ember.$('body').removeClass('has-nypr-account-modal-open');
+      $('body').removeClass('has-nypr-account-modal-open');
       set(this, 'password', null);
     }
   }).drop(),

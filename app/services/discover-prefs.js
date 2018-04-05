@@ -1,11 +1,12 @@
-import Ember from 'ember';
+import { alias } from '@ember/object/computed';
+import Service, { inject as service } from '@ember/service';
 
-export default Ember.Service.extend({
-  session: Ember.inject.service(),
+export default Service.extend({
+  session: service(),
 
   selectedTopicTags:[],
   selectedShowSlugs:[],
-  excludedStoryIds: Ember.computed.alias('session.data.discover-excluded-story-ids'),
+  excludedStoryIds: alias('session.data.discover-excluded-story-ids'),
 
   setupComplete: false,
   currentSetupStep: 'start',

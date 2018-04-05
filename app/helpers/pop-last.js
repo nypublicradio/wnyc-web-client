@@ -1,11 +1,6 @@
-import Ember from 'ember';
-
-const {
-  Helper,
-  get
-} = Ember;
-
-const {capitalize} = Ember.String;
+import { capitalize } from '@ember/string';
+import Helper from '@ember/component/helper';
+import { get } from '@ember/object';
 
 export default Helper.helper(function([id]) {
   const lastItem = get(id.split('/'), 'lastObject');

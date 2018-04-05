@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import RavenLogger from 'ember-cli-deploy-sentry/services/raven';
 import Ember from 'ember';
 
@@ -9,7 +10,7 @@ export default RavenLogger.extend({
   // set it here.
   releaseMetaName: 'revision',
   init() {
-    Ember.$(document).ajaxError((event, jqXHR, ajaxSettings, thrownError) => {
+    $(document).ajaxError((event, jqXHR, ajaxSettings, thrownError) => {
       if (Ember.testing) {
         return;
       }

@@ -1,12 +1,15 @@
-import Ember from 'ember';
+import { once } from '@ember/runloop';
+import { on } from '@ember/object/evented';
+import { mapBy } from '@ember/object/computed';
+import Component from '@ember/component';
 import service from 'ember-service/inject';
 import get from 'ember-metal/get';
 
-export default Ember.Component.extend({
+export default Component.extend({
   metrics: service(),
   classNames:['discover-show-list'],
   shows: [],
-  showSlugs:     Ember.computed.mapBy('shows', 'slug'),
+  showSlugs:     mapBy('shows', 'slug'),
   selectedShowSlugs: [],
   excludedShowSlugs: [],
 
@@ -18,12 +21,12 @@ export default Ember.Component.extend({
     this._super(...arguments);
   },
 
-  initializeShows: Ember.on('init', function() {
+  initializeShows: on('init', function() {
     this.updateShows(this.get('excludedShowSlugs'), this.get('selectedShowSlugs'));
   }),
 
   updateShows(excludedShowSlugs, selectedShowSlugs) {
-    Ember.run.once(() => {
+    once(() => {
       this.sendAction('onShowsUpdated', excludedShowSlugs.slice());
       this.sendAction('onNoneSelected', selectedShowSlugs.length === 0);
     });

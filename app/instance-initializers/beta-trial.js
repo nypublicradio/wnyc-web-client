@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import EmberObject from '@ember/object';
+import $ from 'jquery';
 import config from 'wnyc-web-client/config/environment';
 
 export function chooseBetaPayload() {
@@ -6,7 +7,7 @@ export function chooseBetaPayload() {
   let retiredTrial = document.querySelector('#retired-beta');
   let activeTrial = document.querySelector('#active-beta');
   let myTrials = document.cookie.match(/wnyc_trial_\d+_interaction=(?:True|False)/g) || [];
-  let inRetiredTrial = myTrials.includes(`wnyc_trial_${Ember.$(retiredTrial).attr('data-id')}_interaction=True`);
+  let inRetiredTrial = myTrials.includes(`wnyc_trial_${$(retiredTrial).attr('data-id')}_interaction=True`);
   if (!myTrials.length) {
     return activeTrial;
   }
@@ -24,7 +25,7 @@ export function initialize(appInstance) {
   let betaPayload = chooseBetaPayload();
 
   if (betaPayload) {
-    let beta = Ember.Object.create();
+    let beta = EmberObject.create();
     try {
       let { attributes, id } = JSON.parse(betaPayload.textContent);
       beta.setProperties(attributes);

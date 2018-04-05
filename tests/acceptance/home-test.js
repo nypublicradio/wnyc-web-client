@@ -1,62 +1,61 @@
+import { currentURL, visit } from '@ember/test-helpers';
 import test from 'ember-sinon-qunit/test-support/test';
-import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
 import djangoPage from 'wnyc-web-client/tests/pages/django-page';
 
-moduleForAcceptance('Acceptance | home', {
-  beforeEach() {
+import { setupApplicationTest } from 'ember-qunit';
+import { module } from 'qunit';
+
+module('Acceptance | home', function(hooks) {
+  setupApplicationTest(hooks);
+
+  hooks.beforeEach(function() {
     server.create('stream');
-  }
-});
+  });
 
-test('visiting /', function(assert) {
-  server.create('django-page', {id: '/'});
-  djangoPage
-    .bootstrap({id: '/'})
-    .visit({id: '/'});
+  test('visiting /', function(assert) {
+    server.create('django-page', {id: '/'});
+    djangoPage
+      .bootstrap({id: '/'})
+      .visit({id: '/'});
 
-  andThen(function() {
     assert.equal(currentURL(), '/');
     let djangoContent = findWithAssert('.django-content');
     assert.ok(djangoContent.contents().length);
   });
-});
 
-test('.l-constrained is added to the home page', function(assert) {
-  let home = server.create('django-page', {
-    id: '/',
-    text: `
-    <div>
+  test('.l-constrained is added to the home page', function(assert) {
+    let home = server.create('django-page', {
+      id: '/',
+      text: `
       <div>
-    this is a regular template
+        <div>
+      this is a regular template
+        </div>
       </div>
       <div id="gothamist-row"></div>
-    </div>
     `
   });
 
-  djangoPage
-    .bootstrap(home)
-    .visit(home);
+    djangoPage
+      .bootstrap(home)
+      .visit(home);
 
-  andThen(function() {
     assert.equal(find('.django-content').parent('.l-constrained').length, 1, 'should have an l-constrained class');
   });
-});
 
-test('home page does dfp targeting', function(/*assert*/) {
-  server.create('django-page', {id: '/'});
+  test('home page does dfp targeting', async function() /*assert*/{
+    server.create('django-page', {id: '/'});
 
-  // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
-  server.create('django-page', {id: 'foo/'});
-  visit('/foo');
+    // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
+    server.create('django-page', {id: 'foo/'});
+    await visit('/foo');
 
-  andThen(() => {
     this.mock(this.application.__container__.lookup('route:index').get('googleAds'))
       .expects('doTargeting')
       .once();
-  });
 
-  djangoPage
-    .bootstrap({id: '/'})
-    .visit({id: '/'});
+    djangoPage
+      .bootstrap({id: '/'})
+      .visit({id: '/'});
+  });
 });

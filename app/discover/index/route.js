@@ -1,17 +1,19 @@
-import Ember from 'ember';
-const {
-  get
-} = Ember;
+import { isEmpty } from '@ember/utils';
+import { hash } from 'rsvp';
+import { gt } from '@ember/object/computed';
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
+import { get } from '@ember/object';
 
-export default Ember.Route.extend({
-  session:          Ember.inject.service(),
-  discoverQueue:    Ember.inject.service(),
-  discoverPrefs:    Ember.inject.service(),
-  scroller:         Ember.inject.service(),
-  metrics:          Ember.inject.service(),
+export default Route.extend({
+  session:          service(),
+  discoverQueue:    service(),
+  discoverPrefs:    service(),
+  scroller:         service(),
+  metrics:          service(),
   titleToken: 'Discover Playlist',
 
-  hasQueuedStories: Ember.computed.gt('discoverQueue.items.length', 0),
+  hasQueuedStories: gt('discoverQueue.items.length', 0),
 
   setupController(controller) {
     controller.set('noNewResults', false);
@@ -27,7 +29,7 @@ export default Ember.Route.extend({
       stories = this._loadStoriesFromServer();
     }
 
-    return Ember.RSVP.hash({stories});
+    return hash({stories});
   },
 
   afterModel(model) {
@@ -74,13 +76,13 @@ export default Ember.Route.extend({
   },
 
   _hasNoNewResults(stories) {
-    if (Ember.isEmpty(stories)) {
+    if (isEmpty(stories)) {
       return true;
     }
     else {
       let oldStoryIds = this._loadStoriesFromQueue().mapBy('id');
       let newStoryIds = stories.mapBy('id');
-      return Ember.isEmpty(newStoryIds.reject(s => oldStoryIds.includes(s)));
+      return isEmpty(newStoryIds.reject(s => oldStoryIds.includes(s)));
     }
   },
 

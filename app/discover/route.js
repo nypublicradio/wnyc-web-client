@@ -1,10 +1,11 @@
-import Ember from 'ember';
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 import ENV from '../config/environment';
 
-export default Ember.Route.extend({
-  session:       Ember.inject.service(),
-  discoverQueue: Ember.inject.service('discover-queue'),
-  discoverPrefs: Ember.inject.service(),
+export default Route.extend({
+  session:       service(),
+  discoverQueue: service('discover-queue'),
+  discoverPrefs: service(),
   titleToken: 'Discover',
 
   setupController(controller) {

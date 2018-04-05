@@ -1,25 +1,32 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import {
+  render,
+  findAll,
+  fillIn,
+  triggerEvent
+} from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('embedded/header-search-field', 'Integration | Component | embedded/header search field', {
-  integration: true
-});
+module('Integration | Component | embedded/header search field', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  test('it renders', async function(assert) {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{embedded/header-search-field}}`);
+    await render(hbs`{{embedded/header-search-field}}`);
 
-  assert.equal(this.$('form').length, 1, 'it renders a form');
-});
+    assert.equal(findAll('form').length, 1, 'it renders a form');
+  });
 
-test('it calls the passesd in search attr on submit', function(assert) {
-  this.set('search', q => assert.equal(q, 'foo', 'search was invoked'));
+  test('it calls the passesd in search attr on submit', async function(assert) {
+    this.set('search', q => assert.equal(q, 'foo', 'search was invoked'));
 
-  this.render(hbs`{{embedded/header-search-field search=search}}`);
+    await render(hbs`{{embedded/header-search-field search=search}}`);
 
-  this.$('#search-input').val('foo');
-  this.$('#search-input').change();
-  this.$('form').submit();
+    await fillIn('#search-input', 'foo');
+    await triggerEvent('#search-input', 'change');
+    await triggerEvent('form', 'submit');
+  });
 });

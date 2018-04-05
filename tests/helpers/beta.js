@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import EmberObject from '@ember/object';
 import moment from 'moment';
 
 export function clearBetaCookies() {
@@ -6,7 +6,7 @@ export function clearBetaCookies() {
 }
 
 export function generateBetaTrial(withExit) {
-  let beta = Ember.Object.create({
+  let beta = EmberObject.create({
     status: 'active',
     tease: 'beta tease',
     welcome_message: 'beta welcome',

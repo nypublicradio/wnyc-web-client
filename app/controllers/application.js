@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { match } from '@ember/object/computed';
 import Controller from 'ember-controller';
 import service from 'ember-service/inject';
 import get from 'ember-metal/get';
@@ -18,7 +18,7 @@ export default Controller.extend({
 
   showPlayer: reads('dj.showPlayer'),
 
-  isHomepage: Ember.computed.match('currentRouteName', /^index(_loading)?$/),
+  isHomepage: match('currentRouteName', /^index(_loading)?$/),
 
   actions: {
 

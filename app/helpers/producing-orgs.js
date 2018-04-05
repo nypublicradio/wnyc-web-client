@@ -1,8 +1,6 @@
-import Ember from 'ember';
+import { htmlSafe } from '@ember/template';
+import Helper from '@ember/component/helper';
 import get from 'ember-metal/get';
-const {
-  Helper
-} = Ember;
 
 export function producingOrgs([ orgsList ]/*, hash*/, {unlinked=false}={}) {
   let producingString = '';
@@ -25,7 +23,7 @@ export function producingOrgs([ orgsList ]/*, hash*/, {unlinked=false}={}) {
     producingString += line;
   });
 
-  return Ember.String.htmlSafe(`${producingString}`);
+  return htmlSafe(`${producingString}`);
 }
 
 export default Helper.helper(producingOrgs);

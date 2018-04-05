@@ -1,4 +1,4 @@
-import { dasherize } from 'ember-string';
+import { dasherize } from '@ember/string';
 
 const slugify = str => dasherize(str.replace(/[^\w\s]/gi, '-'));
 

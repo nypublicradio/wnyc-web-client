@@ -1,119 +1,120 @@
-import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
+import Service from '@ember/service';
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
 import hifiNeeds from 'wnyc-web-client/tests/helpers/hifi-needs';
 
-moduleFor('service:discover-queue', 'Unit | Service | discover-queue', {
-  // Specify the other units that are required for this test.
-  needs: ['service:listen-history', 'service:action-queue', 'service:dj', ...hifiNeeds],
+module('Unit | Service | discover-queue', function(hooks) {
+  setupTest(hooks);
 
-  beforeEach() {
-    const sessionStub = Ember.Service.extend({
+  hooks.beforeEach(function() {
+    const sessionStub = Service.extend({
       data: {} // we only really need the data thing
     });
 
-    this.register('service:session', sessionStub);
-    this.inject.service('session', { as: 'session' });
-  },
-  afterEach() {
-  }
-});
+    this.owner.register('service:session', sessionStub);
+    this.session = this.owner.lookup('service:session');
+  });
 
-test('it exists', function(assert) {
-  let service = this.subject();
-  assert.ok(service);
-});
+  hooks.afterEach(function() {
+  });
 
-test('item can get added to queue', function(assert) {
-  let story1 = {id: 1};
-  let story2 = {id: 2};
-  let service = this.subject();
+  test('it exists', function(assert) {
+    let service = this.owner.lookup('service:discover-queue');
+    assert.ok(service);
+  });
 
-  service.addItem(story1);
-  service.addItem(story2);
+  test('item can get added to queue', function(assert) {
+    let story1 = {id: 1};
+    let story2 = {id: 2};
+    let service = this.owner.lookup('service:discover-queue');
 
-  assert.equal(service.get('items').length, 2);
-});
+    service.addItem(story1);
+    service.addItem(story2);
 
-test('item can get removed from discover queue', function(assert) {
-  let story1 = {id: 1};
-  let story2 = {id: 2};
-  let service = this.subject();
+    assert.equal(service.get('items').length, 2);
+  });
 
-  service.addItem(story1);
-  service.addItem(story2);
-  service.removeItem(story1);
+  test('item can get removed from discover queue', function(assert) {
+    let story1 = {id: 1};
+    let story2 = {id: 2};
+    let service = this.owner.lookup('service:discover-queue');
 
-  assert.equal(service.get('items').length, 1);
-  assert.equal(service.get('items')[0].id, 2);
-});
+    service.addItem(story1);
+    service.addItem(story2);
+    service.removeItem(story1);
 
-test('item can get removed from discover queue by id', function(assert) {
-  let story1 = {id: 1};
-  let story2 = {id: 2};
-  let service = this.subject();
+    assert.equal(service.get('items').length, 1);
+    assert.equal(service.get('items')[0].id, 2);
+  });
 
-  service.addItem(story1);
-  service.addItem(story2);
-  service.removeItemById(1);
+  test('item can get removed from discover queue by id', function(assert) {
+    let story1 = {id: 1};
+    let story2 = {id: 2};
+    let service = this.owner.lookup('service:discover-queue');
 
-  assert.equal(service.get('items').length, 1);
-  assert.equal(service.get('items')[0].id, 2);
-});
+    service.addItem(story1);
+    service.addItem(story2);
+    service.removeItemById(1);
 
-test('queue can be updated in bulk', function(assert) {
-  let story1 = {id: 1};
-  let story2 = {id: 2};
-  let service = this.subject();
+    assert.equal(service.get('items').length, 1);
+    assert.equal(service.get('items')[0].id, 2);
+  });
 
-  service.addItem(story1);
-  service.addItem(story2);
-  assert.equal(service.get('items').length, 2);
+  test('queue can be updated in bulk', function(assert) {
+    let story1 = {id: 1};
+    let story2 = {id: 2};
+    let service = this.owner.lookup('service:discover-queue');
 
-  service.updateQueue([{id:4}, {id:5}, {id:6}]);
-  assert.equal(service.get('items').length, 3);
-  assert.equal(service.get('items').map(d => d.id).join(","), "4,5,6");
-});
+    service.addItem(story1);
+    service.addItem(story2);
+    assert.equal(service.get('items').length, 2);
 
-test('queue can return next item that is unplayed', function(assert) {
-  let story1 = {id: 1};
-  let story2 = {id: 2};
-  let story3 = {id: 3};
-  let story4 = {id: 4};
+    service.updateQueue([{id:4}, {id:5}, {id:6}]);
+    assert.equal(service.get('items').length, 3);
+    assert.equal(service.get('items').map(d => d.id).join(","), "4,5,6");
+  });
 
-  let service = this.subject();
+  test('queue can return next item that is unplayed', function(assert) {
+    let story1 = {id: 1};
+    let story2 = {id: 2};
+    let story3 = {id: 3};
+    let story4 = {id: 4};
 
-  service.addItem(story1);
-  service.addItem(story2);
-  service.addItem(story3);
-  service.addItem(story4);
+    let service = this.owner.lookup('service:discover-queue');
 
-  service.get('history').addListen(story2);
-  assert.equal(service.nextUnplayedItem().id, 1);
-  service.get('history').addListen(story1);
-  assert.equal(service.nextUnplayedItem().id, 3);
-});
+    service.addItem(story1);
+    service.addItem(story2);
+    service.addItem(story3);
+    service.addItem(story4);
 
-test('queue can return next item in list given the current item', function(assert) {
-  let story1 = {id: 1};
-  let story2 = {id: 2};
-  let service = this.subject();
+    service.get('history').addListen(story2);
+    assert.equal(service.nextUnplayedItem().id, 1);
+    service.get('history').addListen(story1);
+    assert.equal(service.nextUnplayedItem().id, 3);
+  });
 
-  service.addItem(story1);
-  service.addItem(story2);
-  assert.equal(service.get('items').length, 2);
+  test('queue can return next item in list given the current item', function(assert) {
+    let story1 = {id: 1};
+    let story2 = {id: 2};
+    let service = this.owner.lookup('service:discover-queue');
 
-  assert.equal(service.nextItem(1), story2);
-});
+    service.addItem(story1);
+    service.addItem(story2);
+    assert.equal(service.get('items').length, 2);
 
-test('queue can be empied', function(assert) {
-  let story1 = {id: 1};
-  let story2 = {id: 2};
-  let service = this.subject();
+    assert.equal(service.nextItem(1), story2);
+  });
 
-  service.addItem(story1);
-  service.addItem(story2);
-  assert.equal(service.get('items').length, 2);
+  test('queue can be empied', function(assert) {
+    let story1 = {id: 1};
+    let story2 = {id: 2};
+    let service = this.owner.lookup('service:discover-queue');
 
-  service.emptyQueue();
-  assert.equal(service.get('items').length, 0);
+    service.addItem(story1);
+    service.addItem(story2);
+    assert.equal(service.get('items').length, 2);
+
+    service.emptyQueue();
+    assert.equal(service.get('items').length, 0);
+  });
 });

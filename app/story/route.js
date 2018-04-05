@@ -1,11 +1,11 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
+import { hash as waitFor } from 'rsvp';
+import { get } from '@ember/object';
 import service from 'ember-service/inject';
 import PlayParamMixin from 'wnyc-web-client/mixins/play-param';
 import config from 'wnyc-web-client/config/environment';
-const { get } = Ember;
-const { hash: waitFor } = Ember.RSVP;
 
-export default Ember.Route.extend(PlayParamMixin, {
+export default Route.extend(PlayParamMixin, {
   metrics:      service(),
   session:      service(),
   googleAds:    service(),

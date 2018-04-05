@@ -1,29 +1,31 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('simple-callout', 'Integration | Component | simple callout', {
-  integration: true
-});
+module('Integration | Component | simple callout', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
+  test('it renders', async function(assert) {
 
-  this.render(hbs`{{simple-callout}}`);
+    await render(hbs`{{simple-callout}}`);
 
-  assert.equal(this.$().text().trim(), '');
+    assert.equal(find('*').textContent.trim(), '');
 
-  this.render(hbs`
-    {{#simple-callout}}
-      template block text
-    {{/simple-callout}}
-  `);
+    await render(hbs`
+      {{#simple-callout}}
+        template block text
+      {{/simple-callout}}
+    `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
-});
+    assert.equal(find('*').textContent.trim(), 'template block text');
+  });
 
 
-test('it displays button text', function(assert) {
+  test('it displays button text', async function(assert) {
 
-  this.render(hbs`{{simple-callout button-text='button text'}}`);
+    await render(hbs`{{simple-callout button-text='button text'}}`);
 
-  assert.equal(this.$().text().trim(), 'button text');
+    assert.equal(find('*').textContent.trim(), 'button text');
+  });
 });

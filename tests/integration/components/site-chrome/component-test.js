@@ -1,24 +1,26 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, findAll, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('site-chrome', 'Integration | Component | site chrome', {
-  integration: true
-});
+module('Integration | Component | site chrome', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  test('it renders', async function(assert) {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{site-chrome}}`);
+    await render(hbs`{{site-chrome}}`);
 
-  assert.equal(this.$('.l-page').length, 1);
+    assert.equal(findAll('.l-page').length, 1);
 
-  // Template block usage:
-  this.render(hbs`
-    {{#site-chrome}}
-      template block text
-    {{/site-chrome}}
-  `);
+    // Template block usage:
+    await render(hbs`
+      {{#site-chrome}}
+        template block text
+      {{/site-chrome}}
+    `);
 
-  assert.ok(this.$().text().trim().match('template block text'));
+    assert.ok(find('*').textContent.trim().match('template block text'));
+  });
 });

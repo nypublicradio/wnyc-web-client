@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import { helper as buildHelper } from '@ember/component/helper';
 
 export function abbreviateTime(params/*, hash*/) {
 
   return params[0].replace(/seconds?/, 'sec').replace(/minutes?/, 'min').replace(/hours?/, 'hr');
 }
 
-export default Ember.Helper.helper(abbreviateTime);
+export default buildHelper(abbreviateTime);

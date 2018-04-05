@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import computed from 'ember-computed';
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames:['discover-show'],
 
   classNameBindings:['isSelected'],
