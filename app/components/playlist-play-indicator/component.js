@@ -18,12 +18,12 @@ export default Component.extend({
     if (!this.get('isReady')) {
       return;
     }
-    
+
     if (this.get('isPlaying')) {
-      this.sendAction('onPause');
+      this.onPause();
     }
     else {
-      this.sendAction('onPlay');
+      this.onPlay();
     }
   }
 });

@@ -15,6 +15,7 @@ export default Service.extend({
   actionQueue: service(),
 
   init() {
+    this._super(...arguments);
     let hifi        = get(this, 'hifi');
     let actionQueue = get(this, 'actionQueue');
 

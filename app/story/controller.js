@@ -7,7 +7,7 @@ export default Controller.extend({
   queryParams:  ['tab'],
   tab: 'summary',
   metrics: service(),
-  deviceIsIos: !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform),
+
   setTab(){
     if (location.hash.substr(1) === "transcript"){
         this.set("tab", 'transcript');
@@ -17,6 +17,7 @@ export default Controller.extend({
   init(){
     this._super(...arguments);
     scheduleOnce("afterRender", this, this.setTab);
+    this.set('deviceIsIos', !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform));
   },
 
   actions: {

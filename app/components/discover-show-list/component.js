@@ -1,5 +1,4 @@
 import { once } from '@ember/runloop';
-import { on } from '@ember/object/evented';
 import { mapBy } from '@ember/object/computed';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
@@ -8,10 +7,17 @@ import { get } from '@ember/object';
 export default Component.extend({
   metrics: service(),
   classNames:['discover-show-list'],
-  shows: [],
   showSlugs:     mapBy('shows', 'slug'),
-  selectedShowSlugs: [],
-  excludedShowSlugs: [],
+
+  init() {
+    this._super(...arguments);
+    this.setProperties({
+      shows: [],
+      selectedShowSlugs: [],
+      excludedShowSlugs: [],
+    });
+    this.updateShows(this.get('excludedShowSlugs'), this.get('selectedShowSlugs'));
+  },
 
   didReceiveAttrs() {
     this.set('selectedShowSlugs', this.get('showSlugs').reject(item => {
@@ -21,14 +27,10 @@ export default Component.extend({
     this._super(...arguments);
   },
 
-  initializeShows: on('init', function() {
-    this.updateShows(this.get('excludedShowSlugs'), this.get('selectedShowSlugs'));
-  }),
-
   updateShows(excludedShowSlugs, selectedShowSlugs) {
     once(() => {
-      this.sendAction('onShowsUpdated', excludedShowSlugs.slice());
-      this.sendAction('onNoneSelected', selectedShowSlugs.length === 0);
+      this.onShowsUpdated(excludedShowSlugs.slice());
+      this.onNoneSelected(selectedShowSlugs.length === 0);
     });
   },
 

@@ -13,6 +13,7 @@ import velocity from 'velocity';
 
 const mockMetrics = Service.extend({
   init() {
+    this._super(...arguments);
     this.trackedEvents = [];
   },
   trackEvent(service, event) {

@@ -7,7 +7,10 @@ module('Unit | Service | discover prefs', function(hooks) {
 
   hooks.beforeEach(function() {
     const sessionStub = Service.extend({
-      data: {} // we only really need the data thing
+      init() {
+        this._super(...arguments);
+        this.set('data', {});
+      },
     });
 
     this.owner.register('service:session', sessionStub);

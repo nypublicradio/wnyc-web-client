@@ -1,6 +1,6 @@
 import { inject as service } from '@ember/service';
 import DataPipeline from 'nypr-metrics/services/data-pipeline';
-import computed from 'ember-computed';
+import { computed } from '@ember/object';
 
 export default DataPipeline.extend({
   session: service(),

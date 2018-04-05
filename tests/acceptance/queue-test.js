@@ -1,4 +1,4 @@
-import { click, currentURL } from '@ember/test-helpers';
+import { click, currentURL, find } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import { run } from '@ember/runloop';
@@ -83,15 +83,15 @@ module('Acceptance | queue', function(hooks) {
 
     let listenButtons = findWithAssert('.player-queue [data-test-selector=listen-button]');
     listenButtons.each((i, el) => {
-      assert.equal($(el).attr('data-show'), 'foo show');
-      assert.equal($(el).attr('data-story'), stories[i].title);
+      assert.equal(find(el).getAttribute('data-show'), 'foo show');
+      assert.equal(find(el).getAttribute('data-story'), stories[i].title);
     });
 
     await click('button:contains(My Listening History)');
     listenButtons = findWithAssert('.player-history [data-test-selector=listen-button]');
     listenButtons.get().reverse().forEach((el, i) => {
-      assert.equal($(el).attr('data-show'), 'foo show');
-      assert.equal($(el).attr('data-story'), stories[i + 2].title);
+      assert.equal(find(el).getAttribute('data-show'), 'foo show');
+      assert.equal(find(el).getAttribute('data-story'), stories[i + 2].title);
     });
   });
 });

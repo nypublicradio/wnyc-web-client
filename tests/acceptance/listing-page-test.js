@@ -380,8 +380,8 @@ module('Acceptance | Listing Page | Analytics', function(hooks) {
 
     let listenButtons = findWithAssert('.story-tease [data-test-selector=listen-button]');
     listenButtons.each((i, el) => {
-      assert.equal($(el).attr('data-show'), 'foo show');
-      assert.equal($(el).attr('data-story'), teaseList[i].title);
+      assert.equal(find(el).getAttribute('data-show'), 'foo show');
+      assert.equal(find(el).getAttribute('data-story'), teaseList[i].title);
     })
   })
 });

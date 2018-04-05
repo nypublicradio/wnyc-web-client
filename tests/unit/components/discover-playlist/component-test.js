@@ -2,8 +2,7 @@ import Service from '@ember/service';
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 import { get, set } from '@ember/object';
-import { dummyHifi, hifiNeeds } from 'wnyc-web-client/tests/helpers/hifi-integration-helpers';
-import Service from '@ember/service';
+import { dummyHifi } from 'wnyc-web-client/tests/helpers/hifi-integration-helpers';
 
 module('Unit | Component | discover playlist', function(hooks) {
   setupTest(hooks);
@@ -19,11 +18,15 @@ module('Unit | Component | discover playlist', function(hooks) {
     });
 
     const dummyDj = Service.extend({
-      currentlyLoadingIds: [],
       isReady: true,
       play() {},
-      pause() {}
+      pause() {},
+      init() {
+        this._super(...arguments);
+        this.set('currentlyLoadingIds', []);
+      },
     })
+
 
     this.owner.register('service:hifi', dummyHifi);
     this.hifi = this.owner.lookup('service:hifi');

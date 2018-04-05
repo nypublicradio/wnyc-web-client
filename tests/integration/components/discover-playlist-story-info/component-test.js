@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, settled, find, findAll } from '@ember/test-helpers';
+import { render, click, find, findAll } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import startMirage from 'wnyc-web-client/tests/helpers/setup-mirage-for-integration';
 import moment from 'moment';
@@ -84,11 +84,9 @@ module('Integration | Component | discover playlist story info', function(hooks)
 
     await render(hbs`{{discover-playlist-story-info story=story}}`);
 
-    $("a.discover-playlist-story-summary-action-link").click();
+    await click("a.discover-playlist-story-summary-action-link");
 
-    return settled().then(() => {
-      assert.equal(findAll('.discover-playlist-story-info-extended.is-shown').length, 1);
-    });
+    assert.equal(findAll('.discover-playlist-story-info-extended.is-shown').length, 1);
   });
 
   test('it links to the story url', async function(assert) {

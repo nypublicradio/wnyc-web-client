@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import { later } from '@ember/runloop';
 import { click, currentURL, visit } from '@ember/test-helpers';
 import { module, test } from 'qunit';

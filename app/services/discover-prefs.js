@@ -4,14 +4,17 @@ import Service, { inject as service } from '@ember/service';
 export default Service.extend({
   session: service(),
 
-  selectedTopicTags:[],
-  selectedShowSlugs:[],
   excludedStoryIds: alias('session.data.discover-excluded-story-ids'),
 
   setupComplete: false,
   currentSetupStep: 'start',
 
   init() {
+    this._super(...arguments);
+    this.setProperties({
+      selectedTopicTags:[],
+      selectedShowSlugs:[],
+    });
     this.loadFromSession();
   },
 

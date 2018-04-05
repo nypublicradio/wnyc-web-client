@@ -30,7 +30,10 @@ module('Integration | Component | discover playlist', function(hooks) {
     isPlaying: false,
     pause() {},
     play() {},
-    currentlyLoadingIds: []
+    init() {
+      this._super(...arguments);
+      this.set('currentlyLoadingIds', []);
+    },
   });
 
   const queueStub = Service.extend({

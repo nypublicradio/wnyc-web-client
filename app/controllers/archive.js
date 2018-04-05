@@ -1,5 +1,5 @@
-import Controller from 'ember-controller';
-import computed from 'ember-computed';
+import Controller from '@ember/controller';
+import { computed } from '@ember/object';
 
 export default Controller.extend({
   queryParams: [
@@ -16,17 +16,22 @@ export default Controller.extend({
   year: null,
   month: null,
   day: null,
-  
-  sortOptions: [{
-    label: 'Newest to Oldest',
-    value: '-newsdate'
-  }, {
-    label: 'Oldest to Newest',
-    value: 'newsdate'
-  }],
-  
-  pageOptions: [10, 25, 50, 100, 500],
-  
+
+  init() {
+    this._super(...arguments);
+    this.setProperties({
+      sortOptions: [{
+        label: 'Newest to Oldest',
+        value: '-newsdate'
+      }, {
+        label: 'Oldest to Newest',
+        value: 'newsdate'
+      }],
+
+      pageOptions: [10, 25, 50, 100, 500],
+    });
+  },
+
   years: computed('model.meta.dates', function() {
     return Object.keys(this.get('model.meta.dates')).reverse();
   }),
@@ -34,7 +39,7 @@ export default Controller.extend({
     let { year, month, day } = this.getProperties('year', 'month', 'day');
     return !year && !month && !day;
   }),
-  
+
   months: computed('year', 'model.meta.dates', function() {
     return Object.keys(this.get('model.meta.dates')[this.get('year')]);
   }),
@@ -42,7 +47,7 @@ export default Controller.extend({
     let { year, month, day } = this.getProperties('year', 'month', 'day');
     return year && !month && !day;
   }),
-  
+
   days: computed('year', 'month', 'model.meta.dates', function() {
     let { year, month } = this.getProperties('year', 'month');
     return this.get('model.meta.dates')[year][month].map(Number).sort((a, b) => a - b);
@@ -51,7 +56,7 @@ export default Controller.extend({
     let { year, month, day } = this.getProperties('year', 'month', 'day');
     return year && month && !day;
   }),
-  
+
   actions: {
     updateOrder(e) {
       this.set('ordering', e.target.value);

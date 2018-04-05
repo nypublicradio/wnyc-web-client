@@ -1,14 +1,17 @@
 import Service from '@ember/service';
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
-import hifiNeeds from 'wnyc-web-client/tests/helpers/hifi-needs';
+// import hifiNeeds from 'wnyc-web-client/tests/helpers/hifi-needs';
 
 module('Unit | Service | discover-queue', function(hooks) {
   setupTest(hooks);
 
   hooks.beforeEach(function() {
     const sessionStub = Service.extend({
-      data: {} // we only really need the data thing
+      init() {
+        this._super(...arguments);
+        this.set('data', {});
+      },
     });
 
     this.owner.register('service:session', sessionStub);

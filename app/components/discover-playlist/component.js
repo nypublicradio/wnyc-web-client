@@ -56,11 +56,14 @@ export default Component.extend({
 
   removedItemIds: map('removedItems', (i) => i.id),
 
-  // This is for the delete effects, and this might be a weird way to do it
-  // but by not actually deleting the item from the list we can avoid having to
-  // set magic number timeouts
+  init() {
+    this._super(...arguments);
 
-  removedItems: [],
+    // but by not actually deleting the item from the list we can avoid having to
+    // set magic number timeouts
+    this.set('removedItems', []);
+  },
+  // This is for the delete effects, and this might be a weird way to do it
   actions: {
     removeItem(item) {
       get(this, 'metrics').trackEvent('GoogleAnalytics', {
@@ -73,10 +76,12 @@ export default Component.extend({
       this.get('removedItems').addObject(item);
 
       // this will fire the listen action and delete it from the queue
-      this.sendAction('onRemoveItem', item);
-
       // we don't want to actually delete it from the stories object
       // that will work itself next time the list loads
+      if (this.onRemoveItem) {
+        this.onRemoveItem(item);
+      }
+
     },
 
     dragStarted(/* item */) {
@@ -105,7 +110,9 @@ export default Component.extend({
       this.set('removedItems', []); // clear out removed/hidden items
 
       // this sends it up to get updated in the queue
-      this.sendAction('onUpdateItems', presentAndOrderedItems);
+      if (this.onUpdateItems) {
+        this.onUpdateItems(presentAndOrderedItems);
+      }
     },
 
     toggle() {
@@ -133,7 +140,9 @@ export default Component.extend({
     },
 
     findMore() {
-      this.sendAction('findMore');
+      if (this.findMore) {
+        this.findMore();
+      }
     }
   }
 });

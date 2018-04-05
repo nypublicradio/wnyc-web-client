@@ -145,8 +145,8 @@ module('Acceptance |  Story Detail Analytics', function(hooks) {
     await visit(`story/${segmentStory.slug}`);
     let segmentButtons = findWithAssert('#segmentsList [data-test-selector=listen-button]');
     segmentButtons.each((i, el) => {
-      assert.equal($(el).attr('data-show'), 'foo show');
-      assert.equal($(el).attr('data-story'), segmentStory.segments[i].title);
+      assert.equal(find(el).getAttribute('data-show'), 'foo show');
+      assert.equal(find(el).getAttribute('data-story'), segmentStory.segments[i].title);
     });
   });
 

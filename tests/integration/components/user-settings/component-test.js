@@ -6,11 +6,15 @@ import hbs from 'htmlbars-inline-precompile';
 import Service from '@ember/service';
 
 const sessionStub = Service.extend({
-  data: {
-    'user-prefs-active-stream': {slug: 'wnyc-fm939', name: 'WNYC 93.9 FM'},
-    'user-prefs-active-autoplay': 'default_stream'
-  }
+  init() {
+    this._super(...arguments);
+    this.set('data', {
+      'user-prefs-active-stream': {slug: 'wnyc-fm939', name: 'WNYC 93.9 FM'},
+      'user-prefs-active-autoplay': 'default_stream'
+    });
+  },
 });
+
 
 module('Integration | Component | user settings', function(hooks) {
   setupRenderingTest(hooks);

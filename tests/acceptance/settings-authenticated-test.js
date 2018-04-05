@@ -35,10 +35,10 @@ module('Acceptance | settings', function(hooks) {
 
     assert.equal(currentURL(), '/settings');
 
-    var actualStream = $('.user-stream .ember-power-select-selected-item').text().trim();
+    var actualStream = find('.user-stream .ember-power-select-selected-item').textContent.trim();
     assert.equal(actualStream, wqxrStream.name);
 
-    var actualPref = $('.autoplay-options .ember-power-select-selected-item').text().trim();
+    var actualPref = find('.autoplay-options .ember-power-select-selected-item').textContent.trim();
     var expectedPref = 'My Queue';
     assert.equal(actualPref, expectedPref);
   });
@@ -69,14 +69,6 @@ module('Acceptance | settings', function(hooks) {
     await click('.toggle');
     var expectedElementCount = findAll('.autoplay-inactive').length;
     var actualElementCount = 1;
-    assert.equal(expectedElementCount, actualElementCount);
-  });
-
-  test('if feature flag for autoplay-autoprefs is absent, then the link should be not be present', async function(assert) {
-    await visit('/');
-    const el = $('.l-bottom .list-item:contains("Settings")');
-    const expectedElementCount = 0;
-    const actualElementCount = el.length;
     assert.equal(expectedElementCount, actualElementCount);
   });
 });

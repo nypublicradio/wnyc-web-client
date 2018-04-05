@@ -6,10 +6,13 @@ import { inject as service } from '@ember/service';
 export default Component.extend({
   metrics: service(),
   session: service(),
-  autoPlayPrefs: [
-    { name: 'My Default Stream', field: 'default_stream' },
-    { name: 'My Queue', field: 'queue' }
-  ],
+  init() {
+    this._super(...arguments);
+    this.set('autoPlayPrefs', [
+      { name: 'My Default Stream', field: 'default_stream' },
+      { name: 'My Queue', field: 'queue' }
+    ]);
+  },
 
   enableAutoplay: equal('session.data.user-prefs-active-autoplay', 'no_autoplay'),
   activeStream: computed('session.data.user-prefs-active-stream.slug', function(){

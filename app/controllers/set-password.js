@@ -1,4 +1,4 @@
-import Controller from 'ember-controller';
+import Controller from '@ember/controller';
 
 export default Controller.extend({
   queryParams: ['username', 'code', 'email', 'verification_token', 'email_id'],

@@ -1,5 +1,5 @@
-import Controller from 'ember-controller';
-import computed from 'ember-computed';
+import Controller from '@ember/controller';
+import { computed } from '@ember/object';
 import { get } from '@ember/object';
 import { inject as service } from '@ember/service';
 

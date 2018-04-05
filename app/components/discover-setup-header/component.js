@@ -1,4 +1,4 @@
-import { equal } from 'ember-computed';
+import { equal } from '@ember/object/computed';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { get } from '@ember/object';
@@ -10,7 +10,9 @@ export default Component.extend({
   isLoadingNext: equal('loadingDirection', 'next'),
   actions: {
     next() {
-      this.sendAction('onNext');
+      if (this.next) {
+        this.next();
+      }
     },
     back() {
       get(this, 'metrics').trackEvent('GoogleAnalytics', {
@@ -18,7 +20,9 @@ export default Component.extend({
         action: 'Clicked Back in Discover'
       });
 
-      this.sendAction('onBack');
+      if (this.onBack) {
+        this.onBack();
+      }
     }
   }
 });

@@ -1,4 +1,4 @@
-import { helper } from 'ember-helper';
+import { helper } from '@ember/component/helper';
 
 export function urlEncode(s) {
   return encodeURIComponent(s).replace(/'/g,"%27").replace(/"/g,"%22");

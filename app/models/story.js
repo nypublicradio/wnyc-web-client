@@ -1,5 +1,5 @@
 import StoryModel from 'nypr-publisher-lib/models/story';
-import computed from 'ember-computed';
+import { computed } from '@ember/object';
 import { get } from '@ember/object';
 
 export default StoryModel.extend({
