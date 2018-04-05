@@ -1,4 +1,3 @@
-/*jshint node:true*/
 function reportFile() {
   if (_circleTestFolder()) {
     return _circleTestFolder() + '/test.xml';
@@ -24,18 +23,20 @@ module.exports = {
     'Chrome'
   ],
   browser_args: {
-    Chrome: [
-      '--disable-gpu',
-      '--headless',
-      '--remote-debugging-port=9222',
-      '--window-size=1440,900'
-    ]
+    Chrome: {
+      mode: 'ci',
+      args: [
+        // --no-sandbox is needed when running Chrome inside a container
+        process.env.TRAVIS ? '--no-sandbox' : null,
+
+        '--disable-gpu',
+        '--headless',
+        '--remote-debugging-port=0',
+        '--window-size=1440,900'
+      ].filter(Boolean)
+    }
   },
-  "launch_in_dev": [
-    "Chrome",
-    "Firefox"
-  ],
-  "reporter": testReporter(),
-  "report_file": reportFile(),
-  "xunit_intermediate_output": true
+  reporter: testReporter(),
+  report_file: reportFile(),
+  xunit_intermediate_output: true
 };

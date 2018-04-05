@@ -1,13 +1,11 @@
-import Ember from 'ember';
+import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
 import AnalyticsMixin from './mixins/analytics';
-import service from 'ember-service/inject';
+import { inject as service } from '@ember/service';
 
-const Router = Ember.Router.extend(AnalyticsMixin, {
+const Router = EmberRouter.extend(AnalyticsMixin, {
   session:      service(),
-
   location: config.locationType,
-
   willTransition(oldInfos, newInfos, transition) {
     this._super(...arguments);
     if (!['login', 'signup', 'validate', 'forgot', 'reset', 'set-password'].includes(transition.targetName)) {

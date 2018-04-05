@@ -213,6 +213,8 @@ module.exports = function(environment) {
     ENV.membershipAPI = 'http://www.example.com';
     ENV.platformEventsAPI = 'http://example.com';
     ENV.gothamistStories = 'http://gothamist.com';
+    ENV.APP.autoboot = false;
+    
   }
 
   if (environment === 'production') {
