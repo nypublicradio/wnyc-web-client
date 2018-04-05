@@ -55,6 +55,7 @@ jobs:
         environment:
           JOBS: 2
 
+    parallelism: 4
     steps:
       - checkout
       - restore_cache:
@@ -67,7 +68,7 @@ jobs:
           name: Test
           environment:
             CIRCLE_TEST_REPORTS: test-results
-          command: npx ember test
+          command: npx ember exam --split=$CIRCLE_NODE_TOTAL --partition=$(($CIRCLE_NODE_INDEX + 1))
       - store_test_results:
           path: test-results/
 

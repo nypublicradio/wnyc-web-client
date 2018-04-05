@@ -3209,6 +3209,17 @@ ember-diff-attrs@^0.2.1:
     ember-cli-babel "^6.6.0"
     ember-weakmap "^3.0.0"
 
+ember-exam@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ember-exam/-/ember-exam-1.0.0.tgz#dd750ea407c05b01e74ee27ba42edb58585ae06b"
+  dependencies:
+    chalk "^2.1.0"
+    cli-table2 "^0.2.0"
+    debug "^3.1.0"
+    ember-cli-babel "^6.3.0"
+    fs-extra "^4.0.2"
+    rimraf "^2.6.2"
+
 ember-export-application-global@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ember-export-application-global/-/ember-export-application-global-2.0.0.tgz#8d6d7619ac8a1a3f8c43003549eb21ebed685bd2"
@@ -4375,7 +4386,7 @@ fs-extra@^2.0.0:
     graceful-fs "^4.1.2"
     jsonfile "^2.1.0"
 
-fs-extra@^4.0.0:
+fs-extra@^4.0.0, fs-extra@^4.0.2:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-4.0.3.tgz#0d852122e5bc5beb453fb028e9c0c9bf36340c94"
   dependencies:
