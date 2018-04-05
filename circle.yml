@@ -63,7 +63,7 @@ jobs:
         environment:
           JOBS: 2
 
-    parallelism: 7
+    parallelism: 4
     steps:
       - checkout
       - restore_cache:
