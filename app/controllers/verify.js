@@ -1,5 +1,5 @@
 import Controller from 'ember-controller';
-import service from 'ember-service/inject';
+import { inject as service } from '@ember/service';
 import config from 'wnyc-web-client/config/environment';
 
 export default Controller.extend({

@@ -1,6 +1,6 @@
 import { get } from '@ember/object';
+import { inject as service } from '@ember/service';
 import Component from 'nypr-django-for-ember/components/django-page';
-import service from 'ember-service/inject';
 
 export default Component.extend({
   session: service(),

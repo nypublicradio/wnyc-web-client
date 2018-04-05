@@ -1,10 +1,9 @@
 import { once } from '@ember/runloop';
 import { on } from '@ember/object/evented';
-import { computed } from '@ember/object';
+import { computed, set } from '@ember/object';
 import { mapBy } from '@ember/object/computed';
 import Component from '@ember/component';
-import service from 'ember-service/inject';
-import get from 'ember-metal/get';
+import { inject as service } from '@ember/service';
 
 export default Component.extend({
   metrics: service(),

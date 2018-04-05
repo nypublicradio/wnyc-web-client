@@ -3,7 +3,7 @@ import { setProperties, get } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 import $ from 'jquery';
 import Ember from 'ember';
-import service from 'ember-service/inject';
+import { inject as service } from '@ember/service';
 
 
 const {

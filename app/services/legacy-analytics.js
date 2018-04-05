@@ -1,7 +1,5 @@
-import $ from 'jquery';
 import { get } from '@ember/object';
-import Service from '@ember/service';
-import service from 'ember-service/inject';
+import Service, { inject as service } from '@ember/service';
 
 const MENU_SELECTORS = '#navigation-menu';
 const HOMEPAGE_SELECTORS = '#wnyc_home a[href^=http], #wnyc_home a.external-link';
@@ -9,7 +7,7 @@ const SHARE_SELECTORS = '.js-share';
 const HEADER_SELECTORS = '#brand-logo, .header-wide-button, #header .user-logout, #header .user-login';
 
 function contains(selector, target) {
-  let results = $(target).closest(selector);
+  let results = document.querySelector(target).closest(selector);
   return !!results.length;
 }
 
@@ -32,7 +30,7 @@ export default Service.extend({
   },
 
   _trackLinkWithText({target}, category) {
-    const $target = $(target);
+    const $target = document.querySelector(target);
     const title = $target.text().trim();
     const destinationUrl = $target.attr('href') !== '#' ? $target.attr('href') : false;
     const metrics = get(this, 'metrics');
@@ -45,7 +43,7 @@ export default Service.extend({
   },
 
   _trackHomepage({target}) {
-    let $tgt = $(target);
+    let $tgt = document.querySelector(target);
     let $li = $tgt.closest('li');
     let index = $li.index();
     let $bucket = $tgt.closest('.bucket, #damost');
@@ -69,7 +67,7 @@ export default Service.extend({
     let {containers, title} = get(story, 'analytics');
 
     /*global wnyc*/
-    let $clickedEl = $(target);
+    let $clickedEl = document.querySelector(target);
     let dataCategory = $clickedEl.closest('[data-category]');
     let sharedVia = dataCategory.data('category');
 

@@ -1,7 +1,7 @@
 import { match } from '@ember/object/computed';
 import Controller from 'ember-controller';
-import service from 'ember-service/inject';
-import get from 'ember-metal/get';
+import { inject as service } from '@ember/service';
+import { get } from '@ember/object';
 import { reads } from 'ember-computed';
 
 export default Controller.extend({

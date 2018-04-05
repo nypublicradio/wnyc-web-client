@@ -1,6 +1,6 @@
 import StoryModel from 'nypr-publisher-lib/models/story';
 import computed from 'ember-computed';
-import get from 'ember-metal/get';
+import { get } from '@ember/object';
 
 export default StoryModel.extend({
   shareMetadata: computed(function() {

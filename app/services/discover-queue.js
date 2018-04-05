@@ -2,8 +2,8 @@ import { alias } from '@ember/object/computed';
 import { bind } from '@ember/runloop';
 import Service from '@ember/service';
 import { A as emberArray } from '@ember/array';
-import service from 'ember-service/inject';
-import get from 'ember-metal/get';
+import { inject as service } from '@ember/service';
+import { get } from '@ember/object';
 
 export default Service.extend({
   session: service(),

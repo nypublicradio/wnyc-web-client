@@ -1,4 +1,4 @@
-import Component from 'ember-component';
+import Component from '@ember/component';
 import { readOnly } from 'ember-computed';
 
 export default Component.extend({

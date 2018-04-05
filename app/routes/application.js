@@ -1,7 +1,7 @@
 import Route from 'ember-route';
-import get from 'ember-metal/get';
+import { get } from '@ember/object';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
-import service from 'ember-service/inject';
+import { inject as service } from '@ember/service';
 
 export default Route.extend(ApplicationRouteMixin, {
   metrics: service(),

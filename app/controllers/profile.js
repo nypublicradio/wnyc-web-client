@@ -1,11 +1,9 @@
-import $ from 'jquery';
-import Evented from '@ember/object/evented';
-import Controller from 'ember-controller';
-import service from 'ember-service/inject';
+import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 import config from 'wnyc-web-client/config/environment';
 import { task, waitForEvent } from 'ember-concurrency';
-import get from 'ember-metal/get';
-import set from 'ember-metal/set';
+import { get, set } from '@ember/object';
+import Evented from '@ember/object/evented';
 import fetch from 'fetch';
 import RSVP from 'rsvp';
 
@@ -136,11 +134,11 @@ export default Controller.extend(Evented, {
   }),
 
   promptForPassword: task(function * () {
-    $('body').addClass('has-nypr-account-modal-open');
+    document.querySelector('body').classList.add('has-nypr-account-modal-open');
     try {
       yield waitForEvent(this, 'passwordVerified');
     } finally {
-      $('body').removeClass('has-nypr-account-modal-open');
+      document.querySelector('body').classList.remove('has-nypr-account-modal-open');
       set(this, 'password', null);
     }
   }).drop(),

@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
-import run from 'ember-runloop';
+import { run } from '@ember/runloop';
 
 module('Unit | Controller | profile', function(hooks) {
   setupTest(hooks);

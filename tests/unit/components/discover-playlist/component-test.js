@@ -1,9 +1,9 @@
 import Service from '@ember/service';
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
-import get from 'ember-metal/get';
-import set from 'ember-metal/set';
+import { get, set } from '@ember/object';
 import { dummyHifi, hifiNeeds } from 'wnyc-web-client/tests/helpers/hifi-integration-helpers';
+import Service from '@ember/service';
 
 module('Unit | Component | discover playlist', function(hooks) {
   setupTest(hooks);

@@ -1,7 +1,7 @@
 import { equal } from '@ember/object/computed';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import service from 'ember-service/inject';
+import { inject as service } from '@ember/service';
 
 export default Component.extend({
   metrics: service(),

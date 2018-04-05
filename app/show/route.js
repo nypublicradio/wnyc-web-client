@@ -1,6 +1,6 @@
 import Route from 'ember-route';
 import RSVP from 'rsvp';
-import service from 'ember-service/inject';
+import { inject as service } from '@ember/service';
 import ENV from 'wnyc-web-client/config/environment';
 
 export default Route.extend({

@@ -1,7 +1,7 @@
 import { hash as waitFor } from 'rsvp';
 import { set, get } from '@ember/object';
 import Route from 'ember-route';
-import service from 'ember-service/inject';
+import { inject as service } from '@ember/service';
 import Ember from 'ember';
 const {
   Inflector

@@ -1,7 +1,7 @@
 import Route from '@ember/routing/route';
 import { hash as waitFor } from 'rsvp';
 import { get } from '@ember/object';
-import service from 'ember-service/inject';
+import { inject as service } from '@ember/service';
 import PlayParamMixin from 'wnyc-web-client/mixins/play-param';
 import config from 'wnyc-web-client/config/environment';
 

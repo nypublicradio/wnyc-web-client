@@ -1,6 +1,6 @@
 import Component from '@ember/component';
-import service from 'ember-service/inject';
-import { reads } from 'ember-computed';
+import { inject as service } from '@ember/service';
+import { reads } from '@ember/object/computed';
 
 export default Component.extend({
   dj:                service(),

@@ -1,7 +1,6 @@
 import Mixin from '@ember/object/mixin';
-import service from 'ember-service/inject';
-import set from 'ember-metal/set';
-import get from 'ember-metal/get';
+import { inject as service } from '@ember/service';
+import { get, set } from '@ember/object';
 
 // Invalidates an authenticated session,
 // but sets a flag to not refresh the page.

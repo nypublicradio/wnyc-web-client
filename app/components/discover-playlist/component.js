@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import { computed, observer } from '@ember/object';
 import {
   reads,
@@ -9,8 +8,8 @@ import {
   map
 } from '@ember/object/computed';
 import Component from '@ember/component';
-import get from 'ember-metal/get';
-import service from 'ember-service/inject';
+import { get } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 export default Component.extend({
   session:  service(),
@@ -121,7 +120,7 @@ export default Component.extend({
       else {
         let story = this.get('stories').get('firstObject');
         this.send('playTrack', story.id);
-        this.get('scroller').scrollVertical($(`span[data-story-id="${story.id}"]`), {offset: -100, duration: 500});
+        this.get('scroller').scrollVertical(document.querySelector(`span[data-story-id="${story.id}"]`), {offset: -100, duration: 500});
       }
     },
 

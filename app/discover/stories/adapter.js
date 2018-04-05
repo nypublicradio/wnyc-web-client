@@ -1,6 +1,6 @@
 import config from '../../config/environment';
 import DS from 'ember-data';
-import service from 'ember-service/inject';
+import { inject as service } from '@ember/service';
 import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 
 const { featureFlags } = config;
