@@ -21,7 +21,7 @@ You will need the following software properly installed on your computer. Please
 
 ## Development
 
-As noted above, you must spin up a checkout of [`publisher`](https://github.com/nypublicradio/publisher) at a web address against which this ember app can make requests. By default, the app will use `http://dev.wnyc.net:MY_PORT` as its destination.
+As noted above, you must spin up a checkout of [`publisher`](https://github.com/nypublicradio/publisher) at a web address against which this ember app can make requests. By default, the app will use `https://wqxr.demo2.wnyc.net` as its destination.
 
 This value is controlled by a `.env` file you will create by following the directions below. Substitute the value of `MY_PORT` with the port of your `publisher` checkout on `dev.wnyc.net`, or replace it with a different address entirely if you are running the `publisher` app somewhere else.
 
@@ -37,7 +37,7 @@ We use [modernizr](https://modernizr.com/) to detect for certain browser feature
 
 The `publisher` service is not set up as a strictly data-only API server and will return HTML with embedded script tags that request against the domain root. To resolve this issue, you should run your local server with the proxy command:
 ```sh
-$ ember serve --proxy http://dev.wnyc.net:MY_PORT
+$ ember serve --proxy https://wqxr.demo2.wnyc.net
 ```
 
 ## Related features in the Django app
