@@ -17,7 +17,7 @@ jobs:
           key: grunt-and-bower
           paths:
             - ~/.config/yarn/global
-      
+
       - restore_cache:
           key: bower-deps-{{ checksum "bower.json" }}
       - run:
@@ -62,7 +62,9 @@ jobs:
           key: modernizr-{{ .Revision }}
       - run:
           name: Test
-          command: ./node_modules/ember-cli/bin/ember test
+          command: ./node_modules/ember-cli/bin/ember test -r xunit
+      - store_test_results:
+          /tmp/wqxr-web-client-test.xml
 
   deploy:
     docker:
