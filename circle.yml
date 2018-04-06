@@ -67,7 +67,7 @@ jobs:
           path: app/build/reports
           destination: reports
       - store_test_results:
-          path: /tmp/wqxr-web-client-test.xml
+          path: /tmp/tests/
 
   deploy:
     docker:

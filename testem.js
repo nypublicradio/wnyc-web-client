@@ -1,6 +1,6 @@
 /* eslint-env node */
 module.exports = {
-  report_file: '/tmp/wqxr-web-client-test.xml',
+  report_file: '/tmp/tests/wqxr-web-client-test.xml',
   test_page: 'tests/index.html?hidepassed',
   disable_watching: true,
   launch_in_ci: [
