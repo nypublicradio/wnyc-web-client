@@ -2809,16 +2809,16 @@ ember-cli-dependency-checker@^2.0.0:
     resolve "^1.5.0"
     semver "^5.3.0"
 
-ember-cli-deploy-build@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/ember-cli-deploy-build/-/ember-cli-deploy-build-1.1.0.tgz#44ef2e09301319a1fc5807e9ec30491a753e2483"
+ember-cli-deploy-build@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/ember-cli-deploy-build/-/ember-cli-deploy-build-1.1.1.tgz#de515b04536a569f42626ef28aea139f32ef00e8"
   dependencies:
     chalk "^1.0.0"
     ember-cli-deploy-plugin "^0.2.1"
     glob "^7.1.1"
     rsvp "^3.5.0"
 
-ember-cli-deploy-display-revisions@1.0.0:
+ember-cli-deploy-display-revisions@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ember-cli-deploy-display-revisions/-/ember-cli-deploy-display-revisions-1.0.0.tgz#72ad8cf74d94e996ae0a52cd1403fd9195db38df"
   dependencies:
@@ -2828,9 +2828,9 @@ ember-cli-deploy-display-revisions@1.0.0:
     moment "^2.18.0"
     rsvp "^3.5.0"
 
-ember-cli-deploy-gzip@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/ember-cli-deploy-gzip/-/ember-cli-deploy-gzip-1.0.0.tgz#32b6fcc96ed6d571ad4e5b0c08e53e93d717347f"
+ember-cli-deploy-gzip@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/ember-cli-deploy-gzip/-/ember-cli-deploy-gzip-1.0.1.tgz#aab2e5ffb1eb120e264d2e50d7583691fe207c54"
   dependencies:
     chalk "^1.1.3"
     core-object "^2.0.6"
@@ -2838,16 +2838,16 @@ ember-cli-deploy-gzip@1.0.0:
     minimatch "^3.0.3"
     rsvp "^3.5.0"
 
-ember-cli-deploy-json-config@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/ember-cli-deploy-json-config/-/ember-cli-deploy-json-config-1.0.0.tgz#10a39c5a03800624da91ec29dd49f59d77c7112f"
+ember-cli-deploy-json-config@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/ember-cli-deploy-json-config/-/ember-cli-deploy-json-config-1.0.1.tgz#ef1df38eaef4c96b5bcd5e93aabc3f304095bd04"
   dependencies:
     chalk "^1.0.0"
     cheerio "^0.22.0"
     ember-cli-deploy-plugin "^0.2.3"
     rsvp "^3.5.0"
 
-ember-cli-deploy-manifest@1.1.0:
+ember-cli-deploy-manifest@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/ember-cli-deploy-manifest/-/ember-cli-deploy-manifest-1.1.0.tgz#096c4d1502c00935cabdbb9a38619ee3195ef927"
   dependencies:
@@ -2869,7 +2869,7 @@ ember-cli-deploy-progress@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/ember-cli-deploy-progress/-/ember-cli-deploy-progress-1.3.0.tgz#18663deed25b4d5397476332f25eed3c3fdf225a"
 
-ember-cli-deploy-redis@1.0.2:
+ember-cli-deploy-redis@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/ember-cli-deploy-redis/-/ember-cli-deploy-redis-1.0.2.tgz#41f27b7c2368d49d792b7b7de751a20d26915124"
   dependencies:
@@ -2880,7 +2880,7 @@ ember-cli-deploy-redis@1.0.2:
     rsvp "^3.0.18"
     then-redis "^2.0.1"
 
-ember-cli-deploy-revision-data@1.0.0:
+ember-cli-deploy-revision-data@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ember-cli-deploy-revision-data/-/ember-cli-deploy-revision-data-1.0.0.tgz#e870abc79f25bc96fe5532fec41baa9e1bc3ccc6"
   dependencies:
@@ -2892,9 +2892,9 @@ ember-cli-deploy-revision-data@1.0.0:
     rsvp "^3.5.0"
     simple-git "^1.57.0"
 
-ember-cli-deploy-s3@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/ember-cli-deploy-s3/-/ember-cli-deploy-s3-1.1.0.tgz#626126c21c7b2ef0347978c01c1338e6a16b02ab"
+ember-cli-deploy-s3@^1.1.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-deploy-s3/-/ember-cli-deploy-s3-1.2.0.tgz#7e9e9621da4157fdcf09a2d56c42c61ef6b1f2e4"
   dependencies:
     aws-sdk "^2.6.12"
     chalk "^1.0.0"
@@ -2906,9 +2906,9 @@ ember-cli-deploy-s3@1.1.0:
     proxy-agent "^2.0.0"
     rsvp "^3.5.0"
 
-ember-cli-deploy-sentry@0.5.2:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/ember-cli-deploy-sentry/-/ember-cli-deploy-sentry-0.5.2.tgz#5872f7cc83303d0d66284fe4b51ba83501c1b1ac"
+ember-cli-deploy-sentry@^0.5.2:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/ember-cli-deploy-sentry/-/ember-cli-deploy-sentry-0.5.4.tgz#8c1a319972c590159bfbffb22f1a016f2eda59fc"
   dependencies:
     ember-cli-babel "^5.0.0"
     ember-cli-deploy-plugin "^0.2.0"
@@ -2918,7 +2918,7 @@ ember-cli-deploy-sentry@0.5.2:
     throat "^2.0.0"
     url-join "0.0.1"
 
-ember-cli-deploy-ssh-tunnel@1.0.0:
+ember-cli-deploy-ssh-tunnel@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ember-cli-deploy-ssh-tunnel/-/ember-cli-deploy-ssh-tunnel-1.0.0.tgz#9773d4c98721b8bf4bdc5f659c20777648f5e861"
   dependencies:
@@ -2926,9 +2926,9 @@ ember-cli-deploy-ssh-tunnel@1.0.0:
     tunnel-ssh "^1.0.1"
     untildify "^2.0.0"
 
-ember-cli-deploy@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/ember-cli-deploy/-/ember-cli-deploy-1.0.1.tgz#6024c4fa0d8f8c09dfa57d251a7aca14e0ae2226"
+ember-cli-deploy@^1.0.1:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/ember-cli-deploy/-/ember-cli-deploy-1.0.2.tgz#9ab39188c882b57937418db5b3da6fc65b16b916"
   dependencies:
     chalk "^1.1.3"
     core-object "^2.0.0"
@@ -2939,11 +2939,11 @@ ember-cli-deploy@1.0.1:
     rsvp "^3.3.3"
     silent-error "^1.0.0"
 
-ember-cli-document-title@0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/ember-cli-document-title/-/ember-cli-document-title-0.3.3.tgz#0441d64e3ab7a64b220f8c54a144ab927d6138af"
+ember-cli-document-title@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-document-title/-/ember-cli-document-title-0.4.0.tgz#1d0321c443d16b104eca16a8eb42839ecd6737f2"
   dependencies:
-    ember-cli-babel "^5.1.6"
+    ember-cli-babel "^6.6.0"
 
 ember-cli-dotenv@1.2.0:
   version "1.2.0"
@@ -2993,7 +2993,7 @@ ember-cli-htmlbars-inline-precompile@^1.0.0:
     heimdalljs-logger "^0.1.7"
     silent-error "^1.1.0"
 
-ember-cli-htmlbars@^1.0.3, ember-cli-htmlbars@^1.1.1:
+ember-cli-htmlbars@^1.1.1:
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/ember-cli-htmlbars/-/ember-cli-htmlbars-1.3.4.tgz#461289724b34af372a6a0c4b6635819156963353"
   dependencies:
@@ -3578,11 +3578,11 @@ ember-power-select@^1.9.2:
     ember-text-measurer "^0.4.0"
     ember-truth-helpers "^2.0.0"
 
-ember-query-method@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/ember-query-method/-/ember-query-method-0.1.0.tgz#4789201f8604f6eb1cb3d72da4ef4f6c7d7f3dbe"
+ember-query-method@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/ember-query-method/-/ember-query-method-0.2.0.tgz#ea59837968ed6adb4766e40b948317987ea33fa7"
   dependencies:
-    ember-cli-babel "^5.1.6"
+    ember-cli-babel "^6.6.0"
 
 ember-qunit@^3.3.2:
   version "3.4.0"
@@ -3652,12 +3652,12 @@ ember-runtime-enumerable-includes-polyfill@^2.0.0, ember-runtime-enumerable-incl
     ember-cli-babel "^6.9.0"
     ember-cli-version-checker "^2.1.0"
 
-ember-scroll-to@0.6.4:
-  version "0.6.4"
-  resolved "https://registry.yarnpkg.com/ember-scroll-to/-/ember-scroll-to-0.6.4.tgz#aabf0e683db1d9eaf2d1b09e33a2e6691fcf77f4"
+ember-scroll-to@ragnarpeterson/ember-scroll-to#e882524:
+  version "0.6.5"
+  resolved "https://codeload.github.com/ragnarpeterson/ember-scroll-to/tar.gz/e88252463005dc6fae65f39714654e4a51af68f9"
   dependencies:
-    ember-cli-babel "^5.1.6"
-    ember-cli-htmlbars "^1.0.3"
+    ember-cli-babel "^6.3.0"
+    ember-cli-htmlbars "^2.0.1"
 
 ember-simple-auth@^1.3.0, ember-simple-auth@^1.4.0, ember-simple-auth@^1.4.2:
   version "1.6.0"

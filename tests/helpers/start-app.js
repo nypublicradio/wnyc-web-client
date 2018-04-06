@@ -5,6 +5,7 @@ import config from '../../config/environment';
 import './alien-dom-click';
 import './ember-sortable/test-helpers';
 import './google-analytics-stub';
+import './responsive';
 
 export default function startApp(attrs) {
   let attributes = merge({}, config.APP);
