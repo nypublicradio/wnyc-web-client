@@ -23,7 +23,7 @@ You will need the following software properly installed on your computer. Please
 
 As noted above, you must spin up a checkout of [`publisher`](https://github.com/nypublicradio/publisher) at a web address against which this ember app can make requests. By default, the app will use `https://wqxr.demo2.wnyc.net` as its destination.
 
-This value is controlled by a `.env` file you will create by following the directions below. Substitute the value of `MY_PORT` with the port of your `publisher` checkout on `dev.wnyc.net`, or replace it with a different address entirely if you are running the `publisher` app somewhere else.
+This value is controlled by a `.env` file you will create by following the directions below.
 
 We use [modernizr](https://modernizr.com/) to detect for certain browser features. Rather than include a full build in the app, there is a single Grunt task included in this project which scans all the `.js` and `.scss` files for mentions of the modernizr API. Step 9 below will generate a modernizr build; do not skip it or you may have mysterious errors.
 
