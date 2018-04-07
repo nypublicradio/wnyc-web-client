@@ -1,10 +1,9 @@
-import { click, findAll, currentURL, visit } from '@ember/test-helpers';
-import { module, test } from 'qunit';
+import { click, find, currentURL, visit } from '@ember/test-helpers';
+import { module } from 'qunit';
+import test from 'ember-sinon-qunit/test-support/test';
 import { setupApplicationTest } from 'ember-qunit';
 import config from 'wnyc-web-client/config/environment';
-import sinon from 'sinon';
 import velocity from 'velocity';
-import GoogleAnalytics from 'wnyc-web-client/metrics-adapters/google-analytics';
 
 module('Acceptance | Analytics', function(hooks) {
   setupApplicationTest(hooks);
@@ -19,40 +18,25 @@ module('Acceptance | Analytics', function(hooks) {
   });
 
   test('it does not log a pageview when opening and closing the queue', async function(assert) {
-    assert.expect(4);
-    let done = assert.async();
-    var pageViewEvent = sinon.spy();
-
-    GoogleAnalytics.reopen({
-      trackPage: pageViewEvent
-    });
+    let metrics = this.owner.lookup('service:metrics');
+    let trackPage = this.spy(metrics, 'trackPage').withArgs('GoogleAnalytics');
 
     server.create('django-page', {id: '/'});
     await visit('/');
     await click('.nypr-player-queue-button.is-floating');
 
-    assert.equal(findAll('.l-sliding-modal').length, 1, 'modal is open');
-    assert.ok(pageViewEvent.calledOnce, 'trackpageViewEvent was only called once after opening queue');
+    assert.ok(find('.l-sliding-modal'), 'modal is open');
+    assert.equal(trackPage.callCount, 1, 'trackpageViewEvent was only called once after opening queue');
 
     await click('.nypr-player-queue-button.is-floating');
 
-    assert.equal(findAll('.l-sliding-modal').length, 0, 'modal is closed');
-    assert.ok(pageViewEvent.calledOnce, 'trackPageView was only called once after opening and closing queue');
-    done();
+    assert.notOk(find('.l-sliding-modal'), 'modal is closed');
+    assert.equal(trackPage.callCount, 1, 'trackPageView was only called once after opening and closing queue');
   });
 
   test('it logs a homepage bucket event when you click a story on the home page', async function(assert) {
-    assert.expect(2);
-    let done = assert.async();
-    let homepageBucketEvent = sinon.spy();
-
-    GoogleAnalytics.reopen({
-      trackEvent({category}) {
-        if (category === 'Homepage Bucket') {
-          homepageBucketEvent();
-        }
-      }
-    });
+    let metrics = this.owner.lookup('service:metrics');
+    let trackSpy = this.spy(metrics, 'trackEvent');
 
     let story = server.create('story');
     let id = `story/${story.slug}/`;
@@ -74,7 +58,6 @@ module('Acceptance | Analytics', function(hooks) {
     await click('#test-link');
 
     assert.equal(currentURL(), `/story/${story.slug}`, 'opened story page');
-    assert.ok(homepageBucketEvent.calledOnce, 'bucket event was triggered once after clicking link');
-    done();
+    assert.equal(trackSpy.firstCall.args[1].category, 'Homepage Bucket', 'bucket event was triggered once after clicking link');
   });
 });

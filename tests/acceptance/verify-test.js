@@ -51,7 +51,7 @@ module('Acceptance | verify', function(hooks) {
 
     await fillIn('input[name=email]', 'foo@example.com');
     await fillIn('input[name=password]', 'password1');
-    await click('button[type=submit]:contains(Log in)');
+    await click('button[type=submit]');
     assert.equal(currentURL(), '/profile');
     assert.equal(findAll('.alert.alert-success').length, 1);
   });
@@ -63,7 +63,7 @@ module('Acceptance | verify', function(hooks) {
 
     await fillIn('input[name=email]', 'foo@example.com');
     await fillIn('input[name=password]', 'password1');
-    await click('button[type=submit]:contains(Log in)');
+    await click('button[type=submit]');
     assert.equal(currentURL(), '/profile');
     assert.equal(findAll('.alert.alert-warning').length, 1);
   });

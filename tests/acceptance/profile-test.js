@@ -223,7 +223,7 @@ module('Acceptance | profile', function(hooks) {
     authenticateSession(this.application, {access_token: 'foo'});
 
     await visit('/profile');
-    await click('span:contains(My Online Account) + button:contains(Edit)');
+    await click('span + button');
 
     assert.equal(find('.nypr-account-modal-title').textContent.trim(), 'Enter Your Email');
 

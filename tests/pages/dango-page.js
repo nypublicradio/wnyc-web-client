@@ -1,14 +1,7 @@
-import PageObject from 'wnyc-web-client/tests/page-object';
+import { create, visitable } from 'ember-cli-page-object';
 import { appendHTML } from 'wnyc-web-client/tests/helpers/html';
-let {
-  visitable,
-  //clickOnText,
-  //clickable,
-  //textList,
-  //text
-} = PageObject;
 
-export default PageObject.create({
+export default create({
   visit: visitable(':id'),
 
   bootstrap({id}) {

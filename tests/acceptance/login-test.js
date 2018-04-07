@@ -8,14 +8,13 @@ import {
 } from '@ember/test-helpers';
 import { module, skip, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import djangoPage from 'wnyc-web-client/tests/pages/django-page';
+import testPage from 'wnyc-web-client/tests/pages/listing-page';
 import { Response } from 'ember-cli-mirage';
 import config from 'wnyc-web-client/config/environment';
 import {
   authenticateSession,
   currentSession
 } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
-import 'wnyc-web-client/tests/helpers/with-feature';
 import dummySuccessProviderFb from 'wnyc-web-client/tests/helpers/torii-dummy-success-provider-fb';
 import dummyFailureProvider from 'wnyc-web-client/tests/helpers/torii-dummy-failure-provider';
 import { registerMockOnInstance } from 'wnyc-web-client/tests/helpers/register-mock';
@@ -37,7 +36,7 @@ module('Acceptance | login', function(hooks) {
     server.create('user');
     authenticateSession(this.application, {access_token: 'foo'});
     let page = server.create('django-page', {id: '/'});
-    djangoPage.bootstrap(page);
+    await testPage.bootstrap(page);
 
     await visit('/login');
 
@@ -46,14 +45,14 @@ module('Acceptance | login', function(hooks) {
 
   test('Log in button is visible at load', async function(assert) {
     await visit('/login');
-    assert.equal(findAll('button[type=submit]:contains(Log in)').length, 1);
+    assert.equal(findAll('button[type=submit]').length, 1);
   });
 
   test('Submitting valid credentials redirects to previous route', async function(assert) {
     server.create('user');
     let page = server.create('django-page', {id: '/'});
 
-    djangoPage
+    await testPage
       .bootstrap(page)
       .visit(page);
     await visit('/login');
@@ -61,7 +60,7 @@ module('Acceptance | login', function(hooks) {
 
     await fillIn('input[name=email]', 'foo@example.com');
     await fillIn('input[name=password]', 'password1');
-    await click('button[type=submit]:contains(Log in)');
+    await click('button[type=submit]');
 
     assert.equal(currentSession(this.application).get('isAuthenticated'), true);
     assert.equal(currentURL(), '/');
@@ -76,7 +75,7 @@ module('Acceptance | login', function(hooks) {
 
     await fillIn('input[name=email]', 'foo@example.com');
     await fillIn('input[name=password]', 'badpassword2');
-    await click('button[type=submit]:contains(Log in)');
+    await click('button[type=submit]');
 
     assert.equal(currentSession(this.application).get('isAuthenticated'), false);
     assert.equal(find('.account-form-heading').textContent.trim(), 'Log in to WNYC');
@@ -93,7 +92,7 @@ module('Acceptance | login', function(hooks) {
 
     await fillIn('input[name=email]', 'isignedupwithfacebook@example.com');
     await fillIn('input[name=password]', 'imaginedpassword123');
-    await click('button[type=submit]:contains(Log in)');
+    await click('button[type=submit]');
 
     assert.equal(currentSession(this.application).get('isAuthenticated'), false);
     assert.equal(find('.account-form-heading').textContent.trim(), 'Log in to WNYC');
@@ -110,7 +109,7 @@ module('Acceptance | login', function(hooks) {
 
     await fillIn('input[name=email]', EMAIL);
     await fillIn('input[name=password]', 'password123');
-    await click('button[type=submit]:contains(Log in)');
+    await click('button[type=submit]');
 
     assert.equal(currentSession(this.application).get('isAuthenticated'), false);
     assert.equal(find('.account-form-heading').textContent.trim(), 'Log in to WNYC');
@@ -137,7 +136,7 @@ module('Acceptance | login', function(hooks) {
   test('Log in with Facebook button is visible at load', async function(assert) {
     withFeature('socialAuth');
     await visit('/login');
-    assert.equal(find('button:contains(Log in with Facebook)').length, 1);
+    assert.equal(find('button').length, 1);
 
   });
 
@@ -146,11 +145,11 @@ module('Acceptance | login', function(hooks) {
     registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
     withFeature('socialAuth');
     let page = server.create('django-page', {id: '/'});
-    djangoPage.bootstrap(page);
+    await testPage.bootstrap(page);
 
     await visit('/login');
 
-    await click('button:contains(Log in with Facebook)');
+    await click('button');
     assert.equal(currentURL(), '/');
     assert.ok(currentSession(this.application).get('isAuthenticated'), 'Session is authenticated');
     assert.equal(find('.user-nav-greeting').textContent.trim(), user.given_name);
@@ -171,7 +170,7 @@ module('Acceptance | login', function(hooks) {
     withFeature('socialAuth');
     await visit('/login');
 
-    await click('button:contains(Log in with Facebook)');
+    await click('button');
 
     assert.equal(currentURL(), '/login');
     assert.equal(find('.alert-warning').textContent.trim(), "Unfortunately, we can't authorize your account without permission to view your email address.");
@@ -183,7 +182,7 @@ module('Acceptance | login', function(hooks) {
     withFeature('socialAuth');
     await visit('/login');
 
-    await click('button:contains(Log in with Facebook)');
+    await click('button');
 
     assert.equal(currentURL(), '/login');
     assert.equal(find('.alert-warning').textContent.trim(), "We're sorry, but we weren't able to log you in through Facebook.");

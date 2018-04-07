@@ -6,7 +6,7 @@ import showPage from 'wnyc-web-client/tests/pages/show';
 module('Acceptance | Listing Page | paginating', function(hooks) {
   setupApplicationTest(hooks);
 
-  test('showing pagination for a list of episodes', function(assert) {
+  test('showing pagination for a list of episodes', async function(assert) {
     let apiResponse = server.create('api-response', {
       id: 'shows/foo/episodes/1',
       teaseList: server.createList('story', 10),
@@ -21,12 +21,12 @@ module('Acceptance | Listing Page | paginating', function(hooks) {
       apiResponse
     });
 
-    visit('shows/foo');
+    await visit('shows/foo');
 
     assert.equal(find('#pagefooter').length, 1, 'is showing pagination');
   });
 
-  test('showing no pagination on about pages', function(assert) {
+  test('showing no pagination on about pages', async function(assert) {
     server.create('listing-page', {
       id: 'shows/foo',
       linkroll: [
@@ -35,12 +35,12 @@ module('Acceptance | Listing Page | paginating', function(hooks) {
       apiResponse: server.create('api-response', { id: 'shows/foo/about' })
     });
 
-    visit('shows/foo');
+    await visit('shows/foo');
 
     assert.equal(find('#pagefooter').length, 0, 'is not showing pagination');
   });
 
-  test('showing no pagination on story detail listing pages', function(assert) {
+  test('showing no pagination on story detail listing pages', async function(assert) {
     let apiResponse = server.create('api-response', {
       id: 'shows/foo/story/1',
       story: server.create('story')
@@ -54,12 +54,12 @@ module('Acceptance | Listing Page | paginating', function(hooks) {
       apiResponse
     });
 
-    visit('shows/foo');
+    await visit('shows/foo');
 
     assert.equal(find('#pagefooter').length, 0, 'is not showing pagination');
   });
 
-  test('can go back and forward', function(assert) {
+  test('can go back and forward', async function(assert) {
     let api1 = 'shows/foo/episodes/1';
     let api2 = 'shows/foo/episodes/2';
 
@@ -84,7 +84,7 @@ module('Acceptance | Listing Page | paginating', function(hooks) {
 
     let firstStoryTitle;
 
-    visit('shows/foo');
+    await visit('shows/foo');
 
     firstStoryTitle = showPage.storyTitles()[0];
     showPage.clickNext();
@@ -95,7 +95,7 @@ module('Acceptance | Listing Page | paginating', function(hooks) {
     assert.equal(firstStoryTitle, showPage.storyTitles()[0], 'first story title should be the same');
   });
 
-  test('proper paginating for listing pages without a linkroll', function(assert) {
+  test('proper paginating for listing pages without a linkroll', async function(assert) {
     // api-responses without a linkroll associated are just the stories associated
     // with the listing object
     let api1 = 'shows/foo/recent_stories/1';
@@ -117,7 +117,7 @@ module('Acceptance | Listing Page | paginating', function(hooks) {
       apiResponse
     });
 
-    visit('shows/foo');
+    await visit('shows/foo');
 
     assert.equal(currentURL(), 'shows/foo');
     showPage.clickNext();
@@ -126,7 +126,7 @@ module('Acceptance | Listing Page | paginating', function(hooks) {
     assert.equal(currentURL(), '/shows/foo/1', 'adds page number when going back');
   });
 
-  test('can navigate to a specified page of results', function(assert) {
+  test('can navigate to a specified page of results', async function(assert) {
     let api1 = 'shows/foo/episodes/1';
     let api4 = 'shows/foo/episodes/4';
 
@@ -150,7 +150,7 @@ module('Acceptance | Listing Page | paginating', function(hooks) {
 
     let firstStoryTitle;
 
-    visit('shows/foo');
+    await visit('shows/foo');
 
     firstStoryTitle = showPage.storyTitles()[0];
     showPage.clickPage(4);
@@ -186,7 +186,7 @@ module('Acceptance | Listing Page | paginating', function(hooks) {
     assert.equal(find('.pagefooter-current').text().trim(), '5', 'current page number is 5');
   });
 
-  test('it only shows ten pages at a time', function(assert) {
+  test('it only shows ten pages at a time', async function(assert) {
     let apiResponse = server.create('api-response', {
       id: `shows/foo/episodes/1`,
       teaseList: server.createList('story', 10),
@@ -199,7 +199,7 @@ module('Acceptance | Listing Page | paginating', function(hooks) {
       apiResponse
     });
 
-    visit('shows/foo');
+    await visit('shows/foo');
 
     assert.equal(find('.pagefooter-current').length, 1, 'one current page number');
     assert.equal(find('.pagefooter-link').length, 10, 'links 2-9 and one final page');
@@ -208,7 +208,7 @@ module('Acceptance | Listing Page | paginating', function(hooks) {
     assert.equal(find('.pagefooter-link:last').text().trim(), '50', 'final link should be 50');
   });
 
-  test('clicking on a page number takes to the page of the correct tab', function(assert) {
+  test('clicking on a page number takes to the page of the correct tab', async function(assert) {
     let episodesPage1 = 'shows/foo/episodes/1';
     let apiResponse = server.create('api-response', {
       id: episodesPage1,
@@ -238,7 +238,7 @@ module('Acceptance | Listing Page | paginating', function(hooks) {
       apiResponse
     });
 
-    visit('shows/foo');
+    await visit('shows/foo');
 
     showPage.clickNavLink('Segments');
     showPage.clickPage(3);

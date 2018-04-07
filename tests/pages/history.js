@@ -1,27 +1,23 @@
-import PageObject from 'wnyc-web-client/tests/page-object';
-
-let {
+import {
+  create,
   visitable,
   clickable,
   collection,
   text,
   isVisible
-} = PageObject;
+} from 'ember-cli-page-object';
 
-export default PageObject.create({
+export default create({
   visit:             visitable('/?modal=queue-history'),
-  clickHistoryTab:   clickable('.tabbedlist-button:contains(History)'),
-  clickClearHistory: clickable('.clearhistory-button:contains(Clear)'),
-  clickYes:          clickable('.clearhistory-button:contains(Yes)'),
-  clickNo:           clickable('.clearhistory-button:contains(No)'),
+  clickHistoryTab:   clickable('.tabbedlist-button'),
+  clickClearHistory: clickable('.clearhistory-button'),
+  clickYes:          clickable('.clearhistory-button'),
+  clickNo:           clickable('.clearhistory-button'),
   historyIsVisible:  isVisible('.player-history'),
   clearPromptIsVisible:  isVisible('.clearhistory-prompt'),
   emptyMessageIsVisible: isVisible('.queuelist-empty'),
-  stories: collection({
-    itemScope: '.player-history .list-item',
-    item: {
-      title:               text('.queueitem-itemtitle'),
-      clickDelete:         clickable('.queueitem-deletebutton'),
-    }
+  stories: collection('.player-history .list-item', {
+    title:       text('.queueitem-itemtitle'),
+    clickDelete: clickable('.queueitem-deletebutton'),
   })
 });

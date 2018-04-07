@@ -17,9 +17,10 @@ export default Component.extend({
   init() {
     this._super(...arguments);
     this.setProperties({
-      topics: [],
+      topics: this.topics || [],
+      selectedTopicTags: this.selectedTopicTags || [],
     });
-    this.updateTopics((this.get('selectedTopicTags') || []));
+    this.updateTopics(this.selectedTopicTags);
   },
 
   updateTopics(topics) {
@@ -27,8 +28,10 @@ export default Component.extend({
       this.set('selectedTopicTags', topics.slice());
       // don't want this bound to the session stuff passed in or saving gets hinky
 
-      this.onNoneSelected(topics.length === 0);
-      this.onTopicsUpdated(topics);
+      /* eslint-disable */
+      this.sendAction('onNoneSelected', topics.length === 0);
+      this.sendAction('onTopicsUpdated', topics);
+      /* eslint-enable */
     });
   },
 

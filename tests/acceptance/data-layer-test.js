@@ -6,16 +6,17 @@ module('Acceptance | data layer', function(hooks) {
   setupApplicationTest(hooks);
 
   test('confirming data layer showTitle is present on show page', async function(assert) {
-      window.dataLayer = [];
+    window.dataLayer = [];
 
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo',
-    linkroll: [
-      {'nav-slug': 'episodes', title: 'Episodes'}
-    ],
-    socialLinks: [{title: 'facebook', href: 'http://facebook.com'}],
-    apiResponse: server.create('api-response', { id: 'shows/foo/episodes/1' })
-  });
+    const SLUG = 'foo';
+    let listingPage = server.create('listing-page', {
+      id: `shows/${SLUG}`,
+      linkroll: [
+        {'nav-slug': 'episodes', title: 'Episodes'}
+      ],
+      socialLinks: [{title: 'facebook', href: 'http://facebook.com'}],
+      apiResponse: server.create('api-response', { id: 'shows/foo/episodes/1' })
+    });
 
     await visit('/shows/foo');
 

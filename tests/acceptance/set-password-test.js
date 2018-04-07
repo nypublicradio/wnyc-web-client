@@ -30,7 +30,7 @@ module('Acceptance | set password', function(hooks) {
     assert.equal(find('.account-form-description').textContent.trim(), `Create a WNYC password for ${email}.`, 'it should show the create password form desc');
 
     await fillIn('input[name=password]', password);
-    await click('button:contains(Create password)');
+    await click('button');
 
     assert.equal(find('.account-form-heading').textContent.trim(), 'Oops!', 'it should show an oops page when you click create password with a bad code');
   });
@@ -45,14 +45,14 @@ module('Acceptance | set password', function(hooks) {
     assert.equal(find('.account-form-heading').textContent.trim(), 'Create a password', 'it should show the create password form');
 
     await fillIn('input[name=password]', password);
-    await click('button:contains(Create password)');
+    await click('button');
 
     assert.equal(find('.account-form-heading').textContent.trim(), 'Log in to WNYC', 'it should show a login form when you click create password with a good email code and password');
 
     await fillIn('input[name=email]', email);
     await fillIn('input[name=password]', password);
 
-    await click('button[type=submit]:contains(Log in)');
+    await click('button[type=submit]');
 
     assert.ok(currentSession(this.application).get('isAuthenticated'));
   });
@@ -69,7 +69,7 @@ module('Acceptance | set password', function(hooks) {
     assert.equal(find('.account-form-heading').textContent.trim(), 'Create a password', 'it should show the create password form');
 
     await fillIn('input[name=password]', password);
-    await click('button:contains(Create password)');
+    await click('button');
 
     assert.equal(find('.account-form-heading').textContent.trim(), 'Create a password', 'it should remain on the form when the reset url returns other errors.');
   });

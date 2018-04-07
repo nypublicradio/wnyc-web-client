@@ -10,9 +10,7 @@ export default Component.extend({
   isLoadingNext: equal('loadingDirection', 'next'),
   actions: {
     next() {
-      if (this.next) {
-        this.next();
-      }
+      this.sendAction('onNext'); // eslint-disable-line
     },
     back() {
       get(this, 'metrics').trackEvent('GoogleAnalytics', {
@@ -20,9 +18,7 @@ export default Component.extend({
         action: 'Clicked Back in Discover'
       });
 
-      if (this.onBack) {
-        this.onBack();
-      }
+      this.sendAction('onBack'); // eslint-disable-line
     }
   }
 });

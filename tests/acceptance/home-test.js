@@ -1,6 +1,6 @@
 import { currentURL, visit } from '@ember/test-helpers';
 import test from 'ember-sinon-qunit/test-support/test';
-import djangoPage from 'wnyc-web-client/tests/pages/django-page';
+import testPage from 'wnyc-web-client/tests/pages/listing-page';
 
 import { setupApplicationTest } from 'ember-qunit';
 import { module } from 'qunit';
@@ -12,9 +12,9 @@ module('Acceptance | home', function(hooks) {
     server.create('stream');
   });
 
-  test('visiting /', function(assert) {
+  test('visiting /', async function(assert) {
     server.create('django-page', {id: '/'});
-    djangoPage
+    await testPage
       .bootstrap({id: '/'})
       .visit({id: '/'});
 
@@ -23,7 +23,7 @@ module('Acceptance | home', function(hooks) {
     assert.ok(djangoContent.contents().length);
   });
 
-  test('.l-constrained is added to the home page', function(assert) {
+  test('.l-constrained is added to the home page', async function(assert) {
     let home = server.create('django-page', {
       id: '/',
       text: `
@@ -36,7 +36,7 @@ module('Acceptance | home', function(hooks) {
     `
   });
 
-    djangoPage
+    await testPage
       .bootstrap(home)
       .visit(home);
 
@@ -54,7 +54,7 @@ module('Acceptance | home', function(hooks) {
       .expects('doTargeting')
       .once();
 
-    djangoPage
+    await testPage
       .bootstrap({id: '/'})
       .visit({id: '/'});
   });

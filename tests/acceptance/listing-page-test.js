@@ -22,7 +22,7 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
     window.assign = function() {}
   });
 
-  test('smoke test', function(assert) {
+  test('smoke test', async function(assert) {
     server.create('listing-page', {
       id: 'shows/foo',
       linkroll: [
@@ -32,7 +32,7 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
       apiResponse: server.create('api-response', { id: 'shows/foo/episodes/1' })
     });
 
-    visit('shows/foo');
+    await visit('shows/foo');
 
     assert.equal(currentURL(), 'shows/foo');
     assert.ok(findWithAssert('.sitechrome-btn'), 'donate chunk should reset after navigating');
@@ -40,7 +40,7 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
     assert.notOk(find('[data-test-selector="admin-link"]').length, 'edit link should not be visible');
   });
 
-  test('authenticated smoke test', function(assert) {
+  test('authenticated smoke test', async function(assert) {
     server.get(`${config.adminRoot}/api/v1/is_logged_in/`, {is_staff: true});
     server.create('user');
     server.create('listing-page', {
@@ -52,12 +52,12 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
       apiResponse: server.create('api-response', { id: 'shows/foo/episodes/1' })
     });
 
-    visit('shows/foo');
+    await visit('shows/foo');
 
     assert.ok(find('[data-test-selector="admin-link"]').length, 'edit links are visible');
   });
 
-  test('about smoke test', function(assert) {
+  test('about smoke test', async function(assert) {
     server.create('listing-page', {
       id: 'shows/foo',
       linkroll: [
@@ -66,12 +66,12 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
       apiResponse: server.create('api-response', { id: 'shows/foo/about' })
     });
 
-    visit('shows/foo');
+    await visit('shows/foo');
 
     assert.equal(showPage.aboutText(), 'About');
   });
 
-  test('visiting a listing page - story page smoke test', function(assert) {
+  test('visiting a listing page - story page smoke test', async function(assert) {
     let apiResponse = server.create('api-response', {
       id: 'shows/foo/story/1',
       type: 'story',
@@ -86,12 +86,12 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
       apiResponse
     });
 
-    visit('shows/foo');
+    await visit('shows/foo');
 
     assert.equal(showPage.storyText(), 'Story body.');
   });
 
-  test('scripts in well route content will execute', function(assert) {
+  test('scripts in well route content will execute', async function(assert) {
     let story = server.create('story', {
       slug: 'foo',
       body: `test body.
@@ -121,14 +121,14 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
       apiResponse
     });
 
-    visit('shows/foo');
+    await visit('shows/foo');
 
     assert.equal(findAll('[data-test-selector=story-detail] p').length, 1, 'should only be one p tag');
     let text = find('[data-test-selector=story-detail] .django-content').find('p, div').map((_, e) => e.innerText).get().join(' ');
     assert.equal(text, 'test body. Added this paragraph!');
   });
 
-  test('using a nav-link', function(assert) {
+  test('using a nav-link', async function(assert) {
     let apiResponse = server.create('api-response', {
       id: 'shows/foo/episodes/1',
       teaseList: server.createList('story', 10, {title: 'Story Title'})
@@ -150,14 +150,14 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
       apiResponse
     });
 
-    visit('shows/foo');
+    await visit('shows/foo');
 
     showPage.clickNavLink('Next Link');
 
     assert.deepEqual(showPage.storyTitles(), ["Story Title"]);
   });
 
-  test('visiting directly to a nav link url', function(assert) {
+  test('visiting directly to a nav link url', async function(assert) {
     let apiResponse = server.create('api-response', {
       id: 'shows/foo/episodes/1',
       teaseList: server.createList('story', 10)
@@ -176,14 +176,14 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
       apiResponse
     });
 
-    visit('shows/foo/next-link/');
+    await visit('shows/foo/next-link/');
 
     assert.equal(currentURL(), `shows/foo/next-link/`);
 
     assert.equal(findWithAssert('nav li.is-active > a').text(), 'Next Link');
   });
 
-  test('null social links should not break page', function(assert) {
+  test('null social links should not break page', async function(assert) {
     let apiResponse = server.create('api-response', {
       id: 'shows/foo/recent_stories/1',
       teaseList: server.createList('story', 10)
@@ -194,12 +194,12 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
       apiResponse
     });
 
-    visit('shows/foo');
+    await visit('shows/foo');
 
     assert.equal(currentURL(), 'shows/foo');
   });
 
-  test('undefined social links should not break page', function(assert) {
+  test('undefined social links should not break page', async function(assert) {
     let apiResponse = server.create('api-response', {
       id: 'shows/foo/recent_stories/1',
       teaseList: server.createList('story', 10)
@@ -210,7 +210,7 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
       apiResponse
     });
 
-    visit('shows/foo');
+    await visit('shows/foo');
 
     assert.equal(currentURL(), 'shows/foo');
   });
@@ -223,7 +223,7 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
     });
     server.create('django-page', {id: '/'});
 
-    visit('shows/foo')
+    await visit('shows/foo')
 
     assert.equal(find('.foo').textContent, 'donate to foo', 'donate chunk should match');
 
@@ -232,21 +232,21 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
     assert.ok(findWithAssert('.sitechrome-btn'), 'donate chunk should reset after navigating');
   });
 
-  test('show pages with a play param', function(assert) {
+  test('show pages with a play param', async function(assert) {
     let story = server.create('story');
     server.create('listing-page', {
       id: 'shows/foo',
       apiResponse: server.create('api-response', { id: 'shows/foo/recent_stories/1' })
     });
 
-    visit(`shows/foo?play=${story.slug}`);
+    await visit(`shows/foo?play=${story.slug}`);
 
     assert.equal(currentURL(), `shows/foo?play=${story.slug}`);
     assert.ok(find('.nypr-player').length, 'persistent player should be visible');
     assert.equal(find('[data-test-selector=nypr-player-story-title]').text(), story.title, `${story.title} should be loaded in player UI`);
   });
 
-  test('show pages with a listen live chunk', function(assert) {
+  test('show pages with a listen live chunk', async function(assert) {
     server.create('listing-page', {
       id: 'shows/foo'
     });
@@ -258,7 +258,7 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
       content: 'foo bar text'
     });
 
-    visit('shows/foo');
+    await visit('shows/foo');
 
     assert.equal(find('.channel-header .django-content').textContent.trim(), 'foo bar text');
   });
@@ -276,8 +276,7 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
     await visit('shows/foo');
   });
 
-
-  test('if a show is airing, the featured story listen button says "Listen Live"', function(assert) {
+  test('if a show is airing, the featured story listen button says "Listen Live"', async function(assert) {
     let now = moment();
     let later = now.add(1, 'hour');
     let featuredStory = server.create('story', {
@@ -300,7 +299,7 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
       }
     });
 
-    visit('shows/foo');
+    await visit('shows/foo');
 
     let button = find('[data-test-selector=listen-button]');
     assert.ok(button.text().match('Listen Live'));
@@ -315,7 +314,7 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
 module('Acceptance | Listing Page | Analytics', function(hooks) {
   setupApplicationTest(hooks);
 
-  test('metrics properly reports channel attrs', function(assert) {
+  test('metrics properly reports channel attrs', async function(assert) {
     server.create('listing-page', {
       id: 'shows/foo',
       cmsPK: 123,
@@ -358,10 +357,10 @@ module('Acceptance | Listing Page | Analytics', function(hooks) {
       }
     };
 
-    visit('shows/foo');
+    await visit('shows/foo');
   });
 
-  test('listen buttons in story teases include data-story and data-show values', function(assert) {
+  test('listen buttons in story teases include data-story and data-show values', async function(assert) {
     let teaseList = server.createList('story', 5, {audioAvailable: true, showTitle: 'foo show'});
     server.create('listing-page', {
       id: 'shows/foo',
@@ -376,7 +375,7 @@ module('Acceptance | Listing Page | Analytics', function(hooks) {
     });
 
 
-    visit('shows/foo');
+    await visit('shows/foo');
 
     let listenButtons = findWithAssert('.story-tease [data-test-selector=listen-button]');
     listenButtons.each((i, el) => {

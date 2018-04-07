@@ -24,7 +24,7 @@ module('Integration | Component | discover topic list', function(hooks) {
     this.set('topics', topics);
     await render(hbs`{{discover-topic-list topics=topics onTopicsUpdated=(action (mut currentlySelectedTopics))}}`);
 
-    this.$('button:contains("Select All")').click();
+    this.$('button').click();
     assert.equal(this.get('currentlySelectedTopics').length, this.get('topics').length);
   });
 
@@ -32,8 +32,8 @@ module('Integration | Component | discover topic list', function(hooks) {
     this.set('topics', topics);
     await render(hbs`{{discover-topic-list topics=topics onTopicsUpdated=(action (mut currentlySelectedTopics))}}`);
 
-    this.$('button:contains("Select All")').click();
-    this.$('button:contains("Clear All")').click();
+    this.$('button').click();
+    this.$('button').click();
     assert.equal(this.get('currentlySelectedTopics').length, 0);
   });
 
@@ -42,13 +42,13 @@ module('Integration | Component | discover topic list', function(hooks) {
     await render(hbs`{{discover-topic-list topics=topics}}`);
 
     this.$('.discover-topic')[0].click();
-    assert.equal(this.$('button:contains("Clear All")').length, 0, "Should be 'Select All' when not all are selected");
+    assert.equal(this.$('button').length, 0, "Should be 'Select All' when not all are selected");
 
     this.$('.discover-topic')[1].click();
-    assert.equal(this.$('button:contains("Clear All")').length, 0, "Should be 'Select All' when not all are selected");
+    assert.equal(this.$('button').length, 0, "Should be 'Select All' when not all are selected");
 
     this.$('.discover-topic')[2].click();
-    assert.equal(this.$('button:contains("Clear All")').length, 1, "Should be 'Clear All' when all are selected");
+    assert.equal(this.$('button').length, 1, "Should be 'Clear All' when all are selected");
   });
 
   test('passing in selected topics renders selected items', async function(assert) {

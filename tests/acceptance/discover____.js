@@ -4,7 +4,6 @@ import { module, skip, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import { currentSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
 import config from 'wnyc-web-client/config/environment';
-import 'wnyc-web-client/tests/helpers/with-feature';
 import velocity from 'velocity';
 
 module('Acceptance | discover', function(hooks) {
@@ -44,7 +43,7 @@ module('Acceptance | discover', function(hooks) {
     await visit('/discover/start');
     server.createList('discover-topic', 20);
 
-    await click('button:contains("Get Started")');
+    await click('button');
 
     assert.equal(currentURL(), '/discover/start/topics');
   });
@@ -53,7 +52,7 @@ module('Acceptance | discover', function(hooks) {
     await visit('/discover/start');
     server.createList('discover-topic', 20);
 
-    await click('button:contains("Get Started")');
+    await click('button');
     assert.equal($(".discover-topic").length, 20);
   });
 
@@ -61,9 +60,9 @@ module('Acceptance | discover', function(hooks) {
     await visit('/discover/start');
     server.createList('discover-topic', 20);
 
-    await click('button:contains("Get Started")');
+    await click('button');
     assert.equal($(".discover-topic").length, 20);
-    await click('button:contains("Select All")');
+    await click('button');
     assert.equal($(".discover-topic.is-selected").length, 20);
   });
 
@@ -72,7 +71,7 @@ module('Acceptance | discover', function(hooks) {
     await visit('/discover/start');
     server.createList('discover-topic', 20);
 
-    await click('button:contains("Get Started")');
+    await click('button');
     assert.equal(currentURL(), '/discover/start/topics');
     assert.equal($('button.mod-filled-red').length, 0, "Button should not be red");
     await click(".discover-topic input");
@@ -83,10 +82,10 @@ module('Acceptance | discover', function(hooks) {
     await visit('/discover/start');
     server.createList('discover-topic', 20);
 
-    await click('button:contains("Get Started")');
+    await click('button');
     assert.equal(currentURL(), '/discover/start/topics');
     assert.equal($('.discover-setup-title-error').text().trim(), "");
-    await click('button:contains("Next")');
+    await click('button');
     assert.equal($('.discover-setup-title-error').text().length > 0, true);
   });
 
@@ -94,9 +93,9 @@ module('Acceptance | discover', function(hooks) {
     await visit('/discover/start');
     server.createList('discover-topic', 20);
 
-    await click('button:contains("Get Started")');
+    await click('button');
     assert.equal(currentURL(), '/discover/start/topics');
-    await click("button:contains('Back')");
+    await click("button");
     assert.equal(currentURL(), '/discover/start');
   });
 
@@ -106,10 +105,10 @@ module('Acceptance | discover', function(hooks) {
     server.create('discover-topic', {title: "Art", url: "art"});
     server.create('discover-topic', {title: "Technology", url: "technology"});
 
-    await click('button:contains("Get Started")');
+    await click('button');
     assert.equal(currentURL(), '/discover/start/topics', "is on topics");
     await click(".discover-topic input[name='music']");
-    await click("button:contains('Next')");
+    await click("button");
     assert.equal(currentURL(), "/discover/start/shows");
     await visit('/discover/start/topics');
     assert.equal($(".discover-topic input[name='music']").prop('checked'), true, "Checkbox was not checked");
@@ -122,15 +121,15 @@ module('Acceptance | discover', function(hooks) {
     let shows = server.createList('show', 5);
     let testShow = shows[0];
     await visit('/discover/start');
-    await click('button:contains("Get Started")');
+    await click('button');
 
     await click(".discover-topic input");
-    await click("button:contains('Next')");
+    await click("button");
 
     assert.equal(currentURL(), '/discover/start/shows');
     assert.equal($(`.discover-show[data-slug="${testShow.slug}"] input`).prop('checked'), true);
     await click(`.discover-show[data-slug="${testShow.slug}"]`);
-    await click("button:contains('Create Playlist')");
+    await click("button");
 
     await visit('/discover/start/shows');
 
@@ -143,14 +142,14 @@ module('Acceptance | discover', function(hooks) {
     let shows = server.createList('show', 5);
     let testShow = shows[0];
     await visit('/discover/start');
-    await click('button:contains("Get Started")');
+    await click('button');
     await click(".discover-topic input");
-    await click("button:contains('Next')");
+    await click("button");
     assert.equal(currentURL(), '/discover/start/shows', "should be on shows step");
     assert.equal($(`.discover-show[data-slug="${testShow.slug}"] input`).prop('checked'), true, "show should be selected");
     await click(`.discover-show[data-slug="${testShow.slug}"]`);
-    await click("button:contains('Back')");
-    await click("button:contains('Next')");
+    await click("button");
+    await click("button");
     assert.equal($(`.discover-show[data-slug="${testShow.slug}"]`).length, 1, "test show should exist");
     assert.equal($(`.discover-show[data-slug="${testShow.slug}"] input`).prop('checked'), false, "should not be checked");
   });
@@ -159,10 +158,10 @@ module('Acceptance | discover', function(hooks) {
     server.createList('discover-topic', 5);
     let shows = server.createList('show', 5);
     await visit('/discover/start');
-    await click('button:contains("Get Started")');
+    await click('button');
 
     await click(".discover-topic input");
-    await click("button:contains('Next')");
+    await click("button");
     assert.equal(currentURL(), '/discover/start/shows');
     assert.equal($(`.discover-show input:checked`).length, shows.length, "all shows should be selected");
   });
@@ -173,9 +172,9 @@ module('Acceptance | discover', function(hooks) {
 
     await visit('/discover/start');
 
-    await click('button:contains("Get Started")');
+    await click('button');
     await click(".discover-topic input");
-    await click("button:contains('Next')");
+    await click("button");
     assert.equal($('button.mod-filled-red').length, 1, "Button should be red");
 
     await click($(".discover-show")[0]);
@@ -191,9 +190,9 @@ module('Acceptance | discover', function(hooks) {
 
     await visit('/discover/start');
 
-    await click('button:contains("Get Started")');
+    await click('button');
     await click(".discover-topic input");
-    await click("button:contains('Next')");
+    await click("button");
 
     assert.equal($(`.discover-show input:checked`).length, 2, "all shows should be selected");
     assert.equal($('button.mod-filled-red').length, 1, "Button should be red");
@@ -201,7 +200,7 @@ module('Acceptance | discover', function(hooks) {
     await click($(".discover-show")[0]);
     await click($(".discover-show")[1]);
 
-    await click($('button:contains("Create Playlist")'));
+    await click($('button'));
 
     assert.equal($('.discover-setup-title-error').text().length > 0, true);
     assert.equal(currentURL(), '/discover/start/shows');
@@ -215,16 +214,16 @@ module('Acceptance | discover', function(hooks) {
 
     var done = assert.async();
 
-    await click('button:contains("Get Started")');
+    await click('button');
     await click($(".discover-topic input")[0]);
     await click($(".discover-topic input")[1]);
     await click($(".discover-topic input")[2]);
 
-    await click("button:contains('Next')");
+    await click("button");
 
     await click($(".discover-show")[0])
     await click($(".discover-show")[1]);
-    await click($('button:contains("Create Playlist")'));
+    await click($('button'));
 
     let url =[config.publisherAPI, 'v3/make_playlist'].join("/");
     server.get(url, function(schema, request) {
@@ -241,11 +240,11 @@ module('Acceptance | discover', function(hooks) {
     server.createList('show', 5);
 
     await visit('/discover/start');
-    await click('button:contains("Get Started")');
+    await click('button');
 
 
     await click(".discover-topic input");
-    await click("button:contains('Next')");
+    await click("button");
 
     assert.equal(currentURL(), '/discover/start/shows');
     await click('a[href="/login"]');
@@ -258,15 +257,15 @@ module('Acceptance | discover', function(hooks) {
     server.createList('show', 5);
 
     await visit('/discover/start');
-    await click('button:contains("Get Started")');
+    await click('button');
 
     await click(".discover-topic input");
-    await click("button:contains('Next')");
+    await click("button");
 
     assert.equal(currentURL(), '/discover/start/shows');
-    await click(".rounded-caps-button:contains('Back')");
+    await click(".rounded-caps-button");
     assert.equal(currentURL(), '/discover/start/topics', "should be on topics screen");
-    await click(".rounded-caps-button:contains('Back')");
+    await click(".rounded-caps-button");
     assert.equal(currentURL(), '/discover/start', "should be on welcome screen");
   });
 
@@ -287,7 +286,7 @@ module('Acceptance | discover', function(hooks) {
     server.createList('discover-topic', 5);
     await visit('/discover/start/topics');
     assert.equal(currentURL(), '/discover/start');
-    assert.equal($("a:contains('Download It Now')").length, 1);
+    assert.equal($("a").length, 1);
     window.Modernizr.touchevents = oldTouchSetting; // restore this thing
   });
 });

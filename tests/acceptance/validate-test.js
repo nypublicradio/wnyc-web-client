@@ -46,7 +46,7 @@ module('Acceptance | validate', function(hooks) {
 
     await fillIn('input[name=email]', 'user@example.com');
     await fillIn('input[name=password]', 'password1');
-    await click('button[type=submit]:contains(Log in)');
+    await click('button[type=submit]');
 
     assert.ok(currentSession(this.application).get('isAuthenticated'));
   });
@@ -64,7 +64,7 @@ module('Acceptance | validate', function(hooks) {
 
     await fillIn('input[name=email]', 'user@example.com');
     await fillIn('input[name=password]', 'password1');
-    await click('button[type=submit]:contains(Log in)');
+    await click('button[type=submit]');
 
     assert.ok(currentSession(this.application).get('isAuthenticated'));
   });

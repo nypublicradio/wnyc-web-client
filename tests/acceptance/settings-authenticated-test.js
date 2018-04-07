@@ -11,7 +11,6 @@ import {
   authenticateSession,
   currentSession
 } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
-import 'wnyc-web-client/tests/helpers/with-feature';
 
 module('Acceptance | settings', function(hooks) {
   setupApplicationTest(hooks);

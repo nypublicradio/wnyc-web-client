@@ -51,7 +51,7 @@ module('Acceptance | reset', function(hooks) {
     assert.equal(find('.account-form-heading').textContent.trim(), 'Reset your password', 'it should show the reset password form');
 
     await fillIn('input[name=password]', password);
-    await click('button:contains(Reset password)');
+    await click('button');
 
     assert.equal(find('.account-form-heading').textContent.trim(), 'Oops!', 'it should show an oops page when you click reset password with a bad code');
   });
@@ -65,14 +65,14 @@ module('Acceptance | reset', function(hooks) {
     assert.equal(find('.account-form-heading').textContent.trim(), 'Reset your password', 'it should show the reset password form');
 
     await fillIn('input[name=password]', password);
-    await click('button:contains(Reset password)');
+    await click('button');
 
     assert.equal(find('.account-form-heading').textContent.trim(), 'Log in to WNYC', 'it should show a login form when you click reset password with a good email code and password');
 
     await fillIn('input[name=email]', email);
     await fillIn('input[name=password]', password);
 
-    await click('button[type=submit]:contains(Log in)');
+    await click('button[type=submit]');
 
     assert.ok(currentSession(this.application).get('isAuthenticated'));
   });
@@ -88,14 +88,14 @@ module('Acceptance | reset', function(hooks) {
     assert.equal(find('.account-form-heading').textContent.trim(), 'Reset your password', 'it should show the reset password form');
 
     await fillIn('input[name=password]', password);
-    await click('button:contains(Reset password)');
+    await click('button');
 
     assert.equal(find('.account-form-heading').textContent.trim(), 'Log in to WNYC', 'it should show a login form when you click reset password with a good email code and password');
 
     await fillIn('input[name=email]', email);
     await fillIn('input[name=password]', password);
 
-    await click('button[type=submit]:contains(Log in)');
+    await click('button[type=submit]');
 
     assert.ok(currentSession(this.application).get('isAuthenticated'));
   });
@@ -111,7 +111,7 @@ module('Acceptance | reset', function(hooks) {
     assert.equal(find('.account-form-heading').textContent.trim(), 'Reset your password', 'it should show the reset password form');
 
     await fillIn('input[name=password]', password);
-    await click('button:contains(Reset password)');
+    await click('button');
 
     assert.equal(find('.account-form-heading').textContent.trim(), 'Reset your password', 'it should remain on the form when the reset url returns other errors.');
   });

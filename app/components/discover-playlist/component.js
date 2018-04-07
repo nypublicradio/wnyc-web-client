@@ -78,9 +78,7 @@ export default Component.extend({
       // this will fire the listen action and delete it from the queue
       // we don't want to actually delete it from the stories object
       // that will work itself next time the list loads
-      if (this.onRemoveItem) {
-        this.onRemoveItem(item);
-      }
+      this.sendAction('onRemoveItem', item); // eslint-disable-line
 
     },
 
@@ -110,9 +108,7 @@ export default Component.extend({
       this.set('removedItems', []); // clear out removed/hidden items
 
       // this sends it up to get updated in the queue
-      if (this.onUpdateItems) {
-        this.onUpdateItems(presentAndOrderedItems);
-      }
+      this.sendAction('onUpdateItems', presentAndOrderedItems); // eslint-disable-line
     },
 
     toggle() {
@@ -140,9 +136,7 @@ export default Component.extend({
     },
 
     findMore() {
-      if (this.findMore) {
-        this.findMore();
-      }
+      this.sendAction('findMore'); // eslint-disable-line
     }
   }
 });

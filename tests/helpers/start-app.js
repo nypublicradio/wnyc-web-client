@@ -3,9 +3,9 @@ import { merge } from '@ember/polyfills';
 import Application from '../../app';
 import config from '../../config/environment';
 import './alien-dom-click';
-import './ember-sortable/test-helpers';
 import './google-analytics-stub';
 import './responsive';
+import './ember-sortable/test-helpers';
 
 export default function startApp(attrs) {
   let attributes = merge({}, config.APP);

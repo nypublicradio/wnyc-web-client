@@ -8,9 +8,8 @@ import {
 } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import djangoPage from 'wnyc-web-client/tests/pages/django-page';
+import testPage from 'wnyc-web-client/tests/pages/listing-page';
 import { Response } from 'ember-cli-mirage';
-import 'wnyc-web-client/tests/helpers/with-feature';
 import {
   authenticateSession,
   currentSession
@@ -43,7 +42,7 @@ module('Acceptance | signup', function(hooks) {
     server.create('user');
     authenticateSession(this.application, {access_token: 'foo'});
     let page = server.create('django-page', {id: '/'});
-    djangoPage.bootstrap(page);
+    await testPage.bootstrap(page);
 
     await visit(signupUrl);
 
@@ -52,7 +51,7 @@ module('Acceptance | signup', function(hooks) {
 
   test('Sign up button is visible at load', async function(assert) {
     await visit(signupUrl);
-    assert.equal(find('button[type=submit]:contains(Sign up)').length, 1);
+    assert.equal(find('button[type=submit]').length, 1);
 
   });
 
@@ -75,7 +74,7 @@ module('Acceptance | signup', function(hooks) {
     await fillIn('input[name=email]', 'foo@example.com');
     await fillIn('input[name=emailConfirmation]', 'foo@example.com');
     await fillIn('input[name=typedPassword]', 'password1234567');
-    await click('button[type=submit]:contains(Sign up)');
+    await click('button[type=submit]');
 
     assert.equal(find('.account-form-heading').textContent.trim(), 'Thanks for signing up!');
   });
@@ -83,7 +82,7 @@ module('Acceptance | signup', function(hooks) {
   test('Sign up with Facebook button is visible at load', async function(assert) {
     withFeature('socialAuth');
     await visit(signupUrl);
-    assert.equal(find('button:contains(Sign up with Facebook)').length, 1);
+    assert.equal(find('button').length, 1);
 
   });
 
@@ -94,7 +93,7 @@ module('Acceptance | signup', function(hooks) {
     withFeature('socialAuth');
     await visit(signupUrl);
 
-    await click('button:contains(Sign up with Facebook)');
+    await click('button');
 
     assert.ok(/^index(_loading)?$/.test(currentRouteName()));
     assert.ok(currentSession(this.application).get('isAuthenticated'), 'Session is authenticated');
@@ -116,7 +115,7 @@ module('Acceptance | signup', function(hooks) {
     withFeature('socialAuth');
     await visit(signupUrl);
 
-    await click('button:contains(Sign up with Facebook)');
+    await click('button');
 
     assert.equal(currentURL(), '/signup');
     assert.equal(find('.alert-warning').textContent.trim(), "Unfortunately, we can't authorize your account without permission to view your email address.");
@@ -128,7 +127,7 @@ module('Acceptance | signup', function(hooks) {
     withFeature('socialAuth');
     await visit(signupUrl);
 
-    await click('button:contains(Sign up with Facebook)');
+    await click('button');
 
     assert.equal(currentURL(), '/signup');
     assert.equal(find('.alert-warning').textContent.trim(), "We're sorry, but we weren't able to log you in through Facebook.");

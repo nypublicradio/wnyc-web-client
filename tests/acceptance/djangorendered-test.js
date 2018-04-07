@@ -28,9 +28,9 @@ module('Acceptance | Django Rendered | Proper Re-renders', function(hooks) {
     window.onbeforeunload = undefined;
   });
 
-  test('on a search page with a query', function(assert) {
+  test('on a search page with a query', async function(assert) {
     let search = server.create('django-page', {id: 'search/?q=foo'});
-    djangoPage
+    await djangoPage
       .bootstrap(search)
       .visit({id: 'search/?q=foo'});
 
@@ -43,7 +43,7 @@ module('Acceptance | Django Rendered | Proper Re-renders', function(hooks) {
     let home = server.create('django-page', {id: '/'});
     server.create('django-page', {id: 'search/?q=foo'});
 
-    djangoPage
+    await djangoPage
       .bootstrap(home)
       .visit(home);
 
@@ -67,7 +67,7 @@ module('Acceptance | Django Rendered | Proper Re-renders', function(hooks) {
       .catch(() => delete window.assign);
   });
 
-  test('deferred scripts embedded within content do not run twice', function(assert) {
+  test('deferred scripts embedded within content do not run twice', async function(assert) {
     let page = server.create('django-page', {
       id: 'foo/',
       slug: 'foo',
@@ -85,14 +85,14 @@ module('Acceptance | Django Rendered | Proper Re-renders', function(hooks) {
   `
     });
 
-    djangoPage
+    await djangoPage
       .bootstrap(page)
       .visit(page);
 
     assert.equal(findAll('section.text p').length, 1, 'should only be one p tag');
   });
 
-  test('.l-constrained is not added to responsive pages', function(assert) {
+  test('.l-constrained is not added to responsive pages', async function(assert) {
     let responsivePage = server.create('django-page', {
       id: 'fake/',
       text: `
@@ -104,14 +104,14 @@ module('Acceptance | Django Rendered | Proper Re-renders', function(hooks) {
       `
     });
 
-    djangoPage
+    await djangoPage
       .bootstrap(responsivePage)
       .visit(responsivePage);
 
     assert.equal(find('.django-content').parent('.l-constrained').length, 0, 'should not have an l-constrained class');
   });
 
-  test('.l-constrained is added to regular pages', function(assert) {
+  test('.l-constrained is added to regular pages', async function(assert) {
     let regularPage = server.create('django-page', {
       id: 'fake/',
       text: `
@@ -123,17 +123,17 @@ module('Acceptance | Django Rendered | Proper Re-renders', function(hooks) {
       `
     });
 
-    djangoPage
+    await djangoPage
       .bootstrap(regularPage)
       .visit(regularPage);
 
     assert.equal(find('.django-content').parent('.l-constrained').length, 1, 'should have an l-constrained class');
   });
 
-  test('.search is added to search pages', function(assert) {
+  test('.search is added to search pages', async function(assert) {
     let searchPage = server.create('django-page', { id: 'search/' });
 
-    djangoPage
+    await djangoPage
       .bootstrap(searchPage)
       .visit(searchPage);
 
@@ -143,7 +143,7 @@ module('Acceptance | Django Rendered | Proper Re-renders', function(hooks) {
 
   test('arbitrary django routes do dfp targeting', async function() /*assert*/{
     server.create('django-page', {id: 'fake/'});
-    
+
     // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
     server.create('django-page', {id: 'foo/'});
     await visit('/foo');
@@ -151,24 +151,9 @@ module('Acceptance | Django Rendered | Proper Re-renders', function(hooks) {
     this.mock(this.application.__container__.lookup('route:djangorendered').get('googleAds'))
       .expects('doTargeting')
       .once();
-    
-    djangoPage
+
+    await djangoPage
       .bootstrap({id: 'fake/'})
       .visit({id: 'fake/'});
-  });
-});
-
-module('Acceptance | Django Rendered | Beta Trial', function(hooks) {
-  setupApplicationTest(hooks);
-
-  hooks.beforeEach(function() {
-    server.create('stream');
-    window.onbeforeunload = escapeNavigation;
-    config.betaTrials.active = true;
-    config.betaTrials.preBeta = true;
-  });
-
-  hooks.afterEach(function() {
-    window.onbeforeunload = undefined;
   });
 });

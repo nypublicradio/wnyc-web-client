@@ -5,13 +5,13 @@ import Controller from '@ember/controller';
 
 export default Controller.extend({
   queryParams:  ['tab'],
-  tab: 'summary',
+  tab: null,
   metrics: service(),
 
   setTab(){
     if (location.hash.substr(1) === "transcript"){
-        this.set("tab", 'transcript');
-      }
+      this.set("tab", 'transcript');
+    }
   },
 
   init(){

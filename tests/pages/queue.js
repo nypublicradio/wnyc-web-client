@@ -1,19 +1,15 @@
-import PageObject from 'wnyc-web-client/tests/page-object';
-
-let {
+import {
+  create,
   visitable,
   collection,
   text,
   isVisible
-} = PageObject;
+} from 'ember-cli-page-object';
 
-export default PageObject.create({
+export default create({
   visit: visitable('/?modal=queue-history'),
   queueIsVisible: isVisible('.player-queue'),
-  stories: collection({
-    itemScope: '.sortable-item',
-    item: {
-      title: text('.queueitem-itemtitle'),
-    }
+  stories: collection('.sortable-item', {
+    title: text('.queueitem-itemtitle'),
   })
 });

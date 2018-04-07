@@ -56,7 +56,7 @@ module('Acceptance | queue', function(hooks) {
 
     // drag story 0 below story 1
     drag('mouse',
-      `.queueitem:contains(Story 0)`,
+      `.queueitem`,
       function() {return {dy: 400, dx:0};}
     );
 
@@ -87,7 +87,7 @@ module('Acceptance | queue', function(hooks) {
       assert.equal(find(el).getAttribute('data-story'), stories[i].title);
     });
 
-    await click('button:contains(My Listening History)');
+    await click('button');
     listenButtons = findWithAssert('.player-history [data-test-selector=listen-button]');
     listenButtons.get().reverse().forEach((el, i) => {
       assert.equal(find(el).getAttribute('data-show'), 'foo show');

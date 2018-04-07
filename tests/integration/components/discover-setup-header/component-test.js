@@ -13,7 +13,7 @@ module('Integration | Component | discover setup header', function(hooks) {
     });
 
     await render(hbs`{{discover-setup-header onBack=(action onBack)}}`);
-    this.$("button:contains('Back')").click();
+    this.$("button").click();
 
     return settled().then(() => {
       assert.equal(this.get('actionFired'), true, "back action should have fired");
@@ -27,7 +27,7 @@ module('Integration | Component | discover setup header', function(hooks) {
     });
 
     await render(hbs`{{discover-setup-header nextButtonText="Next" onNext=(action onNext)}}`);
-    this.$("button:contains('Next')").click();
+    this.$("button").click();
 
     return settled().then(() => {
       assert.equal(this.get('actionFired'), true, "next action should have fired");

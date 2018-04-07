@@ -7,8 +7,8 @@ const SHARE_SELECTORS = '.js-share';
 const HEADER_SELECTORS = '#brand-logo, .header-wide-button, #header .user-logout, #header .user-login';
 
 function contains(selector, target) {
-  let results = document.querySelector(target).closest(selector);
-  return !!results.length;
+  let results = target.closest(selector);
+  return !!results;
 }
 
 export default Service.extend({
@@ -16,7 +16,7 @@ export default Service.extend({
   store: service(),
 
   dispatch(e) {
-    let target = e.currentTarget || e.target;
+    let target = e.target || e.currentTarget;
 
     if (contains(MENU_SELECTORS, target)) {
       this._trackLinkWithText(e, 'WNYC Menu');
@@ -30,9 +30,9 @@ export default Service.extend({
   },
 
   _trackLinkWithText({target}, category) {
-    const $target = document.querySelector(target);
-    const title = $target.text().trim();
-    const destinationUrl = $target.attr('href') !== '#' ? $target.attr('href') : false;
+    target = document.querySelector(target);
+    const title = target.textContent.trim();
+    const destinationUrl = target.getAttribute('href') !== '#' ? target.getAttribute('href') : false;
     const metrics = get(this, 'metrics');
 
     metrics.trackEvent('GoogleAnalytics', {
@@ -43,33 +43,32 @@ export default Service.extend({
   },
 
   _trackHomepage({target}) {
-    let $tgt = document.querySelector(target);
-    let $li = $tgt.closest('li');
-    let index = $li.index();
-    let $bucket = $tgt.closest('.bucket, #damost');
-    let position = $bucket.attr('data-position');
-    let $title = $bucket.find('.bucket-title, #damost-nav .active');
-    let title = $title.text().trim();
+    let li = target.closest('li');
+    let index = Array.from(li.parentElement.children).indexOf(li);
+    let bucket = target.closest('.bucket, #damost');
+    let position = bucket.getAttribute('data-position');
+    let title = bucket.querySelector('.bucket-title, #damost-nav .active');
+    title = title.textContent.trim();
     let metrics = get(this, 'metrics');
 
     metrics.trackEvent('GoogleAnalytics', {
       category: 'Homepage Bucket',
       action : `Clicked story in bucket ${position} with title "${title}"`,
-      label : `Headline clicked: "${$tgt.text()}", url: ${$tgt.attr('href')}`,
+      label : `Headline clicked: "${target.textContent.trim()}", url: ${target.getAttribute('href')}`,
       value : index + 1  // zero-indexing is for computers, 1-indexing is for people
     });
   },
 
   _trackShare({target}) {
+    /*global wnyc*/
+
     let metrics = get(this, 'metrics');
     let store = get(this, 'store');
     let story = store.peekRecord('story', wnyc.current_item.id);
     let {containers, title} = get(story, 'analytics');
 
-    /*global wnyc*/
-    let $clickedEl = document.querySelector(target);
-    let dataCategory = $clickedEl.closest('[data-category]');
-    let sharedVia = dataCategory.data('category');
+    let dataCategory = target.closest('[data-category]');
+    let sharedVia = dataCategory.getAttribute('data-category');
 
     switch(sharedVia){
       case 'SharedE':
