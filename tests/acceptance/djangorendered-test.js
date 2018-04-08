@@ -1,12 +1,10 @@
 import {
-  fillIn,
+  find,
   findAll,
   currentURL,
-  triggerEvent,
-  visit
+  visit,
 } from '@ember/test-helpers';
-import config from 'wnyc-web-client/config/environment';
-import { module, skip } from 'qunit';
+import { module } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import test from 'ember-sinon-qunit/test-support/test';
 import djangoPage from 'wnyc-web-client/tests/pages/django-page';
@@ -32,39 +30,10 @@ module('Acceptance | Django Rendered | Proper Re-renders', function(hooks) {
     let search = server.create('django-page', {id: 'search/?q=foo'});
     await djangoPage
       .bootstrap(search)
-      .visit({id: 'search/?q=foo'});
+      .visit({path: 'search', q: 'foo'});
 
-    assert.equal(currentURL(), 'search/?q=foo');
-    let djangoContent = findWithAssert('.django-content');
-    assert.ok(djangoContent.contents().length);
-  });
-
-  skip('it properly routes to the search page', async function(assert) {
-    let home = server.create('django-page', {id: '/'});
-    server.create('django-page', {id: 'search/?q=foo'});
-
-    await djangoPage
-      .bootstrap(home)
-      .visit(home);
-
-    await fillIn('#search-input', 'foo');
-    await triggerEvent('#search-form', 'submit');
-
-    assert.equal(currentURL(), '/search/?q=foo');
-  });
-
-  skip('it retries the server on a request error', async function(assert) {
-    assert.expect(1);
-    // we do this in order to simulate the unrecoverable errors generated when
-    // Ember tries to AJAX load a url from another domain.
-    server.get(`${config.webRoot}/unknown-url/`, () => {throw 'simulating a CORS error';});
-
-    window.assign = function() {
-      assert.ok(true, 'location.assign was called');
-    };
-
-    await await await visit('/unknown-url')
-      .catch(() => delete window.assign);
+    assert.equal(currentURL(), 'search?q=foo');
+    assert.ok(find('.django-content'));
   });
 
   test('deferred scripts embedded within content do not run twice', async function(assert) {
@@ -87,7 +56,7 @@ module('Acceptance | Django Rendered | Proper Re-renders', function(hooks) {
 
     await djangoPage
       .bootstrap(page)
-      .visit(page);
+      .visit({path: 'foo'});
 
     assert.equal(findAll('section.text p').length, 1, 'should only be one p tag');
   });
@@ -106,9 +75,9 @@ module('Acceptance | Django Rendered | Proper Re-renders', function(hooks) {
 
     await djangoPage
       .bootstrap(responsivePage)
-      .visit(responsivePage);
+      .visit({path: 'fake'});
 
-    assert.equal(find('.django-content').parent('.l-constrained').length, 0, 'should not have an l-constrained class');
+    assert.notOk(find('.django-content').matches('.l-constrained .django-content'), 'should not have an l-constrained class');
   });
 
   test('.l-constrained is added to regular pages', async function(assert) {
@@ -125,9 +94,9 @@ module('Acceptance | Django Rendered | Proper Re-renders', function(hooks) {
 
     await djangoPage
       .bootstrap(regularPage)
-      .visit(regularPage);
+      .visit({path: 'fake'});
 
-    assert.equal(find('.django-content').parent('.l-constrained').length, 1, 'should have an l-constrained class');
+    assert.ok(find('.l-constrained .django-content'), 'should have an l-constrained class');
   });
 
   test('.search is added to search pages', async function(assert) {
@@ -135,25 +104,25 @@ module('Acceptance | Django Rendered | Proper Re-renders', function(hooks) {
 
     await djangoPage
       .bootstrap(searchPage)
-      .visit(searchPage);
+      .visit({path: 'search'});
 
-    assert.equal(find('.django-content').parent('.search').length, 1, 'should have an l-constrained class');
+    assert.ok(find('.search .django-content'), 'should have an l-constrained class');
   });
 
 
-  test('arbitrary django routes do dfp targeting', async function() /*assert*/{
+  test('arbitrary django routes do dfp targeting', async function() {
     server.create('django-page', {id: 'fake/'});
 
     // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
     server.create('django-page', {id: 'foo/'});
     await visit('/foo');
 
-    this.mock(this.application.__container__.lookup('route:djangorendered').get('googleAds'))
+    this.mock(this.owner.lookup('route:djangorendered').get('googleAds'))
       .expects('doTargeting')
       .once();
 
     await djangoPage
       .bootstrap({id: 'fake/'})
-      .visit({id: 'fake/'});
+      .visit({path: 'fake'});
   });
 });
