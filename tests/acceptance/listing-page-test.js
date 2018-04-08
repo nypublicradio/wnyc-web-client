@@ -13,6 +13,15 @@ import moment from 'moment';
 import { setupApplicationTest } from 'ember-qunit';
 import { module } from 'qunit';
 
+import DummyConnection from 'ember-hifi/hifi-connections/dummy-connection';
+
+const setupHifi = app => {
+  const HIFI = app.lookup('service:hifi');
+  app.register('hifi-connection:local-dummy-connection', DummyConnection, {instantiate: false});
+  HIFI.set('_connections', [HIFI._activateConnection({name: 'LocalDummyConnection'})]);
+}
+
+
 module('Acceptance | Listing Page | viewing', function(hooks) {
   setupApplicationTest(hooks);
 
