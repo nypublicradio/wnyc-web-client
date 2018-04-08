@@ -3,6 +3,7 @@ import { appendHTML } from 'wnyc-web-client/tests/helpers/html';
 
 export default create({
   visit: visitable('shows/:slug'),
+  visitSubPage: visitable('shows/:slug/:page'),
 
   bootstrap({id}) {
     /* eslint-disable */
