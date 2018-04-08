@@ -6,17 +6,15 @@ import {
   currentRouteName,
   visit
 } from '@ember/test-helpers';
-import { module, test } from 'qunit';
+import { module } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
+import test from 'ember-sinon-qunit/test-support/test';
 import testPage from 'wnyc-web-client/tests/pages/listing-page';
 import { Response } from 'ember-cli-mirage';
 import {
   authenticateSession,
   currentSession
 } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
-import dummySuccessProviderFb from 'wnyc-web-client/tests/helpers/torii-dummy-success-provider-fb';
-import dummyFailureProvider from 'wnyc-web-client/tests/helpers/torii-dummy-failure-provider';
-import { registerMockOnInstance } from 'wnyc-web-client/tests/helpers/register-mock';
 import config from 'wnyc-web-client/config/environment';
 
 module('Acceptance | signup', function(hooks) {
@@ -80,7 +78,6 @@ module('Acceptance | signup', function(hooks) {
   });
 
   test('Sign up with Facebook button is visible at load', async function(assert) {
-    withFeature('socialAuth');
     await visit(signupUrl);
     assert.equal(find('button').length, 1);
 
@@ -89,21 +86,33 @@ module('Acceptance | signup', function(hooks) {
   test('Successful facebook login redirects', async function(assert) {
     server.create('django-page', {id: '/'});
     let user = server.create('user', 'facebook');
-    registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
-    withFeature('socialAuth');
-    await visit(signupUrl);
+    let facebookProvider = this.owner.lookup('torii-provider:facebook-connect');
+    this.stub(facebookProvider, 'open').resolves({
+      accessToken: 'abcdef',
+      expiresIn: 6000,
+      userId: '123456',
+      provider: 'facebook-connect'
+    });
 
+    await visit(signupUrl);
     await click('button');
 
     assert.ok(/^index(_loading)?$/.test(currentRouteName()));
-    assert.ok(currentSession(this.application).get('isAuthenticated'), 'Session is authenticated');
+    assert.ok(currentSession().get('isAuthenticated'), 'Session is authenticated');
     assert.equal(find('.user-nav-greeting').textContent.trim(), user.given_name);
     assert.equal(find('.user-nav-avatar > img').getAttribute('src'), user.picture);
   });
 
   test('Facebook login with no email shows alert', async function(assert) {
     server.create('user');
-    registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
+    let facebookProvider = this.owner.lookup('torii-provider:facebook-connect');
+    this.stub(facebookProvider, 'open').resolves({
+      accessToken: 'abcdef',
+      expiresIn: 6000,
+      userId: '123456',
+      provider: 'facebook-connect'
+    });
+
     server.get(`${config.authAPI}/v1/session`, () => {
       return new Response(400, {}, { "errors": {
         "code": "MissingAttributeException",
@@ -112,25 +121,24 @@ module('Acceptance | signup', function(hooks) {
       });
     });
 
-    withFeature('socialAuth');
     await visit(signupUrl);
 
     await click('button');
 
     assert.equal(currentURL(), '/signup');
     assert.equal(find('.alert-warning').textContent.trim(), "Unfortunately, we can't authorize your account without permission to view your email address.");
-    assert.ok(!currentSession(this.application).get('isAuthenticated'), 'Session is not authenticated');
+    assert.ok(!currentSession().get('isAuthenticated'), 'Session is not authenticated');
   });
 
   test('Unsuccessful facebook login shows alert', async function(assert) {
-    registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummyFailureProvider);
-    withFeature('socialAuth');
-    await visit(signupUrl);
+    let facebookProvider = this.owner.lookup('torii-provider:facebook-connect');
+    this.stub(facebookProvider, 'open').rejects();
 
+    await visit(signupUrl);
     await click('button');
 
     assert.equal(currentURL(), '/signup');
     assert.equal(find('.alert-warning').textContent.trim(), "We're sorry, but we weren't able to log you in through Facebook.");
-    assert.ok(!currentSession(this.application).get('isAuthenticated'), 'Session is not authenticated');
+    assert.ok(!currentSession().get('isAuthenticated'), 'Session is not authenticated');
   });
 });
