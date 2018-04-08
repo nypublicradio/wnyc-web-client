@@ -12,14 +12,14 @@ module('Acceptance | history', function(hooks) {
     server.create('stream');
   });
 
-  test('visiting /?modal=queue-history', function(assert) {
+  test('visiting /?modal=queue-history', async function(assert) {
     assert.expect(2);
     velocity.mock = true; //skip animations
 
     server.create('djangoPage', {id:'/'});
 
-    historyPage.visit();
-    historyPage.clickHistoryTab();
+    await historyPage.visit();
+    await historyPage.clickHistoryTab();
 
     assert.equal(currentURL(), '/?modal=queue-history');
     assert.ok(historyPage.historyIsVisible, 'History should exist');
