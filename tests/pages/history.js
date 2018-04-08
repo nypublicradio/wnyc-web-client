@@ -9,7 +9,7 @@ import {
 
 export default create({
   visit:             visitable('/?modal=queue-history'),
-  clickHistoryTab:   clickable('.tabbedlist-button'),
+  clickHistoryTab:   clickable('.tabbedlist-button:contains(My Listening History)'),
   clickClearHistory: clickable('.clearhistory-button'),
   clickYes:          clickable('.clearhistory-button'),
   clickNo:           clickable('.clearhistory-button'),
