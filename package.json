@@ -41,7 +41,7 @@
     "ember-cli-deploy-sentry": "^0.5.2",
     "ember-cli-deploy-ssh-tunnel": "^1.0.0",
     "ember-cli-document-title": "^0.4.0",
-    "ember-cli-dotenv": "1.2.0",
+    "ember-cli-dotenv": "^2.0.0",
     "ember-cli-eslint": "^4.2.1",
     "ember-cli-fastclick": "^1.4.1",
     "ember-cli-flash": "^1.6.3",
