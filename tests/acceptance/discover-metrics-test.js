@@ -1,6 +1,6 @@
 import Service from '@ember/service';
 import { click, visit } from '@ember/test-helpers';
-import { module, test } from 'qunit';
+import { module, skip } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import { currentSession } from 'ember-simple-auth/test-support';
 import {
@@ -54,7 +54,7 @@ module('Acceptance | discover metrics', function(hooks) {
       velocity.mock = false;
   });
 
-  test('it should log the correct events during onboarding', async function(assert) {
+  skip('it should log the correct events during onboarding', async function(assert) {
     await visit('/discover/start');
     assert.deepEqual(this.metrics.get('trackedEvents.lastObject'),
       discoverEvent('Discover Entered'),
@@ -129,7 +129,7 @@ module('Acceptance | discover metrics', function(hooks) {
       'it should log a create playlist event when you click create playlist');
   });
 
-  test('it should not log a "discover entered" event when redirected past the splash page', async function(assert) {
+  skip('it should not log a "discover entered" event when redirected past the splash page', async function(assert) {
     server.create('django-page', {id: '/'});
     await visit('/discover/start'); // discover event 1
     await click('button.discover-welcome-screen-button'); // discover event 2
@@ -166,7 +166,7 @@ module('Acceptance | discover metrics returning user', function(hooks) {
     velocity.mock = false;
   });
 
-  test('it should log the correct events when starting with a playlist', async function(assert) {
+  skip('it should log the correct events when starting with a playlist', async function(assert) {
     await visit('/discover/playlist');
 
     await click('a.discover-playlist-story-summary-action-link');
@@ -248,7 +248,7 @@ module('Acceptance | discover metrics returning user', function(hooks) {
       'it should log a create playlist event with a refresh label when you click refresh');
   });
 
-  test('it shouldn\'t log a clicked edit event when visiting /discover/edit directly', async function(assert) {
+  skip('it shouldn\'t log a clicked edit event when visiting /discover/edit directly', async function(assert) {
     await visit('/discover/edit');
     assert.strictEqual(this.metrics.get('trackedEvents').length, 0);
   });

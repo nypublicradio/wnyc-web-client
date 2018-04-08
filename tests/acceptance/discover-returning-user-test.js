@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import { later } from '@ember/runloop';
 import { click, currentURL, visit } from '@ember/test-helpers';
-import { module, test, skip } from 'qunit';
+import { module, skip } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import { currentSession } from 'ember-simple-auth/test-support';
 import RSVP from 'rsvp';
@@ -33,7 +33,7 @@ module('Acceptance | discover returning user', function(hooks) {
     velocity.mock = false;
   });
 
-  test('users who finished setup are redirected /discover -> /discover/playlist', async function(assert) {
+  skip('users who finished setup are redirected /discover -> /discover/playlist', async function(assert) {
     let session = currentSession();
     session.set('data.discover-setup-complete', true);
     await visit('/discover');
@@ -41,7 +41,7 @@ module('Acceptance | discover returning user', function(hooks) {
     assert.equal(currentURL(), '/discover/playlist', 'should be on the playlist page');
   });
 
-  test('users who finished step 1 are redirected to finish the flow', async function(assert) {
+  skip('users who finished step 1 are redirected to finish the flow', async function(assert) {
     let session = currentSession();
     session.set('data.discover-current-setup-step', 'topics');
     await visit('/discover');
@@ -50,7 +50,7 @@ module('Acceptance | discover returning user', function(hooks) {
     assert.equal(currentURL(), '/discover/start/topics', 'should be on the choose topics page');
   });
 
-  test('users who finished step 2 are redirected to finish the flow', async function(assert) {
+  skip('users who finished step 2 are redirected to finish the flow', async function(assert) {
     let session = currentSession();
     session.set('data.discover-current-setup-step', 'shows');
     await visit('/discover');
@@ -58,12 +58,12 @@ module('Acceptance | discover returning user', function(hooks) {
     assert.equal(currentURL(), '/discover/start/shows', 'should be on the choose shows page');
   });
 
-  test('visiting discover/edit starts you on topics', async function(assert) {
+  skip('visiting discover/edit starts you on topics', async function(assert) {
     await visit('/discover/edit');
     assert.equal(currentURL(), '/discover/edit/topics');
   });
 
-  test('you can not edit and choose zero topics', async function(assert) {
+  skip('you can not edit and choose zero topics', async function(assert) {
     await visit('/discover/edit');
     await click('a');
     await click('.discover-topic');
@@ -73,7 +73,7 @@ module('Acceptance | discover returning user', function(hooks) {
     assert.equal(find('.discover-setup-title-error').textContent.trim(), 'Please select at least one topic', 'it should show an error message');
   });
 
-  test('you can not edit and choose zero shows', async function(assert) {
+  skip('you can not edit and choose zero shows', async function(assert) {
     await visit('/discover/edit');
     await click('a');
     await click('.discover-show.is-selected');
@@ -83,31 +83,31 @@ module('Acceptance | discover returning user', function(hooks) {
     assert.equal(find('.discover-setup-title-error').textContent.trim(), 'Please select at least one show', 'it should show an error message');
   });
 
-  test('you can browse directly to shows tab', async function(assert) {
+  skip('you can browse directly to shows tab', async function(assert) {
     await visit('/discover/edit/shows');
     assert.equal(currentURL(), '/discover/edit/shows');
   });
 
-  test('you can browse directly to topics tab', async function(assert) {
+  skip('you can browse directly to topics tab', async function(assert) {
     await visit('/discover/edit/topics');
     assert.equal(currentURL(), '/discover/edit/topics');
   });
 
-  test('clicking cancel on edit page takes you back to playlist', async function(assert) {
+  skip('clicking cancel on edit page takes you back to playlist', async function(assert) {
     await visit('/discover/edit/topics');
     await click("button");
 
     assert.equal(currentURL(), '/discover/playlist');
   });
 
-  test('topics are saved in a session and maintained upon next visit in edit flow', async function(assert) {
+  skip('topics are saved in a session and maintained upon next visit in edit flow', async function(assert) {
     await visit('/discover/edit/topics');
     assert.equal(find(".discover-topic input[name='music']").checked, true, "Checkbox was not checked");
     assert.equal(find(".discover-topic input[name='art']").checked, false, "Checkbox was checked when it shouldn't be");
     assert.equal(find(".discover-topic input[name='technology']").checked, false, "Checkbox was checked when it shouldn't be");
   });
 
-  test('shows are saved in a session and maintained upon next visit in edit flow', async function(assert) {
+  skip('shows are saved in a session and maintained upon next visit in edit flow', async function(assert) {
     await visit('/discover/playlist');
 
     let session = currentSession();
@@ -122,7 +122,7 @@ module('Acceptance | discover returning user', function(hooks) {
     assert.equal(findAll(`.discover-show input[name="${shows[0].slug}"]:not(:checked)`).length, 1, "correct one should be checked");
   });
 
-  test('if find more returns no more items, the old queue is present and an error message is shown', async function(assert) {
+  skip('if find more returns no more items, the old queue is present and an error message is shown', async function(assert) {
     let discoverPath = config.featureFlags['other-discover'] ? 'reco_proxy' : 'make_playlist';
     let session = currentSession();
     var secondRequestCalled = false;
@@ -158,7 +158,7 @@ module('Acceptance | discover returning user', function(hooks) {
   });
 
 
-  test('if find more returns the same list of items, the old queue are displayed and an error message is shown', async function(assert) {
+  skip('if find more returns the same list of items, the old queue are displayed and an error message is shown', async function(assert) {
     let discoverPath = config.featureFlags['other-discover'] ? 'reco_proxy' : 'make_playlist';
     let session = currentSession();
     var secondRequestCalled = false;
@@ -193,7 +193,7 @@ module('Acceptance | discover returning user', function(hooks) {
     assert.equal($(".discover-playlist-no-results").length, 1, "playlist no results error area should be visible");
   });
 
-  test('if find more returns new items, the new items are displayed', async function(assert) {
+  skip('if find more returns new items, the new items are displayed', async function(assert) {
     let discoverPath = config.featureFlags['other-discover'] ? 'reco_proxy' : 'make_playlist';
     let session = currentSession();
     let secondRequestCalled = false;
@@ -253,14 +253,14 @@ module('Acceptance | discover returning user', function(hooks) {
     assert.equal($(".discover-playlist-no-results").length, 0, "playlist no results error area should not be visible");
   });
 
-  test('stories are displayed from saved session data', async function(assert) {
+  skip('stories are displayed from saved session data', async function(assert) {
     await visit('/discover/playlist');
     server.db.discoverStories.forEach(story => {
       assert.equal($(`.discover-playlist`).length, 1);
     });
   });
 
-  test('selected topics are not retained if you hit cancel', async function(assert) {
+  skip('selected topics are not retained if you hit cancel', async function(assert) {
     await visit('/discover/edit/topics');
     assert.equal($(".discover-topic input[name='music']").prop('checked'), true, "Checkbox was not checked");
     assert.equal($(".discover-topic input[name='art']").prop('checked'), false, "Checkbox was checked when it shouldn't be");
@@ -275,7 +275,7 @@ module('Acceptance | discover returning user', function(hooks) {
     assert.equal($(".discover-topic input[name='art']").prop('checked'), false, "Checkbox state should have been reset to saved state");
   });
 
-  test('selected topics are retained temporarily when switching between tabs', async function(assert) {
+  skip('selected topics are retained temporarily when switching between tabs', async function(assert) {
     await visit('/discover/edit/topics');
     assert.equal($(".discover-topic input[name='music']").prop('checked'), true, "Checkbox was not checked");
     assert.equal($(".discover-topic input[name='art']").prop('checked'), false, "Checkbox was checked when it shouldn't be");
@@ -291,7 +291,7 @@ module('Acceptance | discover returning user', function(hooks) {
     assert.equal($(".discover-topic input[name='art']").prop('checked'), true, "Checkbox state should have stayed the same");
   });
 
-  test('selected shows are not retained if you hit cancel', async function(assert) {
+  skip('selected shows are not retained if you hit cancel', async function(assert) {
     let session = currentSession();
     let shows = server.createList('show', 10);
     session.set('data.discover-excluded-shows',  [shows[0].slug]); // set some excluded shows
@@ -313,7 +313,7 @@ module('Acceptance | discover returning user', function(hooks) {
     assert.equal($(`.discover-show input[name='${shows[1].slug}']`).prop('checked'), true, "Checkbox state should have been reset to saved state");
   });
 
-  test('deleting an item removes the item from the list', async function(assert) {
+  skip('deleting an item removes the item from the list', async function(assert) {
     let stories = server.db.discoverStories;
     var story = stories[0];
     await visit('/discover/playlist');
@@ -326,7 +326,7 @@ module('Acceptance | discover returning user', function(hooks) {
     });
   });
 
-  test('playlist shows all items', async function(assert) {
+  skip('playlist shows all items', async function(assert) {
     server.createList('discover-story', 12);
     let stories = server.db.discoverStories;
     let session = currentSession();
@@ -340,7 +340,7 @@ module('Acceptance | discover returning user', function(hooks) {
     });
   });
 
-  test('playlist does not show excluded item when loaded from the queue', async function(assert) {
+  skip('playlist does not show excluded item when loaded from the queue', async function(assert) {
     server.createList('discover-story', 12);
     let stories = server.db.discoverStories;
     let session = currentSession();
@@ -352,7 +352,7 @@ module('Acceptance | discover returning user', function(hooks) {
     assert.equal($(`.discover-playlist-story-title a`).length, 0, "excluded story should not be there when loaded from the queue");
   });
 
-  test('playlist does not show excluded item when loaded from the store', async function(assert) {
+  skip('playlist does not show excluded item when loaded from the store', async function(assert) {
     server.createList('discover-story', 12);
     let stories = server.db.discoverStories;
     let session = currentSession();
@@ -364,7 +364,7 @@ module('Acceptance | discover returning user', function(hooks) {
   });
 
 
-  test('playlist shows all the fields when loaded from the queue/session', async function(assert) {
+  skip('playlist shows all the fields when loaded from the queue/session', async function(assert) {
     server.createList('discover-story', 12);
     let stories = server.db.discoverStories;
     let session = currentSession();
@@ -447,7 +447,7 @@ module('Acceptance | discover returning user', function(hooks) {
 
 
   // TODO: climb the mountain that is making the audio service testable/workable in dev
-  // test('the playlist button says "Start Listening" to begin with', function(assert) {
+  // skip('the playlist button says "Start Listening" to begin with', function(assert) {
   //   server.createList('show', 10);
   //   server.createList('discover-topic', 20);
   //   server.createList('discover-story', 20);
@@ -465,7 +465,7 @@ module('Acceptance | discover returning user', function(hooks) {
 
 
   // TODO: Figure out how to test a loading route. Can't seem to get this to work
-  // test('when building a station we show a loading screen', function(assert) {
+  // skip('when building a station we show a loading screen', function(assert) {
   //   let done = assert.async();
   //   server.get('/api/v1/make_radio', function() {
   //     assert.equal($("#discover_loading_message").length, 1);

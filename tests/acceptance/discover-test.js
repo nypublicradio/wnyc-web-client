@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import { click, currentURL, visit } from '@ember/test-helpers';
-import { module, skip, test } from 'qunit';
+import { module, skip } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import { currentSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
 import config from 'wnyc-web-client/config/environment';
@@ -23,7 +23,7 @@ module('Acceptance | discover', function(hooks) {
     velocity.mock = false;
   });
 
-  test('can visit discover from the home page', async function(assert) {
+  skip('can visit discover from the home page', async function(assert) {
     withFeature('discover');
     server.create('djangoPage', {id:'/'});
     await visit('/');
@@ -33,13 +33,13 @@ module('Acceptance | discover', function(hooks) {
     assert.equal(currentURL(), '/discover/start');
   });
 
-  test('first-time users are redirected /discover -> /discover/start', async function(assert) {
+  skip('first-time users are redirected /discover -> /discover/start', async function(assert) {
     await visit('/discover');
 
     assert.equal(currentURL(), '/discover/start', 'should be on start page');
   });
 
-  test('button exists to create new discover station', async function(assert) {
+  skip('button exists to create new discover station', async function(assert) {
     await visit('/discover/start');
     server.createList('discover-topic', 20);
 
@@ -48,7 +48,7 @@ module('Acceptance | discover', function(hooks) {
     assert.equal(currentURL(), '/discover/start/topics');
   });
 
-  test('shows list of topics', async function(assert) {
+  skip('shows list of topics', async function(assert) {
     await visit('/discover/start');
     server.createList('discover-topic', 20);
 
@@ -56,7 +56,7 @@ module('Acceptance | discover', function(hooks) {
     assert.equal($(".discover-topic").length, 20);
   });
 
-  test('select all button selects all topics', async function(assert) {
+  skip('select all button selects all topics', async function(assert) {
     await visit('/discover/start');
     server.createList('discover-topic', 20);
 
@@ -67,7 +67,7 @@ module('Acceptance | discover', function(hooks) {
   });
 
 
-  test('next button is disabled until a topic is selected', async function(assert) {
+  skip('next button is disabled until a topic is selected', async function(assert) {
     await visit('/discover/start');
     server.createList('discover-topic', 20);
 
@@ -78,7 +78,7 @@ module('Acceptance | discover', function(hooks) {
     assert.equal($('button.mod-filled-red').length, 1, "Button should be red");
   });
 
-  test('next button shows an error if you click it without a topic selected', async function(assert) {
+  skip('next button shows an error if you click it without a topic selected', async function(assert) {
     await visit('/discover/start');
     server.createList('discover-topic', 20);
 
@@ -89,7 +89,7 @@ module('Acceptance | discover', function(hooks) {
     assert.equal($('.discover-setup-title-error').text().length > 0, true);
   });
 
-  test('back goes back to the welcome screen', async function(assert) {
+  skip('back goes back to the welcome screen', async function(assert) {
     await visit('/discover/start');
     server.createList('discover-topic', 20);
 
@@ -99,7 +99,7 @@ module('Acceptance | discover', function(hooks) {
     assert.equal(currentURL(), '/discover/start');
   });
 
-  test('topics are saved in a session and maintained upon next visit in initial flow', async function(assert) {
+  skip('topics are saved in a session and maintained upon next visit in initial flow', async function(assert) {
     await visit('/discover/start');
     server.create('discover-topic', {title: "Music", url: "music"});
     server.create('discover-topic', {title: "Art", url: "art"});
@@ -116,7 +116,7 @@ module('Acceptance | discover', function(hooks) {
     assert.equal($(".discover-topic input[name='technology']").prop('checked'), false, "Checkbox was checked when it shouldn't be");
   });
 
-  test('show exclusions are saved in a session and maintained upon next visit in initial flow', async function(assert) {
+  skip('show exclusions are saved in a session and maintained upon next visit in initial flow', async function(assert) {
     server.createList('discover-topic', 5);
     let shows = server.createList('show', 5);
     let testShow = shows[0];
@@ -137,7 +137,7 @@ module('Acceptance | discover', function(hooks) {
     assert.equal($(`.discover-show[data-slug="${testShow.slug}"] input`).prop('checked'), false, "should not be checked");
   });
 
-  test('show exclusions are maintained if you go back to topics screen', async function(assert) {
+  skip('show exclusions are maintained if you go back to topics screen', async function(assert) {
     server.createList('discover-topic', 5);
     let shows = server.createList('show', 5);
     let testShow = shows[0];
@@ -154,7 +154,7 @@ module('Acceptance | discover', function(hooks) {
     assert.equal($(`.discover-show[data-slug="${testShow.slug}"] input`).prop('checked'), false, "should not be checked");
   });
 
-  test('all shows are selected by default', async function(assert) {
+  skip('all shows are selected by default', async function(assert) {
     server.createList('discover-topic', 5);
     let shows = server.createList('show', 5);
     await visit('/discover/start');
@@ -166,7 +166,7 @@ module('Acceptance | discover', function(hooks) {
     assert.equal($(`.discover-show input:checked`).length, shows.length, "all shows should be selected");
   });
 
-  test('create playlist button is disabled if no shows are selected', async function(assert) {
+  skip('create playlist button is disabled if no shows are selected', async function(assert) {
     server.createList('discover-topic', 20);
     server.createList('show', 2);
 
@@ -184,7 +184,7 @@ module('Acceptance | discover', function(hooks) {
     assert.equal($('button.mod-filled-red').length, 0, "Button should not be red");
   });
 
-  test('create playlist button should show error if clicked if no shows are selected', async function(assert) {
+  skip('create playlist button should show error if clicked if no shows are selected', async function(assert) {
     server.createList('discover-topic', 20);
     server.createList('show', 2);
 
@@ -252,7 +252,7 @@ module('Acceptance | discover', function(hooks) {
     assert.equal(currentURL(), '/discover/start/shows', "should be on shows step");
   });
 
-  test('should be able to go back to welcome screen if you really want to', async function(assert) {
+  skip('should be able to go back to welcome screen if you really want to', async function(assert) {
     server.createList('discover-topic', 5);
     server.createList('show', 5);
 
@@ -269,7 +269,7 @@ module('Acceptance | discover', function(hooks) {
     assert.equal(currentURL(), '/discover/start', "should be on welcome screen");
   });
 
-  test('nav link sends you to start page', async function(assert) {
+  skip('nav link sends you to start page', async function(assert) {
     withFeature('discover');
     server.createList('discover-topic', 5);
     server.createList('show', 5);
@@ -280,7 +280,7 @@ module('Acceptance | discover', function(hooks) {
     assert.equal(currentURL(), '/discover/start', "should be on start page");
   });
 
-  test('mobile users get the app download page', async function(assert) {
+  skip('mobile users get the app download page', async function(assert) {
     let oldTouchSetting = window.Modernizr.touchevents;
     window.Modernizr.touchevents = true; //spoof this thing
     server.createList('discover-topic', 5);

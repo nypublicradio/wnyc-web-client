@@ -3,7 +3,7 @@ import config from 'wnyc-web-client/config/environment';
 import BetaActionsMixin from 'wnyc-web-client/mixins/beta-actions';
 import { plantBetaTrial, clearBetaCookies } from 'wnyc-web-client/tests/helpers/beta';
 import { appendIfNot } from 'wnyc-web-client/tests/helpers/html';
-import { module, test } from 'qunit';
+import { module, skip } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import $ from 'jquery';
 
@@ -30,7 +30,7 @@ module('Acceptance | active beta trial', function(hooks) {
     plantBetaTrial();
     config.betaTrials.isBetaSite = false;
     config.betaTrials.preBeta = true;
-    
+
     server.create('stream');
   });
 
@@ -38,7 +38,7 @@ module('Acceptance | active beta trial', function(hooks) {
     clearBetaCookies();
   });
 
-  test('when a trial is active, I can enter the beta', async function(assert) {
+  skip('when a trial is active, I can enter the beta', async function(assert) {
     assertRun = function() {
       assert.ok('enterBeta was called');
     };
@@ -50,7 +50,7 @@ module('Acceptance | active beta trial', function(hooks) {
     findWithAssert('[data-test-selector=beta-enter]').click();
   });
 
-  test('when a trial is active, I can dismiss the beta invite', async function(assert) {
+  skip('when a trial is active, I can dismiss the beta invite', async function(assert) {
     assertRun = function() {
       assert.ok('dismissBeta was called');
     };
@@ -63,7 +63,7 @@ module('Acceptance | active beta trial', function(hooks) {
     findWithAssert('[data-test-selector=beta-dismiss]').click();
   });
 
-  test('when a trial is active, display the invite message on all routes', async function(assert) {
+  skip('when a trial is active, display the invite message on all routes', async function(assert) {
     server.create('djangoPage', {id: '/'});
     server.create('djangoPage', {id: 'story/foo/'});
 
@@ -87,7 +87,7 @@ module('Acceptance | on the beta site', function(hooks) {
     server.create('stream');
   });
 
-  test('when I am on the beta site, I can exit the beta', async function(assert) {
+  skip('when I am on the beta site, I can exit the beta', async function(assert) {
     server.create('djangoPage', {id:'/'});
     assertRun = function() {
       assert.ok('exitBeta was called');
@@ -101,7 +101,7 @@ module('Acceptance | on the beta site', function(hooks) {
 
 
   // this dom node is rendered by a component that's only in beta
-  test('when I am on the beta site, I can see the beta nav menu', async function(assert) {
+  skip('when I am on the beta site, I can see the beta nav menu', async function(assert) {
     server.create('djangoPage', {id:'/'});
     //appendIfNot('beta-nav');
     await visit('/');
@@ -124,7 +124,7 @@ module('Acceptance | retired beta trial', function(hooks) {
     server.create('stream');
   });
 
-  test('when a trial has been retired, I am shown the exit interview and can dismiss it', async function(assert) {
+  skip('when a trial has been retired, I am shown the exit interview and can dismiss it', async function(assert) {
     server.create('djangoPage', {id:'/'});
     appendIfNot('site-chrome');
     await visit('/');
