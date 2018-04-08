@@ -27,6 +27,7 @@ module.exports = function(environment) {
       config: {
         id: process.env.GOOGLE_ANALYTICS || 'UA-46158613-1'
       },
+      environments: ['production', 'development']
     }, {
       name: 'NprAnalytics',
       config: {
