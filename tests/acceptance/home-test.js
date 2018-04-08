@@ -1,6 +1,6 @@
-import { currentURL, visit } from '@ember/test-helpers';
+import { currentURL, visit, find } from '@ember/test-helpers';
 import test from 'ember-sinon-qunit/test-support/test';
-import testPage from 'wnyc-web-client/tests/pages/listing-page';
+import homePage from 'wnyc-web-client/tests/pages/home';
 
 import { setupApplicationTest } from 'ember-qunit';
 import { module } from 'qunit';
@@ -14,17 +14,16 @@ module('Acceptance | home', function(hooks) {
 
   test('visiting /', async function(assert) {
     server.create('django-page', {id: '/'});
-    await testPage
-      .bootstrap({id: '/'})
-      .visit({id: '/'});
+    await homePage
+      .bootstrap()
+      .visit();
 
     assert.equal(currentURL(), '/');
-    let djangoContent = findWithAssert('.django-content');
-    assert.ok(djangoContent.contents().length);
+    assert.ok(find('.django-content'));
   });
 
   test('.l-constrained is added to the home page', async function(assert) {
-    let home = server.create('django-page', {
+    server.create('django-page', {
       id: '/',
       text: `
       <div>
@@ -36,11 +35,11 @@ module('Acceptance | home', function(hooks) {
     `
   });
 
-    await testPage
-      .bootstrap(home)
-      .visit(home);
+    await homePage
+      .bootstrap()
+      .visit();
 
-    assert.equal(find('.django-content').parent('.l-constrained').length, 1, 'should have an l-constrained class');
+    assert.ok(find('.l-constrained .django-content'), 'should have an l-constrained class');
   });
 
   test('home page does dfp targeting', async function() /*assert*/{
@@ -50,12 +49,12 @@ module('Acceptance | home', function(hooks) {
     server.create('django-page', {id: 'foo/'});
     await visit('/foo');
 
-    this.mock(this.application.__container__.lookup('route:index').get('googleAds'))
+    this.mock(this.owner.lookup('route:index').get('googleAds'))
       .expects('doTargeting')
       .once();
 
-    await testPage
-      .bootstrap({id: '/'})
-      .visit({id: '/'});
+    await homePage
+      .bootstrap()
+      .visit();
   });
 });
