@@ -40,7 +40,7 @@ module('Acceptance | signup', function(hooks) {
     server.create('user');
     authenticateSession({access_token: 'foo'});
     let page = server.create('django-page', {id: '/'});
-    await testPage.bootstrap(page);
+    testPage.bootstrap(page);
 
     await visit(signupUrl);
 
@@ -49,8 +49,7 @@ module('Acceptance | signup', function(hooks) {
 
   test('Sign up button is visible at load', async function(assert) {
     await visit(signupUrl);
-    assert.equal(find('button[type=submit]').length, 1);
-
+    assert.ok(find('button[type=submit]'));
   });
 
   test('Sign up page populates fields from query string', async function(assert) {
@@ -79,8 +78,7 @@ module('Acceptance | signup', function(hooks) {
 
   test('Sign up with Facebook button is visible at load', async function(assert) {
     await visit(signupUrl);
-    assert.equal(find('button').length, 1);
-
+    assert.ok(find('button.account-form-btn--facebook'));
   });
 
   test('Successful facebook login redirects', async function(assert) {
