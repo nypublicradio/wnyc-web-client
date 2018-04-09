@@ -2,7 +2,7 @@ import $ from 'jquery';
 import { click, currentURL, visit } from '@ember/test-helpers';
 import { module, skip } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { currentSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
+import { currentSession } from 'ember-simple-auth/test-support';
 import config from 'wnyc-web-client/config/environment';
 import velocity from 'velocity';
 
@@ -12,7 +12,7 @@ module('Acceptance | discover', function(hooks) {
   hooks.beforeEach(function() {
     velocity.mock = true;
     window.Modernizr.touchevents = false;
-    let session = currentSession(this.application);
+    let session = currentSession();
     session.set('data.discover-excluded-shows',  []);
     session.set('data.discover-topics', []);
     session.set('data.discover-excluded-story-ids', []);

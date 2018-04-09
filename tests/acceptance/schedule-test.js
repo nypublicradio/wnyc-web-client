@@ -25,11 +25,11 @@ module('Acceptance | schedule', function(hooks) {
     let date = moment().format('YYYY/MMM/DD').toLowerCase();
     server.create('django-page', {id: '/'});
     server.create('django-page', {id: `schedule/${date}/?scheduleStation=wnyc-fm939`});
-    
+
     await visit('/');
-    
+
     await click('a[href="/schedule"]');
-    
+
     assert.equal(currentURL(), `/schedule/${date}?scheduleStation=wnyc-fm939`);
   });
 
@@ -42,10 +42,10 @@ module('Acceptance | schedule', function(hooks) {
       `
     });
     server.create('django-page', {id: `schedule/${date}/?scheduleStation=wqxr`});
-    
+
     await visit('/');
     await click('#foo');
-    
+
     assert.equal(currentURL(), `/schedule/${date}?scheduleStation=wqxr`);
   });
 
@@ -53,10 +53,10 @@ module('Acceptance | schedule', function(hooks) {
     // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
     server.create('django-page', {id: 'foo/'});
     await visit('/foo');
-    this.mock(this.application.__container__.lookup('route:schedule.date').get('googleAds'))
+    this.mock(this.owner.lookup('route:schedule.date').get('googleAds'))
       .expects('doTargeting')
       .once();
-    
+
     let date = moment().format('YYYY/MMM/DD').toLowerCase();
     server.create('django-page', {id: `schedule/${date}/?scheduleStation=wnyc-fm939`});
 

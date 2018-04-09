@@ -124,7 +124,7 @@ module('Acceptance |  Story Detail Analytics', function(hooks) {
     // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
     server.create('django-page', {id: 'foo/'});
     await visit('/foo');
-    this.mock(this.application.__container__.lookup('route:story').get('googleAds'))
+    this.mock(this.owner.lookup('route:story').get('googleAds'))
       .expects('doTargeting')
       .once()
       .withArgs(forDfp);

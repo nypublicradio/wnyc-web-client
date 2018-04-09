@@ -12,7 +12,7 @@ import config from 'wnyc-web-client/config/environment';
 import {
   authenticateSession,
   currentSession
-} from 'wnyc-web-client/tests/helpers/ember-simple-auth';
+} from 'ember-simple-auth/test-support';
 
 module('Acceptance | reset', function(hooks) {
   setupApplicationTest(hooks);
@@ -36,11 +36,11 @@ module('Acceptance | reset', function(hooks) {
 
   test('visiting /reset deauthenticates but remains on page', async function(assert) {
     server.create('user');
-    authenticateSession(this.application, {access_token: 'foo'});
+    authenticateSession({access_token: 'foo'});
 
     await visit(resetUrlWithEmailAndConfirmation);
 
-    assert.notOk(currentSession(this.application).get('isAuthenticated'));
+    assert.notOk(currentSession().get('isAuthenticated'));
     assert.equal(currentURL(), resetUrlWithEmailAndConfirmation);
   });
 
@@ -74,13 +74,13 @@ module('Acceptance | reset', function(hooks) {
 
     await click('button[type=submit]');
 
-    assert.ok(currentSession(this.application).get('isAuthenticated'));
+    assert.ok(currentSession().get('isAuthenticated'));
   });
 
   test('visiting /reset and resetting password and logging in still works when starting logged in', async function(assert) {
     server.create('stream');
     server.create('user');
-    authenticateSession(this.application, {access_token: 'foo'});
+    authenticateSession({access_token: 'foo'});
 
     await visit(resetUrlWithEmailAndConfirmation);
 
@@ -97,7 +97,7 @@ module('Acceptance | reset', function(hooks) {
 
     await click('button[type=submit]');
 
-    assert.ok(currentSession(this.application).get('isAuthenticated'));
+    assert.ok(currentSession().get('isAuthenticated'));
   });
 
   test('visiting /reset and getting a server error when submitting the form', async function(assert) {

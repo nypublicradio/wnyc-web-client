@@ -14,7 +14,7 @@ import { Response } from 'ember-cli-mirage';
 import {
   authenticateSession,
   currentSession
-} from 'wnyc-web-client/tests/helpers/ember-simple-auth';
+} from 'ember-simple-auth/test-support';
 import config from 'wnyc-web-client/config/environment';
 
 module('Acceptance | signup', function(hooks) {
@@ -38,7 +38,7 @@ module('Acceptance | signup', function(hooks) {
 
   test("can't visit /signup when authenticated", async function(assert) {
     server.create('user');
-    authenticateSession(this.application, {access_token: 'foo'});
+    authenticateSession({access_token: 'foo'});
     let page = server.create('django-page', {id: '/'});
     await testPage.bootstrap(page);
 

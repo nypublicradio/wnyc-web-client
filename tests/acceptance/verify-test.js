@@ -8,7 +8,7 @@ import {
 } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { authenticateSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
+import { authenticateSession } from 'ember-simple-auth/test-support';
 
 module('Acceptance | verify', function(hooks) {
   setupApplicationTest(hooks);
@@ -25,7 +25,7 @@ module('Acceptance | verify', function(hooks) {
   });
 
   test('visiting /verify with correct params takes you to profile with success alert', async function(assert) {
-    authenticateSession(this.application, {access_token: 'foo'});
+    authenticateSession({access_token: 'foo'});
     server.create('user');
 
     await visit('/verify?verification_token=abc&email_id=def');
@@ -35,7 +35,7 @@ module('Acceptance | verify', function(hooks) {
   });
 
   test('visiting /verify with missing params takes you to profile with warning alert', async function(assert) {
-    authenticateSession(this.application, {access_token: 'foo'});
+    authenticateSession({access_token: 'foo'});
     server.create('user');
 
     await visit('/verify');

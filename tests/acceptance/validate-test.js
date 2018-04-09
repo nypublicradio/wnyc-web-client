@@ -10,7 +10,7 @@ import { setupApplicationTest } from 'ember-qunit';
 import {
   authenticateSession,
   currentSession
-} from 'wnyc-web-client/tests/helpers/ember-simple-auth';
+} from 'ember-simple-auth/test-support';
 
 module('Acceptance | validate', function(hooks) {
   setupApplicationTest(hooks);
@@ -28,10 +28,10 @@ module('Acceptance | validate', function(hooks) {
 
   test('visiting /validate deauthenticates but remains on page', async function(assert) {
     server.create('user');
-    authenticateSession(this.application, {access_token: 'foo'});
+    authenticateSession({access_token: 'foo'});
     await visit('/validate');
 
-    assert.notOk(currentSession(this.application).get('isAuthenticated'));
+    assert.notOk(currentSession().get('isAuthenticated'));
     assert.equal(currentURL(), '/validate');
   });
 
@@ -48,13 +48,13 @@ module('Acceptance | validate', function(hooks) {
     await fillIn('input[name=password]', 'password1');
     await click('button[type=submit]');
 
-    assert.ok(currentSession(this.application).get('isAuthenticated'));
+    assert.ok(currentSession().get('isAuthenticated'));
   });
 
   test('visiting /validate and logging in even when starting logged in', async function(assert) {
     server.create('stream');
     server.create('user');
-    authenticateSession(this.application, {access_token: 'foo'});
+    authenticateSession({access_token: 'foo'});
 
     await visit('/validate?username=test&confirmation=123');
 
@@ -66,6 +66,6 @@ module('Acceptance | validate', function(hooks) {
     await fillIn('input[name=password]', 'password1');
     await click('button[type=submit]');
 
-    assert.ok(currentSession(this.application).get('isAuthenticated'));
+    assert.ok(currentSession().get('isAuthenticated'));
   });
 });

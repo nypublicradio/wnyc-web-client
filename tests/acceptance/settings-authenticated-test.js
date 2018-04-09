@@ -10,16 +10,16 @@ import { setupApplicationTest } from 'ember-qunit';
 import {
   authenticateSession,
   currentSession
-} from 'wnyc-web-client/tests/helpers/ember-simple-auth';
+} from 'ember-simple-auth/test-support';
 
 module('Acceptance | settings', function(hooks) {
   setupApplicationTest(hooks);
 
   hooks.beforeEach(function() {
     server.create('user');
-    authenticateSession(this.application, {access_token: 'foo'});
+    authenticateSession({access_token: 'foo'});
 
-    let session = currentSession(this.application);
+    let session = currentSession();
     session.set('data.user-prefs-active-stream', {slug: 'wqxr', name: 'WQXR New York'});
     session.set('data.user-prefs-active-autoplay', 'default_stream');
     server.createList('stream', 7);

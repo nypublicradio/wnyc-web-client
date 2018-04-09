@@ -9,7 +9,7 @@ import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import { Response } from 'ember-cli-mirage';
 import config from 'wnyc-web-client/config/environment';
-import { currentSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
+import { currentSession } from 'ember-simple-auth/test-support';
 
 module('Acceptance | set password', function(hooks) {
   setupApplicationTest(hooks);
@@ -54,7 +54,7 @@ module('Acceptance | set password', function(hooks) {
 
     await click('button[type=submit]');
 
-    assert.ok(currentSession(this.application).get('isAuthenticated'));
+    assert.ok(currentSession().get('isAuthenticated'));
   });
 
 
