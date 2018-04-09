@@ -1,4 +1,5 @@
 import {
+  pauseTest,
   click,
   fillIn,
   findAll,
@@ -71,20 +72,20 @@ module('Acceptance | show archive', function(hooks) {
     assert.equal(collapse(find('[data-test-selector="dates"]').textContent), 'Year: 2017 | 2000');
     assert.ok(/1 2 3 4 5/.test(collapse(find('#pagefooter').textContent)));
 
-    await click('[data-test-selector="dates"] a');
+    await click('a[href="/shows/foo/archive?year=2000"]');
     assert.equal(collapse(find('[data-test-selector="dates"]').textContent), '< Back 2000 Month: January | June');
 
-    await click('[data-test-selector="dates"] a');
+    await click('a[href="/shows/foo/archive?month=1&year=2000"]');
     assert.equal(collapse(find('[data-test-selector="dates"]').textContent), '< 2000 January 2000 Day: 2 | 11 | 27');
 
-    await click('[data-test-selector="dates"] a');
+    await click('a[href="/shows/foo/archive?day=11&month=1&year=2000"]');
     assert.equal(collapse(find('[data-test-selector="dates"]').textContent), '< January 2000 Tuesday, January 11 2000');
 
-    await click('a');
-    firstDate = find('[data-test-selector="story-list"] > li:first > h2 > small').textContent;
+    await click('[data-test-selector=dates] a');
+    firstDate = find('[data-test-selector="story-list"] > li:first-child > h2 > small').textContent;
 
     await fillIn('[data-test-selector="sort"]', 'newsdate');
-    let oppositeFirstDate = find('[data-test-selector="story-list"] > li:first > h2 > small').textContent;
+    let oppositeFirstDate = find('[data-test-selector="story-list"] > li:first-child > h2 > small').textContent;
     assert.notEqual(firstDate, oppositeFirstDate);
   });
 });
