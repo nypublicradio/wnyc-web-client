@@ -8,5 +8,5 @@ import {
 export default create({
   visit: visitable('story/:slug'),
   clickShowComments: clickable('[data-test-selector=story-comments]'),
-  commentsVisible: isVisible('article', {scope: '[data-test-selector=comment-list]'})
+  commentsVisible: isVisible('[data-test-selector=comment-list]')
 });
