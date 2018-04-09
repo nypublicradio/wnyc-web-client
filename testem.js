@@ -19,7 +19,6 @@ module.exports = {
   launch_in_ci: [
     'Chrome'
   ],
-<<<<<<< HEAD
   launch_in_dev: [
     'Firefox',
     'Chrome'
