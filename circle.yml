@@ -63,9 +63,6 @@ jobs:
       - run:
           name: Test
           command: ./node_modules/ember-cli/bin/ember test -r xunit
-      - store_artifacts:
-          path: app/build/reports
-          destination: reports
       - store_test_results:
           path: test-results/wqxr-testem/
 
