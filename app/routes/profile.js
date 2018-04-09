@@ -10,10 +10,8 @@ export default Route.extend(AuthenticatedRouteMixin, {
     return this.get('currentUser.user');
   },
   setupController(controller, model) {
-    if (this.features.isEnabled('member-center')) {
-      controller.set('orders', this.store.findAll('order'));
-      controller.send('updateEmailStatus', get(model, 'email'));
-    }
+    controller.set('orders', this.store.findAll('order'));
+    controller.send('updateEmailStatus', get(model, 'email'));
     return this._super(controller, model);
   },
 });

@@ -136,8 +136,6 @@ module.exports = function(environment) {
     gothamistStories: process.env.GOTHAMIST_STORIES,
     wnycDonateURL: 'https://pledge3.wnyc.org/epledge/main?ref=button-donate-header',
     featureFlags: {
-      'social-auth': process.env.SOCIAL_AUTH,
-      'member-center': process.env.MEMBER_CENTER,
       'discover': true,
       'other-discover': process.env.OTHER_DISCOVER,
     },
