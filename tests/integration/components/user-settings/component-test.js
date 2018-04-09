@@ -1,7 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, find } from '@ember/test-helpers';
-import startMirage from 'wnyc-web-client/tests/helpers/setup-mirage-for-integration';
 import hbs from 'htmlbars-inline-precompile';
 import Service from '@ember/service';
 
@@ -22,12 +21,7 @@ module('Integration | Component | user settings', function(hooks) {
   hooks.beforeEach(function() {
     this.owner.register('service:session', sessionStub);
     this.session = this.owner.lookup('service:session');
-    startMirage(this.container);
     server.create('stream', { slug: 'wnyc-fm939', name: 'WNYC 93.9FM', audioBumper: 'blerg' });
-  });
-
-  hooks.afterEach(function() {
-    server.shutdown();
   });
 
   test('it renders with being already authenticated', async function(assert) {

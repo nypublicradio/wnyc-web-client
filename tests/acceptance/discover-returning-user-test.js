@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import { later } from '@ember/runloop';
-import { click, currentURL, visit } from '@ember/test-helpers';
+import { findAll, click, currentURL, visit } from '@ember/test-helpers';
 import { module, skip } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import { currentSession } from 'ember-simple-auth/test-support';
@@ -131,7 +131,7 @@ module('Acceptance | discover returning user', function(hooks) {
 
     assert.equal(currentURL(), '/discover/playlist');
 
-    let matchResults = server.db.discoverStories.map(story => {
+    let matchResults = server.db.discoverStories.map(/* story */ () => {
       return ($(`.discover-playlist-story-title a`).length === 1);
     }).uniq();
     assert.ok((matchResults.length === 1) && (matchResults[0] === true), "Should have matched all the stories in the db");
@@ -147,7 +147,7 @@ module('Acceptance | discover returning user', function(hooks) {
     assert.equal(currentURL(), '/discover/playlist');
     assert.equal(secondRequestCalled, true, "response with no results should have been triggered");
 
-    matchResults = server.db.discoverStories.map(story => {
+    matchResults = server.db.discoverStories.map(/* story */ () => {
       return ($(`.discover-playlist-story-title a`).length === 1);
     });
 
@@ -167,7 +167,7 @@ module('Acceptance | discover returning user', function(hooks) {
 
     assert.equal(currentURL(), '/discover/playlist');
 
-    let matchResults = server.db.discoverStories.map(story => {
+    let matchResults = server.db.discoverStories.map(/* story */ () => {
       return ($(`.discover-playlist-story-title a`).length === 1);
     }).uniq();
     assert.ok((matchResults.length === 1) && (matchResults[0] === true), "Should have matched all the stories in the db");
@@ -183,7 +183,7 @@ module('Acceptance | discover returning user', function(hooks) {
     assert.equal(currentURL(), '/discover/playlist');
     assert.equal(secondRequestCalled, true, "response with no results should have been triggered");
 
-    matchResults = server.db.discoverStories.map(story => {
+    matchResults = server.db.discoverStories.map(/* story */ () => {
       return ($(`.discover-playlist-story-title a`).length === 1);
     });
 
@@ -203,7 +203,7 @@ module('Acceptance | discover returning user', function(hooks) {
 
     assert.equal(currentURL(), '/discover/playlist');
 
-    let matchResults = server.db.discoverStories.map(story => {
+    let matchResults = server.db.discoverStories.map(/* story */ () => {
       return ($(`.discover-playlist-story-title a`).length === 1);
     }).uniq();
     assert.ok((matchResults.length === 1) && (matchResults[0] === true), "Should have matched all the stories in the db");
@@ -224,7 +224,7 @@ module('Acceptance | discover returning user', function(hooks) {
     assert.equal(currentURL(), '/discover/playlist');
     assert.equal(secondRequestCalled, true, "response with second results have been triggered");
 
-    matchResults = stories.map(story => {
+    matchResults = stories.map(/* story */ () => {
       return ($(`.discover-playlist-story-title a`).length === 1);
     });
 
@@ -243,7 +243,7 @@ module('Acceptance | discover returning user', function(hooks) {
     assert.equal(currentURL(), '/discover/playlist');
     assert.equal(thirdRequestCalled, true, "response with third results have been triggered");
 
-    matchResults = stories.map(story => {
+    matchResults = stories.map(/* story */ () => {
       return ($(`.discover-playlist-story-title a`).length === 1);
     });
 
@@ -255,7 +255,7 @@ module('Acceptance | discover returning user', function(hooks) {
 
   skip('stories are displayed from saved session data', async function(assert) {
     await visit('/discover/playlist');
-    server.db.discoverStories.forEach(story => {
+    server.db.discoverStories.forEach(/* story */ () => {
       assert.equal($(`.discover-playlist`).length, 1);
     });
   });
@@ -335,7 +335,7 @@ module('Acceptance | discover returning user', function(hooks) {
     session.set('data.discover-excluded-story-ids',  []);
 
     await visit('/discover/playlist');
-    stories.forEach(story => {
+    stories.forEach(/* story */ () => {
       assert.equal($(`.discover-playlist-story-title a`).length, 1, "playlist should contain story title");
     });
   });
@@ -366,9 +366,9 @@ module('Acceptance | discover returning user', function(hooks) {
 
   skip('playlist shows all the fields when loaded from the queue/session', async function(assert) {
     server.createList('discover-story', 12);
-    let stories = server.db.discoverStories;
+    // let stories = server.db.discoverStories;
     let session = currentSession();
-    let example = stories[0];
+    // let example = stories[0];
     session.set('data.discover-queue',  []);
     session.set('data.discover-excluded-story-ids', []);
     await visit('/discover/playlist');

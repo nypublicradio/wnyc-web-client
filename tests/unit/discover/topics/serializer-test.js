@@ -1,17 +1,8 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
-import startMirage from '../../../helpers/setup-mirage-for-integration';
 
 module('Unit | Serializer | discover/topics', function(hooks) {
   setupTest(hooks);
-
-  hooks.beforeEach(function() {
-    startMirage(this.container);
-  });
-
-  hooks.afterEach(function() {
-    server.shutdown();
-  });
 
   test('it serializes the data', function(assert) {
     let done = assert.async();

@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, findAll } from '@ember/test-helpers';
+import { render, findAll, click, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | discover topic list', function(hooks) {
@@ -24,7 +24,7 @@ module('Integration | Component | discover topic list', function(hooks) {
     this.set('topics', topics);
     await render(hbs`{{discover-topic-list topics=topics onTopicsUpdated=(action (mut currentlySelectedTopics))}}`);
 
-    this.$('button').click();
+    await click('button');
     assert.equal(this.get('currentlySelectedTopics').length, this.get('topics').length);
   });
 
@@ -32,8 +32,8 @@ module('Integration | Component | discover topic list', function(hooks) {
     this.set('topics', topics);
     await render(hbs`{{discover-topic-list topics=topics onTopicsUpdated=(action (mut currentlySelectedTopics))}}`);
 
-    this.$('button').click();
-    this.$('button').click();
+    await click('button');
+    await click('button');
     assert.equal(this.get('currentlySelectedTopics').length, 0);
   });
 
@@ -41,14 +41,14 @@ module('Integration | Component | discover topic list', function(hooks) {
     this.set('topics', topics.slice(0, 3));
     await render(hbs`{{discover-topic-list topics=topics}}`);
 
-    this.$('.discover-topic')[0].click();
-    assert.equal(this.$('button').length, 0, "Should be 'Select All' when not all are selected");
+    await click('.discover-topic');
+    assert.equal(find('button.discover-topic-bubble').textContent.trim(), 'Select All', "Should be 'Select All' when not all are selected");
 
-    this.$('.discover-topic')[1].click();
-    assert.equal(this.$('button').length, 0, "Should be 'Select All' when not all are selected");
+    await click('.discover-topic:nth-of-type(2)');
+    assert.equal(find('button.discover-topic-bubble').textContent.trim(), 'Select All', "Should be 'Select All' when not all are selected");
 
-    this.$('.discover-topic')[2].click();
-    assert.equal(this.$('button').length, 1, "Should be 'Clear All' when all are selected");
+    await click('.discover-topic:nth-of-type(3)');
+    assert.equal(find('button.discover-topic-bubble').textContent.trim(), 'Clear All', "Should be 'Clear All' when not all are selected");
   });
 
   test('passing in selected topics renders selected items', async function(assert) {

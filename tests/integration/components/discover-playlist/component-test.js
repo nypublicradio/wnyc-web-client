@@ -3,14 +3,12 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click, findAll } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import startMirage from 'wnyc-web-client/tests/helpers/setup-mirage-for-integration';
 import { dummyHifi } from 'wnyc-web-client/tests/helpers/hifi-integration-helpers';
 
 module('Integration | Component | discover playlist', function(hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function() {
-    startMirage(this.container);
     this.owner.register('service:dj', djStub);
     this.dj = this.owner.lookup('service:dj');
 
@@ -19,10 +17,6 @@ module('Integration | Component | discover playlist', function(hooks) {
 
     this.owner.register('service:discover-queue', queueStub);
     this.queue = this.owner.lookup('service:discover-queue');
-  });
-
-  hooks.afterEach(function() {
-    window.server.shutdown();
   });
 
   const djStub = Service.extend({

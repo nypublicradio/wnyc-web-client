@@ -2,20 +2,11 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click, find, findAll } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import startMirage from 'wnyc-web-client/tests/helpers/setup-mirage-for-integration';
 import moment from 'moment';
 
 module('Integration | Component | discover playlist story info', function(hooks) {
   setupRenderingTest(hooks);
-
-  hooks.beforeEach(function() {
-    startMirage(this.container);
-  });
-
-  hooks.afterEach(function() {
-    window.server.shutdown();
-  });
-
+  
   test('it displays duration in the correct format', async function(assert) {
     this.set('story', server.create('discover-story', {audioDurationReadable: "2 min"}));
 

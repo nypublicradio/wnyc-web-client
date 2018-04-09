@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, findAll, find } from '@ember/test-helpers';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | site chrome', function(hooks) {
@@ -12,7 +12,7 @@ module('Integration | Component | site chrome', function(hooks) {
 
     await render(hbs`{{site-chrome}}`);
 
-    assert.equal(findAll('.l-page').length, 1);
+    assert.ok(find('.l-page'));
 
     // Template block usage:
     await render(hbs`
@@ -21,6 +21,6 @@ module('Integration | Component | site chrome', function(hooks) {
       {{/site-chrome}}
     `);
 
-    assert.ok(find('*').textContent.trim().match('template block text'));
+    assert.ok(this.element.textContent.trim().match('template block text'));
   });
 });

@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, find } from '@ember/test-helpers';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | simple callout', function(hooks) {
@@ -10,7 +10,7 @@ module('Integration | Component | simple callout', function(hooks) {
 
     await render(hbs`{{simple-callout}}`);
 
-    assert.equal(find('*').textContent.trim(), '');
+    assert.equal(this.element.textContent.trim(), '');
 
     await render(hbs`
       {{#simple-callout}}
@@ -18,7 +18,7 @@ module('Integration | Component | simple callout', function(hooks) {
       {{/simple-callout}}
     `);
 
-    assert.equal(find('*').textContent.trim(), 'template block text');
+    assert.equal(this.element.textContent.trim(), 'template block text');
   });
 
 
@@ -26,6 +26,6 @@ module('Integration | Component | simple callout', function(hooks) {
 
     await render(hbs`{{simple-callout button-text='button text'}}`);
 
-    assert.equal(find('*').textContent.trim(), 'button text');
+    assert.equal(this.element.textContent.trim(), 'button text');
   });
 });

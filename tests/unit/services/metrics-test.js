@@ -1,4 +1,3 @@
-import config from 'wnyc-web-client/config/environment';
 import { module } from 'qunit';
 import { setupTest } from 'ember-qunit';
 import test from 'ember-sinon-qunit/test-support/test';
@@ -10,30 +9,5 @@ module('Unit | Service | metrics', function(hooks) {
   test('it exists', function(assert) {
     let service = this.owner.lookup('service:metrics');
     assert.ok(service);
-  });
-
-  test('calling tracking events does not call npr tracking events', function(assert) {
-    let service = this.owner.factoryFor('service:metrics').create({options: config});
-
-    let nprTrackPageSpy = this.spy(service._adapters.NprAnalytics, 'trackPage');
-    let nprTrackEventSpy = this.spy(service._adapters.NprAnalytics, 'trackEvent');
-
-    let gaTrackPageSpy = this.spy(service._adapters.GoogleAnalytics, 'trackPage');
-    let gaTrackEventSpy = this.spy(service._adapters.GoogleAnalytics, 'trackEvent');
-
-    // let gtmTrackPageSpy = this.spy(service._adapters.GoogleTagManager, 'trackPage');
-    // let gtmTrackEventSpy = this.spy(service._adapters.GoogleTagManager, 'trackEvent');
-
-    service.trackPage({ page: '/foo', title: 'foo' });
-
-    assert.notOk(nprTrackPageSpy.returnValue, 'npr trackPage should not be called');
-    assert.equal(gaTrackPageSpy.callCount, 1, 'ga trackPage should be called');
-    // assert.equal(gtmTrackPageSpy.callCount, 1, 'gtm trackPage should be called');
-
-    service.trackEvent({ category: 'foo', action: 'bar', label: 'baz' });
-
-    assert.notOk(nprTrackEventSpy.returnValue, 'npr trackEvent should not be called');
-    assert.equal(gaTrackEventSpy.callCount, 1, 'ga trackEvent should be called');
-    // assert.equal(gtmTrackEventSpy.callCount, 1, 'gtm trackEvent should be called');
   });
 });
