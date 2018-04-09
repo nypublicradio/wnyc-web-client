@@ -26,11 +26,11 @@ module('Acceptance | settings', function(hooks) {
   });
 
   test('visiting /settings and selecting my queue as an autoplay preference', async function(assert) {
-    let wqxrStream = server.schema.streams.where({slug: 'wqxr'}).models[0];
+    let wqxrStream = server.schema.streams.findBy({slug: 'wqxr'});
     await visit('/settings');
 
     await click('.autoplay-options .ember-power-select-trigger');
-    await click('.autoplay-options .ember-power-select-option:last');
+    await click('.autoplay-options .ember-power-select-option:last-child');
 
     assert.equal(currentURL(), '/settings');
 
@@ -46,9 +46,8 @@ module('Acceptance | settings', function(hooks) {
     let stream = server.schema.streams.all().models[2];
     await visit('/settings');
 
-    await await await click('.user-stream .ember-power-select-trigger').then(async () => {
-      await click(findAll('.user-stream .ember-power-select-option')[2]);
-    });
+    await click('.user-stream .ember-power-select-trigger');
+    await click('.user-stream .ember-power-select-option:nth-child(3)');
 
     var actualStream = find('.user-stream .ember-power-select-selected-item').textContent.trim();
     assert.equal(actualStream, stream.name);
@@ -57,7 +56,7 @@ module('Acceptance | settings', function(hooks) {
   test('the stream button in the nav should match the default stream', async function(assert) {
     await visit('/settings');
 
-    const actualLabel = find('.stream-launcher').getAttribute('aria-label');
+    const actualLabel = (find('.stream-launcher') || find('.sitechrome-nav .listen-button')).getAttribute('aria-label');
     const expectedLabel = 'Listen to WQXR New York';
     assert.equal(actualLabel, expectedLabel);
   });
