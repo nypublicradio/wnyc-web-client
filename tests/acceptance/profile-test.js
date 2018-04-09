@@ -2,13 +2,12 @@ import {
   click,
   fillIn,
   find,
-  findAll,
   currentURL,
   visit
 } from '@ember/test-helpers';
 import { module, skip, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { authenticateSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
+import { authenticateSession } from 'ember-simple-auth/test-support';
 import config from 'wnyc-web-client/config/environment';
 import { Response } from 'ember-cli-mirage';
 
@@ -27,7 +26,7 @@ module('Acceptance | profile', function(hooks) {
   });
 
   test('authenticated visiting /profile', async function(assert) {
-    authenticateSession(this.application, {access_token: 'foo'});
+    authenticateSession({access_token: 'foo'});
     server.create('user');
 
     await visit('/profile');
@@ -73,31 +72,32 @@ module('Acceptance | profile', function(hooks) {
       };
     });
 
-    authenticateSession(this.application, {access_token: 'secret'});
+    authenticateSession({access_token: 'secret'});
     await visit('/profile');
 
-    assert.equal(findWithAssert('input[name=fullName]').val(), `${given_name} ${family_name}`, 'displays old fullname');
-    assert.equal(findWithAssert('input[name=preferredUsername]').val(), preferred_username, 'displays old username');
-    assert.equal(findWithAssert('input[name=email]').val(), email, 'displays old email');
-    assert.equal(findWithAssert('input[name=password]').val(), '********', 'displays password asterisks');
+    assert.equal(find('input[name=fullName]').value, `${given_name} ${family_name}`, 'displays old fullname');
+    assert.equal(find('input[name=preferredUsername]').value, preferred_username, 'displays old username');
+    assert.equal(find('input[name=email]').value, email, 'displays old email');
+    assert.equal(find('input[name=password]').value, '********', 'displays password asterisks');
     await click('.nypr-basic-info [data-test-selector="nypr-card-button"]');
     await fillIn('input[name=givenName]', FIRST);
     await fillIn('input[name=familyName]', LAST);
     await fillIn('input[name=preferredUsername]', USER);
     await fillIn('input[name=email]', EMAIL);
 
-    find('input[name=email]').click();
+    await click('input[name=email]');
     await fillIn('input[name=confirmEmail]', EMAIL);
 
     await click('.nypr-basic-info [data-test-selector="save"]');
 
     await fillIn('[name=passwordForEmailChange]', PW);
     await click('[data-test-selector=check-pw]');
-    assert.ok(findWithAssert('.alert-success').length, 'shows flash message');
-    assert.equal(findWithAssert('input[name=fullName]').val(), `${FIRST} ${LAST}`, 'displays new fullname');
-    assert.equal(findWithAssert('input[name=preferredUsername]').val(), USER, 'displays new username');
-    assert.equal(findWithAssert('input[name=email]').val(), EMAIL, 'displays new email');
-    assert.equal(findWithAssert('input[name=password]').val(), '********', 'displays password asterisks');
+
+    assert.ok(find('.alert-success'), 'shows flash message');
+    assert.equal(find('input[name=fullName]').value, `${FIRST} ${LAST}`, 'displays new fullname');
+    assert.equal(find('input[name=preferredUsername]').value, USER, 'displays new username');
+    assert.equal(find('input[name=email]').value, EMAIL, 'displays new email');
+    assert.equal(find('input[name=password]').value, '********', 'displays password asterisks');
   });
 
   skip('using bad password to update email shows error', async function(assert) {
@@ -141,7 +141,7 @@ module('Acceptance | profile', function(hooks) {
       assert.deepEqual(body, {old_password: OLD, new_password: NEW});
     });
 
-    authenticateSession(this.application, {access_token: 'foo'});
+    authenticateSession({access_token: 'foo'});
     await visit('/profile');
 
     await click('.nypr-password-card [data-test-selector="nypr-card-button"]');
@@ -151,7 +151,7 @@ module('Acceptance | profile', function(hooks) {
 
     await click('.nypr-password-card [data-test-selector="save"]');
 
-    assert.ok(findWithAssert('.alert-success').length, 'shows flash message');
+    assert.ok(find('.alert-success'), 'shows flash message');
   });
 
   test('trying to update with incorrect password shows error', async function(assert) {
@@ -167,18 +167,18 @@ module('Acceptance | profile', function(hooks) {
       });
     });
 
-    authenticateSession(this.application, {access_token: 'foo'});
+    authenticateSession({access_token: 'foo'});
     await visit('/profile');
 
     await click('.nypr-password-card [data-test-selector="nypr-card-button"]');
 
     await fillIn('input[name=currentPassword]', OLD);
-    find('input[name=currentPassword]').focusout();
+    // find('input[name=currentPassword]').focusout();
     await fillIn('input[name=newPassword]', NEW);
 
     await click('.nypr-password-card [data-test-selector="save"]');
 
-    assert.equal(findAll('[data-test-selector=save]').length, 1, 'form should not be in editing state');
+    assert.ok(find('[data-test-selector=save]'), 'form should not be in editing state');
     assert.equal(find('.nypr-input-error').textContent.trim(), 'This password is incorrect.');
     assert.equal(find('.nypr-input-helplink').textContent.trim(), 'Forgot password?');
     assert.equal(find('input[name=currentPassword]').value, OLD, 'old password should still be there');
@@ -193,7 +193,7 @@ module('Acceptance | profile', function(hooks) {
       assert.equal(requestHeaders.Authorization, 'Bearer foo');
     });
 
-    authenticateSession(this.application, {access_token: 'foo'});
+    authenticateSession({access_token: 'foo'});
     await visit('/profile');
 
     await click('[data-test-selector="disable-account"]');
@@ -204,23 +204,21 @@ module('Acceptance | profile', function(hooks) {
   });
 
   test('shows pending email', async function(assert) {
-    withFeature('member-center');
     server.create('user');
-    authenticateSession(this.application, {access_token: 'foo'});
+    authenticateSession({access_token: 'foo'});
 
     server.get(`${config.membershipAPI}/v1/emails/is-verified/`, () => {
       return new Response(200, {}, {data: {is_verified: false}});
     });
     await visit('/profile');
 
-    assert.ok(findWithAssert('.nypr-account-pending'), 'pending message shows');
+    assert.ok(find('.nypr-account-pending'), 'pending message shows');
   });
 
   test('creating email from fb account', async function(assert) {
-    withFeature('social-auth');
     const EMAIL = 'foo@bar.baz';
     server.create('user', 'facebook');
-    authenticateSession(this.application, {access_token: 'foo'});
+    authenticateSession({access_token: 'foo'});
 
     await visit('/profile');
     await click('span + button');
@@ -236,27 +234,26 @@ module('Acceptance | profile', function(hooks) {
 
   test('logged in with fb account shows manage link', async function(assert) {
     server.create('user', 'facebook', {facebookId: '1234'});
-    authenticateSession(this.application, {access_token: 'foo'});
+    authenticateSession({access_token: 'foo'});
 
     await visit('/profile');
 
-    assert.equal(findAll('.nypr-social-connect__link').length, 1);
+    assert.ok(find('.nypr-social-connect__link'));
   });
 
   test('logged in without fb account does not show manage link', async function(assert) {
     server.create('user');
-    authenticateSession(this.application, {access_token: 'foo'});
+    authenticateSession({access_token: 'foo'});
 
     await visit('/profile');
 
-    assert.equal(findAll('.nypr-social-connect__link').length, 0);
+    assert.notOk(find('.nypr-social-connect__link'));
   });
 
   test('resend verification email when authenticated via username/password', async function(assert) {
-    withFeature('member-center');
     // Logged in username/password user
     server.create('user');
-    authenticateSession(this.application, {access_token: 'secret'});
+    authenticateSession({access_token: 'secret'});
     // Account is pending verification
     server.get(`${config.membershipAPI}/v1/emails/is-verified/`, () => {
       return new Response(200, {}, {data: {is_verified: false}});
@@ -278,10 +275,9 @@ module('Acceptance | profile', function(hooks) {
 
   test('resend verification email when authenticated via facebook', async function(assert) {
     const PW = 'abcdef123456';
-    withFeature('member-center');
     // Logged in facebook user with connected email account
     server.create('user', 'connected');
-    authenticateSession(this.application, {access_token: 'secret', provider: 'facebook-connect'});
+    authenticateSession({access_token: 'secret', provider: 'facebook-connect'});
     // Account is pending verification because they changed their email address
     server.get(`${config.membershipAPI}/v1/emails/is-verified/`, () => {
       return new Response(200, {}, {data: {is_verified: false}});
@@ -305,10 +301,9 @@ module('Acceptance | profile', function(hooks) {
 
   test('resend verification email when authenticated via facebook fails on bad password', async function(assert) {
     const PW = 'abcdef123456';
-    withFeature('member-center');
     // Logged in facebook user with connected email account
     server.create('user', 'connected');
-    authenticateSession(this.application, {access_token: '123456', provider: 'facebook-connect'});
+    authenticateSession({access_token: '123456', provider: 'facebook-connect'});
     // Account is pending verification because they changed their email address
     server.get(`${config.membershipAPI}/v1/emails/is-verified/`, () => {
       return new Response(200, {}, {data: {is_verified: false}});
@@ -331,10 +326,9 @@ module('Acceptance | profile', function(hooks) {
   });
 
   test('resend set password email when have not set a password yet', async function(assert) {
-    withFeature('member-center');
     // Logged in facebook user
     let user = server.create('user', 'facebook');
-    authenticateSession(this.application, {access_token: '123456', provider: 'facebook-connect'});
+    authenticateSession({access_token: '123456', provider: 'facebook-connect'});
     // Account is pending verification because they just created an email account and hasn't set a password yet
     server.get(`${config.membershipAPI}/v1/emails/is-verified/`, () => {
       return new Response(200, {}, {data: {is_verified: false}});
