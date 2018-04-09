@@ -10,9 +10,9 @@ import {
 export default create({
   visit:             visitable('/?modal=queue-history'),
   clickHistoryTab:   clickable('.tabbedlist-button:contains(My Listening History)'),
-  clickClearHistory: clickable('.clearhistory-button'),
-  clickYes:          clickable('.clearhistory-button'),
-  clickNo:           clickable('.clearhistory-button'),
+  clickClearHistory: clickable('.clearhistory-main .clearhistory-button'),
+  clickYes:          clickable('.clearhistory-button:contains(Yes)'),
+  clickNo:           clickable('.clearhistory-button:contains(No)'),
   historyIsVisible:  isVisible('.player-history'),
   clearPromptIsVisible:  isVisible('.clearhistory-prompt'),
   emptyMessageIsVisible: isVisible('.queuelist-empty'),
