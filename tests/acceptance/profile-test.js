@@ -3,7 +3,8 @@ import {
   fillIn,
   find,
   currentURL,
-  visit
+  visit,
+  blur,
 } from '@ember/test-helpers';
 import { module, skip, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
@@ -114,7 +115,7 @@ module('Acceptance | profile', function(hooks) {
       });
     });
 
-    authenticateSession(this.application, {access_token: 'foo'});
+    authenticateSession({access_token: 'foo'});
     await visit('/profile');
 
     await click('.nypr-basic-info [data-test-selector="nypr-card-button"]');
@@ -172,9 +173,10 @@ module('Acceptance | profile', function(hooks) {
 
     await click('.nypr-password-card [data-test-selector="nypr-card-button"]');
 
+
     await fillIn('input[name=currentPassword]', OLD);
-    // find('input[name=currentPassword]').focusout();
     await fillIn('input[name=newPassword]', NEW);
+    await blur('input[name=currentPassword]', OLD);
 
     await click('.nypr-password-card [data-test-selector="save"]');
 
