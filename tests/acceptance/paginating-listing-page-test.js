@@ -1,4 +1,4 @@
-import { findAll, currentURL, find, visit } from '@ember/test-helpers';
+import { findAll, currentURL, find, visit, pauseTest } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import showPage from 'wnyc-web-client/tests/pages/show';
@@ -23,7 +23,7 @@ module('Acceptance | Listing Page | paginating', function(hooks) {
 
     await visit('shows/foo');
 
-    assert.equal(find('#pagefooter').length, 1, 'is showing pagination');
+    assert.equal(find('#pagefooter'), 'is showing pagination');
   });
 
   test('showing no pagination on about pages', async function(assert) {
@@ -37,7 +37,7 @@ module('Acceptance | Listing Page | paginating', function(hooks) {
 
     await visit('shows/foo');
 
-    assert.equal(find('#pagefooter').length, 0, 'is not showing pagination');
+    assert.notOk(find('#pagefooter'), 'is not showing pagination');
   });
 
   test('showing no pagination on story detail listing pages', async function(assert) {
@@ -56,7 +56,7 @@ module('Acceptance | Listing Page | paginating', function(hooks) {
 
     await visit('shows/foo');
 
-    assert.equal(find('#pagefooter').length, 0, 'is not showing pagination');
+    assert.notOk(find('#pagefooter'), 'is not showing pagination');
   });
 
   test('can go back and forward', async function(assert) {
@@ -86,13 +86,16 @@ module('Acceptance | Listing Page | paginating', function(hooks) {
 
     await visit('shows/foo');
 
-    firstStoryTitle = showPage.storyTitles()[0];
-    showPage.clickNext();
-    assert.notEqual(firstStoryTitle, showPage.storyTitles()[0], 'first story title should be different');
+    firstStoryTitle = showPage.storyTitles[0];
+    await showPage.clickNext();
+
+    assert.notEqual(firstStoryTitle, showPage.storyTitles[0], 'first story title should be different');
     assert.equal(currentURL(), `/${api2}`, 'uses nav slug when paginating');
-    showPage.clickBack();
+
+    await showPage.clickBack();
+
     assert.equal(currentURL(), `/${api1}`, 'uses nav slug when paginating');
-    assert.equal(firstStoryTitle, showPage.storyTitles()[0], 'first story title should be the same');
+    assert.equal(firstStoryTitle, showPage.storyTitles[0], 'first story title should be the same');
   });
 
   test('proper paginating for listing pages without a linkroll', async function(assert) {
@@ -120,9 +123,11 @@ module('Acceptance | Listing Page | paginating', function(hooks) {
     await visit('shows/foo');
 
     assert.equal(currentURL(), 'shows/foo');
-    showPage.clickNext();
+    await showPage.clickNext();
+
     assert.equal(currentURL(), '/shows/foo/2', 'correct url when paginating');
-    showPage.clickBack();
+
+    await showPage.clickBack();
     assert.equal(currentURL(), '/shows/foo/1', 'adds page number when going back');
   });
 
@@ -152,9 +157,10 @@ module('Acceptance | Listing Page | paginating', function(hooks) {
 
     await visit('shows/foo');
 
-    firstStoryTitle = showPage.storyTitles()[0];
-    showPage.clickPage(4);
-    assert.notEqual(firstStoryTitle, showPage.storyTitles()[0]);
+    firstStoryTitle = showPage.storyTitles[0];
+    await showPage.clickPage(4);
+
+    assert.notEqual(firstStoryTitle, showPage.storyTitles[0]);
     assert.equal(currentURL(), `/${api4}`, 'uses nav slug when paginating');
   });
 
@@ -201,11 +207,12 @@ module('Acceptance | Listing Page | paginating', function(hooks) {
 
     await visit('shows/foo');
 
-    assert.equal(find('.pagefooter-current').length, 1, 'one current page number');
-    assert.equal(find('.pagefooter-link').length, 10, 'links 2-9 and one final page');
-    assert.equal(find('.dots').length, 1, 'should only be one set of dots');
-    assert.equal(find('.dots').next('.pagefooter-link').text().trim(), '50', 'final link should follow dots');
-    assert.equal(find('.pagefooter-link:last').text().trim(), '50', 'final link should be 50');
+    assert.equal(findAll('.pagefooter-current').length, 1, 'one current page number');
+    assert.equal(findAll('.pagefooter-link').length, 10, 'links 2-9 and one final page');
+    assert.equal(findAll('.dots').length, 1, 'should only be one set of dots');
+    assert.equal(find('.dots + .pagefooter-link').textContent.trim(), '50', 'final link should follow dots');
+
+    assert.equal(findAll('.pagefooter-link')[9].textContent.trim(), '50', 'final link should be 50');
   });
 
   test('clicking on a page number takes to the page of the correct tab', async function(assert) {
@@ -240,8 +247,9 @@ module('Acceptance | Listing Page | paginating', function(hooks) {
 
     await visit('shows/foo');
 
-    showPage.clickNavLink('Segments');
-    showPage.clickPage(3);
+    await showPage.clickNavLink('Segments');
+    await showPage.clickPage(3);
+
     assert.equal(currentURL(), `/${segmentsPage3}`);
   });
 });
