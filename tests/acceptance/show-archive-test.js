@@ -1,5 +1,4 @@
 import {
-  pauseTest,
   click,
   fillIn,
   findAll,
