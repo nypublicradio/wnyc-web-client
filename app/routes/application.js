@@ -55,6 +55,7 @@ export default Route.extend(ApplicationRouteMixin, {
     },
     didTransition() {
       this.controllerFor('application').set('error', null);
+      return true;
     },
     willTransition() {
       //close queue/history modal when we open a new page
