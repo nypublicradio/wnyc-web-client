@@ -1,6 +1,5 @@
 import test from 'ember-sinon-qunit/test-support/test';
 import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
-import djangoPage from 'wqxr-web-client/tests/pages/django-page';
 import showPage from 'wqxr-web-client/tests/pages/show';
 import config from 'wqxr-web-client/config/environment';
 import moment from 'moment';
@@ -13,22 +12,19 @@ moduleForAcceptance('Acceptance | Listing Page | viewing', {
 });
 
 test('smoke test', function(assert) {
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
+  server.create('listing-page', {
+    id: 'shows/foo',
     linkroll: [
       {'nav-slug': 'episodes', title: 'Episodes'}
     ],
     socialLinks: [{title: 'facebook', href: 'http://facebook.com'}],
     apiResponse: server.create('api-response', { id: 'shows/foo/episodes/1' })
   });
-  server.create('django-page', {id: listingPage.id});
 
-  djangoPage
-    .bootstrap(listingPage)
-    .visit(listingPage);
+  visit('shows/foo');
 
   andThen(function() {
-    assert.equal(currentURL(), `${listingPage.id}`);
+    assert.equal(currentURL(), 'shows/foo');
     assert.ok(findWithAssert('.sitechrome-btn'), 'donate chunk should reset after navigating');
     assert.ok(showPage.facebookIsVisible());
     assert.notOk(find('[data-test-selector="admin-link"]').length, 'edit link should not be visible');
@@ -38,19 +34,16 @@ test('smoke test', function(assert) {
 test('authenticated smoke test', function(assert) {
   server.get(`${config.adminRoot}/api/v1/is_logged_in/`, {is_staff: true});
   server.create('user');
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
+  server.create('listing-page', {
+    id: 'shows/foo',
     linkroll: [
       {'nav-slug': 'episodes', title: 'Episodes'}
     ],
     socialLinks: [{title: 'facebook', href: 'http://facebook.com'}],
     apiResponse: server.create('api-response', { id: 'shows/foo/episodes/1' })
   });
-  server.create('django-page', {id: listingPage.id});
 
-  djangoPage
-    .bootstrap(listingPage)
-    .visit(listingPage);
+  visit('shows/foo');
 
   andThen(() => {
     andThen(() => assert.ok(find('[data-test-selector="admin-link"]').length, 'edit links are visible'));
@@ -58,18 +51,15 @@ test('authenticated smoke test', function(assert) {
 });
 
 test('about smoke test', function(assert) {
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
+  server.create('listing-page', {
+    id: 'shows/foo',
     linkroll: [
       {'nav-slug': 'about', title: 'About'},
     ],
     apiResponse: server.create('api-response', { id: 'shows/foo/about' })
   });
-  server.create('django-page', {id: listingPage.id});
 
-  djangoPage
-    .bootstrap(listingPage)
-    .visit(listingPage);
+  visit('shows/foo');
 
   andThen(function() {
     assert.equal(showPage.aboutText(), 'About');
@@ -83,18 +73,15 @@ test('visiting a listing page - story page smoke test', function(assert) {
     story: server.create('story')
   });
 
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
+  server.create('listing-page', {
+    id: 'shows/foo',
     linkroll: [
       {'nav-slug': 'story', title: 'Story'}
     ],
     apiResponse
   });
-  server.create('django-page', {id: listingPage.id});
 
-  djangoPage
-    .bootstrap(listingPage)
-    .visit(listingPage);
+  visit('shows/foo');
 
   andThen(() => {
     assert.equal(showPage.storyText(), 'Story body.');
@@ -123,18 +110,15 @@ test('scripts in well route content will execute', function(assert) {
     story
   });
 
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
+  server.create('listing-page', {
+    id: 'shows/foo',
     linkroll: [
       {'nav-slug': 'story', title: 'Story'}
     ],
     apiResponse
   });
-  server.create('django-page', {id: listingPage.id});
 
-  djangoPage
-    .bootstrap(listingPage)
-    .visit(listingPage);
+  visit('shows/foo');
 
   andThen(function() {
     assert.equal(find('[data-test-selector=story-detail] p').length, 1, 'should only be one p tag');
@@ -153,8 +137,8 @@ test('using a nav-link', function(assert) {
     teaseList: server.createList('story', 1, {title: 'Story Title'})
   });
 
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
+  server.create('listing-page', {
+    id: 'shows/foo',
     linkroll: [
       {'nav-slug': 'episodes', title: 'Episodes'},
       {'nav-slug': 'next-link', title: 'Next Link'}
@@ -162,11 +146,7 @@ test('using a nav-link', function(assert) {
     apiResponse
   });
 
-  server.create('django-page', {id: listingPage.id});
-
-  djangoPage
-    .bootstrap(listingPage)
-    .visit(listingPage);
+  visit('shows/foo');
 
   showPage.clickNavLink('Next Link');
 
@@ -185,8 +165,8 @@ test('visiting directly to a nav link url', function(assert) {
     teaseList: server.createList('story', 1, {title: 'Story Title'})
   });
 
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
+  server.create('listing-page', {
+    id: 'shows/foo',
     linkroll: [
       {'nav-slug': 'episodes', title: 'Episodes'},
       {'nav-slug': 'next-link', title: 'Next Link'}
@@ -194,11 +174,7 @@ test('visiting directly to a nav link url', function(assert) {
     apiResponse
   });
 
-  server.create('django-page', {id: listingPage.id});
-
-  djangoPage
-    .bootstrap(listingPage)
-    .visit({id: 'shows/foo/next-link/'});
+  visit('shows/foo/next-link/');
 
   andThen(() => {
     assert.equal(currentURL(), `shows/foo/next-link/`);
@@ -212,19 +188,16 @@ test('null social links should not break page', function(assert) {
     id: 'shows/foo/recent_stories/1',
     teaseList: server.createList('story', 10)
   });
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
+  server.create('listing-page', {
+    id: 'shows/foo',
     socialLinks: null,
     apiResponse
   });
-  server.create('django-page', {id: listingPage.id});
 
-  djangoPage
-    .bootstrap(listingPage)
-    .visit(listingPage);
+  visit('shows/foo');
 
   andThen(function() {
-    assert.equal(currentURL(), `${listingPage.id}`);
+    assert.equal(currentURL(), 'shows/foo');
   });
 });
 
@@ -233,35 +206,29 @@ test('undefined social links should not break page', function(assert) {
     id: 'shows/foo/recent_stories/1',
     teaseList: server.createList('story', 10)
   });
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
+  server.create('listing-page', {
+    id: 'shows/foo',
     socialLinks: undefined,
     apiResponse
   });
-  server.create('django-page', {id: listingPage.id});
 
-  djangoPage
-    .bootstrap(listingPage)
-    .visit(listingPage);
+  visit('shows/foo');
 
   andThen(function() {
-    assert.equal(currentURL(), `${listingPage.id}`);
+    assert.equal(currentURL(), 'shows/foo');
   });
 });
 
 test('visiting a show with a different header donate chunk', function(assert) {
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
+  server.create('listing-page', {
+    id: 'shows/foo',
     headerDonateChunk: '<a href="http://foo.com" class="foo">donate to foo</a>',
     apiResponse: server.create('api-response', { id: 'shows/foo/recent_stories/1' })
   });
-  server.create('django-page', {id: listingPage.id});
-  server.create('django-page', {id: 'fake/'});
+  server.create('django-page', {id: '/'});
   server.create('bucket', {slug: 'wqxr-home'}); // redirected to homepage
 
-  djangoPage
-    .bootstrap(listingPage)
-    .visit(listingPage);
+  visit('shows/foo')
 
   andThen(function() {
     assert.equal(find('.foo').text(), 'donate to foo', 'donate chunk should match');
@@ -278,18 +245,15 @@ test('visiting a show with a different header donate chunk', function(assert) {
 
 test('show pages with a play param', function(assert) {
   let story = server.create('story');
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
+  server.create('listing-page', {
+    id: 'shows/foo',
     apiResponse: server.create('api-response', { id: 'shows/foo/recent_stories/1' })
   });
-  server.create('django-page', {id: listingPage.id});
 
-  djangoPage
-    .bootstrap(listingPage)
-    .visit({id: listingPage.id + `?play=${story.slug}`});
+  visit(`shows/foo?play=${story.slug}`);
 
   andThen(function() {
-    assert.equal(currentURL(), `${listingPage.id}?play=${story.slug}`);
+    assert.equal(currentURL(), `shows/foo?play=${story.slug}`);
     assert.ok(find('.nypr-player').length, 'persistent player should be visible');
     assert.equal(find('[data-test-selector=nypr-player-story-title]').text(), story.title, `${story.title} should be loaded in player UI`);
   });
@@ -297,8 +261,8 @@ test('show pages with a play param', function(assert) {
 });
 
 test('show pages with a listen live chunk', function(assert) {
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/'
+  server.create('listing-page', {
+    id: 'shows/foo'
   });
   server.create('api-response', { id: 'shows/foo/recent_stories/1' });
 
@@ -306,23 +270,20 @@ test('show pages with a listen live chunk', function(assert) {
     id: 'shows-foo-listenlive',
     content: 'foo bar text'
   });
-  server.create('django-page', {id: listingPage.id});
-  djangoPage
-    .bootstrap(listingPage)
-    .visit(listingPage);
-  
+
+  visit('shows/foo');
+
   andThen(() => {
     assert.equal(find('.channel-header .django-content').text().trim(), 'foo bar text');
   });
 });
 
 test('channel routes do dfp targeting', function(/*assert*/) {
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/'
+  server.create('listing-page', {
+    id: 'shows/foo'
   });
   server.create('api-response', { id: 'shows/foo/recent_stories/1' });
-  server.create('django-page', {id: listingPage.id});
-  
+
   // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
   visit('/');
 
@@ -331,10 +292,8 @@ test('channel routes do dfp targeting', function(/*assert*/) {
       .expects('doTargeting')
       .once();
   });
-  
-  djangoPage
-    .bootstrap({id: listingPage.id})
-    .visit({id: listingPage.id});
+
+  visit('shows/foo');
 });
 
 test('if a show is airing, the featured story listen button says "Listen Live"', function(assert) {
@@ -346,8 +305,8 @@ test('if a show is airing, the featured story listen button says "Listen Live"',
   });
   let featured = {};
   Object.keys(featuredStory.attrs).forEach(k => featured[k.dasherize()] = featuredStory.attrs[k]);
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
+  server.create('listing-page', {
+    id: 'shows/foo',
     featured,
     apiResponse: server.create('api-response', { id: 'shows/foo/recent_stories/1' })
   });
@@ -359,11 +318,8 @@ test('if a show is airing, the featured story listen button says "Listen Live"',
       }
     }
   });
-  server.create('django-page', {id: listingPage.id});
 
-  djangoPage
-    .bootstrap(listingPage)
-    .visit(listingPage);
+  visit('shows/foo');
 
   andThen(() => {
     let button = find('[data-test-selector=listen-button]');
@@ -379,8 +335,8 @@ test('if a show is airing, the featured story listen button says "Listen Live"',
 moduleForAcceptance('Acceptance | Listing Page | Analytics');
 
 test('metrics properly reports channel attrs', function(assert) {
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
+  server.create('listing-page', {
+    id: 'shows/foo',
     cmsPK: 123,
     linkroll: [
       {'nav-slug': 'episodes', title: 'Episodes'}
@@ -391,8 +347,6 @@ test('metrics properly reports channel attrs', function(assert) {
 
   assert.expect(2);
 
-  server.create('django-page', {id: listingPage.id});
-  
   server.post(`${config.platformEventsAPI}/v1/events/viewed`, (schema, {requestBody}) => {
     let {
       cms_id,
@@ -423,15 +377,13 @@ test('metrics properly reports channel attrs', function(assert) {
     }
   };
 
-  djangoPage
-    .bootstrap(listingPage)
-    .visit(listingPage);
+  visit('shows/foo');
 });
 
 test('listen buttons in story teases include data-story and data-show values', function(assert) {
   let teaseList = server.createList('story', 5, {audioAvailable: true, showTitle: 'foo show'});
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
+  server.create('listing-page', {
+    id: 'shows/foo',
     cmsPK: 123,
     linkroll: [
       {'nav-slug': 'episodes', title: 'Episodes'}
@@ -441,12 +393,8 @@ test('listen buttons in story teases include data-story and data-show values', f
       teaseList
     })
   });
-  server.create('django-page', {id: listingPage.id});
 
-
-  djangoPage
-    .bootstrap(listingPage)
-    .visit(listingPage);
+  visit('shows/foo');
 
   andThen(() => {
     let listenButtons = findWithAssert('.story-tease [data-test-selector=listen-button]');
