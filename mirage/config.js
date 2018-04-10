@@ -88,7 +88,16 @@ export default function() {
     return stories.where({ slug }).models[0];
   });
   this.get('/v3/story/related/', 'story');
-  this.get('/v3/channel/*id', 'api-response');
+  this.get('/v3/channel/*id', ({ apiResponses, listingPages }, { params }) => {
+    let { id } = params;
+    if (id.split('/').length === 2) {
+      // listing-page
+      return listingPages.find(id);
+    } else {
+      // api response object
+      return apiResponses.find(id);
+    }
+  });
   this.get('/v3/chunks/:id/', 'chunk');
 
   let discoverPath = config.featureFlags['other-discover'] ? 'reco_proxy' : 'make_playlist';
