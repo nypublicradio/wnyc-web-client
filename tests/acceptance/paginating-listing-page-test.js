@@ -1,6 +1,5 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
-import djangoPage from 'wnyc-web-client/tests/pages/django-page';
 import showPage from 'wnyc-web-client/tests/pages/show';
 
 moduleForAcceptance('Acceptance | Listing Page | paginating');
@@ -12,19 +11,15 @@ test('showing pagination for a list of episodes', function(assert) {
     totalCount: 50
   });
 
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
+  server.create('listing-page', {
+    id: 'shows/foo',
     linkroll: [
       {'nav-slug': 'episodes', title: 'Episodes'}
     ],
     apiResponse
   });
 
-  server.create('django-page', {id: listingPage.id});
-
-  djangoPage
-    .bootstrap(listingPage)
-    .visit(listingPage);
+  visit('shows/foo');
 
   andThen(function() {
     assert.equal(find('#pagefooter').length, 1, 'is showing pagination');
@@ -32,18 +27,15 @@ test('showing pagination for a list of episodes', function(assert) {
 });
 
 test('showing no pagination on about pages', function(assert) {
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
+  server.create('listing-page', {
+    id: 'shows/foo',
     linkroll: [
       {'nav-slug': 'about', title: 'About'},
     ],
     apiResponse: server.create('api-response', { id: 'shows/foo/about' })
   });
-  server.create('django-page', {id: listingPage.id});
 
-  djangoPage
-    .bootstrap(listingPage)
-    .visit(listingPage);
+  visit('shows/foo');
 
   andThen(function() {
     assert.equal(find('#pagefooter').length, 0, 'is not showing pagination');
@@ -56,18 +48,15 @@ test('showing no pagination on story detail listing pages', function(assert) {
     story: server.create('story')
   });
 
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
+  server.create('listing-page', {
+    id: 'shows/foo',
     linkroll: [
       {'nav-slug': 'story', title: 'Story'}
     ],
     apiResponse
   });
-  server.create('django-page', {id: listingPage.id});
 
-  djangoPage
-    .bootstrap(listingPage)
-    .visit(listingPage);
+  visit('shows/foo');
 
   andThen(function() {
     assert.equal(find('#pagefooter').length, 0, 'is not showing pagination');
@@ -89,20 +78,17 @@ test('can go back and forward', function(assert) {
     totalCount: 50
   });
 
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
+  server.create('listing-page', {
+    id: 'shows/foo',
     linkroll: [
       {'nav-slug': 'episodes', title: 'Episodes'},
     ],
     apiResponse
   });
 
-  server.create('django-page', {id: listingPage.id});
   let firstStoryTitle;
 
-  djangoPage
-    .bootstrap(listingPage)
-    .visit(listingPage);
+  visit('shows/foo');
 
   andThen(function() {
     firstStoryTitle = showPage.storyTitles()[0];
@@ -136,19 +122,15 @@ test('proper paginating for listing pages without a linkroll', function(assert) 
     totalCount: 50
   });
 
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
+  server.create('listing-page', {
+    id: 'shows/foo',
     apiResponse
   });
 
-  server.create('django-page', {id: listingPage.id});
-
-  djangoPage
-    .bootstrap(listingPage)
-    .visit(listingPage);
+  visit('shows/foo');
 
   andThen(function() {
-    assert.equal(currentURL(), 'shows/foo/');
+    assert.equal(currentURL(), 'shows/foo');
     showPage.clickNext();
   });
   andThen(function() {
@@ -174,21 +156,17 @@ test('can navigate to a specified page of results', function(assert) {
     teaseList: server.createList('story', 10)
   });
 
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
+  server.create('listing-page', {
+    id: 'shows/foo',
     linkroll: [
       {'nav-slug': 'episodes', title: 'Episodes'},
     ],
     apiResponse
   });
 
-  server.create('django-page', {id: listingPage.id});
-
   let firstStoryTitle;
 
-  djangoPage
-    .bootstrap(listingPage)
-    .visit(listingPage);
+  visit('shows/foo');
 
   andThen(function() {
     firstStoryTitle = showPage.storyTitles()[0];
@@ -214,23 +192,18 @@ test('can land on a page number', function(assert) {
     teaseList: server.createList('story', 50)
   });
 
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
+  server.create('listing-page', {
+    id: 'shows/foo',
     linkroll: [
       {'nav-slug': 'episodes', title: 'Episodes'},
     ],
     apiResponse
   });
 
-  server.create('django-page', {id: listingPage.id});
-
-  djangoPage
-    .bootstrap(listingPage);
-  
-  visit(`/${api5}`);
+  visit(api5);
 
   andThen(function() {
-    assert.equal(currentURL(), `/${api5}`, 'can land directly on a page of results');
+    assert.equal(currentURL(), api5, 'can land directly on a page of results');
     assert.equal(find('.pagefooter-current').text().trim(), '5', 'current page number is 5');
   });
 });
@@ -241,19 +214,15 @@ test('it only shows ten pages at a time', function(assert) {
     teaseList: server.createList('story', 10),
     totalCount: 500
   });
-  
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
+
+  server.create('listing-page', {
+    id: 'shows/foo',
     linkroll: [{'nav-slug': 'episodes', title: 'Episodes'}],
     apiResponse
   });
-  
-  server.create('django-page', {id: listingPage.id});
-  
-  djangoPage
-    .bootstrap(listingPage)
-    .visit(listingPage);
-  
+
+  visit('shows/foo');
+
   andThen(function() {
     assert.equal(find('.pagefooter-current').length, 1, 'one current page number');
     assert.equal(find('.pagefooter-link').length, 10, 'links 2-9 and one final page');
@@ -272,7 +241,7 @@ test('clicking on a page number takes to the page of the correct tab', function(
   });
   let segmentsPage1 = 'shows/foo/segments/1';
   let segmentsPage3 = 'shows/foo/segments/3';
-  
+
   server.create('api-response', {
     id: segmentsPage1,
     teaseList: server.createList('story', 10),
@@ -283,9 +252,9 @@ test('clicking on a page number takes to the page of the correct tab', function(
     teaseList: server.createList('story', 10),
     totalCount: 60
   });
-  
-  let listingPage = server.create('listing-page', {
-    id: 'shows/foo/',
+
+  server.create('listing-page', {
+    id: 'shows/foo',
     linkroll: [
       {'nav-slug': 'episodes', title: 'Episodes'},
       {'nav-slug': 'segments', title: 'Segments'}
@@ -293,12 +262,8 @@ test('clicking on a page number takes to the page of the correct tab', function(
     apiResponse
   });
 
-  server.create('django-page', {id: listingPage.id});
-  
-  djangoPage
-    .bootstrap(listingPage)
-    .visit(listingPage);
-  
+  visit('shows/foo');
+
   andThen(() => {
     showPage.clickNavLink('Segments');
   });
