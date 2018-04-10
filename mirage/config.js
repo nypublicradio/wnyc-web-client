@@ -67,7 +67,16 @@ export default function() {
     return stories.where({ slug }).models[0];
   });
   this.get(`${baseUrl}/api/v3/story/related/`, 'story');
-  this.get(`${baseUrl}/api/v3/channel/*id`, 'api-response');
+  this.get(`${baseUrl}/v3/channel/*id`, ({ apiResponses, listingPages }, { params }) => {
+    let { id } = params;
+    if (id.split('/').length === 2) {
+      // listing-page
+      return listingPages.find(id);
+    } else {
+      // api response object
+      return apiResponses.find(id);
+    }
+  });
   this.get(`${baseUrl}/api/v3/chunks/:id/`, 'chunk');
 
   /*------------------------------------------------------------
