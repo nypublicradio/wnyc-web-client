@@ -26,58 +26,68 @@ const hasProvider = function(request) {
 
 export default function() {
   this.logging = false;
-  let baseUrl = config.webRoot;
 
   /*------------------------------------------------------------
     legacy (v1) endpoints
   --------------------------------------------------------------*/
 
-  this.get(`${baseUrl}/api/v1/story/:id`);
-  this.get(`${baseUrl}/api/v1/browser_id/`, {success: true});
-  this.get(`${baseUrl}/api/v1/list/comments/24/:storyId/`, 'comment');
-  this.get(`${config.publisherAPI}/v1/whats_on/`);
-  this.get(`${baseUrl}/api/v1/whats_on/:slug`, 'whats-on');
-  this.get('/api/v1/whats_on/:slug', 'whats-on');
-  this.get(`${baseUrl}/api/v1/list/streams/`);
-  this.get('/api/v1/list/streams/');
-  this.get(`${baseUrl}/api/v1/list/streams/:slug`, 'stream');
-  this.get('/api/v1/list/streams/:slug', 'stream');
+  this.urlPrefix = config.publisherAPI;
 
-  this.post(`${config.publisherAPI}/v1/listenaction/create/:id/play/`, {});
-  this.post(`${config.publisherAPI}/v1/listenaction/create/:id/complete/`, {});
-  this.post(`${config.publisherAPI}/most/view/managed_item/:id/`, {});
-  this.post(`${config.publisherAPI}/most/listen/managed_item/:id/`, {});
+  this.get('/v1/story/:id');
+  this.get('/v1/list/comments/24/:storyId/', 'comment');
+  this.get('/v1/whats_on/');
+  this.get('/v1/whats_on/:slug', 'whats-on');
+  this.get('/v1/list/streams/');
+  this.get('/v1/list/streams/:slug', 'stream');
+
+  this.post('/v1/listenaction/create/:id/play/', {});
+  this.post('/v1/listenaction/create/:id/complete/', {});
+  this.post('/most/view/managed_item/:id/', {});
+  this.post('/most/listen/managed_item/:id/', {});
+
+  this.get('/v1/browser_id/', {success: true});
 
   /*------------------------------------------------------------
     transitional (v2) endpoints
   --------------------------------------------------------------*/
 
-  this.get(`${baseUrl}/api/v2/related/:storyId/`, 'story');
+  this.get('/v2/related/:storyId/', 'story');
 
   /*------------------------------------------------------------
     JSON:API (v3) endpoints
   --------------------------------------------------------------*/
 
-  this.get(`/api/v3/shows`);
-  this.get(`${baseUrl}/api/v3/shows`);
-  this.get(`${baseUrl}/api/v3/buckets/:slug/`, 'bucket');
-  this.get(`${baseUrl}/api/v3/story-pk/:id/`, 'story');
-  this.get(`${baseUrl}/api/v3/story/:slug/`, ({ stories }, { params }) => {
+  this.get('/v3/shows');
+  this.get('/v3/buckets/:slug/',  ({ buckets }, { params }) => {
+    return buckets.findBy({ slug: params.slug });
+  });
+  this.get('/v3/story-pk/:id/', 'story');
+  this.get('/v3/story/:slug/', ({ stories }, { params }) => {
     let { slug } = params;
     return stories.where({ slug }).models[0];
   });
-  this.get(`${baseUrl}/api/v3/story/related/`, 'story');
-  this.get(`${baseUrl}/api/v3/channel/*id`, 'api-response');
-  this.get(`${baseUrl}/api/v3/chunks/:id/`, 'chunk');
+  this.get('/v3/story/related/', 'story');
+  this.get('/v3/channel/*id', ({ apiResponses, listingPages }, { params }) => {
+    let { id } = params;
+    if (id.split('/').length === 2) {
+      // listing-page
+      return listingPages.find(id);
+    } else {
+      // api response object
+      return apiResponses.find(id);
+    }
+  });
+  this.get('/v3/chunks/:id/', 'chunk');
 
   /*------------------------------------------------------------
     identity management (account) endpoints
   --------------------------------------------------------------*/
-  this.get(`${config.adminRoot}/api/v1/is_logged_in/`, {});
-  this.get(`${config.adminRoot}/comments/security_info/`, {security_hash: 'foo', timestamp: Date.now()});
+  this.urlPrefix = config.adminRoot;
 
-  this.post(`${config.adminRoot}/api/v1/accounts/logout/`, {successful_logout: true});
-  this.post(`${config.adminRoot}/api/v1/accounts/login/`, function(schema, request) {
+  this.get('/comments/security_info/', {security_hash: 'foo', timestamp: Date.now()});
+  this.get('/api/v1/is_logged_in/', {});
+  this.post('/api/v1/accounts/logout/', {successful_logout: true});
+  this.post('/api/v1/accounts/login/', function(schema, request) {
     let params = {};
     request.requestBody.split('&').forEach(p => {
       params[p.split('=')[0]] = p.split('=')[1];
@@ -97,22 +107,24 @@ export default function() {
     passthroughs
   --------------------------------------------------------------*/
 
+  this.urlPrefix = ''
+
   // Let this one slip by, we've got a http-proxy for it
-  this.passthrough(`/api/v1/dynamic-script-loader`);
-  this.passthrough(`${baseUrl}/api/v1/dynamic-script-loader`);
-  this.passthrough(`${baseUrl}/api/v1/schedule/whats_on_today/*`);
+  this.passthrough('/api/v1/dynamic-script-loader');
+  this.passthrough(`${config.publisherAPI}/api/v1/dynamic-script-loader`);
+  this.passthrough(`${config.publisherAPI}/api/v1/schedule/whats_on_today/*`);
   this.passthrough('/datanewswidget/**');
 
   /*------------------------------------------------------------
   ${webRoot}/* requests. Oddballs without the api namespace
   --------------------------------------------------------------*/
 
-  this.get(`${baseUrl}`, function(schema) {
+  this.get(`${config.webRoot}`, function(schema) {
     let home = schema.djangoPages.find('/');
     return home ? home.attrs.text : '';
   });
 
-  this.get(`${baseUrl}/*id`, function(schema, {queryParams, params}) {
+  this.get(`${config.webRoot}/*id`, function(schema, {queryParams, params}) {
     let { id } = params;
     let page = schema.djangoPages.find(id);
     if (!page) {
@@ -123,6 +135,7 @@ export default function() {
     }
     return page || new Response(404);
   });
+
 
   /*-------------------------------------------------------------
   auth microservice
@@ -240,15 +253,19 @@ export default function() {
   analytics microservice
   ---------------------------------------------------------------*/
 
-  this.post(`${config.platformEventsAPI}/v1/events/viewed`, {});
-  this.post(`${config.platformEventsAPI}/v1/events/listened`, {});
+  this.urlPrefix = config.platformEventsAPI;
+
+  this.post('/v1/events/viewed', {});
+  this.post('/v1/events/listened', {});
 
   /*-------------------------------------------------------------
   membership microservice
   ---------------------------------------------------------------*/
-  this.get(`${config.membershipAPI}/v1/orders/`, 'orders');
-  this.get(`${config.membershipAPI}/v1/emails/is-verified/`, {data: {is_verified: true}});
-  this.patch(`${config.membershipAPI}/v1/emails/:email_id/verify/`, (schema, request) => {
+  this.urlPrefix = config.membershipAPI;
+
+  this.get('/v1/orders/', 'orders');
+  this.get('/v1/emails/is-verified/', {data: {is_verified: true}});
+  this.patch('/v1/emails/:email_id/verify/', (schema, request) => {
     let params = JSON.parse(request.requestBody);
     if (params &&
         get(params, 'data.attributes.verification_token') &&
