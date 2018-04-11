@@ -18,7 +18,9 @@ export default Ember.Route.extend(PlayParamMixin, {
   model() {
     let page = this.store.findRecord('django-page', '/');
     let featuredStream = this.store.findRecord('stream', 'wnyc-fm939');
-    let gothamist = fetch(config.gothamistStories).then(r => r.json()).then(({entries = []}) => entries.slice(0, 5));
+    let gothamist = fetch(config.gothamistStories)
+      .then(r => r.json()).then(({entries = []}) => entries.slice(0, 5))
+      .catch(() => []);
     return hash({page, featuredStream, gothamist});
   },
   afterModel({ page }) {
