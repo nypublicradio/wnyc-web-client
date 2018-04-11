@@ -7,7 +7,6 @@ const { featureFlags } = config;
 const path = featureFlags['other-discover'] ? 'reco_proxy' : 'make_playlist';
 
 export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
-  authorizer: 'authorizer:nypr',
   host: config.publisherAPI,
   namespace: `v3/${path}/`,
   pathForType: () => '',
@@ -21,5 +20,11 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
       withCredentials: true
     };
     return this._super(url, type, options);
+  },
+  authorize(xhr) {
+    let headers = this.get('session').authorize({});
+    for (var h in headers) {
+      xhr.setRequestHeader(h, headers[h]);
+    }
   }
 });
