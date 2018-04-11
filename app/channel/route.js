@@ -8,7 +8,7 @@ const {
 } = Ember;
 const { hash: waitFor } = Ember.RSVP;
 const inflector = new Inflector(Inflector.defaultRules);
-import { retryFromServer, beforeTeardown } from 'nypr-django-for-ember/utils/compat-hooks';
+import { beforeTeardown } from 'nypr-django-for-ember/utils/compat-hooks';
 import PlayParamMixin from 'wnyc-web-client/mixins/play-param';
 import config from 'wnyc-web-client/config/environment';
 
@@ -21,18 +21,15 @@ export default Route.extend(PlayParamMixin, {
     const listingSlug = `${channelPathName}/${params.slug}`;
     set(this, 'listingSlug', listingSlug);
 
+    let channel = this.store.findRecord('channel', listingSlug);
     let listenLive = this.store.findRecord('chunk', `shows-${params.slug}-listenlive`)
       .catch(() => '');
 
-    return this.store.find('django-page', listingSlug.replace(/\/*$/, '/')).then(page => {
-      return waitFor({
-        page,
-        channel: page.get('wnycChannel'),
-        user: this.get('session.data.authenticated'),
-        listenLive
-      });
-    })
-    .catch(e => retryFromServer(e, listingSlug.replace(/\/*$/, '/')));
+    return waitFor({
+      channel,
+      listenLive,
+      user: this.get('session.data.authenticated'),
+    });
   },
 
   afterModel({ channel }, transition) {
