@@ -139,12 +139,6 @@ module.exports = function(environment) {
       'discover': true,
       'other-discover': process.env.OTHER_DISCOVER,
     },
-    betaTrials: {
-      betaInviteLanding: '#full-page-transforms-wrapper',
-      legacyNavLinkLanding: '#navigation-items > li:nth-child(2)',
-      isBetaSite: false,
-      preBeta: false,
-    },
     contentSecurityPolicy: {
       'connect-src': "'self' *.wnyc.net:* ws://*.wnyc.net:*",
       'style-src': "'self' 'unsafe-inline' *.wnyc.net:* *.wnyc.org cloud.typography.com fonts.googleapis.com www.google.com platform.twitter.com",
@@ -203,9 +197,6 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
-
-    ENV.betaTrials.legacyNavLinkLanding = '#ember-testing';
-    ENV.betaTrials.betaInviteLanding = '#ember-testing';
 
     ENV.publisherAPI = 'http://example.com/api';
     ENV.adminRoot = 'http://admin.example.com';

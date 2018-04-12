@@ -1,10 +1,9 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import BetaActionsMixin from 'wnyc-web-client/mixins/beta-actions';
 import config from 'wnyc-web-client/config/environment';
 import { or } from '@ember/object/computed';
 
-export default Component.extend(BetaActionsMixin, {
+export default Component.extend({
   session: service(),
   metrics: service(),
   router: service(),
@@ -12,7 +11,7 @@ export default Component.extend(BetaActionsMixin, {
   donateURL: config.wnycDonateURL,
   classNameBindings: ['showPlayer:sitechrome--player-open'],
   preferredStream: or('session.data.user-prefs-active-stream', 'defaultStream'),
-  
+
   init() {
     this._super(...arguments);
     this.setProperties({
