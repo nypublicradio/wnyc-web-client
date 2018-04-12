@@ -95,9 +95,9 @@ jobs:
 
 workflows:
   version: 2
-  buld-test-deploy:
+  install-test-deploy:
     jobs:
-      - build:
+      - install:
           filters:
             tags:
               only: /.*/
@@ -106,7 +106,7 @@ workflows:
             tags:
               only: /.*/
           requires:
-            - build
+            - install
       - deploy:
           requires:
             - test
