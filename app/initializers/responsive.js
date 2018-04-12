@@ -1,5 +1,3 @@
-import { initialize } from 'ember-responsive/initializers/responsive';
-
 /**
  * Ember responsive initializer
  *
@@ -11,5 +9,8 @@ import { initialize } from 'ember-responsive/initializers/responsive';
 
 export default {
   name: 'responsive',
-  initialize
+  initialize(app) {
+    app.inject('component', 'media', 'service:media');
+    app.inject('controller', 'media', 'service:media');
+  }
 };
