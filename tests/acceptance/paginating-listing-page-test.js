@@ -23,7 +23,7 @@ module('Acceptance | Listing Page | paginating', function(hooks) {
 
     await visit('shows/foo');
 
-    assert.equal(find('#pagefooter'), 'is showing pagination');
+    assert.ok(find('#pagefooter'), 'is showing pagination');
   });
 
   test('showing no pagination on about pages', async function(assert) {
@@ -189,7 +189,7 @@ module('Acceptance | Listing Page | paginating', function(hooks) {
     await visit(api5);
 
     assert.equal(currentURL(), api5, 'can land directly on a page of results');
-    assert.equal(find('.pagefooter-current').text().trim(), '5', 'current page number is 5');
+    assert.equal(find('.pagefooter-current').textContent.trim(), '5', 'current page number is 5');
   });
 
   test('it only shows ten pages at a time', async function(assert) {

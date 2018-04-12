@@ -72,6 +72,9 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
       linkroll: [
         {'nav-slug': 'about', title: 'About'},
       ],
+      about: {
+        body: 'About'
+      },
       apiResponse: server.create('api-response', { id: 'shows/foo/about' })
     });
 
@@ -182,7 +185,7 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
       apiResponse
     });
 
-    await visit('shows/foo/next-link/');
+    await visit('shows/foo/next-link');
 
     assert.equal(currentURL(), 'shows/foo/next-link');
 
