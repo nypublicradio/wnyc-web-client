@@ -22,25 +22,28 @@ jobs:
           key: bower-deps-{{ checksum "bower.json" }}
       - run:
           name: Install bower deps
-          command: ~/.config/yarn/global/node_modules/.bin/bower i
+          command: npx bower i
       - save_cache:
           key: bower-deps-{{ checksum "bower.json" }}
           paths:
             - bower_components
 
       - restore_cache:
-          key: node-deps-{{ checksum "yarn.lock" }}
+          key: v2-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
       - run:
           name: Node dependencies
-          command: yarn --pure-lockfile
+          command: |
+            if [ ! -d ./node_modules ]; then
+              yarn --pure-lockfile
+            fi
       - save_cache:
-          key: node-deps-{{ checksum "yarn.lock" }}
+          key: v2-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
 
       - run:
           name: Build modernizr
-          command: ~/.config/yarn/global/node_modules/.bin/grunt modernizr:dist
+          command: npx grunt modernizr:dist
       - save_cache:
           key: modernizr-{{ .Revision }}
           paths:
@@ -57,14 +60,14 @@ jobs:
       - restore_cache:
           key: bower-deps-{{ checksum "bower.json" }}
       - restore_cache:
-          key: node-deps-{{ checksum "yarn.lock" }}
+          key: v2-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
       - restore_cache:
           key: modernizr-{{ .Revision }}
       - run:
           name: Test
           environment:
             CIRCLE_TEST_REPORTS: test-results
-          command: ./node_modules/ember-cli/bin/ember test
+          command: npx ember test
       - store_test_results:
           path: test-results/
 
@@ -78,7 +81,7 @@ jobs:
       - restore_cache:
           key: bower-deps-{{ checksum "bower.json" }}
       - restore_cache:
-          key: node-deps-{{ checksum "yarn.lock" }}
+          key: v2-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
       - restore_cache:
           key: modernizr-{{ .Revision }}
       - run:
@@ -87,10 +90,10 @@ jobs:
             env | sed -n 's/^DEPLOY_//p' > .env
             if [[ "${CIRCLE_BRANCH}" == "demo" ]]; then
               env | sed -n 's/^DEMO_//p' >> .env
-              ./node_modules/ember-cli/bin/ember deploy demo --verbose --activate
-            elif grep -q "v[0-9]\+\.[0-9]\+\.[0-9]\+" <<< "$CIRCLE_TAG"; then
+              npx ember deploy demo --verbose --activate
+            elif grep -q "v[0-9]+\.[0-9]+\.[0-9]+" <<< "$CIRCLE_TAG"; then
               env | sed -n 's/^PROD_//p' >> .env
-              ./node_modules/ember-cli/bin/ember deploy production --verbose --activate
+              npx ember deploy production --verbose --activate
             fi
 
 workflows:
