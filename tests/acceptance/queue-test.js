@@ -1,4 +1,4 @@
-import { click, currentURL, findAll, settled } from '@ember/test-helpers';
+import { click, currentURL, findAll } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import { run } from '@ember/runloop';
@@ -6,6 +6,16 @@ import velocity from 'velocity';
 import RSVP from 'rsvp';
 
 import queuePage from 'wnyc-web-client/tests/pages/queue';
+
+const setupSessionStore = app => {
+  let testStore = app.lookup('session-store:test');
+
+  testStore.persist = data => {
+    testStore.set('_data', data);
+    return RSVP.resolve();
+  }
+  testStore.restore = () => RSVP.resolve(testStore.get('_data'));
+}
 
 module('Acceptance | queue', function(hooks) {
   setupApplicationTest(hooks);
@@ -37,14 +47,9 @@ module('Acceptance | queue', function(hooks) {
   });
 
   test('Queue should sort when you drag an item', async function(assert) {
-    let listenQueue = this.owner.lookup('service:listen-queue');
-    let testStore = this.owner.lookup('session-store:test');
+    setupSessionStore(this.owner);
 
-    testStore.persist = data => {
-      testStore.set('_data', data);
-      return RSVP.resolve();
-    }
-    testStore.restore = () => RSVP.resolve(testStore.get('_data'));
+    let listenQueue = this.owner.lookup('service:listen-queue');
 
     let [{slug:slug1}, {slug:slug2}] = server.createList('story', 2);
     server.create('djangoPage', {id:'/'});
@@ -73,6 +78,8 @@ module('Acceptance | queue', function(hooks) {
   });
 
   test('queue and listening history listen buttons should have data-show and data-story attributes', async function(assert) {
+    setupSessionStore(this.owner);
+
     let listenQueue = this.owner.lookup('service:listen-queue');
     let listenHistory = this.owner.lookup('service:listen-history');
 
