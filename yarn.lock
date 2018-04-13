@@ -6788,8 +6788,8 @@ nypr-audio-services@>=0.3.0:
     nypr-ui ">=0.2.0"
 
 nypr-audio-services@>=0.3.3:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.3.4.tgz#cb22a5ca295c1f2917a7331f99ee83224f52edfa"
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.3.5.tgz#dfabdd04288d709632d13ef8c16238947ba7359c"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
