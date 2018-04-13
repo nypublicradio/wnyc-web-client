@@ -23,6 +23,7 @@ module('Acceptance | queue', function(hooks) {
   hooks.beforeEach(function() {
     server.create('stream');
     velocity.mock = true;
+    setupSessionStore(this.owner);
   });
 
   hooks.afterEach(function() {
@@ -47,8 +48,6 @@ module('Acceptance | queue', function(hooks) {
   });
 
   test('Queue should sort when you drag an item', async function(assert) {
-    setupSessionStore(this.owner);
-
     let listenQueue = this.owner.lookup('service:listen-queue');
 
     let [{slug:slug1}, {slug:slug2}] = server.createList('story', 2);
@@ -78,8 +77,6 @@ module('Acceptance | queue', function(hooks) {
   });
 
   test('queue and listening history listen buttons should have data-show and data-story attributes', async function(assert) {
-    setupSessionStore(this.owner);
-
     let listenQueue = this.owner.lookup('service:listen-queue');
     let listenHistory = this.owner.lookup('service:listen-history');
 
