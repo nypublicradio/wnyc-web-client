@@ -97,7 +97,8 @@
     "nypr-metrics": "~0.0.0",
     "nypr-player": "~0.0.0",
     "nypr-publisher-lib": ">=0.3.0",
-    "nypr-ui": "~0.1.7",
+    "nypr-ui": "0.2.7",
+
     "torii": "0.9.5"
   },
   "ember-addon": {

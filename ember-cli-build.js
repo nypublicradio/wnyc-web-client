@@ -27,7 +27,8 @@ module.exports = function(defaults) {
     'ember-cli-mirage': { directory: defaults.project.root + '/mirage' },
     'mirage-support': {
       includeAll: true
-    }
+    },
+     useWaypoints: true
   });
 
   try {

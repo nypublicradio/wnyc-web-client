@@ -2710,7 +2710,7 @@ ember-basic-dropdown@0.33.1:
     ember-native-dom-helpers "^0.5.0"
     ember-wormhole "^0.5.1"
 
-ember-basic-dropdown@^0.34.0:
+ember-basic-dropdown@0.34.0, ember-basic-dropdown@^0.34.0:
   version "0.34.0"
   resolved "https://registry.yarnpkg.com/ember-basic-dropdown/-/ember-basic-dropdown-0.34.0.tgz#a0371b7c06756cdd3170e7d4a9ed4f4890bc2d59"
   dependencies:
@@ -3643,6 +3643,12 @@ ember-invoke-action@^1.4.0:
   resolved "https://registry.yarnpkg.com/ember-invoke-action/-/ember-invoke-action-1.5.0.tgz#0370f187f39f22d54ddd039cd01aa7e685edbbec"
   dependencies:
     ember-cli-babel "^6.6.0"
+
+ember-lifeline@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ember-lifeline/-/ember-lifeline-2.0.0.tgz#ab2dadd3eed585605d1c4137c64aacec4d241c8e"
+  dependencies:
+    ember-cli-babel "^6.8.2"
 
 ember-lifeline@^2.0.0:
   version "2.0.0"
@@ -7280,11 +7286,11 @@ nypr-publisher-lib@>=0.3.0:
     nypr-django-for-ember ">=0.1.0"
     nypr-ui ">=0.2.4"
 
-nypr-ui@>=0.2.4:
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.2.6.tgz#282b712df5fbbc58c643fa93130ba7a79c8cc139"
+nypr-ui@0.2.7:
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.2.7.tgz#1f8d48daefb4e233042165a424619447ece3c4c9"
   dependencies:
-    ember-basic-dropdown "0.33.1"
+    ember-basic-dropdown "0.34.0"
     ember-burger-menu "^3.1.0"
     ember-cli-babel "^6.8.0"
     ember-cli-htmlbars "^2.0.1"
