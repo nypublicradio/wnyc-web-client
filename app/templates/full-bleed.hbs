@@ -1,5 +1,5 @@
 {{#with model.story as |s|}}
-  {{#nypr-ui/hero gradient=true sticky=true noHeaderImage=showShareLinks class="full-bleed__hero" as |hero|}}
+  {{#nypr-ui/hero gradient=true sticky=true noHeaderImage=showShareLinks class=(concat 'full-bleed__hero' (if showShareLinks ' no-image')) as |hero|}}
     {{#hero.top as |top|}}
       {{#top.left}}
         {{#link-to 'index' class="full-bleed__logo-link gtm__click-tracking" data-action='Full Bleed WNYC logo' data-label=s.title}}
@@ -87,13 +87,14 @@
   {{#if showSmallLead}}
     <div class="full-bleed__small-lead">
       <div class="embedded-image">
-        <img src={{s.imageMain.url}} source={{img.source}}
-        caption={{s.imageMain.caption}}
-        credit={{s.imageMain.creditsName}} />
-        <div class="image-metadata">{{s.imageMain.source}}</div>
-        <div class="image-caption">{{s.imageMain.caption}}</div>
-        <div class="image-credit">{{s.imageMain.credit}}</div>
-        </div>
+        <img src={{s.imageMain.url}} source={{s.imageMain.source}}
+             caption={{s.imageMain.caption}}
+             credit={{s.imageMain.creditsName}} />
+          <div class="image-metadata">
+          <div class="image-caption">{{s.imageMain.caption}}</div>
+          <div class="image-credit">{{s.imageMain.credit}}</div>
+          </div>
+      </div>
     </div>
   {{/if}}
 

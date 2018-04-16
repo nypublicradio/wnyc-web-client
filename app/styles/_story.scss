@@ -36,10 +36,10 @@ article > section a:hover {
   &.stuck {
     margin-bottom: 0;
   }
-}
 
-.full-bleed_hero > .no-image {
-
+  &.no-image {
+    margin-bottom: 0px;
+  }
 }
 
 .full-bleed__logo-link {
@@ -132,6 +132,33 @@ article > section a:hover {
     bottom: 0;
     top: -5px;
   }
+  @include mq($mobile){
+    margin-bottom: 50px;
+    &:before {
+      content: '';
+      display: block;
+      width: 50px;
+      position: absolute;
+      border-top: 5px solid $wqxrblue;
+      border-right: 5px solid transparent;
+      bottom: 5px;
+    }
+
+    &:after {
+      content: '';
+      display: block;
+      height: 0;
+      width: 0;
+      margin-top: 20px;
+      margin-bottom: 15px;
+      border-left: 5px solid transparent;
+      border-top: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 5px solid $wqxrblue;
+      position: relative;
+
+    }
+  }
 }
 
 .full-bleed__blurb {
@@ -144,10 +171,13 @@ article > section a:hover {
 .no-image .full-bleed__blurb{
   @include noimage-layout;
   font-family: 'OpenSans', sans-serif;
-  font-size: 28px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 1.36;
   font-style: normal;
+  @include mq($medium-and-up){
+    font-size: 28px;
+  }
 }
 
 .full-bleed__footer > .listen-button {
@@ -181,27 +211,19 @@ article > section a:hover {
   }
 }
 
-.no-image .full-bleed__share-label {
-  display: none;
-}
-.no-image .story-share-buttons {
-  display: none;
-}
-
-.stuck .no-image .full-bleed__share {
-  .btn {
-    color: $wqxrblue;
-    border-color: rgba(136, 136, 136, 0.2);
-  }
-  @include mq($medium-and-up) {
-    .full-bleed__share-label {
-      display: inline;
-    }
+.no-image .full-bleed__share {
+  .full-bleed__share-label {
+    display: none;
   }
   .story-share-buttons {
-    display: inline;
+    display: none;
+    @include mq($mobile){
+      display: inline;
+    }
+    .btn {
+      color: black;
+    }
   }
-
 }
 
 .full-bleed__share-label {
@@ -223,6 +245,15 @@ article > section a:hover {
   margin-bottom: 40px;
   .embedded-image{
     margin: 0 auto;
+    > .image-metadata  {
+      display: block;
+      padding-top: 6px;
+      text-align: right;
+
+      @include mq($medium-and-up) {
+        margin-bottom: 0;
+      }
+    }
   }
 }
 
@@ -230,18 +261,19 @@ article > section a:hover {
 
   > .django-content p {
     @include layout;
-    margin-bottom:70px;
+    margin-bottom:45px;
     color: black;
     font-size: 16px;
     line-height: 1.5;
 
     @include mq($medium-and-up) {
       font-size: 18px;
+      margin-bottom:60px;
     }
   }
 
   > .django-content > div > p:first-of-type::first-letter {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 93px;
     line-height: 81px;
@@ -250,7 +282,7 @@ article > section a:hover {
   }
 
   .nypr-pull-quote__wrapper{
-    @include layout;
+      @include layout;
   }
 
   .nypr-pull-quote{
@@ -289,6 +321,7 @@ article > section a:hover {
       position: relative;
       display: block;
       @include hero-emphasis;
+      font-family: 'Lato', sans-serif;
       font-size: 20px;
       line-height: 1.35;
 
@@ -350,7 +383,9 @@ article > section a:hover {
 
   font-size: 16px;
   margin-bottom: 40px;
-
+  @include mq($mobile){
+    font-size:12px;
+  }
 
   > .full-bleed__byline-content > .full-bleed__byline-left > p {
     margin: 0;
@@ -376,6 +411,9 @@ article > section a:hover {
   float: right;
   display: flex;
   align-items: center;
+  @include mq($mobile){
+    display: none;
+  }
 
   .btn {
     color: black;
@@ -475,6 +513,26 @@ article > section a:hover {
   }
 }
 
+.stuck .no-image .full-bleed__share {
+  .btn {
+    color: $wqxrblue;
+    border-color: rgba(136, 136, 136, 0.2);
+  }
+  @include mq($medium-and-up) {
+    .full-bleed__share-label {
+      display: inline;
+    }
+  }
+  .story-share-buttons {
+    display: inline;
+  }
+
+}
+
+.stuck > .image-container.no-image {
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.4);
+}
+
 .stuck > .image-container > .hero-headline {
   &:before {
     display: none;
@@ -482,8 +540,4 @@ article > section a:hover {
   &:after {
     display: none;
   }
-}
-
-.stuck > .image-container > .hero-blurb {
-
 }
