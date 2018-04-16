@@ -529,10 +529,6 @@ article > section a:hover {
 
 }
 
-.stuck > .image-container.no-image {
-  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.4);
-}
-
 .stuck > .image-container > .hero-headline {
   &:before {
     display: none;
@@ -540,4 +536,5 @@ article > section a:hover {
   &:after {
     display: none;
   }
+  padding: 0 0;
 }
