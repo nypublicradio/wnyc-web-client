@@ -5,6 +5,14 @@
     </section>
   {{/if}}
 
+  {{dfp-ad
+    slotClassNames="l-constrained aligncenter leaderboard"
+    slot="6483581/leaderboard/wqxr_leaderboard"
+    target="leaderboard_ad_home"
+    mapping=(array (array 0 (array 300 50)) (array 758 (array 728 90)) (array 1203 (array 970 90)))
+    sizes=(array (array 970 90) (array 728 90) (array 300 50))
+  }}
+
   <section class="l-container l-container--touch-full">
     {{#stream-banner background=background streams=streams as |currentStream banner|}}
       {{#banner.header as |header|}}
@@ -24,16 +32,6 @@
       {{/if}}
     {{/stream-banner}}
   </section>
-
-  {{#if media.isSmallOnly}}
-    <section class="home__leaderboard">
-      {{dfp-ad
-        slot="/6483581/leaderboard/wqxr_leaderboard"
-        sizes=(array (array 300 50))
-        target="leaderboard"
-        slotClassNames="home__leaderboard__slot"}}
-    </section>
-  {{/if}}
 
   <section class="l-container l-container--touch-full">
     {{#nypr-brick-layout as |layout|}}
@@ -61,15 +59,10 @@
       {{#layout.cards as |row|}}
         {{row.brick item=model.wqxrHome.featuredItems.[3]}}
         {{row.brick item=model.wqxrHome.featuredItems.[4]}}
-        {{#row.brick class='brick__item--sponsored'}}
-          {{dfp-ad
-            slot="/6483581/rectangle/wqxr_rectangle"
-            sizes=(array (array 300 250))
-            target="wqxr_bigbox_ad"}}
-        {{/row.brick}}
+        {{row.brick item=model.wqxrHome.featuredItems.[5]}}
       {{/layout.cards}}
 
-      {{layout.blowout flip=true items=(slice model.wqxrHome.featuredItems 5 8)}}
+      {{layout.blowout flip=true items=(slice model.wqxrHome.featuredItems 6 9)}}
 
     {{/nypr-brick-layout}}
   </section>

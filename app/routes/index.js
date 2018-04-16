@@ -18,8 +18,8 @@ export default Route.extend(PlayParamMixin, {
     return RSVP.hash({
       wqxrHome: this.store.findRecord('bucket', 'wqxr-home').then(b => {
         return {
-          featuredItems: b.get('bucketItems').slice(0, 8),
-          otherItems: b.get('bucketItems').slice(8)
+          featuredItems: b.get('bucketItems').slice(0, 9),
+          otherItems: b.get('bucketItems').slice(9)
         };
       }),
       wartopChunk: this.store.findRecord('chunk', 'wqxr-wartop-home').catch(()=>''),
