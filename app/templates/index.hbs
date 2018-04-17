@@ -28,7 +28,9 @@
       {{/row.items}}
     {{/story-row}}
 
-    {{#nypr-ui/support-stripe theme='wnyc' background='/assets/img/backgrounds/support-stripe.jpg' as |stripe|}}
+    {{#nypr-ui/support-stripe theme='wnyc'
+      link='https://pledge3.wnyc.org/donate/gothamist/onestep/'
+      background='/assets/img/backgrounds/support-stripe.jpg' as |stripe|}}
       {{stripe.text 'Join WNYC in bringing Gothamist back to NYC.'}}
 
       {{stripe.link 'Support us' 'https://pledge3.wnyc.org/donate/gothamist/onestep/'}}
