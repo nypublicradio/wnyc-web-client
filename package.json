@@ -15,13 +15,19 @@
     "lint:js": "eslint ./*.js app config lib server tests",
     "start": "ember serve",
     "test": "ember test",
-    "upgrade-nypr": "yarn upgrade nypr-ads nypr-ui nypr-player nypr-account-settings nypr-audio-services nypr-metrics nypr-django-for-ember nypr-publisher-lib"
+    "upgrade-nypr": "yarn upgrade nypr-ads nypr-ui nypr-player nypr-account-settings nypr-audio-services nypr-metrics nypr-django-for-ember nypr-publisher-lib",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:test": "start-server-and-test start http://localhost:4200 cy:run",
+    "cy:ci:run": "for f in $(circleci tests glob cypress/integration/** | circleci tests split); do cypress run --spec \"$f\"; done;",
+    "cy:ci:test": "start-server-and-test start http://localhost:4200 cy:ci:run"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
     "broccoli-merge-trees": "^1.1.0",
     "broccoli-sourcemap-concat": "^2.0.2",
     "broccoli-stew": "^1.4.0",
+    "cypress": "^2.1.0",
     "ember-ajax": "^3.0.0",
     "ember-body-class": "0.4.0",
     "ember-cli": "~3.0.0",

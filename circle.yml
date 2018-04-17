@@ -57,13 +57,13 @@ jobs:
           paths:
             - test-dist
 
-  test:
+  test_ember:
     docker:
       - image: circleci/node:8.6.0-browsers
         environment:
           JOBS: 2
 
-    parallelism: 4
+    parallelism: 3
     steps:
       - checkout
       - restore_cache:
@@ -83,6 +83,7 @@ jobs:
             --path="test-dist"
             --split=$CIRCLE_NODE_TOTAL
             --partition=$(($CIRCLE_NODE_INDEX + 1))
+            --parallel
       - store_test_results:
           path: test-results/
 
@@ -127,7 +128,7 @@ workflows:
             - install
       - deploy:
           requires:
-            - test
+            - test_ember
           filters:
             tags:
               only: /^v[0-9]+\.[0-9]+\.[0-9]+/

@@ -30,4 +30,10 @@ export default function(server) {
    // server.createList('pledge', 5, { isActive: 'false', orderType: 'sustainer' }); // Expired sustainer
    // server.createList('pledge', 3, { isActive: 'true', orderType: 'onetime' }); // Expired
 
+  // Pass server instructions via Cypress using this awkward eval command
+  if (window.localStorage.mirageServerCommand) {
+    server.db.emptyData();  // start fresh
+    eval(`(${window.localStorage.mirageServerCommand})`)(server)
+  }
+
 }
