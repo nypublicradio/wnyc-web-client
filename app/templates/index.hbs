@@ -29,11 +29,10 @@
     {{/story-row}}
 
     {{#nypr-ui/support-stripe theme='wnyc'
-      link='https://www.kickstarter.com/projects/675760894/bring-back-gothamist?ref=eiqojw'
+      href='https://www.kickstarter.com/projects/675760894/bring-back-gothamist?ref=eiqojw'
       background='/assets/img/backgrounds/support-stripe.jpg' as |stripe|}}
       {{stripe.text 'Join WNYC in bringing Gothamist back to NYC.'}}
-
-      {{stripe.link 'Support us' 'https://pledge3.wnyc.org/donate/gothamist/onestep/'}}
+      {{stripe.label 'Support us'}}
     {{/nypr-ui/support-stripe}}
   {{/ember-wormhole}}
 
