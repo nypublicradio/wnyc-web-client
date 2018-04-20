@@ -71,14 +71,18 @@
               itemPK=preferredStream.slug
               itemTitle=preferredStream.name
               playContext='nav'
-              class='stream-launcher listen-button--stream'}}
+              data-action='Clicked Play/Pause Stream: Nav'
+              data-label=preferredStream.name
+              class='stream-launcher gtm__click-tracking'}}
               <span>Listen Live</span>
             {{/listen-button}}
           {{else}}
             {{!-- This 'button' is a top nav item that looks like a link. it doesn't show an icon to reflect state --}}
             {{!-- So clicking will always trigger a play action (and not a pause), state is locked to 'is-paused'  --}}
             {{#listen-button
-              class='listen-button--stream'
+              class='gtm__click-tracking'
+              data-action='Clicked Play/Pause Stream: Nav'
+              data-label=preferredStream.name
               type='vanilla'
               state='is-paused'
               itemPK=preferredStream.slug
