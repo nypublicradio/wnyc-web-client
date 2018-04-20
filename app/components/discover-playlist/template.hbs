@@ -64,7 +64,8 @@
               type='red-hollow'
               isCurrentSound=(and (eq story.id currentPlaylistStoryPk) isPlaying)
               playContext="discover"
-              class="playlist-play-indicator-button"
+              class='playlist-play-indicator-button gtm__click-tracking'
+              data-action='Clicked Discover Item'
               itemPK=story.id
               itemTitle=story.title
               itemShow=story.showTitle}}
