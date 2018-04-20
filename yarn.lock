@@ -1703,11 +1703,7 @@ caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
   version "1.0.30000830"
   resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000830.tgz#6e45255b345649fd15ff59072da1e12bb3de2f13"
 
-caniuse-lite@^1.0.30000792:
-  version "1.0.30000828"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000828.tgz#048f98de213f7a3c047bf78a9523c611855d4fdd"
-
-caniuse-lite@^1.0.30000821:
+caniuse-lite@^1.0.30000792, caniuse-lite@^1.0.30000821:
   version "1.0.30000830"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000830.tgz#cb96b8a2dd3cbfe04acea2af3c4e894249095328"
 
@@ -6812,8 +6808,8 @@ nypr-django-for-ember@>=0.1.0:
     ember-wormhole "^0.5.2"
 
 nypr-django-for-ember@>=0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/nypr-django-for-ember/-/nypr-django-for-ember-0.2.0.tgz#b91a133a666be24193ca7ae58f0fac05c075c531"
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/nypr-django-for-ember/-/nypr-django-for-ember-0.2.2.tgz#ce3a95d9bdfb9355272f59d2a6742334c032165b"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
