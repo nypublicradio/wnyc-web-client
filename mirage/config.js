@@ -58,8 +58,8 @@ export default function() {
   --------------------------------------------------------------*/
 
   this.get(`/api/v3/shows`);
-  this.get(`${baseUrl}/api/v3/shows`);
-  this.get(`${baseUrl}/api/v3/buckets/:slug/`, ({ buckets }, { params }) => {
+  this.get(`/api/v3/shows`);
+  this.get(`/api/v3/buckets/:slug/`, ({ buckets }, { params }) => {
     let { slug } = params;
 
     let bucket = buckets.where({slug}).models[0];
@@ -82,8 +82,8 @@ export default function() {
     }
   });
 
-  this.get(`${baseUrl}/api/v3/story-pk/:id/`, 'story');
-  this.get(`${baseUrl}/api/v3/story/:slug/`, ({ stories }, { params }) => {
+  this.get(`/api/v3/story-pk/:id/`, 'story');
+  this.get(`/api/v3/story/:slug/`, ({ stories }, { params }) => {
     let { slug } = params;
     return stories.where({ slug }).models[0];
   });
