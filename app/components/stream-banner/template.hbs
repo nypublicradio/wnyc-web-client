@@ -16,7 +16,9 @@
   </div>
   <div class="streambanner-controls">
     {{#listen-button
-      class='streambanner-listenbutton listen-button--stream'
+      class='streambanner-listenbutton gtm__click-tracking'
+      data-action='Clicked Play/Pause Stream: Other'
+      data-label=stream.name
       type='red-minion'
       itemPK=slug
       itemTitle=stream.name}}
