@@ -1,4 +1,3 @@
-/* eslint-env node */
 'use strict';
 var fs = require('fs');
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');

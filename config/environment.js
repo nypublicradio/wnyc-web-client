@@ -1,4 +1,3 @@
-/* eslint-env node */
 'use strict';
 
 module.exports = function(environment) {
@@ -61,10 +60,11 @@ module.exports = function(environment) {
       dsn: process.env.SENTRY_DSN,
       //debug: process.env.DEPLOY_TARGET !== 'production',
       development: environment !== 'production',
+    ENV.APP.autoboot = false;
       includePaths: [
         process.env.WQXR_URL,
         /https?:\/\/(static|demo-static)\.wnyc\.org/,
-        /https?:\/\/media\.wnyc\.org/,
+    // here you can enable a production-specific feature
         /https?:\/\/(demo2-wnyc)\.wqxr\.org/
       ],
       whitelistUrls: [
