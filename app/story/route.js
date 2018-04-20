@@ -23,10 +23,8 @@ export default Ember.Route.extend(PlayParamMixin, {
     return this.store.findRecord('story', slug, {adapterOptions: {queryParams}}).then(story => {
       let comments = this.store.query('comment', { itemTypeId: story.get('itemTypeId'), itemId: story.get('cmsPK') });
       let relatedStories = this.store.query('story', {related: { itemId: story.get('cmsPK'), limit: 5 }});
-      let show = (get(story, 'show')) ? this.store.findRecord('show', get(story, 'show')).catch(() => {}) : null
 
       return waitFor({
-        show,
         story,
         getComments: () => comments,
         getRelatedStories: () => relatedStories,
@@ -46,14 +44,10 @@ export default Ember.Route.extend(PlayParamMixin, {
     }
   },
 
-  setupController(controller, { show }) {
+  setupController(controller) {
     controller.set('isMobile', window.Modernizr.touchevents);
     controller.set('session', get(this, 'session'));
     controller.set('user', get(this, 'currentUser.user'));
-
-    if (show) {
-      this.controllerFor('application').set('customDonationUrl', get(show, 'donationUrl'));
-    }
 
     return this._super(...arguments);
   },
@@ -65,10 +59,6 @@ export default Ember.Route.extend(PlayParamMixin, {
     } else {
       this._super(...arguments);
     }
-  },
-
-  deactivate() {
-    this.controllerFor('application').set('customDonationUrl', null);
   },
 
   actions: {

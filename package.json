@@ -62,7 +62,6 @@
     "ember-feature-flags": "3.0.0",
     "ember-fetch": "^3.2.9",
     "ember-get-config": "^0.2.2",
-    "ember-gsap": "^1.0.1",
     "ember-hifi": "^1.11.3",
     "ember-holygrail-layout": "^0.1.4",
     "ember-hotjar": "^0.0.2",
@@ -99,7 +98,7 @@
     "nypr-metrics": "~0.0.0",
     "nypr-player": "~0.0.0",
     "nypr-publisher-lib": "^0.3.0",
-    "nypr-ui": "~0.2.4",
+    "nypr-ui": ">=0.2.8",
     "torii": "0.9.5"
   },
   "ember-addon": {
