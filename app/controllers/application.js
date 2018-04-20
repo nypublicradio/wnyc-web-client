@@ -45,7 +45,7 @@ export default Controller.extend({
 
     soundTitleDidChange() {
       if (this.get('hifi.currentSound.isStream')) {
-        this.get('listenAnalytics').trackStreamData(this.get('hifi.currentSound'));
+        this.get('dataLayer').audioTracking('schedule', this.get('hifi.currentSound'));
       }
     },
 
