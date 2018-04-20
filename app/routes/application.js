@@ -3,7 +3,6 @@ import get from 'ember-metal/get';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 import service from 'ember-service/inject';
 import RSVP from 'rsvp';
-import config from '../config/environment';
 
 export default Route.extend(ApplicationRouteMixin, {
   metrics: service(),
@@ -47,11 +46,6 @@ export default Route.extend(ApplicationRouteMixin, {
     return RSVP.hash({
       splashPage: this.store.findRecord('chunk', 'wqxr-global').catch(()=>'')
     });
-  },
-
-  setupController(controller, model) {
-    controller.set('defaultDonationUrl', config.donationUrl);
-    this._super(controller, model);
   },
 
   actions: {

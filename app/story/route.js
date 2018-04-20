@@ -22,11 +22,9 @@ export default Ember.Route.extend(PlayParamMixin, {
     return this.store.findRecord('story', slug, {adapterOptions: {queryParams}}).then(story => {
       let comments = this.store.query('comment', { itemTypeId: story.get('itemTypeId'), itemId: story.get('cmsPK') });
       let relatedStories = this.store.query('story', {related: { itemId: story.get('cmsPK'), limit: 5 }});
-      let show = (get(story, 'show')) ? this.store.findRecord('show', get(story, 'show')).catch(() => {}) : null
-      
+
       return waitFor({
         story,
-        show,
         getComments: () => comments,
         getRelatedStories: () => relatedStories,
         adminURL: `${config.adminRoot}/admin`
@@ -41,20 +39,33 @@ export default Ember.Route.extend(PlayParamMixin, {
     }
   },
 
-  setupController(controller, { show }) {
+  setupController(controller) {
     controller.set('isMobile', window.Modernizr.touchevents);
     controller.set('session', get(this, 'session'));
     controller.set('user', get(this, 'currentUser.user'));
 
-    if (show) {
-      this.controllerFor('application').set('customDonationUrl', get(show, 'donationUrl'));
-    }
-
     return this._super(...arguments);
   },
 
-  deactivate() {
-    this.controllerFor('application').set('customDonationUrl', null);
+  renderTemplate(controller, model) {
+    if (get(model, 'story.template') === 'story_full-bleed') {
+      this.send('disableChrome');
+      let image = get(model, 'story.imageMain');
+      // This logic is yields three cases corresponding to the three possible full-bleed template layouts:
+      // Big lead image, small lead image, and no lead image. If there is an image, and the width is big enough,
+      // don't show additional share links or the small lead image. If there is an image but it's small, show
+      // both the additional share links and the small lead. If there is no lead image, show only the additional share links.
+      if (image){
+        controller.set('showSmallLead', image.w < 1440);
+        controller.set('showShareLinks', image.w < 1440);
+      } else {
+        controller.set('showSmallLead', false);
+        controller.set('showShareLinks', true);
+      }
+      this.render('full-bleed');
+    } else {
+      this._super(...arguments);
+    }
   },
 
   actions: {
