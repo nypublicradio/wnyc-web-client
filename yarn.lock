@@ -7347,25 +7347,9 @@ nypr-publisher-lib@0.3.8:
     nypr-django-for-ember ">=0.1.0"
     nypr-ui ">=0.2.4"
 
-nypr-ui@>=0.2.4, nypr-ui@nypublicradio/nypr-ui#RT-623, nypr-ui@~0.1.0:
-  version "0.2.2"
-  resolved "https://codeload.github.com/nypublicradio/nypr-ui/tar.gz/73a37d00b7b6d204ee5e91102a1cc80e966b411c"
-  dependencies:
-    ember-basic-dropdown "0.33.1"
-    ember-cli-babel "^6.8.0"
-    ember-cli-htmlbars "^2.0.1"
-    ember-cli-htmlbars-inline-precompile "^1.0.0"
-    ember-cli-sass "^7.0.0"
-    ember-click-outside "0.1.11"
-    ember-composable-helpers "2.0.3"
-    ember-holygrail-layout "^0.1.4"
-    ember-power-select "^1.9.2"
-    ivy-tabs "3.1.0"
-    waypoints "^4.0.1"
-
-nypr-ui@>=0.2.8:
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.2.9.tgz#cbd30baa9f20fc47434e107145aeef72454a288a"
+nypr-ui@>=0.2.10, nypr-ui@>=0.2.4, nypr-ui@~0.1.0:
+  version "0.2.10"
+  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.2.10.tgz#ccd0e732f85dbc2f1045fe1bd96f42cee4bf8f32"
   dependencies:
     ember-basic-dropdown "0.34.0"
     ember-burger-menu "^3.1.0"
