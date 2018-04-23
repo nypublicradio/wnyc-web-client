@@ -18,7 +18,7 @@
       {{#row.label}}Latest From <a href="https://www.gothamist.com">Gothamist</a>{{/row.label}}
 
       {{#row.items items=model.gothamist as |story|}}
-        {{#story-card href=story.permalink as |card|}}
+        {{#story-card href=story.permalink class="gtm__click-tracking" data-action="gothamist" data-label=story.title as |card|}}
           {{card.image width=300 src=story.thumbnail_300}}
           {{#card.body}}
             {{story.title}}
