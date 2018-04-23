@@ -4,7 +4,7 @@ import { computed } from '@ember/object';
 export default Component.extend({
   tagName: 'a',
   classNames: ['story-card'],
-  attributeBindings: ['target', 'href', 'data-action', 'data-label'],
+  attributeBindings: ['target', 'href', 'data-category', 'data-action', 'data-label'],
   target: computed('href', function() {
     let url = this.get('href');
     url = new URL(url);
