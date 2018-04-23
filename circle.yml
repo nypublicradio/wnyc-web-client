@@ -89,7 +89,7 @@ jobs:
             if [[ "${CIRCLE_BRANCH}" == "demo" ]]; then
               env | sed -n 's/^DEMO_//p' >> .env
               npx ember deploy demo --verbose --activate
-            elif grep -q "v[0-9]+\.[0-9]+\.[0-9]+" <<< "$CIRCLE_TAG"; then
+            elif grep -qE "v[0-9]+\.[0-9]+\.[0-9]+" <<< "$CIRCLE_TAG"; then
               env | sed -n 's/^PROD_//p' >> .env
               npx ember deploy production --verbose --activate
             fi
