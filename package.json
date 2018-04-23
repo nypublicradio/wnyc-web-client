@@ -112,6 +112,7 @@
   },
   "resolutions": {
     "nypr-metrics": "<0.1.0",
-    "nypr-audio-services": "<0.3.0"
+    "nypr-audio-services": "<0.3.0",
+    "ember-responsive": "^2.0.4"
   }
 }
