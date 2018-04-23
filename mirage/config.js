@@ -80,7 +80,11 @@ export default function() {
     JSON:API (v3) endpoints
   --------------------------------------------------------------*/
 
-  this.get('/v3/shows');
+  this.get('/v3/shows', 'show');
+  this.get(`/v3/shows/:slug/`, ({ shows }, { params }) => {
+    let { slug } = params;
+    return shows.where({ slug }).models[0];
+  });
   this.get('/v3/buckets/:slug/', 'bucket');
   this.get('/v3/story-pk/:id/', 'story');
   this.get('/v3/story/:slug/', ({ stories }, { params }) => {

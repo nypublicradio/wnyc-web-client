@@ -462,12 +462,12 @@ body.ember-application.discover {
 
 // Get this out of the way when we're animating, because
 // fixed position elements dont' play nice with liquid-fire
-.liquid-animating .mod-sticky-header {
+.discover .liquid-animating .mod-sticky-header {
   opacity:0;
   transition: opacity 0.25s ease-in;
 }
 
-.mod-sticky-header{
+.discover .mod-sticky-header{
   opacity:1;
   position:fixed;
   top:0;

@@ -19,6 +19,7 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 @import "nypr-ui/hero";
 @import "nypr-ui/button-classes";
 @import "nypr-ui/network-stripe";
+@import "nypr-ui/brand-header";
 
 @import 'normalize';
 
@@ -131,6 +132,13 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 }
 
 @import 'lib/slick-1.4.1.scss';
+
+.nypr-brand-header > .nypr-brand-header-button {
+  border-bottom: 1px solid transparent; /* override wnyc style of border bottom hovers */
+}
+.nypr-brand-header-close:hover {
+  border-bottom: 1px solid #CCC;
+}
 
 /***
  * Molecules:
