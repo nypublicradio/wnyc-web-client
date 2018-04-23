@@ -57,33 +57,13 @@ export default function() {
     JSON:API (v3) endpoints
   --------------------------------------------------------------*/
 
-  this.get(`/api/v3/shows`);
-  this.get(`/api/v3/shows`);
-  this.get(`/api/v3/buckets/:slug/`, ({ buckets }, { params }) => {
-    let { slug } = params;
+  this.get('/v3/shows');
+  this.get('/v3/buckets/:slug/', ({ buckets }, { params }) => {
+    return buckets.findBy({ slug: params.slug });
+  })
 
-    let bucket = buckets.where({slug}).models[0];
-
-    if (bucket) {
-      return bucket
-    }
-    else {
-      return {
-        data: {
-          type: 'bucket',
-          id: null,
-          attributes: {
-            title: ""
-          }
-        }
-      }
-      // What it should do:
-      // return new Mirage.Response(422, {some: 'header'}, {errors: {title: ['cannot be blank']}});
-    }
-  });
-
-  this.get(`/api/v3/story-pk/:id/`, 'story');
-  this.get(`/api/v3/story/:slug/`, ({ stories }, { params }) => {
+  this.get('/v3/story-pk/:id/', 'story');
+  this.get('/v3/story/:slug/', ({ stories }, { params }) => {
     let { slug } = params;
     return stories.where({ slug }).models[0];
   });
