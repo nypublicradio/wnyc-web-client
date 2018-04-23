@@ -92,7 +92,7 @@
     "morgan": "^1.6.1",
     "nypr-account-settings": "~0.0.0",
     "nypr-ads": "~0.0.0",
-    "nypr-audio-services": "~0.3.0",
+    "nypr-audio-services": "<0.3.0",
     "nypr-auth": "~0.0.0",
     "nypr-django-for-ember": "~0.0.0",
     "nypr-metrics": "~0.0.0",
@@ -111,6 +111,7 @@
     "node": "^4.5 || 6.* || >= 7.*"
   },
   "resolutions": {
-    "nypr-metrics": "<0.1.0"
+    "nypr-metrics": "<0.1.0",
+    "nypr-audio-services": "<0.3.0"
   }
 }
