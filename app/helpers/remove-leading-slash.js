@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { helper as buildHelper } from '@ember/component/helper';
 
 export function removeLeadingSlash([ string ] /*, hash */) {
   if (string.startsWith('/')){
@@ -7,4 +7,4 @@ export function removeLeadingSlash([ string ] /*, hash */) {
   return string;
 }
 
-export default Ember.Helper.helper(removeLeadingSlash);
+export default buildHelper(removeLeadingSlash);

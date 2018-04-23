@@ -1,84 +1,86 @@
-import { test } from 'qunit';
-import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
-import Test from 'ember-test';
+import { click, findAll, currentURL, visit } from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
+import { registerWaiter, unregisterWaiter } from '@ember/test';
+import DummyConnection from 'ember-hifi/hifi-connections/dummy-connection';
 
-moduleForAcceptance('Acceptance | Selectors for GTM Analytics');
-
-function waitForStreams() {
-  return find('.stream-banner-station').length;
+const setupHifi = app => {
+  const HIFI = app.lookup('service:hifi');
+  app.register('hifi-connection:local-dummy-connection', DummyConnection, {instantiate: false});
+  HIFI.set('_connections', [HIFI._activateConnection({name: 'LocalDummyConnection'})]);
 }
 
-test('test for analytics selectors', function(assert) {
-  Test.registerWaiter(waitForStreams);
+module('Acceptance | Selectors for GTM Analytics', function(hooks) {
+  setupApplicationTest(hooks);
 
-  server.create('bucket', {slug: 'wqxr-home'});
-  server.createList('stream', 7);
-  server.createList('whats-on', 7);
+  function waitForStreams() {
+    return findAll('.stream-banner-station').length;
+  }
 
-  visit('/');
+  function findWithAssert(selector){
+    let found = findAll(selector);
+    if (found.length == 0){
+      throw "DOM element not found.";
+    } else {
+      return found;
+    }
+  }
 
-  andThen(function() {
-    Test.unregisterWaiter(waitForStreams);
+  test('test for analytics selectors', async function(assert) {
+    setupHifi(this.owner);
+    registerWaiter(waitForStreams);
+
+    server.create('bucket', {slug: 'wqxr-home'});
+    server.createList('stream', 7);
+    server.createList('whats-on', 7);
+
+    await visit('/');
+
+    unregisterWaiter(waitForStreams);
 
     assert.equal(currentURL(), '/');
     // UA, User clicks on a link in a homepage bucket
-    let show = findWithAssert('.brick__item .item__head__brand').first();
-    let overlayLink = findWithAssert('.brick__item .item__link--hidden').first();
+    let show = findWithAssert('.brick__item .item__head__brand')[0];
+    let overlayLink = findWithAssert('.brick__item .item__link--hidden')[0];
     // let title = findWithAssert('.item__head__headline > a').first();
 
     // assert event values
     let firstStory = server.db.buckets[0].bucketItems[0].attributes;
     let shows = firstStory.headers.links.reverse().map(l => l.title).join(' | ');
 
-    assert.equal(`${shows} | ${firstStory.title}`, overlayLink.attr('title'), 'link overlay should include analytics info');
+    assert.equal(`${shows} | ${firstStory.title}`, overlayLink.attributes.getNamedItem('title').value, 'link overlay should include analytics info');
     // assert.equal(`${shows} | ${firstStory.title}`, title.attr('title'), 'headline link should include analytics info');
-    assert.equal(firstStory.headers.brand.title, show.attr('title'), 'show link should include analytics info');
-  });
-
-  andThen(function() {
+    assert.equal(firstStory.headers.brand.title, show.attributes.getNamedItem('title').value, 'show link should include analytics info');
     // UA, User Launches Stream from Stream Banner
     findWithAssert('.stream-banner__active-stream');
-    click(findWithAssert('.stream-banner-listenbutton'));
-  });
-
-  andThen(function() {
+    await click(findWithAssert('.stream-banner-listenbutton')[0]);
     // UA, User Pauses Listen Live from Stream Banner
     findWithAssert('.stream-banner-listenbutton.is-playing');
 
     // UA Pause Persistent Player
-    let pauseButton = findWithAssert('.nypr-player-button.mod-listen.is-playing');
-    assert.ok(pauseButton.attr('title'));
+    let pauseButton = findWithAssert('.nypr-player-button.mod-listen.is-playing')[0];
+    assert.ok(pauseButton.attributes.getNamedItem('title').value);
 
     // UA Fast forward from persistent player
     findWithAssert('.nypr-player-button.mod-fastforward');
     // UA Rewind from persistent player
     findWithAssert('.nypr-player-button.mod-rewind');
 
-    click(pauseButton);
-  });
+    await click(pauseButton);
+    let playButton = findWithAssert('.nypr-player-button.mod-listen.is-paused')[0];
+    assert.ok(playButton.attributes.getNamedItem('title').value);
+    await click('.nypr-sharebutton button');
 
-  andThen(function() {
-    let playButton = findWithAssert('.nypr-player-button.mod-listen.is-paused');
-    assert.ok(playButton.attr('title'));
-  });
-  click('.nypr-sharebutton button');
-
-  andThen(function() {
     // UA, User shares stream from persistent player
     findWithAssert('.nypr-sharebutton-listitem > button');
     // findWithAssert('.nypr-player-stream-info-station-info > a');
-  });
 
-  click('.ember-basic-dropdown-trigger');
+    await click('.ember-basic-dropdown-trigger');
 
-  andThen(function() {
     // UA, User Selects a Station from Stream Banner Dropdown
     findWithAssert('.stream-banner-dropdown .ember-power-select-option');
-  });
-
-  andThen(function() {
     // UA Menu Social Links
     let socialLinks = findWithAssert('.sitechrome__nav-footer .nypr-social-icons__link');
-    socialLinks.each(() => assert.ok(socialLinks.attr('title')));
+    socialLinks.forEach((e) => assert.ok(e.attributes.getNamedItem('title').value));
   });
 });

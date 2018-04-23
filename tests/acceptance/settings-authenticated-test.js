@@ -1,13 +1,16 @@
-import { test } from 'qunit';
-import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
+import { find, click, findAll, visit } from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
 import {
   authenticateSession,
   currentSession
 } from 'wqxr-web-client/tests/helpers/ember-simple-auth';
 import 'wqxr-web-client/tests/helpers/with-feature';
 
-moduleForAcceptance('Acceptance | settings', {
-  beforeEach() {
+module('Acceptance | settings', function(hooks) {
+  setupApplicationTest(hooks);
+
+  hooks.beforeEach(function() {
     server.create('user');
     authenticateSession(this.application, {access_token: 'foo'});
 
@@ -15,39 +18,33 @@ moduleForAcceptance('Acceptance | settings', {
     session.set('data.user-prefs-active-stream', {slug: 'wqxr', name: 'WQXR 105.9 FM'});
     session.set('data.user-prefs-active-autoplay', 'default_stream');
     server.createList('stream', 7);
-  }
-});
-
-test('after visiting settings, user can select different stream', function(assert) {
-  let stream = server.schema.streams.all().models[1];
-  visit('/settings');
-
-  click('.user-stream .ember-power-select-trigger').then(() => {
-    click('.user-stream .ember-power-select-option:eq(1)');
   });
 
-  andThen(function() {
-    var actualStream = find('.user-stream .ember-power-select-selected-item').text().trim();
+  test('after visiting settings, user can select different stream', async function(assert) {
+    let stream = server.schema.streams.all().models[1];
+    await visit('/settings');
+
+    await await await click('.user-stream .ember-power-select-trigger').then(async () => {
+      await click(findAll('.user-stream .ember-power-select-option')[1]);
+    });
+
+    var actualStream = find('.user-stream .ember-power-select-selected-item').textContent.trim();
     assert.equal(actualStream, stream.name);
   });
-});
 
-test('the stream button in the nav should match the default stream', function(assert) {
-  visit('/settings');
+  test('the stream button in the nav should match the default stream', async function(assert) {
+    await visit('/settings');
 
-  andThen(function() {
-    const actualLabel = find('.stream-launcher').attr('aria-label');
+    const actualLabel = find('.stream-launcher').getAttribute('aria-label');
     const expectedLabel = 'Listen to WQXR 105.9 FM';
     assert.equal(actualLabel, expectedLabel);
   });
-});
 
-test('after visiting settings, user can toggle off autoplay settings', function(assert) {
-  visit('/settings');
+  test('after visiting settings, user can toggle off autoplay settings', async function(assert) {
+    await visit('/settings');
 
-  click('.toggle');
-  andThen(function() {
-    var expectedElementCount = find('.inactive-toggle').length;
+    await click('.toggle');
+    var expectedElementCount = findAll('.inactive-toggle').length;
     var actualElementCount = 1;
     assert.equal(expectedElementCount, actualElementCount);
   });

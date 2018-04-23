@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
 import config from 'wqxr-web-client/config/environment';
 import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-route-mixin';
 
-export default Ember.Route.extend(UnauthenticatedRouteMixin, {
+export default Route.extend(UnauthenticatedRouteMixin, {
   titleToken: 'Log in',
   setupController(controller) {
     controller.set('config', config);

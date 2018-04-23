@@ -1,20 +1,22 @@
-import Ember from 'ember';
+import { alias } from '@ember/object/computed';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
+import { bind, later } from '@ember/runloop';
+import $ from 'jquery';
 
- var $window = Ember.$(window),
-  $document = Ember.$(document),
-    bind = Ember.run.bind;
+var $window = $(window), $document = $(document);
 
-export default Ember.Component.extend({
+export default Component.extend({
   page: 1,
   isFetching: false,
 
-  hasMore: Ember.computed('shows', 'activeShows', function(){
+  hasMore: computed('shows', 'activeShows', function(){
     return (this.get('activeShows.length') < this.get('shows.length'));
   }),
 
-  totalShows: Ember.computed.alias('shows.length'),
+  totalShows: alias('shows.length'),
 
-  activeShows: Ember.computed('shows', 'page', function(){
+  activeShows: computed('shows', 'page', function(){
     return this.get('shows').slice(0, this.get('page')*10 );
   }),
 
@@ -37,7 +39,7 @@ export default Ember.Component.extend({
   didScroll: function() {
     if (this.scrolledToEnd() && this.get('hasMore') && !this.get('isFetching')) {
       this.set('isFetching', true);
-      Ember.run.later(()=>{
+      later(()=>{
         this.incrementProperty('page');
         this.set('isFetching', false);
       }, 1000);

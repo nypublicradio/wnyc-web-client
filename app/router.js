@@ -1,7 +1,6 @@
 import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
-import AnalyticsMixin from './mixins/analytics';
-import service from 'ember-service/inject';
+import { inject as service } from '@ember/service';
 
 const Router = EmberRouter.extend({
   location: config.locationType,

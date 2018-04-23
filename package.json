@@ -72,7 +72,7 @@
     "ember-multiselect-checkboxes": "0.10.3",
     "ember-poll": "^1.2.0",
     "ember-query-method": "^0.1.0",
-    "ember-resolver": "^4.0.0",
+    "ember-resolver": "^4.5.5",
     "ember-responsive": "^2.0.4",
     "ember-route-action-helper": "2.0.6",
     "ember-scroll-to": "0.6.4",

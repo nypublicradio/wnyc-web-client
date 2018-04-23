@@ -1,15 +1,16 @@
-import Ember from 'ember';
-import service from 'ember-service/inject';
-const { computed } = Ember;
+import { equal } from '@ember/object/computed';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
 
-export default Ember.Component.extend({
+export default Component.extend({
   metrics: service(),
   session: service(),
   autoPlayPrefs: [
     { name: 'My Default Stream', field: 'default_stream' },
   ],
 
-  enableAutoplay: computed.equal('session.data.user-prefs-active-autoplay', 'no_autoplay'),
+  enableAutoplay: equal('session.data.user-prefs-active-autoplay', 'no_autoplay'),
   activeStream: computed('session.data.user-prefs-active-stream.slug', function(){
     let streams = this.get('streams');
     let currentStream = this.getWithDefault('session.data.user-prefs-active-stream', {slug: 'wqxr', name: 'WQXR 105.9 FM'});

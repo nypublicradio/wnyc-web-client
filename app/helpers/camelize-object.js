@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { helper as buildHelper } from '@ember/component/helper';
 
 export function camelizeObj(source) {
   let dest = null;
@@ -20,4 +20,4 @@ export function camelizeObj(source) {
   return dest;
 }
 
-export default Ember.Helper.helper(camelizeObj);
+export default buildHelper(camelizeObj);

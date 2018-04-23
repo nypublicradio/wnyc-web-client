@@ -1,76 +1,70 @@
-import { test } from 'qunit';
-import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
+import {
+  click,
+  fillIn,
+  findAll,
+  currentURL,
+  find,
+  visit
+} from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
 import { authenticateSession } from 'wqxr-web-client/tests/helpers/ember-simple-auth';
 
-moduleForAcceptance('Acceptance | verify', {
-  beforeEach() {
+module('Acceptance | verify', function(hooks) {
+  setupApplicationTest(hooks);
+
+  hooks.beforeEach(function() {
     server.create('stream');
-  }
-});
+  });
 
-test('visiting /verify unauthenticated shows a login form', function(assert) {
-  visit('/verify');
+  test('visiting /verify unauthenticated shows a login form', async function(assert) {
+    await visit('/verify');
 
-  return andThen(() => {
     assert.equal(currentURL(), '/verify');
-    assert.equal(find('.account-form-heading').text().trim(), 'Log in to WQXR');
+    assert.equal(find('.account-form-heading').textContent.trim(), 'Log in to WQXR');
   });
-});
 
-test('visiting /verify with correct params takes you to profile with success alert', function(assert) {
-  authenticateSession(this.application, {access_token: 'foo'});
-  server.create('user');
+  test('visiting /verify with correct params takes you to profile with success alert', async function(assert) {
+    authenticateSession(this.application, {access_token: 'foo'});
+    server.create('user');
 
-  visit('/verify?verification_token=abc&email_id=def');
+    await visit('/verify?verification_token=abc&email_id=def');
 
-  return andThen(() => {
     assert.equal(currentURL(), '/profile');
-    assert.equal(find('.alert.alert-success').length, 1);
+    assert.equal(findAll('.alert.alert-success').length, 1);
   });
-});
 
-test('visiting /verify with missing params takes you to profile with warning alert', function(assert) {
-  authenticateSession(this.application, {access_token: 'foo'});
-  server.create('user');
+  test('visiting /verify with missing params takes you to profile with warning alert', async function(assert) {
+    authenticateSession(this.application, {access_token: 'foo'});
+    server.create('user');
 
-  visit('/verify');
+    await visit('/verify');
 
-  return andThen(() => {
     assert.equal(currentURL(), '/profile');
-    assert.equal(find('.alert.alert-warning').length, 1);
-  });
-});
-
-test('visiting /verify with correct params and logging in takes you to profile with success alert', function(assert) {
-  server.create('user');
-
-  visit('/verify?verification_token=abc&email_id=def');
-
-  andThen(() => {
-    fillIn('input[name=email]', 'foo@example.com');
-    fillIn('input[name=password]', 'password1');
-    click('button[type=submit]:contains(Log in)');
+    assert.equal(findAll('.alert.alert-warning').length, 1);
   });
 
-  return andThen(() => {
+  test('visiting /verify with correct params and logging in takes you to profile with success alert', async function(assert) {
+    server.create('user');
+
+    await visit('/verify?verification_token=abc&email_id=def');
+
+    await fillIn('input[name=email]', 'foo@example.com');
+    await fillIn('input[name=password]', 'password1');
+    await click('button[type=submit]:contains(Log in)');
     assert.equal(currentURL(), '/profile');
-    assert.equal(find('.alert.alert-success').length, 1);
-  });
-});
-
-test('visiting /verify with missing params and logging in takes you to profile with warning alert', function(assert) {
-  server.create('user');
-
-  visit('/verify');
-
-  andThen(() => {
-    fillIn('input[name=email]', 'foo@example.com');
-    fillIn('input[name=password]', 'password1');
-    click('button[type=submit]:contains(Log in)');
+    assert.equal(findAll('.alert.alert-success').length, 1);
   });
 
-  return andThen(() => {
+  test('visiting /verify with missing params and logging in takes you to profile with warning alert', async function(assert) {
+    server.create('user');
+
+    await visit('/verify');
+
+    await fillIn('input[name=email]', 'foo@example.com');
+    await fillIn('input[name=password]', 'password1');
+    await click('button[type=submit]:contains(Log in)');
     assert.equal(currentURL(), '/profile');
-    assert.equal(find('.alert.alert-warning').length, 1);
+    assert.equal(findAll('.alert.alert-warning').length, 1);
   });
 });

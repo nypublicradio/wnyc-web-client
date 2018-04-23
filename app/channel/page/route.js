@@ -1,6 +1,6 @@
-import Route from 'ember-route';
-import get, { getProperties } from 'ember-metal/get';
-import set from 'ember-metal/set';
+import Route from '@ember/routing/route';
+import { get, getProperties } from '@ember/object';
+import { set } from '@ember/object';
 import ListingRouteMixin from 'wqxr-web-client/mixins/listing-route';
 
 export default Route.extend(ListingRouteMixin, {

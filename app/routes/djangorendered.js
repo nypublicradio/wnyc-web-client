@@ -1,7 +1,7 @@
 import ENV from 'wqxr-web-client/config/environment';
-import Route from 'ember-route';
-import get from 'ember-metal/get';
-import service from 'ember-service/inject';
+import Route from '@ember/routing/route';
+import { get } from '@ember/object';
+import { inject as service } from 'ember/service';
 import { retryFromServer, beforeTeardown } from 'nypr-django-for-ember/utils/compat-hooks';
 import PlayParamMixin from 'wqxr-web-client/mixins/play-param';
 

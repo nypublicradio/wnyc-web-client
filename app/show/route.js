@@ -1,11 +1,11 @@
-import Route from 'ember-route';
-import service from 'ember-service/inject';
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
 import RSVP from 'rsvp';
 import ENV from 'wqxr-web-client/config/environment';
 
 export default Route.extend({
   titleToken: 'All Shows, Podcasts and Programs',
-  
+
   googleAds: service(),
 
   model() {
@@ -21,7 +21,7 @@ export default Route.extend({
       //featured: this.store.findRecord('bucket', 'wnyc-shows-featured').then(b => b.get('bucketItems.firstObject'))
     });
   },
-  
+
   afterModel() {
     this.get('googleAds').doTargeting();
   },

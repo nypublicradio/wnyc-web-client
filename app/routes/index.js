@@ -1,9 +1,9 @@
-import Route from 'ember-route';
-import service from 'ember-service/inject';
+import Route from '@ember/routing/route';
+import { get } from '@ember/object';
+import { inject as service } from '@ember/service';
 import PlayParamMixin from 'wqxr-web-client/mixins/play-param';
 import DS from 'ember-data';
 import RSVP from 'rsvp';
-import get from 'ember-metal/get';
 
 const STREAM_BG = '/assets/img/backgrounds/streambanner.jpg';
 

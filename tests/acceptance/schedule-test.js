@@ -1,70 +1,63 @@
-import { skip } from 'qunit';
+import { click, findAll, currentURL, visit } from '@ember/test-helpers';
+import { module, skip } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
 import test from 'ember-sinon-qunit/test-support/test';
-import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
 import moment from 'moment';
 
-moduleForAcceptance('Acceptance | schedule', {
-  beforeEach() {
+module('Acceptance | schedule', function(hooks) {
+  setupApplicationTest(hooks);
+
+  hooks.beforeEach(function() {
     server.create('stream');
-  }
-});
+  });
 
-test('visiting /schedule', function(assert) {
-  let date = moment().format('YYYY/MMM/DD').toLowerCase();
-  server.create('django-page', {id: `schedule/${date}/?scheduleStation=wqxr`});
-  visit('/schedule');
+  test('visiting /schedule', async function(assert) {
+    let date = moment().format('YYYY/MMM/DD').toLowerCase();
+    server.create('django-page', {id: `schedule/${date}/?scheduleStation=wqxr`});
+    await visit('/schedule');
 
-  andThen(function() {
     // ember strips the trailing slash
     assert.equal(currentURL(), `/schedule/${date}?scheduleStation=wqxr`);
-    assert.equal(find('#leaderboard').length, 1, 'leaderboard is present');
-  });
-});
-
-test('clicking on /schedule', function(assert) {
-  let date = moment().format('YYYY/MMM/DD').toLowerCase();
-  server.create('django-page', {id: 'fake/'});
-  server.create('django-page', {id: `schedule/${date}/?scheduleStation=wqxr`});
-
-  visit('/fake');
-
-  andThen(function() {
-    click('a[href="/schedule"]');
+    assert.equal(findAll('#leaderboard').length, 1, 'leaderboard is present');
   });
 
-  andThen(function() {
+  test('clicking on /schedule', async function(assert) {
+    let date = moment().format('YYYY/MMM/DD').toLowerCase();
+    server.create('django-page', {id: 'fake/'});
+    server.create('django-page', {id: `schedule/${date}/?scheduleStation=wqxr`});
+
+    await visit('/fake');
+
+    await click('a[href="/schedule"]');
+
     assert.equal(currentURL(), `/schedule/${date}?scheduleStation=wqxr`);
   });
-});
 
-skip('transitioning to a specific schedule', function(assert) {
-  let date = moment().format('YYYY/MMM/DD').toLowerCase();
-  server.create('django-page', {
-    id: '/streams',
-    testMarkup: `
-    <a href="/schedule/?scheduleStation=wqxr" id="foo">foo</a>
-    `
-  });
-  server.create('django-page', {id: `schedule/${date}/?scheduleStation=wqxr`});
+  skip('transitioning to a specific schedule', async function(assert) {
+    let date = moment().format('YYYY/MMM/DD').toLowerCase();
+    server.create('django-page', {
+      id: '/streams',
+      testMarkup: `
+      <a href="/schedule/?scheduleStation=wqxr" id="foo">foo</a>
+      `
+    });
+    server.create('django-page', {id: `schedule/${date}/?scheduleStation=wqxr`});
 
-  visit('/streams');
-  click('#foo');
+    await visit('/streams');
+    await click('#foo');
 
-  andThen(function() {
     assert.equal(currentURL(), `/schedule/${date}?scheduleStation=wqxr`);
   });
-});
 
-test('schedule routes do dfp targeting', function(/*assert*/) {
-  // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
-  visit('/');
-  andThen(() => {
+  test('schedule routes do dfp targeting', async function() /*assert*/{
+    // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
+    await visit('/');
     this.mock(this.application.__container__.lookup('route:schedule.date').get('googleAds'))
       .expects('doTargeting')
       .once();
-  });
-  let date = moment().format('YYYY/MMM/DD').toLowerCase();
-  server.create('django-page', {id: `schedule/${date}/?scheduleStation=wqxr`});
+    let date = moment().format('YYYY/MMM/DD').toLowerCase();
+    server.create('django-page', {id: `schedule/${date}/?scheduleStation=wqxr`});
 
-  visit('/schedule');
+    await visit('/schedule');
+  });
 });

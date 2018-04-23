@@ -1,7 +1,7 @@
-import Controller from 'ember-controller';
-import service from 'ember-service/inject';
+import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 import config from 'wqxr-web-client/config/environment';
-import get from 'ember-metal/get';
+import { get } from '@ember/object';
 
 const FLASH_MESSAGES = {
   set: 'Your password has been successfully updated.',

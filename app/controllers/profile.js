@@ -1,10 +1,10 @@
-import Ember from 'ember';
-import Controller from 'ember-controller';
-import service from 'ember-service/inject';
+import $ from 'jquery';
+import Evented from '@ember/object/evented';
+import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 import config from 'wqxr-web-client/config/environment';
 import { task, waitForEvent } from 'ember-concurrency';
-import get from 'ember-metal/get';
-import set from 'ember-metal/set';
+import { get, set } from '@ember/object';
 import fetch from 'fetch';
 import RSVP from 'rsvp';
 
@@ -13,7 +13,7 @@ const FLASH_MESSAGES = {
   password: 'Your password has been updated.'
 };
 
-export default Controller.extend(Ember.Evented, {
+export default Controller.extend(Evented, {
   session: service(),
   flashMessages: service(),
   torii: service(),
@@ -135,11 +135,11 @@ export default Controller.extend(Ember.Evented, {
   }),
 
   promptForPassword: task(function * () {
-    Ember.$('body').addClass('has-nypr-account-modal-open');
+    $('body').addClass('has-nypr-account-modal-open');
     try {
       yield waitForEvent(this, 'passwordVerified');
     } finally {
-      Ember.$('body').removeClass('has-nypr-account-modal-open');
+      $('body').removeClass('has-nypr-account-modal-open');
       set(this, 'password', null);
     }
   }).drop(),

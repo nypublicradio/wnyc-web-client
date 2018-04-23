@@ -60,7 +60,6 @@ module.exports = function(environment) {
       dsn: process.env.SENTRY_DSN,
       //debug: process.env.DEPLOY_TARGET !== 'production',
       development: environment !== 'production',
-    ENV.APP.autoboot = false;
       includePaths: [
         process.env.WQXR_URL,
         /https?:\/\/(static|demo-static)\.wnyc\.org/,
@@ -194,6 +193,7 @@ module.exports = function(environment) {
     ENV.authAPI = 'http://example.com';
     ENV.membershipAPI = 'http://example.com';
     ENV.platformEventsAPI = 'http://example.com';
+    ENV.APP.autoboot = false;
   }
 
   if (environment === 'production') {

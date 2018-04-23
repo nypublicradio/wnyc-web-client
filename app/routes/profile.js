@@ -1,7 +1,7 @@
-import Route from 'ember-route';
-import service from 'ember-service/inject';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
-import get from 'ember-metal/get';
+import Route from '@ember/routing/route';
+import { get } from '@ember/object';
+import { inject as service } from 'ember/service';
 
 export default Route.extend(AuthenticatedRouteMixin, {
   currentUser: service(),

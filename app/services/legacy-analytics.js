@@ -1,10 +1,7 @@
-import service from 'ember-service/inject';
-import Ember from 'ember';
-const {
-  $,
-  get,
-  Service,
-} = Ember;
+import $ from 'jquery';
+import { get } from '@ember/object';
+import Service from '@ember/service';
+import { inject as service } from '@ember/service';
 
 const MENU_SELECTORS = '#navigation-menu';
 const HOMEPAGE_SELECTORS = '#wnyc_home a[href^=http], #wnyc_home a.external-link';

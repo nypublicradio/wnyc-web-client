@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { helper } from 'ember-helper';
+import { helper } from '@ember/component/helper';
 
 export function numericDuration([milliseconds]) {
   let hours = moment.duration(milliseconds).get('hours');

@@ -1,81 +1,79 @@
+import {
+  fillIn,
+  keyEvent,
+  findAll,
+  currentURL,
+  find,
+  visit
+} from '@ember/test-helpers';
 import test from 'ember-sinon-qunit/test-support/test';
-import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
+import { setupApplicationTest } from 'ember-qunit';
+import { module } from 'qunit';
 
-moduleForAcceptance('Acceptance | shows', {
-  beforeEach() {
+module('Acceptance | shows', function(hooks) {
+  setupApplicationTest(hooks);
+
+  hooks.beforeEach(function() {
     server.create('stream');
-  }
-});
+  });
 
 
-test('visiting /shows', function(assert) {
-  server.createList('show', 10);
-  server.create('bucket', {slug: 'wnyc-shows-featured'});
-  
-  visit('/shows');
+  test('visiting /shows', async function(assert) {
+    server.createList('show', 10);
+    server.create('bucket', {slug: 'wnyc-shows-featured'});
 
-  andThen(function() {
+    await visit('/shows');
+
     assert.equal(currentURL(), '/shows');
 
     //one show is featured
     //we're disabling this featured show module for now
     //assert.equal( $('.l-highlight--geometric .flag').length, 1, "one featured item is present");
-    
+
     //10 shows are listed, per test data
-    assert.equal(find('.shows-list ul li').length, 10, "ten shows are listed" );
+    assert.equal(findAll('.shows-list ul li').length, 10, "ten shows are listed" );
 
     //ad is there
-    assert.equal(find('#leaderboard').length, 1, "ad is present" );
-  });
-});
-
-test('searching /shows', function(assert) {
-  server.createList('show', 10);
-  visit('/shows');
-
-  andThen(function() {
-    fillIn(".shows-search .searchbox--shows input", "ra");
-    keyEvent('.shows-search .searchbox--shows input', 'keyup');
-    andThen(function() {  
-      //no longer expect 10 shows
-      assert.notEqual(find('.shows-list li').length, 10, "filtering results in less than 10 shows");
-    });
+    assert.equal(findAll('#leaderboard').length, 1, "ad is present" );
   });
 
-  server.create('bucket', {slug: 'wqxr-home'});
-  server.create('djangoPage', {id:'/'});
-  visit('/');
-  visit('/shows');
+  test('searching /shows', async function(assert) {
+    server.createList('show', 10);
+    await visit('/shows');
 
-  andThen(function() {
-    assert.equal(find('.shows-list li').length, 10, "all shows visible after navigating");
-  });
-});
-  
+    await fillIn(".shows-search .searchbox--shows input", "ra");
+    await keyEvent('.shows-search .searchbox--shows input', 'keyup');
+    //no longer expect 10 shows
+    assert.notEqual(findAll('.shows-list li').length, 10, "filtering results in less than 10 shows");
 
-test('searching with no results /shows', function(assert) {
-  server.createList('show', 10);
-  server.create('bucket', {slug: 'wnyc-shows-featured'});
-  visit('/shows');
-  fillIn(".shows-search .searchbox--shows input", "Nonsense Message");
-  keyEvent('.shows-search .searchbox--shows input', 'keyup', 13);
+    server.create('bucket', {slug: 'wqxr-home'});
+    server.create('djangoPage', {id:'/'});
+    await visit('/');
+    await visit('/shows');
 
-  //show the no results found message
-  andThen(function() {
-    assert.equal(find(".shows-list").text().trim(), "Sorry, but no matching shows were found. Try a different spelling or other words in the title of the show you're looking for. If you're looking for something other than a show name, try searching the rest of the website.", "No results message displays");
+    assert.equal(findAll('.shows-list li').length, 10, "all shows visible after navigating");
   });
 
-});
 
-test('show routes do dfp targeting', function(/*assert*/) {
-  // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
-  visit('/');
+  test('searching with no results /shows', async function(assert) {
+    server.createList('show', 10);
+    server.create('bucket', {slug: 'wnyc-shows-featured'});
+    await visit('/shows');
+    await fillIn(".shows-search .searchbox--shows input", "Nonsense Message");
+    await keyEvent('.shows-search .searchbox--shows input', 'keyup', 13);
 
-  andThen(() => {
+    assert.equal(find(".shows-list").textContent.trim(), "Sorry, but no matching shows were found. Try a different spelling or other words in the title of the show you're looking for. If you're looking for something other than a show name, try searching the rest of the website.", "No results message displays");
+
+  });
+
+  test('show routes do dfp targeting', async function() /*assert*/{
+    // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
+    await visit('/');
+
     this.mock(this.application.__container__.lookup('route:show').get('googleAds'))
       .expects('doTargeting')
       .once();
-  });
 
-  visit('/shows');
+    await visit('/shows');
+  });
 });

@@ -1,6 +1,6 @@
-import Component from 'ember-component';
-import computed from 'ember-computed';
-import { htmlSafe } from 'ember-string';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { htmlSafe } from '@ember/string';
 
 const ASSET_MAP = {
   '404': '/assets/img/error/violinist.jpg'
@@ -16,7 +16,7 @@ const TEXT_MAP = {
 export default Component.extend({
   classNames: ['error-page'],
   attributeBindings: ['style'],
-  
+
   style: computed('errorCode', function() {
     let imagePath = ASSET_MAP[this.get('errorCode')];
     return htmlSafe(`background-image: url(${imagePath});`);

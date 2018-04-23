@@ -1,6 +1,6 @@
 import config from 'wqxr-web-client/config/environment';
 import { Response, faker } from 'ember-cli-mirage';
-import get from 'ember-metal/get';
+import { get } from '@ember/object';
 
 // Mirage is diabled by default when using --proxy
 // In development (without --proxy) and test environments, these handlers will be used

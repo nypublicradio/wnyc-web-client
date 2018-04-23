@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { helper as buildHelper } from '@ember/component/helper';
 import moment from 'moment';
 
 export function humanizeDuration(params/*, hash*/) {
@@ -30,4 +30,4 @@ function withUnits(value, singularUnit) {
   }
 }
 
-export default Ember.Helper.helper(humanizeDuration);
+export default buildHelper(humanizeDuration);

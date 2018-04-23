@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { assign } from '@ember/polyfills';
 import nyprPlayerBreakpoints from 'nypr-player/breakpoints';
 
 const narrow = 321;
@@ -8,7 +8,7 @@ const medium = 801;
 const large = 1025;
 const short = 700;
 
-export default Ember.assign({
+export default assign({
   largeAndUp: `(min-width: ${large}px)`,
   mediumAndUp: `(min-width: ${medium}px)`,
   smallAndUp: `(min-width: ${narrow}px)`,

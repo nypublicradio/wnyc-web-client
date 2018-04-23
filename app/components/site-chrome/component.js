@@ -1,7 +1,7 @@
-import Component from 'ember-component';
-import service from 'ember-service/inject';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 import config from 'wqxr-web-client/config/environment';
-import { or } from 'ember-computed';
+import { or } from '@ember/object/computed';
 
 export default Component.extend({
   session: service(),
