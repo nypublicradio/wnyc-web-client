@@ -15,7 +15,7 @@
 
   {{#ember-wormhole to='gothamist-row'}}
     {{#story-row as |row|}}
-      {{#row.label}}Latest News From <a href="https://www.gothamist.com">Gothamist</a>{{/row.label}}
+      {{#row.label}}Latest From <a href="https://www.gothamist.com">Gothamist</a>{{/row.label}}
 
       {{#row.items items=model.gothamist as |story|}}
         {{#story-card href=story.permalink as |card|}}
