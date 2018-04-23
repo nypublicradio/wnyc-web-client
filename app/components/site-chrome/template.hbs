@@ -9,8 +9,7 @@
 {{!--
   Using double link-to in order to get an active class on the li tag
 --}}
-{{#way-point on-up=(action (mut sticky) value="true") on-down=(action (mut sticky) value="")}}
-{{/way-point}}
+{{way-point on-up=(action (mut sticky) false) on-down=(action (mut sticky) true)}}
 
 <div class="l-page" id='site-chrome'>
   <div class="sitechrome-top">
