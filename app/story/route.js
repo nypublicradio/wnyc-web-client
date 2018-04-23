@@ -19,10 +19,10 @@ export default Ember.Route.extend(PlayParamMixin, {
     return `${tokens[0]} - WQXR`;
   },
   model({ slug }, { queryParams }) {
-
     return this.store.findRecord('story', slug, {adapterOptions: {queryParams}}).then(story => {
       let comments = this.store.query('comment', { itemTypeId: story.get('itemTypeId'), itemId: story.get('cmsPK') });
       let relatedStories = this.store.query('story', {related: { itemId: story.get('cmsPK'), limit: 5 }});
+
       return waitFor({
         story,
         getComments: () => comments,
@@ -43,6 +43,7 @@ export default Ember.Route.extend(PlayParamMixin, {
     controller.set('isMobile', window.Modernizr.touchevents);
     controller.set('session', get(this, 'session'));
     controller.set('user', get(this, 'currentUser.user'));
+
     return this._super(...arguments);
   },
 

@@ -58,9 +58,10 @@ export default function() {
   --------------------------------------------------------------*/
 
   this.get('/v3/shows');
-  this.get('/v3/buckets/:slug/',  ({ buckets }, { params }) => {
+  this.get('/v3/buckets/:slug/', ({ buckets }, { params }) => {
     return buckets.findBy({ slug: params.slug });
-  });
+  })
+
   this.get('/v3/story-pk/:id/', 'story');
   this.get('/v3/story/:slug/', ({ stories }, { params }) => {
     let { slug } = params;
