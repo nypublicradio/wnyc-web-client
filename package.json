@@ -97,7 +97,7 @@
     "nypr-django-for-ember": "~0.0.0",
     "nypr-metrics": "~0.0.0",
     "nypr-player": "~0.0.0",
-    "nypr-publisher-lib": "^0.3.0",
+    "nypr-publisher-lib": "0.3.8",
     "nypr-ui": ">=0.2.8",
     "torii": "0.9.5"
   },
@@ -113,6 +113,7 @@
   "resolutions": {
     "nypr-metrics": "<0.1.0",
     "nypr-audio-services": "<0.3.0",
+    "nypr-ui": ">=0.2.8",
     "ember-responsive": "^2.0.4"
   }
 }
