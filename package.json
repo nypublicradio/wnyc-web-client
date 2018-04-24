@@ -99,7 +99,7 @@
     "nypr-audio-services": ">=0.3.7",
     "nypr-auth": ">=0.2.2",
     "nypr-django-for-ember": ">=0.2.0",
-    "nypr-metrics": "<0.1.0",
+    "nypr-metrics": ">=0.3.0",
     "nypr-player": ">=0.2.0",
     "nypr-publisher-lib": ">=0.3.5",
     "nypr-ui": ">=0.2.15",
@@ -120,7 +120,6 @@
     "nypr-audio-services": ">=0.3.7",
     "nypr-auth": ">=0.2.2",
     "nypr-django-for-ember": ">=0.2.0",
-    "nypr-metrics": "<0.1.0",
     "nypr-publisher-lib": ">=0.3.5",
     "nypr-ui": ">=0.2.15",
     "customizr": "Modernizr/customizr#e5890ed4b4fedb69da50ffbae39577788970d8ee"
