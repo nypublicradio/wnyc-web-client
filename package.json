@@ -117,6 +117,7 @@
     "ember-cli-babel": "^6.6.0",
     "nypr-django-for-ember": ">=0.2.0",
     "nypr-metrics": "<0.1.0",
-    "nypr-ui": ">=0.2.11"
+    "nypr-ui": ">=0.2.11",
+    "customizr": "1.0.0-alpha"
   }
 }
