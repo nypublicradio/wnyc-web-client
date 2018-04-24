@@ -68,6 +68,9 @@ module('Acceptance | queue', function(hooks) {
     let listenQueue = this.owner.lookup('service:listen-queue');
     let listenHistory = this.owner.lookup('service:listen-history');
 
+    let applicationStore = this.owner.lookup('session-store:application');
+    this.owner.register('session-store:test', applicationStore, {instantiate: false})
+
     let stories = server.createList('story', 4, {showTitle: 'foo show'});
     server.create('djangoPage', {id:'/'});
 
