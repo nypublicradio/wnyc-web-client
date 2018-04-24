@@ -6913,13 +6913,11 @@ nypr-django-for-ember@>=0.1.0, nypr-django-for-ember@>=0.2.0:
     ember-cli-htmlbars "^2.0.1"
     ember-wormhole "^0.5.2"
 
-nypr-metrics@<0.1.0, nypr-metrics@>=0.3.0:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/nypr-metrics/-/nypr-metrics-0.0.1.tgz#5954087401a04f3cf19c878191d6b638cbbd1b20"
+nypr-metrics@>=0.3.0:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/nypr-metrics/-/nypr-metrics-0.3.1.tgz#917d61ad0f7fc5ffd7409a560f8a64588663c576"
   dependencies:
-    ember-cli-babel "^6.0.0"
-    ember-cli-htmlbars "^1.1.1"
-    ember-cli-htmlbars-inline-precompile "^0.4.0"
+    ember-cli-babel "^6.6.0"
     ember-get-config "^0.2.2"
     ember-metrics "^0.12.1"
 
