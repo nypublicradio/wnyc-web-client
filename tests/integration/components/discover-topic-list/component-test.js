@@ -68,7 +68,7 @@ module('Integration | Component | discover topic list', function(hooks) {
 
     assert.equal(this.get('currentlySelectedTopics').length, 2, "should get updated on render");
 
-    this.$('.discover-topic')[1].click();
+    await click('.discover-topic:nth-of-type(2)');
     assert.equal(this.get('currentlySelectedTopics').length, 1, "should be updated when topics change");
   });
 });

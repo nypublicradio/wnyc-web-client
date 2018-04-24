@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, settled } from '@ember/test-helpers';
+import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | discover setup header', function(hooks) {
@@ -13,11 +13,9 @@ module('Integration | Component | discover setup header', function(hooks) {
     });
 
     await render(hbs`{{discover-setup-header onBack=(action onBack)}}`);
-    this.$("button").click();
+    await click("button");
 
-    return settled().then(() => {
-      assert.equal(this.get('actionFired'), true, "back action should have fired");
-    });
+    assert.equal(this.get('actionFired'), true, "back action should have fired");
   });
 
   test('sends onNext action when next is clicked', async function(assert) {
@@ -27,10 +25,8 @@ module('Integration | Component | discover setup header', function(hooks) {
     });
 
     await render(hbs`{{discover-setup-header nextButtonText="Next" onNext=(action onNext)}}`);
-    this.$("button").click();
+    await click('.discover-setup-header :last-child > button');
 
-    return settled().then(() => {
-      assert.equal(this.get('actionFired'), true, "next action should have fired");
-    });
+    assert.equal(this.get('actionFired'), true, "next action should have fired");
   });
 });

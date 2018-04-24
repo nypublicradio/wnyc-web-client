@@ -53,7 +53,7 @@ module('Integration | Component | discover playlist', function(hooks) {
     });
 
     await render(hbs`{{discover-playlist audioReady=true stories=stories onRemoveItem=onRemove}}`);
-    this.$('.discover-playlist-item-delete:first').click();
+    await click('.discover-playlist-item-delete');
 
     assert.equal(this.get('itemRemoved').id, server.db.discoverStories[0].id);
   });
