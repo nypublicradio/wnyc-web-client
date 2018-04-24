@@ -6845,9 +6845,9 @@ nypr-publisher-lib@>=0.3.5:
     nypr-django-for-ember ">=0.1.0"
     nypr-ui ">=0.2.4"
 
-nypr-ui@>=0.2.0, nypr-ui@>=0.2.4, nypr-ui@>=0.2.6:
-  version "0.2.10"
-  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.2.10.tgz#ccd0e732f85dbc2f1045fe1bd96f42cee4bf8f32"
+nypr-ui@>=0.2.0, nypr-ui@>=0.2.11, nypr-ui@>=0.2.4, nypr-ui@>=0.2.6:
+  version "0.2.11"
+  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.2.11.tgz#29c836c9b833a906a8490c6b90e414e14fda5578"
   dependencies:
     ember-basic-dropdown "0.34.0"
     ember-burger-menu "^3.1.0"

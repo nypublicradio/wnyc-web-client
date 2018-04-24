@@ -115,6 +115,7 @@
   },
   "resolutions": {
     "ember-cli-babel": "^6.6.0",
-    "nypr-django-for-ember": ">=0.2.0"
+    "nypr-django-for-ember": ">=0.2.0",
+    "nypr-ui": ">=0.2.11"
   }
 }
