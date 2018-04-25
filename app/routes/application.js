@@ -1,3 +1,4 @@
+import DS from 'ember-data';
 import Route from '@ember/routing/route';
 import { get } from '@ember/object';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
@@ -59,10 +60,8 @@ export default Route.extend(ApplicationRouteMixin, {
 
   actions: {
     error(error/*, transition*/) {
-      if (error && error.response) {
-        if (error.response.status === 404) {
-          this.transitionTo('missing');
-        }
+      if (error instanceof DS.NotFoundError) {
+        this.transitionTo('404', error.url);
       } else {
         /* eslint-disable */
         console.error(error);

@@ -31,7 +31,12 @@ export default Route.extend(/*PlayParamMixin,*/ {
       upstream_url += `?${qp.join('&')}`;
     }
     return this.store.find('django-page', upstream_url)
-      .catch(e => retryFromServer(e, upstream_url));
+      .catch(e => {
+        if (e instanceof DS.NotFoundError) {
+          throw e;
+        }
+        retryFromServer(e, upstream_url)
+      });
   },
 
   afterModel(page) {
