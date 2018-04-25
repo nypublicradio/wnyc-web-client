@@ -16,7 +16,6 @@ export default Route.extend(PlayParamMixin, {
   dj: service(),
   metrics: service(),
   googleAds: service(),
-  title: 'WNYC | New York Public Radio, Podcasts, Live Streaming Radio, News',
 
   model() {
     let page = this.store.findRecord('django-page', '/');
