@@ -12,7 +12,6 @@ export default Route.extend(/*PlayParamMixin,*/ {
     }
   },
 
-  metrics: service(),
   googleAds: service(),
 
   titleToken(model) {
@@ -39,14 +38,7 @@ export default Route.extend(/*PlayParamMixin,*/ {
       });
   },
 
-  afterModel(page) {
-    let metrics = get(this, 'metrics');
-    let path = document.location.pathname; // e.g. '/shows/bl/'
-    let title = (get(page, 'title') || '').trim();
-    metrics.trackPage('NprAnalytics', {
-      page: path,
-      title
-    });
+  afterModel() {
     get(this, 'googleAds').doTargeting();
   },
 
