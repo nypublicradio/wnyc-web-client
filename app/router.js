@@ -70,8 +70,8 @@ Router.map(function() {
   // This is our catch all route that can render any existing page
   // from the django site. It will be used when there's nothing more
   // specific.
+  this.route('404', { path: '*' });
   this.route('djangorendered', { path: '*upstream_url' });
-  this.route('missing');
 });
 
 export default Router;
