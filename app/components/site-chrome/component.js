@@ -5,7 +5,6 @@ import { or } from '@ember/object/computed';
 
 export default Component.extend({
   session: service(),
-  metrics: service(),
   router: service(),
   currentUser: service(),
   donateURL: config.wnycDonateURL,
