@@ -15,13 +15,6 @@ module.exports = function(defaults) {
       enabled: true,
     },
     storeConfigInMeta: env !== 'development',
-
-    // This project's in-repo addon configuration confuses Mirage and makes it
-    // think we are distributing this project as an addon. Because of this it assumes
-    // we're using Mirage to develop our addon tests using /tests/dummy/mirage as our
-    // mirage folder. This config overrides the mirage folder to use the correct location
-    // for developing an Ember application.
-    'ember-cli-mirage': { directory: defaults.project.root + '/mirage' },
     'mirage-support': {
       includeAll: true
     },
