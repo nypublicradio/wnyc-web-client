@@ -1,4 +1,4 @@
-import ENV from 'wnyc-web-client/config/environment';
+import config from 'wnyc-web-client/config/environment';
 import Route from '@ember/routing/route';
 import { get } from '@ember/object';
 import { inject as service } from '@ember/service';
@@ -25,7 +25,7 @@ export default Route.extend(/*PlayParamMixin,*/ {
     upstream_url = upstream_url.replace(/\/*$/, '/');
 
     let qp = Object.keys(queryParams)
-      .filter(q => queryParams[q] && ENV.QP_WHITELIST.includes(q)).map(p => `${p}=${queryParams[p].replace(/\s/g, '%20')}`);
+      .filter(q => queryParams[q] && config.QP_WHITELIST.includes(q)).map(p => `${p}=${queryParams[p].replace(/\s/g, '%20')}`);
     if (qp.length) {
       upstream_url += `?${qp.join('&')}`;
     }
