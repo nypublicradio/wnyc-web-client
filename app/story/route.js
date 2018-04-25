@@ -12,11 +12,11 @@ export default Route.extend(PlayParamMixin, {
   dataPipeline: service(),
   currentUser:  service(),
 
-  titleToken(model) {
-    return `${get(model, 'story.title')} - ${get(model, 'story.headers.brand.title')}`;
-  },
-  title(tokens) {
-    return `${tokens[0]} - WNYC`;
+  titleToken({ story }) {
+    return [
+      get(story, 'title'),
+      get(story, 'showTitle') || get(story, 'channelTitle') || 'NPR Article?'
+    ]
   },
   model({ slug }, { queryParams }) {
 

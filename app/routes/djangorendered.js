@@ -16,14 +16,7 @@ export default Route.extend(/*PlayParamMixin,*/ {
   googleAds: service(),
 
   titleToken(model) {
-    return get(model, 'title');
-  },
-  title(tokens) {
-    if (tokens && tokens.length > 0) {
-      return tokens[0];
-    } else {
-      return 'WNYC | New York Public Radio, Podcasts, Live Streaming Radio, News';
-    }
+    return get(model, 'title').split(' | ')[0];
   },
 
   model({ upstream_url }, { queryParams }) {

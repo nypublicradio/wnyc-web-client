@@ -2,6 +2,8 @@ import Route from '@ember/routing/route';
 import config from 'wnyc-web-client/config/environment';
 
 export default Route.extend({
+  titleToken: 'Forgot Password',
+  
   setupController(controller) {
     controller.set('config', config);
     return this._super(...arguments);
