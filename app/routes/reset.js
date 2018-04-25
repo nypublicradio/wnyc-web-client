@@ -2,6 +2,8 @@ import Route from '@ember/routing/route';
 import DeauthenticatedRouteMixin from 'wnyc-web-client/mixins/deauthenticated-route-mixin';
 
 export default Route.extend(DeauthenticatedRouteMixin, {
+  titleToken: 'Reset Password',
+  
   beforeModel(transition) {
     if ( !transition.queryParams.email || !transition.queryParams.confirmation ) {
       // if we got here with missing url parameters,
