@@ -6,7 +6,7 @@ import { inject as service } from '@ember/service';
 import { schedule } from '@ember/runloop';
 
 export default Route.extend(ApplicationRouteMixin, {
-  metrics: service(),
+  dataLayer: service('nypr-metrics/data-layer'),
   asyncWriter: service(),
   legacyLoader: service(),
   leaderboard: service(),
@@ -40,14 +40,12 @@ export default Route.extend(ApplicationRouteMixin, {
   },
 
   beforeModel() {
-    let metrics = get(this, 'metrics');
-
     get(this, 'session').syncBrowserId()
       .then(id => get(this, 'dj').addBrowserId(id));
     get(this, 'session').staffAuth();
     get(this, 'currentUser').load();
 
-    metrics.identify('GoogleAnalytics', {isAuthenticated: false});
+    get(this, 'dataLayer').setLoggedIn(false);
 
     get(this, 'asyncWriter').install();
     get(this, 'leaderboard').install();
@@ -93,11 +91,12 @@ export default Route.extend(ApplicationRouteMixin, {
 
   sessionAuthenticated() {
     this._super(...arguments);
-    get(this, 'metrics').identify('GoogleAnalytics', {isAuthenticated: true});
+    get(this, 'dataLayer').setLoggedIn(true);
     get(this, 'currentUser').load();
   },
 
   sessionInvalidated() {
+    get(this, 'dataLayer').setLoggedIn(false);
     if (this.get('session.noRefresh') === true) {
       this.set('session.noRefresh', false);
     } else {
