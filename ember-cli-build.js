@@ -1,25 +1,12 @@
 /* eslint-env node */
 'use strict';
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
-var mergeTrees = require('broccoli-merge-trees');
-var mv = require('broccoli-stew').mv;
 var fs = require('fs');
 
 var env = EmberApp.env();
 
 module.exports = function(defaults) {
-  var pubTrees = ['public'];
-  if (env === 'development') {
-    pubTrees.push(mv('docs', 'docs'));
-  }
   let app = new EmberApp(defaults, {
-    autoprefixer: {
-      browsers: ['last 3 versions']
-    },
-    'ember-cli-babel': { includePolyfill: true },
-    trees: {
-      public: mergeTrees(pubTrees)
-    },
     fingerprint: {
       enabled: env === 'production',
       prepend: process.env.FINGERPRINT_PREPEND_URL
