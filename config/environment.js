@@ -22,24 +22,6 @@ module.exports = function(environment) {
       }],
       alwaysUseSingleAudioElement: false
     },
-    metricsAdapters: [{
-      name: 'GoogleAnalytics',
-      config: {
-        id: process.env.GOOGLE_ANALYTICS || 'UA-46158613-1'
-      },
-      environments: ['production', 'development']
-    }, {
-      name: 'NprAnalytics',
-      config: {
-        id: 'UA-18188937-11'
-      }
-    }, {
-      name: 'GoogleTagManager',
-      config: {
-        id: process.env.GOOGLE_TAG_MANAGER_ID || 'GTM-PM94N2'
-      },
-      environments: ['production', 'development']
-    }],
     'ember-cli-mirage': {
       autostart: true // https://github.com/samselikoff/ember-cli-mirage/blob/master/CHANGELOG.md#how-it-works-in-different-types-of-tests
     },
@@ -164,7 +146,8 @@ module.exports = function(environment) {
       id: 491820,
       enabled: environment === 'production',
       forceSSL: true
-    }
+    },
+    googleTagManager: process.env.GOOGLE_TAG_MANAGER_ID || 'GTM-PM94N2'
   };
 
   if (environment === 'development') {
@@ -207,7 +190,7 @@ module.exports = function(environment) {
     ENV.platformEventsAPI = 'http://example.com';
     ENV.gothamistStories = 'http://gothamist.com';
     ENV.APP.autoboot = false;
-    
+
   }
 
   if (environment === 'production') {
