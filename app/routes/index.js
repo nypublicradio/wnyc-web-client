@@ -11,7 +11,6 @@ const { hash } = rsvp;
 export default Route.extend(PlayParamMixin, {
   classNames: ['home'],
   dj: service(),
-  metrics: service(),
   googleAds: service(),
 
   model() {
@@ -20,16 +19,10 @@ export default Route.extend(PlayParamMixin, {
     let gothamist = fetch(config.gothamistStories)
       .then(r => r.json()).then(({entries = []}) => entries.slice(0, 5))
       .catch(() => []);
+      
     return hash({page, featuredStream, gothamist});
   },
-  afterModel({ page }) {
-    let metrics = get(this, 'metrics');
-    let path = document.location.pathname; // e.g. '/shows/bl/'
-    let title = (get(page, 'title') || '').trim();
-    metrics.trackPage('NprAnalytics', {
-      page: path,
-      title
-    });
+  afterModel() {
     get(this, 'googleAds').doTargeting();
   },
 
