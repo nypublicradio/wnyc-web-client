@@ -4,12 +4,14 @@ import { get } from '@ember/object';
 import { inject as service } from '@ember/service';
 import PlayParamMixin from 'wnyc-web-client/mixins/play-param';
 import config from 'wnyc-web-client/config/environment';
+import { schedule } from '@ember/runloop';
 
 export default Route.extend(PlayParamMixin, {
   session:      service(),
   googleAds:    service(),
   dataPipeline: service(),
   currentUser:  service(),
+  dataLayer:    service('nypr-metrics/data-layer'),
 
   titleToken({ story }) {
     return [
@@ -39,6 +41,13 @@ export default Route.extend(PlayParamMixin, {
     }
     get(this, 'dataLayer').setForType('story', story);
 
+    schedule('afterRender', () => {
+      // data pipeline
+      get(this, 'dataPipeline').reportItemView({
+        cms_id: get(story, 'cmsPK'),
+        item_type: get(story, 'itemType'),
+      });
+    });
   },
 
   setupController(controller) {
@@ -59,20 +68,6 @@ export default Route.extend(PlayParamMixin, {
   },
 
   actions: {
-    didTransition() {
-      this._super(...arguments);
-
-      let model = get(this, 'currentModel');
-      let dataPipeline = get(this, 'dataPipeline');
-
-      // data pipeline
-      dataPipeline.reportItemView({
-        cms_id: get(model, 'story.cmsPK'),
-        item_type: get(model, 'story.itemType'),
-      });
-      return true;
-    },
-
     willTransition() {
       this.send('enableChrome');
       get(this, 'dataLayer').clearForType('story');
