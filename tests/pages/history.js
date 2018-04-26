@@ -1,14 +1,13 @@
-import PageObject from 'wqxr-web-client/tests/page-object';
-
-let {
+import {
+  create,
   visitable,
   clickable,
   collection,
   text,
   isVisible
-} = PageObject;
+} from 'ember-cli-page-object';
 
-export default PageObject.create({
+export default create({
   visit:             visitable('/fake?modal=queue-history'),
   clickHistoryTab:   clickable('.tabbedlist-button:contains(History)'),
   clickClearHistory: clickable('.clearhistory-button:contains(Clear)'),

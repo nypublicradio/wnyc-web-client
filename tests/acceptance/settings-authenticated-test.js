@@ -5,7 +5,7 @@ import {
   authenticateSession,
   currentSession
 } from 'wqxr-web-client/tests/helpers/ember-simple-auth';
-import 'wqxr-web-client/tests/helpers/with-feature';
+//import 'wqxr-web-client/tests/helpers/with-feature';
 
 module('Acceptance | settings', function(hooks) {
   setupApplicationTest(hooks);

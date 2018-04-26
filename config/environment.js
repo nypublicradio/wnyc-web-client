@@ -25,6 +25,7 @@ module.exports = function(environment) {
       config: {
         id: process.env.GOOGLE_ANALYTICS || 'UA-46158613-2'
       },
+      environments: ['production', 'development']
     }, {
       name: 'NprAnalytics',
       config: {
@@ -37,6 +38,9 @@ module.exports = function(environment) {
       },
       environments: [process.env.DEV_GTM ? 'development' : 'production']
     }],
+    'ember-cli-mirage': {
+      autostart: true // https://github.com/samselikoff/ember-cli-mirage/blob/master/CHANGELOG.md#how-it-works-in-different-types-of-tests
+    },
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build

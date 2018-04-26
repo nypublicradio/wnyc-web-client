@@ -1,13 +1,12 @@
-import PageObject from 'wqxr-web-client/tests/page-object';
-
-let {
+import {
+  create,
   visitable,
   collection,
   text,
   isVisible
-} = PageObject;
+} from 'ember-cli-page-object';
 
-export default PageObject.create({
+export default create({
   visit: visitable('/fake?modal=queue-history'),
   queueIsVisible: isVisible('.player-queue'),
   stories: collection({

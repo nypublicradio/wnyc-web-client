@@ -32,9 +32,7 @@ export default Controller.extend(Evented, {
     let new_password = changeset.get('newPassword');
     return new RSVP.Promise((resolve, reject) => {
       let headers = {'Content-Type': 'application/json'};
-      this.get('session').authorize('authorizer:nypr', (header, value) => {
-        headers[header] = value;
-      });
+      headers = this.get('session').authorize(headers);
       fetch(`${config.authAPI}/v1/password`, {
         headers,
         method: 'POST',
@@ -54,9 +52,7 @@ export default Controller.extend(Evented, {
   requestTempPassword(email) {
     return new RSVP.Promise((resolve, reject) => {
       let headers = {'Content-Type': 'application/json'};
-      this.get('session').authorize('authorizer:nypr', (header, value) => {
-        headers[header] = value;
-      });
+      headers = this.get('session').authorize(headers);
       fetch(`${config.authAPI}/v1/password/send-temp`, {
         headers,
         method: 'POST',
@@ -82,9 +78,7 @@ export default Controller.extend(Evented, {
   setEmailPendingStatus: task(function * (email) {
     let url = `${config.membershipAPI}/v1/emails/is-verified/?email=${email}`;
     let headers = {'Content-Type': 'application/json'};
-    this.get('session').authorize('authorizer:nypr', (header, value) => {
-      headers[header] = value;
-    });
+    headers = this.get('session').authorize(headers);
     try {
       let response = yield fetch(url, {headers, method: 'GET'});
       if (response && response.ok) {
@@ -117,9 +111,7 @@ export default Controller.extend(Evented, {
     }
     let url = `${config.authAPI}/v1/confirm/resend-attr`;
     let headers = {'Content-Type': 'application/json'};
-    this.get('session').authorize('authorizer:nypr', (header, value) => {
-      headers[header] = value;
-    });
+    headers = this.get('session').authorize(headers);
     return new RSVP.Promise((resolve,reject) => {
       fetch(url, {headers, method: 'GET'}).then(response => {
         if (response && response.ok) {

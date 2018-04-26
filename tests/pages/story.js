@@ -1,12 +1,11 @@
-import PageObject from 'wqxr-web-client/tests/page-object';
-
-let {
+import {
+  create,
   visitable,
   clickable,
   isVisible
-} = PageObject;
+} from 'ember-cli-page-object';
 
-export default PageObject.create({
+export default create({
   visit: visitable('story/:slug'),
   clickShowComments: clickable('[data-test-selector=story-comments]'),
   commentsVisible: isVisible('article', {scope: '[data-test-selector=comment-list]'})

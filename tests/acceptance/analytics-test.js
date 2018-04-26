@@ -2,6 +2,7 @@ import { click, findAll, currentURL, visit } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import { registerWaiter, unregisterWaiter } from '@ember/test';
+import { setBreakpoint } from 'ember-responsive/test-support';
 import DummyConnection from 'ember-hifi/hifi-connections/dummy-connection';
 
 const setupHifi = app => {
@@ -28,7 +29,8 @@ module('Acceptance | Selectors for GTM Analytics', function(hooks) {
 
   test('test for analytics selectors', async function(assert) {
     setupHifi(this.owner);
-    registerWaiter(waitForStreams);
+    setBreakpoint('largeAndUp')
+    // registerWaiter(waitForStreams);
 
     server.create('bucket', {slug: 'wqxr-home'});
     server.createList('stream', 7);
@@ -36,7 +38,7 @@ module('Acceptance | Selectors for GTM Analytics', function(hooks) {
 
     await visit('/');
 
-    unregisterWaiter(waitForStreams);
+    // unregisterWaiter(waitForStreams);
 
     assert.equal(currentURL(), '/');
     // UA, User clicks on a link in a homepage bucket
@@ -53,7 +55,7 @@ module('Acceptance | Selectors for GTM Analytics', function(hooks) {
     assert.equal(firstStory.headers.brand.title, show.attributes.getNamedItem('title').value, 'show link should include analytics info');
     // UA, User Launches Stream from Stream Banner
     findWithAssert('.stream-banner__active-stream');
-    await click(findWithAssert('.stream-banner-listenbutton')[0]);
+    await click('.stream-banner-listenbutton');
     // UA, User Pauses Listen Live from Stream Banner
     findWithAssert('.stream-banner-listenbutton.is-playing');
 
@@ -66,7 +68,7 @@ module('Acceptance | Selectors for GTM Analytics', function(hooks) {
     // UA Rewind from persistent player
     findWithAssert('.nypr-player-button.mod-rewind');
 
-    await click(pauseButton);
+    await click('.nypr-player-button.mod-listen.is-playing');
     let playButton = findWithAssert('.nypr-player-button.mod-listen.is-paused')[0];
     assert.ok(playButton.attributes.getNamedItem('title').value);
     await click('.nypr-sharebutton button');

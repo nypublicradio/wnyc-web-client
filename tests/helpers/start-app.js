@@ -3,7 +3,7 @@ import { merge } from '@ember/polyfills';
 import Application from '../../app';
 import config from '../../config/environment';
 import registerPowerSelectHelpers from '../../tests/helpers/ember-power-select';
-
+import './responsive';
 import './alien-dom-click';
 import './ember-sortable/test-helpers';
 import './google-analytics-stub';

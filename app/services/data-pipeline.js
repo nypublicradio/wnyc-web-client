@@ -6,9 +6,7 @@ export default DataPipeline.extend({
   session: service(),
   browserId: computed.readOnly('session.data.browserId'),
   authorize(fetchOptions) {
-    this.get('session').authorize('authorizer:nypr', (header, value) => {
-      fetchOptions.headers[header] = value;
-    });
+    fetchOptions.headers = this.get('session').authorize(fetchOptions.headers);
     return fetchOptions;
   }
 })

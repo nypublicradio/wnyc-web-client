@@ -8,7 +8,7 @@ import {
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import { Response } from 'ember-cli-mirage';
-import 'wqxr-web-client/tests/helpers/with-feature';
+//import 'wqxr-web-client/tests/helpers/with-feature';
 import {
   authenticateSession,
   currentSession
