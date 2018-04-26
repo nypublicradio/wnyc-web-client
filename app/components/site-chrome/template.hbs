@@ -52,7 +52,9 @@
       <h1>
         <span class="for-screenreaders">WNYC Navigation</span>
         <a href="/"
-          class="link--nodecor wnyc-logo-nav"
+          class="link--nodecor wnyc-logo-nav gtm__click-tracking"
+          data-action="Side Navigation"
+          data-label="logo"
           title="WNYC | New York Public Radio Home Page">
           {{wnyc-svg icon='logo-wnyc' className='icon--wnyc-logo-nav'}}
         </a>
@@ -94,31 +96,29 @@
         </li>
 
         {{#link-to 'stream' tagName='li' href=false class="list-item list-item--nav"}}
-          {{link-to 'All Streams' 'stream' class="inherit"}}
+          {{link-to 'All Streams' 'stream' class="inherit gtm__click-tracking-text" data-action="Side Navigation"}}
         {{/link-to}}
 
         {{#link-to 'schedule' current-when="schedule.date" tagName='li' href=false class="list-item list-item--nav"}}
-          {{link-to 'Schedule' 'schedule' class="inherit"}}
+          {{link-to 'Schedule' 'schedule' class="inherit gtm__click-tracking-text" data-action="Side Navigation"}}
         {{/link-to}}
 
         {{#link-to 'show' current-when="show show-detail" tagName="li" href=false class="list-item list-item--nav"}}
-          {{link-to 'Shows' 'show' class="inherit"}}
+          {{link-to 'Shows' 'show' class="inherit gtm__click-tracking-text" data-action="Side Navigation"}}
         {{/link-to}}
 
         {{#link-to 'topics' current-when='topics tag-detail' tagName='li' href=false class="list-item list-item--nav"}}
-          {{link-to 'Topics' 'topics' class="inherit"}}
+          {{link-to 'Topics' 'topics' class="inherit gtm__click-tracking-text" data-action="Side Navigation"}}
         {{/link-to}}
 
         {{#link-to 'discover.start' current-when="discover" tagName='li' href=false class="list-item list-item--nav"}}
-          {{#link-to 'discover.start' class="inherit"}}
-            Discover
-          {{/link-to}}
+          {{link-to 'Discover' 'discover.start' class="inherit gtm__click-tracking-text" data-action="Side Navigation"}}
         {{/link-to}}
 
         {{#unless media.isLargeAndUp}}
 
           {{#link-to 'djangorendered' 'search/' tagName='li' href=false class="list-item list-item--nav"}}
-            {{link-to 'Search' 'djangorendered' 'search/' class="inherit"}}
+            {{link-to 'Search' 'djangorendered' 'search/' class="inherit gtm__click-tracking-text" data-action="Side Navigation"}}
           {{/link-to}}
 
         {{/unless}}
