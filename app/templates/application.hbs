@@ -75,23 +75,39 @@
           }}
 
           {{#unless hifi.isLoading}} {{! only show the share button when the audio has loaded}}
-            {{#if integration.currentAudio.shareMetadata}}
+            {{#with (hash data=integration.currentAudio.shareMetadata story=integration.currentAudio) as |meta|}}
 
-                {{nypr-share-button
-                  shareText = integration.currentAudio.shareMetadata.shareText
-                  shareUrl  = integration.currentAudio.shareMetadata.shareUrl
-                  via       = 'WNYC'
-                  onShare   = (action 'trackShare' (hash
-                                story = integration.currentAudio
-                                type   = (if integration.isStream 'livestream' 'on_demand')
-                                playContext = "Player"
-                                shareText = integration.currentAudio.shareMetadata.shareText
-                                shareUrl = integration.currentAudio.shareMetadata.shareUrl
-                                analyticsCode = integration.currentAudio.shareMetadata.analyticsCode
-                                ))
-                  text   = "SHARE"}}
+                {{#nypr-share-button
+                  text="SHARE"
+                  shareUrl=meta.data.shareUrl
+                  shareText=meta.data.shareText
+                  data-action=(concat 'Shared Story "' meta.story.title '" - "' meta.story.showTitle '"' )
+                  data-label='Player'
+                  as |share|}}
+                  {{#share.item as |item|}}
+                    {{item.button
+                      type='Facebook'
+                      classNames='gtm__click-tracking'
+                    }}
+                  {{/share.item}}
 
-            {{/if}}
+                  {{#share.item as |item|}}
+                    {{item.button
+                      type='Twitter'
+                      via='WNYC'
+                      classNames='gtm__click-tracking'
+                    }}
+                  {{/share.item}}
+
+                  {{#share.item as |item|}}
+                    {{item.button
+                      type='Email'
+                      classNames='gtm__click-tracking'
+                    }}
+                  {{/share.item}}
+                {{/nypr-share-button}}
+
+            {{/with}}
           {{/unless}}
         {{/content.for}}
 
