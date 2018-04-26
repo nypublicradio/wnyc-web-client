@@ -1,0 +1,51 @@
+.story-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: none;
+
+  &:hover {
+
+  }
+}
+
+.story-card__image {
+  display: block;
+  background-position: center;
+  background-size: cover;
+  flex: 1;
+}
+
+.story-card__body {
+  display: block;
+  position: relative;
+  flex-basis: 150px;
+
+  background: white;
+  padding: 15px 15px 22px;
+
+  font-size: 14px;
+  line-height: 1.43;
+  color: black;
+
+  > .popout-icon {
+    width: 11.5px;
+    height: 11.5px;
+
+    fill: #ddd;
+
+    position: absolute;
+    bottom: 11px;
+    right: 11px;
+  }
+
+  @include mq($medium-and-up) {
+    flex: 1;
+    padding: 15px 15px 28px;
+
+    > .popout-icon {
+      bottom: 15px;
+      right: 15px;;
+    }
+  }
+}

@@ -29,6 +29,7 @@ test('.l-constrained is added to the home page', function(assert) {
       <div>
     this is a regular template
       </div>
+      <div id="gothamist-row"></div>
     </div>
     `
   });
@@ -44,17 +45,17 @@ test('.l-constrained is added to the home page', function(assert) {
 
 test('home page does dfp targeting', function(/*assert*/) {
   server.create('django-page', {id: '/'});
-  
+
   // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
   server.create('django-page', {id: 'foo/'});
   visit('/foo');
-  
+
   andThen(() => {
     this.mock(this.application.__container__.lookup('route:index').get('googleAds'))
       .expects('doTargeting')
       .once();
   });
-  
+
   djangoPage
     .bootstrap({id: '/'})
     .visit({id: '/'});
