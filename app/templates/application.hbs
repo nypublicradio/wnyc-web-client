@@ -76,19 +76,23 @@
 
           {{#unless hifi.isLoading}} {{! only show the share button when the audio has loaded}}
             {{#with (hash data=integration.currentAudio.shareMetadata story=integration.currentAudio) as |meta|}}
-
-                {{#nypr-share-button
-                  text="SHARE"
-                  shareUrl=meta.data.shareUrl
-                  shareText=meta.data.shareText
-                  data-action=(concat 'Shared Story "' meta.story.title '" - "' meta.story.showTitle '"' )
-                  data-label='player'
-                  as |share|}}
-                  {{share.button type='Facebook'}}
-                  {{share.button type='Twitter' via='WNYC'}}
-                  {{share.button type='Email'}}
-                {{/nypr-share-button}}
-
+              {{#nypr-share-button
+                text="SHARE"
+                shareUrl=meta.data.shareUrl
+                shareText=meta.data.shareText
+                data-action='Share from Player'
+                as |share|}}
+                {{share.button
+                  type='Facebook'
+                  data-label=(concat meta.story.title ' | ' meta.story.showTitle ' | Facebook')}}
+                {{share.button
+                  type='Twitter'
+                  via='WNYC'
+                  data-label=(concat meta.story.title ' | ' meta.story.showTitle ' | Twitter')}}
+                {{share.button
+                  type='Email'
+                  data-label=(concat meta.story.title ' | ' meta.story.showTitle ' | Email')}}
+              {{/nypr-share-button}}
             {{/with}}
           {{/unless}}
         {{/content.for}}
