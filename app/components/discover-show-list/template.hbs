@@ -5,5 +5,13 @@
   tagName='div'
   onchange=(action 'onMultiselectChangeEvent') as |show isSelected|}}
 
-  {{discover-show title=show.title slug=show.slug isSelected=isSelected imageTemplate=show.image.template}}
+  {{discover-show
+    title=show.title
+    slug=show.slug
+    isSelected=isSelected
+    imageTemplate=show.image.template
+    class='gtm__click-tracking'
+    data-action='Discover'
+    data-label=(concat (if isSelected 'Deselected Show ' 'Selected Show ') show.title)
+  }}
 {{/multiselect-checkboxes}}
