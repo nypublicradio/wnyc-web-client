@@ -3,7 +3,6 @@ import { inject as service } from '@ember/service';
 
 export default Component.extend({
   session: service(),
-  metrics: service(),
   isPopupOpen: false,
   classNameBindings: ['isPopupOpen'],
   actions: {
