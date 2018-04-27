@@ -2,12 +2,10 @@ import { hash } from 'rsvp';
 import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
 import ENV from '../../config/environment';
-import { get } from '@ember/object';
 
 export default Route.extend({
   session: service(),
   discoverPrefs: service(),
-  metrics: service(),
   titleToken: 'Discover Select Shows',
 
   model() {
@@ -44,10 +42,6 @@ export default Route.extend({
       }
       else {
         this.controller.setProperties({showError: false, loadingDirection: 'next'});
-        get(this, 'metrics').trackEvent('GoogleAnalytics', {
-          category: 'Discover',
-          action: 'Create Playlist in Discover'
-        });
 
         this.controllerFor('discover.shows').set('showError', false);
         let prefs = this.get('discoverPrefs');
