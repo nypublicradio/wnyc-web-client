@@ -6,6 +6,7 @@ export default Component.extend({
   tagName: 'button',
   classNames: ['rounded-caps-button'],
   classNameBindings: ['hasIcon:mod-with-icon'],
+  attributeBindings: ['data-action', 'data-label', 'data-category', 'data-value'],
   iconPlacement: 'right',
   placeRight: computed('iconPlacement', function() {
     return this.get('iconPlacement') === 'right';
