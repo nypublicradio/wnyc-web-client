@@ -2,7 +2,7 @@ import { create, visitable } from 'ember-cli-page-object';
 import { appendHTML } from 'wqxr-web-client/tests/helpers/html';
 
 export default create({
-  visit: visitable(':id'),
+  visit: visitable(':path'),
 
   bootstrap({id}) {
     /* eslint-disable */

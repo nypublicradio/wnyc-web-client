@@ -1,6 +1,7 @@
 import {
   fillIn,
   findAll,
+  find,
   currentURL,
   triggerEvent,
   visit
@@ -19,6 +20,15 @@ function escapeNavigation() {
 module('Acceptance | Django Rendered | Proper Re-renders', function(hooks) {
   setupApplicationTest(hooks);
 
+  function findWithAssert(selector){
+    let found = findAll(selector);
+    if (found.length == 0){
+      throw "DOM element not found.";
+    } else {
+      return found;
+    }
+  }
+
   hooks.beforeEach(function() {
     server.create('stream');
     window.onbeforeunload = escapeNavigation;
@@ -28,15 +38,14 @@ module('Acceptance | Django Rendered | Proper Re-renders', function(hooks) {
     window.onbeforeunload = undefined;
   });
 
-  test('on a search page with a query', function(assert) {
+  test('on a search page with a query', async function(assert) {
     let search = server.create('django-page', {id: 'search/?q=foo'});
-    djangoPage
+    await djangoPage
       .bootstrap(search)
-      .visit({id: 'search/?q=foo'});
+      .visit({path: 'search', q: 'foo'});
 
-    assert.equal(currentURL(), 'search/?q=foo');
-    let djangoContent = findWithAssert('.django-content');
-    assert.ok(djangoContent.contents().length);
+    assert.equal(currentURL(), 'search?q=foo');
+    assert.ok(find('.django-content'));
   });
 
   skip('it properly routes to the search page', async function(assert) {
@@ -44,7 +53,7 @@ module('Acceptance | Django Rendered | Proper Re-renders', function(hooks) {
     server.create('django-page', {id: 'search/?q=foo'});
     server.create('bucket');
 
-    djangoPage
+    await djangoPage
       .bootstrap(home)
       .visit(home);
 
@@ -68,7 +77,7 @@ module('Acceptance | Django Rendered | Proper Re-renders', function(hooks) {
       .catch(() => delete window.assign);
   });
 
-  test('deferred scripts embedded within content do not run twice', function(assert) {
+  test('deferred scripts embedded within content do not run twice', async function(assert) {
     let page = server.create('django-page', {
       id: 'foo/',
       slug: 'foo',
@@ -86,14 +95,14 @@ module('Acceptance | Django Rendered | Proper Re-renders', function(hooks) {
   `
     });
 
-    djangoPage
+    await djangoPage
       .bootstrap(page)
-      .visit(page);
+      .visit({path: 'foo'});
 
     assert.equal(findAll('section.text p').length, 1, 'should only be one p tag');
   });
 
-  test('.l-constrained is not added to responsive pages', function(assert) {
+  test('.l-constrained is not added to responsive pages', async function(assert) {
     let responsivePage = server.create('django-page', {
       id: 'fake/',
       text: `
@@ -105,14 +114,14 @@ module('Acceptance | Django Rendered | Proper Re-renders', function(hooks) {
       `
     });
 
-    djangoPage
+    await djangoPage
       .bootstrap(responsivePage)
-      .visit(responsivePage);
+      .visit({path: 'fake'});
 
-    assert.equal(find('.django-content').parent('.l-constrained').length, 0, 'should not have an l-constrained class');
+    assert.notOk(find('.django-content').matches('.l-constrained .django-content'), 'should not have an l-constrained class');
   });
 
-  test('.l-constrained is added to regular pages', function(assert) {
+  test('.l-constrained is added to regular pages', async function(assert) {
     let regularPage = server.create('django-page', {
       id: 'fake/',
       text: `
@@ -124,35 +133,37 @@ module('Acceptance | Django Rendered | Proper Re-renders', function(hooks) {
       `
     });
 
-    djangoPage
+    await djangoPage
       .bootstrap(regularPage)
-      .visit(regularPage);
+      .visit({path: 'fake'});
 
-    assert.equal(find('.django-content').parent('.l-constrained').length, 1, 'should have an l-constrained class');
+    assert.ok(find('.l-constrained .django-content'), 'should have an l-constrained class');
   });
 
-  test('.search is added to search pages', function(assert) {
+  test('.search is added to search pages', async function(assert) {
     let searchPage = server.create('django-page', { id: 'search/' });
 
-    djangoPage
+    await djangoPage
       .bootstrap(searchPage)
-      .visit(searchPage);
+      .visit({path: 'search'});
 
-    assert.equal(find('.django-content').parent('.search').length, 1, 'should have an l-constrained class');
+    assert.ok(find('.search .django-content'), 'should have an l-constrained class');
   });
 
   test('arbitrary django routes do dfp targeting', async function() /*assert*/{
+
     // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
     server.create('django-page', {id: 'fake/'});
+    server.create('django-page', {id: 'foo/'});
 
-    await visit('/');
-    
-    this.mock(this.application.__container__.lookup('route:djangorendered').get('googleAds'))
+    await visit('/foo');
+
+    this.mock(this.owner.lookup('route:djangorendered').get('googleAds'))
       .expects('doTargeting')
       .once();
-    
-    djangoPage
+
+    await djangoPage
       .bootstrap({id: 'fake/'})
-      .visit({id: 'fake/'});
+      .visit({path: 'fake'});
   });
 });
