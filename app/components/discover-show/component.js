@@ -5,7 +5,7 @@ export default Component.extend({
   classNames:['discover-show'],
 
   classNameBindings:['isSelected'],
-  attributeBindings:['slug:data-slug'],
+  attributeBindings:['slug:data-slug', 'data-category', 'data-action', 'data-label', 'data-label'],
 
   imageUrl: computed('imageTemplate', function() {
     let template = this.get('imageTemplate');
