@@ -1,10 +1,8 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import { get } from '@ember/object';
 
 export default Route.extend({
   discoverPrefs: service(),
-  metrics: service(),
 
   setupController(controller) {
     controller.set('isMobile', window.Modernizr.touchevents);
@@ -15,32 +13,15 @@ export default Route.extend({
     let prefs = this.get('discoverPrefs');
 
     if (!prefs.get('setupComplete')) {
-      if (prefs.get('currentSetupStep') === 'start') {
-        get(this, 'metrics').trackEvent('GoogleAnalytics', {
-          category: 'Discover',
-          action: 'Discover Entered'
-        });
-      }
       this.transitionTo(`discover.${prefs.get('currentSetupStep')}`);
     }
     else if (transition.targetName === 'discover.start'){
       // we clicked on the side bar, and setup is done. Go to the playlist
       this.replaceWith('discover.index');
     }
-    else {
-      get(this, 'metrics').trackEvent('GoogleAnalytics', {
-        category: 'Discover',
-        action: 'Discover Entered'
-      });
-      // browsing direct, allow it
-    }
   },
   actions: {
     next() {
-      get(this, 'metrics').trackEvent('GoogleAnalytics', {
-        category: 'Discover',
-        action: 'Clicked Get Started'
-      });
       let prefs = this.get('discoverPrefs');
       prefs.set('currentSetupStep', 'topics');
       prefs.save();
