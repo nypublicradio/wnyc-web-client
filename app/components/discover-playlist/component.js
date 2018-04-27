@@ -8,14 +8,12 @@ import {
   map
 } from '@ember/object/computed';
 import Component from '@ember/component';
-import { get } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
   session:  service(),
   scroller: service(),
   dj:       service(),
-  metrics:  service(),
 
   classNames:        ['discover-playlist-container'],
   classNameBindings: ['isDraggingItem:is-dragging-item'],
@@ -66,12 +64,6 @@ export default Component.extend({
   // This is for the delete effects, and this might be a weird way to do it
   actions: {
     removeItem(item) {
-      get(this, 'metrics').trackEvent('GoogleAnalytics', {
-        category: 'Discover',
-        action: 'Removed Story from Discover',
-        value: Number(get(item, 'id'))
-      });
-
       // This will trigger the CSS effect to remove it/hide it from the list
       this.get('removedItems').addObject(item);
 
@@ -91,11 +83,6 @@ export default Component.extend({
     },
 
     reorderItems(itemModels, draggedModel) {
-      get(this, 'metrics').trackEvent('GoogleAnalytics', {
-        category: 'Discover',
-        action: 'Moved Story',
-        value: Number(get(draggedModel, 'id'))
-      });
       this.set('justDragged', draggedModel);
 
       // This is a good time to actually delete the hidden items

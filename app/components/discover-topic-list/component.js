@@ -37,11 +37,6 @@ export default Component.extend({
 
   actions: {
     selectAll() {
-      get(this, 'metrics').trackEvent('GoogleAnalytics', {
-        category: 'Discover',
-        action: 'Selected All Topics',
-      });
-
       this.updateTopics(this.get('topicTags'));
     },
     selectNone() {
@@ -54,25 +49,11 @@ export default Component.extend({
     },
     onMultiselectChangeEvent(selectedTopics, value, action) {
       let topics = this.get('selectedTopicTags');
-      let topic = get(this, 'topics').findBy('url', value);
-      let title = get(topic, 'title');
 
       if (action === 'added') {
-        get(this, 'metrics').trackEvent('GoogleAnalytics', {
-          category: 'Discover',
-          action: 'Selected Topic',
-          label: title
-        });
-
         topics.addObject(value);
       }
       else if (action === 'removed') {
-        get(this, 'metrics').trackEvent('GoogleAnalytics', {
-          category: 'Discover',
-          action: 'Deselected Topic',
-          label: title
-        });
-
         topics.removeObject(value);
       }
 
