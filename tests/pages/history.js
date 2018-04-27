@@ -16,11 +16,8 @@ export default create({
   historyIsVisible:  isVisible('.player-history'),
   clearPromptIsVisible:  isVisible('.clearhistory-prompt'),
   emptyMessageIsVisible: isVisible('.queuelist-empty'),
-  stories: collection({
-    itemScope: '.player-history .list-item',
-    item: {
+  stories: collection('.player-history .list-item', {
       title:               text('.queueitem-itemtitle'),
       clickDelete:         clickable('.queueitem-deletebutton'),
-    }
-  })
+    })
 });
