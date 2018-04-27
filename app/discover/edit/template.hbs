@@ -18,6 +18,9 @@
     </div>
     <div class="discover-setup-header-action">
       {{#action-button
+        classNames='gtm__click-tracking'
+        data-action='Discover'
+        data-label='Refresh Playlist in Discover'
         class=(if (not (or hasNotSelectedATopic hasNotSelectedAShow)) 'mod-filled-red')
         click=(route-action 'refresh')}}
         Refresh Playlist
