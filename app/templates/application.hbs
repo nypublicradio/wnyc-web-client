@@ -29,6 +29,8 @@
   {{#unless chromeDisabled}}
     <div class="l-fixed l-lowright">
     {{nypr-player/queue-button
+      class       = "gtm__click-tracking"
+      data-action = (if modal "Close Queue" "Open Queue")
       isFloating  = true
       queueLength = queue.items.length
       showModal   = (action 'showModal' 'queue-history')
@@ -104,6 +106,8 @@
         {{#content.for 'aux' as |args|}}
           {{args.queueButton
             queueLength = queue.items.length
+            class       = "gtm__click-tracking"
+            data-action = (if modal "Close Queue" "Open Queue")
             showModal   = (action 'showModal' 'queue-history')
             closeModal  = (action 'closeModal')
             isOpenModal = modal}}
