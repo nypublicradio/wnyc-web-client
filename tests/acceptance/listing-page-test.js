@@ -336,7 +336,7 @@ module('Acceptance | Listing Page | Analytics', function(hooks) {
       apiResponse: server.create('api-response', { id: 'shows/foo/episodes/1' })
     });
 
-    assert.expect(2);
+    assert.expect(1);
 
     server.post(`${config.platformEventsAPI}/v1/events/viewed`, (schema, {requestBody}) => {
       let {
@@ -362,11 +362,7 @@ module('Acceptance | Listing Page | Analytics', function(hooks) {
       assert.deepEqual({cms_id, item_type, browser_id, client, external_referrer, referrer, url, site_id}, testObj, 'params match up');
     });
 
-    window.ga = this.spy();
-
     await visit('shows/foo');
-
-    assert.ok(window.ga.calledWith('npr.send'), 'npr.send called');
   });
 
   test('listen buttons in story teases include data-action and data-label values', async function(assert) {
