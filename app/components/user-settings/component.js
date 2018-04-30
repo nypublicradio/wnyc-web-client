@@ -4,7 +4,6 @@ import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
-  metrics: service(),
   session: service(),
   init() {
     this._super(...arguments);
@@ -41,13 +40,6 @@ export default Component.extend({
     },
 
     selectStream(stream) {
-      let metrics = this.get('metrics');
-      metrics.trackEvent('GoogleAnalytics', {
-        category: "Settings",
-        action:   "Continuous Play Stream",
-        label:    stream.get('name')
-      });
-
       let session = this.get('session');
       session.set('data.user-prefs-active-stream', stream.getProperties('slug', 'name'));
     },
