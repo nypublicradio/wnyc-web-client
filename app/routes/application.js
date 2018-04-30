@@ -81,13 +81,13 @@ export default Route.extend(ApplicationRouteMixin, {
     },
     didTransition() {
       this.controllerFor('application').set('error', null);
+      this.set('dataPipeline.currentReferrer', window.location.toString());
       return true;
     },
     willTransition() {
       //close queue/history modal when we open a new page
       this.controllerFor('application').send('closeModal');
       this.send('updateDonateChunk', null);
-      this.set('dataPipeline.currentReferrer', window.location.toString());
     },
     updateDonateChunk(donateChunk) {
       this.controllerFor('application').set('headerDonateChunk', donateChunk);
