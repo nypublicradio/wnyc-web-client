@@ -87,7 +87,8 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 @import 'story-card';
 @import 'story-row';
 
-
+// Required for ember-component-css
+@import "pod-styles";
 
 // LEGACY CODE
 @import 'legacy/home-compat';
