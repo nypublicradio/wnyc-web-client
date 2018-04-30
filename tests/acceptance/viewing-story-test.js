@@ -143,8 +143,8 @@ module('Acceptance |  Story Detail Analytics', function(hooks) {
 
     let segmentButtons = findAll('#segmentsList [data-test-selector=listen-button]');
     segmentButtons.forEach((el, i) => {
-      assert.equal(listenButton.getAttribute('data-action'), 'Clicked Play/Pause On Demand');
-      assert.equal(listenButton.getAttribute('data-label'), `${segmentStory.segments[i].title} | foo show`);
+      assert.equal(el.getAttribute('data-action'), 'Clicked Play/Pause On Demand');
+      assert.equal(el.getAttribute('data-label'), `${segmentStory.segments[i].title} | foo show`);
     });
   });
 
