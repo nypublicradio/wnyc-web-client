@@ -13,6 +13,14 @@ import moment from 'moment';
 import { setupApplicationTest } from 'ember-qunit';
 import { module } from 'qunit';
 
+import DummyConnection from 'ember-hifi/hifi-connections/dummy-connection';
+
+const setupHifi = app => {
+  const HIFI = app.lookup('service:hifi');
+  app.register('hifi-connection:local-dummy-connection', DummyConnection, {instantiate: false});
+  HIFI.set('_connections', [HIFI._activateConnection({name: 'LocalDummyConnection'})]);
+}
+
 module('Acceptance | Listing Page | viewing', function(hooks) {
   setupApplicationTest(hooks);
 
@@ -34,9 +42,9 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
     await visit('shows/foo');
 
     assert.equal(currentURL(), 'shows/foo');
-    assert.ok(findWithAssert('.sitechrome-btn'), 'donate chunk should reset after navigating');
-    assert.ok(showPage.facebookIsVisible());
-    assert.notOk(findAll('[data-test-selector="admin-link"]').length, 'edit link should not be visible');
+    assert.ok(find('.sitechrome-btn'), 'donate chunk should reset after navigating');
+    assert.ok(showPage.facebookIsVisible);
+    assert.notOk(find('[data-test-selector="admin-link"]'), 'edit link should not be visible');
   });
 
   test('authenticated smoke test', async function(assert) {
@@ -51,8 +59,10 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
       apiResponse: server.create('api-response', { id: 'shows/foo/episodes/1' })
     });
 
-    assert.ok(find('[data-test-selector="admin-link"]').length, 'edit links are visible');
     await visit('shows/foo');
+
+    assert.ok(find('[data-test-selector="admin-link"]'), 'edit links are visible');
+
   });
 
   test('about smoke test', async function(assert) {
@@ -61,12 +71,15 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
       linkroll: [
         {'nav-slug': 'about', title: 'About'},
       ],
+      about: {
+        body: 'About'
+      },
       apiResponse: server.create('api-response', { id: 'shows/foo/about' })
     });
 
     await visit('shows/foo');
 
-    assert.equal(showPage.aboutText(), 'About');
+    assert.equal(showPage.aboutText, 'About');
   });
 
   test('visiting a listing page - story page smoke test', async function(assert) {
@@ -86,7 +99,7 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
 
     await visit('shows/foo');
 
-    assert.equal(showPage.storyText(), 'Story body.');
+    assert.equal(showPage.storyText, 'Story body.');
   });
 
   test('scripts in well route content will execute', async function(assert) {
@@ -122,15 +135,12 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
     await visit('shows/foo');
 
     assert.equal(findAll('[data-test-selector=story-detail] p').length, 1, 'should only be one p tag');
-    let text = find('[data-test-selector=story-detail] .django-content').find('p, div').map((_, e) => e.innerText).get().join(' ');
+    let nodes = find('[data-test-selector=story-detail] .django-content').querySelectorAll('p, div');
+    let text = Array.from(nodes).map(e => e.innerText).join(' ');
     assert.equal(text, 'test body. Added this paragraph!');
   });
 
   test('using a nav-link', async function(assert) {
-    let apiResponse = server.create('api-response', {
-      id: 'shows/foo/episodes/1',
-      teaseList: server.createList('story', 10)
-    });
     server.create('api-response', {
       id: 'shows/foo/next-link/1',
       teaseList: server.createList('story', 1, {title: 'Story Title'})
@@ -142,14 +152,17 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
         {'nav-slug': 'episodes', title: 'Episodes'},
         {'nav-slug': 'next-link', title: 'Next Link'}
       ],
-      apiResponse
+      apiResponse: server.create('api-response', {
+        id: 'shows/foo/episodes/1',
+        teaseList: server.createList('story', 10)
+      })
     });
 
     await visit('shows/foo');
 
-    showPage.clickNavLink('Next Link');
+    await showPage.clickNavLink('Next Link');
 
-    assert.deepEqual(showPage.storyTitles(), ["Story Title"]);
+    assert.deepEqual(showPage.storyTitles, ["Story Title"]);
   });
 
   test('visiting directly to a nav link url', async function(assert) {
@@ -175,7 +188,7 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
 
     assert.equal(currentURL(), `shows/foo/next-link/`);
 
-    assert.equal(findWithAssert('nav li.is-active > a').text(), 'Next Link');
+    assert.equal(find('nav li.is-active > a').textContent.trim(), 'Next Link');
   });
 
   test('null social links should not break page', async function(assert) {
@@ -221,14 +234,16 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
 
     await visit('shows/foo')
 
-    assert.equal(find('.foo').textContent, 'donate to foo', 'donate chunk should match');
+    assert.equal(find('.foo').textContent.trim(), 'donate to foo', 'donate chunk should match');
 
     await click(find('a[href="/"]'));
 
-    assert.ok(findWithAssert('.sitechrome-btn'), 'donate chunk should reset after navigating');
+    assert.ok(find('.sitechrome-btn'), 'donate chunk should reset after navigating');
   });
 
   test('show pages with a play param', async function(assert) {
+    setupHifi(this.owner);
+
     let story = server.create('story');
     server.create('listing-page', {
       id: 'shows/foo',
@@ -238,7 +253,7 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
     await visit(`shows/foo?play=${story.slug}`);
 
     assert.equal(currentURL(), `shows/foo?play=${story.slug}`);
-    assert.ok(findAll('.nypr-player').length, 'persistent player should be visible');
+    assert.ok(find('.nypr-player'), 'persistent player should be visible');
     assert.equal(find('[data-test-selector=nypr-player-story-title]').textContent, story.title, `${story.title} should be loaded in player UI`);
   });
 
@@ -267,7 +282,7 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
     // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
     await visit('/');
 
-    this.mock(this.application.__container__.lookup('route:show').get('googleAds'))
+    this.mock(this.owner.lookup('route:show').get('googleAds'))
       .expects('doTargeting')
       .once();
 
@@ -299,12 +314,12 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
 
     await visit('shows/foo');
 
-    let button = find('[data-test-selector=listen-button]');
-    assert.ok(button.text().match('Listen Live'));
+    let button = find('[data-test-selector=listen-button].is-live');
+    assert.ok(button.textContent.match('Listen Live'));
     if (later.minutes() === 0) {
-      assert.ok(button.text().match(later.format('h A')));
+      assert.ok(button.textContent.match(later.format('h A')));
     } else {
-      assert.ok(button.text().match(later.format('h:mm A')));
+      assert.ok(button.textContent.match(later.format('h:mm A')));
     }
   });
 });
@@ -349,13 +364,10 @@ module('Acceptance | Listing Page | Analytics', function(hooks) {
       assert.deepEqual({cms_id, item_type, browser_id, client, external_referrer, referrer, url, site_id}, testObj, 'params match up');
     });
 
-    window.ga = function(command) {
-      if (command === 'npr.send') {
-        assert.ok('called npr.send');
-      }
-    };
+    window.ga = this.spy();
 
     await visit('shows/foo');
+    assert.ok(window.ga.calledWith('npr.send'), 'npr.send called');
   });
 
   test('listen buttons in story teases include data-story and data-show values', async function(assert) {
@@ -374,10 +386,10 @@ module('Acceptance | Listing Page | Analytics', function(hooks) {
 
     await visit('shows/foo');
 
-    let listenButtons = findWithAssert('.story-tease [data-test-selector=listen-button]');
-    listenButtons.each((i, el) => {
-      assert.equal($(el).attr('data-show'), 'foo show');
-      assert.equal($(el).attr('data-story'), teaseList[i].title);
+    let listenButtons = findAll('.story-tease [data-test-selector=listen-button]');
+    listenButtons.forEach((el, i) => {
+      assert.equal(el.getAttribute('data-show'), 'foo show');
+      assert.equal(el.getAttribute('data-story'), teaseList[i].title);
     })
   })
 });

@@ -15,7 +15,7 @@ module('Acceptance | home', function(hooks) {
   test('visiting /', async function(assert) {
     await visit('/');
 
-    assert.equal(findAll('.stream-banner').length, 1, 'stream banner should render');  
+    assert.equal(findAll('.stream-banner').length, 1, 'stream banner should render');
   });
 
   skip('using stream banner', async function(assert) {
@@ -31,12 +31,12 @@ module('Acceptance | home', function(hooks) {
   test('home page does dfp targeting', async function() /*assert*/{
     // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
     await visit('/foo');
-    
-    this.mock(this.application.__container__.lookup('route:index').get('googleAds'))
+
+    this.mock(this.owner.lookup('route:index').get('googleAds'))
       .expects('doTargeting')
       .once();
-    
+
     await visit('/');
-    
+
   });
 });

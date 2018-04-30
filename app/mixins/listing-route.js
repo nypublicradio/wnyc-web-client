@@ -2,13 +2,10 @@ import Mixin from '@ember/object/mixin';
 import { setProperties, get } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 import $ from 'jquery';
-import Ember from 'ember';
 import { inject as service } from '@ember/service';
+import Inflector from 'ember-inflector';
 
 
-const {
-  Inflector
-} = Ember;
 const inflect = new Inflector(Inflector.defaultRules);
 
 export default Mixin.create({

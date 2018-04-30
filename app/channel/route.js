@@ -2,10 +2,7 @@ import { hash as waitFor } from 'rsvp';
 import { set, get } from '@ember/object';
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import Ember from 'ember';
-const {
-  Inflector
-} = Ember;
+import Inflector from 'ember-inflector';
 const inflector = new Inflector(Inflector.defaultRules);
 import { beforeTeardown } from 'nypr-django-for-ember/utils/compat-hooks';
 import PlayParamMixin from 'wqxr-web-client/mixins/play-param';
