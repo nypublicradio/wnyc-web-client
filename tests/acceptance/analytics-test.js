@@ -17,20 +17,21 @@ module('Acceptance | Analytics', function(hooks) {
   });
 
   test('it does not log a pageview when opening and closing the queue', async function(assert) {
-    let metrics = this.owner.lookup('service:metrics');
-    let trackPage = this.spy(metrics, 'trackPage').withArgs('GoogleAnalytics');
+    let dataLayer = this.owner.lookup('service:nypr-metrics/data-layer');
+    let trackPage = this.spy(dataLayer, 'sendPageView');
 
     server.create('django-page', {id: '/'});
     await visit('/');
+
     await click('.nypr-player-queue-button.is-floating');
 
     assert.ok(find('.l-sliding-modal'), 'modal is open');
-    assert.equal(trackPage.callCount, 1, 'trackpageViewEvent was only called once after opening queue');
+    assert.equal(trackPage.callCount, 1, 'sendPageView was only called once after opening queue');
 
     await click('.nypr-player-queue-button.is-floating');
 
     assert.notOk(find('.l-sliding-modal'), 'modal is closed');
-    assert.equal(trackPage.callCount, 1, 'trackPageView was only called once after opening and closing queue');
+    assert.equal(trackPage.callCount, 1, 'sendPageView was only called once after opening and closing queue');
   });
 
   test('it registers the browser id with the dj service', async function() {
