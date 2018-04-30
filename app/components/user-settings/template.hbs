@@ -14,7 +14,12 @@
     dropdownClass='stream-dropdown'
     loadingMessage='Retrieving Stream List...'
     onchange=(action 'selectStream') as |stream|}}
-    {{stream.name}}
+    <span
+      class="gtm__click-tracking"
+      data-action="Settings"
+      data-label="Change Default Stream to {{stream.name}}">
+      {{stream.name}}
+    </span>
   {{/power-select}}
 </div>
 
@@ -31,7 +36,11 @@
 
     <div class='setting-opts autoplay'>
       {{#liquid-bind enableAutoplay use='slideToggle' class='toggle-container' as |disableAutoplay|}}
-        <div class='toggle autoplay-toggle {{if disableAutoplay "inactive-toggle" ""}}' {{action 'toggleAutoplay' enableAutoplay}}>
+        <div
+          class="toggle autoplay-toggle gtm__click-tracking {{if disableAutoplay 'inactive-toggle'}}"
+          data-action="Settings"
+          data-label={{if disableAutoplay "Turn On Continuous Play" "Turn Off Continuous Play"}}
+          {{action 'toggleAutoplay' enableAutoplay}}>
           <span class='switch'></span>
           <span class='label'>{{if disableAutoplay "OFF" "ON"}}</span>
         </div>
@@ -51,7 +60,12 @@
       dropdownClass='autoplay-dropdown'
       disabled=enableAutoplay
       onchange=(action 'selectAutoPlayPref') as |pref|}}
-      {{pref.name}}
+      <span
+        class="gtm__click-tracking"
+        data-action="Settings"
+        data-label="Change Continuous Play to {{pref.name}}">
+        {{pref.name}}
+      </span>
     {{/power-select}}
   </div>
 </div>
