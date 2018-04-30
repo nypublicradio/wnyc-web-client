@@ -369,7 +369,7 @@ module('Acceptance | Listing Page | Analytics', function(hooks) {
     assert.ok(window.ga.calledWith('npr.send'), 'npr.send called');
   });
 
-  test('listen buttons in story teases include data-story and data-show values', async function(assert) {
+  test('listen buttons in story teases include data-action and data-label values', async function(assert) {
     let teaseList = server.createList('story', 5, {audioAvailable: true, showTitle: 'foo show'});
     server.create('listing-page', {
       id: 'shows/foo',
@@ -388,8 +388,8 @@ module('Acceptance | Listing Page | Analytics', function(hooks) {
 
     let listenButtons = findAll('.story-tease [data-test-selector=listen-button]');
     listenButtons.forEach((el, i) => {
-      assert.equal(el.getAttribute('data-show'), 'foo show');
-      assert.equal(el.getAttribute('data-story'), teaseList[i].title);
+      assert.equal(el.getAttribute('data-action'), 'Clicked Play/Pause On Demand');
+      assert.equal(el.getAttribute('data-label'), `${teaseList[i].title} | foo show`);
     })
   })
 });
