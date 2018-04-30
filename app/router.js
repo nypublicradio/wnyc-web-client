@@ -1,18 +1,18 @@
 import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
-import AnalyticsMixin from './mixins/analytics';
 import { inject as service } from '@ember/service';
 
-const Router = EmberRouter.extend(AnalyticsMixin, {
+const Router = EmberRouter.extend({
   session:      service(),
   location: config.locationType,
+  rootURL: config.rootURL,
+  
   willTransition(oldInfos, newInfos, transition) {
     this._super(...arguments);
     if (!['login', 'signup', 'validate', 'forgot', 'reset', 'set-password'].includes(transition.targetName)) {
       this.get('session').set('attemptedTransition', transition);
     }
   },
-  rootURL: config.rootURL
 });
 
 function subpageRoutes() {
