@@ -1,13 +1,11 @@
 import { match } from '@ember/object/computed';
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import { get } from '@ember/object';
 import { reads } from '@ember/object/computed';
 
 export default Controller.extend({
   dj             : service(),
   hifi           : service(),
-  metrics        : service(),
   session        : service(),
   listenAnalytics: service(),
   queue          : service('listen-queue'),
@@ -26,13 +24,6 @@ export default Controller.extend({
       this._scrollY = window.scrollY;
       this.set('modal', which);
       this._wasModal = true;
-
-      let metrics = get(this, 'metrics');
-      metrics.trackEvent('GoogleAnalytics', {
-        category: 'Persistent Player',
-        action: 'Click',
-        label: 'Open Queue'
-      });
     },
     closeModal() {
       if (!this.get('modal')) {
