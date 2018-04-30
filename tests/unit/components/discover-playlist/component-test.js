@@ -1,22 +1,12 @@
 import Service from '@ember/service';
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
-import { get, set } from '@ember/object';
 import { dummyHifi } from 'wnyc-web-client/tests/helpers/hifi-integration-helpers';
 
 module('Unit | Component | discover playlist', function(hooks) {
   setupTest(hooks);
 
   hooks.beforeEach(function() {
-    const metricsStub = Service.extend({
-      trackEvent(service, event) {
-        set(this, 'lastTrackedEvent', event);
-        set(this, 'trackedEventCount', get(this, 'trackedEventCount') + 1);
-      },
-      lastTrackedEvent: null,
-      trackedEventCount: 0,
-    });
-
     const dummyDj = Service.extend({
       isReady: true,
       play() {},
@@ -30,9 +20,6 @@ module('Unit | Component | discover playlist', function(hooks) {
 
     this.owner.register('service:hifi', dummyHifi);
     this.hifi = this.owner.lookup('service:hifi');
-
-    this.owner.register('service:metrics', metricsStub);
-    this.metrics = this.owner.lookup('service:metrics');
 
     this.owner.register('service:dj', dummyDj);
     this.dj = this.owner.lookup('service:dj');
@@ -116,38 +103,4 @@ module('Unit | Component | discover playlist', function(hooks) {
     assert.equal(component.get('removedItems').length, 1, "item should be added to removed items list");
   });
 
-  test('removeItem sends removed item event to metrics', function(assert) {
-    var component = this.owner.factoryFor('component:discover-playlist').create();
-    component.set('stories', stories);
-    component.set('removedItems', []);
-
-    let story = stories[0];
-    component.send('removeItem', story);
-    assert.equal(component.get('metrics.trackedEventCount'), 1, "it should only send one metrics event");
-    assert.deepEqual(component.get('metrics.lastTrackedEvent'),
-      {
-        category: 'Discover',
-        action: 'Removed Story from Discover',
-        value: 1
-      },
-      "it should send the removed item metrics event");
-  });
-
-  test('reorderItems sends moved item event to metrics', function(assert) {
-    var component = this.owner.factoryFor('component:discover-playlist').create();
-    component.set('stories', stories);
-    component.set('removedItems', []);
-
-    let reorderedStories = stories.slice(0).reverse();
-    let story = stories[0];
-    component.send('reorderItems', reorderedStories, story);
-    assert.equal(component.get('metrics.trackedEventCount'), 1, "it should only send one metrics event");
-    assert.deepEqual(component.get('metrics.lastTrackedEvent'),
-      {
-        category: 'Discover',
-        action: 'Moved Story',
-        value: 1
-      },
-      "it should send the moved item metrics event");
-  });
 });
