@@ -2,12 +2,13 @@ import { match } from '@ember/object/computed';
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { reads } from '@ember/object/computed';
+import { get } from '@ember/object';
 
 export default Controller.extend({
   dj             : service(),
   hifi           : service(),
   session        : service(),
-  listenAnalytics: service(),
+  dataLayer      : service('nypr-metrics/data-layer'),
   queue          : service('listen-queue'),
 
   queryParams:  ['modal', 'play'],
@@ -35,8 +36,9 @@ export default Controller.extend({
     },
 
     soundTitleDidChange() {
-      if (this.get('hifi.currentSound.isStream')) {
-        this.get('dataLayer').audioTracking('schedule', this.get('hifi.currentSound'));
+      let sound = this.get('hifi.currentSound');
+      if (get(sound, 'isStream') && get(sound, 'position') > 10) { // skip initial play
+        this.get('dataLayer').audioTracking('schedule', sound);
       }
     },
   }
