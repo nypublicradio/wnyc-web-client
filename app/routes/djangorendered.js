@@ -16,7 +16,12 @@ export default Route.extend(/*PlayParamMixin,*/ {
   googleAds: service(),
 
   titleToken(model) {
-    return get(model, 'title').split(' | ')[0];
+    let title = get(model, 'title');
+    if (title) {
+      return title.split(' | ')[0];
+    } else {
+      return 'Not Found';
+    }
   },
 
   model({ upstream_url }, { queryParams }) {
