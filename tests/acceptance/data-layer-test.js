@@ -41,57 +41,57 @@ module('Acceptance | data layer', function(hooks) {
     await visit('/shows/foo');
 
     assert.ok(layerSpy.calledWith({
-      'Show Title': showListingPage.title,
-      'Item Type': 'show',
-      'ID': showListingPage.cmsPK.toString(),
-      'Major Tags': 'none',
-      'Tags': 'none',
-      'Org ID': '0',
-      'Has Audio': '0',
-      'Word Count': 'none',
-      'NPR ID': 'none',
+      'Viewed Show Title': showListingPage.title,
+      'Viewed Item Type': 'show',
+      'Viewed ID': showListingPage.cmsPK.toString(),
+      'Viewed Story Major Tags': 'none',
+      'Viewed Story Tags': 'none',
+      'Viewed Org ID': '0',
+      'Viewed Has Audio': '0',
+      'Viewed Story Word Count': 'none',
+      'Viewed NPR ID': 'none',
     }), 'correct values for show');
 
     await visit('/series/foo');
 
     assert.ok(layerSpy.calledWith({
-      'Series Title': seriesListingPage.title,
-      'Item Type': 'series',
-      'ID': seriesListingPage.cmsPK.toString(),
-      'Major Tags': 'none',
-      'Tags': 'none',
-      'Org ID': '0',
-      'Has Audio': '0',
-      'Word Count': 'none',
-      'NPR ID': 'none',
+      'Viewed Series Title': seriesListingPage.title,
+      'Viewed Item Type': 'series',
+      'Viewed ID': seriesListingPage.cmsPK.toString(),
+      'Viewed Story Major Tags': 'none',
+      'Viewed Story Tags': 'none',
+      'Viewed Org ID': '0',
+      'Viewed Has Audio': '0',
+      'Viewed Story Word Count': 'none',
+      'Viewed NPR ID': 'none',
     }), 'correct values for series');
 
     await visit('/articles/foo');
 
     assert.ok(layerSpy.calledWith({
-      'Article Channel Title': articleChannelListingPage.title,
-      'Item Type': 'articlechannel',
-      'ID': articleChannelListingPage.cmsPK.toString(),
-      'Major Tags': 'none',
-      'Tags': 'none',
-      'Org ID': '0',
-      'Has Audio': '0',
-      'Word Count': 'none',
-      'NPR ID': 'none',
+      'Viewed Article Channel Title': articleChannelListingPage.title,
+      'Viewed Item Type': 'articlechannel',
+      'Viewed ID': articleChannelListingPage.cmsPK.toString(),
+      'Viewed Story Major Tags': 'none',
+      'Viewed Story Tags': 'none',
+      'Viewed Org ID': '0',
+      'Viewed Has Audio': '0',
+      'Viewed Story Word Count': 'none',
+      'Viewed NPR ID': 'none',
     }), 'correct values for article channels');
 
     await visit('/tags/foo');
 
     assert.ok(layerSpy.calledWith({
-      'Tag Title': tagListingPage.title,
-      'Item Type': 'tag',
-      'ID': tagListingPage.cmsPK.toString(),
-      'Major Tags': 'none',
-      'Tags': 'none',
-      'Org ID': '0',
-      'Has Audio': '0',
-      'Word Count': 'none',
-      'NPR ID': 'none',
+      'Viewed Tag Title': tagListingPage.title,
+      'Viewed Item Type': 'tag',
+      'Viewed ID': tagListingPage.cmsPK.toString(),
+      'Viewed Story Major Tags': 'none',
+      'Viewed Story Tags': 'none',
+      'Viewed Org ID': '0',
+      'Viewed Has Audio': '0',
+      'Viewed Story Word Count': 'none',
+      'Viewed NPR ID': 'none',
     }), 'correct values for tags');
   });
 
@@ -111,36 +111,36 @@ module('Acceptance | data layer', function(hooks) {
     await visit(`story/${story.slug}`);
 
     assert.deepEqual(layerSpy.getCall(1).args[0], {
-      'Authors': 'Foo, Bar',
-      'Date Published': story.newsdate,
-      'Show Title': story.showTitle,
-      'Story Title': story.title,
-      'Story Template': story.template,
-      'Story Series': 'Buz Series, Baz Series',
-      'Item Type': 'story',
-      'ID': story.cmsPK.toString(),
-      'Major Tags': 'news',
-      'Tags': 'politics,entertainment',
-      'Org ID': '1',
-      'Has Audio': true,
-      'Word Count': 150,
-      'NPR ID': '5'
+      'Viewed Authors': 'Foo, Bar',
+      'Viewed Date Published': story.newsdate,
+      'Viewed Show Title': story.showTitle,
+      'Viewed Story Title': story.title,
+      'Viewed Story Template': story.template,
+      'Viewed Story Series': 'Buz Series, Baz Series',
+      'Viewed Item Type': 'story',
+      'Viewed ID': story.cmsPK.toString(),
+      'Viewed Story Major Tags': 'news',
+      'Viewed Story Tags': 'politics,entertainment',
+      'Viewed Org ID': '1',
+      'Viewed Has Audio': true,
+      'Viewed Story Word Count': 150,
+      'Viewed NPR ID': '5'
     });
     assert.ok(layerSpy.calledWith({
-      'Authors': 'Foo, Bar',
-      'Date Published': story.newsdate,
-      'Show Title': story.showTitle,
-      'Story Title': story.title,
-      'Story Template': story.template,
-      'Story Series': 'Buz Series, Baz Series',
-      'Item Type': 'story',
-      'ID': story.cmsPK.toString(),
-      'Major Tags': 'news',
-      'Tags': 'politics,entertainment',
-      'Org ID': '1',
-      'Has Audio': true,
-      'Word Count': 150,
-      'NPR ID': '5'
+      'Viewed Authors': 'Foo, Bar',
+      'Viewed Date Published': story.newsdate,
+      'Viewed Show Title': story.showTitle,
+      'Viewed Story Title': story.title,
+      'Viewed Story Template': story.template,
+      'Viewed Story Series': 'Buz Series, Baz Series',
+      'Viewed Item Type': 'story',
+      'Viewed ID': story.cmsPK.toString(),
+      'Viewed Story Major Tags': 'news',
+      'Viewed Story Tags': 'politics,entertainment',
+      'Viewed Org ID': '1',
+      'Viewed Has Audio': true,
+      'Viewed Story Word Count': 150,
+      'Viewed NPR ID': '5'
     }));
   });
 });
