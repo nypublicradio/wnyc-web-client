@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import RavenLogger from 'ember-cli-deploy-sentry/services/raven';
 import Ember from 'ember';
+import { run } from '@ember/runloop';
 
 export default RavenLogger.extend({
   // ember-cli-deploy-sentry will use this key as part of a dynamic lookup on the
@@ -10,34 +11,37 @@ export default RavenLogger.extend({
   // set it here.
   releaseMetaName: 'revision',
   init() {
+    this._super(...arguments);
     $(document).ajaxError((event, jqXHR, ajaxSettings, thrownError) => {
       if (Ember.testing) {
         return;
       }
-      let {
-        type,
-        url,
-        data
-      } = ajaxSettings;
-      let {
-        status,
-        response
-      } = jqXHR;
-      response = response ? response.substr(0, 100) : '';
-      // The details of CORS errors are protected by browsers, so we don't get
-      // additional metadata. The jQuery default for these errors are 'error',
-      // which isn't helpful.
-      let fallbackMessage = jqXHR.statusText === 'error' ? "Possibly a CORS error. Extra details are protected." : jqXHR.statusText;
-      // if a thrownError is passed in, use that. otherwise use whatever we got from above.
-      this.captureMessage(thrownError || fallbackMessage, {
-        extra: {
+      run(() => {
+        let {
           type,
           url,
-          data,
+          data
+        } = ajaxSettings;
+        let {
           status,
-          response,
-          error: thrownError || jqXHR.statusText
-        }
+          response
+        } = jqXHR;
+        response = response ? response.substr(0, 100) : '';
+        // The details of CORS errors are protected by browsers, so we don't get
+        // additional metadata. The jQuery default for these errors are 'error',
+        // which isn't helpful.
+        let fallbackMessage = jqXHR.statusText === 'error' ? "Possibly a CORS error. Extra details are protected." : jqXHR.statusText;
+        // if a thrownError is passed in, use that. otherwise use whatever we got from above.
+        this.captureMessage(thrownError || fallbackMessage, {
+          extra: {
+            type,
+            url,
+            data,
+            status,
+            response,
+            error: thrownError || jqXHR.statusText
+          }
+        });
       });
     });
   },
