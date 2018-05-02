@@ -1,13 +1,13 @@
-export function registerAndInjectMock(application, registryName, mockObject, injectionName) {
+export function registerAndInjectMock(owner, registryName, mockObject, injectionName) {
   // if we're using a fake name, we can simply register and inject.
-  application.register(registryName, mockObject);
-  application.inject('controller', injectionName, registryName);
-  application.inject('route',      injectionName, registryName);
-  application.inject('component',  injectionName, registryName);
-  return application.__container__.lookup(registryName);
+  owner.register(registryName, mockObject);
+  owner.inject('controller', injectionName, registryName);
+  owner.inject('route',      injectionName, registryName);
+  owner.inject('component',  injectionName, registryName);
+  return owner.lookup(registryName);
 }
 
-export function registerMockOnInstance(application, registryName, mockObject) {
+export function registerMockOnInstance(owner, registryName, mockObject) {
   // If we're trying to ovverride a real name, (e.g. because we want to fool an
   // initializer that uses instance.lookup('foo:bar')) things get trickier;
   //
@@ -18,8 +18,6 @@ export function registerMockOnInstance(application, registryName, mockObject) {
   // We use this deprecated api here to replace the object directly with our own mock
   //
   // based on: https://github.com/ember-weekend/ember-weekend/blob/master/tests/helpers/module-for-acceptance.js#L14
-  let instance = application.__deprecatedInstance__;
-  let registry = instance.register ? instance : instance.registry;
-  registry.register(registryName, mockObject);
-  return application.__container__.lookup(registryName);
+  owner.register(registryName, mockObject);
+  return owner.lookup(registryName);
 }
