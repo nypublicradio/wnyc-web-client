@@ -1,13 +1,22 @@
-import { click, visit } from '@ember/test-helpers';
+import { click, visit, triggerEvent, find } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import config from 'wqxr-web-client/config/environment';
-import { next } from '@ember/runloop';
+
+import DummyConnection from 'ember-hifi/hifi-connections/dummy-connection';
+
+const setupHifi = app => {
+  const HIFI = app.lookup('service:hifi');
+  app.register('hifi-connection:local-dummy-connection', DummyConnection, {instantiate: false});
+  HIFI.set('_connections', [HIFI._activateConnection({name: 'LocalDummyConnection'})]);
+}
 
 module('Acceptance | player events', function(hooks) {
   setupApplicationTest(hooks);
 
   test('visiting /player-events', async function(assert) {
+    setupHifi(this.owner);
+
     let story = server.create('story', {title: "Test audio", audio: '/good/150000/test'});
     let done = assert.async();
     server.create('stream');
@@ -27,14 +36,12 @@ module('Acceptance | player events', function(hooks) {
     // story header play button
     await click('main [data-test-selector="listen-button"]');
 
-    // let hifi go a tick, otherwise we report the second play as a start, not a resume
-    next(async () => {
-      // pause
-      await click('.nypr-player-button.mod-listen');
+    // pause
+    await click('.nypr-player-button.mod-listen');
 
-      // play
-      await click('.nypr-player-button.mod-listen');
-    });
+    // play
+    await click('.nypr-player-button.mod-listen');
+
     // fast forward
     await click('.nypr-player-button.mod-fastforward');
 
@@ -43,8 +50,7 @@ module('Acceptance | player events', function(hooks) {
 
     // set position
     let progressMeter = find('.nypr-player-progress');
-    let leftEdge = progressMeter.offset().left;
-    var e = window.$.Event('mousedown', {which: 1, pageX: leftEdge + 200});
-    progressMeter.trigger(e);
+    let leftEdge = progressMeter.getBoundingClientRect().left;
+    triggerEvent('.nypr-player-progress', 'mousedown', {which: 1, pageX: leftEdge + 200})
   });
 });

@@ -12,7 +12,7 @@ import config from 'wqxr-web-client/config/environment';
 import {
   authenticateSession,
   currentSession
-} from 'wqxr-web-client/tests/helpers/ember-simple-auth';
+} from 'ember-simple-auth/test-support';
 
 module('Acceptance | set password', function(hooks) {
   setupApplicationTest(hooks);
@@ -33,7 +33,7 @@ module('Acceptance | set password', function(hooks) {
     assert.equal(find('.account-form-description').textContent.trim(), `Create a WQXR password for ${email}.`, 'it should show the create password form desc');
 
     await fillIn('input[name=password]', password);
-    await click('button:contains(Create password)');
+    await click('button');
 
     assert.equal(find('.account-form-heading').textContent.trim(), 'Oops!', 'it should show an oops page when you click create password with a bad code');
   });
@@ -46,16 +46,16 @@ module('Acceptance | set password', function(hooks) {
     assert.equal(find('.account-form-heading').textContent.trim(), 'Create a password', 'it should show the create password form');
 
     await fillIn('input[name=password]', password);
-    await click('button:contains(Create password)');
+    await click('button');
 
     assert.equal(find('.account-form-heading').textContent.trim(), 'Log in to WQXR', 'it should show a login form when you click create password with a good email code and password');
 
     await fillIn('input[name=email]', email);
     await fillIn('input[name=password]', password);
 
-    await click('button[type=submit]:contains(Log in)');
+    await click('button[type=submit]');
 
-    assert.ok(currentSession(this.application).get('isAuthenticated'));
+    assert.ok(currentSession().get('isAuthenticated'));
   });
 
 
@@ -70,21 +70,21 @@ module('Acceptance | set password', function(hooks) {
     assert.equal(find('.account-form-heading').textContent.trim(), 'Create a password', 'it should show the create password form');
 
     await fillIn('input[name=password]', password);
-    await click('button:contains(Create password)');
+    await click('button');
 
     assert.equal(find('.account-form-heading').textContent.trim(), 'Create a password', 'it should remain on the form when the reset url returns other errors.');
   });
 
   test('setting password while already logged in redirects to profile', async function(assert) {
     server.create('user', 'facebook');
-    authenticateSession(this.application, {access_token: 'foo'});
+    authenticateSession({access_token: 'foo'});
 
     await visit(setPasswordUrlWithParameters);
 
     assert.equal(currentURL(), setPasswordUrlWithParameters);
     assert.equal(find('.account-form-heading').textContent.trim(), 'Create a password', 'it should show the create password form');
     await fillIn('input[name=password]', password);
-    await click('button:contains(Create password)');
+    await click('button');
     assert.equal(currentURL(), '/profile', 'it should redirect to the profile page');
   });
 });

@@ -6,6 +6,15 @@ import config from 'wqxr-web-client/config/environment';
 import { setupApplicationTest } from 'ember-qunit';
 import { module } from 'qunit';
 
+import DummyConnection from 'ember-hifi/hifi-connections/dummy-connection';
+
+const setupHifi = app => {
+  const HIFI = app.lookup('service:hifi');
+  app.register('hifi-connection:local-dummy-connection', DummyConnection, {instantiate: false});
+  HIFI.set('_connections', [HIFI._activateConnection({name: 'LocalDummyConnection'})]);
+}
+
+
 module('Acceptance | Story Detail', function(hooks) {
   setupApplicationTest(hooks);
 
@@ -21,10 +30,10 @@ module('Acceptance | Story Detail', function(hooks) {
     let story = server.create('story', {enableComments: true});
     await visit(`story/${story.slug}`);
 
-    storyPage.clickShowComments();
+    await storyPage.clickShowComments();
 
     assert.ok(storyPage.commentsVisible, 'comments are visible');
-    assert.notOk(findAll('.js-feature-comment').length, 'feature controls are visible');
+    assert.notOk(find('.js-feature-comment'), 'feature controls are visible');
   });
 
   test('view comments as staff user', async function(assert) {
@@ -35,16 +44,17 @@ module('Acceptance | Story Detail', function(hooks) {
     server.createList('comment', 5, {story});
     await visit(`story/${story.slug}`);
 
-    storyPage.clickShowComments();
-    assert.ok(find('[data-test-selector=moderate]').length, 'moderate control is visible');
+    await storyPage.clickShowComments();
+    assert.ok(find('[data-test-selector=moderate]'), 'moderate control is visible');
   });
 
   test('story pages with a play param', async function(assert) {
+    setupHifi(this.owner);
     let story = server.create('story');
     await visit(`story/${story.slug}/?play=${story.slug}`);
 
     assert.equal(currentURL(), `story/${story.slug}/?play=${story.slug}`);
-    assert.ok(findAll('.nypr-player').length, 'persistent player should be visible');
+    assert.ok(find('.nypr-player'), 'persistent player should be visible');
     assert.equal(find('[data-test-selector=nypr-player-story-title]').textContent, story.title, `${story.title} should be loaded in player UI`);
   });
 });
@@ -115,7 +125,7 @@ module('Acceptance |  Story Detail Analytics', function(hooks) {
     // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
     await visit('/');
 
-    this.mock(this.application.__container__.lookup('route:story').get('googleAds'))
+    this.mock(this.owner.lookup('route:story').get('googleAds'))
       .expects('doTargeting')
       .once()
       .withArgs(forDfp);
@@ -129,15 +139,15 @@ module('Acceptance |  Story Detail Analytics', function(hooks) {
 
     await visit(`story/${story.slug}`);
 
-    let listenButton = findWithAssert('#storyHeader [data-test-selector=listen-button]');
-    assert.equal(listenButton.attr('data-show'), 'foo show');
-    assert.equal(listenButton.attr('data-story'), story.title);
+    let listenButton = find('#storyHeader [data-test-selector=listen-button]');
+    assert.equal(listenButton.getAttribute('data-show'), 'foo show');
+    assert.equal(listenButton.getAttribute('data-story'), story.title);
 
     await visit(`story/${segmentStory.slug}`);
-    let segmentButtons = findWithAssert('#segmentsList [data-test-selector=listen-button]');
-    segmentButtons.each((i, el) => {
-      assert.equal($(el).attr('data-show'), 'foo show');
-      assert.equal($(el).attr('data-story'), segmentStory.segments[i].title);
+    let segmentButtons = findAll('#segmentsList [data-test-selector=listen-button]');
+    segmentButtons.forEach((el, i) => {
+      assert.equal(el.getAttribute('data-show'), 'foo show');
+      assert.equal(el.getAttribute('data-story'), segmentStory.segments[i].title);
     });
   });
 

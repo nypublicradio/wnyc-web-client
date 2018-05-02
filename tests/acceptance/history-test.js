@@ -1,7 +1,6 @@
 import { currentURL } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { run } from '@ember/runloop';
 import historyPage from 'wqxr-web-client/tests/pages/history';
 import velocity from 'velocity';
 

@@ -8,7 +8,7 @@ module('Acceptance | playlist', function(hooks) {
 
   test('visiting /streams/wqxr', async function(assert) {
     server.create('stream', {
-      slug: 'wqxr', 
+      slug: 'wqxr',
       name: 'WQXR FM',
     });
     server.create('whats-on', {
@@ -31,7 +31,7 @@ module('Acceptance | playlist', function(hooks) {
 
   test('playlist routes do dfp targeting', async function() /*assert*/{
     server.create('stream', {
-      slug: 'wnyc-fm939', 
+      slug: 'wnyc-fm939',
       name: 'WNYC FM',
     });
     server.create('whats-on', {
@@ -43,10 +43,10 @@ module('Acceptance | playlist', function(hooks) {
         end: "2016-09-15T13:00:15.542Z" // 9 am
       }
     });
-    
+
     // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
     await visit('/');
-    this.mock(this.application.__container__.lookup('route:playlist').get('googleAds'))
+    this.mock(this.owner.lookup('route:playlist').get('googleAds'))
       .expects('doTargeting')
       .once();
 

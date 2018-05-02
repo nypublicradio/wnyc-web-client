@@ -3,19 +3,19 @@ import {
   click,
   fillIn,
   currentURL,
+  currentRouteName,
   visit
 } from '@ember/test-helpers';
-import { module, test } from 'qunit';
+import { module } from 'qunit';
+import test from 'ember-sinon-qunit/test-support/test';
 import { setupApplicationTest } from 'ember-qunit';
 import { Response } from 'ember-cli-mirage';
 //import 'wqxr-web-client/tests/helpers/with-feature';
 import {
   authenticateSession,
   currentSession
-} from 'wqxr-web-client/tests/helpers/ember-simple-auth';
-import dummySuccessProviderFb from 'wqxr-web-client/tests/helpers/torii-dummy-success-provider-fb';
-import dummyFailureProvider from 'wqxr-web-client/tests/helpers/torii-dummy-failure-provider';
-import { registerMockOnInstance } from 'wqxr-web-client/tests/helpers/register-mock';
+} from 'ember-simple-auth/test-support';
+
 
 module('Acceptance | signup', function(hooks) {
   setupApplicationTest(hooks);
@@ -39,7 +39,7 @@ module('Acceptance | signup', function(hooks) {
   test("can't visit /signup when authenticated", async function(assert) {
     server.create('bucket', {slug: 'wqxr-home'});
     server.create('user');
-    authenticateSession(this.application, {access_token: 'foo'});
+    authenticateSession({access_token: 'foo'});
 
     await visit(signupUrl);
 
@@ -48,7 +48,7 @@ module('Acceptance | signup', function(hooks) {
 
   test('Sign up button is visible at load', async function(assert) {
     await visit(signupUrl);
-    assert.equal(find('button[type=submit]:contains(Sign up)').length, 1);
+    assert.ok(find('button[type=submit]'));
   });
 
   test('Sign up page populates fields from query string', async function(assert) {
@@ -70,36 +70,46 @@ module('Acceptance | signup', function(hooks) {
     await fillIn('input[name=email]', 'foo@example.com');
     await fillIn('input[name=emailConfirmation]', 'foo@example.com');
     await fillIn('input[name=typedPassword]', 'password1234567');
-    await click('button[type=submit]:contains(Sign up)');
+    await click('button[type=submit]');
 
     assert.equal(find('.account-form-heading').textContent.trim(), 'Thanks for signing up!');
   });
 
   test('Sign up with Facebook button is visible at load', async function(assert) {
-    withFeature('socialAuth');
     await visit(signupUrl);
-    assert.equal(find('button:contains(Sign up with Facebook)').length, 1);
+    assert.ok(find('button.account-form-btn--facebook'));
 
   });
 
   test('Successful facebook login redirects', async function(assert) {
     server.create('bucket', {slug: 'wqxr-home'});
-    let user = server.create('user');
-    registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
-    withFeature('socialAuth');
+    let user = server.create('user', 'facebook');
+    let facebookProvider = this.owner.lookup('torii-provider:facebook-connect');
+    this.stub(facebookProvider, 'open').resolves({
+      accessToken: 'abcdef',
+      expiresIn: 6000,
+      userId: '123456',
+      provider: 'facebook-connect'
+    });
+
     await visit(signupUrl);
+    await click('button');
 
-    await click('button:contains(Sign up with Facebook)');
-
-    assert.equal(currentURL(), '/');
-    assert.ok(currentSession(this.application).get('isAuthenticated'), 'Session is authenticated');
+    assert.ok(/^index(_loading)?$/.test(currentRouteName()));
+    assert.ok(currentSession().get('isAuthenticated'), 'Session is authenticated');
     assert.equal(find('.user-nav-greeting').textContent.trim(), user.given_name);
     assert.equal(find('.user-nav-avatar > img').getAttribute('src'), user.picture);
   });
 
   test('Facebook login with no email shows alert', async function(assert) {
     server.create('user');
-    registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
+    let facebookProvider = this.owner.lookup('torii-provider:facebook-connect');
+    this.stub(facebookProvider, 'open').resolves({
+      accessToken: 'abcdef',
+      expiresIn: 6000,
+      userId: '123456',
+      provider: 'facebook-connect'
+    });
     server.get('/v1/session', () => {
       return new Response(400, {}, { "errors": {
         "code": "MissingAttributeException",
@@ -108,25 +118,24 @@ module('Acceptance | signup', function(hooks) {
       });
     });
 
-    withFeature('socialAuth');
     await visit(signupUrl);
 
-    await click('button:contains(Sign up with Facebook)');
+    await click('button');
 
     assert.equal(currentURL(), '/signup');
     assert.equal(find('.alert-warning').textContent.trim(), "Unfortunately, we can't authorize your account without permission to view your email address.");
-    assert.ok(!currentSession(this.application).get('isAuthenticated'), 'Session is not authenticated');
+    assert.ok(!currentSession().get('isAuthenticated'), 'Session is not authenticated');
   });
 
   test('Unsuccessful facebook login shows alert', async function(assert) {
-    registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummyFailureProvider);
-    withFeature('socialAuth');
-    await visit(signupUrl);
+    let facebookProvider = this.owner.lookup('torii-provider:facebook-connect');
+    this.stub(facebookProvider, 'open').rejects();
 
-    await click('button:contains(Sign up with Facebook)');
+    await visit(signupUrl);
+    await click('button');
 
     assert.equal(currentURL(), '/signup');
     assert.equal(find('.alert-warning').textContent.trim(), "We're sorry, but we weren't able to log you in through Facebook.");
-    assert.ok(!currentSession(this.application).get('isAuthenticated'), 'Session is not authenticated');
+    assert.ok(!currentSession().get('isAuthenticated'), 'Session is not authenticated');
   });
 });

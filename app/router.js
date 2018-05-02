@@ -1,8 +1,9 @@
 import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
 import { inject as service } from '@ember/service';
+import AnalyticsMixin from './mixins/analytics';
 
-const Router = EmberRouter.extend({
+const Router = EmberRouter.extend(AnalyticsMixin, {
   location: config.locationType,
   session:  service(),
 

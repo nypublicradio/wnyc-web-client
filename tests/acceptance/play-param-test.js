@@ -5,34 +5,28 @@ import {
   find,
   visit
 } from '@ember/test-helpers';
-import { module, skip, test } from 'qunit';
+import { module } from 'qunit';
+import test from 'ember-sinon-qunit/test-support/test';
 import { setupApplicationTest } from 'ember-qunit';
 import { registerMockOnInstance } from 'wqxr-web-client/tests/helpers/register-mock';
-import Service from '@ember/service';
 import velocity from 'velocity';
 import { dummyHifi } from 'wqxr-web-client/tests/helpers/hifi-integration-helpers';
 
 
 velocity.mock = true;
 
-const mockAudio = Service.extend({
-  playParam: null,
-  play(playParam) {
-    this.set('playParam', playParam);
-  }
-});
 
 module('Acceptance | play param', function(hooks) {
   setupApplicationTest(hooks);
 
   hooks.beforeEach(function() {
     server.create('stream');
-    registerMockOnInstance(this.application, 'service:hifi', dummyHifi);
+    registerMockOnInstance(this.owner, 'service:hifi', dummyHifi);
   });
 
-  skip('play param transitions', async function(assert) {
-    let application = this.application;
-    let audio = registerMockOnInstance(application, 'service:dj', mockAudio);
+  test('play param transitions', async function(assert) {
+    let dj = this.owner.lookup('service:dj');
+    this.stub(dj, 'play');
 
     server.create('django-page', {
       id: 'fake/',
@@ -50,10 +44,10 @@ module('Acceptance | play param', function(hooks) {
     await click('#foo');
 
     assert.equal(currentURL(), '/foo?play=wnyc-fm939', 'url should have ?play');
-    assert.equal(audio.get('playParam'), 'wnyc-fm939', 'play should be called');
     await click('#home');
-    assert.equal(currentURL(), '/', 'homepage should not have a query param');
-    assert.equal(audio.get('playParam'), 'wnyc-fm939', 'play should not be called again');
+    assert.equal(currentURL(), '/fake', 'homepage should not have a query param');
+    assert.ok(dj.play.calledOnce, 'play should not be called again');
+    assert.ok(dj.play.calledWith('wnyc-fm939'), 'play should be called');
   });
 
   test('loading a page with the ?play param', async function(assert) {

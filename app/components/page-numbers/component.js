@@ -94,7 +94,7 @@ export default Component.extend({
   actions: {
     pageClicked(num) {
       set(this, 'currentPage', num);
-      this.sendAction('action', num);
+      this.sendAction('action', num); // eslint-disable-line
     },
     incrementPage(num) {
       let currentPage = get(this, 'currentPage');
@@ -104,7 +104,7 @@ export default Component.extend({
       if (currentPage <= 1 && num === -1) { return false; }
       this.incrementProperty('currentPage', num);
       let newPage = this.get('currentPage');
-      this.sendAction('action', newPage);
+      this.sendAction('action', newPage); // eslint-disable-line
     }
   }
 });

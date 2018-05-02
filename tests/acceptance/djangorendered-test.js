@@ -20,15 +20,6 @@ function escapeNavigation() {
 module('Acceptance | Django Rendered | Proper Re-renders', function(hooks) {
   setupApplicationTest(hooks);
 
-  function findWithAssert(selector){
-    let found = findAll(selector);
-    if (found.length == 0){
-      throw "DOM element not found.";
-    } else {
-      return found;
-    }
-  }
-
   hooks.beforeEach(function() {
     server.create('stream');
     window.onbeforeunload = escapeNavigation;

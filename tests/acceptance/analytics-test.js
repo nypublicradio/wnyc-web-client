@@ -1,7 +1,6 @@
 import { click, findAll, currentURL, visit } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { registerWaiter, unregisterWaiter } from '@ember/test';
 import { setBreakpoint } from 'ember-responsive/test-support';
 import DummyConnection from 'ember-hifi/hifi-connections/dummy-connection';
 
@@ -13,10 +12,6 @@ const setupHifi = app => {
 
 module('Acceptance | Selectors for GTM Analytics', function(hooks) {
   setupApplicationTest(hooks);
-
-  function waitForStreams() {
-    return findAll('.stream-banner-station').length;
-  }
 
   function findWithAssert(selector){
     let found = findAll(selector);

@@ -52,7 +52,7 @@ module('Acceptance | schedule', function(hooks) {
   test('schedule routes do dfp targeting', async function() /*assert*/{
     // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
     await visit('/');
-    this.mock(this.application.__container__.lookup('route:schedule.date').get('googleAds'))
+    this.mock(this.owner.lookup('route:schedule.date').get('googleAds'))
       .expects('doTargeting')
       .once();
     let date = moment().format('YYYY/MMM/DD').toLowerCase();
