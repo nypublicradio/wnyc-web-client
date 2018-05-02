@@ -47,6 +47,7 @@ module('Acceptance | validate', function(hooks) {
   });
 
   test('visiting /validate and logging in even when starting logged in', async function(assert) {
+    server.create('bucket', {slug: 'wqxr-home'});
     server.create('stream');
     server.create('user');
     authenticateSession({access_token: 'foo'});

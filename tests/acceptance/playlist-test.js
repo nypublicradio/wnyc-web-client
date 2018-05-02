@@ -30,6 +30,7 @@ module('Acceptance | playlist', function(hooks) {
   });
 
   test('playlist routes do dfp targeting', async function() /*assert*/{
+    server.create('bucket', {slug: 'wqxr-home'});
     server.create('stream', {
       slug: 'wnyc-fm939',
       name: 'WNYC FM',

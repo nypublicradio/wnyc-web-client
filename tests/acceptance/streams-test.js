@@ -48,6 +48,7 @@ module('Acceptance | streams', function(hooks) {
   });
 
   test('stream routes do dfp targeting', async function() /*assert*/{
+    server.create('bucket', {slug: 'wqxr-home'});
     server.createList('stream', 7);
     server.createList('whats-on', 7);
 

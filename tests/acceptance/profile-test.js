@@ -186,6 +186,7 @@ module('Acceptance | profile', function(hooks) {
   });
 
   test('can disable account', async function(assert) {
+    server.create('bucket', {slug: 'wqxr-home'});
     assert.expect(1);
 
     server.create('user');

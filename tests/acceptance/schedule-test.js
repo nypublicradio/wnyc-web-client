@@ -50,6 +50,7 @@ module('Acceptance | schedule', function(hooks) {
   });
 
   test('schedule routes do dfp targeting', async function() /*assert*/{
+    server.create('bucket', {slug: 'wqxr-home'});
     // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
     await visit('/');
     this.mock(this.owner.lookup('route:schedule.date').get('googleAds'))

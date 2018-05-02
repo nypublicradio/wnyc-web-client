@@ -274,6 +274,7 @@ module('Acceptance | Listing Page | viewing', function(hooks) {
   });
 
   test('channel routes do dfp targeting', async function() /*assert*/{
+    server.create('bucket', {slug: 'wqxr-home'});
     server.create('listing-page', {
       id: 'shows/foo'
     });

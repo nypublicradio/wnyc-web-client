@@ -75,6 +75,7 @@ module('Acceptance | reset', function(hooks) {
   });
 
   test('visiting /reset and resetting password and logging in still works when starting logged in', async function(assert) {
+    server.create('bucket', {slug: 'wqxr-home'});
     server.create('stream');
     server.create('user');
     authenticateSession({access_token: 'foo'});

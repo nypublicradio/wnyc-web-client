@@ -39,6 +39,7 @@ module('Acceptance | set password', function(hooks) {
   });
 
   test('visiting /set-password and creating a password and logging in', async function(assert) {
+    server.create('bucket', {slug: 'wqxr-home'});
     server.create('user');
     await visit(setPasswordUrlWithParameters);
 

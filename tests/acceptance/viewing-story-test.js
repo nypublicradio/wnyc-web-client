@@ -118,6 +118,7 @@ module('Acceptance |  Story Detail Analytics', function(hooks) {
   });
 
   test('story routes do dfp targeting', async function() /*assert*/{
+    server.create('bucket', {slug: 'wqxr-home'});
     let forDfp = {tags: ['foo', 'bar'], show: 'foo show', channel: 'foo channel', series: 'foo series'};
     let story = server.create('story', forDfp);
 

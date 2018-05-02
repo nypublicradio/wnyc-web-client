@@ -73,7 +73,6 @@ module('Acceptance | queue', function(hooks) {
 
     let stories = server.createList('story', 4, {showTitle: 'foo show'});
     server.create('djangoPage', {id:'/'});
-    console.log(stories);
 
     run(() => {
       listenQueue.addToQueueById(stories[0].slug);
@@ -83,7 +82,6 @@ module('Acceptance | queue', function(hooks) {
       listenHistory.addListen(stories[3]);
     });
 
-    console.log(listenQueue);
 
     await queuePage.visit();
     //await pauseTest();
