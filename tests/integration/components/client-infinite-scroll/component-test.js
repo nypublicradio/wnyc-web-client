@@ -2,25 +2,16 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, findAll } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import startMirage from 'wqxr-web-client/tests/helpers/setup-mirage-for-integration';
 
 module('Integration | Component | client infinite scroll', function(hooks) {
   setupRenderingTest(hooks);
-
-  hooks.beforeEach(function() {
-    startMirage(this.container);
-  });
-
-  hooks.afterEach(function() {
-    server.shutdown();
-  });
 
   test('it renders', async function(assert) {
     let testShows = server.createList('show', 42);
     this.set("testShows", testShows);
 
     await render(hbs`{{client-infinite-scroll shows=testShows}}`);
-    
+
     assert.equal(findAll("li.list-item").length, 10, "ten items in the list to start");
   });
 

@@ -1,5 +1,6 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
+import { run } from '@ember/runloop'
 
 module('Unit | Model | story metadata', function(hooks) {
   setupTest(hooks);
@@ -35,8 +36,8 @@ module('Unit | Model | story metadata', function(hooks) {
 
   TEST_CASES.forEach(testCase => {
     test(testCase.description, function(assert) {
-      let story = this.subject(testCase.story);
-      let actual = story.get('shareMetadata');
+      let story = run(() => this.owner.lookup('service:store').createRecord('story', testCase.story));
+      let actual = run (() => story.get('shareMetadata'));
       const expected = testCase.expectedMetadata;
       assert.deepEqual(actual, expected, testCase.description);
     });

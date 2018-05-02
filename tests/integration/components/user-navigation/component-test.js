@@ -50,14 +50,11 @@ module('Integration | Component | user navigation', function(hooks) {
     assert.equal(findAll('.user-nav-popup').length, 0, 'popup should start closed');
     await click('.user-nav-logged-in button');
 
-    settled().then(async () => {
-      assert.equal(findAll('.user-nav-popup').length, 1, 'popup should open');
-      await click('.user-nav-logged-in button');
-    });
 
-    return settled().then(() => {
-      assert.equal(findAll('.user-nav-popup').length, 0, 'popup should close');
-    });
+    assert.equal(findAll('.user-nav-popup').length, 1, 'popup should open');
+    await click('.user-nav-logged-in button');
+
+    assert.equal(findAll('.user-nav-popup').length, 0, 'popup should close');
   });
 
   test('clicking outside closes the popup', async function(assert) {
@@ -67,12 +64,9 @@ module('Integration | Component | user navigation', function(hooks) {
     assert.equal(findAll('.user-nav-popup').length, 0, 'popup should start closed');
     await click('.user-nav-logged-in button');
 
-    settled().then(async () => {
-      assert.equal(findAll('.user-nav-popup').length, 1, 'popup should open');
-      await click('#outside');
-    });
+    assert.equal(findAll('.user-nav-popup').length, 1, 'popup should open');
+    await click('#outside');
 
-    return settled().then(() => {
-      assert.equal(findAll('.user-nav-popup').length, 0, 'popup should close');
-    });});
+    assert.equal(findAll('.user-nav-popup').length, 0, 'popup should close');
+  });
 });

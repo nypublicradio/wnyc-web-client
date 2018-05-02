@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, findAll } from '@ember/test-helpers';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | error page', function(hooks) {
@@ -26,6 +26,6 @@ module('Integration | Component | error page', function(hooks) {
   test('it renders 404 page', async function(assert) {
     await render(hbs`{{error-page errorCode='404'}}`);
 
-    assert.ok(findAll('[data-test-selector=404]').length);
+    assert.ok(find('[data-test-selector="404"]'));
   });
 });

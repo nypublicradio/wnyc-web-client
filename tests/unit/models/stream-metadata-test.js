@@ -1,5 +1,6 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
+import { run } from '@ember/runloop';
 
 module('Unit | Model | stream metadata', function(hooks) {
   setupTest(hooks);
@@ -39,8 +40,8 @@ module('Unit | Model | stream metadata', function(hooks) {
 
   TEST_CASES.forEach(testCase => {
     test(testCase.description, function(assert) {
-      let stream = this.subject(testCase.story);
-      let actual = stream.get('shareMetadata');
+      let stream = run(() => this.owner.lookup('service:store').createRecord('stream', testCase.story));
+      let actual = run(() => stream.get('shareMetadata'));
       const expected = testCase.expectedMetadata;
       assert.deepEqual(actual, expected, testCase.description);
     });
