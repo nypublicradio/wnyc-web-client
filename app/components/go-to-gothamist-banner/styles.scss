@@ -58,6 +58,7 @@ p.headline {
 p.subhead {
   font-size: 18px;
   line-height: 1.5;
+  font-weight: 400;
 
   @include mq($small-only) {
     font-size: 14px;
