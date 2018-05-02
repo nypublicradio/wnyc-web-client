@@ -27,6 +27,7 @@ module.exports = function(environment) {
       config: {
         id: process.env.GOOGLE_ANALYTICS || 'UA-46158613-1'
       },
+      environments: ['production', 'development']
     }, {
       name: 'NprAnalytics',
       config: {
@@ -39,6 +40,9 @@ module.exports = function(environment) {
       },
       environments: ['production', 'development']
     }],
+    'ember-cli-mirage': {
+      autostart: true // https://github.com/samselikoff/ember-cli-mirage/blob/master/CHANGELOG.md#how-it-works-in-different-types-of-tests
+    },
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -132,16 +136,8 @@ module.exports = function(environment) {
     gothamistStories: process.env.GOTHAMIST_STORIES,
     wnycDonateURL: 'https://pledge3.wnyc.org/epledge/main?ref=button-donate-header',
     featureFlags: {
-      'social-auth': process.env.SOCIAL_AUTH,
-      'member-center': process.env.MEMBER_CENTER,
       'discover': true,
       'other-discover': process.env.OTHER_DISCOVER,
-    },
-    betaTrials: {
-      betaInviteLanding: '#full-page-transforms-wrapper',
-      legacyNavLinkLanding: '#navigation-items > li:nth-child(2)',
-      isBetaSite: false,
-      preBeta: false,
     },
     contentSecurityPolicy: {
       'connect-src': "'self' *.wnyc.net:* ws://*.wnyc.net:*",
@@ -202,9 +198,6 @@ module.exports = function(environment) {
 
     ENV.APP.rootElement = '#ember-testing';
 
-    ENV.betaTrials.legacyNavLinkLanding = '#ember-testing';
-    ENV.betaTrials.betaInviteLanding = '#ember-testing';
-
     ENV.publisherAPI = 'http://example.com/api';
     ENV.adminRoot = 'http://admin.example.com';
     ENV.etagAPI = 'http://example.com/api/v1/browser_id/';
@@ -213,6 +206,8 @@ module.exports = function(environment) {
     ENV.membershipAPI = 'http://www.example.com';
     ENV.platformEventsAPI = 'http://example.com';
     ENV.gothamistStories = 'http://gothamist.com';
+    ENV.APP.autoboot = false;
+    
   }
 
   if (environment === 'production') {

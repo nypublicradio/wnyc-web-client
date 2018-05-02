@@ -1,9 +1,6 @@
-import Ember from 'ember';
-const {
-  Component,
-  get,
-  $
-} = Ember;
+import Component from '@ember/component';
+import { get } from '@ember/object';
+import $ from 'jquery';
 
 export default Component.extend({
   classNames: ['l-sliding-modal', 'l-modal--shadow'],

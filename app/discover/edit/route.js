@@ -1,11 +1,12 @@
-import Ember from 'ember';
-import get from 'ember-metal/get';
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
+import { get } from '@ember/object';
 
-export default Ember.Route.extend({
-  session:       Ember.inject.service(),
-  discoverPrefs: Ember.inject.service(),
-  discoverQueue: Ember.inject.service(),
-  metrics:       Ember.inject.service(),
+export default Route.extend({
+  session:       service(),
+  discoverPrefs: service(),
+  discoverQueue: service(),
+  metrics:       service(),
 
   redirect(model, transition) {
     if (transition.targetName === "discover.edit.index") {

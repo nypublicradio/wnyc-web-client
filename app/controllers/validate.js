@@ -1,4 +1,4 @@
-import Controller from 'ember-controller';
+import Controller from '@ember/controller';
 import config from 'wnyc-web-client/config/environment';
 
 export default Controller.extend({

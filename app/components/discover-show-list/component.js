@@ -1,31 +1,39 @@
-import Ember from 'ember';
-import service from 'ember-service/inject';
-import get from 'ember-metal/get';
+import { once } from '@ember/runloop';
+import { mapBy } from '@ember/object/computed';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { get } from '@ember/object';
 
-export default Ember.Component.extend({
+export default Component.extend({
   metrics: service(),
-  classNames:['discover-show-list'],
-  shows: [],
-  showSlugs:     Ember.computed.mapBy('shows', 'slug'),
-  selectedShowSlugs: [],
-  excludedShowSlugs: [],
+  classNames: ['discover-show-list'],
+  showSlugs:  mapBy('shows', 'slug'),
+
+  init() {
+    this._super(...arguments);
+    this.setProperties({
+      shows: this.shows || [],
+      selectedShowSlugs: this.selectedShowSlugs || [],
+      excludedShowSlugs: this.excludedShowSlugs || [],
+    });
+    this.updateShows();
+  },
 
   didReceiveAttrs() {
     this.set('selectedShowSlugs', this.get('showSlugs').reject(item => {
-      return this.get('excludedShowSlugs').includes(item);
+      return this.excludedShowSlugs.includes(item);
     }));
+    this.updateShows()
 
     this._super(...arguments);
   },
 
-  initializeShows: Ember.on('init', function() {
-    this.updateShows(this.get('excludedShowSlugs'), this.get('selectedShowSlugs'));
-  }),
-
-  updateShows(excludedShowSlugs, selectedShowSlugs) {
-    Ember.run.once(() => {
-      this.sendAction('onShowsUpdated', excludedShowSlugs.slice());
-      this.sendAction('onNoneSelected', selectedShowSlugs.length === 0);
+  updateShows() {
+    once(() => {
+      /* eslint-disable */
+      this.sendAction('onShowsUpdated', this.excludedShowSlugs.slice());
+      this.sendAction('onNoneSelected', this.selectedShowSlugs.length === 0);
+      /* eslint-enable */
     });
   },
 

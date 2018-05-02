@@ -1,10 +1,9 @@
-import Ember from 'ember';
-import Controller from 'ember-controller';
-import service from 'ember-service/inject';
+import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 import config from 'wnyc-web-client/config/environment';
 import { task, waitForEvent } from 'ember-concurrency';
-import get from 'ember-metal/get';
-import set from 'ember-metal/set';
+import { get, set } from '@ember/object';
+import Evented from '@ember/object/evented';
 import fetch from 'fetch';
 import RSVP from 'rsvp';
 
@@ -13,7 +12,7 @@ const FLASH_MESSAGES = {
   password: 'Your password has been updated.'
 };
 
-export default Controller.extend(Ember.Evented, {
+export default Controller.extend(Evented, {
   session: service(),
   flashMessages: service(),
   torii: service(),
@@ -32,9 +31,7 @@ export default Controller.extend(Ember.Evented, {
     let new_password = changeset.get('newPassword');
     return new RSVP.Promise((resolve, reject) => {
       let headers = {'Content-Type': 'application/json'};
-      this.get('session').authorize('authorizer:nypr', (header, value) => {
-        headers[header] = value;
-      });
+      headers = this.get('session').authorize(headers);
       fetch(`${config.authAPI}/v1/password`, {
         headers,
         method: 'POST',
@@ -54,9 +51,7 @@ export default Controller.extend(Ember.Evented, {
   requestTempPassword(email) {
     return new RSVP.Promise((resolve, reject) => {
       let headers = {'Content-Type': 'application/json'};
-      this.get('session').authorize('authorizer:nypr', (header, value) => {
-        headers[header] = value;
-      });
+      headers = this.get('session').authorize(headers);
       fetch(`${config.authAPI}/v1/password/send-temp`, {
         headers,
         method: 'POST',
@@ -82,9 +77,7 @@ export default Controller.extend(Ember.Evented, {
   setEmailPendingStatus: task(function * (email) {
     let url = `${config.membershipAPI}/v1/emails/is-verified/?email=${email}`;
     let headers = {'Content-Type': 'application/json'};
-    this.get('session').authorize('authorizer:nypr', (header, value) => {
-      headers[header] = value;
-    });
+    headers = this.get('session').authorize(headers);
     try {
       let response = yield fetch(url, {headers, method: 'GET'});
       if (response && response.ok) {
@@ -117,9 +110,7 @@ export default Controller.extend(Ember.Evented, {
     }
     let url = `${config.authAPI}/v1/confirm/resend-attr`;
     let headers = {'Content-Type': 'application/json'};
-    this.get('session').authorize('authorizer:nypr', (header, value) => {
-      headers[header] = value;
-    });
+    headers = this.get('session').authorize(headers);
     return new RSVP.Promise((resolve,reject) => {
       fetch(url, {headers, method: 'GET'}).then(response => {
         if (response && response.ok) {
@@ -135,11 +126,11 @@ export default Controller.extend(Ember.Evented, {
   }),
 
   promptForPassword: task(function * () {
-    Ember.$('body').addClass('has-nypr-account-modal-open');
+    document.querySelector('body').classList.add('has-nypr-account-modal-open');
     try {
       yield waitForEvent(this, 'passwordVerified');
     } finally {
-      Ember.$('body').removeClass('has-nypr-account-modal-open');
+      document.querySelector('body').classList.remove('has-nypr-account-modal-open');
       set(this, 'password', null);
     }
   }).drop(),

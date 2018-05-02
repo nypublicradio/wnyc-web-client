@@ -1,5 +1,11 @@
 import fixPositioningAfterTransition from '../utils/fix-positioning-after-transition';
-import { isAnimating, finish, timeSpent, animate, stop } from "liquid-fire";
+import {
+  isAnimating,
+  finish,
+  timeSpent,
+  animate,
+  stop
+} from "liquid-fire";
 
 export default function fade(opts={}) {
   var firstStep;

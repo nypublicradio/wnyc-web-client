@@ -1,15 +1,17 @@
-import Ember from 'ember';
+import { not } from '@ember/object/computed';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: 'button',
   classNames: ['rounded-caps-button'],
   classNameBindings: ['hasIcon:mod-with-icon'],
   iconPlacement: 'right',
-  placeRight: Ember.computed('iconPlacement', function() {
+  placeRight: computed('iconPlacement', function() {
     return this.get('iconPlacement') === 'right';
   }),
-  placeLeft: Ember.computed.not('placeRight'),
-  hasIcon: Ember.computed('icon', function() {
+  placeLeft: not('placeRight'),
+  hasIcon: computed('icon', function() {
     return !!this.get('icon');
   })
 });

@@ -1,6 +1,6 @@
 import StreamModel from 'nypr-publisher-lib/models/stream';
-import computed from 'ember-computed';
-import get from 'ember-metal/get';
+import { computed } from '@ember/object';
+import { get } from '@ember/object';
 
 export default StreamModel.extend({
   shareMetadata: computed('currentShow', 'currentPlaylistItem', function() {

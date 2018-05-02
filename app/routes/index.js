@@ -1,14 +1,14 @@
-import Ember from 'ember';
-import service from 'ember-service/inject';
+import Route from '@ember/routing/route';
+import { get } from '@ember/object';
+import { inject as service } from '@ember/service';
 import PlayParamMixin from 'wnyc-web-client/mixins/play-param';
 import rsvp from 'rsvp';
 import config from 'wnyc-web-client/config/environment';
 import fetch from 'fetch';
 import { beforeTeardown } from 'nypr-django-for-ember/utils/compat-hooks';
 const { hash } = rsvp;
-const { get } = Ember;
 
-export default Ember.Route.extend(PlayParamMixin, {
+export default Route.extend(PlayParamMixin, {
   classNames: ['home'],
   dj: service(),
   metrics: service(),

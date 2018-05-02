@@ -1,7 +1,8 @@
-import Ember from 'ember';
+import { readOnly, equal } from '@ember/object/computed';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
-  errorType: Ember.computed.readOnly('error.response.status'),
-  pageNotFound: Ember.computed.equal('errorType', 404),
-  serverError: Ember.computed.equal('errorType', 500)
+export default Component.extend({
+  errorType: readOnly('error.response.status'),
+  pageNotFound: equal('errorType', 404),
+  serverError: equal('errorType', 500)
 });

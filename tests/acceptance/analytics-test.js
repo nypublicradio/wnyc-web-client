@@ -1,82 +1,63 @@
-import { test } from 'qunit';
-import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import { click, find, currentURL, visit } from '@ember/test-helpers';
+import { module } from 'qunit';
+import test from 'ember-sinon-qunit/test-support/test';
+import { setupApplicationTest } from 'ember-qunit';
 import config from 'wnyc-web-client/config/environment';
-import sinon from 'sinon';
 import velocity from 'velocity';
-import GoogleAnalytics from 'wnyc-web-client/metrics-adapters/google-analytics';
 
-moduleForAcceptance('Acceptance | Analytics', {
-  beforeEach() {
+module('Acceptance | Analytics', function(hooks) {
+  setupApplicationTest(hooks);
+
+  hooks.beforeEach(function() {
     velocity.mock = true;
     server.create('stream');
-  },
-  afterEach() {
+  });
+
+  hooks.afterEach(function() {
     velocity.mock = false;
-  }
-});
-
-test('it does not log a pageview when opening and closing the queue', function(assert) {
-  assert.expect(4);
-  let done = assert.async();
-  var pageViewEvent = sinon.spy();
-
-  GoogleAnalytics.reopen({
-    trackPage: pageViewEvent
   });
 
-  server.create('django-page', {id: '/'});
-  visit('/');
-  click('.nypr-player-queue-button.is-floating');
+  test('it does not log a pageview when opening and closing the queue', async function(assert) {
+    let metrics = this.owner.lookup('service:metrics');
+    let trackPage = this.spy(metrics, 'trackPage').withArgs('GoogleAnalytics');
 
-  andThen(() => {
-    assert.equal(find('.l-sliding-modal').length, 1, 'modal is open');
-    assert.ok(pageViewEvent.calledOnce, 'trackpageViewEvent was only called once after opening queue');
+    server.create('django-page', {id: '/'});
+    await visit('/');
+    await click('.nypr-player-queue-button.is-floating');
+
+    assert.ok(find('.l-sliding-modal'), 'modal is open');
+    assert.equal(trackPage.callCount, 1, 'trackpageViewEvent was only called once after opening queue');
+
+    await click('.nypr-player-queue-button.is-floating');
+
+    assert.notOk(find('.l-sliding-modal'), 'modal is closed');
+    assert.equal(trackPage.callCount, 1, 'trackPageView was only called once after opening and closing queue');
   });
 
-  click('.nypr-player-queue-button.is-floating');
+  test('it logs a homepage bucket event when you click a story on the home page', async function(assert) {
+    let metrics = this.owner.lookup('service:metrics');
+    let trackSpy = this.spy(metrics, 'trackEvent');
 
-  andThen(() => {
-    assert.equal(find('.l-sliding-modal').length, 0, 'modal is closed');
-    assert.ok(pageViewEvent.calledOnce, 'trackPageView was only called once after opening and closing queue');
-    done();
-  });
-});
+    let story = server.create('story');
+    let id = `story/${story.slug}/`;
+    let testMarkup = `
+      <div id="wnyc_home">
+        <div class="top-stories bucket" data-position="top">
+          <h4 class="bucket-title">Top Stories</h4>
+          <ul id="home-primary">
+            <li class="first last">
+              <a href="${config.webRoot}/${id}" id="test-link">story link</a>
+            </li>
+          </ul>
+        </div>
+      </div>`;
+    server.create('django-page', {id});
+    server.create('django-page', {id: '/', testMarkup});
 
-test('it logs a homepage bucket event when you click a story on the home page', function(assert) {
-  assert.expect(2);
-  let done = assert.async();
-  let homepageBucketEvent = sinon.spy();
+    await visit('/');
+    await click('#test-link');
 
-  GoogleAnalytics.reopen({
-    trackEvent({category}) {
-      if (category === 'Homepage Bucket') {
-        homepageBucketEvent();
-      }
-    }
-  });
-
-  let story = server.create('story');
-  let id = `story/${story.slug}/`;
-  let testMarkup = `
-    <div id="wnyc_home">
-      <div class="top-stories bucket" data-position="top">
-        <h4 class="bucket-title">Top Stories</h4>
-        <ul id="home-primary">
-          <li class="first last">
-            <a href="${config.webRoot}/${id}" id="test-link">story link</a>
-          </li>
-        </ul>
-      </div>
-    </div>`;
-  server.create('django-page', {id});
-  server.create('django-page', {id: '/', testMarkup});
-
-  visit('/');
-  click('#test-link');
-
-  andThen(() => {
     assert.equal(currentURL(), `/story/${story.slug}`, 'opened story page');
-    assert.ok(homepageBucketEvent.calledOnce, 'bucket event was triggered once after clicking link');
-    done();
+    assert.equal(trackSpy.firstCall.args[1].category, 'Homepage Bucket', 'bucket event was triggered once after clicking link');
   });
 });

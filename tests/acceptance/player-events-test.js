@@ -1,52 +1,54 @@
-import { test } from 'qunit';
-import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import { click, visit, triggerEvent, find } from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
 import config from 'wnyc-web-client/config/environment';
-import { next } from 'ember-runloop';
 
-moduleForAcceptance('Acceptance | player events');
+import DummyConnection from 'ember-hifi/hifi-connections/dummy-connection';
 
-test('visiting /player-events', function(assert) {
-  let story = server.create('story', {title: "Test audio", audio: '/good/150000/test'});
-  let done = assert.async();
-  server.create('stream');
+const setupHifi = app => {
+  const HIFI = app.lookup('service:hifi');
+  app.register('hifi-connection:local-dummy-connection', DummyConnection, {instantiate: false});
+  HIFI.set('_connections', [HIFI._activateConnection({name: 'LocalDummyConnection'})]);
+}
 
-  visit(`/story/${story.slug}/`);
+module('Acceptance | player events', function(hooks) {
+  setupApplicationTest(hooks);
 
-  let calls = [];
-  server.post(`${config.platformEventsAPI}/v1/events/listened`, (schema, {requestBody}) => {
-    calls.push(JSON.parse(requestBody).action);
-    if (calls.length === 6) {
-      assert.ok('6 calls');
-      assert.deepEqual(calls.sort(), ['start', 'pause', 'resume', 'skip_15_forward', 'skip_15_back', 'set_position'].sort());
-      done();
-    }
-  });
+  test('visiting /player-events', async function(assert) {
+    setupHifi(this.owner);
 
-  // story header play button
-  click('main [data-test-selector="listen-button"]');
-  
-  andThen(() => {
-    // let hifi go a tick, otherwise we report the second play as a start, not a resume
-    next(() => {
-      // pause
-      click('.nypr-player-button.mod-listen');
+    let story = server.create('story', {title: "Test audio", audio: '/good/150000/test'});
+    server.create('stream');
 
-      // play
-      click('.nypr-player-button.mod-listen');
+    await visit(`/story/${story.slug}`);
+
+    let calls = [];
+    server.post(`${config.platformEventsAPI}/v1/events/listened`, (schema, {requestBody}) => {
+      calls.push(JSON.parse(requestBody).action);
+      if (calls.length === 6) {
+        assert.ok('6 calls');
+        assert.deepEqual(calls.sort(), ['start', 'pause', 'resume', 'skip_15_forward', 'skip_15_back', 'set_position'].sort());
+      }
     });
-  });
 
-  andThen(() => {
+    // story header play button
+    await click('main [data-test-selector="listen-button"]');
+
+    // pause
+    await click('.nypr-player-button.mod-listen');
+
+    // play
+    await click('.nypr-player-button.mod-listen');
+
     // fast forward
-    click('.nypr-player-button.mod-fastforward');
+    await click('.nypr-player-button.mod-fastforward');
 
     // rewind
-    click('.nypr-player-button.mod-rewind');
+    await click('.nypr-player-button.mod-rewind');
 
     // set position
     let progressMeter = find('.nypr-player-progress');
-    let leftEdge = progressMeter.offset().left;
-    var e = window.$.Event('mousedown', {which: 1, pageX: leftEdge + 200});
-    progressMeter.trigger(e);
+    let leftEdge = progressMeter.getBoundingClientRect().left;
+    triggerEvent('.nypr-player-progress', 'mousedown', {which: 1, pageX: leftEdge + 200});
   });
 });

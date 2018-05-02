@@ -1,7 +1,7 @@
-import Route from 'ember-route';
-import get from 'ember-metal/get';
+import Route from '@ember/routing/route';
+import { get } from '@ember/object';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
-import service from 'ember-service/inject';
+import { inject as service } from '@ember/service';
 
 export default Route.extend(ApplicationRouteMixin, {
   metrics: service(),
@@ -55,6 +55,7 @@ export default Route.extend(ApplicationRouteMixin, {
     },
     didTransition() {
       this.controllerFor('application').set('error', null);
+      return true;
     },
     willTransition() {
       //close queue/history modal when we open a new page

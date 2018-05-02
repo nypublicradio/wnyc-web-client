@@ -1,20 +1,23 @@
-import Ember from 'ember';
+import { scheduleOnce } from '@ember/runloop';
+import { inject as service } from '@ember/service';
+import Controller from '@ember/controller';
 
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   queryParams:  ['tab'],
-  tab: 'summary',
-  metrics: Ember.inject.service(),
-  deviceIsIos: !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform),
+  tab: null,
+  metrics: service(),
+
   setTab(){
     if (location.hash.substr(1) === "transcript"){
-        this.set("tab", 'transcript');
-      }
+      this.set("tab", 'transcript');
+    }
   },
 
   init(){
     this._super(...arguments);
-    Ember.run.scheduleOnce("afterRender", this, this.setTab);
+    scheduleOnce("afterRender", this, this.setTab);
+    this.set('deviceIsIos', !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform));
   },
 
   actions: {

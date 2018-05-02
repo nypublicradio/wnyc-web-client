@@ -1,5 +1,5 @@
-import Component from 'ember-component';
-import { readOnly } from 'ember-computed';
+import Component from '@ember/component';
+import { readOnly } from '@ember/object/computed';
 
 export default Component.extend({
   stream: null,

@@ -1,54 +1,56 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('discover-topic', 'Integration | Component | discover topic', {
-  integration: true
-});
+module('Integration | Component | discover topic', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders unchecked', function(assert) {
-  this.set('title', 'Music');
-  this.set('url', 'm-u');
-  this.set('isSelected', false);
+  test('it renders unchecked', async function(assert) {
+    this.set('title', 'Music');
+    this.set('url', 'm-u');
+    this.set('isSelected', false);
 
-  this.render(hbs`{{discover-topic title=title url=url isSelected=isSelected}}`);
+    await render(hbs`{{discover-topic title=title url=url isSelected=isSelected}}`);
 
-  assert.equal(this.$('label').text().trim(), 'Music');
-  assert.equal(this.$('input[type=checkbox]').attr('name'), 'm-u');
-  assert.equal(this.$('input[type=checkbox]').is(':checked'), false);
-});
+    assert.equal(find('label').textContent.trim(), 'Music');
+    assert.equal(find('input[type=checkbox]').getAttribute('name'), 'm-u');
+    assert.equal(this.$('input[type=checkbox]').is(':checked'), false);
+  });
 
-test('it renders checked', function(assert) {
-  this.set('title', 'Music');
-  this.set('url', 'm-u');
-  this.set('isSelected', true);
+  test('it renders checked', async function(assert) {
+    this.set('title', 'Music');
+    this.set('url', 'm-u');
+    this.set('isSelected', true);
 
-  this.render(hbs`{{discover-topic title=title url=url isSelected=isSelected}}`);
+    await render(hbs`{{discover-topic title=title url=url isSelected=isSelected}}`);
 
-  assert.equal(this.$('label').text().trim(), 'Music');
-  assert.equal(this.$('input[type=checkbox]').attr('name'), 'm-u');
-  assert.equal(this.$('input[type=checkbox]').is(':checked'), true);
-});
+    assert.equal(find('label').textContent.trim(), 'Music');
+    assert.equal(find('input[type=checkbox]').getAttribute('name'), 'm-u');
+    assert.equal(this.$('input[type=checkbox]').is(':checked'), true);
+  });
 
-test('unchecking and checking box will change attribute', function(assert) {
-  this.set('isSelected', false);
-  this.render(hbs`{{discover-topic title=title url=url isSelected=isSelected}}`);
+  test('unchecking and checking box will change attribute', async function(assert) {
+    this.set('isSelected', false);
+    await render(hbs`{{discover-topic title=title url=url isSelected=isSelected}}`);
 
-  this.$('input[type=checkbox]').click();
-  assert.equal(this.$('input[type=checkbox]').is(':checked'), true);
-  assert.equal(this.get('isSelected'), true);
+    await click('input[type=checkbox]');
+    assert.equal(this.$('input[type=checkbox]').is(':checked'), true);
+    assert.equal(this.get('isSelected'), true);
 
-  this.$('input[type=checkbox]').click();
-  assert.equal(this.$('input[type=checkbox]').is(':checked'), false);
-  assert.equal(this.get('isSelected'), false);
-});
+    await click('input[type=checkbox]');
+    assert.equal(this.$('input[type=checkbox]').is(':checked'), false);
+    assert.equal(this.get('isSelected'), false);
+  });
 
-test('when checked element has correct class', function(assert) {
-  this.set('title', 'Music');
-  this.set('url', 'm-u');
-  this.set('isSelected', false);
-  this.render(hbs`{{discover-topic title=title url=url isSelected=isSelected}}`);
-  assert.equal(this.$('.discover-topic').hasClass('is-selected'), false);
+  test('when checked element has correct class', async function(assert) {
+    this.set('title', 'Music');
+    this.set('url', 'm-u');
+    this.set('isSelected', false);
+    await render(hbs`{{discover-topic title=title url=url isSelected=isSelected}}`);
+    assert.equal(find('.discover-topic').classList.contains('is-selected'), false);
 
-  this.set('isSelected', true);
-  assert.equal(this.$('.discover-topic').hasClass('is-selected'), true);
+    this.set('isSelected', true);
+    assert.equal(find('.discover-topic').classList.contains('is-selected'), true);
+  });
 });

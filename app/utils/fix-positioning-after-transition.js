@@ -1,4 +1,4 @@
-import { later } from 'ember-runloop';
+import { later } from '@ember/runloop';
 
 export default function fixPositioningAfterTransition() {
   later(null, function() {

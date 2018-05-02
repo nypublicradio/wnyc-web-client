@@ -1,11 +1,13 @@
-import Ember from 'ember';
+import { hash } from 'rsvp';
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 import ENV from '../../config/environment';
-import get from 'ember-metal/get';
+import { get } from '@ember/object';
 
-export default Ember.Route.extend({
-  session: Ember.inject.service(),
-  discoverPrefs: Ember.inject.service(),
-  metrics: Ember.inject.service(),
+export default Route.extend({
+  session: service(),
+  discoverPrefs: service(),
+  metrics: service(),
   titleToken: 'Discover Select Shows',
 
   model() {
@@ -16,7 +18,7 @@ export default Ember.Route.extend({
       api_key: ENV.discoverAPIKey,
       'fields[show]': 'slug,title,image'
     }).then((shows) => {
-      return Ember.RSVP.hash({
+      return hash({
         shows: shows,
         excludedShowSlugs: prefs.get('excludedShowSlugs')
       });

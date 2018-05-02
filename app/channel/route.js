@@ -1,16 +1,13 @@
-import Route from 'ember-route';
-import service from 'ember-service/inject';
-import Ember from 'ember';
-const {
-  Inflector,
-  get,
-  set
-} = Ember;
-const { hash: waitFor } = Ember.RSVP;
-const inflector = new Inflector(Inflector.defaultRules);
+import { hash as waitFor } from 'rsvp';
+import { set, get } from '@ember/object';
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
 import { beforeTeardown } from 'nypr-django-for-ember/utils/compat-hooks';
 import PlayParamMixin from 'wnyc-web-client/mixins/play-param';
 import config from 'wnyc-web-client/config/environment';
+import Inflector from 'ember-inflector';
+
+const inflector = new Inflector(Inflector.defaultRules);
 
 export default Route.extend(PlayParamMixin, {
   session:      service(),

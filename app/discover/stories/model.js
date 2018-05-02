@@ -1,6 +1,6 @@
 import Model from 'ember-data/model';
 import attr from  'ember-data/attr';
-import { reads } from 'ember-computed';
+import { reads } from '@ember/object/computed';
 
 export default Model.extend({
   title:                  attr('string'),

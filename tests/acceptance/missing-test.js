@@ -1,13 +1,14 @@
-import { test } from 'qunit';
-import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import { find, currentURL, visit } from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
 
-moduleForAcceptance('Acceptance | missing');
+module('Acceptance | missing', function(hooks) {
+  setupApplicationTest(hooks);
 
-test('visiting /missing', function(assert) {
-  visit('/missing');
+  test('visiting /missing', async function(assert) {
+    await visit('/missing');
 
-  andThen(function() {
     assert.equal(currentURL(), '/missing');
-    assert.equal(find('.error-img').length, 1);
+    assert.ok(find('.error-img'));
   });
 });

@@ -10,7 +10,7 @@
     Hi {{model.givenName}}!
   </h2>
 
-  <div class={{if features.memberCenter "nypr-account-settings-and-member-center" "l-constrained account-info"}}>
+  <div class="nypr-account-settings-and-member-center">
     <div class="nypr-account-settings-body">
       {{nypr-accounts/basic-card
         user=model
@@ -40,19 +40,17 @@
       {{/if}}
 
     </div>
-    {{#if features.memberCenter}}
-      {{nypr-accounts/membership-card
-        pledges=orders
-        siteName=siteName
-        siteDomain=siteDomain
-        user=model
-        emailIsPendingVerification=emailIsPendingVerification
-        resendVerificationEmail=(if model.hasPassword
-          (action resendVerificationEmail)
-          (action requestTempPassword model.email)
-        )
-        class='nypr-membership-info-body'}}
-    {{/if}}
+    {{nypr-accounts/membership-card
+      pledges=orders
+      siteName=siteName
+      siteDomain=siteDomain
+      user=model
+      emailIsPendingVerification=emailIsPendingVerification
+      resendVerificationEmail=(if model.hasPassword
+        (action resendVerificationEmail)
+        (action requestTempPassword model.email)
+      )
+      class='nypr-membership-info-body'}}
   </div>
 
   <div class="aligncenter text--small">
@@ -131,4 +129,3 @@
   </form>
   {{/nypr-account-modal}}
 {{/if}}
-

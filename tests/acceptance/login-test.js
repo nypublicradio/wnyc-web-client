@@ -1,212 +1,196 @@
-import { test, skip } from 'qunit';
-import djangoPage from 'wnyc-web-client/tests/pages/django-page';
-import moduleForAcceptance from 'wnyc-web-client/tests/helpers/module-for-acceptance';
+import {
+  find,
+  click,
+  fillIn,
+  currentURL,
+  visit,
+} from '@ember/test-helpers';
+import { module, } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
+import test from 'ember-sinon-qunit/test-support/test';
+import homePage from 'wnyc-web-client/tests/pages/home';
 import { Response } from 'ember-cli-mirage';
 import config from 'wnyc-web-client/config/environment';
-import { authenticateSession, currentSession } from 'wnyc-web-client/tests/helpers/ember-simple-auth';
-import 'wnyc-web-client/tests/helpers/with-feature';
-import dummySuccessProviderFb from 'wnyc-web-client/tests/helpers/torii-dummy-success-provider-fb';
-import dummyFailureProvider from 'wnyc-web-client/tests/helpers/torii-dummy-failure-provider';
-import { registerMockOnInstance } from 'wnyc-web-client/tests/helpers/register-mock';
+import {
+  authenticateSession,
+  currentSession
+} from 'ember-simple-auth/test-support';
 
-moduleForAcceptance('Acceptance | login', {
-  beforeEach() {
+
+module('Acceptance | login', function(hooks) {
+  setupApplicationTest(hooks);
+
+  hooks.beforeEach(function() {
     server.create('stream');
-  }
-});
+  });
 
-test('visiting /login', function(assert) {
-  visit('/login');
+  test('visiting /login', async function(assert) {
+    await visit('/login');
 
-  andThen(() => {
     assert.equal(currentURL(), '/login');
   });
-});
 
-test("can't visit /login when authenticated", function(assert) {
-  server.create('user');
-  authenticateSession(this.application, {access_token: 'foo'});
-  let page = server.create('django-page', {id: '/'});
-  djangoPage.bootstrap(page);
+  test("can't visit /login when authenticated", async function(assert) {
+    authenticateSession({access_token: 'foo'});
+    server.create('django-page', {id: '/'});
+    server.create('user');
 
-  visit('/login');
+    await visit('/login');
 
-  andThen(() => {
     assert.equal(currentURL(), '/');
   });
-});
 
-test('Log in button is visible at load', function(assert) {
-  visit('/login');
-
-  andThen(() => assert.equal(find('button[type=submit]:contains(Log in)').length, 1));
-});
-
-test('Submitting valid credentials redirects to previous route', function(assert) {
-  server.create('user');
-  let page = server.create('django-page', {id: '/'});
-
-  andThen(() => {
-    djangoPage
-      .bootstrap(page)
-      .visit(page);
+  test('Log in button is visible at load', async function(assert) {
+    await visit('/login');
+    assert.ok(find('button[type=submit]'));
   });
 
-  andThen(() => {
-    visit('/login');
-  });
+  test('Submitting valid credentials redirects to previous route', async function(assert) {
+    server.create('user');
+    server.create('django-page', {id: '/'});
 
-  andThen(() => {
-    assert.equal(find('.account-form-heading').text().trim(), 'Log in to WNYC');
-  });
+    await homePage
+      .bootstrap()
+      .visit();
+    await visit('/login');
 
-  fillIn('input[name=email]', 'foo@example.com');
-  fillIn('input[name=password]', 'password1');
-  click('button[type=submit]:contains(Log in)');
+    assert.equal(find('.account-form-heading').textContent.trim(), 'Log in to WNYC');
 
-  andThen(() => {
-    assert.equal(currentSession(this.application).get('isAuthenticated'), true);
+    await fillIn('input[name=email]', 'foo@example.com');
+    await fillIn('input[name=password]', 'password1');
+    await click('button[type=submit]');
+
+    assert.ok(currentSession().get('isAuthenticated'));
     assert.equal(currentURL(), '/');
   });
-});
 
-test('Submitting invalid credentials shows form level error message', function(assert) {
-  server.post(`${config.authAPI}/v1/session`, () => {
-    return new Response(400, {}, {errors: {code: "UnauthorizedAccess"}});
-  });
-
-  visit('/login');
-
-  fillIn('input[name=email]', 'foo@example.com');
-  fillIn('input[name=password]', 'badpassword2');
-  click('button[type=submit]:contains(Log in)');
-
-  andThen(() => {
-    assert.equal(currentSession(this.application).get('isAuthenticated'), false);
-    assert.equal(find('.account-form-heading').text().trim(), 'Log in to WNYC');
-    assert.equal(find('.account-form-error').length, 1);
-  });
-});
-
-
-test('Signing in with social only account shows form level error message', function(assert) {
-  server.post(`${config.authAPI}/v1/session`, () => {
-    return new Response(400, {}, {errors: {code: "UserNoPassword"}});
-  });
-
-  visit('/login');
-
-  fillIn('input[name=email]', 'isignedupwithfacebook@example.com');
-  fillIn('input[name=password]', 'imaginedpassword123');
-  click('button[type=submit]:contains(Log in)');
-
-  andThen(() => {
-    assert.equal(currentSession(this.application).get('isAuthenticated'), false);
-    assert.equal(find('.account-form-heading').text().trim(), 'Log in to WNYC');
-    assert.equal(find('.account-form-error').length, 1);
-  });
-});
-
-test('Signing in with non-existing email shows form level error message', function(assert) {
-  const EMAIL = 'doesnotexist@example.com';
-  server.post(`${config.authAPI}/v1/session`, () => {
-    return new Response(400, {}, {errors: {code: "UserNotFoundException"}});
-  });
-
-  visit('/login');
-
-  fillIn('input[name=email]', EMAIL);
-  fillIn('input[name=password]', 'password123');
-  click('button[type=submit]:contains(Log in)');
-
-  andThen(() => {
-    assert.equal(currentSession(this.application).get('isAuthenticated'), false);
-    assert.equal(find('.account-form-heading').text().trim(), 'Log in to WNYC');
-    assert.equal(find('.account-form-error').length, 1);
-    assert.ok(find('.account-form-error').text().indexOf(EMAIL) > 0, 'error message contains email address');
-  });
-});
-
-skip('Clicking logout hides privileged links', function(assert) {
-  server.create('user');
-  server.create('django-page', {id: '/'});
-  visit('/login');
-  andThen(() => {
-    fillIn('input[name=username]', 'foo');
-    fillIn('input[name=password]', 'bar');
-    click('button.submit');
-  });
-  andThen(() => {
-    assert.equal(find('[data-test-selector=logout]').text().trim(), 'Sign Out');
-    assert.equal(currentURL(), '/');
-    click('[data-test-selector=logout]');
-  });
-  andThen(() => {
-    assert.equal(find('a[href*=login]').text().trim(), 'Sign In');
-  });
-});
-
-test('Log in with Facebook button is visible at load', function(assert) {
-  withFeature('socialAuth');
-  visit('/login');
-
-  andThen(() => assert.equal(find('button:contains(Log in with Facebook)').length, 1));
-});
-
-test('Successful facebook login redirects', function(assert) {
-  let user = server.create('user', 'facebook');
-  registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
-  withFeature('socialAuth');
-  let page = server.create('django-page', {id: '/'});
-  djangoPage.bootstrap(page);
-
-  visit('/login');
-
-  andThen(() => {
-    click('button:contains(Log in with Facebook)');
-  });
-
-  andThen(() => {
-    assert.equal(currentURL(), '/');
-    assert.ok(currentSession(this.application).get('isAuthenticated'), 'Session is authenticated');
-    assert.equal(find('.user-nav-greeting').text().trim(), user.given_name);
-    assert.equal(find('.user-nav-avatar > img').attr('src'), user.picture);
-  });
-});
-
-test('Facebook login with no email shows alert', function(assert) {
-  server.create('user');
-  registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummySuccessProviderFb);
-  server.get(`${config.authAPI}/v1/session`, () => {
-    return new Response(400, {}, { "errors": {
-      "code": "MissingAttributeException",
-      "message": "A provider account could not be created because one or more attributes were not available from the provider. Permissions may have been declined.",
-      "values": ["email"] }
+  test('Submitting invalid credentials shows form level error message', async function(assert) {
+    server.post(`${config.authAPI}/v1/session`, () => {
+      return new Response(400, {}, {errors: {code: "UnauthorizedAccess"}});
     });
+
+    await visit('/login');
+
+    await fillIn('input[name=email]', 'foo@example.com');
+    await fillIn('input[name=password]', 'badpassword2');
+    await click('button[type=submit]');
+
+    assert.notOk(currentSession().get('isAuthenticated'));
+    assert.equal(find('.account-form-heading').textContent.trim(), 'Log in to WNYC');
+    assert.ok(find('.account-form-error'));
   });
 
-  withFeature('socialAuth');
-  visit('/login');
 
-  click('button:contains(Log in with Facebook)');
+  test('Signing in with social only account shows form level error message', async function(assert) {
+    server.post(`${config.authAPI}/v1/session`, () => {
+      return new Response(400, {}, {errors: {code: "UserNoPassword"}});
+    });
 
-  andThen(() => {
-    assert.equal(currentURL(), '/login');
-    assert.equal(find('.alert-warning').text().trim(), "Unfortunately, we can't authorize your account without permission to view your email address.");
-    assert.ok(!currentSession(this.application).get('isAuthenticated'), 'Session is not authenticated');
+    await visit('/login');
+
+    await fillIn('input[name=email]', 'isignedupwithfacebook@example.com');
+    await fillIn('input[name=password]', 'imaginedpassword123');
+    await click('button[type=submit]');
+
+    assert.notOk(currentSession().get('isAuthenticated'));
+    assert.equal(find('.account-form-heading').textContent.trim(), 'Log in to WNYC');
+    assert.ok(find('.account-form-error'));
   });
-});
 
-test('Unsuccessful facebook login shows alert', function(assert) {
-  registerMockOnInstance(this.application, 'torii-provider:facebook-connect', dummyFailureProvider);
-  withFeature('socialAuth');
-  visit('/login');
+  test('Signing in with non-existing email shows form level error message', async function(assert) {
+    const EMAIL = 'doesnotexist@example.com';
+    server.post(`${config.authAPI}/v1/session`, () => {
+      return new Response(400, {}, {errors: {code: "UserNotFoundException"}});
+    });
 
-  click('button:contains(Log in with Facebook)');
+    await visit('/login');
 
-  andThen(() => {
+    await fillIn('input[name=email]', EMAIL);
+    await fillIn('input[name=password]', 'password123');
+    await click('button[type=submit]');
+
+    assert.notOk(currentSession().get('isAuthenticated'));
+    assert.equal(find('.account-form-heading').textContent.trim(), 'Log in to WNYC');
+    assert.ok(find('.account-form-error'));
+    assert.ok(find('.account-form-error').textContent.match(EMAIL), 'error message contains email address');
+  });
+
+  test('Clicking logout hides privileged links', async function(assert) {
+    server.create('user');
+    server.create('django-page', {id: '/'});
+    await visit('/login');
+
+    await fillIn('input[name=email]', 'foo@bar.com');
+    await fillIn('input[name=password]', 'bar');
+    await click('button[type=submit]');
+
+    assert.equal(currentURL(), '/');
+    await click('.user-nav-button'); // show user menu
+    assert.equal(find('[title="Log out"]').textContent.trim(), 'Log out');
+    await click('[title="Log out"]');
+
+    assert.equal(find('a[href*=login]').textContent.trim(), 'Log in');
+  });
+
+  test('Log in with Facebook button is visible at load', async function(assert) {
+    await visit('/login');
+    assert.ok(find('button'));
+  });
+
+  test('Successful facebook login redirects', async function(assert) {
+    server.create('django-page', {id: '/'});
+    let user = server.create('user', 'facebook');
+    let facebookProvider = this.owner.lookup('torii-provider:facebook-connect');
+    this.stub(facebookProvider, 'open').resolves({
+       accessToken: 'abcdef',
+       expiresIn: 6000,
+       userId: '123456',
+       provider: 'facebook-connect'
+    });
+
+    await visit('/login');
+    await click('button');
+
+    assert.equal(currentURL(), '/');
+    assert.ok(currentSession().get('isAuthenticated'), 'Session is authenticated');
+    assert.equal(find('.user-nav-greeting').textContent.trim(), user.given_name);
+    assert.equal(find('.user-nav-avatar > img').getAttribute('src'), user.picture);
+  });
+
+  test('Facebook login with no email shows alert', async function(assert) {
+    server.create('user');
+    server.get(`${config.authAPI}/v1/session`, () => {
+      return new Response(400, {}, { "errors": {
+        "code": "MissingAttributeException",
+        "message": "A provider account could not be created because one or more attributes were not available from the provider. Permissions may have been declined.",
+        "values": ["email"] }
+      });
+    });
+    let facebookProvider = this.owner.lookup('torii-provider:facebook-connect');
+    this.stub(facebookProvider, 'open').resolves({
+       accessToken: 'abcdef',
+       expiresIn: 6000,
+       userId: '123456',
+       provider: 'facebook-connect'
+    });
+
+    await visit('/login');
+    await click('button');
+
     assert.equal(currentURL(), '/login');
-    assert.equal(find('.alert-warning').text().trim(), "We're sorry, but we weren't able to log you in through Facebook.");
-    assert.ok(!currentSession(this.application).get('isAuthenticated'), 'Session is not authenticated');
+    assert.equal(find('.alert-warning').textContent.trim(), "Unfortunately, we can't authorize your account without permission to view your email address.");
+    assert.notOk(currentSession().get('isAuthenticated'), 'Session is not authenticated');
+  });
+
+  test('Unsuccessful facebook login shows alert', async function(assert) {
+    let facebookProvider = this.owner.lookup('torii-provider:facebook-connect');
+    this.stub(facebookProvider, 'open').rejects();
+
+    await visit('/login');
+    await click('button');
+
+    assert.equal(currentURL(), '/login');
+    assert.equal(find('.alert-warning').textContent.trim(), "We're sorry, but we weren't able to log you in through Facebook.");
+    assert.ok(!currentSession().get('isAuthenticated'), 'Session is not authenticated');
   });
 });

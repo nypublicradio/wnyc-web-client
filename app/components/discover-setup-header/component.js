@@ -1,7 +1,7 @@
-import { equal } from 'ember-computed';
-import Component from 'ember-component';
-import service from 'ember-service/inject';
-import get from 'ember-metal/get';
+import { equal } from '@ember/object/computed';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { get } from '@ember/object';
 
 export default Component.extend({
   metrics: service(),
@@ -10,7 +10,7 @@ export default Component.extend({
   isLoadingNext: equal('loadingDirection', 'next'),
   actions: {
     next() {
-      this.sendAction('onNext');
+      this.sendAction('onNext'); // eslint-disable-line
     },
     back() {
       get(this, 'metrics').trackEvent('GoogleAnalytics', {
@@ -18,7 +18,7 @@ export default Component.extend({
         action: 'Clicked Back in Discover'
       });
 
-      this.sendAction('onBack');
+      this.sendAction('onBack'); // eslint-disable-line
     }
   }
 });

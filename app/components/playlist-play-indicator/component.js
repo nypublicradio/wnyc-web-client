@@ -1,14 +1,16 @@
-import Ember from 'ember';
+import { alias, not } from '@ember/object/computed';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   attributeBindings: ['disabled', 'aria-label', 'title', 'isPlaying:data-is-playing'],
 
-  title:        Ember.computed('itemTitle', function() {
+  title:        computed('itemTitle', function() {
     return `Listen to ${this.get('itemTitle')}`;
   }),
-  'aria-label': Ember.computed.alias('title'),
+  'aria-label': alias('title'),
 
-  disabled:     Ember.computed.not('isReady'),
+  disabled:     not('isReady'),
   isReady:      false,
   isPlaying:    false,
 
@@ -16,12 +18,12 @@ export default Ember.Component.extend({
     if (!this.get('isReady')) {
       return;
     }
-    
+
     if (this.get('isPlaying')) {
-      this.sendAction('onPause');
+      this.onPause();
     }
     else {
-      this.sendAction('onPlay');
+      this.onPlay();
     }
   }
 });
