@@ -19,7 +19,7 @@
 
       {{#row.items items=model.gothamist as |story|}}
         {{#story-card href=story.permalink class="gtm__click-tracking" data-category="Homepage Bucket" data-action="gothamist" data-label=story.title as |card|}}
-          {{card.image width=300 src=story.thumbnail_300}}
+          {{card.image width=300 src=(make-https story.thumbnail_300)}}
           {{#card.body}}
             {{story.title}}
             {{nypr-svg icon="popout-icon" className="popout-icon"}}
