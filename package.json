@@ -87,7 +87,7 @@
     "eslint-plugin-ember": "^5.0.0",
     "glob": "7.1.1",
     "grunt": "^1.0.1",
-    "grunt-modernizr": "^1.0.2",
+    "grunt-modernizr": "^1.0.3",
     "http-proxy": "^1.14.0",
     "liquid-fire": "^0.29.2",
     "loader.js": "^4.2.3",
