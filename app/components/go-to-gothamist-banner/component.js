@@ -1,5 +1,9 @@
 import Component from '@ember/component';
 
 export default Component.extend({
-  classNames: ['go-to-gothamist-banner']
+  tagName: 'a',
+  classNames: ['go-to-gothamist-banner'],
+  attributeBindings: ['href', 'target'],
+  href: 'http://gothamist.com/',
+  target: '_blank'
 });
