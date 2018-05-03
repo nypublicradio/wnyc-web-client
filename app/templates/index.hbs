@@ -18,7 +18,12 @@
       {{#row.label}}Latest From <a href="https://www.gothamist.com">Gothamist</a>{{/row.label}}
 
       {{#row.items items=model.gothamist as |story|}}
-        {{#story-card href=story.permalink class="gtm__click-tracking" data-category="Homepage Bucket" data-action="gothamist" data-label=story.title as |card|}}
+        {{#story-card
+          href=(append-query story.permalink 'utm_medium=partnersite&utm_source=wnyc&utm_campaign=homepagepromo')
+          class="gtm__click-tracking"
+          data-category="Homepage Bucket"
+          data-action="gothamist"
+          data-label=story.title as |card|}}
           {{card.image width=300 src=(make-https story.thumbnail_300)}}
           {{#card.body}}
             {{story.title}}
