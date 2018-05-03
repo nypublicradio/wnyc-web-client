@@ -10,6 +10,7 @@ $white: #fff;
   display: flex;
   height: 334px;
   margin-bottom: 20px;
+  position: relative;
 
   @include mq($small-only) {
     height: 245px;
@@ -37,6 +38,35 @@ $white: #fff;
   }
 }
 
+.wnyc_plus_gothamist_external {
+  align-items: center;
+  bottom: 20px;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  font-size: 23.4px;
+  justify-content: center;
+  position: absolute;
+  right: 30px;
+
+  @include mq($small-only) {
+    display: none;
+  }
+
+  .logo-gothamist-vertical {
+    width: 70px;
+    fill: white;
+  }
+
+  .logo-wnyc {
+    width: 90px;
+
+    #wnyc-logo {
+      fill: white;
+    }
+  }
+}
+
 .wnyc_plus_gothamist {
   display: none;
 
@@ -46,8 +76,8 @@ $white: #fff;
     justify-content: space-around;
     align-items: center;
     width: 40%;
-    margin-left:  auto;
-    margin-right:  auto;
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: -10px;
   }
 
