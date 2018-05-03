@@ -30,6 +30,22 @@ article > section a:hover {
   }
 }
 
+@mixin with-gradient($gradient) {
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: $zIndex--heroGradient;
+
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: linear-gradient(#{$gradient});
+  }
+}
+
+
 .full-bleed__hero {
   margin-bottom: 35px;
 
@@ -259,6 +275,11 @@ article > section a:hover {
 
 .full-bleed__body {
 
+  > .django-content h1, h2, h3, h4, h5, h6 {
+    @include layout;
+    color: black;
+  }
+
   > .django-content p {
     @include layout;
     margin-bottom:45px;
@@ -297,6 +318,8 @@ article > section a:hover {
     max-width: 1440px;
 
     margin: 0 auto;
+
+    @include with-gradient("to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)");
 
     > img {
       width: 100%;
