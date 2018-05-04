@@ -101,7 +101,7 @@
     "nypr-django-for-ember": ">=0.2.0",
     "nypr-metrics": "<0.1.0",
     "nypr-player": ">=0.2.0",
-    "nypr-publisher-lib": "0.3.11",
+    "nypr-publisher-lib": "nypublicradio/nypr-publisher-lib#9bcc980a175a141a80a7fe171df6c6f62002e447",
     "nypr-ui": ">=0.2.6",
     "torii": "^0.10.1"
   },
@@ -120,6 +120,6 @@
     "nypr-metrics": "<0.1.0",
     "nypr-ui": ">=0.2.11",
     "customizr": "1.0.0-alpha",
-    "nypr-publisher-lib": "0.3.11"
+    "nypr-publisher-lib": "nypublicradio/nypr-publisher-lib#9bcc980a175a141a80a7fe171df6c6f62002e447"
   }
 }
