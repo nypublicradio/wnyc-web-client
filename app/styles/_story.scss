@@ -275,14 +275,20 @@ article > section a:hover {
 
 .full-bleed__body {
 
+  > .django-content {
+    font-family: 'Lato', sans-serif;
+  }
+
   > .django-content h1, h2, h3, h4, h5, h6 {
     @include layout;
     color: black;
+    font-weight: bold;
+    font-style: italic
   }
 
   > .django-content p {
     @include layout;
-    margin-bottom:45px;
+    margin-bottom: 45px;
     color: black;
     font-size: 16px;
     line-height: 1.5;
@@ -316,15 +322,16 @@ article > section a:hover {
     display: block;
     position: relative;
     max-width: 1440px;
-
     margin: 0 auto;
 
-    @include with-gradient("to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)");
+    @include mq($medium-and-up){
+      @include with-gradient("to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)");
+    }
 
     > img {
       width: 100%;
       margin-bottom: 33px;
-
+      z-index: $zIndex--underGradient;
       @include mq($medium-and-up) {
         margin-bottom: 55px;
       }
@@ -337,6 +344,7 @@ article > section a:hover {
 
       @include mq($medium-and-up) {
         margin-bottom: 0;
+        z-index: $zIndex--overGradient;
       }
     }
 
@@ -349,6 +357,7 @@ article > section a:hover {
       line-height: 1.35;
 
       @include mq($medium-and-up) {
+        z-index: $zIndex--overGradient;
         font-size: 40px;
         line-height: 1.25;
         color: white;
@@ -393,6 +402,7 @@ article > section a:hover {
       color: $lightgray;
 
       @include mq($medium-and-up) {
+        z-index: $zIndex--overGradient;
         position: absolute;
         bottom: -35px;
         right: 25px;
