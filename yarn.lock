@@ -6847,8 +6847,8 @@ nypr-audio-services@>=0.3.0, nypr-audio-services@>=0.3.3:
     nypr-ui ">=0.2.0"
 
 nypr-auth@>=0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/nypr-auth/-/nypr-auth-0.2.0.tgz#8842b4e011a196d0aac3c3e2c9f9a2ef9ea7d5d2"
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/nypr-auth/-/nypr-auth-0.2.1.tgz#d6f83c096dd59d7f4919aa39ed77399e4ee7edff"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-get-config "^0.2.2"
