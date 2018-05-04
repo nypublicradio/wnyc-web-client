@@ -6884,9 +6884,9 @@ nypr-player@>=0.2.0:
     ember-moment "^7.4.1"
     nypr-ui ">=0.2.0"
 
-nypr-publisher-lib@nypublicradio/nypr-publisher-lib#9bcc980a175a141a80a7fe171df6c6f62002e447:
-  version "0.3.12"
-  resolved "https://codeload.github.com/nypublicradio/nypr-publisher-lib/tar.gz/9bcc980a175a141a80a7fe171df6c6f62002e447"
+nypr-publisher-lib@>=0.3.5:
+  version "0.3.13"
+  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.3.13.tgz#91fa50d2f97c2ff2b82f46f3df8badd953d54083"
   dependencies:
     broccoli-funnel "^2.0.1"
     broccoli-merge-trees "^2.0.0"
