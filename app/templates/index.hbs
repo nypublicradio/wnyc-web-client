@@ -27,17 +27,6 @@
         {{/story-card}}
       {{/row.items}}
     {{/story-row}}
-
-    {{#nypr-ui/support-stripe
-      class="gtm__click-tracking"
-      data-action="donate"
-      data-label="gothamist homepage cross-promo"
-      theme='wnyc'
-      href='https://www.kickstarter.com/projects/675760894/bring-back-gothamist?ref=eiqojw'
-      background='/assets/img/backgrounds/support-stripe.jpg' as |stripe|}}
-      {{stripe.text 'Join WNYC in bringing Gothamist back to NYC.'}}
-      {{stripe.label 'Support us'}}
-    {{/nypr-ui/support-stripe}}
   {{/ember-wormhole}}
 
   {{#ember-wormhole to='go-to-gothamist'}}
