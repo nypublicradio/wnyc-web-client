@@ -33,7 +33,6 @@ module('Acceptance | home', function(hooks) {
       </div>
       <div id="gothamist-row"></div>
       <div id="go-to-gothamist"></div>
-    </div>
     `
   });
 
