@@ -6885,8 +6885,8 @@ nypr-player@>=0.2.0:
     nypr-ui ">=0.2.0"
 
 nypr-publisher-lib@>=0.3.5:
-  version "0.3.10"
-  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.3.10.tgz#1b258a76429165c1cf6588f3d617e9f1cc99f169"
+  version "0.3.13"
+  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.3.13.tgz#91fa50d2f97c2ff2b82f46f3df8badd953d54083"
   dependencies:
     broccoli-funnel "^2.0.1"
     broccoli-merge-trees "^2.0.0"
@@ -6897,7 +6897,6 @@ nypr-publisher-lib@>=0.3.5:
     ember-click-outside "^0.1.12"
     ember-font-awesome "^4.0.0-rc.1"
     ember-get-config "^0.2.2"
-    ember-responsive "^3.0.0-beta.3"
     liquid-fire "~0.29.1"
     nypr-audio-services ">=0.3.0"
     nypr-django-for-ember ">=0.1.0"
