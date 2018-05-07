@@ -30,22 +30,6 @@ article > section a:hover {
   }
 }
 
-@mixin with-gradient($gradient) {
-  &:before {
-    content: '';
-    display: block;
-    position: absolute;
-    z-index: $zIndex--heroGradient;
-
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-image: linear-gradient(#{$gradient});
-  }
-}
-
-
 .full-bleed__hero {
   margin-bottom: 35px;
 
@@ -322,7 +306,7 @@ article > section a:hover {
     margin: 0 auto;
 
     @include mq($medium-and-up){
-      @include with-gradient("to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)");
+      @include with-gradient("to bottom, rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.5)");
     }
 
     > img {
@@ -359,10 +343,10 @@ article > section a:hover {
         line-height: 1.25;
         color: white;
         max-width: 865px;
-
         position: absolute;
         bottom: 65px;
         left: 65px;
+        right: 65px;
       }
 
       &:before {
