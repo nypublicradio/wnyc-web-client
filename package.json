@@ -92,7 +92,7 @@
     "liquid-fire": "^0.29.2",
     "loader.js": "^4.2.3",
     "morgan": "^1.6.1",
-    "nypr-account-settings": ">=0.2.0-beta.1",
+    "nypr-account-settings": ">=0.1.0",
     "nypr-ads": ">=0.1.0",
     "nypr-audio-services": ">=0.4.0-beta.2",
     "nypr-auth": ">=0.2.2",
