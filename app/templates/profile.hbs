@@ -58,9 +58,7 @@
       Need help? Contact us using our <a href="https://nypublicradio.zendesk.com/hc/en-us" target="_blank">contact form</a> or call us at <a class="text--nowrap" href="tel:646-829-4000">646-829-4000</a>.<br />
       <button
         data-test-selector="disable-account"
-        class="btn--link btn--smalltext gtm__click-tracking"
-        data-action="Personal Info"
-        data-label="Open Disable Account"
+        class="btn--link btn--smalltext"
         {{action (action (mut disableModal) true)}}>Disable my online account</button>
     </p>
   </div>
@@ -76,15 +74,11 @@
 
     {{#m.footer}}
       <button
-        class="nypr-account-cancel gtm__click-tracking"
-        data-action="Personal Info"
-        data-label="Cancel Disable Account"
+        class="nypr-account-cancel"
         data-test-selector="cancel-disable"
         {{action (action (mut disableModal) false)}}>Cancel</button>
       <button
-        class="nypr-account-confirm gtm__click-tracking"
-        data-action="Personal Info"
-        data-label="Submit Disable Account"
+        class="nypr-account-confirm"
         data-test-selector="do-disable"
         {{action 'disableAccount'}}>Disable my online account</button>
     {{/m.footer}}
