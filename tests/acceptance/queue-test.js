@@ -1,7 +1,6 @@
-import { click, currentURL, findAll } from '@ember/test-helpers';
+import { currentURL } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { run } from '@ember/runloop';
 import velocity from 'velocity';
 
 import queuePage from 'wnyc-web-client/tests/pages/queue';
