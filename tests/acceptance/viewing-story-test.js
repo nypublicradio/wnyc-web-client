@@ -1,4 +1,4 @@
-import { waitFor, currentURL, find, findAll, visit } from '@ember/test-helpers';
+import { waitFor, currentURL, find, visit } from '@ember/test-helpers';
 import test from 'ember-sinon-qunit/test-support/test';
 import storyPage from 'wnyc-web-client/tests/pages/story';
 import config from 'wnyc-web-client/config/environment';
