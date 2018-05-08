@@ -8,9 +8,6 @@
     title=topic.title
     url=topic.url
     isSelected=isSelected
-    class='gtm__click-tracking'
-    data-action='Discover'
-    data-label=(concat (if isSelected 'Deselected Topic ' 'Selected Topic ') topic.title)
   }}
 
   {{! Adding this <hr> element and then doing a couple of nth-of-type selectors to
@@ -22,15 +19,11 @@
 <div class="discover-topic-bubble-select-all">
 {{#if allSelected}}
   <button
-    class="discover-topic-bubble gtm__click-tracking"
-    data-action="Discover"
-    data-label="Cleared All Topics"
+    class="discover-topic-bubble"
     {{action 'selectNone'}}>Clear All</button>
 {{else}}
   <button
-    class="discover-topic-bubble gtm__click-tracking"
-    data-action="Discover"
-    data-label="Selected All Topics"
+    class="discover-topic-bubble"
     {{action 'selectAll'}}>Select All</button>
 {{/if}}
 </div>
