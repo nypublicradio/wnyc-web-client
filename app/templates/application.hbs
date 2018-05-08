@@ -29,8 +29,6 @@
   {{#unless chromeDisabled}}
     <div class="l-fixed l-lowright">
     {{nypr-player/queue-button
-      class       = "gtm__click-tracking"
-      data-action = (if modal "Close Queue" "Open Queue")
       isFloating  = true
       queueLength = queue.items.length
       showModal   = (action 'showModal' 'queue-history')
@@ -77,18 +75,14 @@
                 text="SHARE"
                 shareUrl=meta.data.shareUrl
                 shareText=meta.data.shareText
-                data-action='Share from Player'
                 as |share|}}
                 {{share.button
-                  type='Facebook'
-                  data-label=(concat meta.story.title ' | ' meta.story.showTitle ' | Facebook')}}
+                  type='Facebook'}}
                 {{share.button
                   type='Twitter'
-                  via='WNYC'
-                  data-label=(concat meta.story.title ' | ' meta.story.showTitle ' | Twitter')}}
+                  via='WNYC'}}
                 {{share.button
-                  type='Email'
-                  data-label=(concat meta.story.title ' | ' meta.story.showTitle ' | Email')}}
+                  type='Email'}}
               {{/nypr-share-button}}
             {{/with}}
           {{/unless}}
@@ -106,8 +100,6 @@
         {{#content.for 'aux' as |args|}}
           {{args.queueButton
             queueLength = queue.items.length
-            class       = "gtm__click-tracking"
-            data-action = (if modal "Close Queue" "Open Queue")
             showModal   = (action 'showModal' 'queue-history')
             closeModal  = (action 'closeModal')
             isOpenModal = modal}}
