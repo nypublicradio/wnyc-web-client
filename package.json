@@ -36,7 +36,6 @@
     "ember-cli-deploy-redis": "^1.0.2",
     "ember-cli-deploy-revision-data": "^1.0.0",
     "ember-cli-deploy-s3": "^1.1.0",
-    "ember-cli-deploy-sentry": "^0.5.2",
     "ember-cli-deploy-ssh-tunnel": "^1.0.0",
     "ember-cli-document-title": "^0.4.0",
     "ember-cli-dotenv": "^2.0.0",
