@@ -14,9 +14,9 @@ export function appendQuery([url = '', queryToAdd = '']/*, hash*/) {
   }
 
   // does a query string exist?
-  let [address, foundQuery] = url.split('?');
+  let [, foundQuery, ...extra] = url.split('?');
 
-  if (/\?/.test(address) || /\?/.test(foundQuery)) {
+  if (extra.length > 0) {
     // found a query string in the url or the query params
     // weird case, just bail out
     return url;
