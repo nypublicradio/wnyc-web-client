@@ -88,6 +88,7 @@
     "grunt": "^1.0.1",
     "grunt-modernizr": "^1.0.2",
     "http-proxy": "^1.14.0",
+    "jquery-migrate": "^3.0.1",
     "liquid-fire": "^0.29.2",
     "loader.js": "^4.2.3",
     "morgan": "^1.6.1",
