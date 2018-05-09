@@ -46,46 +46,6 @@ module.exports = function(environment) {
     exportApplicationGlobal: true,
     QP_WHITELIST: ['q', 'scheduleStation', 'next', 'n'], // see puppy/settings/base_settings.py
 
-    sentry: {
-      dsn: process.env.SENTRY_DSN,
-      //debug: process.env.DEPLOY_TARGET !== 'production',
-      development: environment !== 'production',
-      includePaths: [
-        process.env.WNYC_URL,
-        /https?:\/\/(static|demo-static)\.wnyc\.org/,
-        /https?:\/\/media\.wnyc\.org/,
-        /https?:\/\/(demo2-wnyc)\.wqxr\.org/
-      ],
-      whitelistUrls: [
-        /https?:\/\/(static|demo-static)\.wnyc\.org\/assets\/(vendor|wnyc-web-client)-.*/,
-        /https?:\/\/media\.wnyc\.org\/static\/.*\.js/,
-        /https?:\/\/((demo2-wnyc)\.)?wqxr\.org\/static\/.*\.js/
-      ],
-      ravenOptions: {
-        shouldSendCallback: function({extra}) {
-          var TOO_LONG = 1000 * 60 * 60 * 24; // one day
-          if (extra['session:duration'] > TOO_LONG) {
-            return false;
-          }
-
-          // only send 5% of errors
-          var sampleRate = 5;
-          return (Math.random() * 100 <= sampleRate);
-        },
-        ignoreUrls: [
-          // Facebook blocked
-          /connect\.facebook\.net\/en_US\/all\.js/i,
-          // Chrome extensions
-          /extensions\//i,
-          /^chrome:\/\//i,
-          /chartbeat/i,
-        ],
-        ignoreErrors: [
-          'adsafeprotected',
-          'sascdn'
-        ]
-      }
-    },
     flashMessageDefaults: {
       preventDuplicates: true,
       timeout: 10000

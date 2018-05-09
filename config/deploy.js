@@ -29,16 +29,6 @@ module.exports = function(deployTarget) {
       dstPort: process.env.SSH_TUNNEL_DESTINATION_PORT
     },
 
-    sentry: {
-      publicUrl: process.env.FINGERPRINT_PREPEND_URL,
-      sentryUrl: 'https://sentry.wnyc.org',
-      sentryOrganizationSlug: 'sentry',
-      sentryProjectSlug: process.env.SENTRY_PROJECT,
-      sentryApiKey: process.env.SENTRY_EMBER_SOURCEMAPS_KEY,
-      enableRevisionTagging: false,
-      replaceFiles: true
-    },
-
     'json-config': {
       jsonBlueprint(context, pluginHelper) {
         var jsonBlueprint = pluginHelper.readConfigDefault('jsonBlueprint');
