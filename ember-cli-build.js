@@ -33,12 +33,6 @@ module.exports = function(defaults) {
 
   // This is here so that legacy JS within our content pages can share
   // our version of jQuery without dying.
-
-  // All legacy JS modules that are directly called from this ember
-  // app should be imported into the app's own build here. Notice that
-  // these are symlinked to their original locations in the puppy
-  // source.
-  app.import('bower_components/imagesloaded/imagesloaded.pkgd.js');
   app.import('node_modules/jquery-migrate/dist/jquery-migrate.min.js');
 
   return app.toTree();
