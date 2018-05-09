@@ -58,8 +58,6 @@ module.exports = function(environment) {
     // these are provided via a .env file or else by Django's EmberAdapter
     // fall back to demo GA key
 
-    googleAnalyticsKey: process.env.GOOGLE_ANALYTICS || 'UA-46158613-1',
-    nprGoogleAnalyticsKey: 'UA-18188937-11',
     googleAPIv3Key: process.env.GOOGLE_API_V3_KEY,
     discoverStation: "wnyc-v2",
     discoverAPIKey: "trident",
