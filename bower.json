@@ -1,7 +1,6 @@
 {
   "name": "wnyc-web-client",
   "dependencies": {
-    "normalize.css": "3.0.3",
     "raven-js": "~2.1",
     "waypoints": "~4.0.0",
     "jquery-migrate": "^3.0.0",
