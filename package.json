@@ -64,6 +64,7 @@
     "ember-hifi": "^1.15.0",
     "ember-holygrail-layout": "^0.3.0",
     "ember-hotjar": "^0.0.2",
+    "ember-imagesloaded-shim": "^0.0.6",
     "ember-load-initializers": "^1.0.0",
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-metrics": "^0.12.1",
