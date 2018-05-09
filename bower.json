@@ -1,9 +1,6 @@
 {
   "name": "wnyc-web-client",
   "dependencies": {
-    "raven-js": "~2.1",
-    "waypoints": "~4.0.0",
-    "pretender": "^1.0.0",
-    "Faker": "~3.0.0"
+    "waypoints": "~4.0.0"
   }
 }
