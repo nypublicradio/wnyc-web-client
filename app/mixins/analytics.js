@@ -1,7 +1,7 @@
-import Mixin from 'ember-metal/mixin';
-import { scheduleOnce } from 'ember-runloop';
-import get from 'ember-metal/get';
-import service from 'ember-service/inject';
+import Mixin from '@ember/object/mixin';
+import { scheduleOnce } from '@ember/runloop';
+import { get } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 const DETAIL_ROUTES = new RegExp(/story|(show|article|series|tag|blog)-detail\./);
 

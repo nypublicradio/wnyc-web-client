@@ -1,51 +1,46 @@
-import { test } from 'qunit';
-import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
+import { click, currentURL, visit } from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
 
-moduleForAcceptance('Acceptance | events', {
-  beforeEach() {
+module('Acceptance | events', function(hooks) {
+  setupApplicationTest(hooks);
+
+  hooks.beforeEach(function() {
     server.create('stream');
-  }
-});
+  });
 
-test('visiting /events', function(assert) {
-  server.create('django-page', {id: 'events/'});
-  visit('/events');
+  test('visiting /events', async function(assert) {
+    server.create('django-page', {id: 'events/'});
+    await visit('/events');
 
-  andThen(function() {
     assert.equal(currentURL(), `/events`);
   });
-});
 
-test('clicking on /events', function(assert) {
-  server.create('bucket', {slug: 'wqxr-home'});
-  server.create('django-page', {id: '/'});
-  server.create('django-page', {id: 'events/'});
-  
-  visit('/');
-  
-  andThen(function() {
-    click('a[href="/events"]');
-  });
-  
-  andThen(function() {
+  test('clicking on /events', async function(assert) {
+    server.create('bucket', {slug: 'wqxr-home'});
+    server.create('django-page', {id: '/'});
+    server.create('django-page', {id: 'events/'});
+    
+    await visit('/');
+    
+    await click('a[href="/events"]');
+    
     assert.equal(currentURL(), `/events`);
   });
-});
 
-test('transitioning to a specific event', function(assert) {
-  server.create('django-page', {
-    id: 'fake/',
-    testMarkup: `
-    <a href="/events/wqxr-media-sponsorship/2016/jan/29/ecstatic-music-festival-2016/" id="foo">foo</a>
-    `
-  });
-  server.create('django-page', {id: `events/wqxr-media-sponsorship/2016/jan/29/ecstatic-music-festival-2016/`});
-  server.create('bucket', {slug: 'wqxr-home'});
-  
-  visit('/fake');
-  click('#foo');
-  
-  andThen(function() {
+  test('transitioning to a specific event', async function(assert) {
+    server.create('django-page', {
+      id: 'fake/',
+      testMarkup: `
+      <a href="/events/wqxr-media-sponsorship/2016/jan/29/ecstatic-music-festival-2016/" id="foo">foo</a>
+      `
+    });
+    server.create('django-page', {id: `events/wqxr-media-sponsorship/2016/jan/29/ecstatic-music-festival-2016/`});
+    server.create('bucket', {slug: 'wqxr-home'});
+    
+    await visit('/fake');
+    await click('#foo');
+    
     assert.equal(currentURL(), `/events/wqxr-media-sponsorship/2016/jan/29/ecstatic-music-festival-2016/`);
   });
 });

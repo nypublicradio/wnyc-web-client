@@ -1,6 +1,6 @@
 import AdaptiveStore from 'ember-simple-auth/session-stores/adaptive';
-import service from 'ember-service/inject';
-import set from 'ember-metal/set';
+import { inject as service } from '@ember/service';
+import { set } from '@ember/object';
 
 export default AdaptiveStore.extend({
   store: service(),

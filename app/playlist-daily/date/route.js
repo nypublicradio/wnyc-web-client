@@ -1,9 +1,9 @@
-import Route from 'ember-route';
-import service from 'ember-service/inject';
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
 
 export default Route.extend({
   poll: service(),
-  
+
   titleToken(model) {
     return model.get('title');
   },
@@ -16,7 +16,7 @@ export default Route.extend({
     // year, month, day, and scheduleStation will all be available vars
     return this.store.findRecord('django-page', `playlist-daily/${year}/${month}/${day}/?scheduleStation=${scheduleStation}`, {reload: true});
   },
-  
+
   actions: {
     didTransition() {
       this.get('poll').addPoll({

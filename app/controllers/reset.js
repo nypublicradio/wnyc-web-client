@@ -1,4 +1,4 @@
-import Controller from 'ember-controller';
+import Controller from '@ember/controller';
 import config from 'wqxr-web-client/config/environment';
 
 export default Controller.extend({

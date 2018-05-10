@@ -1,11 +1,11 @@
-import Ember from 'ember';
-import service from 'ember-service/inject';
+import Route from '@ember/routing/route';
+import { hash as waitFor } from 'rsvp';
+import { get } from '@ember/object';
+import { inject as service } from '@ember/service';
 import PlayParamMixin from 'wqxr-web-client/mixins/play-param';
 import config from 'wqxr-web-client/config/environment';
-const { get } = Ember;
-const { hash: waitFor } = Ember.RSVP;
 
-export default Ember.Route.extend(PlayParamMixin, {
+export default Route.extend(PlayParamMixin, {
   metrics:      service(),
   session:      service(),
   googleAds:    service(),
@@ -19,6 +19,7 @@ export default Ember.Route.extend(PlayParamMixin, {
     return `${tokens[0]} - WQXR`;
   },
   model({ slug }, { queryParams }) {
+
     return this.store.findRecord('story', slug, {adapterOptions: {queryParams}}).then(story => {
       let comments = this.store.query('comment', { itemTypeId: story.get('itemTypeId'), itemId: story.get('cmsPK') });
       let relatedStories = this.store.query('story', {related: { itemId: story.get('cmsPK'), limit: 5 }});

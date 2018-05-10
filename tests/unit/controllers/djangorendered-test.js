@@ -1,12 +1,12 @@
-import { moduleFor, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
 
-moduleFor('controller:djangorendered', 'Unit | Controller | django rendered', {
-  // Specify the other units that are required for this test.
-  needs: ['service:metrics', 'service:session', 'service:data-pipeline']
-});
+module('Unit | Controller | django rendered', function(hooks) {
+  setupTest(hooks);
 
-// Replace this with your real tests.
-test('it exists', function(assert) {
-  let controller = this.subject();
-  assert.ok(controller);
+  // Replace this with your real tests.
+  test('it exists', function(assert) {
+    let controller = this.owner.lookup('controller:djangorendered');
+    assert.ok(controller);
+  });
 });

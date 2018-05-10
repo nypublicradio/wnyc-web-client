@@ -1,55 +1,64 @@
+import { click, findAll, currentURL, visit, waitFor } from '@ember/test-helpers';
 import test from 'ember-sinon-qunit/test-support/test';
-import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
+import { setupApplicationTest } from 'ember-qunit';
+import { module } from 'qunit';
 
-moduleForAcceptance('Acceptance | streams');
+import DummyConnection from 'ember-hifi/hifi-connections/dummy-connection';
 
-test('visiting /streams', function(assert) {
-  let streams = server.createList('stream', 7);
-  server.createList('whats-on', 7);
-  
-  let wqxrStreams = streams.filter(stream => stream.attrs.source_tags.includes('wqxr_site'));
-  let wnycStreams = streams.filter(stream => stream.attrs.source_tags.includes('wnyc_site'));
-  let allStreams = wqxrStreams.sort((a, b) => a.site_priority - b.site_priority)
-    .concat(wnycStreams.sort((a, b) => a.site_priority - b.site_priority)).uniq();
+const setupHifi = app => {
+  const HIFI = app.lookup('service:hifi');
+  app.register('hifi-connection:local-dummy-connection', DummyConnection, {instantiate: false});
+  HIFI.set('_connections', [HIFI._activateConnection({name: 'LocalDummyConnection'})]);
+}
 
-  visit('/streams');
+module('Acceptance | streams', function(hooks) {
+  setupApplicationTest(hooks);
 
-  andThen(function() {
+  test('visiting /streams', async function(assert) {
+    let streams = server.createList('stream', 7);
+    server.createList('whats-on', 7);
+
+    let wqxrStreams = streams.filter(stream => stream.attrs.source_tags.includes('wqxr_site'));
+    let wnycStreams = streams.filter(stream => stream.attrs.source_tags.includes('wnyc_site'));
+    let allStreams = wqxrStreams.sort((a, b) => a.site_priority - b.site_priority)
+      .concat(wnycStreams.sort((a, b) => a.site_priority - b.site_priority)).uniq();
+
+    await visit('/streams');
+
     assert.equal(currentURL(), '/streams');
-    assert.equal(find('.stream-list li').length, 7, 'should display a list of streams');
+    assert.equal(findAll('.stream-list li').length, 7, 'should display a list of streams');
     assert.deepEqual(
       allStreams.map(stream => stream.attrs.name),
-      find('.stream-list li .streamitem-header .streamitem-link').map((i, el) => el.textContent.trim()).get(),
+      findAll('.stream-list li .streamitem-header .streamitem-link').map(el => el.textContent.trim()),
       'should order by site and priority'
     );
   });
-});
 
-test('playing a stream', function(assert) {
-  server.createList('stream', 7);
-  server.createList('whats-on', 7);
+  test('playing a stream', async function(assert) {
+    setupHifi(this.owner);
+    server.createList('stream', 7);
+    server.createList('whats-on', 7);
 
-  visit('/streams');
+    await visit('/streams');
 
-  click('.stream-list li:first button');
+    await click('.stream-list li:first-child button');
+    await waitFor('.nypr-player');
 
-  andThen(function() {
-    assert.ok(findWithAssert('.nypr-player'), 'persistent player should be visible');
+    assert.ok('persistent player should be visible');
   });
-});
 
-test('stream routes do dfp targeting', function(/*assert*/) {
-  server.createList('stream', 7);
-  server.createList('whats-on', 7);
-  
-  // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
-  visit('/');
+  test('stream routes do dfp targeting', async function() /*assert*/{
+    server.create('bucket', {slug: 'wqxr-home'});
+    server.createList('stream', 7);
+    server.createList('whats-on', 7);
 
-  andThen(() => {
-    this.mock(this.application.__container__.lookup('route:stream').get('googleAds'))
+    // https://github.com/emberjs/ember.js/issues/14716#issuecomment-267976803
+    await visit('/');
+
+    this.mock(this.owner.lookup('route:stream').get('googleAds'))
       .expects('doTargeting')
       .once();
-  });
 
-  visit('/streams');
+    await visit('/streams');
+  });
 });

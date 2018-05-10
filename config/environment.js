@@ -1,4 +1,3 @@
-/* eslint-env node */
 'use strict';
 
 module.exports = function(environment) {
@@ -26,6 +25,7 @@ module.exports = function(environment) {
       config: {
         id: process.env.GOOGLE_ANALYTICS || 'UA-46158613-2'
       },
+      environments: ['production', 'development']
     }, {
       name: 'NprAnalytics',
       config: {
@@ -38,6 +38,9 @@ module.exports = function(environment) {
       },
       environments: [process.env.DEV_GTM ? 'development' : 'production']
     }],
+    'ember-cli-mirage': {
+      autostart: true // https://github.com/samselikoff/ember-cli-mirage/blob/master/CHANGELOG.md#how-it-works-in-different-types-of-tests
+    },
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -64,7 +67,7 @@ module.exports = function(environment) {
       includePaths: [
         process.env.WQXR_URL,
         /https?:\/\/(static|demo-static)\.wnyc\.org/,
-        /https?:\/\/media\.wnyc\.org/,
+    // here you can enable a production-specific feature
         /https?:\/\/(demo2-wnyc)\.wqxr\.org/
       ],
       whitelistUrls: [
@@ -194,6 +197,7 @@ module.exports = function(environment) {
     ENV.authAPI = 'http://example.com';
     ENV.membershipAPI = 'http://example.com';
     ENV.platformEventsAPI = 'http://example.com';
+    ENV.APP.autoboot = false;
   }
 
   if (environment === 'production') {

@@ -1,7 +1,6 @@
-import Ember from 'ember';
-import service from 'ember-service/inject';
-import set from 'ember-metal/set';
-import get from 'ember-metal/get';
+import Mixin from '@ember/object/mixin';
+import { inject as service } from '@ember/service';
+import { set, get } from '@ember/object';
 
 // Invalidates an authenticated session,
 // but sets a flag to not refresh the page.
@@ -12,7 +11,7 @@ import get from 'ember-metal/get';
 //
 // The user should be logged out so they can log in with their own account,
 // but we still want to stay on the route.
-export default Ember.Mixin.create({
+export default Mixin.create({
   session: service(),
 
   beforeModel() {

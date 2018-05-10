@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { helper as buildHelper } from '@ember/component/helper';
 
 export function camelizeKeys([ source ]/*, hash*/) {
   let dest = {};
@@ -6,4 +6,4 @@ export function camelizeKeys([ source ]/*, hash*/) {
   return dest;
 }
 
-export default Ember.Helper.helper(camelizeKeys);
+export default buildHelper(camelizeKeys);

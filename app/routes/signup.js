@@ -1,4 +1,4 @@
-import Route from 'ember-route';
+import Route from '@ember/routing/route';
 import config from 'wqxr-web-client/config/environment';
 import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-route-mixin';
 

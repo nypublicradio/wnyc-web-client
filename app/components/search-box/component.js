@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import config from 'wqxr-web-client/config/environment';
 
-export default Ember.Component.extend({
+export default Component.extend({
   svgURL: config.wnycSvgURL
 });

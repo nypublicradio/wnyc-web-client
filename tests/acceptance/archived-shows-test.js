@@ -1,17 +1,17 @@
-import { test } from 'qunit';
-import moduleForAcceptance from 'wqxr-web-client/tests/helpers/module-for-acceptance';
+import { findAll, currentURL, visit } from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
 
-moduleForAcceptance('Acceptance | archived-shows');
+module('Acceptance | archived-shows', function(hooks) {
+  setupApplicationTest(hooks);
 
-test('visiting /archived-shows', function(assert) {
-  server.createList('show', 25);
-  visit('/archived-shows');
+  test('visiting /archived-shows', async function(assert) {
+    server.createList('show', 25);
+    await visit('/archived-shows');
 
-  andThen(function() {
     assert.equal(currentURL(), '/archived-shows');
 
     //all 25 shows are listed, per test data
-    assert.equal( find('.shows-list ul li').length, 25, "twenty five shows are listed" );
-
+    assert.equal( findAll('.shows-list ul li').length, 25, "twenty five shows are listed" );
   });
 });

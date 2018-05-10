@@ -1,8 +1,7 @@
-import Component from 'ember-component';
-import get from 'ember-metal/get';
-import set from 'ember-metal/set';
-import { next } from 'ember-runloop';
-import { htmlSafe } from 'ember-string';
+import { next } from '@ember/runloop';
+import { htmlSafe } from '@ember/string';
+import Component from '@ember/component';
+import { get, set } from '@ember/object';
 
 export default Component.extend({
   classNames: ['popupmenu'],

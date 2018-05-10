@@ -10,5 +10,5 @@ module.exports = {
     drag: true,
     alienDomClick: true,
     '$': true
-  }
+  },
 };

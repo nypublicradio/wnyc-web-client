@@ -1,12 +1,12 @@
-import { moduleFor, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
 
-moduleFor('controller:schedule.date', 'Unit | Controller | schedule date', {
-  // Specify the other units that are required for this test.
-  needs: ['service:metrics', 'service:session', 'service:data-pipeline']
-});
+module('Unit | Controller | schedule date', function(hooks) {
+  setupTest(hooks);
 
-// Replace this with your real tests.
-test('it exists', function(assert) {
-  let controller = this.subject();
-  assert.ok(controller);
+  // Replace this with your real tests.
+  test('it exists', function(assert) {
+    let controller = this.owner.lookup('controller:schedule.date');
+    assert.ok(controller);
+  });
 });

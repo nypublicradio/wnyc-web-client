@@ -1,10 +1,10 @@
-import Ember from 'ember';
-import Component from 'ember-component';
-import { htmlSafe } from 'ember-string';
+import $ from 'jquery';
+import Component from '@ember/component';
+import { htmlSafe } from '@ember/string';
 
 export default Component.extend({
   tagName: 'section',
-  classNames: ['newsletter-signup', 'background--light'], 
+  classNames: ['newsletter-signup', 'background--light'],
   formLoading: false,
   successMsg: null,
   errorMsg: null,
@@ -40,7 +40,7 @@ export default Component.extend({
           jsonp: 'c',
           data: this.$('form').serialize(),
         };
-        Ember.$.ajax(options).always(function(response) {
+        $.ajax(options).always(function(response) {
           if ( response.result === "error" ) {
             this.set('formLoading', false);
             this.set('errorMsg', htmlSafe(response.msg));
@@ -51,12 +51,12 @@ export default Component.extend({
         }.bind(this));
 
       }
-    }, 
+    },
 
     //release the error state as the user enters text
     releaseErrorState: function(){
       this.set('errorMsg', null);
     },
-    
+
   }
 });

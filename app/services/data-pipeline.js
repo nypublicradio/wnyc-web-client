@@ -1,14 +1,12 @@
+import { inject as service } from '@ember/service';
 import DataPipeline from 'nypr-metrics/services/data-pipeline';
-import Ember from 'ember';
-import computed from 'ember-computed';
+import { computed } from '@ember/object';
 
 export default DataPipeline.extend({
-  session: Ember.inject.service(),
+  session: service(),
   browserId: computed.readOnly('session.data.browserId'),
   authorize(fetchOptions) {
-    this.get('session').authorize('authorizer:nypr', (header, value) => {
-      fetchOptions.headers[header] = value;
-    });
+    fetchOptions.headers = this.get('session').authorize(fetchOptions.headers);
     return fetchOptions;
   }
 })

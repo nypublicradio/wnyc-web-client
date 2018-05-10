@@ -1,4 +1,4 @@
-import { helper } from 'ember-helper';
+import { helper } from '@ember/component/helper';
 
 // A test to see if we can change volume on HTML5 Audio Elements.
 // Mostly for iOS

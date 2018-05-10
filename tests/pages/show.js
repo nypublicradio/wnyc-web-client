@@ -1,18 +1,16 @@
-import PageObject from 'wqxr-web-client/tests/page-object';
-
-let {
+import {
+  create,
   visitable,
   clickOnText,
   clickable,
-  textList,
   text,
   isVisible
-} = PageObject;
+} from 'ember-cli-page-object';
 
-export default PageObject.create({
+export default create({
   visit: visitable(':id'),
   clickNavLink: clickOnText('.nav-links'),
-  storyTitles: textList('[data-test-selector=story-tease-title]'),
+  storyTitles: text('[data-test-selector=story-tease-title]', {multiple: true}),
   aboutText: text('[data-test-selector=about-page]'),
   storyText: text('[data-test-selector=story-detail]'),
   clickNext: clickable('.pagefooter-next > a'),

@@ -1,14 +1,13 @@
-import PageObject from 'wqxr-web-client/tests/page-object';
-
-let {
+import {
+  create,
   visitable,
   clickable,
   collection,
   text,
   isVisible
-} = PageObject;
+} from 'ember-cli-page-object';
 
-export default PageObject.create({
+export default create({
   visit:             visitable('/fake?modal=queue-history'),
   clickHistoryTab:   clickable('.tabbedlist-button:contains(History)'),
   clickClearHistory: clickable('.clearhistory-button:contains(Clear)'),
@@ -17,11 +16,8 @@ export default PageObject.create({
   historyIsVisible:  isVisible('.player-history'),
   clearPromptIsVisible:  isVisible('.clearhistory-prompt'),
   emptyMessageIsVisible: isVisible('.queuelist-empty'),
-  stories: collection({
-    itemScope: '.player-history .list-item',
-    item: {
+  stories: collection('.player-history .list-item', {
       title:               text('.queueitem-itemtitle'),
       clickDelete:         clickable('.queueitem-deletebutton'),
-    }
-  })
+    })
 });

@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { helper } from 'ember-helper';
+import { helper } from '@ember/component/helper';
 
 // Returns a time like '5 am' if time has no minute part.
 // Otherwise returns a time like '5:30 am'.
