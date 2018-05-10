@@ -9,7 +9,13 @@
       {{/top.left}}
 
       {{#top.right}}
-        {{#nypr-ui/buttons/red tagName="a" href="https://pledge3.wnyc.org/donate/main/onestep/?ref=button-donate-header" tall=true class="full-bleed__donate"}}
+        {{#nypr-ui/buttons/red
+          tagName="a"
+          href="https://pledge3.wnyc.org/donate/main/onestep/?ref=button-donate-header"
+          tall=true
+          class="full-bleed__donate gtm__click-tracking"
+          data-action="Donate"
+          data-label="full-bleed"}}
           Donate
         {{/nypr-ui/buttons/red}}
       {{/top.right}}
