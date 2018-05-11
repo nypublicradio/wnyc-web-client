@@ -27,9 +27,7 @@ export default Route.extend(ApplicationRouteMixin, {
     let metrics = get(this, 'metrics');
 
     get(this, 'session').syncBrowserId()
-      .then(id => {
-        get(this, 'dj').addBrowserId(id);
-      });
+      .then(id => get(this, 'dj').addBrowserId(id));
     get(this, 'session').staffAuth();
     get(this, 'currentUser').load();
 
