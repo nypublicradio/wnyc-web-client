@@ -1,8 +1,9 @@
 import { click, findAll, currentURL, visit } from '@ember/test-helpers';
-import { module, test } from 'qunit';
+import { module } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import { setBreakpoint } from 'ember-responsive/test-support';
 import DummyConnection from 'ember-hifi/hifi-connections/dummy-connection';
+import test from 'ember-sinon-qunit/test-support/test';
 
 const setupHifi = app => {
   const HIFI = app.lookup('service:hifi');
@@ -79,5 +80,21 @@ module('Acceptance | Selectors for GTM Analytics', function(hooks) {
     // UA Menu Social Links
     let socialLinks = findWithAssert('.sitechrome__nav-footer .nypr-social-icons__link');
     socialLinks.forEach((e) => assert.ok(e.attributes.getNamedItem('title').value));
+  });
+
+  test('it registers the browser id with the dj service', async function() {
+    const ID = 'foo';
+    let session = this.owner.lookup('service:session');
+    let dj = this.owner.lookup('service:dj');
+
+    this.mock(session).expects('syncBrowserId').once().resolves(ID);
+    this.mock(dj).expects('addBrowserId').withArgs(ID);
+
+    setBreakpoint('largeAndUp')
+    server.create('bucket', {slug: 'wqxr-home'});
+    server.createList('stream', 7);
+    server.createList('whats-on', 7);
+
+    await visit('/');
   });
 });
