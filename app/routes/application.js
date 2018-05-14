@@ -80,9 +80,7 @@ export default Route.extend(ApplicationRouteMixin, {
       }
     },
     didTransition() {
-      this.controllerFor('application').set('error', null);
       this.set('dataPipeline.currentReferrer', window.location.toString());
-      return true;
     },
     willTransition() {
       //close queue/history modal when we open a new page
