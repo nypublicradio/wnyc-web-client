@@ -6848,7 +6848,7 @@ nypr-audio-services@>=0.3.0, nypr-audio-services@nypublicradio/nypr-audio-servic
 
 nypr-auth@>=0.2.0, nypr-auth@nypublicradio/nypr-auth#RT-701:
   version "0.2.1"
-  resolved "https://codeload.github.com/nypublicradio/nypr-auth/tar.gz/57dd621cbfc95f431122a3f26f391800fd2472e6"
+  resolved "https://codeload.github.com/nypublicradio/nypr-auth/tar.gz/92f908457985d0907a111bd8a4810fa1f9db69b8"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-get-config "^0.2.2"
