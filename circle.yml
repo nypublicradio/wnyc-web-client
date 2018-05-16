@@ -71,7 +71,7 @@ jobs:
       - store_test_results:
           path: test-results/
 
-  deploy:
+  deploy_production:
     docker:
       - image: circleci/node:8.6.0
         environment:
@@ -85,16 +85,51 @@ jobs:
       - restore_cache:
           key: modernizr-{{ .Revision }}
       - run:
-          name: Deploy to S3 and Redis
+          name: Deploy to production
           command: |
             env | sed -n 's/^DEPLOY_//p' > .env
-            if [[ "${CIRCLE_BRANCH}" == "demo" ]]; then
-              env | sed -n 's/^DEMO_//p' >> .env
-              npx ember deploy demo --verbose --activate
-            elif grep -qE "v[0-9]+\.[0-9]+\.[0-9]+" <<< "$CIRCLE_TAG"; then
-              env | sed -n 's/^PROD_//p' >> .env
-              npx ember deploy production --verbose --activate
-            fi
+            env | sed -n 's/^PROD_//p' >> .env
+            npx ember deploy production --verbose --activate
+
+  deploy_staging:
+    docker:
+      - image: circleci/node:8.6.0
+        environment:
+          JOBS: 2
+    steps:
+      - checkout
+      - restore_cache:
+          key: bower-deps-{{ checksum "bower.json" }}
+      - restore_cache:
+          key: v2-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
+      - restore_cache:
+          key: modernizr-{{ .Revision }}
+      - run:
+          name: Deploy to staging
+          command: |
+            env | sed -n 's/^DEPLOY_//p' > .env
+            env | sed -n 's/^STAGING_//p' >> .env
+            npx ember deploy staging --verbose --activate
+
+  deploy_qa:
+    docker:
+      - image: circleci/node:8.6.0
+        environment:
+          JOBS: 2
+    steps:
+      - checkout
+      - restore_cache:
+          key: bower-deps-{{ checksum "bower.json" }}
+      - restore_cache:
+          key: v2-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
+      - restore_cache:
+          key: modernizr-{{ .Revision }}
+      - run:
+          name: Deploy $CIRCLE_BRANCH to QA
+          command: |
+            env | sed -n 's/^DEPLOY_//p' > .env
+            env | sed -n 's/^PROD_//p' >> .env
+            npx ember deploy qa:$CIRCLE_BRANCH --verbose
 
 workflows:
   version: 2
@@ -110,11 +145,23 @@ workflows:
               only: /.*/
           requires:
             - install
-      - deploy:
+      - deploy_production:
           requires:
             - test
           filters:
             tags:
               only: /^v[0-9]+\.[0-9]+\.[0-9]+/
             branches:
-              only: demo
+              ignore: /.*/
+      - deploy_staging:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
+      - deploy_qa:
+          requires:
+            - test
+          filters:
+            branches:
+              only: /(feature\/.+)|([a-zA-Z]+-\d+)/
