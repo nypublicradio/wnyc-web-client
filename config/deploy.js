@@ -50,6 +50,7 @@ module.exports = function(deployTarget) {
 
   if (deployTarget.startsWith('qa:')) {
     ENV.redis.keyPrefix = deployTarget.replace('qa:', '');
+    ENV.pipeline = { activateOnDeploy: true };
   }
 
   if (deployTarget === 'demo') {
