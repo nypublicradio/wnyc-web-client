@@ -289,6 +289,19 @@ article > section a:hover {
     margin-right: 7px;
   }
 
+  > .django-content blockquote {
+    position: relative;
+    max-width: 685px;
+    margin: 0 auto;
+    padding: 0 25px;
+    > p {
+      font-style: italic;
+      padding: 0 20px 0 0;
+      color: $lightgray;
+      border-left: 6px solid $wqxrblue;
+    }
+  }
+
   .nypr-pull-quote__wrapper{
       @include layout;
   }
