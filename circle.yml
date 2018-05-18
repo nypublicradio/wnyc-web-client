@@ -125,7 +125,7 @@ jobs:
       - restore_cache:
           key: modernizr-{{ .Revision }}
       - run:
-          name: Deploy $CIRCLE_BRANCH to QA
+          name: Deploy QA build
           command: |
             env | sed -n 's/^DEPLOY_//p' > .env
             env | sed -n 's/^PROD_//p' >> .env
