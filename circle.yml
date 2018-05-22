@@ -69,7 +69,7 @@ jobs:
       - restore_cache:
           key: bower-deps-{{ checksum "bower.json" }}
       - restore_cache:
-          key: v2-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
+          key: v3-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
       - restore_cache:
           key: modernizr-{{ .Revision }}
       - restore_cache:
