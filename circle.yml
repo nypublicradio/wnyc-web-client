@@ -49,14 +49,6 @@ jobs:
           paths:
             - vendor/modernizr/modernizr-build.js
 
-      - run:
-          name: Build Ember app for testing
-          command: npx ember build --output-path="test-dist" --environment=test
-      - save_cache:
-          key: ember-test-build-{{ .Revision }}
-          paths:
-            - test-dist
-
   test_ember:
     docker:
       - image: circleci/node:8.6.0-browsers
@@ -72,15 +64,12 @@ jobs:
           key: v1-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
       - restore_cache:
           key: modernizr-{{ .Revision }}
-      - restore_cache:
-          key: ember-test-build-{{ .Revision }}
       - run:
           name: Test
           environment:
             CIRCLE_TEST_REPORTS: test-results
           command: >
             npx ember exam
-            --path="test-dist"
             --split=$CIRCLE_NODE_TOTAL
             --partition=$(($CIRCLE_NODE_INDEX + 1))
             --parallel
