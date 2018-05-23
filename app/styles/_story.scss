@@ -295,7 +295,12 @@ article > section a:hover {
     margin: 0 auto;
     padding: 0 25px;
     > p {
+      font-size: 18px;
       font-style: italic;
+      font-weight: normal;
+      @include mq($medium-and-up) {
+        font-size: 20px;
+      }
       padding: 0 0 0 20px;
       color: $lightgray;
       border-left: 6px solid $wqxrblue;
