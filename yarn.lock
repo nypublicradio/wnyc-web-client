@@ -6903,8 +6903,8 @@ nypr-publisher-lib@>=0.3.5:
     nypr-ui ">=0.2.4"
 
 nypr-ui@>=0.2.0, nypr-ui@>=0.2.11, nypr-ui@>=0.2.4, nypr-ui@>=0.2.6:
-  version "0.2.13"
-  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.2.13.tgz#896ba1b59f231d8b91a59a1ae8167ca52a86fa09"
+  version "0.2.14"
+  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.2.14.tgz#a7db89107a90ed6930c219144dd409a14570aed9"
   dependencies:
     ember-basic-dropdown "0.34.0"
     ember-burger-menu "^3.1.0"
