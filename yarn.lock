@@ -7187,9 +7187,9 @@ nypr-publisher-lib@>=0.3.5:
     nypr-django-for-ember ">=0.1.0"
     nypr-ui ">=0.2.4"
 
-nypr-ui@>=0.2.0, nypr-ui@>=0.2.4:
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.2.9.tgz#cbd30baa9f20fc47434e107145aeef72454a288a"
+nypr-ui@>=0.2.0, nypr-ui@>=0.2.4, nypr-ui@>=0.2.6:
+  version "0.2.14"
+  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.2.14.tgz#a7db89107a90ed6930c219144dd409a14570aed9"
   dependencies:
     ember-basic-dropdown "0.34.0"
     ember-burger-menu "^3.1.0"
@@ -7199,23 +7199,7 @@ nypr-ui@>=0.2.0, nypr-ui@>=0.2.4:
     ember-cli-sass "^7.1.7"
     ember-click-outside "0.1.11"
     ember-composable-helpers "2.0.3"
-    ember-holygrail-layout "^0.3.0"
-    ember-power-select "^1.9.2"
-    ivy-tabs "^3.3.0"
-    waypoints "^4.0.1"
-
-nypr-ui@>=0.2.6:
-  version "0.2.11"
-  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.2.11.tgz#29c836c9b833a906a8490c6b90e414e14fda5578"
-  dependencies:
-    ember-basic-dropdown "0.34.0"
-    ember-burger-menu "^3.1.0"
-    ember-cli-babel "^6.8.0"
-    ember-cli-htmlbars "^2.0.1"
-    ember-cli-htmlbars-inline-precompile "^1.0.0"
-    ember-cli-sass "^7.1.7"
-    ember-click-outside "0.1.11"
-    ember-composable-helpers "2.0.3"
+    ember-cookies "^0.3.0"
     ember-holygrail-layout "^0.3.0"
     ember-power-select "^1.9.2"
     ivy-tabs "^3.3.0"
