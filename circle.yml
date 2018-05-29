@@ -129,7 +129,7 @@ jobs:
           command: |
             env | sed -n 's/^DEPLOY_//p' > .env
             env | sed -n 's/^PROD_//p' >> .env
-            npx ember deploy qa:$CIRCLE_BRANCH --verbose
+            npx ember deploy qa:$CIRCLE_BRANCH --verbose --activate
 
 workflows:
   version: 2

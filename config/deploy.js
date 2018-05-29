@@ -38,7 +38,7 @@ module.exports = function(deployTarget) {
       enableRevisionTagging: false,
       replaceFiles: true
     },
-    
+
     'json-config': {
       jsonBlueprint(context, pluginHelper) {
         var jsonBlueprint = pluginHelper.readConfigDefault('jsonBlueprint');
@@ -50,11 +50,6 @@ module.exports = function(deployTarget) {
 
   if (deployTarget.startsWith('qa:')) {
     ENV.redis.keyPrefix = deployTarget.replace('qa:', '');
-    ENV.pipeline = { activateOnDeploy: true };
-  }
-
-  if (deployTarget === 'demo') {
-    ENV.pipeline = { activateOnDeploy: true };
   }
 
   if (deployTarget === 'production') {
