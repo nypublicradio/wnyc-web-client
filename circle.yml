@@ -91,7 +91,7 @@ jobs:
             env | sed -n 's/^PROD_//p' >> .env
             npx ember deploy production --verbose --activate
 
-  deploy_staging:
+  deploy_demo:
     docker:
       - image: circleci/node:8.6.0
         environment:
@@ -105,11 +105,11 @@ jobs:
       - restore_cache:
           key: modernizr-{{ .Revision }}
       - run:
-          name: Deploy to staging
+          name: Deploy to demo
           command: |
             env | sed -n 's/^DEPLOY_//p' > .env
-            env | sed -n 's/^STAGING_//p' >> .env
-            npx ember deploy staging --verbose --activate
+            env | sed -n 's/^DEMO_//p' >> .env
+            npx ember deploy demo --verbose --activate
 
   deploy_qa:
     docker:
@@ -153,7 +153,7 @@ workflows:
               only: /^v[0-9]+\.[0-9]+\.[0-9]+/
             branches:
               ignore: /.*/
-      - deploy_staging:
+      - deploy_demo:
           requires:
             - test
           filters:
