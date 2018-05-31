@@ -2229,7 +2229,7 @@ currently-unhandled@^0.4.1:
   dependencies:
     array-find-index "^1.0.1"
 
-customizr@1.0.0-alpha, "customizr@https://github.com/Modernizr/customizr/tarball/develop":
+"customizr@https://github.com/Modernizr/customizr/tarball/develop":
   version "1.0.0-alpha"
   resolved "https://registry.yarnpkg.com/customizr/-/customizr-1.0.0-alpha.tgz#7ee5871f4e0aeef38d2a3fb03c804bae61bc21ee"
   dependencies:
@@ -6902,9 +6902,9 @@ nypr-publisher-lib@>=0.3.5:
     nypr-django-for-ember ">=0.1.0"
     nypr-ui ">=0.2.4"
 
-nypr-ui@>=0.2.0, nypr-ui@>=0.2.11, nypr-ui@>=0.2.4, nypr-ui@>=0.2.6:
-  version "0.2.14"
-  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.2.14.tgz#a7db89107a90ed6930c219144dd409a14570aed9"
+nypr-ui@>=0.2.0, nypr-ui@>=0.2.15, nypr-ui@>=0.2.4:
+  version "0.2.15"
+  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.2.15.tgz#b401a09eb87ebd586438c4ddd7d5c52eb0c44270"
   dependencies:
     ember-basic-dropdown "0.34.0"
     ember-burger-menu "^3.1.0"

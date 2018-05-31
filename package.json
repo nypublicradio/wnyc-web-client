@@ -102,7 +102,7 @@
     "nypr-metrics": "<0.1.0",
     "nypr-player": ">=0.2.0",
     "nypr-publisher-lib": ">=0.3.5",
-    "nypr-ui": ">=0.2.6",
+    "nypr-ui": ">=0.2.15",
     "torii": "^0.10.1"
   },
   "ember-addon": {
@@ -118,8 +118,7 @@
     "ember-cli-babel": "^6.6.0",
     "nypr-django-for-ember": ">=0.2.0",
     "nypr-metrics": "<0.1.0",
-    "nypr-ui": ">=0.2.11",
-    "customizr": "1.0.0-alpha",
-    "nypr-publisher-lib": ">=0.3.5"
+    "nypr-publisher-lib": ">=0.3.5",
+    "nypr-ui": ">=0.2.15"
   }
 }
