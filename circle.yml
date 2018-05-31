@@ -130,11 +130,10 @@ jobs:
             env | sed -n 's/^DEPLOY_//p' > .env
             env | sed -n 's/^DEMO_//p' >> .env
             npx ember deploy qa:$CIRCLE_BRANCH --verbose --activate
-            echo "https://www.wnyc.org?build=$CIRCLE_BRANCH" > /tmp/qa-builds
+            echo "<a href=\"https://www.wnyc.org?build=$CIRCLE_BRANCH\">https://www.wnyc.org/?build=$CIRCLE_BRANCH</a>" > /tmp/qa-builds/$CIRCLE_BRANCH.html
 
       - store_artifacts:
           path: /tmp/qa-builds
-          destination: $CIRCLE_BRANCH
 
 workflows:
   version: 2
