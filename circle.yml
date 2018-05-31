@@ -1,15 +1,32 @@
 version: 2
 
+defaults: &defaults
+  docker:
+    - image: circleci/node:8.6.0-browsers
+      environment:
+        JOBS: 2
+
+restore_bower: &restore_bower
+  restore_cache:
+    key: bower-deps-{{ checksum "bower.json" }}
+
+restore_node: &restore_node
+  restore_cache:
+    key: v2-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
+
+restore_modernizr: &restore_modernizr
+  restore_cache:
+    key: modernizr-{{ .Revision }}
+
+
 jobs:
   install:
-    docker:
-      - image: circleci/node:8.6.0
+    <<: *defaults
 
     steps:
       - checkout
 
-      - restore_cache:
-          key: grunt-and-bower
+      - <<: *restore_bower
       - run:
           name: Install grunt and bower
           command: yarn global add bower grunt-cli
@@ -18,18 +35,19 @@ jobs:
           paths:
             - ~/.config/yarn/global
 
-      - restore_cache:
-          key: bower-deps-{{ checksum "bower.json" }}
+      - <<: *restore_bower
       - run:
           name: Install bower deps
-          command: npx bower i
+          command: |
+            if [ ! -d bower_components ]; then
+              npx bower i
+            fi
       - save_cache:
           key: bower-deps-{{ checksum "bower.json" }}
           paths:
             - bower_components
 
-      - restore_cache:
-          key: v2-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
+      - <<: *restore_node
       - run:
           name: Node dependencies
           command: |
@@ -41,28 +59,26 @@ jobs:
           paths:
             - node_modules
 
+      - <<: *restore_modernizr
       - run:
           name: Build modernizr
-          command: npx grunt modernizr:dist
+          command: |
+            if [ ! -f vendor/modrnizr/modernizr-build.js ]; then
+              npx grunt modernizr:dist
+            fi
       - save_cache:
           key: modernizr-{{ .Revision }}
           paths:
             - vendor/modernizr/modernizr-build.js
 
   test:
-    docker:
-      - image: circleci/node:8.6.0-browsers
-        environment:
-          JOBS: 2
+    <<: *defaults
 
     steps:
       - checkout
-      - restore_cache:
-          key: bower-deps-{{ checksum "bower.json" }}
-      - restore_cache:
-          key: v2-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
-      - restore_cache:
-          key: modernizr-{{ .Revision }}
+      - <<: *restore_bower
+      - <<: *restore_node
+      - <<: *restore_modernizr
       - run:
           name: Test
           environment:
@@ -72,18 +88,14 @@ jobs:
           path: test-results/
 
   deploy_production:
-    docker:
-      - image: circleci/node:8.6.0
-        environment:
-          JOBS: 2
+    <<: *defaults
+
     steps:
       - checkout
-      - restore_cache:
-          key: bower-deps-{{ checksum "bower.json" }}
-      - restore_cache:
-          key: v2-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
-      - restore_cache:
-          key: modernizr-{{ .Revision }}
+      - <<: *restore_bower
+      - <<: *restore_node
+      - <<: *restore_modernizr
+
       - run:
           name: Deploy to production
           command: |
@@ -92,18 +104,14 @@ jobs:
             npx ember deploy production --verbose --activate
 
   deploy_demo:
-    docker:
-      - image: circleci/node:8.6.0
-        environment:
-          JOBS: 2
+    <<: *defaults
+
     steps:
       - checkout
-      - restore_cache:
-          key: bower-deps-{{ checksum "bower.json" }}
-      - restore_cache:
-          key: v2-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
-      - restore_cache:
-          key: modernizr-{{ .Revision }}
+      - <<: *restore_bower
+      - <<: *restore_node
+      - <<: *restore_modernizr
+
       - run:
           name: Deploy to demo
           command: |
@@ -112,18 +120,13 @@ jobs:
             npx ember deploy demo --verbose --activate
 
   deploy_qa:
-    docker:
-      - image: circleci/node:8.6.0
-        environment:
-          JOBS: 2
+    <<: *defaults
     steps:
       - checkout
-      - restore_cache:
-          key: bower-deps-{{ checksum "bower.json" }}
-      - restore_cache:
-          key: v2-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
-      - restore_cache:
-          key: modernizr-{{ .Revision }}
+      - <<: *restore_bower
+      - <<: *restore_node
+      - <<: *restore_modernizr
+      
       - run:
           name: Deploy QA build
           command: |
