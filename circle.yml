@@ -134,7 +134,7 @@ jobs:
           name: Make QA artifact
           command: |
             mkdir /tmp/qa-builds
-            echo "<a href=\"https://$DEMO_WNYC_URL?build=$CIRCLE_BRANCH\">https://$DEMO_WNYC_URL?build=$CIRCLE_BRANCH</a>" > /tmp/qa-builds/$CIRCLE_SHA1.html
+            echo "<a href=\"https:$DEMO_WNYC_URL?build=$CIRCLE_BRANCH\">https:$DEMO_WNYC_URL?build=$CIRCLE_BRANCH</a>" > /tmp/qa-builds/$CIRCLE_SHA1.html
 
       - store_artifacts:
           path: /tmp/qa-builds
@@ -168,8 +168,8 @@ workflows:
             branches:
               only: master
       - deploy_qa:
-          # requires:
-          #   - test
+          requires:
+            - test
           filters:
             branches:
               only: /(feature\/.+)|([a-zA-Z]+-\d+)/
