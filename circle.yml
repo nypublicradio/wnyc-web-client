@@ -130,6 +130,11 @@ jobs:
             env | sed -n 's/^DEPLOY_//p' > .env
             env | sed -n 's/^DEMO_//p' >> .env
             npx ember deploy qa:$CIRCLE_BRANCH --verbose --activate
+            echo "https://www.wnyc.org?build=$CIRCLE_BRANCH" > /tmp/qa-builds
+
+      - store_artifacts:
+          path: /tmp/qa-builds
+          destination: $CIRCLE_BRANCH
 
 workflows:
   version: 2
@@ -160,8 +165,8 @@ workflows:
             branches:
               only: master
       - deploy_qa:
-          requires:
-            - test
+          # requires:
+          #   - test
           filters:
             branches:
               only: /(feature\/.+)|([a-zA-Z]+-\d+)/
