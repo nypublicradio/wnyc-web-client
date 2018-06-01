@@ -1,3 +1,4 @@
+/* global Cypress, cy */
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -25,6 +26,10 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 // -- This is a dual command --
+
+Cypress.Commands.overwrite("route", (originalFn, ...args) => {
+  return originalFn(...args)
+});
 
 Cypress.Commands.add("mirageServer", (serverFn) => {
   // This could be more elegant, but communicating with the mirage server via

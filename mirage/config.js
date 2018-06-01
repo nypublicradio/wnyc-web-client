@@ -27,16 +27,6 @@ const hasProvider = function(request) {
 export default function() {
   this.logging = false;
 
-  /* If the `passthrough` key is found in localStorage, ignore the entire
-   * Mirage mock configuration and passthrough everything. The `return` assures
-   * that we don't process the rest of the config.*/
-  if (window.localStorage.passthrough) {
-    this.passthrough(`**`);
-    this.passthrough(`${config.webRoot}/**`);
-    this.passthrough(`${config.publisherAPI}/**`);
-    return;
-  }
-
   /*------------------------------------------------------------
     legacy (v1) endpoints
   --------------------------------------------------------------*/

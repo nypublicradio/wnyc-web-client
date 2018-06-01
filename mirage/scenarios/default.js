@@ -36,4 +36,10 @@ export default function(server) {
     eval(`(${window.localStorage.mirageServerCommand})`)(server)
   }
 
+  /* If the `passthrough` key is found in localStorage, shutdown the Mirage
+   * server so it doesn't mock any API calls. */
+  if (window.localStorage.passthrough) {
+    server.shutdown();
+  }
+
 }

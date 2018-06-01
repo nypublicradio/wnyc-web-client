@@ -49,10 +49,6 @@ describe('Example tests to demonstrate functionality', function() {
 
     cy.route({
       url: '**',
-      onRequest: (xhr) => {
-        xhr.url = xhr.url.replace('4200', '3000')
-        return xhr
-      }
     });
 
     cy.visit('/');
