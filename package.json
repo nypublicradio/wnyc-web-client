@@ -27,7 +27,7 @@
     "broccoli-merge-trees": "^1.1.0",
     "broccoli-sourcemap-concat": "^2.0.2",
     "broccoli-stew": "^1.4.0",
-    "cypress": "^2.1.0",
+    "cypress": "^3.0.0",
     "ember-ajax": "^3.0.0",
     "ember-body-class": "0.4.0",
     "ember-cli": "~3.0.0",
