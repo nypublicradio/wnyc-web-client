@@ -129,24 +129,6 @@
     margin-right: 7px;
   }
 
-  > .django-content blockquote {
-    position: relative;
-    max-width: 685px;
-    margin: 0 auto;
-    padding: 10px 25px;
-    font-size: 18px;
-    @include mq($medium-and-up) {
-      font-size: 20px;
-      padding: 30px 25px;
-    }
-    > p {
-      font-style: italic;
-      padding: 0 0 0 20px;
-      color: $lightgray;
-      border-left: 6px solid $red;
-    }
-  }
-
   .embedded-image {
     display: block;
 
@@ -248,6 +230,26 @@
 
 .nypr-pull-quote {
   @include pull-quote;
+}
+
+blockquote:not(.nypr-pull-quote) {
+  position: relative;
+  max-width: 685px;
+  margin: 0 auto;
+  padding: 15px 25px;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: italic;
+  border: none;
+  @include mq($medium-and-up) {
+    font-size: 20px;
+    padding: 30px 25px;
+  }
+  > p {
+    padding: 0 0 0 20px;
+    color: $lightgray;
+    border-left: 6px solid $red;
+  }
 }
 
 .story__download-link {
