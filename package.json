@@ -61,7 +61,7 @@
     "ember-feature-flags": "^5.0.0",
     "ember-fetch": "^3.2.9",
     "ember-get-config": "^0.2.2",
-    "ember-hifi": "^1.11.3",
+    "ember-hifi": "1.15.0",
     "ember-holygrail-layout": "^0.3.0",
     "ember-hotjar": "^0.0.2",
     "ember-imagesloaded-shim": "^0.0.6",
@@ -94,10 +94,10 @@
     "morgan": "^1.6.1",
     "nypr-account-settings": ">=0.1.0",
     "nypr-ads": ">=0.1.0",
-    "nypr-audio-services": ">=0.3.3",
-    "nypr-auth": ">=0.2.0",
+    "nypr-audio-services": ">=0.3.7",
+    "nypr-auth": ">=0.2.2",
     "nypr-django-for-ember": ">=0.2.0",
-    "nypr-metrics": ">=0.3.1",
+    "nypr-metrics": "<0.1.0",
     "nypr-player": ">=0.2.0",
     "nypr-publisher-lib": ">=0.3.5",
     "nypr-ui": ">=0.2.6",
@@ -109,7 +109,12 @@
     ]
   },
   "resolutions": {
-    "nypr-metrics": "<0.1.0"
+    "ember-hifi": "1.15.0",
+    "nypr-audio-services": ">=0.3.7",
+    "nypr-auth": ">=0.2.2",
+    "nypr-metrics": "<0.1.0",
+    "nypr-ui": ">=0.2.6",
+    "nypr-publisher-lib": ">=0.3.5"
   },
   "engines": {
     "node": "^4.5 || 6.* || >= 7.*"
