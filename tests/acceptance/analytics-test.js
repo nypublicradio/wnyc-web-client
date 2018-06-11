@@ -60,4 +60,16 @@ module('Acceptance | Analytics', function(hooks) {
     assert.equal(currentURL(), `/story/${story.slug}`, 'opened story page');
     assert.equal(trackSpy.firstCall.args[1].category, 'Homepage Bucket', 'bucket event was triggered once after clicking link');
   });
+
+  test('it registers the browser id with the dj service', async function() {
+    const ID = 'foo';
+    let session = this.owner.lookup('service:session');
+    let dj = this.owner.lookup('service:dj');
+
+    this.mock(session).expects('syncBrowserId').once().resolves(ID);
+    this.mock(dj).expects('addBrowserId').withArgs(ID);
+
+    server.create('django-page', {id: '/'});
+    await visit('/');
+  });
 });
