@@ -3306,9 +3306,9 @@ ember-hash-helper-polyfill@^0.2.0:
     ember-cli-babel "^6.8.2"
     ember-cli-version-checker "^2.1.0"
 
-ember-hifi@^1.11.1, ember-hifi@nypublicradio/ember-hifi#RT-701:
-  version "1.14.1"
-  resolved "https://codeload.github.com/nypublicradio/ember-hifi/tar.gz/30c7402dc6b6fe131649657d47894b6a9995d035"
+ember-hifi@1.15.0, ember-hifi@^1.11.1:
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/ember-hifi/-/ember-hifi-1.15.0.tgz#ea38acb50b195bbc524a31c5cf9561bbf3fc6a0e"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-poll "^1.4.0"
@@ -6895,10 +6895,9 @@ nypr-ads@>=0.1.0:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
 
-nypr-audio-services@>=0.3.0, nypr-audio-services@nypublicradio/nypr-audio-services#RT-701:
-  version "0.3.6"
-  uid aa5887b7154e56cec03854ef5a8bca79be688816
-  resolved "https://codeload.github.com/nypublicradio/nypr-audio-services/tar.gz/aa5887b7154e56cec03854ef5a8bca79be688816"
+nypr-audio-services@>=0.3.0, nypr-audio-services@>=0.3.7:
+  version "0.3.7"
+  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.3.7.tgz#bbaf99c31aa4d52bf174a406eb7c072f45af0f8e"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
@@ -6914,9 +6913,9 @@ nypr-audio-services@>=0.3.0, nypr-audio-services@nypublicradio/nypr-audio-servic
     nypr-metrics ">=0.3.0"
     nypr-ui ">=0.2.0"
 
-nypr-auth@>=0.2.0, nypr-auth@nypublicradio/nypr-auth#RT-701:
-  version "0.2.1"
-  resolved "https://codeload.github.com/nypublicradio/nypr-auth/tar.gz/92f908457985d0907a111bd8a4810fa1f9db69b8"
+nypr-auth@>=0.2.0, nypr-auth@>=0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/nypr-auth/-/nypr-auth-0.2.2.tgz#ac671c85ee0cb77314b69a5bee3e98a62df689c6"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-get-config "^0.2.2"
