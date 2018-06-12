@@ -1723,13 +1723,17 @@ can-symlink@^1.0.0:
   dependencies:
     tmp "0.0.28"
 
-caniuse-lite@^1.0.30000792, caniuse-lite@^1.0.30000844:
+caniuse-lite@^1.0.30000792:
   version "1.0.30000851"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000851.tgz#3b498aebf9f92cf6cff4ab54d13b557c0b590533"
 
 caniuse-lite@^1.0.30000805:
   version "1.0.30000833"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000833.tgz#98e84fcdb4399c6fa0b0fd41490d3217ac7802b4"
+
+caniuse-lite@^1.0.30000844:
+  version "1.0.30000852"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000852.tgz#8b7510cec030cac7842e52beca2bf292af65f935"
 
 capture-exit@^1.1.0:
   version "1.2.0"
@@ -3306,9 +3310,9 @@ ember-hash-helper-polyfill@^0.2.0:
     ember-cli-babel "^6.8.2"
     ember-cli-version-checker "^2.1.0"
 
-ember-hifi@1.15.0, ember-hifi@^1.11.1:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/ember-hifi/-/ember-hifi-1.15.0.tgz#ea38acb50b195bbc524a31c5cf9561bbf3fc6a0e"
+ember-hifi@^1.11.1, ember-hifi@^1.15.0:
+  version "1.15.1"
+  resolved "https://registry.yarnpkg.com/ember-hifi/-/ember-hifi-1.15.1.tgz#7211b8cea45ed3611545d7f1c1a4c184e2182fda"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-poll "^1.4.0"
@@ -6896,8 +6900,8 @@ nypr-ads@>=0.1.0:
     ember-cli-htmlbars "^2.0.1"
 
 nypr-audio-services@>=0.3.0, nypr-audio-services@>=0.3.7:
-  version "0.3.7"
-  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.3.7.tgz#bbaf99c31aa4d52bf174a406eb7c072f45af0f8e"
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.3.8.tgz#8255c398b52b82a1a557f0bdecdd2a1f7134fe25"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
