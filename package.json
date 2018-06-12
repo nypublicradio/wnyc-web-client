@@ -61,7 +61,7 @@
     "ember-feature-flags": "^5.0.0",
     "ember-fetch": "^3.2.9",
     "ember-get-config": "^0.2.2",
-    "ember-hifi": "1.15.0",
+    "ember-hifi": "^1.15.0",
     "ember-holygrail-layout": "^0.3.0",
     "ember-hotjar": "^0.0.2",
     "ember-imagesloaded-shim": "^0.0.6",
@@ -109,7 +109,7 @@
     ]
   },
   "resolutions": {
-    "ember-hifi": "1.15.0",
+    "ember-hifi": "^1.15.0",
     "nypr-audio-services": ">=0.3.7",
     "nypr-auth": ">=0.2.2",
     "nypr-metrics": "<0.1.0",
