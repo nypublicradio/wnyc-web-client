@@ -258,7 +258,7 @@ article > section a:hover {
 }
 
 .full-bleed__body {
-    font-family: 'Lato', sans-serif;
+  font-family: 'Lato', sans-serif;
 
   h1, h2, h3, h4, h5, h6 {
     @include layout;
@@ -267,36 +267,26 @@ article > section a:hover {
     font-style: italic
   }
 
-  > .django-content p {
+  > .django-content > div > p {
     @include layout;
-    margin-bottom: 45px;
+    margin-bottom: 20px;
     color: black;
     font-size: 16px;
     line-height: 1.5;
 
     @include mq($medium-and-up) {
       font-size: 18px;
-      margin-bottom:60px;
+      margin-bottom:35px;
     }
   }
 
   > .django-content > div > p:first-of-type::first-letter {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Lato', sans-serif;
     font-weight: 700;
     font-size: 93px;
     line-height: 81px;
     float: left;
     margin-right: 7px;
-  }
-
-  .nypr-pull-quote__wrapper{
-      @include layout;
-  }
-
-  .nypr-pull-quote{
-    @include pull-quote($wqxrblue, #{"Lato", OpenSans}, italic);
-    font-weight: bold;
-    color: black;
   }
 
   .embedded-image {
@@ -526,6 +516,37 @@ article > section a:hover {
     color: $wqxrlink;
   }
 }
+
+.nypr-pull-quote{
+  @include pull-quote($wqxrblue, #{"Lato", OpenSans}, italic);
+  font-weight: bold;
+  color: black;
+}
+
+.full-bleed__body .nypr-pull-quote__wrapper{
+  @include layout;
+}
+
+blockquote:not(.nypr-pull-quote) {
+  position: relative;
+  max-width: 685px;
+  margin: 0 auto;
+  padding: 15px 25px;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: italic;
+  border: none;
+  @include mq($medium-and-up) {
+    font-size: 20px;
+    padding: 30px 25px;
+  }
+  > p {
+    padding: 0 0 0 20px;
+    color: $lightgray;
+    border-left: 6px solid $wqxrblue;
+  }
+}
+
 
 .stuck .no-image .full-bleed__share {
   .btn {
