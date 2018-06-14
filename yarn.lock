@@ -1896,8 +1896,8 @@ caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
   resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000830.tgz#6e45255b345649fd15ff59072da1e12bb3de2f13"
 
 caniuse-lite@^1.0.30000844:
-  version "1.0.30000852"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000852.tgz#8b7510cec030cac7842e52beca2bf292af65f935"
+  version "1.0.30000855"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000855.tgz#d5a26a9093b932d6266bf4ed9294b41b84945d14"
 
 capture-exit@^1.1.0:
   version "1.2.0"
@@ -7116,8 +7116,8 @@ nypr-ads@>=0.1.0:
     ember-cli-htmlbars "^2.0.1"
 
 nypr-audio-services@>=0.3.0, nypr-audio-services@>=0.3.7:
-  version "0.3.8"
-  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.3.8.tgz#8255c398b52b82a1a557f0bdecdd2a1f7134fe25"
+  version "0.3.9"
+  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.3.9.tgz#13f5d3dc34497191034af3133444bcdf34aa05cf"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
@@ -7150,8 +7150,8 @@ nypr-django-for-ember@>=0.1.0:
     ember-wormhole "^0.5.2"
 
 nypr-django-for-ember@>=0.2.0:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/nypr-django-for-ember/-/nypr-django-for-ember-0.2.2.tgz#ce3a95d9bdfb9355272f59d2a6742334c032165b"
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/nypr-django-for-ember/-/nypr-django-for-ember-0.2.4.tgz#35a18989859136f0f968810291aab8f02910e415"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
