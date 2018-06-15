@@ -6,7 +6,6 @@ import rsvp from 'rsvp';
 import config from 'wnyc-web-client/config/environment';
 import fetch from 'fetch';
 import { beforeTeardown } from 'nypr-django-for-ember/utils/compat-hooks';
-import DS from 'ember-data';
 
 const { hash } = rsvp;
 
