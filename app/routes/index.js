@@ -6,7 +6,11 @@ import rsvp from 'rsvp';
 import config from 'wnyc-web-client/config/environment';
 import fetch from 'fetch';
 import { beforeTeardown } from 'nypr-django-for-ember/utils/compat-hooks';
+import DS from 'ember-data';
+
 const { hash } = rsvp;
+
+const STREAM_BG = '/assets/img/backgrounds/streambanner.jpg';
 
 export default Route.extend(PlayParamMixin, {
   classNames: ['home'],
@@ -17,6 +21,7 @@ export default Route.extend(PlayParamMixin, {
 
   model() {
     let page = this.store.findRecord('django-page', '/');
+    // let streams = this.store.findAll('stream', {reload: true});
     let featuredStream = this.store.findRecord('stream', 'wnyc-fm939');
     let gothamist = fetch(config.gothamistStories)
       .then(r => r.json()).then(({entries = []}) => entries.slice(0, 5))
@@ -40,5 +45,12 @@ export default Route.extend(PlayParamMixin, {
       beforeTeardown();
       return true;
     }
+  },
+
+  setupController(controller) {
+    this._super(...arguments);
+    let streams = this.store.findAll('stream', {reload: true})
+    controller.set('streams', streams);
+    controller.set('background', STREAM_BG);
   }
 });
