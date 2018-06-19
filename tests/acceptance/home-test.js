@@ -31,6 +31,7 @@ module('Acceptance | home', function(hooks) {
       this is a regular template
         </div>
       </div>
+      <div id="stream-banner" class="clearfix"></div>
       <div id="gothamist-row"></div>
       <div id="go-to-gothamist"></div>
     `
