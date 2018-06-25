@@ -102,7 +102,7 @@
     "nypr-metrics": "<0.1.0",
     "nypr-player": ">=0.2.0",
     "nypr-publisher-lib": ">=0.3.5",
-    "nypr-ui": ">=0.2.15",
+    "nypr-ui": "https://github.com/nypublicradio/nypr-ui#fb1df5f18cb3ba4b65b9755f47abc198434dc4a2",
     "torii": "^0.10.1"
   },
   "ember-addon": {
