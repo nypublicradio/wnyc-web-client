@@ -1,15 +1,32 @@
 version: 2
 
+defaults: &defaults
+  docker:
+    - image: circleci/node:8.6.0-browsers
+      environment:
+        JOBS: 2
+
+restore_bower: &restore_bower
+  restore_cache:
+    key: bower-deps-{{ checksum "bower.json" }}
+
+restore_node: &restore_node
+  restore_cache:
+    key: v2-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
+
+restore_modernizr: &restore_modernizr
+  restore_cache:
+    key: modernizr-{{ .Revision }}
+
+
 jobs:
   install:
-    docker:
-      - image: circleci/node:8.6.0
+    <<: *defaults
 
     steps:
       - checkout
 
-      - restore_cache:
-          key: grunt-and-bower
+      - <<: *restore_bower
       - run:
           name: Install grunt and bower
           command: yarn global add bower grunt-cli
@@ -18,18 +35,19 @@ jobs:
           paths:
             - ~/.config/yarn/global
 
-      - restore_cache:
-          key: bower-deps-{{ checksum "bower.json" }}
+      - <<: *restore_bower
       - run:
           name: Install bower deps
-          command: npx bower i
+          command: |
+            if [ ! -d bower_components ]; then
+              npx bower i
+            fi
       - save_cache:
           key: bower-deps-{{ checksum "bower.json" }}
           paths:
             - bower_components
 
-      - restore_cache:
-          key: v2-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
+      - <<: *restore_node
       - run:
           name: Node dependencies
           command: |
@@ -41,28 +59,26 @@ jobs:
           paths:
             - node_modules
 
+      - <<: *restore_modernizr
       - run:
           name: Build modernizr
-          command: npx grunt modernizr:dist
+          command: |
+            if [ ! -f vendor/modrnizr/modernizr-build.js ]; then
+              npx grunt modernizr:dist
+            fi
       - save_cache:
           key: modernizr-{{ .Revision }}
           paths:
             - vendor/modernizr/modernizr-build.js
 
   test:
-    docker:
-      - image: circleci/node:8.6.0-browsers
-        environment:
-          JOBS: 2
+    <<: *defaults
 
     steps:
       - checkout
-      - restore_cache:
-          key: bower-deps-{{ checksum "bower.json" }}
-      - restore_cache:
-          key: v2-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
-      - restore_cache:
-          key: modernizr-{{ .Revision }}
+      - <<: *restore_bower
+      - <<: *restore_node
+      - <<: *restore_modernizr
       - run:
           name: Test
           environment:
@@ -71,30 +87,60 @@ jobs:
       - store_test_results:
           path: test-results/
 
-  deploy:
-    docker:
-      - image: circleci/node:8.6.0
-        environment:
-          JOBS: 2
+  deploy_production:
+    <<: *defaults
+
     steps:
       - checkout
-      - restore_cache:
-          key: bower-deps-{{ checksum "bower.json" }}
-      - restore_cache:
-          key: v2-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
-      - restore_cache:
-          key: modernizr-{{ .Revision }}
+      - <<: *restore_bower
+      - <<: *restore_node
+      - <<: *restore_modernizr
+
       - run:
-          name: Deploy to S3 and Redis
+          name: Deploy to production
           command: |
             env | sed -n 's/^DEPLOY_//p' > .env
-            if [[ "${CIRCLE_BRANCH}" == "demo" ]]; then
-              env | sed -n 's/^DEMO_//p' >> .env
-              npx ember deploy demo --verbose --activate
-            elif grep -qE "v[0-9]+\.[0-9]+\.[0-9]+" <<< "$CIRCLE_TAG"; then
-              env | sed -n 's/^PROD_//p' >> .env
-              npx ember deploy production --verbose --activate
-            fi
+            env | sed -n 's/^PROD_//p' >> .env
+            npx ember deploy production --verbose --activate
+
+  deploy_demo:
+    <<: *defaults
+
+    steps:
+      - checkout
+      - <<: *restore_bower
+      - <<: *restore_node
+      - <<: *restore_modernizr
+
+      - run:
+          name: Deploy to demo
+          command: |
+            env | sed -n 's/^DEPLOY_//p' > .env
+            env | sed -n 's/^DEMO_//p' >> .env
+            npx ember deploy demo --verbose --activate
+
+  deploy_qa:
+    <<: *defaults
+    steps:
+      - checkout
+      - <<: *restore_bower
+      - <<: *restore_node
+      - <<: *restore_modernizr
+      
+      - run:
+          name: Deploy QA build
+          command: |
+            env | sed -n 's/^DEPLOY_//p' > .env
+            env | sed -n 's/^DEMO_//p' >> .env
+            npx ember deploy qa:$CIRCLE_BRANCH --verbose --activate
+      - run:
+          name: Make QA artifact
+          command: |
+            mkdir /tmp/qa-builds
+            echo "<a href=\"https:$DEMO_WNYC_URL?build=$CIRCLE_BRANCH\">https:$DEMO_WNYC_URL?build=$CIRCLE_BRANCH</a>" > /tmp/qa-builds/$CIRCLE_SHA1.html
+
+      - store_artifacts:
+          path: /tmp/qa-builds
 
 workflows:
   version: 2
@@ -110,11 +156,23 @@ workflows:
               only: /.*/
           requires:
             - install
-      - deploy:
+      - deploy_production:
           requires:
             - test
           filters:
             tags:
               only: /^v[0-9]+\.[0-9]+\.[0-9]+/
             branches:
-              only: demo
+              ignore: /.*/
+      - deploy_demo:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
+      - deploy_qa:
+          requires:
+            - test
+          filters:
+            branches:
+              only: /(feature\/.+)|([a-zA-Z]+-\d+)/
