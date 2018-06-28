@@ -122,6 +122,6 @@
     "nypr-django-for-ember": ">=0.2.0",
     "nypr-metrics": "<0.1.0",
     "nypr-publisher-lib": ">=0.3.5",
-    "nypr-ui": "nypublicradio/nypr-ui/master#8be21ec"
+    "nypr-ui": "nypublicradio/nypr-ui#master"
   }
 }
