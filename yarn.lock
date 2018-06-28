@@ -6944,24 +6944,6 @@ nypr-ui@>=0.2.0, nypr-ui@>=0.2.4, nypr-ui@nypublicradio/nypr-ui#master:
     ivy-tabs "^3.3.0"
     waypoints "^4.0.1"
 
-nypr-ui@>=0.2.15:
-  version "0.2.15"
-  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.2.15.tgz#b401a09eb87ebd586438c4ddd7d5c52eb0c44270"
-  dependencies:
-    ember-basic-dropdown "0.34.0"
-    ember-burger-menu "^3.1.0"
-    ember-cli-babel "^6.8.0"
-    ember-cli-htmlbars "^2.0.1"
-    ember-cli-htmlbars-inline-precompile "^1.0.0"
-    ember-cli-sass "^7.1.7"
-    ember-click-outside "0.1.11"
-    ember-composable-helpers "2.0.3"
-    ember-cookies "^0.3.0"
-    ember-holygrail-layout "^0.3.0"
-    ember-power-select "^1.9.2"
-    ivy-tabs "^3.3.0"
-    waypoints "^4.0.1"
-
 oauth-sign@~0.8.1, oauth-sign@~0.8.2:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"
