@@ -175,4 +175,4 @@ workflows:
             - test
           filters:
             branches:
-              only: /([A-Za-z-_]+/)?[A-Za-z-_]+(\d+)?/
+              only: /([A-Za-z-_]+\/)?[A-Za-z-_\d]+/
