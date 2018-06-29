@@ -2216,7 +2216,7 @@ currently-unhandled@^0.4.1:
   dependencies:
     array-find-index "^1.0.1"
 
-"customizr@https://github.com/Modernizr/customizr/tarball/develop":
+customizr@Modernizr/customizr#e5890ed4b4fedb69da50ffbae39577788970d8ee, "customizr@https://github.com/Modernizr/customizr/tarball/develop":
   version "1.0.0"
   resolved "https://codeload.github.com/Modernizr/customizr/tar.gz/e5890ed4b4fedb69da50ffbae39577788970d8ee"
   dependencies:

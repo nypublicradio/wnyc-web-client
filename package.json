@@ -115,6 +115,7 @@
     "node": "^4.5 || 6.* || >= 7.*"
   },
   "resolutions": {
-    "ember-cli-babel": "^6.6.0"
+    "ember-cli-babel": "^6.6.0",
+    "customizr": "Modernizr/customizr#e5890ed4b4fedb69da50ffbae39577788970d8ee"
   }
 }
