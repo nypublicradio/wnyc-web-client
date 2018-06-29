@@ -126,18 +126,18 @@ jobs:
       - <<: *restore_bower
       - <<: *restore_node
       - <<: *restore_modernizr
-      
+
       - run:
           name: Deploy QA build
           command: |
             env | sed -n 's/^DEPLOY_//p' > .env
             env | sed -n 's/^DEMO_//p' >> .env
-            npx ember deploy qa:$CIRCLE_BRANCH --verbose --activate
+            npx ember deploy qa:$QA_PREFIX/$CIRCLE_BRANCH --verbose --activate
       - run:
           name: Make QA artifact
           command: |
             mkdir /tmp/qa-builds
-            echo "<a href=\"https:$DEMO_WNYC_URL?build=$CIRCLE_BRANCH\">https:$DEMO_WNYC_URL?build=$CIRCLE_BRANCH</a>" > /tmp/qa-builds/$CIRCLE_SHA1.html
+            echo "<a href=\"https:$DEMO_WNYC_URL?build=$QA_PREFIX/$CIRCLE_BRANCH\">https:$DEMO_WNYC_URL?build=$QA_PREFIX/$CIRCLE_BRANCH</a>" > /tmp/qa-builds/$CIRCLE_SHA1.html
 
       - store_artifacts:
           path: /tmp/qa-builds
