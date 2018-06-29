@@ -2532,7 +2532,7 @@ ember-cli-autoprefixer@^0.8.1:
     broccoli-autoprefixer "^5.0.0"
     lodash "^4.0.0"
 
-ember-cli-babel@^5.0.0, ember-cli-babel@^5.1.6, ember-cli-babel@^5.1.7, ember-cli-babel@^6.0.0, ember-cli-babel@^6.0.0-beta.4, ember-cli-babel@^6.0.0-beta.7, ember-cli-babel@^6.1.0, ember-cli-babel@^6.10.0, ember-cli-babel@^6.11.0, ember-cli-babel@^6.3.0, ember-cli-babel@^6.6.0, ember-cli-babel@^6.7.2, ember-cli-babel@^6.8.0, ember-cli-babel@^6.8.1, ember-cli-babel@^6.8.2, ember-cli-babel@^6.9.0, ember-cli-babel@^6.9.2:
+ember-cli-babel@^5.0.0, ember-cli-babel@^5.1.3, ember-cli-babel@^5.1.6, ember-cli-babel@^5.1.7, ember-cli-babel@^6.0.0, ember-cli-babel@^6.0.0-beta.4, ember-cli-babel@^6.0.0-beta.7, ember-cli-babel@^6.1.0, ember-cli-babel@^6.10.0, ember-cli-babel@^6.11.0, ember-cli-babel@^6.3.0, ember-cli-babel@^6.6.0, ember-cli-babel@^6.7.2, ember-cli-babel@^6.8.0, ember-cli-babel@^6.8.1, ember-cli-babel@^6.8.2, ember-cli-babel@^6.9.0, ember-cli-babel@^6.9.2:
   version "6.12.0"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-6.12.0.tgz#3adcdbe1278da1fcd0b9038f1360cb4ac5d4414c"
   dependencies:
@@ -3133,8 +3133,8 @@ ember-concurrency@^0.8.2:
     ember-maybe-import-regenerator "^0.1.5"
 
 ember-cookies@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/ember-cookies/-/ember-cookies-0.3.0.tgz#f9a23c957bd0e561e6a056e044d95ce2416b64d8"
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/ember-cookies/-/ember-cookies-0.3.1.tgz#42ca530703092f6cde691103d608a6a5a58f2d76"
   dependencies:
     ember-cli-babel "^6.8.2"
     ember-getowner-polyfill "^1.1.0 || ^2.0.0"
@@ -3603,7 +3603,8 @@ ember-waypoints@nypublicradio/ember-waypoints#afffe72:
   version "0.1.0"
   resolved "https://codeload.github.com/nypublicradio/ember-waypoints/tar.gz/afffe721c401a6b784640d59a73a9ed4451e7248"
   dependencies:
-    ember-cli-babel "^5.1.3"
+    ember-cli-babel "^6.6.0"
+    waypoints "^4.0.1"
 
 ember-weakmap@^3.0.0:
   version "3.2.0"
@@ -6725,8 +6726,8 @@ nypr-ads@>=0.1.0:
     ember-cli-htmlbars "^2.0.1"
 
 nypr-audio-services@>=0.4.0-beta.2:
-  version "0.4.0-beta.5"
-  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.4.0-beta.5.tgz#46a0985c0aac947f308d9dbae3983915cce2b607"
+  version "0.4.0-beta.6"
+  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.4.0-beta.6.tgz#491540fe76ef734c2ecabb8415099a9bc7a09afe"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
@@ -6736,6 +6737,7 @@ nypr-audio-services@>=0.4.0-beta.2:
     ember-fetch "^3.3.0"
     ember-get-config "^0.2.2"
     ember-hifi "^1.11.1"
+    ember-responsive "^3.0.0-beta.3"
     ember-simple-auth "^1.3.0"
     liquid-fire "^0.29.1"
     nypr-metrics ">=0.4.0-beta.1"
