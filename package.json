@@ -122,6 +122,7 @@
     "nypr-django-for-ember": ">=0.2.0",
     "nypr-metrics": "<0.1.0",
     "nypr-publisher-lib": ">=0.3.5",
-    "nypr-ui": ">=0.2.15"
+    "nypr-ui": ">=0.2.15",
+    "customizr": "Modernizr/customizr#e5890ed4b4fedb69da50ffbae39577788970d8ee"
   }
 }
