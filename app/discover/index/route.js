@@ -10,7 +10,6 @@ export default Route.extend({
   discoverQueue:    service(),
   discoverPrefs:    service(),
   scroller:         service(),
-  metrics:          service(),
   titleToken: 'Discover Playlist',
 
   hasQueuedStories: gt('discoverQueue.items.length', 0),
@@ -88,11 +87,6 @@ export default Route.extend({
 
   actions: {
     findMore() {
-      get(this, 'metrics').trackEvent('GoogleAnalytics', {
-        category: 'Discover',
-        action: 'Clicked Find More in Discover',
-      });
-
       let controller = this.controllerFor('discover.index');
 
       controller.set('findingMore', true);

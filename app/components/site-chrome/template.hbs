@@ -71,14 +71,13 @@
               itemPK=preferredStream.slug
               itemTitle=preferredStream.name
               playContext='nav'
-              class='stream-launcher listen-button--stream'}}
+              class='stream-launcher'}}
               <span>Listen Live</span>
             {{/listen-button}}
           {{else}}
             {{!-- This 'button' is a top nav item that looks like a link. it doesn't show an icon to reflect state --}}
             {{!-- So clicking will always trigger a play action (and not a pause), state is locked to 'is-paused'  --}}
             {{#listen-button
-              class='listen-button--stream'
               type='vanilla'
               state='is-paused'
               itemPK=preferredStream.slug
@@ -106,9 +105,7 @@
         {{/link-to}}
 
         {{#link-to 'discover.start' current-when="discover" tagName='li' href=false class="list-item list-item--nav"}}
-          {{#link-to 'discover.start' class="inherit"}}
-            Discover
-          {{/link-to}}
+          {{link-to 'Discover' 'discover.start' class="inherit"}}
         {{/link-to}}
 
         {{#unless media.isLargeAndUp}}

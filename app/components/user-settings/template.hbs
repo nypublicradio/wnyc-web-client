@@ -14,7 +14,7 @@
     dropdownClass='stream-dropdown'
     loadingMessage='Retrieving Stream List...'
     onchange=(action 'selectStream') as |stream|}}
-    {{stream.name}}
+      {{stream.name}}
   {{/power-select}}
 </div>
 
@@ -31,7 +31,9 @@
 
     <div class='setting-opts autoplay'>
       {{#liquid-bind enableAutoplay use='slideToggle' class='toggle-container' as |disableAutoplay|}}
-        <div class='toggle autoplay-toggle {{if disableAutoplay "inactive-toggle" ""}}' {{action 'toggleAutoplay' enableAutoplay}}>
+        <div
+          class="toggle autoplay-toggle {{if disableAutoplay 'inactive-toggle'}}"
+          {{action 'toggleAutoplay' enableAutoplay}}>
           <span class='switch'></span>
           <span class='label'>{{if disableAutoplay "OFF" "ON"}}</span>
         </div>
@@ -51,7 +53,7 @@
       dropdownClass='autoplay-dropdown'
       disabled=enableAutoplay
       onchange=(action 'selectAutoPlayPref') as |pref|}}
-      {{pref.name}}
+        {{pref.name}}
     {{/power-select}}
   </div>
 </div>

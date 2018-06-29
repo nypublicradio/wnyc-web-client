@@ -6,7 +6,7 @@
         <div class="text nudge-big">
           <h3 class="h5 aligncenter text--upper text--white text--spacing-sm">Featured Show</h3>
         </div>
-        {{show-tease show=model.featured featuredSpot=true trackingCategory="Shows A-Z"}}
+        {{show-tease show=model.featured featuredSpot=true}}
       </div>
     </div>
   </div>
@@ -42,7 +42,7 @@
      <ul class="list list--borderbottom">
       {{#each filteredShows as |show|}}
         <li class="list-item list-item--medium">
-           {{show-tease show=show trackingCategory=trackingCategory}} 
+           {{show-tease show=show}}
         </li>
       {{/each}}
     </ul>

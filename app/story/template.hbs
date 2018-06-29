@@ -51,7 +51,23 @@
               {{/if}}
             {{/if}}
 
-            {{header.share story=model.story via='WNYC' classNames='story-share-buttons'}}
+            {{#header.share story=model.story classNames='story-share-buttons' as |share|}}
+              {{#share.button
+                type='Facebook'
+                class="btn btn--circle btn--mq-graywhite"}}
+                <i class="fa fa-facebook"></i>
+              {{/share.button}}
+              {{#share.button
+                type='Twitter'
+                class="btn btn--circle btn--mq-graywhite"}}
+                <i class="fa fa-twitter"></i>
+              {{/share.button}}
+              {{#share.button
+                type='Email'
+                class="btn btn--circle btn--mq-graywhite"}}
+                <i class="fa fa-envelope"></i>
+              {{/share.button}}
+            {{/header.share}}
 
           {{/nypr-story/header-content}}
 
@@ -133,7 +149,6 @@
                              getComments=model.getComments
                              browserId=session.data.browserId
                              class=(if model.story.interactiveTemplate 'l-medium')
-                             onShowComments=(action 'onShowComments')
                            }}
         {{/if}}
       </article>

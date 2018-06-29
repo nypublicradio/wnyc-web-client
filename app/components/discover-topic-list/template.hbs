@@ -4,7 +4,11 @@
   valueProperty='url'
   tagName='div'
   onchange=(action 'onMultiselectChangeEvent') as |topic isSelected|}}
-  {{discover-topic title=topic.title url=topic.url isSelected=isSelected}}
+  {{discover-topic
+    title=topic.title
+    url=topic.url
+    isSelected=isSelected
+  }}
 
   {{! Adding this <hr> element and then doing a couple of nth-of-type selectors to
   display/hide them allows us to group the items in alternating groups of 3 and 4
@@ -14,9 +18,13 @@
 
 <div class="discover-topic-bubble-select-all">
 {{#if allSelected}}
-  <button class="discover-topic-bubble" href="#" {{action 'selectNone'}}>Clear All</button>
+  <button
+    class="discover-topic-bubble"
+    {{action 'selectNone'}}>Clear All</button>
 {{else}}
-  <button class="discover-topic-bubble" href="#" {{action 'selectAll'}}>Select All</button>
+  <button
+    class="discover-topic-bubble"
+    {{action 'selectAll'}}>Select All</button>
 {{/if}}
 </div>
 

@@ -9,8 +9,8 @@ const inflect = new Inflector(Inflector.defaultRules);
 
 export default Mixin.create({
   pageNumbers:  service(),
-  metrics:      service(),
   dataPipeline: service(),
+  dataLayer:    service('nypr-metrics/data-layer'),
 
   titleToken() {
     const channelType = get(this, 'channelType');
@@ -27,23 +27,9 @@ export default Mixin.create({
   afterModel(model) {
     let channelType = get(this, 'channelType')
     let { channel } = this.modelFor(channelType)
-    let channelTitle = get(channel, 'title');
-    let metrics = get(this, 'metrics');
     let dataPipeline = get(this, 'dataPipeline');
-    let nprVals = get(channel, 'nprAnalyticsDimensions');
 
-    // google analytics
-    metrics.trackEvent('GoogleAnalytics', {
-      category: `Viewed ${get(channel, 'listingObjectType').capitalize()}`,
-      action: channelTitle,
-    });
-
-    // NPR
-    metrics.trackPage('NprAnalytics', {
-      page: `/${get(this, 'listingSlug')}`,
-      title: channelTitle,
-      nprVals,
-    });
+    get(this, 'dataLayer').setForType(get(channel, 'itemType'), channel);
 
     // data pipeline
     dataPipeline.reportItemView({
@@ -80,7 +66,16 @@ export default Mixin.create({
       const navSlug = this._getNavSlug(channelType);
       this._scrollToOffset(channelType);
       this.transitionTo(`${channelType}.page`, navSlug ? `${navSlug}/${page}` : page);
-    }
+    },
+
+    willTransition() {
+      let channelType = get(this, 'channelType')
+      let { channel } = this.modelFor(channelType)
+      get(this, 'dataLayer').clearForType(get(channel, 'itemType'));
+
+      return true;
+    },
+
   },
 
   _getNavSlug(channelType) {

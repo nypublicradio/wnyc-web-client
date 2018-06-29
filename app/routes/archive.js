@@ -21,7 +21,9 @@ export default Route.extend({
       refreshModel: true
     }
   },
-  
+
+  titleToken: "Producer's Archive",
+
   model({ uslug, page, pageSize, ordering, year, month, day }) {
     let fields = 'item_type,slug,newsdate,segments,title,tease';
     let item_type = 'episode,article';

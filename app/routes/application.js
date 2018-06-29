@@ -1,10 +1,15 @@
+import DS from 'ember-data';
 import Route from '@ember/routing/route';
 import { get } from '@ember/object';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 import { inject as service } from '@ember/service';
+import { schedule } from '@ember/runloop';
+
+const DETAIL_ROUTES = new RegExp(/story|(show|article|series|tag|blog)-detail\./);
 
 export default Route.extend(ApplicationRouteMixin, {
-  metrics: service(),
+  dataLayer: service('nypr-metrics/data-layer'),
+  dataPipeline: service(),
   asyncWriter: service(),
   legacyLoader: service(),
   leaderboard: service(),
@@ -14,24 +19,46 @@ export default Route.extend(ApplicationRouteMixin, {
   store: service(),
   dj: service(),
 
-  title(tokens) {
-    if (tokens && tokens.length > 0) {
-      let lastToken = tokens.slice(-1);
-      return `${lastToken} | WNYC`;
-    } else {
-      return 'WNYC | New York Public Radio, Podcasts, Live Streaming Radio, News';
+  title(tokens = []) {
+    let siteName = 'WNYC';
+    let tagline = 'New York Public Radio, Podcasts, Live Streaming Radio, News';
+
+    // combine the first two items if the second item stats with `:`
+    if (tokens[1] && tokens[1].startsWith(':'))  {
+      tokens.splice(0, 2, `${tokens[0]}${tokens[1]}`);
     }
+
+    tokens.push(siteName);
+    if (tokens.length < 3) {
+      tokens.push(tagline);
+    }
+    let title = tokens.join(' | ');
+    get(this, 'dataLayer').setPageTitle(title);
+
+    if (!this.controller._wasModal) {
+      let route = this.router.currentRouteName;
+
+      schedule('afterRender', () => {
+        get(this, 'dataLayer').sendPageView();
+        if (!DETAIL_ROUTES.test(route) && !route.match(/loading/)) {
+          this.get('dataPipeline').reportItemView();
+        }
+      });
+    } else {
+      // reset
+      this.controller._wasModal = false;
+    }
+
+    return title;
   },
 
   beforeModel() {
-    let metrics = get(this, 'metrics');
-
     get(this, 'session').syncBrowserId()
       .then(id => get(this, 'dj').addBrowserId(id));
     get(this, 'session').staffAuth();
     get(this, 'currentUser').load();
 
-    metrics.identify('GoogleAnalytics', {isAuthenticated: false});
+    get(this, 'dataLayer').setLoggedIn(false);
 
     get(this, 'asyncWriter').install();
     get(this, 'leaderboard').install();
@@ -44,10 +71,8 @@ export default Route.extend(ApplicationRouteMixin, {
 
   actions: {
     error(error/*, transition*/) {
-      if (error && error.response) {
-        if (error.response.status === 404) {
-          this.transitionTo('missing');
-        }
+      if (error instanceof DS.NotFoundError) {
+        this.transitionTo('404', error.url);
       } else {
         /* eslint-disable */
         console.error(error);
@@ -55,8 +80,7 @@ export default Route.extend(ApplicationRouteMixin, {
       }
     },
     didTransition() {
-      this.controllerFor('application').set('error', null);
-      return true;
+      this.set('dataPipeline.currentReferrer', window.location.toString());
     },
     willTransition() {
       //close queue/history modal when we open a new page
@@ -79,11 +103,12 @@ export default Route.extend(ApplicationRouteMixin, {
 
   sessionAuthenticated() {
     this._super(...arguments);
-    get(this, 'metrics').identify('GoogleAnalytics', {isAuthenticated: true});
+    get(this, 'dataLayer').setLoggedIn(true);
     get(this, 'currentUser').load();
   },
 
   sessionInvalidated() {
+    get(this, 'dataLayer').setLoggedIn(false);
     if (this.get('session.noRefresh') === true) {
       this.set('session.noRefresh', false);
     } else {
