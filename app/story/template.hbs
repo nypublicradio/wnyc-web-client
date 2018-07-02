@@ -40,7 +40,8 @@
                     itemPK=model.story.slug
                     itemTitle=model.story.title
                     type="queue-button--storyheader"
-                    playContext="StoryHeader"}}
+                    itemShow=(or model.story.showTitle model.story.headers.brand.title)
+                    playContext="story-header"}}
 
                   {{#if (or model.story.audioMayDownload model.story.audioMayEmbed)}}
                     {{nypr-story/audio-options story=model.story}}
@@ -99,6 +100,7 @@
                     itemPK=row.segment.slug
                     itemTitle=row.segment.title
                     type="small-blue"
+                    itemShow=(or model.story.showTitle model.story.headers.brand.title)
                     playContext="segment-list"}}
                   </div>
                 {{/row.buttons}}
