@@ -7,7 +7,7 @@ module.exports = function(deployTarget) {
     },
 
     gzip: {
-      filePattern: '\*\*/\*.{js,css,ico,map,xml,txt,svg,eot,ttf,woff,woff2}'
+      filePattern: '**/*.{js,css,ico,map,xml,txt,svg,eot,ttf,woff,woff2}'
     },
 
     s3: {
