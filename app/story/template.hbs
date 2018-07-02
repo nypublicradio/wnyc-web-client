@@ -90,7 +90,7 @@
                 {{#row.buttons}}
                   <div class="btn-group">
                   {{listen-button
-                    playContext="story-list"
+                    playContext="segment-list"
                     itemPK=row.segment.slug
                     itemTitle=row.segment.title
                     itemShow=(or model.story.showTitle model.story.headers.brand.title)
@@ -99,7 +99,7 @@
                     itemPK=row.segment.slug
                     itemTitle=row.segment.title
                     type="small-blue"
-                    playContext="StoryList"}}
+                    playContext="segment-list"}}
                   </div>
                 {{/row.buttons}}
               {{else}}
