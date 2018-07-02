@@ -8,7 +8,7 @@ export default StreamModel.extend({
     let shareUrl = '';
 
     let entry = get(this, 'currentPlaylistItem.catalogEntry');
-    if (entry) {
+    if (entry && entry.composer) {
       shareText = `${entry.title} - ${entry.composer.name}`;
       shareUrl = 'http://www.wnyc.org/streams/' + get(this, 'slug');
     } else {
