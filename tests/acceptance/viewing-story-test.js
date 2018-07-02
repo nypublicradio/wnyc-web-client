@@ -129,6 +129,25 @@ module('Acceptance |  Story Detail Analytics', function(hooks) {
     await visit(`story/${story.slug}`);
   });
 
+  test('listen button on story page includes data-action and data-label values', async function(assert) {
+    let story = server.create('story', {showTitle: 'foo show'});
+    let segmentStory = server.create('story', 'withSegments', {showTitle: 'foo show'});
+
+    await visit(`story/${story.slug}`);
+
+    let listenButton = find('#storyHeader [data-test-selector=listen-button]');
+    assert.equal(listenButton.getAttribute('data-action'), 'Clicked Play/Pause On Demand');
+    assert.equal(listenButton.getAttribute('data-label'), `${story.title} | foo show`);
+
+    await visit(`story/${segmentStory.slug}`);
+
+    let segmentButtons = findAll('#segmentsList [data-test-selector=listen-button]');
+    segmentButtons.forEach((el, i) => {
+      assert.equal(el.getAttribute('data-action'), 'Clicked Play/Pause On Demand');
+      assert.equal(el.getAttribute('data-label'), `${segmentStory.segments[i].title} | foo show`);
+    });
+  });
+
   test('api request includes draft params', async function(assert) {
     assert.expect(4);
 

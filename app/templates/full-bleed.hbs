@@ -2,7 +2,7 @@
   {{#nypr-ui/hero gradient=true sticky=true class="full-bleed__hero" as |hero|}}
     {{#hero.top as |top|}}
       {{#top.left}}
-        {{#link-to 'index' class="full-bleed__logo-link"}}
+        {{#link-to 'index' class="full-bleed__logo-link gtm__click-tracking" data-action='Full Bleed WNYC logo' data-label=(concat s.title ' | ' s.showTitle)}}
           {{nypr-svg icon="left-arrow" className="full-bleed__back"}}
           {{nypr-svg icon="wnyc-logo" className="full-bleed__logo"}}
         {{/link-to}}

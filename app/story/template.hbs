@@ -54,17 +54,23 @@
             {{#header.share story=model.story classNames='story-share-buttons' as |share|}}
               {{#share.button
                 type='Facebook'
-                class="btn btn--circle btn--mq-graywhite"}}
+                class="btn btn--circle btn--mq-graywhite"
+                data-action='Share from Story Header'
+                data-label=(concat model.story.title ' | ' model.story.showTitle ' | Facebook')}}
                 <i class="fa fa-facebook"></i>
               {{/share.button}}
               {{#share.button
                 type='Twitter'
-                class="btn btn--circle btn--mq-graywhite"}}
+                class="btn btn--circle btn--mq-graywhite"
+                data-action='Share from Story Header'
+                data-label=(concat model.story.title ' | ' model.story.showTitle ' | Twitter')}}
                 <i class="fa fa-twitter"></i>
               {{/share.button}}
               {{#share.button
                 type='Email'
-                class="btn btn--circle btn--mq-graywhite"}}
+                class="btn btn--circle btn--mq-graywhite"
+                data-action='Share from Story Header'
+                data-label=(concat model.story.title ' | ' model.story.showTitle ' | Email')}}
                 <i class="fa fa-envelope"></i>
               {{/share.button}}
             {{/header.share}}

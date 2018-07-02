@@ -364,4 +364,28 @@ module('Acceptance | Listing Page | Analytics', function(hooks) {
 
     await visit('shows/foo');
   });
+
+  test('listen buttons in story teases include data-action and data-label values', async function(assert) {
+    let teaseList = server.createList('story', 5, {audioAvailable: true, showTitle: 'foo show'});
+    server.create('listing-page', {
+      id: 'shows/foo',
+      cmsPK: 123,
+      linkroll: [
+        {'nav-slug': 'episodes', title: 'Episodes'}
+      ],
+      apiResponse: server.create('api-response', {
+        id: 'shows/foo/episodes/1',
+        teaseList
+      })
+    });
+
+
+    await visit('shows/foo');
+
+    let listenButtons = findAll('.story-tease [data-test-selector=listen-button]');
+    listenButtons.forEach((el, i) => {
+      assert.equal(el.getAttribute('data-action'), 'Clicked Play/Pause On Demand');
+      assert.equal(el.getAttribute('data-label'), `${teaseList[i].title} | foo show`);
+    })
+  })
 });
