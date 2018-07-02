@@ -1,4 +1,4 @@
-import { currentURL } from '@ember/test-helpers';
+import { currentURL, findAll, click } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import { run } from '@ember/runloop';
@@ -86,14 +86,14 @@ module('Acceptance | queue', function(hooks) {
 
     let listenButtons = Array.from(findAll('.player-queue [data-test-selector=listen-button]'));
     listenButtons.forEach((el, i) => {
-      assert.equal(el.getAttribute('data-action'), 'Clicked Play/Pause On Demand');
+      assert.equal(el.getAttribute('data-action'), 'Clicked Play/Pause On Demand: queue');
       assert.equal(el.getAttribute('data-label'), `${stories[i].title} | foo show`);
     });
 
     await click('.tabbedlist-tab:last-child > button');
     listenButtons = Array.from(findAll('.player-history [data-test-selector=listen-button]'));
     listenButtons.reverse().forEach((el, i) => {
-      assert.equal(el.getAttribute('data-action'), 'Clicked Play/Pause On Demand');
+      assert.equal(el.getAttribute('data-action'), 'Clicked Play/Pause On Demand: history');
       assert.equal(el.getAttribute('data-label'), `${stories[i + 2].title} | foo show`);
     });
   });

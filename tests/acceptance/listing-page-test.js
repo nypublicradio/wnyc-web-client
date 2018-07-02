@@ -384,7 +384,7 @@ module('Acceptance | Listing Page | Analytics', function(hooks) {
 
     let listenButtons = findAll('.story-tease [data-test-selector=listen-button]');
     listenButtons.forEach((el, i) => {
-      assert.equal(el.getAttribute('data-action'), 'Clicked Play/Pause On Demand');
+      assert.equal(el.getAttribute('data-action'), 'Clicked Play/Pause On Demand: show-detail-page-list');
       assert.equal(el.getAttribute('data-label'), `${teaseList[i].title} | foo show`);
     })
   })
