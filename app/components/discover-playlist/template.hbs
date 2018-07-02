@@ -74,7 +74,8 @@
               isCurrentSound=(and (eq story.id currentPlaylistStoryPk) isPlaying)
               playContext="discover"
               class='playlist-play-indicator-button gtm__click-tracking'
-              data-action='Clicked Discover Item'
+              data-action='Discover'
+              data-label=(concat 'Clicked Playlist Item | ' story.title ' | ' story.showTitle)
               itemPK=story.id
               itemTitle=story.title
               itemShow=story.showTitle}}
