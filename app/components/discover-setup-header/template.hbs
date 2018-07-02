@@ -1,7 +1,7 @@
 <header class="discover-setup-header">
   <div class="discover-setup-header-action">
     {{#action-button
-      classNames='gtm__click-tracking-text'
+      classNames='gtm__click-tracking'
       data-action='Discover'
       click=(action 'back')
       icon="left-caret"
@@ -38,7 +38,7 @@
         lineWidth=2}}
     {{/if}}
     {{#action-button
-      classNames='gtm__click-tracking-text'
+      classNames='gtm__click-tracking'
       data-action='Discover'
       class=(if nextButtonEnabled 'mod-filled-red')
       click=(action 'next')

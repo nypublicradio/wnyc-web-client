@@ -19,12 +19,12 @@
           <div class="user-nav-popup">
             <ul class="user-nav-list">
               <li class="user-nav-listitem" {{action (mut isPopupOpen) false}}>
-                {{link-to 'Settings' 'settings' class='gtm__click-tracking-text' data-action='User Menu'}}
+                {{link-to 'Settings' 'settings' class='gtm__click-tracking' data-action='User Menu'}}
               </li>
               <li class="user-nav-listitem" {{action (mut isPopupOpen) false}}>
-                {{link-to 'Account' 'profile' class='gtm__click-tracking-text' data-action='User Menu'}}
+                {{link-to 'Account' 'profile' class='gtm__click-tracking' data-action='User Menu'}}
               </li>
-              <li class="user-nav-listitem"><a href="/" title="Log out" class="gtm__click-tracking-text" data-action="User Menu" {{action 'logout'}}>Log out</a></li>
+              <li class="user-nav-listitem"><a href="/" title="Log out" class="gtm__click-tracking" data-action="User Menu" {{action 'logout'}}>Log out</a></li>
             </ul>
           </div>
         {{/if}}
@@ -34,13 +34,13 @@
     <div class="user-nav-signup user-nav-link">
       <a href='/signup'
         title="Sign up"
-        class="gtm__click-tracking-text"
+        class="gtm__click-tracking"
         data-action="User Menu">Sign up</a>
     </div>
     <div class="user-nav-login user-nav-link">
       <a href='/login'
         title="Log in"
-        class="gtm__click-tracking-text"
+        class="gtm__click-tracking"
         data-action="User Menu">Log in</a>
     </div>
   {{/if}}
