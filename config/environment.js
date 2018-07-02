@@ -55,9 +55,6 @@ module.exports = function(environment) {
     siteName: 'WNYC',
     siteId: 1,
     clientSlug: 'wnyc_web',
-    // these are provided via a .env file or else by Django's EmberAdapter
-    // fall back to demo GA key
-
     googleAPIv3Key: process.env.GOOGLE_API_V3_KEY,
     discoverStation: "wnyc-v2",
     discoverAPIKey: "trident",
@@ -75,10 +72,7 @@ module.exports = function(environment) {
     platformEventsAPI: process.env.PLATFORM_EVENTS_SERVICE,
     gothamistStories: process.env.GOTHAMIST_STORIES,
     wnycDonateURL: 'https://pledge3.wnyc.org/epledge/main?ref=button-donate-header',
-    featureFlags: {
-      'discover': true,
-      'other-discover': process.env.OTHER_DISCOVER,
-    },
+    featureFlags: {},
     contentSecurityPolicy: {
       'connect-src': "'self' *.wnyc.net:* ws://*.wnyc.net:*",
       'style-src': "'self' 'unsafe-inline' *.wnyc.net:* *.wnyc.org cloud.typography.com fonts.googleapis.com www.google.com platform.twitter.com",
