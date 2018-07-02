@@ -2547,7 +2547,7 @@ ember-cli-autoprefixer@^0.8.1:
     broccoli-autoprefixer "^5.0.0"
     lodash "^4.0.0"
 
-ember-cli-babel@^5.0.0, ember-cli-babel@^5.1.3, ember-cli-babel@^5.1.6, ember-cli-babel@^5.1.7, ember-cli-babel@^6.0.0, ember-cli-babel@^6.0.0-beta.4, ember-cli-babel@^6.0.0-beta.7, ember-cli-babel@^6.1.0, ember-cli-babel@^6.10.0, ember-cli-babel@^6.11.0, ember-cli-babel@^6.3.0, ember-cli-babel@^6.6.0, ember-cli-babel@^6.7.2, ember-cli-babel@^6.8.0, ember-cli-babel@^6.8.1, ember-cli-babel@^6.8.2, ember-cli-babel@^6.9.0, ember-cli-babel@^6.9.2:
+ember-cli-babel@^5.0.0, ember-cli-babel@^5.1.6, ember-cli-babel@^5.1.7, ember-cli-babel@^6.0.0, ember-cli-babel@^6.0.0-beta.4, ember-cli-babel@^6.0.0-beta.7, ember-cli-babel@^6.1.0, ember-cli-babel@^6.10.0, ember-cli-babel@^6.11.0, ember-cli-babel@^6.3.0, ember-cli-babel@^6.6.0, ember-cli-babel@^6.7.2, ember-cli-babel@^6.8.0, ember-cli-babel@^6.8.1, ember-cli-babel@^6.8.2, ember-cli-babel@^6.9.0, ember-cli-babel@^6.9.2:
   version "6.12.0"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-6.12.0.tgz#3adcdbe1278da1fcd0b9038f1360cb4ac5d4414c"
   dependencies:
@@ -6731,9 +6731,9 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
-nypr-account-settings@>=0.1.0:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/nypr-account-settings/-/nypr-account-settings-0.1.3.tgz#c21ecb1a0d682fe69b22b9920c66d356392f54dc"
+nypr-account-settings@>=0.2.0-beta.1:
+  version "0.2.0-beta.2"
+  resolved "https://registry.yarnpkg.com/nypr-account-settings/-/nypr-account-settings-0.2.0-beta.2.tgz#aa77e3a3e55584ae1bf397af070568a0c221a0c6"
   dependencies:
     ember-changeset "^1.4.1"
     ember-changeset-validations "^1.2.11"
@@ -6753,8 +6753,8 @@ nypr-ads@>=0.1.0:
     ember-cli-htmlbars "^2.0.1"
 
 nypr-audio-services@>=0.4.0-beta.2:
-  version "0.4.0-beta.6"
-  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.4.0-beta.6.tgz#491540fe76ef734c2ecabb8415099a9bc7a09afe"
+  version "0.4.0-beta.7"
+  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.4.0-beta.7.tgz#bec7450301e1f79f0b6a76f09852c22e464b3239"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
@@ -6787,23 +6787,23 @@ nypr-auth@>=0.2.2:
     ember-simple-auth "^1.6.0"
 
 nypr-django-for-ember@>=0.3.0-beta.1:
-  version "0.3.0-beta.2"
-  resolved "https://registry.yarnpkg.com/nypr-django-for-ember/-/nypr-django-for-ember-0.3.0-beta.2.tgz#7645675d075c0e31c4fcd6c03236f0d6005f61cf"
+  version "0.3.0-beta.3"
+  resolved "https://registry.yarnpkg.com/nypr-django-for-ember/-/nypr-django-for-ember-0.3.0-beta.3.tgz#6b15f3ff5efa393253502fe929763b7caa292893"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
     ember-wormhole "^0.5.2"
 
 nypr-metrics@>=0.4.0-beta.1:
-  version "0.4.0-beta.3"
-  resolved "https://registry.yarnpkg.com/nypr-metrics/-/nypr-metrics-0.4.0-beta.3.tgz#1b9187a2b30c439f059369d1c48aadf25533841e"
+  version "0.4.0-beta.4"
+  resolved "https://registry.yarnpkg.com/nypr-metrics/-/nypr-metrics-0.4.0-beta.4.tgz#9658d55dee180a5e4ead743f0f9905e9a57315f8"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-get-config "^0.2.2"
 
 nypr-player@>=0.3.0-beta.1:
-  version "0.3.0-beta.4"
-  resolved "https://registry.yarnpkg.com/nypr-player/-/nypr-player-0.3.0-beta.4.tgz#d8aeff1bfac3c5c4df9aa53c91c63904f19df601"
+  version "0.3.0-beta.5"
+  resolved "https://registry.yarnpkg.com/nypr-player/-/nypr-player-0.3.0-beta.5.tgz#4df8d0609dcf596a95b1a774d7e4390dd99b1ad8"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
@@ -6814,8 +6814,8 @@ nypr-player@>=0.3.0-beta.1:
     nypr-ui ">=0.3.0-beta.1"
 
 nypr-publisher-lib@>=0.4.0-beta.1:
-  version "0.4.0-beta.6"
-  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.4.0-beta.6.tgz#6076a092d6ad6b6cad24a407f21d3fcd5746cb56"
+  version "0.4.0-beta.7"
+  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.4.0-beta.7.tgz#08c5501f1a9cda7fa53f099e62f7eec110203868"
   dependencies:
     broccoli-funnel "^2.0.1"
     broccoli-merge-trees "^2.0.0"
@@ -6832,8 +6832,8 @@ nypr-publisher-lib@>=0.4.0-beta.1:
     nypr-ui ">=0.3.0-beta.1"
 
 nypr-ui@>=0.3.0-beta.1:
-  version "0.3.0-beta.4"
-  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.3.0-beta.4.tgz#2e120fcf1b3a682b19665067a14a2f1da2e3fa66"
+  version "0.3.0-beta.5"
+  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.3.0-beta.5.tgz#42e7bce6556586027981b10eacca8d85b0bdbb59"
   dependencies:
     ember-basic-dropdown "0.34.0"
     ember-burger-menu "^3.1.0"
