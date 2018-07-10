@@ -27,7 +27,12 @@
 }
 
 .user-settings .ember-power-select-option {
-  padding: 0 20px;
+  padding: 0;
+
+  span { // to better trigger analyics events
+    padding: 0 20px;
+    display: block;
+  }
 }
 
 .user-settings .ember-power-select-trigger,

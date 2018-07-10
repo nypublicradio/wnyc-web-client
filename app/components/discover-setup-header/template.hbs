@@ -40,6 +40,7 @@
     {{#action-button
       classNames='gtm__click-tracking'
       data-action='Discover'
+      data-label=(concat nextButtonText ' in Discover')
       class=(if nextButtonEnabled 'mod-filled-red')
       click=(action 'next')
       icon=nextButtonIcon
