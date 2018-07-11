@@ -43,7 +43,7 @@ module('Acceptance | shows', function(hooks) {
     await visit('/shows');
 
     await fillIn(".shows-search .searchbox--shows input", "ra");
-    await triggerKeyEvent('.shows-search .searchbox--shows input', 'keyup', '65');
+    await triggerKeyEvent('.shows-search .searchbox--shows input', 'keyup', 65);
     //no longer expect 10 shows
     assert.notEqual(findAll('.shows-list li').length, 10, "filtering results in less than 10 shows");
 
@@ -60,7 +60,7 @@ module('Acceptance | shows', function(hooks) {
     server.create('bucket', {slug: 'wnyc-shows-featured'});
     await visit('/shows');
     await fillIn(".shows-search .searchbox--shows input", "Nonsense Message");
-    await triggerKeyEvent('.shows-search .searchbox--shows input', 'keyup', '13');
+    await triggerKeyEvent('.shows-search .searchbox--shows input', 'keyup', 13);
 
     assert.equal(find(".shows-list").textContent.trim(), "Sorry, but no matching shows were found. Try a different spelling or other words in the title of the show you're looking for. If you're looking for something other than a show name, try searching the rest of the website.", "No results message displays");
 

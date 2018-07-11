@@ -7,11 +7,25 @@
 
 {{#django-page page=model.page class='l-constrained'}}
 
-  {{#if media.isSmallOnly}}
-    {{#ember-wormhole to='stream-banner'}}
-      {{stream-banner stream=model.featuredStream}}
-    {{/ember-wormhole}}
-  {{/if}}
+  {{#ember-wormhole to='stream-banner'}}
+      {{#stream-banner background=background streams=streams as |currentStream banner|}}
+        {{#banner.header as |header|}}
+          {{component header.stationTitle}}
+          {{component header.dropdown}}
+        {{/banner.header}}
+
+        {{component banner.details}}
+
+        {{component banner.controls}}
+
+        {{#if (and currentStream.currentComposer.name currentStream.currentPiece)}}
+          {{#link-to 'playlist-daily' (query-params scheduleStation=currentStream.slug) class='stream-banner-recently link--blue'}}
+            Recently played
+            {{nypr-svg className="icon rotate-minus90" icon="caret-down"}}
+          {{/link-to}}
+        {{/if}}
+      {{/stream-banner}}
+  {{/ember-wormhole}}
 
   {{#ember-wormhole to='gothamist-row'}}
     {{#story-row as |row|}}

@@ -87,12 +87,12 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 @import 'story';
 @import 'story-card';
 @import 'story-row';
+@import 'stream-widget';
 
 // Required for ember-component-css
 
 // LEGACY CODE
 @import 'legacy/home-compat';
-@import 'legacy/stream-widget';
 @import 'legacy/weather';
 @import 'legacy/search';
 @import 'legacy/screen';
