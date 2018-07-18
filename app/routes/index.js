@@ -6,6 +6,7 @@ import rsvp from 'rsvp';
 import config from 'wnyc-web-client/config/environment';
 import fetch from 'fetch';
 import { beforeTeardown } from 'nypr-django-for-ember/utils/compat-hooks';
+import DS from 'ember-data';
 const { hash } = rsvp;
 
 const STREAM_BG = '/assets/img/backgrounds/streambanner.jpg';
@@ -47,7 +48,13 @@ export default Route.extend(PlayParamMixin, {
 
   setupController(controller) {
     this._super(...arguments);
-    let streams = this.store.findAll('stream', {reload: true})
+    // let streams = this.store.findAll('stream', {reload: true})
+    let streams = DS.PromiseArray.create({
+      promise: this.store.findAll('stream', {reload: true}).then(s => {
+        return s.filterBy('isWNYC').sortBy('sitePriority')
+        .concat(s.filterBy('isWQXR').sortBy('sitePriority')).uniq();
+      })
+    });
     controller.set('streams', streams);
     controller.set('background', STREAM_BG);
   }
