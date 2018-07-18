@@ -270,11 +270,20 @@ body.ember-application {
       color: $lightgray;
       font-weight: normal;
       font-size: 12px;
+      pointer-events: none;
     }
         
     .media {
       border-radius: 3px 3px 0 0;
-    }     
+
+      a {
+        display: block;
+
+        > * {
+          pointer-events: none;
+        }
+      }
+    }
   }
   
   @media screen and (min-width:800px) {    

@@ -4,6 +4,10 @@
   height: 100%;
   border: none;
 
+  > * {
+    pointer-events: none; // for analytics
+  }
+
   &:hover {
 
   }
