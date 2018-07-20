@@ -18,7 +18,10 @@ module.exports = function(defaults) {
     'mirage-support': {
       includeAll: true
     },
-    useWaypoints: true
+    useWaypoints: true,
+    'ember-cli-build': {
+      includePolyfill: true, // for ie 11 support
+    }
   });
 
   try {
