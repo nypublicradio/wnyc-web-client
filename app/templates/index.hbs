@@ -11,7 +11,9 @@
       {{#stream-banner background=background streams=streams as |currentStream banner|}}
         {{#banner.header as |header|}}
           {{component header.stationTitle}}
-          {{component header.dropdown}}
+          {{#header.dropdown as |stream|}}
+            {{stream.name}}
+          {{/header.dropdown}}
         {{/banner.header}}
 
         {{component banner.details}}
