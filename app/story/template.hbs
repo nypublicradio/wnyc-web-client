@@ -53,27 +53,29 @@
             {{/if}}
 
             {{#header.share story=model.story classNames='story-share-buttons' as |share|}}
+              {{#with model.story as |s|}}
               {{#share.button
                 type='Facebook'
                 class="btn btn--circle btn--mq-graywhite"
                 data-action='Share from Story Header'
-                data-label=(concat model.story.title ' | ' model.story.showTitle ' | Facebook')}}
+                data-label=(concat s.title ' | ' (or s.showTitle s.channelTitle) ' | Facebook')}}
                 <i class="fa fa-facebook"></i>
               {{/share.button}}
               {{#share.button
                 type='Twitter'
                 class="btn btn--circle btn--mq-graywhite"
                 data-action='Share from Story Header'
-                data-label=(concat model.story.title ' | ' model.story.showTitle ' | Twitter')}}
+                data-label=(concat s.title ' | ' (or s.showTitle s.channelTitle) ' | Twitter')}}
                 <i class="fa fa-twitter"></i>
               {{/share.button}}
               {{#share.button
                 type='Email'
                 class="btn btn--circle btn--mq-graywhite"
                 data-action='Share from Story Header'
-                data-label=(concat model.story.title ' | ' model.story.showTitle ' | Email')}}
+                data-label=(concat s.title ' | ' (or s.showTitle s.channelTitle) ' | Email')}}
                 <i class="fa fa-envelope"></i>
               {{/share.button}}
+              {{/with}}
             {{/header.share}}
 
           {{/nypr-story/header-content}}
@@ -94,13 +96,13 @@
                     playContext="segment-list"
                     itemPK=row.segment.slug
                     itemTitle=row.segment.title
-                    itemShow=(or model.story.showTitle model.story.headers.brand.title)
+                    itemShow=(or model.story.showTitle model.story.channelTitle)
                     type="blue-circle"}}
                   {{queue-button
                     itemPK=row.segment.slug
                     itemTitle=row.segment.title
                     type="small-blue"
-                    itemShow=(or model.story.showTitle model.story.headers.brand.title)
+                    itemShow=(or model.story.showTitle model.story.channelTitle)
                     playContext="segment-list"}}
                   </div>
                 {{/row.buttons}}
