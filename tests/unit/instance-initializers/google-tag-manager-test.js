@@ -1,6 +1,6 @@
 import Application from '@ember/application';
 
-import { initialize } from 'wnyc-web-client/instance-initializers/google-tag-manager.js';
+import { initialize } from 'wnyc-web-client/instance-initializers/google-tag-manager';
 import { module, test } from 'qunit';
 import destroyApp from '../../helpers/destroy-app';
 
