@@ -6700,8 +6700,8 @@ nypr-django-for-ember@>=0.3.0-beta.1:
     ember-wormhole "^0.5.2"
 
 nypr-metrics@>=0.4.0-beta.1:
-  version "0.4.0-beta.5"
-  resolved "https://registry.yarnpkg.com/nypr-metrics/-/nypr-metrics-0.4.0-beta.5.tgz#b9779402ba31acd3045d5f8cfc30455e64a23b8f"
+  version "0.4.0-beta.6"
+  resolved "https://registry.yarnpkg.com/nypr-metrics/-/nypr-metrics-0.4.0-beta.6.tgz#f1dd9f4e08cf060d2c525d952a4a1f260bab2faa"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-get-config "^0.2.2"
@@ -6737,8 +6737,8 @@ nypr-publisher-lib@>=0.4.0-beta.1:
     nypr-ui ">=0.3.0-beta.1"
 
 nypr-ui@>=0.3.0-beta.1:
-  version "0.3.0-beta.6"
-  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.3.0-beta.6.tgz#fe85358947b377270bcd126b12b716b4471a8428"
+  version "0.3.0-beta.7"
+  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.3.0-beta.7.tgz#d031b970868fe7347469370096fb084caeffdd57"
   dependencies:
     ember-basic-dropdown "0.34.0"
     ember-burger-menu "^3.1.0"
