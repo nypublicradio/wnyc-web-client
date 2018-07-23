@@ -123,7 +123,7 @@ module('Acceptance | discover returning user', function(hooks) {
   });
 
   skip('if find more returns no more items, the old queue is present and an error message is shown', async function(assert) {
-    let discoverPath = config.featureFlags['other-discover'] ? 'reco_proxy' : 'make_playlist';
+    let discoverPath = 'make_playlist';
     let session = currentSession();
     var secondRequestCalled = false;
     session.set('data.discover-excluded-story-ids', []);
@@ -159,7 +159,7 @@ module('Acceptance | discover returning user', function(hooks) {
 
 
   skip('if find more returns the same list of items, the old queue are displayed and an error message is shown', async function(assert) {
-    let discoverPath = config.featureFlags['other-discover'] ? 'reco_proxy' : 'make_playlist';
+    let discoverPath = 'make_playlist';
     let session = currentSession();
     var secondRequestCalled = false;
     session.set('data.discover-excluded-story-ids', []);
@@ -194,7 +194,7 @@ module('Acceptance | discover returning user', function(hooks) {
   });
 
   skip('if find more returns new items, the new items are displayed', async function(assert) {
-    let discoverPath = config.featureFlags['other-discover'] ? 'reco_proxy' : 'make_playlist';
+    let discoverPath = 'make_playlist';
     let session = currentSession();
     let secondRequestCalled = false;
     let thirdRequestCalled = false;

@@ -24,7 +24,6 @@ module('Acceptance | discover', function(hooks) {
   });
 
   skip('can visit discover from the home page', async function(assert) {
-    withFeature('discover');
     server.create('djangoPage', {id:'/'});
     await visit('/');
 
@@ -270,7 +269,6 @@ module('Acceptance | discover', function(hooks) {
   });
 
   skip('nav link sends you to start page', async function(assert) {
-    withFeature('discover');
     server.createList('discover-topic', 5);
     server.createList('show', 5);
     server.create('djangoPage', {id:'/'});

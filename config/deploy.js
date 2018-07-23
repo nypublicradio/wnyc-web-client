@@ -7,7 +7,7 @@ module.exports = function(deployTarget) {
     },
 
     gzip: {
-      filePattern: '\*\*/\*.{js,css,ico,map,xml,txt,svg,eot,ttf,woff,woff2}'
+      filePattern: '**/*.{js,css,ico,map,xml,txt,svg,eot,ttf,woff,woff2}'
     },
 
     s3: {
@@ -27,16 +27,6 @@ module.exports = function(deployTarget) {
       host: process.env.SSH_TUNNEL_HOST,
       dstHost: process.env.SSH_TUNNEL_DESTINATION_HOST,
       dstPort: process.env.SSH_TUNNEL_DESTINATION_PORT
-    },
-
-    sentry: {
-      publicUrl: process.env.FINGERPRINT_PREPEND_URL,
-      sentryUrl: 'https://sentry.wnyc.org',
-      sentryOrganizationSlug: 'sentry',
-      sentryProjectSlug: process.env.SENTRY_PROJECT,
-      sentryApiKey: process.env.SENTRY_EMBER_SOURCEMAPS_KEY,
-      enableRevisionTagging: false,
-      replaceFiles: true
     },
 
     'json-config': {

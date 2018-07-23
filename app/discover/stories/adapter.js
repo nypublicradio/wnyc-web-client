@@ -3,8 +3,7 @@ import DS from 'ember-data';
 import { inject as service } from '@ember/service';
 import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 
-const { featureFlags } = config;
-const path = featureFlags['other-discover'] ? 'reco_proxy' : 'make_playlist';
+const path = 'make_playlist';
 
 export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
   host: config.publisherAPI,

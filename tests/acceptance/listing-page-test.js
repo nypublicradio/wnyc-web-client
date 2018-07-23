@@ -336,7 +336,7 @@ module('Acceptance | Listing Page | Analytics', function(hooks) {
       apiResponse: server.create('api-response', { id: 'shows/foo/episodes/1' })
     });
 
-    assert.expect(2);
+    assert.expect(1);
 
     server.post(`${config.platformEventsAPI}/v1/events/viewed`, (schema, {requestBody}) => {
       let {
@@ -362,14 +362,10 @@ module('Acceptance | Listing Page | Analytics', function(hooks) {
       assert.deepEqual({cms_id, item_type, browser_id, client, external_referrer, referrer, url, site_id}, testObj, 'params match up');
     });
 
-    window.ga = this.spy();
-
     await visit('shows/foo');
-
-    assert.ok(window.ga.calledWith('npr.send'), 'npr.send called');
   });
 
-  test('listen buttons in story teases include data-story and data-show values', async function(assert) {
+  test('listen buttons in story teases include data-action and data-label values', async function(assert) {
     let teaseList = server.createList('story', 5, {audioAvailable: true, showTitle: 'foo show'});
     server.create('listing-page', {
       id: 'shows/foo',
@@ -388,8 +384,8 @@ module('Acceptance | Listing Page | Analytics', function(hooks) {
 
     let listenButtons = findAll('.story-tease [data-test-selector=listen-button]');
     listenButtons.forEach((el, i) => {
-      assert.equal(el.getAttribute('data-show'), 'foo show');
-      assert.equal(el.getAttribute('data-story'), teaseList[i].title);
+      assert.equal(el.getAttribute('data-action'), 'Clicked Play/Pause On Demand: show-detail-page-list');
+      assert.equal(el.getAttribute('data-label'), `${teaseList[i].title} | foo show`);
     })
   })
 });

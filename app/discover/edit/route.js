@@ -1,12 +1,10 @@
 import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
-import { get } from '@ember/object';
 
 export default Route.extend({
   session:       service(),
   discoverPrefs: service(),
   discoverQueue: service(),
-  metrics:       service(),
 
   redirect(model, transition) {
     if (transition.targetName === "discover.edit.index") {
@@ -47,12 +45,6 @@ export default Route.extend({
       if (error) {
         return;
       }
-
-      get(this, 'metrics').trackEvent('GoogleAnalytics', {
-        category: 'Discover',
-        action: 'Create Playlist in Discover',
-        label: 'Refresh Playlist'
-      });
 
       this.get('discoverPrefs').save();
       this.get('discoverQueue').emptyQueue();

@@ -28,7 +28,10 @@
         </a>
       {{/if}}
     {{else}}
-      <button class="discover-welcome-screen-button rounded-caps-button" {{action 'next'}}>
+      <button
+        class="discover-welcome-screen-button rounded-caps-button gtm__click-tracking"
+        data-action="Discover"
+        {{action 'next'}}>
         Get Started
       </button>
     {{/if}}

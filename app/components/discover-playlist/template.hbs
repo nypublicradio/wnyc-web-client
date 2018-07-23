@@ -14,7 +14,12 @@
 <div class="discover-playlist-content-container">
 {{discover-feedback-button}}
 <div class="discover-refresh-bar-container">
-  <button class="discover-refresh-bar" disabled={{findingMore}} {{action 'findMore'}}>
+  <button
+    class="discover-refresh-bar gtm__click-tracking"
+    data-action="Discover"
+    data-label="Refresh Playlist in Discover"
+    disabled={{findingMore}}
+    {{action 'findMore'}}>
     {{! firefox does not allow buttons as flex items }}
     <span>
       {{#if findingMore}}
@@ -44,7 +49,11 @@
       onDragStop="dragStopped"
     }}
 
-      <span class="discover-playlist-item-handle" data-story-id="{{story.id}}">
+      <span
+        class="discover-playlist-item-handle gtm__click-tracking"
+        data-action="Discover"
+        data-label="Moved Story | {{story.title}} | {{story.showTitle}}"
+        data-story-id="{{story.id}}">
         {{wnyc-svg icon="reorder"}}
       </span>
 
@@ -64,7 +73,9 @@
               type='red-hollow'
               isCurrentSound=(and (eq story.id currentPlaylistStoryPk) isPlaying)
               playContext="discover"
-              class="playlist-play-indicator-button"
+              class='playlist-play-indicator-button gtm__click-tracking'
+              data-action='Discover'
+              data-label=(concat 'Clicked Playlist Item | ' story.title ' | ' story.showTitle)
               itemPK=story.id
               itemTitle=story.title
               itemShow=story.showTitle}}
@@ -74,7 +85,12 @@
         {{discover-playlist-story-info story=story}}
       {{/discover-playlist-story}}
 
-      <span class="discover-playlist-item-delete" {{action 'removeItem' story}} data-story-id="{{story.id}}">
+      <span
+        class="discover-playlist-item-delete gtm__click-tracking"
+        data-action="Discover"
+        data-label="Removed Story from Discover | {{story.title}} | {{story.showTitle}}"
+        {{action 'removeItem' story}}
+        data-story-id="{{story.id}}">
         {{wnyc-svg icon="close"}}
       </span>
     {{/sortable-item}}

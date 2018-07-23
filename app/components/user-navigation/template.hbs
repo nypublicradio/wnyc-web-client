@@ -1,7 +1,7 @@
   {{#if isLoggedIn}}
     <div class="user-nav-logged-in">
-      {{#click-outside action=(action 'closePopup')}}
-        <button {{action 'togglePopup'}} class="user-nav-button">
+      {{#click-outside action=(action (mut isPopupOpen) false)}}
+        <button {{action (mut isPopupOpen) (not isPopupOpen)}} class="user-nav-button">
           <div class="user-nav-avatar">
           {{#if user.picture}}
             <img src={{user.picture}}>
@@ -18,13 +18,13 @@
           </div>
           <div class="user-nav-popup">
             <ul class="user-nav-list">
-              <li class="user-nav-listitem" {{action 'closePopupAndTrack' 'Settings'}}>
-                {{link-to 'Settings' 'settings'}}
+              <li class="user-nav-listitem" {{action (mut isPopupOpen) false}}>
+                {{link-to 'Settings' 'settings' class='gtm__click-tracking' data-action='User Menu'}}
               </li>
-              <li class="user-nav-listitem" {{action 'closePopupAndTrack' 'Account'}}>
-                {{link-to 'Account' 'profile'}}
+              <li class="user-nav-listitem" {{action (mut isPopupOpen) false}}>
+                {{link-to 'Account' 'profile' class='gtm__click-tracking' data-action='User Menu'}}
               </li>
-              <li class="user-nav-listitem"><a href="/" title="Log out" {{action 'logout'}}>Log out</a></li>
+              <li class="user-nav-listitem"><a href="/" title="Log out" class="gtm__click-tracking" data-action="User Menu" {{action 'logout'}}>Log out</a></li>
             </ul>
           </div>
         {{/if}}
@@ -34,13 +34,13 @@
     <div class="user-nav-signup user-nav-link">
       <a href='/signup'
         title="Sign up"
-        data-tracking-category="WNYC Menu"
-        data-tracking-action="Clicked Sign up">Sign up</a>
+        class="gtm__click-tracking"
+        data-action="User Menu">Sign up</a>
     </div>
     <div class="user-nav-login user-nav-link">
       <a href='/login'
         title="Log in"
-        data-tracking-category="WNYC Menu"
-        data-tracking-action="Clicked Log in">Log in</a>
+        class="gtm__click-tracking"
+        data-action="User Menu">Log in</a>
     </div>
   {{/if}}

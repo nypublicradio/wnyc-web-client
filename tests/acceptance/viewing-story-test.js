@@ -1,4 +1,4 @@
-import { waitFor, currentURL, find, findAll, visit } from '@ember/test-helpers';
+import { waitFor, currentURL, findAll, find, visit } from '@ember/test-helpers';
 import test from 'ember-sinon-qunit/test-support/test';
 import storyPage from 'wnyc-web-client/tests/pages/story';
 import config from 'wnyc-web-client/config/environment';
@@ -86,14 +86,8 @@ module('Acceptance | Story Donate URLs', function(hooks) {
 module('Acceptance |  Story Detail Analytics', function(hooks) {
   setupApplicationTest(hooks);
 
-  hooks.afterEach(function() {
-    delete window.ga;
-  });
-
   test('metrics properly reports story attrs', async function(assert) {
     let story = server.create('story');
-
-    assert.expect(2);
 
     server.post(`${config.platformEventsAPI}/v1/events/viewed`, (schema, {requestBody}) => {
       let {
@@ -117,14 +111,7 @@ module('Acceptance |  Story Detail Analytics', function(hooks) {
       assert.deepEqual({cms_id, item_type, browser_id, client, referrer, url, site_id}, testObj, 'params match up');
     });
 
-    window.ga = function(command) {
-      if (command === 'npr.send') {
-        assert.ok('called npr.send');
-      }
-    };
-
     await visit(`story/${story.slug}`);
-
   });
 
   test('story routes do dfp targeting', async function() /*assert*/{
@@ -142,22 +129,22 @@ module('Acceptance |  Story Detail Analytics', function(hooks) {
     await visit(`story/${story.slug}`);
   });
 
-  test('listen button on story page includes data-story and data-show values', async function(assert) {
+  test('listen button on story page includes data-action and data-label values', async function(assert) {
     let story = server.create('story', {showTitle: 'foo show'});
     let segmentStory = server.create('story', 'withSegments', {showTitle: 'foo show'});
 
     await visit(`story/${story.slug}`);
 
     let listenButton = find('#storyHeader [data-test-selector=listen-button]');
-    assert.equal(listenButton.getAttribute('data-show'), 'foo show');
-    assert.equal(listenButton.getAttribute('data-story'), story.title);
+    assert.equal(listenButton.getAttribute('data-action'), 'Clicked Play/Pause On Demand: story-header');
+    assert.equal(listenButton.getAttribute('data-label'), `${story.title} | foo show`);
 
     await visit(`story/${segmentStory.slug}`);
 
     let segmentButtons = findAll('#segmentsList [data-test-selector=listen-button]');
     segmentButtons.forEach((el, i) => {
-      assert.equal(el.getAttribute('data-show'), 'foo show');
-      assert.equal(el.getAttribute('data-story'), segmentStory.segments[i].title);
+      assert.equal(el.getAttribute('data-action'), 'Clicked Play/Pause On Demand: segment-list');
+      assert.equal(el.getAttribute('data-label'), `${segmentStory.segments[i].title} | foo show`);
     });
   });
 

@@ -52,7 +52,9 @@
       <h1>
         <span class="for-screenreaders">WNYC Navigation</span>
         <a href="/"
-          class="link--nodecor wnyc-logo-nav"
+          class="link--nodecor wnyc-logo-nav gtm__click-tracking"
+          data-action="Side Navigation"
+          data-label="logo"
           title="WNYC | New York Public Radio Home Page">
           {{wnyc-svg icon='logo-wnyc' className='icon--wnyc-logo-nav'}}
         </a>
@@ -71,14 +73,18 @@
               itemPK=preferredStream.slug
               itemTitle=preferredStream.name
               playContext='nav'
-              class='stream-launcher listen-button--stream'}}
+              data-action='Clicked Play/Pause Stream: nav'
+              data-label=preferredStream.name
+              class='stream-launcher gtm__click-tracking'}}
               <span>Listen Live</span>
             {{/listen-button}}
           {{else}}
             {{!-- This 'button' is a top nav item that looks like a link. it doesn't show an icon to reflect state --}}
             {{!-- So clicking will always trigger a play action (and not a pause), state is locked to 'is-paused'  --}}
             {{#listen-button
-              class='listen-button--stream'
+              class='gtm__click-tracking'
+              data-action='Clicked Play/Pause Stream: nav'
+              data-label=preferredStream.name
               type='vanilla'
               state='is-paused'
               itemPK=preferredStream.slug
@@ -90,31 +96,29 @@
         </li>
 
         {{#link-to 'stream' tagName='li' href=false class="list-item list-item--nav"}}
-          {{link-to 'All Streams' 'stream' class="inherit"}}
+          {{link-to 'All Streams' 'stream' class="inherit gtm__click-tracking" data-action="Side Navigation"}}
         {{/link-to}}
 
         {{#link-to 'schedule' current-when="schedule.date" tagName='li' href=false class="list-item list-item--nav"}}
-          {{link-to 'Schedule' 'schedule' class="inherit"}}
+          {{link-to 'Schedule' 'schedule' class="inherit gtm__click-tracking" data-action="Side Navigation"}}
         {{/link-to}}
 
         {{#link-to 'show' current-when="show show-detail" tagName="li" href=false class="list-item list-item--nav"}}
-          {{link-to 'Shows' 'show' class="inherit"}}
+          {{link-to 'Shows' 'show' class="inherit gtm__click-tracking" data-action="Side Navigation"}}
         {{/link-to}}
 
         {{#link-to 'topics' current-when='topics tag-detail' tagName='li' href=false class="list-item list-item--nav"}}
-          {{link-to 'Topics' 'topics' class="inherit"}}
+          {{link-to 'Topics' 'topics' class="inherit gtm__click-tracking" data-action="Side Navigation"}}
         {{/link-to}}
 
         {{#link-to 'discover.start' current-when="discover" tagName='li' href=false class="list-item list-item--nav"}}
-          {{#link-to 'discover.start' class="inherit"}}
-            Discover
-          {{/link-to}}
+          {{link-to 'Discover' 'discover.start' class="inherit gtm__click-tracking" data-action="Side Navigation"}}
         {{/link-to}}
 
         {{#unless media.isLargeAndUp}}
 
           {{#link-to 'djangorendered' 'search/' tagName='li' href=false class="list-item list-item--nav"}}
-            {{link-to 'Search' 'djangorendered' 'search/' class="inherit"}}
+            {{link-to 'Search' 'djangorendered' 'search/' class="inherit gtm__click-tracking" data-action="Side Navigation"}}
           {{/link-to}}
 
         {{/unless}}

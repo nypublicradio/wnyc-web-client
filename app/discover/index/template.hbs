@@ -20,9 +20,9 @@
     {{/if}}
   </div>
   <a href='/discover/edit'
-     class="discover-edit-playlist-link"
-     data-tracking-category='Discover'
-     data-tracking-action='Clicked Edit in Discover'>
+     class="discover-edit-playlist-link gtm__click-tracking"
+     data-action='Discover'
+     data-label='Clicked Edit in Discover'>
   {{#if isLoading}}
   {{animated-loading-icon
     width=34
@@ -49,7 +49,12 @@
     dotRadius=2
     lineWidth=2}}
   {{/if}}
-  <button {{action 'findMore'}} class="discover-playlist-find-more rounded-caps-button mod-hollow-blue" disabled={{findingMore}}>
+  <button
+    {{action 'findMore'}}
+    class="discover-playlist-find-more rounded-caps-button mod-hollow-blue gtm__click-tracking"
+    data-action="Discover"
+    data-label="Refresh Playlist in Discover"
+    disabled={{findingMore}}>
     Refresh Playlist
   </button>
 </div>

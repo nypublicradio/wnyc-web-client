@@ -7,11 +7,10 @@ export default StoryModel.extend({
     let title = get(this, 'twitterHeadline') || get(this, 'title');
     let parentTitle = get(this, 'headers.brand.title');
     let shareUrl = get(this, 'url');
-    let analyticsCode = get(this, 'analyticsCode') || '';
 
     let shareText = [parentTitle, title].filter(t => t).join(' - ');
     let via = get(this, 'twitterHandle') || 'WNYC';
 
-    return {shareText, shareUrl, analyticsCode, via};
+    return {shareText, shareUrl, via};
   })
 });

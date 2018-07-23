@@ -2,7 +2,7 @@
   {{#nypr-ui/hero gradient=true sticky=true class="full-bleed__hero" as |hero|}}
     {{#hero.top as |top|}}
       {{#top.left}}
-        {{#link-to 'index' class="full-bleed__logo-link gtm__click-tracking" data-action='Full Bleed WNYC logo' data-label=s.title}}
+        {{#link-to 'index' class="full-bleed__logo-link gtm__click-tracking" data-action='Full Bleed WNYC logo' data-label=(concat s.title ' | ' (or s.showTitle s.channelTitle))}}
           {{nypr-svg icon="left-arrow" className="full-bleed__back"}}
           {{nypr-svg icon="wnyc-logo" className="full-bleed__logo"}}
         {{/link-to}}
@@ -49,7 +49,7 @@
           itemPK=s.slug
           itemTitle=s.title
           itemShow=(or s.showTitle s.headers.brand.title)}}Listen {{s.audioDurationReadable}}&nbsp;{{/listen-button}}
-          
+
           {{#unless deviceIsIos}}
             <a href={{s.audio}} download={{s.title}} class="story__download-link" title='Download "{{s.title}}"'>{{nypr-svg icon="download"}} Download</a>
             <div class="story-embed__wrapper">

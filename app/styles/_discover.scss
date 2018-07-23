@@ -633,6 +633,10 @@ body.ember-application.discover {
   path {
     fill:white;
   }
+
+  * {
+    pointer-events: none;
+  }
 }
 
 
@@ -888,6 +892,10 @@ body.ember-application.discover {
     fill:$blue;
     stroke:$blue;
   }
+
+  * {
+    pointer-events: none;
+  }
 }
 
 .discover-playlist-story-title {
@@ -1040,6 +1048,10 @@ body.ember-application.discover {
   position:relative;
   cursor:pointer;
   input { display:none; }
+
+  * {
+    pointer-events: none;
+  }
 }
 
 .discover-show-selection-icon {
@@ -1155,6 +1167,10 @@ body.ember-application.discover .discover .rounded-caps-button {
     &:active {
       border-color:#FFF;
     }
+  }
+
+  * {
+    pointer-events: none; // for analytics consistency
   }
 }
 

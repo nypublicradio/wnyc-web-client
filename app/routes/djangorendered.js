@@ -1,4 +1,5 @@
-import ENV from 'wnyc-web-client/config/environment';
+import DS from 'ember-data';
+import config from 'wnyc-web-client/config/environment';
 import Route from '@ember/routing/route';
 import { get } from '@ember/object';
 import { inject as service } from '@ember/service';
@@ -12,17 +13,14 @@ export default Route.extend(/*PlayParamMixin,*/ {
     }
   },
 
-  metrics: service(),
   googleAds: service(),
 
   titleToken(model) {
-    return get(model, 'title');
-  },
-  title(tokens) {
-    if (tokens && tokens.length > 0) {
-      return tokens[0];
+    let title = get(model, 'title');
+    if (title) {
+      return title.split(' | ')[0];
     } else {
-      return 'WNYC | New York Public Radio, Podcasts, Live Streaming Radio, News';
+      return 'Not Found';
     }
   },
 
@@ -33,22 +31,20 @@ export default Route.extend(/*PlayParamMixin,*/ {
     upstream_url = upstream_url.replace(/\/*$/, '/');
 
     let qp = Object.keys(queryParams)
-      .filter(q => queryParams[q] && ENV.QP_WHITELIST.includes(q)).map(p => `${p}=${queryParams[p].replace(/\s/g, '%20')}`);
+      .filter(q => queryParams[q] && config.QP_WHITELIST.includes(q)).map(p => `${p}=${queryParams[p].replace(/\s/g, '%20')}`);
     if (qp.length) {
       upstream_url += `?${qp.join('&')}`;
     }
     return this.store.find('django-page', upstream_url)
-      .catch(e => retryFromServer(e, upstream_url));
+      .catch(e => {
+        if (e instanceof DS.NotFoundError) {
+          throw e;
+        }
+        retryFromServer(e, upstream_url)
+      });
   },
 
-  afterModel(page) {
-    let metrics = get(this, 'metrics');
-    let path = document.location.pathname; // e.g. '/shows/bl/'
-    let title = (get(page, 'title') || '').trim();
-    metrics.trackPage('NprAnalytics', {
-      page: path,
-      title
-    });
+  afterModel() {
     get(this, 'googleAds').doTargeting();
   },
 

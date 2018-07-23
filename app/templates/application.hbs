@@ -29,6 +29,8 @@
   {{#unless chromeDisabled}}
     <div class="l-fixed l-lowright">
     {{nypr-player/queue-button
+      class       = "gtm__click-tracking"
+      data-action = (if modal "Close Queue" "Open Queue")
       isFloating  = true
       queueLength = queue.items.length
       showModal   = (action 'showModal' 'queue-history')
@@ -39,22 +41,17 @@
   {{else}}
 
     {{#liquid-if integration.revealNotificationBar class='player-notification-wrapper'}}
-      {{#player-notification onDismiss=integration.onDismissNotification}}
+      {{#integration.notification}}
         {{player-notification/autoplay-message
           duration   = integration.currentSound.duration
           position   = integration.currentSound.position
           audioType  = integration.currentAudioType
           isLoggedIn = session.isAuthenticated
         }}
-      {{/player-notification}}
+      {{/integration.notification}}
     {{/liquid-if}}
 
     {{#nypr-player
-      onPlay           = integration.onPlay
-      onPause          = integration.onPause
-      onFastForward    = integration.onFastForward
-      onRewind         = integration.onRewind
-      onSetPosition    = integration.onSetPosition
       currentTitle     = integration.currentTitle
       backdropImageUrl = integration.backdropImageUrl
       storyTitle       = integration.storyTitle
@@ -64,6 +61,7 @@
         {{#content.for 'trackInfo'}}
           {{nypr-player-integration/track-info
             currentAudio    = integration.currentAudio
+            currentSound    = integration.currentSound
             showTitle       = integration.showTitle
             showUrl         = integration.showUrl
             storyTitle      = integration.storyTitle
@@ -75,23 +73,25 @@
           }}
 
           {{#unless hifi.isLoading}} {{! only show the share button when the audio has loaded}}
-            {{#if integration.currentAudio.shareMetadata}}
-
-                {{nypr-share-button
-                  shareText = integration.currentAudio.shareMetadata.shareText
-                  shareUrl  = integration.currentAudio.shareMetadata.shareUrl
-                  via       = 'WNYC'
-                  onShare   = (action 'trackShare' (hash
-                                story = integration.currentAudio
-                                type   = (if integration.isStream 'livestream' 'on_demand')
-                                playContext = "Player"
-                                shareText = integration.currentAudio.shareMetadata.shareText
-                                shareUrl = integration.currentAudio.shareMetadata.shareUrl
-                                analyticsCode = integration.currentAudio.shareMetadata.analyticsCode
-                                ))
-                  text   = "SHARE"}}
-
-            {{/if}}
+            {{#with (hash data=integration.currentAudio.shareMetadata story=integration.currentAudio) as |meta|}}
+              {{#nypr-share-button
+                text="SHARE"
+                shareUrl=meta.data.shareUrl
+                shareText=meta.data.shareText
+                data-action='Share from Player'
+                as |share|}}
+                {{share.button
+                  type='Facebook'
+                  data-label=(concat meta.story.title ' | ' meta.story.showTitle ' | Facebook')}}
+                {{share.button
+                  type='Twitter'
+                  via='WNYC'
+                  data-label=(concat meta.story.title ' | ' meta.story.showTitle ' | Twitter')}}
+                {{share.button
+                  type='Email'
+                  data-label=(concat meta.story.title ' | ' meta.story.showTitle ' | Email')}}
+              {{/nypr-share-button}}
+            {{/with}}
           {{/unless}}
         {{/content.for}}
 
@@ -107,6 +107,8 @@
         {{#content.for 'aux' as |args|}}
           {{args.queueButton
             queueLength = queue.items.length
+            class       = "gtm__click-tracking"
+            data-action = (if modal "Close Queue" "Open Queue")
             showModal   = (action 'showModal' 'queue-history')
             closeModal  = (action 'closeModal')
             isOpenModal = modal}}

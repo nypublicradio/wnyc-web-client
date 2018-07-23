@@ -104,7 +104,7 @@ export default function() {
   });
   this.get('/v3/chunks/:id/', 'chunk');
 
-  let discoverPath = config.featureFlags['other-discover'] ? 'reco_proxy' : 'make_playlist';
+  let discoverPath = 'make_playlist';
   this.get(`/v3/${discoverPath}`, 'discover-story');
 
   /*------------------------------------------------------------

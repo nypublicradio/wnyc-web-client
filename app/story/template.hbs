@@ -40,7 +40,8 @@
                     itemPK=model.story.slug
                     itemTitle=model.story.title
                     type="queue-button--storyheader"
-                    playContext="StoryHeader"}}
+                    itemShow=(or model.story.showTitle model.story.headers.brand.title)
+                    playContext="story-header"}}
 
                   {{#if (or model.story.audioMayDownload model.story.audioMayEmbed)}}
                     {{nypr-story/audio-options story=model.story}}
@@ -51,7 +52,31 @@
               {{/if}}
             {{/if}}
 
-            {{header.share story=model.story via='WNYC' classNames='story-share-buttons'}}
+            {{#header.share story=model.story classNames='story-share-buttons' as |share|}}
+              {{#with model.story as |s|}}
+              {{#share.button
+                type='Facebook'
+                class="btn btn--circle btn--mq-graywhite"
+                data-action='Share from Story Header'
+                data-label=(concat s.title ' | ' (or s.showTitle s.channelTitle) ' | Facebook')}}
+                <i class="fa fa-facebook"></i>
+              {{/share.button}}
+              {{#share.button
+                type='Twitter'
+                class="btn btn--circle btn--mq-graywhite"
+                data-action='Share from Story Header'
+                data-label=(concat s.title ' | ' (or s.showTitle s.channelTitle) ' | Twitter')}}
+                <i class="fa fa-twitter"></i>
+              {{/share.button}}
+              {{#share.button
+                type='Email'
+                class="btn btn--circle btn--mq-graywhite"
+                data-action='Share from Story Header'
+                data-label=(concat s.title ' | ' (or s.showTitle s.channelTitle) ' | Email')}}
+                <i class="fa fa-envelope"></i>
+              {{/share.button}}
+              {{/with}}
+            {{/header.share}}
 
           {{/nypr-story/header-content}}
 
@@ -68,16 +93,17 @@
                 {{#row.buttons}}
                   <div class="btn-group">
                   {{listen-button
-                    playContext="story-list"
+                    playContext="segment-list"
                     itemPK=row.segment.slug
                     itemTitle=row.segment.title
-                    itemShow=(or model.story.showTitle model.story.headers.brand.title)
+                    itemShow=(or model.story.showTitle model.story.channelTitle)
                     type="blue-circle"}}
                   {{queue-button
                     itemPK=row.segment.slug
                     itemTitle=row.segment.title
                     type="small-blue"
-                    playContext="StoryList"}}
+                    itemShow=(or model.story.showTitle model.story.channelTitle)
+                    playContext="segment-list"}}
                   </div>
                 {{/row.buttons}}
               {{else}}
@@ -133,7 +159,6 @@
                              getComments=model.getComments
                              browserId=session.data.browserId
                              class=(if model.story.interactiveTemplate 'l-medium')
-                             onShowComments=(action 'onShowComments')
                            }}
         {{/if}}
       </article>
