@@ -84,7 +84,7 @@
     "ember-sortable": "^1.11.2",
     "ember-source": "~3.0.0",
     "ember-truth-helpers": "^2.0.0",
-    "ember-waypoints": "nypublicradio/ember-waypoints",
+    "ember-waypoints": "nypublicradio/ember-waypoints#master",
     "ember-wormhole": "^0.5.4",
     "eslint-plugin-ember": "^5.0.0",
     "glob": "7.1.1",
@@ -102,7 +102,7 @@
     "nypr-metrics": "<0.1.0",
     "nypr-player": ">=0.2.0",
     "nypr-publisher-lib": ">=0.3.5",
-    "nypr-ui": ">=0.2.18",
+    "nypr-ui": "^0.2.19",
     "torii": "^0.10.1"
   },
   "ember-addon": {
@@ -122,7 +122,10 @@
     "nypr-django-for-ember": ">=0.2.0",
     "nypr-metrics": "<0.1.0",
     "nypr-publisher-lib": ">=0.3.5",
-    "nypr-ui": ">=0.2.18",
+    "nypr-ui": "^0.2.19",
+    "customizr": "Modernizr/customizr#e5890ed4b4fedb69da50ffbae39577788970d8ee"
+  },
+  "dependencies": {
     "customizr": "Modernizr/customizr#e5890ed4b4fedb69da50ffbae39577788970d8ee"
   }
 }
