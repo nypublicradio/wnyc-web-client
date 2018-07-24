@@ -16,8 +16,8 @@
     ember-try "^0.2.23"
 
 "@ember-decorators/babel-transforms@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@ember-decorators/babel-transforms/-/babel-transforms-2.0.1.tgz#75b668cfe996fa920c940ad723be015cddf904db"
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@ember-decorators/babel-transforms/-/babel-transforms-2.0.2.tgz#f73b4af32bc9aa2253cc8d2e72b984ab85e432db"
   dependencies:
     babel-plugin-transform-class-properties "^6.24.1"
     babel-plugin-transform-decorators-legacy "^1.3.4"
@@ -6666,8 +6666,8 @@ nypr-ads@>=0.1.0:
     ember-cli-htmlbars "^2.0.1"
 
 nypr-audio-services@>=0.4.0-beta.2:
-  version "0.4.0-beta.9"
-  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.4.0-beta.9.tgz#4d8aed2fb32f9466bef96c8e0596417b4ebbd804"
+  version "0.4.0-beta.10"
+  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.4.0-beta.10.tgz#64108041e4c9ffd886c5bbb7a82bb39439ef9357"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
@@ -6719,8 +6719,8 @@ nypr-player@>=0.3.0-beta.1:
     nypr-ui ">=0.3.0-beta.1"
 
 nypr-publisher-lib@>=0.4.0-beta.1:
-  version "0.4.0-beta.11"
-  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.4.0-beta.11.tgz#bfed53ba4852ac9f61fd74c4f128e3438b7a481d"
+  version "0.4.0-beta.12"
+  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.4.0-beta.12.tgz#18453abfab90d45887ed4daa3a06980ddfd8b967"
   dependencies:
     broccoli-funnel "^2.0.1"
     broccoli-merge-trees "^2.0.0"
