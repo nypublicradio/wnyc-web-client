@@ -67,7 +67,14 @@
 </div>
 
 {{#if disableModal}}
-  {{#nypr-account-modal title="Disable online account" closeAction=(action (mut disableModal) false) as |m|}}
+  {{#nypr-account-modal closeAction=(action (mut disableModal) false) as |m|}}
+    {{#m.header as |header|}}
+      {{header.title "Disable online account"}}
+      {{#header.button}}
+        {{nypr-svg icon='close'}}
+      {{/.header.button}}
+    {{/m.header}}
+
     {{#m.body}}
     <p>
       This will disable your online account, but will not impact your membership status.
@@ -107,7 +114,14 @@
 {{/if}}
 
 {{#if promptForPassword.isRunning}}
-  {{#nypr-account-modal title="Enter your Password" closeAction=(action 'endTask' 'promptForPassword') as |m|}}
+  {{#nypr-account-modal closeAction=(action 'endTask' 'promptForPassword') as |m|}}
+    {{#m.header as |header|}}
+      {{header.title "Enter your Password"}}
+      {{#header.button}}
+        {{nypr-svg icon='close'}}
+      {{/.header.button}}
+    {{/m.header}}
+
     <form {{action (perform verifyPassword) on='submit'}}>
     {{#m.body}}
       <p>
