@@ -73,7 +73,11 @@
           }}
 
           {{#unless hifi.isLoading}} {{! only show the share button when the audio has loaded}}
-            {{#with (hash data=integration.currentAudio.shareMetadata story=integration.currentAudio) as |meta|}}
+            {{#with (hash
+                data=integration.currentAudio.shareMetadata
+                story=integration.currentAudio
+                showTitle=(or integration.showTitle integration.currentAudio.channelTitle 'NPR Article'))
+              as |meta|}}
               {{#nypr-share-button
                 text="SHARE"
                 shareUrl=meta.data.shareUrl
@@ -82,14 +86,14 @@
                 as |share|}}
                 {{share.button
                   type='Facebook'
-                  data-label=(concat meta.story.title ' | ' meta.story.showTitle ' | Facebook')}}
+                  data-label=(concat meta.story.title ' | ' meta.showTitle ' | Facebook')}}
                 {{share.button
                   type='Twitter'
                   via='WNYC'
-                  data-label=(concat meta.story.title ' | ' meta.story.showTitle ' | Twitter')}}
+                  data-label=(concat meta.story.title ' | ' meta.showTitle ' | Twitter')}}
                 {{share.button
                   type='Email'
-                  data-label=(concat meta.story.title ' | ' meta.story.showTitle ' | Email')}}
+                  data-label=(concat meta.story.title ' | ' meta.showTitle ' | Email')}}
               {{/nypr-share-button}}
             {{/with}}
           {{/unless}}

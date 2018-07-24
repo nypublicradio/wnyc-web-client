@@ -58,21 +58,21 @@
                 type='Facebook'
                 class="btn btn--circle btn--mq-graywhite"
                 data-action='Share from Story Header'
-                data-label=(concat s.title ' | ' (or s.showTitle s.channelTitle) ' | Facebook')}}
+                data-label=(concat s.title ' | ' (or s.showTitle s.channelTitle 'NPR Article') ' | Facebook')}}
                 <i class="fa fa-facebook"></i>
               {{/share.button}}
               {{#share.button
                 type='Twitter'
                 class="btn btn--circle btn--mq-graywhite"
                 data-action='Share from Story Header'
-                data-label=(concat s.title ' | ' (or s.showTitle s.channelTitle) ' | Twitter')}}
+                data-label=(concat s.title ' | ' (or s.showTitle s.channelTitle 'NPR Article') ' | Twitter')}}
                 <i class="fa fa-twitter"></i>
               {{/share.button}}
               {{#share.button
                 type='Email'
                 class="btn btn--circle btn--mq-graywhite"
                 data-action='Share from Story Header'
-                data-label=(concat s.title ' | ' (or s.showTitle s.channelTitle) ' | Email')}}
+                data-label=(concat s.title ' | ' (or s.showTitle s.channelTitle 'NPR Article') ' | Email')}}
                 <i class="fa fa-envelope"></i>
               {{/share.button}}
               {{/with}}
@@ -96,13 +96,13 @@
                     playContext="segment-list"
                     itemPK=row.segment.slug
                     itemTitle=row.segment.title
-                    itemShow=(or model.story.showTitle model.story.channelTitle)
+                    itemShow=(or model.story.showTitle model.story.channelTitle 'NPR Article')
                     type="blue-circle"}}
                   {{queue-button
                     itemPK=row.segment.slug
                     itemTitle=row.segment.title
                     type="small-blue"
-                    itemShow=(or model.story.showTitle model.story.channelTitle)
+                    itemShow=(or model.story.showTitle model.story.channelTitle 'NPR Article')
                     playContext="segment-list"}}
                   </div>
                 {{/row.buttons}}
