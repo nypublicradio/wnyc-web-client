@@ -6666,8 +6666,8 @@ nypr-ads@>=0.1.0:
     ember-cli-htmlbars "^2.0.1"
 
 nypr-audio-services@>=0.4.0-beta.2:
-  version "0.4.0-beta.8"
-  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.4.0-beta.8.tgz#a45c889bc45f1929b753c544beef75526f1766ae"
+  version "0.4.0-beta.9"
+  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.4.0-beta.9.tgz#4d8aed2fb32f9466bef96c8e0596417b4ebbd804"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
