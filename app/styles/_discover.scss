@@ -299,6 +299,7 @@ body.ember-application.discover {
     display: flex;
     justify-content: center;
     align-items: center;
+    pointer-events: none;
   }
 
   > span > .animated-loading-icon {
