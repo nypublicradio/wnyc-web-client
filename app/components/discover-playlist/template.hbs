@@ -78,7 +78,7 @@
               data-label=(concat 'Clicked Playlist Item | ' story.title ' | ' story.showTitle)
               itemPK=story.id
               itemTitle=story.title
-              itemShow=story.showTitle}}
+              itemShow=(or story.showTitle story.channelTitle)}}
           {{/if}}
         </div>
 

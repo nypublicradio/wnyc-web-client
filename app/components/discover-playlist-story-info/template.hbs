@@ -19,7 +19,7 @@
     <a
       class="discover-playlist-story-summary-action-link gtm__click-tracking {{if showSummary 'is-shown'}}"
       data-action="Discover"
-      data-label="{{if showSummary 'Collapsed' 'Expanded'}} Summary | {{story.title}} | {{story.showTitle}}"
+      data-label="{{if showSummary 'Collapsed' 'Expanded'}} Summary | {{story.title}} | {{or story.showTitle story.channelTitle}}"
       {{action "toggleSummary"}}>
       Summary
       {{wnyc-svg icon="arrow-dropdown"}}
