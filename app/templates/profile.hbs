@@ -70,7 +70,7 @@
   {{#nypr-account-modal closeAction=(action (mut disableModal) false) as |m|}}
     {{#m.header as |header|}}
       {{header.title "Disable online account"}}
-      {{#header.button}}
+      {{#header.button class="gtm__click-tracking" data-action="Personal Info" data-label="Cancel Disable Account"}}
         {{nypr-svg icon='close'}}
       {{/header.button}}
     {{/m.header}}
