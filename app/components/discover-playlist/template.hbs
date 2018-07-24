@@ -52,7 +52,7 @@
       <span
         class="discover-playlist-item-handle gtm__click-tracking"
         data-action="Discover"
-        data-label="Moved Story | {{story.title}} | {{story.showTitle}}"
+        data-label="Moved Story | {{story.title}} | {{or story.showTitle story.channelTitle 'NPR Article'}}"
         data-story-id="{{story.id}}">
         {{wnyc-svg icon="reorder"}}
       </span>
@@ -75,10 +75,10 @@
               playContext="discover"
               class='playlist-play-indicator-button gtm__click-tracking'
               data-action='Discover'
-              data-label=(concat 'Clicked Playlist Item | ' story.title ' | ' story.showTitle)
+              data-label=(concat 'Clicked Playlist Item | ' story.title ' | ' (or story.showTitle story.channelTitle 'NPR Article'))
               itemPK=story.id
               itemTitle=story.title
-              itemShow=(or story.showTitle story.channelTitle)}}
+              itemShow=(or story.showTitle story.channelTitle 'NPR Article')}}
           {{/if}}
         </div>
 
@@ -88,7 +88,7 @@
       <span
         class="discover-playlist-item-delete gtm__click-tracking"
         data-action="Discover"
-        data-label="Removed Story from Discover | {{story.title}} | {{story.showTitle}}"
+        data-label="Removed Story from Discover | {{story.title}} | {{or story.showTitle story.channelTitle 'NPR Article'}}"
         {{action 'removeItem' story}}
         data-story-id="{{story.id}}">
         {{wnyc-svg icon="close"}}

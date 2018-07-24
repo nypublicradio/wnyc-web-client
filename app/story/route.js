@@ -16,7 +16,7 @@ export default Route.extend(PlayParamMixin, {
   titleToken({ story }) {
     return [
       get(story, 'title'),
-      get(story, 'showTitle') || get(story, 'channelTitle') || 'NPR Article?'
+      get(story, 'showTitle') || get(story, 'channelTitle') || 'NPR Article'
     ]
   },
   model({ slug }, { queryParams }) {
