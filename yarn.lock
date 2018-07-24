@@ -6700,8 +6700,8 @@ nypr-django-for-ember@>=0.3.0-beta.1:
     ember-wormhole "^0.5.2"
 
 nypr-metrics@>=0.4.0-beta.1:
-  version "0.4.0-beta.7"
-  resolved "https://registry.yarnpkg.com/nypr-metrics/-/nypr-metrics-0.4.0-beta.7.tgz#41c069754dd0c03b0ca7070c11f9c338f2f9f379"
+  version "0.4.0-beta.8"
+  resolved "https://registry.yarnpkg.com/nypr-metrics/-/nypr-metrics-0.4.0-beta.8.tgz#afaa77d71ffb0da9b9ac73bf7c9ba49513433994"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-get-config "^0.2.2"
