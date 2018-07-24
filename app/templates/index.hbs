@@ -18,7 +18,17 @@
 
         {{component banner.details}}
 
-        {{component banner.controls}}
+        {{#banner.controls}}
+          {{#listen-button
+            class='stream-banner-listenbutton nudge'
+            data-action="Clicked Play/Pause Stream: stream-banner"
+            data-label=currentStream.name
+            type='blue-boss'
+            itemPK=currentStream.slug
+            itemTitle=currentStream.name}}
+            Listen Live
+          {{/listen-button}}
+        {{/banner.controls}}
 
         {{#if (and currentStream.currentComposer.name currentStream.currentPiece)}}
           {{#link-to 'playlist-daily' (query-params scheduleStation=currentStream.slug) class='stream-banner-recently link--blue'}}
