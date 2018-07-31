@@ -19,7 +19,7 @@ module.exports = function(defaults) {
       includeAll: true
     },
     useWaypoints: true,
-    'ember-cli-build': {
+    'ember-cli-babel': {
       includePolyfill: true, // for ie 11 support
     }
   });
