@@ -48,7 +48,7 @@
           type='white-hollow-block'
           itemPK=s.slug
           itemTitle=s.title
-          itemShow=(or s.showTitle s.headers.brand.title)}}Listen {{s.audioDurationReadable}}&nbsp;{{/listen-button}}
+          itemShow=(or s.showTitle s.channelTitle 'NPR Article')}}Listen {{s.audioDurationReadable}}&nbsp;{{/listen-button}}
 
           {{#unless deviceIsIos}}
             <a href={{s.audio}} download={{s.title}} class="story__download-link" title='Download "{{s.title}}"'>{{nypr-svg icon="download"}} Download</a>
