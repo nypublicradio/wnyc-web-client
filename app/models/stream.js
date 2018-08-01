@@ -17,6 +17,6 @@ export default StreamModel.extend({
       shareUrl = get(this, 'currentShow.url');
     }
 
-    return ({shareText, shareUrl});
+    return ({shareText, shareUrl, via});
   }),
 })
