@@ -3583,8 +3583,7 @@ ember-waypoints@nypublicradio/ember-waypoints#afffe72:
   version "0.1.0"
   resolved "https://codeload.github.com/nypublicradio/ember-waypoints/tar.gz/afffe721c401a6b784640d59a73a9ed4451e7248"
   dependencies:
-    ember-cli-babel "^6.6.0"
-    waypoints "^4.0.1"
+    ember-cli-babel "^5.1.3"
 
 ember-weakmap@^3.0.0:
   version "3.2.0"
@@ -6718,9 +6717,9 @@ nypr-player@>=0.3.0:
     ember-moment "^7.4.1"
     nypr-ui ">=0.3.0"
 
-nypr-publisher-lib@>=0.4.0:
+nypr-publisher-lib@nypublicradio/nypr-publisher-lib#bugfix/audio-may-stream-listen-button:
   version "0.4.0"
-  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.4.0.tgz#4858c9890a6c9e78df12f63e80b0bea6f1a9ed60"
+  resolved "https://codeload.github.com/nypublicradio/nypr-publisher-lib/tar.gz/32e1ada297c885b7c1c4325672fdf71bf6f3f92a"
   dependencies:
     broccoli-funnel "^2.0.1"
     broccoli-merge-trees "^2.0.0"
