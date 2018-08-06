@@ -38,6 +38,7 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 @import 'nypr-account-modal';
 @import "nypr-audio-services";
 @import "nypr-publisher-lib";
+@import "recaptcha";
 
 @import 'box';
 @import 'text';
