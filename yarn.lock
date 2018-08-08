@@ -6643,9 +6643,9 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
-nypr-account-settings@>=0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/nypr-account-settings/-/nypr-account-settings-0.2.0.tgz#aa6ef39d184d1d11daef1b7b9428d2036779ffcd"
+nypr-account-settings@>=0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/nypr-account-settings/-/nypr-account-settings-0.2.2.tgz#d6d7a859d1a6b54c75e1412634a430c0a5f10080"
   dependencies:
     ember-changeset "^1.4.1"
     ember-changeset-validations "^1.2.11"
@@ -6682,9 +6682,9 @@ nypr-audio-services@>=0.4.0:
     nypr-metrics ">=0.4.0"
     nypr-ui ">=0.3.0"
 
-nypr-auth@>=0.2.0, nypr-auth@>=0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/nypr-auth/-/nypr-auth-0.2.2.tgz#ac671c85ee0cb77314b69a5bee3e98a62df689c6"
+nypr-auth@>=0.2.0, nypr-auth@>=0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/nypr-auth/-/nypr-auth-0.2.3.tgz#23a8aa09d827d9c5459be94bdee79e98c169d658"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-get-config "^0.2.2"
