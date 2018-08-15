@@ -52,7 +52,7 @@
           data-label=story.title as |card|}}
           {{card.image width=300 src=(make-https story.thumbnail_300)}}
           {{#card.body}}
-            {{story.title}}
+            {{{story.title}}}
             {{nypr-svg icon="popout-icon" className="popout-icon"}}
           {{/card.body}}
         {{/story-card}}
