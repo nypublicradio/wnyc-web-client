@@ -107,6 +107,8 @@ export default function() {
   let discoverPath = 'make_playlist';
   this.get(`/v3/${discoverPath}`, 'discover-story');
 
+  this.get('/v3/chunks/election-promo/', {content: 'election chunk content'});
+
   /*------------------------------------------------------------
     identity management (account) endpoints
   --------------------------------------------------------------*/
