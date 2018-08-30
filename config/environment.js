@@ -74,6 +74,8 @@ module.exports = function(environment) {
     publisherAPI: process.env.PUBLISHER_API,
     platformEventsAPI: process.env.PLATFORM_EVENTS_SERVICE,
     gothamistStories: process.env.GOTHAMIST_STORIES,
+
+    optInAPI: process.env.OPT_IN_API,
     wnycDonateURL: 'https://pledge3.wnyc.org/epledge/main?ref=button-donate-header',
     featureFlags: {},
     contentSecurityPolicy: {
