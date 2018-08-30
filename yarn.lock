@@ -7173,7 +7173,7 @@ nypr-django-for-ember@>=0.3.0:
 
 nypr-election-countdown@nypublicradio/nypr-election-countdown#master:
   version "0.1.8"
-  resolved "https://codeload.github.com/nypublicradio/nypr-election-countdown/tar.gz/6f3d67dace27002e0aa513e04c36f661e970e18a"
+  resolved "https://codeload.github.com/nypublicradio/nypr-election-countdown/tar.gz/17335be66014adf7fbbd2b3188f73b19193b0013"
   dependencies:
     "@fortawesome/ember-fontawesome" "^0.1.2"
     "@fortawesome/free-brands-svg-icons" "^5.2.0"
