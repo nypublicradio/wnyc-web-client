@@ -16,6 +16,10 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 }
 
 @import "election-countdown/election-countdown-promo";
+.election-promo {
+  margin-top: -24px;
+  margin-bottom: 24px;
+}
 
 @import "pod-styles";
 
