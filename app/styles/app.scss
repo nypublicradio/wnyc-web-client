@@ -14,6 +14,9 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 #ember-testing {
   transform: translateZ(0);
 }
+
+@import "election-countdown/election-countdown-promo";
+
 @import "pod-styles";
 
 @import "nypr-ui";
