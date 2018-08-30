@@ -3,6 +3,7 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { reads } from '@ember/object/computed';
 import { get } from '@ember/object';
+import config from '../config/environment';
 
 export default Controller.extend({
   dj             : service(),
@@ -18,6 +19,9 @@ export default Controller.extend({
   showPlayer: reads('dj.showPlayer'),
 
   isHomepage: match('currentRouteName', /^index(_loading)?$/),
+
+  mailchimpEndpoint: `${config.optInAPI}/mailchimp`,
+  politicsBriefNewsletter: config.politicsBriefNewsletter,
 
   actions: {
 

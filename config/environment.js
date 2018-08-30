@@ -76,6 +76,9 @@ module.exports = function(environment) {
     gothamistStories: process.env.GOTHAMIST_STORIES,
 
     optInAPI: process.env.OPT_IN_API,
+    // POLITICS BRIEF NEWSLETTER ID
+    politicsBriefNewsletter: 'f6eba6a538',
+
     wnycDonateURL: 'https://pledge3.wnyc.org/epledge/main?ref=button-donate-header',
     featureFlags: {},
     contentSecurityPolicy: {
