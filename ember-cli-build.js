@@ -21,7 +21,12 @@ module.exports = function(defaults) {
     useWaypoints: true,
     'ember-cli-babel': {
       includePolyfill: true, // for ie 11 support
-    }
+    },
+    sassOptions: {
+      includePaths: [
+        'node_modules/include-media/dist',
+      ]
+    },
   });
 
   try {

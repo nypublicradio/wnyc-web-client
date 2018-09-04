@@ -25,6 +25,9 @@ module.exports = function(environment) {
     'ember-cli-mirage': {
       autostart: true // https://github.com/samselikoff/ember-cli-mirage/blob/master/CHANGELOG.md#how-it-works-in-different-types-of-tests
     },
+    moment: {
+      includeTimezone: 'all',
+    },
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -71,6 +74,11 @@ module.exports = function(environment) {
     publisherAPI: process.env.PUBLISHER_API,
     platformEventsAPI: process.env.PLATFORM_EVENTS_SERVICE,
     gothamistStories: process.env.GOTHAMIST_STORIES,
+
+    optInAPI: process.env.OPT_IN_API,
+    // POLITICS BRIEF NEWSLETTER ID
+    politicsBriefNewsletter: 'f6eba6a538',
+
     wnycDonateURL: 'https://pledge3.wnyc.org/epledge/main?ref=button-donate-header',
     featureFlags: {},
     contentSecurityPolicy: {
