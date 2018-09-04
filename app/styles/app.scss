@@ -21,6 +21,12 @@ body:not(.simplified_wrapper):not(.container_stripped) {
   margin-bottom: 24px;
 }
 
+.election-promo__top-copy a:hover {
+  opacity: 0.8;
+  text-decoration: none;
+  border-bottom-color: rgba(0, 0, 0, 0);
+}
+
 @import "pod-styles";
 
 @import "nypr-ui";
