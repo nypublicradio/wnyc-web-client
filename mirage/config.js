@@ -107,7 +107,7 @@ export default function() {
   let discoverPath = 'make_playlist';
   this.get(`/v3/${discoverPath}`, 'discover-story');
 
-  this.get('/v3/chunks/election-promo/', () => {
+  this.get('/v3/chunks/election-promo/', (server) => {
     return server.create('chunk', {slug: 'election-promo', content: 'election promo content'});
   });
 
@@ -310,6 +310,21 @@ export default function() {
       return new Response(200, {}, {data: {success: true}});
     } else {
       return new Response(200, {}, {data: {success: false}});
+    }
+  });
+
+  this.post(`${config.optInAPI}/mailchimp`, function() {
+    return {
+      email_address: "email@example.com",
+      status: "subscribed",
+      list_id: "a1b2c3"
+    }
+  });
+  this.post(`${config.optInAPI}/mobile-commons`, function() {
+    return {
+      campaign_id: "1",
+      opt_in_path_id: "12345",
+      phone_number: "212-555-0101"
     }
   });
 }

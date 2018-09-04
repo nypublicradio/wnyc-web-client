@@ -7171,9 +7171,9 @@ nypr-django-for-ember@>=0.3.0:
     ember-cli-htmlbars "^2.0.1"
     ember-wormhole "^0.5.2"
 
-nypr-election-countdown@nypublicradio/nypr-election-countdown#master:
-  version "0.1.8"
-  resolved "https://codeload.github.com/nypublicradio/nypr-election-countdown/tar.gz/17335be66014adf7fbbd2b3188f73b19193b0013"
+nypr-election-countdown@>=0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/nypr-election-countdown/-/nypr-election-countdown-0.2.2.tgz#45d998d1ff64cac8ee4e3337962314acc05d2c0a"
   dependencies:
     "@fortawesome/ember-fontawesome" "^0.1.2"
     "@fortawesome/free-brands-svg-icons" "^5.2.0"
