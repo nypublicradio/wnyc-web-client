@@ -3782,8 +3782,7 @@ ember-waypoints@nypublicradio/ember-waypoints#afffe72:
   version "0.1.0"
   resolved "https://codeload.github.com/nypublicradio/ember-waypoints/tar.gz/afffe721c401a6b784640d59a73a9ed4451e7248"
   dependencies:
-    ember-cli-babel "^6.6.0"
-    waypoints "^4.0.1"
+    ember-cli-babel "^5.1.3"
 
 ember-weakmap@^3.0.0:
   version "3.2.0"
@@ -7209,9 +7208,9 @@ nypr-player@>=0.3.0:
     ember-moment "^7.4.1"
     nypr-ui ">=0.3.0"
 
-nypr-publisher-lib@>=0.4.1:
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.4.1.tgz#965c80ac5a2d888d1c055fb4446f2a7dfb37dad8"
+nypr-publisher-lib@>=0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.4.2.tgz#97208aaab25ab25c19b98a324d6a642f43d29a58"
   dependencies:
     broccoli-funnel "^2.0.1"
     broccoli-merge-trees "^2.0.0"
@@ -7227,9 +7226,9 @@ nypr-publisher-lib@>=0.4.1:
     nypr-django-for-ember ">=0.3.0"
     nypr-ui ">=0.3.0"
 
-nypr-publisher-lib@>=0.4.2:
+nypr-publisher-lib@nypublicradio/nypr-publisher-lib#feature/jj-live-wnyc:
   version "0.4.2"
-  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.4.2.tgz#97208aaab25ab25c19b98a324d6a642f43d29a58"
+  resolved "https://codeload.github.com/nypublicradio/nypr-publisher-lib/tar.gz/e43dcfe01c06460adef7804adfe5f6fca1562343"
   dependencies:
     broccoli-funnel "^2.0.1"
     broccoli-merge-trees "^2.0.0"
