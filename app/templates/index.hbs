@@ -31,7 +31,7 @@
         {{/banner.controls}}
 
         {{#if (and currentStream.currentComposer.name currentStream.currentPiece)}}
-          {{#link-to 'playlist-daily' (query-params scheduleStation=currentStream.slug) class='stream-banner-recently link--blue'}}
+          {{#link-to 'playlist' (query-params scheduleStation=currentStream.slug) class='stream-banner-recently link--blue'}}
             Recently played
             {{nypr-svg className="icon rotate-minus90" icon="caret-down"}}
           {{/link-to}}
