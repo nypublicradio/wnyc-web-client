@@ -102,7 +102,7 @@
     "nypr-election-countdown": ">=0.2.6",
     "nypr-metrics": ">=0.4.0",
     "nypr-player": ">=0.3.0",
-    "nypr-publisher-lib": ">=0.4.1",
+    "nypr-publisher-lib": "^0.4.3",
     "nypr-ui": ">=0.3.0",
     "torii": "^0.10.1"
   },
