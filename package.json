@@ -99,11 +99,11 @@
     "nypr-audio-services": ">=0.4.0",
     "nypr-auth": ">=0.2.3",
     "nypr-django-for-ember": ">=0.3.0",
-    "nypr-election-countdown": ">=0.2.4",
+    "nypr-election-countdown": "nypublicradio/nypr-election-countdown#kate/RT-1042-promo",
     "nypr-metrics": ">=0.4.0",
     "nypr-player": ">=0.3.0",
     "nypr-publisher-lib": ">=0.4.1",
-    "nypr-ui": ">=0.3.0",
+    "nypr-ui": "nypublicradio/nypr-ui#kate/right-arrow",
     "torii": "^0.10.1"
   },
   "ember-addon": {

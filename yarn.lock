@@ -7171,9 +7171,9 @@ nypr-django-for-ember@>=0.3.0:
     ember-cli-htmlbars "^2.0.1"
     ember-wormhole "^0.5.2"
 
-nypr-election-countdown@>=0.2.4:
+nypr-election-countdown@nypublicradio/nypr-election-countdown#kate/RT-1042-promo:
   version "0.2.4"
-  resolved "https://registry.yarnpkg.com/nypr-election-countdown/-/nypr-election-countdown-0.2.4.tgz#0e2b89bffed8e008abb6a20755629f29498d8a4e"
+  resolved "https://codeload.github.com/nypublicradio/nypr-election-countdown/tar.gz/35f8b20ec450604d5233098b9b538867267bca49"
   dependencies:
     "@fortawesome/ember-fontawesome" "^0.1.2"
     "@fortawesome/free-brands-svg-icons" "^5.2.0"
@@ -7248,6 +7248,24 @@ nypr-publisher-lib@>=0.4.2:
 nypr-ui@>=0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.3.0.tgz#76e4eb992ef28ab24d29ca8314f0fad7d8134af4"
+  dependencies:
+    ember-basic-dropdown "0.34.0"
+    ember-burger-menu "^3.1.0"
+    ember-cli-babel "^6.8.0"
+    ember-cli-htmlbars "^2.0.1"
+    ember-cli-htmlbars-inline-precompile "^1.0.0"
+    ember-cli-sass "^7.1.7"
+    ember-click-outside "0.1.11"
+    ember-composable-helpers "2.0.3"
+    ember-cookies "^0.3.0"
+    ember-holygrail-layout "^0.3.0"
+    ember-power-select "^1.9.2"
+    ivy-tabs "^3.3.0"
+    waypoints "^4.0.1"
+
+nypr-ui@nypublicradio/nypr-ui#kate/right-arrow:
+  version "0.4.0"
+  resolved "https://codeload.github.com/nypublicradio/nypr-ui/tar.gz/a3b791de94f61112035921f4fdec8004d8d01b02"
   dependencies:
     ember-basic-dropdown "0.34.0"
     ember-burger-menu "^3.1.0"
