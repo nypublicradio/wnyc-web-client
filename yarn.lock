@@ -7173,7 +7173,7 @@ nypr-django-for-ember@>=0.3.0:
 
 nypr-election-countdown@nypublicradio/nypr-election-countdown#kate/RT-1042-promo:
   version "0.2.4"
-  resolved "https://codeload.github.com/nypublicradio/nypr-election-countdown/tar.gz/7d5c6110e8a24b52bcdc1e161a93662b4ee7367c"
+  resolved "https://codeload.github.com/nypublicradio/nypr-election-countdown/tar.gz/b9e9901da6913201669561d245078ff211718729"
   dependencies:
     "@fortawesome/ember-fontawesome" "^0.1.2"
     "@fortawesome/free-brands-svg-icons" "^5.2.0"
