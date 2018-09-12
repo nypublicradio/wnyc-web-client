@@ -77,7 +77,7 @@ module.exports = function(environment) {
 
     optInAPI: process.env.OPT_IN_API,
     // POLITICS BRIEF NEWSLETTER ID
-    politicsBriefNewsletter: 'f6eba6a538',
+    politicsBriefNewsletter: process.env.ELECTION_NEWSLETTER_ID || '058457038f',
 
     wnycDonateURL: 'https://pledge3.wnyc.org/epledge/main?ref=button-donate-header',
     featureFlags: {},
