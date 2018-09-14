@@ -19,6 +19,10 @@ body:not(.simplified_wrapper):not(.container_stripped) {
 .election-promo {
   margin-top: -24px;
   margin-bottom: 24px;
+
+  a:focus {
+    border: none;
+  }
 }
 
 .election-promo__top-copy a:hover {
