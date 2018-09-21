@@ -26,5 +26,5 @@
 }
 
 .stream-banner .ember-basic-dropdown-content {
-    z-index: 1111;
+    z-index: $zIndex--persistent-player;
 }
