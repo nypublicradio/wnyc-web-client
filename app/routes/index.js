@@ -23,7 +23,7 @@ export default Route.extend(PlayParamMixin, {
     let gothamist = fetch(config.gothamistStories)
       .then(r => r.json()).then(({entries = []}) => entries.slice(0, 5))
       .catch(() => []);
-      
+
     return hash({page, featuredStream, gothamist});
   },
   afterModel() {
@@ -42,7 +42,7 @@ export default Route.extend(PlayParamMixin, {
     this._super(...arguments);
     let streams = DS.PromiseArray.create({
       promise: this.store.findAll('stream', {reload: true}).then(s => {
-        return s.filterBy('isWNYC').sortBy('sitePriority')
+        return s.filterBy('liveWNYC').sortBy('sitePriority')
         .concat(s.filterBy('isWQXR').sortBy('sitePriority')).uniq();
       })
     });

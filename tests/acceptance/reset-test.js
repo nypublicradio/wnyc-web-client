@@ -102,7 +102,7 @@ module('Acceptance | reset', function(hooks) {
 
   test('visiting /reset and getting a server error when submitting the form', async function(assert) {
     server.post(`${config.authAPI}/v1/confirm/password-reset`, () => {
-      return new Response(500);
+      return new Response(500, {}, {});
     });
 
     await visit(resetUrlWithEmailAndConfirmation);
