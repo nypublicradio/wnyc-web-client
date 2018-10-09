@@ -12,6 +12,7 @@ module('Acceptance | data layer', function(hooks) {
 
     let showListingPage = server.create('listing-page', {
       id: 'shows/foo',
+      slug: 'foo',
       cmsPK: 500,
       listingObjectType: 'show',
       apiResponse: server.create('api-response', { id: 'shows/foo/recent_stories/1' }),
@@ -20,6 +21,7 @@ module('Acceptance | data layer', function(hooks) {
     let seriesListingPage = server.create('listing-page', {
       id: 'series/foo',
       cmsPK: 600,
+      slug: 'foo',
       listingObjectType: 'series',
       apiResponse: server.create('api-response', { id: 'series/foo/recent_stories/1' }),
     });
@@ -27,6 +29,7 @@ module('Acceptance | data layer', function(hooks) {
     let articleChannelListingPage = server.create('listing-page', {
       id: 'articles/foo',
       cmsPK: 800,
+      slug: 'foo',
       listingObjectType: 'articlechannel',
       apiResponse: server.create('api-response', { id: 'articles/foo/recent_stories/1' }),
     });
@@ -34,6 +37,7 @@ module('Acceptance | data layer', function(hooks) {
     let tagListingPage = server.create('listing-page', {
       id: 'tags/foo',
       cmsPK: 1000,
+      slug: 'foo',
       listingObjectType: 'tag',
       apiResponse: server.create('api-response', { id: 'tags/foo/recent_stories/1' }),
     });
@@ -50,6 +54,7 @@ module('Acceptance | data layer', function(hooks) {
       'Viewed Has Audio': '0',
       'Viewed Story Word Count': 'none',
       'Viewed NPR ID': 'none',
+      'Viewed Container Slug': showListingPage.slug,
     }), 'correct values for show');
 
     await visit('/series/foo');
@@ -64,6 +69,7 @@ module('Acceptance | data layer', function(hooks) {
       'Viewed Has Audio': '0',
       'Viewed Story Word Count': 'none',
       'Viewed NPR ID': 'none',
+      'Viewed Container Slug': showListingPage.slug,
     }), 'correct values for series');
 
     await visit('/articles/foo');
@@ -78,6 +84,7 @@ module('Acceptance | data layer', function(hooks) {
       'Viewed Has Audio': '0',
       'Viewed Story Word Count': 'none',
       'Viewed NPR ID': 'none',
+      'Viewed Container Slug': showListingPage.slug,
     }), 'correct values for article channels');
 
     await visit('/tags/foo');
@@ -92,6 +99,7 @@ module('Acceptance | data layer', function(hooks) {
       'Viewed Has Audio': '0',
       'Viewed Story Word Count': 'none',
       'Viewed NPR ID': 'none',
+      'Viewed Container Slug': showListingPage.slug,
     }), 'correct values for tags');
   });
 
@@ -105,13 +113,15 @@ module('Acceptance | data layer', function(hooks) {
       template: 'default',
       series: [{title: 'Buz Series'}, {title: 'Baz Series'}],
       nprAnalyticsDimensions: [...new Array(4),'news', ...new Array(2), '1', null, true, null, null, 150, '5'],
-      tags: ['politics', 'entertainment']
+      tags: ['politics', 'entertainment'],
+      show: 'test-show-slug'
     });
 
     await visit(`story/${story.slug}`);
 
     assert.deepEqual(layerSpy.getCall(1).args[0], {
       'Viewed Authors': 'Foo, Bar',
+      'Viewed Container Slug': 'test-show-slug',
       'Viewed Date Published': story.newsdate,
       'Viewed Show Title': story.showTitle,
       'Viewed Story Title': story.title,
@@ -124,10 +134,11 @@ module('Acceptance | data layer', function(hooks) {
       'Viewed Org ID': '1',
       'Viewed Has Audio': true,
       'Viewed Story Word Count': 150,
-      'Viewed NPR ID': '5'
+      'Viewed NPR ID': '5',
     });
     assert.ok(layerSpy.calledWith({
       'Viewed Authors': 'Foo, Bar',
+      'Viewed Container Slug': 'test-show-slug',
       'Viewed Date Published': story.newsdate,
       'Viewed Show Title': story.showTitle,
       'Viewed Story Title': story.title,

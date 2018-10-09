@@ -99,7 +99,7 @@
     "nypr-auth": ">=0.2.3",
     "nypr-django-for-ember": ">=0.3.0",
     "nypr-election-countdown": ">=0.2.6",
-    "nypr-metrics": ">=0.4.0",
+    "nypr-metrics": "~0.5.1",
     "nypr-player": ">=0.3.0",
     "nypr-publisher-lib": "^0.4.3",
     "nypr-ui": ">=0.3.0",
@@ -117,5 +117,8 @@
   "resolutions": {
     "customizr": "Modernizr/customizr#e5890ed4b4fedb69da50ffbae39577788970d8ee",
     "ember-cli-babel": "^6.6.0"
+  },
+  "dependencies": {
+    "broccoli-funnel": "^2.0.1"
   }
 }
