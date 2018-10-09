@@ -20,24 +20,24 @@ module('Acceptance | data layer', function(hooks) {
 
     let seriesListingPage = server.create('listing-page', {
       id: 'series/foo',
-      cmsPK: 600,
       slug: 'foo',
+      cmsPK: 600,
       listingObjectType: 'series',
       apiResponse: server.create('api-response', { id: 'series/foo/recent_stories/1' }),
     });
 
     let articleChannelListingPage = server.create('listing-page', {
       id: 'articles/foo',
-      cmsPK: 800,
       slug: 'foo',
+      cmsPK: 800,
       listingObjectType: 'articlechannel',
       apiResponse: server.create('api-response', { id: 'articles/foo/recent_stories/1' }),
     });
 
     let tagListingPage = server.create('listing-page', {
       id: 'tags/foo',
-      cmsPK: 1000,
       slug: 'foo',
+      cmsPK: 1000,
       listingObjectType: 'tag',
       apiResponse: server.create('api-response', { id: 'tags/foo/recent_stories/1' }),
     });
