@@ -102,7 +102,7 @@
     "nypr-metrics": ">=0.4.0",
     "nypr-player": ">=0.3.0",
     "nypr-publisher-lib": "^0.4.3",
-    "nypr-ui": ">=0.3.0",
+    "nypr-ui": "nypublicradio/nypr-ui#bkammin/GT-593_no_new_tab_when_sharing_via_email",
     "torii": "^0.10.1"
   },
   "ember-addon": {
