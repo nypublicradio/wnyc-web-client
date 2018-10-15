@@ -107,7 +107,8 @@ module.exports = function(environment) {
       enabled: environment === 'production',
       forceSSL: true
     },
-    googleTagManager: process.env.GOOGLE_TAG_MANAGER_ID || 'GTM-PM94N2'
+    googleTagManager: process.env.GOOGLE_TAG_MANAGER_ID || 'GTM-PM94N2',
+    googleDFPPrefix: process.env.GOOGLE_DFP_PREFIX || '/6483581/'
   };
 
   if (environment === 'development') {

@@ -6,7 +6,7 @@ const Router = EmberRouter.extend({
   session:      service(),
   location: config.locationType,
   rootURL: config.rootURL,
-  
+
   willTransition(oldInfos, newInfos, transition) {
     this._super(...arguments);
     if (!['login', 'signup', 'validate', 'forgot', 'reset', 'set-password'].includes(transition.targetName)) {
