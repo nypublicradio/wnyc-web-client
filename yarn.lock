@@ -7443,7 +7443,25 @@ nypr-ads@>=0.1.0:
 
 nypr-audio-services@>=0.4.0, nypr-audio-services@^0.5.0:
   version "0.5.0"
-  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.5.0.tgz#4f38153310b9dfb94c5edf37eb3a936677149365"
+  resolved "https://codeload.github.com/nypublicradio/nypr-audio-services/tar.gz/e2e02788fe5aa51eeccacbbf306f75941e7b6ac7"
+  dependencies:
+    ember-cli-babel "^6.6.0"
+    ember-cli-htmlbars "^2.0.1"
+    ember-cli-htmlbars-inline-precompile "^1.0.0"
+    ember-cli-sass "^7.0.0"
+    ember-diff-attrs "^0.2.1"
+    ember-fetch "^3.3.0"
+    ember-get-config "^0.2.2"
+    ember-hifi "^1.11.1"
+    ember-responsive "^3.0.0-beta.3"
+    ember-simple-auth "^1.3.0"
+    liquid-fire "^0.29.1"
+    nypr-metrics "^0.5.0"
+    nypr-ui "^0.4.0"
+
+nypr-audio-services@>=0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.5.1.tgz#a6ed9b0061c56625b69dd348369b1b35c3150e35"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
