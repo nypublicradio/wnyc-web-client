@@ -7441,9 +7441,9 @@ nypr-ads@>=0.1.0:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
 
-nypr-audio-services@>=0.4.0, nypr-audio-services@^0.5.0:
+nypr-audio-services@>=0.4.0, nypr-audio-services@^0.5.0, nypr-audio-services@nypublicradio/nypr-audio-services#feature/stream-banner-show-episode-link:
   version "0.5.0"
-  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.5.0.tgz#4f38153310b9dfb94c5edf37eb3a936677149365"
+  resolved "https://codeload.github.com/nypublicradio/nypr-audio-services/tar.gz/e2e02788fe5aa51eeccacbbf306f75941e7b6ac7"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
