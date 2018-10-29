@@ -8557,9 +8557,9 @@ nypr-auth@>=0.2.0, nypr-auth@>=0.2.3:
     ember-simple-auth "^1.6.0"
 
 nypr-countdown@^0.1.0:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/nypr-countdown/-/nypr-countdown-0.1.1.tgz#dedbcf4be4318e19862cf3921b88ba870e6f2492"
-  integrity sha512-LbrVvWKuVmhgTiQzy1iFHbJ5eEoQdg3V9yvuR3Zo+02cyAm6ju9djk5i0B/ixmwCWItrEKH6lzISuDQfyjO8qA==
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/nypr-countdown/-/nypr-countdown-0.1.2.tgz#4582f2f00abc914fa69a5b273122e54bf5ea7a43"
+  integrity sha512-BwxK3/zdRrlWTxbSK/IRy8Vt1I+xVRoN4okkmIQcpK9J3rY53A7In0AP7++bxhyxf8/GAFWJL7SYGBi/2j2ypQ==
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
@@ -8574,10 +8574,10 @@ nypr-django-for-ember@>=0.3.0, nypr-django-for-ember@^0.4.0:
     ember-cli-htmlbars "^2.0.1"
     ember-wormhole "^0.5.2"
 
-nypr-election-countdown@>=0.2.10:
-  version "0.2.10"
-  resolved "https://registry.yarnpkg.com/nypr-election-countdown/-/nypr-election-countdown-0.2.10.tgz#4093d0c66471aa0676a1447f6b689ff6c07a8eec"
-  integrity sha512-zufS+WGuFLnIty7gstzcPaGXkcjVIT7p7gHCqi7i7rH1XnwRNT/1cKsG6rVx/VfVk6uIj4seE3h7A1qUnb9tQg==
+nypr-election-countdown@>=0.2.11:
+  version "0.2.11"
+  resolved "https://registry.yarnpkg.com/nypr-election-countdown/-/nypr-election-countdown-0.2.11.tgz#6ec1c78864fbc63f33e4ea6508fa58ec5e3749eb"
+  integrity sha512-MZLlPRmfiAMgBR5syZFeu/NqM3mCvGtl18QKeehE8gh7F6c3PzbwgJxAhL3TzoTXhK3OFsFraKY4r4LEiYMwJw==
   dependencies:
     "@fortawesome/ember-fontawesome" "^0.1.2"
     "@fortawesome/free-brands-svg-icons" "^5.2.0"
