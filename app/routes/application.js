@@ -21,7 +21,7 @@ export default Route.extend(ApplicationRouteMixin, {
 
   title(tokens = []) {
     let siteName = 'WNYC';
-    let tagline = 'Boo York Pumpkin Afradio, Podcasts, Live Streaming Radio, News';
+    let tagline = 'New York Public Radio, Podcasts, Live Streaming Radio, News';
 
     // combine the first two items if the second item stats with `:`
     if (tokens[1] && tokens[1].startsWith(':'))  {
