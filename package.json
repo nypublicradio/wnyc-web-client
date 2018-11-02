@@ -98,7 +98,7 @@
     "nypr-audio-services": ">=0.5.1",
     "nypr-auth": ">=0.2.3",
     "nypr-django-for-ember": ">=0.3.0",
-    "nypr-election-countdown": ">=0.2.11",
+    "nypr-election-countdown": "^0.2.12",
     "nypr-metrics": "~0.5.1",
     "nypr-player": ">=0.3.0",
     "nypr-publisher-lib": "^0.4.3",
