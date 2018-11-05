@@ -8574,10 +8574,10 @@ nypr-django-for-ember@>=0.3.0, nypr-django-for-ember@^0.4.0:
     ember-cli-htmlbars "^2.0.1"
     ember-wormhole "^0.5.2"
 
-nypr-election-countdown@>=0.2.11:
-  version "0.2.11"
-  resolved "https://registry.yarnpkg.com/nypr-election-countdown/-/nypr-election-countdown-0.2.11.tgz#6ec1c78864fbc63f33e4ea6508fa58ec5e3749eb"
-  integrity sha512-MZLlPRmfiAMgBR5syZFeu/NqM3mCvGtl18QKeehE8gh7F6c3PzbwgJxAhL3TzoTXhK3OFsFraKY4r4LEiYMwJw==
+nypr-election-countdown@^0.2.12:
+  version "0.2.12"
+  resolved "https://registry.yarnpkg.com/nypr-election-countdown/-/nypr-election-countdown-0.2.12.tgz#102d384fc979de814275d582a3471092e65c3b85"
+  integrity sha512-4Kb1sgw9S2eQAmlLLRg6LUQa2R5dl+w7Bp4uw87iVoAvhPhfKZMAR2VMshMpihbfVDzGEEogteBs1wHbKY+oEQ==
   dependencies:
     "@fortawesome/ember-fontawesome" "^0.1.2"
     "@fortawesome/free-brands-svg-icons" "^5.2.0"
@@ -8593,6 +8593,7 @@ nypr-election-countdown@>=0.2.11:
     moment-timezone "^0.5.20"
     nypr-countdown "^0.1.0"
     nypr-publisher-lib ">=0.4.2"
+    nypr-ui "^0.4.2"
 
 nypr-metrics@^0.5.0, nypr-metrics@~0.5.1:
   version "0.5.1"
@@ -8653,7 +8654,7 @@ nypr-publisher-lib@^0.4.3:
     nypr-django-for-ember ">=0.3.0"
     nypr-ui ">=0.3.0"
 
-nypr-ui@>=0.3.0, nypr-ui@^0.4.0:
+nypr-ui@>=0.3.0, nypr-ui@^0.4.0, nypr-ui@^0.4.2:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.4.2.tgz#2378126a14761bc625676d20a1e3f94f3a3885d6"
   integrity sha512-N1YsPViHfnMWoEB+GceDR0i3yuhY2ccbpw37wDj9wMG818jkqEP/iI2jSeGT/JrMGFWuJWXWOZ7admhGxvsh+g==

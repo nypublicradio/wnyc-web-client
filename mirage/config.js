@@ -111,6 +111,10 @@ export default function() {
     return server.create('chunk', {slug: 'election-promo', content: 'election promo content'});
   });
 
+  this.get('/v3/chunks/election-hub-countdown-text/', (server) => {
+    return server.create('chunk', {slug: 'election-promo', content: 'election hub promo content'});
+  });
+
   /*------------------------------------------------------------
     identity management (account) endpoints
   --------------------------------------------------------------*/
