@@ -15,22 +15,6 @@ body:not(.simplified_wrapper):not(.container_stripped) {
   transform: translateZ(0);
 }
 
-@import "election-countdown/election-countdown-promo";
-.election-promo {
-  margin-top: -24px;
-  margin-bottom: 24px;
-
-  a:focus {
-    border: none;
-  }
-}
-
-.election-promo__top-copy a:hover {
-  opacity: 0.8;
-  text-decoration: none;
-  border-bottom-color: rgba(0, 0, 0, 0);
-}
-
 @import "pod-styles";
 
 @import "nypr-ui";

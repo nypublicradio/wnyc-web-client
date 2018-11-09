@@ -107,14 +107,6 @@ export default function() {
   let discoverPath = 'make_playlist';
   this.get(`/v3/${discoverPath}`, 'discover-story');
 
-  this.get('/v3/chunks/election-promo/', (server) => {
-    return server.create('chunk', {slug: 'election-promo', content: 'election promo content'});
-  });
-
-  this.get('/v3/chunks/election-hub-countdown-text/', (server) => {
-    return server.create('chunk', {slug: 'election-promo', content: 'election hub promo content'});
-  });
-
   /*------------------------------------------------------------
     identity management (account) endpoints
   --------------------------------------------------------------*/
