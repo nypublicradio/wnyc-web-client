@@ -8654,10 +8654,10 @@ nypr-publisher-lib@^0.4.3:
     nypr-django-for-ember ">=0.3.0"
     nypr-ui ">=0.3.0"
 
-nypr-ui@>=0.3.0, nypr-ui@^0.4.0, nypr-ui@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.4.2.tgz#2378126a14761bc625676d20a1e3f94f3a3885d6"
-  integrity sha512-N1YsPViHfnMWoEB+GceDR0i3yuhY2ccbpw37wDj9wMG818jkqEP/iI2jSeGT/JrMGFWuJWXWOZ7admhGxvsh+g==
+nypr-ui@>=0.3.0, nypr-ui@^0.4.0, nypr-ui@^0.4.2, nypr-ui@nypublicradio/nypr-ui#306a6a320:
+  version "0.4.4"
+  uid "306a6a3208755d007a47ecd43e4fbeee17833d7c"
+  resolved "https://codeload.github.com/nypublicradio/nypr-ui/tar.gz/306a6a3208755d007a47ecd43e4fbeee17833d7c"
   dependencies:
     ember-basic-dropdown "0.34.0"
     ember-burger-menu "^3.1.0"
