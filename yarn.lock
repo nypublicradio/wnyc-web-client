@@ -8655,9 +8655,9 @@ nypr-publisher-lib@^0.5.4:
     nypr-ui "^0.4.0"
 
 nypr-ui@>=0.3.0, nypr-ui@^0.4.0, nypr-ui@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.4.2.tgz#2378126a14761bc625676d20a1e3f94f3a3885d6"
-  integrity sha512-N1YsPViHfnMWoEB+GceDR0i3yuhY2ccbpw37wDj9wMG818jkqEP/iI2jSeGT/JrMGFWuJWXWOZ7admhGxvsh+g==
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.4.5.tgz#6c4ef9aa5994e2fb6d11fda431d512dc86bb67c6"
+  integrity sha512-AQtZidPAeFj0NDmP7jDiMxiIKcZr6tXbMk58wFpzU6ensKtUF9WRR0t+DMqMcA8C6JRfPX/U8KYHhUGaZt/IWA==
   dependencies:
     ember-basic-dropdown "0.34.0"
     ember-burger-menu "^3.1.0"
