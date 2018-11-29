@@ -8528,7 +8528,7 @@ nypr-ads@>=0.1.0:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
 
-nypr-audio-services@>=0.4.0, nypr-audio-services@>=0.5.1, nypr-audio-services@^0.5.0:
+nypr-audio-services@>=0.5.1, nypr-audio-services@^0.5.0:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.5.1.tgz#a6ed9b0061c56625b69dd348369b1b35c3150e35"
   integrity sha512-tOfHf3pdSq1jQw07cFicRGv0Wq+bBs9eEqll5AX8oa84jvU3ywHt6QTYo4mbDPtrYTilMkoEKfdxME8W0VXMrQ==
@@ -8635,10 +8635,10 @@ nypr-publisher-lib@>=0.4.2:
     nypr-django-for-ember "^0.4.0"
     nypr-ui "^0.4.0"
 
-nypr-publisher-lib@^0.4.3:
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.4.3.tgz#949f6f61b3daef0f45f5ab99bfeda3a5ac8c0277"
-  integrity sha512-+2GrJkCNsYVF+MWoAosSW+utmq3YzTADPgpMVbDO/0V6zwOjzBczr64J1P3PJ8bYs4Heqz45XQMLZgjQ3JypsA==
+nypr-publisher-lib@^0.5.4:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.5.4.tgz#1b02d3eac142a2e7ec53acf535318c414c14178c"
+  integrity sha512-Q7ujkfazVcmYqWMlekXxe9lEJ6R9r5IqJ+zB47bxb+nGj79pXpYGyWIo8uw5WwIeXNt4QR3Kbi68peRhbKpC7g==
   dependencies:
     broccoli-funnel "^2.0.1"
     broccoli-merge-trees "^2.0.0"
@@ -8650,9 +8650,9 @@ nypr-publisher-lib@^0.4.3:
     ember-font-awesome "^4.0.0-rc.3"
     ember-get-config "^0.2.2"
     liquid-fire "~0.29.1"
-    nypr-audio-services ">=0.4.0"
-    nypr-django-for-ember ">=0.3.0"
-    nypr-ui ">=0.3.0"
+    nypr-audio-services "^0.5.0"
+    nypr-django-for-ember "^0.4.0"
+    nypr-ui "^0.4.0"
 
 nypr-ui@>=0.3.0, nypr-ui@^0.4.0, nypr-ui@^0.4.2:
   version "0.4.2"
