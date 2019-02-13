@@ -837,7 +837,7 @@ var HTML = `<html>
                               <li><a href="/terms/">Terms of Use</a></li>
                               <li><a href="/privacy/">Privacy Policy</a></li>
                               <li><a href="/corrections/">Corrections</a></li>
-                              <li><a href="/articles/wnyc-contest-rules/">Contest Rules</a></li>
+                              <li><a href="/articles/wnyc-contest-rules/">Giveaway Rules</a></li>
                           </ul>
                       </div>
                       <!-- #footer_copyright -->
