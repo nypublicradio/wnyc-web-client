@@ -3,13 +3,6 @@
 @import url(//fonts.googleapis.com/css?family=Montserrat:700italic,700,600italic);
 //
 
-// hide everything not ember so we can control the UI over the alien DOM
-body:not(.simplified_wrapper):not(.container_stripped) {
-   > :not(.ember-view):not(#qunit):not(#qunit-fixture):not(#ember-testing-container):not(#modal-overlays) {
-    display: none;
-  }
-}
-
 // contain fixed layouts
 #ember-testing {
   transform: translateZ(0);
