@@ -26,18 +26,18 @@
 }
 
 .playlist-item {
-  padding-left: 50px !important;
   display: flex;
-  flex-direction: column;
-  border-bottom: 0 !important;
-  padding-bottom: 0 !important;
+  border-bottom: 1px dotted $line--light !important;
+  padding-bottom: 24px !important;
 
   &:first-child {
     border-top: 1px dotted $line--light;
   }
 
   .playlist-info {
-      width: auto !important;
+      width: 100% !important;
+      display: flex;
+      justify-content: space-between;
   }
 
   &__composer,
@@ -48,24 +48,29 @@
   }
 
   &__title {
-    @include fontsize(16);
+    @include fontsize(18);
   }
 
   &__musicians {
     color: $lightgray;
+    @include fontsize(14);
   }
 
+  // overrides styles from schedule page that get picked up from
+  // re-using templates
   .time {
     font-size: 14px !important;
     color: $lightgray !important;
-    font-weight: 600 !important;
+    font-weight: 400 !important;
     margin: 0 !important;
+    padding-right: 24px !important;
     text-align: left !important;
+    float: right !important;
+    min-width: 90px !important;
   }
 
   .piece-info {
     @include fontsize(16);
-    line-height: 27px;
     color: $darkergray !important;
 
     ul {
@@ -80,5 +85,51 @@
 
   .album-info .playlist-actions {
     margin: 3px 0 0 0;
+    > li {
+      float: none !important;
+    }
+  }
+
+  .americanstandards-piece-info {
+    @include fontsize(16);
+    line-height: normal;
+    color: $darkergray;
+
+    ul {
+      padding: 0;
+      margin: 0 !important;
+    }
+
+    li {
+      list-style: none;
+    }
+
+    .playlist-item__musicians {
+      margin-bottom: 8px;
+    }
+
+    .playlist-item__composers, .playlist-item__composer {
+      @include fontsize(14);
+      font-weight: 400;
+    }
+
+    .playlist-item__composers {
+      margin-bottom: 16px;
+    }
+
+    .album-info {
+      @include fontsize(12);
+    }
+
+    .album-info .playlist-actions li {
+      float: none !important;
+    }
+  }
+
+  &__duration {
+    @include fontsize(14);
+    float: right;
+    flex-shrink: 0;
+    text-align: right;
   }
 }
