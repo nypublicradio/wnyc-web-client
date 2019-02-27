@@ -115,7 +115,8 @@
   },
   "resolutions": {
     "customizr": "Modernizr/customizr#e5890ed4b4fedb69da50ffbae39577788970d8ee",
-    "ember-cli-babel": "^6.6.0"
+    "ember-cli-babel": "^6.6.0",
+    "nypr-audio-services": "nypublicradio/nypr-audio-services#a92c9701cff2fc6069e77186664c9f1e2800d892"
   },
   "dependencies": {
     "broccoli-funnel": "^2.0.1"
