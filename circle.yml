@@ -8,7 +8,7 @@ defaults: &defaults
 
 restore_node: &restore_node
   restore_cache:
-    key: v2-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
+    key: v3-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
 
 restore_modernizr: &restore_modernizr
   restore_cache:
