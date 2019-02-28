@@ -34,7 +34,7 @@ jobs:
               yarn --pure-lockfile
             fi
       - save_cache:
-          key: v2-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
+          key: v3-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
 
