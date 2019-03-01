@@ -7441,9 +7441,9 @@ nypr-ads@>=0.1.0:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
 
-nypr-audio-services@nypublicradio/nypr-audio-services#a92c9701cff2fc6069e77186664c9f1e2800d892:
-  version "0.5.3"
-  resolved "https://codeload.github.com/nypublicradio/nypr-audio-services/tar.gz/a92c9701cff2fc6069e77186664c9f1e2800d892"
+nypr-audio-services@>=0.5.6, nypr-audio-services@^0.5.0:
+  version "0.5.6"
+  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.5.6.tgz#160ef265544b72d830c72e901a85c9f3488b6fc2"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
@@ -7475,7 +7475,7 @@ nypr-countdown@^0.1.0:
     ember-cli-htmlbars "^2.0.1"
     ember-inflector "^3.0.0"
 
-nypr-django-for-ember@>=0.3.0, nypr-django-for-ember@^0.4.0:
+nypr-django-for-ember@0.4.0, nypr-django-for-ember@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/nypr-django-for-ember/-/nypr-django-for-ember-0.4.0.tgz#26c29b564f1a7939af69bad9ead2260b65fe70cd"
   dependencies:
