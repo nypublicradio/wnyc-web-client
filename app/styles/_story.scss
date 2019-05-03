@@ -107,7 +107,7 @@
     font-style: italic;
   }
 
-  > .django-content > div > p {
+  > .django-content > div > p, > .django-content > div > ul, > .django-content > div > ol {
     @include layout;
     margin-bottom: 20px;
 
@@ -118,6 +118,10 @@
       font-size: 18px;
       margin-bottom: 35px;
     }
+  }
+
+  > .django-content > div > ul, > .django-content > div > ol {
+    padding: 0 100px;
   }
 
   > .django-content > div > p:first-of-type::first-letter {
