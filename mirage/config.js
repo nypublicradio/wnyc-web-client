@@ -6,7 +6,7 @@ import { get } from '@ember/object';
 // In development (without --proxy) and test environments, these handlers will be used
 
 // Note for future people: schema.modelName.create() doesn't generate attributes in mirage factories. Create the objects using server.create in default.js (for local dev), or in the test
-const getPropertyCaseInsensitive = function(obj, prop) {
+export const getPropertyCaseInsensitive = function(obj, prop) {
   prop = prop.toLowerCase();
   for (let p in obj) {
     if (obj.hasOwnProperty(p) && prop === p.toLowerCase()) {
