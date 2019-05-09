@@ -12,6 +12,8 @@ import { authenticateSession } from 'ember-simple-auth/test-support';
 import config from 'wnyc-web-client/config/environment';
 import { Response } from 'ember-cli-mirage';
 
+import { getPropertyCaseInsensitive } from 'wnyc-web-client/mirage/config';
+
 module('Acceptance | profile', function(hooks) {
   setupApplicationTest(hooks);
 
@@ -56,7 +58,8 @@ module('Acceptance | profile', function(hooks) {
     });
 
     server.patch(`${config.authAPI}/v1/user`, (schema, request) => {
-      assert.equal(request.requestHeaders.authorization, 'Bearer secret');
+      let secret = getPropertyCaseInsensitive(request.requestHeaders, 'Authorization');
+      assert.equal(secret, 'Bearer secret');
       assert.deepEqual(JSON.parse(request.requestBody), {
         given_name: FIRST,
         family_name: LAST,
@@ -192,7 +195,8 @@ module('Acceptance | profile', function(hooks) {
 
     let {id } = server.create('user');
     server.delete(`${config.authAPI}/v1/user`, (schema, {requestHeaders}) => {
-      assert.equal(requestHeaders.authorization, 'Bearer foo');
+      let secret = getPropertyCaseInsensitive(requestHeaders, 'Authorization');
+      assert.equal(secret, 'Bearer foo');
       return {data: {type: 'user', id }};
     });
 
