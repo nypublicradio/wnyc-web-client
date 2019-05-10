@@ -16,4 +16,18 @@ export default Route.extend(AuthenticatedRouteMixin, {
     controller.send('updateEmailStatus', get(model, 'email'));
     return this._super(controller, model);
   },
+  actions: {
+    didTransition() {
+      //shows the zendesk widget if prev loaded
+      if (window.zE && typeof window.zE.show === "function") {
+        window.zE.show();
+      }
+    },
+    willTransition() {
+      //hide the zendesk Widget
+      if (window.zE && typeof window.zE.hide === "function") {
+        window.zE.hide();
+      }
+    }
+  }
 });
