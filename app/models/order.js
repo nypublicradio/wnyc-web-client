@@ -15,6 +15,7 @@ export default Model.extend({
   creditCardLast4Digits: attr('string'),
   isActiveMember: attr('boolean'),
   isSustainer: attr('boolean'),
+  isPayment: attr('boolean'),
   updateLink: computed('fund', function() {
     let pledgeDomain = this.get('fund') === 'WQXR' ? 'wqxr' : 'wnyc';
     let fundSlug = this.get('fund').toLowerCase().replace(/[. ]/g, '');
