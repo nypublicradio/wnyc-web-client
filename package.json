@@ -93,7 +93,7 @@
     "loader.js": "^4.2.3",
     "morgan": "^1.6.1",
     "normalize.css": "^8.0.0",
-    "nypr-account-settings": "nypublicradio/nypr-account-settings#5ff6a98d98c91c00cfcee49b56514feeea843c30",
+    "nypr-account-settings": "nypublicradio/nypr-account-settings#e65ec2a8fadb18f651f0aea9a49e0d3822d29414",
     "nypr-ads": ">=0.1.0",
     "nypr-audio-services": ">=0.5.6",
     "nypr-auth": ">=0.2.3",
