@@ -7420,9 +7420,10 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
-nypr-account-settings@nypublicradio/nypr-account-settings#e65ec2a8fadb18f651f0aea9a49e0d3822d29414:
-  version "0.2.2"
-  resolved "https://codeload.github.com/nypublicradio/nypr-account-settings/tar.gz/e65ec2a8fadb18f651f0aea9a49e0d3822d29414"
+nypr-account-settings@>=0.2.3:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/nypr-account-settings/-/nypr-account-settings-0.2.4.tgz#8d0c16c3eea0cd93040e90833b62db220332a76a"
+  integrity sha512-DUoMv0vY3A1t0SFq3JwSUsxWts9zZ7j++f4OK5nnz+B3ihSj8KPEmKEw52RT8dSLJNXW+Ktj+r0hMNkC0N1ABA==
   dependencies:
     ember-changeset "^1.4.1"
     ember-changeset-validations "^1.2.11"
