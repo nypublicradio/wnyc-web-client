@@ -33,7 +33,7 @@
         {{#if (and currentStream.currentComposer.name currentStream.currentPiece)}}
           {{#link-to 'schedule' (query-params scheduleStation=currentStream.slug) class='stream-banner-recently link--blue'}}
             Recently played
-            {{nypr-svg className="icon rotate-minus90" icon="caret-down"}}
+            {{nypr-svg className="icon rotate-minus90" icon="down-caret"}}
           {{/link-to}}
         {{/if}}
       {{/stream-banner}}
