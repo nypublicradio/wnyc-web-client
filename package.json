@@ -93,7 +93,7 @@
     "loader.js": "^4.2.3",
     "morgan": "^1.6.1",
     "normalize.css": "^8.0.0",
-    "nypr-account-settings": ">=0.2.2",
+    "nypr-account-settings": ">=0.2.3",
     "nypr-ads": ">=0.1.0",
     "nypr-audio-services": ">=0.5.6",
     "nypr-auth": ">=0.2.3",
