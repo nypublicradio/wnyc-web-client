@@ -1,5 +1,8 @@
 /* eslint-env node */
+const url = require('url');
 var proxyPath = '/media';
+
+let upstream = url.parse(process.env.WNYC_URL);
 
 module.exports = function(app) {
   // For options, see:
@@ -13,6 +16,6 @@ module.exports = function(app) {
 
   app.use(proxyPath, function(req, res/*, next*/){
     req.url = proxyPath + '/' + req.url;
-    proxy.web(req, res, { target: `${process.env.WNYC_URL}`, changeOrigin: true });
+    proxy.web(req, res, { target: `https://${upstream.host}`, changeOrigin: true });
   });
 };
