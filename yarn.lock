@@ -7523,9 +7523,10 @@ nypr-player@>=0.3.0:
     ember-moment "^7.4.1"
     nypr-ui "^0.4.0"
 
-nypr-publisher-lib@>=0.4.2:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.5.0.tgz#74cece66931d53366a38352ef11a473387ebfdc1"
+nypr-publisher-lib@>=0.4.2, nypr-publisher-lib@^0.5.1:
+  version "0.5.7"
+  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.5.7.tgz#8101e0b023ffcb34ef6d1d2a309e1bf1c0aa1e6e"
+  integrity sha512-r23UvM6wb46g7zYDf9kvPUf7ipKUAdQHzZmlq2gJQQyfUyCa7frC0ruMjUprlgYLKmxaU8ygm8f/2cYBQtvHzw==
   dependencies:
     broccoli-funnel "^2.0.1"
     broccoli-merge-trees "^2.0.0"
@@ -7539,7 +7540,7 @@ nypr-publisher-lib@>=0.4.2:
     liquid-fire "~0.29.1"
     nypr-audio-services "^0.5.0"
     nypr-django-for-ember "^0.4.0"
-    nypr-ui "^0.4.0"
+    nypr-ui "^0.5.0"
 
 nypr-publisher-lib@^0.5.4:
   version "0.5.4"
@@ -7562,6 +7563,25 @@ nypr-publisher-lib@^0.5.4:
 nypr-ui@>=0.3.0, nypr-ui@^0.4.0, nypr-ui@^0.4.2:
   version "0.4.5"
   resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.4.5.tgz#6c4ef9aa5994e2fb6d11fda431d512dc86bb67c6"
+  dependencies:
+    ember-basic-dropdown "0.34.0"
+    ember-burger-menu "^3.1.0"
+    ember-cli-babel "^6.8.0"
+    ember-cli-htmlbars "^2.0.1"
+    ember-cli-htmlbars-inline-precompile "^1.0.0"
+    ember-cli-sass "^7.1.7"
+    ember-click-outside "0.1.11"
+    ember-composable-helpers "2.0.3"
+    ember-cookies "^0.3.0"
+    ember-holygrail-layout "^0.3.0"
+    ember-power-select "^1.9.2"
+    ivy-tabs "^3.3.0"
+    waypoints "^4.0.1"
+
+nypr-ui@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/nypr-ui/-/nypr-ui-0.5.0.tgz#7278ca1abd4a8d6301a989e7980d561fa67e8398"
+  integrity sha512-rEb/g//9dWT2czaby3FuMVMQ96zj0BOhln1ReFhRPX+D3uy1PrRGq4e2bRw7ajnWdLH8Ibx2w5PJl2TjtGHyUA==
   dependencies:
     ember-basic-dropdown "0.34.0"
     ember-burger-menu "^3.1.0"
