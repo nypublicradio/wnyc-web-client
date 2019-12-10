@@ -1,9 +1,11 @@
-import AdaptiveStore from 'ember-simple-auth/session-stores/adaptive';
+import CookieStore from 'ember-simple-auth/session-stores/cookie';
 import { inject as service } from '@ember/service';
 import { set } from '@ember/object';
+import config from '../config/environment';
 
-export default AdaptiveStore.extend({
+export default CookieStore.extend({
   store: service(),
+  cookieDomain: config.cookieDomain,
 
   init() {
     this._super(...arguments);

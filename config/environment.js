@@ -74,6 +74,7 @@ module.exports = function(environment) {
     publisherAPI: process.env.PUBLISHER_API,
     platformEventsAPI: process.env.PLATFORM_EVENTS_SERVICE,
     gothamistStories: process.env.GOTHAMIST_STORIES,
+    cookieDomain: process.env.COOKIE_DOMAIN,
 
     optInAPI: process.env.OPT_IN_API,
     // POLITICS BRIEF NEWSLETTER ID
