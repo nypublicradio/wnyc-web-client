@@ -74,7 +74,7 @@ module.exports = function(environment) {
     publisherAPI: process.env.PUBLISHER_API,
     platformEventsAPI: process.env.PLATFORM_EVENTS_SERVICE,
     gothamistStories: process.env.GOTHAMIST_STORIES,
-    cookieDomain: process.env.COOKIE_DOMAIN,
+    cookieDomain: process.env.COOKIE_DOMAIN || ".wnyc.org",
 
     optInAPI: process.env.OPT_IN_API,
     // POLITICS BRIEF NEWSLETTER ID
@@ -151,6 +151,7 @@ module.exports = function(environment) {
     ENV.platformEventsAPI = 'http://example.com';
     ENV.gothamistStories = 'http://gothamist.com';
     ENV.APP.autoboot = false;
+    ENV.cookieDomain = ".example.com"
 
   }
 
