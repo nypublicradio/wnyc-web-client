@@ -5,10 +5,10 @@ import config from '../config/environment';
 
 export default CookieStore.extend({
   store: service(),
-  cookieDomain: config.cookieDomain,
 
   init() {
     this._super(...arguments);
+    this._setCookieDomain();
     this.on('sessionDataUpdated', (d) => {
       this._restoreQueue(d);
       this._restoreListens(d);
@@ -22,6 +22,16 @@ export default CookieStore.extend({
       .then(d => this._restoreQueue(d))
       .then(d => this._restoreDiscoverQueue(d))
       .then(d => this._restoreListens(d));
+  },
+
+  _setCookieDomain(){
+    //only set the cookieDomain if it matches domain of the current url
+    let currentUrl = window.location.href;
+    let envDomain = config.cookieDomain;
+
+    if (currentUrl.indexOf(envDomain) > 1){
+      this.set("cookieDomain", envDomain);
+    }
   },
 
   _restoreDiscoverQueue(data) {
