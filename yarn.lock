@@ -7479,10 +7479,10 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
-nypr-account-settings@~0.2.7:
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/nypr-account-settings/-/nypr-account-settings-0.2.7.tgz#fc9b43d3dbf593036f1002a15d942adb9335e97f"
-  integrity sha512-9vg0XSKmTBfy50AjPfYxYftu+YZAbuE9rfPJkkXAwHMDwtHb/hjFYAqRVoQmvtci4Ys1vlNbXiVP5yOjibkbDg==
+nypr-account-settings@~0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/nypr-account-settings/-/nypr-account-settings-0.3.0.tgz#8d18faf21f061cee79c06c6a778f594ff3e207c9"
+  integrity sha512-NVpFHOcN9VEkDkOCx+go3qa0v1q0T+dG2fIXnifPvGQX9LQSdpkzW56aybEK5zyicI9fFisBtyvXb6Qda0kEaA==
   dependencies:
     ember-changeset "^2.0.0"
     ember-changeset-validations "^2.1.0"
