@@ -68,3 +68,6 @@ ENV.LOG_LEGACY_LOADER = true;
 
 #### Metrics Adapters
 We use [`ember-metrics`](https://github.com/poteto/ember-metrics) to proxy analytics tracking to two backends, our Data Warehouse and Google Analytics. Debug output for the Data Warehouse adapter can be turned on by adding `debug` to the url's query string. GA debugging is handled using [a chrome extension](https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna?hl=en).
+
+#### Facebook Graph API
+This site currently uses version 2.12 of the Facebook Graph API. If we decide to upgrade to the latest version, please be sure to check Facebook's API Upgrade Tool to see which changes need to be made in order to upgrade: https://developers.facebook.com/tools/api_versioning/
