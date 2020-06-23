@@ -7582,7 +7582,7 @@ nypr-player@>=0.3.0:
     ember-moment "^7.4.1"
     nypr-ui "^0.4.0"
 
-nypr-publisher-lib@>=0.4.2, nypr-publisher-lib@^0.5.1:
+nypr-publisher-lib@>=0.4.2, nypr-publisher-lib@^0.5.1, nypr-publisher-lib@^0.5.7:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.5.7.tgz#8101e0b023ffcb34ef6d1d2a309e1bf1c0aa1e6e"
   integrity sha512-r23UvM6wb46g7zYDf9kvPUf7ipKUAdQHzZmlq2gJQQyfUyCa7frC0ruMjUprlgYLKmxaU8ygm8f/2cYBQtvHzw==
@@ -7600,24 +7600,6 @@ nypr-publisher-lib@>=0.4.2, nypr-publisher-lib@^0.5.1:
     nypr-audio-services "^0.5.0"
     nypr-django-for-ember "^0.4.0"
     nypr-ui "^0.5.0"
-
-nypr-publisher-lib@^0.5.4:
-  version "0.5.4"
-  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.5.4.tgz#1b02d3eac142a2e7ec53acf535318c414c14178c"
-  dependencies:
-    broccoli-funnel "^2.0.1"
-    broccoli-merge-trees "^2.0.0"
-    ember-cli-babel "^6.6.0"
-    ember-cli-htmlbars "^2.0.1"
-    ember-cli-htmlbars-inline-precompile "^1.0.0"
-    ember-cli-sass "^7.0.0"
-    ember-click-outside "^0.1.12"
-    ember-font-awesome "^4.0.0-rc.3"
-    ember-get-config "^0.2.2"
-    liquid-fire "~0.29.1"
-    nypr-audio-services "^0.5.0"
-    nypr-django-for-ember "^0.4.0"
-    nypr-ui "^0.4.0"
 
 nypr-ui@>=0.3.0, nypr-ui@^0.4.0, nypr-ui@^0.4.2:
   version "0.4.5"
