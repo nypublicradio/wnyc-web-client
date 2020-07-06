@@ -1,12 +1,14 @@
-import AdaptiveStore from 'ember-simple-auth/session-stores/adaptive';
+import CookieStore from 'ember-simple-auth/session-stores/cookie';
 import { inject as service } from '@ember/service';
 import { set } from '@ember/object';
+import config from '../config/environment';
 
-export default AdaptiveStore.extend({
+export default CookieStore.extend({
   store: service(),
 
   init() {
     this._super(...arguments);
+    this._setCookieDomain();
     this.on('sessionDataUpdated', (d) => {
       this._restoreQueue(d);
       this._restoreListens(d);
@@ -20,6 +22,16 @@ export default AdaptiveStore.extend({
       .then(d => this._restoreQueue(d))
       .then(d => this._restoreDiscoverQueue(d))
       .then(d => this._restoreListens(d));
+  },
+
+  _setCookieDomain(){
+    //only set the cookieDomain if it matches domain of the current url
+    let currentUrl = window.location.href;
+    let envDomain = config.cookieDomain;
+
+    if (currentUrl.indexOf(envDomain) > 1){
+      this.set("cookieDomain", envDomain);
+    }
   },
 
   _restoreDiscoverQueue(data) {
