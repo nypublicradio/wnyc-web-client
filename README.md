@@ -5,7 +5,7 @@ This is a browser-based client for interfacing with the New York Public Radio di
 
 ## Getting Started
 
-This ember app is a **client**, which means its primary purpose is to provide an interface to data source. On its own, this application will not do much without some kind of source from which it can retrieve content to display. To this end, you will need to run a checkout of [`publisher`](https://github.com/nypublicradio/publisher) as a **server**.
+This ember app is a **client**, which means its primary purpose is to provide an interface to data source. On its own, this application will not do much without some kind of source from which it can retrieve content to display. To this end, you will need to either use the *demo* instance of Publisher at internal.demo2.wnyc.net or run a checkout of [`publisher`](https://github.com/nypublicradio/publisher) as a **server** locally.
 
 `publisher` is a Django app with its own environment and dependencies, but is configured to work in concert with `wnyc-web-client`. In development mode, `publisher` will make requests to `http://localhost:4200/assets/` for Ember assets (see [`puppy/util/ember_config.py`](https://github.com/nypublicradio/publisher/blob/main/puppy/util/ember_config.py)). So you will need to set up a separate checkout of `publisher` to do any substantial development work on `wnyc-web-client`.
 
@@ -16,28 +16,31 @@ Fortunately, `publisher` has its own set of easy-to-follow getting started instr
 You will need the following software properly installed on your computer. Please follow all the directions as written on the websites of these projects and do not neglect to install their dependencies.
 
 * [Git](http://git-scm.com/downloads)
+* Node version 8 (install using [nvm](https://github.com/nvm-sh/nvm#installing-and-updating))
 * [Ember CLI](https://ember-cli.com/user-guide/#getting-started) (>= 2.6.0)
 * [Grunt](http://gruntjs.com/getting-started)
+* [Yarn](https://classic.yarnpkg.com/en/docs/install/#mac-stable)
 
 ## Development
 
-As noted above, you must spin up a checkout of [`publisher`](https://github.com/nypublicradio/publisher) at a web address against which this ember app can make requests. By default, the app will use `http://dev.wnyc.net:MY_PORT` as its destination.
+As noted above, you must either use the default backend, [Publisher Demo](https://internal.demo2.wnyc.net/) _or_ spin up a checkout of [`publisher`](https://github.com/nypublicradio/publisher) at a web address against which this ember app can make requests. By default, the app will use `https://api.demo.nypr.digital/api` as its destination.
 
 This value is controlled by a `.env` file you will create by following the directions below. Substitute the value of `MY_PORT` with the port of your `publisher` checkout on `dev.wnyc.net`, or replace it with a different address entirely if you are running the `publisher` app somewhere else.
 
-We use [modernizr](https://modernizr.com/) to detect for certain browser features. Rather than include a full build in the app, there is a single Grunt task included in this project which scans all the `.js` and `.scss` files for mentions of the modernizr API. Step 9 below will generate a modernizr build; do not skip it or you may have mysterious errors.
+We use [modernizr](https://modernizr.com/) to detect for certain browser features. Rather than include a full build in the app, there is a single Grunt task included in this project which scans all the `.js` and `.scss` files for mentions of the modernizr API. Step 7 below will generate a modernizr build; do not skip it or you may have mysterious errors.
 
 1. `$ git clone git@github.com:nypublicradio/wnyc-web-client.git && cd wnyc-web-client`
 2. `$ git checkout <working branch>`
 3. `$ cp .env.sample .env`
-4. Edit `.env` with your `publisher` app location
-7. `$ yarn`
-8. `$ bower install`
-9. `$ grunt modernizr:dist`
+4. Edit `.env` with your `publisher` app location if you do _not_ want to use Publisher's demo environment, which is the default in `.env.sample`.
+5. `$ yarn`
+6. `$ npm install grunt@v1.0.3` :point-left: version can be unpinned if `wnyc-web-client` is migrated to Node >=v10
+7. `$ npx grunt modernizr:dist`
+
 
 The `publisher` service is not set up as a strictly data-only API server and will return HTML with embedded script tags that request against the domain root. To resolve this issue, you should run your local server with the proxy command:
 ```sh
-$ ember serve --proxy http://dev.wnyc.net:MY_PORT
+$ ember serve --proxy=http://wnyc.demo2.wnyc.net
 ```
 
 ## Related features in the Django app

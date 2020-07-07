@@ -85,7 +85,7 @@
     "ember-wormhole": "^0.5.4",
     "eslint-plugin-ember": "^5.0.0",
     "glob": "7.1.1",
-    "grunt": "^1.0.1",
+    "grunt": "1.0.3",
     "grunt-modernizr": "^1.0.2",
     "http-proxy": "^1.14.0",
     "jquery-migrate": "3.0.0",
@@ -116,7 +116,8 @@
   "resolutions": {
     "customizr": "Modernizr/customizr#e5890ed4b4fedb69da50ffbae39577788970d8ee",
     "ember-cli-babel": "^6.6.0",
-    "nypr-publisher-lib": "^0.5.1"
+    "nypr-publisher-lib": "^0.5.1",
+    "mkdirp": "~0.5.1"
   },
   "dependencies": {
     "broccoli-funnel": "^2.0.1"
