@@ -1,63 +1,6 @@
-{{dfp-ad
-  slotClassNames="is-collapsed l-constrained aligncenter leaderboard"
-  slot="/6483581/leaderboard/wnyc_leaderboard"
-  target="leaderboard"
-  mapping=(array (array 0 (array 300 50)) (array 758 (array 728 90)) (array 1203 (array (array 970 90) (array 970 415))))
-  sizes=(array (array 970 415) (array 970 90) (array 728 90) (array 300 50))}}
+<div class="l-constrained">
 
-{{#django-page page=model.page class='l-constrained'}}
-
-  {{#ember-wormhole to='stream-banner'}}
-      {{#stream-banner background=background streams=streams as |currentStream banner|}}
-        {{#banner.header as |header|}}
-          {{component header.stationTitle}}
-          {{#header.dropdown as |stream|}}
-            {{stream.name}}
-          {{/header.dropdown}}
-        {{/banner.header}}
-
-        {{component banner.details}}
-
-        {{#banner.controls}}
-          {{#listen-button
-            class='stream-banner-listenbutton nudge'
-            data-action="Clicked Play/Pause Stream: stream-banner"
-            data-label=currentStream.name
-            type='blue-boss'
-            itemPK=currentStream.slug
-            itemTitle=currentStream.name}}
-            Listen Live
-          {{/listen-button}}
-        {{/banner.controls}}
-
-        {{#if (and currentStream.currentComposer.name currentStream.currentPiece)}}
-          {{#link-to 'schedule' (query-params scheduleStation=currentStream.slug) class='stream-banner-recently link--blue'}}
-            Recently played
-            {{nypr-svg className="icon rotate-minus90" icon="down-caret"}}
-          {{/link-to}}
-        {{/if}}
-      {{/stream-banner}}
-  {{/ember-wormhole}}
-
-  {{!-- {{#ember-wormhole to='gothamist-row'}}
-    {{#story-row as |row|}}
-      {{#row.label}}Latest From <a href="https://www.gothamist.com?utm_medium=partnersite&utm_source=wnyc&utm_campaign=homepagepromo">Gothamist</a>{{/row.label}}
-
-      {{#row.items items=model.gothamist as |story|}}
-        {{#story-card
-          href=(append-query story.permalink 'utm_medium=partnersite&utm_source=wnyc&utm_campaign=homepagepromo')
-          class="gtm__click-tracking"
-          data-category="Homepage Bucket"
-          data-action="gothamist"
-          data-label=story.title as |card|}}
-          {{card.image width=300 src=(make-https story.thumbnail_300)}}
-          {{#card.body}}
-            {{{story.title}}}
-            {{nypr-svg icon="popout-icon" className="popout-icon"}}
-          {{/card.body}}
-        {{/story-card}}
-      {{/row.items}}
-    {{/story-row}}
-  {{/ember-wormhole}} --}}
-
-{{/django-page}}
+<div id="main" class="container_12 site-container">
+<p><strong>WNYC.org is experiencing technical difficulties.  Please tune in to our stations at 93.9FM and AM820 on your radio until the issues have been resolved. Thank you for your patience.</strong></p>
+</div>
+</div>
