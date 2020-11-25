@@ -125,23 +125,29 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - test:
-          filters:
-            tags:
-              only: /.*/
+      # - test:
+      #     filters:
+      #       tags:
+      #         only: /.*/
+      #     requires:
+      #       - install
+      - deploy_production:
           requires:
             - install
-      - deploy_production:
           filters:
             tags:
               only: /^v[0-9]+\.[0-9]+\.[0-9]+/
             branches:
               ignore: /.*/
       - deploy_demo:
+          requires:
+            - install
           filters:
             branches:
               only: main
       - deploy_qa:
+          requires:
+            - install
           filters:
             branches:
               only: /[A-Za-z-_]+/[A-Za-z-_\d]+/
