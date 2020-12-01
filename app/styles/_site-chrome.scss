@@ -221,6 +221,23 @@
     }
   }
 
+  .radio-link::after {
+    content: "New";
+    font-size: x-small;
+    color: $red;
+    background: white;
+    text-transform: uppercase;
+    size: small;
+    margin-left: 5px;
+    padding: 1px 3px;
+    border-radius: 3px;
+    font-weight: 700;
+  }
+
+  .radio-wave {
+    padding-top: 12px;
+    padding-left: 12px;
+  }
   &:not(.x-scrollable) {
     .list-item {
       padding: 1px 18px 1px 0;
