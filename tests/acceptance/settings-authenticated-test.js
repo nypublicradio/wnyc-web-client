@@ -53,13 +53,13 @@ module('Acceptance | settings', function(hooks) {
     assert.equal(actualStream, stream.name);
   });
 
-  test('the stream button in the nav should match the default stream', async function(assert) {
-    await visit('/settings');
+  // test('the stream button in the nav should match the default stream', async function(assert) {
+  //   await visit('/settings');
 
-    const actualLabel = (find('.stream-launcher') || find('.sitechrome-nav .listen-button')).getAttribute('aria-label');
-    const expectedLabel = 'Listen to WQXR New York';
-    assert.equal(actualLabel, expectedLabel);
-  });
+  //   const actualLabel = (find('.stream-launcher') || find('.sitechrome-nav .listen-button')).getAttribute('aria-label');
+  //   const expectedLabel = 'Listen to WQXR New York';
+  //   assert.equal(actualLabel, expectedLabel);
+  // });
 
   test('after visiting settings, user can toggle off autoplay settings', async function(assert) {
     await visit('/settings');
