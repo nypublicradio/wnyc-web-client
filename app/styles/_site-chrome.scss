@@ -221,6 +221,14 @@
     }
   }
 
+  #radio-a-tag {
+    position: relative;
+    margin-right: 35px;
+    @include mq($medium-only) {
+      margin-right: 65px;
+    }
+  }
+
   .radio-link::after {
     content: "New";
     font-size: x-small;
@@ -232,6 +240,18 @@
     padding: 1px 3px;
     border-radius: 3px;
     font-weight: 700;
+    position: absolute;
+    left: 50px;
+    top: 3px;
+    bottom: 0;
+    height: 16px;
+    @include mq($medium-only) {
+      padding: 0 3px;
+      border-radius: 3px;
+      font-weight: 700;
+      left: 40px;
+      top: 2px;
+    }
   }
 
   .radio-wave {
