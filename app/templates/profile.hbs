@@ -51,17 +51,14 @@
       {{/if}}
 
     </div>
-    {{nypr-accounts/membership-card
-      pledges=orders
-      siteName=siteName
-      siteDomain=siteDomain
-      user=model
-      emailIsPendingVerification=emailIsPendingVerification
-      resendVerificationEmail=(if model.hasPassword
-        (action resendVerificationEmail)
-        (action requestTempPassword model.email)
-      )
-      class='nypr-membership-info-body'}}
+    <div class="nypr-membership-info-body">
+      <div class="nypr-card">
+        <div class="nypr-card-header">
+          <span class="nypr-card-title">My Donation Status</span>
+        </div>
+        <p>Your membership details could not be retrieved at this time. Please try again later. We apologize for this inconvenience.</p>
+      </div>
+    </div>
   </div>
 
   <div class="aligncenter text--small">
