@@ -66,35 +66,20 @@
 
       <ul class="list list--noborder flush {{unless media.isLargeAndUp 'list--inline list--spaced text--small' 'alignright'}}">
 
-        <li class="list-item list-item--nav">
-          {{#if media.isLargeAndUp}}
-            {{#listen-button
-              type=(if isHomepage 'white-hollow-small' 'red-hollow-small')
-              itemPK=preferredStream.slug
-              itemTitle=preferredStream.name
-              playContext='nav'
-              data-action='Clicked Play/Pause Stream: nav'
-              data-label=preferredStream.name
-              class='stream-launcher gtm__click-tracking'}}
-              <span>Listen Live</span>
-            {{/listen-button}}
-          {{else}}
-            {{!-- This 'button' is a top nav item that looks like a link. it doesn't show an icon to reflect state --}}
-            {{!-- So clicking will always trigger a play action (and not a pause), state is locked to 'is-paused'  --}}
-            {{#listen-button
-              class='gtm__click-tracking'
-              data-action='Clicked Play/Pause Stream: nav'
-              data-label=preferredStream.name
-              type='vanilla'
-              state='is-paused'
-              itemPK=preferredStream.slug
-              itemTitle=preferredStream.name
-              playContext='nav'}}
-              <span>Listen Live</span>
-            {{/listen-button}}
-          {{/if}}
-        </li>
+        <svg class="radio-wave nav--homepage" viewBox="0 0 48 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+        
+          <rect x="6.15503" y="7.16339" width="3.31245" height="10.5739" rx="1.65623" fill="white"/>
+          <rect y="11.1428" width="2.99189" height="3.18354" rx="1.49595" fill="white"/>
+          <rect x="12.6305" width="3.31245" height="24.6725" rx="1.65623" fill="white"/>
+          <rect x="19.1061" y="7.16339" width="3.31245" height="10.5739" rx="1.65623" fill="white"/>
+          <rect x="25.5815" y="3.18372" width="3.31245" height="17.6232" rx="1.65623" fill="white"/>
+          <rect x="32.0571" y="8.75507" width="3.31245" height="7.04928" rx="1.65623" fill="white"/>
+          <rect x="38.5326" y="6.36707" width="3.31245" height="12.3362" rx="1.65623" fill="white"/>
+          <rect x="45.0081" y="11.1428" width="2.99189" height="3.18354" rx="1.49595" fill="white"/>
+        </svg>
 
+        <a href="https://www.wnyc.org/radio" target="_blank" rel="noopener" id="radio-a-tag" class="list-item list-item--nav inherit gtm__click-tracking radio-link">Radio</a> 
+    
         {{#link-to 'stream' tagName='li' href=false class="list-item list-item--nav"}}
           {{link-to 'All Streams' 'stream' class="inherit gtm__click-tracking" data-action="Side Navigation"}}
         {{/link-to}}
