@@ -9246,10 +9246,9 @@ nwsapi@^2.0.9:
   resolved "https://registry.yarnpkg.com/nwsapi/-/nwsapi-2.2.0.tgz#204879a9e3d068ff2a55139c2c772780681a38b7"
   integrity sha512-h2AatdwYH+JHiZpv7pt/gSX1XoRGb7L/qSIeuqA6GwYoF9w1vP1cw42TO0aI2pNyshRK5893hNSl+1//vHK7hQ==
 
-nypr-account-settings@~0.2.7:
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/nypr-account-settings/-/nypr-account-settings-0.2.7.tgz#fc9b43d3dbf593036f1002a15d942adb9335e97f"
-  integrity sha512-9vg0XSKmTBfy50AjPfYxYftu+YZAbuE9rfPJkkXAwHMDwtHb/hjFYAqRVoQmvtci4Ys1vlNbXiVP5yOjibkbDg==
+nypr-account-settings@nypublicradio/nypr-account-settings#91ccbb3:
+  version "0.3.0"
+  resolved "https://codeload.github.com/nypublicradio/nypr-account-settings/tar.gz/91ccbb3713d1aef193454bd82a2e1ad25056af1f"
   dependencies:
     ember-changeset "^2.0.0"
     ember-changeset-validations "^2.1.0"
