@@ -241,22 +241,30 @@
     border-radius: 3px;
     font-weight: 700;
     position: absolute;
-    left: 50px;
+    left: 45px;
     top: 3px;
     bottom: 0;
     height: 16px;
     @include mq($medium-only) {
-      padding: 0 3px;
+      font-size: 8px;
       border-radius: 3px;
       font-weight: 700;
-      left: 40px;
+      left: 35px;
       top: 2px;
+      line-height: 2;
+      padding-right: 5px;
+      padding-left: 5px;
     }
   }
 
   .radio-wave {
-    padding-top: 12px;
+    width: 40px;
     padding-left: 12px;
+    @include mq($medium-only) {
+      padding-top: 15px;
+      padding-right: 5px;
+      width: 40px;
+    }
   }
   &:not(.x-scrollable) {
     .list-item {
@@ -504,5 +512,24 @@
       flex-grow: 0;
       margin-right: 15px;
     }
+  }
+}
+
+.l-page-nav rect {
+  fill: white;
+}
+.l-page-nav:not(.nav--homepage) rect {
+  fill: $red;
+  @include mq($medium-only) {
+    fill:white ;
+  }
+}
+
+.l-page-nav:not(.nav--homepage) .radio-link::after {
+  color: white;
+  background: $red;
+  @include mq($medium-only) {
+    color: $red;
+    background: white;
   }
 }
