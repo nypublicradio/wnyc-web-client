@@ -12,7 +12,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
     return this.get('currentUser.user');
   },
   setupController(controller, model) {
-    controller.set('orders', this.store.findAll('order'));
+    controller.set('orders', this.store.findAll('order')).catch(e => e);
     controller.send('updateEmailStatus', get(model, 'email'));
     return this._super(controller, model);
   },
