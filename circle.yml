@@ -143,6 +143,8 @@ workflows:
           requires:
             - test
           filters:
+            tags:
+              only: demo
             branches:
               only: main
       - deploy_qa:
