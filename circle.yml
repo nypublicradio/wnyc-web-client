@@ -2,13 +2,13 @@ version: 2
 
 defaults: &defaults
   docker:
-    - image: circleci/node:8-browsers
+    - image: circleci/node:10-browsers
       environment:
         JOBS: 2
 
 restore_node: &restore_node
   restore_cache:
-    key: v3-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
+    key: v3-node10-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
 
 restore_modernizr: &restore_modernizr
   restore_cache:
@@ -34,7 +34,7 @@ jobs:
               yarn --pure-lockfile
             fi
       - save_cache:
-          key: v3-node8-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
+          key: v3-node10-yarn-deps-{{ arch }}-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
 
