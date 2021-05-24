@@ -31,7 +31,7 @@
 #wnyc_home h2 {
   letter-spacing: 0.2px;
   margin-bottom: 5px;
-  font-weight: 600;
+  font-weight: bold;
 }
 
 #wnyc_home h4.show-name {
@@ -260,7 +260,7 @@ body.ember-application {
   }
 
   #wnyc_home h2 {
-    font-weight: normal;
+    font-weight: bold;
   }
 
   .story-wrapper {
