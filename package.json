@@ -60,7 +60,7 @@
     "ember-feature-flags": "^5.0.0",
     "ember-fetch": "^3.4.5",
     "ember-get-config": "^0.2.4",
-    "ember-hifi": "^1.15.0",
+    "ember-hifi": "https://github.com/nypublicradio/ember-hifi#4ba77e3",
     "ember-holygrail-layout": "^0.3.0",
     "ember-hotjar": "^0.0.2",
     "ember-imagesloaded-shim": "^0.0.6",
@@ -100,7 +100,7 @@
     "nypr-django-for-ember": "0.4.4",
     "nypr-election-countdown": "^0.2.14",
     "nypr-metrics": "~0.5.1",
-    "nypr-player": ">=0.3.0",
+    "nypr-player": "https://github.com/nypublicradio/nypr-player#76bf006",
     "nypr-publisher-lib": "^0.5.11",
     "nypr-ui": ">=0.3.0",
     "torii": "^0.10.1"
