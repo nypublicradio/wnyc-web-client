@@ -5258,14 +5258,14 @@ ember-hash-helper-polyfill@^0.2.0:
     ember-cli-version-checker "^2.1.0"
 
 ember-hifi@^1.11.1, ember-hifi@^1.15.0, ember-hifi@^1.15.1:
-  version "1.17.0"
-  resolved "https://registry.yarnpkg.com/ember-hifi/-/ember-hifi-1.17.0.tgz#678a6e9833128ba5ffe38bc55c836ca7d32c771f"
-  integrity sha512-6E7VpvlEsOYTVEVaj4pxGqpUp3E2NZegT5AgxfsPrSaGcTycNxb3ZjeGe+y1ka/UW0diVnwB5bcSspW5xqTKEQ==
+  version "1.19.0"
+  resolved "https://registry.yarnpkg.com/ember-hifi/-/ember-hifi-1.19.0.tgz#22e9f2a7c5c79b0e1ba83374def28ffcc02ba8be"
+  integrity sha512-0CXklGv3BGwckxI13JUHAToP5d6dF+aUL+RYJXJMHyZsrTcgv53+0ZIMzgy4CXaXQYgioJMDIaJERmi53jbB8Q==
   dependencies:
     ember-cli-babel "^7.7.3"
     ember-copy "^1.0.0"
     ember-poll "^1.4.0"
-    hls.js "^0.12.2"
+    hls.js "^0.13.2"
     howler "^2.0.5"
 
 ember-holygrail-layout@^0.3.0:
@@ -7171,10 +7171,10 @@ heimdalljs@^0.3.0:
   dependencies:
     rsvp "~3.2.1"
 
-hls.js@^0.12.2:
-  version "0.12.4"
-  resolved "https://registry.yarnpkg.com/hls.js/-/hls.js-0.12.4.tgz#c155b7b2825a11117c111b781973c0ffa759006b"
-  integrity sha512-e8OPxQ60dBVsdkv4atdxR21KzC1mgwspM41qpozpj3Uv1Fz4CaeQy3FWoaV2O+QKKbNRvV5hW+/LipCWdrwnMQ==
+hls.js@^0.13.2:
+  version "0.13.2"
+  resolved "https://registry.yarnpkg.com/hls.js/-/hls.js-0.13.2.tgz#3e7dd28e3787c69c6aba42b64b11eb2c3c8c29f1"
+  integrity sha512-sIg2t4uGpWQLzuK1Iid9614WOKqxj4OYg+EbFbhhTDCsxpENBN+Du3yBFnoi+a83DuOOHdiQd1ydnti9loSGXw==
   dependencies:
     eventemitter3 "3.1.0"
     url-toolkit "^2.1.6"
@@ -9373,9 +9373,9 @@ nypr-metrics@^0.5.0, nypr-metrics@~0.5.1:
     ember-get-config "^0.2.2"
 
 nypr-player@>=0.3.0:
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/nypr-player/-/nypr-player-0.4.3.tgz#8435ac7b8c09e291d66ef7ac012b2beb7e358250"
-  integrity sha512-DIgWPeV7XFcIxqONj7WJ+hjEdvFPXOSI/k6N4qtGKYOzOP3EQikyqNFJJYsi5TW1xEK6HlEtTE0qkiul6ZmdBw==
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/nypr-player/-/nypr-player-0.4.4.tgz#693e6665083185a7a9ece0e9e35bed0724f35a8f"
+  integrity sha512-1aD+5MdZ4bcZBtZvwj/IT2tXMl7L3UISlcmTALu7NlerEil5ksaJUv42pl1+tll0mdFESdifaKBcuEeVe+IKYQ==
   dependencies:
     ember-cli-babel "^7.12.0"
     ember-cli-htmlbars "^2.0.1"
@@ -9385,7 +9385,7 @@ nypr-player@>=0.3.0:
     ember-moment "^7.4.1"
     nypr-ui "^0.5.0"
 
-nypr-publisher-lib@^0.5.1, nypr-publisher-lib@^0.5.11:
+nypr-publisher-lib@^0.5.1:
   version "0.5.8"
   resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.5.8.tgz#8a126d44cc5f6cba2817a3fac79d5731ec6ba4af"
   integrity sha512-QKVc9enPg5YbgC5r/eRBva3k50DZv27nlbj8yiFv55txQsBp+9lyelUtlhaMraUqegH0R6kRzrqSoMs4owtRhA==
@@ -9404,6 +9404,28 @@ nypr-publisher-lib@^0.5.1, nypr-publisher-lib@^0.5.11:
     ember-get-config "^0.2.2"
     liquid-fire "~0.29.1"
     nypr-audio-services "^0.5.0"
+    nypr-django-for-ember "^0.4.0"
+    nypr-ui "^0.5.0"
+
+nypr-publisher-lib@^0.5.11:
+  version "0.5.12"
+  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.5.12.tgz#83fe4931166c785c97cc79f26ec265d50387e088"
+  integrity sha512-n9TThigaEp327DN8AAqXqtu8xzgcVS7cIF0jUoe/tDk3jY54fxjpmdAIHei5aIoZdb21X30GG1CPn+q6PNio6A==
+  dependencies:
+    "@fortawesome/ember-fontawesome" "^0.1.14"
+    "@fortawesome/free-brands-svg-icons" "^5.10.1"
+    "@fortawesome/free-regular-svg-icons" "^5.10.1"
+    "@fortawesome/free-solid-svg-icons" "^5.10.1"
+    broccoli-funnel "^2.0.1"
+    broccoli-merge-trees "^2.0.0"
+    ember-cli-babel "^6.6.0"
+    ember-cli-htmlbars "^2.0.1"
+    ember-cli-htmlbars-inline-precompile "^1.0.0"
+    ember-cli-sass "^7.0.0"
+    ember-click-outside "^0.1.12"
+    ember-get-config "^0.2.2"
+    liquid-fire "~0.29.1"
+    nypr-audio-services "^0.6.0"
     nypr-django-for-ember "^0.4.0"
     nypr-ui "^0.5.0"
 
