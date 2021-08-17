@@ -31,8 +31,10 @@ vendor/modernizr/modernizr-build.js
 # editor cruft
 .*swp
 .*~
-.DS_Store 
+.DS_Store
 # ember-try
 .node_modules.ember-try/
 bower.json.ember-try
 package.json.ember-try
+
+.idea
