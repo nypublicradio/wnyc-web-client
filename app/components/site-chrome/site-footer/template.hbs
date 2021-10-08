@@ -1,386 +1,364 @@
 {{!--
-  Using <a> tags here instead of ember {{link-to}} helpers in order to run google analytics tracking events on the links. Global link handler catches clicks on links with data-tracking properties and runs an event tracking function before routing the link. More in /overhaul/app/instance-initializers/link-handler.js
---}}
+Using <a> tags here instead of ember {{link-to}} helpers in order to run google analytics tracking events on the links.
+  Global link handler catches clicks on links with data-tracking properties and runs an event tracking function before
+  routing the link. More in /overhaul/app/instance-initializers/link-handler.js
+  --}}
 
-<footer class="l-full flush sitechrome-footer gtm__click-tracking-container" data-action="Footer" id="footer">
-  <div class="for-screenreaders">
-    <h5>Document Footer</h5>
-  </div>
+  <footer class="l-full flush sitechrome-footer gtm__click-tracking-container" data-action="Footer" id="footer">
+    <div class="for-screenreaders">
+      <h5>Document Footer</h5>
+    </div>
 
-  <div class="l-highlight--gray {{if media.isMiddleNarrowAndUp 'l-padtop--double'}}">
-    <div class="l-constrained">
-      <div class="l-flexgrid">
-        <nav class="l-flex1of2">
-          <div class="l-unconstrained {{if media.isMiddleNarrowAndUp 'flush'}}">
-            <div class="l-highlight--mq--graydark {{unless media.isMiddleNarrowAndUp 'l-padtop'}}">
-              <div class="l-constrained">
-                <div class="align--mq-centertoleft">
-                  <h2 class="text--normal h2">
-                    {{wnyc-svg icon='logo-wnyc' className='icon--wnyc-logo-footer'}}
-                    <span class="middle-narrow-up">About WNYC</span>
-                  </h2>
-                  <!-- .h2 -->
+    <div class="l-highlight--gray {{if media.isMiddleNarrowAndUp 'l-padtop--double'}}">
+      <div class="l-constrained">
+        <div class="l-flexgrid">
+          <nav class="l-flex1of2">
+            <div class="l-unconstrained {{if media.isMiddleNarrowAndUp 'flush'}}">
+              <div class="l-highlight--mq--graydark {{unless media.isMiddleNarrowAndUp 'l-padtop'}}">
+                <div class="l-constrained">
+                  <div class="align--mq-centertoleft">
+                    <h2 class="text--normal h2">
+                      {{wnyc-svg icon='logo-wnyc' className='icon--wnyc-logo-footer'}}
+                      <span class="middle-narrow-up">About WNYC</span>
+                    </h2>
+                    <!-- .h2 -->
 
-                  <div class="text text--medium">
-                    <div class="text-body text-body--rightpad2x">
-                      <p>Listener-supported WNYC is the home for independent journalism and courageous conversation on air and online. Broadcasting live from New York City on 93.9 FM and AM 820 and available online and on the go.</p>
+                    <div class="text text--medium">
+                      <div class="text-body text-body--rightpad2x">
+                        <p>Listener-supported WNYC is the home for independent journalism and courageous conversation on
+                          air and online. Broadcasting live from New York City on 93.9 FM and AM 820 and available
+                          online and on the go.</p>
+                      </div>
                     </div>
+                    <!-- .text -->
                   </div>
-                  <!-- .text -->
+                  <!-- .align-mq -->
                 </div>
-                <!-- .align-mq -->
+                <!-- .l-constrained -->
               </div>
-              <!-- .l-constrained -->
+              <!-- .l-highlight -->
             </div>
-            <!-- .l-highlight -->
-          </div>
-          <!-- .l-unconstrained -->
+            <!-- .l-unconstrained -->
 
-          <div class="l-highlight--gray">
-            <div class="l-flexgrid">
-              <div class="l-flex1of2 l-flex1of2--fixed">
+            <div class="l-highlight--gray">
+              <div class="l-flexgrid">
+                <div class="l-flex1of2 l-flex1of2--fixed">
+                  <ul class="list list--noborder align--mq-centertoleft">
+                    <li class="list-item list-item--tiny">
+                      <a href="/schedule" class="link--capbold" title="On Air Schedule">
+                        On Air Schedule
+                      </a>
+                    </li>
+                    <li class="list-item list-item--tiny">
+                      <a href="/newsletters" class="link--capbold" title="Daily Newsletter">
+                        Daily Newsletter
+                      </a>
+                    </li>
+                    <li class="list-item list-item--tiny">
+                      <a href="/events" class="link--capbold" title="Events">
+                        Events
+                      </a>
+                    </li>
+                    <li class="list-item list-item--tiny">
+                      <a href="/wnyc-partner-events" class="link--capbold" title="Partner Events">
+                        Partner Events
+                      </a>
+                    </li>
+                    <li class="list-item list-item--tiny">
+                      <a href="/community" class="link--capbold" title="Community">
+                        Community
+                      </a>
+                    </li>
+                    <li class="list-item list-item--tiny">
+                      <a href="/giveaways" class="link--capbold" title="Giveaways">
+                        Giveaways
+                      </a>
+                    </li>
+                    <li class="list-item list-item--tiny">
+                      <a href="/weather" class="link--capbold" title="Weather">
+                        Weather
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="l-flex1of2 l-flex1of2--fixed">
+                  <ul class="list list--noborder align--mq-centertoleft">
+                    <li class="list-item list-item--tiny">
+                      <a href="/mobile" class="link--capbold" title="Download Our Apps">
+                        Download Our Apps
+                      </a>
+                    </li>
+                    <li class="list-item list-item--tiny">
+                      <a href="https://www.wnycstudios.org" class="link--capbold" target="_blank" title="Podcasts">
+                        Podcasts
+                      </a>
+                    </li>
+                    <li class="list-item list-item--tiny">
+                      <a href="/archives/collections" class="link--capbold" title="NYPR Archived Shows">
+                        Archived Shows
+                      </a>
+                    </li>
+                    <li class="list-item list-item--tiny">
+                      <a href="/series/archives-preservation" class="link--capbold" title="Audio Archives">
+                        Audio Archives
+                      </a>
+                    </li>
+                    <li class="list-item list-item--tiny">
+                      <a href="/audio/help" class="link--capbold" title="Audio Help">
+                        Audio Help
+                      </a>
+                    </li>
+                    <li class="list-item list-item--tiny">
+                      <a href="https://www.nypublicradio.org/support/" target="_blank" class="link--capbold"
+                        title="Support Us">
+                        Support Us
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+
+              </div>
+              <!-- .l-flexgrid -->
+            </div>
+            <!-- .l-highlight-dark -->
+          </nav>
+          <!-- .l-flex1of2 About WNYC -->
+
+          <div class="l-flex1of2">
+            <nav class="l-col1of2">
+              <div class="align--mq-centertoleft">
+                <h2
+                  class="{{if media.isMiddleNarrowAndUp 'h2 text--normal' 'text--red text--upper text--spacing h5 nudge'}}">
+                  Inside WNYC
+                </h2>
+                <!-- .h2 -->
                 <ul class="list list--noborder align--mq-centertoleft">
                   <li class="list-item list-item--tiny">
-                    <a href="/schedule"
-                      class="link--capbold"
-                      title="On Air Schedule">
-                      On Air Schedule
+                    <a href="/about" class="link--capbold" title="About Us">
+                      About Us
                     </a>
                   </li>
                   <li class="list-item list-item--tiny">
-                    <a href="/newsletters"
-                      class="link--capbold"
-                      title="Daily Newsletter">
-                      Daily Newsletter
+                    <a href="/contact" class="link--capbold" title="Contact Us" target="_blank">
+                      Contact Us / Feedback
                     </a>
                   </li>
                   <li class="list-item list-item--tiny">
-                   <a href="/events"
-                      class="link--capbold"
-                      title="Events">
-                      Events
+                    <a href="http://www.nypublicradio.org/underwriting/wnyc" class="link--capbold"
+                      title="Become a Sponsor">
+                      Become a Sponsor
                     </a>
                   </li>
                   <li class="list-item list-item--tiny">
-                    <a href="/wnyc-partner-events"
-                      class="link--capbold"
-                      title="Partner Events">
-                      Partner Events
+                    <a href="/careers" class="link--capbold" title="Careers">
+                      Careers
                     </a>
                   </li>
                   <li class="list-item list-item--tiny">
-                    <a href="/community"
-                      class="link--capbold"
-                      title="Community">
-                      Community
+                    <a href="https://www.nypublicradio.org/diversity-dei-overview/" class="link--capbold"
+                      title="Diversity (DEI)" target="_blank">
+                      Diversity (DEI)
                     </a>
                   </li>
                   <li class="list-item list-item--tiny">
-                    <a href="/giveaways"
-                      class="link--capbold"
-                      title="Giveaways">
-                      Giveaways
-                    </a>
-                  </li>
-                  <li class="list-item list-item--tiny">
-                    <a href="/weather"
-                      class="link--capbold"
-                      title="Weather">
-                      Weather
+                    <a href="/press" class="link--capbold" title="Press">
+                      Press
                     </a>
                   </li>
                 </ul>
               </div>
-              <div class="l-flex1of2 l-flex1of2--fixed">
-                <ul class="list list--noborder align--mq-centertoleft">
-                   <li class="list-item list-item--tiny">
-                    <a href="/mobile"
-                      class="link--capbold"
-                      title="Download Our Apps">
-                      Download Our Apps
-                    </a>
-                  </li>
-                   <li class="list-item list-item--tiny">
-                    <a href="https://www.wnycstudios.org"
-                      class="link--capbold"
-                      target="_blank"
-                      title="Podcasts">
-                      Podcasts
-                    </a>
-                  </li>
-                   <li class="list-item list-item--tiny">
-                    <a href="/archives/collections"
-                      class="link--capbold"
-                      title="NYPR Archived Shows">
-                      Archived Shows
-                    </a>
-                  </li>
-                  <li class="list-item list-item--tiny">
-                    <a href="/series/archives-preservation"
-                      class="link--capbold"
-                      title="Audio Archives">
-                      Audio Archives
-                    </a>
-                  </li>
-                  <li class="list-item list-item--tiny">
-                    <a href="/audio/help"
-                      class="link--capbold"
-                      title="Audio Help">
-                      Audio Help
-                    </a>
-                  </li>
-                  <li class="list-item list-item--tiny">
-                    <a href="/support"
-                      class="link--capbold"
-                      title="Support WNYC">
-                      Support WNYC
-                    </a>
-                  </li>
-                </ul>
-              </div>
+              <!-- .align -->
+            </nav>
+            <!-- .l-col1of2 -->
 
-            </div>
-            <!-- .l-flexgrid -->
-          </div>
-          <!-- .l-highlight-dark -->
-        </nav>
-        <!-- .l-flex1of2 About WNYC -->
-
-        <div class="l-flex1of2">
-          <nav class="l-col1of2">
-            <div class="align--mq-centertoleft">
-              <h2 class="{{if media.isMiddleNarrowAndUp 'h2 text--normal' 'text--red text--upper text--spacing h5 nudge'}}">
-                Inside WNYC
+            {{#if media.isMiddleNarrowAndUp}}
+            <nav class="l-col1of2">
+              <h2 class="text--normal h2 medium-up">
+                Social
               </h2>
               <!-- .h2 -->
               <ul class="list list--noborder align--mq-centertoleft">
                 <li class="list-item list-item--tiny">
-                  <a href="/about"
-                    class="link--capbold"
-                    title="About Us">
-                    About Us
+                  <a href="http://www.facebook.com/wnyc" class="link--capbold" title="Facebook" target="_blank">
+                    <i class="fa fa-facebook"></i>
+                    <span>Facebook</span>
                   </a>
                 </li>
                 <li class="list-item list-item--tiny">
-                  <a href="/contact"
-                    class="link--capbold"
-                    title="Contact Us"
+                  <a href="http://www.twitter.com/wnyc" class="link--capbold" title="Twitter" target="_blank">
+                    <i class="fa fa-twitter"></i>
+                    <span>Twitter</span>
+                  </a>
+                </li>
+                {{#if media.isLargeAndUp}}
+                {{!-- These twitter links don't work on mobile, hide on tablets --}}
+                <li class="list-item list-item--tiny">
+                  <a href="https://twitter.com/WNYC/lists/wnyc-shows/members" class="link--capbold" title="Twitter"
                     target="_blank">
-                    Contact Us / Feedback
+                    <i class="fa fa-twitter"></i>
+                    <span>Our Shows</span>
                   </a>
                 </li>
                 <li class="list-item list-item--tiny">
-                  <a href="http://www.nypublicradio.org/underwriting/wnyc"
-                    class="link--capbold"
-                    title="Become a Sponsor">
-                    Become a Sponsor
-                  </a>
-                </li>
-                <li class="list-item list-item--tiny">
-                 <a href="/careers"
-                    class="link--capbold"
-                    title="Careers">
-                    Careers
-                  </a>
-                </li>
-                <li class="list-item list-item--tiny">
-                  <a href="https://www.nypublicradio.org/diversity-dei-overview/"
-                    class="link--capbold"
-                    title="Diversity (DEI)"
+                  <a href="https://twitter.com/WNYC/lists/wnyc-people/members" class="link--capbold" title="Twitter"
                     target="_blank">
-                    Diversity (DEI)
+                    <i class="fa fa-twitter"></i>
+                    <span>Our People</span>
+                  </a>
+                </li>
+                {{/if}}
+                <li class="list-item list-item--tiny">
+                  <a href="https://www.instagram.com/wnyc" class="link--capbold" title="Instagram" target="_blank">
+                    <i class="fa fa-instagram"></i>
+                    <span>Instagram</span>
                   </a>
                 </li>
                 <li class="list-item list-item--tiny">
-                  <a href="/press"
-                    class="link--capbold"
-                    title="Press">
-                    Press
+                  <a href="https://www.snapchat.com/add/wnycradio" class="link--capbold" title="Snapchat"
+                    target="_blank">
+                    <i class="fa fa-snapchat-ghost"></i>
+                    <span>Snapchat</span>
                   </a>
                 </li>
-              </ul>
-            </div>
-          <!-- .align -->
-          </nav>
-          <!-- .l-col1of2 -->
-
-          {{#if media.isMiddleNarrowAndUp}}
-          <nav class="l-col1of2">
-            <h2 class="text--normal h2 medium-up">
-              Social
-            </h2>
-            <!-- .h2 -->
-            <ul class="list list--noborder align--mq-centertoleft">
-              <li class="list-item list-item--tiny">
-                <a href="http://www.facebook.com/wnyc" class="link--capbold" title="Facebook" target="_blank">
-                  <i class="fa fa-facebook"></i>
-                  <span>Facebook</span>
-                </a>
-              </li>
-              <li class="list-item list-item--tiny">
-                <a href="http://www.twitter.com/wnyc" class="link--capbold" title="Twitter" target="_blank">
-                  <i class="fa fa-twitter"></i>
-                  <span>Twitter</span>
-                </a>
-              </li>
-              {{#if media.isLargeAndUp}}
-              {{!-- These twitter links don't work on mobile, hide on tablets --}}
-              <li class="list-item list-item--tiny">
-                <a href="https://twitter.com/WNYC/lists/wnyc-shows/members" class="link--capbold" title="Twitter" target="_blank">
-                  <i class="fa fa-twitter"></i>
-                  <span>Our Shows</span>
-                </a>
-              </li>
-              <li class="list-item list-item--tiny">
-                <a href="https://twitter.com/WNYC/lists/wnyc-people/members" class="link--capbold" title="Twitter" target="_blank">
-                  <i class="fa fa-twitter"></i>
-                  <span>Our People</span>
-                </a>
-              </li>
-              {{/if}}
-              <li class="list-item list-item--tiny">
-                <a href="https://www.instagram.com/wnyc" class="link--capbold" title="Instagram" target="_blank">
-                  <i class="fa fa-instagram"></i>
-                  <span>Instagram</span>
-                </a>
-              </li>
-              <li class="list-item list-item--tiny">
-                <a href="https://www.snapchat.com/add/wnycradio" class="link--capbold" title="Snapchat" target="_blank">
-                  <i class="fa fa-snapchat-ghost"></i>
-                  <span>Snapchat</span>
-                </a>
-              </li>
-              <li class="list-item list-item--tiny">
-                <a href="https://www.youtube.com/user/wnycradio" class="link--capbold" title="YouTube" target="_blank">
-                  <i class="fa fa-youtube"></i>
-                  <span>YouTube</span>
-                </a>
-              </li>
-              <li class="list-item list-item--tiny">
-                <a href="http://wnyc.tumblr.com" class="link--capbold" title="Tumblr" target="_blank">
-                  <i class="fa fa-tumblr"></i>
-                  <span>Tumblr</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <!-- .l-col1of2 -->
-          {{/if}}
-        </div>
-        <!-- .l-flex1of2 -->
-        <!-- inside wnyc/social -->
-      </div>
-      <!-- .l-flexgrid -->
-    </div>
-    <!-- .l-constrained -->
-  </div>
-  <!-- .l-highlight -->
-
-  <div class="l-highlight--gray pad-persistent-player">
-    <div class="l-constrained l-constrained--shrink">
-      <div class="box--topborder box--flexpadtop">
-
-        {{network-stripe}}
-
-      </div>
-      <!-- .box -->
-    </div>
-    <!-- .l-constrained -->
-
-    {{#unless media.isMiddleNarrowAndUp}}
-    <nav class="box--flexpadtop box--topborder">
-      <div class="l-constrained">
-        <h2 class="for-screenreaders">Social</h2>
-        <ul class="list list--noborder list--flex aligncenter flush">
-          <li class="list-item list-item--tiny">
-            <a href="http://www.facebook.com/wnyc" title="Facebook" target="_blank">
-                <i class="fa fa-facebook fa-2x"></i>
-            </a>
-          </li>
-          <li class="list-item list-item--tiny">
-            <a href="http://www.twitter.com/wnyc" title="Twitter" target="_blank">
-                <i class="fa fa-twitter fa-2x"></i>
-            </a>
-          </li>
-          <li class="list-item list-item--tiny">
-            <a href="https://www.instagram.com/wnyc" title="Instagram" target="_blank">
-                <i class="fa fa-instagram fa-2x"></i>
-            </a>
-          </li>
-          <li class="list-item list-item--tiny">
-            <a href="https://www.snapchat.com/add/wnycradio" title="Snapchat" target="_blank">
-                <i class="fa fa-snapchat-ghost fa-2x"></i>
-            </a>
-          </li>
-          <li class="list-item list-item--tiny">
-            <a href="https://www.youtube.com/user/wnycradio" title="YouTube" target="_blank">
-                <i class="fa fa-youtube fa-2x"></i>
-            </a>
-          </li>
-          <li class="list-item list-item--tiny">
-            <a href="http://wnyc.tumblr.com" title="Tumblr" target="_blank">
-                <i class="fa fa-tumblr fa-2x"></i>
-            </a>
-          </li>
-        </ul>
-      </div>
-      <!-- .l-constrained -->
-    </nav>
-    <!-- .box -->
-    {{/unless}}
-
-    <div class="l-constrained l-constrained--shrink">
-      <div class="box--topborder box--flexpadtop">
-        <div class="l-full footer-legal">
-          <div class="l-col2of3">
-            <nav class="align--mq-centertoleft">
-              <div class="for-screenreaders">
-                <h2>Legal Nav</h2>
-              </div>
-              <ul class="list list--noborder flush {{if media.isMiddleNarrowAndUp 'list--flex'}}">
                 <li class="list-item list-item--tiny">
-                  <a href="http://www.newyorkpublicradio.org" class="link--capbold">&copy; {{moment-format (now) 'YYYY'}} New York Public Radio</a>
+                  <a href="https://www.youtube.com/user/wnycradio" class="link--capbold" title="YouTube"
+                    target="_blank">
+                    <i class="fa fa-youtube"></i>
+                    <span>YouTube</span>
+                  </a>
                 </li>
                 <li class="list-item list-item--tiny">
-                  <a href="/terms/" class="link--capbold" title="Terms of Use">Terms of Use</a>
-                </li>
-                <li class="list-item list-item--tiny">
-                  <a href="/privacy/" class="link--capbold" title="Privacy Policy">Privacy Policy</a>
-                </li>
-                <li class="list-item list-item--tiny">
-                  <a href="https://media.wnyc.org/media/resources/2021/Jul/07/accessibility_policy_10.30.20.pdf" class="link--capbold" target="_blank" rel="nofollow" title="Privacy Policy">Accessibility</a>
-                </li>
-                <li class="list-item list-item--tiny">
-                  <a href="/corrections/" class="link--capbold">Corrections</a>
-                </li>
-                <li class="list-item list-item--tiny">
-                  <a href="/articles/wnyc-contest-rules" class="link--capbold" title="Giveaway Rules">Giveaway Rules</a>
-                </li>
-                <li class="list-item list-item--tiny">
-                  <a href="https://publicfiles.fcc.gov/fm-profile/wnyc-fm" class="link--capbold" title="WNYC-FM FCC Public File" target="_blank">WNYC-FM FCC Public File</a>
-                </li>
-                <li class="list-item list-item--tiny">
-                  <a href="https://www.wnyc.org/resources/912769/fcc_eeo_public_file_report.pdf" class="link--capbold" title="EEO Report" target="_blank">EEO Report</a>
-                </li>
-                <li class="list-item list-item--tiny">
-                  <a href="https://publicfiles.fcc.gov/am-profile/wnyc" class="link--capbold" title="WNYC-AM FCC Public File" target="_blank">WNYC-AM FCC Public File</a>
+                  <a href="http://wnyc.tumblr.com" class="link--capbold" title="Tumblr" target="_blank">
+                    <i class="fa fa-tumblr"></i>
+                    <span>Tumblr</span>
+                  </a>
                 </li>
               </ul>
             </nav>
-            <!-- .align -->
+            <!-- .l-col1of2 -->
+            {{/if}}
           </div>
-          <div class="l-col1of3 middle-narrow-up">
-            <div class="text--small {{if media.isMediumAndUp 'alignright' 'aligncenter'}}">
-              <span class="text--lightgray">WNYC is supported by {{nypr-svg icon='jlgreene-logo' className='icon--jlgreene--footer'}}</span>
+          <!-- .l-flex1of2 -->
+          <!-- inside wnyc/social -->
+        </div>
+        <!-- .l-flexgrid -->
+      </div>
+      <!-- .l-constrained -->
+    </div>
+    <!-- .l-highlight -->
+
+    <div class="l-highlight--gray pad-persistent-player">
+      <div class="l-constrained l-constrained--shrink">
+        <div class="box--topborder box--flexpadtop">
+
+          {{network-stripe}}
+
+        </div>
+        <!-- .box -->
+      </div>
+      <!-- .l-constrained -->
+
+      {{#unless media.isMiddleNarrowAndUp}}
+      <nav class="box--flexpadtop box--topborder">
+        <div class="l-constrained">
+          <h2 class="for-screenreaders">Social</h2>
+          <ul class="list list--noborder list--flex aligncenter flush">
+            <li class="list-item list-item--tiny">
+              <a href="http://www.facebook.com/wnyc" title="Facebook" target="_blank">
+                <i class="fa fa-facebook fa-2x"></i>
+              </a>
+            </li>
+            <li class="list-item list-item--tiny">
+              <a href="http://www.twitter.com/wnyc" title="Twitter" target="_blank">
+                <i class="fa fa-twitter fa-2x"></i>
+              </a>
+            </li>
+            <li class="list-item list-item--tiny">
+              <a href="https://www.instagram.com/wnyc" title="Instagram" target="_blank">
+                <i class="fa fa-instagram fa-2x"></i>
+              </a>
+            </li>
+            <li class="list-item list-item--tiny">
+              <a href="https://www.snapchat.com/add/wnycradio" title="Snapchat" target="_blank">
+                <i class="fa fa-snapchat-ghost fa-2x"></i>
+              </a>
+            </li>
+            <li class="list-item list-item--tiny">
+              <a href="https://www.youtube.com/user/wnycradio" title="YouTube" target="_blank">
+                <i class="fa fa-youtube fa-2x"></i>
+              </a>
+            </li>
+            <li class="list-item list-item--tiny">
+              <a href="http://wnyc.tumblr.com" title="Tumblr" target="_blank">
+                <i class="fa fa-tumblr fa-2x"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- .l-constrained -->
+      </nav>
+      <!-- .box -->
+      {{/unless}}
+
+      <div class="l-constrained l-constrained--shrink">
+        <div class="box--topborder box--flexpadtop">
+          <div class="l-full footer-legal">
+            <div class="l-col2of3">
+              <nav class="align--mq-centertoleft">
+                <div class="for-screenreaders">
+                  <h2>Legal Nav</h2>
+                </div>
+                <ul class="list list--noborder flush {{if media.isMiddleNarrowAndUp 'list--flex'}}">
+                  <li class="list-item list-item--tiny">
+                    <a href="http://www.newyorkpublicradio.org" class="link--capbold">&copy; {{moment-format (now)
+                      'YYYY'}} New York Public Radio</a>
+                  </li>
+                  <li class="list-item list-item--tiny">
+                    <a href="/terms/" class="link--capbold" title="Terms of Use">Terms of Use</a>
+                  </li>
+                  <li class="list-item list-item--tiny">
+                    <a href="/privacy/" class="link--capbold" title="Privacy Policy">Privacy Policy</a>
+                  </li>
+                  <li class="list-item list-item--tiny">
+                    <a href="https://media.wnyc.org/media/resources/2021/Jul/07/accessibility_policy_10.30.20.pdf"
+                      class="link--capbold" target="_blank" rel="nofollow" title="Privacy Policy">Accessibility</a>
+                  </li>
+                  <li class="list-item list-item--tiny">
+                    <a href="/corrections/" class="link--capbold">Corrections</a>
+                  </li>
+                  <li class="list-item list-item--tiny">
+                    <a href="/articles/wnyc-contest-rules" class="link--capbold" title="Giveaway Rules">Giveaway
+                      Rules</a>
+                  </li>
+                  <li class="list-item list-item--tiny">
+                    <a href="https://publicfiles.fcc.gov/fm-profile/wnyc-fm" class="link--capbold"
+                      title="WNYC-FM FCC Public File" target="_blank">WNYC-FM FCC Public File</a>
+                  </li>
+                  <li class="list-item list-item--tiny">
+                    <a href="https://www.wnyc.org/resources/912769/fcc_eeo_public_file_report.pdf" class="link--capbold"
+                      title="EEO Report" target="_blank">EEO Report</a>
+                  </li>
+                  <li class="list-item list-item--tiny">
+                    <a href="https://publicfiles.fcc.gov/am-profile/wnyc" class="link--capbold"
+                      title="WNYC-AM FCC Public File" target="_blank">WNYC-AM FCC Public File</a>
+                  </li>
+                </ul>
+              </nav>
+              <!-- .align -->
+            </div>
+            <div class="l-col1of3 middle-narrow-up">
+              <div class="text--small {{if media.isMediumAndUp 'alignright' 'aligncenter'}}">
+                <span class="text--lightgray">WNYC is supported by {{nypr-svg icon='jlgreene-logo'
+                  className='icon--jlgreene--footer'}}</span>
+              </div>
             </div>
           </div>
+
+
         </div>
-
-
+        <!-- .box -->
       </div>
-      <!-- .box -->
+      <!-- .l-constrained -->
     </div>
-    <!-- .l-constrained -->
-  </div>
-  <!-- .l-highlight -->
-</footer>
+    <!-- .l-highlight -->
+  </footer>

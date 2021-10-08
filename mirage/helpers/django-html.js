@@ -282,7 +282,7 @@ var HTML = `<html>
                   <li class="secondary">
                       <a href="https://pledge3.wnyc.org/?utm_source=wnyc&utm_medium=wnyc-nav-link&utm_content=wnyc-sidebar&utm_campaign=pledge" class="donation">Donate</a>
                   </li>
-                  <li class="secondary"><a href="/support/">Support WNYC</a></li>
+                  <li class="secondary"><a href="https://www.nypublicradio.org/support/" target="_blank">Support Us</a></li>
                   <li class="secondary"><a href="/about/">About Us</a></li>
               </ul>
               <div id="navigation-photo-credit">
