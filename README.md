@@ -16,7 +16,7 @@ Fortunately, `publisher` has its own set of easy-to-follow getting started instr
 You will need the following software properly installed on your computer. Please follow all the directions as written on the websites of these projects and do not neglect to install their dependencies.
 
 * [Git](http://git-scm.com/downloads)
-* Node version 8 (install using [nvm](https://github.com/nvm-sh/nvm#installing-and-updating))
+* Node version 10.0.0 (install using [nvm](https://github.com/nvm-sh/nvm#installing-and-updating))
 * [Ember CLI](https://ember-cli.com/user-guide/#getting-started) (>= 2.6.0)
 * [Grunt](http://gruntjs.com/getting-started)
 * [Yarn](https://classic.yarnpkg.com/en/docs/install/#mac-stable)
@@ -33,7 +33,7 @@ We use [modernizr](https://modernizr.com/) to detect for certain browser feature
 2. `$ git checkout <working branch>`
 3. `$ cp .env.sample .env`
 4. Edit `.env` with your `publisher` app location if you do _not_ want to use Publisher's demo environment, which is the default in `.env.sample`.
-5. `$ yarn`
+5. `$ yarn install`
 6. `$ npm install grunt@v1.0.3` :point-left: version can be unpinned if `wnyc-web-client` is migrated to Node >=v10
 7. `$ npx grunt modernizr:dist`
 

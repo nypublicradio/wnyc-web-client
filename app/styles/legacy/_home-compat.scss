@@ -7,8 +7,8 @@
 
 #wnyc_home .story-wrapper {
   h2 > a {
-    display: block;
-    border: none;
+    display: inline;
+    //border: none;
 
     &:hover {
       text-decoration: none;
@@ -260,7 +260,20 @@ body.ember-application {
   }
 
   #wnyc_home h2 {
-    font-weight: bold;
+    font-weight: 600;
+    letter-spacing: 0.1px;
+    font-size: 20px;
+    line-height: 1.25;
+    color: #333;
+    background-color: transparent;
+      & a{
+        text-decoration: none;
+        transition: border-color 250ms ease, color 250ms ease;
+        border-bottom: 1px solid rgba($blue, 0);
+        &:active, &:hover { outline: 0; }
+        &:focus, &:hover { border-bottom-color: $blue; }
+        &:hover { color: $blue; }
+      }
   }
 
   .story-wrapper {
@@ -286,14 +299,25 @@ body.ember-application {
     }
   }
 
-  @media screen and (min-width:800px) {
-    #home-primary {
-      h2 {
-        font-size: 20px;
-      }
+  #wnyc_home{
+    @media screen and (min-width:800px) {
+      #home-primary, #home-secondary, .shelf {
+        h2 {
+          font-size: 1.5rem;
+          line-height: 1.425;
+        }
 
-      .image {
-        border-radius: 3px 0 0 3px;
+        .image {
+          border-radius: 3px 0 0 3px;
+        }
+      }
+      #home-secondary h2{
+        font-size: 1.25rem;
+        line-height: 1.3;
+      
+      }
+      .shelf h2{
+        font-size: 14px;
       }
     }
   }
