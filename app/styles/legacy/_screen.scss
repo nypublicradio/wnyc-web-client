@@ -276,7 +276,12 @@ h2.headline.norule {
   text-transform: none;
 }
 
-h2 a, h3 a, h4 a {
+h2 a {
+  color: #333;
+  text-decoration: none;
+}
+
+h3 a, h4 a {
   color: #000;
   text-decoration: none;
 }
