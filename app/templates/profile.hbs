@@ -6,16 +6,17 @@
     }
   };
 </script>
-<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=4e99cf72-9408-4ac4-8092-69ac6f3541c8"> </script>
+<script id="ze-snippet"
+  src="https://static.zdassets.com/ekr/snippet.js?key=4e99cf72-9408-4ac4-8092-69ac6f3541c8"> </script>
 <!-- End of nypublicradio Zendesk Widget script -->
 
 <div class="l-constrained account-info">
   <h2 class="account-header">
     <div class="account-avatar">
       {{#if model.picture}}
-        <img src={{model.picture}}>
+      <img src={{model.picture}}>
       {{else}}
-        {{nypr-svg icon="user"}}
+      {{nypr-svg icon="user"}}
       {{/if}}
     </div>
     Hi {{model.givenName}}!
@@ -24,139 +25,124 @@
   <div class="nypr-account-settings-and-member-center">
     <div class="nypr-account-settings-body">
       {{nypr-accounts/basic-card
-        user=model
-        siteName=siteName
-        emailUpdated=(action emailUpdated)
-        authenticate=(action authenticate)
-        requestTempPassword=(action requestTempPassword)
-        emailIsPendingVerification=emailIsPendingVerification}}
+      user=model
+      siteName=siteName
+      emailUpdated=(action emailUpdated)
+      authenticate=(action authenticate)
+      requestTempPassword=(action requestTempPassword)
+      emailIsPendingVerification=emailIsPendingVerification}}
 
       {{#if model.hasPassword}}
-        {{nypr-accounts/password-card
-          helplinkUrl='/forgot'
-          helplinkText='Forgot password?'
-          changePassword=(action changePassword)}}
+      {{nypr-accounts/password-card
+      helplinkUrl='/forgot'
+      helplinkText='Forgot password?'
+      changePassword=(action changePassword)}}
       {{/if}}
 
       {{#if model.facebookId}}
-        {{#nypr-accounts/social-card as |card|}}
-          {{card.connect-button
-            connected=true
-            providerName='Facebook'
-            providerIcon='facebook-official'
-            buttonClass='nypr-social-connect__button--facebook'
-            manageUrl='https://www.facebook.com/settings?tab=applications'
-            }}
-        {{/nypr-accounts/social-card}}
+      {{#nypr-accounts/social-card as |card|}}
+      {{card.connect-button
+      connected=true
+      providerName='Facebook'
+      providerIcon='facebook-official'
+      buttonClass='nypr-social-connect__button--facebook'
+      manageUrl='https://www.facebook.com/settings?tab=applications'
+      }}
+      {{/nypr-accounts/social-card}}
       {{/if}}
 
     </div>
     {{nypr-accounts/membership-card
-      pledges=orders
-      siteName=siteName
-      siteDomain=siteDomain
-      user=model
-      emailIsPendingVerification=emailIsPendingVerification
-      resendVerificationEmail=(if model.hasPassword
-        (action resendVerificationEmail)
-        (action requestTempPassword model.email)
-      )
-      class='nypr-membership-info-body'}}
+    pledgeManagerEnabled=false
+    customStatusMessage="Thanks for visiting this page! Our Member Center is currently unavailable while we make improvements that we hope you will find useful. If you have questions about your membership or need to make changes at this time, please <a href='https://www.wnyc.org/contact' target='_blank' rel='nofollow'>contact Listener Services here.</a>"
+    siteName=siteName
+    siteDomain=siteDomain
+    user=model
+    emailIsPendingVerification=emailIsPendingVerification
+    resendVerificationEmail=(if model.hasPassword
+    (action resendVerificationEmail)
+    (action requestTempPassword model.email)
+    )
+    class='nypr-membership-info-body'}}
   </div>
 
   <div class="aligncenter text--small">
     <p>
-      Need help? Contact us using our <a href="https://nypublicradio.zendesk.com/hc/en-us" target="_blank">contact form</a> or call us at <a class="text--nowrap" href="tel:646-829-4000">646-829-4000</a>.<br />
-      <button
-        data-test-selector="disable-account"
-        class="btn--link btn--smalltext gtm__click-tracking"
-        data-action="Personal Info"
-        data-label="Open Disable Account"
-        {{action (action (mut disableModal) true)}}>Disable my online account</button>
+      Need help? Contact us using our <a href="https://nypublicradio.zendesk.com/hc/en-us" target="_blank">contact
+        form</a> or call us at <a class="text--nowrap" href="tel:646-829-4000">646-829-4000</a>.<br />
+      <button data-test-selector="disable-account" class="btn--link btn--smalltext gtm__click-tracking"
+        data-action="Personal Info" data-label="Open Disable Account" {{action (action (mut disableModal)
+        true)}}>Disable my online account</button>
     </p>
   </div>
 </div>
 
 {{#if disableModal}}
-  {{#nypr-account-modal closeAction=(action (mut disableModal) false) as |m|}}
-    {{#m.header as |header|}}
-      {{header.title "Disable online account"}}
-      {{#header.button class="gtm__click-tracking" data-action="Personal Info" data-label="Cancel Disable Account"}}
-        {{nypr-svg icon='close'}}
-      {{/header.button}}
-    {{/m.header}}
+{{#nypr-account-modal closeAction=(action (mut disableModal) false) as |m|}}
+{{#m.header as |header|}}
+{{header.title "Disable online account"}}
+{{#header.button class="gtm__click-tracking" data-action="Personal Info" data-label="Cancel Disable Account"}}
+{{nypr-svg icon='close'}}
+{{/header.button}}
+{{/m.header}}
 
-    {{#m.body}}
-    <p>
-      This will disable your online account, but will not impact your membership status.
-    </p>
-    {{/m.body}}
+{{#m.body}}
+<p>
+  This will disable your online account, but will not impact your membership status.
+</p>
+{{/m.body}}
 
-    {{#m.footer}}
-      <button
-        class="nypr-account-cancel gtm__click-tracking"
-        data-action="Personal Info"
-        data-label="Cancel Disable Account"
-        data-test-selector="cancel-disable"
-        {{action (action (mut disableModal) false)}}>Cancel</button>
-      <button
-        class="nypr-account-confirm gtm__click-tracking"
-        data-action="Personal Info"
-        data-label="Submit Disable Account"
-        data-test-selector="do-disable"
-        {{action 'disableAccount'}}>Disable my online account</button>
-    {{/m.footer}}
-  {{/nypr-account-modal}}
+{{#m.footer}}
+<button class="nypr-account-cancel gtm__click-tracking" data-action="Personal Info" data-label="Cancel Disable Account"
+  data-test-selector="cancel-disable" {{action (action (mut disableModal) false)}}>Cancel</button>
+<button class="nypr-account-confirm gtm__click-tracking" data-action="Personal Info" data-label="Submit Disable Account"
+  data-test-selector="do-disable" {{action 'disableAccount' }}>Disable my online account</button>
+{{/m.footer}}
+{{/nypr-account-modal}}
 {{else if confirmDisableModal}}
-  {{#nypr-account-modal as |m|}}
-    {{#m.body}}
-    <p>
-      Your online {{siteName}} account has been deactivated.
-    </p>
-    {{/m.body}}
+{{#nypr-account-modal as |m|}}
+{{#m.body}}
+<p>
+  Your online {{siteName}} account has been deactivated.
+</p>
+{{/m.body}}
 
-    {{#m.footer}}
-      <button
-        class="nypr-account-confirm"
-        data-test-selector="confirm-disable"
-        {{action 'confirmDisable'}}>Got it!</button>
-    {{/m.footer}}
-  {{/nypr-account-modal}}
+{{#m.footer}}
+<button class="nypr-account-confirm" data-test-selector="confirm-disable" {{action 'confirmDisable' }}>Got it!</button>
+{{/m.footer}}
+{{/nypr-account-modal}}
 {{/if}}
 
 {{#if promptForPassword.isRunning}}
-  {{#nypr-account-modal closeAction=(action 'endTask' 'promptForPassword') as |m|}}
-    {{#m.header as |header|}}
-      {{header.title "Enter your Password"}}
-      {{#header.button}}
-        {{nypr-svg icon='close'}}
-      {{/header.button}}
-    {{/m.header}}
+{{#nypr-account-modal closeAction=(action 'endTask' 'promptForPassword') as |m|}}
+{{#m.header as |header|}}
+{{header.title "Enter your Password"}}
+{{#header.button}}
+{{nypr-svg icon='close'}}
+{{/header.button}}
+{{/m.header}}
 
-    <form {{action (perform verifyPassword) on='submit'}}>
-    {{#m.body}}
-      <p>
-        You must re-enter your password to verify your account.
-      </p>
-      {{nypr-input
-        label='Password'
-        type='password'
-        fieldname='passwordForVerifyEmail'
-        placeholder='Enter your password'
-        value=password
-        helplinkUrl="/forgot"
-        helplinkText="Forgot Password?"
-        errors=passwordError
-        showError=true
-      }}
-    {{/m.body}}
+<form {{action (perform verifyPassword) on='submit' }}>
+  {{#m.body}}
+  <p>
+    You must re-enter your password to verify your account.
+  </p>
+  {{nypr-input
+  label='Password'
+  type='password'
+  fieldname='passwordForVerifyEmail'
+  placeholder='Enter your password'
+  value=password
+  helplinkUrl="/forgot"
+  helplinkText="Forgot Password?"
+  errors=passwordError
+  showError=true
+  }}
+  {{/m.body}}
 
-    {{#m.footer}}
-      <button
-        class="nypr-account-confirm"
-        data-test-selector="check-pw-verify"
-        >Submit</button>
-    {{/m.footer}}
-  </form>
-  {{/nypr-account-modal}}
+  {{#m.footer}}
+  <button class="nypr-account-confirm" data-test-selector="check-pw-verify">Submit</button>
+  {{/m.footer}}
+</form>
+{{/nypr-account-modal}}
 {{/if}}

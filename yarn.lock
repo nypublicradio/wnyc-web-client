@@ -9246,10 +9246,10 @@ nwsapi@^2.0.9:
   resolved "https://registry.yarnpkg.com/nwsapi/-/nwsapi-2.2.0.tgz#204879a9e3d068ff2a55139c2c772780681a38b7"
   integrity sha512-h2AatdwYH+JHiZpv7pt/gSX1XoRGb7L/qSIeuqA6GwYoF9w1vP1cw42TO0aI2pNyshRK5893hNSl+1//vHK7hQ==
 
-nypr-account-settings@~0.2.8:
-  version "0.2.8"
-  resolved "https://registry.yarnpkg.com/nypr-account-settings/-/nypr-account-settings-0.2.8.tgz#5e36a6d47803429372ebc8b545097eb590107a97"
-  integrity sha512-JK6IU7wnVqPRTlwal+L8AYy4+J4Ura75gMlr8tE+qyLWOLVS1AnApb9SNqjj4V7pEfkerklsUowFTZrkjS6e6g==
+nypr-account-settings@0.2.10:
+  version "0.2.10"
+  resolved "https://registry.yarnpkg.com/nypr-account-settings/-/nypr-account-settings-0.2.10.tgz#ecb84bf848e89e3355057c7c526982c3e969878d"
+  integrity sha512-rWxJzKQzCCbKVbAAyhxcrC724hl2cLUuyV7V9PSkPakjw05zRHh9z3X352duYcfM2o5ANW5IUhnNkX9UzyhCow==
   dependencies:
     ember-changeset "^2.0.0"
     ember-changeset-validations "^2.1.0"
@@ -9408,9 +9408,9 @@ nypr-publisher-lib@^0.5.1:
     nypr-ui "^0.5.0"
 
 nypr-publisher-lib@^0.5.11:
-  version "0.5.12"
-  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.5.12.tgz#83fe4931166c785c97cc79f26ec265d50387e088"
-  integrity sha512-n9TThigaEp327DN8AAqXqtu8xzgcVS7cIF0jUoe/tDk3jY54fxjpmdAIHei5aIoZdb21X30GG1CPn+q6PNio6A==
+  version "0.5.13"
+  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.5.13.tgz#f3920bec922900087b7fc898f6afbf39efb59d3f"
+  integrity sha512-P8S8zUIA5f1G//9Tv0OYaasCNZ2ek5SNddWkwjmiCpwyw5br6hviTys2yApuM8OscJ3G2ksWNI1mkMGuC4ohWA==
   dependencies:
     "@fortawesome/ember-fontawesome" "^0.1.14"
     "@fortawesome/free-brands-svg-icons" "^5.10.1"

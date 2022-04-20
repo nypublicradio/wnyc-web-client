@@ -359,14 +359,4 @@ module('Acceptance | profile', function(hooks) {
     assert.equal(setTempPasswordRequests.length, 1, 'it should call the send-temp api url once');
     assert.equal(JSON.parse(setTempPasswordRequests[0].requestBody).email, user.email, 'it should call the send-temp api url with the users email address');
   });
-
-  test('test member center failure', async function(assert) {
-    authenticateSession({access_token: 'foo'});
-    server.create('user');
-    server.get('/v1/orders/', {}, 500);
-
-    await visit('/profile');
-
-    assert.ok(find('.nypr-membership-info-body').textContent.includes("membership details could not be retrieved"));
-  });
 });
