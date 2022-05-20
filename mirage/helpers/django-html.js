@@ -1084,12 +1084,12 @@ var HTML = `<html>
       googletag.cmd.push(function() {
 
       var leaderboard_mapping = googletag.sizeMapping()
-          .addSize([0, 0], [300, 50])
+          .addSize([0, 0], [320, 50])
           .addSize([758, 0], [728, 90])
           .addSize([1020, 0], [970, 415])
           .build()
 
-      wnyc.ads.leaderboard = googletag.defineSlot("/1007549/WNYC/wnyc_leaderboard", [[970, 415], [728, 90], [300, 50]], "leaderboard")
+      wnyc.ads.leaderboard = googletag.defineSlot("/1007549/WNYC/wnyc_leaderboard", [[970, 415], [728, 90], [320, 50]], "leaderboard")
           .defineSizeMapping(leaderboard_mapping)
           .addService(googletag.pubads());
 
