@@ -99,10 +99,15 @@
         {{#link-to 'discover.start' current-when="discover" tagName='li' href=false class="list-item list-item--nav"}}
           {{link-to 'Discover' 'discover.start' class="inherit gtm__click-tracking" data-action="Side Navigation"}}
         {{/link-to}}
+        
+        <li class="list-item list-item--nav">
+          <a href="https://shop.wnyc.org" id="merch-store-a-tag" class="inherit gtm__click-tracking merch-store-link"
+            data-action="Side Navigation" target="_blank" rel="noopener"><span><i class="fa fa-external-link" aria-hidden="true"></i></span>Shop</a> 
+        </li>
 
         <li class="list-item list-item--nav">
           <a href="https://www.nypublicradio.org/support/" class="inherit gtm__click-tracking" data-action="Side Navigation"
-            target="_blank"><span><i class="fa fa-external-link" aria-hidden="true"></i></span> Support Us</a>
+            target="_blank" rel="noopener"><span><i class="fa fa-external-link" aria-hidden="true"></i></span> Support Us</a>
         </li>
 
         {{#unless media.isLargeAndUp}}
