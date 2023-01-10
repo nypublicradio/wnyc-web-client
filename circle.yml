@@ -134,6 +134,7 @@ workflows:
       - deploy_production:
           requires:
             - test
+          context: "AWS Deploy"
           filters:
             tags:
               only: /^v[0-9]+\.[0-9]+\.[0-9]+/
@@ -142,6 +143,7 @@ workflows:
       - deploy_demo:
           requires:
             - test
+          context: "AWS Deploy"
           filters:
             tags:
               only: demo
@@ -150,6 +152,7 @@ workflows:
       - deploy_qa:
           requires:
             - test
+          context: "AWS Deploy"
           filters:
             branches:
               only: /[A-Za-z-_]+/[A-Za-z-_\d]+/
