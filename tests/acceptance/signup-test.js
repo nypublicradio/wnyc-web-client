@@ -76,67 +76,8 @@ module('Acceptance | signup', function(hooks) {
     assert.equal(find('.account-form-heading').textContent.trim(), 'Thanks for signing up!');
   });
 
-  test('Sign up with Facebook button is visible at load', async function(assert) {
+  test('Sign up with Facebook button is not visible at load', async function(assert) {
     await visit(signupUrl);
-    assert.ok(find('button.account-form-btn--facebook'));
-  });
-
-  test('Successful facebook login redirects', async function(assert) {
-    server.create('django-page', {id: '/'});
-    let user = server.create('user', 'facebook');
-    let facebookProvider = this.owner.lookup('torii-provider:facebook-connect');
-    this.stub(facebookProvider, 'open').resolves({
-      accessToken: 'abcdef',
-      expiresIn: 6000,
-      userId: '123456',
-      provider: 'facebook-connect'
-    });
-
-    await visit(signupUrl);
-    await click('button');
-
-    assert.ok(/^index(_loading)?$/.test(currentRouteName()));
-    assert.ok(currentSession().get('isAuthenticated'), 'Session is authenticated');
-    assert.equal(find('.user-nav-greeting').textContent.trim(), user.given_name);
-    assert.equal(find('.user-nav-avatar > img').getAttribute('src'), user.picture);
-  });
-
-  test('Facebook login with no email shows alert', async function(assert) {
-    server.create('user');
-    let facebookProvider = this.owner.lookup('torii-provider:facebook-connect');
-    this.stub(facebookProvider, 'open').resolves({
-      accessToken: 'abcdef',
-      expiresIn: 6000,
-      userId: '123456',
-      provider: 'facebook-connect'
-    });
-
-    server.get(`${config.authAPI}/v1/session`, () => {
-      return new Response(400, {}, { "errors": {
-        "code": "MissingAttributeException",
-        "message": "A provider account could not be created because one or more attributes were not available from the provider. Permissions may have been declined.",
-        "values": ["email"] }
-      });
-    });
-
-    await visit(signupUrl);
-
-    await click('button');
-
-    assert.equal(currentURL(), '/signup');
-    assert.equal(find('.alert-warning').textContent.trim(), "Unfortunately, we can't authorize your account without permission to view your email address.");
-    assert.ok(!currentSession().get('isAuthenticated'), 'Session is not authenticated');
-  });
-
-  test('Unsuccessful facebook login shows alert', async function(assert) {
-    let facebookProvider = this.owner.lookup('torii-provider:facebook-connect');
-    this.stub(facebookProvider, 'open').rejects();
-
-    await visit(signupUrl);
-    await click('button');
-
-    assert.equal(currentURL(), '/signup');
-    assert.equal(find('.alert-warning').textContent.trim(), "We're sorry, but we weren't able to log you in through Facebook.");
-    assert.ok(!currentSession().get('isAuthenticated'), 'Session is not authenticated');
+    assert.notOk(find('button.account-form-btn--facebook'));
   });
 });
