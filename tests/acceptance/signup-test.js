@@ -3,19 +3,15 @@ import {
   click,
   fillIn,
   currentURL,
-  currentRouteName,
   visit
 } from '@ember/test-helpers';
 import { module } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import test from 'ember-sinon-qunit/test-support/test';
 import testPage from 'wnyc-web-client/tests/pages/listing-page';
-import { Response } from 'ember-cli-mirage';
 import {
-  authenticateSession,
-  currentSession
+  authenticateSession
 } from 'ember-simple-auth/test-support';
-import config from 'wnyc-web-client/config/environment';
 
 module('Acceptance | signup', function(hooks) {
   setupApplicationTest(hooks);

@@ -118,6 +118,6 @@ module('Acceptance | login', function(hooks) {
 
   test('Log in with Facebook button is not visible at load', async function(assert) {
     await visit('/login');
-    assert.notOk(find('button'));
+    assert.notOk(find('button.account-form-btn--facebook'));
   });
 });
