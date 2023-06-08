@@ -9246,10 +9246,10 @@ nwsapi@^2.0.9:
   resolved "https://registry.yarnpkg.com/nwsapi/-/nwsapi-2.2.0.tgz#204879a9e3d068ff2a55139c2c772780681a38b7"
   integrity sha512-h2AatdwYH+JHiZpv7pt/gSX1XoRGb7L/qSIeuqA6GwYoF9w1vP1cw42TO0aI2pNyshRK5893hNSl+1//vHK7hQ==
 
-nypr-account-settings@0.2.10:
-  version "0.2.10"
-  resolved "https://registry.yarnpkg.com/nypr-account-settings/-/nypr-account-settings-0.2.10.tgz#ecb84bf848e89e3355057c7c526982c3e969878d"
-  integrity sha512-rWxJzKQzCCbKVbAAyhxcrC724hl2cLUuyV7V9PSkPakjw05zRHh9z3X352duYcfM2o5ANW5IUhnNkX9UzyhCow==
+nypr-account-settings@0.2.11:
+  version "0.2.11"
+  resolved "https://registry.yarnpkg.com/nypr-account-settings/-/nypr-account-settings-0.2.11.tgz#81d284d35cde2112242994ff05832addb871e015"
+  integrity sha512-SrgHLktXzKx9qrWKaLSqv4zEbWqe6DQ4ZgVwfK1ZqOlvjd0w88Ejtf5nHyLDS8O3zbalMdaLEy2Bhm6r96rvtA==
   dependencies:
     ember-changeset "^2.0.0"
     ember-changeset-validations "^2.1.0"
