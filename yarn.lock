@@ -9261,10 +9261,10 @@ nypr-account-settings@0.2.11:
     ember-modal-dialog "^3.0.0-beta.4"
     nypr-auth ">=0.2.0"
 
-nypr-ads@~0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/nypr-ads/-/nypr-ads-0.1.0.tgz#383e3f842597fb79b7c62f099998916a345be83c"
-  integrity sha512-CgwrrA/C+skcv7enoR9JUFyn1bwtLOSZ8GK1orrantxRcAkrdGGtWtrW6kWOwx6BNoopCikxNbxcOqAUVex97Q==
+nypr-ads@1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/nypr-ads/-/nypr-ads-1.1.2.tgz#088affa3e4e606f8846c5e7218048201d55ab6f0"
+  integrity sha512-vmYXKmNqRL/MKzpwo8zPjuoQVj0jAnRyQ+XtG1YruRag1h6VvJGq743//CnOiH+gkQ7pTs2bIREJqjUlmXsxdg==
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
