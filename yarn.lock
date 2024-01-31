@@ -3999,7 +3999,7 @@ currently-unhandled@^0.4.1:
   dependencies:
     array-find-index "^1.0.1"
 
-customizr@Modernizr/customizr#e5890ed4b4fedb69da50ffbae39577788970d8ee, "customizr@https://github.com/Modernizr/customizr/tarball/develop":
+customizr@Modernizr/customizr#e5890ed4b4fedb69da50ffbae39577788970d8ee, customizr@^1.4.1:
   version "1.0.0"
   resolved "https://codeload.github.com/Modernizr/customizr/tar.gz/e5890ed4b4fedb69da50ffbae39577788970d8ee"
   dependencies:
@@ -6977,13 +6977,13 @@ grunt-legacy-util@~1.1.1:
     underscore.string "~3.3.4"
     which "~1.3.0"
 
-grunt-modernizr@^1.0.2:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/grunt-modernizr/-/grunt-modernizr-1.0.3.tgz#f197b7830adb096961f112c7625241100c369323"
-  integrity sha512-sOUtGtB/NUFGTB4rIk711yBoRGOWZsFXfH+NgEx6RBlH1XQDP351CrGoKguODROUATwje8AfsW0EnV1VxEMr/g==
+grunt-modernizr@^2.0.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/grunt-modernizr/-/grunt-modernizr-2.1.1.tgz#80ab26910c2002526d30a2581885e913b7e96218"
+  integrity sha512-4jYKx73INKyZN8QpVEsdIJ4fOxGyB4oZRt2jsaFJxsjuThmwJUF39IuaNik4uQWnauvZSGtMFyncXWLp4ym1Dw==
   dependencies:
-    customizr "https://github.com/Modernizr/customizr/tarball/develop"
-    lodash.merge "^4.0.1"
+    customizr "^1.4.1"
+    lodash.merge "^4.6.2"
 
 grunt@1.0.3:
   version "1.0.3"
@@ -8340,7 +8340,7 @@ lodash.memoize@^4.1.2:
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
   integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
 
-lodash.merge@^4.0.1, lodash.merge@^4.4.0, lodash.merge@^4.6.0, lodash.merge@^4.6.2:
+lodash.merge@^4.4.0, lodash.merge@^4.6.0, lodash.merge@^4.6.2:
   version "4.6.2"
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
   integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
@@ -9385,7 +9385,7 @@ nypr-player@>=0.3.0:
     ember-moment "^7.4.1"
     nypr-ui "^0.5.0"
 
-nypr-publisher-lib@^0.5.1:
+nypr-publisher-lib@^0.5.1, nypr-publisher-lib@^0.5.11:
   version "0.5.8"
   resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.5.8.tgz#8a126d44cc5f6cba2817a3fac79d5731ec6ba4af"
   integrity sha512-QKVc9enPg5YbgC5r/eRBva3k50DZv27nlbj8yiFv55txQsBp+9lyelUtlhaMraUqegH0R6kRzrqSoMs4owtRhA==
@@ -9407,10 +9407,10 @@ nypr-publisher-lib@^0.5.1:
     nypr-django-for-ember "^0.4.0"
     nypr-ui "^0.5.0"
 
-nypr-publisher-lib@^0.5.11:
-  version "0.5.13"
-  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.5.13.tgz#f3920bec922900087b7fc898f6afbf39efb59d3f"
-  integrity sha512-P8S8zUIA5f1G//9Tv0OYaasCNZ2ek5SNddWkwjmiCpwyw5br6hviTys2yApuM8OscJ3G2ksWNI1mkMGuC4ohWA==
+nypr-publisher-lib@^0.5.14:
+  version "0.5.14"
+  resolved "https://registry.yarnpkg.com/nypr-publisher-lib/-/nypr-publisher-lib-0.5.14.tgz#fac3501541875ffc9b64ba89e545edf6568d9769"
+  integrity sha512-ktt13v8B9XKCFIF2UYrD6Ssepo2PF+EyrRcjgp7XWaatiQmWxWH+/KR4NfyHBNPXQl/ZQla1oFHJcnRbo6pwpg==
   dependencies:
     "@fortawesome/ember-fontawesome" "^0.1.14"
     "@fortawesome/free-brands-svg-icons" "^5.10.1"
