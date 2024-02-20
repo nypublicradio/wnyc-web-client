@@ -116,6 +116,7 @@
   "resolutions": {
     "customizr": "Modernizr/customizr#e5890ed4b4fedb69da50ffbae39577788970d8ee",
     "ember-cli-babel": "^6.6.0",
+    "nypr-audio-services": "^0.6.2",
     "nypr-publisher-lib": "^0.5.15",
     "mkdirp": "~0.5.1"
   },
