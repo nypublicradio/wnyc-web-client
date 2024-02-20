@@ -12,7 +12,7 @@ module('Integration | Component | user navigation', function(hooks) {
 
   test('it renders', async function(assert) {
     await render(hbs`{{user-navigation}}`);
-    assert.ok(find('.user-nav-signup'));
+    assert.ok(find('.user-nav-membercenter'));
   });
 
   test('it shows the login state', async function(assert) {
