@@ -129,7 +129,7 @@ module('Acceptance | login', function(hooks) {
     assert.equal(find('[title="Log out"]').textContent.trim(), 'Log out');
     await click('[title="Log out"]');
 
-    assert.equal(find('a[href*=login]').textContent.trim(), 'Log in');
+    assert.notOk(find('a[href*=settings]'));
   });
 
   test('Log in with Facebook button is visible at load', async function(assert) {

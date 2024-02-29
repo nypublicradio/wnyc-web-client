@@ -9269,10 +9269,10 @@ nypr-ads@0.1.1:
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
 
-nypr-audio-services@^0.6.0, nypr-audio-services@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.6.1.tgz#eeefee06b92fe1065716e8a95964236c04aac386"
-  integrity sha512-wylCZ19m4CHDKv5JA7cPuM8MANka/UPrV3VQbTMjniQuDm/EQEbpFkQ9YF+dzmXzPsOeqaaThk0m+m1UkF/7pA==
+nypr-audio-services@^0.6.0, nypr-audio-services@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/nypr-audio-services/-/nypr-audio-services-0.6.2.tgz#470ad4e317d053737bcc52ce4d5821ca9b3ea4b2"
+  integrity sha512-snHubD+NZJ0l8iSw5xHXAXC5uTYH6IMyZpC0gDIU9s5T2gKBe8oxmfRgrLbueJGZzPP+4DKAFpRQDmsDbImOKQ==
   dependencies:
     ember-cli-babel "^7.12.0"
     ember-cli-htmlbars "^2.0.1"
