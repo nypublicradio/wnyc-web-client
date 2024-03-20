@@ -1,12 +1,12 @@
 /* eslint-env node */
 'use strict';
 
-module.exports = function(environment) {
+module.exports = function ( environment ) {
 
   function usingProxy() {
-    return !!process.argv.filter(function (arg) {
-      return arg.indexOf('--proxy') === 0;
-    }).length;
+    return !!process.argv.filter( function ( arg ) {
+      return arg.indexOf( '--proxy' ) === 0;
+    } ).length;
   }
 
   const ALIEN_DOM_ROOT = environment === 'test' ? '#ember-testing' : 'body';
@@ -17,9 +17,9 @@ module.exports = function(environment) {
     rootURL: '/',
     locationType: 'auto',
     emberHifi: {
-      connections: [{
+      connections: [ {
         name: 'NativeAudio'
-      }],
+      } ],
       alwaysUseSingleAudioElement: false
     },
     'ember-cli-mirage': {
@@ -47,7 +47,7 @@ module.exports = function(environment) {
     },
     // required for what's on widget compat
     exportApplicationGlobal: true,
-    QP_WHITELIST: ['q', 'scheduleStation', 'next', 'n'], // see puppy/settings/base_settings.py
+    QP_WHITELIST: [ 'q', 'scheduleStation', 'next', 'n' ], // see puppy/settings/base_settings.py
 
     flashMessageDefaults: {
       preventDuplicates: true,
@@ -79,7 +79,7 @@ module.exports = function(environment) {
     // POLITICS BRIEF NEWSLETTER ID
     politicsBriefNewsletter: process.env.ELECTION_NEWSLETTER_ID || '058457038f',
 
-    wnycDonateURL: 'https://pledge3.wnyc.org/epledge/main?ref=button-donate-header',
+    wnycDonateURL: 'https://pledge.wnyc.org/support/wnyc?utm_source=wnyc&utm_medium=wnyc&utm_campaign=donate-button',
     featureFlags: {},
     contentSecurityPolicy: {
       'connect-src': "'self' *.wnyc.net:* ws://*.wnyc.net:*",
@@ -110,7 +110,7 @@ module.exports = function(environment) {
     googleTagManager: process.env.GOOGLE_TAG_MANAGER_ID || 'GTM-PM94N2'
   };
 
-  if (environment === 'development') {
+  if ( environment === 'development' ) {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -119,7 +119,7 @@ module.exports = function(environment) {
     // ENV.LOG_LEGACY_LOADER = true;
 
     var mirageEnabled = !usingProxy();
-    ENV['ember-cli-mirage'] = {
+    ENV[ 'ember-cli-mirage' ] = {
       // Mirage should be doing this automatically, but
       // it consideres the http-proxies we have in server/proxies
       // as a "proxy". We only want mirage to be disabled if we've
@@ -129,7 +129,7 @@ module.exports = function(environment) {
 
   }
 
-  if (environment === 'test') {
+  if ( environment === 'test' ) {
     // Testem prefers this...
     ENV.locationType = 'none';
 
@@ -153,7 +153,7 @@ module.exports = function(environment) {
 
   }
 
-  if (environment === 'production') {
+  if ( environment === 'production' ) {
 
   }
 

@@ -18,6 +18,12 @@
           </div>
           <div class="user-nav-popup">
             <ul class="user-nav-list">
+              <li class="user-nav-listitem user-nav-membercenter" {{action (mut isPopupOpen) false}}>
+                <a href='https://pledge.wnyc.org/user'
+                  title="Member Center"
+                  class="gtm__click-tracking"
+                  data-action="User Menu">Member Center</a>
+              </li>
               <li class="user-nav-listitem" {{action (mut isPopupOpen) false}}>
                 {{link-to 'Settings' 'settings' class='gtm__click-tracking' data-action='User Menu'}}
               </li>
@@ -31,16 +37,10 @@
       {{/click-outside}}
     </div>
   {{else}}
-    <div class="user-nav-signup user-nav-link">
-      <a href='/signup'
-        title="Sign up"
+    <div class="user-nav-membercenter user-nav-link">
+      <a href='https://pledge.wnyc.org/user'
+        title="Member Center"
         class="gtm__click-tracking"
-        data-action="User Menu">Sign up</a>
-    </div>
-    <div class="user-nav-login user-nav-link">
-      <a href='/login'
-        title="Log in"
-        class="gtm__click-tracking"
-        data-action="User Menu">Log in</a>
+        data-action="User Menu">Member Center</a>
     </div>
   {{/if}}
