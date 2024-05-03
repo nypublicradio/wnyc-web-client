@@ -1,0 +1,49 @@
+:root {
+  --centennial-header-size: 36px;
+  --centennial-module-spacing: 90px;
+}
+
+.centennial-module {
+  margin-bottom: var(--centennial-module-spacing);
+}
+
+.centennial-module h2 {
+  display: block;
+  margin: auto;
+  text-align: center;
+  font-size: var(--centennial-header-size);
+}
+
+.centennial-card-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.centennial-card {
+  max-width: 250px;
+}
+
+.centennial-message h2 {
+  font-size: 24px;
+  text-align: left;
+}
+
+.centennial-message__wrapper {
+  display: flex;
+}
+
+.centennial-message__wrapper div {
+  width: 50%;
+}
+
+.centennial-ctas {
+  display: flex;
+}
+
+.centennial-cta {
+  width: 50%;
+  height: 500px;
+  // background gradient
+  background: linear-gradient(90deg, #FFC107 0%, #FF9800 100%);
+  color: white;
+}
