@@ -47,3 +47,36 @@
   background: linear-gradient(90deg, #FFC107 0%, #FF9800 100%);
   color: white;
 }
+.centennial-toggletip {
+  position: relative;
+  display: inline-block;
+}
+
+.centennial-toggletip-button {
+    border: none;
+    margin: 0px;
+    padding: 0px;
+    background:#408840;
+    width:19px;
+    height:19px;
+  }
+.centennial-toggletip-button:focus {
+  outline: 2px solid green;
+  outline-offset: 1px;
+}
+
+.centennial-toggletip-tooltip {
+  z-index:99;
+  display: none;
+  background: #eee;
+	border: 1px solid #ccc;
+	padding: 10px;
+	border-radius: 8px;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	position: absolute;
+	width: 14m; 
+  font-size:.8em;
+}
+.centennial-toggletip-tooltip.mod-visible {
+  display: block;
+}
