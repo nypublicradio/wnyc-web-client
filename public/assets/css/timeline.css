@@ -1,0 +1,9 @@
+.tl-timemarker .tl-timemarker-content-container {
+  background-color: #de1e3d;
+}
+.tl-timemarker:hover .tl-timemarker-content-container {
+  background-color: #ba0d29;
+}
+.tl-timemarker .tl-timemarker-content-container .tl-timemarker-content .tl-timemarker-text h2.tl-headline {
+  color: #ffffff;
+}
