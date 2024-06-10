@@ -12,15 +12,6 @@ module('Integration | Component | centennial/centennial-header', function(hooks)
 
     await render(hbs`{{centennial/centennial-header}}`);
 
-    assert.equal(this.element.textContent.trim(), '');
-
-    // Template block usage:
-    await render(hbs`
-      {{#centennial/centennial-header}}
-        template block text
-      {{/centennial/centennial-header}}
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.equal(find('.centennial-header__hero img').getAttribute('alt').trim(), 'A Century of the New York Conversation');
   });
 });

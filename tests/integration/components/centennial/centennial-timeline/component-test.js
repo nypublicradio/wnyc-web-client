@@ -12,15 +12,6 @@ module('Integration | Component | centennial/centennial-timeline', function(hook
 
     await render(hbs`{{centennial/centennial-timeline}}`);
 
-    assert.equal(this.element.textContent.trim(), '');
-
-    // Template block usage:
-    await render(hbs`
-      {{#centennial/centennial-timeline}}
-        template block text
-      {{/centennial/centennial-timeline}}
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.equal(this.element.textContent.trim(), 'Explore 100 Years of WNYC');
   });
 });
