@@ -69,14 +69,24 @@
     margin: 0 0 0 12px;
   }
   .nypr-social-icons__link {
+    color: white;
     display: inline-block;
     width: 24px;
     height: 24px;
     border-radius: 50%;
     background-color: black;
+    &:hover,
+    &:focus {
+      background-color: #d3008c;
+      border-color: #d3008c;
+      color: white;
+    }
+  }
+  .nypr-social-icons__icon {
+    width: 100%;
+    text-align: center;
   }
 }
-
 .centennial-timeline__wrapper {
   display: flex;
   align-items: center;
