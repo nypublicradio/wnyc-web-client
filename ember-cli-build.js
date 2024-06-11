@@ -9,7 +9,8 @@ module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
     fingerprint: {
       enabled: env === 'production',
-      prepend: process.env.FINGERPRINT_PREPEND_URL
+      prepend: process.env.FINGERPRINT_PREPEND_URL,
+      exclude: ['assets/css/']
     },
     sourcemaps: {
       enabled: true,

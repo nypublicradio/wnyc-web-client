@@ -1,9 +1,9 @@
 import Route from '@ember/routing/route';
+import config from './config/environment';
 
 export default Route.extend({
-  init() {
-    this._super(...arguments);
-    this.set('cssPath', 'assets/css/timeline.css')
+  setupController(controller) {
+    controller.set('cssPath', `${config.rootURL}assets/css/timeline.css`)
   },
   actions: {
     didTransition() {
