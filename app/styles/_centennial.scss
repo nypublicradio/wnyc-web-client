@@ -86,6 +86,12 @@
     width: 100%;
     text-align: center;
   }
+  .nypr-social-icons__icon.fa-x {
+    display: inline-block;
+    height: 100%;
+    vertical-align: unset;
+    background: url(/assets/svg/100/_x_twitter.svg) center / 15px 15px no-repeat;
+  }
 }
 .centennial-timeline__wrapper {
   display: flex;
