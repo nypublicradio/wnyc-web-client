@@ -91,12 +91,20 @@
   display: flex;
   align-items: center;
   height: 180px;
-  background: linear-gradient(180deg, #DE1E3D 0%, #FF7800 100%);
+  background:
+    url("/assets/svg/100/1924.svg") left top / 300px no-repeat,
+    url("/assets/svg/100/2024.svg") right bottom / 300px no-repeat,
+    linear-gradient(182deg, #DE1E3D 0%, #FF7800 100%);
 }
+
 
 @media screen and (min-width: 1025px) {
   .centennial-timeline__wrapper {
     height: 250px;
+    background:
+    url("/assets/svg/100/1924.svg") left top no-repeat,
+    url("/assets/svg/100/2024.svg") right bottom no-repeat,
+    linear-gradient(182deg, #DE1E3D 0%, #FF7800 100%);
   }
 }
 
@@ -166,7 +174,7 @@
 	border-radius: 8px;
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 	position: absolute;
-	width: 14m; 
+	width: 14m;
   font-size:.8em;
 }
 .centennial-toggletip-tooltip.mod-visible {
