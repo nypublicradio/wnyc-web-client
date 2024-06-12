@@ -10,7 +10,7 @@ module.exports = function(defaults) {
     fingerprint: {
       enabled: env === 'production',
       prepend: process.env.FINGERPRINT_PREPEND_URL,
-      exclude: ['assets/css/', 'assets/svg/100/']
+      exclude: ['assets/css/']
     },
     sourcemaps: {
       enabled: true,

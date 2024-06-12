@@ -89,7 +89,6 @@
   .nypr-social-icons__icon.fa-x {
     display: inline-block;
     height: 100%;
-    vertical-align: unset;
     background: url(/assets/svg/100/_x_twitter.svg) center / 15px 15px no-repeat;
   }
 }
@@ -108,8 +107,8 @@
   .centennial-timeline__wrapper {
     height: 250px;
     background:
-    url("/assets/svg/100/1924.svg") left top no-repeat,
-    url("/assets/svg/100/2024.svg") right bottom no-repeat,
+    url("/assets/svg/100/1924.svg") left / 400px top no-repeat,
+    url("/assets/svg/100/2024.svg") right /  400px bottom no-repeat,
     linear-gradient(182deg, #DE1E3D 0%, #FF7800 100%);
   }
 }
