@@ -74,6 +74,7 @@ module.exports = function ( environment ) {
     publisherAPI: process.env.PUBLISHER_API,
     platformEventsAPI: process.env.PLATFORM_EVENTS_SERVICE,
     gothamistStories: process.env.GOTHAMIST_STORIES,
+    staticAssetPath: process.env.STATIC_ASSET_PATH,
 
     optInAPI: process.env.OPT_IN_API,
     // POLITICS BRIEF NEWSLETTER ID

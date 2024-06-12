@@ -3,7 +3,7 @@ import config from 'wnyc-web-client/config/environment';
 
 export default Route.extend({
   setupController(controller) {
-    controller.set('cssPath', `https://${config.environment}-static.wnyc.org/assets/css/timeline.css`)
+    controller.set('cssPath', `${config.staticAssetPath}css/timeline.css`)
     return this._super(...arguments);
   },
   actions: {
