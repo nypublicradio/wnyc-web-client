@@ -118,6 +118,7 @@ module.exports = function ( environment ) {
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
     // ENV.LOG_LEGACY_LOADER = true;
+    ENV['staticAssetPath'] = '/assets/';
 
     var mirageEnabled = !usingProxy();
     ENV[ 'ember-cli-mirage' ] = {

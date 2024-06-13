@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import config from 'wnyc-web-client/config/environment';
 
 export default Component.extend({
   init() {
@@ -9,5 +10,6 @@ export default Component.extend({
           { url: 'https://www.youtube.com/channel/UCbysmY4hyViQAAYEzOR-uCQ', icon: 'youtube' },
           { url: 'http://www.facebook.com/wnyc', icon: 'facebook' }
         ]);
+      this.set('staticAssetPath', config.staticAssetPath);
 },
 });
