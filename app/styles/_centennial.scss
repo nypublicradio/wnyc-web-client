@@ -15,6 +15,7 @@
   .util-centennial-lr-margins {
     margin-left: 25px;
     margin-right: 150px;
+    max-width: 1100px;
   }
 }
 
@@ -97,10 +98,10 @@
   display: flex;
   align-items: center;
   height: 180px;
-  max-width: 1008px;
+  box-shadow: inset 0px 1px 1px 0px white;
   background:
-    url("/assets/svg/100/1924.svg") left top / 300px no-repeat,
-    url("/assets/svg/100/2024.svg") right bottom / 300px no-repeat,
+    url("/assets/svg/100/1924.svg") left top -1px / 300px no-repeat,
+    url("/assets/svg/100/2024.svg") right bottom -1px / 300px no-repeat,
     linear-gradient(182deg, #DE1E3D 0%, #FF7800 100%);
 }
 
@@ -108,8 +109,8 @@
   .centennial-timeline__wrapper {
     height: 250px;
     background:
-    url("/assets/svg/100/1924.svg") left / 400px top no-repeat,
-    url("/assets/svg/100/2024.svg") right /  400px bottom no-repeat,
+    url("/assets/svg/100/1924.svg") left top -1px / 400px no-repeat,
+    url("/assets/svg/100/2024.svg") right bottom -1px / 400px no-repeat,
     linear-gradient(182deg, #DE1E3D 0%, #FF7800 100%);
   }
 }
