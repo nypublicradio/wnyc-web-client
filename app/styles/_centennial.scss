@@ -1,0 +1,189 @@
+:root {
+  --centennial-header-size: 36px;
+  --centennial-header-font-family: 'Open Sans', sans-serif;
+  --centennial-header-font-weight: 800;
+  --centennial-header-line-height: 1.2;
+  --centennial-module-spacing: 40px;
+}
+
+.util-centennial-lr-margins {
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+@media screen and (min-width: 1025px) {
+  .util-centennial-lr-margins {
+    margin-left: 25px;
+    margin-right: 150px;
+    max-width: 1100px;
+  }
+}
+
+.centennial-module {
+  margin-bottom: var(--centennial-module-spacing);
+}
+
+.centennial-module h2 {
+  display: block;
+  margin: auto;
+  text-align: center;
+  font-size: var(--centennial-header-size);
+  font-family: var(--centennial-header-font-family);
+  font-weight: var(--centennial-header-font-weight);
+  line-height: var(--centennial-header-line-height);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.centennial-header {
+  margin-bottom: var(--centennial-module-spacing);
+}
+
+.centennial-header__hero, .centennial-header__hero img {
+  display: block;
+  margin: auto;
+  min-width: 100%;
+}
+
+.centennial-header__social {
+  .nypr-social-icons {
+    display: inline-block;
+    width: auto;
+    padding: 0;
+    margin: 0;
+  }
+  .nypr-social-icons__header {
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 400;
+    display: inline-block;
+    color: black;
+    vertical-align: top;
+    padding: 0;
+  }
+  .nypr-social-icons__list {
+    display: inline-block;
+    list-style: none;
+  }
+  .nypr-social-icons__item {
+    display: inline-block;
+    margin: 0 0 0 12px;
+  }
+  .nypr-social-icons__link {
+    color: white;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 20px;
+    border-radius: 50%;
+    background-color: black;
+    &:hover,
+    &:focus {
+      background-color: #d3008c;
+      border-color: #d3008c;
+      color: white;
+    }
+  }
+  .nypr-social-icons__icon {
+    width: 100%;
+    text-align: center;
+  }
+  .nypr-social-icons__icon.fa-x {
+    display: inline-block;
+    height: 100%;
+    background: url(/assets/svg/100/_x_twitter.svg) center / 15px 15px no-repeat;
+  }
+}
+.centennial-timeline__wrapper {
+  display: flex;
+  align-items: center;
+  height: 180px;
+  box-shadow: inset 0px 1px 1px 0px white;
+  background:
+    url("/assets/svg/100/1924.svg") left top -1px / 300px no-repeat,
+    url("/assets/svg/100/2024.svg") right bottom -1px / 300px no-repeat,
+    linear-gradient(182deg, #DE1E3D 0%, #FF7800 100%);
+}
+
+@media screen and (min-width: 1025px) {
+  .centennial-timeline__wrapper {
+    height: 250px;
+    background:
+    url("/assets/svg/100/1924.svg") left top -1px / 400px no-repeat,
+    url("/assets/svg/100/2024.svg") right bottom -1px / 400px no-repeat,
+    linear-gradient(182deg, #DE1E3D 0%, #FF7800 100%);
+  }
+}
+
+.centennial-timeline__wrapper a {
+  display: inline-block;
+  margin: auto;
+}
+
+.centennial-card-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.centennial-card {
+  max-width: 250px;
+}
+
+.centennial-message h2 {
+  font-size: 24px;
+  text-align: left;
+}
+
+.centennial-message__wrapper {
+  display: flex;
+}
+
+.centennial-message__wrapper div {
+  width: 50%;
+}
+
+.centennial-ctas {
+  display: flex;
+}
+
+.centennial-cta {
+  width: 50%;
+  height: 500px;
+  // background gradient
+  background: linear-gradient(90deg, #FFC107 0%, #FF9800 100%);
+  color: white;
+}
+.centennial-toggletip {
+  position: relative;
+  display: inline-block;
+}
+
+.centennial-toggletip-button {
+    border: none;
+    margin: 0px;
+    padding: 0px;
+    background:#408840;
+    width:19px;
+    height:19px;
+}
+
+.centennial-toggletip-button:focus {
+  outline: 2px solid green;
+  outline-offset: 1px;
+}
+
+.centennial-toggletip-tooltip {
+  z-index:99;
+  display: none;
+  background: #eee;
+	border: 1px solid #ccc;
+	padding: 10px;
+	border-radius: 8px;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	position: absolute;
+	width: 14m;
+  font-size:.8em;
+}
+.centennial-toggletip-tooltip.mod-visible {
+  display: block;
+}

@@ -1,0 +1,39 @@
+<div class="centennial-card">
+  {{#if image}}
+  <a href={{url}} class="centennial-card__image">
+    <img alt="{{title}}"
+      src="{{image-template image.template 250 250 image.crop}}"
+      srcset="{{image-template image.template 500 500 image.crop}} 2x,
+        {{image-template image.template 750 750 image.crop}} 3x"
+      width="250" height="250">
+  </a>
+  {{/if}}
+  <a href={{url}} class="centennial-card__title">
+    <strong>{{ title }}</strong>
+  </a>
+  <p>{{{tease}}}</p>
+  <div class="centennial-card__footer">
+  {{#if isStreamable}}
+    {{#listen-button
+    
+      isLive=false
+      type='blue-minion'
+      playContext=playContext
+      data-action=(concat 'Clicked Play/Pause ' 'On Demand: ' playContext)
+      data-label=item.title
+      itemPK=item.attributes.cmsPK
+      itemTitle=item.title
+      itemShow=(or item.attributes.showTitle item.attributes.headers.brand.title)
+      }}
+      Listen
+      <span class="centennial-card__duration">{{item.attributes.audioDurationReadable}}</span>
+    {{/listen-button}}
+
+    {{#if item.transcript}}
+      <a href="{{item.url}}?tab=transcript" class="centennial-card__transcript-link">Read Transcript</a>
+    {{/if}}
+
+    {{centennial/centennial-share-button}}
+  {{/if}}
+</div>
+</div>

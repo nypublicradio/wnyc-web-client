@@ -72,6 +72,8 @@ Router.map(function() {
   // specific.
   this.route('404', { path: '*' });
   this.route('djangorendered', { path: '*upstream_url' });
+  this.route('centennial', {path: '100'});
+  this.route('timeline');
 });
 
 export default Router;
