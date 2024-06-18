@@ -6,6 +6,12 @@
   --centennial-module-spacing: 40px;
 }
 
+@media screen and (max-width: 1024px) {
+  body.centennial .sitechrome-nav {
+    margin-bottom: 0px;
+  }
+}
+
 .util-centennial-lr-margins {
   margin-left: 25px;
   margin-right: 25px;
