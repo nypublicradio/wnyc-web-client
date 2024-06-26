@@ -187,3 +187,116 @@
 .centennial-toggletip-tooltip.mod-visible {
   display: block;
 }
+
+.event-card {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  border-bottom: #000000 1px solid;
+}
+.event-card__image-wrapper {
+  flex: 0 0 60px;
+  margin-right: 22px;
+  padding: 32px 0px;
+  position: relative;
+}
+.event-card__details {
+  flex: 1 1 auto;
+  padding: 32px 0px;
+}
+.event-card__date {
+  display: flex;
+  flex-direction: column;
+  width: 60px;
+  height: 60px;
+  justify-content: center;
+  background-color: black;
+  color: white;
+}
+.event-card__image {
+  display: none;
+}
+.event-card__day {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+}
+.event-card__month {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+}
+ .event-card__title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 28.8px
+}
+.event-card__description {
+  display: none;
+  font-size: 14px;
+}
+.event-card__tag {
+  display: inline-block;
+  padding: 4px 8px;
+  margin-right: 4px;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.event-card__tag.mod-live-stream {
+  background-color: #88DA5E;
+  color: black;
+}
+.event-card__tag.mod-in-person {
+  background-color: #3CBEF2;
+  color: black;
+}
+.event-card__arrow {
+  flex: 0 0 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  a {
+    display: block;
+    height:fit-content;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    &:hover, &:focus {
+      cursor: pointer;
+      text-decoration: none;
+      border-bottom: transparent;
+      background-color: #ddd;
+    }
+    svg {
+      margin: 0 auto;
+      display: block;
+    }
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .event-card {
+    max-width: 811px;
+    margin: 0 auto;
+  }
+  .event-card__image-wrapper {
+    flex: 0 0 250px;
+    margin-right: 22px;
+    padding: 32px 0px;
+  }
+  .event-card__image {
+    display: block;
+  }
+  .event-card__date {
+    position: absolute;
+    top: 32px; 
+    left: 0;
+  }
+  .event-card__description {
+    display: block;
+  }
+}
