@@ -4,6 +4,8 @@
 <div class="centennial-home">
   {{centennial/centennial-header}}
   {{centennial/centennial-intro}}
+  {{centennial/centennial-events events=model.events}}
+  {{centennial/centennial-timeline}}
   {{centennial/centennial-archives items=model.archiveItems}}
   {{centennial/centennial-explore
     category1Title=model.featuredCategory1.title
@@ -13,5 +15,4 @@
     category3Title=model.featuredCategory3.title
     category3Items=model.featuredCategory3.bucketItems
     }}
-  {{centennial/centennial-timeline}}
 </div>
