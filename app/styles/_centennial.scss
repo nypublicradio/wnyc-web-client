@@ -369,6 +369,9 @@
   padding: 32px 0px;
   position: relative;
 }
+.event-card__image-wrapper a:focus {
+  outline: 1px solid blue;
+}
 .event-card__details {
   flex: 1 1 auto;
   padding: 32px 0px;
@@ -402,9 +405,11 @@
   font-weight: 700;
   line-height: 28.8px
 }
-.event-card__description {
-  display: none;
-  font-size: 14px;
+.event-card__time {
+  margin-bottom: 4px;
+}
+.event-card__tags {
+  margin-bottom: 4px;
 }
 .event-card__tag {
   display: inline-block;
@@ -413,6 +418,15 @@
   font-size: 10px;
   font-weight: 800;
   text-transform: uppercase;
+}
+.event-card__description {
+  display: none;
+  font-size: 14px;
+}
+.event-card__description {
+  p:last-child {
+    margin-bottom: 0;
+  }
 }
 .event-card__tag.mod-live-stream {
   background-color: #88DA5E;
@@ -455,10 +469,12 @@
   .event-card__image-wrapper {
     flex: 0 0 250px;
     margin-right: 22px;
+    max-width: 230px;
     padding: 32px 0px;
   }
   .event-card__image {
-    display: block;
+    display: inline-block;
+    max-width: 230px;
   }
   .event-card__date {
     position: absolute;

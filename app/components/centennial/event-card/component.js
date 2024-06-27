@@ -8,8 +8,11 @@ export default Component.extend({
   month: computed('event.attributes.start-date', function() {
     return moment(this.get('event.attributes.startDate')).format('MMM');
   }),
-  day: computed('event.attributes.start-date', function() {
+  day: computed('event.attributes.startDate', function() {
     return moment(this.get('event.attributes.startDate')).format('DD');
+  }),
+  startTime: computed('event.attributes.startDate', 'event.attributes.startTime', function() {
+    return moment(`${this.get('event.attributes.startDate')} ${this.get('event.attributes.startTime')}`).format('h:mm A');
   }),
   tags: computed('event.attributes.tags', function() {
     return this.get('event.attributes.tags').split(', ');
@@ -20,5 +23,12 @@ export default Component.extend({
   isLiveStream: computed('tags', function() {
     return this.get('tags').includes('live_stream');
   }),
+  eventUrl: computed('event.attributes.startDate', 'event.attributes.slug', function() {
+    const year = moment(this.get('event.attributes.startDate')).format('YYYY');
+    const month = moment(this.get('event.attributes.startDate')).format('MMM').toLowerCase();
+    const day = moment(this.get('event.attributes.startDate')).format('DD');
+    const slug = this.get('event.attributes.slug');
+    return `/events/wnyc-events/${year}/${month}/${day}/${slug}/`
+  })
 
 });
