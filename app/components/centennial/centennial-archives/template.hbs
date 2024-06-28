@@ -1,6 +1,11 @@
-<div class="centennial-archives centennial-module">
+
+<div class="centennial-archives centennial-module util-centennial-lr-margins">
   <div>
     <h2>From the WNYC Archives</h2>
   </div>
   {{centennial/centennial-card-list items=items}}
+  {{#if items}}
+  <pre>{{items}}</pre>
+  {{/if}}
+  
 </div>

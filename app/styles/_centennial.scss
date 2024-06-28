@@ -122,13 +122,27 @@
 
 .centennial-card-list {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }
 
-.centennial-card {
-  max-width: 250px;
-}
+.centennial-archives {
 
+}
+.centennial-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 24px;
+}
+.centennial-card__image img {
+  width: 100%;
+  height: auto;
+}
+.centennial-card__footer {
+  display: flex;
+  justify-content: space-between;
+}
 .centennial-message h2 {
   font-size: 24px;
   text-align: left;
@@ -162,7 +176,6 @@
     border: none;
     margin: 0px;
     padding: 0px;
-    background:#408840;
     width:19px;
     height:19px;
 }
@@ -174,16 +187,42 @@
 
 .centennial-toggletip-tooltip {
   z-index:99;
-  display: none;
-  background: #eee;
-	border: 1px solid #ccc;
-	padding: 10px;
-	border-radius: 8px;
-	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 	position: absolute;
-	width: 14m;
-  font-size:.8em;
+	padding: 10px;
+  display: none;
+  min-width: 170px;
+  border-radius: 4px;
+  background-color: rgb(244, 242, 240);
+  box-shadow: none;
+  right: 0;
+  margin-top: .75rem;
+  padding: .5rem;
 }
+
 .centennial-toggletip-tooltip.mod-visible {
   display: block;
+}
+
+.centennial-toggletip-tooltip ul, .centennial-toggletip-tooltip li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.centennial-toggletip-tooltip .btn {
+  height: 40px;
+  font-size: 16px;
+  width: 100%;
+  color: black;
+  background-color: rgb(244, 242, 240);
+  border-color: rgb(244, 242, 240);
+
+  &:not([disabled]) {
+    &:hover,
+    &:focus {
+      background-color: #fff;
+      border-color: #fff;
+      color: black;
+    }
+  }
 }
