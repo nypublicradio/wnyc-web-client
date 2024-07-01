@@ -1,11 +1,19 @@
-<div class="centennial-explore centennial-module">
+<div class="centennial-explore centennial-module util-centennial-lr-margins">
   <div>
     <h2>Explore Centennial Content</h2>
   </div>
   <div>
-    <h3>Category 1</h3>
-      {{centennial/centennial-card-list items=row1}}
-    <h3>Category 2</h3>
-      {{centennial/centennial-card-list items=row2}}
+    {{#if category1Items}}
+    <h3>{{category1Title}}</h3>
+      {{centennial/centennial-card-list items=category1Items}}
+    {{/if}}
+    {{#if category2Items}}
+    <h3>{{category2Title}}</h3>
+      {{centennial/centennial-card-list items=category2Items}}
+    {{/if}}
+    {{#if category3Items}}
+    <h3>{{category3Title}}</h3>
+      {{centennial/centennial-card-list items=category3Items}}
+    {{/if}}
   </div>
 </div>

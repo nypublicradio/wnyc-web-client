@@ -14,6 +14,9 @@ export default Component.extend({
   }),
 
   actions: {
+    closeTooltip() {
+      set(this, 'tooltipIsOpen', false);
+    },
     toggleTooltip() {
       if (!this.tooltipIsOpen) {
         set(this, 'tooltipIsOpen', true);

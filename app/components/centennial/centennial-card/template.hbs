@@ -8,10 +8,12 @@
       width="240" height="178">
   </a>
   {{/if}}
-  <a href={{url}} class="centennial-card__title">
-    <strong>{{ title }}</strong>
-  </a>
-  <p>{{{tease}}}</p>
+  <div class="centennial-card__content">
+    <a href={{url}} class="centennial-card__title">
+      <strong>{{ title }}</strong>
+    </a>
+    <p class="centennial-card__tease">{{{tease}}}</p>
+  </div>
   <div class="centennial-card__footer">
   {{#if isStreamable}}
     {{#listen-button
@@ -29,10 +31,12 @@
     {{/listen-button}}
 
     {{#if item.transcript}}
-      <a href="{{item.url}}?tab=transcript" class="centennial-card__transcript-link">Read Transcript</a>
+      <a href="{{item.attributes.url}}?tab=transcript" class="centennial-card__transcript-link">Read Transcript</a>
     {{/if}}
-
-    {{centennial/centennial-share-button}}
+    {{centennial/centennial-share-button
+      shareUrl=item.attributes.url
+      shareTitle=item.attributes.title
+    }}
   {{/if}}
 </div>
 </div>
