@@ -6,19 +6,6 @@
   --centennial-module-spacing: 40px;
 }
 
-.util-centennial-lr-margins {
-  margin-left: 25px;
-  margin-right: 25px;
-}
-
-@media screen and (min-width: 1025px) {
-  .util-centennial-lr-margins {
-    margin-left: 25px;
-    margin-right: 150px;
-    max-width: 1100px;
-  }
-}
-
 .centennial-module {
   margin-bottom: var(--centennial-module-spacing);
 }
@@ -164,7 +151,7 @@
   justify-content: space-between;
 }
 
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 800px) {
   .centennial-card-list {
     flex-direction: row;
     column-gap: 16px;
@@ -179,6 +166,7 @@
   .centennial-card__image img {
     width: 100%;
     height: auto;
+    aspect-ratio: 27 / 20;
   }
   .centennial-card__image {
     display: inline-block;
@@ -225,6 +213,9 @@
       }
     }
   }
+  .centennial-card__duration {
+    font-size: 12px;
+  }
   .centennial-toggletip {
     position: relative;
     display: inline-block;
@@ -270,7 +261,7 @@
     color: black;
     background-color: rgb(244, 242, 240);
     border-color: rgb(244, 242, 240);
-  
+
     &:not([disabled]) {
       &:hover,
       &:focus {
@@ -285,9 +276,9 @@
   }
 }
 
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 800px) {
   .centennial-card {
-    max-width: 240px;
+    max-width: 250px;
     .centennial-card__content {
       .centennial-card__title {
         display: inline-block;
@@ -334,6 +325,11 @@
       &:hover path, &:focus path {
         fill: #d3008c;
       }
+    }
+  }
+  @media screen and (min-width: 840px) {
+    .centennial-card {
+      max-width: 270px;
     }
   }
 }
