@@ -6,19 +6,6 @@
   --centennial-module-spacing: 40px;
 }
 
-.util-centennial-lr-margins {
-  margin-left: 25px;
-  margin-right: 25px;
-}
-
-@media screen and (min-width: 1025px) {
-  .util-centennial-lr-margins {
-    margin-left: 25px;
-    margin-right: 150px;
-    max-width: 1100px;
-  }
-}
-
 .centennial-module {
   margin-bottom: var(--centennial-module-spacing);
 }
@@ -44,6 +31,19 @@
   margin: auto;
   min-width: 100%;
 }
+
+.centennial-explore {
+  h3 {
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 28px;
+    margin: 0;
+    padding: 0;
+  }
+}
+
 
 .centennial-header__social {
   .nypr-social-icons {
@@ -120,15 +120,6 @@
   margin: auto;
 }
 
-.centennial-card-list {
-  display: flex;
-  justify-content: space-between;
-}
-
-.centennial-card {
-  max-width: 250px;
-}
-
 .centennial-message h2 {
   font-size: 24px;
   text-align: left;
@@ -153,37 +144,202 @@
   background: linear-gradient(90deg, #FFC107 0%, #FF9800 100%);
   color: white;
 }
-.centennial-toggletip {
-  position: relative;
-  display: inline-block;
+
+.centennial-card-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.centennial-toggletip-button {
+@media screen and (min-width: 800px) {
+  .centennial-card-list {
+    flex-direction: row;
+    column-gap: 16px;
+  }
+}
+
+.centennial-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 24px;
+  .centennial-card__image img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 27 / 20;
+  }
+  .centennial-card__image.centennial-card__image--placeholder {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 27 / 20;
+    background: #D9D9D9;
+  }
+  .centennial-card__image {
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+  .centennial-card__footer {
+    display: flex;
+    justify-content: space-between;
+    line-height: 36px;
+  }
+  .centennial-card__content {
+    display: flex;
+    flex-direction: column;
+  }
+  .centennial-card__title {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    margin-bottom: 10px;
+    color: black;
+    text-decoration: none;
     border: none;
-    margin: 0px;
-    padding: 0px;
-    background:#408840;
-    width:19px;
-    height:19px;
+    &:hover, &:focus {
+      color: #d3008c;
+      text-decoration: none;
+      border: none;
+    }
+  }
+  .centennial-card__tease {
+    font-size: 14px;
+    line-height: 24px;
+  }
+  .listen-button {
+    color: black;
+    background-color: #D9D9D9;
+    border-color: #D9D9D9;
+    polygon {
+      color: black;
+    }
+    &:not([disabled]) {
+      &:hover,
+      &:focus {
+        background-color: #bcbcbc;
+        border-color: #bcbcbc;
+        color: black;
+        fill: black;
+      }
+    }
+  }
+  .centennial-card__duration {
+    font-size: 12px;
+  }
+  .centennial-toggletip {
+    position: relative;
+    display: inline-block;
+  }
+  .centennial-toggletip-button {
+      border: none;
+      margin: 0px;
+      padding: 0px;
+      width: 19px;
+      height: 19px;
+      path {
+        fill: #979797;
+      }
+      &:hover path, &:focus path {
+        fill: #333;
+      }
+  }
+  .centennial-toggletip-tooltip {
+    z-index: 99;
+    position: absolute;
+    padding: 10px;
+    display: none;
+    min-width: 170px;
+    border-radius: 4px;
+    background-color: rgb(244, 242, 240);
+    box-shadow: none;
+    right: 0;
+    margin-top: .75rem;
+    padding: .5rem;
+  }
+  .centennial-toggletip-tooltip.mod-visible {
+    display: block;
+  }
+  .centennial-toggletip-tooltip ul, .centennial-toggletip-tooltip li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .centennial-toggletip-tooltip .btn {
+    height: 40px;
+    font-size: 16px;
+    width: 100%;
+    color: black;
+    background-color: rgb(244, 242, 240);
+    border-color: rgb(244, 242, 240);
+
+    &:not([disabled]) {
+      &:hover,
+      &:focus {
+        background-color: #fff;
+        border-color: #fff;
+        color: black;
+      }
+    }
+    i, svg {
+      margin-right: 6px;
+    }
+  }
 }
 
-.centennial-toggletip-button:focus {
-  outline: 2px solid green;
-  outline-offset: 1px;
-}
+@media screen and (min-width: 800px) {
+  .centennial-card {
+    max-width: 250px;
+    .centennial-card__content {
+      .centennial-card__title {
+        display: inline-block;
+        height: 42px;
+        max-height: 42px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .centennial-card__tease {
+        display: inline-block;
+        height: 98px;
+        max-height: 98px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+    .listen-button {
+      color: white;
+      background-color: black;
+      border-color: black;
 
-.centennial-toggletip-tooltip {
-  z-index:99;
-  display: none;
-  background: #eee;
-	border: 1px solid #ccc;
-	padding: 10px;
-	border-radius: 8px;
-	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-	position: absolute;
-	width: 14m;
-  font-size:.8em;
-}
-.centennial-toggletip-tooltip.mod-visible {
-  display: block;
+      polygon {
+        color: white;
+      }
+      &:not([disabled]) {
+        &:hover,
+        &:focus {
+          background-color: #d3008c;
+          border-color: #d3008c;
+          color: white;
+          fill: white;
+        }
+      }
+    }
+    .centennial-toggletip-button {
+      border: none;
+      margin: 0px;
+      padding: 0px;
+      width:19px;
+      height:19px;
+      path {
+        fill: black;
+      }
+      &:hover path, &:focus path {
+        fill: #d3008c;
+      }
+    }
+  }
+  @media screen and (min-width: 840px) {
+    .centennial-card {
+      max-width: 270px;
+    }
+  }
 }
