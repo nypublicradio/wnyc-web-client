@@ -157,6 +157,7 @@ h2.centennial-message__header {
 @media screen and (min-width: 1025px) {
   .centennial-message__wrapper {
     flex-direction: row;
+    column-gap: 32px;
   }
   h2.centennial-message__header {
     font-size: 18px;
