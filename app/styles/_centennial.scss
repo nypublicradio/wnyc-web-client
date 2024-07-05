@@ -177,6 +177,9 @@
     justify-content: space-between;
     line-height: 36px;
   }
+  .centennial-card__content {
+    display: flex;
+  }
   .centennial-card__title {
     display: inline-block;
     font-size: 16px;
