@@ -1,0 +1,12 @@
+
+{{#click-outside action=(action 'closeTooltip')}}
+<span class="centennial-toggletip">
+<button {{action "toggleTooltip"}} class="centennial-toggletip-button" aria-describedby={{buttonAriaDescribedBy}} aria-expanded={{buttonAriaExpanded}}>
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M14 4C15.105 4 16 3.105 16 2C16 0.895 15.105 0 14 0C12.895 0 12 0.895 12 2C12 2.144 12.017 2.283 12.045 2.418L3.501 6.691C3.134 6.271 2.601 6 2 6C0.895 6 0 6.895 0 8C0 9.105 0.895 10 2 10C2.601 10 3.134 9.729 3.501 9.309L12.046 13.581C12.017 13.717 12 13.856 12 14C12 15.105 12.895 16 14 16C15.105 16 16 15.105 16 14C16 12.895 15.105 12 14 12C13.399 12 12.866 12.271 12.499 12.691L3.955 8.418C3.983 8.283 4 8.144 4 8C4 7.856 3.983 7.717 3.955 7.582L12.5 3.31C12.866 3.729 13.399 4 14 4Z" fill="black"/>
+</svg>
+
+</button>
+<aside class="centennial-toggletip-tooltip {{tooltipClass}}" aria-live='polite'><span role='tooltip'>{{yield}}</span></aside>
+</span>
+{{/click-outside}}
