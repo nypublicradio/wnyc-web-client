@@ -2,20 +2,23 @@
   {{#if image}}
   <a href={{url}} class="centennial-card__image">
     <img alt="{{title}}"
-      src="{{image-template image.template 250 250 image.crop}}"
-      srcset="{{image-template image.template 500 500 image.crop}} 2x,
-        {{image-template image.template 750 750 image.crop}} 3x"
-      width="250" height="250">
+      src="{{image-template image.template 270 200 image.crop}}"
+      srcset="{{image-template image.template 540 400 image.crop}} 2x,
+        {{image-template image.template 810 600 image.crop}} 3x"
+      width="270" height="200">
   </a>
+  {{else}}
+    <div class="centennial-card__image centennial-card__image--placeholder"></div>
   {{/if}}
-  <a href={{url}} class="centennial-card__title">
-    <strong>{{ title }}</strong>
-  </a>
-  <p>{{{tease}}}</p>
+  <div class="centennial-card__content">
+    <a href={{url}} class="centennial-card__title">
+      <strong>{{ title }}</strong>
+    </a>
+    <p class="centennial-card__tease">{{{tease}}}</p>
+  </div>
   <div class="centennial-card__footer">
   {{#if isStreamable}}
     {{#listen-button
-    
       isLive=false
       type='blue-minion'
       playContext=playContext
@@ -30,10 +33,12 @@
     {{/listen-button}}
 
     {{#if item.transcript}}
-      <a href="{{item.url}}?tab=transcript" class="centennial-card__transcript-link">Read Transcript</a>
+      <a href="{{item.attributes.url}}?tab=transcript" class="centennial-card__transcript-link">Read Transcript</a>
     {{/if}}
-
-    {{centennial/centennial-share-button}}
+    {{centennial/centennial-share-button
+      shareUrl=item.attributes.url
+      shareTitle=item.attributes.title
+    }}
   {{/if}}
 </div>
 </div>

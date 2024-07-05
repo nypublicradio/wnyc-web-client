@@ -1,8 +1,10 @@
-<div class="centennial-events centennial-module">
+<div class="centennial-events centennial-module util-centennial-lr-margins">
   <div>
     <h2>Join the Celebration</h2>
   </div>
   <div>
-
+    {{#each events as |event|}}
+      {{centennial/event-card event=event}}
+    {{/each}}
   </div>
 </div>
