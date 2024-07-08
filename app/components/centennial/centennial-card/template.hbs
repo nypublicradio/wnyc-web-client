@@ -21,12 +21,13 @@
     {{#listen-button
       isLive=false
       type='blue-minion'
-      playContext=playContext
-      data-action=(concat 'Clicked Play/Pause ' 'On Demand: ' playContext)
-      data-label=item.title
-      itemPK=item.attributes.cmsPK
-      itemTitle=item.title
-      itemShow=(or item.attributes.showTitle item.attributes.headers.brand.title)
+      playContext='centennial'
+      isCurrentSound=(and (eq story.id currentPlaylistStoryPk) isPlaying)
+      data-action=(concat 'Clicked Play/Pause ' 'On Demand: ' 'centennial')
+      data-label=item.attributes.title
+      itemPK=item.id
+      itemTitle=item.attributes.title
+      itemShow=(or item.attributes.showTitle item.attributes.channelTitle item.attributes.headers.brand.title)
       }}
       Listen
       <span class="centennial-card__duration">{{item.attributes.audioDurationReadable}}</span>
