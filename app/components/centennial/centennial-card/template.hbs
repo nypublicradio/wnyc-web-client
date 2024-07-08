@@ -25,7 +25,7 @@
       isCurrentSound=(and (eq story.id currentPlaylistStoryPk) isPlaying)
       data-action=(concat 'Clicked Play/Pause ' 'On Demand: ' 'centennial')
       data-label=item.attributes.title
-      itemPK=item.id
+      itemPK=item.attributes.slug
       itemTitle=item.attributes.title
       itemShow=(or item.attributes.showTitle item.attributes.channelTitle item.attributes.headers.brand.title)
       }}
