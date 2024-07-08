@@ -12,7 +12,11 @@ export default Component.extend({
     return moment(this.get('event.attributes.startDate')).format('DD');
   }),
   startTime: computed('event.attributes.{startDate,startTime}', function() {
-    return moment(`${this.get('event.attributes.startDate')} ${this.get('event.attributes.startTime')}`).format('h:mm A');
+    const startTime = moment(`${this.get('event.attributes.startDate')} ${this.get('event.attributes.startTime')}`)
+    if (startTime.isValid()) {
+      return startTime;
+    }
+    return startTime.format('h:mm A');
   }),
   tags: computed('event.attributes.tags', function() {
     return this.get('event.attributes.tags').split(', ');
