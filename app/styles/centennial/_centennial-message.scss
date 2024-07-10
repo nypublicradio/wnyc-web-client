@@ -1,14 +1,10 @@
-.centennial-message h2 {
-  font-size: 24px;
-  text-align: left;
-}
-
 .centennial-message__wrapper {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 h2.centennial-message__header {
+  text-align: left;
   display: inline-block;
   font-size: 14px;
   padding: 8px 10px;
@@ -29,7 +25,7 @@ h2.centennial-message__header {
     column-gap: 32px;
   }
   h2.centennial-message__header {
-    font-size: 18px;
+    font-size: 20px;
   }
   .centennial-message__quote {
     font-size: 18px;
@@ -41,7 +37,7 @@ h2.centennial-message__header {
 }
 @media screen and (min-width: 1300px) {
   h2.centennial-message__header {
-    font-size: 24px;
+    font-size: 22px;
   }
 }
 .centennial-message__video {
