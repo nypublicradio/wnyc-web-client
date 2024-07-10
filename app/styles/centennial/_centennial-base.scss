@@ -1,0 +1,30 @@
+@import url("https://p.typekit.net/p.css?s=1&k=ejx5fro&ht=tk&f=4648.4649.4650.4651.4455.4677.4948.5045&a=53485050&app=typekit&e=css");
+@font-face {
+  font-family:"ff-tisa-web-pro";
+  src:url("https://use.typekit.net/af/8bcf67/00000000000000003b9b0789/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff2"),url("https://use.typekit.net/af/8bcf67/00000000000000003b9b0789/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff"),url("https://use.typekit.net/af/8bcf67/00000000000000003b9b0789/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("opentype");
+  font-display:swap;font-style:normal;font-weight:700;
+  font-feature-settings: "lnum";
+}
+
+:root {
+  --centennial-header-size: 36px;
+  --centennial-header-font-family: 'Open Sans', sans-serif;
+  --centennial-header-font-weight: 800;
+  --centennial-header-line-height: 1.2;
+  --centennial-module-spacing: 40px;
+}
+.centennial-module {
+  margin-bottom: var(--centennial-module-spacing);
+}
+
+.centennial-module h2 {
+  display: block;
+  margin: auto;
+  text-align: center;
+  font-size: var(--centennial-header-size);
+  font-family: var(--centennial-header-font-family);
+  font-weight: var(--centennial-header-font-weight);
+  line-height: var(--centennial-header-line-height);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
