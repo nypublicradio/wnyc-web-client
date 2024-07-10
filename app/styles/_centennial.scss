@@ -714,3 +714,51 @@ h2.centennial-message__header {
     text-align: center;
   }
 }
+
+//logo
+.centennial-logo-wnyc {
+  width: 70px;
+  height: 70px;
+  padding: 0;
+  margin-top: -10px;
+  margin-bottom: -22px;
+  margin-left: -25px;
+}
+@media screen and (max-width: 1024px) {
+  .sitechrome-top {
+    padding: 10px;
+  }
+  .sitechrome-topbody-right {
+    margin-bottom: 0px;
+  }
+}
+.centennial-logo-outer {
+  fill: #FFFFFF;
+}
+.centennial-logo-inner > path {
+  fill: #DE1E3D;
+}
+@media screen and (min-width: 1025px) {
+  .centennial-logo-wnyc {
+    width: 100px;
+    height: 100px;
+    margin: 0;
+  }
+  .centennial-logo-outer {
+    fill: #DE1E3D;
+  }
+  .centennial-logo-inner > path {
+    fill: #FFFFFF;
+  }
+  .nav--homepage {
+    .centennial-logo-outer {
+      fill: #FFFFFF;
+    }
+    .centennial-logo-inner > path {
+      fill: #DE1E3D;
+    }
+  }
+}
+.sitechrome-nav h1 a, .sitechrome-nav h1 a:hover {
+  padding: 22px 10px 22px 28px
+}
