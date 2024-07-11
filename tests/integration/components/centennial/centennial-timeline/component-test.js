@@ -12,6 +12,6 @@ module('Integration | Component | centennial/centennial-timeline', function(hook
 
     await render(hbs`{{centennial/centennial-timeline}}`);
 
-    assert.equal(find('.centennial-timeline h2').textContent.trim(), ' Explore WNYC’s First Century');
+    assert.equal(find('.centennial-timeline h2').textContent.trim(), 'Explore WNYC’s First Century');
   });
 });
