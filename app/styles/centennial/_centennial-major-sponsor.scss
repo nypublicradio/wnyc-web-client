@@ -1,0 +1,31 @@
+.centennial-major-sponsor__placement {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 28px;
+  align-items: center;
+}
+.centennial-major-sponsor__logo {
+  width: 131px;
+  min-width: 131px;
+}
+.centennial-major-sponsor__logo path {
+  fill: rgb(51, 51, 51);
+}
+.centennial-major-sponsor__blurb {
+  font-size: 16px;
+  line-height: 1.5;
+}
+@media screen and (min-width: 1025px) {
+  .centennial-major-sponsor__placement {
+    flex-direction: row;
+    column-gap: 48px;
+  }
+  .centennial-major-sponsor__logo {
+    width: 184px;
+    min-width: 184px;
+  }
+  .centennial-major-sponsor__blurb {
+    padding-right: 48px;
+  }
+}
