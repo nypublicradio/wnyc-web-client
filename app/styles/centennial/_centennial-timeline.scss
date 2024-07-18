@@ -1,0 +1,25 @@
+.centennial-timeline__wrapper {
+  display: flex;
+  align-items: center;
+  height: 180px;
+  box-shadow: inset 0px 1px 1px 0px white;
+  background:
+    url("/assets/svg/100/1924.svg") left top -1px / 300px no-repeat,
+    url("/assets/svg/100/2024.svg") right bottom -1px / 300px no-repeat,
+    linear-gradient(182deg, #DE1E3D 0%, #FF7800 100%);
+}
+
+@media screen and (min-width: 1025px) {
+  .centennial-timeline__wrapper {
+    height: 250px;
+    background:
+    url("/assets/svg/100/1924.svg") left top -1px / 400px no-repeat,
+    url("/assets/svg/100/2024.svg") right bottom -1px / 400px no-repeat,
+    linear-gradient(182deg, #DE1E3D 0%, #FF7800 100%);
+  }
+}
+
+.centennial-timeline__wrapper a {
+  display: inline-block;
+  margin: auto;
+}

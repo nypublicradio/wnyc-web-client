@@ -22,7 +22,7 @@
       isLive=false
       type='blue-minion'
       playContext='centennial'
-      isCurrentSound=(and (eq story.id currentPlaylistStoryPk) isPlaying)
+      isCurrentSound=(and (eq item.attributes.slug currentPlaylistStoryPk) isPlaying)
       data-action=(concat 'Clicked Play/Pause ' 'On Demand: ' 'centennial')
       data-label=item.attributes.title
       itemPK=item.attributes.slug
