@@ -4,15 +4,24 @@
   padding: 0;
 }
 .centennial-legacy-giving__list li {
-  list-style: none;  
+  list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
+  column-gap: 24px;
   margin-bottom: 24px;
 }
+@media screen and (min-width: 1024px) {
+  .centennial-legacy-giving__content > p {
+    font-size: 18px;
+  }
+  .centennial-legacy-giving__list li {
+    column-gap: 32px;
+  }
+}
 .centennial-legacy-giving__list li > svg {
-  height: 0px;
-  flex: 0 0 120px;  
+  height: 50px;
+  flex: 0 0 50px;
 }
 .centennial-legacy-giving__list li > span {
   flex: 1 0;
