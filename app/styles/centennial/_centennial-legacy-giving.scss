@@ -10,6 +10,9 @@
   margin: 0;
   padding: 0;
 }
+.centennial-legacy-giving__list strong {
+  font-weight: 700;
+}
 .centennial-legacy-giving__list li {
   list-style: none;
   margin: 0;
@@ -21,6 +24,9 @@
 .centennial-legacy-giving__list li > svg {
   height: 50px;
   flex: 0 0 50px;
+}
+.centennial-legacy-giving__list li > svg path {
+  fill: rgb(51, 51, 51);
 }
 .centennial-legacy-giving__list li > span {
   flex: 1 0;
