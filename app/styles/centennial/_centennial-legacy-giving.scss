@@ -1,0 +1,44 @@
+.centennial-legacy-giving__content {
+  max-width: 823px;
+  margin: auto;
+}
+.centennial-legacy-giving__content > p {
+  margin-bottom: 48px;
+}
+.centennial-legacy-giving__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.centennial-legacy-giving__list strong {
+  font-weight: 700;
+}
+.centennial-legacy-giving__list li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  column-gap: 24px;
+  margin-bottom: 24px;
+}
+.centennial-legacy-giving__list li > svg {
+  height: 50px;
+  flex: 0 0 50px;
+}
+.centennial-legacy-giving__list li > svg path {
+  fill: rgb(51, 51, 51);
+}
+.centennial-legacy-giving__list li > span {
+  flex: 1 0;
+}
+@media screen and (min-width: 1024px) {
+  h2.centennial-legacy-giving__header {
+    margin-bottom: 48px;
+  }
+  .centennial-legacy-giving__content > p {
+    font-size: 18px;
+  }
+  .centennial-legacy-giving__list li {
+    column-gap: 32px;
+  }
+}
