@@ -3,7 +3,14 @@
 </HeadLayout>
 <div class="centennial-home">
   {{centennial/centennial-header}}
+
+  {{centennial/centennial-nav}}
+
   {{centennial/centennial-message}}
+<<<<<<< HEAD
+=======
+  <span class="centennial-nav-anchor" id="explore"></span>
+>>>>>>> ccf1fe53 (reorder modules and add nav)
   {{centennial/centennial-explore
     category1Title=model.featuredCategory1.title
     category1Items=model.featuredCategory1.bucketItems
@@ -13,11 +20,23 @@
     category3Items=model.featuredCategory3.bucketItems
     }}
   {{centennial/centennial-cta-narrow}}
+<<<<<<< HEAD
   {{centennial/centennial-legacy-giving}}
   {{centennial/centennial-timeline}}
   {{centennial/centennial-archives items=model.archiveItems}}
   {{centennial/centennial-events events=model.events}}
+=======
+  <span class="centennial-nav-anchor" id="support"></span>
+  {{centennial/centennial-legacy-giving}}
+  <span class="centennial-nav-anchor" id="history"></span>
+  {{centennial/centennial-timeline}}
+  {{centennial/centennial-archives items=model.archiveItems}}
+  <span class="centennial-nav-anchor" id="events"></span>
+  {{centennial/centennial-events events=model.events}}
+  <span class="centennial-nav-anchor" id="stories"></span>
+>>>>>>> ccf1fe53 (reorder modules and add nav)
   {{centennial/centennial-new-york-stories}}
   {{centennial/centennial-double-cta}}
+  <span class="centennial-nav-anchor" id="sponsors"></span>
   {{centennial/centennial-major-sponsor}}
 </div>
