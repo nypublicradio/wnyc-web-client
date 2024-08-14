@@ -13,6 +13,24 @@
   --centennial-header-line-height: 1.2;
   --centennial-module-spacing: 64px;
 }
+
+.centennial-home {
+  position: relative;
+}
+
+
+.centennial-nav-anchor {
+  position: relative;
+  top: -60px;
+}
+
+@media screen and (min-width: 1025px) {
+  .centennial-nav-anchor {
+    position: inherit;
+  }
+}
+
+
 .centennial-module {
   margin-bottom: var(--centennial-module-spacing);
 }
