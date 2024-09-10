@@ -1,4 +1,4 @@
-.centennial-major-sponsor__placement {
+.centennial-major-sponsor {
   margin-top: 48px;
   display: flex;
   flex-direction: column;
@@ -17,7 +17,7 @@
   line-height: 1.5;
 }
 @media screen and (min-width: 1025px) {
-  .centennial-major-sponsor__placement {
+  .centennial-major-sponsor {
     flex-direction: row;
     column-gap: 48px;
   }
