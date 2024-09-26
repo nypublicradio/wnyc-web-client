@@ -14,9 +14,8 @@ export default Component.extend({
   startTime: computed('event.attributes.{startDate,startTime}', function() {
     const startTime = moment(`${this.get('event.attributes.startDate')} ${this.get('event.attributes.startTime')}`)
     if (startTime.isValid()) {
-      return startTime;
+      return startTime.format('h:mm A');
     }
-    return startTime.format('h:mm A');
   }),
   tags: computed('event.attributes.tags', function() {
     return this.get('event.attributes.tags').split(', ');
