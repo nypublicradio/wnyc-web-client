@@ -1,0 +1,77 @@
+//centennial cta rectangle
+.centennial-cta-rectangle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(0deg, #9DED4E 0%, #0A69BE 100%);
+  color: white;
+  padding: 16px 8px 16px 24px;
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  height: 250px;
+  width: 335px;
+}
+.centennial-cta-rectangle__contents {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.centennial-cta-rectangle__image {
+  flex: 1 0 130px;
+  display: flex;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+}
+.centennial-cta-rectangle__image img {
+  width: 115px;
+  height: 115px;
+}
+.centennial-cta-rectangle__header {
+  font-family: ff-tisa-web-pro, serif;
+  font-size: 28px;
+  width: 210px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.centennial-cta-rectangle__text {
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.centennial-cta-rectangle__button {
+  width: calc(100% - 24px);
+  text-align: center;
+}
+@media screen and (min-width: 1220px) {
+  .centennial-cta-rectangle {
+    width: 496px;
+    height: 375px;
+    margin: auto;
+    padding: 36px;
+  }
+  .centennial-cta-rectangle__header {
+    width: 100%;
+    font-size: 36px;
+    margin-bottom: 48px;
+  }
+  .centennial-cta-rectangle__image {
+    flex: 1 0 230px;
+  }
+  .centennial-cta-rectangle__image img {
+    width: 215px;
+    height: 215px;
+  }
+  .centennial-cta-rectangle__text {
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 32px;
+  }
+  .centennial-cta-rectangle__button {
+    width: 100%;
+    text-align: center;
+  }
+}

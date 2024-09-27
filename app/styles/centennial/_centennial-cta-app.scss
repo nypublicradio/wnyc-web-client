@@ -1,0 +1,57 @@
+//centennial cta rectangle
+.centennial-cta-app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: black;
+  background-color: #FCD240;
+  border-bottom: none;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  height: 250px;
+  width: 335px;
+}
+.centennial-cta-app:hover {
+  border-bottom: none;
+}
+.centennial-cta-app:focus-visible {
+  outline: 2px solid blue;
+  outline-style: auto;
+}
+.centennial-cta-app__header {
+  font-family: ff-tisa-web-pro, serif;
+  padding: 20px 0 0 40px;
+  width: 210px;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.21;
+}
+.centennial-cta-app__badges {
+  display: flex;
+  flex-direction: row;
+  padding: 20px 0 0 40px;
+  align-items: center;
+}
+
+@media screen and (min-width: 1220px) {
+  .centennial-cta-app {
+    width: 496px;
+    height: 375px;
+  }
+  .centennial-cta-app__header {
+    font-family: ff-tisa-web-pro, serif;
+    padding: 80px 0 0 40px;
+    width: 230px;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.21;
+    margin-bottom: 24px;
+  }
+  .centennial-cta-app__badges {
+    display: flex;
+    flex-direction: row;
+    padding: 20px 0 0 40px;
+    align-items: center;
+  }
+}

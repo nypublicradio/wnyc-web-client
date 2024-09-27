@@ -1,0 +1,59 @@
+.centennial-header {
+  margin-bottom: 32px;
+}
+
+.centennial-header__hero, .centennial-header__hero img {
+  display: block;
+  margin: auto;
+  min-width: 100%;
+}
+
+.centennial-header__social {
+  .nypr-social-icons {
+    display: inline-block;
+    width: auto;
+    padding: 0;
+    margin: 0;
+  }
+  .nypr-social-icons__header {
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 400;
+    display: inline-block;
+    color: black;
+    vertical-align: top;
+    padding: 0;
+  }
+  .nypr-social-icons__list {
+    display: inline-block;
+    list-style: none;
+  }
+  .nypr-social-icons__item {
+    display: inline-block;
+    margin: 0 0 0 12px;
+  }
+  .nypr-social-icons__link {
+    color: white;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 20px;
+    border-radius: 50%;
+    background-color: black;
+    &:hover,
+    &:focus {
+      background-color: #d3008c;
+      border-color: #d3008c;
+      color: white;
+    }
+  }
+  .nypr-social-icons__icon {
+    width: 100%;
+    text-align: center;
+  }
+  .nypr-social-icons__icon.fa-x {
+    display: inline-block;
+    height: 100%;
+    background: url(/assets/svg/100/_x_twitter.svg) center / 15px 15px no-repeat;
+  }
+}

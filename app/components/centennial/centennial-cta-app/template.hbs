@@ -1,0 +1,47 @@
+<style>
+  .centennial-cta-app {
+      background-image: url("{{staticAssetPath}}img/100/app-iphone-1x.png");
+      background-image: -webkit-image-set(
+        url("{{staticAssetPath}}img/100/app-iphone-1x.png") 1x,
+        url("{{staticAssetPath}}img/100/app-iphone-2x.png") 2x,
+        url("{{staticAssetPath}}img/100/app-iphone-3x.png") 3x
+        );
+      background-image: image-set(
+        url("{{staticAssetPath}}img/100/app-iphone-1x.png") 1x,
+        url("{{staticAssetPath}}img/100/app-iphone-2x.png") 2x,
+        url("{{staticAssetPath}}img/100/app-iphone-3x.png") 3x
+        );
+      background-repeat: no-repeat;
+      background-position: top right;
+      background-size: contain;
+  }
+  @media screen and (min-width: 1220px) {
+    .centennial-cta-app {
+        background-image: url("{{staticAssetPath}}img/100/iphone-1x.png");
+        background-image: -webkit-image-set(
+          url("{{staticAssetPath}}img/100/iphone-1x.png") 1x,
+          url("{{staticAssetPath}}img/100/iphone-2x.png") 2x,
+          url("{{staticAssetPath}}img/100/iphone-2.5x.png") 2.5x
+          );
+        background-image: image-set(
+          url("{{staticAssetPath}}img/100/iphone-1x.png") 1x,
+          url("{{staticAssetPath}}img/100/iphone-2x.png") 2x,
+          url("{{staticAssetPath}}img/100/iphone-2.5x.png") 2.5x
+          );
+        background-repeat: no-repeat;
+        background-position: top right;
+        background-size: contain;
+    }
+  }
+</style>
+<a class="centennial-cta-app" href="https://www.wnyc.org/mobile" target="_blank" rel="noopener noreferrer">
+  <div class="centennial-cta-app__content">
+    <h3 class="centennial-cta-app__header">Listen on the go with the all new WNYC app</h3>
+    <div class="centennial-cta-app__badges">
+      <img width="100" height="34" alt="Download the WNYC App on the App Store" src="{{staticAssetPath}}img/100/app-store-badge-1x.png"
+      srcset="{{staticAssetPath}}img/100/app-store-badge-1x.png 100w, {{staticAssetPath}}img/100/app-store-badge-2x.png 200w, {{staticAssetPath}}img/100/app-store-badge-3x.png 300w">
+      <img width="131" height="50" alt="Get the WNYC App on Google Play" src="{{staticAssetPath}}img/100/google-play-badge-1x.png"
+      srcset="{{staticAssetPath}}img/100/google-play-badge-1x.png 131w, {{staticAssetPath}}img/100/google-play-badge-2x.png 262w, {{staticAssetPath}}img/100/google-play-badge-3x.png 393w">
+    </div>
+  </div>
+</a>

@@ -1,0 +1,49 @@
+// stories - Tell Us Your New York Stories
+.centennial-stories__hero {
+  display: flex;
+  flex-direction: row;
+}
+.centennial-stories__hero-text {
+  width: 100%;
+  display: block;
+  color: white;
+  background-color: #BB299F;
+  padding: 42px 22px;
+}
+@media screen and (min-width: 1270px) {
+  .centennial-stories__hero-text {
+    width: 375px;
+    height: 252px;
+  }
+}
+.centennial-stories__hero-image {
+  display: none;
+}
+@media screen and (min-width: 1270px) {
+  .centennial-stories__hero-image {
+    display: inline-block;
+  }
+}
+
+.centennial-stories__categories {
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (min-width: 800px) {
+  .centennial-stories__categories {
+    flex-direction: row;
+    justify-content: space-between;
+    column-gap: 48px;
+  }
+}
+.centennial-stories__category {
+  flex: 1 1 0px;
+  margin-bottom: 32px;
+  h3 {
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 700px;
+    border-bottom: 1px solid #000;
+    margin-bottom: 16px;
+  }
+}
