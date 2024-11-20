@@ -25,13 +25,15 @@
 
   {{/alt-channel-layout}}
 {{else}}
-  {{#if model.channel.hasMarquee}}
-    {{x-marquee listenLive=model.listenLive.pagecontent model=model.channel isStaff=session.data.isStaff adminURL=adminURL}}
-  {{else}}
-    {{channel-header listenLive=model.listenLive.pagecontent model=model.channel isStaff=session.data.isStaff adminURL=adminURL classNames=(unless model.channel.featured 'flush')}}
-  {{/if}}
+  <div class="{{model.channel.slug}}">
+    {{#if model.channel.hasMarquee}}
+      {{x-marquee listenLive=model.listenLive.pagecontent model=model.channel isStaff=session.data.isStaff adminURL=adminURL}}
+    {{else}}
+      {{channel-header listenLive=model.listenLive.pagecontent model=model.channel isStaff=session.data.isStaff adminURL=adminURL classNames=(unless model.channel.featured 'flush')}}
+    {{/if}}
+  </div>
 
-<div class="l-constrained">
+<div class="l-constrained {{model.channel.slug}}">
   <main class="l-col2of3">
 
     {{#if model.channel.featured}}
