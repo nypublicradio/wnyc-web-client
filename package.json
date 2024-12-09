@@ -101,7 +101,7 @@
     "nypr-election-countdown": "^0.2.14",
     "nypr-metrics": "~0.5.1",
     "nypr-player": ">=0.3.0",
-    "nypr-publisher-lib": "^0.5.15",
+    "nypr-publisher-lib": "^0.5.16",
     "nypr-ui": ">=0.3.0",
     "torii": "^0.10.1"
   },
