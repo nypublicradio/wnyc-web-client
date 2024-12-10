@@ -1,0 +1,46 @@
+.newsounds,
+.soundcheck,
+.gig-alerts {
+
+  .nav-bar {
+    background-color: black;
+  }
+
+  .listen-button {
+
+    &.blue-minion {
+      background-color: black;
+      border-color: black;
+      &:not([disabled]) {
+        &:hover,
+        &:focus {
+          background-color: #F042EA;
+          border-color: #F042EA;
+        }
+      }
+    }
+
+    &.blue-boss,
+    &.red-minion {
+      background-color: #F042EA;
+      border-color: #F042EA;
+      &:not([disabled]) {
+        &:hover,
+        &:focus {
+          background-color: rgb(242, 92, 237);
+          border-color: rgb(242, 92, 237);
+        }
+      }
+    }
+
+  }
+
+  .marquee-gradient {
+    background-image: radial-gradient(rgba(255, 255, 255,0) 200px, white 620px) !important;
+  }
+
+  .marquee-image {
+    background-color: white !important;
+  }
+
+}
