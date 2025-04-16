@@ -57,9 +57,9 @@ Router.map(function() {
     this.route('redirect', { path: '/'} );
   });
 
-  this.route('profile');
-
   //Commenting out the following routes to retire the resolving pages from wnyc.org and wqxr.org per DEVO-519
+  //this.route('profile');
+
   //this.route('login');
   //this.route('signup');
   this.route('validate');
